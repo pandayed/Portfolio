@@ -1,0 +1,17 @@
+.HomePage {
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.IntroContent {
+    display: inline-block;
+    background-color: blue;
+}
+
+.NameLine {
+    font-size: 20px;
+    font-weight: bold;
+}
