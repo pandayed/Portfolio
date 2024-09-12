@@ -1,0 +1,17 @@
+.Header {
+    display: flex;
+    background-color: red;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.HeaderNavigation {
+    background-color: aqua;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.HeaderNavItem {
+    display: inline;
+}
