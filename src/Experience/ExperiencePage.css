@@ -1,0 +1,43 @@
+.ExperienceSection {
+    background-color: rebeccapurple;
+    padding: 20px 100px 100px 100px;
+    margin: 0px;
+}
+
+.Experience {
+    margin: 0px 0px 40px 0px;
+}
+
+.CompanyName {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+.Position {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.Technology {}
+
+.TechItem {
+    padding: 0px 10px 0px 4px;
+    background-color: #ffffff1a;
+    border-color: black;
+    border-radius: 4px;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.TechItem {
+    display: inline;
+}
+
+.WorkDetails {
+    justify-content: center;
+    align-items: center;
+}
+
+.WorkDetailsItem {}

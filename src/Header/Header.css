@@ -1,12 +1,14 @@
 .Header {
     display: flex;
-    background-color: red;
+    z-index: 1;
+    background-color: #222831;
     justify-content: space-between;
-    padding: 20px;
+    padding: 20px 40px 20px 40px;
+    align-items: center;
 }
 
+
 .HeaderNavigation {
-    background-color: aqua;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -14,4 +16,33 @@
 
 .HeaderNavItem {
     display: inline;
+    margin: 0px 0px 0px 20px;
+}
+
+.SelectedHeaderNavItem {
+    display: inline;
+
+}
+
+.HeaderNavButton {
+    margin: 0px;
+    background-color: #ffffff1a;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    /* Add rounded corners */
+}
+
+.HeaderNavButton:hover {
+    background-color: #ffffff11;
+    /* Optional: Darken the color on hover */
+}
+
+.SelectedHeaderNavButton {}
+
+
+.Theme {
+    margin-inline-start: 40px;
 }
