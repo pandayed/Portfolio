@@ -1,0 +1,35 @@
+/* divs */
+
+.inline-div {
+    display: inline;
+    /* Additional styles */
+}
+
+.make-child-center {
+    align-items: center;
+}
+
+/* fonts */
+
+.codeFont {
+    font-family: "Source Code Pro", monospace;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.cursiveFont {
+    font-family: "Abril Fatface", serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+/* Highlighted Background */
+.HighlitedBackground {
+    background-color: blueviolet;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+}

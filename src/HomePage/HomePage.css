@@ -1,17 +1,78 @@
 .HomePage {
-    background-color: aquamarine;
+    background-color: #31363F;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    margin: 0px;
 }
 
+.Intro {
+    font-size: 5rem;
+    color: #ffffff99;
+    font-weight: 600;
+    letter-spacing: -.1rem;
+}
 
-.IntroContent {
-    display: inline-block;
-    background-color: blue;
+.Name {
+    font-size: 5rem;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: -.1rem;
 }
 
 .NameLine {
-    font-size: 20px;
-    font-weight: bold;
+    font-family: "Source Code Pro";
+    font-size: 1.2rem;
+    color: white;
+}
+
+.Description {
+    margin: 40px 0px 40px 0px;
+    font-family: "Source Code Pro";
+    line-height: 2;
+}
+
+.IntroButton {
+    font-family: "Source Code Pro";
+    background-color: #00000000;
+    color: white;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    border-radius: 25px;
+    margin-inline-end: 20px;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.IntroButton:hover {
+    font-family: "Source Code Pro";
+    background-color: #ffffff11;
+    color: white;
+    padding: 10px 25px 10px 25px;
+    border-radius: 25px;
+    font-size: 1.25rem;
+    margin-inline-end: 20px;
+    cursor: pointer;
+}
+
+.ResumeButton {
+    border-style: solid;
+    border-color: white;
+    border-width: 0.5px;
+}
+
+.ContactMeButton {
+    border-style: solid;
+    border-color: white;
+    border-width: 0.5px;
+}
+
+.LinkedInButton {
+    background-color: #0a66c2;
+}
+
+.LinkedInButton:hover {
+    background-color: #0e75dd;
 }
