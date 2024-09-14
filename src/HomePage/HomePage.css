@@ -1,11 +1,17 @@
 .HomePage {
     background-color: #31363F;
+
+    background-image: url('../assets/texture-background.png');
     display: flex;
+    height: 100vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0px;
+}
+
+.HomePageContainer {
+    margin: 40px;
 }
 
 .Intro {
@@ -26,9 +32,11 @@
     font-family: "Source Code Pro";
     font-size: 1.2rem;
     color: white;
+    height: 20px;
 }
 
 .Description {
+    /* background-color: #0a66c2; */
     margin: 40px 0px 40px 0px;
     font-family: "Source Code Pro";
     line-height: 2;

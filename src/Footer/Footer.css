@@ -1,5 +1,39 @@
-.Footer {
-    display: flex;
-    background-color: #31363F;
+.FooterBody {
     padding: 20px;
+    background-color: #31363F;
+}
+
+/* Icon styling */
+.SocialIcon {
+    margin-left: 4px;
+    width: 16px;
+    height: 16 px;
+}
+
+.FooterBase {
+    display: flex;
+    background-color: #222831;
+    padding: 20px;
+}
+
+.SocialsTitle {
+    color: #ffffff99;
+    font-size: small;
+    font-weight: bold;
+}
+
+.SiteLink {
+    font-family: "Source Code Pro";
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.SocialLinks {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.SocialLinkItem {
+    margin-top: 4px;
 }
