@@ -1,3 +1,7 @@
+:root {
+    --social-icon-size: 14px;
+}
+
 .FooterBody {
     padding: 20px;
     background-color: #31363F;
@@ -5,10 +9,11 @@
 
 /* Icon styling */
 .SocialIcon {
-    margin-left: 4px;
-    width: 16px;
-    height: 16 px;
+    fill: white;
+    width: var(--social-icon-size);
+    height: var(--social-icon-size);
 }
+
 
 .FooterBase {
     display: flex;
@@ -16,17 +21,22 @@
     padding: 20px;
 }
 
-.SocialsTitle {
-    color: #ffffff99;
+.SocialTitle {
     font-size: small;
-    font-weight: bold;
+    margin-left: 4px;
+    color: white;
 }
 
 .SiteLink {
+    display: inline-flex;
     font-family: "Source Code Pro";
     color: white;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    align-items: center;
+    text-decoration: none;
+    border-bottom: 0.5px solid white;
+    /* Apply custom underline */
+    padding-bottom: 2px;
+    /* Add space between content and underline */
 }
 
 .SocialLinks {
@@ -35,5 +45,6 @@
 }
 
 .SocialLinkItem {
-    margin-top: 4px;
+    margin-top: 8px;
+    list-style: none;
 }

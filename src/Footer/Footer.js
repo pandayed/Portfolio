@@ -2,15 +2,21 @@
 import React from "react";
 import './Footer.css';  // Create a CSS file for styling
 import '../CommonClasses/CommonClasses.css';
-import UprightArrow from '../assets/icons/upright_arrow.svg';
+
+import InstagramIcon from '../assets/social_icons/icons8-instagram.svg';
+import TwitterX from '../assets/social_icons/icons8-twitterx.svg';
+import LinkedIn from '../assets/social_icons/icons8-linkedin.svg';
+import Gmail from '../assets/social_icons/icons8-gmail.svg';
+import GitHub from '../assets/social_icons/icons8-github.svg';
+
 
 
 const SocialLink = (props) => {
     return (
         <li className="SocialLinkItem">
             <a className="SiteLink" href={props.link} >
-                {/* <img src={UprightArrow} className="SocialIcon" alt="icon" /> */}
-                <div className="SocialText">{props.title}</div>
+                <img src={props.icon} className="SocialIcon" alt="icon" />
+                <div className="SocialTitle">{props.title}</div>
             </a>
         </li>
     );
@@ -29,17 +35,17 @@ const Footer = () => {
                     </div>
 
                     <ul className="SocialLinks">
-                        <SocialLink title="Instagram" link="" />
-                        <SocialLink title="Twitter/X" link="" />
+                        <SocialLink title="Instagram" link="" icon={InstagramIcon} />
+                        <SocialLink title="Twitter/X" link="" icon={TwitterX} />
                     </ul>
                     <div>
 
                     </div>
 
                     <ul className="SocialLinks">
-                        <SocialLink title="G-Mail" link="" />
-                        <SocialLink title="LinkedIn" link="" />
-                        <SocialLink title="GitHub" link="" />
+                        <SocialLink title="G-Mail" link="" icon={Gmail} />
+                        <SocialLink title="LinkedIn" link="" icon={LinkedIn} />
+                        <SocialLink title="GitHub" link="" icon={GitHub} />
 
                     </ul>
 
