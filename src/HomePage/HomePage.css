@@ -1,6 +1,5 @@
 .HomePage {
     background-color: #31363F;
-
     background-image: url('../assets/texture-background.png');
     display: flex;
     height: 100vh;
@@ -8,6 +7,7 @@
     justify-content: center;
     align-items: center;
     margin: 0px;
+    padding: 0px;
 }
 
 .HomePageContainer {

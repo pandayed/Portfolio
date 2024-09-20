@@ -59,17 +59,18 @@ function App() {
           <HomePage />
         </div>
 
-        <div id="experience" ref={experienceRef}>
+        {/* <div id="experience" ref={experienceRef}>
           <ExperiencePage />
-        </div>
+        </div> */}
 
-        <div id="skills" ref={skillsRef}>
+        {/* <div id="skills" ref={skillsRef}>
           <SkillsPage />
-        </div>
+        </div> */}
 
-        <div id="contact" ref={contactRef}>
+        {/* <div id="contact" ref={contactRef}>
           <ContactPage />
-        </div>
+        </div> */}
+
       </div>
 
       <Footer />
