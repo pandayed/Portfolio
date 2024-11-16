@@ -10,11 +10,13 @@ import ExperiencePage from './Experience/ExperiencePage';
 import SkillsPage from './SkillsPage';
 import ContactPage from './Contact/ContactPage';
 import HeaderNavigationButton from './Header/HeaderNavigationButtons';
+import { BookShelfPage } from './BookShelf/BookShelfPage';
 
 function App() {
   // Create refs for each section
   const homeRef = useRef(null);
   const experienceRef = useRef(null);
+  const bookshelfRef = useRef(null);
   const skillsRef = useRef(null);
   const contactRef = useRef(null);
 
@@ -29,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Header>
+      <Header>
         <ul className="HeaderNavigation inline-div">
           <HeaderNavigationButton
             onClick={() => scrollToSection(homeRef, 'home')}
@@ -42,26 +44,35 @@ function App() {
             isSelected={selectedSection === 'experience'}
           />
           <HeaderNavigationButton
+            onClick={() => scrollToSection(bookshelfRef, 'bookshelf')}
+            label="Bookshelf"
+            isSelected={selectedSection==='bookshelf'}
+          />
+          {/* <HeaderNavigationButton
             onClick={() => scrollToSection(skillsRef, 'skills')}
             label="Skills"
             isSelected={selectedSection === 'skills'}
-          />
-          <HeaderNavigationButton
+          /> */}
+          {/* <HeaderNavigationButton
             onClick={() => scrollToSection(contactRef, 'contact')}
             label="Contact"
             isSelected={selectedSection === 'contact'}
-          />
+          /> */}
         </ul>
-      </Header> */}
+      </Header>
 
       <div>
         <div id="home" ref={homeRef}>
           <HomePage />
         </div>
 
-        {/* <div id="experience" ref={experienceRef}>
+        <div id="experience" ref={experienceRef}>
           <ExperiencePage />
-        </div> */}
+        </div>
+
+        <div id="bookshelf" ref={bookshelfRef}>
+          <BookShelfPage />
+        </div>
 
         {/* <div id="skills" ref={skillsRef}>
           <SkillsPage />
