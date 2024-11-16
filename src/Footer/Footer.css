@@ -4,7 +4,7 @@
 
 .FooterBody {
     padding: 20px;
-    background-color: #31363F;
+    background-color: #2A2A2A;
 }
 
 /* Icon styling */
@@ -17,13 +17,13 @@
 
 .FooterBase {
     display: flex;
-    background-color: #222831;
+    background-color: #171717;
     padding: 20px;
 }
 
 .SocialTitle {
     font-size: small;
-    margin-left: 4px;
+    /* margin-left: 4px; */
     color: white;
 }
 

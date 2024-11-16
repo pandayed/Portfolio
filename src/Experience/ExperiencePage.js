@@ -1,30 +1,71 @@
 import React from "react";
 import { experiences } from '../Model/Experience';
 import './ExperiencePage.css';
+import { getFormattedDate } from '../Utils.js';
+
+const TechItem = (props) => {
+    return (
+        <div className="TechItem">
+            {props.technology}
+        </div>
+    )
+}
+
 
 const Experience = (props) => {  // Use props instead of destructuring
     return (
         <div className="Experience">
-            <div className="CompanyName">{props.experience.company}</div>
-            <div className="Position">{props.experience.jobRole}</div>
-            <div className="Technology">
-                {
-                    props.experience.tech.map((technology, index) => (
-                        <div className="TechItem">
-                            {technology}
-                        </div>
-                    )
-                    )
-                }
+            <div className="CompanyLogoContainer">
+                <div className="CompanyLogoWrapper">
+                    <img src={props.experience.companyLogo} alt="Cisco" className="CompanyLogo">
+                    </img>
+                </div>
             </div>
-            <div className="WorkDetails">
-                {
-                    props.experience.workDetails.map((workDetailsItem, index) => (
-                        <div className="WorkDetailsIteam">
-                            {workDetailsItem}
-                        </div>
-                    ))
-                }</div>
+
+            <div className="CompanyDetails">
+                <div className="CompanyName">{props.experience.company}</div>
+                <div className="Position">{props.experience.jobRole}</div>
+                <div className="DateContainer">
+                    <div className="StartEndDate">
+                        {getFormattedDate(props.experience.startDate)}
+                    </div>
+                    <div className="DateSeparator">
+                        -
+                    </div>
+                    {
+                        props.experience.endDate === undefined ? (
+                            <div className="PresentDate">PRESENT</div>
+                        ) : (
+                            <div className="StartEndDate">{getFormattedDate(props.experience.endDate)}</div>
+                        )
+                    }
+
+                </div>
+                <div className="Technology">
+                    {
+                        props.experience.tech.map(
+                            (technology, index) => (
+                                <TechItem technology={technology} />
+                            )
+                        )
+                    }
+                </div>
+                <div className="WorkDetails">
+                    {
+                        <ul className="WorkDetailsList">
+                            {props.experience.workDetails.map((workDetailsItem, index) => (
+                                <li className="WorkDetailsItem">
+                                    {workDetailsItem}
+                                </li>
+                            ))}
+                        </ul>
+                    }
+                </div>
+            </div>
+
+
+
+
         </div>
     );
 }
@@ -32,10 +73,13 @@ const Experience = (props) => {  // Use props instead of destructuring
 const ExperiencePage = () => {
     return (
         <div className="ExperienceSection">
-            <p className="SectionTitle">Experience</p>
-            {experiences.map((experience, index) => (
-                <Experience key={index} experience={experience} />  // Passing experience as a prop
-            ))}
+            <div className="SectionTitle">Work Experience</div>
+            <div className="ExperiencesList">
+                {experiences.map((experience, index) => (
+                    <Experience key={index} experience={experience} />  // Passing experience as a prop
+                ))}
+            </div>
+
         </div>
     );
 };

@@ -1,4 +1,3 @@
-// src/components/Footer.js
 import React from "react";
 import './Footer.css';  // Create a CSS file for styling
 import '../CommonClasses/CommonClasses.css';
@@ -15,7 +14,7 @@ const SocialLink = (props) => {
     return (
         <li className="SocialLinkItem">
             <a className="SiteLink" href={props.link} >
-                <img src={props.icon} className="SocialIcon" alt="icon" />
+                {/* <img src={props.icon} className="SocialIcon" alt="icon" /> */}
                 <div className="SocialTitle">{props.title}</div>
             </a>
         </li>
@@ -30,9 +29,9 @@ const Footer = () => {
             <div className="FooterBody">
 
                 <div className="Socials">
-                    <div className="SocialsTitle">
+                    {/* <div className="SocialsTitle">
                         Socials
-                    </div>
+                    </div> */}
 
                     <ul className="SocialLinks">
                         <SocialLink title="Instagram" link="" icon={InstagramIcon} />

@@ -1,11 +1,24 @@
+:root {
+    --company-logo-size: 100px;
+}
+
+
+.PresentDate {
+    color: #00CA00;
+}
+
+
 .ExperienceSection {
-    background-color: rebeccapurple;
+    background-color: #202020;
     padding: 20px 100px 100px 100px;
     margin: 0px;
 }
 
 .Experience {
     margin: 0px 0px 40px 0px;
+    display: flex;
+    gap: 20px;
+
 }
 
 .CompanyName {
@@ -15,29 +28,87 @@
 
 
 .Position {
-    font-size: 1rem;
+    font-family: "Source Code Pro";
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
-.Technology {}
-
 .TechItem {
-    padding: 0px 10px 0px 4px;
-    background-color: #ffffff1a;
-    border-color: black;
-    border-radius: 4px;
-    margin-right: 10px;
+    font-size: small;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
+    padding: 4px 10px;
+    border: solid 0.25px white;
+    background-color: #ffffff1a;
+    border-radius: 4px;
+    margin-right: 10px;
 }
 
 .TechItem {
     display: inline;
 }
 
+
+
+.Technology {
+    font-family: "Source Code Pro";
+    margin-top: 20px;
+}
+
+.CompanyLogo {
+    height: var(--company-logo-size);
+    width: var(--company-logo-size);
+    object-fit: contain;
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+
+.CompanyLogoWrapper {
+    display: inline-flex;
+    margin: 0px;
+    padding: 18px;
+    background-color: #ffffff1a;
+    border-radius: 10px;
+}
+
+
+.SectionTitle {
+    text-align: left;
+}
+
+.ExperiencesList {
+    margin-top: 20px;
+}
+
+.DateSeparator {
+    margin: 0px 10px 0px 10px;
+}
+
+.DateContainer {
+    display: flex;
+    margin-top: 10px;
+}
+
+
+/* Work Related */
+
 .WorkDetails {
+    margin-top: 5px;
     justify-content: center;
     align-items: center;
 }
 
-.WorkDetailsItem {}
+.WorkDetailsList {
+    padding: 15px;
+    list-style-type: disc;
+    /* Ensures bullets are shown */
+    margin: 0;
+}
+
+.WorkDetailsItem {
+    margin-bottom: 0px;
+}
