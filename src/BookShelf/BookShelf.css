@@ -1,3 +1,17 @@
 .BookShelf {
     background-color: blue;
+    display: flex; /* Align items horizontally */
+    overflow-x: auto; /* Allow horizontal scrolling if items overflow */
+    gap: 20px; /* Space between items */
+    padding: 10px;
+}
+
+.Book {
+    height: 200px; /* Fixed height for each book */
+    width: auto; /* Adjust width based on content */
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: space-between; /* Space out image and text */
+    text-align: center;
 }
