@@ -9,13 +9,13 @@
 
 
 .ExperienceSection {
-    background-color: blue;
-    padding: 20px 100px 100px 100px;
+    background-color: #202020;
+    padding: 100px 100px 100px 100px;
     margin: 0px;
 }
 
 .Experience {
-    margin: 0px 0px 40px 0px;
+    margin: 0px;
     display: flex;
     gap: 20px;
 
@@ -70,9 +70,9 @@
 .CompanyLogoWrapper {
     display: inline-flex;
     margin: 0px;
-    padding: 18px;
+    padding: 12px;
     background-color: #ffffff1a;
-    border-radius: 10px;
+    border-radius: 14px;
 }
 
 
@@ -81,7 +81,9 @@
 }
 
 .ExperiencesList {
-    margin-top: 20px;
+    display: flex; /* Enables flex layout */
+    flex-direction: column; /* Ensures projects stack vertically */
+    gap: 40px;
 }
 
 .DateSeparator {

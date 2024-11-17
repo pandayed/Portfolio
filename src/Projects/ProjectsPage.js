@@ -52,7 +52,7 @@ const Project = (props) => {
 export const ProjectsPage = () => {
     return (
         <div className="ProjectsPage">
-            <div className="SectionTitle">Projects</div>
+            <div className="SectionTitle">Featured Projects</div>
             <div className="ProjectsList">
                 {
                     Projects.map((project, index)=>(

@@ -89,13 +89,17 @@ const ImageDisplay = ({ isbn }) => {
 export const BookShelfPage = () => {
     return (
         <div className="BookShelf">
-            {books.map((book, index) => (
-                <div key={index} className="Book">
-                    <ImageDisplay isbn={book.isbn} />
-                    <h3>{book.name}</h3>
-                    <p>Author: {book.author}</p>
-                </div>
-            ))}
+            <div className="SectionTitle">BookShelf</div>
+            <div className="BooksList">
+                {books.map((book, index) => (
+                    <div key={index} className="Book">
+                        {/* <p className="BookName">{book.name}</p> */}
+                        <ImageDisplay isbn={book.isbn} />
+                        {/* <p>Author: {book.author}</p> */}
+                    </div>
+                ))}
+            </div>
+            
         </div>
     );
 };
