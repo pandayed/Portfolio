@@ -1,0 +1,39 @@
+.ProjectsPage{
+    background-color: #202020;
+    padding: 100px 100px 100px 100px;
+    margin: 0px;
+}
+
+.Project{
+    border: solid 0.25px #ffffff1a;
+    border-radius: 10px;
+    background-color: #ffffff1a;
+    padding: 20px;
+    margin: 0px;
+}
+
+.Project:hover{
+    border: solid 0.25px white;
+    border-radius: 10px;
+    background-color: #ffffff1a;
+    padding: 20px;
+    margin: 0px;
+}
+
+.ProjectTitle{
+    margin: 0px;
+    font-family: "Source Code Pro";
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.ProjectsList{
+    display: flex; /* Enables flex layout */
+    flex-direction: column; /* Ensures projects stack vertically */
+    gap: 20px;
+}
+
+.ProjectLink {
+    text-decoration: none; /* Removes the default underline for links */
+    color: inherit; /* Ensures link color matches the project's styles */
+}

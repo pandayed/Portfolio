@@ -1,6 +1,7 @@
 import React from "react";
 import Cisco from '../assets/company_logos/ic_cisco.png'
 
+
 // ---------------- class defintion ------------------- //
 
 class Experience {

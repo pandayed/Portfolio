@@ -81,7 +81,7 @@ const ImageDisplay = ({ isbn }) => {
 
     return (
         <div>
-            {image && <img src={image} alt="Book Cover" />}
+            {image && <img src={image} alt="Book Cover" className="BookImage"/>}
         </div>
     );
 };

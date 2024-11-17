@@ -7,10 +7,12 @@ import Footer from './Footer/Footer';
 
 import HomePage from './HomePage/HomePage';
 import ExperiencePage from './Experience/ExperiencePage';
+import { CertificationsPage } from './Certifications/CertificationsPage';
 import SkillsPage from './SkillsPage';
 import ContactPage from './Contact/ContactPage';
 import HeaderNavigationButton from './Header/HeaderNavigationButtons';
 import { BookShelfPage } from './BookShelf/BookShelfPage';
+import { ProjectsPage } from './Projects/ProjectsPage';
 
 function App() {
   // Create refs for each section
@@ -70,9 +72,18 @@ function App() {
           <ExperiencePage />
         </div>
 
+        <div id="projects">
+            <ProjectsPage />
+        </div>
+
         <div id="bookshelf" ref={bookshelfRef}>
           <BookShelfPage />
         </div>
+
+        <div id="certifications">
+            <CertificationsPage/>
+        </div>
+
 
         {/* <div id="skills" ref={skillsRef}>
           <SkillsPage />
