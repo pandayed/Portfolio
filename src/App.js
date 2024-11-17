@@ -18,6 +18,8 @@ function App() {
   // Create refs for each section
   const homeRef = useRef(null);
   const experienceRef = useRef(null);
+  const projectsRef = useRef(null);
+  const certificationsRef = useRef(null);
   const bookshelfRef = useRef(null);
   const skillsRef = useRef(null);
   const contactRef = useRef(null);
@@ -46,6 +48,16 @@ function App() {
             isSelected={selectedSection === 'experience'}
           />
           <HeaderNavigationButton
+            onClick={()=> scrollToSection(projectsRef, 'projects')}
+            label="Projects"
+            isSelected={selectedSection==='projects'}
+          />
+          <HeaderNavigationButton
+            onClick={()=> scrollToSection(certificationsRef, 'certifications')}
+            label="Certifications"
+            isSelected={selectedSection==='certifications'}
+          />
+          <HeaderNavigationButton
             onClick={() => scrollToSection(bookshelfRef, 'bookshelf')}
             label="Bookshelf"
             isSelected={selectedSection==='bookshelf'}
@@ -72,17 +84,19 @@ function App() {
           <ExperiencePage />
         </div>
 
-        <div id="projects">
+        <div id="projects" ref={projectsRef}>
             <ProjectsPage />
+        </div>
+
+        <div id="certifications" ref={certificationsRef}>
+            <CertificationsPage/>
         </div>
 
         <div id="bookshelf" ref={bookshelfRef}>
           <BookShelfPage />
         </div>
 
-        <div id="certifications">
-            <CertificationsPage/>
-        </div>
+        
 
 
         {/* <div id="skills" ref={skillsRef}>

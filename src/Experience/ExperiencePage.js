@@ -46,10 +46,6 @@ const Experience = (props) => {  // Use props instead of destructuring
                     }
                 </div>
             </div>
-
-
-
-
         </div>
     );
 }
