@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.affdefc8.chunk.css",
+    "main.js": "/Portfolio/static/js/main.ec23a6a3.chunk.js",
+    "main.js.map": "/Portfolio/static/js/main.ec23a6a3.chunk.js.map",
+    "runtime-main.js": "/Portfolio/static/js/runtime-main.c5f0d44a.js",
+    "runtime-main.js.map": "/Portfolio/static/js/runtime-main.c5f0d44a.js.map",
+    "static/js/2.20105d65.chunk.js": "/Portfolio/static/js/2.20105d65.chunk.js",
+    "static/js/2.20105d65.chunk.js.map": "/Portfolio/static/js/2.20105d65.chunk.js.map",
+    "static/js/3.78f8ad49.chunk.js": "/Portfolio/static/js/3.78f8ad49.chunk.js",
+    "static/js/3.78f8ad49.chunk.js.map": "/Portfolio/static/js/3.78f8ad49.chunk.js.map",
+    "index.html": "/Portfolio/index.html",
+    "precache-manifest.835a6de830092096ee2f6f8abb17e005.js": "/Portfolio/precache-manifest.835a6de830092096ee2f6f8abb17e005.js",
+    "service-worker.js": "/Portfolio/service-worker.js",
+    "static/css/main.affdefc8.chunk.css.map": "/Portfolio/static/css/main.affdefc8.chunk.css.map",
+    "static/js/2.20105d65.chunk.js.LICENSE.txt": "/Portfolio/static/js/2.20105d65.chunk.js.LICENSE.txt",
+    "static/media/icons8-github.svg": "/Portfolio/static/media/icons8-github.4d56b368.svg",
+    "static/media/icons8-gmail.svg": "/Portfolio/static/media/icons8-gmail.4f188c4c.svg",
+    "static/media/icons8-instagram.svg": "/Portfolio/static/media/icons8-instagram.c06f4e91.svg",
+    "static/media/icons8-linkedin.svg": "/Portfolio/static/media/icons8-linkedin.d83aa128.svg",
+    "static/media/icons8-twitterx.svg": "/Portfolio/static/media/icons8-twitterx.4282e240.svg",
+    "static/media/texture-background.png": "/Portfolio/static/media/texture-background.9be0f029.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c5f0d44a.js",
+    "static/js/2.20105d65.chunk.js",
+    "static/css/main.affdefc8.chunk.css",
+    "static/js/main.ec23a6a3.chunk.js"
+  ]
+}
