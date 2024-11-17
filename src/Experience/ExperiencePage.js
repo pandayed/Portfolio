@@ -2,15 +2,7 @@ import React from "react";
 import { experiences } from '../Model/Experience';
 import './ExperiencePage.css';
 import { getFormattedDate } from '../Utils.js';
-
-const TechItem = (props) => {
-    return (
-        <div className="TechItem">
-            {props.technology}
-        </div>
-    )
-}
-
+import { Technologies } from  '../common.js';
 
 const Experience = (props) => {  // Use props instead of destructuring
     return (
@@ -41,15 +33,7 @@ const Experience = (props) => {  // Use props instead of destructuring
                     }
 
                 </div>
-                <div className="Technology">
-                    {
-                        props.experience.tech.map(
-                            (technology, index) => (
-                                <TechItem technology={technology} />
-                            )
-                        )
-                    }
-                </div>
+                <Technologies technologies={props.experience.tech} />
                 <div className="WorkDetails">
                     {
                         <ul className="WorkDetailsList">

@@ -1,8 +1,10 @@
 .SectionTitle {
-    font-size: 2rem;
+    font-size: 2.75rem;
     font-weight: bold;
     color: white;
-    margin: 0px;
+    margin: 0px auto;
+    width: fit-content;
+    margin-bottom: 100px;
     text-align: center;
     line-height: 1.2;
 }
