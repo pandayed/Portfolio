@@ -29,15 +29,15 @@ const Footer = () => {
                 <div className="Socials">
 
                     <div className="SocialLinks">
-                        <SocialLink title="G-Mail" link="" icon={Gmail} />
-                        <SocialLink title="LinkedIn" link="" icon={LinkedIn} />
-                        <SocialLink title="GitHub" link="" icon={GitHub} />
+                        <SocialLink title="G-Mail" link="mailto:lalbiharipandeyg@gmail.com" icon={Gmail} />
+                        <SocialLink title="LinkedIn" link="https://www.linkedin.com/in/pandayed/" icon={LinkedIn} />
+                        <SocialLink title="GitHub" link="https://github.com/pandayed" icon={GitHub} />
 
                     </div>
 
                     <div className="SocialLinks">
-                        <SocialLink title="Instagram" link="" icon={InstagramIcon} />
-                        <SocialLink title="Twitter/X" link="" icon={TwitterX} />
+                        <SocialLink title="Instagram" link="https://www.instagram.com/pandayed" icon={InstagramIcon} />
+                        <SocialLink title="Twitter/X" link="https://x.com/pandayed" icon={TwitterX} />
                     </div>
 
                     

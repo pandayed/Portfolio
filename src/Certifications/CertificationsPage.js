@@ -10,7 +10,7 @@ const certificates = [
     //     source: "Udemy",
     // },
     {
-        title: "Implemeting and Administering Cisco Solutions (CCNA) 2.1",
+        title: "Authorized Training Course for CCNA 2.1",
         completionDate: new Date("2024-08-23"),
         url: "https://drive.google.com/file/d/1C1f-FtQ8rAtAW_GF7t_BqsqEXCYgGlnU/view?usp=drive_link",
         source: "Cisco"
