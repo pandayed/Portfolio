@@ -4,7 +4,7 @@
 
 .FooterBody {
     padding: 20px;
-    background-color: #2A2A2A;
+    background-color: #1A1E25;
 }
 
 /* Icon styling */
@@ -17,7 +17,7 @@
 
 .FooterBase {
     display: flex;
-    background-color: #171717;
+    background-color: #161A20;
     padding: 20px;
 }
 
@@ -40,11 +40,12 @@
 }
 
 .SocialLinks {
-    list-style-type: none;
-    padding-left: 0;
+    display: flex;
+    gap: 50px;
 }
 
-.SocialLinkItem {
-    margin-top: 8px;
-    list-style: none;
+.Socials{
+    padding: 0px 100px 0px 100px;
+    display: flex;
+    justify-content: space-between;
 }

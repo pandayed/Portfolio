@@ -7,10 +7,16 @@
     color: #00CA00;
 }
 
+.CompanyDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 
 .ExperienceSection {
-    background-color: #202020;
-    padding: 100px 100px 100px 100px;
+    background-color: #20262F;
+    padding: 100px;
     margin: 0px;
 }
 
@@ -18,7 +24,11 @@
     margin: 0px;
     display: flex;
     gap: 20px;
+}
 
+.Titles{
+    display: flex;
+    flex-direction: column;
 }
 
 .CompanyName {
@@ -39,21 +49,16 @@
     justify-content: center;
     align-items: center;
     padding: 4px 10px;
-    border: solid 0.25px white;
     background-color: #ffffff1a;
     border-radius: 4px;
-    margin-right: 10px;
-}
-
-.TechItem {
-    display: inline;
 }
 
 
 
 .Technology {
+    display: flex;
+    gap: 10px;
     font-family: "Source Code Pro";
-    margin-top: 20px;
 }
 
 .CompanyLogo {
@@ -71,13 +76,8 @@
     display: inline-flex;
     margin: 0px;
     padding: 12px;
-    background-color: #ffffff1a;
+    background-color: #ffffff0c;
     border-radius: 14px;
-}
-
-
-.SectionTitle {
-    text-align: left;
 }
 
 .ExperiencesList {
@@ -92,7 +92,6 @@
 
 .DateContainer {
     display: flex;
-    margin-top: 10px;
 }
 
 
@@ -105,9 +104,8 @@
 }
 
 .WorkDetailsList {
-    padding: 15px;
+    padding-left: 15px;
     list-style-type: disc;
-    /* Ensures bullets are shown */
     margin: 0;
 }
 

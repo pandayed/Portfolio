@@ -1,5 +1,5 @@
 .BooksList {
-    background-color: hsla(0, 0%, 100%, 0.200);
+    background-color: #ffffff09;
     display: flex; /* Align items horizontally */
     overflow-x: auto; /* Allow horizontal scrolling if items overflow */
     gap: 20px; /* Space between items */
@@ -9,7 +9,7 @@
 
 .BookShelf{
     padding: 100px;
-    background-color: rebeccapurple;
+    background-color: #1B2027;
 }
 
 .Book {

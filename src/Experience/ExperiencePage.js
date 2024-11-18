@@ -15,8 +15,11 @@ const Experience = (props) => {  // Use props instead of destructuring
             </div>
 
             <div className="CompanyDetails">
-                <div className="CompanyName">{props.experience.company}</div>
-                <div className="Position">{props.experience.jobRole}</div>
+                <div className="Titles">
+                    <div className="CompanyName">{props.experience.company}</div>
+                    <div className="Position">{props.experience.jobRole}</div>
+                </div>
+
                 <div className="DateContainer">
                     <div className="StartEndDate">
                         {getFormattedDate(props.experience.startDate)}
@@ -31,9 +34,10 @@ const Experience = (props) => {  // Use props instead of destructuring
                             <div className="StartEndDate">{getFormattedDate(props.experience.endDate)}</div>
                         )
                     }
-
                 </div>
+
                 <Technologies technologies={props.experience.tech} />
+                
                 <div className="WorkDetails">
                     {
                         <ul className="WorkDetailsList">
