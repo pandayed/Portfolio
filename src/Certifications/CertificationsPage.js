@@ -1,5 +1,6 @@
 import React from "react";
 import './CertificationsPage.css';
+import { getFormattedDate } from "../Utils";
 
 const certificates = [
     // {
@@ -20,11 +21,18 @@ const certificates = [
 const certificateDisplay = (certificate) => {
     return (
             <div className="Certificate">
+                <div className="CertificateMainContent">
                 <a href={certificate.url} target="_blank" className="CertificateTitle">
                     {certificate.title}
                 </a>
                 <p>by</p>
                 <p className="CertificateSource">{certificate.source}</p>
+                </div>
+
+                <div className="CompletionData">
+                    <p>Completed On:</p>
+                    <p className="CompletionDate">{getFormattedDate(certificate.completionDate)}</p>
+                </div>
             </div>
             
     );
