@@ -1,5 +1,7 @@
 import React from "react";
-import Cisco from '../assets/company_logos/ic_cisco.png'
+import Cisco from '../assets/company_logos/ic_cisco.png';
+import DefaultCompanyLogo from '../assets/company_logos/ic_default-company-logo.png';
+
 
 
 // ---------------- class defintion ------------------- //
@@ -44,7 +46,7 @@ export const experiences = [
 
     ),
     new Experience(
-        Cisco,
+        DefaultCompanyLogo,
         "Exatorial",
         "Software Engineer Intern",
         new Date("2023-07-01"),  // Assuming start date
@@ -57,7 +59,7 @@ export const experiences = [
 
     ),
     new Experience(
-        Cisco,
+        DefaultCompanyLogo,
         "Checko",
         "Mobile Development Intern",
         new Date("2023-01-01"),  // Assuming start date
@@ -70,7 +72,7 @@ export const experiences = [
 
     ),
     new Experience(
-        Cisco,
+        DefaultCompanyLogo,
         "Mugs",
         "Android Application Developer",
         new Date("2022-06-01"),  // Assuming start date

@@ -11,24 +11,24 @@ const Projects = [
             "JavaScript"
         ]
     },
-    {
-        title: "EdPub",
-        url: "https://www.linkedin.com/in/pandayed/",
-        technologies: [
-            "Kotlin",
-            "Android",
-            "Firebase"
-        ]
-    },
-    {
-        title: "Epione",
-        url: "",
-        technologies: [
-            "Flutter",
-            "Android",
-            "Firebase"
-        ]
-    }
+    // {
+    //     title: "EdPub",
+    //     url: "https://www.linkedin.com/in/pandayed/",
+    //     technologies: [
+    //         "Kotlin",
+    //         "Android",
+    //         "Firebase"
+    //     ]
+    // },
+    // {
+    //     title: "Epione",
+    //     url: "",
+    //     technologies: [
+    //         "Flutter",
+    //         "Android",
+    //         "Firebase"
+    //     ]
+    // }
 ]
 
 const Project = (props) => {

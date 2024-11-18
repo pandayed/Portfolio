@@ -89,7 +89,7 @@ const ImageDisplay = ({ isbn }) => {
 export const BookShelfPage = () => {
     return (
         <div className="BookShelf">
-            <div className="SectionTitle">BookShelf</div>
+            <div className="SectionTitle">Bookshelf</div>
             <div className="BooksList">
                 {books.map((book, index) => (
                     <div key={index} className="Book">
