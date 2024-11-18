@@ -1,21 +1,25 @@
 .ProjectsPage{
-    background-color: #202020;
+    background-color: #1F242C;
     padding: 100px 100px 100px 100px;
     margin: 0px;
 }
 
 .Project{
+    display: flex;
+    text-decoration: none;
+    color: white;
     border: solid 0.25px #ffffff1a;
     border-radius: 10px;
-    background-color: #ffffff1a;
+    background-color: #ffffff05;
     padding: 20px;
+    justify-content: space-between;
     margin: 0px;
 }
 
 .Project:hover{
-    border: solid 0.25px white;
+    border: solid 0.25px #ffffff2f;
     border-radius: 10px;
-    background-color: #ffffff1a;
+    background-color: #ffffff08;
     padding: 20px;
     margin: 0px;
 }
@@ -23,8 +27,14 @@
 .ProjectTitle{
     margin: 0px;
     font-family: "Source Code Pro";
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
+}
+
+.ProjectImage{
+    border-radius: 10px;
+    height: 400px;
+    width: auto;
 }
 
 .ProjectsList{
@@ -33,7 +43,41 @@
     gap: 20px;
 }
 
-.ProjectLink {
-    text-decoration: none; /* Removes the default underline for links */
-    color: inherit; /* Ensures link color matches the project's styles */
+.RepoVisibility{
+    background-color: #ffffff1a;
+    gap: 5px;
+    border-radius: 10px;
+    font-size: small;
+    align-items: center;
+    margin: 0px;
+    padding: 2px 8px 2px 8px;
+    display: inline-flex;
+    max-width: fit-content;
+}
+.VisibilityIcon{
+    margin: 0px;
+    padding: 0px;
+    height: 10px;
+}
+
+.VisibilityText{
+    margin: 0px;
+    padding: 0px;
+}
+
+.ProjectDescription{
+    margin: 0px;
+    line-height: 1.25;
+    padding: 0px;
+}
+
+.ProjectTextDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.TitleSection{
+    gap: 60px;
+    display: flex;
 }
