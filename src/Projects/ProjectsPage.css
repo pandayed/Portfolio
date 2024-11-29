@@ -4,6 +4,27 @@
     margin: 0px;
 }
 
+.GitHubLink{
+    display: inline-flex;
+    font-family: "Source Code Pro";
+    color: white;
+    align-items: center;
+    text-decoration: none;
+    border-bottom: 0.5px solid white;
+    padding-bottom: 2px;
+}
+
+.GitHubLink:hover{
+    font-style: italic;
+    display: inline-flex;
+    font-family: "Source Code Pro";
+    color: white;
+    align-items: center;
+    text-decoration: none;
+    border-bottom: 0.5px solid white;
+    padding-bottom: 2px;
+}
+
 .Project{
     display: flex;
     text-decoration: none;
@@ -12,6 +33,7 @@
     border-radius: 10px;
     background-color: #ffffff05;
     padding: 20px;
+    gap: 20px;
     justify-content: space-between;
     margin: 0px;
 }
@@ -22,6 +44,13 @@
     background-color: #ffffff08;
     padding: 20px;
     margin: 0px;
+    gap: 20px;
+}
+
+.VisibilityAndLinks{
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
 .ProjectTitle{
@@ -33,8 +62,8 @@
 
 .ProjectImage{
     border-radius: 10px;
-    height: 400px;
-    width: auto;
+    height: auto;
+    width: 60%;
 }
 
 .ProjectsList{
@@ -44,6 +73,7 @@
 }
 
 .RepoVisibility{
+    font-family: "Source Code Pro";
     background-color: #ffffff1a;
     gap: 5px;
     border-radius: 10px;
