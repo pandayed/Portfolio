@@ -8,20 +8,9 @@
 }
 
 
-.HeaderNavigation {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
 .HeaderNavItem {
     display: inline;
     margin: 0px 0px 0px 20px;
-}
-
-.SelectedHeaderNavItem {
-    display: inline;
-
 }
 
 .HeaderNavButton {
@@ -40,7 +29,9 @@
     /* Optional: Darken the color on hover */
 }
 
-.SelectedHeaderNavButton {}
+.SelectedHeaderNavButton {
+    
+}
 
 
 .Theme {
