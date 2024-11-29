@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <Header>
-        <ul className="HeaderNavigation inline-div">
+        <div>
           <HeaderNavigationButton
             onClick={() => scrollToSection(homeRef, 'home')}
             label="Home"
@@ -72,7 +72,7 @@ function App() {
             label="Contact"
             isSelected={selectedSection === 'contact'}
           /> */}
-        </ul>
+        </div>
       </Header>
 
       <div>

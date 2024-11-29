@@ -5,7 +5,7 @@ const HeaderNavigationButton = (
     props
 ) => {
     return (
-        <li className="HeaderNavItem">
+        <div className="HeaderNavItem">
             <button
                 className="HeaderNavButton"
                 onClick={props.onClick}
@@ -14,7 +14,7 @@ const HeaderNavigationButton = (
                     {props.label}
                 </div>
             </button>
-        </li>
+        </div>
 
     );
 };
