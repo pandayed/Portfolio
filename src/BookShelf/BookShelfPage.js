@@ -106,32 +106,33 @@ const ImageDisplay = ({ isbn }) => {
 };
 
 export const BookShelfPage = () => {
+
     return (
         <div className="BookShelf">
             <div className="SectionTitle">Bookshelf</div>
 
+            <div className="BookCategory">
+
             {
-                booksByCategory.map((category, index) => {
-                    <div className="BooksList">
-
+                booksByCategory.map((category, index) => (
+                        <div className="BooksList">
                         <p className="CategoryTitle">
-                            {"hi"}
+                            {category.category}
                         </p>
-
-                        <div >
-                            {category.booksList.map((book, _) => (
-                                <div key={index} className="Book">
-                                    <p className="BookName">{book.name}</p>
-                                    <ImageDisplay isbn={book.isbn} />
-                                    <p>Author: {book.author}</p>
-                                </div>
-                            ))}
-                        </div>
-
+                        {category.booksList.map((book, _) => (
+                            <div key={index} className="Book">
+                                {/* <p className="BookName">{book.name}</p> */}
+                                <ImageDisplay isbn={book.isbn} />
+                                {/* <p>Author: {book.author}</p> */}
+                            </div>
+                        ))}
                     </div>
-                })
+                    
+                ))
             }
 
+
+</div>
 
 
         </div>
