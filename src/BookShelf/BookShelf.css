@@ -39,6 +39,23 @@
     border-radius: 10px; /* Round the edges */
 }
 
-.CategoryTitle{
+.CategoryTitle {
+
+    writing-mode: vertical-rl; /* Changed from vertical-lr to vertical-rl */
+    text-orientation: mixed; /* Ensures text is not sideways */
+    transform: rotate(180deg); /* Rotates the text to go from bottom to top */
+    font-size: 1rem;
+    margin: 0px;
+    padding: 10px;
+    text-overflow: ellipsis; /* Add ... for overflow */
     color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0px 10px 10px 0px;
+}
+
+.BookCategory{
+    flex-direction: column;
+    display: flex;
+    gap: 20px;
+    /* background-color: white; */
 }
