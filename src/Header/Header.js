@@ -30,13 +30,12 @@ const Header = (props) => {
             <div className="logo">
                 <a href="/">pandayed.com</a>
             </div>
-            <div>
+            <div className="hidden lg:flex">
                 <div className="inline-div make-child-center">
                     {props.children} {/* Render the passed content */}
                 </div>
             </div>
             <ThemeToggle />
-
         </div>
     );
 };
