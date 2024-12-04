@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getBookCoverUrl } from "../api-calls";
 import './BookShelf.css';
+import  BlockGraphic  from "../assets/block-graphic.svg";
 
 const booksByCategory = [
     {
@@ -109,32 +110,27 @@ export const BookShelfPage = () => {
 
     return (
         <div className="BookShelf">
+            {/* <object type="image/svg+xml" data={BlockGraphic}>svg-animation</object> */}
             <div className="SectionTitle">Bookshelf</div>
-
             <div className="BookCategory">
-
-            {
-                booksByCategory.map((category, index) => (
+                {
+                    booksByCategory.map((category, index) => (
                         <div className="BooksList">
-                        <p className="CategoryTitle">
-                            {category.category}
-                        </p>
-                        {category.booksList.map((book, _) => (
-                            <div key={index} className="Book">
-                                {/* <p className="BookName">{book.name}</p> */}
-                                <ImageDisplay isbn={book.isbn} />
-                                {/* <p>Author: {book.author}</p> */}
-                            </div>
-                        ))}
-                    </div>
-                    
-                ))
-            }
+                            <p className="CategoryTitle">
+                                {category.category}
+                            </p>
+                            {category.booksList.map((book, _) => (
+                                <div key={index} className="Book">
+                                    {/* <p className="BookName">{book.name}</p> */}
+                                    <ImageDisplay isbn={book.isbn} />
+                                    {/* <p>Author: {book.author}</p> */}
+                                </div>
+                            ))}
+                        </div>
 
-
-</div>
-
-
+                    ))
+                }
+            </div>
         </div>
     );
 };
