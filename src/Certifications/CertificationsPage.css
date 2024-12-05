@@ -3,13 +3,21 @@
     padding: 100px;
 }
 
-.CertificateTitle{
+/* .CertificateTitle{
     text-decoration: none;
     font-family: "Source Code Pro";
     color: white;
-    /* font-weight: bold; */
-    border-bottom: 0.5px solid white;
+
 }
+
+.CertificateTitle:hover{
+    font-style: italic;
+    text-decoration: none;
+    font-family: "Source Code Pro";
+    color: white;
+
+    border-bottom: 0.5px solid white;
+} */
 
 .CertificateMainContent{
     gap: 20px;

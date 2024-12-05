@@ -1,4 +1,5 @@
 import React from "react";
+import '../CommonClasses/CommonClasses.css';
 import './CertificationsPage.css';
 import { getFormattedDate } from "../Utils";
 
@@ -22,7 +23,7 @@ const certificateDisplay = (certificate) => {
     return (
             <div className="Certificate">
                 <div className="CertificateMainContent">
-                <a href={certificate.url} target="_blank" className="CertificateTitle">
+                <a href={certificate.url} target="_blank" className="clickable-text">
                     {certificate.title}
                 </a>
                 <p>by</p>

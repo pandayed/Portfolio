@@ -4,7 +4,6 @@ import './Header.css'; // Create a separate CSS file for styling if needed
 import '../CommonClasses/CommonClasses.css';
 
 
-
 function ThemeToggle() {
     // State to track the theme (light or dark)
     const [isDarkTheme, setIsDarkTheme] = useState(false);
