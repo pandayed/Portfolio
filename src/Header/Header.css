@@ -7,17 +7,11 @@
     align-items: center;
 }
 
-
-.HeaderNavItem {
-    display: inline;
-    margin: 0px 0px 0px 20px;
-}
-
 .HeaderNavButton {
+    font-family: "Source Code Pro";
     margin: 0px;
     background-color: #ffffff1a;
     color: white;
-    padding: 10px 20px;
     cursor: pointer;
     border: none;
     border-radius: 10px;

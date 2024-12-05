@@ -34,3 +34,11 @@
     color: white;
     text-decoration: none;
 }
+
+.clickable-text {
+    @apply text-white font-mono no-underline;
+  }
+  
+  .clickable-text:hover {
+    @apply italic text-white no-underline border-b border-white;
+  }

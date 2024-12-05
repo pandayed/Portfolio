@@ -5,16 +5,15 @@ const HeaderNavigationButton = (
     props
 ) => {
     return (
-        <div className="HeaderNavItem">
-            <button
-                className="HeaderNavButton"
+            <div
+                className="HeaderNavButton px-4 py-2 text-sm"
                 onClick={props.onClick}
             >
                 <div className="NavigationItemLabel">
                     {props.label}
                 </div>
-            </button>
-        </div>
+            </div>
+
 
     );
 };
