@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getBookCoverUrl } from "../api-calls";
-import './BookShelf.css';
-import  BlockGraphic  from "../assets/block-graphic.svg";
 
 const booksByCategory = [
     {
@@ -76,61 +74,65 @@ const booksByCategory = [
     }
 ];
 
-
-
 const ImageDisplay = ({ isbn }) => {
     const [image, setImage] = useState(null);
     const [error, setError] = useState(null);
 
     const bookCoverSuccessCallback = (response) => {
-        // Assuming the response contains a "url" key with the image URL
-        const bookCoverImageUrl = response.data.url; // why does data appear in response
-        console.log(response);
-        setImage(bookCoverImageUrl); // Set the image URL
+        const bookCoverImageUrl = response.data.url;
+        setImage(bookCoverImageUrl);
     };
 
     const bookCoverErrorCallback = (error) => {
         console.error(`Error: ${error}`);
-        setError(error.message); // Set the error message
+        setError(error.message);
     };
 
-    // Trigger the API call when the component mounts or when `isbn` changes
-    React.useEffect(() => {
+    useEffect(() => {
         getBookCoverUrl(bookCoverSuccessCallback, bookCoverErrorCallback, isbn);
     }, [isbn]);
 
     return (
-        <div>
-            {image && <img src={image} alt="Book Cover" className="BookImage" />}
+        <div className="flex justify-center">
+            {image && (
+                <img 
+                    src={image} 
+                    alt="Book Cover" 
+                    className="h-48 w-auto object-cover rounded-lg shadow-md" 
+                />
+            )}
         </div>
     );
 };
 
 export const BookShelfPage = () => {
-
     return (
-        <div className="BookShelf">
-            {/* <object type="image/svg+xml" data={BlockGraphic}>svg-animation</object> */}
-            <div className="SectionTitle">Bookshelf</div>
-            <div className="BookCategory">
-                {
-                    booksByCategory.map((category, index) => (
-                        <div className="BooksList">
-                            <p className="CategoryTitle">
-                                {category.category}
-                            </p>
-                            {category.booksList.map((book, _) => (
-                                <div key={index} className="Book">
-                                    {/* <p className="BookName">{book.name}</p> */}
+        <div className="bg-[#1B2027] p-6 md:p-12 lg:p-24">
+            <div className="text-white text-3xl font-bold mb-8 text-center">Bookshelf</div>
+            <div className="space-y-6">
+                {booksByCategory.map((category, categoryIndex) => (
+                    <div 
+                        key={categoryIndex} 
+                        className="bg-white/5 rounded-2xl p-4 md:p-6"
+                    >
+                        <div className="text-white text-lg font-semibold mb-4 text-center md:text-left">
+                            {category.category}
+                        </div>
+                        <div className="flex overflow-x-auto space-x-4 pb-4">
+                            {category.booksList.map((book, bookIndex) => (
+                                <div 
+                                    key={bookIndex} 
+                                    className="flex-shrink-0 w-40 text-center"
+                                >
                                     <ImageDisplay isbn={book.isbn} />
-                                    {/* <p>Author: {book.author}</p> */}
                                 </div>
                             ))}
                         </div>
-
-                    ))
-                }
+                    </div>
+                ))}
             </div>
         </div>
     );
 };
+
+export default BookShelfPage;
