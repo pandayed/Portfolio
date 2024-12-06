@@ -74,7 +74,7 @@ function App() {
       </Header>
 
       <div>
-        <div id="home" ref={homeRef}>
+        {/* <div id="home" ref={homeRef}>
           <HomePage />
         </div>
 
@@ -92,7 +92,7 @@ function App() {
 
         <div id="bookshelf" ref={bookshelfRef}>
           <BookShelfPage />
-        </div>
+        </div> */}
 
         
 
