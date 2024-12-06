@@ -45,7 +45,14 @@ const Hamburger = (props) => {
                         <div className="p-2 self-end HeaderNavButton" id="close-button" onClick={toggleMenu}>
                             <AiOutlineClose />
                         </div>
-                        {props.menuItems}
+                        {props.menuItems.map(menuItem => 
+        React.cloneElement(menuItem, { 
+            onClick: (e) => {
+                menuItem.props.onClick?.(e);
+                toggleMenu();
+            }
+        })
+    )}
                     </div>
                 </div>
             )}
