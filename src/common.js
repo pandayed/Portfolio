@@ -2,7 +2,7 @@ import React from "react";
 
 const TechItem = (props) => {
     return (
-        <div className="TechItem">
+        <div className="text-xs inline-flex items-center justify-center px-2.5 py-1 bg-white/10 rounded-md">
             {props.technology}
         </div>
     )
@@ -10,7 +10,7 @@ const TechItem = (props) => {
 
 export const Technologies = (props) => {
     return (
-        <div className="Technology">
+        <div className="flex flex-wrap gap-2 font-['Source_Code_Pro'] mt-2">
             {
                 props.technologies.map(
                     (technology, index) => (

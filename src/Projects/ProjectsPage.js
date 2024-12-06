@@ -46,9 +46,16 @@ const Project = ({ project }) => {
             href={project.deployment || project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex text-white border border-white/10 rounded-lg bg-white/5 p-5 gap-5 hover:border-white/30 hover:bg-white/10 transition-all duration-300"
+            className="flex flex-col lg:flex-row text-white border border-white/10 rounded-lg bg-white/5 p-5 gap-5 hover:border-white/30 hover:bg-white/10 transition-all duration-300"
         >
-            <div className="flex flex-col gap-5 flex-grow">
+            {project.projectImage && (
+                <img 
+                    src={project.projectImage} 
+                    alt={`${project.title} project`}
+                    className="rounded-lg h-auto w-full object-cover lg:hidden"
+                />
+            )}
+            <div className="flex flex-col gap-5 flex-grow" id="ProjectDetails">
                 <div>
                     <p className="m-0 font-['Source_Code_Pro'] text-2xl font-bold">
                         {project.title}
@@ -73,7 +80,7 @@ const Project = ({ project }) => {
                 <img 
                     src={project.projectImage} 
                     alt={`${project.title} project`}
-                    className="rounded-lg h-auto w-3/5 object-cover"
+                    className="hidden rounded-lg h-auto w-3/5 object-cover lg:flex"
                 />
             )}
         </a>
