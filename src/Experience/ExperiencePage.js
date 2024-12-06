@@ -1,10 +1,5 @@
 import React from "react";
-import './ExperiencePage.css';
 import { getFormattedDate } from '../Utils.js';
-import { Technologies } from  '../common.js';
-import { useState } from "react";
-import { useEffect } from "react";
-
 
 // Import the logos
 import CiscoLogo from '../assets/company_logos/ic_cisco.png';
@@ -12,18 +7,18 @@ import DefaultCompanyLogo from '../assets/company_logos/ic_default-company-logo.
 
 const experiences = [
     {
-        "companyLogo": CiscoLogo,  // Use imported logo
+        "companyLogo": CiscoLogo,
         "company": "Cisco",
         "jobRole": "Software Engineer",
         "startDate": "2024-08-01",
-        "endDate": null,  // Use null instead of undefined
+        "endDate": null,
         "tech": ["Go", "JavaScript", "Java", "Python", "Power BI", "React", "Splunk", "Spring Boot"],
         "workDetails": [
             "Developing Cisco SEA",
         ]
     },
     {
-        "companyLogo": CiscoLogo,  // Use imported logo
+        "companyLogo": CiscoLogo,
         "company": "Cisco",
         "jobRole": "Software Engineer Intern",
         "startDate": "2024-02-01",
@@ -35,7 +30,7 @@ const experiences = [
         ]
     },
     {
-        "companyLogo": DefaultCompanyLogo,  // Use imported logo
+        "companyLogo": DefaultCompanyLogo,
         "company": "Exatorial",
         "jobRole": "Software Engineer Intern",
         "startDate": "2023-07-01",
@@ -47,7 +42,7 @@ const experiences = [
         ]
     },
     {
-        "companyLogo": DefaultCompanyLogo,  // Use imported logo
+        "companyLogo": DefaultCompanyLogo,
         "company": "Checko",
         "jobRole": "Mobile Development Intern",
         "startDate": "2023-01-01",
@@ -59,7 +54,7 @@ const experiences = [
         ]
     },
     {
-        "companyLogo": DefaultCompanyLogo,  // Use imported logo
+        "companyLogo": DefaultCompanyLogo,
         "company": "Mugs",
         "jobRole": "Android Application Developer",
         "startDate": "2022-06-01",
@@ -71,62 +66,82 @@ const experiences = [
         ]
     }
 ];
-  
 
-const Experience = (props) => {
+const Technologies = ({ technologies }) => {
     return (
-        <div className="Experience">
-            <div className="CompanyLogoContainer">
-                <div className="CompanyLogoWrapper">
+        <div className="flex flex-wrap gap-2 font-['Source_Code_Pro'] mt-2">
+            {technologies.map((tech, index) => (
+                <span 
+                    key={index} 
+                    className="text-xs inline-flex items-center justify-center px-2.5 py-1 bg-white/10 rounded-md"
+                >
+                    {tech}
+                </span>
+            ))}
+        </div>
+    );
+};
+
+const Experience = ({ experience }) => {
+    return (
+        <div className="flex flex-col md:flex-row gap-4 md:gap-8 p-4 bg-[#20262F]/50 rounded-lg">
+            {/* Company Logo Container */}
+            <div className="flex justify-center md:justify-start items-center">
+                <div className="inline-flex p-3 bg-white/5 rounded-xl">
                     <img 
-                        src={props.experience.companyLogo} 
-                        alt={`${props.experience.company} logo`} 
-                        className="CompanyLogo" 
+                        src={experience.companyLogo} 
+                        alt={`${experience.company} logo`} 
+                        className="w-24 h-24 object-contain bg-white rounded-lg"
                     />
                 </div>
             </div>
 
-            <div className="CompanyDetails">
-                <div className="Titles">
-                    <div className="CompanyName">{props.experience.company}</div>
-                    <div className="Position">{props.experience.jobRole}</div>
+            {/* Company Details */}
+            <div className="flex flex-col gap-4 flex-grow">
+                {/* Company Name and Position */}
+                <div className="flex flex-col">
+                    <h3 className="text-2xl font-bold text-white">
+                        {experience.company}
+                    </h3>
+                    <h4 className="text-xl font-['Source_Code_Pro'] text-white/80">
+                        {experience.jobRole}
+                    </h4>
                 </div>
 
-                <div className="DateContainer">
-                    <div className="StartEndDate">
-                        {getFormattedDate(props.experience.startDate)}
-                    </div>
-                    <div className="DateSeparator">-</div>
-                    {
-                        props.experience.endDate === null ? (
-                            <div className="PresentDate">PRESENT</div>
-                        ) : (
-                            <div className="StartEndDate">{getFormattedDate(props.experience.endDate)}</div>
-                        )
-                    }
+                {/* Date Container */}
+                <div className="flex items-center gap-2 text-base font-['Source_Code_Pro']">
+                    <span>{getFormattedDate(experience.startDate)}</span>
+                    <span className="mx-2">-</span>
+                    {experience.endDate === null ? (
+                        <span className="text-green-500 font-semibold">PRESENT</span>
+                    ) : (
+                        <span>{getFormattedDate(experience.endDate)}</span>
+                    )}
                 </div>
 
-                <Technologies technologies={props.experience.tech} />
-                
-                <div className="WorkDetails">
-                    <ul className="WorkDetailsList">
-                        {props.experience.workDetails.map((workDetailsItem, index) => (
-                            <li key={index} className="WorkDetailsItem">
-                                {workDetailsItem}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                {/* Technologies */}
+                <Technologies technologies={experience.tech} />
+
+                {/* Work Details */}
+                <ul className="list-disc list-outside pl-5 text-white/80 space-y-2">
+                    {experience.workDetails.map((workDetailsItem, index) => (
+                        <li key={index} className="text-base">
+                            {workDetailsItem}
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );
-}
+};
 
 const ExperiencePage = () => {
     return (
-        <div className="ExperienceSection">
-            <div className="SectionTitle">Work Experience</div>
-            <div className="ExperiencesList">
+        <div className="bg-[#20262F] py-16 px-4 sm:px-8 md:px-16 lg:px-24">
+            <h2 className="text-4xl font-bold text-white text-center mb-12">
+                Work Experience
+            </h2>
+            <div className="max-w-6xl mx-auto space-y-8">
                 {experiences.map((experience, index) => (
                     <Experience key={index} experience={experience} />
                 ))}
