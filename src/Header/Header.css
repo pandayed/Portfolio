@@ -1,5 +1,6 @@
 .Header {
     display: flex;
+    flex-direction: row;
     z-index: 1;
     background-color: #222831;
     justify-content: space-between;
@@ -15,12 +16,10 @@
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    /* Add rounded corners */
 }
 
 .HeaderNavButton:hover {
     background-color: #ffffff11;
-    /* Optional: Darken the color on hover */
 }
 
 .SelectedHeaderNavButton {

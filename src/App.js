@@ -36,7 +36,6 @@ function App() {
   return (
     <div className="App">
       <Header>
-        <div className="flex gap-4">
           <HeaderNavigationButton
             onClick={() => scrollToSection(homeRef, 'home')}
             label="Home"
@@ -72,7 +71,6 @@ function App() {
             label="Contact"
             isSelected={selectedSection === 'contact'}
           /> */}
-        </div>
       </Header>
 
       <div>
