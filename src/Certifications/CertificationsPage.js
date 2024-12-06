@@ -1,54 +1,63 @@
 import React from "react";
-import '../CommonClasses/CommonClasses.css';
-import './CertificationsPage.css';
-import { getFormattedDate } from "../Utils";
 
 const certificates = [
-    // {
-    //     title: "Android MVVM Architecture",
-    //     completionDate: new Date("2023-07-01"),
-    //     url: "https://drive.google.com/file/d/1pQNy6gR5VTu_r6dXZ-tG4m7PTX3mU3z1/view?usp=drive_link",
-    //     source: "Udemy",
-    // },
     {
         title: "Authorized Training Course for CCNA 2.1",
         completionDate: new Date("2024-08-23"),
         url: "https://drive.google.com/file/d/1C1f-FtQ8rAtAW_GF7t_BqsqEXCYgGlnU/view?usp=drive_link",
         source: "Cisco"
     }
+];
 
-]
+// Inline date formatting function
+const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+};
 
-const certificateDisplay = (certificate) => {
+const CertificateDisplay = ({ certificate }) => {
     return (
-            <div className="Certificate">
-                <div className="CertificateMainContent">
-                <a href={certificate.url} target="_blank" className="clickable-text">
+        <div className="flex items-center justify-between text-white text-xl py-4 border-b border-gray-700">
+            <div className="flex items-center gap-4">
+                <a 
+                    href={certificate.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:italic hover:border-b hover:border-white transition-all duration-300"
+                >
                     {certificate.title}
                 </a>
                 <p>by</p>
-                <p className="CertificateSource">{certificate.source}</p>
-                </div>
-
-                <div className="CompletionData">
-                    <p>Completed On:</p>
-                    <p className="CompletionDate">{getFormattedDate(certificate.completionDate)}</p>
-                </div>
+                <p className="font-bold">{certificate.source}</p>
             </div>
-            
-    );
-}
 
-export const CertificationsPage = () => {
-    return (
-        <div className="CertificationsPage">
-            <div className="SectionTitle">Certifications</div>
-            {
-                certificates.map((certificate, index) => (
-                    certificateDisplay(certificate)
-                ))
-            }
-
+            <div className="flex gap-4">
+                <p>Completed On:</p>
+                <p className="font-bold">{formatDate(certificate.completionDate)}</p>
+            </div>
         </div>
     );
 };
+
+export const CertificationsPage = () => {
+    return (
+        <div className="bg-[#1D222A] p-6 md:p-12 lg:p-24">
+            <div className="text-white text-3xl md:text-4xl lg:text-5xl mb-8 font-bold">
+                Certifications
+            </div>
+            <div className="space-y-4">
+                {certificates.map((certificate, index) => (
+                    <CertificateDisplay 
+                        key={index} 
+                        certificate={certificate} 
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default CertificationsPage;
