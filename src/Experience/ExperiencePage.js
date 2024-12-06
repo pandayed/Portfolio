@@ -17,10 +17,9 @@ const experiences = [
         "jobRole": "Software Engineer",
         "startDate": "2024-08-01",
         "endDate": null,  // Use null instead of undefined
-        "tech": ["Python", "Splunk", "JavaScript", "React"],
+        "tech": ["Go", "JavaScript", "Java", "Python", "Power BI", "React", "Splunk", "Spring Boot"],
         "workDetails": [
-            "Developing UI for Cisco SEA",
-            "Enhancing analytical capabilites using Splunk"
+            "Developing Cisco SEA",
         ]
     },
     {

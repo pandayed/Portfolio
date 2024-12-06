@@ -23,70 +23,66 @@ function ThemeToggle() {
     );
 }
 
-
 const Hamburger = (props) => {
     const [isOpen, setIsOpen] = useState(false);
-  
+
     // Toggle the menu visibility
     const toggleMenu = () => {
-      setIsOpen(!isOpen);
+        setIsOpen(!isOpen);
     };
-  
+
     return (
-      <div className="lg:hidden">
-        {/* Hamburger Icon */}
-        <button
-          className="p-2 text-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-          onClick={toggleMenu}
-        >
-          <svg
-            className="w-6 h-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            {isOpen ? (
-              // Close Icon
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              // Hamburger Icon
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+        <div className="lg:hidden">
+            {/* Hamburger Icon */}
+            <button
+                className="p-2 text-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                onClick={toggleMenu}
+            >
+                <svg
+                    className="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                >
+                    {isOpen ? (
+                        // Close Icon
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    ) : (
+                        // Hamburger Icon
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M4 6h16M4 12h16M4 18h16"
+                        />
+                    )}
+                </svg>
+            </button>
+
+            {isOpen && (
+                <div
+                    className={`p-4 fixed top-0 left-0 h-full w-full bg-gray-900 text-white transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"
+                        }`}
+                >
+                    <button
+                        className="absolute top-4 right-6 text-3xl"
+                        onClick={toggleMenu}
+                    >
+                        ✖
+                    </button>
+                    <div className="flex flex-col w-full gap-4">
+                        {props.menuItems}
+                    </div>
+                </div>
             )}
-          </svg>
-        </button>
-  
-        {/* Dropdown Menu */}
-        {isOpen && (
-          <div className="absolute top-12 right-4 bg-white shadow-md rounded-md w-48">
-            <ul className="flex flex-col items-start p-4">
-              <li className="py-2 hover:text-blue-500 cursor-pointer">
-                <a href="#home">Home</a>
-              </li>
-              <li className="py-2 hover:text-blue-500 cursor-pointer">
-                <a href="#about">About</a>
-              </li>
-              <li className="py-2 hover:text-blue-500 cursor-pointer">
-                <a href="#services">Services</a>
-              </li>
-              <li className="py-2 hover:text-blue-500 cursor-pointer">
-                <a href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
+        </div>
     );
-  };
+};
 
 
 const Header = (props) => {
@@ -95,13 +91,11 @@ const Header = (props) => {
             <div className="logo">
                 <a href="/">pandayed.com</a>
             </div>
-            <div className="hidden lg:flex">
-                <div className="inline-div make-child-center">
-                    {props.children} {/* Render the passed content */}
-                </div>
+            <div className="hidden lg:flex gap-4">
+                {props.children}
             </div>
             <ThemeToggle />
-            <Hamburger/>
+            <Hamburger menuItems={props.children} />
         </div>
     );
 };
