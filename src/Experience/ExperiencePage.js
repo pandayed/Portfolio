@@ -30,7 +30,6 @@ const experiences = [
         ]
     },
     {
-        "companyLogo": DefaultCompanyLogo,
         "company": "Exatorial",
         "jobRole": "Software Engineer Intern",
         "startDate": "2023-07-01",
@@ -42,7 +41,6 @@ const experiences = [
         ]
     },
     {
-        "companyLogo": DefaultCompanyLogo,
         "company": "Checko",
         "jobRole": "Mobile Development Intern",
         "startDate": "2023-01-01",
@@ -54,7 +52,6 @@ const experiences = [
         ]
     },
     {
-        "companyLogo": DefaultCompanyLogo,
         "company": "Mugs",
         "jobRole": "Android Application Developer",
         "startDate": "2022-06-01",
@@ -84,9 +81,9 @@ const Technologies = ({ technologies }) => {
 
 const Experience = ({ experience }) => {
     return (
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8 p-4 bg-[#20262F]/50 rounded-lg">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 p-4 bg-[#20262F]/50 rounded-lg">
             {/* Company Logo Container */}
-            <div className="flex justify-center md:justify-start items-center">
+            {experience.companyLogo && <div className="flex justify-start">
                 <div className="inline-flex p-3 bg-white/5 rounded-xl">
                     <img 
                         src={experience.companyLogo} 
@@ -94,7 +91,7 @@ const Experience = ({ experience }) => {
                         className="w-24 h-24 object-contain bg-white rounded-lg"
                     />
                 </div>
-            </div>
+            </div>}
 
             {/* Company Details */}
             <div className="flex flex-col gap-4 flex-grow">
@@ -137,7 +134,7 @@ const Experience = ({ experience }) => {
 
 const ExperiencePage = () => {
     return (
-        <div className="bg-[#20262F] py-16 px-4 sm:px-8 md:px-16 lg:px-24">
+        <div className="bg-[#20262F] py-16 px-4 sm:px-8 lg:px-16 lg:px-24">
             <h2 className="text-4xl font-bold text-white text-center mb-12">
                 Work Experience
             </h2>
