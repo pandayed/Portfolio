@@ -20,13 +20,13 @@ const formatDate = (date) => {
 
 const CertificateDisplay = ({ certificate }) => {
     return (
-        <div className="flex items-center justify-between text-white text-xl py-4 border-b border-gray-700">
+        <div className="flex items-center justify-between text-white text-xl py-4 border-gray-700">
             <div className="flex items-center gap-4">
                 <a 
                     href={certificate.url} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="hover:italic hover:border-b hover:border-white transition-all duration-300"
+                    className="inline-flex font-['Source_Code_Pro'] text-white items-center border-b border-white pb-0.5 hover:italic"
                 >
                     {certificate.title}
                 </a>
@@ -35,8 +35,7 @@ const CertificateDisplay = ({ certificate }) => {
             </div>
 
             <div className="flex gap-4">
-                <p>Completed On:</p>
-                <p className="font-bold">{formatDate(certificate.completionDate)}</p>
+                <p>{formatDate(certificate.completionDate)}</p>
             </div>
         </div>
     );
@@ -44,8 +43,8 @@ const CertificateDisplay = ({ certificate }) => {
 
 export const CertificationsPage = () => {
     return (
-        <div className="bg-[#1D222A] p-6 md:p-12 lg:p-24">
-            <div className="text-white text-3xl md:text-4xl lg:text-5xl mb-8 font-bold">
+        <div className="bg-[#1D222A] py-16 px-4 sm:px-8 md:px-16 lg:px-24">
+            <div className="text-4xl font-bold text-white text-center mb-12">
                 Certifications
             </div>
             <div className="space-y-4">
