@@ -59,48 +59,49 @@ const HomePage = () => {
     }, []);
 
     return (
-        <div 
+        <div
             className="min-h-screen bg-[#2D333B] bg-opacity-90 bg-cover bg-center flex flex-col justify-center items-center"
             style={{
                 backgroundImage: `url(${require('../assets/texture-background.png')})`
             }}
         >
-            <div className="max-w-4xl px-4 sm:px-6 lg:px-8 w-full">
-                <div 
-                    ref={referenceRef} 
+            <div className="max-w-4xl px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-8">
+                <div
+                    ref={referenceRef}
                     className="text-white space-y-4"
                 >
-                    <div 
-                        className="font-['Source_Code_Pro'] text-base sm:text-lg" 
+                    <div
+                        className="font-['Source_Code_Pro'] text-base sm:text-lg min-h-[2em]"
                         aria-label="Typing animation"
                     >
                         {displayText}
                     </div>
-                    
-                    <div>
-                        <h1 
-                            className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tighter text-white"
+
+                    <div className='text-4xl sm:text-5xl lg:text-6xl font-semibold flex flex-col gap-8'>
+                        <div
+                            className="text-white"
                         >
                             Lal Bihari Pandey.
-                        </h1>
-                        <h2 
-                            className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tighter text-white text-opacity-60"
+                        </div>
+                        <div
+                            className="text-white text-opacity-60"
                         >
-                            I design and develop<br />
+                            I design and develop</div>
+                        <div className="text-white text-opacity-60">
                             for impactful experiences.
-                        </h2>
+                        </div>
                     </div>
                 </div>
 
-                <div 
+                <div
                     ref={dynamicWidthRef}
                     style={{ width: `${width}px` }}
-                    className="font-['Source_Code_Pro'] text-base sm:text-lg text-white my-10 leading-relaxed"
+                    className="font-['Source_Code_Pro'] text-base sm:text-lg text-white leading-relaxed"
                 >
                     I am a versatile digital creator — continuously evolving with a passion for lifelong learning and a commitment to making a lasting impact.
                 </div>
 
-                <div 
+                <div
                     ref={dynamicWidthRef}
                     style={{ width: `${width}px` }}
                     className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
