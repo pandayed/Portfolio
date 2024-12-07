@@ -114,14 +114,15 @@ const HomePage = () => {
                     </button>
 
                     <button
-                        className="px-6 py-3 rounded-full text-lg font-['Source_Code_Pro'] text-white border border-white hover:bg-white/10 transition-colors duration-300 w-full sm:w-auto"
+                    // text-xs inline-flex items-center justify-center px-2.5 py-1 bg-white/10 rounded-md
+                        className="px-6 py-3 rounded-full text-lg font-['Source_Code_Pro'] text-white bg-white/10 transition-colors duration-300 w-full sm:w-auto hover:bg-white/8"
                         onClick={() => window.open('https://docs.google.com/document/d/1bDCyITLmrrbFMAPZ51MRAw-5M_O0TGIW3HOSzICOyhY', '_blank')}
                     >
                         Resume
                     </button>
 
                     <button
-                        className="px-6 py-3 rounded-full text-lg font-['Source_Code_Pro'] text-white border border-white hover:bg-white/10 transition-colors duration-300 w-full sm:w-auto"
+                        className="px-6 py-3 rounded-full text-lg font-['Source_Code_Pro'] text-white bg-white/10 transition-colors duration-300 w-full sm:w-auto"
                         onClick={() => window.location.href = 'mailto:lalbiharipandeyg@gmail.com'}
                     >
                         E-Mail
