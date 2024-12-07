@@ -56,11 +56,11 @@ function App() {
             label="Certifications"
             isSelected={selectedSection==='certifications'}
           />
-          <HeaderNavigationButton
+          {/* <HeaderNavigationButton
             onClick={() => scrollToSection(bookshelfRef, 'bookshelf')}
             label="Bookshelf"
             isSelected={selectedSection==='bookshelf'}
-          />
+          /> */}
           {/* <HeaderNavigationButton
             onClick={() => scrollToSection(skillsRef, 'skills')}
             label="Skills"
@@ -90,9 +90,9 @@ function App() {
             <CertificationsPage/>
         </div>
 
-        <div id="bookshelf" ref={bookshelfRef}>
+        {/* <div id="bookshelf" ref={bookshelfRef}>
           <BookShelfPage />
-        </div>
+        </div> */}
 
         
 
