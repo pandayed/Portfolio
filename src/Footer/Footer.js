@@ -7,7 +7,7 @@ const SocialLink = ({ title, link }) => {
     return (
         <a
             href={link}
-            className="inline-flex items-center font-['Source_Code_Pro'] text-white text-sm border-white pb-1 border-b hover:opacity-70 transition-opacity"
+            className="inline-flex items-center font-['Source_Code_Pro'] text-white text-sm border-white pb-1 border-b hover:opacity-70 transition-opacity self-start"
         >
             <span>{title}</span>
         </a>
@@ -17,8 +17,8 @@ const SocialLink = ({ title, link }) => {
 const Footer = () => {
     const socialLinks1 = [
         { title: "G-Mail", link: "mailto:lalbiharipandeyg@gmail.com" },
-        { title: "LinkedIn", link: "https://www.linkedin.com/in/pandayed/" },
-        { title: "GitHub", link: "https://github.com/pandayed" }
+        { title: "GitHub", link: "https://github.com/pandayed" },
+        { title: "LinkedIn", link: "https://www.linkedin.com/in/pandayed/" }
     ];
 
     const socialLinks2 = [
@@ -29,7 +29,7 @@ const Footer = () => {
     return (
         <footer className="bg-[#1A1E25]">
             <div className="container mx-auto px-4 py-8">
-                <div className="flex flex-row justify-between items-center md:flex-row">
+                <div className="flex flex-row justify-between md:flex-row">
                     <div className="flex flex-col gap-2 md:flex-row md:gap-4">
                         {socialLinks1.map((link, index) => (
                             <SocialLink
