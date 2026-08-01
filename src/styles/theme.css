@@ -2,7 +2,7 @@
 
 :root {
     /* Surfaces */
-    --color-paper: #fdfdfd;
+    --color-paper: #faf6ec;
     --color-header: var(--color-paper);
     --color-footer: var(--color-paper);
     --color-footer-base: var(--color-paper);
