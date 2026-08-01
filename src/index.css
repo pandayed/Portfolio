@@ -4,11 +4,19 @@
 
 body {
     font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--color-text);
+    background-color: var(--color-paper);
 }
 
 code {
     font-family: var(--font-code);
+    font-size: 0.875em;
+}
+
+::selection {
+    background-color: rgba(153, 27, 27, 0.12);
 }

@@ -2,7 +2,7 @@
 
 .Section {
     margin: 0;
-    padding: var(--space-xl) var(--section-gutter);
+    padding: var(--space-lg) var(--section-gutter);
 }
 
 .SectionInner {
@@ -11,12 +11,12 @@
 }
 
 .SectionTitle {
-    margin: 0 0 3rem;
-    font-size: 2.25rem;
-    font-weight: bold;
+    max-width: var(--section-max-width);
+    margin: 0 auto var(--space-lg);
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--color-text);
-    text-align: center;
-    line-height: 1.2;
+    line-height: 1.33;
 }
 
 .Stack {

@@ -1,35 +1,40 @@
 /* Design tokens shared by every component stylesheet. */
 
 :root {
-    /* Surfaces, darkest at the top of the page to lightest at the bottom */
-    --color-header: #222831;
-    --color-home: #2d333b;
-    --color-experience: #20262f;
-    --color-projects: #1f242c;
-    --color-certifications: #1d222a;
-    --color-bookshelf: #1b2027;
-    --color-footer: #1a1e25;
-    --color-footer-base: #161a20;
+    /* Surfaces */
+    --color-paper: #fdfdfd;
+    --color-header: var(--color-paper);
+    --color-home: var(--color-paper);
+    --color-experience: var(--color-paper);
+    --color-projects: var(--color-paper);
+    --color-certifications: var(--color-paper);
+    --color-bookshelf: var(--color-paper);
+    --color-footer: var(--color-paper);
+    --color-footer-base: var(--color-paper);
 
     /* Foreground */
-    --color-text: #ffffff;
-    --color-text-muted: rgba(255, 255, 255, 0.8);
-    --color-text-subtle: rgba(255, 255, 255, 0.6);
-    --color-accent-present: #22c55e;
-    --color-linkedin: #0a66c2;
-    --color-linkedin-hover: #0e75dd;
+    --color-text: #1c1c1c;
+    --color-text-muted: #52525b;
+    --color-text-subtle: #71717a;
+    --color-accent: #991b1b;
+    --color-accent-present: var(--color-accent);
+    --color-linkedin: var(--color-accent);
+    --color-linkedin-hover: var(--color-accent);
 
-    /* Translucent whites used for chips, cards and borders */
-    --surface-faint: rgba(255, 255, 255, 0.05);
-    --surface-soft: rgba(255, 255, 255, 0.1);
-    --border-faint: rgba(255, 255, 255, 0.1);
-    --border-soft: rgba(255, 255, 255, 0.3);
+    /* Neutrals used for chips, rules and borders */
+    --surface-faint: #fafafa;
+    --surface-soft: #f4f4f5;
+    --border-faint: #e4e4e7;
+    --border-soft: #d4d4d8;
 
     /* Typography */
-    --font-body: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Roboto", "Helvetica Neue", sans-serif;
-    --font-code: "Source Code Pro", monospace;
-    --font-accent: "Abril Fatface", serif;
+    --font-body: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times,
+        serif;
+    --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    --font-code: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+        Consolas, monospace;
+    --font-accent: var(--font-body);
 
     /* Spacing and radii */
     --space-xs: 0.5rem;
@@ -37,30 +42,18 @@
     --space-md: 1.25rem;
     --space-lg: 2rem;
     --space-xl: 4rem;
-    --radius-sm: 0.375rem;
-    --radius-md: 0.625rem;
-    --radius-lg: 0.875rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
     --radius-pill: 9999px;
 
-    /* Section gutters, widened at each breakpoint by the media queries below */
+    /* Section gutters, widened at each breakpoint by the media query below */
     --section-gutter: 1rem;
-    --section-max-width: 72rem;
+    --section-max-width: 69ch;
 }
 
 @media (min-width: 640px) {
     :root {
-        --section-gutter: 2rem;
-    }
-}
-
-@media (min-width: 768px) {
-    :root {
-        --section-gutter: 4rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    :root {
-        --section-gutter: 6rem;
+        --section-gutter: 1.5rem;
     }
 }
