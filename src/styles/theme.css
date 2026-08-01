@@ -1,6 +1,8 @@
 /* Design tokens shared by every component stylesheet. */
 
 :root {
+    color-scheme: light;
+
     /* Surfaces */
     --color-paper: #faf6ec;
     --color-header: var(--color-paper);
@@ -11,6 +13,7 @@
     --color-text: #1c1c1c;
     --color-text-subtle: #71717a;
     --color-accent: #991b1b;
+    --color-selection: rgba(153, 27, 27, 0.12);
 
     /* Typography */
     --font-body: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times,
@@ -30,6 +33,20 @@
     /* Section gutters, widened at each breakpoint by the media query below */
     --section-gutter: 1rem;
     --section-max-width: 69ch;
+}
+
+/* Dark counterpart: the same warm hue family, inverted in lightness.
+   The surface aliases above resolve against whichever --color-paper wins. */
+
+[data-theme='dark'] {
+    color-scheme: dark;
+
+    --color-paper: #16130c;
+
+    --color-text: #ece5d5;
+    --color-text-subtle: #a8a29a;
+    --color-accent: #db7266;
+    --color-selection: rgba(219, 114, 102, 0.18);
 }
 
 @media (min-width: 640px) {

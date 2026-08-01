@@ -5,9 +5,26 @@
   <meta charset="utf-8" />
   <link rel="icon" href="./ic_portfolio_logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#faf6ec" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16130c" media="(prefers-color-scheme: dark)" />
   <meta name="description" content="Portfolio of Lal Bihari Pandey" />
   <link rel="manifest" href="./manifest.json" />
+
+  <!-- Resolve the theme before first paint so the page never flashes the wrong surface. -->
+  <script>
+    (function () {
+      var theme;
+      try {
+        theme = localStorage.getItem('theme');
+      } catch (error) {
+        theme = null;
+      }
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
