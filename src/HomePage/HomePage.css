@@ -1,87 +1,108 @@
 .HomePage {
-    background-color: #2D333B;
-    background-image: url('../assets/texture-background.png');
     display: flex;
-    height: 100vh;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: 0px;
-    padding: 0px;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--color-home);
+    background-position: center;
+    background-size: cover;
 }
 
-.HomePageContainer {
-    margin: 40px;
+.HomePage__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    width: 100%;
+    max-width: 56rem;
+    padding: 0 var(--section-gutter);
 }
 
-.Intro {
-    font-size: 5rem;
-    color: #ffffff99;
+.HomePage__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    color: var(--color-text);
+}
+
+.HomePage__typewriter {
+    min-height: 2em;
+    font-family: var(--font-code);
+    font-size: 1rem;
+}
+
+.HomePage__title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    font-size: 2.25rem;
     font-weight: 600;
-    letter-spacing: -.1rem;
 }
 
-.Name {
-    font-size: 5rem;
-    color: #ffffff;
-    font-weight: 600;
-    letter-spacing: -.1rem;
+.HomePage__title--muted {
+    color: var(--color-text-subtle);
 }
 
-.NameLine {
-    font-family: "Source Code Pro";
-    font-size: 1.2rem;
-    color: white;
-    height: 20px;
+.HomePage__description {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    line-height: 1.625;
+    color: var(--color-text);
 }
 
-.Description {
-    /* background-color: #0a66c2; */
-    margin: 40px 0px 40px 0px;
-    font-family: "Source Code Pro";
-    line-height: 2;
-    font-size: 1.2rem;
+.HomePage__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
 }
 
-.IntroButton {
-    font-family: "Source Code Pro";
-    background-color: #00000000;
-    color: white;
+.HomePage__button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-code);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    background-color: var(--surface-soft);
     border: none;
-    padding: 10px 25px 10px 25px;
-    border-radius: 25px;
-    margin-inline-end: 20px;
-    font-size: 1.25rem;
+    border-radius: var(--radius-pill);
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.IntroButton:hover {
-    font-family: "Source Code Pro";
-    background-color: #ffffff11;
-    color: white;
-    padding: 10px 25px 10px 25px;
-    border-radius: 25px;
-    font-size: 1.25rem;
-    margin-inline-end: 20px;
-    cursor: pointer;
+.HomePage__button:hover {
+    background-color: rgba(255, 255, 255, 0.16);
 }
 
-.ResumeButton {
-    border-style: solid;
-    border-color: white;
-    border-width: 0.5px;
+.HomePage__button--linkedin {
+    background-color: var(--color-linkedin);
 }
 
-.ContactMeButton {
-    border-style: solid;
-    border-color: white;
-    border-width: 0.5px;
+.HomePage__button--linkedin:hover {
+    background-color: var(--color-linkedin-hover);
 }
 
-.LinkedInButton {
-    background-color: #0a66c2;
+@media (min-width: 640px) {
+    .HomePage__typewriter,
+    .HomePage__description {
+        font-size: 1.125rem;
+    }
+
+    .HomePage__title {
+        font-size: 3rem;
+    }
+
+    .HomePage__actions {
+        flex-direction: row;
+    }
+
+    .HomePage__button {
+        width: auto;
+    }
 }
 
-.LinkedInButton:hover {
-    background-color: #0e75dd;
+@media (min-width: 1024px) {
+    .HomePage__title {
+        font-size: 3.75rem;
+    }
 }

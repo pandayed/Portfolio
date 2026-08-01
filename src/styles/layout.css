@@ -1,0 +1,37 @@
+/* Layout primitives reused by every page section. */
+
+.Section {
+    margin: 0;
+    padding: var(--space-xl) var(--section-gutter);
+}
+
+.SectionInner {
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+}
+
+.SectionTitle {
+    margin: 0 0 3rem;
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.Stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.Stack--sm {
+    gap: var(--space-sm);
+}
+
+.Stack--md {
+    gap: var(--space-md);
+}
+
+.Stack--lg {
+    gap: var(--space-lg);
+}

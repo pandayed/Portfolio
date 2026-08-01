@@ -1,32 +1,33 @@
-:root {
-    --company-logo-size: 100px;
+.ExperienceSection {
+    --company-logo-size: 6rem;
+
+    background-color: var(--color-experience);
 }
 
-
-.PresentDate {
-    color: #00CA00;
-}
-
-.CompanyDetails{
+.ExperiencesList {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
-
-
-.ExperienceSection {
-    background-color: #20262F;
-    padding: 100px;
-    margin: 0px;
+    gap: var(--space-lg);
 }
 
 .Experience {
-    margin: 0px;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: var(--space-sm);
+    background-color: rgba(32, 38, 47, 0.5);
+    border-radius: var(--radius-md);
 }
 
-.Titles{
+.Experience__details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: var(--space-sm);
+}
+
+.Experience__titles {
     display: flex;
     flex-direction: column;
 }
@@ -34,81 +35,68 @@
 .CompanyName {
     font-size: 1.5rem;
     font-weight: bold;
+    color: var(--color-text);
 }
-
 
 .Position {
-    font-family: "Source Code Pro";
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-family: var(--font-code);
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: var(--color-text-muted);
 }
-
-.TechItem {
-    font-size: small;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 10px;
-    background-color: #ffffff1a;
-    border-radius: 4px;
-}
-
-
-
-.Technology {
-    display: flex;
-    gap: 10px;
-    font-family: "Source Code Pro";
-}
-
-.CompanyLogo {
-    height: var(--company-logo-size);
-    width: var(--company-logo-size);
-    object-fit: contain;
-    margin: 0px;
-    padding: 0px;
-    background-color: white;
-    border-radius: 10px;
-}
-
 
 .CompanyLogoWrapper {
     display: inline-flex;
-    margin: 0px;
-    padding: 12px;
-    background-color: #ffffff0c;
-    border-radius: 14px;
+    align-self: flex-start;
+    margin: 0;
+    padding: 0.75rem;
+    background-color: var(--surface-faint);
+    border-radius: var(--radius-lg);
 }
 
-.ExperiencesList {
-    display: flex; /* Enables flex layout */
-    flex-direction: column; /* Ensures projects stack vertically */
-    gap: 40px;
-}
-
-.DateSeparator {
-    margin: 0px 10px 0px 10px;
+.CompanyLogo {
+    width: var(--company-logo-size);
+    height: var(--company-logo-size);
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
 }
 
 .DateContainer {
     display: flex;
+    align-items: center;
+    font-family: var(--font-code);
+    font-size: 1rem;
 }
 
+.DateSeparator {
+    margin: 0 0.625rem;
+}
 
-/* Work Related */
-
-.WorkDetails {
-    margin-top: 5px;
-    justify-content: center;
-    align-items: center;
+.PresentDate {
+    font-weight: 600;
+    color: var(--color-accent-present);
 }
 
 .WorkDetailsList {
-    padding-left: 15px;
-    list-style-type: disc;
     margin: 0;
+    padding-left: 1.25rem;
+    list-style: disc outside;
+    color: var(--color-text-muted);
 }
 
 .WorkDetailsItem {
-    margin-bottom: 0px;
+    margin-bottom: var(--space-xs);
+    font-size: 1rem;
+}
+
+.WorkDetailsItem:last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+    .Experience {
+        flex-direction: row;
+        gap: var(--space-lg);
+    }
 }

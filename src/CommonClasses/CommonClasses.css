@@ -1,44 +1,31 @@
-/* divs */
-
-.inline-div {
-    display: inline;
-    /* Additional styles */
-}
-
-.make-child-center {
-    align-items: center;
-    justify-content: center;
-}
-
-/* fonts */
+/* Fonts */
 
 .codeFont {
-    font-family: "Source Code Pro", monospace;
+    font-family: var(--font-code);
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
 }
 
 .cursiveFont {
-    font-family: "Abril Fatface", serif;
+    font-family: var(--font-accent);
     font-weight: 100;
     font-style: normal;
 }
 
-/* Highlighted Background */
-.HighlitedBackground {
-    background-color: blueviolet;
-}
+/* Underlined link shared by projects, certifications and the footer */
 
-.logo a {
-    color: white;
+.UnderlinedLink {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    font-family: var(--font-code);
+    color: var(--color-text);
     text-decoration: none;
+    border-bottom: 1px solid var(--color-text);
+    padding-bottom: 2px;
 }
 
-.clickable-text {
-    @apply text-white font-mono no-underline;
-  }
-  
-  .clickable-text:hover {
-    @apply italic text-white no-underline border-b border-white;
-  }
+.UnderlinedLink:hover {
+    font-style: italic;
+}

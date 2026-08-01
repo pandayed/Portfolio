@@ -1,48 +1,50 @@
-.CertificationsPage{
-    background-color: #1D222A;
-    padding: 100px;
+.CertificationsPage {
+    background-color: var(--color-certifications);
 }
 
-/* .CertificateTitle{
-    text-decoration: none;
-    font-family: "Source Code Pro";
-    color: white;
-
-}
-
-.CertificateTitle:hover{
-    font-style: italic;
-    text-decoration: none;
-    font-family: "Source Code Pro";
-    color: white;
-
-    border-bottom: 0.5px solid white;
-} */
-
-.CertificateMainContent{
-    gap: 20px;
-    color: white;
+.CertificationsList {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: var(--space-sm);
 }
 
-.Certificate{
-    font-size: 1.2rem;
-    align-items: center;
+.Certificate {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+    font-size: 1.25rem;
+    color: var(--color-text);
 }
 
-.CertificateSource{
-    /* font-style: italic; */
+.CertificateMainContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.CertificateSource {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.CertificateSource__name {
     font-weight: bold;
 }
 
-.CompletionData{
-    display: flex;
-    gap: 20px;
+.CompletionDate {
+    margin: 0;
 }
 
-.CompletionDate{
-    font-weight: bold;
+@media (min-width: 1024px) {
+    .Certificate {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .CertificateMainContent {
+        flex-direction: row;
+        align-items: center;
+    }
 }
