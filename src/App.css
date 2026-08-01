@@ -1,3 +1,21 @@
 .App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
     background-color: var(--color-paper);
+}
+
+main {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) var(--section-gutter);
+}
+
+.Intro {
+    max-width: var(--section-max-width);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    text-align: center;
 }
