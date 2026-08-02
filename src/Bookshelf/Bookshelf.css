@@ -1,0 +1,50 @@
+.Bookshelf {
+    width: 100%;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+}
+
+.Bookshelf__pageTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.Bookshelf__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.Bookshelf__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.Bookshelf__title {
+    font-size: 1.0625rem;
+    color: var(--color-text);
+}
+
+.Bookshelf__dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-lg);
+}
+
+.Bookshelf__date {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--color-text-subtle);
+}
+
+.Bookshelf__dateLabel {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}

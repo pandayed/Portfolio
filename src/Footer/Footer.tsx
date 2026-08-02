@@ -1,6 +1,8 @@
 import './Footer.css';
 import '../CommonClasses/CommonClasses.css';
 
+import { HOME_ROUTE, toHref } from '../routing/routes';
+
 interface SocialLinkItem {
     title: string;
     link: string;
@@ -42,7 +44,7 @@ const Footer = () => {
             </div>
 
             <div className="Footer__base">
-                <a href="/" className="Footer__siteLink">
+                <a href={toHref(HOME_ROUTE)} className="Footer__siteLink">
                     pandayed.com
                 </a>
             </div>

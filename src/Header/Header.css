@@ -24,11 +24,31 @@
     color: var(--color-accent);
 }
 
+.Header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.Header__navLink {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 450;
+    letter-spacing: 0.025em;
+    color: var(--color-text-subtle);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.Header__navLink:hover,
+.Header__navLink[aria-current='page'] {
+    color: var(--color-accent);
+}
+
 .ThemeToggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-inline-start: var(--space-lg);
     font-size: 1rem;
     background: none;
     border: none;
