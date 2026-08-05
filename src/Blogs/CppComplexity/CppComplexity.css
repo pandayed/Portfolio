@@ -143,6 +143,11 @@
     color: var(--color-text);
 }
 
+.CppComplexity__legend .UnderlinedLink {
+    font-family: inherit;
+    font-size: inherit;
+}
+
 .CppComplexity__notes {
     display: flex;
     flex-direction: column;

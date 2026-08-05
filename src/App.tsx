@@ -5,6 +5,7 @@ import Header from './Header/Header';
 import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
+import ComplexityCases from './Blogs/ComplexityCases/ComplexityCases';
 import Projects from './Projects/Projects';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
@@ -14,6 +15,7 @@ import {
     ABOUT_ROUTE,
     BLOGS_ROUTE,
     BOOKSHELF_ROUTE,
+    COMPLEXITY_CASES_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     HOME_ROUTE,
     PROJECTS_ROUTE,
@@ -25,6 +27,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [HOME_ROUTE]: Home,
     [BLOGS_ROUTE]: Blogs,
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,
+    [COMPLEXITY_CASES_ROUTE]: ComplexityCases,
     [PROJECTS_ROUTE]: Projects,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,

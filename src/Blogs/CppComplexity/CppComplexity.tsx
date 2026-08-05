@@ -2,7 +2,7 @@ import './CppComplexity.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import Page from '../../Page/Page';
-import { BLOGS_ROUTE, toHref } from '../../routing/routes';
+import { BLOGS_ROUTE, COMPLEXITY_CASES_ROUTE, toHref } from '../../routing/routes';
 
 import { sequenceContainers } from './sequenceContainers';
 import { orderedContainers, unorderedContainers } from './associativeContainers';
@@ -128,7 +128,12 @@ const CppComplexity = () => {
                     
                     <p className="CppComplexity__legend">
                     An em
-                    dash means amortising changes nothing for that operation. </p>
+                    dash means amortising changes nothing for that operation. Why average and
+                    amortised are not interchangeable is covered{' '}
+                    <a href={toHref(COMPLEXITY_CASES_ROUTE)} className="UnderlinedLink">
+                        here
+                    </a>
+                    . </p>
                     
                     <p className="CppComplexity__legend">
                     For example,{' '}
