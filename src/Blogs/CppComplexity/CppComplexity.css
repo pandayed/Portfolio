@@ -1,0 +1,155 @@
+.CppComplexity {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.CppComplexity__back {
+    font-size: 0.875rem;
+}
+
+.CppComplexity__toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-sm);
+    padding: var(--space-sm) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.CppComplexity__tocLink {
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--color-text-subtle);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.CppComplexity__tocLink:hover {
+    color: var(--color-accent);
+}
+
+.CppComplexity__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.CppComplexity__sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    scroll-margin-top: var(--space-xl);
+}
+
+.CppComplexity__structure {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-left: var(--space-sm);
+    border-left: 2px solid var(--color-border);
+}
+
+.CppComplexity__structureName {
+    font-family: var(--font-code);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.CppComplexity__internals {
+    color: var(--color-text);
+}
+
+/* The table is wider than the text column on small screens, so it scrolls
+   on its own rather than widening the article. */
+.CppComplexity__tableWrap {
+    /* min-width lets this flex child shrink so the overflow lands here. */
+    min-width: 0;
+    margin-top: var(--space-xs);
+    overflow-x: auto;
+}
+
+.CppComplexity__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.CppComplexity__table thead th {
+    padding: 0 var(--space-xs) var(--space-xs) 0;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+
+.CppComplexity__group:not(:last-child) .CppComplexity__why {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.CppComplexity__table td {
+    padding: var(--space-xs) var(--space-xs) 0 0;
+    font-family: var(--font-code);
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.CppComplexity__signature {
+    padding: var(--space-xs) var(--space-sm) 0 0;
+    font-family: var(--font-code);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text);
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.CppComplexity__table td.CppComplexity__why {
+    padding: 0.25rem 0 var(--space-sm) 0;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-subtle);
+    white-space: normal;
+}
+
+.CppComplexity__matters {
+    margin-right: var(--space-xs);
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.CppComplexity__legend {
+    font-size: 0.875rem;
+    color: var(--color-text-subtle);
+}
+
+.CppComplexity__legend code {
+    font-family: var(--font-code);
+    font-size: 0.8125rem;
+    color: var(--color-text);
+}
+
+.CppComplexity__notes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+    padding-left: 1.125rem;
+    list-style: disc;
+    font-size: 0.9375rem;
+    color: var(--color-text-subtle);
+}

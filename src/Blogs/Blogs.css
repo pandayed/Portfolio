@@ -1,0 +1,28 @@
+.Blogs__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.Blogs__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.Blogs__title {
+    font-size: 1.0625rem;
+    color: var(--color-text);
+}
+
+.Blogs__summary {
+    font-size: 0.9375rem;
+    color: var(--color-text-subtle);
+}
+
+.Blogs__date {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--color-text-subtle);
+}

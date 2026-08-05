@@ -1,0 +1,188 @@
+import type { Section } from './types';
+
+export const adaptors: Section = {
+    id: 'adaptors',
+    title: 'Container adaptors',
+    structures: [
+        {
+            name: 'std::stack<T> and std::queue<T>',
+            internals:
+                'Both wrap std::deque by default and expose only the operations it already does in constant time.',
+            operations: [
+                {
+                    signature: 'push, pop, top, front, back',
+                    best: 'O(1)',
+                    average: 'O(1)',
+                    amortised: 'O(1)',
+                    worst: 'O(n / B)',
+                    matters: 'Amortised',
+                    why: 'Each forwards to push_back, pop_back or pop_front on the deque, so it inherits the deque numbers exactly, block growth included.',
+                },
+            ],
+            notes: [
+                'stack can be backed by a vector for better locality: std::stack<int, std::vector<int>>. queue cannot, since vector has no pop_front.',
+            ],
+        },
+        {
+            name: 'std::priority_queue<T>',
+            internals:
+                'A binary heap stored in a vector. The children of index i are at 2i + 1 and 2i + 2, and the tree is complete, so its height is floor(log2 n).',
+            operations: [
+                {
+                    signature: 'pq.top()',
+                    best: 'O(1)',
+                    average: 'O(1)',
+                    amortised: '—',
+                    worst: 'O(1)',
+                    matters: 'Worst',
+                    why: 'The heap property puts the maximum at index 0, so it is a single read.',
+                },
+                {
+                    signature: 'pq.push(x)',
+                    best: 'O(1)',
+                    average: 'O(1)',
+                    amortised: '—',
+                    worst: 'O(log n)',
+                    matters: 'Average',
+                    why: 'Append, then sift up while the element beats its parent. A random element usually stops after a step or two because half the nodes are leaves, so the average is constant even though a new maximum climbs the full height.',
+                },
+                {
+                    signature: 'pq.pop()',
+                    best: 'O(1)',
+                    average: 'O(log n)',
+                    amortised: '—',
+                    worst: 'O(log n)',
+                    matters: 'Worst',
+                    why: 'The last element is moved to the root and sifted down. It came from the bottom, so it is usually small and falls nearly all the way back; unlike push, the average does not save you.',
+                },
+                {
+                    signature: 'building from a range',
+                    best: 'O(n)',
+                    average: 'O(n)',
+                    amortised: '—',
+                    worst: 'O(n)',
+                    matters: 'Worst',
+                    why: 'std::make_heap is linear, not n log n. Most nodes are near the bottom and sift down a short distance; summing height times count over all levels gives 2n. Heapifying once beats n pushes.',
+                },
+                {
+                    signature: 'finding or erasing an arbitrary element',
+                    best: 'O(1)',
+                    average: 'O(n)',
+                    amortised: '—',
+                    worst: 'O(n)',
+                    matters: 'Worst',
+                    why: 'A heap is only partially ordered, so there is no search interface and nothing to prune with. If you need this, you need a different structure.',
+                },
+            ],
+        },
+    ],
+};
+
+export const algorithms: Section = {
+    id: 'algorithms',
+    title: 'Algorithms',
+    structures: [
+        {
+            name: 'Sorting and ordering',
+            internals: 'Iterator based. sort and nth_element need random access iterators.',
+            operations: [
+                {
+                    signature: 'std::sort',
+                    best: 'O(n log n)',
+                    average: 'O(n log n)',
+                    amortised: '—',
+                    worst: 'O(n log n)',
+                    matters: 'Worst',
+                    why: 'Introsort: quicksort, switching to heapsort when the recursion gets too deep and to insertion sort on small runs. Plain quicksort is O(n^2) on adversarial input; the heapsort fallback is what makes n log n a guarantee rather than an average. Not stable.',
+                },
+                {
+                    signature: 'std::stable_sort',
+                    best: 'O(n log n)',
+                    average: 'O(n log n)',
+                    amortised: '—',
+                    worst: 'O(n log^2 n)',
+                    matters: 'Average',
+                    why: 'Merge sort. With an O(n) scratch buffer it is n log n; the worst case is the buffer allocation failing, after which it merges in place and pays an extra log factor.',
+                },
+                {
+                    signature: 'std::partial_sort(first, mid, last)',
+                    best: 'O(n)',
+                    average: 'O(n log k)',
+                    amortised: '—',
+                    worst: 'O(n log k)',
+                    matters: 'Worst',
+                    why: 'For k = mid - first. Heapify the first k, then scan the rest, pushing anything better into the heap. For a top-k query this beats sorting all n whenever k is small.',
+                },
+                {
+                    signature: 'std::nth_element',
+                    best: 'O(n)',
+                    average: 'O(n)',
+                    amortised: '—',
+                    worst: 'O(n log n)',
+                    matters: 'Average',
+                    why: 'Quickselect: partition, then recurse into one side only, giving n + n/2 + n/4 ... = 2n. Raw quickselect degrades to O(n^2) on bad pivots, so libstdc++ uses introselect and falls back to a heap-based partial sort at a depth limit.',
+                },
+                {
+                    signature: 'std::binary_search, std::lower_bound',
+                    best: 'O(1)',
+                    average: 'O(log n)',
+                    amortised: '—',
+                    worst: 'O(log n)',
+                    matters: 'Worst',
+                    why: 'The range halves each step. On a list the comparison count is still log n, but advancing the iterator makes the total work O(n), so the bound applies to comparisons and not to time on every container.',
+                },
+            ],
+        },
+        {
+            name: 'Scans and transformations',
+            internals: 'No assumption about order, so every element is visited.',
+            operations: [
+                {
+                    signature: 'std::find, std::any_of',
+                    best: 'O(1)',
+                    average: 'O(n)',
+                    amortised: '—',
+                    worst: 'O(n)',
+                    matters: 'Worst',
+                    why: 'They stop at the first match, so a hit costs the position of that match and averages n/2. A miss always reads all n, and a miss is the case to plan for.',
+                },
+                {
+                    signature: 'std::count, std::accumulate, std::for_each',
+                    best: 'O(n)',
+                    average: 'O(n)',
+                    amortised: '—',
+                    worst: 'O(n)',
+                    matters: 'Worst',
+                    why: 'There is no early exit; the answer depends on every element, so all n are read whatever the data looks like.',
+                },
+                {
+                    signature: 'std::remove, std::unique',
+                    best: 'O(n)',
+                    average: 'O(n)',
+                    amortised: '—',
+                    worst: 'O(n)',
+                    matters: 'Worst',
+                    why: 'One pass that moves survivors to the front and returns the new end. They see only iterators, so they cannot shrink the container; pair them with erase. unique removes only adjacent duplicates, so sort first.',
+                },
+                {
+                    signature: 'std::rotate, std::reverse',
+                    best: 'O(n)',
+                    average: 'O(n)',
+                    amortised: '—',
+                    worst: 'O(n)',
+                    matters: 'Worst',
+                    why: 'A fixed number of swaps per element, in place, with no allocation.',
+                },
+                {
+                    signature: 'std::next_permutation',
+                    best: 'O(1)',
+                    average: 'O(1)',
+                    amortised: 'O(1)',
+                    worst: 'O(n)',
+                    matters: 'Amortised',
+                    why: 'Find the rightmost ascent, swap it with the smallest larger element to its right, reverse the suffix. Most calls touch only the last few elements, so enumerating all n! permutations costs O(n!) steps overall rather than O(n * n!).',
+                },
+            ],
+        },
+    ],
+};
