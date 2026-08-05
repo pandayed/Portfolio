@@ -36,7 +36,7 @@ const MyArticle = () => (
         </section>
 
         <section className="MyArticle__section" aria-labelledby="first-section">
-            <h2 id="first-section" className="MyArticle__sectionTitle">
+            <h2 id="first-section" className="SectionTitle">
                 First section
             </h2>
             <p>Body text.</p>
@@ -53,8 +53,12 @@ const MyArticle = () => (
 
 ## Section headings
 
-- Section titles are `h2`. Structures or sub-items inside a section are `h3`.
-- Section titles need `scroll-margin-top` so a scrolled-to heading does not sit under the sticky header.
+- Section titles are `h2` and use the shared `SectionTitle` class. Structures or sub-items inside a section are `h3`.
+- `SectionTitle` already carries `scroll-margin-top`, so a scrolled-to heading clears the sticky header. Do not restate its size, weight or colour in the article stylesheet.
+
+## Links and text inside an article
+
+Follow the `link-and-type-styles` skill. In short: a link inside a sentence uses `Link`, the accent colour marks links only, and font sizes come from the tokens in `src/styles/theme.css`.
 
 ## Check before you finish
 
