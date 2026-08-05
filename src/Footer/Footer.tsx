@@ -16,37 +16,26 @@ const SocialLink = ({ title, link }: SocialLinkItem) => {
     );
 };
 
-const primaryLinks: SocialLinkItem[] = [
+const socialLinks: SocialLinkItem[] = [
     { title: 'G-Mail', link: 'mailto:lalbiharipandeyg@gmail.com' },
     { title: 'GitHub', link: 'https://github.com/pandayed' },
     { title: 'LinkedIn', link: 'https://www.linkedin.com/in/pandayed/' },
-];
-
-const secondaryLinks: SocialLinkItem[] = [
-    { title: 'Instagram', link: 'https://www.instagram.com/pandayed' },
     { title: 'Twitter/X', link: 'https://x.com/pandayed' },
 ];
 
 const Footer = () => {
     return (
         <footer className="Footer">
-            <div className="Footer__body">
-                <div className="Footer__group">
-                    {primaryLinks.map((link) => (
-                        <SocialLink key={link.title} title={link.title} link={link.link} />
-                    ))}
-                </div>
-                <div className="Footer__group">
-                    {secondaryLinks.map((link) => (
-                        <SocialLink key={link.title} title={link.title} link={link.link} />
-                    ))}
-                </div>
-            </div>
-
-            <div className="Footer__base">
+            <div className="Footer__inner">
                 <a href={toHref(HOME_ROUTE)} className="Footer__siteLink">
                     pandayed.com
                 </a>
+
+                <div className="Footer__group">
+                    {socialLinks.map((link) => (
+                        <SocialLink key={link.title} title={link.title} link={link.link} />
+                    ))}
+                </div>
             </div>
         </footer>
     );

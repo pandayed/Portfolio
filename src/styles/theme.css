@@ -7,13 +7,13 @@
     --color-paper: #faf6ec;
     --color-header: var(--color-paper);
     --color-footer: var(--color-paper);
-    --color-footer-base: var(--color-paper);
 
     /* Foreground */
     --color-text: #1c1c1c;
     --color-text-subtle: #71717a;
     --color-accent: #991b1b;
     --color-selection: rgba(153, 27, 27, 0.12);
+    --color-border: rgba(28, 28, 28, 0.12);
 
     /* Typography */
     --font-body: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times,
@@ -47,6 +47,7 @@
     --color-text-subtle: #a8a29a;
     --color-accent: #db7266;
     --color-selection: rgba(219, 114, 102, 0.18);
+    --color-border: rgba(236, 229, 213, 0.14);
 }
 
 @media (min-width: 640px) {

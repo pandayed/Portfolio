@@ -1,7 +1,13 @@
 .Intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    width: 100%;
     max-width: var(--section-max-width);
-    margin: auto 0;
     font-size: 1.125rem;
     color: var(--color-text);
-    text-align: center;
+}
+
+.Intro p {
+    margin: 0;
 }

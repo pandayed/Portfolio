@@ -2,10 +2,20 @@ import './Home.css';
 
 const Home = () => {
     return (
-        <p className="Intro">
-            I am Lal Bihari Pandey, a versatile digital creator — continuously evolving with a
-            passion for lifelong learning and a commitment to making a lasting impact.
-        </p>
+        <div className="Intro">
+            <p>
+                I get the job done. I care about intentions, and deeply care about outcomes. I
+                hold myself to a standard of reliable execution.
+            </p>
+
+            <p>
+                I'm endlessly curious. I turned one of my many pursuits into a profession:
+                technology. I don't limit where I learn from.
+            </p>
+            <p>
+                I have chosen to keep this site, not fully, but mostly, professionally inclined.
+            </p>
+        </div>
     );
 };
 

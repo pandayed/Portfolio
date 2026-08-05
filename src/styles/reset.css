@@ -7,9 +7,16 @@
 }
 
 html,
-body,
-#root {
+body {
     min-height: 100%;
+}
+
+/* 100dvh instead of a percentage chain: percentages only resolve against a
+   parent with a definite height, which body does not have. */
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
 }
 
 body {
