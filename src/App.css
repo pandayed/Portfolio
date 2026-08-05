@@ -5,13 +5,14 @@
     background-color: var(--color-paper);
 }
 
+/* Full width so an article can put its table of contents beside the text
+   column. Every page still caps its own content at --section-max-width. */
 main {
     display: flex;
     flex: 1;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: var(--section-max-width);
     margin: 0 auto;
     padding: var(--space-lg) var(--section-gutter);
 }

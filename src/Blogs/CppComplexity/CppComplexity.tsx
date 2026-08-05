@@ -1,13 +1,16 @@
 import './CppComplexity.css';
 import '../../CommonClasses/CommonClasses.css';
 
-import Page from '../../Page/Page';
-import { BLOGS_ROUTE, COMPLEXITY_CASES_ROUTE, toHref } from '../../routing/routes';
+import ArticleLayout from '../ArticleLayout/ArticleLayout';
+import type { TocEntry } from '../ArticleLayout/types';
+import { COMPLEXITY_CASES_ROUTE, toHref } from '../../routing/routes';
 
 import { sequenceContainers } from './sequenceContainers';
 import { orderedContainers, unorderedContainers } from './associativeContainers';
 import { adaptors, algorithms } from './adaptorsAndAlgorithms';
 import type { Operation, Section, Structure } from './types';
+
+const CAVEATS_ID = 'caveats';
 
 const sections: Section[] = [
     sequenceContainers,
@@ -17,10 +20,10 @@ const sections: Section[] = [
     algorithms,
 ];
 
-/* Anchor hrefs would be swallowed by the hash router, so scroll directly. */
-const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
+const tocEntries: TocEntry[] = [
+    ...sections.map(({ id, title }) => ({ id, title })),
+    { id: CAVEATS_ID, title: 'Caveats' },
+];
 
 /* Two rows per operation: the numbers, then the case that actually governs it. */
 const OperationRows = ({
@@ -102,71 +105,55 @@ const SectionBlock = ({ id, title, structures }: Section) => {
 
 const CppComplexity = () => {
     return (
-        <Page title="C++ containers and complexities">
-            <div className="CppComplexity">
-                <a href={toHref(BLOGS_ROUTE)} className="UnderlinedLink CppComplexity__back">
-                    Back to blogs
-                </a>
-
-                <nav className="CppComplexity__toc" aria-label="Sections">
-                    {sections.map((section) => (
-                        <button
-                            key={section.id}
-                            type="button"
-                            className="CppComplexity__tocLink"
-                            onClick={() => scrollToSection(section.id)}
-                        >
-                            {section.title}
-                        </button>
-                    ))}
-                </nav>
-
+        <ArticleLayout title="C++ containers and complexities" sections={tocEntries}>
+            <section className="CppComplexity__section">
                 <p className="CppComplexity__legend">
                     Every operation is listed under all four cases. The label on the row below it
                     marks the one that holds in practice: when working out the complexity of an
-                    algorithm that uses the operation, that is the figure to carry through. </p>
-                    
-                    <p className="CppComplexity__legend">
-                    An em
-                    dash means amortising changes nothing for that operation. Why average and
+                    algorithm that uses the operation, that is the figure to carry through.
+                </p>
+
+                <p className="CppComplexity__legend">
+                    An em dash means amortising changes nothing for that operation. Why average and
                     amortised are not interchangeable is covered{' '}
                     <a href={toHref(COMPLEXITY_CASES_ROUTE)} className="UnderlinedLink">
                         here
                     </a>
-                    . </p>
-                    
-                    <p className="CppComplexity__legend">
-                    For example,{' '}
-                    <code>v.push_back</code> is marked Amortised, so when considering a <code>v.push_back</code> operation do not consider the worst case complexity of it, instead consider the amortised one. So a loop that appends n elements
-                    is O(n) overall, not the O(n&sup2;).
+                    .
                 </p>
 
-                {sections.map((section) => (
-                    <SectionBlock key={section.id} {...section} />
-                ))}
+                <p className="CppComplexity__legend">
+                    For example, <code>v.push_back</code> is marked Amortised, so when considering a{' '}
+                    <code>v.push_back</code> operation do not consider the worst case complexity of
+                    it, instead consider the amortised one. So a loop that appends n elements is
+                    O(n) overall, not the O(n&sup2;).
+                </p>
+            </section>
 
-                <section className="CppComplexity__section" aria-labelledby="caveats">
-                    <h2 id="caveats" className="CppComplexity__sectionTitle">
-                        Caveats
-                    </h2>
-                    <ul className="CppComplexity__notes">
-                        <li>
-                            Amortised is not guaranteed. push_back and unordered_map insert are
-                            constant on average, but a single call can be linear.
-                        </li>
-                        <li>
-                            Average is not worst case. Unordered containers degrade to O(n) under
-                            a bad hash.
-                        </li>
-                        <li>
-                            Asymptotics ignore the constant factor, which is mostly cache
-                            behaviour. A linear scan over a vector can beat a log n walk over a
-                            tree at small sizes.
-                        </li>
-                    </ul>
-                </section>
-            </div>
-        </Page>
+            {sections.map((section) => (
+                <SectionBlock key={section.id} {...section} />
+            ))}
+
+            <section className="CppComplexity__section" aria-labelledby={CAVEATS_ID}>
+                <h2 id={CAVEATS_ID} className="CppComplexity__sectionTitle">
+                    Caveats
+                </h2>
+                <ul className="CppComplexity__notes">
+                    <li>
+                        Amortised is not guaranteed. push_back and unordered_map insert are
+                        constant on average, but a single call can be linear.
+                    </li>
+                    <li>
+                        Average is not worst case. Unordered containers degrade to O(n) under a bad
+                        hash.
+                    </li>
+                    <li>
+                        Asymptotics ignore the constant factor, which is mostly cache behaviour. A
+                        linear scan over a vector can beat a log n walk over a tree at small sizes.
+                    </li>
+                </ul>
+            </section>
+        </ArticleLayout>
     );
 };
 

@@ -1,14 +1,3 @@
-.ComplexityCases {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    margin-top: var(--space-lg);
-}
-
-.ComplexityCases__back {
-    font-size: 0.875rem;
-}
-
 .ComplexityCases__section {
     display: flex;
     flex-direction: column;
@@ -19,6 +8,7 @@
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--color-text);
+    scroll-margin-top: var(--header-offset);
 }
 
 .ComplexityCases__section p {

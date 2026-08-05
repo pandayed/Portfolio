@@ -1,37 +1,3 @@
-.CppComplexity {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    margin-top: var(--space-lg);
-}
-
-.CppComplexity__back {
-    font-size: 0.875rem;
-}
-
-.CppComplexity__toc {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs) var(--space-sm);
-    padding: var(--space-sm) 0;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.CppComplexity__tocLink {
-    padding: 0;
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    color: var(--color-text-subtle);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.CppComplexity__tocLink:hover {
-    color: var(--color-accent);
-}
-
 .CppComplexity__section {
     display: flex;
     flex-direction: column;
@@ -42,7 +8,7 @@
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--color-text);
-    scroll-margin-top: var(--space-xl);
+    scroll-margin-top: var(--header-offset);
 }
 
 .CppComplexity__structure {
