@@ -16,7 +16,7 @@ const formatDate = (date: string) => dateFormatter.format(new Date(`${date}T00:0
 const PostEntry = ({ title, summary, publishedOn, route }: Post) => {
     return (
         <li className="Blogs__item">
-            <a href={toHref(route)} className="UnderlinedLink Blogs__title">
+            <a href={toHref(route)} className="Link Link--standalone Blogs__title">
                 {title}
             </a>
             <p className="Blogs__summary">{summary}</p>

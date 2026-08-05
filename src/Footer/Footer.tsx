@@ -10,7 +10,7 @@ interface SocialLinkItem {
 
 const SocialLink = ({ title, link }: SocialLinkItem) => {
     return (
-        <a href={link} className="UnderlinedLink SocialLink">
+        <a href={link} className="NavLink">
             <span>{title}</span>
         </a>
     );
@@ -27,7 +27,7 @@ const Footer = () => {
     return (
         <footer className="Footer">
             <div className="Footer__inner">
-                <a href={toHref(HOME_ROUTE)} className="Footer__siteLink">
+                <a href={toHref(HOME_ROUTE)} className="NavLink">
                     pandayed.com
                 </a>
 

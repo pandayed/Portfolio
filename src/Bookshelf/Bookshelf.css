@@ -4,12 +4,6 @@
     margin: 0 auto;
 }
 
-.Bookshelf__pageTitle {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-text);
-}
-
 .Bookshelf__list {
     display: flex;
     flex-direction: column;
@@ -24,8 +18,7 @@
 }
 
 .Bookshelf__title {
-    font-size: 1.0625rem;
-    color: var(--color-text);
+    font-size: var(--text-body);
 }
 
 .Bookshelf__dates {
@@ -39,12 +32,13 @@
     align-items: baseline;
     gap: var(--space-xs);
     font-family: var(--font-sans);
-    font-size: 0.875rem;
+    font-size: var(--text-small);
     color: var(--color-text-subtle);
 }
 
 .Bookshelf__dateLabel {
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 }

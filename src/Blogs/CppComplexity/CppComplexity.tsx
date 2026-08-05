@@ -93,7 +93,7 @@ const StructureCard = ({ name, internals, operations, notes }: Structure) => {
 const SectionBlock = ({ id, title, structures }: Section) => {
     return (
         <section className="CppComplexity__section" aria-labelledby={id}>
-            <h2 id={id} className="CppComplexity__sectionTitle">
+            <h2 id={id} className="SectionTitle">
                 {title}
             </h2>
             {structures.map((structure) => (
@@ -116,7 +116,7 @@ const CppComplexity = () => {
                 <p className="CppComplexity__legend">
                     An em dash means amortising changes nothing for that operation. Why average and
                     amortised are not interchangeable is covered{' '}
-                    <a href={toHref(COMPLEXITY_CASES_ROUTE)} className="UnderlinedLink">
+                    <a href={toHref(COMPLEXITY_CASES_ROUTE)} className="Link">
                         here
                     </a>
                     .
@@ -135,7 +135,7 @@ const CppComplexity = () => {
             ))}
 
             <section className="CppComplexity__section" aria-labelledby={CAVEATS_ID}>
-                <h2 id={CAVEATS_ID} className="CppComplexity__sectionTitle">
+                <h2 id={CAVEATS_ID} className="SectionTitle">
                     Caveats
                 </h2>
                 <ul className="CppComplexity__notes">

@@ -23,10 +23,13 @@ const ArticleLayout = ({ title, sections, children }: ArticleLayoutProps) => {
     return (
         <article className="ArticleLayout" aria-labelledby={titleId}>
             <header className="ArticleLayout__header">
-                <a href={toHref(BLOGS_ROUTE)} className="UnderlinedLink ArticleLayout__back">
+                <a
+                    href={toHref(BLOGS_ROUTE)}
+                    className="Link Link--standalone ArticleLayout__back"
+                >
                     Back to blogs
                 </a>
-                <h1 id={titleId} className="ArticleLayout__title">
+                <h1 id={titleId} className="PageTitle">
                     {title}
                 </h1>
             </header>

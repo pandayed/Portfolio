@@ -4,27 +4,13 @@
     gap: var(--space-sm);
 }
 
-.ComplexityCases__sectionTitle {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text);
-    scroll-margin-top: var(--header-offset);
-}
-
 .ComplexityCases__section p {
     color: var(--color-text);
 }
 
-/* Inline links sit inside prose, so they take the sentence font instead of the
-   code font the shared class defaults to. */
-.ComplexityCases__section p .UnderlinedLink {
-    font-family: inherit;
-    font-size: inherit;
-}
-
 .ComplexityCases__section code {
     font-family: var(--font-code);
-    font-size: 0.8125rem;
+    font-size: var(--text-fine);
     color: var(--color-text);
 }
 
@@ -33,7 +19,7 @@
     padding: var(--space-sm);
     overflow-x: auto;
     font-family: var(--font-code);
-    font-size: 0.8125rem;
+    font-size: var(--text-fine);
     line-height: 1.6;
     color: var(--color-text);
     border-left: 2px solid var(--color-border);
@@ -48,13 +34,13 @@
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-size: 0.9375rem;
+    font-size: var(--text-secondary);
 }
 
 .ComplexityCases__table th[scope='col'] {
     padding: 0 var(--space-sm) var(--space-xs) 0;
     font-family: var(--font-sans);
-    font-size: 0.6875rem;
+    font-size: var(--text-label);
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -65,7 +51,7 @@
 .ComplexityCases__table th[scope='row'] {
     padding: var(--space-xs) var(--space-sm) var(--space-xs) 0;
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--text-fine);
     font-weight: 600;
     color: var(--color-text);
     vertical-align: baseline;
@@ -89,6 +75,6 @@
     gap: var(--space-xs);
     padding-left: 1.125rem;
     list-style: disc;
-    font-size: 0.9375rem;
+    font-size: var(--text-secondary);
     color: var(--color-text-subtle);
 }

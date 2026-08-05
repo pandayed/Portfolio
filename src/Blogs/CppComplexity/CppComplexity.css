@@ -4,13 +4,6 @@
     gap: var(--space-sm);
 }
 
-.CppComplexity__sectionTitle {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text);
-    scroll-margin-top: var(--header-offset);
-}
-
 .CppComplexity__structure {
     display: flex;
     flex-direction: column;
@@ -21,7 +14,7 @@
 
 .CppComplexity__structureName {
     font-family: var(--font-code);
-    font-size: 1rem;
+    font-size: var(--text-subheading);
     font-weight: 600;
     color: var(--color-text);
 }
@@ -48,7 +41,7 @@
 .CppComplexity__table thead th {
     padding: 0 var(--space-xs) var(--space-xs) 0;
     font-family: var(--font-sans);
-    font-size: 0.6875rem;
+    font-size: var(--text-label);
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -61,11 +54,13 @@
     border-bottom: 1px solid var(--color-border);
 }
 
+/* The figures carry the row, so they sit at full text colour. The accent is
+   reserved for links and is deliberately not used here. */
 .CppComplexity__table td {
     padding: var(--space-xs) var(--space-xs) 0 0;
     font-family: var(--font-code);
-    font-size: 0.8125rem;
-    color: var(--color-accent);
+    font-size: var(--text-fine);
+    color: var(--color-text);
     white-space: nowrap;
     vertical-align: baseline;
 }
@@ -73,7 +68,7 @@
 .CppComplexity__signature {
     padding: var(--space-xs) var(--space-sm) 0 0;
     font-family: var(--font-code);
-    font-size: 0.8125rem;
+    font-size: var(--text-fine);
     font-weight: 500;
     color: var(--color-text);
     vertical-align: baseline;
@@ -83,35 +78,32 @@
 .CppComplexity__table td.CppComplexity__why {
     padding: 0.25rem 0 var(--space-sm) 0;
     font-family: var(--font-body);
-    font-size: 0.9375rem;
+    font-size: var(--text-secondary);
     color: var(--color-text-subtle);
     white-space: normal;
 }
 
+/* Uppercase sans at full text colour separates the label from the sentence
+   after it without borrowing the link colour. */
 .CppComplexity__matters {
     margin-right: var(--space-xs);
     font-family: var(--font-sans);
-    font-size: 0.6875rem;
+    font-size: var(--text-label);
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--color-text);
 }
 
 .CppComplexity__legend {
-    font-size: 0.875rem;
+    font-size: var(--text-small);
     color: var(--color-text-subtle);
 }
 
 .CppComplexity__legend code {
     font-family: var(--font-code);
-    font-size: 0.8125rem;
+    font-size: var(--text-fine);
     color: var(--color-text);
-}
-
-.CppComplexity__legend .UnderlinedLink {
-    font-family: inherit;
-    font-size: inherit;
 }
 
 .CppComplexity__notes {
@@ -121,6 +113,6 @@
     margin-top: var(--space-xs);
     padding-left: 1.125rem;
     list-style: disc;
-    font-size: 0.9375rem;
+    font-size: var(--text-secondary);
     color: var(--color-text-subtle);
 }

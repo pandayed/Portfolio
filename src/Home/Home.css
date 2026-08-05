@@ -4,7 +4,7 @@
     gap: var(--space-sm);
     width: 100%;
     max-width: var(--section-max-width);
-    font-size: 1.125rem;
+    font-size: var(--text-lead);
     color: var(--color-text);
 }
 

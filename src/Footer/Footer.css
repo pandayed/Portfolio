@@ -21,32 +21,8 @@
     gap: var(--space-sm);
 }
 
-.SocialLink {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    color: var(--color-text-subtle);
-    border-bottom: none;
-    transition: color 0.15s ease;
-}
-
-.SocialLink:hover {
-    font-style: normal;
-    color: var(--color-accent);
-}
-
 .Footer__base {
     padding: 0 var(--section-gutter);
     text-align: center;
     background-color: var(--color-footer-base);
-}
-
-.Footer__siteLink {
-    font-size: 0.875rem;
-    color: var(--color-text-subtle);
-    text-decoration: none;
-    transition: color 0.15s ease;
-}
-
-.Footer__siteLink:hover {
-    color: var(--color-accent);
 }

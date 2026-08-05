@@ -17,7 +17,7 @@ const TableOfContents = ({ sections }: TableOfContentsProps) => {
                 <button
                     key={section.id}
                     type="button"
-                    className="ArticleLayout__tocLink"
+                    className="NavLink ArticleLayout__tocLink"
                     onClick={() => scrollToSection(section.id)}
                 >
                     {section.title}

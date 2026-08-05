@@ -31,7 +31,7 @@ const BookEntry = ({ title, link, addedOn, completedOn }: Book) => {
                 href={link}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="UnderlinedLink Bookshelf__title"
+                className="Link Link--standalone Bookshelf__title"
             >
                 {title}
             </a>
@@ -46,7 +46,7 @@ const BookEntry = ({ title, link, addedOn, completedOn }: Book) => {
 const Bookshelf = () => {
     return (
         <section className="Bookshelf" aria-labelledby="bookshelf-title">
-            <h1 id="bookshelf-title" className="Bookshelf__pageTitle">
+            <h1 id="bookshelf-title" className="PageTitle">
                 Bookshelf
             </h1>
             <ul className="Bookshelf__list">

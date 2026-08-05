@@ -27,13 +27,7 @@
 }
 
 .ArticleLayout__back {
-    font-size: 0.875rem;
-}
-
-.ArticleLayout__title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-text);
+    font-size: var(--text-small);
 }
 
 .ArticleLayout__body {
@@ -58,7 +52,7 @@
 .ArticleLayout__tocLabel {
     width: 100%;
     font-family: var(--font-sans);
-    font-size: 0.6875rem;
+    font-size: var(--text-label);
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -67,17 +61,8 @@
 
 .ArticleLayout__tocLink {
     padding: 0;
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--text-fine);
     text-align: left;
-    color: var(--color-text-subtle);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.ArticleLayout__tocLink:hover {
-    color: var(--color-accent);
 }
 
 /* Wide enough for the text column plus a table of contents column on each

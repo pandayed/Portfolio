@@ -1,4 +1,5 @@
 import './Page.css';
+import '../CommonClasses/CommonClasses.css';
 
 import type { ReactNode } from 'react';
 
@@ -15,7 +16,7 @@ const Page = ({ title, children }: PageProps) => {
 
     return (
         <section className="Page" aria-labelledby={titleId}>
-            <h1 id={titleId} className="Page__title">
+            <h1 id={titleId} className="PageTitle">
                 {title}
             </h1>
             {children}

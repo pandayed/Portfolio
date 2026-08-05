@@ -13,19 +13,63 @@
     font-style: normal;
 }
 
-/* Underlined link shared by projects, certifications and the footer */
+/* Titles */
 
-.UnderlinedLink {
-    display: inline-flex;
-    align-items: center;
-    align-self: flex-start;
-    font-family: var(--font-code);
+.PageTitle {
+    font-size: var(--text-title);
+    font-weight: 600;
     color: var(--color-text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-text);
-    padding-bottom: 2px;
 }
 
-.UnderlinedLink:hover {
-    font-style: italic;
+.SectionTitle {
+    font-size: var(--text-heading);
+    font-weight: 600;
+    color: var(--color-text);
+    /* Clears the sticky header when an article section is scrolled to. */
+    scroll-margin-top: var(--header-offset, 0);
+}
+
+/* Links
+
+   The accent colour marks a link and nothing else, so accented text is never
+   read as emphasised prose. Only colour and underline weight respond to
+   hover: family, size and style stay fixed so no text reflows. */
+
+.Link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+    transition: text-decoration-thickness 0.15s ease;
+}
+
+.Link:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* Titles and back links sit alone on a line, where the accent alone is enough
+   to identify them, so the underline is held back until hover. */
+
+.Link--standalone {
+    text-decoration: none;
+}
+
+.Link--standalone:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+/* Header, footer and table of contents are chrome rather than prose, so they
+   stay subdued until pointed at and never compete with links in the text. */
+
+.NavLink {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--color-text-subtle);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.NavLink:hover {
+    color: var(--color-accent);
 }

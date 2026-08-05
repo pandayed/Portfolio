@@ -40,7 +40,7 @@ const Header = ({ route }: HeaderProps) => {
                         <a
                             key={item.route}
                             href={toHref(item.route)}
-                            className="Header__navLink"
+                            className="NavLink Header__navLink"
                             aria-current={route === item.route ? 'page' : undefined}
                         >
                             {item.title}

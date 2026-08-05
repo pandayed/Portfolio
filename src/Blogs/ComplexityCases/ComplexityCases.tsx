@@ -30,7 +30,7 @@ const ComplexityCases = () => {
             </section>
 
             <section className="ComplexityCases__section" aria-labelledby="amortised">
-                <h2 id="amortised" className="ComplexityCases__sectionTitle">
+                <h2 id="amortised" className="SectionTitle">
                     Amortised: a guarantee
                 </h2>
                 <p>
@@ -50,7 +50,7 @@ const ComplexityCases = () => {
             </section>
 
             <section className="ComplexityCases__section" aria-labelledby="average">
-                <h2 id="average" className="ComplexityCases__sectionTitle">
+                <h2 id="average" className="SectionTitle">
                     Average: an assumption
                 </h2>
                 <p>
@@ -70,7 +70,7 @@ const ComplexityCases = () => {
             </section>
 
             <section className="ComplexityCases__section" aria-labelledby="side-by-side">
-                <h2 id="side-by-side" className="ComplexityCases__sectionTitle">
+                <h2 id="side-by-side" className="SectionTitle">
                     Side by side
                 </h2>
                 <div className="ComplexityCases__tableWrap">
@@ -113,7 +113,7 @@ const ComplexityCases = () => {
             </section>
 
             <section className="ComplexityCases__section" aria-labelledby="the-test">
-                <h2 id="the-test" className="ComplexityCases__sectionTitle">
+                <h2 id="the-test" className="SectionTitle">
                     The test
                 </h2>
                 <p>
@@ -126,7 +126,7 @@ const ComplexityCases = () => {
             </section>
 
             <section className="ComplexityCases__section" aria-labelledby="where-both-break">
-                <h2 id="where-both-break" className="ComplexityCases__sectionTitle">
+                <h2 id="where-both-break" className="SectionTitle">
                     Where both break
                 </h2>
                 <ul className="ComplexityCases__notes">
@@ -144,7 +144,7 @@ const ComplexityCases = () => {
                 <p>
                     In either situation read the worst column instead. Otherwise the marked case on
                     the{' '}
-                    <a href={toHref(CPP_COMPLEXITY_ROUTE)} className="UnderlinedLink">
+                    <a href={toHref(CPP_COMPLEXITY_ROUTE)} className="Link">
                         container complexities
                     </a>{' '}
                     page is the figure to use.

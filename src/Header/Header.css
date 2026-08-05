@@ -24,7 +24,7 @@
 
 .logo a {
     font-family: var(--font-sans);
-    font-size: 0.875rem;
+    font-size: var(--text-small);
     font-weight: 550;
     letter-spacing: 0.025em;
     color: var(--color-text);
@@ -43,16 +43,10 @@
 }
 
 .Header__navLink {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
     font-weight: 450;
     letter-spacing: 0.025em;
-    color: var(--color-text-subtle);
-    text-decoration: none;
-    transition: color 0.15s ease;
 }
 
-.Header__navLink:hover,
 .Header__navLink[aria-current='page'] {
     color: var(--color-accent);
 }
