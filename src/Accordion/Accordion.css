@@ -1,0 +1,41 @@
+.Accordion {
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: var(--space-sm);
+}
+
+.Accordion__summary {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--color-text-subtle);
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.15s ease;
+}
+
+.Accordion__summary::-webkit-details-marker {
+    display: none;
+}
+
+.Accordion__summary::before {
+    content: '+';
+    display: inline-block;
+    width: 1em;
+}
+
+.Accordion[open] > .Accordion__summary::before {
+    content: '−';
+}
+
+.Accordion__summary:hover {
+    color: var(--color-accent);
+}
+
+.Accordion__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+    font-size: var(--text-secondary);
+    color: var(--color-text-subtle);
+}

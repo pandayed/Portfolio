@@ -20,8 +20,24 @@
     color: var(--color-text-subtle);
 }
 
+.Blogs__dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-lg);
+}
+
 .Blogs__date {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
     font-family: var(--font-sans);
     font-size: var(--text-small);
     color: var(--color-text-subtle);
+}
+
+.Blogs__dateLabel {
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }

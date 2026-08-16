@@ -20,7 +20,7 @@ const socialLinks: SocialLinkItem[] = [
     { title: 'G-Mail', link: 'mailto:lalbiharipandeyg@gmail.com' },
     { title: 'GitHub', link: 'https://github.com/pandayed' },
     { title: 'LinkedIn', link: 'https://www.linkedin.com/in/pandayed/' },
-    { title: 'Twitter/X', link: 'https://x.com/pandayed' },
+    { title: 'Twitter/X', link: 'https://x.com/lalpandeyed' },
 ];
 
 const Footer = () => {
