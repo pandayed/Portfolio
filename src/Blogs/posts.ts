@@ -1,4 +1,9 @@
-import { COMPLEXITY_CASES_ROUTE, CPP_COMPLEXITY_ROUTE, type Route } from '../routing/routes';
+import {
+    COMPLEXITY_CASES_ROUTE,
+    CPP_COMPLEXITY_ROUTE,
+    SQL_VS_MYSQL_ROUTE,
+    type Route,
+} from '../routing/routes';
 
 export interface Post {
     title: string;
@@ -20,5 +25,11 @@ export const posts: Post[] = [
         summary: 'Time complexities of the standard containers and algorithms, and what forces each one.',
         publishedOn: '2026-08-05',
         route: CPP_COMPLEXITY_ROUTE,
+    },
+    {
+        title: 'SQL vs PostgreSQL, MySQL, SQL Server and Oracle',
+        summary: 'SQL is a language. PostgreSQL, MySQL, SQL Server and Oracle are separate programs that implement it, each with its own extra syntax.',
+        publishedOn: '2026-08-16',
+        route: SQL_VS_MYSQL_ROUTE,
     },
 ];
