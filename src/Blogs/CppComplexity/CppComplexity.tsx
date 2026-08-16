@@ -3,7 +3,7 @@ import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
 import type { TocEntry } from '../ArticleLayout/types';
-import { COMPLEXITY_CASES_ROUTE, toHref } from '../../routing/routes';
+import { COMPLEXITY_CASES_ROUTE, CPP_COMPLEXITY_ROUTE, toHref } from '../../routing/routes';
 
 import { sequenceContainers } from './sequenceContainers';
 import { orderedContainers, unorderedContainers } from './associativeContainers';
@@ -105,7 +105,11 @@ const SectionBlock = ({ id, title, structures }: Section) => {
 
 const CppComplexity = () => {
     return (
-        <ArticleLayout title="C++ containers and complexities" sections={tocEntries}>
+        <ArticleLayout
+            title="C++ containers and complexities"
+            route={CPP_COMPLEXITY_ROUTE}
+            sections={tocEntries}
+        >
             <section className="CppComplexity__section">
                 <p className="CppComplexity__legend">
                     Every operation is listed under all four cases. The label on the row below it

@@ -10,16 +10,19 @@ Every article page uses the same layout. Do not hand-roll a layout in the articl
 ## Rules
 
 1. The table of contents appears on the right side of the page.
-2. An article is rendered with `ArticleLayout`. It supplies the title, the back link, the table of contents and the article body.
+2. An article is rendered with `ArticleLayout`. It supplies the title, the back link, the table of contents, the article body and the comments.
 3. The table of contents is rendered by `TableOfContents`. Do not add a second one inside the article.
 4. Every entry in the table of contents points at a section on the page. Give that section an `id` and set `aria-labelledby` to it.
 5. The intro paragraph has no heading, so it gets no table of contents entry.
+6. `ArticleLayout` takes the article's own `route`. It keys the comment thread, so it must never change once a post is live.
+7. The comments section and its table of contents entry are added by `ArticleLayout`. Do not add either inside the article.
 
 ## Components
 
 - `src/Blogs/ArticleLayout/ArticleLayout.tsx` - the page shell.
 - `src/Blogs/ArticleLayout/TableOfContents.tsx` - the list of sections.
 - `src/Blogs/ArticleLayout/types.ts` - `TocEntry`, one `{ id, title }` per section.
+- `src/Comments/Comments.tsx` - the giscus comment thread at the end of the body.
 
 ## Writing an article
 
@@ -30,7 +33,7 @@ const sections: TocEntry[] = [
 ];
 
 const MyArticle = () => (
-    <ArticleLayout title="My article" sections={sections}>
+    <ArticleLayout title="My article" route={MY_ARTICLE_ROUTE} sections={sections}>
         <section className="MyArticle__section">
             <p>Intro paragraph. No heading, so it is not in the table of contents.</p>
         </section>
@@ -63,5 +66,6 @@ Follow the `link-and-type-styles` skill. In short: a link inside a sentence uses
 ## Check before you finish
 
 - Does every `TocEntry` id match an `id` on the page?
-- Is the article free of its own back link, its own table of contents and its own outer wrapper?
+- Is the article free of its own back link, its own table of contents, its own comments section and its own outer wrapper?
+- Does `route` match the route the article is registered under in `src/routing/routes.ts`?
 - Does the article still read top to bottom without the table of contents?

@@ -2,7 +2,7 @@ import './ComplexityCases.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
-import { CPP_COMPLEXITY_ROUTE, toHref } from '../../routing/routes';
+import { COMPLEXITY_CASES_ROUTE, CPP_COMPLEXITY_ROUTE, toHref } from '../../routing/routes';
 import { sections } from './sections';
 
 const pushBackExample = `std::vector<int> v;              // capacity 0
@@ -20,7 +20,11 @@ m.find(k);                       // O(1) if the hash spreads the keys
 
 const ComplexityCases = () => {
     return (
-        <ArticleLayout title="Average and amortised are not the same thing" sections={sections}>
+        <ArticleLayout
+            title="Average and amortised are not the same thing"
+            route={COMPLEXITY_CASES_ROUTE}
+            sections={sections}
+        >
             <section className="ComplexityCases__section">
                 <p>
                     Best, average and worst describe one call on different inputs. Amortised

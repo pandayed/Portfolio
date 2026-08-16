@@ -34,6 +34,23 @@ export const applyTheme = (theme: Theme): void => {
     document.documentElement.dataset.theme = theme;
 };
 
+export const getAppliedTheme = (): Theme => {
+    const applied = document.documentElement.dataset.theme;
+    return isTheme(applied) ? applied : getInitialTheme();
+};
+
+/* Each caller of useTheme keeps its own state, so anything outside the toggle
+   has to follow the attribute the toggle writes rather than the hook. */
+export const watchAppliedTheme = (onChange: (theme: Theme) => void): (() => void) => {
+    const observer = new MutationObserver(() => onChange(getAppliedTheme()));
+
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme'],
+    });
+    return () => observer.disconnect();
+};
+
 export const watchSystemTheme = (onChange: (theme: Theme) => void): (() => void) => {
     const query = window.matchMedia(DARK_QUERY);
     const listener = (event: MediaQueryListEvent) => onChange(event.matches ? 'dark' : 'light');

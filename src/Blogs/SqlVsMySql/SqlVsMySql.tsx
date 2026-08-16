@@ -2,6 +2,7 @@ import './SqlVsMySql.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
+import { SQL_VS_MYSQL_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
 const syntaxExample = `-- PostgreSQL and MySQL
@@ -16,7 +17,11 @@ SELECT * FROM films ORDER BY id
 
 const SqlVsMySql = () => {
     return (
-        <ArticleLayout title="SQL vs PostgreSQL, MySQL, SQL Server and Oracle" sections={sections}>
+        <ArticleLayout
+            title="SQL vs PostgreSQL, MySQL, SQL Server and Oracle"
+            route={SQL_VS_MYSQL_ROUTE}
+            sections={sections}
+        >
             <section className="SqlVsMySql__section">
                 <p>
                     SQL is a language. PostgreSQL, MySQL, SQL Server and Oracle are programs that
