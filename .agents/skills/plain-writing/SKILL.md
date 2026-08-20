@@ -1,6 +1,6 @@
 ---
 name: plain-writing
-description: Write in plain, simple language. Use this skill for any writing task - docs, README files, commit messages, PR descriptions, code comments, UI copy, or chat replies. It keeps the text direct and note-like instead of bookish or literary.
+description: Write in plain, simple language. Use this skill for any writing task - docs, articles, README files, commit messages, PR descriptions, code comments, UI copy, or chat replies. It keeps the text direct and note-like instead of bookish or literary.
 ---
 
 # Plain Writing
