@@ -2,6 +2,7 @@ import {
     COMPLEXITY_CASES_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     SQL_VS_MYSQL_ROUTE,
+    SSL_TLS_ROUTE,
     type Route,
 } from '../routing/routes';
 
@@ -35,6 +36,13 @@ const entries: Post[] = [
         startedOn: '2026-08-16',
         updatedOn: '2026-08-16',
         route: SQL_VS_MYSQL_ROUTE,
+    },
+    {
+        title: 'SSL and TLS',
+        summary: 'SSL is the old name for TLS. What the protocol guarantees, how the handshake works, and which versions are still allowed.',
+        startedOn: '2026-08-21',
+        updatedOn: '2026-08-21',
+        route: SSL_TLS_ROUTE,
     },
 ];
 

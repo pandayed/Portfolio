@@ -1,0 +1,73 @@
+.SslTls__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.SslTls__section p {
+    color: var(--color-text);
+}
+
+.SslTls__tableWrap {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.SslTls__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: var(--text-secondary);
+}
+
+.SslTls__table th[scope='col'] {
+    padding: 0 var(--space-sm) var(--space-xs) 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.SslTls__table th[scope='row'] {
+    padding: var(--space-xs) var(--space-sm) var(--space-xs) 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-fine);
+    font-weight: 600;
+    color: var(--color-text);
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.SslTls__table td {
+    padding: var(--space-xs) var(--space-sm) var(--space-xs) 0;
+    color: var(--color-text-subtle);
+    vertical-align: baseline;
+}
+
+.SslTls__table tbody tr:not(:last-child) th,
+.SslTls__table tbody tr:not(:last-child) td {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.SslTls__notes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-left: 1.125rem;
+    list-style: disc;
+    font-size: var(--text-secondary);
+    color: var(--color-text-subtle);
+}
+
+.SslTls__steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-left: 1.125rem;
+    list-style: decimal;
+    font-size: var(--text-secondary);
+    color: var(--color-text-subtle);
+}

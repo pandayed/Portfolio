@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <div className="Intro">
             <p>
-                I try toget the job done. I do care about intentions and so about the outcomes. I try to hold myself to a standard of reliable execution.
+                I try to get the job done (and moslty I do get it done). I do care about intentions and so about the outcomes. I try to hold myself to a standard of reliable execution.
             </p>
 
             <p>

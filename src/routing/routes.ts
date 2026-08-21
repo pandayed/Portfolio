@@ -6,6 +6,7 @@ export const BLOGS_ROUTE = '/blogs';
 export const CPP_COMPLEXITY_ROUTE = '/blogs/cpp-complexity';
 export const COMPLEXITY_CASES_ROUTE = '/blogs/complexity-cases';
 export const SQL_VS_MYSQL_ROUTE = '/blogs/sql-vs-mysql';
+export const SSL_TLS_ROUTE = '/blogs/ssl-tls';
 export const PROJECTS_ROUTE = '/projects';
 export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
@@ -16,6 +17,7 @@ export type Route =
     | typeof CPP_COMPLEXITY_ROUTE
     | typeof COMPLEXITY_CASES_ROUTE
     | typeof SQL_VS_MYSQL_ROUTE
+    | typeof SSL_TLS_ROUTE
     | typeof PROJECTS_ROUTE
     | typeof BOOKSHELF_ROUTE
     | typeof ABOUT_ROUTE;
@@ -25,6 +27,7 @@ const routes: Route[] = [
     CPP_COMPLEXITY_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
+    SSL_TLS_ROUTE,
     PROJECTS_ROUTE,
     BOOKSHELF_ROUTE,
     ABOUT_ROUTE,

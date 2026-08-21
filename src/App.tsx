@@ -7,6 +7,7 @@ import Blogs from './Blogs/Blogs';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
 import ComplexityCases from './Blogs/ComplexityCases/ComplexityCases';
 import SqlVsMySql from './Blogs/SqlVsMySql/SqlVsMySql';
+import SslTls from './Blogs/SslTls/SslTls';
 import Projects from './Projects/Projects';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
@@ -21,6 +22,7 @@ import {
     HOME_ROUTE,
     PROJECTS_ROUTE,
     SQL_VS_MYSQL_ROUTE,
+    SSL_TLS_ROUTE,
     type Route,
 } from './routing/routes';
 import { useRoute } from './routing/useRoute';
@@ -31,6 +33,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,
     [COMPLEXITY_CASES_ROUTE]: ComplexityCases,
     [SQL_VS_MYSQL_ROUTE]: SqlVsMySql,
+    [SSL_TLS_ROUTE]: SslTls,
     [PROJECTS_ROUTE]: Projects,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,
