@@ -11,7 +11,6 @@ import {
     GISCUS_REPO,
     GISCUS_REPO_ID,
     GISCUS_SCRIPT_SRC,
-    isConfigured,
     toDiscussionTerm,
 } from './giscus';
 
@@ -64,7 +63,7 @@ const Comments = ({ term }: CommentsProps) => {
 
     useEffect(() => {
         const container = containerRef.current;
-        if (!container || !isConfigured()) {
+        if (!container) {
             return;
         }
 
@@ -80,10 +79,6 @@ const Comments = ({ term }: CommentsProps) => {
             sendTheme(containerRef.current?.querySelector('iframe.giscus-frame') ?? null, theme);
         });
     }, []);
-
-    if (!isConfigured()) {
-        return null;
-    }
 
     return (
         <section className="Comments" aria-labelledby={COMMENTS_ID}>

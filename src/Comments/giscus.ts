@@ -10,7 +10,7 @@
 export const GISCUS_REPO = 'pandayed/Portfolio';
 export const GISCUS_REPO_ID = 'R_kgDOGcq7-A';
 export const GISCUS_CATEGORY = 'Comments';
-export const GISCUS_CATEGORY_ID = 'REPLACE_WITH_CATEGORY_ID';
+export const GISCUS_CATEGORY_ID = 'DIC_kwDOGcq7-M4DD-Pc';
 
 export const GISCUS_SCRIPT_SRC = 'https://giscus.app/client.js';
 export const GISCUS_ORIGIN = 'https://giscus.app';
@@ -20,6 +20,3 @@ export const GISCUS_ORIGIN = 'https://giscus.app';
    route is passed explicitly instead, which also survives a future move off
    hash routing. */
 export const toDiscussionTerm = (route: string): string => `blog:${route}`;
-
-export const isConfigured = (): boolean =>
-    GISCUS_CATEGORY_ID !== 'REPLACE_WITH_CATEGORY_ID';
