@@ -8,6 +8,7 @@ import CppComplexity from './Blogs/CppComplexity/CppComplexity';
 import ComplexityCases from './Blogs/ComplexityCases/ComplexityCases';
 import SqlVsMySql from './Blogs/SqlVsMySql/SqlVsMySql';
 import SslTls from './Blogs/SslTls/SslTls';
+import AiObedience from './Blogs/AiObedience/AiObedience';
 import Projects from './Projects/Projects';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
@@ -15,6 +16,7 @@ import Footer from './Footer/Footer';
 
 import {
     ABOUT_ROUTE,
+    AI_OBEDIENCE_ROUTE,
     BLOGS_ROUTE,
     BOOKSHELF_ROUTE,
     COMPLEXITY_CASES_ROUTE,
@@ -34,6 +36,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [COMPLEXITY_CASES_ROUTE]: ComplexityCases,
     [SQL_VS_MYSQL_ROUTE]: SqlVsMySql,
     [SSL_TLS_ROUTE]: SslTls,
+    [AI_OBEDIENCE_ROUTE]: AiObedience,
     [PROJECTS_ROUTE]: Projects,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,

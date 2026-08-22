@@ -1,4 +1,5 @@
 import {
+    AI_OBEDIENCE_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     SQL_VS_MYSQL_ROUTE,
@@ -43,6 +44,13 @@ const entries: Post[] = [
         startedOn: '2026-08-21',
         updatedOn: '2026-08-21',
         route: SSL_TLS_ROUTE,
+    },
+    {
+        title: 'AI (dis)obedience',
+        summary: 'Code that runs and is still wrong for the codebase. What goes wrong, and why it comes down to specification, context, scope, execution strategy and reading the code yourself.',
+        startedOn: '2026-08-22',
+        updatedOn: '2026-08-22',
+        route: AI_OBEDIENCE_ROUTE,
     },
 ];
 
