@@ -4,6 +4,8 @@ import './CommonClasses/CommonClasses.css';
 import Header from './Header/Header';
 import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
+import Drafts from './Blogs/Drafts';
+import Archive from './Blogs/Archive';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
 import ComplexityCases from './Blogs/ComplexityCases/ComplexityCases';
 import SqlVsMySql from './Blogs/SqlVsMySql/SqlVsMySql';
@@ -17,10 +19,12 @@ import Footer from './Footer/Footer';
 import {
     ABOUT_ROUTE,
     AI_OBEDIENCE_ROUTE,
+    ARCHIVE_ROUTE,
     BLOGS_ROUTE,
     BOOKSHELF_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     CPP_COMPLEXITY_ROUTE,
+    DRAFTS_ROUTE,
     HOME_ROUTE,
     PROJECTS_ROUTE,
     SQL_VS_MYSQL_ROUTE,
@@ -32,6 +36,8 @@ import { useRoute } from './routing/useRoute';
 const pages: Record<Route, () => JSX.Element> = {
     [HOME_ROUTE]: Home,
     [BLOGS_ROUTE]: Blogs,
+    [DRAFTS_ROUTE]: Drafts,
+    [ARCHIVE_ROUTE]: Archive,
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,
     [COMPLEXITY_CASES_ROUTE]: ComplexityCases,
     [SQL_VS_MYSQL_ROUTE]: SqlVsMySql,

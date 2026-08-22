@@ -7,6 +7,10 @@ import {
     type Route,
 } from '../routing/routes';
 
+/* Where a post shows up. Published posts are on the blogs page, drafts and
+   archived posts each have a page of their own. */
+export type PostStatus = 'published' | 'draft' | 'archived';
+
 export interface Post {
     title: string;
     summary: string;
@@ -14,6 +18,7 @@ export interface Post {
     startedOn: string;
     updatedOn: string;
     route: Route;
+    status: PostStatus;
 }
 
 const entries: Post[] = [
@@ -23,6 +28,7 @@ const entries: Post[] = [
         startedOn: '2026-08-05',
         updatedOn: '2026-08-05',
         route: COMPLEXITY_CASES_ROUTE,
+        status: 'draft',
     },
     {
         title: 'C++ containers and complexities',
@@ -30,6 +36,7 @@ const entries: Post[] = [
         startedOn: '2026-08-05',
         updatedOn: '2026-08-05',
         route: CPP_COMPLEXITY_ROUTE,
+        status: 'draft',
     },
     {
         title: 'SQL vs PostgreSQL, MySQL, SQL Server and Oracle',
@@ -37,6 +44,7 @@ const entries: Post[] = [
         startedOn: '2026-08-16',
         updatedOn: '2026-08-16',
         route: SQL_VS_MYSQL_ROUTE,
+        status: 'draft',
     },
     {
         title: 'SSL and TLS',
@@ -44,6 +52,7 @@ const entries: Post[] = [
         startedOn: '2026-08-21',
         updatedOn: '2026-08-21',
         route: SSL_TLS_ROUTE,
+        status: 'draft',
     },
     {
         title: 'AI (dis)obedience',
@@ -51,9 +60,16 @@ const entries: Post[] = [
         startedOn: '2026-08-22',
         updatedOn: '2026-08-22',
         route: AI_OBEDIENCE_ROUTE,
+        status: 'draft',
     },
 ];
 
 /* Newest first by start date. Sorted here so the list above can stay in any
    order that is convenient to edit. */
 export const posts: Post[] = [...entries].sort((a, b) => b.startedOn.localeCompare(a.startedOn));
+
+const withStatus = (status: PostStatus): Post[] => posts.filter((post) => post.status === status);
+
+export const publishedPosts: Post[] = withStatus('published');
+export const draftPosts: Post[] = withStatus('draft');
+export const archivedPosts: Post[] = withStatus('archived');
