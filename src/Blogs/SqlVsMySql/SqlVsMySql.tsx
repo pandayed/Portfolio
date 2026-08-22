@@ -1,4 +1,3 @@
-import './SqlVsMySql.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
@@ -22,7 +21,7 @@ const SqlVsMySql = () => {
             route={SQL_VS_MYSQL_ROUTE}
             sections={sections}
         >
-            <section className="SqlVsMySql__section">
+            <section className="Article__section">
                 <p>
                     SQL is a language. PostgreSQL, MySQL, SQL Server and Oracle are programs that
                     implement it. Once that distinction is clear, the syntax differences between
@@ -30,7 +29,7 @@ const SqlVsMySql = () => {
                 </p>
             </section>
 
-            <section className="SqlVsMySql__section" aria-labelledby="language-vs-database">
+            <section className="Article__section" aria-labelledby="language-vs-database">
                 <h2 id="language-vs-database" className="SectionTitle">
                     SQL is a language, not a database
                 </h2>
@@ -46,7 +45,7 @@ const SqlVsMySql = () => {
                 </p>
             </section>
 
-            <section className="SqlVsMySql__section" aria-labelledby="standardized">
+            <section className="Article__section" aria-labelledby="standardized">
                 <h2 id="standardized" className="SectionTitle">
                     SQL is standardized
                 </h2>
@@ -62,7 +61,7 @@ const SqlVsMySql = () => {
                 </p>
             </section>
 
-            <section className="SqlVsMySql__section" aria-labelledby="what-implementation-means">
+            <section className="Article__section" aria-labelledby="what-implementation-means">
                 <h2 id="what-implementation-means" className="SectionTitle">
                     What implementation means
                 </h2>
@@ -78,7 +77,7 @@ const SqlVsMySql = () => {
                 </p>
             </section>
 
-            <section className="SqlVsMySql__section" aria-labelledby="limit-vs-top">
+            <section className="Article__section" aria-labelledby="limit-vs-top">
                 <h2 id="limit-vs-top" className="SectionTitle">
                     LIMIT vs TOP
                 </h2>
@@ -87,7 +86,7 @@ const SqlVsMySql = () => {
                     standard left open for years. PostgreSQL and MySQL use LIMIT and OFFSET. SQL
                     Server uses TOP. Oracle traditionally used the ROWNUM pseudo-column.
                 </p>
-                <pre className="SqlVsMySql__code">
+                <pre className="Article__code">
                     <code>{syntaxExample}</code>
                 </pre>
                 <p>
@@ -104,8 +103,8 @@ const SqlVsMySql = () => {
                     </a>
                     , has been open since 2015 and is marked Verified, not Fixed.
                 </p>
-                <div className="SqlVsMySql__tableWrap">
-                    <table className="SqlVsMySql__table">
+                <div className="Article__tableWrap">
+                    <table className="Article__table">
                         <thead>
                             <tr>
                                 <th scope="col">Database</th>
@@ -139,7 +138,7 @@ const SqlVsMySql = () => {
                 </div>
             </section>
 
-            <section className="SqlVsMySql__section" aria-labelledby="why-old-syntax-stays">
+            <section className="Article__section" aria-labelledby="why-old-syntax-stays">
                 <h2 id="why-old-syntax-stays" className="SectionTitle">
                     Why old syntax stays
                 </h2>
@@ -155,7 +154,7 @@ const SqlVsMySql = () => {
                 </p>
             </section>
 
-            <section className="SqlVsMySql__section" aria-labelledby="extensions">
+            <section className="Article__section" aria-labelledby="extensions">
                 <h2 id="extensions" className="SectionTitle">
                     Extensions beyond the standard
                 </h2>
@@ -170,7 +169,7 @@ const SqlVsMySql = () => {
                 </p>
             </section>
 
-            <section className="SqlVsMySql__section" aria-labelledby="learning-sql">
+            <section className="Article__section" aria-labelledby="learning-sql">
                 <h2 id="learning-sql" className="SectionTitle">
                     What this means when you learn SQL
                 </h2>

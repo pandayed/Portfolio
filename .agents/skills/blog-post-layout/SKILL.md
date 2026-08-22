@@ -16,13 +16,31 @@ Every article page uses the same layout. Do not hand-roll a layout in the articl
 5. The intro paragraph has no heading, so it gets no table of contents entry.
 6. `ArticleLayout` takes the article's own `route`. It keys the comment thread, so it must never change once a post is live.
 7. The comments section and its table of contents entry are added by `ArticleLayout`. Do not add either inside the article.
+8. The body is styled by the shared `Article__*` classes. An article stylesheet holds only what is unique to that one article, and most articles need none.
 
 ## Components
 
 - `src/Blogs/ArticleLayout/ArticleLayout.tsx` - the page shell.
+- `src/Blogs/ArticleLayout/Article.css` - the prose styles every article body uses.
 - `src/Blogs/ArticleLayout/TableOfContents.tsx` - the list of sections.
 - `src/Blogs/ArticleLayout/types.ts` - `TocEntry`, one `{ id, title }` per section.
 - `src/Comments/Comments.tsx` - the giscus comment thread at the end of the body.
+
+## Body classes
+
+`ArticleLayout` imports `Article.css`, so an article uses these without importing anything.
+
+| Class | Element | Use for |
+| --- | --- | --- |
+| `Article__section` | `section` | one section of the body |
+| `Article__subTitle` | `h3` | a sub-item inside a section |
+| `Article__notes` | `ul` | a bulleted list |
+| `Article__steps` | `ol` | a numbered list |
+| `Article__code` | `pre` | a code snippet |
+| `Article__tableWrap` | `div` | the scroll container around a table |
+| `Article__table` | `table` | a table of rows and columns |
+
+Lists and paragraphs read at body size and full text colour. Do not restate their size or colour, and do not make them subtle: `--color-text-subtle` is for chrome and captions, not for the text of the article.
 
 ## Writing an article
 
@@ -34,11 +52,11 @@ const sections: TocEntry[] = [
 
 const MyArticle = () => (
     <ArticleLayout title="My article" route={MY_ARTICLE_ROUTE} sections={sections}>
-        <section className="MyArticle__section">
+        <section className="Article__section">
             <p>Intro paragraph. No heading, so it is not in the table of contents.</p>
         </section>
 
-        <section className="MyArticle__section" aria-labelledby="first-section">
+        <section className="Article__section" aria-labelledby="first-section">
             <h2 id="first-section" className="SectionTitle">
                 First section
             </h2>
@@ -56,7 +74,7 @@ const MyArticle = () => (
 
 ## Section headings
 
-- Section titles are `h2` and use the shared `SectionTitle` class. Structures or sub-items inside a section are `h3`.
+- Section titles are `h2` and use the shared `SectionTitle` class. Structures or sub-items inside a section are `h3` and use `Article__subTitle`.
 - `SectionTitle` already carries `scroll-margin-top`, so a scrolled-to heading clears the sticky header. Do not restate its size, weight or colour in the article stylesheet.
 
 ## Links and text inside an article
@@ -69,3 +87,4 @@ Follow the `link-and-type-styles` skill. In short: a link inside a sentence uses
 - Is the article free of its own back link, its own table of contents, its own comments section and its own outer wrapper?
 - Does `route` match the route the article is registered under in `src/routing/routes.ts`?
 - Does the article still read top to bottom without the table of contents?
+- Does the article stylesheet hold anything that `Article.css` already covers?

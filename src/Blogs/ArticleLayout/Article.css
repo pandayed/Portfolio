@@ -1,0 +1,122 @@
+/* Prose inside an article body. Every article uses these, so an article
+   stylesheet holds only what is unique to that one article. ArticleLayout
+   imports this file, so an article does not import it itself. */
+
+.Article__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* A sub-item inside a section. It carries no table of contents entry, so the
+   extra space above it is what separates one sub-item from the last. */
+.Article__subTitle {
+    font-size: var(--text-subheading);
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.Article__subTitle:not(:first-child) {
+    margin-top: var(--space-sm);
+}
+
+/* A list is prose, so it reads at the size and colour of a paragraph. The
+   marker takes the colour of its item, so the bullet stays as dark as the
+   text beside it. */
+
+.Article__notes,
+.Article__steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-left: 1.25rem;
+    font-size: var(--text-body);
+    color: var(--color-text);
+}
+
+.Article__notes {
+    list-style: disc;
+}
+
+.Article__steps {
+    list-style: decimal;
+}
+
+/* Code */
+
+.Article__section p code,
+.Article__notes code,
+.Article__steps code {
+    font-family: var(--font-code);
+    /* A ratio rather than a token, so inline code tracks the text it sits in. */
+    font-size: 0.875em;
+}
+
+/* Snippets are short, so they scroll rather than wrap. */
+.Article__code {
+    padding: var(--space-sm);
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: var(--text-fine);
+    line-height: 1.6;
+    color: var(--color-text);
+    border-left: 2px solid var(--color-border);
+}
+
+/* A code element inside something that already sets a code face would drop to
+   the browser's smaller monospace default, so it takes what is set around it. */
+.Article__code code,
+.Article__table code {
+    font: inherit;
+}
+
+/* Tables
+
+   A table is denser than prose, so it steps down one size. Only the column
+   headings stay subtle: they are labels, and the figures under them are
+   content that reads at full text colour. */
+
+.Article__tableWrap {
+    /* min-width lets this flex child shrink so the overflow lands here. */
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.Article__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: var(--text-secondary);
+}
+
+.Article__table th[scope='col'] {
+    padding: 0 var(--space-sm) var(--space-xs) 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.Article__table th[scope='row'] {
+    padding: var(--space-xs) var(--space-sm) var(--space-xs) 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-fine);
+    font-weight: 600;
+    color: var(--color-text);
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.Article__table td {
+    padding: var(--space-xs) var(--space-sm) var(--space-xs) 0;
+    color: var(--color-text);
+    vertical-align: baseline;
+}
+
+.Article__table tbody tr:not(:last-child) th,
+.Article__table tbody tr:not(:last-child) td {
+    border-bottom: 1px solid var(--color-border);
+}

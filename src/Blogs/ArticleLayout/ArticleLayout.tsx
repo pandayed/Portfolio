@@ -1,4 +1,5 @@
 import './ArticleLayout.css';
+import './Article.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import type { ReactNode } from 'react';

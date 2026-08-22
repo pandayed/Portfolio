@@ -1,4 +1,3 @@
-import './ComplexityCases.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
@@ -25,7 +24,7 @@ const ComplexityCases = () => {
             route={COMPLEXITY_CASES_ROUTE}
             sections={sections}
         >
-            <section className="ComplexityCases__section">
+            <section className="Article__section">
                 <p>
                     Best, average and worst describe one call on different inputs. Amortised
                     describes a sequence of calls on the same container. That is the whole
@@ -33,7 +32,7 @@ const ComplexityCases = () => {
                 </p>
             </section>
 
-            <section className="ComplexityCases__section" aria-labelledby="amortised">
+            <section className="Article__section" aria-labelledby="amortised">
                 <h2 id="amortised" className="SectionTitle">
                     Amortised: a guarantee
                 </h2>
@@ -42,7 +41,7 @@ const ComplexityCases = () => {
                     each call is amortised O(1), even though one of them was linear. It is
                     arithmetic on a worst case, so no assumption about the data is involved.
                 </p>
-                <pre className="ComplexityCases__code">
+                <pre className="Article__code">
                     <code>{pushBackExample}</code>
                 </pre>
                 <p>
@@ -53,7 +52,7 @@ const ComplexityCases = () => {
                 </p>
             </section>
 
-            <section className="ComplexityCases__section" aria-labelledby="average">
+            <section className="Article__section" aria-labelledby="average">
                 <h2 id="average" className="SectionTitle">
                     Average: an assumption
                 </h2>
@@ -61,7 +60,7 @@ const ComplexityCases = () => {
                     An average bound is a statement about typical inputs. It holds while the data
                     behaves, and there is no total to fall back on when it does not.
                 </p>
-                <pre className="ComplexityCases__code">
+                <pre className="Article__code">
                     <code>{hashExample}</code>
                 </pre>
                 <p>
@@ -73,12 +72,12 @@ const ComplexityCases = () => {
                 </p>
             </section>
 
-            <section className="ComplexityCases__section" aria-labelledby="side-by-side">
+            <section className="Article__section" aria-labelledby="side-by-side">
                 <h2 id="side-by-side" className="SectionTitle">
                     Side by side
                 </h2>
-                <div className="ComplexityCases__tableWrap">
-                    <table className="ComplexityCases__table">
+                <div className="Article__tableWrap">
+                    <table className="Article__table">
                         <thead>
                             <tr>
                                 <th scope="col" />
@@ -116,7 +115,7 @@ const ComplexityCases = () => {
                 </div>
             </section>
 
-            <section className="ComplexityCases__section" aria-labelledby="the-test">
+            <section className="Article__section" aria-labelledby="the-test">
                 <h2 id="the-test" className="SectionTitle">
                     The test
                 </h2>
@@ -129,11 +128,11 @@ const ComplexityCases = () => {
                 </p>
             </section>
 
-            <section className="ComplexityCases__section" aria-labelledby="where-both-break">
+            <section className="Article__section" aria-labelledby="where-both-break">
                 <h2 id="where-both-break" className="SectionTitle">
                     Where both break
                 </h2>
-                <ul className="ComplexityCases__notes">
+                <ul className="Article__notes">
                     <li>
                         Per-call latency. Amortised O(1) says nothing about any one call. Under a
                         frame budget or a p99 target, the single push_back that reallocates misses

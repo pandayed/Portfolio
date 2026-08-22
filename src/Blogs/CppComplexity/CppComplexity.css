@@ -1,9 +1,3 @@
-.CppComplexity__section {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-}
-
 .CppComplexity__structure {
     display: flex;
     flex-direction: column;
@@ -12,26 +6,14 @@
     border-left: 2px solid var(--color-border);
 }
 
+/* A container name is an identifier, so it is set in the code face. Its size,
+   weight and colour come from Article__subTitle. */
 .CppComplexity__structureName {
     font-family: var(--font-code);
-    font-size: var(--text-subheading);
-    font-weight: 600;
-    color: var(--color-text);
 }
 
-.CppComplexity__internals {
-    color: var(--color-text);
-}
-
-/* The table is wider than the text column on small screens, so it scrolls
-   on its own rather than widening the article. */
-.CppComplexity__tableWrap {
-    /* min-width lets this flex child shrink so the overflow lands here. */
-    min-width: 0;
-    margin-top: var(--space-xs);
-    overflow-x: auto;
-}
-
+/* Figures rather than sentences fill this table, and each operation spans two
+   rows, so it sets its own cells instead of taking the shared article table. */
 .CppComplexity__table {
     width: 100%;
     border-collapse: collapse;
@@ -75,11 +57,19 @@
     white-space: nowrap;
 }
 
+/* Without this the signature drops to the browser's smaller monospace default
+   and stops matching the figures on the same row. */
+.CppComplexity__signature code {
+    font: inherit;
+}
+
+/* The sentence under a row is prose, so it takes the body face and the text
+   colour rather than reading as a faded caption. */
 .CppComplexity__table td.CppComplexity__why {
-    padding: 0.25rem 0 var(--space-sm) 0;
+    padding: var(--space-xs) 0 var(--space-sm) 0;
     font-family: var(--font-body);
     font-size: var(--text-secondary);
-    color: var(--color-text-subtle);
+    color: var(--color-text);
     white-space: normal;
 }
 
@@ -93,26 +83,4 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-text);
-}
-
-.CppComplexity__legend {
-    font-size: var(--text-small);
-    color: var(--color-text-subtle);
-}
-
-.CppComplexity__legend code {
-    font-family: var(--font-code);
-    font-size: var(--text-fine);
-    color: var(--color-text);
-}
-
-.CppComplexity__notes {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    margin-top: var(--space-xs);
-    padding-left: 1.125rem;
-    list-style: disc;
-    font-size: var(--text-secondary);
-    color: var(--color-text-subtle);
 }

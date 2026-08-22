@@ -59,10 +59,10 @@ const OperationRows = ({
 const StructureCard = ({ name, internals, operations, notes }: Structure) => {
     return (
         <article className="CppComplexity__structure">
-            <h3 className="CppComplexity__structureName">{name}</h3>
-            <p className="CppComplexity__internals">{internals}</p>
+            <h3 className="Article__subTitle CppComplexity__structureName">{name}</h3>
+            <p>{internals}</p>
 
-            <div className="CppComplexity__tableWrap">
+            <div className="Article__tableWrap">
                 <table className="CppComplexity__table">
                     <thead>
                         <tr>
@@ -80,7 +80,7 @@ const StructureCard = ({ name, internals, operations, notes }: Structure) => {
             </div>
 
             {notes && (
-                <ul className="CppComplexity__notes">
+                <ul className="Article__notes">
                     {notes.map((note) => (
                         <li key={note}>{note}</li>
                     ))}
@@ -92,7 +92,7 @@ const StructureCard = ({ name, internals, operations, notes }: Structure) => {
 
 const SectionBlock = ({ id, title, structures }: Section) => {
     return (
-        <section className="CppComplexity__section" aria-labelledby={id}>
+        <section className="Article__section" aria-labelledby={id}>
             <h2 id={id} className="SectionTitle">
                 {title}
             </h2>
@@ -110,14 +110,14 @@ const CppComplexity = () => {
             route={CPP_COMPLEXITY_ROUTE}
             sections={tocEntries}
         >
-            <section className="CppComplexity__section">
-                <p className="CppComplexity__legend">
+            <section className="Article__section">
+                <p>
                     Every operation is listed under all four cases. The label on the row below it
                     marks the one that holds in practice: when working out the complexity of an
                     algorithm that uses the operation, that is the figure to carry through.
                 </p>
 
-                <p className="CppComplexity__legend">
+                <p>
                     An em dash means amortising changes nothing for that operation. Why average and
                     amortised are not interchangeable is covered{' '}
                     <a href={toHref(COMPLEXITY_CASES_ROUTE)} className="Link">
@@ -126,7 +126,7 @@ const CppComplexity = () => {
                     .
                 </p>
 
-                <p className="CppComplexity__legend">
+                <p>
                     For example, <code>v.push_back</code> is marked Amortised, so when considering a{' '}
                     <code>v.push_back</code> operation do not consider the worst case complexity of
                     it, instead consider the amortised one. So a loop that appends n elements is
@@ -138,11 +138,11 @@ const CppComplexity = () => {
                 <SectionBlock key={section.id} {...section} />
             ))}
 
-            <section className="CppComplexity__section" aria-labelledby={CAVEATS_ID}>
+            <section className="Article__section" aria-labelledby={CAVEATS_ID}>
                 <h2 id={CAVEATS_ID} className="SectionTitle">
                     Caveats
                 </h2>
-                <ul className="CppComplexity__notes">
+                <ul className="Article__notes">
                     <li>
                         Amortised is not guaranteed. push_back and unordered_map insert are
                         constant on average, but a single call can be linear.

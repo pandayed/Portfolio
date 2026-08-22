@@ -1,4 +1,3 @@
-import './SslTls.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
@@ -8,7 +7,7 @@ import { sections } from './sections';
 const SslTls = () => {
     return (
         <ArticleLayout title="SSL and TLS" route={SSL_TLS_ROUTE} sections={sections}>
-            <section className="SslTls__section">
+            <section className="Article__section">
                 <p>
                     SSL and TLS are the same protocol under two names. SSL is the old name and every
                     SSL version is deprecated. TLS is the name of the versions still in use. A
@@ -16,7 +15,7 @@ const SslTls = () => {
                 </p>
             </section>
 
-            <section className="SslTls__section" aria-labelledby="names">
+            <section className="Article__section" aria-labelledby="names">
                 <h2 id="names" className="SectionTitle">
                     SSL is the old name
                 </h2>
@@ -31,12 +30,12 @@ const SslTls = () => {
                 </p>
             </section>
 
-            <section className="SslTls__section" aria-labelledby="what-tls-gives-you">
+            <section className="Article__section" aria-labelledby="what-tls-gives-you">
                 <h2 id="what-tls-gives-you" className="SectionTitle">
                     What TLS gives you
                 </h2>
                 <p>TLS sits between TCP and the application protocol. It provides three things.</p>
-                <ul className="SslTls__notes">
+                <ul className="Article__notes">
                     <li>
                         Encryption. Anyone reading the wire sees ciphertext, not the request or the
                         response.
@@ -56,7 +55,7 @@ const SslTls = () => {
                 </p>
             </section>
 
-            <section className="SslTls__section" aria-labelledby="certificates">
+            <section className="Article__section" aria-labelledby="certificates">
                 <h2 id="certificates" className="SectionTitle">
                     Certificates and who signs them
                 </h2>
@@ -78,7 +77,7 @@ const SslTls = () => {
                 </p>
             </section>
 
-            <section className="SslTls__section" aria-labelledby="handshake">
+            <section className="Article__section" aria-labelledby="handshake">
                 <h2 id="handshake" className="SectionTitle">
                     The handshake
                 </h2>
@@ -86,7 +85,7 @@ const SslTls = () => {
                     The handshake agrees on keys and checks the server identity before any
                     application data is sent. These are the steps in TLS 1.3.
                 </p>
-                <ol className="SslTls__steps">
+                <ol className="Article__steps">
                     <li>
                         The client sends ClientHello: the TLS versions it supports, the cipher
                         suites it supports, the server name it wants, and a key share.
@@ -112,12 +111,12 @@ const SslTls = () => {
                 </p>
             </section>
 
-            <section className="SslTls__section" aria-labelledby="versions">
+            <section className="Article__section" aria-labelledby="versions">
                 <h2 id="versions" className="SectionTitle">
                     Versions and their status
                 </h2>
-                <div className="SslTls__tableWrap">
-                    <table className="SslTls__table">
+                <div className="Article__tableWrap">
+                    <table className="Article__table">
                         <thead>
                             <tr>
                                 <th scope="col">Version</th>
@@ -165,7 +164,7 @@ const SslTls = () => {
                 </p>
             </section>
 
-            <section className="SslTls__section" aria-labelledby="changes-in-1-3">
+            <section className="Article__section" aria-labelledby="changes-in-1-3">
                 <h2 id="changes-in-1-3" className="SectionTitle">
                     What TLS 1.3 removed
                 </h2>
@@ -173,7 +172,7 @@ const SslTls = () => {
                     TLS 1.2 accumulated options, and most of the attacks on TLS were attacks on the
                     weak ones. TLS 1.3 deletes them instead of leaving them configurable.
                 </p>
-                <ul className="SslTls__notes">
+                <ul className="Article__notes">
                     <li>
                         RSA key exchange is gone. Every key exchange is now ephemeral, so recording
                         the traffic today and stealing the private key later does not decrypt it.
@@ -193,7 +192,7 @@ const SslTls = () => {
                 </ul>
             </section>
 
-            <section className="SslTls__section" aria-labelledby="limits">
+            <section className="Article__section" aria-labelledby="limits">
                 <h2 id="limits" className="SectionTitle">
                     What TLS does not do
                 </h2>

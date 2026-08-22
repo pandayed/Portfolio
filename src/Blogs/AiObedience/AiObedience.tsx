@@ -1,4 +1,3 @@
-import './AiObedience.css';
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
@@ -11,9 +10,9 @@ const CONTEXT_ROT = 'https://research.trychroma.com/context-rot';
 const AiObedience = () => {
     return (
         <ArticleLayout title="AI (dis)obedience" route={AI_OBEDIENCE_ROUTE} sections={sections}>
-            <section className="AiObedience__section">
+            <section className="Article__section">
                 <p>While building apps with just prompts, I ran into these failures:</p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>
                         Fix this everywhere changed three files out of twenty, and the task was
                         reported as done.
@@ -41,17 +40,15 @@ const AiObedience = () => {
                 </ul>
             </section>
 
-            <section className="AiObedience__section">
+            <section className="Article__section">
                 <p>
                     Different models behave differently in the same scenario. The same model
                     behaves differently across scenarios. People who work on AI describe that
                     behaviour with analogies, and three of them come up more often than the rest.
                 </p>
 
-                <h3 className="AiObedience__subTitle">The sorcerer&apos;s apprentice</h3>
-                <p>
-                    AI is more goal oriented than path oriented.
-                </p>
+                <h3 className="Article__subTitle">The sorcerer&apos;s apprentice</h3>
+                <p>AI is more goal oriented than path oriented.</p>
                 <p>
                     The apprentice knows a few things and not everything. It still goes after the
                     goal. It picks its own path. That path is often not the one the master wanted.
@@ -59,7 +56,7 @@ const AiObedience = () => {
                     work is done. The report looks like completion. The requirement is not met.
                 </p>
 
-                <h3 className="AiObedience__subTitle">The parent and the child</h3>
+                <h3 className="Article__subTitle">The parent and the child</h3>
                 <p>
                     A child asks for one thing. The parent gives something else. The parent wants
                     to help. The parent also wants to do what they think is best for the child.
@@ -71,7 +68,7 @@ const AiObedience = () => {
                     you did not ask for.
                 </p>
 
-                <h3 className="AiObedience__subTitle">The genie</h3>
+                <h3 className="Article__subTitle">The genie</h3>
                 <p>
                     A model today is capable. It still misses what you wanted, because your request
                     was underspecified. The genie has just come out of the bottle. It has the
@@ -83,13 +80,13 @@ const AiObedience = () => {
                     needed. The genie had no way to tell which.
                 </p>
 
-                <h3 className="AiObedience__subTitle">Why the analogies are useful</h3>
+                <h3 className="Article__subTitle">Why the analogies are useful</h3>
                 <p>
                     Each analogy names a different cause. So each one points to a different fix.
                     They also move the diagnosis away from the model. The model is usually not the
                     cause.
                 </p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>
                         The apprentice: the goal is rewarded and the path is not. State the path
                         and the constraints. Then check the completion claim.
@@ -105,9 +102,9 @@ const AiObedience = () => {
                 </ul>
             </section>
 
-            <section className="AiObedience__section">
+            <section className="Article__section">
                 <p>These are the pieces that decide whether the output is what you want:</p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>Model capability. What the model can do at all.</li>
                     <li>Specification. What you asked for, and what done means.</li>
                     <li>Context. What the model can see about this repository.</li>
@@ -119,7 +116,7 @@ const AiObedience = () => {
                 </ul>
             </section>
 
-            <section className="AiObedience__section" aria-labelledby="model-capability">
+            <section className="Article__section" aria-labelledby="model-capability">
                 <h2 id="model-capability" className="SectionTitle">
                     Model capability
                 </h2>
@@ -127,7 +124,7 @@ const AiObedience = () => {
                     Model capability sets the limit. The other things in this post help you get
                     closer to that limit. None of them take you past it.
                 </p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>
                         Context window. How much the model can hold at one time. This includes your
                         prompt, the files it read, the tool output and everything it has already
@@ -156,7 +153,7 @@ const AiObedience = () => {
                 </p>
             </section>
 
-            <section className="AiObedience__section" aria-labelledby="specification">
+            <section className="Article__section" aria-labelledby="specification">
                 <h2 id="specification" className="SectionTitle">
                     Specification
                 </h2>
@@ -179,7 +176,7 @@ const AiObedience = () => {
                     every rule gets long, and you have to type it again the next time. Use these
                     instead.
                 </p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>
                         Skills. A skill is a named set of instructions for a recurring task, and
                         the agent loads it when the task matches. Most agents now support some form
@@ -197,7 +194,7 @@ const AiObedience = () => {
                 <p>The more specific the input, the closer the output is to what you want.</p>
             </section>
 
-            <section className="AiObedience__section" aria-labelledby="context">
+            <section className="Article__section" aria-labelledby="context">
                 <h2 id="context" className="SectionTitle">
                     Context
                 </h2>
@@ -220,7 +217,7 @@ const AiObedience = () => {
                 </p>
             </section>
 
-            <section className="AiObedience__section" aria-labelledby="scope">
+            <section className="Article__section" aria-labelledby="scope">
                 <h2 id="scope" className="SectionTitle">
                     Scope
                 </h2>
@@ -230,7 +227,7 @@ const AiObedience = () => {
                     about how many places the change applies to. That question has to be answered
                     before any file is edited.
                 </p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>What counts as a relevant occurrence.</li>
                     <li>How to find all of them.</li>
                     <li>Which ones are excluded on purpose.</li>
@@ -264,25 +261,12 @@ const AiObedience = () => {
                     places, and the same search after the change shows that nothing was left.
                 </p>
                 <p>
-                    Many things are not greppable. Cases that belong to one category often share no
-                    text. Every place that assumes a request is authenticated. Every component that
-                    breaks on a slow network. There is no string to search for. For these, use the
-                    structure of the code instead. Take the call sites of one function, the
-                    implementations of one interface, or the errors a type checker reports after
-                    you change a signature. If none of that works, list the files yourself.
+                    Many things are not greppable. So, AI may try to read all the files it think would help, but since there is a context limit, its likely to fail for such tasks.
                 </p>
-                <p>
-                    An AI can fix five occurrences correctly and still fail the task, because the
-                    task was twenty. Each edit is right and the result is wrong. This is why
-                    repository-level benchmarks such as{' '}
-                    <a href={SWE_BENCH} className="Link">
-                        SWE-bench
-                    </a>{' '}
-                    score a whole repository state and its tests, not a single function.
-                </p>
+
             </section>
 
-            <section className="AiObedience__section" aria-labelledby="execution">
+            <section className="Article__section" aria-labelledby="execution">
                 <h2 id="execution" className="SectionTitle">
                     Execution strategy
                 </h2>
@@ -295,7 +279,7 @@ const AiObedience = () => {
                     the APIs and the rest in a single pass. It usually does not finish all of it.
                     Two other things go wrong as well.
                 </p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>
                         You cannot review it properly. The change is too large to read with care.
                     </li>
@@ -305,7 +289,7 @@ const AiObedience = () => {
                     </li>
                 </ul>
                 <p>A better strategy makes the model stop.</p>
-                <ol className="AiObedience__steps">
+                <ol className="Article__steps">
                     <li>Ask for a plan before any code.</li>
                     <li>
                         Ask the plan to state the blast radius, which is everything the change
@@ -339,7 +323,7 @@ const AiObedience = () => {
                 </p>
             </section>
 
-            <section className="AiObedience__section" aria-labelledby="verification">
+            <section className="Article__section" aria-labelledby="verification">
                 <h2 id="verification" className="SectionTitle">
                     Manual verification
                 </h2>
@@ -354,7 +338,7 @@ const AiObedience = () => {
                     Checking the feature is not enough. You open the feature and it works. The
                     problem is in the code, and the code is not visible from the feature.
                 </p>
-                <ul className="AiObedience__notes">
+                <ul className="Article__notes">
                     <li>Everything in one file, where the codebase would have split it.</li>
                     <li>The same string written out in six places instead of once.</li>
                     <li>A failure suppressed so the screen keeps rendering.</li>
