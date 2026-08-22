@@ -4,7 +4,6 @@ import ArticleLayout from '../ArticleLayout/ArticleLayout';
 import { AI_OBEDIENCE_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
-const SWE_BENCH = 'https://www.swebench.com/';
 const CONTEXT_ROT = 'https://research.trychroma.com/context-rot';
 
 const AiObedience = () => {
