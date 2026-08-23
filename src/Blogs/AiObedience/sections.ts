@@ -7,5 +7,5 @@ export const sections: TocEntry[] = [
     { id: 'scope', title: 'Scope' },
     { id: 'execution', title: 'Execution strategy' },
     { id: 'verification', title: 'Manual verification' },
-    { id: 'compound-engineering', title: 'Compound engineering' },
+    { id: 'improving-the-system', title: 'Improving the system' },
 ];

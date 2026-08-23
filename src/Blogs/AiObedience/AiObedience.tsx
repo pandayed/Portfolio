@@ -365,9 +365,9 @@ const AiObedience = () => {
                 </p>
             </section>
 
-            <section className="Article__section" aria-labelledby="compound-engineering">
-                <h2 id="compound-engineering" className="SectionTitle">
-                    Compound engineering
+            <section className="Article__section" aria-labelledby="improving-the-system">
+                <h2 id="improving-the-system" className="SectionTitle">
+                    Improving the system
                 </h2>
                 <p>
                     Doing all of this at once is a lot of work. You do not have to. Keep working the
@@ -392,9 +392,8 @@ const AiObedience = () => {
                     </li>
                 </ul>
                 <p>
-                    This is compound engineering. You turn each learning into reusable context, a
-                    tool, or a skill. The next task is picked up by a better system, even though the
-                    model is the same.
+                    Turn each learning into reusable context, a tool, or a skill. The next task is
+                    then picked up by a better system, even though the model is the same.
                 </p>
                 <p>
                     Every fix stays in place. So the failures you hit later are new ones, not the
