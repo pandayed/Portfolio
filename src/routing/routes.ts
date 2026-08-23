@@ -10,6 +10,7 @@ export const COMPLEXITY_CASES_ROUTE = '/blogs/complexity-cases';
 export const SQL_VS_MYSQL_ROUTE = '/blogs/sql-vs-mysql';
 export const SSL_TLS_ROUTE = '/blogs/ssl-tls';
 export const AI_OBEDIENCE_ROUTE = '/blogs/ai-obedience';
+export const SIEVE_OF_ERATOSTHENES_ROUTE = '/blogs/sieve-of-eratosthenes';
 export const PROJECTS_ROUTE = '/projects';
 export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
@@ -24,6 +25,7 @@ export type Route =
     | typeof SQL_VS_MYSQL_ROUTE
     | typeof SSL_TLS_ROUTE
     | typeof AI_OBEDIENCE_ROUTE
+    | typeof SIEVE_OF_ERATOSTHENES_ROUTE
     | typeof PROJECTS_ROUTE
     | typeof BOOKSHELF_ROUTE
     | typeof ABOUT_ROUTE;
@@ -37,6 +39,7 @@ const routes: Route[] = [
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
     AI_OBEDIENCE_ROUTE,
+    SIEVE_OF_ERATOSTHENES_ROUTE,
     PROJECTS_ROUTE,
     BOOKSHELF_ROUTE,
     ABOUT_ROUTE,

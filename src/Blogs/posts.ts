@@ -2,6 +2,7 @@ import {
     AI_OBEDIENCE_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     CPP_COMPLEXITY_ROUTE,
+    SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
     type Route,
@@ -60,6 +61,14 @@ const entries: Post[] = [
         startedOn: '2026-08-22',
         updatedOn: '2026-08-22',
         route: AI_OBEDIENCE_ROUTE,
+        status: 'draft',
+    },
+    {
+        title: 'Sieve of Eratosthenes',
+        summary: 'Finding every prime up to N by crossing out multiples, and the two steps that make it fast: stopping at the square root and starting at i * i.',
+        startedOn: '2026-08-23',
+        updatedOn: '2026-08-23',
+        route: SIEVE_OF_ERATOSTHENES_ROUTE,
         status: 'draft',
     },
 ];

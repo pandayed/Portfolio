@@ -11,6 +11,7 @@ import ComplexityCases from './Blogs/ComplexityCases/ComplexityCases';
 import SqlVsMySql from './Blogs/SqlVsMySql/SqlVsMySql';
 import SslTls from './Blogs/SslTls/SslTls';
 import AiObedience from './Blogs/AiObedience/AiObedience';
+import SieveOfEratosthenes from './Blogs/SieveOfEratosthenes/SieveOfEratosthenes';
 import Projects from './Projects/Projects';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
@@ -27,6 +28,7 @@ import {
     DRAFTS_ROUTE,
     HOME_ROUTE,
     PROJECTS_ROUTE,
+    SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
     type Route,
@@ -43,6 +45,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [SQL_VS_MYSQL_ROUTE]: SqlVsMySql,
     [SSL_TLS_ROUTE]: SslTls,
     [AI_OBEDIENCE_ROUTE]: AiObedience,
+    [SIEVE_OF_ERATOSTHENES_ROUTE]: SieveOfEratosthenes,
     [PROJECTS_ROUTE]: Projects,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,
