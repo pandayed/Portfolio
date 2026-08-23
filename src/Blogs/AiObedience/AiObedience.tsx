@@ -364,6 +364,43 @@ const AiObedience = () => {
                     tree.
                 </p>
             </section>
+
+            <section className="Article__section" aria-labelledby="compound-engineering">
+                <h2 id="compound-engineering" className="SectionTitle">
+                    Compound engineering
+                </h2>
+                <p>
+                    Doing all of this at once is a lot of work. You do not have to. Keep working the
+                    way you already work, and change the system only when a result is not what you
+                    wanted.
+                </p>
+                <p>
+                    When the output is wrong, the cause is usually that the system is not being used
+                    the way it is meant to be used. Something was not specified. The context was not
+                    there. The scope was never fixed. The model was never stopped. Find which one it
+                    was and write it down. That note is the change to the system.
+                </p>
+                <p>Two things tell you a change belongs in the system.</p>
+                <ul className="Article__notes">
+                    <li>
+                        You type the same chunk of prompt again. Move it into a skill. You should
+                        not have to type it a third time.
+                    </li>
+                    <li>
+                        You wanted a behaviour and the AI did not give it. Write that behaviour into
+                        a skill or a rule, so the next task starts with it.
+                    </li>
+                </ul>
+                <p>
+                    This is compound engineering. You turn each learning into reusable context, a
+                    tool, or a skill. The next task is picked up by a better system, even though the
+                    model is the same.
+                </p>
+                <p>
+                    Every fix stays in place. So the failures you hit later are new ones, not the
+                    same one again.
+                </p>
+            </section>
         </ArticleLayout>
     );
 };

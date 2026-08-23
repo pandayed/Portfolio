@@ -28,7 +28,7 @@ const Footer = () => {
         <footer className="Footer">
             <div className="Footer__inner">
                 <a href={toHref(HOME_ROUTE)} className="NavLink">
-                    pandayed.com
+                    lalpandey.com
                 </a>
 
                 <div className="Footer__group">
