@@ -1,6 +1,7 @@
 import {
     AI_OBEDIENCE_ROUTE,
     COMPLEXITY_CASES_ROUTE,
+    CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
@@ -69,6 +70,14 @@ const entries: Post[] = [
         startedOn: '2026-08-23',
         updatedOn: '2026-08-23',
         route: SIEVE_OF_ERATOSTHENES_ROUTE,
+        status: 'draft',
+    },
+    {
+        title: 'Consistent hashing',
+        summary: 'Spreading keys across a changing set of nodes without remapping almost everything.',
+        startedOn: '2026-08-23',
+        updatedOn: '2026-08-23',
+        route: CONSISTENT_HASHING_ROUTE,
         status: 'draft',
     },
 ];
