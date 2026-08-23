@@ -11,7 +11,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', {
 
 const formatDate = (date: string) => dateFormatter.format(new Date(`${date}T00:00:00`));
 
-const BookDate = ({ label, date }: { label: string; date: string | null }) => {
+const BookDate = ({ label, date }: { label: string; date?: string }) => {
     return (
         <div className="Bookshelf__date">
             <span className="Bookshelf__dateLabel">{label}</span>
@@ -35,10 +35,12 @@ const BookEntry = ({ title, link, addedOn, completedOn }: Book) => {
             >
                 {title}
             </a>
-            <div className="Bookshelf__dates">
-                <BookDate label="Added" date={addedOn} />
-                <BookDate label="Completed" date={completedOn} />
-            </div>
+            {(addedOn || completedOn) && (
+                <div className="Bookshelf__dates">
+                    <BookDate label="Added" date={addedOn} />
+                    <BookDate label="Completed" date={completedOn} />
+                </div>
+            )}
         </li>
     );
 };
