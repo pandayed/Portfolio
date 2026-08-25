@@ -4,114 +4,143 @@ import ArticleLayout from '../ArticleLayout/ArticleLayout';
 import { AI_OBEDIENCE_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
-const CONTEXT_ROT = 'https://research.trychroma.com/context-rot';
+const CONTEXT_ROT = 'https://www.trychroma.com/research/context-rot';
 
 const AiObedience = () => {
     return (
-        <ArticleLayout title="AI (dis)obedience" route={AI_OBEDIENCE_ROUTE} sections={sections}>
+        <ArticleLayout
+            title="AI (dis)obedience: why coding agents miss the request"
+            route={AI_OBEDIENCE_ROUTE}
+            sections={sections}
+        >
             <section className="Article__section">
-                <p>While building apps with just prompts, I ran into these failures:</p>
+                <p>
+                    This blog post contains my learnings and knowledge around AI assisted
+                    development. It is about how the common failures look like, how to interpret them, why they
+                    happen, how to avoid them and how to handle when a new failure happens.
+                </p>
+                <p>There can be uncountable types/patterns of failures, the common ones which I came across appear as:</p>
                 <ul className="Article__notes">
                     <li>
-                        Fix this everywhere changed three files out of twenty, and the task was
-                        reported as done.
+                        “Fix this everywhere” changes three occurrences while several others are
+                        missed.
                     </li>
                     <li>
-                        A small change turned into new abstractions, renamed APIs and edits to
-                        unrelated files.
+                        A narrow fix grows into new abstractions, renamed APIs and unrelated edits.
+                    </li>
+                    <li>The requested behaviour works, but an existing behaviour regresses.</li>
+                    <li>
+                        The main path is handled while edge cases and dependent code are ignored.
                     </li>
                     <li>
-                        The requested behaviour worked, and something that had worked before was
-                        broken.
+                        The agent reports completion because the output looks plausible, even
+                        though part of the requirement remains open.
                     </li>
                     <li>
-                        The main path was handled, and the edge cases and the dependent code were
-                        not.
-                    </li>
-                    <li>
-                        The AI stopped when the output looked plausible, and the full requirement
-                        was not met.
-                    </li>
-                    <li>
-                        The feature behaved correctly, and the internals ignored a pattern the
-                        repository already used elsewhere.
+                        The feature behaves correctly, but the code ignores an established pattern
+                        elsewhere in the repository.
                     </li>
                 </ul>
             </section>
 
             <section className="Article__section">
                 <p>
-                    Different models behave differently in the same scenario. The same model
-                    behaves differently across scenarios. People who work on AI describe that
-                    behaviour with analogies, and three of them come up more often than the rest.
+                    To understand the possible reasons when the outputs do not match the desired result, its important to understand the behaviour of the AI models. The experts explain the behavoiours using several analogies, the most common ones are explained here.
+
                 </p>
 
                 <h3 className="Article__subTitle">The sorcerer&apos;s apprentice</h3>
-                <p>AI is more goal oriented than path oriented.</p>
                 <p>
-                    The apprentice knows a few things and not everything. It still goes after the
-                    goal. It picks its own path. That path is often not the one the master wanted.
-                    It does not stop where the master would have stopped. It then reports that the
-                    work is done. The report looks like completion. The requirement is not met.
+                    The apprentice wants to make the master happy. It may say yes to a task which is beyond its capability. It may turn notorious, take wrong paths, get wicked, and lie about results. Generally this would happen when the task is beyond its capability.
                 </p>
 
                 <h3 className="Article__subTitle">The parent and the child</h3>
                 <p>
-                    A child asks for one thing. The parent gives something else. The parent wants
-                    to help. The parent also wants to do what they think is best for the child.
-                    Both of those are true at the same time.
-                </p>
-                <p>
-                    The intent is good. The result is still not what the child asked for. A model
-                    does the same thing. You ask for a narrow fix. You get a cleaner design that
-                    you did not ask for.
+                    A parent may answer a child&apos;s request with what the parent considers more
+                    useful. Coding agents are often tuned to be helpful, which can produce the same
+                    mismatch: you ask for a narrow fix and receive a broader redesign.
                 </p>
 
                 <h3 className="Article__subTitle">The genie</h3>
                 <p>
-                    A model today is capable. It still misses what you wanted, because your request
-                    was underspecified. The genie has just come out of the bottle. It has the
-                    ability. It does not have the context you hold.
-                </p>
-                <p>
-                    Ask a genie for a bridge across the river. You may get a rope bridge. You may
-                    get six lanes of concrete. Both are bridges. Only one of them is the one you
-                    needed. The genie had no way to tell which.
+                    A genie can grant the words of a wish without meeting the need behind it. Ask
+                    for a bridge and you might get either a rope bridge or six lanes of concrete.
                 </p>
 
-                <h3 className="Article__subTitle">Why the analogies are useful</h3>
                 <p>
-                    Each analogy names a different cause. So each one points to a different fix.
-                    They also move the diagnosis away from the model. The model is usually not the
-                    cause.
+                    Each behaviour in itself contains a lot more than explained here. Also, its important to remember that the same model in different scenarios can have different behaviours.
                 </p>
-                <ul className="Article__notes">
-                    <li>
-                        The apprentice: the goal is rewarded and the path is not. State the path
-                        and the constraints. Then check the completion claim.
-                    </li>
-                    <li>
-                        The parent: good intent still gives the wrong output. Say what you want.
-                        Say that you do not want anything extra.
-                    </li>
-                    <li>
-                        The genie: capability is not context. Specify the request. Do not assume
-                        the context is shared.
-                    </li>
-                </ul>
+
+                <p>
+                    The remedies to the problems introduced by these behaviours are discussed now.
+                </p>
             </section>
 
-            <section className="Article__section">
-                <p>These are the pieces that decide whether the output is what you want:</p>
+            <section className="Article__section" aria-labelledby="collaborator">
+                <h2 id="collaborator" className="SectionTitle">
+                    Treat the agent as a (junior) collaborator
+                </h2>
+                <p>
+                    At whatever position you are, apprentice, intern, junior, senior, expert, the AI is always a junior collaborator, not an alternative/replacement of yourself or anyone. Be considerate to listen/read to its responses but do not get blinded by its lies, when it may.
+                </p>
+                <p>
+                    You can keep it as an intelligent advisor, but not as the decision maker.
+                </p>
+                <p>
+                    The agent can make typing faster, but it does not remove the work of choosing
+                    the right change.
+                </p>
+                <p>
+                    After AI, we often tend to take up features, which we are not very familiar with, make sure to understand the task and codebase/feature before starting the actual task.
+                </p>
+                <section className="Article__section" aria-labelledby="asking-for-docs">
+                    <h2 id="asking-for-docs" className="SectionTitle">
+                        Ask for a doc
+                    </h2>
+                    <p>
+                        Docs are good, as they can be revisited, edited, and shared.
+                    </p>
+                    <ul className="Article__notes">
+                        <li>What do you want to know? Code level understanding or high level overview.</li>
+                        <li>What should be omitted? Should it incldue the code snippets, the links to the file or just the feature details on the client side.</li>
+                        <li>What is your current understanding?</li>
+                        <li>If you do not understand the tech, mention that.</li>
+                        <li>If you understand the tech but not the feature mention that.</li>
+                        <li>Generally for a high level overview, which does not mention code level details, comes when we say that the intended audience is PMs.</li>
+                        <li>When requiring the actual code details, we can mention that the intended audience is Engineers.</li>
+                    </ul>
+                </section>
+
+                <section className="Article__section" aria-labelledby="evidence">
+                    <h2 id="evidence" className="SectionTitle">
+                        Ask for the evidence
+                    </h2>
+                    <p>Ask the agent to distinguish four things in any investigation or plan:</p>
+                    <ul className="Article__notes">
+                        <li>Confirmed facts supported by source, documentation, logs or runtime output.</li>
+                        <li>Inferences drawn from those facts.</li>
+                        <li>Assumptions being used to make progress.</li>
+                        <li>Unknowns that still need evidence or a decision.</li>
+                    </ul>
+                    <p>
+                        Evidence is broader than a file and line number: it may be an API contract, a
+                        focused test result, a browser observation or a version-control history. The
+                        important part is that the claim points to something checkable and does not
+                        present an inference as a confirmed fact.
+                    </p>
+                </section>
+                <p>
+                    Now, lets come to which all stars need to align to get a good result.
+                </p>
+                <p>The quality of the result depends on:</p>
                 <ul className="Article__notes">
-                    <li>Model capability. What the model can do at all.</li>
-                    <li>Specification. What you asked for, and what done means.</li>
-                    <li>Context. What the model can see about this repository.</li>
-                    <li>
-                        Scope. How many places the task covers, and whether they can be found.
-                    </li>
-                    <li>Execution strategy. The order of the work and where the model stops.</li>
-                    <li>Manual verification. Whether you read the code, not just the feature.</li>
+                    <li>Capability: what the selected model can reliably do.</li>
+                    <li>Specification: what was requested and what “done” means.</li>
+                    <li>Context: what the agent can see about the repository and the problem.</li>
+                    <li>Scope: which occurrences and behaviours the change must cover.</li>
+                    <li>Execution: how the work is divided and where approval is required.</li>
+                    <li>Tools: what the agent can use to gather evidence and validate its work.</li>
+                    <li>Verification: what a human checks before accepting the change.</li>
                 </ul>
             </section>
 
@@ -120,35 +149,24 @@ const AiObedience = () => {
                     Model capability
                 </h2>
                 <p>
-                    Model capability sets the limit. The other things in this post help you get
-                    closer to that limit. None of them take you past it.
+                    Model capability sets an upper bound on the result. Better instructions and
+                    better context help the model approach that bound, but they cannot make every
+                    model equally suitable for every task.
                 </p>
                 <ul className="Article__notes">
                     <li>
-                        Context window. How much the model can hold at one time. This includes your
-                        prompt, the files it read, the tool output and everything it has already
-                        said. A large window does not mean the model uses all of it. Accuracy drops
-                        in the middle of a long context, so a model can hold a file and still miss
-                        what is in it.
+                        Context handling: can it find and use the relevant detail among prompts,
+                        files, tool output and earlier messages?
                     </li>
                     <li>
-                        Reasoning. Whether it can carry a set of steps without losing the earlier
-                        ones. A refactor across four files needs the model to remember the first
-                        file while it edits the fourth.
+                        Reasoning: can it preserve constraints and dependencies across several
+                        steps?
                     </li>
-                    <li>
-                        Tool use. Whether it searches, reads and runs things before it answers, or
-                        answers from memory. The first gives evidence. The second is a guess.
-                    </li>
-                    <li>
-                        Long tasks. Whether it stays consistent across many steps. Most models get
-                        worse as a task runs longer.
-                    </li>
+                    <li>Tool use: can it use terminal, browser, mcp tools etc?</li>
                 </ul>
                 <p>
-                    Capability also changes within one model. The same model behaves differently
-                    with a different reasoning budget, a different temperature, or a different set
-                    of tools. So one failure does not prove the model cannot do the task.
+                    The surrounding setup matters too. Also, the same model can perform differently with different reasoning settings.
+                   
                 </p>
             </section>
 
@@ -157,40 +175,73 @@ const AiObedience = () => {
                     Specification
                 </h2>
                 <p>
-                    Humans are underspecified by default. You know what you want. You say part of
-                    it. The rest stays in your head.
+                    Requests are usually incomplete because the person writing them already knows
+                    the surrounding context. The agent does not. Any important detail left unstated
+                    becomes a decision the agent must infer or ask about.
                 </p>
                 <p>
-                    A model has to fill in the rest. It always fills it in with something. What it
-                    fills in is not always what you wanted.
+                    This matters in mature repositories, which often contain several patterns for
+                    similar work. If the request does not identify the relevant precedent, the
+                    agent may choose a common industry pattern instead of the local one.
                 </p>
                 <p>
-                    A repository often holds more than one design pattern for the same job. The
-                    model also knows the patterns the industry uses. These compete with each other.
-                    When the request does not say which pattern applies, the model picks one. It
-                    often picks the industry default over the one your repository already uses.
+                    A useful specification does not need to be long. It should answer the questions
+                    that could materially change the solution:
+                </p>
+                <ul className="Article__notes">
+                    <li>What is explicitly included and excluded?</li>
+                    <li>Which existing behaviour must remain unchanged?</li>
+                    <li>Which repository pattern or contract should be followed?</li>
+                    <li>What evidence will demonstrate completion?</li>
+                    <li>Which decisions should come back for approval?</li>
+                </ul>
+                <p>
+                    When you do not know all of those answers, ask the agent to inspect first and
+                    identify only the gaps that would change the implementation. Resolve those gaps
+                    before code is edited.
                 </p>
                 <p>
-                    So be specific. You cannot be specific in every prompt. A prompt that carries
-                    every rule gets long, and you have to type it again the next time. Use these
-                    instead.
+                    Repeated constraints do not need to be typed in every prompt. Store them where
+                    the tool can apply them consistently.
+                </p>
+
+            </section>
+
+            <section className="Article__section" aria-labelledby="skills">
+                <h2 id="skills" className="SectionTitle">
+                    Skills and rules
+                </h2>
+                <p>
+                    Skills and rules are most useful when they capture lessons from real work. If
+                    you have corrected the same workflow more than once, the repeated correction is
+                    a good candidate for reusable guidance.
+                </p>
+                <p>
+                    Start with the successful process, not an imagined universal process. Turn the
+                    corrected steps into a small skill, use it on another suitable task and refine
+                    it from what happens.
+                </p>
+                <p>
+                    "Start with a successful process", this means, that first use prompts and existing tools to get a desired output, and see that at which points AI failed or needed inputs, based on those points create a skill.
                 </p>
                 <ul className="Article__notes">
                     <li>
-                        Skills. A skill is a named set of instructions for a recurring task, and
-                        the agent loads it when the task matches. Most agents now support some form
-                        of this.
+                        Give the skill a narrow purpose and a description that clearly says when it
+                        applies.
                     </li>
                     <li>
-                        Rules. Some tools, such as Augment, let you write rules that apply to every
-                        request in the workspace.
-                    </li>
-                    <li>
-                        AGENTS.md. Codex and several other tools read this file from the root of
-                        the repository, so it holds instructions that sit above any single task.
+                        Invoke critical workflows explicitly; do not rely only on automatic skill
+                        selection.
                     </li>
                 </ul>
-                <p>The more specific the input, the closer the output is to what you want.</p>
+                <p>
+                    More guidance is not always better. Overlapping instructions can conflict, and
+                    generic rules copied from another project may not fit yours. Keep broad rules
+                    short and move specialised detail into instructions that load only when needed.
+                </p>
+                <p>
+                    Review this guidance when the repository, tools or models change.
+                </p>
             </section>
 
             <section className="Article__section" aria-labelledby="context">
@@ -198,21 +249,48 @@ const AiObedience = () => {
                     Context
                 </h2>
                 <p>
-                    Specification says what to do. Context is what the model can see while it does
-                    it.
+                    Context is the king.
                 </p>
                 <p>
-                    Work is often spread across folders. Put those folder paths in the skill that
-                    covers the task. The agent then goes to the right place instead of guessing
-                    where the code is.
+                    Specification says what to do. Context is the information available while the
+                    agent decides how to do it.
                 </p>
                 <p>
-                    Context is not only code. It is also the documentation and the comments around
-                    the code. Exceptions are where this matters most. A repository has places where
-                    the normal pattern is not followed. If the reason is not written down, the
-                    model sees code that does not match the industry standard and tries to fix it.
-                    If the reason is written down, the model follows the codebase. An architecture
-                    decision record is a good place to write that reason.
+                    Useful context includes entry points, related folders, local conventions,
+                    product requirements, previous decisions and known exceptions. Point the agent
+                    towards the sources of truth instead of making it rediscover them on every task.
+                </p>
+                <p>
+                    Exceptions need explanation, without explanations the needed exceptions appear like anomaly. Without it, unusual code can look accidental and
+                    invite an unnecessary “fix”. A short comment or architecture decision record
+                    can explain why the local rule differs from the obvious alternative.
+                </p>
+                <p>
+                    Use the form of context that best matches the task. A marked-up screenshot is
+                    often clearer for a visual defect; a request and response example is often
+                    clearer for an API problem; a failing log is often clearer for a runtime error.
+                </p>
+
+                <p>
+                    Prefer a fresh session when the previous conversation is unrelated. Old
+                    messages consume attention and can pull the discussion towards decisions that
+                    do not apply to the new task.
+                </p>
+                <p>
+                    Remember the rule, if you have reached the context limit, you have already reached the quality limit.
+                </p>
+                <p>
+                    We misunderstand context. We believe that more context AI would have, the better it would perform. But reality is quite the opposite.
+                    The rule is quality of response is inversely proportional to the input context. Larger input context leads to lower quality output. We must have a way to restrict the context so that the model does not pick up irrelevant things as the context. Do not assume that only inputs are part of the context, the outputs/changes also contribute to the context.
+                </p>
+                <p>
+                    In{' '}
+                    <a href={CONTEXT_ROT} className="Link">
+                        Chroma&apos;s context-rot evaluation
+                    </a>
+                    , performance declined as the amount of input increased, even when the input
+                    remained within the model&apos;s advertised context window. The practical lesson is
+                    to supply the most relevant evidence, not every available file.
                 </p>
             </section>
 
@@ -220,49 +298,29 @@ const AiObedience = () => {
                 <h2 id="scope" className="SectionTitle">
                     Scope
                 </h2>
-                <p>Change this everywhere is a bad instruction. I gave it often and it failed.</p>
                 <p>
-                    Everywhere is not an instruction about how to write the code. It is a question
-                    about how many places the change applies to. That question has to be answered
-                    before any file is edited.
+                    “Change this everywhere” sounds clear, but “everywhere” has not yet been
+                    defined. Before editing, turn it into an inventory question:
                 </p>
                 <ul className="Article__notes">
                     <li>What counts as a relevant occurrence.</li>
                     <li>How to find all of them.</li>
                     <li>Which ones are excluded on purpose.</li>
-                    <li>How to show that none were missed.</li>
+                    <li>What check will show that the intended set was covered.</li>
                 </ul>
                 <p>
-                    The model cannot read the whole repository to answer that. It reads some files
-                    and it chooses which ones. Files it does not open are not part of the answer.
-                    It also cannot tell you what it missed, because it does not know what it did
-                    not read.
-                </p>
-                <p>
-                    Reading more files does not fix this. The opposite happens. The more the model
-                    reads, the worse it gets at using any of it.{' '}
-                    <a href={CONTEXT_ROT} className="Link">
-                        Chroma tested eighteen models
-                    </a>{' '}
-                    and every one of them got worse as the input got longer, well before the
-                    context window was full. A model that reads twenty files loses the first files
-                    while it reads the last ones. Response quality drops as the amount of context
-                    goes up.
-                </p>
-                <p>
-                    So do not ask the model to read for coverage. Ask it to search. A search
-                    returns every match at the same cost and does not lose the early results.
-                </p>
-                <p>
-                    This works only if the thing is greppable. Make it greppable on purpose. Use
-                    one name for one concept. Use a shared prefix. Use a marker constant. Use a
-                    type that every case has to go through. Then the search gives you the list of
-                    places, and the same search after the change shows that nothing was left.
-                </p>
-                <p>
-                    Many things are not greppable. So, AI may try to read all the files it think would help, but since there is a context limit, its likely to fail for such tasks.
+                    Search first to build an inventory, then inspect the matches to decide
+                    which ones actually belong in scope. Search again after the edit to detect
+                    anything that remains.
                 </p>
 
+                <p>
+                    Searches like find all of this and that, only work when things are greppable. Otherwise they do not.
+                </p>
+
+                <p>
+                    Scope includes what AI can read and what AI can change, use restrictive instructions so that it does not go and change everything or more than what is needed for the current task.
+                </p>
             </section>
 
             <section className="Article__section" aria-labelledby="execution">
@@ -270,136 +328,114 @@ const AiObedience = () => {
                     Execution strategy
                 </h2>
                 <p>
-                    There is more than one way to get the same task done. The execution strategy is
-                    the order of the work and the points where the model stops.
+                    Execution strategy is the order of the work and the points where the agent must
+                    pause. It should match the risk of the task.
                 </p>
                 <p>
-                    The default is one shot. You describe a feature and the model writes the page,
-                    the APIs and the rest in a single pass. It usually does not finish all of it.
-                    Two other things go wrong as well.
+                    A small, reversible change may be safe to implement directly. A change that
+                    spans a page, API and data model deserves separate investigation, design and
+                    implementation phases. Trying to do all of that in one pass makes two things
+                    harder:
                 </p>
                 <ul className="Article__notes">
-                    <li>
-                        You cannot review it properly. The change is too large to read with care.
-                    </li>
-                    <li>
-                        If you reject the approach, all of it has to be rewritten. The work and the
-                        tokens are spent twice.
-                    </li>
+                    <li>The resulting change is too large to review carefully.</li>
+                    <li>A rejected design forces more of the implementation to be rewritten.</li>
                 </ul>
-                <p>A better strategy makes the model stop.</p>
+                <p>For a larger or riskier task, use explicit checkpoints:</p>
                 <ol className="Article__steps">
-                    <li>Ask for a plan before any code.</li>
                     <li>
-                        Ask the plan to state the blast radius, which is everything the change
-                        touches.
+                        Make it read and understand the current state of the repo. Better you give whatever scope you feel is right so that AI would not have to read everything.
+                    </li>
+                    
+                    <li>
+                        Once it understands enough (it might not understand everything and all, so do not let it run in the loop), ask it to make a plan, with what all files will it interact, what all APIs will it use, and whatever you feel like should be in the plan.
                     </li>
                     <li>
-                        Ask it to list the competing options: the patterns already in the codebase,
-                        the approaches available, the one it recommends, and the reason.
+                        The planning skill must instruct, that the execution strategy must be divided into phases (not too many and not too little, genearlly UTs go into the last phase). Each phase should have a checklist, and manual verification checklist too, so that AI and you both can review if the phase is complete.
                     </li>
-                    <li>Ask for the plan in phases.</li>
                     <li>
-                        Ask each phase to carry a manual verification checklist. That is what you
-                        check by hand before the next phase starts.
+                        A good plan doc is that in which each phase can be started in a new session/chat.
                     </li>
-                    <li>Discuss the plan, then let it implement one phase.</li>
                     <li>
-                        Ask for tests last, once you have verified the feature behaves the way you
-                        want.
+                        The planning can have multiple steps, from draft to final.
                     </li>
-                </ol>
+                    <li>
+                        Compare viable approaches and their trade-offs when more than one materially
+                        different solution exists.
+                    </li>
+                    <li>Approve the approach before implementation begins.</li>
+                    <li>
+                        Implement in reviewable phases, each with a clear completion check.
+                    </li>
+                </ol>      
+                <h3 className="Article__subTitle">Invite disagreement, retain the decision</h3>
                 <p>
-                    When the model stops and discusses, you usually end up with an implementation
-                    you want. When it does not stop, you get something you have to change
-                    afterwards.
+                    Ask the agent to point out unclear requirements and problems with your proposed
+                    approach. If there are real alternatives, ask for their trade-offs before
+                    stating a preference. This reduces the tendency to simply elaborate on the
+                    first idea presented.
                 </p>
                 <p>
-                    Ask for one more thing in the plan. Have the model mark where each statement
-                    comes from. A file and a line is evidence. Everything else is inference. Ask
-                    for that separation once and you will see how much of a plan is inference. Some
-                    of it will be wrong.
+                    The agent can recommend an option, but the accountable person should choose it.
+                    State that implementation must wait for approval and that any material departure
+                    from the agreed plan requires another discussion.
                 </p>
+
+                <p>At evert step give it freedom to stop and ask questions or to make clear if it finds a blocker. AI is very goal driven and it may go with work arounds, if you do not let it stop when it needs.</p>
             </section>
 
             <section className="Article__section" aria-labelledby="verification">
                 <h2 id="verification" className="SectionTitle">
                     Manual verification
                 </h2>
-                <p>Read the code yourself at least once per change.</p>
                 <p>
-                    A model is probabilistic, not deterministic. The same prompt on the same
-                    repository can produce a different answer twice. You can pick the right model,
-                    write the skills, supply the context and stop the model at every phase, and
-                    still get code you do not want. None of those steps make the output certain.
+                    Read the code yourself before accepting it. Good prompts, repository rules and
+                    automated checks reduce risk; none of them makes generated code certain.
                 </p>
                 <p>
-                    Checking the feature is not enough. You open the feature and it works. The
-                    problem is in the code, and the code is not visible from the feature.
+                    Behavioural verification and code review answer different questions. Using the
+                    feature shows whether the visible path works. Reading the change shows whether
+                    it fits the repository and whether the apparent success hides a new problem.
                 </p>
                 <ul className="Article__notes">
-                    <li>Everything in one file, where the codebase would have split it.</li>
-                    <li>The same string written out in six places instead of once.</li>
-                    <li>A failure suppressed so the screen keeps rendering.</li>
-                    <li>A value hardcoded on the client that should come from the API.</li>
-                    <li>Logic in the component that belongs behind the endpoint.</li>
+                    <li>Was every requested case covered, including error and boundary cases?</li>
+                    <li>Did anything outside the agreed scope change?</li>
+                    <li>Does the implementation follow the local architecture and naming?</li>
+                    <li>Were errors handled, or merely hidden?</li>
+                    <li>Do the validation results support the completion claim?</li>
                 </ul>
                 <p>
-                    None of those show up when you use the feature. The feature works and the tests
-                    pass. Nothing tells you they are there.
+                    Accepted code becomes part of the evidence future contributors and agents use
+                    to infer local conventions. That makes review important beyond the current
+                    task: an accidental pattern can be copied later.
                 </p>
                 <p>
-                    Whatever you accept becomes the pattern. The model reads the repository to
-                    decide what this codebase does. Code you accepted is part of that repository,
-                    so the model copies it in the next task. The copy makes the pattern stronger.
-                    The chance of the same mistake goes up with every occurrence you leave in
-                    place. Fix it once, or write a rule that says not to do it, and it stops there.
-                </p>
-                <p>
-                    Do this before the pull request. A review reads a diff. A diff does not carry
-                    the repository. It does not show the helper that already existed, the folder
-                    the file should have been in, or the pattern the change broke. The human
-                    reviewer and the AI reviewer both lose that context at the diff. You have the
-                    most context right after the change, while the work is still in your working
-                    tree.
+                    Review while the investigation and design decisions are still fresh. A pull
+                    request reviewer can inspect the wider repository, but the person who guided
+                    the work usually has the clearest context for the alternatives considered and
+                    assumptions made.
                 </p>
             </section>
+
+
 
             <section className="Article__section" aria-labelledby="improving-the-system">
                 <h2 id="improving-the-system" className="SectionTitle">
                     Improving the system
                 </h2>
                 <p>
-                    Doing all of this at once is a lot of work. You do not have to. Keep working the
-                    way you already work, and change the system only when a result is not what you
-                    wanted.
+                    You do not need to build an elaborate agent workflow before doing useful work.
+                    Start with the current process and improve it when a real failure reveals a
+                    repeatable weakness.
                 </p>
                 <p>
-                    When the output is wrong, the cause is usually that the system is not being used
-                    the way it is meant to be used. Something was not specified. The context was not
-                    there. The scope was never fixed. The model was never stopped. Find which one it
-                    was and write it down. That note is the change to the system.
-                </p>
-                <p>Two things tell you a change belongs in the system.</p>
-                <ul className="Article__notes">
-                    <li>
-                        You type the same chunk of prompt again. Move it into a skill. You should
-                        not have to type it a third time.
-                    </li>
-                    <li>
-                        You wanted a behaviour and the AI did not give it. Write that behaviour into
-                        a skill or a rule, so the next task starts with it.
-                    </li>
-                </ul>
-                <p>
-                    Turn each learning into reusable context, a tool, or a skill. The next task is
-                    then picked up by a better system, even though the model is the same.
-                </p>
-                <p>
-                    Every fix stays in place. So the failures you hit later are new ones, not the
-                    same one again.
+                    When a result is wrong, classify the failure before adding another rule. Was the
+                    requirement unclear? Was essential context absent? Was the scope incomplete?
+                    Did the agent choose a poor strategy? Did a validation step fail to detect the
+                    problem? The answer determines the smallest useful correction.
                 </p>
             </section>
+
         </ArticleLayout>
     );
 };

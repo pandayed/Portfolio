@@ -62,7 +62,7 @@ const entries: Post[] = [
         startedOn: '2026-08-22',
         updatedOn: '2026-08-22',
         route: AI_OBEDIENCE_ROUTE,
-        status: 'draft',
+        status: 'published',
     },
     {
         title: 'Sieve of Eratosthenes',
