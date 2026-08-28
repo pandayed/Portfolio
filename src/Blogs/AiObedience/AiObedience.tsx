@@ -192,7 +192,7 @@ const AiObedience = () => {
                     whole system working together.
                 </p>
                 <p>
-                    Also, the car analogy brings us to the point, that, its necessary to understand how to steer well and when to stop, which this blog post talks in further sections.
+                    Also, the car analogy brings us to the point, that, its necessary to understand how to steer well and when to stop, about which this blog post talks in further sections.
                 </p>
             </section>
 
@@ -269,6 +269,23 @@ const AiObedience = () => {
                         written in prose.
                     </li>
                 </ul>
+                <p>
+                    Before writing a skill or a rule, read your AI tool&apos;s own documentation for
+                    how it expects that document to be structured. Each tool defines its own
+                    format, and a file that ignores it may be parsed incorrectly or skipped
+                    entirely.
+                </p>
+                <p>
+                    A skill or rule is not picked up just because it exists somewhere in the
+                    repository. Every tool has its own discovery rules: which directories it scans,
+                    which file names it looks for, and which of those files it actually loads for a
+                    given task. A well written rule placed in the wrong file or folder has the same
+                    effect as not writing it at all.
+                </p>
+                <p>
+                    These discovery rules differ from tool to tool. Confirm the rule for the tool
+                    you are using instead of assuming it matches another tool you have used before.
+                </p>
                 <p>
                     More guidance is not always better. Overlapping instructions can conflict, and
                     generic rules copied from another project may not fit yours. Keep broad rules
