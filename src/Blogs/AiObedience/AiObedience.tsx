@@ -165,8 +165,34 @@ const AiObedience = () => {
                     <li>Tool use: can it use terminal, browser, mcp tools etc?</li>
                 </ul>
                 <p>
-                    The surrounding setup matters too. Also, the same model can perform differently with different reasoning settings.
-                   
+                    What we actually use is not the model on its own, but a system built around
+                    it. The model is the brain. The harness around it, the tools, the memory, the
+                    way work is passed in and out, is the body. The rules the system must follow
+                    while it works are the constraints.
+                </p>
+                <p>
+                    Reasoning settings change the body and the constraints, not the brain. A
+                    higher reasoning setting gives the same model more resources and more time to
+                    think before it answers, so the same model can produce a better result. This
+                    is why the same model name can behave quite differently with two differnt reasoning settings and two different setups.
+                </p>
+
+                <h3 className="Article__subTitle">The chess player and the clock</h3>
+                <p>
+                    Think of the model as a chess player. The same player finds better moves in a
+                    long game than in a blitz game. Time on the clock is part of the strength, not
+                    just the player. Taken further, a weaker player with relaxed time constraints can beat
+                    a stronger player who has to move in seconds.
+                </p>
+
+                <h3 className="Article__subTitle">The engine and the drive</h3>
+                <p>
+                    Think of the model as a car engine. A strong engine helps, but the drive also
+                    depends on the steering, the brakes and the road. The result you feel is the
+                    whole system working together.
+                </p>
+                <p>
+                    Also, the car analogy brings us to the point, that, its necessary to understand how to steer well and when to stop, which this blog post talks in further sections.
                 </p>
             </section>
 
@@ -201,6 +227,11 @@ const AiObedience = () => {
                     before code is edited.
                 </p>
                 <p>
+                    Add an example wherever you can. An example of the wanted output, or of an
+                    existing place in the repository that already does the same thing, tells the
+                    agent far more than a description of it.
+                </p>
+                <p>
                     Repeated constraints do not need to be typed in every prompt. Store them where
                     the tool can apply them consistently.
                 </p>
@@ -232,6 +263,10 @@ const AiObedience = () => {
                     <li>
                         Invoke critical workflows explicitly; do not rely only on automatic skill
                         selection.
+                    </li>
+                    <li>
+                        Put an example in the skill. A worked case is easier to follow than a rule
+                        written in prose.
                     </li>
                 </ul>
                 <p>
@@ -433,6 +468,9 @@ const AiObedience = () => {
                     requirement unclear? Was essential context absent? Was the scope incomplete?
                     Did the agent choose a poor strategy? Did a validation step fail to detect the
                     problem? The answer determines the smallest useful correction.
+                </p>
+                <p>
+                    This methodology of improving the system gradually over by recording the learnings is often called Compound Engineering.
                 </p>
             </section>
 
