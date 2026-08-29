@@ -194,6 +194,9 @@ const AiObedience = () => {
                 <p>
                     Also, the car analogy brings us to the point, that, its necessary to understand how to steer well and when to stop, about which this blog post talks in further sections.
                 </p>
+                <p>
+                    Tip: Try to automate everything with AI, of course you know some limits, like not sharing passwords and all. Eventually you will realize that what can be automated and what cannot be. Focus your time on what cannot be automated.
+                </p>
             </section>
 
             <section className="Article__section" aria-labelledby="specification">
@@ -440,6 +443,10 @@ const AiObedience = () => {
                 <h2 id="verification" className="SectionTitle">
                     Manual verification
                 </h2>
+                <p>
+                    Treat the first response from the agent as a first draft, not the final
+                    output. This may sound like a no-brainer, but it is surprising how often we act as if the first response is the final response, and forget to tweak or even review it.
+                </p>
                 <p>
                     Read the code yourself before accepting it. Good prompts, repository rules and
                     automated checks reduce risk; none of them makes generated code certain.
