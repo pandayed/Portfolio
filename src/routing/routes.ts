@@ -12,6 +12,7 @@ export const SSL_TLS_ROUTE = '/blogs/ssl-tls';
 export const AI_OBEDIENCE_ROUTE = '/blogs/ai-obedience';
 export const SIEVE_OF_ERATOSTHENES_ROUTE = '/blogs/sieve-of-eratosthenes';
 export const CONSISTENT_HASHING_ROUTE = '/blogs/consistent-hashing';
+export const WHY_REACT_ROUTE = '/blogs/why-react';
 export const PROJECTS_ROUTE = '/projects';
 export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
@@ -28,6 +29,7 @@ export type Route =
     | typeof AI_OBEDIENCE_ROUTE
     | typeof SIEVE_OF_ERATOSTHENES_ROUTE
     | typeof CONSISTENT_HASHING_ROUTE
+    | typeof WHY_REACT_ROUTE
     | typeof PROJECTS_ROUTE
     | typeof BOOKSHELF_ROUTE
     | typeof ABOUT_ROUTE;
@@ -43,6 +45,7 @@ const routes: Route[] = [
     AI_OBEDIENCE_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     CONSISTENT_HASHING_ROUTE,
+    WHY_REACT_ROUTE,
     PROJECTS_ROUTE,
     BOOKSHELF_ROUTE,
     ABOUT_ROUTE,

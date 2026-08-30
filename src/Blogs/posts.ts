@@ -6,6 +6,7 @@ import {
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
+    WHY_REACT_ROUTE,
     type Route,
 } from '../routing/routes';
 
@@ -78,6 +79,14 @@ const entries: Post[] = [
         startedOn: '2026-08-23',
         updatedOn: '2026-08-23',
         route: CONSISTENT_HASHING_ROUTE,
+        status: 'draft',
+    },
+    {
+        title: 'Why React?',
+        summary: 'From HTML, CSS and JavaScript to the DOM update pipeline, why manual DOM updates do not scale, and how React solves it with a virtual DOM.',
+        startedOn: '2026-08-30',
+        updatedOn: '2026-08-30',
+        route: WHY_REACT_ROUTE,
         status: 'draft',
     },
 ];

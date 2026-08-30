@@ -13,6 +13,7 @@ import SslTls from './Blogs/SslTls/SslTls';
 import AiObedience from './Blogs/AiObedience/AiObedience';
 import SieveOfEratosthenes from './Blogs/SieveOfEratosthenes/SieveOfEratosthenes';
 import ConsistentHashing from './Blogs/ConsistentHashing/ConsistentHashing';
+import WhyReact from './Blogs/WhyReact/WhyReact';
 import Projects from './Projects/Projects';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
@@ -33,6 +34,7 @@ import {
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
+    WHY_REACT_ROUTE,
     type Route,
 } from './routing/routes';
 import { useRoute } from './routing/useRoute';
@@ -49,6 +51,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [AI_OBEDIENCE_ROUTE]: AiObedience,
     [SIEVE_OF_ERATOSTHENES_ROUTE]: SieveOfEratosthenes,
     [CONSISTENT_HASHING_ROUTE]: ConsistentHashing,
+    [WHY_REACT_ROUTE]: WhyReact,
     [PROJECTS_ROUTE]: Projects,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,
