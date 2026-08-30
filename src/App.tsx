@@ -14,6 +14,7 @@ import AiObedience from './Blogs/AiObedience/AiObedience';
 import SieveOfEratosthenes from './Blogs/SieveOfEratosthenes/SieveOfEratosthenes';
 import ConsistentHashing from './Blogs/ConsistentHashing/ConsistentHashing';
 import WhyReact from './Blogs/WhyReact/WhyReact';
+import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import Projects from './Projects/Projects';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
@@ -25,6 +26,7 @@ import {
     ARCHIVE_ROUTE,
     BLOGS_ROUTE,
     BOOKSHELF_ROUTE,
+    CHAIN_OF_THOUGHT_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
@@ -52,6 +54,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [SIEVE_OF_ERATOSTHENES_ROUTE]: SieveOfEratosthenes,
     [CONSISTENT_HASHING_ROUTE]: ConsistentHashing,
     [WHY_REACT_ROUTE]: WhyReact,
+    [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,
     [PROJECTS_ROUTE]: Projects,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,

@@ -1,5 +1,6 @@
 import {
     AI_OBEDIENCE_ROUTE,
+    CHAIN_OF_THOUGHT_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
@@ -87,6 +88,14 @@ const entries: Post[] = [
         startedOn: '2026-08-30',
         updatedOn: '2026-08-30',
         route: WHY_REACT_ROUTE,
+        status: 'draft',
+    },
+    {
+        title: 'Chain of thought for LLMs',
+        summary: 'How large language models reason step by step before giving an answer.',
+        startedOn: '2026-08-30',
+        updatedOn: '2026-08-30',
+        route: CHAIN_OF_THOUGHT_ROUTE,
         status: 'draft',
     },
 ];
