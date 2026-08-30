@@ -1,0 +1,54 @@
+.HashRing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    margin: 0;
+}
+
+.HashRing__svg {
+    width: 100%;
+    max-width: 20rem;
+}
+
+.HashRing__circle {
+    fill: none;
+    stroke: var(--color-border);
+    stroke-width: 1.5;
+}
+
+.HashRing__tick {
+    stroke: var(--color-border);
+    stroke-width: 1;
+}
+
+.HashRing__tickLabel {
+    font-family: var(--font-code);
+    font-size: var(--text-label);
+    fill: var(--color-text-subtle);
+}
+
+.HashRing__node {
+    fill: var(--color-text);
+}
+
+.HashRing__nodeLabel {
+    font-family: var(--font-sans);
+    font-size: var(--text-fine);
+    font-weight: 600;
+    fill: var(--color-text);
+}
+
+.HashRing__nodeValue {
+    font-family: var(--font-code);
+    font-size: var(--text-label);
+    font-weight: 400;
+    fill: var(--color-text-subtle);
+}
+
+.HashRing__caption {
+    max-width: 24rem;
+    font-size: var(--text-secondary);
+    color: var(--color-text-subtle);
+    text-align: center;
+}

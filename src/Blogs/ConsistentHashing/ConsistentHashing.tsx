@@ -2,35 +2,31 @@ import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
 import { CONSISTENT_HASHING_ROUTE } from '../../routing/routes';
+import HashRing from './HashRing';
 import { sections } from './sections';
 
 const moduloPlacement = `server = hash(key) % number_of_servers`;
 
-const ring = `                    0
-                    |
-      875           |           125
-                    |
-    750 ------------+------------ 250
-                    |
-      625           |           375
-                    |
-                   500`;
+const HASH_SPACE_MAX = 1000;
+const HASH_SPACE_TICKS = [0, 250, 500, 750];
 
 const serverHashes = `hash("server-A") -> 137
 hash("server-B") -> 582
 hash("server-C") -> 814`;
 
-const ringWithNodes = `                    0
-                    |
-      814 *         |         * 137
-    Server C        |        Server A
-                    |
-    750 ------------+------------ 250
-                    |
-        582 *       |
-      Server B      |
-                    |
-                   500`;
+const serverNodes = [
+    { id: 'server-a', label: 'Server A', value: 137 },
+    { id: 'server-b', label: 'Server B', value: 582 },
+    { id: 'server-c', label: 'Server C', value: 814 },
+];
+
+const nodeLookupPseudocode = `sorted_node_hashes = [137, 582, 814]
+
+function find_node(key_hash):
+    index = binary_search_first_greater_than(sorted_node_hashes, key_hash)
+    if index == length(sorted_node_hashes):
+        index = 0
+    return sorted_node_hashes[index]`;
 
 const ConsistentHashing = () => {
     return (
@@ -140,9 +136,11 @@ const ConsistentHashing = () => {
                     Join the two ends of the range. The value after 999 is 0 again. That circular
                     range is the hash ring.
                 </p>
-                <pre className="Article__code">
-                    <code>{ring}</code>
-                </pre>
+                <HashRing
+                    max={HASH_SPACE_MAX}
+                    ticks={HASH_SPACE_TICKS}
+                    caption="Values 0 to 999 arranged as a circle. 999 sits next to 0."
+                />
                 <p>
                     The ring is not divided into pieces in advance. Its positions are the possible
                     outputs of the hash function, and nothing else.
@@ -164,13 +162,39 @@ const ConsistentHashing = () => {
                 <pre className="Article__code">
                     <code>{serverHashes}</code>
                 </pre>
-                <pre className="Article__code">
-                    <code>{ringWithNodes}</code>
-                </pre>
+                <HashRing
+                    max={HASH_SPACE_MAX}
+                    ticks={HASH_SPACE_TICKS}
+                    nodes={serverNodes}
+                    caption="Each server's identifier hashes to a position on the ring."
+                />
                 <p>
                     Those positions are not picked by hand and they are not random. The same
                     identifier always hashes to the same position, so every machine in the system
                     works out the same ring.
+                </p>
+            </section>
+
+            <section className="Article__section" aria-labelledby="node-lookup">
+                <h2 id="node-lookup" className="SectionTitle">
+                    Finding a node for a key
+                </h2>
+                <p>
+                    Keep the node hashes in a sorted array. To place a key, hash it, then binary
+                    search that array for the first node hash bigger than the key&apos;s hash. The
+                    node at that position is the one the key is assigned to.
+                </p>
+                <pre className="Article__code">
+                    <code>{nodeLookupPseudocode}</code>
+                </pre>
+                <p>
+                    If the key&apos;s hash is bigger than every node hash, the search finds nothing.
+                    That key falls past the last node, which wraps around to the first node on the
+                    ring, so the index resets to 0.
+                </p>
+                <p>
+                    Binary search costs O(log n) for n nodes, against O(n) for scanning the array
+                    in order.
                 </p>
             </section>
         </ArticleLayout>
