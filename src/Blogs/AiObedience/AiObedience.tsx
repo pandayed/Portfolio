@@ -397,11 +397,18 @@ const AiObedience = () => {
                     <li>A rejected design forces more of the implementation to be rewritten.</li>
                 </ul>
                 <p>For a larger or riskier task, use explicit checkpoints:</p>
+
+                
+
+                <h3 className="Article__subTitle">Analyze</h3>
                 <ol className="Article__steps">
                     <li>
-                        Make it read and understand the current state of the repo. Better you give whatever scope you feel is right so that AI would not have to read everything.
+                        Make it read and understand the current state of the repo, what is the requirement of the task, and ask questions for clarity. Better you give whatever scope you feel is right so that AI would not have to read everything.
                     </li>
-                    
+                </ol>
+
+                <h3 className="Article__subTitle">Create plan file</h3>
+                <ol className="Article__steps">
                     <li>
                         Once it understands enough (it might not understand everything and all, so do not let it run in the loop), ask it to make a plan, with what all files will it interact, what all APIs will it use, and whatever you feel like should be in the plan.
                     </li>
@@ -411,18 +418,33 @@ const AiObedience = () => {
                     <li>
                         A good plan doc is that in which each phase can be started in a new session/chat.
                     </li>
-                    <li>
-                        The planning can have multiple steps, from draft to final.
-                    </li>
+                </ol>
+
+                <h3 className="Article__subTitle">Validate plan</h3>
+                <ol className="Article__steps">
                     <li>
                         Compare viable approaches and their trade-offs when more than one materially
                         different solution exists.
                     </li>
                     <li>Approve the approach before implementation begins.</li>
+                </ol>
+
+                <h3 className="Article__subTitle">Execute</h3>
+                <ol className="Article__steps">
                     <li>
-                        Implement in reviewable phases, each with a clear completion check.
+                        Implement in reviewable phases.
                     </li>
-                </ol>      
+                </ol>
+
+                <h3 className="Article__subTitle">Verify</h3>
+                <ol className="Article__steps">
+                    <li>
+                        Each phase should have a clear completion check before moving to the next.
+                    </li>
+                </ol>
+
+                <p>While moving from one checkpoint to next, there can be multiple iterations, like it may take multiple iterations to come up with a good plan.</p>
+
                 <h3 className="Article__subTitle">Invite disagreement, retain the decision</h3>
                 <p>
                     Ask the agent to point out unclear requirements and problems with your proposed
