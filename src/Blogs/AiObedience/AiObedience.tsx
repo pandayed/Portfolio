@@ -389,12 +389,15 @@ const AiObedience = () => {
                 <p>
                     A small, reversible change may be safe to implement directly. A change that
                     spans a page, API and data model deserves separate investigation, design and
-                    implementation phases. Trying to do all of that in one pass makes two things
-                    harder:
+                    implementation phases.
+                </p>
+                <p>
+                    Trying to do all of that in one pass makes things harder for you and AI both:
                 </p>
                 <ul className="Article__notes">
-                    <li>The resulting change is too large to review carefully.</li>
-                    <li>A rejected design forces more of the implementation to be rewritten.</li>
+                    <li>Context would be lost, time would be limited so AI may miss things.</li>
+                    <li>The resulting change would be too large to review carefully.</li>
+                    <li>A rejected design would force more of the implementation to be rewritten.</li>
                 </ul>
                 <p>For a larger or riskier task, use explicit checkpoints:</p>
 
@@ -403,14 +406,14 @@ const AiObedience = () => {
                 <h3 className="Article__subTitle">Analyze</h3>
                 <ol className="Article__steps">
                     <li>
-                        Make it read and understand the current state of the repo, what is the requirement of the task, and ask questions for clarity. Better you give whatever scope you feel is right so that AI would not have to read everything.
+                        Make it read and understand the current state of the repo, what is the requirement of the task, and let it or make it ask questions for clarity. Better you give whatever scope you feel is right so that AI would not have to read everything.
                     </li>
                 </ol>
 
                 <h3 className="Article__subTitle">Create plan file</h3>
                 <ol className="Article__steps">
                     <li>
-                        Once it understands enough (it might not understand everything and all, so do not let it run in the loop), ask it to make a plan, with what all files will it interact, what all APIs will it use, and whatever you feel like should be in the plan.
+                        Once it understands enough (it might not understand everything and all, you would need to tell it things to too), then, ask it to make a plan, with what all files will it interact, what all APIs will it use, and whatever you feel like should be in the plan.
                     </li>
                     <li>
                         The planning skill must instruct, that the execution strategy must be divided into phases (not too many and not too little, genearlly UTs go into the last phase). Each phase should have a checklist, and manual verification checklist too, so that AI and you both can review if the phase is complete.
@@ -443,7 +446,7 @@ const AiObedience = () => {
                     </li>
                 </ol>
 
-                <p>While moving from one checkpoint to next, there can be multiple iterations, like it may take multiple iterations to come up with a good plan.</p>
+                <p>While moving from one checkpoint to next, there can be multiple iterations, like it may take multiple iterations to come up with a good plan. Also, the steps I shared above are not sequential, generally after every execution phase, the verification happens and then the next phase execution happens. You are free to take a different approach it that suits you better.</p>
 
                 <h3 className="Article__subTitle">Invite disagreement, retain the decision</h3>
                 <p>
@@ -458,7 +461,7 @@ const AiObedience = () => {
                     from the agreed plan requires another discussion.
                 </p>
 
-                <p>At evert step give it freedom to stop and ask questions or to make clear if it finds a blocker. AI is very goal driven and it may go with work arounds, if you do not let it stop when it needs.</p>
+                <p>At evert step give it freedom to stop and ask questions or to make clear if it finds a blocker. AI is very goal driven and it may go with work arounds, if you do not let it stop when it needs. Not giving it enough freedom to ask questions, would make it assume things or even worse which can not imagine.</p>
             </section>
 
             <section className="Article__section" aria-labelledby="verification">
