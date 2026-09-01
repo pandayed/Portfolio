@@ -8,6 +8,7 @@ import {
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
     WHY_REACT_ROUTE,
+    WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     type Route,
 } from '../routing/routes';
 
@@ -96,6 +97,14 @@ const entries: Post[] = [
         startedOn: '2026-08-30',
         updatedOn: '2026-08-30',
         route: CHAIN_OF_THOUGHT_ROUTE,
+        status: 'draft',
+    },
+    {
+        title: 'Writing better plans and skills',
+        summary: 'What makes a plan document or an AI skill actually work: say only what the model does not know, match freedom to the task, and build in a way to check the result.',
+        startedOn: '2026-09-01',
+        updatedOn: '2026-09-01',
+        route: WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
         status: 'draft',
     },
 ];

@@ -14,6 +14,7 @@ export const SIEVE_OF_ERATOSTHENES_ROUTE = '/blogs/sieve-of-eratosthenes';
 export const CONSISTENT_HASHING_ROUTE = '/blogs/consistent-hashing';
 export const WHY_REACT_ROUTE = '/blogs/why-react';
 export const CHAIN_OF_THOUGHT_ROUTE = '/blogs/chain-of-thought';
+export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plans-and-skills';
 export const PROJECTS_ROUTE = '/projects';
 export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
@@ -32,6 +33,7 @@ export type Route =
     | typeof CONSISTENT_HASHING_ROUTE
     | typeof WHY_REACT_ROUTE
     | typeof CHAIN_OF_THOUGHT_ROUTE
+    | typeof WRITING_BETTER_PLANS_AND_SKILLS_ROUTE
     | typeof PROJECTS_ROUTE
     | typeof BOOKSHELF_ROUTE
     | typeof ABOUT_ROUTE;
@@ -49,6 +51,7 @@ const routes: Route[] = [
     CONSISTENT_HASHING_ROUTE,
     WHY_REACT_ROUTE,
     CHAIN_OF_THOUGHT_ROUTE,
+    WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     PROJECTS_ROUTE,
     BOOKSHELF_ROUTE,
     ABOUT_ROUTE,

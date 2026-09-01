@@ -15,6 +15,7 @@ import SieveOfEratosthenes from './Blogs/SieveOfEratosthenes/SieveOfEratosthenes
 import ConsistentHashing from './Blogs/ConsistentHashing/ConsistentHashing';
 import WhyReact from './Blogs/WhyReact/WhyReact';
 import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
+import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
 import Projects from './Projects/Projects';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
@@ -37,6 +38,7 @@ import {
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
     WHY_REACT_ROUTE,
+    WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     type Route,
 } from './routing/routes';
 import { useRoute } from './routing/useRoute';
@@ -55,6 +57,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [CONSISTENT_HASHING_ROUTE]: ConsistentHashing,
     [WHY_REACT_ROUTE]: WhyReact,
     [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,
+    [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
     [PROJECTS_ROUTE]: Projects,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,
