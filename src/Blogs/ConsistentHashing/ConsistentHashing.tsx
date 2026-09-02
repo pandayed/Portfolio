@@ -84,7 +84,7 @@ const ConsistentHashing = () => {
 
             <section className="Article__section" aria-labelledby="rehashing-problem">
                 <h2 id="rehashing-problem" className="SectionTitle">
-                    Classical hashing based distribution & associated problem
+                    Simple Hash Based Distribution (brief)
                 </h2>
                 <p>
                     Every piece of data would have a key, and therefore every request would have the key too (as each request would be about a particular piece of data).
