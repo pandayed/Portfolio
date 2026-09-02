@@ -77,11 +77,11 @@ const entries: Post[] = [
     },
     {
         title: 'Consistent hashing',
-        summary: 'Spreading keys across a changing set of nodes without remapping almost everything.',
+        summary: 'Distributing data/requests across a changing set of nodes without remapping almost everything.',
         startedOn: '2026-08-23',
         updatedOn: '2026-08-23',
         route: CONSISTENT_HASHING_ROUTE,
-        status: 'draft',
+        status: 'published',
     },
     {
         title: 'Why React?',

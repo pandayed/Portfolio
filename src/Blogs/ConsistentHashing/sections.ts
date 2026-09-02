@@ -6,4 +6,5 @@ export const sections: TocEntry[] = [
     { id: 'hash-ring', title: 'The hash ring' },
     { id: 'node-placement', title: 'Placing nodes on the ring' },
     { id: 'node-lookup', title: 'Finding a node for a key' },
+    { id: 'uneven-distribution', title: 'Uneven distribution problem' },
 ];

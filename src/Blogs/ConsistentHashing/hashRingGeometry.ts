@@ -75,3 +75,18 @@ export const describeNodePosition = (value: number, max: number): NodePosition =
         ...anchorFor(angle),
     };
 };
+
+/* SVG path for the arc between two values, walked clockwise from `from` to
+   `to`. Used to highlight the slice of the ring a server owns. */
+export const describeArcPath = (from: number, to: number, max: number): string => {
+    const start = pointAt(RING_RADIUS, angleFor(from, max));
+    const end = pointAt(RING_RADIUS, angleFor(to, max));
+
+    let sweep = to - from;
+    if (sweep <= 0) {
+        sweep += max;
+    }
+    const largeArcFlag = sweep > max / 2 ? 1 : 0;
+
+    return `M ${start.x} ${start.y} A ${RING_RADIUS} ${RING_RADIUS} 0 ${largeArcFlag} 1 ${end.x} ${end.y}`;
+};

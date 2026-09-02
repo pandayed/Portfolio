@@ -12,6 +12,9 @@ const AiObedience = () => {
       title="AI (dis)obedience: why coding agents miss the request"
       route={AI_OBEDIENCE_ROUTE}
       sections={sections}
+      references={[
+        { title: "Chroma's context-rot evaluation", href: CONTEXT_ROT },
+      ]}
     >
       <section className="Article__section">
         <p>

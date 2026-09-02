@@ -17,6 +17,14 @@
     stroke-width: 1.5;
 }
 
+.HashRing__highlightArc {
+    fill: none;
+    stroke: var(--color-text);
+    stroke-width: 4;
+    stroke-linecap: round;
+    opacity: 0.3;
+}
+
 .HashRing__tick {
     stroke: var(--color-border);
     stroke-width: 1;
@@ -32,11 +40,20 @@
     fill: var(--color-text);
 }
 
+.HashRing__node--virtual {
+    fill: var(--color-text-subtle);
+}
+
 .HashRing__nodeLabel {
     font-family: var(--font-sans);
     font-size: var(--text-fine);
     font-weight: 600;
     fill: var(--color-text);
+}
+
+.HashRing__nodeLabel--virtual {
+    font-weight: 400;
+    fill: var(--color-text-subtle);
 }
 
 .HashRing__nodeValue {
