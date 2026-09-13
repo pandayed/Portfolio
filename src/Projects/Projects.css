@@ -1,0 +1,30 @@
+.Projects__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.Projects__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.Projects__summary {
+    font-size: var(--text-secondary);
+    color: var(--color-text-subtle);
+}
+
+.Projects__stack {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--color-text-subtle);
+}
+
+.Projects__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    font-size: var(--text-small);
+}

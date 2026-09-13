@@ -17,6 +17,7 @@ import WhyReact from './Blogs/WhyReact/WhyReact';
 import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
 import Projects from './Projects/Projects';
+import PrivacyPolicy from './Instead/PrivacyPolicy';
 import Bookshelf from './Bookshelf/Bookshelf';
 import About from './About/About';
 import Footer from './Footer/Footer';
@@ -33,6 +34,7 @@ import {
     CPP_COMPLEXITY_ROUTE,
     DRAFTS_ROUTE,
     HOME_ROUTE,
+    INSTEAD_PRIVACY_POLICY_ROUTE,
     PROJECTS_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
@@ -59,6 +61,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,
     [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
     [PROJECTS_ROUTE]: Projects,
+    [INSTEAD_PRIVACY_POLICY_ROUTE]: PrivacyPolicy,
     [BOOKSHELF_ROUTE]: Bookshelf,
     [ABOUT_ROUTE]: About,
 };
