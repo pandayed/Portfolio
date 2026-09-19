@@ -51,4 +51,12 @@ export const books: Book[] = [
         title: 'Atomic Habits',
         link: 'https://jamesclear.com/atomic-habits',
     },
+    {
+        title: "Don't Believe Everything You Think",
+        link: 'https://josephnguyen.org/products/dont-believe-everything-you-think-expanded-edition-why-your-thinking-is-the-beginning-end-of-suffering',
+    },
+    {
+        title: 'The Brain: The Story of You',
+        link: 'https://eagleman.com/books/the-brain/',
+    },
 ];
