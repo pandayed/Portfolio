@@ -8,6 +8,8 @@ import Notes from './Notes/Notes';
 import MysqlNotes from './Notes/MysqlNotes';
 import GoNotes from './Notes/GoNotes';
 import GoNote from './Notes/GoNotes/GoNote';
+import PythonNotes from './Notes/PythonNotes/PythonNotesIndex';
+import PythonNote from './Notes/PythonNotes/PythonNote';
 import Drafts from './Blogs/Drafts';
 import Archive from './Blogs/Archive';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
@@ -42,6 +44,7 @@ import {
     CPP_COMPLEXITY_ROUTE,
     DRAFTS_ROUTE,
     GO_NOTES_ROUTE,
+    PYTHON_NOTES_ROUTE,
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
@@ -55,6 +58,7 @@ import {
     WHY_REACT_ROUTE,
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     type GoNoteRoute,
+    type PythonNoteRoute,
     type Route,
 } from './routing/routes';
 import { useRoute } from './routing/useRoute';
@@ -65,6 +69,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [NOTES_ROUTE]: Notes,
     [MYSQL_NOTES_ROUTE]: MysqlNotes,
     [GO_NOTES_ROUTE]: GoNotes,
+    [PYTHON_NOTES_ROUTE]: PythonNotes,
     [DRAFTS_ROUTE]: Drafts,
     [ARCHIVE_ROUTE]: Archive,
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,
@@ -90,6 +95,7 @@ function App() {
     const route = useRoute();
     const CurrentPage = pages[route];
     const isGoNote = route.startsWith(`${GO_NOTES_ROUTE}/`);
+    const isPythonNote = route.startsWith(`${PYTHON_NOTES_ROUTE}/`);
 
     return (
         <div className="App">
@@ -98,6 +104,8 @@ function App() {
             <main>
                 {isGoNote ? (
                     <GoNote route={route as GoNoteRoute} />
+                ) : isPythonNote ? (
+                    <PythonNote route={route as PythonNoteRoute} />
                 ) : CurrentPage ? (
                     <CurrentPage />
                 ) : (

@@ -1,0 +1,10 @@
+.PythonNote__exception {
+    padding: var(--space-sm);
+    border-left: 2px solid var(--color-border);
+}
+
+.PythonNote__result {
+    font-family: var(--font-code);
+    font-size: var(--text-fine);
+    color: var(--color-text-subtle);
+}

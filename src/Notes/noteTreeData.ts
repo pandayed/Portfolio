@@ -4,11 +4,14 @@ import {
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
     NOTES_ROUTE,
+    PYTHON_NOTES_ROUTE,
     SCALAR_IN_MYSQL_ROUTE,
     type GoNoteRoute,
+    type PythonNoteRoute,
     type Route,
 } from '../routing/routes';
 import { goNotes as goNotePages } from './GoNotes/goNotes';
+import { pythonChapters } from './PythonNotes/pythonNotes';
 
 interface NoteBase {
     title: string;
@@ -63,6 +66,26 @@ export const goNotes: NoteGroup = {
     })),
 };
 
+export const pythonNotes: NoteGroup = {
+    type: 'group',
+    title: 'Python',
+    summary: 'Short Python notes based on examples, edge cases, and common mistakes.',
+    route: PYTHON_NOTES_ROUTE,
+    children: pythonChapters.map((chapter) => ({
+        type: 'group',
+        title: chapter.title,
+        summary: chapter.summary,
+        route: `${PYTHON_NOTES_ROUTE}/${chapter.notes[0].slug}` as PythonNoteRoute,
+        children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+            type: 'page',
+            title,
+            summary,
+            route: `${PYTHON_NOTES_ROUTE}/${slug}` as PythonNoteRoute,
+            updatedOn,
+        })),
+    })),
+};
+
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
@@ -75,6 +98,7 @@ export const noteTree: NoteNode[] = [
     },
     mysqlNotes,
     goNotes,
+    pythonNotes,
 ];
 
 const collectRoutes = (nodes: NoteNode[]): Route[] =>

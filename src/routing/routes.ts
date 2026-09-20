@@ -2,12 +2,14 @@
    unknown paths back to index.html. */
 
 import { goNotes } from '../Notes/GoNotes/goNotes';
+import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
 
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
 export const MYSQL_NOTES_ROUTE = '/notes/mysql';
 export const GO_NOTES_ROUTE = '/notes/go';
+export const PYTHON_NOTES_ROUTE = '/notes/python';
 export const DRAFTS_ROUTE = '/blogs/drafts';
 export const ARCHIVE_ROUTE = '/blogs/archive';
 export const CPP_COMPLEXITY_ROUTE = '/blogs/cpp-complexity';
@@ -29,6 +31,7 @@ export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
 
 export type GoNoteRoute = `${typeof GO_NOTES_ROUTE}/${string}`;
+export type PythonNoteRoute = `${typeof PYTHON_NOTES_ROUTE}/${string}`;
 
 export type Route =
     | typeof HOME_ROUTE
@@ -37,6 +40,8 @@ export type Route =
     | typeof MYSQL_NOTES_ROUTE
     | typeof GO_NOTES_ROUTE
     | GoNoteRoute
+    | typeof PYTHON_NOTES_ROUTE
+    | PythonNoteRoute
     | typeof DRAFTS_ROUTE
     | typeof ARCHIVE_ROUTE
     | typeof CPP_COMPLEXITY_ROUTE
@@ -61,12 +66,18 @@ const goNoteRoutes: GoNoteRoute[] = goNotes.map(
     ({ slug }) => `${GO_NOTES_ROUTE}/${slug}` as GoNoteRoute,
 );
 
+const pythonNoteRoutes: PythonNoteRoute[] = pythonNotes.map(
+    ({ slug }) => `${PYTHON_NOTES_ROUTE}/${slug}` as PythonNoteRoute,
+);
+
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
     MYSQL_NOTES_ROUTE,
     GO_NOTES_ROUTE,
     ...goNoteRoutes,
+    PYTHON_NOTES_ROUTE,
+    ...pythonNoteRoutes,
     DRAFTS_ROUTE,
     ARCHIVE_ROUTE,
     CPP_COMPLEXITY_ROUTE,
