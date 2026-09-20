@@ -17,6 +17,7 @@ import WhyReact from './Blogs/WhyReact/WhyReact';
 import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
 import MysqlGroupBy from './Blogs/MysqlGroupBy/MysqlGroupBy';
+import ScalarInMysql from './Blogs/ScalarInMysql/ScalarInMysql';
 import Projects from './Projects/Projects';
 import PrivacyPolicy from './Instead/PrivacyPolicy';
 import Bookshelf from './Bookshelf/Bookshelf';
@@ -38,6 +39,7 @@ import {
     INSTEAD_PRIVACY_POLICY_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     PROJECTS_ROUTE,
+    SCALAR_IN_MYSQL_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
@@ -63,6 +65,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,
     [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
     [MYSQL_GROUP_BY_ROUTE]: MysqlGroupBy,
+    [SCALAR_IN_MYSQL_ROUTE]: ScalarInMysql,
     [PROJECTS_ROUTE]: Projects,
     [INSTEAD_PRIVACY_POLICY_ROUTE]: PrivacyPolicy,
     [BOOKSHELF_ROUTE]: Bookshelf,

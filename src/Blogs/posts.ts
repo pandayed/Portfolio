@@ -5,6 +5,7 @@ import {
     CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
+    SCALAR_IN_MYSQL_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
@@ -114,6 +115,14 @@ const entries: Post[] = [
         startedOn: '2026-09-19',
         updatedOn: '2026-09-19',
         route: MYSQL_GROUP_BY_ROUTE,
+        status: 'published',
+    },
+    {
+        title: 'Scalar in MySQL',
+        summary: 'A scalar is one individual value, as opposed to a set of values, and that is what a scalar subquery has to return.',
+        startedOn: '2026-09-20',
+        updatedOn: '2026-09-20',
+        route: SCALAR_IN_MYSQL_ROUTE,
         status: 'published',
     },
 ];
