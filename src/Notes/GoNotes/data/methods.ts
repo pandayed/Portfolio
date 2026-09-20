@@ -1,4 +1,5 @@
-/* Copied from the Methods page in Notion without changing its content. */
+/* Copied from the Methods page in Notion. Missing pointer markers from the
+   source were restored using the Go method-set rules. */
 
 import type { GoNote } from '../types';
 
@@ -8,15 +9,6 @@ const note = {
     "title": "Methods",
     "updatedOn": "2026-01-24",
     "blocks": [
-        {
-            "id": "2f224eb1-ed54-807e-a3ab-faf86e23feba",
-            "type": "header",
-            "richText": [
-                [
-                    "WARNING: Some T mean *T, copy paste errors are there"
-                ]
-            ]
-        },
         {
             "id": "2f224eb1-ed54-8051-b4d7-d924a3def698",
             "type": "text"
@@ -791,7 +783,7 @@ const note = {
                     " of type "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
@@ -833,7 +825,7 @@ const note = {
                             " "
                         ],
                         [
-                            "T",
+                            "*T",
                             [
                                 [
                                     "c"
@@ -2223,7 +2215,7 @@ const note = {
                     "If a method has receiver "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
@@ -2285,7 +2277,7 @@ const note = {
                             " in "
                         ],
                         [
-                            "T",
+                            "*T",
                             [
                                 [
                                     "c"
@@ -2356,7 +2348,7 @@ const note = {
                     " can call a "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
@@ -2405,7 +2397,7 @@ const note = {
                     "If a method has receiver "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
@@ -2450,7 +2442,7 @@ const note = {
                     "type": "bulleted_list",
                     "richText": [
                         [
-                            "T",
+                            "*T",
                             [
                                 [
                                     "c"
@@ -2703,7 +2695,7 @@ const note = {
                     " implement an interface that requires a method implemented with receiver "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
@@ -3301,7 +3293,7 @@ const note = {
                     "’s method set still excludes "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
@@ -3359,7 +3351,7 @@ const note = {
                     " value can call a "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
@@ -3441,7 +3433,7 @@ const note = {
                     " call a "
                 ],
                 [
-                    "T",
+                    "*T",
                     [
                         [
                             "c"
