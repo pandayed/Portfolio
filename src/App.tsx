@@ -6,6 +6,8 @@ import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
 import Notes from './Notes/Notes';
 import MysqlNotes from './Notes/MysqlNotes';
+import GoNotes from './Notes/GoNotes';
+import GoNote from './Notes/GoNotes/GoNote';
 import Drafts from './Blogs/Drafts';
 import Archive from './Blogs/Archive';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
@@ -39,6 +41,7 @@ import {
     CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     DRAFTS_ROUTE,
+    GO_NOTES_ROUTE,
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
@@ -51,15 +54,17 @@ import {
     SSL_TLS_ROUTE,
     WHY_REACT_ROUTE,
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
+    type GoNoteRoute,
     type Route,
 } from './routing/routes';
 import { useRoute } from './routing/useRoute';
 
-const pages: Record<Route, () => JSX.Element> = {
+const pages: Partial<Record<Route, () => JSX.Element>> = {
     [HOME_ROUTE]: Home,
     [BLOGS_ROUTE]: Blogs,
     [NOTES_ROUTE]: Notes,
     [MYSQL_NOTES_ROUTE]: MysqlNotes,
+    [GO_NOTES_ROUTE]: GoNotes,
     [DRAFTS_ROUTE]: Drafts,
     [ARCHIVE_ROUTE]: Archive,
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,
@@ -84,13 +89,20 @@ const pages: Record<Route, () => JSX.Element> = {
 function App() {
     const route = useRoute();
     const CurrentPage = pages[route];
+    const isGoNote = route.startsWith(`${GO_NOTES_ROUTE}/`);
 
     return (
         <div className="App">
             <Header route={route} />
 
             <main>
-                <CurrentPage />
+                {isGoNote ? (
+                    <GoNote route={route as GoNoteRoute} />
+                ) : CurrentPage ? (
+                    <CurrentPage />
+                ) : (
+                    <Home />
+                )}
             </main>
 
             <Footer />

@@ -1,0 +1,33 @@
+.GoNote__callout,
+.GoNote__quote {
+    padding: var(--space-sm);
+    border-left: 2px solid var(--color-border);
+}
+
+.GoNote__callout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.GoNote__quote {
+    font-style: italic;
+}
+
+.GoNote__divider {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.GoNote__listChildren {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+}
+
+.GoNote__listChildren .Article__notes,
+.GoNote__listChildren .Article__steps {
+    margin-top: 0;
+}

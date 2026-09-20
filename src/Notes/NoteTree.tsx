@@ -20,7 +20,7 @@ const NoteTree = ({ nodes, level = 1 }: NoteTreeProps) => (
                 <a href={toHref(node.route)} className="Link Link--standalone Notes__title">
                     {node.title}
                 </a>
-                <p className="Notes__summary">{node.summary}</p>
+                {node.summary && <p className="Notes__summary">{node.summary}</p>}
                 {node.type === 'page' ? (
                     <p className="Notes__updated">
                         Updated <time dateTime={node.updatedOn}>{formatDate(node.updatedOn)}</time>

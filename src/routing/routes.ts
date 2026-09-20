@@ -1,10 +1,13 @@
 /* Hash routing keeps deep links working on static hosts that cannot rewrite
    unknown paths back to index.html. */
 
+import { goNotes } from '../Notes/GoNotes/goNotes.generated';
+
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
 export const MYSQL_NOTES_ROUTE = '/notes/mysql';
+export const GO_NOTES_ROUTE = '/notes/go';
 export const DRAFTS_ROUTE = '/blogs/drafts';
 export const ARCHIVE_ROUTE = '/blogs/archive';
 export const CPP_COMPLEXITY_ROUTE = '/blogs/cpp-complexity';
@@ -25,11 +28,15 @@ export const INSTEAD_PRIVACY_POLICY_ROUTE = '/instead/privacy-policy';
 export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
 
+export type GoNoteRoute = `${typeof GO_NOTES_ROUTE}/${string}`;
+
 export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
     | typeof NOTES_ROUTE
     | typeof MYSQL_NOTES_ROUTE
+    | typeof GO_NOTES_ROUTE
+    | GoNoteRoute
     | typeof DRAFTS_ROUTE
     | typeof ARCHIVE_ROUTE
     | typeof CPP_COMPLEXITY_ROUTE
@@ -50,10 +57,16 @@ export type Route =
     | typeof BOOKSHELF_ROUTE
     | typeof ABOUT_ROUTE;
 
+const goNoteRoutes: GoNoteRoute[] = goNotes.map(
+    ({ slug }) => `${GO_NOTES_ROUTE}/${slug}` as GoNoteRoute,
+);
+
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
     MYSQL_NOTES_ROUTE,
+    GO_NOTES_ROUTE,
+    ...goNoteRoutes,
     DRAFTS_ROUTE,
     ARCHIVE_ROUTE,
     CPP_COMPLEXITY_ROUTE,

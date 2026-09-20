@@ -1,15 +1,18 @@
 import {
     API_COMMUNICATION_ROUTE,
+    GO_NOTES_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
     NOTES_ROUTE,
     SCALAR_IN_MYSQL_ROUTE,
+    type GoNoteRoute,
     type Route,
 } from '../routing/routes';
+import { goNotes as goNotePages } from './GoNotes/goNotes.generated';
 
 interface NoteBase {
     title: string;
-    summary: string;
+    summary?: string;
     route: Route;
 }
 
@@ -48,6 +51,18 @@ export const mysqlNotes: NoteGroup = {
     ],
 };
 
+export const goNotes: NoteGroup = {
+    type: 'group',
+    title: 'Go',
+    route: GO_NOTES_ROUTE,
+    children: goNotePages.map(({ slug, title, updatedOn }) => ({
+        type: 'page',
+        title,
+        route: `${GO_NOTES_ROUTE}/${slug}` as GoNoteRoute,
+        updatedOn,
+    })),
+};
+
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
@@ -59,6 +74,7 @@ export const noteTree: NoteNode[] = [
         updatedOn: '2026-09-20',
     },
     mysqlNotes,
+    goNotes,
 ];
 
 const collectRoutes = (nodes: NoteNode[]): Route[] =>
