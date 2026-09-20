@@ -14,6 +14,8 @@ const saferQuery = `SELECT city, COUNT(*) AS customer_count
 FROM customers
 GROUP BY city;`;
 
+const sqlModeQuery = `SELECT @@sql_mode;`;
+
 interface Row {
     id: string;
     city: string;
@@ -65,6 +67,29 @@ const MysqlGroupBy = () => {
                 <p>
                     <code>city</code> is grouped, but <code>id</code> and <code>name</code> are
                     non-aggregated columns. MySQL does not know which Delhi row to return.
+                </p>
+            </section>
+
+            <section className="Article__section" aria-labelledby="the-default">
+                <h2 id="the-default" className="SectionTitle">
+                    The default
+                </h2>
+                <p>
+                    From MySQL 5.7.5 onwards, <code>ONLY_FULL_GROUP_BY</code> is part of the default{' '}
+                    <code>sql_mode</code>. So on a default MySQL 5.7.5 or later, the query above
+                    returns an error. It does not return an arbitrary row.
+                </p>
+                <p>
+                    Before 5.7.5 the mode was off by default, and MySQL returned an arbitrary row.
+                    MariaDB also leaves the mode off by default, so it returns an arbitrary row.
+                </p>
+                <p>Check what the server is using:</p>
+                <pre className="Article__code">
+                    <code>{sqlModeQuery}</code>
+                </pre>
+                <p>
+                    A managed database or an application framework can set its own{' '}
+                    <code>sql_mode</code>, so read the value instead of assuming the default.
                 </p>
             </section>
 
