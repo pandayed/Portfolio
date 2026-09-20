@@ -1,4 +1,5 @@
 import {
+    API_COMMUNICATION_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
     NOTES_ROUTE,
@@ -49,7 +50,16 @@ export const mysqlNotes: NoteGroup = {
 
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
-export const noteTree: NoteNode[] = [mysqlNotes];
+export const noteTree: NoteNode[] = [
+    {
+        type: 'page',
+        title: 'The Anatomy of API Communication in a React Application',
+        summary: 'Each layer exists for a specific reason, solves a specific problem, and has a clear boundary.',
+        route: API_COMMUNICATION_ROUTE,
+        updatedOn: '2026-09-20',
+    },
+    mysqlNotes,
+];
 
 const collectRoutes = (nodes: NoteNode[]): Route[] =>
     nodes.flatMap((node) => [

@@ -20,6 +20,7 @@ import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
 import MysqlGroupBy from './Blogs/MysqlGroupBy/MysqlGroupBy';
 import ScalarInMysql from './Blogs/ScalarInMysql/ScalarInMysql';
+import ApiCommunication from './Notes/ApiCommunication/ApiCommunication';
 import Projects from './Projects/Projects';
 import PrivacyPolicy from './Instead/PrivacyPolicy';
 import Bookshelf from './Bookshelf/Bookshelf';
@@ -28,6 +29,7 @@ import Footer from './Footer/Footer';
 
 import {
     ABOUT_ROUTE,
+    API_COMMUNICATION_ROUTE,
     AI_OBEDIENCE_ROUTE,
     ARCHIVE_ROUTE,
     BLOGS_ROUTE,
@@ -72,6 +74,7 @@ const pages: Record<Route, () => JSX.Element> = {
     [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
     [MYSQL_GROUP_BY_ROUTE]: MysqlGroupBy,
     [SCALAR_IN_MYSQL_ROUTE]: ScalarInMysql,
+    [API_COMMUNICATION_ROUTE]: ApiCommunication,
     [PROJECTS_ROUTE]: Projects,
     [INSTEAD_PRIVACY_POLICY_ROUTE]: PrivacyPolicy,
     [BOOKSHELF_ROUTE]: Bookshelf,

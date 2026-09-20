@@ -19,6 +19,7 @@ export const CHAIN_OF_THOUGHT_ROUTE = '/blogs/chain-of-thought';
 export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plans-and-skills';
 export const MYSQL_GROUP_BY_ROUTE = '/blogs/mysql-group-by';
 export const SCALAR_IN_MYSQL_ROUTE = '/blogs/scalar-in-mysql';
+export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
 export const PROJECTS_ROUTE = '/projects';
 export const INSTEAD_PRIVACY_POLICY_ROUTE = '/instead/privacy-policy';
 export const BOOKSHELF_ROUTE = '/bookshelf';
@@ -43,6 +44,7 @@ export type Route =
     | typeof WRITING_BETTER_PLANS_AND_SKILLS_ROUTE
     | typeof MYSQL_GROUP_BY_ROUTE
     | typeof SCALAR_IN_MYSQL_ROUTE
+    | typeof API_COMMUNICATION_ROUTE
     | typeof PROJECTS_ROUTE
     | typeof INSTEAD_PRIVACY_POLICY_ROUTE
     | typeof BOOKSHELF_ROUTE
@@ -66,6 +68,7 @@ const routes: Route[] = [
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     SCALAR_IN_MYSQL_ROUTE,
+    API_COMMUNICATION_ROUTE,
     PROJECTS_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     BOOKSHELF_ROUTE,
