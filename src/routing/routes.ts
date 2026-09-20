@@ -25,6 +25,7 @@ export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plan
 export const MYSQL_GROUP_BY_ROUTE = '/blogs/mysql-group-by';
 export const SCALAR_IN_MYSQL_ROUTE = '/blogs/scalar-in-mysql';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
+export const JAVASCRIPT_ASYNC_ROUTE = '/notes/javascript-asynchronous-programming';
 export const PROJECTS_ROUTE = '/projects';
 export const INSTEAD_PRIVACY_POLICY_ROUTE = '/instead/privacy-policy';
 export const BOOKSHELF_ROUTE = '/bookshelf';
@@ -57,6 +58,7 @@ export type Route =
     | typeof MYSQL_GROUP_BY_ROUTE
     | typeof SCALAR_IN_MYSQL_ROUTE
     | typeof API_COMMUNICATION_ROUTE
+    | typeof JAVASCRIPT_ASYNC_ROUTE
     | typeof PROJECTS_ROUTE
     | typeof INSTEAD_PRIVACY_POLICY_ROUTE
     | typeof BOOKSHELF_ROUTE
@@ -93,6 +95,7 @@ const routes: Route[] = [
     MYSQL_GROUP_BY_ROUTE,
     SCALAR_IN_MYSQL_ROUTE,
     API_COMMUNICATION_ROUTE,
+    JAVASCRIPT_ASYNC_ROUTE,
     PROJECTS_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     BOOKSHELF_ROUTE,

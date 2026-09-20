@@ -1,6 +1,7 @@
 import {
     API_COMMUNICATION_ROUTE,
     GO_NOTES_ROUTE,
+    JAVASCRIPT_ASYNC_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
     NOTES_ROUTE,
@@ -89,6 +90,13 @@ export const pythonNotes: NoteGroup = {
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
+    {
+        type: 'page',
+        title: 'Asynchronous Programming in JavaScript',
+        summary: 'The event loop, Promises, async and await, concurrency, cancellation, errors, and common production patterns.',
+        route: JAVASCRIPT_ASYNC_ROUTE,
+        updatedOn: '2026-09-21',
+    },
     {
         type: 'page',
         title: 'The Anatomy of API Communication in a React Application',
