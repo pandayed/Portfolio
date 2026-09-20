@@ -1,0 +1,46 @@
+.Notes__intro {
+    margin-top: var(--space-sm);
+    font-size: var(--text-secondary);
+    color: var(--color-text-subtle);
+}
+
+.Notes__back {
+    display: block;
+    margin-top: var(--space-sm);
+    font-size: var(--text-small);
+}
+
+.Notes__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.Notes__list .Notes__list {
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+    padding-left: var(--space-lg);
+    border-left: 1px solid var(--color-border);
+}
+
+.Notes__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.Notes__title {
+    font-size: var(--text-body);
+}
+
+.Notes__summary,
+.Notes__updated {
+    font-size: var(--text-secondary);
+    color: var(--color-text-subtle);
+}
+
+.Notes__updated {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+}

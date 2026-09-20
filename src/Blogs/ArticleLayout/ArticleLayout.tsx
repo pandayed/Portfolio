@@ -18,6 +18,8 @@ interface ArticleLayoutProps {
     /* External sources cited by the article. Omit or leave empty when the
        article cites none. */
     references?: ReferenceEntry[];
+    backRoute?: Route;
+    backLabel?: string;
     children?: ReactNode;
 }
 
@@ -26,7 +28,15 @@ const toId = (title: string) => `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-
 /* Shared shell for every article: title, back link, body, references,
    comments, and the table of contents in the right margin. Articles supply
    the body only. */
-const ArticleLayout = ({ title, route, sections, references = [], children }: ArticleLayoutProps) => {
+const ArticleLayout = ({
+    title,
+    route,
+    sections,
+    references = [],
+    backRoute = BLOGS_ROUTE,
+    backLabel = 'Back to blogs',
+    children,
+}: ArticleLayoutProps) => {
     const titleId = toId(title);
     const tocEntries: TocEntry[] = [
         ...sections,
@@ -38,10 +48,10 @@ const ArticleLayout = ({ title, route, sections, references = [], children }: Ar
         <article className="ArticleLayout" aria-labelledby={titleId}>
             <header className="ArticleLayout__header">
                 <a
-                    href={toHref(BLOGS_ROUTE)}
+                    href={toHref(backRoute)}
                     className="Link Link--standalone ArticleLayout__back"
                 >
-                    Back to blogs
+                    {backLabel}
                 </a>
                 <h1 id={titleId} className="PageTitle">
                     {title}

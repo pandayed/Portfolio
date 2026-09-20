@@ -4,6 +4,8 @@ import './CommonClasses/CommonClasses.css';
 import Header from './Header/Header';
 import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
+import Notes from './Notes/Notes';
+import MysqlNotes from './Notes/MysqlNotes';
 import Drafts from './Blogs/Drafts';
 import Archive from './Blogs/Archive';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
@@ -38,6 +40,8 @@ import {
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
+    MYSQL_NOTES_ROUTE,
+    NOTES_ROUTE,
     PROJECTS_ROUTE,
     SCALAR_IN_MYSQL_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
@@ -52,6 +56,8 @@ import { useRoute } from './routing/useRoute';
 const pages: Record<Route, () => JSX.Element> = {
     [HOME_ROUTE]: Home,
     [BLOGS_ROUTE]: Blogs,
+    [NOTES_ROUTE]: Notes,
+    [MYSQL_NOTES_ROUTE]: MysqlNotes,
     [DRAFTS_ROUTE]: Drafts,
     [ARCHIVE_ROUTE]: Archive,
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,

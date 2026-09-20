@@ -3,6 +3,8 @@
 
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
+export const NOTES_ROUTE = '/notes';
+export const MYSQL_NOTES_ROUTE = '/notes/mysql';
 export const DRAFTS_ROUTE = '/blogs/drafts';
 export const ARCHIVE_ROUTE = '/blogs/archive';
 export const CPP_COMPLEXITY_ROUTE = '/blogs/cpp-complexity';
@@ -25,6 +27,8 @@ export const ABOUT_ROUTE = '/about';
 export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
+    | typeof NOTES_ROUTE
+    | typeof MYSQL_NOTES_ROUTE
     | typeof DRAFTS_ROUTE
     | typeof ARCHIVE_ROUTE
     | typeof CPP_COMPLEXITY_ROUTE
@@ -46,6 +50,8 @@ export type Route =
 
 const routes: Route[] = [
     BLOGS_ROUTE,
+    NOTES_ROUTE,
+    MYSQL_NOTES_ROUTE,
     DRAFTS_ROUTE,
     ARCHIVE_ROUTE,
     CPP_COMPLEXITY_ROUTE,

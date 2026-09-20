@@ -4,8 +4,6 @@ import {
     COMPLEXITY_CASES_ROUTE,
     CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
-    MYSQL_GROUP_BY_ROUTE,
-    SCALAR_IN_MYSQL_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
@@ -108,22 +106,6 @@ const entries: Post[] = [
         updatedOn: '2026-09-01',
         route: WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
         status: 'draft',
-    },
-    {
-        title: 'MySQL GROUP BY and Non-Aggregated Columns',
-        summary: 'Selecting columns that are neither grouped nor aggregated, what ONLY_FULL_GROUP_BY changes, and why the result is otherwise unpredictable.',
-        startedOn: '2026-09-19',
-        updatedOn: '2026-09-19',
-        route: MYSQL_GROUP_BY_ROUTE,
-        status: 'published',
-    },
-    {
-        title: 'Scalar in MySQL',
-        summary: 'A scalar is one individual value, as opposed to a set of values, and that is what a scalar subquery has to return.',
-        startedOn: '2026-09-20',
-        updatedOn: '2026-09-20',
-        route: SCALAR_IN_MYSQL_ROUTE,
-        status: 'published',
     },
 ];
 

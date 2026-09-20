@@ -3,12 +3,14 @@ import '../CommonClasses/CommonClasses.css';
 
 import ThemeToggle from './ThemeToggle';
 import { useScrolled } from './useScrolled';
+import { noteRoutes } from '../Notes/noteTreeData';
 
 import {
     ABOUT_ROUTE,
     BLOGS_ROUTE,
     BOOKSHELF_ROUTE,
     HOME_ROUTE,
+    NOTES_ROUTE,
     PROJECTS_ROUTE,
     toHref,
     type Route,
@@ -20,10 +22,14 @@ interface HeaderProps {
 
 const navItems: { title: string; route: Route }[] = [
     { title: 'Blogs', route: BLOGS_ROUTE },
+    { title: 'Notes', route: NOTES_ROUTE },
     { title: 'Projects', route: PROJECTS_ROUTE },
     { title: 'Bookshelf', route: BOOKSHELF_ROUTE },
     { title: 'About', route: ABOUT_ROUTE },
 ];
+
+const isCurrent = (currentRoute: Route, navRoute: Route) =>
+    currentRoute === navRoute || (navRoute === NOTES_ROUTE && noteRoutes.includes(currentRoute));
 
 const Header = ({ route }: HeaderProps) => {
     const scrolled = useScrolled();
@@ -41,7 +47,7 @@ const Header = ({ route }: HeaderProps) => {
                             key={item.route}
                             href={toHref(item.route)}
                             className="NavLink Header__navLink"
-                            aria-current={route === item.route ? 'page' : undefined}
+                            aria-current={isCurrent(route, item.route) ? 'page' : undefined}
                         >
                             {item.title}
                         </a>

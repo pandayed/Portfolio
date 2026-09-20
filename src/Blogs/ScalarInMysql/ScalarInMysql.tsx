@@ -1,7 +1,7 @@
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
-import { SCALAR_IN_MYSQL_ROUTE } from '../../routing/routes';
+import { MYSQL_NOTES_ROUTE, SCALAR_IN_MYSQL_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
 const countQuery = `SELECT COUNT(*) FROM users;`;
@@ -25,7 +25,13 @@ WHERE salary > (
 
 const ScalarInMysql = () => {
     return (
-        <ArticleLayout title="Scalar in MySQL" route={SCALAR_IN_MYSQL_ROUTE} sections={sections}>
+        <ArticleLayout
+            title="Scalar in MySQL"
+            route={SCALAR_IN_MYSQL_ROUTE}
+            sections={sections}
+            backRoute={MYSQL_NOTES_ROUTE}
+            backLabel="Back to MySQL notes"
+        >
             <section className="Article__section">
                 <p>In MySQL, scalar simply means a single value.</p>
                 <p>A scalar value is one individual value, such as:</p>

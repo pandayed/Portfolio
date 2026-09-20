@@ -19,6 +19,7 @@ const SocialLink = ({ title, link }: SocialLinkItem) => {
 const socialLinks: SocialLinkItem[] = [
     { title: 'G-Mail', link: 'mailto:lalbiharipandeyg@gmail.com' },
     { title: 'GitHub', link: 'https://github.com/pandayed' },
+    { title: 'Source', link: 'https://github.com/pandayed/Portfolio' },
     { title: 'LinkedIn', link: 'https://www.linkedin.com/in/pandayed/' },
     { title: 'Twitter/X', link: 'https://x.com/lalpandeyed' },
 ];

@@ -1,7 +1,7 @@
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
-import { MYSQL_GROUP_BY_ROUTE } from '../../routing/routes';
+import { MYSQL_GROUP_BY_ROUTE, MYSQL_NOTES_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
 const groupedQuery = `SELECT *
@@ -51,6 +51,8 @@ const MysqlGroupBy = () => {
             title="MySQL GROUP BY and Non-Aggregated Columns"
             route={MYSQL_GROUP_BY_ROUTE}
             sections={sections}
+            backRoute={MYSQL_NOTES_ROUTE}
+            backLabel="Back to MySQL notes"
         >
             <section className="Article__section">
                 <pre className="Article__code">
