@@ -9,7 +9,7 @@ import {
     toHref,
     type GoNoteRoute,
 } from '../../routing/routes';
-import { goNotes } from './goNotes.generated';
+import { goNotes } from './goNotes';
 import type { GoNoteBlock, RichText, RichTextMark } from './types';
 
 interface GoNoteProps {

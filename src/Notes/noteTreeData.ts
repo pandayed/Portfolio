@@ -8,7 +8,7 @@ import {
     type GoNoteRoute,
     type Route,
 } from '../routing/routes';
-import { goNotes as goNotePages } from './GoNotes/goNotes.generated';
+import { goNotes as goNotePages } from './GoNotes/goNotes';
 
 interface NoteBase {
     title: string;

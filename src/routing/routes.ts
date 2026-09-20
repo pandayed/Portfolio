@@ -1,7 +1,7 @@
 /* Hash routing keeps deep links working on static hosts that cannot rewrite
    unknown paths back to index.html. */
 
-import { goNotes } from '../Notes/GoNotes/goNotes.generated';
+import { goNotes } from '../Notes/GoNotes/goNotes';
 
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
