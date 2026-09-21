@@ -60,7 +60,9 @@
     font-size: var(--text-fine);
     line-height: 1.6;
     color: var(--color-text);
-    border-left: 2px solid var(--color-border);
+    background-color: var(--color-code-background);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
 }
 
 /* A code element inside something that already sets a code face would drop to

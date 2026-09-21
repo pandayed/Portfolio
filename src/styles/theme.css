@@ -14,6 +14,7 @@
     --color-accent: #991b1b;
     --color-selection: rgba(153, 27, 27, 0.12);
     --color-border: rgba(28, 28, 28, 0.12);
+    --color-code-background: rgba(28, 28, 28, 0.045);
 
     /* Typography */
     --font-body: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times,
@@ -60,6 +61,7 @@
     --color-accent: #db7266;
     --color-selection: rgba(219, 114, 102, 0.18);
     --color-border: rgba(236, 229, 213, 0.14);
+    --color-code-background: rgba(236, 229, 213, 0.08);
 }
 
 @media (min-width: 640px) {
