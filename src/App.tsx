@@ -26,6 +26,7 @@ import MysqlGroupBy from './Blogs/MysqlGroupBy/MysqlGroupBy';
 import ScalarInMysql from './Blogs/ScalarInMysql/ScalarInMysql';
 import ApiCommunication from './Notes/ApiCommunication/ApiCommunication';
 import JavaScriptAsync from './Notes/JavaScriptAsync/JavaScriptAsync';
+import JavaScriptEventLoop from './Notes/JavaScriptEventLoop/JavaScriptEventLoop';
 import Projects from './Projects/Projects';
 import PrivacyPolicy from './Instead/PrivacyPolicy';
 import Bookshelf from './Bookshelf/Bookshelf';
@@ -49,6 +50,7 @@ import {
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
+    JAVASCRIPT_EVENT_LOOP_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
     NOTES_ROUTE,
@@ -88,6 +90,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [SCALAR_IN_MYSQL_ROUTE]: ScalarInMysql,
     [API_COMMUNICATION_ROUTE]: ApiCommunication,
     [JAVASCRIPT_ASYNC_ROUTE]: JavaScriptAsync,
+    [JAVASCRIPT_EVENT_LOOP_ROUTE]: JavaScriptEventLoop,
     [PROJECTS_ROUTE]: Projects,
     [INSTEAD_PRIVACY_POLICY_ROUTE]: PrivacyPolicy,
     [BOOKSHELF_ROUTE]: Bookshelf,

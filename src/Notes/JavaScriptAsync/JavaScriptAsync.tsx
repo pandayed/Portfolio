@@ -1,7 +1,12 @@
 import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
-import { JAVASCRIPT_ASYNC_ROUTE, NOTES_ROUTE } from '../../routing/routes';
+import {
+    JAVASCRIPT_ASYNC_ROUTE,
+    JAVASCRIPT_EVENT_LOOP_ROUTE,
+    NOTES_ROUTE,
+    toHref,
+} from '../../routing/routes';
 
 const sections: TocEntry[] = [
     { id: 'mental-model', title: 'The runtime model' },
@@ -452,6 +457,11 @@ const JavaScriptAsync = () => (
                 A zero-millisecond timer means “not before this delay.” It does not mean “run now.”
                 Long synchronous code delays it. A loop that continually queues microtasks can also
                 delay timers and rendering.
+            </p>
+            <p>
+                See the
+                {' '}<a className="Link" href={toHref(JAVASCRIPT_EVENT_LOOP_ROUTE)}>event loop and task queues note</a>
+                {' '}for detailed browser and Node.js scheduling rules.
             </p>
         </section>
 

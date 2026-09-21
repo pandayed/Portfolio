@@ -26,6 +26,7 @@ export const MYSQL_GROUP_BY_ROUTE = '/blogs/mysql-group-by';
 export const SCALAR_IN_MYSQL_ROUTE = '/blogs/scalar-in-mysql';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
 export const JAVASCRIPT_ASYNC_ROUTE = '/notes/javascript-asynchronous-programming';
+export const JAVASCRIPT_EVENT_LOOP_ROUTE = '/notes/javascript-event-loop';
 export const PROJECTS_ROUTE = '/projects';
 export const INSTEAD_PRIVACY_POLICY_ROUTE = '/instead/privacy-policy';
 export const BOOKSHELF_ROUTE = '/bookshelf';
@@ -59,6 +60,7 @@ export type Route =
     | typeof SCALAR_IN_MYSQL_ROUTE
     | typeof API_COMMUNICATION_ROUTE
     | typeof JAVASCRIPT_ASYNC_ROUTE
+    | typeof JAVASCRIPT_EVENT_LOOP_ROUTE
     | typeof PROJECTS_ROUTE
     | typeof INSTEAD_PRIVACY_POLICY_ROUTE
     | typeof BOOKSHELF_ROUTE
@@ -96,6 +98,7 @@ const routes: Route[] = [
     SCALAR_IN_MYSQL_ROUTE,
     API_COMMUNICATION_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
+    JAVASCRIPT_EVENT_LOOP_ROUTE,
     PROJECTS_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     BOOKSHELF_ROUTE,

@@ -2,6 +2,7 @@ import {
     API_COMMUNICATION_ROUTE,
     GO_NOTES_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
+    JAVASCRIPT_EVENT_LOOP_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
     NOTES_ROUTE,
@@ -90,6 +91,13 @@ export const pythonNotes: NoteGroup = {
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
+    {
+        type: 'page',
+        title: 'JavaScript Event Loop and Task Queues',
+        summary: 'Microtasks, tasks, Promises, timers, browser scheduling, and the Node.js event loop.',
+        route: JAVASCRIPT_EVENT_LOOP_ROUTE,
+        updatedOn: '2026-09-21',
+    },
     {
         type: 'page',
         title: 'Asynchronous Programming in JavaScript',
