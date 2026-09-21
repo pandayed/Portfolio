@@ -1,6 +1,7 @@
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
+import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import { API_COMMUNICATION_ROUTE, NOTES_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
@@ -269,7 +270,7 @@ const ApiCommunication = () => (
                 belongs to the browser engine.
             </p>
             <p>A raw <code>fetch</code> call looks like this:</p>
-            <pre className="Article__code"><code>{rawFetchExample}</code></pre>
+            <CodeBlock language="typescript">{rawFetchExample}</CodeBlock>
             <p>
                 This works. But imagine writing this for every API call in an application with
                 fifty endpoints. You would repeat the headers, the credentials setting, the error
@@ -315,7 +316,7 @@ const ApiCommunication = () => (
                 about how to communicate with the server. It knows nothing about what data to
                 request. It only knows the mechanics of transport.
             </p>
-            <pre className="Article__code"><code>{apiClientExample}</code></pre>
+            <CodeBlock language="typescript">{apiClientExample}</CodeBlock>
             <p>What belongs in this layer:</p>
             <ul className="Article__notes">
                 <li>Base URL configuration</li><li>Timeout settings</li><li>Authentication header injection</li>
@@ -342,7 +343,7 @@ const ApiCommunication = () => (
                 to a specific HTTP request: which endpoint, which HTTP method, which parameters,
                 and what the response looks like.
             </p>
-            <pre className="Article__code"><code>{serviceExample}</code></pre>
+            <CodeBlock language="typescript">{serviceExample}</CodeBlock>
             <p>Does:</p>
             <ul className="Article__notes">
                 <li>Maps business operations to endpoints (<code>getAll</code> –&gt; <code>GET /users</code>)</li>
@@ -384,16 +385,16 @@ const ApiCommunication = () => (
                 solve this problem.
             </p>
             <p>A hook wraps a service function and adds all the behavior that React components need.</p>
-            <pre className="Article__code"><code>{hooksExample}</code></pre>
+            <CodeBlock language="typescript">{hooksExample}</CodeBlock>
             <h3 className="Article__subTitle">What TanStack Query handles that you would otherwise build manually</h3>
             <p>Without TanStack Query, a component that fetches a user list looks like this:</p>
-            <pre className="Article__code"><code>{manualFetchingExample}</code></pre>
+            <CodeBlock language="typescript">{manualFetchingExample}</CodeBlock>
             <p>
                 You write this boilerplate for every data-fetching component. And you still have no
                 caching, no deduplication, no background refetching, no retry logic.
             </p>
             <p>With TanStack Query:</p>
-            <pre className="Article__code"><code>{queryFetchingExample}</code></pre>
+            <CodeBlock language="typescript">{queryFetchingExample}</CodeBlock>
             <p>One line. And you get all of the following for free:</p>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -425,7 +426,7 @@ const ApiCommunication = () => (
                 The component is the final consumer. It calls a hook, receives data and state, and
                 renders UI. It knows nothing about HTTP, endpoints, caching, or Axios.
             </p>
-            <pre className="Article__code"><code>{componentExample}</code></pre>
+            <CodeBlock language="typescript">{componentExample}</CodeBlock>
             <p>
                 The component’s only job is to translate data into pixels. If you can look at a
                 component and immediately understand what it renders without needing to understand
@@ -441,7 +442,7 @@ const ApiCommunication = () => (
         <section className="Article__section" aria-labelledby="complete-picture">
             <h2 id="complete-picture" className="SectionTitle">The Complete Picture</h2>
             <p>Here is the full stack, from the lowest level to the highest, with the library or provider responsible for each:</p>
-            <pre className="Article__code"><code>{completePicture}</code></pre>
+            <CodeBlock language="typescript">{completePicture}</CodeBlock>
             <p>Each layer depends only on the one directly below it. A change in any layer does not ripple upward or downward.</p>
         </section>
 
@@ -476,7 +477,7 @@ const ApiCommunication = () => (
         <section className="Article__section" aria-labelledby="mixing-layers">
             <h2 id="mixing-layers" className="SectionTitle">A Common Mistake – Mixing Layers</h2>
             <p>The most frequent antipattern is combining service functions and hooks into the same file:</p>
-            <pre className="Article__code"><code>{antipatternExample}</code></pre>
+            <CodeBlock language="typescript">{antipatternExample}</CodeBlock>
             <p>This appears harmless and even convenient. The problem surfaces when:</p>
             <ul className="Article__notes">
                 <li>You need <code>getUsers</code> in a non-React context (a test helper, a script, a Web Worker) but importing the file pulls in React and TanStack Query dependencies.</li>

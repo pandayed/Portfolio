@@ -1,6 +1,7 @@
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
+import CodeBlock from '../ArticleLayout/CodeBlock';
 import { MYSQL_NOTES_ROUTE, SCALAR_IN_MYSQL_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
@@ -60,24 +61,16 @@ const ScalarInMysql = () => {
                 </h2>
                 <p>It is usually used to distinguish a single value from a set/table of values.</p>
                 <p>For example:</p>
-                <pre className="Article__code">
-                    <code>{countQuery}</code>
-                </pre>
+                <CodeBlock language="sql">{countQuery}</CodeBlock>
                 <p>
                     <code>COUNT(*)</code> returns a scalar value:
                 </p>
-                <pre className="Article__code">
-                    <code>{countResult}</code>
-                </pre>
+                <CodeBlock language="sql">{countResult}</CodeBlock>
                 <p>It is just one value.</p>
                 <p>Compare that with:</p>
-                <pre className="Article__code">
-                    <code>{namesQuery}</code>
-                </pre>
+                <CodeBlock language="sql">{namesQuery}</CodeBlock>
                 <p>which might return:</p>
-                <pre className="Article__code">
-                    <code>{namesResult}</code>
-                </pre>
+                <CodeBlock language="sql">{namesResult}</CodeBlock>
                 <p>That's a set of values, not a scalar.</p>
             </section>
 
@@ -89,13 +82,9 @@ const ScalarInMysql = () => {
                     You'll also encounter scalar subquery, which means a subquery that returns
                     exactly one value:
                 </p>
-                <pre className="Article__code">
-                    <code>{subqueryExample}</code>
-                </pre>
+                <CodeBlock language="sql">{subqueryExample}</CodeBlock>
                 <p>Here:</p>
-                <pre className="Article__code">
-                    <code>SELECT AVG(salary) FROM employees</code>
-                </pre>
+                <CodeBlock language="sql">SELECT AVG(salary) FROM employees</CodeBlock>
                 <p>
                     is a scalar subquery because <code>AVG()</code> produces one value, e.g.{' '}
                     <code>75000</code>.

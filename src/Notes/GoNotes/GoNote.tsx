@@ -3,6 +3,7 @@ import './GoNote.css';
 import { Fragment, type ReactNode } from 'react';
 
 import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
+import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     GO_NOTES_ROUTE,
@@ -134,9 +135,9 @@ const renderBlock = (block: GoNoteBlock): ReactNode => {
             );
         case 'code':
             return (
-                <pre className="Article__code" key={block.id}>
-                    <code>{plainText(block.richText)}</code>
-                </pre>
+                <CodeBlock language="go" key={block.id}>
+                    {plainText(block.richText)}
+                </CodeBlock>
             );
         case 'divider':
             return <hr className="GoNote__divider" key={block.id} />;

@@ -1,6 +1,7 @@
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
+import CodeBlock from '../ArticleLayout/CodeBlock';
 import { MYSQL_GROUP_BY_ROUTE, MYSQL_NOTES_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
@@ -55,9 +56,7 @@ const MysqlGroupBy = () => {
             backLabel="Back to MySQL notes"
         >
             <section className="Article__section">
-                <pre className="Article__code">
-                    <code>{groupedQuery}</code>
-                </pre>
+                <CodeBlock language="sql">{groupedQuery}</CodeBlock>
                 <p>Suppose the table contains:</p>
                 <ResultTable
                     rows={[
@@ -86,9 +85,7 @@ const MysqlGroupBy = () => {
                     MariaDB also leaves the mode off by default, so it returns an arbitrary row.
                 </p>
                 <p>Check what the server is using:</p>
-                <pre className="Article__code">
-                    <code>{sqlModeQuery}</code>
-                </pre>
+                <CodeBlock language="sql">{sqlModeQuery}</CodeBlock>
                 <p>
                     A managed database or an application framework can set its own{' '}
                     <code>sql_mode</code>, so read the value instead of assuming the default.
@@ -100,9 +97,7 @@ const MysqlGroupBy = () => {
                     If ONLY_FULL_GROUP_BY is enabled
                 </h2>
                 <p>The query produces an error:</p>
-                <pre className="Article__code">
-                    <code>{groupByError}</code>
-                </pre>
+                <CodeBlock language="sql">{groupByError}</CodeBlock>
             </section>
 
             <section className="Article__section" aria-labelledby="only-full-group-by-disabled">
@@ -135,9 +130,7 @@ const MysqlGroupBy = () => {
                     A safer query
                 </h2>
                 <p>A safer query is:</p>
-                <pre className="Article__code">
-                    <code>{saferQuery}</code>
-                </pre>
+                <CodeBlock language="sql">{saferQuery}</CodeBlock>
                 <p>For predictable result, each selected column must either:</p>
                 <ul className="Article__notes">
                     <li>

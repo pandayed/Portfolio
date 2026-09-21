@@ -15,6 +15,13 @@
     --color-selection: rgba(153, 27, 27, 0.12);
     --color-border: rgba(28, 28, 28, 0.12);
     --color-code-background: rgba(28, 28, 28, 0.045);
+    --color-code-comment: #7a7469;
+    --color-code-keyword: #8f2d56;
+    --color-code-string: #17644f;
+    --color-code-number: #8a4b08;
+    --color-code-function: #195a91;
+    --color-code-operator: #7650a8;
+    --color-code-constant: #9a3412;
 
     /* Typography */
     --font-body: "Source Serif 4", Georgia, Cambria, "Times New Roman", Times,
@@ -62,6 +69,13 @@
     --color-selection: rgba(219, 114, 102, 0.18);
     --color-border: rgba(236, 229, 213, 0.14);
     --color-code-background: rgba(236, 229, 213, 0.08);
+    --color-code-comment: #a8a29a;
+    --color-code-keyword: #f09ab4;
+    --color-code-string: #8bd6bb;
+    --color-code-number: #f0bb76;
+    --color-code-function: #8ec8f2;
+    --color-code-operator: #c9a8f0;
+    --color-code-constant: #ffad8a;
 }
 
 @media (min-width: 640px) {

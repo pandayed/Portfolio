@@ -72,6 +72,64 @@
     font: inherit;
 }
 
+/* Prism token colours stay separate from the link accent so code remains
+   readable in both themes without making non-link text look clickable. */
+.Article__code .token.comment,
+.Article__code .token.prolog,
+.Article__code .token.doctype,
+.Article__code .token.cdata {
+    color: var(--color-code-comment);
+    font-style: italic;
+}
+
+.Article__code .token.punctuation {
+    color: var(--color-text-subtle);
+}
+
+.Article__code .token.property,
+.Article__code .token.tag,
+.Article__code .token.boolean,
+.Article__code .token.number,
+.Article__code .token.constant,
+.Article__code .token.symbol,
+.Article__code .token.deleted {
+    color: var(--color-code-number);
+}
+
+.Article__code .token.selector,
+.Article__code .token.attr-name,
+.Article__code .token.string,
+.Article__code .token.char,
+.Article__code .token.builtin,
+.Article__code .token.inserted {
+    color: var(--color-code-string);
+}
+
+.Article__code .token.operator,
+.Article__code .token.entity,
+.Article__code .token.url,
+.Article__code .language-css .token.string,
+.Article__code .style .token.string {
+    color: var(--color-code-operator);
+}
+
+.Article__code .token.atrule,
+.Article__code .token.attr-value,
+.Article__code .token.keyword {
+    color: var(--color-code-keyword);
+}
+
+.Article__code .token.function,
+.Article__code .token.class-name {
+    color: var(--color-code-function);
+}
+
+.Article__code .token.regex,
+.Article__code .token.important,
+.Article__code .token.variable {
+    color: var(--color-code-constant);
+}
+
 /* Tables
 
    A table is denser than prose, so it steps down one size. Only the column

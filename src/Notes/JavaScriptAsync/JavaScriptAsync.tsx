@@ -1,4 +1,5 @@
 import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
+import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { JAVASCRIPT_ASYNC_ROUTE, NOTES_ROUTE } from '../../routing/routes';
 
@@ -349,7 +350,7 @@ const JavaScriptAsync = () => (
                 Timers and user events use callbacks. Callbacks are not always asynchronous.
                 <code>array.map(callback)</code> calls its callback synchronously.
             </p>
-            <pre className="Article__code"><code>{callbackExample}</code></pre>
+            <CodeBlock language="javascript">{callbackExample}</CodeBlock>
             <p>Callback-based asynchronous code has three recurring problems:</p>
             <ul className="Article__notes">
                 <li>Nested steps become hard to read.</li>
@@ -369,7 +370,7 @@ const JavaScriptAsync = () => (
                 <code> pending</code>, then becomes either <code>fulfilled</code> with a value or
                 <code> rejected</code> with a reason. Once settled, its state cannot change.
             </p>
-            <pre className="Article__code"><code>{promiseCreationExample}</code></pre>
+            <CodeBlock language="javascript">{promiseCreationExample}</CodeBlock>
             <ul className="Article__notes">
                 <li><code>resolve(value)</code> fulfills the Promise, unless the value is another Promise or thenable.</li>
                 <li><code>reject(error)</code> rejects it. Reject with an <code>Error</code> object so the stack and message are useful.</li>
@@ -381,7 +382,7 @@ const JavaScriptAsync = () => (
                 <code> new Promise</code> when adapting a callback or event API, not when you already
                 have a Promise.
             </p>
-            <pre className="Article__code"><code>{promisifyExample}</code></pre>
+            <CodeBlock language="javascript">{promisifyExample}</CodeBlock>
         </section>
 
         <section className="Article__section" aria-labelledby="promise-chains">
@@ -401,13 +402,13 @@ const JavaScriptAsync = () => (
                     </tbody>
                 </table>
             </div>
-            <pre className="Article__code"><code>{chainExample}</code></pre>
+            <CodeBlock language="javascript">{chainExample}</CodeBlock>
             <p>
                 Return the next Promise from each handler. Without <code>return</code>, the chain does
                 not wait for it and cannot catch its failure. A <code>.catch</code> can recover by
                 returning a value. Throw again when it cannot recover.
             </p>
-            <pre className="Article__code"><code>{recoveryExample}</code></pre>
+            <CodeBlock language="javascript">{recoveryExample}</CodeBlock>
             <p>
                 <code>.finally</code> is for cleanup. It receives no result argument. Its return value
                 is normally ignored, so it does not replace the result. A thrown error or rejected
@@ -422,7 +423,7 @@ const JavaScriptAsync = () => (
                 it with <code>42</code>. Throwing rejects it. The <code>await</code> keyword pauses only
                 that async function. It does not block the JavaScript thread.
             </p>
-            <pre className="Article__code"><code>{asyncAwaitExample}</code></pre>
+            <CodeBlock language="javascript">{asyncAwaitExample}</CodeBlock>
             <ul className="Article__notes">
                 <li><code>await promise</code> produces the fulfillment value.</li>
                 <li>If the Promise rejects, <code>await</code> throws that reason.</li>
@@ -445,8 +446,8 @@ const JavaScriptAsync = () => (
                 task queues. The precise task queues belong to the host environment. Promise
                 microtasks run before the next timer task in the browser model used in this note.
             </p>
-            <pre className="Article__code"><code>{schedulingExample}</code></pre>
-            <pre className="Article__code"><code>{awaitSchedulingExample}</code></pre>
+            <CodeBlock language="javascript">{schedulingExample}</CodeBlock>
+            <CodeBlock language="javascript">{awaitSchedulingExample}</CodeBlock>
             <p>
                 A zero-millisecond timer means “not before this delay.” It does not mean “run now.”
                 Long synchronous code delays it. A loop that continually queues microtasks can also
@@ -461,8 +462,8 @@ const JavaScriptAsync = () => (
                 await it. Start independent operations first, then await them together. Await in order
                 when a later operation needs an earlier result or the system requires ordering.
             </p>
-            <pre className="Article__code"><code>{sequentialExample}</code></pre>
-            <pre className="Article__code"><code>{dependencyExample}</code></pre>
+            <CodeBlock language="javascript">{sequentialExample}</CodeBlock>
+            <CodeBlock language="javascript">{dependencyExample}</CodeBlock>
             <p>
                 Concurrency improves waiting time, but it increases load. Do not start thousands of
                 requests together. Use bounded concurrency when the input can be large.
@@ -482,7 +483,7 @@ const JavaScriptAsync = () => (
                     </tbody>
                 </table>
             </div>
-            <pre className="Article__code"><code>{combinatorExample}</code></pre>
+            <CodeBlock language="javascript">{combinatorExample}</CodeBlock>
             <ul className="Article__notes">
                 <li>All combinators preserve input order in their result, not completion order.</li>
                 <li><code>Promise.all</code> rejects early, but it does not cancel the other operations.</li>
@@ -499,7 +500,7 @@ const JavaScriptAsync = () => (
                 fulfills for HTTP errors such as 404 and 500. Check <code>response.ok</code> before
                 reading the body.
             </p>
-            <pre className="Article__code"><code>{fetchExample}</code></pre>
+            <CodeBlock language="javascript">{fetchExample}</CodeBlock>
             <ul className="Article__notes">
                 <li>A successful HTTP response can still contain invalid or unexpected data. Validate data at the boundary.</li>
                 <li>Reading the body with <code>json()</code> is asynchronous and can fail.</li>
@@ -515,7 +516,7 @@ const JavaScriptAsync = () => (
                 support cancellation. <code>AbortController</code> is the standard signal-based API
                 used by <code>fetch</code> and other browser APIs.
             </p>
-            <pre className="Article__code"><code>{cancellationExample}</code></pre>
+            <CodeBlock language="javascript">{cancellationExample}</CodeBlock>
             <p>
                 Cancellation is normal control flow when a user leaves a page, replaces a search,
                 or no longer needs a result. Keep it separate from a real network or server failure.
@@ -527,7 +528,7 @@ const JavaScriptAsync = () => (
                 a newer result. Abort the previous request or compare a request identifier before
                 updating state.
             </p>
-            <pre className="Article__code"><code>{latestRequestExample}</code></pre>
+            <CodeBlock language="javascript">{latestRequestExample}</CodeBlock>
         </section>
 
         <section className="Article__section" aria-labelledby="retries">
@@ -538,7 +539,7 @@ const JavaScriptAsync = () => (
                 failures, or other permanent 4xx responses. Retrying a write can duplicate data
                 unless the operation is idempotent or uses an idempotency key.
             </p>
-            <pre className="Article__code"><code>{retryExample}</code></pre>
+            <CodeBlock language="javascript">{retryExample}</CodeBlock>
             <ul className="Article__notes">
                 <li>Use a small attempt limit.</li>
                 <li>Increase the delay after each failure. Add random jitter in larger systems so clients do not retry together.</li>
@@ -553,7 +554,7 @@ const JavaScriptAsync = () => (
                 <code>Promise.all(items.map(doWork))</code> starts every operation immediately. That is
                 fine for a small fixed list. For a large list, run a fixed number of workers.
             </p>
-            <pre className="Article__code"><code>{concurrencyExample}</code></pre>
+            <CodeBlock language="javascript">{concurrencyExample}</CodeBlock>
             <p>
                 Decide the limit from the API rate limit, memory use, and operation cost. The worker
                 pattern matters even when a project uses an existing concurrency helper.
@@ -568,14 +569,14 @@ const JavaScriptAsync = () => (
                 user types. It does not cancel a request that already started, so combine it with
                 request cancellation when needed.
             </p>
-            <pre className="Article__code"><code>{debounceExample}</code></pre>
+            <CodeBlock language="javascript">{debounceExample}</CodeBlock>
             <h3 className="Article__subTitle">Consume values over time</h3>
             <p>
                 A Promise represents one result. An async iterable represents a sequence of results.
                 Use <code>for await...of</code> for paginated data, streams, or other asynchronous
                 sequences that expose the async-iteration contract.
             </p>
-            <pre className="Article__code"><code>{asyncIterableExample}</code></pre>
+            <CodeBlock language="javascript">{asyncIterableExample}</CodeBlock>
             <h3 className="Article__subTitle">Keep ownership clear</h3>
             <ul className="Article__notes">
                 <li>The function that starts work should return its Promise.</li>
@@ -588,13 +589,13 @@ const JavaScriptAsync = () => (
         <section className="Article__section" aria-labelledby="common-mistakes">
             <h2 id="common-mistakes" className="SectionTitle">Common mistakes</h2>
             <h3 className="Article__subTitle">Using forEach with async callbacks</h3>
-            <pre className="Article__code"><code>{mistakesExample}</code></pre>
+            <CodeBlock language="javascript">{mistakesExample}</CodeBlock>
             <h3 className="Article__subTitle">Leaving a floating Promise</h3>
             <p>
                 A Promise that is neither awaited, returned, nor given a rejection handler can fail
                 without the caller knowing. This can produce an unhandled rejection.
             </p>
-            <pre className="Article__code"><code>{floatingPromiseExample}</code></pre>
+            <CodeBlock language="javascript">{floatingPromiseExample}</CodeBlock>
             <h3 className="Article__subTitle">More mistakes to avoid</h3>
             <ul className="Article__notes">
                 <li>Do not wrap an existing Promise in <code>new Promise</code> without a real adapter need.</li>

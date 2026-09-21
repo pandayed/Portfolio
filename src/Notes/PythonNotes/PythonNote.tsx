@@ -1,6 +1,7 @@
 import './PythonNote.css';
 
 import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
+import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     PYTHON_NOTES_ROUTE,
@@ -58,7 +59,7 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                             {example.title && (
                                 <h3 className="Article__subTitle">{example.title}</h3>
                             )}
-                            <pre className="Article__code"><code>{example.code}</code></pre>
+                            <CodeBlock language="python">{example.code}</CodeBlock>
                             {example.result && (
                                 <p className="PythonNote__result">Result: {example.result}</p>
                             )}

@@ -1,6 +1,7 @@
 import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../ArticleLayout/ArticleLayout';
+import CodeBlock from '../ArticleLayout/CodeBlock';
 import { SQL_VS_MYSQL_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
@@ -86,9 +87,7 @@ const SqlVsMySql = () => {
                     standard left open for years. PostgreSQL and MySQL use LIMIT and OFFSET. SQL
                     Server uses TOP. Oracle traditionally used the ROWNUM pseudo-column.
                 </p>
-                <pre className="Article__code">
-                    <code>{syntaxExample}</code>
-                </pre>
+                <CodeBlock language="sql">{syntaxExample}</CodeBlock>
                 <p>
                     SQL:2008 closed the gap by defining OFFSET ... FETCH FIRST/NEXT ... ROWS ONLY.
                     PostgreSQL, DB2, SQL Server (2012 and later) and Oracle (12c and later) all
