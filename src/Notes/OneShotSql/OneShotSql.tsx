@@ -99,6 +99,69 @@ const rankingExample = `SELECT
 FROM results
 ORDER BY score DESC, employee_id;`;
 
+const selectDistinctExample = `SELECT DISTINCT city
+FROM customers;`;
+
+const joinExample = `SELECT c.customer_id, c.customer_name, o.order_id
+FROM customers AS c
+LEFT JOIN orders AS o
+    ON o.customer_id = c.customer_id;`;
+
+const usingExample = `SELECT customer_id, customer_name, order_id
+FROM customers
+JOIN orders USING (customer_id);`;
+
+const filteringAndGroupingExample = `SELECT customer_id, COUNT(*) AS completed_order_count
+FROM orders
+WHERE status = 'Completed'
+GROUP BY customer_id
+HAVING COUNT(*) >= 3;`;
+
+const namedWindowExample = `SELECT
+    employee_id,
+    department_id,
+    salary,
+    RANK() OVER department_salary AS salary_rank
+FROM employees
+WINDOW department_salary AS (
+    PARTITION BY department_id
+    ORDER BY salary DESC
+);`;
+
+const selectIntoExample = `SELECT id, data
+FROM test_data
+ORDER BY id
+LIMIT 1
+INTO @saved_id, @saved_data;`;
+
+const lockingReadExample = `START TRANSACTION;
+
+SELECT order_id, status
+FROM orders
+WHERE order_id = 42
+FOR UPDATE;
+
+UPDATE orders
+SET status = 'Processing'
+WHERE order_id = 42;
+
+COMMIT;`;
+
+const setOperationsExample = `-- Rows from either query; duplicates are removed
+SELECT customer_id FROM retail_customers
+UNION
+SELECT customer_id FROM wholesale_customers;
+
+-- Rows present in both queries
+SELECT customer_id FROM newsletter_subscribers
+INTERSECT
+SELECT customer_id FROM active_customers;
+
+-- Rows in the first query but not the second
+SELECT customer_id FROM customers
+EXCEPT
+SELECT customer_id FROM blocked_customers;`;
+
 const OneShotSql = () => (
     <ArticleLayout
         title="One Shot SQL"
@@ -108,7 +171,10 @@ const OneShotSql = () => (
         backLabel="Back to MySQL notes"
     >
         <section className="Article__section">
-            <p>These notes are in progress. More edge cases and details will be added gradually.</p>
+            <p>
+                These notes cover MySQL 8.4 and are in progress. More edge cases and details will be
+                added gradually.
+            </p>
         </section>
 
         <section className="Article__section" aria-labelledby="edge-cases">
@@ -138,21 +204,102 @@ const OneShotSql = () => (
             <h2 id="query-order" className="SectionTitle">
                 Query order
             </h2>
-            <h3 className="Article__subTitle">Written order</h3>
-            <p>Smart Developers Find Jolly Work, Good Habits Win Over Laziness:</p>
+            <h3 className="Article__subTitle">Common written order</h3>
+            <p>
+                Wise Students Discover Funny Jolly Wizards; Gather Herbs While Ordering Lunch For
+                Interns:
+            </p>
             <p>
                 <code>
-                    SELECT → DISTINCT → FROM (JOIN) → WHERE → GROUP BY → HAVING → WINDOW → ORDER BY → LIMIT
+                    WITH → SELECT → DISTINCT → FROM (JOIN ... ON/USING) → WHERE → GROUP BY → HAVING
+                    → WINDOW → ORDER BY → LIMIT ... OFFSET → FOR UPDATE/FOR SHARE → INTO
                 </code>
             </p>
             <h3 className="Article__subTitle">Logical processing order</h3>
-            <p>Funny Wizards Gather Herbs While Sleepy Dragons Order Lunch:</p>
+            <p>Funny Jolly Wizards Gather Herbs While Sleepy Dragons Order Other Lunches:</p>
             <p>
                 <code>
-                    FROM (JOIN) → WHERE → GROUP BY → HAVING → WINDOW FUNCTIONS → SELECT → DISTINCT
-                    → ORDER BY → LIMIT
+                    FROM (JOIN ... ON/USING) → WHERE → GROUP BY → HAVING → WINDOW FUNCTIONS → SELECT
+                    → DISTINCT → ORDER BY → OFFSET → LIMIT
                 </code>
             </p>
+            <p>
+                <code>OFFSET</code> is optional. In MySQL, it is part of <code>LIMIT</code> syntax,
+                not a separate clause: <code>LIMIT row_count OFFSET offset</code>. Logically, MySQL
+                skips the offset rows before returning at most the requested row count.
+            </p>
+            <ul className="Article__notes">
+                <li>
+                    <code>ON</code> or <code>USING</code> belongs to its <code>JOIN</code>, which is
+                    inside the <code>FROM</code> part of the query.
+                </li>
+                <li>
+                    The mnemonic uses the preferred final position for <code>INTO</code>, but MySQL
+                    also permits it in other written positions. Use it only once in a{' '}
+                    <code>SELECT</code>.
+                </li>
+                <li>
+                    <code>UNION</code>, <code>INTERSECT</code>, and <code>EXCEPT</code> are not in the
+                    mnemonic because they combine complete query blocks.
+                </li>
+            </ul>
+        </section>
+
+        <section className="Article__section" aria-labelledby="core-select-clauses">
+            <h2 id="core-select-clauses" className="SectionTitle">
+                Core SELECT clauses
+            </h2>
+            <h3 className="Article__subTitle">SELECT and DISTINCT</h3>
+            <p>
+                <code>SELECT</code> chooses the expressions or columns returned by the query. MySQL
+                does not require <code>FROM</code> when no table is needed, as in{' '}
+                <code>SELECT 1;</code>
+            </p>
+            <p>
+                <code>ALL</code> is the default and keeps duplicate result rows.{' '}
+                <code>DISTINCT</code> removes duplicates by considering the full selected row, not
+                just the first selected column. MySQL also accepts <code>DISTINCTROW</code> as a
+                synonym for <code>DISTINCT</code>.
+            </p>
+            <CodeBlock language="sql">{selectDistinctExample}</CodeBlock>
+            <h3 className="Article__subTitle">FROM, JOIN, ON, and USING</h3>
+            <p>
+                <code>FROM</code> identifies the source tables or derived tables. A{' '}
+                <code>JOIN</code> combines rows from those sources. <code>ON</code> supplies a join
+                condition and can compare differently named columns or use a more complex
+                expression.
+            </p>
+            <CodeBlock language="sql">{joinExample}</CodeBlock>
+            <p>
+                <code>USING(column_name)</code> is shorter when the join column has the same name in
+                both tables. Each named column must exist in both tables. In an unqualified{' '}
+                <code>SELECT *</code>, MySQL returns one coalesced copy of a <code>USING</code> column
+                instead of one copy from each table.
+            </p>
+            <CodeBlock language="sql">{usingExample}</CodeBlock>
+            <p>
+                With a <code>LEFT JOIN</code>, every row from the left table remains. Columns from the
+                right table are <code>NULL</code> when no match exists. Put a condition in{' '}
+                <code>ON</code> when it controls matching; put it in <code>WHERE</code> when it filters
+                the joined result.
+            </p>
+            <h3 className="Article__subTitle">WHERE, GROUP BY, and HAVING</h3>
+            <p>
+                <code>WHERE</code> filters individual rows before grouping. <code>GROUP BY</code>
+                collects rows that share the grouping values so aggregate functions can calculate
+                one result per group. <code>HAVING</code> filters the groups after aggregation and
+                can use aggregate functions. Aggregate functions are not allowed in{' '}
+                <code>WHERE</code>.
+            </p>
+            <CodeBlock language="sql">{filteringAndGroupingExample}</CodeBlock>
+            <h3 className="Article__subTitle">WINDOW and OVER</h3>
+            <p>
+                The optional <code>WINDOW</code> clause gives a window specification a name so it can
+                be reused. A window function uses that name, or an inline window specification,
+                inside <code>OVER(...)</code>. <code>OVER</code> is part of the window-function
+                expression; it is not a top-level query clause.
+            </p>
+            <CodeBlock language="sql">{namedWindowExample}</CodeBlock>
         </section>
 
         <section className="Article__section" aria-labelledby="existence-checks">
@@ -406,9 +553,10 @@ const OneShotSql = () => (
             </p>
             <h3 className="Article__subTitle">CTE vs subquery</h3>
             <p>
-                A common table expression starts with <code>WITH</code>, gives a query result a name,
-                and exists only for that statement. It can make a multi-step query easier to read,
-                can be referenced more than once, and can be recursive.
+                A common table expression is defined by <code>WITH</code> before the main{' '}
+                <code>SELECT</code>. It gives a query result a name and exists only for that
+                statement. It can make a multi-step query easier to read, can be referenced more
+                than once, and can be recursive with <code>WITH RECURSIVE</code>.
             </p>
             <CodeBlock language="sql">{cteExample}</CodeBlock>
             <p>
@@ -416,6 +564,50 @@ const OneShotSql = () => (
                 needed once. A CTE is not automatically faster. MySQL may merge or materialize a CTE
                 or a derived table, so choose the clearer form and inspect the execution plan when
                 performance matters.
+            </p>
+            <h3 className="Article__subTitle">SELECT ... INTO</h3>
+            <p>
+                <code>SELECT ... INTO</code> stores a result in variables or writes it to a file.
+                MySQL permits one <code>INTO</code> in a <code>SELECT</code> and permits it in several
+                written positions; placing it at the end is preferred.
+            </p>
+            <CodeBlock language="sql">{selectIntoExample}</CodeBlock>
+            <p>
+                For <code>INTO var_list</code>, the number of variables must match the number of
+                selected values, and the query should return one row. No row raises a warning and
+                leaves the variables unchanged. More than one row raises an error.{' '}
+                <code>INTO OUTFILE</code> writes rows on the MySQL server host, requires the{' '}
+                <code>FILE</code> privilege, and does not overwrite an existing file.{' '}
+                <code>INTO DUMPFILE</code> writes one row without formatting.
+            </p>
+            <h3 className="Article__subTitle">FOR UPDATE and FOR SHARE</h3>
+            <p>
+                These are InnoDB locking reads. <code>FOR UPDATE</code> locks the selected rows
+                against competing updates. <code>FOR SHARE</code> lets other transactions read the
+                rows but prevents them from changing the rows until the transaction ends. Run a
+                locking read with autocommit disabled, normally inside a transaction. The locks are
+                released by <code>COMMIT</code> or <code>ROLLBACK</code>.
+            </p>
+            <CodeBlock language="sql">{lockingReadExample}</CodeBlock>
+            <p>
+                <code>NOWAIT</code> returns an error immediately instead of waiting for a locked row.
+                <code>SKIP LOCKED</code> omits locked rows and can give an inconsistent view, so it is
+                suited to queue-like access rather than general transactional work.
+            </p>
+            <h3 className="Article__subTitle">UNION, INTERSECT, and EXCEPT</h3>
+            <p>
+                These MySQL set operators combine the results of query blocks.{' '}
+                <code>UNION</code> returns rows from either result, <code>INTERSECT</code> returns rows
+                present in both, and <code>EXCEPT</code> returns rows from the first result that are
+                absent from the second. Their default is <code>DISTINCT</code>; add <code>ALL</code> to
+                retain duplicates. Each query block must return the same number of columns, and
+                corresponding columns must have compatible result types.
+            </p>
+            <p>Remember them as: Unite, Intersect, Exclude.</p>
+            <CodeBlock language="sql">{setOperationsExample}</CodeBlock>
+            <p>
+                <code>INTERSECT</code> has higher precedence than <code>UNION</code> and{' '}
+                <code>EXCEPT</code>. Use parentheses when the intended grouping should be explicit.
             </p>
             <h3 className="Article__subTitle">ROW_NUMBER vs RANK vs DENSE_RANK</h3>
             <ul className="Article__notes">
