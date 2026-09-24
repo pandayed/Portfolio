@@ -139,10 +139,10 @@ const OneShotSql = () => (
                 Query order
             </h2>
             <h3 className="Article__subTitle">Written order</h3>
-            <p>Smart Developers Find Work, Good Habits Win Over Laziness:</p>
+            <p>Smart Developers Find Jolly Work, Good Habits Win Over Laziness:</p>
             <p>
                 <code>
-                    SELECT → DISTINCT → FROM → WHERE → GROUP BY → HAVING → WINDOW → ORDER BY → LIMIT
+                    SELECT → DISTINCT → FROM (JOIN) → WHERE → GROUP BY → HAVING → WINDOW → ORDER BY → LIMIT
                 </code>
             </p>
             <h3 className="Article__subTitle">Logical processing order</h3>
