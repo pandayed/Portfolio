@@ -9,7 +9,7 @@ const Notes = () => (
         <p className="Notes__intro">
             Short references grouped by subject. A subject can contain pages or more subjects.
         </p>
-        <NoteTree nodes={noteTree} />
+        <NoteTree nodes={noteTree} rootGroupChildLimit={4} />
     </Page>
 );
 

@@ -5,6 +5,7 @@ import {
     JAVASCRIPT_EVENT_LOOP_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
+    ONE_SHOT_SQL_ROUTE,
     NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
     SCALAR_IN_MYSQL_ROUTE,
@@ -39,6 +40,13 @@ export const mysqlNotes: NoteGroup = {
     summary: 'Short notes about MySQL syntax, behaviour, and common terms.',
     route: MYSQL_NOTES_ROUTE,
     children: [
+        {
+            type: 'page',
+            title: 'One Shot SQL',
+            summary: 'Working notes about SQL edge cases, query order, expressions, and result shapes.',
+            route: ONE_SHOT_SQL_ROUTE,
+            updatedOn: '2026-09-24',
+        },
         {
             type: 'page',
             title: 'Scalar in MySQL',

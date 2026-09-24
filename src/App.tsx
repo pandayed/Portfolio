@@ -6,6 +6,7 @@ import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
 import Notes from './Notes/Notes';
 import MysqlNotes from './Notes/MysqlNotes';
+import OneShotSql from './Notes/OneShotSql/OneShotSql';
 import GoNotes from './Notes/GoNotes';
 import GoNote from './Notes/GoNotes/GoNote';
 import PythonNotes from './Notes/PythonNotes/PythonNotesIndex';
@@ -53,6 +54,7 @@ import {
     JAVASCRIPT_EVENT_LOOP_ROUTE,
     MYSQL_GROUP_BY_ROUTE,
     MYSQL_NOTES_ROUTE,
+    ONE_SHOT_SQL_ROUTE,
     NOTES_ROUTE,
     PROJECTS_ROUTE,
     SCALAR_IN_MYSQL_ROUTE,
@@ -72,6 +74,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [BLOGS_ROUTE]: Blogs,
     [NOTES_ROUTE]: Notes,
     [MYSQL_NOTES_ROUTE]: MysqlNotes,
+    [ONE_SHOT_SQL_ROUTE]: OneShotSql,
     [GO_NOTES_ROUTE]: GoNotes,
     [PYTHON_NOTES_ROUTE]: PythonNotes,
     [DRAFTS_ROUTE]: Drafts,

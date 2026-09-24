@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react';
 
-import { toHref } from '../routing/routes';
+import { toHref, type Route } from '../routing/routes';
 import type { NoteGroup, NoteNode } from './noteTreeData';
 
 interface NoteTreeProps {
     nodes: NoteNode[];
+    rootGroupChildLimit?: number;
 }
 
 interface NoteTreeListProps {
@@ -13,6 +14,11 @@ interface NoteTreeListProps {
     query: string;
     expandedGroups: Set<string>;
     onToggleGroup: (route: string) => void;
+    rootGroupChildLimit?: number;
+    viewAll?: {
+        route: Route;
+        title: string;
+    };
 }
 
 const formatDate = (date: string) =>
@@ -60,6 +66,8 @@ const NoteTreeList = ({
     query,
     expandedGroups,
     onToggleGroup,
+    rootGroupChildLimit,
+    viewAll,
 }: NoteTreeListProps) => (
     <ul className={`Notes__list Notes__list--level${level}`}>
         {nodes.map((node) => {
@@ -68,6 +76,12 @@ const NoteTreeList = ({
                 isGroup &&
                 (expandedGroups.has(node.route) ||
                     (query !== '' && nodeOrChildMatches(node, query)));
+            const shouldLimitChildren =
+                isGroup &&
+                level === 1 &&
+                query === '' &&
+                rootGroupChildLimit !== undefined &&
+                node.children.length > rootGroupChildLimit;
 
             return (
                 <li className="Notes__item" key={node.route}>
@@ -95,21 +109,38 @@ const NoteTreeList = ({
                     ) : (
                         isExpanded && (
                             <NoteTreeList
-                                nodes={node.children}
+                                nodes={shouldLimitChildren
+                                    ? node.children.slice(0, rootGroupChildLimit)
+                                    : node.children}
                                 level={level + 1}
                                 query={query}
                                 expandedGroups={expandedGroups}
                                 onToggleGroup={onToggleGroup}
+                                rootGroupChildLimit={rootGroupChildLimit}
+                                viewAll={shouldLimitChildren
+                                    ? { route: node.route, title: node.title }
+                                    : undefined}
                             />
                         )
                     )}
                 </li>
             );
         })}
+        {viewAll && (
+            <li className="Notes__item">
+                <a
+                    href={toHref(viewAll.route)}
+                    className="Link Link--standalone Notes__title"
+                    aria-label={`View all ${viewAll.title} notes`}
+                >
+                    View All
+                </a>
+            </li>
+        )}
     </ul>
 );
 
-const NoteTree = ({ nodes }: NoteTreeProps) => {
+const NoteTree = ({ nodes, rootGroupChildLimit }: NoteTreeProps) => {
     const [query, setQuery] = useState('');
     const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => new Set());
     const normalizedQuery = normalise(query);
@@ -178,6 +209,7 @@ const NoteTree = ({ nodes }: NoteTreeProps) => {
                     query={normalizedQuery}
                     expandedGroups={expandedGroups}
                     onToggleGroup={toggleGroup}
+                    rootGroupChildLimit={rootGroupChildLimit}
                 />
             ) : (
                 <p className="Notes__empty">Try a different title or topic.</p>

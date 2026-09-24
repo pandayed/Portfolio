@@ -8,6 +8,7 @@ export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
 export const MYSQL_NOTES_ROUTE = '/notes/mysql';
+export const ONE_SHOT_SQL_ROUTE = '/notes/mysql/one-shot-sql';
 export const GO_NOTES_ROUTE = '/notes/go';
 export const PYTHON_NOTES_ROUTE = '/notes/python';
 export const DRAFTS_ROUTE = '/blogs/drafts';
@@ -40,6 +41,7 @@ export type Route =
     | typeof BLOGS_ROUTE
     | typeof NOTES_ROUTE
     | typeof MYSQL_NOTES_ROUTE
+    | typeof ONE_SHOT_SQL_ROUTE
     | typeof GO_NOTES_ROUTE
     | GoNoteRoute
     | typeof PYTHON_NOTES_ROUTE
@@ -78,6 +80,7 @@ const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
     MYSQL_NOTES_ROUTE,
+    ONE_SHOT_SQL_ROUTE,
     GO_NOTES_ROUTE,
     ...goNoteRoutes,
     PYTHON_NOTES_ROUTE,
