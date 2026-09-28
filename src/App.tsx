@@ -24,6 +24,7 @@ import WhyReact from './Blogs/WhyReact/WhyReact';
 import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
 import PostgreSQLGroupBy from './Notes/PostgreSQLGroupBy/PostgreSQLGroupBy';
+import PostgreSQLJoins from './Notes/PostgreSQLJoins/PostgreSQLJoins';
 import ScalarInPostgreSQL from './Notes/ScalarInPostgreSQL/ScalarInPostgreSQL';
 import ApiCommunication from './Notes/ApiCommunication/ApiCommunication';
 import JavaScriptAsync from './Notes/JavaScriptAsync/JavaScriptAsync';
@@ -53,6 +54,7 @@ import {
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
+    POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     NOTES_ROUTE,
@@ -90,6 +92,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,
     [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
     [POSTGRESQL_GROUP_BY_ROUTE]: PostgreSQLGroupBy,
+    [POSTGRESQL_JOINS_ROUTE]: PostgreSQLJoins,
     [SCALAR_IN_POSTGRESQL_ROUTE]: ScalarInPostgreSQL,
     [API_COMMUNICATION_ROUTE]: ApiCommunication,
     [JAVASCRIPT_ASYNC_ROUTE]: JavaScriptAsync,

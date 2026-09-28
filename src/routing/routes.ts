@@ -24,6 +24,7 @@ export const WHY_REACT_ROUTE = '/blogs/why-react';
 export const CHAIN_OF_THOUGHT_ROUTE = '/blogs/chain-of-thought';
 export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plans-and-skills';
 export const POSTGRESQL_GROUP_BY_ROUTE = '/notes/postgresql/group-by';
+export const POSTGRESQL_JOINS_ROUTE = '/notes/postgresql/joins';
 export const SCALAR_IN_POSTGRESQL_ROUTE = '/notes/postgresql/scalar';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
 export const JAVASCRIPT_ASYNC_ROUTE = '/notes/javascript-asynchronous-programming';
@@ -59,6 +60,7 @@ export type Route =
     | typeof CHAIN_OF_THOUGHT_ROUTE
     | typeof WRITING_BETTER_PLANS_AND_SKILLS_ROUTE
     | typeof POSTGRESQL_GROUP_BY_ROUTE
+    | typeof POSTGRESQL_JOINS_ROUTE
     | typeof SCALAR_IN_POSTGRESQL_ROUTE
     | typeof API_COMMUNICATION_ROUTE
     | typeof JAVASCRIPT_ASYNC_ROUTE
@@ -98,6 +100,7 @@ const routes: Route[] = [
     CHAIN_OF_THOUGHT_ROUTE,
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
+    POSTGRESQL_JOINS_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     API_COMMUNICATION_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,

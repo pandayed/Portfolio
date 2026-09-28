@@ -4,6 +4,7 @@ import {
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
+    POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     NOTES_ROUTE,
@@ -45,6 +46,13 @@ export const postgresqlNotes: NoteGroup = {
             title: 'PostgreSQL One Shot SQL',
             summary: 'Working notes about PostgreSQL edge cases, query order, expressions, and result shapes.',
             route: POSTGRESQL_ONE_SHOT_SQL_ROUTE,
+            updatedOn: '2026-09-28',
+        },
+        {
+            type: 'page',
+            title: 'Joins in PostgreSQL',
+            summary: 'Join types, matching rows, NULLs, filtering, and common join patterns.',
+            route: POSTGRESQL_JOINS_ROUTE,
             updatedOn: '2026-09-28',
         },
         {
