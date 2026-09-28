@@ -19,6 +19,9 @@ ORDER BY c.customer_id;`;
 
 const coalesceExample = `SELECT COALESCE(NULL, NULL, 'Hello', 'World');`;
 
+const lengthExample = `SELECT LENGTH(customer_name) AS name_length
+FROM customers;`;
+
 const contactNumberQuery = `SELECT COALESCE(mobile_phone, home_phone, office_phone, 'No Phone') AS contact_number
 FROM customers;`;
 
@@ -376,6 +379,18 @@ const PostgreSQLOneShotSQL = () => (
             </p>
             <CodeBlock language="sql">numerator / NULLIF(denominator, 0)</CodeBlock>
             <p>Use NULLIF for denominators.</p>
+        </section>
+
+        <section className="Article__section" aria-labelledby="important-functions">
+            <h2 id="important-functions" className="SectionTitle">
+                Important functions
+            </h2>
+            <h3 className="Article__subTitle">LENGTH</h3>
+            <p>
+                <code>LENGTH(value)</code> returns the number of characters in a string. Use it to
+                find the length of a <code>varchar</code> value.
+            </p>
+            <CodeBlock language="sql">{lengthExample}</CodeBlock>
         </section>
 
         <section className="Article__section" aria-labelledby="counting-ratios-and-ordering">

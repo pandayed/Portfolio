@@ -6,6 +6,7 @@ export const sections: TocEntry[] = [
     { id: 'core-select-clauses', title: 'Core SELECT clauses' },
     { id: 'existence-checks', title: 'Existence checks' },
     { id: 'expressions-and-null-handling', title: 'Expressions and NULL handling' },
+    { id: 'important-functions', title: 'Important functions' },
     { id: 'counting-ratios-and-ordering', title: 'Counting, ratios, and ordering' },
     { id: 'results-and-terms', title: 'Results and terms' },
     { id: 'more-sql-tools', title: 'More SQL tools' },
