@@ -3,12 +3,12 @@ import {
     GO_NOTES_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
-    MYSQL_GROUP_BY_ROUTE,
-    MYSQL_NOTES_ROUTE,
-    ONE_SHOT_SQL_ROUTE,
+    POSTGRESQL_GROUP_BY_ROUTE,
+    POSTGRESQL_NOTES_ROUTE,
+    POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
-    SCALAR_IN_MYSQL_ROUTE,
+    SCALAR_IN_POSTGRESQL_ROUTE,
     type GoNoteRoute,
     type PythonNoteRoute,
     type Route,
@@ -34,32 +34,32 @@ export interface NoteGroup extends NoteBase {
 
 export type NoteNode = NotePage | NoteGroup;
 
-export const mysqlNotes: NoteGroup = {
+export const postgresqlNotes: NoteGroup = {
     type: 'group',
-    title: 'MySQL',
-    summary: 'Short notes about MySQL syntax, behaviour, and common terms.',
-    route: MYSQL_NOTES_ROUTE,
+    title: 'PostgreSQL',
+    summary: 'Short notes about PostgreSQL syntax, behaviour, and common terms.',
+    route: POSTGRESQL_NOTES_ROUTE,
     children: [
         {
             type: 'page',
-            title: 'One Shot SQL',
-            summary: 'Working notes about SQL edge cases, query order, expressions, and result shapes.',
-            route: ONE_SHOT_SQL_ROUTE,
-            updatedOn: '2026-09-24',
+            title: 'PostgreSQL One Shot SQL',
+            summary: 'Working notes about PostgreSQL edge cases, query order, expressions, and result shapes.',
+            route: POSTGRESQL_ONE_SHOT_SQL_ROUTE,
+            updatedOn: '2026-09-28',
         },
         {
             type: 'page',
-            title: 'Scalar in MySQL',
-            summary: 'A scalar is one value. A scalar subquery must return one value too.',
-            route: SCALAR_IN_MYSQL_ROUTE,
-            updatedOn: '2026-09-20',
+            title: 'Scalar in PostgreSQL',
+            summary: 'A scalar is one value. A scalar subquery returns one column and at most one row.',
+            route: SCALAR_IN_POSTGRESQL_ROUTE,
+            updatedOn: '2026-09-28',
         },
         {
             type: 'page',
             title: 'GROUP BY and non-aggregated columns',
-            summary: 'What ONLY_FULL_GROUP_BY changes and why the result is otherwise unpredictable.',
-            route: MYSQL_GROUP_BY_ROUTE,
-            updatedOn: '2026-09-19',
+            summary: 'How PostgreSQL validates grouped queries and handles functional dependencies.',
+            route: POSTGRESQL_GROUP_BY_ROUTE,
+            updatedOn: '2026-09-28',
         },
     ],
 };
@@ -120,7 +120,7 @@ export const noteTree: NoteNode[] = [
         route: API_COMMUNICATION_ROUTE,
         updatedOn: '2026-09-20',
     },
-    mysqlNotes,
+    postgresqlNotes,
     goNotes,
     pythonNotes,
 ];

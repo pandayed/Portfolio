@@ -7,8 +7,8 @@ import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
-export const MYSQL_NOTES_ROUTE = '/notes/mysql';
-export const ONE_SHOT_SQL_ROUTE = '/notes/mysql/one-shot-sql';
+export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
+export const POSTGRESQL_ONE_SHOT_SQL_ROUTE = '/notes/postgresql/one-shot-sql';
 export const GO_NOTES_ROUTE = '/notes/go';
 export const PYTHON_NOTES_ROUTE = '/notes/python';
 export const DRAFTS_ROUTE = '/blogs/drafts';
@@ -23,8 +23,8 @@ export const CONSISTENT_HASHING_ROUTE = '/blogs/consistent-hashing';
 export const WHY_REACT_ROUTE = '/blogs/why-react';
 export const CHAIN_OF_THOUGHT_ROUTE = '/blogs/chain-of-thought';
 export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plans-and-skills';
-export const MYSQL_GROUP_BY_ROUTE = '/blogs/mysql-group-by';
-export const SCALAR_IN_MYSQL_ROUTE = '/blogs/scalar-in-mysql';
+export const POSTGRESQL_GROUP_BY_ROUTE = '/notes/postgresql/group-by';
+export const SCALAR_IN_POSTGRESQL_ROUTE = '/notes/postgresql/scalar';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
 export const JAVASCRIPT_ASYNC_ROUTE = '/notes/javascript-asynchronous-programming';
 export const JAVASCRIPT_EVENT_LOOP_ROUTE = '/notes/javascript-event-loop';
@@ -40,8 +40,8 @@ export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
     | typeof NOTES_ROUTE
-    | typeof MYSQL_NOTES_ROUTE
-    | typeof ONE_SHOT_SQL_ROUTE
+    | typeof POSTGRESQL_NOTES_ROUTE
+    | typeof POSTGRESQL_ONE_SHOT_SQL_ROUTE
     | typeof GO_NOTES_ROUTE
     | GoNoteRoute
     | typeof PYTHON_NOTES_ROUTE
@@ -58,8 +58,8 @@ export type Route =
     | typeof WHY_REACT_ROUTE
     | typeof CHAIN_OF_THOUGHT_ROUTE
     | typeof WRITING_BETTER_PLANS_AND_SKILLS_ROUTE
-    | typeof MYSQL_GROUP_BY_ROUTE
-    | typeof SCALAR_IN_MYSQL_ROUTE
+    | typeof POSTGRESQL_GROUP_BY_ROUTE
+    | typeof SCALAR_IN_POSTGRESQL_ROUTE
     | typeof API_COMMUNICATION_ROUTE
     | typeof JAVASCRIPT_ASYNC_ROUTE
     | typeof JAVASCRIPT_EVENT_LOOP_ROUTE
@@ -79,8 +79,8 @@ const pythonNoteRoutes: PythonNoteRoute[] = pythonNotes.map(
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
-    MYSQL_NOTES_ROUTE,
-    ONE_SHOT_SQL_ROUTE,
+    POSTGRESQL_NOTES_ROUTE,
+    POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     GO_NOTES_ROUTE,
     ...goNoteRoutes,
     PYTHON_NOTES_ROUTE,
@@ -97,8 +97,8 @@ const routes: Route[] = [
     WHY_REACT_ROUTE,
     CHAIN_OF_THOUGHT_ROUTE,
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
-    MYSQL_GROUP_BY_ROUTE,
-    SCALAR_IN_MYSQL_ROUTE,
+    POSTGRESQL_GROUP_BY_ROUTE,
+    SCALAR_IN_POSTGRESQL_ROUTE,
     API_COMMUNICATION_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,

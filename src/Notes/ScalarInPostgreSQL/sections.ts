@@ -1,4 +1,4 @@
-import type { TocEntry } from '../ArticleLayout/types';
+import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 
 export const sections: TocEntry[] = [
     { id: 'why-you-see-scalar-in-sql', title: 'Why you see "scalar" in SQL' },

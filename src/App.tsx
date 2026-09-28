@@ -5,8 +5,8 @@ import Header from './Header/Header';
 import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
 import Notes from './Notes/Notes';
-import MysqlNotes from './Notes/MysqlNotes';
-import OneShotSql from './Notes/OneShotSql/OneShotSql';
+import PostgreSQLNotes from './Notes/PostgreSQLNotes';
+import PostgreSQLOneShotSQL from './Notes/PostgreSQLOneShotSQL/PostgreSQLOneShotSQL';
 import GoNotes from './Notes/GoNotes';
 import GoNote from './Notes/GoNotes/GoNote';
 import PythonNotes from './Notes/PythonNotes/PythonNotesIndex';
@@ -23,8 +23,8 @@ import ConsistentHashing from './Blogs/ConsistentHashing/ConsistentHashing';
 import WhyReact from './Blogs/WhyReact/WhyReact';
 import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
-import MysqlGroupBy from './Blogs/MysqlGroupBy/MysqlGroupBy';
-import ScalarInMysql from './Blogs/ScalarInMysql/ScalarInMysql';
+import PostgreSQLGroupBy from './Notes/PostgreSQLGroupBy/PostgreSQLGroupBy';
+import ScalarInPostgreSQL from './Notes/ScalarInPostgreSQL/ScalarInPostgreSQL';
 import ApiCommunication from './Notes/ApiCommunication/ApiCommunication';
 import JavaScriptAsync from './Notes/JavaScriptAsync/JavaScriptAsync';
 import JavaScriptEventLoop from './Notes/JavaScriptEventLoop/JavaScriptEventLoop';
@@ -52,12 +52,12 @@ import {
     INSTEAD_PRIVACY_POLICY_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
-    MYSQL_GROUP_BY_ROUTE,
-    MYSQL_NOTES_ROUTE,
-    ONE_SHOT_SQL_ROUTE,
+    POSTGRESQL_GROUP_BY_ROUTE,
+    POSTGRESQL_NOTES_ROUTE,
+    POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     NOTES_ROUTE,
     PROJECTS_ROUTE,
-    SCALAR_IN_MYSQL_ROUTE,
+    SCALAR_IN_POSTGRESQL_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
@@ -73,8 +73,8 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [HOME_ROUTE]: Home,
     [BLOGS_ROUTE]: Blogs,
     [NOTES_ROUTE]: Notes,
-    [MYSQL_NOTES_ROUTE]: MysqlNotes,
-    [ONE_SHOT_SQL_ROUTE]: OneShotSql,
+    [POSTGRESQL_NOTES_ROUTE]: PostgreSQLNotes,
+    [POSTGRESQL_ONE_SHOT_SQL_ROUTE]: PostgreSQLOneShotSQL,
     [GO_NOTES_ROUTE]: GoNotes,
     [PYTHON_NOTES_ROUTE]: PythonNotes,
     [DRAFTS_ROUTE]: Drafts,
@@ -89,8 +89,8 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [WHY_REACT_ROUTE]: WhyReact,
     [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,
     [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
-    [MYSQL_GROUP_BY_ROUTE]: MysqlGroupBy,
-    [SCALAR_IN_MYSQL_ROUTE]: ScalarInMysql,
+    [POSTGRESQL_GROUP_BY_ROUTE]: PostgreSQLGroupBy,
+    [SCALAR_IN_POSTGRESQL_ROUTE]: ScalarInPostgreSQL,
     [API_COMMUNICATION_ROUTE]: ApiCommunication,
     [JAVASCRIPT_ASYNC_ROUTE]: JavaScriptAsync,
     [JAVASCRIPT_EVENT_LOOP_ROUTE]: JavaScriptEventLoop,

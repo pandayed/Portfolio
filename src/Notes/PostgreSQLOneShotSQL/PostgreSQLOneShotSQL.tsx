@@ -2,7 +2,10 @@ import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
-import { MYSQL_NOTES_ROUTE, ONE_SHOT_SQL_ROUTE } from '../../routing/routes';
+import {
+    POSTGRESQL_NOTES_ROUTE,
+    POSTGRESQL_ONE_SHOT_SQL_ROUTE,
+} from '../../routing/routes';
 import { sections } from './sections';
 
 const customersWithoutOrdersQuery = `SELECT c.customer_id, c.customer_name
@@ -19,11 +22,15 @@ const coalesceExample = `SELECT COALESCE(NULL, NULL, 'Hello', 'World');`;
 const contactNumberQuery = `SELECT COALESCE(mobile_phone, home_phone, office_phone, 'No Phone') AS contact_number
 FROM customers;`;
 
-const cancelledRatioQuery = `SELECT COUNT(CASE WHEN status = 'Cancelled' THEN 1 END) * 1.0
-       / NULLIF(COUNT(*), 0)
-FROM Orders;`;
+const cancelledRatioQuery = `SELECT
+    (COUNT(*) FILTER (WHERE status = 'Cancelled'))::numeric
+    / NULLIF(COUNT(*), 0) AS cancelled_ratio
+FROM orders;`;
 
-const ifExample = `SELECT IF(score >= 60, 'Pass', 'Fail') AS result
+const conditionalCaseExample = `SELECT CASE
+    WHEN score >= 60 THEN 'Pass'
+    ELSE 'Fail'
+END AS result
 FROM exam_results;`;
 
 const simpleCaseExample = `CASE status
@@ -45,8 +52,8 @@ const aggregateExample = `SELECT
 FROM orders;`;
 
 const conditionalCountExample = `SELECT
-    COUNT(CASE WHEN status = 'Cancelled' THEN 1 END) AS count_with_count,
-    SUM(CASE WHEN status = 'Cancelled' THEN 1 ELSE 0 END) AS count_with_sum
+    COUNT(*) FILTER (WHERE status = 'Cancelled') AS count_with_filter,
+    SUM(CASE WHEN status = 'Cancelled' THEN 1 ELSE 0 END) AS count_with_case
 FROM orders;`;
 
 const scalarSubqueryExample = `SELECT employee_name
@@ -128,11 +135,24 @@ WINDOW department_salary AS (
     ORDER BY salary DESC
 );`;
 
-const selectIntoExample = `SELECT id, data
+const selectIntoTableExample = `SELECT id, data
+INTO TEMP TABLE saved_test_data
 FROM test_data
 ORDER BY id
-LIMIT 1
-INTO @saved_id, @saved_data;`;
+LIMIT 1;`;
+
+const plpgsqlIntoExample = `SELECT id, data
+INTO saved_id, saved_data
+FROM test_data
+ORDER BY id
+LIMIT 1;`;
+
+const copyExample = `COPY (
+    SELECT id, data
+    FROM test_data
+    ORDER BY id
+) TO '/var/lib/postgresql/export.csv'
+WITH (FORMAT csv, HEADER);`;
 
 const lockingReadExample = `START TRANSACTION;
 
@@ -162,18 +182,18 @@ SELECT customer_id FROM customers
 EXCEPT
 SELECT customer_id FROM blocked_customers;`;
 
-const OneShotSql = () => (
+const PostgreSQLOneShotSQL = () => (
     <ArticleLayout
-        title="One Shot SQL"
-        route={ONE_SHOT_SQL_ROUTE}
+        title="PostgreSQL One Shot SQL"
+        route={POSTGRESQL_ONE_SHOT_SQL_ROUTE}
         sections={sections}
-        backRoute={MYSQL_NOTES_ROUTE}
-        backLabel="Back to MySQL notes"
+        backRoute={POSTGRESQL_NOTES_ROUTE}
+        backLabel="Back to PostgreSQL notes"
     >
         <section className="Article__section">
             <p>
-                These notes cover MySQL 8.4 and are in progress. More edge cases and details will be
-                added gradually.
+                These notes cover PostgreSQL 18 and are in progress. More edge cases and details will
+                be added gradually.
             </p>
         </section>
 
@@ -205,18 +225,15 @@ const OneShotSql = () => (
                 Query order
             </h2>
             <h3 className="Article__subTitle">Common written order</h3>
-            <p>
-                Wise Students Discover Funny Jolly Wizards; Gather Herbs While Ordering Lunch For
-                Interns:
-            </p>
+            <p>A common written order is:</p>
             <p>
                 <code>
                     WITH → SELECT → DISTINCT → FROM (JOIN ... ON/USING) → WHERE → GROUP BY → HAVING
-                    → WINDOW → ORDER BY → LIMIT ... OFFSET → FOR UPDATE/FOR SHARE → INTO
+                    → WINDOW → ORDER BY → LIMIT → OFFSET → FOR UPDATE/FOR SHARE
                 </code>
             </p>
             <h3 className="Article__subTitle">Logical processing order</h3>
-            <p>Funny Jolly Wizards Gather Herbs While Sleepy Dragons Order Other Lunches:</p>
+            <p>A useful logical processing order is:</p>
             <p>
                 <code>
                     FROM (JOIN ... ON/USING) → WHERE → GROUP BY → HAVING → WINDOW FUNCTIONS → SELECT
@@ -224,9 +241,8 @@ const OneShotSql = () => (
                 </code>
             </p>
             <p>
-                <code>OFFSET</code> is optional. In MySQL, it is part of <code>LIMIT</code> syntax,
-                not a separate clause: <code>LIMIT row_count OFFSET offset</code>. Logically, MySQL
-                skips the offset rows before returning at most the requested row count.
+                PostgreSQL has separate <code>LIMIT</code> and <code>OFFSET</code> clauses. It skips the
+                offset rows before returning at most the requested row count.
             </p>
             <ul className="Article__notes">
                 <li>
@@ -234,13 +250,8 @@ const OneShotSql = () => (
                     inside the <code>FROM</code> part of the query.
                 </li>
                 <li>
-                    The mnemonic uses the preferred final position for <code>INTO</code>, but MySQL
-                    also permits it in other written positions. Use it only once in a{' '}
-                    <code>SELECT</code>.
-                </li>
-                <li>
                     <code>UNION</code>, <code>INTERSECT</code>, and <code>EXCEPT</code> are not in the
-                    mnemonic because they combine complete query blocks.
+                    list because they combine complete query blocks.
                 </li>
             </ul>
         </section>
@@ -251,15 +262,15 @@ const OneShotSql = () => (
             </h2>
             <h3 className="Article__subTitle">SELECT and DISTINCT</h3>
             <p>
-                <code>SELECT</code> chooses the expressions or columns returned by the query. MySQL
+                <code>SELECT</code> chooses the expressions or columns returned by the query. PostgreSQL
                 does not require <code>FROM</code> when no table is needed, as in{' '}
                 <code>SELECT 1;</code>
             </p>
             <p>
                 <code>ALL</code> is the default and keeps duplicate result rows.{' '}
                 <code>DISTINCT</code> removes duplicates by considering the full selected row, not
-                just the first selected column. MySQL also accepts <code>DISTINCTROW</code> as a
-                synonym for <code>DISTINCT</code>.
+                just the first selected column. PostgreSQL also supports <code>DISTINCT ON</code> to
+                keep the first row for each specified group of expressions.
             </p>
             <CodeBlock language="sql">{selectDistinctExample}</CodeBlock>
             <h3 className="Article__subTitle">FROM, JOIN, ON, and USING</h3>
@@ -273,7 +284,7 @@ const OneShotSql = () => (
             <p>
                 <code>USING(column_name)</code> is shorter when the join column has the same name in
                 both tables. Each named column must exist in both tables. In an unqualified{' '}
-                <code>SELECT *</code>, MySQL returns one coalesced copy of a <code>USING</code> column
+                <code>SELECT *</code>, PostgreSQL returns one copy of a <code>USING</code> column
                 instead of one copy from each table.
             </p>
             <CodeBlock language="sql">{usingExample}</CodeBlock>
@@ -318,8 +329,8 @@ const OneShotSql = () => (
             <p>
                 <code>EXISTS</code> and <code>NOT EXISTS</code> test whether the subquery returns at
                 least one row. Use them when only existence matters. <code>COUNT(*)</code> computes an
-                exact count. Depending on the execution plan, MySQL may stop after finding a match
-                or transform the subquery using another optimization strategy.
+                exact count. PostgreSQL may stop after finding a matching row because only the
+                existence of a row matters.
             </p>
         </section>
 
@@ -327,23 +338,12 @@ const OneShotSql = () => (
             <h2 id="expressions-and-null-handling" className="SectionTitle">
                 Expressions and NULL handling
             </h2>
-            <h3 className="Article__subTitle">IF()</h3>
-            <p>
-                <code>IF(condition, value_if_true, value_if_false)</code> returns the second value
-                when the condition is nonzero and not <code>NULL</code>. A zero or <code>NULL</code>
-                condition returns the third value.
-            </p>
-            <CodeBlock language="sql">{ifExample}</CodeBlock>
-            <p>
-                In MySQL, <code>IF()</code> is a function used inside an expression. The{' '}
-                <code>IF ... THEN ... END IF</code> statement is different. It is available only in
-                stored programs such as procedures, functions, and triggers.
-            </p>
             <h3 className="Article__subTitle">CASE</h3>
             <p>
-                <code>CASE</code> returns one value. The simple form compares one expression with
-                each <code>WHEN</code> value:
+                PostgreSQL uses <code>CASE</code> for conditional values inside a query:
             </p>
+            <CodeBlock language="sql">{conditionalCaseExample}</CodeBlock>
+            <p>The simple form compares one expression with each <code>WHEN</code> value:</p>
             <CodeBlock language="sql">{simpleCaseExample}</CodeBlock>
             <p>The searched form evaluates separate conditions in order:</p>
             <CodeBlock language="sql">{searchedCaseExample}</CodeBlock>
@@ -408,10 +408,10 @@ const OneShotSql = () => (
             </ul>
             <CodeBlock language="sql">{conditionalCountExample}</CodeBlock>
             <p>
-                Both expressions count cancelled orders. Keep <code>ELSE 0</code> in the{' '}
-                <code>SUM</code> form. Without it, <code>SUM</code> returns <code>NULL</code> when no
-                row matches the condition. It still returns <code>NULL</code> when the input has no
-                rows at all.
+                Both expressions count cancelled orders. <code>FILTER</code> applies its condition
+                before the aggregate receives rows. Keep <code>ELSE 0</code> in the <code>SUM</code>{' '}
+                form. Without it, <code>SUM</code> returns <code>NULL</code> when no row matches. It
+                also returns <code>NULL</code> when the input has no rows.
             </p>
             <p>
                 An aggregate query without <code>GROUP BY</code> still returns one aggregate row for
@@ -420,30 +420,29 @@ const OneShotSql = () => (
             <h3 className="Article__subTitle">Finding ratios</h3>
             <CodeBlock language="sql">{cancelledRatioQuery}</CodeBlock>
             <p>
-                The <code>CASE</code> returns <code>1</code> for a cancelled order and{' '}
-                <code>NULL</code> for other orders. <code>COUNT</code> ignores those <code>NULL</code>
-                values. <code>NULLIF(COUNT(*), 0)</code> changes a zero denominator to{' '}
-                <code>NULL</code>, so the division returns <code>NULL</code> instead of dividing by
+                <code>FILTER</code> counts only cancelled orders. The <code>::numeric</code> cast
+                avoids integer division. <code>NULLIF(COUNT(*), 0)</code> changes a zero denominator
+                to <code>NULL</code>, so the division returns <code>NULL</code> instead of dividing by
                 zero.
             </p>
             <h3 className="Article__subTitle">ROUND</h3>
             <p>
-                <code>ROUND(number, places)</code> rounds a number to the requested number of decimal
-                places. A negative <code>places</code> value rounds digits to the left of the decimal
-                point.
+                <code>ROUND(value, places)</code> rounds a <code>numeric</code> value to the requested
+                number of decimal places. A negative <code>places</code> value rounds digits to the
+                left of the decimal point. The <code>double precision</code> form accepts one
+                argument, so cast it to <code>numeric</code> when a decimal-place argument is needed.
             </p>
             <h3 className="Article__subTitle">GROUP BY and selected columns</h3>
             <p>
-                With <code>ONLY_FULL_GROUP_BY</code>, a selected non-aggregate column must appear in
-                <code>GROUP BY</code>, be functionally dependent on the grouped columns, or be limited
-                to one value by <code>WHERE</code>. When <code>WHERE</code> limits several such columns,
-                those conditions must be joined with <code>AND</code>.
+                In PostgreSQL, a selected column in a grouped query must be grouped or aggregated
+                unless it is functionally dependent on the grouped columns. PostgreSQL recognizes
+                this dependency when the table's primary key is included in <code>GROUP BY</code>.
             </p>
             <h3 className="Article__subTitle">ORDER BY</h3>
             <ul className="Article__notes">
                 <li>
                     Use <code>ORDER BY</code> to get sorted data with <code>ASC</code> or{' '}
-                    <code>DESC</code>, or to get a deterministic order. MySQL does not guarantee the
+                    <code>DESC</code>, or to get a deterministic order. PostgreSQL does not guarantee the
                     order of output rows without it. For a fully deterministic order, the combined
                     sort columns must uniquely order the rows.
                 </li>
@@ -525,9 +524,9 @@ const OneShotSql = () => (
             </p>
             <h3 className="Article__subTitle">LIMIT</h3>
             <p>
-                <code>LIMIT row_count</code> returns at most that many rows. Add an offset with{' '}
-                <code>LIMIT row_count OFFSET offset</code> or <code>LIMIT offset, row_count</code>. The
-                offset starts at 0.
+                <code>LIMIT row_count</code> returns at most that many rows. Add the separate{' '}
+                <code>OFFSET offset</code> clause to skip rows. The offset starts at 0. PostgreSQL also
+                supports the standard <code>OFFSET ... ROWS FETCH FIRST ... ROWS ONLY</code> form.
             </p>
             <CodeBlock language="sql">{limitExample}</CodeBlock>
             <p>
@@ -548,7 +547,7 @@ const OneShotSql = () => (
                 <code>ORDER BY</code> for that.
             </p>
             <p>
-                MySQL allows window functions only in the select list and the query-level{' '}
+                PostgreSQL allows window functions only in the select list and the query-level{' '}
                 <code>ORDER BY</code> clause.
             </p>
             <h3 className="Article__subTitle">CTE vs subquery</h3>
@@ -561,32 +560,39 @@ const OneShotSql = () => (
             <CodeBlock language="sql">{cteExample}</CodeBlock>
             <p>
                 A subquery stays inline where it is used. It is often simpler when the result is
-                needed once. A CTE is not automatically faster. MySQL may merge or materialize a CTE
-                or a derived table, so choose the clearer form and inspect the execution plan when
-                performance matters.
+                needed once. A CTE is not automatically faster. PostgreSQL normally folds a
+                side-effect-free, non-recursive CTE into the parent query when it is referenced once.
+                A CTE referenced more than once is normally materialized. <code>MATERIALIZED</code>{' '}
+                and <code>NOT MATERIALIZED</code> can override that choice. Inspect the execution plan
+                when performance matters.
             </p>
-            <h3 className="Article__subTitle">SELECT ... INTO</h3>
+            <h3 className="Article__subTitle">SELECT INTO, PL/pgSQL, and COPY</h3>
             <p>
-                <code>SELECT ... INTO</code> stores a result in variables or writes it to a file.
-                MySQL permits one <code>INTO</code> in a <code>SELECT</code> and permits it in several
-                written positions; placing it at the end is preferred.
+                At the SQL level, <code>SELECT ... INTO</code> creates a new table from query results.
+                PostgreSQL recommends <code>CREATE TABLE ... AS</code> for new code, but the following
+                form is valid and creates a temporary table:
             </p>
-            <CodeBlock language="sql">{selectIntoExample}</CodeBlock>
+            <CodeBlock language="sql">{selectIntoTableExample}</CodeBlock>
             <p>
-                For <code>INTO var_list</code>, the number of variables must match the number of
-                selected values, and the query should return one row. No row raises a warning and
-                leaves the variables unchanged. More than one row raises an error.{' '}
-                <code>INTO OUTFILE</code> writes rows on the MySQL server host, requires the{' '}
-                <code>FILE</code> privilege, and does not overwrite an existing file.{' '}
-                <code>INTO DUMPFILE</code> writes one row without formatting.
+                Inside PL/pgSQL, <code>SELECT ... INTO target</code> assigns a row to variables or a
+                record. Without <code>STRICT</code>, no row assigns null values and extra rows are
+                discarded. With <code>STRICT</code>, the query must return exactly one row.
             </p>
+            <CodeBlock language="sql">{plpgsqlIntoExample}</CodeBlock>
+            <p>
+                <code>COPY</code> writes query results to a server-side file. The PostgreSQL server
+                process must be allowed to write the target path. The psql <code>\copy</code> command
+                writes on the client instead.
+            </p>
+            <CodeBlock language="sql">{copyExample}</CodeBlock>
             <h3 className="Article__subTitle">FOR UPDATE and FOR SHARE</h3>
             <p>
-                These are InnoDB locking reads. <code>FOR UPDATE</code> locks the selected rows
-                against competing updates. <code>FOR SHARE</code> lets other transactions read the
-                rows but prevents them from changing the rows until the transaction ends. Run a
-                locking read with autocommit disabled, normally inside a transaction. The locks are
-                released by <code>COMMIT</code> or <code>ROLLBACK</code>.
+                These PostgreSQL clauses take row-level locks. <code>FOR UPDATE</code> blocks
+                conflicting updates, deletes, and row locks. <code>FOR SHARE</code> allows compatible
+                shared locks but blocks updates, deletes, and stronger row locks. PostgreSQL also
+                provides <code>FOR NO KEY UPDATE</code> and <code>FOR KEY SHARE</code>. Use an explicit
+                transaction when later statements depend on the lock. <code>COMMIT</code> or{' '}
+                <code>ROLLBACK</code> releases it.
             </p>
             <CodeBlock language="sql">{lockingReadExample}</CodeBlock>
             <p>
@@ -596,7 +602,7 @@ const OneShotSql = () => (
             </p>
             <h3 className="Article__subTitle">UNION, INTERSECT, and EXCEPT</h3>
             <p>
-                These MySQL set operators combine the results of query blocks.{' '}
+                These PostgreSQL set operators combine the results of query blocks.{' '}
                 <code>UNION</code> returns rows from either result, <code>INTERSECT</code> returns rows
                 present in both, and <code>EXCEPT</code> returns rows from the first result that are
                 absent from the second. Their default is <code>DISTINCT</code>; add <code>ALL</code> to
@@ -633,4 +639,4 @@ const OneShotSql = () => (
     </ArticleLayout>
 );
 
-export default OneShotSql;
+export default PostgreSQLOneShotSQL;

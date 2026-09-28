@@ -1,8 +1,8 @@
 import '../../CommonClasses/CommonClasses.css';
 
-import ArticleLayout from '../ArticleLayout/ArticleLayout';
-import CodeBlock from '../ArticleLayout/CodeBlock';
-import { MYSQL_NOTES_ROUTE, SCALAR_IN_MYSQL_ROUTE } from '../../routing/routes';
+import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
+import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import { POSTGRESQL_NOTES_ROUTE, SCALAR_IN_POSTGRESQL_ROUTE } from '../../routing/routes';
 import { sections } from './sections';
 
 const countQuery = `SELECT COUNT(*) FROM users;`;
@@ -24,17 +24,17 @@ WHERE salary > (
     FROM employees
 );`;
 
-const ScalarInMysql = () => {
+const ScalarInPostgreSQL = () => {
     return (
         <ArticleLayout
-            title="Scalar in MySQL"
-            route={SCALAR_IN_MYSQL_ROUTE}
+            title="Scalar in PostgreSQL"
+            route={SCALAR_IN_POSTGRESQL_ROUTE}
             sections={sections}
-            backRoute={MYSQL_NOTES_ROUTE}
-            backLabel="Back to MySQL notes"
+            backRoute={POSTGRESQL_NOTES_ROUTE}
+            backLabel="Back to PostgreSQL notes"
         >
             <section className="Article__section">
-                <p>In MySQL, scalar simply means a single value.</p>
+                <p>In PostgreSQL, a scalar is one value.</p>
                 <p>A scalar value is one individual value, such as:</p>
                 <ul className="Article__notes">
                     <li>
@@ -47,7 +47,7 @@ const ScalarInMysql = () => {
                         <code>3.14</code>
                     </li>
                     <li>
-                        <code>'2026-09-20'</code>
+                        <code>DATE '2026-09-20'</code>
                     </li>
                     <li>
                         <code>NULL</code>
@@ -79,21 +79,20 @@ const ScalarInMysql = () => {
                     Scalar subquery
                 </h2>
                 <p>
-                    You'll also encounter scalar subquery, which means a subquery that returns
-                    exactly one value:
+                    A scalar subquery must return one column. At runtime, one row supplies the value,
+                    no row produces <code>NULL</code>, and more than one row causes an error:
                 </p>
                 <CodeBlock language="sql">{subqueryExample}</CodeBlock>
                 <p>Here:</p>
                 <CodeBlock language="sql">SELECT AVG(salary) FROM employees</CodeBlock>
                 <p>
-                    is a scalar subquery because <code>AVG()</code> produces one value, e.g.{' '}
-                    <code>75000</code>.
+                    is a scalar subquery because <code>AVG()</code> produces one aggregate row. Its
+                    value could be <code>75000</code>. It is <code>NULL</code> when the input is empty.
                 </p>
-                <p>So the simplest definition to remember is:</p>
-                <p>Scalar = one individual value, as opposed to a collection/set of values.</p>
+                <p>Scalar means one individual value rather than a set of values.</p>
             </section>
         </ArticleLayout>
     );
 };
 
-export default ScalarInMysql;
+export default ScalarInPostgreSQL;

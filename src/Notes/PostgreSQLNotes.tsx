@@ -3,16 +3,16 @@ import './Notes.css';
 import Page from '../Page/Page';
 import { NOTES_ROUTE, toHref } from '../routing/routes';
 import NoteTree from './NoteTree';
-import { mysqlNotes } from './noteTreeData';
+import { postgresqlNotes } from './noteTreeData';
 
-const MysqlNotes = () => (
-    <Page title="MySQL notes">
+const PostgreSQLNotes = () => (
+    <Page title="PostgreSQL notes">
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>
-        <p className="Notes__intro">{mysqlNotes.summary}</p>
-        <NoteTree nodes={mysqlNotes.children} />
+        <p className="Notes__intro">{postgresqlNotes.summary}</p>
+        <NoteTree nodes={postgresqlNotes.children} />
     </Page>
 );
 
-export default MysqlNotes;
+export default PostgreSQLNotes;
