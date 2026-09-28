@@ -13,9 +13,15 @@ ORDER BY c.customer_id, o.order_date;`;
 
 const leftJoinExample = `SELECT c.customer_id, c.customer_name, o.order_id
 FROM customers AS c
-LEFT JOIN orders AS o
+LEFT OUTER JOIN orders AS o
     ON o.customer_id = c.customer_id
 ORDER BY c.customer_id, o.order_id;`;
+
+const rightJoinExample = `SELECT c.customer_id, c.customer_name, o.order_id
+FROM customers AS c
+RIGHT OUTER JOIN orders AS o
+    ON o.customer_id = c.customer_id
+ORDER BY o.order_id;`;
 
 const fullJoinExample = `SELECT a.customer_id AS account_customer_id,
        l.customer_id AS loyalty_customer_id
@@ -128,32 +134,40 @@ const PostgreSQLJoins = () => (
 
         <section className="Article__section" aria-labelledby="inner-and-outer-joins">
             <h2 id="inner-and-outer-joins" className="SectionTitle">
-                INNER and outer joins
+                INNER JOIN and OUTER JOIN
             </h2>
-            <h3 className="Article__subTitle">INNER JOIN</h3>
+            <p>
+                There are two broad choices: an <code>INNER JOIN</code> returns matches only. An{' '}
+                <code>OUTER JOIN</code> also keeps rows that have no match. PostgreSQL has three
+                outer-join forms: <code>LEFT</code>, <code>RIGHT</code>, and <code>FULL</code>.
+            </p>
+            <h3 className="Article__subTitle">INNER JOIN: matching rows only</h3>
             <p>
                 <code>INNER JOIN</code> returns only row pairs that satisfy the join condition. A
                 customer with no order does not appear.
             </p>
             <CodeBlock language="sql">{innerJoinExample}</CodeBlock>
-            <h3 className="Article__subTitle">LEFT JOIN</h3>
+            <h3 className="Article__subTitle">LEFT OUTER JOIN: keep every left row</h3>
             <p>
-                <code>LEFT JOIN</code> keeps every row from the left table. When a left row has no
-                match, columns from the right table are returned as <code>NULL</code>.
+                The left table is the one written before the join. <code>LEFT OUTER JOIN</code>
+                keeps every row from that table. If there is no matching order, the customer still
+                appears and the order columns are <code>NULL</code>. <code>LEFT JOIN</code> is the
+                shorter form of <code>LEFT OUTER JOIN</code>; both mean the same thing.
             </p>
             <CodeBlock language="sql">{leftJoinExample}</CodeBlock>
-            <h3 className="Article__subTitle">RIGHT and FULL OUTER JOIN</h3>
-            <ul className="Article__notes">
-                <li>
-                    <code>RIGHT JOIN</code> keeps every row from the right table. Swapping the table
-                    order and using <code>LEFT JOIN</code> gives the same matching behavior and is
-                    often easier to read.
-                </li>
-                <li>
-                    <code>FULL OUTER JOIN</code> keeps matching pairs and unmatched rows from both
-                    sides. Missing-side columns are <code>NULL</code>.
-                </li>
-            </ul>
+            <h3 className="Article__subTitle">RIGHT OUTER JOIN: keep every right row</h3>
+            <p>
+                <code>RIGHT OUTER JOIN</code> keeps every row from the table written after the join.
+                When there is no match, columns from the left table are <code>NULL</code>.{' '}
+                <code>RIGHT JOIN</code> is its shorter form. You can get the same result by swapping
+                the table order and using a <code>LEFT JOIN</code>.
+            </p>
+            <CodeBlock language="sql">{rightJoinExample}</CodeBlock>
+            <h3 className="Article__subTitle">FULL OUTER JOIN: keep rows from both sides</h3>
+            <p>
+                <code>FULL OUTER JOIN</code> keeps matching pairs and every unmatched row from both
+                tables. Columns from the missing side are <code>NULL</code>.
+            </p>
             <CodeBlock language="sql">{fullJoinExample}</CodeBlock>
         </section>
 
