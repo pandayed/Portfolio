@@ -1,6 +1,6 @@
 import './PythonNote.css';
 
-import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {

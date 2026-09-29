@@ -1,6 +1,6 @@
 import '../../CommonClasses/CommonClasses.css';
 
-import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import { API_COMMUNICATION_ROUTE, NOTES_ROUTE } from '../../routing/routes';
 import { sections } from './sections';

@@ -133,6 +133,13 @@ export const noteTree: NoteNode[] = [
     pythonNotes,
 ];
 
+const collectPages = (nodes: NoteNode[]): NotePage[] =>
+    nodes.flatMap((node) =>
+        node.type === 'page' ? [node] : collectPages(node.children),
+    );
+
+export const notePages = collectPages(noteTree);
+
 const collectRoutes = (nodes: NoteNode[]): Route[] =>
     nodes.flatMap((node) => [
         node.route,
