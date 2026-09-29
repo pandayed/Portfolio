@@ -41,7 +41,7 @@ const note: PythonNote = {
             examples: [{
                 code: [
                     'numbers = [1, 2, 3]',
-                    'print(*numbers)',
+                    'print(*numbers)  # 1 2 3',
                     '',
                     'first = [1, 2]',
                     'second = [3, 4]',

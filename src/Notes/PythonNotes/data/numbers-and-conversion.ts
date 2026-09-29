@@ -47,10 +47,10 @@ const note: PythonNote = {
                 code: [
                     'import math',
                     '',
-                    'print(round(3.145))',
-                    'print(abs(-10))',
-                    'print(math.floor(3.14))',
-                    'print(math.ceil(3.14))',
+                    'print(round(3.145))  # 3',
+                    'print(abs(-10))      # 10',
+                    'print(math.floor(3.14))  # 3',
+                    'print(math.ceil(3.14))   # 4',
                 ].join('\n'),
             }],
             exceptions: [

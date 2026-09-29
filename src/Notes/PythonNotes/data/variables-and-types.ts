@@ -71,7 +71,7 @@ const note: PythonNote = {
                     'items = [1, 2, 3]',
                     'before = id(items)',
                     'items.append(4)',
-                    'print(before == id(items))  # True in normal Python execution',
+                    'print(before == id(items))  # True',
                 ].join('\n'),
             }],
             exceptions: [

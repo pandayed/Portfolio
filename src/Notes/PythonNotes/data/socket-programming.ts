@@ -46,7 +46,7 @@ const note: PythonNote = {
                     '    client.connect(("localhost", 1234))',
                     '    client.sendall("Hello".encode("utf-8"))',
                     '    reply = client.recv(1024).decode("utf-8")',
-                    '    print(reply)',
+                    '    print(reply)  # Hello (when connected to the echo server above)',
                 ].join('\n'),
             }],
         },
