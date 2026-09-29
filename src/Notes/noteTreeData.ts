@@ -64,10 +64,10 @@ export const postgresqlNotes: NoteGroup = {
         },
         {
             type: 'page',
-            title: 'GROUP BY and non-aggregated columns',
-            summary: 'How PostgreSQL validates grouped queries and handles functional dependencies.',
+            title: 'GROUP BY in PostgreSQL',
+            summary: 'Grouping by one or more columns, aggregates, filters, NULL values, and subtotal groups.',
             route: POSTGRESQL_GROUP_BY_ROUTE,
-            updatedOn: '2026-09-28',
+            updatedOn: '2026-09-29',
         },
     ],
 };

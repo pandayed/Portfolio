@@ -17,6 +17,40 @@ FROM customers
 GROUP BY city
 ORDER BY city;`;
 
+const aggregateByRegionAndProduct = `SELECT region, product, SUM(amount) AS sales_total
+FROM sales
+GROUP BY region, product
+ORDER BY region, product;`;
+
+const groupingSetsExample = `SELECT region, product, SUM(amount) AS sales_total
+FROM sales
+GROUP BY GROUPING SETS (
+    (region, product),
+    (region),
+    (product),
+    ()
+);`;
+
+const rollupExample = `SELECT region,
+       product,
+       GROUPING(region, product) AS subtotal_level,
+       SUM(amount) AS sales_total
+FROM sales
+GROUP BY ROLLUP (region, product)
+ORDER BY region, product;`;
+
+const whereAndHavingExample = `SELECT city, COUNT(*) AS customer_count
+FROM customers
+WHERE active = true
+GROUP BY city
+HAVING COUNT(*) >= 2
+ORDER BY city;`;
+
+const globalAggregateExample = `SELECT COUNT(*) AS customer_count,
+       COUNT(city) AS customers_with_city
+FROM customers
+WHERE active = true;`;
+
 const groupByPrimaryKeyQuery = `SELECT id, city, name
 FROM customers
 GROUP BY id
@@ -25,6 +59,17 @@ ORDER BY id;`;
 const oneRowPerCityQuery = `SELECT DISTINCT ON (city) id, city, name
 FROM customers
 ORDER BY city, id;`;
+
+const oneRowPerCityWindowQuery = `SELECT id, city, name
+FROM (
+    SELECT id,
+           city,
+           name,
+           ROW_NUMBER() OVER (PARTITION BY city ORDER BY id) AS row_number
+    FROM customers
+) AS ranked_customers
+WHERE row_number = 1
+ORDER BY city;`;
 
 interface Row {
     id: string;
@@ -57,7 +102,7 @@ const ResultTable = ({ rows }: { rows: Row[] }) => (
 
 const PostgreSQLGroupBy = () => (
     <ArticleLayout
-        title="PostgreSQL GROUP BY and Non-Aggregated Columns"
+        title="GROUP BY in PostgreSQL"
         route={POSTGRESQL_GROUP_BY_ROUTE}
         sections={sections}
         backRoute={POSTGRESQL_NOTES_ROUTE}
@@ -134,6 +179,72 @@ const PostgreSQLGroupBy = () => (
             </p>
         </section>
 
+        <section className="Article__section" aria-labelledby="grouping-by-multiple-columns">
+            <h2 id="grouping-by-multiple-columns" className="SectionTitle">
+                Grouping by multiple columns
+            </h2>
+            <p>
+                Put a comma-separated list in <code>GROUP BY</code> to group by a combination of
+                values. The example returns one row for each region and product pair found in the
+                filtered <code>sales</code> rows:
+            </p>
+            <CodeBlock language="sql">{aggregateByRegionAndProduct}</CodeBlock>
+            <p>
+                A pair such as <code>(North, Tea)</code> is one group.{' '}
+                <code>(North, Coffee)</code> is a different group. Grouping by both columns does not
+                calculate separate totals for each region and each product. Use{' '}
+                <code>GROUPING SETS</code> when one query needs detail rows plus specific subtotal
+                levels:
+            </p>
+            <CodeBlock language="sql">{groupingSetsExample}</CodeBlock>
+            <p>
+                <code>GROUP BY</code> does not sort the output. Add <code>ORDER BY</code> when the
+                result needs a specific order.
+            </p>
+            <p>
+                <code>GROUP BY ROLLUP (region, product)</code> is shorthand for hierarchical
+                grouping sets: detail rows by region and product, a subtotal for each region, and
+                a grand total. <code>GROUPING</code> marks which columns were omitted to make a
+                subtotal. This matters when a real{' '}
+                <code>region</code> or <code>product</code> value can itself be <code>NULL</code>:
+            </p>
+            <CodeBlock language="sql">{rollupExample}</CodeBlock>
+            <p>
+                In this example, <code>GROUPING(region, product)</code> is <code>0</code> for a
+                detail row, <code>1</code> for a region subtotal, and <code>3</code> for the grand
+                total. The subtotal rows use <code>NULL</code> for columns omitted at that level.
+            </p>
+        </section>
+
+        <section className="Article__section" aria-labelledby="filtering-rows-and-groups">
+            <h2 id="filtering-rows-and-groups" className="SectionTitle">
+                Filtering rows and groups
+            </h2>
+            <p>
+                <code>WHERE</code> removes input rows before PostgreSQL forms groups.{' '}
+                <code>HAVING</code> removes groups after aggregates are calculated. Use{' '}
+                <code>WHERE</code> for row conditions and <code>HAVING</code> for aggregate
+                conditions:
+            </p>
+            <CodeBlock language="sql">{whereAndHavingExample}</CodeBlock>
+            <p>
+                A query with aggregate functions and no <code>GROUP BY</code> calculates one result
+                for all qualifying input rows. It still returns one row when no rows qualify.{' '}
+                <code>COUNT</code> returns <code>0</code> in that case, while <code>SUM</code> and
+                most other aggregates return <code>NULL</code>:
+            </p>
+            <CodeBlock language="sql">{globalAggregateExample}</CodeBlock>
+            <p>
+                With ordinary grouping columns, an empty input produces no groups, so the query
+                returns no rows. A grouping set that includes <code>()</code>, such as the grand
+                total from <code>ROLLUP</code>, can still produce one aggregate row. Also,{' '}
+                <code>COUNT(*)</code> counts rows, while{' '}
+                <code>COUNT(city)</code> counts only rows where <code>city</code> is not{' '}
+                <code>NULL</code>. Rows whose grouping columns are <code>NULL</code> are grouped
+                together.
+            </p>
+        </section>
+
         <section className="Article__section" aria-labelledby="one-row-per-group">
             <h2 id="one-row-per-group" className="SectionTitle">
                 Choosing one row per group
@@ -148,6 +259,12 @@ const PostgreSQLGroupBy = () => (
                 expression chooses the lowest <code>id</code> within each city. Without a complete{' '}
                 <code>ORDER BY</code>, the chosen row is not predictable.
             </p>
+            <p>
+                A window function is another option when the query needs to rank rows before
+                keeping one. <code>ROW_NUMBER</code> assigns a number within each city, and the
+                outer query keeps the first one:
+            </p>
+            <CodeBlock language="sql">{oneRowPerCityWindowQuery}</CodeBlock>
         </section>
     </ArticleLayout>
 );
