@@ -22,6 +22,40 @@ const coalesceExample = `SELECT COALESCE(NULL, NULL, 'Hello', 'World');`;
 const lengthExample = `SELECT LENGTH(customer_name) AS name_length
 FROM customers;`;
 
+const currentDateTimeExample = `SELECT CURRENT_DATE AS today,
+       CURRENT_TIMESTAMP AS transaction_time,
+       NOW() AS transaction_time_again;`;
+
+const extractDateFieldsExample = `SELECT EXTRACT(YEAR FROM order_date) AS order_year,
+       EXTRACT(MONTH FROM order_date) AS order_month
+FROM orders;`;
+
+const extractWeekdayExample = `SELECT EXTRACT(ISODOW FROM order_date) AS weekday_number
+FROM orders;`;
+
+const dateTruncExample = `SELECT DATE_TRUNC('month', created_at) AS month_start,
+       COUNT(*) AS order_count
+FROM orders
+GROUP BY DATE_TRUNC('month', created_at)
+ORDER BY month_start;`;
+
+const recentOrdersExample = `SELECT order_id, created_at
+FROM orders
+WHERE created_at >= CURRENT_TIMESTAMP - INTERVAL '30 days';`;
+
+const dateArithmeticExample = `SELECT order_date + 7 AS one_week_later,
+       CURRENT_DATE - order_date AS days_since_order
+FROM orders;`;
+
+const timestampArithmeticExample = `SELECT created_at + INTERVAL '7 days' AS one_week_later
+FROM orders;`;
+
+const ageExample = `SELECT AGE(CURRENT_DATE, birth_date) AS age
+FROM people;`;
+
+const toCharDateExample = `SELECT TO_CHAR(order_date, 'Mon DD, YYYY') AS display_date
+FROM orders;`;
+
 const contactNumberQuery = `SELECT COALESCE(mobile_phone, home_phone, office_phone, 'No Phone') AS contact_number
 FROM customers;`;
 
@@ -391,6 +425,77 @@ const PostgreSQLOneShotSQL = () => (
                 find the length of a <code>varchar</code> value.
             </p>
             <CodeBlock language="sql">{lengthExample}</CodeBlock>
+
+            <p>
+                The examples below use <code>order_date</code> and <code>birth_date</code> as{' '}
+                <code>date</code> columns, and <code>created_at</code> as a timestamp column.
+            </p>
+            <h3 className="Article__subTitle">Current date and time</h3>
+            <p>
+                <code>CURRENT_DATE</code> gives today's date. <code>CURRENT_TIMESTAMP</code> and{' '}
+                <code>NOW()</code> give the current date and time. In PostgreSQL, these values are
+                based on the start of the current transaction, so they stay the same during that
+                transaction.
+            </p>
+            <CodeBlock language="sql">{currentDateTimeExample}</CodeBlock>
+
+            <h3 className="Article__subTitle">EXTRACT</h3>
+            <p>
+                Use <code>EXTRACT(field FROM value)</code> to get one part of a date or timestamp,
+                such as its year or month. The result is numeric.
+            </p>
+            <CodeBlock language="sql">{extractDateFieldsExample}</CodeBlock>
+            <p>
+                <code>ISODOW</code> gets the weekday number with Monday as 1 and Sunday as 7.{' '}
+                <code>DOW</code> uses Sunday as 0 and Saturday as 6.
+            </p>
+            <CodeBlock language="sql">{extractWeekdayExample}</CodeBlock>
+            <p>
+                <code>date_part('year', value)</code> can also extract a field. Prefer{' '}
+                <code>EXTRACT</code>: <code>date_part</code> returns <code>double precision</code>,
+                while <code>EXTRACT</code> returns <code>numeric</code>.
+            </p>
+
+            <h3 className="Article__subTitle">DATE_TRUNC</h3>
+            <p>
+                <code>DATE_TRUNC('month', timestamp)</code> sets the day and smaller parts to the
+                start of that month. Use it to group timestamps by month, quarter, or year.
+            </p>
+            <CodeBlock language="sql">{dateTruncExample}</CodeBlock>
+
+            <h3 className="Article__subTitle">Date and time arithmetic</h3>
+            <p>
+                Add an integer to a <code>date</code> to add that many days. Subtracting one{' '}
+                <code>date</code> from another returns the number of days between them.
+            </p>
+            <CodeBlock language="sql">{dateArithmeticExample}</CodeBlock>
+            <p>
+                Add an <code>INTERVAL</code> to a timestamp to move it by a time period. For example,
+                to find rows from the last 30 days:
+            </p>
+            <CodeBlock language="sql">{recentOrdersExample}</CodeBlock>
+            <CodeBlock language="sql">{timestampArithmeticExample}</CodeBlock>
+            <p>
+                A month is not a fixed number of days. Adding one month to January 31 moves to the
+                last valid day of February. This expression returns <code>2026-02-28 00:00:00</code>:
+            </p>
+            <CodeBlock language="sql">DATE '2026-01-31' + INTERVAL '1 month'</CodeBlock>
+
+            <h3 className="Article__subTitle">AGE</h3>
+            <p>
+                <code>AGE(later_date, earlier_date)</code> returns an interval in years, months, and
+                days. It is useful for a calendar-style age. Use date subtraction when you need the
+                number of days between two <code>date</code> values.
+            </p>
+            <CodeBlock language="sql">{ageExample}</CodeBlock>
+
+            <h3 className="Article__subTitle">TO_CHAR</h3>
+            <p>
+                <code>TO_CHAR(value, format)</code> turns a date or timestamp into formatted text.
+                Use it to display a date. Keep the original date or timestamp type for comparisons
+                and sorting.
+            </p>
+            <CodeBlock language="sql">{toCharDateExample}</CodeBlock>
         </section>
 
         <section className="Article__section" aria-labelledby="counting-ratios-and-ordering">
