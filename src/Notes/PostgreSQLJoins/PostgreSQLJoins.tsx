@@ -215,9 +215,21 @@ const PostgreSQLJoins = () => (
                 <code>customer_id</code>.
             </p>
             <p>
-                If one customer has three orders, that customer appears in three result rows. A join
-                does not automatically reduce the result to one row per customer.
+                A join returns one result row for each matching pair. For example, if one customer
+                on the left matches four orders on the right, a <code>LEFT JOIN</code> returns four
+                rows for that customer, one for each order:
             </p>
+            <DataTable
+                caption="Output when customer 1 matches four orders"
+                columns={['c.customer_id', 'c.customer_name', 'o.order_id']}
+                rows={[
+                    ['1', 'Ada', '101'],
+                    ['1', 'Ada', '102'],
+                    ['1', 'Ada', '103'],
+                    ['1', 'Ada', '104'],
+                ]}
+            />
+            <p>A join does not automatically reduce the result to one row per customer.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="inner-and-outer-joins">
