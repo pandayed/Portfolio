@@ -8,8 +8,8 @@ const note: PythonNote = {
     sections: [
         {
             id: 'class-object',
-            title: 'Class and object',
-            paragraphs: ['A class defines behaviour and shared attributes. Calling a class creates an instance of that class.'],
+            title: 'Classes and instances',
+            paragraphs: ['A class defines a kind of object. Calling the class creates an instance. Class attributes belong to the class; methods define behavior for its instances.'],
             examples: [{
                 code: [
                     'class Person:',
@@ -39,7 +39,7 @@ const note: PythonNote = {
                     'person.introduce()',
                 ].join('\n'),
             }],
-            exceptions: ['__init__ initializes an already created instance. __new__ is responsible for creating it. Most classes only need __init__.'],
+            bullets: ['Python calls __init__ after creating an instance. It initializes the instance. Most classes only need __init__.'],
         },
         {
             id: 'class-instance-attributes',
@@ -61,7 +61,7 @@ const note: PythonNote = {
                     'print(Person.species)  # Human',
                 ].join('\n'),
             }],
-            exceptions: ['A mutable class attribute is shared by instances unless an instance replaces it. Put per-instance lists and dictionaries inside __init__.'],
+            bullets: ['Instances read the same mutable class attribute unless an instance shadows it. Define per-instance lists and dictionaries inside __init__.'],
         },
         {
             id: 'deletion-access',
@@ -73,8 +73,8 @@ const note: PythonNote = {
                     'del person',
                 ].join('\n'),
             }],
-            exceptions: [
-                'Python does not make class members private by default. A leading underscore is a non-public convention. A double leading underscore triggers name mangling, but it is not an access-control boundary.',
+            bullets: [
+                'Python does not make class members private by default. A leading underscore marks a non-public name by convention. A double leading underscore triggers name mangling, not access control.',
                 'del person removes that name binding. The object is destroyed only when no references keep it alive.',
             ],
         },

@@ -13,6 +13,13 @@ import exceptions from './data/exceptions';
 import classesAndObjects from './data/classes-and-objects';
 import socketProgramming from './data/socket-programming';
 import railFenceClientServer from './data/rail-fence-client-server';
+import fastapiFirstApp from './data/fastapi-first-app';
+import fastapiPathAndQuery from './data/fastapi-path-and-query';
+import fastapiRequestBodies from './data/fastapi-request-bodies';
+import fastapiResponsesAndErrors from './data/fastapi-responses-and-errors';
+import fastapiDependencies from './data/fastapi-dependencies';
+import fastapiAsyncOperations from './data/fastapi-async-operations';
+import fastapiRouters from './data/fastapi-routers';
 import type { PythonChapter } from './types';
 
 export const pythonChapters: readonly PythonChapter[] = [
@@ -53,6 +60,19 @@ export const pythonChapters: readonly PythonChapter[] = [
         notes: [
             socketProgramming,
             railFenceClientServer,
+        ],
+    },
+    {
+        title: '5. FastAPI',
+        summary: 'Build HTTP APIs with path operations, Pydantic models, dependencies, and routers.',
+        notes: [
+            fastapiFirstApp,
+            fastapiPathAndQuery,
+            fastapiRequestBodies,
+            fastapiResponsesAndErrors,
+            fastapiDependencies,
+            fastapiAsyncOperations,
+            fastapiRouters,
         ],
     },
 ];

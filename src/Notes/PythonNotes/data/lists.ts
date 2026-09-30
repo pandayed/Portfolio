@@ -22,7 +22,7 @@ const note: PythonNote = {
                     'print(characters[::-1])  # [\'n\', \'o\', \'h\', \'t\', \'y\', \'P\']',
                 ].join('\n'),
             }],
-            exceptions: ['Repeating a nested mutable value can create repeated references. [[0] * 2] * 3 does not create three independent inner lists.'],
+            bullets: ['Repeating an inner list repeats the same list reference. Use a comprehension when each nested list must be independent.'],
         },
         {
             id: 'unpacking-enumerate',
@@ -37,7 +37,7 @@ const note: PythonNote = {
                     '    print(index, name)  # 0 Lal, then 1 Ayushi (one pair per line)',
                 ].join('\n'),
             }],
-            exceptions: ['Without a starred target, the number of targets must equal the number of values or unpacking raises ValueError.'],
+            bullets: ['Without a starred target, unpacking needs one target for each value.'],
         },
         {
             id: 'modify',
@@ -74,9 +74,9 @@ const note: PythonNote = {
                     'copy = sorted(items, reverse=True)',
                 ].join('\n'),
             }],
-            exceptions: [
-                'index raises ValueError when the value is absent. Check membership first when absence is normal.',
-                'sort changes the list and returns None. sorted returns a new list. Tuples sort lexicographically when their corresponding values are comparable.',
+            bullets: [
+                'index returns the first matching position. Check membership first when a value may be absent.',
+                'sort changes the list and returns None. sorted returns a new list.',
             ],
         },
         {
@@ -93,7 +93,7 @@ const note: PythonNote = {
                     'print(pairs)  # [(1, 10), (2, 20)]',
                 ].join('\n'),
             }],
-            exceptions: ['zip stops when the shortest iterable ends unless strict=True is used in supported Python versions. map and filter return lazy iterator objects, not lists.'],
+            bullets: ['zip stops when the shortest iterable ends. map and filter produce iterators; use list(...) if you need a list.'],
         },
     ],
 };

@@ -3,7 +3,7 @@ import type { PythonNote } from '../types';
 const note: PythonNote = {
     slug: 'loops-and-range',
     title: 'Loops and range',
-    summary: 'Iterate over values, stop a loop, and use loop else clauses correctly.',
+    summary: 'Repeat work with for and while loops, range, and break.',
     updatedOn: '2026-09-20',
     sections: [
         {
@@ -56,7 +56,7 @@ const note: PythonNote = {
                     '    print("Not found")  # Not found (no name starts with "P" in this list)',
                 ].join('\n'),
             }],
-            exceptions: ['The else is tied to the loop, not to the if. return and an unhandled exception also prevent the else clause from running.'],
+            bullets: ['The else belongs to the loop. It runs only when the loop ends without break.'],
         },
         {
             id: 'while-loop',
@@ -71,7 +71,6 @@ const note: PythonNote = {
                     '    print("Loop was not broken")  # Loop was not broken',
                 ].join('\n'),
             }],
-            exceptions: ['Make sure the condition can become false, or use a deliberate break. Otherwise the loop does not end.'],
         },
     ],
 };

@@ -3,13 +3,13 @@ import type { PythonNote } from '../types';
 const note: PythonNote = {
     slug: 'conditionals',
     title: 'Conditionals',
-    summary: 'Control branches with ordered conditions, boolean operators, and conditional expressions.',
+    summary: 'Choose branches with if, elif, and else, combine conditions, and select values with conditional expressions.',
     updatedOn: '2026-09-20',
     sections: [
         {
             id: 'if-elif-else',
             title: 'if, elif, and else',
-            paragraphs: ['Python checks branches from top to bottom and runs the first matching branch. Put the more specific condition first.'],
+            paragraphs: ['Python checks branches from top to bottom and runs the first matching branch. Order conditions so a specific condition is checked before a broader one.'],
             examples: [{
                 code: [
                     'age = 46',
@@ -22,7 +22,6 @@ const note: PythonNote = {
                     '    print("Under 18")  # Under 18 (when age is below 18)',
                 ].join('\n'),
             }],
-            exceptions: ['If age >= 18 comes first, it also matches 46. The later age >= 45 branch can never run for that value.'],
         },
         {
             id: 'indentation-pass',
@@ -32,7 +31,6 @@ const note: PythonNote = {
                 'Use one consistent indentation style. Four spaces is the standard style.',
                 'pass is a statement that does nothing. It can keep a block syntactically valid while it is empty.',
             ],
-            exceptions: ['Python can accept tabs, but mixing tabs and spaces in indentation can raise TabError and makes code hard to maintain.'],
         },
         {
             id: 'boolean-operators',
@@ -55,7 +53,8 @@ const note: PythonNote = {
         },
         {
             id: 'conditional-expression',
-            title: 'Conditional expression',
+            title: 'Conditional expression (if-else expression)',
+            paragraphs: ['A conditional expression chooses one of two values. Use it for a short choice; use an if statement when each branch needs multiple steps.'],
             examples: [{
                 code: [
                     'age = 20',

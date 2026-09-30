@@ -32,7 +32,7 @@ const note: PythonNote = {
         },
         {
             id: 'arguments',
-            title: 'Arguments',
+            title: 'Positional, keyword, and default arguments',
             examples: [{
                 code: [
                     'def name(first, last="Pandey"):',
@@ -46,7 +46,7 @@ const note: PythonNote = {
         },
         {
             id: 'args-kwargs',
-            title: '*args and **kwargs',
+            title: 'Variable arguments: *args and **kwargs',
             examples: [{
                 code: [
                     'def add(*numbers):',
@@ -65,14 +65,14 @@ const note: PythonNote = {
         },
         {
             id: 'annotations',
-            title: 'Function annotations',
+            title: 'Function type annotations',
             examples: [{
                 code: [
                     'def pair(number: int, label: str) -> tuple[int, str]:',
                     '    return number, label',
                 ].join('\n'),
             }],
-            exceptions: ['Annotations do not enforce argument or return types by themselves. Use a type checker or validation tool when enforcement is required.'],
+            paragraphs: ['Annotations document expected argument and return types. They do not enforce those types by themselves. A type checker or validation tool can check them.'],
         },
         {
             id: 'scope',

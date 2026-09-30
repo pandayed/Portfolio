@@ -49,9 +49,7 @@ const note: PythonNote = {
                 'CPython is the most widely used Python implementation. When someone installs Python from python.org, they usually get CPython. The command python3 starts that implementation on many systems.',
                 'Other implementations exist. PyPy includes a just-in-time compiler, which can make some workloads faster. Different implementations can use different internal ways to run the same Python program.',
             ],
-            exceptions: [
-                'A detail that is specific to CPython is not automatically a rule of the Python language. Code that depends on such a detail may behave differently in another implementation.',
-            ],
+            bullets: ['A CPython detail is not automatically a rule of the Python language. Other implementations may behave differently for implementation-specific details.'],
         },
         {
             id: 'source-to-bytecode',
@@ -95,9 +93,7 @@ const note: PythonNote = {
                 'When Python imports a module, it may save compiled bytecode in a .pyc file inside a folder named __pycache__. On a later import, Python can reuse that cached compilation when it is still valid. This can save compilation work.',
                 'The cache is an implementation detail. You normally edit the .py source file, not the .pyc file. Running a script such as python3 main.py does not mean you need to find or run a .pyc file.',
             ],
-            exceptions: [
-                'Bytecode is specific to an implementation and can change between Python versions. Use dis to inspect it when learning or debugging. Do not build normal application logic around exact bytecode instructions.',
-            ],
+            bullets: ['Bytecode depends on the implementation and can change between Python versions. Use dis to inspect it while learning; do not build application logic around exact instructions.'],
         },
     ],
 };

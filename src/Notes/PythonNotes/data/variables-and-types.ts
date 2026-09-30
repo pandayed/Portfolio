@@ -54,9 +54,6 @@ const note: PythonNote = {
                     'age = "twenty"  # Runs unless another tool checks it.',
                 ].join('\n'),
             }],
-            exceptions: [
-                'A framework or validation library can enforce annotations. That enforcement comes from the tool, not from a normal annotated assignment.',
-            ],
         },
         {
             id: 'identity-mutability',
@@ -74,9 +71,7 @@ const note: PythonNote = {
                     'print(before == id(items))  # True',
                 ].join('\n'),
             }],
-            exceptions: [
-                'Do not treat id as a permanent memory address. Its meaning is implementation-specific, and an identity value may be reused after an object is destroyed.',
-            ],
+            bullets: ['id is an identity value, not a permanent memory address. Its meaning depends on the Python implementation.'],
         },
     ],
 };

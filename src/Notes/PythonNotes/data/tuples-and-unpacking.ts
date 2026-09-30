@@ -20,7 +20,7 @@ const note: PythonNote = {
                     'letters = tuple("Lal")',
                 ].join('\n'),
             }],
-            exceptions: ['A tuple cannot replace, add, or remove its slots. A mutable object stored inside a tuple can still change.'],
+            bullets: ['A tuple’s items cannot be replaced, added, or removed. A mutable item inside a tuple can still change.'],
         },
         {
             id: 'swap',
@@ -52,7 +52,7 @@ const note: PythonNote = {
                     'combined = {**defaults, **overrides}',
                 ].join('\n'),
             }],
-            exceptions: ['When dictionaries are merged this way, a later value replaces an earlier value for the same key.'],
+            bullets: ['When dictionaries are merged, the later value replaces an earlier value for the same key.'],
         },
     ],
 };

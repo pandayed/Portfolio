@@ -59,7 +59,7 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                             {example.title && (
                                 <h3 className="Article__subTitle">{example.title}</h3>
                             )}
-                            <CodeBlock language="python">{example.code}</CodeBlock>
+                            <CodeBlock language={example.language ?? 'python'}>{example.code}</CodeBlock>
                             {example.result && (
                                 <p className="PythonNote__result">Result: {example.result}</p>
                             )}

@@ -19,9 +19,7 @@ const PythonNotesIndex = () => (
                 rel="noreferrer"
             >
                 PythonNotes reference repository
-            </a>
-            . The examples are grouped into chapters, and incorrect or incomplete claims are
-            called out on the relevant page.
+            </a>. The notes are grouped into chapters and use short examples to explain each topic.
         </p>
         <NoteTree nodes={pythonNotes.children} />
     </Page>

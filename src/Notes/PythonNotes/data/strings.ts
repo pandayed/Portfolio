@@ -25,7 +25,7 @@ const note: PythonNote = {
                     'print(name[::-1])  # yednaP irahiB laL',
                 ].join('\n'),
             }],
-            exceptions: ['An out-of-range index raises IndexError. An out-of-range slice is clipped and does not raise that error.'],
+            bullets: ['An index must point to a character in the string. Slices are clipped to the available characters.'],
         },
         {
             id: 'literals-escapes',
@@ -69,9 +69,7 @@ const note: PythonNote = {
                     'print("Lal" in name)  # True',
                 ].join('\n'),
             }],
-            exceptions: [
-                'Strings are immutable. Methods return new strings. find returns -1 when text is absent; index raises ValueError instead.',
-            ],
+            bullets: ['Strings are immutable. Methods return new strings.', 'find returns -1 when text is absent. index raises ValueError instead.'],
         },
     ],
 };

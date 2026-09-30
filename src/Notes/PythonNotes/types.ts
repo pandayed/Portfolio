@@ -1,5 +1,6 @@
 export interface PythonExample {
     title?: string;
+    language?: 'python' | 'text';
     code: string;
     result?: string;
 }

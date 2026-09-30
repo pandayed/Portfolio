@@ -42,7 +42,7 @@ const note: PythonNote = {
         },
         {
             id: 'math',
-            title: 'Built-ins and math',
+            title: 'Numeric helper functions',
             examples: [{
                 code: [
                     'import math',

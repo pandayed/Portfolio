@@ -18,7 +18,7 @@ const note: PythonNote = {
         },
         {
             id: 'server',
-            title: 'Small server',
+            title: 'Minimal TCP server',
             examples: [{
                 code: [
                     'import socket',
@@ -37,7 +37,7 @@ const note: PythonNote = {
         },
         {
             id: 'client',
-            title: 'Small client',
+            title: 'Minimal TCP client',
             examples: [{
                 code: [
                     'import socket',
@@ -60,13 +60,12 @@ const note: PythonNote = {
                 'Prefix each message with its byte length for general binary or text data.',
                 'Loop until every expected byte arrives.',
             ],
-            exceptions: ['recv(1024) means receive up to 1024 bytes. It can return fewer bytes. It returns b"" when the peer closes the connection.'],
+            bullets: ['recv(1024) reads up to 1024 bytes and may return fewer. It returns b"" when the peer closes the connection.'],
         },
         {
             id: 'datatype-checker',
-            title: 'About the datatype-checker example',
-            paragraphs: ['The reference project sends user text to a server and classifies it by scanning characters. This is useful as a socket exercise, but it is not a reliable parser.'],
-            exceptions: ['Inputs such as -10, 1.2.3, an empty string, or mixed letters and punctuation need explicit grammar rules. Use int or float conversion inside narrow try blocks when numeric parsing is the actual goal.'],
+            title: 'What the datatype checker can validate',
+            paragraphs: ['The reference project sends user text to a server and classifies it by scanning characters. This is useful as a socket exercise, but it does not define a complete number format. Inputs such as -10, 1.2.3, or an empty string need explicit parsing rules. Use int or float conversion when the goal is to parse a number.'],
         },
     ],
 };

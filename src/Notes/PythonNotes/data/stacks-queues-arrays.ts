@@ -2,7 +2,7 @@ import type { PythonNote } from '../types';
 
 const note: PythonNote = {
     slug: 'stacks-queues-and-arrays',
-    title: 'Stacks, queues, and arrays',
+    title: 'Stacks, queues, and typed arrays',
     summary: 'Choose a list, deque, or typed array for simple linear storage.',
     updatedOn: '2026-09-20',
     sections: [
@@ -33,11 +33,11 @@ const note: PythonNote = {
                     'first = queue.popleft()',
                 ].join('\n'),
             }],
-            exceptions: ['Avoid list.pop(0) for a busy queue. It shifts all remaining list entries and takes linear time.'],
+            bullets: ['Use deque for a queue that removes items from the front often. Removing the first item from a list shifts the remaining items.'],
         },
         {
             id: 'typed-array',
-            title: 'Typed array',
+            title: 'Typed arrays with array.array',
             paragraphs: ['array.array stores values of one C-compatible type. The first argument is a type code.'],
             examples: [{
                 code: [
@@ -49,7 +49,7 @@ const note: PythonNote = {
                     'numbers.pop()',
                 ].join('\n'),
             }],
-            exceptions: ['A typed array can use less memory than a list of Python integers, but it is not automatically faster for every operation. Measure the actual workload. For numerical computing, NumPy is a separate and more capable library.'],
+            bullets: ['A typed array can use less memory than a list, but it is not faster for every operation. Measure the workload. NumPy is a separate library for numerical computing.'],
         },
     ],
 };
