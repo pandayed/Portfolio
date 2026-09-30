@@ -69,9 +69,6 @@ const note: PythonNote = {
                 'Use tags to group related operations in the generated API docs.',
                 'Add dependencies to a router when every operation in that group needs the same request check.',
             ],
-            exceptions: [
-                'A router is a way to organize route declarations. It does not create a separate FastAPI application or server.',
-            ],
         },
     ],
 };

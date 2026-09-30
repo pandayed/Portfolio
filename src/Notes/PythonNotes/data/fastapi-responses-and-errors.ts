@@ -25,9 +25,6 @@ const note: PythonNote = {
                 ].join('\n'),
                 result: 'The response contains username. password_hash is omitted because it is not in UserPublic.',
             }],
-            exceptions: [
-                'A response model does not replace authorization. Decide whether the caller may access the resource before returning its data.',
-            ],
         },
         {
             id: 'status-codes',
@@ -65,10 +62,6 @@ const note: PythonNote = {
                 ].join('\n'),
                 result: 'A missing item returns status 404 and JSON containing {"detail":"Item not found"}.',
             }],
-            exceptions: [
-                'Raise HTTPException. Returning an HTTPException object does not signal an error response.',
-                'Do not use an HTTP error for a server bug. Unexpected failures should remain server errors and be fixed in application code.',
-            ],
         },
     ],
 };

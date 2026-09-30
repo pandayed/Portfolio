@@ -41,18 +41,12 @@ const note: PythonNote = {
                 'FastAPI includes dependency parameters in the generated API documentation.',
                 'Annotated keeps the Python type and the FastAPI dependency declaration together.',
             ],
-            exceptions: [
-                'Write Depends(pagination), not Depends(pagination()). Passing the function lets FastAPI call it at the right time.',
-            ],
         },
         {
             id: 'dependency-use',
             title: 'Use dependencies for shared request work',
             paragraphs: [
                 'A dependency can return a value, such as parsed pagination settings or a database session. It can also enforce a requirement and raise an HTTPException when the request is not allowed to continue.',
-            ],
-            exceptions: [
-                'A dependency is a way to organize and provide logic. It does not automatically make that logic correct or secure. Validate permissions and handle resource cleanup explicitly.',
             ],
         },
     ],

@@ -44,10 +44,6 @@ const note: PythonNote = {
             paragraphs: [
                 'A blocking call inside async def stops the event loop while it runs. That can delay other requests handled by the same worker. Choose a library with async support, or put synchronous work in a normal FastAPI path operation or dependency where appropriate.',
             ],
-            exceptions: [
-                'FastAPI only applies its thread-pool behavior to path operation functions and dependencies that it calls. A normal utility function that you call directly from async def runs directly and can block.',
-                'Async code helps when work waits on supported asynchronous I/O. It does not make CPU-heavy work run in parallel.',
-            ],
         },
     ],
 };

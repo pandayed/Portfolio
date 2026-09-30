@@ -43,7 +43,6 @@ const note: PythonNote = {
             id: 'security-limit',
             title: 'Security limit',
             paragraphs: ['Rail fence is a classical transposition cipher. It rearranges characters but does not provide modern confidentiality, integrity, or peer authentication.'],
-            exceptions: ['Do not use this transformation to protect passwords, tokens, or private network traffic. Use TLS through a maintained library for real client-server security.'],
         },
     ],
 };

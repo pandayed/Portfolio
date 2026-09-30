@@ -43,10 +43,6 @@ const note: PythonNote = {
                 code: '{"name": "Notebook", "price": "4.50"}',
                 result: 'price is converted to the number 4.5. The function receives item.price as a float.',
             }],
-            exceptions: [
-                'A type annotation alone does not make a field optional. Give it a default such as None when the client may leave it out.',
-                'An input model describes accepted data. Do not assume it also defines exactly which fields the API returns.',
-            ],
         },
         {
             id: 'path-query-body',
@@ -66,9 +62,6 @@ const note: PythonNote = {
                 ].join('\n'),
                 result: 'PUT /items/42?notify=true reads 42 from the path, true from the query, and the item fields from the JSON body.',
             }],
-            exceptions: [
-                'GET request bodies have unclear support across HTTP clients and intermediaries. Use a method such as POST, PUT, or PATCH when sending data in a request body.',
-            ],
         },
     ],
 };

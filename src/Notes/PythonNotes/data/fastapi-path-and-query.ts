@@ -24,9 +24,6 @@ const note: PythonNote = {
                 ].join('\n'),
                 result: 'GET /items/42 passes the integer 42 to read_item and returns {"item_id":42}.',
             }],
-            exceptions: [
-                'GET /items/not-a-number cannot be parsed as an integer. FastAPI rejects the request with a validation error before calling the function.',
-            ],
         },
         {
             id: 'query-parameters',
@@ -56,9 +53,6 @@ const note: PythonNote = {
                 'A parameter whose name appears in the route comes from the path.',
                 'A simple value such as int or str that is not in the route comes from the query string.',
                 'A Pydantic model parameter comes from the request body.',
-            ],
-            exceptions: [
-                'A list query parameter needs an explicit Query() declaration. Otherwise, FastAPI treats a list parameter as a request body.',
             ],
         },
     ],

@@ -10,7 +10,13 @@ const note: PythonNote = {
             id: 'install-and-run',
             title: 'Install and run the application',
             paragraphs: [
-                'FastAPI is a Python framework for building HTTP APIs. It uses Python type annotations to describe request data and create API documentation. FastAPI is built on Starlette for web handling and Pydantic for data validation.',
+                [
+                    'FastAPI is a Python framework for building HTTP APIs. It uses Python type annotations to describe request data and create API documentation. FastAPI is built on ',
+                    { text: 'Starlette', href: 'https://www.starlette.io/' },
+                    ' for web handling and ',
+                    { text: 'Pydantic', href: 'https://docs.pydantic.dev/latest/' },
+                    ' for data validation.',
+                ],
                 'The commands below use uv to manage a project and its packages. Run them in a new project folder. The development command starts a local server and watches files for changes.',
             ],
             examples: [{
@@ -28,9 +34,6 @@ const note: PythonNote = {
                 code: 'uv run fastapi dev main.py',
                 result: 'The server prints a local address, usually http://127.0.0.1:8000.',
             }],
-            exceptions: [
-                'The development server is for local work. A production deployment needs a production server setup and deployment configuration.',
-            ],
         },
         {
             id: 'first-operation',

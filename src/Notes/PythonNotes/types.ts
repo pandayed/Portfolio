@@ -8,10 +8,15 @@ export interface PythonExample {
 export interface PythonNoteSection {
     id: string;
     title: string;
-    paragraphs?: readonly string[];
+    paragraphs?: readonly (string | readonly (string | PythonInlineLink)[])[];
     bullets?: readonly string[];
     examples?: readonly PythonExample[];
     exceptions?: readonly string[];
+}
+
+export interface PythonInlineLink {
+    text: string;
+    href: string;
 }
 
 export interface PythonNote {

@@ -89,7 +89,6 @@ const note: PythonNote = {
             }],
             exceptions: [
                 'A name assigned only inside a branch may be unbound when that branch does not run.',
-                'Changing global state inside a function makes dependencies harder to see. Prefer parameters and return values when practical.',
             ],
         },
     ],

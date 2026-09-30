@@ -44,8 +44,24 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                         {section.title}
                     </h2>
 
-                    {section.paragraphs?.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
+                    {section.paragraphs?.map((paragraph, paragraphIndex) => (
+                        <p key={`${section.id}-paragraph-${paragraphIndex}`}>
+                            {typeof paragraph === 'string'
+                                ? paragraph
+                                : paragraph.map((part, partIndex) => (
+                                    typeof part === 'string'
+                                        ? part
+                                        : (
+                                            <a
+                                                className="Link"
+                                                href={part.href}
+                                                key={`${section.id}-paragraph-${paragraphIndex}-link-${partIndex}`}
+                                            >
+                                                {part.text}
+                                            </a>
+                                        )
+                                ))}
+                        </p>
                     ))}
 
                     {section.bullets && (
