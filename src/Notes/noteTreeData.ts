@@ -3,13 +3,18 @@ import {
     GO_NOTES_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
+    JAVA_NOTES_ROUTE,
+    JAVA_PROGRAM_EXECUTION_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
+    POSTGRESQL_RATIOS_ROUTE,
     NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
+    SPRING_BOOT_NOTES_ROUTE,
+    SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     type GoNoteRoute,
     type PythonNoteRoute,
     type Route,
@@ -69,6 +74,13 @@ export const postgresqlNotes: NoteGroup = {
             route: POSTGRESQL_GROUP_BY_ROUTE,
             updatedOn: '2026-09-29',
         },
+        {
+            type: 'page',
+            title: 'Ratios in PostgreSQL',
+            summary: 'Count matching rows with FILTER and calculate ratios and percentages.',
+            route: POSTGRESQL_RATIOS_ROUTE,
+            updatedOn: '2026-09-30',
+        },
     ],
 };
 
@@ -104,6 +116,38 @@ export const pythonNotes: NoteGroup = {
     })),
 };
 
+export const javaNotes: NoteGroup = {
+    type: 'group',
+    title: 'Java',
+    summary: 'Java fundamentals, starting with source files, compilation, and the JVM.',
+    route: JAVA_NOTES_ROUTE,
+    children: [
+        {
+            type: 'page',
+            title: 'Java source, compilation, and the JVM',
+            summary: 'Follow a Java source file from javac to a running program.',
+            route: JAVA_PROGRAM_EXECUTION_ROUTE,
+            updatedOn: '2026-09-30',
+        },
+    ],
+};
+
+export const springBootNotes: NoteGroup = {
+    type: 'group',
+    title: 'Spring Boot',
+    summary: 'Build on Java fundamentals to understand application startup and HTTP endpoints.',
+    route: SPRING_BOOT_NOTES_ROUTE,
+    children: [
+        {
+            type: 'page',
+            title: 'A first Spring Boot web application',
+            summary: 'See how Spring Boot starts an application and maps an HTTP request.',
+            route: SPRING_BOOT_FIRST_APPLICATION_ROUTE,
+            updatedOn: '2026-09-30',
+        },
+    ],
+};
+
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
@@ -131,6 +175,8 @@ export const noteTree: NoteNode[] = [
     postgresqlNotes,
     goNotes,
     pythonNotes,
+    javaNotes,
+    springBootNotes,
 ];
 
 const collectPages = (nodes: NoteNode[]): NotePage[] =>

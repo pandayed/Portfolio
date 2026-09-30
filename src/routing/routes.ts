@@ -11,6 +11,10 @@ export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
 export const POSTGRESQL_ONE_SHOT_SQL_ROUTE = '/notes/postgresql/one-shot-sql';
 export const GO_NOTES_ROUTE = '/notes/go';
 export const PYTHON_NOTES_ROUTE = '/notes/python';
+export const JAVA_NOTES_ROUTE = '/notes/java';
+export const JAVA_PROGRAM_EXECUTION_ROUTE = '/notes/java/program-execution';
+export const SPRING_BOOT_NOTES_ROUTE = '/notes/spring-boot';
+export const SPRING_BOOT_FIRST_APPLICATION_ROUTE = '/notes/spring-boot/first-application';
 export const DRAFTS_ROUTE = '/blogs/drafts';
 export const ARCHIVE_ROUTE = '/blogs/archive';
 export const CPP_COMPLEXITY_ROUTE = '/blogs/cpp-complexity';
@@ -25,6 +29,7 @@ export const CHAIN_OF_THOUGHT_ROUTE = '/blogs/chain-of-thought';
 export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plans-and-skills';
 export const POSTGRESQL_GROUP_BY_ROUTE = '/notes/postgresql/group-by';
 export const POSTGRESQL_JOINS_ROUTE = '/notes/postgresql/joins';
+export const POSTGRESQL_RATIOS_ROUTE = '/notes/postgresql/ratios';
 export const SCALAR_IN_POSTGRESQL_ROUTE = '/notes/postgresql/scalar';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
 export const JAVASCRIPT_ASYNC_ROUTE = '/notes/javascript-asynchronous-programming';
@@ -47,6 +52,10 @@ export type Route =
     | GoNoteRoute
     | typeof PYTHON_NOTES_ROUTE
     | PythonNoteRoute
+    | typeof JAVA_NOTES_ROUTE
+    | typeof JAVA_PROGRAM_EXECUTION_ROUTE
+    | typeof SPRING_BOOT_NOTES_ROUTE
+    | typeof SPRING_BOOT_FIRST_APPLICATION_ROUTE
     | typeof DRAFTS_ROUTE
     | typeof ARCHIVE_ROUTE
     | typeof CPP_COMPLEXITY_ROUTE
@@ -61,6 +70,7 @@ export type Route =
     | typeof WRITING_BETTER_PLANS_AND_SKILLS_ROUTE
     | typeof POSTGRESQL_GROUP_BY_ROUTE
     | typeof POSTGRESQL_JOINS_ROUTE
+    | typeof POSTGRESQL_RATIOS_ROUTE
     | typeof SCALAR_IN_POSTGRESQL_ROUTE
     | typeof API_COMMUNICATION_ROUTE
     | typeof JAVASCRIPT_ASYNC_ROUTE
@@ -87,6 +97,10 @@ const routes: Route[] = [
     ...goNoteRoutes,
     PYTHON_NOTES_ROUTE,
     ...pythonNoteRoutes,
+    JAVA_NOTES_ROUTE,
+    JAVA_PROGRAM_EXECUTION_ROUTE,
+    SPRING_BOOT_NOTES_ROUTE,
+    SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     DRAFTS_ROUTE,
     ARCHIVE_ROUTE,
     CPP_COMPLEXITY_ROUTE,
@@ -101,6 +115,7 @@ const routes: Route[] = [
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
     POSTGRESQL_JOINS_ROUTE,
+    POSTGRESQL_RATIOS_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     API_COMMUNICATION_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,

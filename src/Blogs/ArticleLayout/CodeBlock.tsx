@@ -1,12 +1,13 @@
 import Prism from 'prismjs';
 import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-typescript';
 
 import { useMemo } from 'react';
 
-type CodeLanguage = 'go' | 'javascript' | 'python' | 'sql' | 'typescript';
+type CodeLanguage = 'go' | 'java' | 'javascript' | 'python' | 'sql' | 'text' | 'typescript';
 
 interface CodeBlockProps {
     children: string;
@@ -15,7 +16,7 @@ interface CodeBlockProps {
 
 const CodeBlock = ({ children, language }: CodeBlockProps) => {
     const highlightedCode = useMemo(
-        () => Prism.highlight(children, Prism.languages[language], language),
+        () => Prism.highlight(children, Prism.languages[language] ?? Prism.languages.plain, language),
         [children, language],
     );
 

@@ -11,6 +11,10 @@ import GoNotes from './Notes/GoNotes';
 import GoNote from './Notes/GoNotes/GoNote';
 import PythonNotes from './Notes/PythonNotes/PythonNotesIndex';
 import PythonNote from './Notes/PythonNotes/PythonNote';
+import JavaNotesIndex from './Notes/JavaNotes/JavaNotesIndex';
+import JavaProgramExecution from './Notes/JavaNotes/JavaProgramExecution';
+import SpringBootNotesIndex from './Notes/SpringBootNotes/SpringBootNotesIndex';
+import SpringBootFirstApplication from './Notes/SpringBootNotes/SpringBootFirstApplication';
 import Drafts from './Blogs/Drafts';
 import Archive from './Blogs/Archive';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
@@ -25,6 +29,7 @@ import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
 import PostgreSQLGroupBy from './Notes/PostgreSQLGroupBy/PostgreSQLGroupBy';
 import PostgreSQLJoins from './Notes/PostgreSQLJoins/PostgreSQLJoins';
+import PostgreSQLRatios from './Notes/PostgreSQLRatios/PostgreSQLRatios';
 import ScalarInPostgreSQL from './Notes/ScalarInPostgreSQL/ScalarInPostgreSQL';
 import ApiCommunication from './Notes/ApiCommunication/ApiCommunication';
 import JavaScriptAsync from './Notes/JavaScriptAsync/JavaScriptAsync';
@@ -49,6 +54,10 @@ import {
     DRAFTS_ROUTE,
     GO_NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
+    JAVA_NOTES_ROUTE,
+    JAVA_PROGRAM_EXECUTION_ROUTE,
+    SPRING_BOOT_NOTES_ROUTE,
+    SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
@@ -57,6 +66,7 @@ import {
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
+    POSTGRESQL_RATIOS_ROUTE,
     NOTES_ROUTE,
     PROJECTS_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
@@ -79,6 +89,10 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [POSTGRESQL_ONE_SHOT_SQL_ROUTE]: PostgreSQLOneShotSQL,
     [GO_NOTES_ROUTE]: GoNotes,
     [PYTHON_NOTES_ROUTE]: PythonNotes,
+    [JAVA_NOTES_ROUTE]: JavaNotesIndex,
+    [JAVA_PROGRAM_EXECUTION_ROUTE]: JavaProgramExecution,
+    [SPRING_BOOT_NOTES_ROUTE]: SpringBootNotesIndex,
+    [SPRING_BOOT_FIRST_APPLICATION_ROUTE]: SpringBootFirstApplication,
     [DRAFTS_ROUTE]: Drafts,
     [ARCHIVE_ROUTE]: Archive,
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,
@@ -93,6 +107,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
     [POSTGRESQL_GROUP_BY_ROUTE]: PostgreSQLGroupBy,
     [POSTGRESQL_JOINS_ROUTE]: PostgreSQLJoins,
+    [POSTGRESQL_RATIOS_ROUTE]: PostgreSQLRatios,
     [SCALAR_IN_POSTGRESQL_ROUTE]: ScalarInPostgreSQL,
     [API_COMMUNICATION_ROUTE]: ApiCommunication,
     [JAVASCRIPT_ASYNC_ROUTE]: JavaScriptAsync,
