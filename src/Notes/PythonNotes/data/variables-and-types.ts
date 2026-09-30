@@ -62,6 +62,7 @@ const note: PythonNote = {
                 'id returns an identity value that is unique during the object lifetime.',
                 'Integers and strings are immutable. An operation creates or reuses another object instead of changing the original object.',
                 'Lists are mutable. append changes the existing list.',
+                'id is an identity value, not a permanent memory address. Its meaning depends on the Python implementation.',
             ],
             examples: [{
                 code: [
@@ -71,7 +72,6 @@ const note: PythonNote = {
                     'print(before == id(items))  # True',
                 ].join('\n'),
             }],
-            bullets: ['id is an identity value, not a permanent memory address. Its meaning depends on the Python implementation.'],
         },
     ],
 };

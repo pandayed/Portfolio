@@ -14,6 +14,7 @@ const note: PythonNote = {
                 'A negative index counts from the end. -1 is the last character.',
                 'The slice stop index is excluded.',
                 'A slice can include a step. A step of -1 reverses the string.',
+                'An index must point to a character in the string. Slices are clipped to the available characters.',
             ],
             examples: [{
                 code: [
@@ -25,7 +26,6 @@ const note: PythonNote = {
                     'print(name[::-1])  # yednaP irahiB laL',
                 ].join('\n'),
             }],
-            bullets: ['An index must point to a character in the string. Slices are clipped to the available characters.'],
         },
         {
             id: 'literals-escapes',

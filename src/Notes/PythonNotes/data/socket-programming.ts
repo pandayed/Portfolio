@@ -59,8 +59,8 @@ const note: PythonNote = {
                 'Use a delimiter when the delimiter cannot appear unescaped in the message.',
                 'Prefix each message with its byte length for general binary or text data.',
                 'Loop until every expected byte arrives.',
+                'recv(1024) reads up to 1024 bytes and may return fewer. It returns b"" when the peer closes the connection.',
             ],
-            bullets: ['recv(1024) reads up to 1024 bytes and may return fewer. It returns b"" when the peer closes the connection.'],
         },
         {
             id: 'datatype-checker',
