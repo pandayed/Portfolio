@@ -11,6 +11,7 @@ import {
     POSTGRESQL_MATHS_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     POSTGRESQL_RATIOS_ROUTE,
+    POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
@@ -82,6 +83,13 @@ export const postgresqlNotes: NoteGroup = {
             summary: 'Count matching rows with FILTER and calculate ratios and percentages.',
             route: POSTGRESQL_RATIOS_ROUTE,
             updatedOn: '2026-09-30',
+        },
+        {
+            type: 'page',
+            title: 'Window functions in PostgreSQL',
+            summary: 'Keep each row while ranking, comparing, and calculating totals across related rows.',
+            route: POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
+            updatedOn: '2026-10-01',
         },
         {
             type: 'page',

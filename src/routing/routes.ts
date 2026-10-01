@@ -31,6 +31,7 @@ export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plan
 export const POSTGRESQL_GROUP_BY_ROUTE = '/notes/postgresql/group-by';
 export const POSTGRESQL_JOINS_ROUTE = '/notes/postgresql/joins';
 export const POSTGRESQL_RATIOS_ROUTE = '/notes/postgresql/ratios';
+export const POSTGRESQL_WINDOW_FUNCTIONS_ROUTE = '/notes/postgresql/window-functions';
 export const POSTGRESQL_MATHS_ROUTE = '/notes/postgresql/maths';
 export const SCALAR_IN_POSTGRESQL_ROUTE = '/notes/postgresql/scalar';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
@@ -74,6 +75,7 @@ export type Route =
     | typeof POSTGRESQL_GROUP_BY_ROUTE
     | typeof POSTGRESQL_JOINS_ROUTE
     | typeof POSTGRESQL_RATIOS_ROUTE
+    | typeof POSTGRESQL_WINDOW_FUNCTIONS_ROUTE
     | typeof POSTGRESQL_MATHS_ROUTE
     | typeof SCALAR_IN_POSTGRESQL_ROUTE
     | typeof API_COMMUNICATION_ROUTE
@@ -121,6 +123,7 @@ const routes: Route[] = [
     POSTGRESQL_GROUP_BY_ROUTE,
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_RATIOS_ROUTE,
+    POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     API_COMMUNICATION_ROUTE,

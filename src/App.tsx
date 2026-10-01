@@ -31,6 +31,7 @@ import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBe
 import PostgreSQLGroupBy from './Notes/PostgreSQLGroupBy/PostgreSQLGroupBy';
 import PostgreSQLJoins from './Notes/PostgreSQLJoins/PostgreSQLJoins';
 import PostgreSQLRatios from './Notes/PostgreSQLRatios/PostgreSQLRatios';
+import PostgreSQLWindowFunctions from './Notes/PostgreSQLWindowFunctions/PostgreSQLWindowFunctions';
 import PostgreSQLMaths from './Notes/PostgreSQLMaths/PostgreSQLMaths';
 import ScalarInPostgreSQL from './Notes/ScalarInPostgreSQL/ScalarInPostgreSQL';
 import ApiCommunication from './Notes/ApiCommunication/ApiCommunication';
@@ -70,6 +71,7 @@ import {
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     POSTGRESQL_RATIOS_ROUTE,
+    POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
     NOTES_ROUTE,
     PROJECTS_ROUTE,
@@ -113,6 +115,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [POSTGRESQL_GROUP_BY_ROUTE]: PostgreSQLGroupBy,
     [POSTGRESQL_JOINS_ROUTE]: PostgreSQLJoins,
     [POSTGRESQL_RATIOS_ROUTE]: PostgreSQLRatios,
+    [POSTGRESQL_WINDOW_FUNCTIONS_ROUTE]: PostgreSQLWindowFunctions,
     [POSTGRESQL_MATHS_ROUTE]: PostgreSQLMaths,
     [SCALAR_IN_POSTGRESQL_ROUTE]: ScalarInPostgreSQL,
     [API_COMMUNICATION_ROUTE]: ApiCommunication,
