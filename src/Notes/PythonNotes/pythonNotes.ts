@@ -22,6 +22,7 @@ import fastapiResponsesAndErrors from './data/fastapi-responses-and-errors';
 import fastapiDependencies from './data/fastapi-dependencies';
 import fastapiAsyncOperations from './data/fastapi-async-operations';
 import fastapiRouters from './data/fastapi-routers';
+import fastapiBackendService from './data/fastapi-backend-service';
 import toolsAndLibraries from './data/tools-and-libraries';
 import type { PythonChapter } from './types';
 
@@ -78,6 +79,7 @@ export const pythonChapters: readonly PythonChapter[] = [
             fastapiDependencies,
             fastapiAsyncOperations,
             fastapiRouters,
+            fastapiBackendService,
         ],
     },
     {
