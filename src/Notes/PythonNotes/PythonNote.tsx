@@ -8,12 +8,27 @@ import {
     type PythonNoteRoute,
 } from '../../routing/routes';
 import { pythonNotes } from './pythonNotes';
+import type { PythonInlineContent } from './types';
 
 interface PythonNoteProps {
     route: PythonNoteRoute;
 }
 
 const sectionId = (id: string) => `python-note-${id}`;
+
+const renderInlineContent = (content: PythonInlineContent, keyPrefix: string) => (
+    typeof content === 'string'
+        ? content
+        : content.map((part, index) => (
+            typeof part === 'string'
+                ? part
+                : (
+                    <a className="Link" href={part.href} key={`${keyPrefix}-link-${index}`}>
+                        {part.text}
+                    </a>
+                )
+        ))
+);
 
 const PythonNote = ({ route }: PythonNoteProps) => {
     const slug = route.slice(`${PYTHON_NOTES_ROUTE}/`.length);
@@ -46,27 +61,17 @@ const PythonNote = ({ route }: PythonNoteProps) => {
 
                     {section.paragraphs?.map((paragraph, paragraphIndex) => (
                         <p key={`${section.id}-paragraph-${paragraphIndex}`}>
-                            {typeof paragraph === 'string'
-                                ? paragraph
-                                : paragraph.map((part, partIndex) => (
-                                    typeof part === 'string'
-                                        ? part
-                                        : (
-                                            <a
-                                                className="Link"
-                                                href={part.href}
-                                                key={`${section.id}-paragraph-${paragraphIndex}-link-${partIndex}`}
-                                            >
-                                                {part.text}
-                                            </a>
-                                        )
-                                ))}
+                            {renderInlineContent(paragraph, `${section.id}-paragraph-${paragraphIndex}`)}
                         </p>
                     ))}
 
                     {section.bullets && (
                         <ul className="Article__notes">
-                            {section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                            {section.bullets.map((bullet, bulletIndex) => (
+                                <li key={`${section.id}-bullet-${bulletIndex}`}>
+                                    {renderInlineContent(bullet, `${section.id}-bullet-${bulletIndex}`)}
+                                </li>
+                            ))}
                         </ul>
                     )}
 

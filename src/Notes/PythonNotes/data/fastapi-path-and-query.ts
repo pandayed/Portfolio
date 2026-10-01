@@ -52,7 +52,11 @@ const note: PythonNote = {
             bullets: [
                 'A parameter whose name appears in the route comes from the path.',
                 'A simple value such as int or str that is not in the route comes from the query string.',
-                'A Pydantic model parameter comes from the request body.',
+                [
+                    'A ',
+                    { text: 'Pydantic', href: '#/notes/python/pydantic' },
+                    ' model parameter comes from the request body.',
+                ],
             ],
         },
     ],

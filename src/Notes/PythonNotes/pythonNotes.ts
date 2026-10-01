@@ -11,15 +11,18 @@ import stacksQueuesArrays from './data/stacks-queues-arrays';
 import functionsAndScope from './data/functions-and-scope';
 import exceptions from './data/exceptions';
 import classesAndObjects from './data/classes-and-objects';
+import modulesAndPackages from './data/modules-and-packages';
 import socketProgramming from './data/socket-programming';
 import railFenceClientServer from './data/rail-fence-client-server';
 import fastapiFirstApp from './data/fastapi-first-app';
 import fastapiPathAndQuery from './data/fastapi-path-and-query';
+import pydantic from './data/pydantic';
 import fastapiRequestBodies from './data/fastapi-request-bodies';
 import fastapiResponsesAndErrors from './data/fastapi-responses-and-errors';
 import fastapiDependencies from './data/fastapi-dependencies';
 import fastapiAsyncOperations from './data/fastapi-async-operations';
 import fastapiRouters from './data/fastapi-routers';
+import toolsAndLibraries from './data/tools-and-libraries';
 import type { PythonChapter } from './types';
 
 export const pythonChapters: readonly PythonChapter[] = [
@@ -47,11 +50,12 @@ export const pythonChapters: readonly PythonChapter[] = [
     },
     {
         title: '3. Program structure',
-        summary: 'Functions, scope, exceptions, classes, and objects.',
+        summary: 'Functions, scope, exceptions, classes, objects, modules, and packages.',
         notes: [
             functionsAndScope,
             exceptions,
             classesAndObjects,
+            modulesAndPackages,
         ],
     },
     {
@@ -68,12 +72,18 @@ export const pythonChapters: readonly PythonChapter[] = [
         notes: [
             fastapiFirstApp,
             fastapiPathAndQuery,
+            pydantic,
             fastapiRequestBodies,
             fastapiResponsesAndErrors,
             fastapiDependencies,
             fastapiAsyncOperations,
             fastapiRouters,
         ],
+    },
+    {
+        title: '6. Tools and libraries',
+        summary: 'Common Python tools, libraries, and frameworks in one line each.',
+        notes: [toolsAndLibraries],
     },
 ];
 

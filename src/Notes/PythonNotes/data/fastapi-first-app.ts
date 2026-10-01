@@ -14,7 +14,7 @@ const note: PythonNote = {
                     'FastAPI is a Python framework for building HTTP APIs. It uses Python type annotations to describe request data and create API documentation. FastAPI is built on ',
                     { text: 'Starlette', href: 'https://www.starlette.io/' },
                     ' for web handling and ',
-                    { text: 'Pydantic', href: 'https://docs.pydantic.dev/latest/' },
+                    { text: 'Pydantic', href: '#/notes/python/pydantic' },
                     ' for data validation.',
                 ],
                 'The commands below use uv to manage a project and its packages. Run them in a new project folder. The development command starts a local server and watches files for changes.',

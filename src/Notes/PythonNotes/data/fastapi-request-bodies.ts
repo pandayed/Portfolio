@@ -10,7 +10,11 @@ const note: PythonNote = {
             id: 'model-shape',
             title: 'Describe the expected JSON',
             paragraphs: [
-                'A request body carries data from a client to an API. For JSON input, define a Pydantic model with the fields the endpoint accepts. FastAPI reads the JSON body, validates it, and gives the function a model instance.',
+                [
+                    'A request body carries data from a client to an API. For JSON input, define a ',
+                    { text: 'Pydantic', href: '#/notes/python/pydantic' },
+                    ' model with the fields the endpoint accepts. FastAPI reads the JSON body, validates it, and gives the function a model instance.',
+                ],
             ],
             examples: [{
                 title: 'A create-item request',
@@ -36,7 +40,10 @@ const note: PythonNote = {
             id: 'input-validation',
             title: 'Validation happens before the function runs',
             paragraphs: [
-                'Pydantic checks the incoming data against the model fields. It converts compatible values to the declared types and reports values it cannot accept. If the body is invalid, FastAPI returns a validation response without running the path operation function.',
+                [
+                    { text: 'Pydantic', href: '#/notes/python/pydantic' },
+                    ' checks the incoming data against the model fields. It converts compatible values to the declared types and reports values it cannot accept. If the body is invalid, FastAPI returns a validation response without running the path operation function.',
+                ],
             ],
             examples: [{
                 title: 'JSON body',
@@ -48,7 +55,11 @@ const note: PythonNote = {
             id: 'path-query-body',
             title: 'Combine path, query, and body values',
             paragraphs: [
-                'One operation can receive values from several places. FastAPI uses the route name for path values, a Pydantic model for the JSON body, and a simple value outside the route for a query parameter.',
+                [
+                    'One operation can receive values from several places. FastAPI uses the route name for path values, a ',
+                    { text: 'Pydantic', href: '#/notes/python/pydantic' },
+                    ' model for the JSON body, and a simple value outside the route for a query parameter.',
+                ],
             ],
             examples: [{
                 code: [
