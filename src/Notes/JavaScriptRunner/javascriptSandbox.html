@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob:; worker-src blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>JavaScript example sandbox</title>
+</head>
+<body>
+<!-- The worker inherits this document's CSP. Reader code never runs on the UI thread. -->
+<script id="worker-source" type="text/plain">
+(() => {
+    const send = self.postMessage.bind(self);
+    const nativeTimeout = self.setTimeout.bind(self);
+    const nativeInterval = self.setInterval.bind(self);
+    const nativeClearTimeout = self.clearTimeout.bind(self);
+    const nativeClearInterval = self.clearInterval.bind(self);
+    const timers = new Set();
+    let settled = false;
+    let finished = false;
+    let completionTimer;
+    let entries = 0;
+
+    function format(value, seen = new Set(), depth = 0) {
+        if (typeof value === 'string') return value.slice(0, 2000);
+        if (typeof value === 'bigint') return `${value}n`;
+        if (typeof value !== 'object' || value === null) return String(value);
+        if (value instanceof Error) return `${value.name}: ${value.message}`.slice(0, 2000);
+        if (seen.has(value)) return '[Circular]';
+        if (depth >= 3) return Array.isArray(value) ? '[Array]' : '[Object]';
+        seen.add(value);
+        try {
+            if (value instanceof Date) return value.toISOString();
+            if (value instanceof Promise) return '[Promise]';
+            if (value instanceof Map) return `Map ${format(Array.from(value.entries()).slice(0, 20), seen, depth + 1)}`;
+            if (value instanceof Set) return `Set ${format(Array.from(value).slice(0, 20), seen, depth + 1)}`;
+            const nested = (item) => typeof item === 'string'
+                ? JSON.stringify(item.slice(0, 2000)) : format(item, seen, depth + 1);
+            if (Array.isArray(value)) {
+                const items = value.slice(0, 20).map(nested);
+                if (value.length > 20) items.push('…');
+                return `[${items.join(', ')}]`;
+            }
+            const keys = Object.keys(value);
+            const items = keys.slice(0, 20).map((key) => `${JSON.stringify(key)}: ${nested(value[key])}`);
+            if (keys.length > 20) items.push('…');
+            return `{${items.join(', ')}}`;
+        } catch {
+            return '[Unprintable value]';
+        } finally {
+            seen.delete(value);
+        }
+    }
+
+    function finish(type, text) {
+        if (finished) return;
+        finished = true;
+        send({ type, text });
+    }
+
+    function write(level, values) {
+        if (finished) return;
+        if (entries >= 200) {
+            finish('limit', 'Stopped after 200 output entries.');
+            return;
+        }
+        entries += 1;
+        send({ type: 'output', level, text: values.slice(0, 20).map((value) => format(value)).join(' ').slice(0, 4000) });
+    }
+
+    for (const level of ['log', 'info', 'warn', 'error', 'debug', 'dir', 'table']) {
+        console[level] = (...values) => write(level, values);
+    }
+    console.clear = () => {
+        if (finished) return;
+        if (entries >= 200) {
+            finish('limit', 'Stopped after 200 output entries.');
+            return;
+        }
+        entries += 1;
+        send({ type: 'clear' });
+    };
+    console.assert = (condition, ...values) => {
+        if (!condition) write('error', ['Assertion failed:', ...values]);
+    };
+
+    function checkCompletion() {
+        nativeClearTimeout(completionTimer);
+        // Promise reactions drain first. Leave a short idle window for the host's
+        // unhandled-rejection task, which can arrive after a zero-delay timer.
+        completionTimer = nativeTimeout(() => {
+            if (settled && timers.size === 0) finish('done');
+        }, 50);
+    }
+
+    self.setTimeout = (callback, delay, ...args) => {
+        const id = nativeTimeout(() => {
+            timers.delete(id);
+            try {
+                if (typeof callback === 'function') callback(...args);
+                else (0, eval)(String(callback));
+            } finally {
+                checkCompletion();
+            }
+        }, delay);
+        timers.add(id);
+        return id;
+    };
+    self.setInterval = (callback, delay, ...args) => {
+        const id = nativeInterval(() => {
+            if (typeof callback === 'function') callback(...args);
+            else (0, eval)(String(callback));
+        }, delay);
+        timers.add(id);
+        return id;
+    };
+    self.clearTimeout = self.clearInterval = (id) => {
+        nativeClearTimeout(id);
+        nativeClearInterval(id);
+        timers.delete(id);
+        checkCompletion();
+    };
+
+    self.addEventListener('error', (event) => {
+        event.preventDefault();
+        finish('error', format(event.error ?? event.message));
+    });
+    self.addEventListener('unhandledrejection', (event) => {
+        event.preventDefault();
+        finish('error', `Unhandled rejection: ${format(event.reason)}`);
+    });
+
+    self.addEventListener('message', async (event) => {
+        try {
+            // The async function allows await in edited examples. Imports and DOM APIs are unavailable.
+            const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+            const run = new AsyncFunction(`"use strict";\n${event.data}`);
+            await run();
+            settled = true;
+            checkCompletion();
+        } catch (error) {
+            finish('error', format(error));
+        }
+    }, { once: true });
+})();
+</script>
+<script>
+(() => {
+    let worker;
+    let outputCount = 0;
+    const send = (data) => parent.postMessage(data, '*');
+    const stop = () => {
+        worker?.terminate();
+        worker = undefined;
+    };
+
+    window.addEventListener('message', (event) => {
+        if (event.source !== parent) return;
+        if (event.data?.type === 'stop') {
+            stop();
+            return;
+        }
+        if (event.data?.type !== 'run' || typeof event.data.code !== 'string' || worker) return;
+        let url;
+        try {
+            url = URL.createObjectURL(new Blob([
+                document.getElementById('worker-source').textContent,
+            ], { type: 'text/javascript' }));
+            worker = new Worker(url);
+            worker.onmessage = ({ data }) => {
+                if (data?.type === 'output' || data?.type === 'clear') {
+                    outputCount += 1;
+                    if (outputCount > 200) {
+                        stop();
+                        send({ type: 'limit', text: 'Stopped after 200 output entries.' });
+                        return;
+                    }
+                }
+                if (data?.type === 'output') {
+                    if (typeof data.text !== 'string') return;
+                    send({ type: 'output', level: data.level, text: data.text.slice(0, 4000) });
+                } else if (data?.type === 'clear') {
+                    send({ type: 'clear' });
+                } else if (['done', 'error', 'limit'].includes(data?.type)) {
+                    stop();
+                    send({ type: data.type, text: typeof data.text === 'string' ? data.text.slice(0, 4000) : '' });
+                }
+            };
+            worker.onerror = (error) => {
+                error.preventDefault();
+                stop();
+                send({ type: 'error', text: error.message || 'Could not run this example.' });
+            };
+            worker.postMessage(event.data.code);
+        } catch (error) {
+            stop();
+            send({ type: 'error', text: `${error.name}: ${error.message}` });
+        } finally {
+            if (url) URL.revokeObjectURL(url);
+        }
+    });
+    window.addEventListener('pagehide', stop);
+})();
+</script>
+</body>
+</html>

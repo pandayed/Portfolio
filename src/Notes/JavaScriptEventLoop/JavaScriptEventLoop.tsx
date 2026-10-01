@@ -1,5 +1,6 @@
 import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import JavaScriptRunner from '../JavaScriptRunner/JavaScriptRunner';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     JAVASCRIPT_ASYNC_ROUTE,
@@ -236,13 +237,13 @@ const JavaScriptEventLoop = () => (
                     </tbody>
                 </table>
             </div>
-            <CodeBlock language="javascript">{browserOrderExample}</CodeBlock>
+            <JavaScriptRunner>{browserOrderExample}</JavaScriptRunner>
             <p>
                 Queue order still matters inside one queue. A microtask queued first runs before a
                 later microtask. A microtask may add another microtask, and the runtime keeps draining
                 the queue before it takes the next task.
             </p>
-            <CodeBlock language="javascript">{nestedMicrotaskExample}</CodeBlock>
+            <JavaScriptRunner>{nestedMicrotaskExample}</JavaScriptRunner>
         </section>
 
         <section className="Article__section" aria-labelledby="promises">
@@ -253,7 +254,7 @@ const JavaScriptEventLoop = () => (
                 microtasks. These handlers include <code>then</code>, <code>catch</code>, and
                 <code> finally</code> callbacks.
             </p>
-            <CodeBlock language="javascript">{promiseExecutorExample}</CodeBlock>
+            <JavaScriptRunner>{promiseExecutorExample}</JavaScriptRunner>
             <ul className="Article__notes">
                 <li>Settling a Promise records its result. It does not run a handler on the current stack.</li>
                 <li>A handler attached to an already-settled Promise still runs as a microtask.</li>
@@ -269,7 +270,7 @@ const JavaScriptEventLoop = () => (
                 returns a pending Promise to its caller. The code after <code>await</code> resumes in
                 a Promise microtask, even when the awaited value is not a pending Promise.
             </p>
-            <CodeBlock language="javascript">{awaitExample}</CodeBlock>
+            <JavaScriptRunner>{awaitExample}</JavaScriptRunner>
             <p>
                 <code>await</code> pauses one async function. It does not block the thread, and it
                 does not create a new thread.
@@ -381,7 +382,7 @@ const JavaScriptEventLoop = () => (
                 <li>Drain the applicable next-tick and microtask queues when the current callback ends.</li>
                 <li>Take the next eligible host task or phase callback. Then repeat the queue check.</li>
             </ol>
-            <CodeBlock language="javascript">{mixedOrderExample}</CodeBlock>
+            <JavaScriptRunner>{mixedOrderExample}</JavaScriptRunner>
             <p>
                 The timer that prints <code>5</code> is created before the first timer callback runs,
                 but it is added later than that first timer. The microtask that prints <code>3</code>

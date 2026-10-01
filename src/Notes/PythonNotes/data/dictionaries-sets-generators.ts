@@ -3,8 +3,8 @@ import type { PythonNote } from '../types';
 const note: PythonNote = {
     slug: 'dictionaries-sets-and-generators',
     title: 'Dictionaries, sets, comprehensions, and generators',
-    summary: 'Use dictionaries and sets, build collections with comprehensions, and produce values with generators.',
-    updatedOn: '2026-09-20',
+    summary: 'Use dictionaries and sets, compare comprehensions with loops, and produce values with generators.',
+    updatedOn: '2026-10-01',
     sections: [
         {
             id: 'dictionaries',
@@ -50,6 +50,30 @@ const note: PythonNote = {
                 'Use set() to create an empty set. {} creates an empty dictionary.',
                 'discard does nothing when a value is absent. remove raises KeyError.',
             ],
+        },
+        {
+            id: 'list-comprehension-vs-loop',
+            title: 'List comprehension versus a for loop',
+            paragraphs: [
+                'Both forms visit the input values one at a time. A list comprehension builds and returns a new list in one expression. A for loop runs a block of statements; it builds a list only if you create one and add values to it.',
+                'Use a comprehension for a short transformation or filter that produces a list. Use a for loop when the work needs several steps, branches, or an action such as printing instead of building a list.',
+            ],
+            examples: [{
+                title: 'The same result with both forms',
+                code: [
+                    'numbers = [1, 2, 3, 4]',
+                    '',
+                    'with_loop = []',
+                    'for number in numbers:',
+                    '    if number % 2 == 0:',
+                    '        with_loop.append(number * number)',
+                    '',
+                    'with_comprehension = [number * number for number in numbers if number % 2 == 0]',
+                    'print(with_loop)',
+                    'print(with_comprehension)',
+                ].join('\n'),
+                result: 'Both lines print [4, 16]. The if clause keeps only even numbers; the expression before for squares each one.',
+            }],
         },
         {
             id: 'comprehensions',

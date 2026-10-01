@@ -1,5 +1,6 @@
 import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import JavaScriptRunner from '../JavaScriptRunner/JavaScriptRunner';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     JAVASCRIPT_ASYNC_ROUTE,
@@ -375,7 +376,7 @@ const JavaScriptAsync = () => (
                 <code> pending</code>, then becomes either <code>fulfilled</code> with a value or
                 <code> rejected</code> with a reason. Once settled, its state cannot change.
             </p>
-            <CodeBlock language="javascript">{promiseCreationExample}</CodeBlock>
+            <JavaScriptRunner>{promiseCreationExample}</JavaScriptRunner>
             <ul className="Article__notes">
                 <li><code>resolve(value)</code> fulfills the Promise, unless the value is another Promise or thenable.</li>
                 <li><code>reject(error)</code> rejects it. Reject with an <code>Error</code> object so the stack and message are useful.</li>
@@ -451,8 +452,8 @@ const JavaScriptAsync = () => (
                 task queues. The precise task queues belong to the host environment. Promise
                 microtasks run before the next timer task in the browser model used in this note.
             </p>
-            <CodeBlock language="javascript">{schedulingExample}</CodeBlock>
-            <CodeBlock language="javascript">{awaitSchedulingExample}</CodeBlock>
+            <JavaScriptRunner>{schedulingExample}</JavaScriptRunner>
+            <JavaScriptRunner>{awaitSchedulingExample}</JavaScriptRunner>
             <p>
                 A zero-millisecond timer means “not before this delay.” It does not mean “run now.”
                 Long synchronous code delays it. A loop that continually queues microtasks can also

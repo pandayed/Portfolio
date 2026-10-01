@@ -4,7 +4,7 @@ const note: PythonNote = {
     slug: 'exceptions',
     title: 'Exceptions',
     summary: 'Handle expected failures without hiding unrelated errors.',
-    updatedOn: '2026-09-20',
+    updatedOn: '2026-10-01',
     sections: [
         {
             id: 'catch-value-error',
@@ -35,23 +35,40 @@ const note: PythonNote = {
         },
         {
             id: 'else-finally',
-            title: 'else and finally',
+            title: 'try, except, else, and finally',
+            paragraphs: [
+                'Put the operation that may fail in try. A matching except handles an exception raised there. If no exception occurs in try, else runs. Finally runs after the handled path or the successful path, so use it for cleanup that must happen in either case.',
+            ],
             bullets: [
-                'else runs only when the try block finishes without an exception.',
-                'finally runs whether an exception occurred or not.',
                 'Keep the try block narrow so it covers only the operation expected to fail.',
+                'An exception that no except handles still propagates after finally runs.',
             ],
             examples: [{
+                title: 'Valid input',
                 code: [
                     'try:',
                     '    age = int("20")',
                     'except ValueError:',
-                    '    print("Invalid age")  # Invalid age (if conversion raises ValueError)',
+                    '    print("Invalid age")',
                     'else:',
-                    '    print(age)  # 20',
+                    '    print(age)',
                     'finally:',
-                    '    print("Finished")  # Finished (always)',
+                    '    print("Finished")',
                 ].join('\n'),
+                result: '20 and Finished print on separate lines. The except block does not run.',
+            }, {
+                title: 'Invalid input',
+                code: [
+                    'try:',
+                    '    age = int("bad")',
+                    'except ValueError:',
+                    '    print("Invalid age")',
+                    'else:',
+                    '    print(age)',
+                    'finally:',
+                    '    print("Finished")',
+                ].join('\n'),
+                result: 'Invalid age and Finished print on separate lines. The else block does not run.',
             }],
         },
         {
