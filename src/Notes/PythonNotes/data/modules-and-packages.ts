@@ -3,8 +3,8 @@ import type { PythonNote } from '../types';
 const note: PythonNote = {
     slug: 'modules-and-packages',
     title: 'Modules and packages',
-    summary: 'Split Python code into files, import it, and run a module inside a package.',
-    updatedOn: '2026-09-30',
+    summary: 'Understand modules, packages, import forms, and installable distributions.',
+    updatedOn: '2026-10-01',
     sections: [
         {
             id: 'module',
@@ -38,6 +38,34 @@ const note: PythonNote = {
                 'import prices gives you the module name prices. Use prices.price_with_tax to get a name from it.',
                 'from prices import price_with_tax imports that name directly. You can then call price_with_tax(20).',
                 'Python finds modules through its import search path. The script’s folder and installed libraries are common places on that path.',
+            ],
+        },
+        {
+            id: 'import-forms',
+            title: 'Choose an import form',
+            paragraphs: [
+                'Each form below uses the same prices.py file. Import the module when you want its name to show where a function came from. Import a name directly when that shorter call is clear.',
+            ],
+            examples: [{
+                title: 'main.py',
+                code: [
+                    'import prices',
+                    'print(prices.price_with_tax(20))  # 22.0',
+                    '',
+                    'from prices import price_with_tax',
+                    'print(price_with_tax(20))  # 22.0',
+                    '',
+                    'import prices as costs',
+                    'print(costs.price_with_tax(20))  # 22.0',
+                    '',
+                    'from prices import price_with_tax as add_tax',
+                    'print(add_tax(20))  # 22.0',
+                ].join('\n'),
+                result: 'All four calls print 22.0. as gives the imported module or name a local alias.',
+            }],
+            bullets: [
+                'By itself, from prices import price_with_tax creates only the local name price_with_tax, not prices.',
+                'Avoid from prices import *. It is harder to see which names came from prices and may replace an existing name.',
             ],
         },
         {
@@ -101,6 +129,40 @@ const note: PythonNote = {
             ],
         },
         {
+            id: 'module-versus-package',
+            title: 'Module versus package',
+            paragraphs: [
+                'A module is a unit of code Python can import. A package is a special kind of module that can contain other modules and packages. The common layout is one .py file for a module and one folder for a regular package.',
+            ],
+            bullets: [
+                'prices.py is a module. import prices loads that module.',
+                'shop/ with __init__.py is a regular package. shop/pricing.py is the module shop.pricing.',
+                'A folder inside shop/ with its own __init__.py is a subpackage. Its modules use longer names such as shop.reports.monthly.',
+                'A namespace package can span more than one folder and does not need __init__.py. It is useful when separate distributions contribute to the same package name.',
+            ],
+        },
+        {
+            id: 'package-import-forms',
+            title: 'Import names from a package',
+            paragraphs: [
+                'These imports use the shop/ and pricing.py files shown above. A dotted name identifies the module inside its package.',
+            ],
+            examples: [{
+                title: 'main.py',
+                code: [
+                    'import shop.pricing',
+                    'print(shop.pricing.total(10, 2))  # 12',
+                    '',
+                    'from shop import pricing',
+                    'print(pricing.total(10, 2))  # 12',
+                    '',
+                    'from shop.pricing import total',
+                    'print(total(10, 2))  # 12',
+                ].join('\n'),
+                result: 'From project/, python3 main.py prints 12 three times.',
+            }],
+        },
+        {
             id: 'imports-inside-packages',
             title: 'Import between modules in a package',
             paragraphs: [
@@ -134,7 +196,7 @@ const note: PythonNote = {
         },
         {
             id: 'installed-packages',
-            title: 'Your packages and installed packages',
+            title: 'Import packages and installed distributions',
             examples: [{
                 title: 'Create a virtual environment and install a library (macOS/Linux)',
                 language: 'text',
@@ -151,14 +213,19 @@ const note: PythonNote = {
             ],
             paragraphs: [
                 'The Python standard library includes modules such as json and pathlib. You can import them without installing a separate library. Other projects publish libraries that you install with a package manager such as pip.',
-                'The word package has two related uses: an import package is code you import, such as shop; a distribution package is something you install. Their names do not always match.',
+                'The word package has two related uses: an import package is code you import, such as shop; a distribution package is something you install. A distribution can provide modules and import packages. Its install name and import name do not always match: pip install Pillow provides the PIL import package.',
+                'To share a project for installation, package its code and project metadata into a distribution. A source distribution contains the source; a wheel is a built distribution for installation. Neither changes the import syntax used by the code.',
                 'A virtual environment gives a project its own installed packages. After creating one, use its Python interpreter to install and run dependencies.',
                 [
                     'Read the ',
                     { text: 'Python modules tutorial', href: 'https://docs.python.org/3/tutorial/modules.html' },
-                    ' and the ',
-                    { text: 'Python Packaging User Guide', href: 'https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/' },
-                    ' for more detail.',
+                    ', the ',
+                    { text: 'installation guide', href: 'https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/' },
+                    ', and the ',
+                    { text: 'distribution and import package guide', href: 'https://packaging.python.org/en/latest/discussions/distribution-package-vs-import-package/' },
+                    '. See ',
+                    { text: 'package formats', href: 'https://packaging.python.org/en/latest/discussions/package-formats/' },
+                    ' for source distributions and wheels.',
                 ],
             ],
         },

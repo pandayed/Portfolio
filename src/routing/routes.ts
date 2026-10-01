@@ -15,6 +15,7 @@ export const JAVA_NOTES_ROUTE = '/notes/java';
 export const JAVA_PROGRAM_EXECUTION_ROUTE = '/notes/java/program-execution';
 export const SPRING_BOOT_NOTES_ROUTE = '/notes/spring-boot';
 export const SPRING_BOOT_FIRST_APPLICATION_ROUTE = '/notes/spring-boot/first-application';
+export const SPRING_BOOT_ANNOTATIONS_ROUTE = '/notes/spring-boot/annotations';
 export const DRAFTS_ROUTE = '/blogs/drafts';
 export const ARCHIVE_ROUTE = '/blogs/archive';
 export const CPP_COMPLEXITY_ROUTE = '/blogs/cpp-complexity';
@@ -57,6 +58,7 @@ export type Route =
     | typeof JAVA_PROGRAM_EXECUTION_ROUTE
     | typeof SPRING_BOOT_NOTES_ROUTE
     | typeof SPRING_BOOT_FIRST_APPLICATION_ROUTE
+    | typeof SPRING_BOOT_ANNOTATIONS_ROUTE
     | typeof DRAFTS_ROUTE
     | typeof ARCHIVE_ROUTE
     | typeof CPP_COMPLEXITY_ROUTE
@@ -103,6 +105,7 @@ const routes: Route[] = [
     JAVA_PROGRAM_EXECUTION_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
+    SPRING_BOOT_ANNOTATIONS_ROUTE,
     DRAFTS_ROUTE,
     ARCHIVE_ROUTE,
     CPP_COMPLEXITY_ROUTE,

@@ -15,6 +15,7 @@ import JavaNotesIndex from './Notes/JavaNotes/JavaNotesIndex';
 import JavaProgramExecution from './Notes/JavaNotes/JavaProgramExecution';
 import SpringBootNotesIndex from './Notes/SpringBootNotes/SpringBootNotesIndex';
 import SpringBootFirstApplication from './Notes/SpringBootNotes/SpringBootFirstApplication';
+import SpringBootAnnotations from './Notes/SpringBootNotes/SpringBootAnnotations';
 import Drafts from './Blogs/Drafts';
 import Archive from './Blogs/Archive';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
@@ -59,6 +60,7 @@ import {
     JAVA_PROGRAM_EXECUTION_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
+    SPRING_BOOT_ANNOTATIONS_ROUTE,
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
@@ -95,6 +97,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [JAVA_PROGRAM_EXECUTION_ROUTE]: JavaProgramExecution,
     [SPRING_BOOT_NOTES_ROUTE]: SpringBootNotesIndex,
     [SPRING_BOOT_FIRST_APPLICATION_ROUTE]: SpringBootFirstApplication,
+    [SPRING_BOOT_ANNOTATIONS_ROUTE]: SpringBootAnnotations,
     [DRAFTS_ROUTE]: Drafts,
     [ARCHIVE_ROUTE]: Archive,
     [CPP_COMPLEXITY_ROUTE]: CppComplexity,

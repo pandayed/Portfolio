@@ -16,6 +16,7 @@ import {
     SCALAR_IN_POSTGRESQL_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
+    SPRING_BOOT_ANNOTATIONS_ROUTE,
     type GoNoteRoute,
     type PythonNoteRoute,
     type Route,
@@ -152,6 +153,13 @@ export const springBootNotes: NoteGroup = {
             summary: 'See how Spring Boot starts an application and maps an HTTP request.',
             route: SPRING_BOOT_FIRST_APPLICATION_ROUTE,
             updatedOn: '2026-09-30',
+        },
+        {
+            type: 'page',
+            title: 'Common annotations at a glance',
+            summary: 'Find common Spring Boot, Spring MVC, validation, and persistence annotations.',
+            route: SPRING_BOOT_ANNOTATIONS_ROUTE,
+            updatedOn: '2026-10-01',
         },
     ],
 };
