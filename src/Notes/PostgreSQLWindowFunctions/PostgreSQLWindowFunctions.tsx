@@ -3,8 +3,10 @@ import '../../CommonClasses/CommonClasses.css';
 import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import {
+    POSTGRESQL_GROUP_BY_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
+    toHref,
 } from '../../routing/routes';
 import { sections } from './sections';
 
@@ -21,6 +23,11 @@ INSERT INTO sales (sale_id, region, person, amount) VALUES
     (3, 'East', 'Cam', 150),
     (4, 'West', 'Dia', 80),
     (5, 'West', 'Eli', 120);`;
+
+const groupedTotalQuery = `SELECT region, SUM(amount) AS region_total
+FROM sales
+GROUP BY region
+ORDER BY region;`;
 
 const partitionQuery = `SELECT
     sale_id, region, person, amount,
@@ -103,6 +110,28 @@ const PostgreSQLWindowFunctions = () => (
         <section className="Article__section" aria-labelledby="partition-rows">
             <h2 id="partition-rows" className="SectionTitle">Partition rows</h2>
             <p>
+                A grouped aggregate returns one row per region. The five sales rows become two
+                result rows:
+            </p>
+            <CodeBlock language="sql">{groupedTotalQuery}</CodeBlock>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead><tr><th scope="col">region</th><th scope="col">region_total</th></tr></thead>
+                    <tbody>
+                        <tr><td>East</td><td>400</td></tr>
+                        <tr><td>West</td><td>200</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                Use this form when the result needs one summary row per region. The{' '}
+                <a className="Link" href={toHref(POSTGRESQL_GROUP_BY_ROUTE)}>
+                    GROUP BY note
+                </a>{' '}
+                explains the selected-column rule and aggregate result shapes.
+            </p>
+            <p>
+                Use a window function when each sale row must remain.{' '}
                 <code>PARTITION BY region</code> starts a separate calculation for each region.
                 Without <code>PARTITION BY</code>, all rows form one partition. This query repeats
                 each region total beside its sales:
@@ -120,6 +149,10 @@ const PostgreSQLWindowFunctions = () => (
                     </tbody>
                 </table>
             </div>
+            <p>
+                The result still has five rows. Each region total is repeated beside the rows that
+                contributed to it.
+            </p>
         </section>
 
         <section className="Article__section" aria-labelledby="rank-rows">

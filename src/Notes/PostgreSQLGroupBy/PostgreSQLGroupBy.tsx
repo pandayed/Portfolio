@@ -2,7 +2,12 @@ import '../../CommonClasses/CommonClasses.css';
 
 import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
-import { POSTGRESQL_GROUP_BY_ROUTE, POSTGRESQL_NOTES_ROUTE } from '../../routing/routes';
+import {
+    POSTGRESQL_GROUP_BY_ROUTE,
+    POSTGRESQL_NOTES_ROUTE,
+    POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
+    toHref,
+} from '../../routing/routes';
 import { sections } from './sections';
 
 const invalidGroupedQuery = `SELECT *
@@ -12,10 +17,28 @@ GROUP BY city;`;
 const groupByError = `ERROR: column "customers.id" must appear in the GROUP BY clause
 or be used in an aggregate function`;
 
+const aggregateWithoutGroupByQuery = `SELECT city, COUNT(*) AS customer_count
+FROM customers;`;
+
+const aggregateWithoutGroupByError = `ERROR: column "customers.city" must appear in the GROUP BY clause
+or be used in an aggregate function`;
+
 const aggregateByCityQuery = `SELECT city, COUNT(*) AS customer_count
 FROM customers
 GROUP BY city
 ORDER BY city;`;
+
+const aggregateAllCustomersQuery = `SELECT COUNT(*) AS customer_count
+FROM customers;`;
+
+const customerCountWindowQuery = `SELECT
+    id,
+    city,
+    name,
+    COUNT(*) OVER () AS all_customers,
+    COUNT(*) OVER (PARTITION BY city) AS customers_in_city
+FROM customers
+ORDER BY id;`;
 
 const aggregateByRegionAndProduct = `SELECT region, product, SUM(amount) AS sales_total
 FROM sales
@@ -109,7 +132,10 @@ const PostgreSQLGroupBy = () => (
         backLabel="Back to PostgreSQL notes"
     >
         <section className="Article__section">
-            <CodeBlock language="sql">{invalidGroupedQuery}</CodeBlock>
+            <p>
+                Start with the result shape. Use <code>GROUP BY</code> when the result should contain
+                one row per group. Use a window function when every original row must remain.
+            </p>
             <p>Suppose the table contains:</p>
             <ResultTable
                 rows={[
@@ -118,6 +144,8 @@ const PostgreSQLGroupBy = () => (
                     { id: '3', city: 'Mumbai', name: 'Alex' },
                 ]}
             />
+            <p>Now consider this query:</p>
+            <CodeBlock language="sql">{invalidGroupedQuery}</CodeBlock>
             <p>
                 The query groups by <code>city</code>, but it also selects <code>id</code> and{' '}
                 <code>name</code>. One Delhi group contains two different values for both columns.
@@ -139,6 +167,104 @@ const PostgreSQLGroupBy = () => (
                 PostgreSQL does not have a mode that makes this query return an arbitrary row. The
                 query must state how each group becomes one result row.
             </p>
+            <h3 className="Article__subTitle">Removing GROUP BY does not fix the query</h3>
+            <CodeBlock language="sql">{aggregateWithoutGroupByQuery}</CodeBlock>
+            <pre className="Article__code">
+                <code>{aggregateWithoutGroupByError}</code>
+            </pre>
+            <p>
+                Without <code>GROUP BY</code>, <code>COUNT(*)</code> produces one result for the whole
+                table. The input contains both Delhi and Mumbai, so PostgreSQL cannot choose one{' '}
+                <code>city</code> for that result. This is the same reason a selected{' '}
+                <code>query_name</code> becomes invalid after <code>GROUP BY query_name</code> is
+                removed.
+            </p>
+            <p>
+                An aggregate function does not require <code>GROUP BY</code> by itself. The error
+                occurs because the query also selects a value that has no single answer for the
+                aggregate result.
+            </p>
+        </section>
+
+        <section className="Article__section" aria-labelledby="valid-aggregate-query">
+            <h2 id="valid-aggregate-query" className="SectionTitle">
+                Choose the result shape
+            </h2>
+            <h3 className="Article__subTitle">One row per city</h3>
+            <CodeBlock language="sql">{aggregateByCityQuery}</CodeBlock>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead>
+                        <tr><th scope="col">city</th><th scope="col">customer_count</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Delhi</td><td>2</td></tr>
+                        <tr><td>Mumbai</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                Three input rows become two result rows because there are two city groups. This is
+                the correct shape when the requirement is one count per city.
+            </p>
+
+            <h3 className="Article__subTitle">One row for the whole table</h3>
+            <CodeBlock language="sql">{aggregateAllCustomersQuery}</CodeBlock>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead><tr><th scope="col">customer_count</th></tr></thead>
+                    <tbody><tr><td>3</td></tr></tbody>
+                </table>
+            </div>
+            <p>
+                This query needs no <code>GROUP BY</code> because it selects only the aggregate.
+                Every input row contributes to one result row.
+            </p>
+
+            <h3 className="Article__subTitle">Keep every customer row</h3>
+            <CodeBlock language="sql">{customerCountWindowQuery}</CodeBlock>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th><th scope="col">city</th><th scope="col">name</th>
+                            <th scope="col">all_customers</th><th scope="col">customers_in_city</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Delhi</td><td>John</td><td>3</td><td>2</td></tr>
+                        <tr><td>2</td><td>Delhi</td><td>Mary</td><td>3</td><td>2</td></tr>
+                        <tr><td>3</td><td>Mumbai</td><td>Alex</td><td>3</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <code>OVER ()</code> calculates across all rows.{' '}
+                <code>OVER (PARTITION BY city)</code> calculates separately for each city. Both keep
+                the three original rows.
+            </p>
+
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead>
+                        <tr><th scope="col">Required result</th><th scope="col">Query form</th><th scope="col">Rows here</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>One overall count</td><td>Aggregate without GROUP BY</td><td>1</td></tr>
+                        <tr><td>One count per city</td><td>GROUP BY city</td><td>2</td></tr>
+                        <tr><td>Every row plus the overall count</td><td>OVER ()</td><td>3</td></tr>
+                        <tr><td>Every row plus its city count</td><td>OVER (PARTITION BY city)</td><td>3</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <code>GROUP BY</code> returns one row per group. <code>PARTITION BY</code> defines
+                groups for a calculation but keeps one result row per input row. Continue with the{' '}
+                <a className="Link" href={toHref(POSTGRESQL_WINDOW_FUNCTIONS_ROUTE)}>
+                    window functions note
+                </a>{' '}
+                for ranking, running totals, and window frames.
+            </p>
         </section>
 
         <section className="Article__section" aria-labelledby="primary-key-dependency">
@@ -154,28 +280,6 @@ const PostgreSQLGroupBy = () => (
             <p>
                 PostgreSQL does not apply this shortcut to every unique constraint. Group by the
                 required columns explicitly when the grouped columns are not the table's primary key.
-            </p>
-        </section>
-
-        <section className="Article__section" aria-labelledby="valid-aggregate-query">
-            <h2 id="valid-aggregate-query" className="SectionTitle">
-                A valid aggregate query
-            </h2>
-            <CodeBlock language="sql">{aggregateByCityQuery}</CodeBlock>
-            <p>This query returns one row per city and counts the rows in each city.</p>
-            <p>For a predictable grouped result, each selected expression must:</p>
-            <ul className="Article__notes">
-                <li>
-                    appear in <code>GROUP BY</code>,
-                </li>
-                <li>
-                    use an aggregate such as <code>COUNT()</code>, <code>SUM()</code>,{' '}
-                    <code>MIN()</code>, or <code>MAX()</code>, or
-                </li>
-                <li>be functionally dependent on the grouped primary key.</li>
-            </ul>
-            <p>
-                <code>HAVING</code> does not change this rule. It filters groups after grouping.
             </p>
         </section>
 

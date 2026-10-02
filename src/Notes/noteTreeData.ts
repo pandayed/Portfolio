@@ -76,7 +76,7 @@ export const postgresqlNotes: NoteGroup = {
             title: 'GROUP BY in PostgreSQL',
             summary: 'Grouping by one or more columns, aggregates, filters, NULL values, and subtotal groups.',
             route: POSTGRESQL_GROUP_BY_ROUTE,
-            updatedOn: '2026-09-29',
+            updatedOn: '2026-10-02',
         },
         {
             type: 'page',
@@ -90,7 +90,7 @@ export const postgresqlNotes: NoteGroup = {
             title: 'Window functions in PostgreSQL',
             summary: 'Keep each row while ranking, comparing, and calculating totals across related rows.',
             route: POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
-            updatedOn: '2026-10-01',
+            updatedOn: '2026-10-02',
         },
         {
             type: 'page',
