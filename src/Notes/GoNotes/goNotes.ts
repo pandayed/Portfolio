@@ -1,7 +1,6 @@
 /* Ordered index of the Go note pages copied from Notion. */
 
 import goNote1 from './data/why-go';
-import goNote2 from './data/you-notes-fit-check';
 import goNote3 from './data/cpp-vs-go';
 import goNote4 from './data/basic-commands';
 import goNote5 from './data/constants-variables';
@@ -45,7 +44,6 @@ import goNote42 from './data/go-by-questions';
 
 export const goNotes = [
     goNote1,
-    goNote2,
     goNote3,
     goNote4,
     goNote5,

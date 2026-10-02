@@ -1,0 +1,58 @@
+.PythonRunSequence {
+    overflow-x: auto;
+}
+
+.PythonRunSequence__svg {
+    display: block;
+    width: 100%;
+    min-width: 76rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-secondary);
+    fill: var(--color-text);
+}
+
+.PythonRunSequence__caption {
+    font-weight: 600;
+}
+
+.PythonRunSequence__participant {
+    fill: none;
+    stroke: var(--color-border);
+}
+
+.PythonRunSequence__heading {
+    font-weight: 600;
+}
+
+.PythonRunSequence__detail {
+    font-size: var(--text-fine);
+    fill: var(--color-text-subtle);
+}
+
+.PythonRunSequence__note {
+    font-size: var(--text-fine);
+    fill: var(--color-text-subtle);
+}
+
+.PythonRunSequence__code {
+    font-family: var(--font-code);
+}
+
+.PythonRunSequence__lifeline {
+    stroke: var(--color-border);
+    stroke-dasharray: 5 5;
+}
+
+.PythonRunSequence__message {
+    fill: none;
+    stroke: var(--color-text);
+    stroke-width: 1.5;
+}
+
+.PythonRunSequence__return {
+    stroke-dasharray: 5 4;
+}
+
+.PythonRunSequence__arrowHead {
+    fill: var(--color-text);
+}

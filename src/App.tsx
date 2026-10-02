@@ -11,6 +11,7 @@ import GoNotes from './Notes/GoNotes';
 import GoNote from './Notes/GoNotes/GoNote';
 import PythonNotes from './Notes/PythonNotes/PythonNotesIndex';
 import PythonNote from './Notes/PythonNotes/PythonNote';
+import ProgrammingDictionary from './Notes/ProgrammingDictionary/ProgrammingDictionaryPage';
 import JavaNotesIndex from './Notes/JavaNotes/JavaNotesIndex';
 import JavaProgramExecution from './Notes/JavaNotes/JavaProgramExecution';
 import SpringBootNotesIndex from './Notes/SpringBootNotes/SpringBootNotesIndex';
@@ -57,6 +58,7 @@ import {
     DRAFTS_ROUTE,
     GO_NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
+    PROGRAMMING_DICTIONARY_ROUTE,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
@@ -95,6 +97,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [POSTGRESQL_ONE_SHOT_SQL_ROUTE]: PostgreSQLOneShotSQL,
     [GO_NOTES_ROUTE]: GoNotes,
     [PYTHON_NOTES_ROUTE]: PythonNotes,
+    [PROGRAMMING_DICTIONARY_ROUTE]: ProgrammingDictionary,
     [JAVA_NOTES_ROUTE]: JavaNotesIndex,
     [JAVA_PROGRAM_EXECUTION_ROUTE]: JavaProgramExecution,
     [SPRING_BOOT_NOTES_ROUTE]: SpringBootNotesIndex,

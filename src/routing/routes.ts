@@ -11,6 +11,7 @@ export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
 export const POSTGRESQL_ONE_SHOT_SQL_ROUTE = '/notes/postgresql/one-shot-sql';
 export const GO_NOTES_ROUTE = '/notes/go';
 export const PYTHON_NOTES_ROUTE = '/notes/python';
+export const PROGRAMMING_DICTIONARY_ROUTE = '/notes/programming-dictionary';
 export const JAVA_NOTES_ROUTE = '/notes/java';
 export const JAVA_PROGRAM_EXECUTION_ROUTE = '/notes/java/program-execution';
 export const SPRING_BOOT_NOTES_ROUTE = '/notes/spring-boot';
@@ -49,6 +50,7 @@ export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
     | typeof NOTES_ROUTE
+    | typeof PROGRAMMING_DICTIONARY_ROUTE
     | typeof POSTGRESQL_NOTES_ROUTE
     | typeof POSTGRESQL_ONE_SHOT_SQL_ROUTE
     | typeof GO_NOTES_ROUTE
@@ -102,6 +104,7 @@ const routes: Route[] = [
     GO_NOTES_ROUTE,
     ...goNoteRoutes,
     PYTHON_NOTES_ROUTE,
+    PROGRAMMING_DICTIONARY_ROUTE,
     ...pythonNoteRoutes,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
@@ -138,6 +141,10 @@ const routes: Route[] = [
 export const toHref = (route: Route): string => `#${route}`;
 
 export const parseRoute = (hash: string): Route => {
-    const path = hash.replace(/^#/, '');
+    const rawPath = hash.replace(/^#/, '');
+    const dictionaryPath = rawPath.split('?')[0];
+    const path = dictionaryPath === PROGRAMMING_DICTIONARY_ROUTE || dictionaryPath === '/notes/python/dictionary'
+        ? PROGRAMMING_DICTIONARY_ROUTE
+        : rawPath;
     return routes.find((route) => route === path) ?? HOME_ROUTE;
 };

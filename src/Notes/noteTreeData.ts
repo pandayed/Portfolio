@@ -14,6 +14,7 @@ import {
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
+    PROGRAMMING_DICTIONARY_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
@@ -175,6 +176,13 @@ export const springBootNotes: NoteGroup = {
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
+    {
+        type: 'page',
+        title: 'Programming dictionary',
+        summary: 'Shared definitions of common programming terms, with language-specific terms clearly marked.',
+        route: PROGRAMMING_DICTIONARY_ROUTE,
+        updatedOn: '2026-10-02',
+    },
     {
         type: 'page',
         title: 'JavaScript Event Loop and Task Queues',

@@ -8,6 +8,7 @@ export interface PythonExample {
 export interface PythonNoteSection {
     id: string;
     title: string;
+    diagram?: 'python-run-sequence';
     paragraphs?: readonly PythonInlineContent[];
     bullets?: readonly PythonInlineContent[];
     examples?: readonly PythonExample[];

@@ -1,0 +1,8 @@
+.ProgrammingDictionary__term {
+    scroll-margin-top: calc(var(--header-offset, 0px) + var(--space-sm));
+}
+
+.ProgrammingDictionary__term:focus {
+    outline: 1px solid var(--color-text-subtle);
+    outline-offset: 4px;
+}

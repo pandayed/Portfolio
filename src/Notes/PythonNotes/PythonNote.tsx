@@ -5,10 +5,14 @@ import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     PYTHON_NOTES_ROUTE,
+    PROGRAMMING_DICTIONARY_ROUTE,
+    toHref,
     type PythonNoteRoute,
 } from '../../routing/routes';
 import { pythonNotes } from './pythonNotes';
 import type { PythonInlineContent } from './types';
+import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
+import PythonRunSequence from './PythonRunSequence';
 
 interface PythonNoteProps {
     route: PythonNoteRoute;
@@ -18,10 +22,10 @@ const sectionId = (id: string) => `python-note-${id}`;
 
 const renderInlineContent = (content: PythonInlineContent, keyPrefix: string) => (
     typeof content === 'string'
-        ? content
+        ? renderProgrammingTerms(content, keyPrefix)
         : content.map((part, index) => (
             typeof part === 'string'
-                ? part
+                ? renderProgrammingTerms(part, `${keyPrefix}-part-${index}`)
                 : (
                     <a className="Link" href={part.href} key={`${keyPrefix}-link-${index}`}>
                         {part.text}
@@ -49,6 +53,10 @@ const PythonNote = ({ route }: PythonNoteProps) => {
             backRoute={PYTHON_NOTES_ROUTE}
             backLabel="Back to Python notes"
         >
+            {!note.sections.every((section) => section.diagram) && <p>
+                Hover over a dotted term link for its meaning, or browse the{' '}
+                <a className="Link" href={toHref(PROGRAMMING_DICTIONARY_ROUTE)}>programming dictionary</a>.
+            </p>}
             {note.sections.map((section) => (
                 <section
                     className="Article__section"
@@ -58,6 +66,8 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                     <h2 id={sectionId(section.id)} className="SectionTitle">
                         {section.title}
                     </h2>
+
+                    {section.diagram === 'python-run-sequence' && <PythonRunSequence />}
 
                     {section.paragraphs?.map((paragraph, paragraphIndex) => (
                         <p key={`${section.id}-paragraph-${paragraphIndex}`}>
@@ -82,14 +92,17 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                             )}
                             <CodeBlock language={example.language ?? 'python'}>{example.code}</CodeBlock>
                             {example.result && (
-                                <p className="PythonNote__result">Result: {example.result}</p>
+                                <p className="PythonNote__result">
+                                    Result: {renderProgrammingTerms(example.result, `${section.id}-result-${index}`)}
+                                </p>
                             )}
                         </div>
                     ))}
 
                     {section.exceptions?.map((exception) => (
                         <aside className="PythonNote__exception" key={exception}>
-                            <strong>Exception or common mistake:</strong> {exception}
+                            <strong>Exception or common mistake:</strong>{' '}
+                            {renderProgrammingTerms(exception, `${section.id}-exception-${exception}`)}
                         </aside>
                     ))}
                 </section>
