@@ -1,0 +1,316 @@
+{
+  "id": "26c24eb1ed54803ab1f7efc05646d87e",
+  "title": "Two Generals’ Problem",
+  "sourceUrl": "https://xpandeyed.notion.site/Two-Generals-Problem-26c24eb1ed54803ab1f7efc05646d87e?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed54805099c8cfdab34f2aca",
+      "type": "bulleted_list",
+      "html": "In a distributed system, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple nodes</span> (servers, databases, replicas) often need to <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">agree on committing a transaction simultaneously</span>.",
+      "text": "In a distributed system, multiple nodes (servers, databases, replicas) often need to agree on committing a transaction simultaneously."
+    },
+    {
+      "id": "26c24eb1ed548080aa8efcbdec51c001",
+      "type": "bulleted_list",
+      "html": "If <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">all commit together → system stays consistent</span>.",
+      "text": "If all commit together → system stays consistent."
+    },
+    {
+      "id": "26c24eb1ed548017958bdbcf1c696d73",
+      "type": "bulleted_list",
+      "html": "If <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one commits but the other does not → inconsistency occurs</span>.",
+      "text": "If one commits but the other does not → inconsistency occurs."
+    },
+    {
+      "id": "26c24eb1ed54805a9948ec5a759b5f98",
+      "type": "bulleted_list",
+      "html": "The problem: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">messages between nodes can get lost, delayed, or fail</span>.",
+      "text": "The problem: messages between nodes can get lost, delayed, or fail."
+    },
+    {
+      "id": "26c24eb1ed5480179a66db7a060470ab",
+      "type": "bulleted_list",
+      "html": "Because of this, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">no node can ever be 100% certain</span> that the other node received its decision.",
+      "text": "Because of this, no node can ever be 100% certain that the other node received its decision."
+    },
+    {
+      "id": "26c24eb1ed54804e8882c3b78f960b73",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480498c17dd7d83630e7f",
+      "type": "header",
+      "html": "The Two General Problem",
+      "text": "The Two General Problem"
+    },
+    {
+      "id": "26c24eb1ed5480808ae9f26080855cd8",
+      "type": "text",
+      "html": "You can read the actual thought experiment here: <a href=\"https://en.wikipedia.org/wiki/Two_Generals%27_Problem\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"1\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26c24eb1-ed54-8080-8ae9-f26080855cd8--1258179451\">Two Generals' Problem [Wikipedia]</span></a>",
+      "text": "You can read the actual thought experiment here: Two Generals' Problem [Wikipedia]",
+      "links": [
+        {
+          "href": "https://en.wikipedia.org/wiki/Two_Generals%27_Problem",
+          "text": "Two Generals' Problem [Wikipedia]"
+        }
+      ]
+    },
+    {
+      "id": "26c24eb1ed5480c89a1de92ad9429ec1",
+      "type": "text",
+      "html": "Below is a modified version.",
+      "text": "Below is a modified version."
+    },
+    {
+      "id": "26c24eb1ed5480e497c1dfb20f2f3357",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Setup:</span>",
+      "text": "Setup:"
+    },
+    {
+      "id": "26c24eb1ed5480b6ab78da3f68fcb39a",
+      "type": "bulleted_list",
+      "html": "Two database nodes: A and B",
+      "text": "Two database nodes: A and B"
+    },
+    {
+      "id": "26c24eb1ed54805eb4add5ff9a29fb6b",
+      "type": "bulleted_list",
+      "html": "Both start with <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">x = 0</span></div>",
+      "text": "Both start with x = 0"
+    },
+    {
+      "id": "26c24eb1ed548027a440de95c489c232",
+      "type": "bulleted_list",
+      "html": "They must update together or not at all (to stay consistent)",
+      "text": "They must update together or not at all (to stay consistent)"
+    },
+    {
+      "id": "26c24eb1ed548054844cdb17363f17ea",
+      "type": "bulleted_list",
+      "html": "Network is unreliable - messages can be lost",
+      "text": "Network is unreliable - messages can be lost"
+    },
+    {
+      "id": "26c24eb1ed5480b18256ca1a2de60a07",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it Plays Out:</span>",
+      "text": "How it Plays Out:"
+    },
+    {
+      "id": "26c24eb1ed5480778091d1e7d5485897",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Node A wants to update x = 10:</span>",
+      "text": "Node A wants to update x = 10:"
+    },
+    {
+      "id": "26c24eb1ed5480a5a458ff3d51c4c2ce",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480778091d1e7d5485897",
+      "html": "A temporarily sets <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">x = 10</span></div> (but doesn't commit yet)",
+      "text": "A temporarily sets x = 10 (but doesn't commit yet)"
+    },
+    {
+      "id": "26c24eb1ed5480aeb55fe815b74f89d6",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480778091d1e7d5485897",
+      "html": "A sends message to B: \"Let's both update x = 10\"",
+      "text": "A sends message to B: \"Let's both update x = 10\""
+    },
+    {
+      "id": "26c24eb1ed5480718419f27a31cc7d8e",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Node B receives the message:</span>",
+      "text": "Node B receives the message:"
+    },
+    {
+      "id": "26c24eb1ed54801a9fe2edb710c7e925",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480718419f27a31cc7d8e",
+      "html": "B temporarily sets <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">x = 10</span></div> (but doesn't commit yet)",
+      "text": "B temporarily sets x = 10 (but doesn't commit yet)"
+    },
+    {
+      "id": "26c24eb1ed54802495d4e14e32fa45ef",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480718419f27a31cc7d8e",
+      "html": "B thinks: \"What if my reply gets lost? Then A won't know I'm ready, and A will rollback to <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">x = 0</span></div>\"",
+      "text": "B thinks: \"What if my reply gets lost? Then A won't know I'm ready, and A will rollback to x = 0\""
+    },
+    {
+      "id": "26c24eb1ed548044b333d7034216b785",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480718419f27a31cc7d8e",
+      "html": "B sends back: \"OK, I'm ready to update x = 10\"",
+      "text": "B sends back: \"OK, I'm ready to update x = 10\""
+    },
+    {
+      "id": "26c24eb1ed5480d2a871d41a74ca19e6",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The problem begins:</span>",
+      "text": "The problem begins:"
+    },
+    {
+      "id": "26c24eb1ed54801fb8a4f3e7beeb39d1",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480d2a871d41a74ca19e6",
+      "html": "Even if A gets B's reply, A thinks: \"But what if B doesn't know I received the reply? B might think I rolled back and B will also rollback to <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">x = 0</span></div>\"",
+      "text": "Even if A gets B's reply, A thinks: \"But what if B doesn't know I received the reply? B might think I rolled back and B will also rollback to x = 0\""
+    },
+    {
+      "id": "26c24eb1ed54800690cedb192449cb49",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480d2a871d41a74ca19e6",
+      "html": "So A sends: \"Got your reply! Let's commit x = 10\"",
+      "text": "So A sends: \"Got your reply! Let's commit x = 10\""
+    },
+    {
+      "id": "26c24eb1ed5480619dcec70f79b54116",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">It never ends:</span>",
+      "text": "It never ends:"
+    },
+    {
+      "id": "26c24eb1ed548084922adce5c1da70fa",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480619dcec70f79b54116",
+      "html": "Now B thinks: \"Did A get my confirmation? What if A thinks I rolled back?\"",
+      "text": "Now B thinks: \"Did A get my confirmation? What if A thinks I rolled back?\""
+    },
+    {
+      "id": "26c24eb1ed54803380cec7dced2e2332",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480619dcec70f79b54116",
+      "html": "B sends: \"Got your confirmation! Really committing x = 10\"",
+      "text": "B sends: \"Got your confirmation! Really committing x = 10\""
+    },
+    {
+      "id": "26c24eb1ed54800dabccd6957fe1f641",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480619dcec70f79b54116",
+      "html": "This continues forever...",
+      "text": "This continues forever..."
+    },
+    {
+      "id": "26c24eb1ed54809a8272c6c9b90be1c8",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The result:</span> Neither node can ever be 100% certain the other will commit. They're stuck in an endless loop of confirmations, never able to safely update <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">x</span></div> from 0 to 10.",
+      "text": "The result: Neither node can ever be 100% certain the other will commit. They're stuck in an endless loop of confirmations, never able to safely update x from 0 to 10."
+    },
+    {
+      "id": "26c24eb1ed548014a74bd9cd2ec6638f",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed54807ebdb4cb46cf67c8da",
+      "type": "header",
+      "html": "Solution?",
+      "text": "Solution?"
+    },
+    {
+      "id": "26d24eb1ed548092afc6d67b603afdfb",
+      "type": "text",
+      "html": "There is no perfect solution to the Two Generals’ Problem. Here’s why:",
+      "text": "There is no perfect solution to the Two Generals’ Problem. Here’s why:"
+    },
+    {
+      "id": "26d24eb1ed5480c7a9a2d3aa1e3e2061",
+      "type": "bulleted_list",
+      "html": "The core issue is unreliable communication. No matter how many acknowledgements are exchanged, there is always uncertainty about whether the last message was received.",
+      "text": "The core issue is unreliable communication. No matter how many acknowledgements are exchanged, there is always uncertainty about whether the last message was received."
+    },
+    {
+      "id": "26d24eb1ed54803685a1f25256e477d5",
+      "type": "bulleted_list",
+      "html": "This makes absolute agreement impossible to guarantee.",
+      "text": "This makes absolute agreement impossible to guarantee."
+    },
+    {
+      "id": "26d24eb1ed5480c9a052e4b70deaff09",
+      "type": "bulleted_list",
+      "html": "The problem has been formally proven unsolvable in distributed systems theory.",
+      "text": "The problem has been formally proven unsolvable in distributed systems theory."
+    },
+    {
+      "id": "26d24eb1ed54809eba97e71fbb2f6400",
+      "type": "bulleted_list",
+      "html": "The uncertainty cannot be eliminated with any finite number of messages.",
+      "text": "The uncertainty cannot be eliminated with any finite number of messages."
+    },
+    {
+      "id": "26d24eb1ed5480619965f5818baba615",
+      "type": "bulleted_list",
+      "html": "In real systems, protocols like Two-Phase Commit (2PC) or Three-Phase Commit (3PC) are used.",
+      "text": "In real systems, protocols like Two-Phase Commit (2PC) or Three-Phase Commit (3PC) are used."
+    },
+    {
+      "id": "26d24eb1ed5480debf24d92ee23b9ad4",
+      "type": "bulleted_list",
+      "html": "These do not solve the problem perfectly but reduce uncertainty with assumptions such as reliable channels, timeouts, and failure detectors.",
+      "text": "These do not solve the problem perfectly but reduce uncertainty with assumptions such as reliable channels, timeouts, and failure detectors."
+    },
+    {
+      "id": "26d24eb1ed54807e9e2ede1acfd38f36",
+      "type": "bulleted_list",
+      "html": "A perfect solution that always works under all conditions does not exist.",
+      "text": "A perfect solution that always works under all conditions does not exist."
+    },
+    {
+      "id": "26d24eb1ed5480c0a1c7db88f31d82cf",
+      "type": "text",
+      "html": "What exists are practical protocols that work well enough in real-world networks but rely on assumptions, so they are not truly perfect.",
+      "text": "What exists are practical protocols that work well enough in real-world networks but rely on assumptions, so they are not truly perfect."
+    },
+    {
+      "id": "26d24eb1ed54808f93b6e743d14624f2",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed54809dabb7dad8dadf8d74",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Connection to Other Concepts</span>",
+      "text": "Connection to Other Concepts"
+    },
+    {
+      "id": "26c24eb1ed5480c59955f1c79cc8075b",
+      "type": "bulleted_list",
+      "html": "This problem is the foundation for:",
+      "text": "This problem is the foundation for:"
+    },
+    {
+      "id": "26c24eb1ed548032ba21fae7e11a61a7",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c59955f1c79cc8075b",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Two-Phase Commit (2PC)</span> → tries to reduce uncertainty but can still fail if the coordinator crashes.",
+      "text": "Two-Phase Commit (2PC) → tries to reduce uncertainty but can still fail if the coordinator crashes."
+    },
+    {
+      "id": "26c24eb1ed5480459828da593b6d6c1c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c59955f1c79cc8075b",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consensus Protocols (Paxos, Raft)</span> → extend the idea to multiple nodes with majority agreement.",
+      "text": "Consensus Protocols (Paxos, Raft) → extend the idea to multiple nodes with majority agreement."
+    },
+    {
+      "id": "26c24eb1ed548038a81acd3eab602b2d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c59955f1c79cc8075b",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "CAP Theorem ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26c24eb1ed5480ca8984db0d9bc7c33f",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed5480b1a578d240c29c74ec",
+      "type": "text"
+    }
+  ]
+}

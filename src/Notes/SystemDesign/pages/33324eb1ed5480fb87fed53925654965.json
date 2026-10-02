@@ -1,0 +1,186 @@
+{
+  "id": "33324eb1ed5480fb87fed53925654965",
+  "title": "DNS: Domain Name System",
+  "sourceUrl": "https://xpandeyed.notion.site/DNS-Domain-Name-System-33324eb1ed5480fb87fed53925654965?pvs=23",
+  "blocks": [
+    {
+      "id": "33324eb1ed54805c8e89e5ac3961817c",
+      "type": "text",
+      "html": "Source: ",
+      "text": "Source: "
+    },
+    {
+      "id": "33324eb1ed5480feb3c2e222e47e1719",
+      "type": "video",
+      "src": "https://www.youtube.com/embed/27r4Bzuj5NQ?rel=0&origin=https%3A%2F%2Fxpandeyed.notion.site"
+    },
+    {
+      "id": "33324eb1ed548052b107f7de7a8c9182",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed5480a48636ef78cce39d3b",
+      "type": "text"
+    },
+    {
+      "id": "33324eb1ed5480c6b935dd17b4ba4f14",
+      "type": "bulleted_list",
+      "html": "It is more of a directory.",
+      "text": "It is more of a directory."
+    },
+    {
+      "id": "33324eb1ed548060a245cabffd686290",
+      "type": "bulleted_list",
+      "html": "Translates the human readable domain name to machine readable IP.",
+      "text": "Translates the human readable domain name to machine readable IP."
+    },
+    {
+      "id": "33324eb1ed5480e1850ce576d7f4d5a1",
+      "type": "image",
+      "src": "/image/attachment%3Ade23a873-5da5-4cde-b0f2-d0de6d25266b%3Aimage.png?table=block&id=33324eb1-ed54-80e1-850c-e576d7f4d5a1&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "alt": "",
+      "localImage": "33324eb1-ed54-80e1-850c-e576d7f4d5a1.webp"
+    },
+    {
+      "id": "33324eb1ed54801f84fcf6bcf0157fc4",
+      "type": "bulleted_list",
+      "html": "DNS Resolver",
+      "text": "DNS Resolver"
+    },
+    {
+      "id": "33324eb1ed54808a87eeccd095016542",
+      "type": "header",
+      "html": "Authoritative DNS Servers",
+      "text": "Authoritative DNS Servers"
+    },
+    {
+      "id": "33324eb1ed5480c5b471ebec2c5cf36c",
+      "type": "bulleted_list",
+      "html": "What is it??",
+      "text": "What is it??"
+    },
+    {
+      "id": "33324eb1ed54803f8d25f7f0d704777f",
+      "type": "bulleted_list",
+      "html": "DNS Resolution has three main levels",
+      "text": "DNS Resolution has three main levels"
+    },
+    {
+      "id": "33324eb1ed54802885c0f5d60594f320",
+      "type": "bulleted_list",
+      "parent": "33324eb1ed54803f8d25f7f0d704777f",
+      "html": "Root Nameservers",
+      "text": "Root Nameservers"
+    },
+    {
+      "id": "33324eb1ed548080804ddc9cb7b8761b",
+      "type": "bulleted_list",
+      "parent": "33324eb1ed54803f8d25f7f0d704777f",
+      "html": "Top Level Domain (TLD) Nameservers",
+      "text": "Top Level Domain (TLD) Nameservers"
+    },
+    {
+      "id": "33324eb1ed548043bb4bd2ae4ffce190",
+      "type": "bulleted_list",
+      "parent": "33324eb1ed54803f8d25f7f0d704777f",
+      "html": "Authoritative Nameservers",
+      "text": "Authoritative Nameservers"
+    },
+    {
+      "id": "33324eb1ed54809aa402e39b28e4fee1",
+      "type": "image",
+      "src": "/image/attachment%3Acc8bb1a2-260c-49c3-ae1b-675bb8001e00%3Aimage.png?table=block&id=33324eb1-ed54-809a-a402-e39b28e4fee1&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "alt": ""
+    },
+    {
+      "id": "33324eb1ed5480d8ad18ca792a01effc",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed548072818dfe2329ad5a2f",
+      "type": "header",
+      "html": "DNS Resolution",
+      "text": "DNS Resolution"
+    },
+    {
+      "id": "33324eb1ed54809c88a5f3bb3634853b",
+      "type": "text",
+      "html": "When <a href=\"http://google.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"1\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-33324eb1-ed54-809c-88a5-f3bb3634853b--247021602\">google.com</span></a> is typed",
+      "text": "When google.com is typed",
+      "links": [
+        {
+          "href": "http://google.com/",
+          "text": "google.com"
+        }
+      ]
+    },
+    {
+      "id": "33324eb1ed548080973cc5f3b5e04329",
+      "type": "numbered_list",
+      "html": "Browser checks its own cache to get the IP",
+      "text": "Browser checks its own cache to get the IP"
+    },
+    {
+      "id": "33324eb1ed548061b2f0ebea6919b58d",
+      "type": "numbered_list",
+      "html": "If the IP is not found in browser cache, it makes an operating system, which in most cases its own cache",
+      "text": "If the IP is not found in browser cache, it makes an operating system, which in most cases its own cache"
+    },
+    {
+      "id": "33324eb1ed5480dcbf16f2e300d33679",
+      "type": "numbered_list",
+      "html": "If the IP is not found there too, then call goes to DNS resolver, which has its own cache.",
+      "text": "If the IP is not found there too, then call goes to DNS resolver, which has its own cache."
+    },
+    {
+      "id": "33324eb1ed548012a0d8cd4b798ecef5",
+      "type": "numbered_list",
+      "html": "If the IP could not be found or the entry in the DNS resolver’s cache is expired, the call goes to root nameservers, which respond with the list of TLD name servers.",
+      "text": "If the IP could not be found or the entry in the DNS resolver’s cache is expired, the call goes to root nameservers, which respond with the list of TLD name servers."
+    },
+    {
+      "id": "33324eb1ed5480f08248e7f0d4eadb37",
+      "type": "numbered_list",
+      "html": "Then the call goes to the TLD nameserver (.com in this example), which returns the authoritative nameservers to the google.com",
+      "text": "Then the call goes to the TLD nameserver (.com in this example), which returns the authoritative nameservers to the google.com"
+    },
+    {
+      "id": "33324eb1ed54802fa11dda09c76fd7a3",
+      "type": "numbered_list",
+      "html": "Then the call goes to the authoritative name server, which finally returns the IP address of the <a href=\"http://google.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"1\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-33324eb1-ed54-802f-a11d-da09c76fd7a3--247021602\">google.com</span></a> to the DNS resolver.",
+      "text": "Then the call goes to the authoritative name server, which finally returns the IP address of the google.com to the DNS resolver.",
+      "links": [
+        {
+          "href": "http://google.com/",
+          "text": "google.com"
+        }
+      ]
+    },
+    {
+      "id": "33324eb1ed5480f880e5c597b408f2fd",
+      "type": "numbered_list",
+      "html": "Then the IP is returned to the OS.",
+      "text": "Then the IP is returned to the OS."
+    },
+    {
+      "id": "33324eb1ed548012b368fb3acc0d4f06",
+      "type": "numbered_list",
+      "html": "OS then returns to the browser.",
+      "text": "OS then returns to the browser."
+    },
+    {
+      "id": "33324eb1ed5480b3a173c9a74ad44892",
+      "type": "image",
+      "src": "/image/attachment%3Aa152c34e-b0c6-445c-ac3c-edb302dae971%3Aimage.png?table=block&id=33324eb1-ed54-80b3-a173-c9a74ad44892&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "alt": ""
+    },
+    {
+      "id": "33324eb1ed5480b2886ce45010235462",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed548093b502ee70a02119ed",
+      "type": "text"
+    }
+  ]
+}

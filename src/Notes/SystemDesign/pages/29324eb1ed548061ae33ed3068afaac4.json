@@ -1,0 +1,296 @@
+{
+  "id": "29324eb1ed548061ae33ed3068afaac4",
+  "title": "Proxy: Forward & Reverse",
+  "sourceUrl": "https://xpandeyed.notion.site/Proxy-Forward-Reverse-29324eb1ed548061ae33ed3068afaac4?pvs=23",
+  "blocks": [
+    {
+      "id": "29324eb1ed5480b3b590c0c290bf5fbd",
+      "type": "header",
+      "html": "Proxy Servers",
+      "text": "Proxy Servers"
+    },
+    {
+      "id": "29324eb1ed5480498b65e25a6634b667",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">A </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">proxy</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\"> is an intermediary server that sits between clients and servers to manage, monitor, or filter requests. Its main purpose is to enforce policies, improve security, and control access. Proxies can operate </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">on behalf of the client</span><span style=\"font-style:italic\" data-token-index=\"4\" class=\"notion-enable-hover\"> or t</span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">he server</span><span style=\"font-style:italic\" data-token-index=\"6\" class=\"notion-enable-hover\">.</span>",
+      "text": "A proxy is an intermediary server that sits between clients and servers to manage, monitor, or filter requests. Its main purpose is to enforce policies, improve security, and control access. Proxies can operate on behalf of the client or the server."
+    },
+    {
+      "id": "29324eb1ed54803e841aecbf83208fd8",
+      "type": "divider"
+    },
+    {
+      "id": "29324eb1ed548063a31bdd7df9232bf2",
+      "type": "header",
+      "html": "Forward Proxy",
+      "text": "Forward Proxy"
+    },
+    {
+      "id": "29324eb1ed5480d49013dede7230633c",
+      "type": "text",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">forward proxy</span> acts on behalf of clients. It sits between client computers and the internet, processing outgoing requests before they reach external servers.",
+      "text": "A forward proxy acts on behalf of clients. It sits between client computers and the internet, processing outgoing requests before they reach external servers."
+    },
+    {
+      "id": "29324eb1ed548020807fee6f99becb75",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Core purposes:</span>",
+      "text": "Core purposes:"
+    },
+    {
+      "id": "29324eb1ed548046accfeb216ece3da7",
+      "type": "bulleted_list",
+      "html": "Client identity protection by hiding the public IP of the client.",
+      "text": "Client identity protection by hiding the public IP of the client."
+    },
+    {
+      "id": "29324eb1ed54801d9d8fdc008e8bfe64",
+      "type": "bulleted_list",
+      "html": "Policy enforcement for outgoing traffic.",
+      "text": "Policy enforcement for outgoing traffic."
+    },
+    {
+      "id": "29324eb1ed5480a6a06cda4c576e255a",
+      "type": "text",
+      "parent": "29324eb1ed54801d9d8fdc008e8bfe64",
+      "html": "In most of the orgs, the orgs want to enforce certain policies, so that their employees (mistakenly or deliberately) do not make requests to some malicious site, or expose some protected data.",
+      "text": "In most of the orgs, the orgs want to enforce certain policies, so that their employees (mistakenly or deliberately) do not make requests to some malicious site, or expose some protected data."
+    },
+    {
+      "id": "29324eb1ed54807a8b81de6beab3b335",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why use a forward proxy instead of installing software on each client?</span>",
+      "text": "Why use a forward proxy instead of installing software on each client?"
+    },
+    {
+      "id": "29324eb1ed5480658f95d94657c1e0dc",
+      "type": "bulleted_list",
+      "html": "Installing security cum policy-enforcing software on every client is inefficient and costly:",
+      "text": "Installing security cum policy-enforcing software on every client is inefficient and costly:"
+    },
+    {
+      "id": "29324eb1ed5480a1b310f9d5b1d4d3df",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480658f95d94657c1e0dc",
+      "html": "Each client consumes extra resources (CPU, memory).",
+      "text": "Each client consumes extra resources (CPU, memory)."
+    },
+    {
+      "id": "29324eb1ed5480058fade75e8b95948e",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480658f95d94657c1e0dc",
+      "html": "Updating policies requires changes on every machine.",
+      "text": "Updating policies requires changes on every machine."
+    },
+    {
+      "id": "29324eb1ed5480b9bfa4f02208158c08",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480658f95d94657c1e0dc",
+      "html": "Other reasons like responsibility overload, redundancy etc. are some other drawbacks.",
+      "text": "Other reasons like responsibility overload, redundancy etc. are some other drawbacks."
+    },
+    {
+      "id": "29324eb1ed54807db558f987c4c59917",
+      "type": "bulleted_list",
+      "html": "A central server simplifies management:",
+      "text": "A central server simplifies management:"
+    },
+    {
+      "id": "29324eb1ed5480dbb52dc42550db1748",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed54807db558f987c4c59917",
+      "html": "Clients only need minimal configuration.",
+      "text": "Clients only need minimal configuration."
+    },
+    {
+      "id": "29324eb1ed5480b08175fbed1beceeff",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed54807db558f987c4c59917",
+      "html": "Control and security are centralized.",
+      "text": "Control and security are centralized."
+    },
+    {
+      "id": "29324eb1ed548011a41edf9016e365db",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works:</span>",
+      "text": "How it works:"
+    },
+    {
+      "id": "29324eb1ed54803e8545e9dad0320a64",
+      "type": "bulleted_list",
+      "html": "Clients send requests to the forward proxy.",
+      "text": "Clients send requests to the forward proxy."
+    },
+    {
+      "id": "29324eb1ed54806e9d29e47492338715",
+      "type": "bulleted_list",
+      "html": "The proxy:",
+      "text": "The proxy:"
+    },
+    {
+      "id": "29324eb1ed5480dfb161d1c0453f4342",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed54806e9d29e47492338715",
+      "html": "Checks and enforces policies on outgoing requests.",
+      "text": "Checks and enforces policies on outgoing requests."
+    },
+    {
+      "id": "29324eb1ed5480e085b2d261fcc36415",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed54806e9d29e47492338715",
+      "html": "Forwards requests to the internet on behalf of clients.",
+      "text": "Forwards requests to the internet on behalf of clients."
+    },
+    {
+      "id": "29324eb1ed5480be98d8f70c9c74fd7b",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed54806e9d29e47492338715",
+      "html": "Masks clients’ real IP addresses.",
+      "text": "Masks clients’ real IP addresses."
+    },
+    {
+      "id": "29324eb1ed548027a4fcd06f2c7aa09c",
+      "type": "bulleted_list",
+      "html": "Responses from external servers also pass through the proxy but are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">usually not modified</span>.",
+      "text": "Responses from external servers also pass through the proxy but are usually not modified."
+    },
+    {
+      "id": "29324eb1ed54805e8f0ccbc7de69036b",
+      "type": "divider"
+    },
+    {
+      "id": "2f824eb1ed548025adbed005d7482241",
+      "type": "transclusion_container"
+    },
+    {
+      "id": "29e24eb1ed548009bd08cdb34353d01a",
+      "type": "shared_ref",
+      "parent": "2f824eb1ed548025adbed005d7482241"
+    },
+    {
+      "id": "29324eb1ed548019baf0c9b51f95cda7",
+      "type": "header",
+      "html": "Reverse Proxy",
+      "text": "Reverse Proxy"
+    },
+    {
+      "id": "29324eb1ed548044b424e450e2d3c128",
+      "type": "text",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">reverse proxy</span> acts on behalf of servers. It sits between clients and backend servers, processing incoming requests before they reach the servers.",
+      "text": "A reverse proxy acts on behalf of servers. It sits between clients and backend servers, processing incoming requests before they reach the servers."
+    },
+    {
+      "id": "29324eb1ed5480239ec4fd75a9bad28c",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Core purposes:</span>",
+      "text": "Core purposes:"
+    },
+    {
+      "id": "29324eb1ed5480a79282d2ae96c17fe1",
+      "type": "bulleted_list",
+      "html": "Security and isolation of backend servers.",
+      "text": "Security and isolation of backend servers."
+    },
+    {
+      "id": "29324eb1ed5480e888c3f7deed8021ea",
+      "type": "bulleted_list",
+      "html": "Centralized control over incoming requests.",
+      "text": "Centralized control over incoming requests."
+    },
+    {
+      "id": "29324eb1ed548085b3d1d14a878a63ff",
+      "type": "sub_header",
+      "html": "Why not build all security into the application server itself?",
+      "text": "Why not build all security into the application server itself?"
+    },
+    {
+      "id": "29324eb1ed54801795f8c1078b7290f1",
+      "type": "bulleted_list",
+      "html": "Security is applied in <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple protective layers</span>, so threats are <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">detected, absorbed, or stopped early</span>, long before they reach the <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">core and most vulnerable part</span> of the system.",
+      "text": "Security is applied in multiple protective layers, so threats are detected, absorbed, or stopped early, long before they reach the core and most vulnerable part of the system."
+    },
+    {
+      "id": "29324eb1ed54802dbef9faeec8d46fe9",
+      "type": "bulleted_list",
+      "html": "The application server’s responsibility is to answer the requests and adding security to that will overload it with responsibility. Therefore, a battleground with high resilience, which is capable of absorbing far more traffic than an application server, is prepared which has the primary responsibility of absorbing, defending and filtering the requests.",
+      "text": "The application server’s responsibility is to answer the requests and adding security to that will overload it with responsibility. Therefore, a battleground with high resilience, which is capable of absorbing far more traffic than an application server, is prepared which has the primary responsibility of absorbing, defending and filtering the requests."
+    },
+    {
+      "id": "29324eb1ed548064907ef42d29d75e7b",
+      "type": "bulleted_list",
+      "html": "The application servers are already complex and vulnerable, as they have to interact with DB, may have internal microservices too, may have different protocols for inter service communications. Adding security to these services will make the system much more complex.",
+      "text": "The application servers are already complex and vulnerable, as they have to interact with DB, may have internal microservices too, may have different protocols for inter service communications. Adding security to these services will make the system much more complex."
+    },
+    {
+      "id": "29324eb1ed54800ca121fc568fb7e20f",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works:</span>",
+      "text": "How it works:"
+    },
+    {
+      "id": "29324eb1ed54806ebc7ecea90389f40f",
+      "type": "bulleted_list",
+      "html": "Clients send requests to the reverse proxy instead of directly to servers.",
+      "text": "Clients send requests to the reverse proxy instead of directly to servers."
+    },
+    {
+      "id": "29324eb1ed5480148911fe4f024eb750",
+      "type": "bulleted_list",
+      "html": "The proxy:",
+      "text": "The proxy:"
+    },
+    {
+      "id": "29324eb1ed5480dbbf22c2260937aec8",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480148911fe4f024eb750",
+      "html": "Monitors and filters (if required) all incoming requests.",
+      "text": "Monitors and filters (if required) all incoming requests."
+    },
+    {
+      "id": "29324eb1ed548048a705e2d21fcb8bc9",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480148911fe4f024eb750",
+      "html": "Protects backend servers by hiding their identities (IP addresses).",
+      "text": "Protects backend servers by hiding their identities (IP addresses)."
+    },
+    {
+      "id": "29324eb1ed548075beffe99d2fc3ebac",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480148911fe4f024eb750",
+      "html": "Can handle encryption/decryption (SSL/TLS termination) to reduce the load on backend servers.",
+      "text": "Can handle encryption/decryption (SSL/TLS termination) to reduce the load on backend servers."
+    },
+    {
+      "id": "29324eb1ed5480409dc1fd29ff6b0be0",
+      "type": "divider"
+    },
+    {
+      "id": "29324eb1ed54804db1efc6e22d04e42d",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Summary</span>",
+      "text": "Summary"
+    },
+    {
+      "id": "29324eb1ed54800ea118d423bd27de6c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Forward proxy:</span> Protects and manages clients, controls outgoing requests, hides client IPs.",
+      "text": "Forward proxy: Protects and manages clients, controls outgoing requests, hides client IPs."
+    },
+    {
+      "id": "29324eb1ed5480b1ad5dc27ce4ede7ef",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Reverse proxy:</span> Protects and manages servers, filters incoming requests, hides server IPs.",
+      "text": "Reverse proxy: Protects and manages servers, filters incoming requests, hides server IPs."
+    },
+    {
+      "id": "29324eb1ed5480249951c5783891a74d",
+      "type": "bulleted_list",
+      "html": "Both ensure <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">security, control, and centralized policy enforcement</span>, without overloading clients or servers.",
+      "text": "Both ensure security, control, and centralized policy enforcement, without overloading clients or servers."
+    },
+    {
+      "id": "29324eb1ed54808fb459da8f5647ccfe",
+      "type": "divider"
+    }
+  ]
+}

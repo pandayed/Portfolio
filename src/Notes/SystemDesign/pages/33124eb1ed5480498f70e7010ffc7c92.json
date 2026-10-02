@@ -1,0 +1,277 @@
+{
+  "id": "33124eb1ed5480498f70e7010ffc7c92",
+  "title": "Bare Metals, Virtual Machines & Containers",
+  "sourceUrl": "https://xpandeyed.notion.site/Bare-Metals-Virtual-Machines-Containers-33124eb1ed5480498f70e7010ffc7c92?pvs=23",
+  "blocks": [
+    {
+      "id": "33124eb1ed5480d18740d10e8b6fb3f1",
+      "type": "header",
+      "html": "Bare Metal",
+      "text": "Bare Metal"
+    },
+    {
+      "id": "33124eb1ed54806ca86ae2aca2338ad0",
+      "type": "bulleted_list",
+      "html": "Grand Dad",
+      "text": "Grand Dad"
+    },
+    {
+      "id": "33124eb1ed5480e0aa4fc40f30f03c78",
+      "type": "bulleted_list",
+      "html": "One tenant owns everything in isolation - the hardware and the OS.",
+      "text": "One tenant owns everything in isolation - the hardware and the OS."
+    },
+    {
+      "id": "33124eb1ed5480e6a502ef84dfdc54ee",
+      "type": "text",
+      "html": "Pros",
+      "text": "Pros"
+    },
+    {
+      "id": "33124eb1ed54801bb4f4c01ed0d07932",
+      "type": "bulleted_list",
+      "html": "Relaxed from noisy neighbour problem",
+      "text": "Relaxed from noisy neighbour problem"
+    },
+    {
+      "id": "33124eb1ed54804badb0c1cdc30642ec",
+      "type": "bulleted_list",
+      "parent": "33124eb1ed54801bb4f4c01ed0d07932",
+      "html": "Noisy Neighbour Problem: Activity of one tenant affects the another tenant as the resources when the resources are shared",
+      "text": "Noisy Neighbour Problem: Activity of one tenant affects the another tenant as the resources when the resources are shared"
+    },
+    {
+      "id": "33124eb1ed5480559019f870adb142cc",
+      "type": "bulleted_list",
+      "html": "Isolation provides highest level of security",
+      "text": "Isolation provides highest level of security"
+    },
+    {
+      "id": "33124eb1ed5480a69290c9727f1ab68b",
+      "type": "bulleted_list",
+      "parent": "33124eb1ed5480559019f870adb142cc",
+      "html": "Prevents side channel attacks",
+      "text": "Prevents side channel attacks"
+    },
+    {
+      "id": "33124eb1ed548027b4bce4dadd95c653",
+      "type": "bulleted_list",
+      "parent": "33124eb1ed5480a69290c9727f1ab68b",
+      "html": "In modern microprocessors, the bad guys try to put malicious tenant to steal secrets from its neighbours.",
+      "text": "In modern microprocessors, the bad guys try to put malicious tenant to steal secrets from its neighbours."
+    },
+    {
+      "id": "33124eb1ed5480259a5bffd5cd8be39a",
+      "type": "bulleted_list",
+      "html": "Full Control, tweak everything, and if you have the understanding, squeezer every ounce of performance.",
+      "text": "Full Control, tweak everything, and if you have the understanding, squeezer every ounce of performance."
+    },
+    {
+      "id": "33224eb1ed5480b096f7cbdbcf36b289",
+      "type": "image",
+      "src": "/image/attachment%3A7c4d1378-1e43-4e71-9fb2-5e7b18902d51%3Aimage.png?table=block&id=33224eb1-ed54-80b0-96f7-cbdbcf36b289&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=540&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "alt": "",
+      "localImage": "33224eb1-ed54-80b0-96f7-cbdbcf36b289.webp"
+    },
+    {
+      "id": "33124eb1ed54806caebef039777166ae",
+      "type": "text",
+      "html": "Cons",
+      "text": "Cons"
+    },
+    {
+      "id": "33124eb1ed54807d90ace7cf390929cf",
+      "type": "bulleted_list",
+      "html": "Expensive",
+      "text": "Expensive"
+    },
+    {
+      "id": "33124eb1ed548008b079d4706b339936",
+      "type": "bulleted_list",
+      "html": "Hard to manage (too many responsibilities as the tenant has to manage the hardware and OS)",
+      "text": "Hard to manage (too many responsibilities as the tenant has to manage the hardware and OS)"
+    },
+    {
+      "id": "33124eb1ed54800a80e5dd3877ca12ef",
+      "type": "bulleted_list",
+      "html": "Hard to scale",
+      "text": "Hard to scale"
+    },
+    {
+      "id": "33124eb1ed5480c49703f38db4e1ab2e",
+      "type": "header",
+      "html": "Virtual Machines",
+      "text": "Virtual Machines"
+    },
+    {
+      "id": "33224eb1ed548042b8a4f42c60673abc",
+      "type": "bulleted_list",
+      "html": "Emulation of physical machines, and this is called virtualisation",
+      "text": "Emulation of physical machines, and this is called virtualisation"
+    },
+    {
+      "id": "33224eb1ed5480d79043f5d573f553e5",
+      "type": "bulleted_list",
+      "html": "Hypervisor: Also called virtual machine monitor",
+      "text": "Hypervisor: Also called virtual machine monitor"
+    },
+    {
+      "id": "33224eb1ed54806697ebfbe811d5013a",
+      "type": "image",
+      "src": "/image/attachment%3Ac688fcd1-e780-4f6a-861a-22dcedc60a8c%3Aimage.png?table=block&id=33224eb1-ed54-8066-97eb-fbe811d5013a&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=540&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "alt": "",
+      "localImage": "33224eb1-ed54-8066-97eb-fbe811d5013a.webp"
+    },
+    {
+      "id": "33224eb1ed548020a033dcb0326a3dd0",
+      "type": "bulleted_list",
+      "html": "There is a concept called bare metal hypervisor. In the hypervisor does not need the host OS. This gives the hypervisor full control over the hardware and hence provides better performance. However, the hardware that supports the bare metal hypervisor is more expensive.",
+      "text": "There is a concept called bare metal hypervisor. In the hypervisor does not need the host OS. This gives the hypervisor full control over the hardware and hence provides better performance. However, the hardware that supports the bare metal hypervisor is more expensive."
+    },
+    {
+      "id": "33224eb1ed548054b7a4e8cbb0af6a0a",
+      "type": "image",
+      "src": "/image/attachment%3A0d98261d-07cd-406d-b5ca-76ef62181f6b%3Aimage.png?table=block&id=33224eb1-ed54-8054-b7a4-e8cbb0af6a0a&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "alt": "",
+      "localImage": "33224eb1-ed54-8054-b7a4-e8cbb0af6a0a.webp"
+    },
+    {
+      "id": "33224eb1ed54802eb5d3eb227a6f868c",
+      "type": "bulleted_list",
+      "html": "Pros of virtual machines",
+      "text": "Pros of virtual machines"
+    },
+    {
+      "id": "33224eb1ed548062bba2c9b17a73160c",
+      "type": "bulleted_list",
+      "parent": "33224eb1ed54802eb5d3eb227a6f868c",
+      "html": "Virtual machines nowadays are available in all shapes and sizes, from few CPU cores to hundreds of cores.",
+      "text": "Virtual machines nowadays are available in all shapes and sizes, from few CPU cores to hundreds of cores."
+    },
+    {
+      "id": "33224eb1ed54800383b4c7236fc79f42",
+      "type": "bulleted_list",
+      "parent": "33224eb1ed54802eb5d3eb227a6f868c",
+      "html": "Cheaper to run than bare metal",
+      "text": "Cheaper to run than bare metal"
+    },
+    {
+      "id": "33224eb1ed5480468d0df441a2dd2b32",
+      "type": "bulleted_list",
+      "parent": "33224eb1ed54802eb5d3eb227a6f868c",
+      "html": "Easier to scale",
+      "text": "Easier to scale"
+    },
+    {
+      "id": "33224eb1ed54801f8bacc5391852db39",
+      "type": "bulleted_list",
+      "parent": "33224eb1ed54802eb5d3eb227a6f868c",
+      "html": "Scaling is easier (both horizontal and vertical), in that too, vertical is easier.",
+      "text": "Scaling is easier (both horizontal and vertical), in that too, vertical is easier."
+    },
+    {
+      "id": "33224eb1ed548037ae51e659bf0f3ac7",
+      "type": "bulleted_list",
+      "html": "Cons of virtual machines",
+      "text": "Cons of virtual machines"
+    },
+    {
+      "id": "33224eb1ed54806c8ff9cbe10ea6a525",
+      "type": "bulleted_list",
+      "parent": "33224eb1ed548037ae51e659bf0f3ac7",
+      "html": "Underlying CPU is same",
+      "text": "Underlying CPU is same"
+    },
+    {
+      "id": "33224eb1ed5480fcacfcee1d09bcf26f",
+      "type": "bulleted_list",
+      "parent": "33224eb1ed548037ae51e659bf0f3ac7",
+      "html": "Vulnerable to noisy neighbour",
+      "text": "Vulnerable to noisy neighbour"
+    },
+    {
+      "id": "33224eb1ed5480868594db954beb01f2",
+      "type": "bulleted_list",
+      "parent": "33224eb1ed548037ae51e659bf0f3ac7",
+      "html": "Vulnerable to side channel attacks like Meltdown and Spectre",
+      "text": "Vulnerable to side channel attacks like Meltdown and Spectre"
+    },
+    {
+      "id": "33224eb1ed5480fab1e3c251d734f099",
+      "type": "header",
+      "html": "Container",
+      "text": "Container"
+    },
+    {
+      "id": "33224eb1ed5480249cbfdde2141e1fed",
+      "type": "bulleted_list",
+      "html": "A container is a lightweight and standalone package of an application with all its dependencies like libraries, frameworks and runtime.",
+      "text": "A container is a lightweight and standalone package of an application with all its dependencies like libraries, frameworks and runtime."
+    },
+    {
+      "id": "33224eb1ed5480aea5cfe07d6a898075",
+      "type": "bulleted_list",
+      "html": "Containerisation is considered as the lightweight version of the virtualisation.",
+      "text": "Containerisation is considered as the lightweight version of the virtualisation."
+    },
+    {
+      "id": "33224eb1ed54805d8ffef6310e8779ae",
+      "type": "image",
+      "src": "/image/attachment%3A8cfb8b1e-f0ba-4eb4-bd7f-dd5b03fa6379%3Aimage.png?table=block&id=33224eb1-ed54-805d-8ffe-f6310e8779ae&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=1020&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
+      "alt": "",
+      "localImage": "33224eb1-ed54-805d-8ffe-f6310e8779ae.webp"
+    },
+    {
+      "id": "33224eb1ed5480eba17ef8e97db6f0ea",
+      "type": "bulleted_list",
+      "html": "Containers are lightweight and require less hardware resources than virtual machines.",
+      "text": "Containers are lightweight and require less hardware resources than virtual machines."
+    },
+    {
+      "id": "33224eb1ed548062a2cff467d464f039",
+      "type": "bulleted_list",
+      "html": "Each container runs as a native process of the host OS they are much faster to start.",
+      "text": "Each container runs as a native process of the host OS they are much faster to start."
+    },
+    {
+      "id": "33224eb1ed5480979cbbd6e3d20ba8d1",
+      "type": "bulleted_list",
+      "html": "Because the isolation of containers relies on OS level primitives, therefore the containers are exposed to wider level of security vulnerabilites.",
+      "text": "Because the isolation of containers relies on OS level primitives, therefore the containers are exposed to wider level of security vulnerabilites."
+    },
+    {
+      "id": "33224eb1ed5480e59063d67e54054336",
+      "type": "bulleted_list",
+      "html": "Its possible to run containers inside the virtual machines.",
+      "text": "Its possible to run containers inside the virtual machines."
+    },
+    {
+      "id": "33224eb1ed548097848cead3ccb8782b",
+      "type": "bulleted_list",
+      "html": "To reduce the security vulnerability by reducing the attack surface, containers are sometimes run into virtual machines. Deciding whether to run containers directly on the container engine on host OS or on virtual machines is basically a tradeoff between (flexibility+maintenecne) and security.",
+      "text": "To reduce the security vulnerability by reducing the attack surface, containers are sometimes run into virtual machines. Deciding whether to run containers directly on the container engine on host OS or on virtual machines is basically a tradeoff between (flexibility+maintenecne) and security."
+    },
+    {
+      "id": "33224eb1ed5480daabddfca68a8380b3",
+      "type": "divider"
+    },
+    {
+      "id": "33224eb1ed548032b05fdbf2dabdd5cb",
+      "type": "text",
+      "html": "There are more layers of abstraction beyond this too.",
+      "text": "There are more layers of abstraction beyond this too."
+    },
+    {
+      "id": "33224eb1ed54806bb7a5e9804360dddb",
+      "type": "bulleted_list",
+      "html": "Serverless computing",
+      "text": "Serverless computing"
+    },
+    {
+      "id": "33224eb1ed5480499556db5be91f055d",
+      "type": "bulleted_list",
+      "html": "Edge computing",
+      "text": "Edge computing"
+    }
+  ]
+}

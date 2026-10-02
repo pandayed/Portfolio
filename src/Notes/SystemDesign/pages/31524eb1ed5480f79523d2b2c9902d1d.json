@@ -1,0 +1,60 @@
+{
+  "id": "31524eb1ed5480f79523d2b2c9902d1d",
+  "title": "The 23 Design Patterns",
+  "sourceUrl": "https://xpandeyed.notion.site/The-23-Design-Patterns-31524eb1ed5480f79523d2b2c9902d1d?pvs=23",
+  "blocks": [
+    {
+      "id": "34f24eb1ed54803ca839d3383ae96148",
+      "type": "text",
+      "html": "Not all of them need to be studied. Only the ones with star icon, and in them too, the Strategy is the most important one.",
+      "text": "Not all of them need to be studied. Only the ones with star icon, and in them too, the Strategy is the most important one."
+    },
+    {
+      "id": "34f24eb1ed5480eba3afd2331d3e1547",
+      "type": "text"
+    },
+    {
+      "id": "34f24eb1ed5480ada5bfe4f4f1b2eae2",
+      "type": "text"
+    },
+    {
+      "id": "34f24eb1ed5480a0a2b2dbb78bbe20fa",
+      "type": "text"
+    },
+    {
+      "id": "31524eb1ed54804bbe86db7b1b9f7eb6",
+      "type": "collection_view",
+      "pageIds": [
+        "31524eb1ed548005bcd9d19385ad2a0b",
+        "31524eb1ed548081baffd23448669d13",
+        "31524eb1ed54805eb4eeef3ff146ca56",
+        "31524eb1ed5480388edfd89d1b438fd9",
+        "31524eb1ed54809a9e79c53b23c4b774"
+      ],
+      "title": "Creational Patterns"
+    },
+    {
+      "id": "31524eb1ed5480bb9143d018d3c47842",
+      "type": "collection_view",
+      "pageIds": [
+        "35124eb1ed54806d83f9d91a005b3f4a",
+        "35124eb1ed5480808e49cbd1d3f656b0"
+      ],
+      "title": "Structural Patterns"
+    },
+    {
+      "id": "31524eb1ed548055ba31d5cc7cd114e1",
+      "type": "collection_view",
+      "pageIds": [
+        "35124eb1ed548057822cecc00ce9c1ce",
+        "35124eb1ed5480c58ddce97b6de2edb2",
+        "35124eb1ed548098b2d4e15c9935b40a"
+      ],
+      "title": "Behavioural Patterns"
+    },
+    {
+      "id": "35124eb1ed54805ba25be54502abeede",
+      "type": "text"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "29424eb1ed5480fe9face77fde2a51b4",
+  "title": "Statefulness vs Statelessness",
+  "sourceUrl": "https://xpandeyed.notion.site/Statefulness-vs-Statelessness-29424eb1ed5480fe9face77fde2a51b4?pvs=23",
+  "blocks": [
+    {
+      "id": "29424eb1ed5480958d4dd83ef25f95ab",
+      "type": "bulleted_list",
+      "html": "State means any <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">data remembered between interactions</span>.",
+      "text": "State means any data remembered between interactions."
+    },
+    {
+      "id": "29424eb1ed54802a8bc8f47356464db4",
+      "type": "bulleted_list",
+      "html": "Examples: login status, items in cart, chat history, etc.",
+      "text": "Examples: login status, items in cart, chat history, etc."
+    },
+    {
+      "id": "29424eb1ed5480819aa6ff0285783101",
+      "type": "divider"
+    },
+    {
+      "id": "29424eb1ed54802baf63e70de45c4e93",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Stateful Applications</span>",
+      "text": "Stateful Applications"
+    },
+    {
+      "id": "29424eb1ed5480908ea4c5fa86b90d12",
+      "type": "bulleted_list",
+      "html": "The server must <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">remember previous interactions</span> to process new ones correctly.",
+      "text": "The server must remember previous interactions to process new ones correctly."
+    },
+    {
+      "id": "29424eb1ed548093839beea8f8eb67ac",
+      "type": "bulleted_list",
+      "html": "Therefore, sticky sessions (discussed later in the same page) are used.",
+      "text": "Therefore, sticky sessions (discussed later in the same page) are used."
+    },
+    {
+      "id": "29424eb1ed5480f8b141c84274c13dd8",
+      "type": "header",
+      "html": "Stateless Applications",
+      "text": "Stateless Applications"
+    },
+    {
+      "id": "29424eb1ed54800bb359e99d6011c20b",
+      "type": "bulleted_list",
+      "html": "Applications which are only meant to show data fall in this category.",
+      "text": "Applications which are only meant to show data fall in this category."
+    },
+    {
+      "id": "29424eb1ed54808c811ac3517757b9f9",
+      "type": "bulleted_list",
+      "html": "Example: A website that shows weather for a particular day of a particular place.",
+      "text": "Example: A website that shows weather for a particular day of a particular place."
+    },
+    {
+      "id": "29424eb1ed5480b98f2cce5a0c21aced",
+      "type": "divider"
+    },
+    {
+      "id": "29424eb1ed5480a5b5b1ece48daa3a75",
+      "type": "header",
+      "html": "Sticky Sessions",
+      "text": "Sticky Sessions"
+    },
+    {
+      "id": "29424eb1ed5480fea05bf6413fe47612",
+      "type": "bulleted_list",
+      "html": "In a complex system, involving multiple DB servers, caches, queues, etc. the changes are not immediately reflected everywhere.",
+      "text": "In a complex system, involving multiple DB servers, caches, queues, etc. the changes are not immediately reflected everywhere."
+    },
+    {
+      "id": "29424eb1ed54803daa04c3d00ea9ca52",
+      "type": "bulleted_list",
+      "html": "If the client’s next request goes to another server, that new server won’t have their data, leading to inconsistency.",
+      "text": "If the client’s next request goes to another server, that new server won’t have their data, leading to inconsistency."
+    },
+    {
+      "id": "29424eb1ed54800b932afe549fe77873",
+      "type": "bulleted_list",
+      "html": "Therefore, sticky sessions are maintained.",
+      "text": "Therefore, sticky sessions are maintained."
+    },
+    {
+      "id": "29424eb1ed5480beb6b9e8d33ae4ba30",
+      "type": "bulleted_list",
+      "html": "Sticky sessions mean that <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">all requests from the same client are always sent to the same server</span>, so that data consistency is maintained.",
+      "text": "Sticky sessions mean that all requests from the same client are always sent to the same server, so that data consistency is maintained."
+    },
+    {
+      "id": "29424eb1ed54806dafc6cca4d678cce0",
+      "type": "bulleted_list",
+      "html": "This is the responsibility of load balancer to stick a user’s sessions to a particular server only.",
+      "text": "This is the responsibility of load balancer to stick a user’s sessions to a particular server only."
+    }
+  ]
+}

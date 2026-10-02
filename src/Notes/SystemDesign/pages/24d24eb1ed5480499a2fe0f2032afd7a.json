@@ -1,0 +1,820 @@
+{
+  "id": "24d24eb1ed5480499a2fe0f2032afd7a",
+  "title": "CAP Theorem",
+  "sourceUrl": "https://xpandeyed.notion.site/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=23",
+  "blocks": [
+    {
+      "id": "26524eb1ed54800ab180c0d698b8f812",
+      "type": "alias",
+      "links": [
+        {
+          "href": "/Distributed-Systems-26524eb1ed548063b5bee98feef734e1?pvs=25",
+          "text": "Distributed Systems"
+        }
+      ]
+    },
+    {
+      "id": "26524eb1ed548046a2d4edc5c47d4894",
+      "type": "text",
+      "html": "In distributed systems:",
+      "text": "In distributed systems:"
+    },
+    {
+      "id": "26524eb1ed5480dcaf02f7108285893b",
+      "type": "bulleted_list",
+      "html": "Data is distributed across multiple nodes.",
+      "text": "Data is distributed across multiple nodes."
+    },
+    {
+      "id": "26524eb1ed548086bc3cf46642097148",
+      "type": "bulleted_list",
+      "html": "Nodes need to communicate with each other for the application to function correctly.",
+      "text": "Nodes need to communicate with each other for the application to function correctly."
+    },
+    {
+      "id": "26524eb1ed548005a0b9d9f48cb49c1d",
+      "type": "text",
+      "html": "But",
+      "text": "But"
+    },
+    {
+      "id": "26624eb1ed5480fc85b4ef604800c295",
+      "type": "bulleted_list",
+      "html": "Machines can crash.",
+      "text": "Machines can crash."
+    },
+    {
+      "id": "26624eb1ed5480128532eb9adf267378",
+      "type": "bulleted_list",
+      "html": "Network links between nodes can fail.",
+      "text": "Network links between nodes can fail."
+    },
+    {
+      "id": "26524eb1ed548055b841cb1a48dac7dd",
+      "type": "text",
+      "html": "And when such things happen",
+      "text": "And when such things happen"
+    },
+    {
+      "id": "26524eb1ed5480a8ad89f14cb5dabc1d",
+      "type": "bulleted_list",
+      "html": "Either, the application services can be halted, making it unavailable to users.",
+      "text": "Either, the application services can be halted, making it unavailable to users."
+    },
+    {
+      "id": "26524eb1ed5480dd8f47eeee256b2694",
+      "type": "bulleted_list",
+      "html": "Or, the application can continue operating, but with certain trade-offs.",
+      "text": "Or, the application can continue operating, but with certain trade-offs."
+    },
+    {
+      "id": "26524eb1ed5480e889a7f640363ba304",
+      "type": "text",
+      "html": "These trade-offs in distributed system design are explained by the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">CAP Theorem</span>.",
+      "text": "These trade-offs in distributed system design are explained by the CAP Theorem."
+    },
+    {
+      "id": "26524eb1ed5480e1ab00fb4733100c33",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed548028bd0ddeaefbb0b821",
+      "type": "header",
+      "html": "[C]: Consistency",
+      "text": "[C]: Consistency"
+    },
+    {
+      "id": "26824eb1ed548077bf3de83391a7ee77",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Every read reflects the most recent completed write (or returns an error).</span>",
+      "text": "Every read reflects the most recent completed write (or returns an error)."
+    },
+    {
+      "id": "26d24eb1ed5480569a42f4de0d2423d8",
+      "type": "bulleted_list",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Strong-Consistency-Linearizability-26c24eb1ed54802abd25ff7b66fefaa8?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Strong Consistency (Linearizability)</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Strong Consistency (Linearizability) ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Strong-Consistency-Linearizability-26c24eb1ed54802abd25ff7b66fefaa8?pvs=24",
+          "text": "Strong Consistency (Linearizability)"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed5480d58bcfebf38d70ca3f",
+      "type": "bulleted_list",
+      "html": "A write is considered successful only when it is durable and visible to all future reads.",
+      "text": "A write is considered successful only when it is durable and visible to all future reads."
+    },
+    {
+      "id": "26824eb1ed54804a9f5edcc7e4af4e58",
+      "type": "bulleted_list",
+      "html": "Any client, reading from any node, will always see the latest committed value — never stale data.",
+      "text": "Any client, reading from any node, will always see the latest committed value — never stale data."
+    },
+    {
+      "id": "26824eb1ed5480389055d4a1a2c41724",
+      "type": "bulleted_list",
+      "html": "From the client’s perspective, the system behaves like there is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">a single, up-to-date copy of the data</span>.",
+      "text": "From the client’s perspective, the system behaves like there is a single, up-to-date copy of the data."
+    },
+    {
+      "id": "26624eb1ed5480068d3ae0f0ee496b28",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed5480e1b41ce65fa5c19cba",
+      "type": "text",
+      "parent": "26624eb1ed5480068d3ae0f0ee496b28",
+      "html": "Consistency is used in many contexts with different meanings. <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Consistency-Definitions-Based-on-Context-26824eb1ed5480da91f3c623df4ea23d?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Consistency: Definitions Based on Context</span><span style=\"white-space:nowrap\"></span></a> provides an overview of these different definitions.",
+      "text": "Consistency is used in many contexts with different meanings. Consistency: Definitions Based on Context provides an overview of these different definitions.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Consistency-Definitions-Based-on-Context-26824eb1ed5480da91f3c623df4ea23d?pvs=24",
+          "text": "Consistency: Definitions Based on Context"
+        }
+      ]
+    },
+    {
+      "id": "26524eb1ed5480a2be08da50ebe61862",
+      "type": "header",
+      "html": "[A]: Availability",
+      "text": "[A]: Availability"
+    },
+    {
+      "id": "26524eb1ed5480a6859bc0a7c80ddd74",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Every request receives a response — which need not to be correct.</span>",
+      "text": "Every request receives a response — which need not to be correct."
+    },
+    {
+      "id": "26524eb1ed5480b3a59bdc1985ed118d",
+      "type": "bulleted_list",
+      "html": "The system remains responsive at all times.",
+      "text": "The system remains responsive at all times."
+    },
+    {
+      "id": "26524eb1ed5480e58317f37b1bfb2601",
+      "type": "bulleted_list",
+      "html": "Even if some nodes are slow or down, other nodes must still reply.",
+      "text": "Even if some nodes are slow or down, other nodes must still reply."
+    },
+    {
+      "id": "26524eb1ed54804f830cfa64d19ad74b",
+      "type": "bulleted_list",
+      "html": "Clients never get stuck waiting indefinitely; they always get <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">some</span> answer.",
+      "text": "Clients never get stuck waiting indefinitely; they always get some answer."
+    },
+    {
+      "id": "26524eb1ed54807f991eecb2bf787861",
+      "type": "header",
+      "html": "[P]: Partition Tolerance",
+      "text": "[P]: Partition Tolerance"
+    },
+    {
+      "id": "26524eb1ed548030a579c3f7c5f705f1",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">The system continues to operate even if communication between nodes is lost.</span>",
+      "text": "The system continues to operate even if communication between nodes is lost."
+    },
+    {
+      "id": "26524eb1ed5480e8b6f1e6ea9ced911d",
+      "type": "bulleted_list",
+      "html": "Network failures may split the system into groups of nodes that can’t talk to each other (a partition).",
+      "text": "Network failures may split the system into groups of nodes that can’t talk to each other (a partition)."
+    },
+    {
+      "id": "26524eb1ed5480669547e4dd4610d00c",
+      "type": "bulleted_list",
+      "html": "Despite this, the system must keep functioning, not shut down.",
+      "text": "Despite this, the system must keep functioning, not shut down."
+    },
+    {
+      "id": "26524eb1ed5480e1b181f8a837d540c5",
+      "type": "bulleted_list",
+      "html": "Design must tolerate unreliable networks where partitions are inevitable.",
+      "text": "Design must tolerate unreliable networks where partitions are inevitable."
+    },
+    {
+      "id": "26624eb1ed5480e99badebe719d5c661",
+      "type": "text",
+      "html": "Partition Tolerance is also referred as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Fault Tolerance.</span>",
+      "text": "Partition Tolerance is also referred as Fault Tolerance."
+    },
+    {
+      "id": "26624eb1ed5480fe9515eccd456d511c",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed5480b58826cbffb005ec77",
+      "type": "callout"
+    },
+    {
+      "id": "26624eb1ed54809a906ecf533066d742",
+      "type": "toggle",
+      "parent": "26624eb1ed5480b58826cbffb005ec77",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example: Consistency, Availability and Partition Tolerance</span>",
+      "text": "Example: Consistency, Availability and Partition Tolerance"
+    },
+    {
+      "id": "26624eb1ed5480679df3e3ad673874e5",
+      "type": "divider",
+      "parent": "26624eb1ed54809a906ecf533066d742"
+    },
+    {
+      "id": "26624eb1ed548062abd5da42a02c260d",
+      "type": "text",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "Let us say we have three nodes, all up, and can communicate to each other.",
+      "text": "Let us say we have three nodes, all up, and can communicate to each other."
+    },
+    {
+      "id": "26624eb1ed548057980fce5e77c02274",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "A client writes an update to node B.",
+      "text": "A client writes an update to node B."
+    },
+    {
+      "id": "26624eb1ed5480439a1ad46628e7e9d4",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "The update is replicated to A and C for the operation to be considered successful.",
+      "text": "The update is replicated to A and C for the operation to be considered successful."
+    },
+    {
+      "id": "26624eb1ed54805c9edcd7a02f82f9c0",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "A subsequent read from any node (A, B, or C) will always return the latest value.",
+      "text": "A subsequent read from any node (A, B, or C) will always return the latest value."
+    },
+    {
+      "id": "26624eb1ed5480d9bfb8e7c6b808b98f",
+      "type": "text",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "This is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency.</span>",
+      "text": "This is consistency."
+    },
+    {
+      "id": "26624eb1ed5480758a36f882845b9946",
+      "type": "divider",
+      "parent": "26624eb1ed54809a906ecf533066d742"
+    },
+    {
+      "id": "26624eb1ed548014b8e0ce123c4a1051",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "Now, Node B goes down due to a hardware failure.",
+      "text": "Now, Node B goes down due to a hardware failure."
+    },
+    {
+      "id": "26624eb1ed5480af8d63e255fc7b6249",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "But, Nodes A and C are still active and can serve the client requests.",
+      "text": "But, Nodes A and C are still active and can serve the client requests."
+    },
+    {
+      "id": "26624eb1ed5480ad8fa9e206ed737afa",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "The system remains available because clients can still interact with A and C.",
+      "text": "The system remains available because clients can still interact with A and C."
+    },
+    {
+      "id": "26624eb1ed5480968191fb1c46c98301",
+      "type": "text",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "This is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">availability</span>.",
+      "text": "This is availability."
+    },
+    {
+      "id": "26624eb1ed54803bba64f7367f635dfe",
+      "type": "divider",
+      "parent": "26624eb1ed54809a906ecf533066d742"
+    },
+    {
+      "id": "26624eb1ed5480aa908fc7a44c4f31b8",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "Now, all nodes are up, but, B is not able to communicate with A and C due to some network failure.",
+      "text": "Now, all nodes are up, but, B is not able to communicate with A and C due to some network failure."
+    },
+    {
+      "id": "26624eb1ed548034a183f35469115d7c",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "Node B can still handle requests from its clients.",
+      "text": "Node B can still handle requests from its clients."
+    },
+    {
+      "id": "26624eb1ed548043bb81d51ffa47c5ce",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "Nodes A and C continue serving their clients.",
+      "text": "Nodes A and C continue serving their clients."
+    },
+    {
+      "id": "26624eb1ed5480bc9773ef8a48b69215",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "The system does not stop functioning, even though nodes cannot all talk to each other.",
+      "text": "The system does not stop functioning, even though nodes cannot all talk to each other."
+    },
+    {
+      "id": "26624eb1ed5480668574facfd6487ebf",
+      "type": "text",
+      "parent": "26624eb1ed54809a906ecf533066d742",
+      "html": "This is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">partition tolerance</span>.",
+      "text": "This is partition tolerance."
+    },
+    {
+      "id": "26524eb1ed54805e8058f96d2f3c6267",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed5480c68a43fcc899592b56",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed5480c2a37cc4ca51a99b7f",
+      "type": "toggle",
+      "parent": "26524eb1ed5480c68a43fcc899592b56",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Availability vs Partition Tolerance</span>",
+      "text": "Availability vs Partition Tolerance"
+    },
+    {
+      "id": "26524eb1ed54805690f0df28d6dfe1b2",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480c2a37cc4ca51a99b7f",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Availability:</span> The system <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">continues to work</span> even when <span style=\"font-style:italic;font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">some nodes are down.</span>",
+      "text": "Availability: The system continues to work even when some nodes are down."
+    },
+    {
+      "id": "26524eb1ed5480649f28da06efb4a096",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480c2a37cc4ca51a99b7f",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Partition Tolerance:</span> The system <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">continues to work</span> when <span style=\"font-style:italic;font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">nodes lose communication among themselves.</span>",
+      "text": "Partition Tolerance: The system continues to work when nodes lose communication among themselves."
+    },
+    {
+      "id": "26524eb1ed54805da745c7eb15f9e93f",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed5480469986d3ff07205f56",
+      "type": "header",
+      "html": "CAP Theorem",
+      "text": "CAP Theorem"
+    },
+    {
+      "id": "26624eb1ed5480e2b33fdcbb6197b5dd",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">A distributed system can provide only two of the three: Consistency, Availability, and Partition Tolerance — never all three at the same time.</span>",
+      "text": "A distributed system can provide only two of the three: Consistency, Availability, and Partition Tolerance — never all three at the same time."
+    },
+    {
+      "id": "26624eb1ed5480e3af44c15614b4399f",
+      "type": "sub_header",
+      "html": "Why Choosing All (CAP) at Once Is Impossible?",
+      "text": "Why Choosing All (CAP) at Once Is Impossible?"
+    },
+    {
+      "id": "26624eb1ed54801aab41fe2d7c678e0c",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Example with 3 nodes A, B, and C storing variable X = 10.</span>",
+      "text": "Example with 3 nodes A, B, and C storing variable X = 10."
+    },
+    {
+      "id": "26624eb1ed5480948972fc9d219c7432",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Client updates X = 20 at node A.</span>",
+      "text": "Client updates X = 20 at node A."
+    },
+    {
+      "id": "26624eb1ed54800da5cbc3810b394956",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480948972fc9d219c7432",
+      "html": "To keep <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Consistency</span>, the update must also reach B and C.",
+      "text": "To keep Consistency, the update must also reach B and C."
+    },
+    {
+      "id": "26624eb1ed548034955bebf3c335a1d9",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Now a partition occurs.</span>",
+      "text": "Now a partition occurs."
+    },
+    {
+      "id": "26624eb1ed5480c2a6a9dd20afb376da",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed548034955bebf3c335a1d9",
+      "html": "Node A is cut off from B and C.",
+      "text": "Node A is cut off from B and C."
+    },
+    {
+      "id": "26624eb1ed5480698d68d8cbaa1155e5",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed548034955bebf3c335a1d9",
+      "html": "Clients still send requests to all nodes.",
+      "text": "Clients still send requests to all nodes."
+    },
+    {
+      "id": "26624eb1ed548026a710e92e5684e8b4",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trying to keep all three:</span>",
+      "text": "Trying to keep all three:"
+    },
+    {
+      "id": "26624eb1ed54803cbad4c11172087353",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed548026a710e92e5684e8b4",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consistency</span> → All nodes must agree (X = 20 everywhere).",
+      "text": "Consistency → All nodes must agree (X = 20 everywhere)."
+    },
+    {
+      "id": "26624eb1ed54801f8429c46ab2c7572c",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed548026a710e92e5684e8b4",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Availability</span> → Each node must answer its clients.",
+      "text": "Availability → Each node must answer its clients."
+    },
+    {
+      "id": "26624eb1ed5480b4ae93ef9f172d16f0",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed548026a710e92e5684e8b4",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Partition Tolerance</span> → Nodes must keep running despite the broken link.",
+      "text": "Partition Tolerance → Nodes must keep running despite the broken link."
+    },
+    {
+      "id": "26624eb1ed5480ab98d4fefce4c1f75c",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The contradiction:</span>",
+      "text": "The contradiction:"
+    },
+    {
+      "id": "26624eb1ed5480b5a166fc9a433f6f98",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480ab98d4fefce4c1f75c",
+      "html": "If A answers its client → A shows X = 20.",
+      "text": "If A answers its client → A shows X = 20."
+    },
+    {
+      "id": "26624eb1ed54806c8a52cc51a9545e91",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480ab98d4fefce4c1f75c",
+      "html": "If B answers its client → B still has X = 10.",
+      "text": "If B answers its client → B still has X = 10."
+    },
+    {
+      "id": "26624eb1ed5480739f73d8d65558a353",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480ab98d4fefce4c1f75c",
+      "html": "That breaks <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Consistency</span>.",
+      "text": "That breaks Consistency."
+    },
+    {
+      "id": "26624eb1ed5480708c9dcea7c110a58c",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480ab98d4fefce4c1f75c",
+      "html": "If A waits for B and C → clients at A get no response.",
+      "text": "If A waits for B and C → clients at A get no response."
+    },
+    {
+      "id": "26624eb1ed548050a64afab7fb761b9f",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480ab98d4fefce4c1f75c",
+      "html": "That breaks <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Availability</span>.",
+      "text": "That breaks Availability."
+    },
+    {
+      "id": "26624eb1ed548046b829edcf0622b994",
+      "type": "text",
+      "html": "This explains that getting all three at once is impossible.",
+      "text": "This explains that getting all three at once is impossible."
+    },
+    {
+      "id": "26624eb1ed5480dea58aef8fba6457ea",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed54809fa2faea81ab027891",
+      "type": "sub_header",
+      "html": "CA",
+      "text": "CA"
+    },
+    {
+      "id": "26624eb1ed54802188bbda66269f9f98",
+      "type": "text",
+      "html": "Choosing <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">CA (Consistency + Availability)</span> sounds tempting, but it is only possible <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">when there are no network partitions</span>. In real-world distributed systems, partitions are inevitable, which makes pure CA an unrealistic choice.",
+      "text": "Choosing CA (Consistency + Availability) sounds tempting, but it is only possible when there are no network partitions. In real-world distributed systems, partitions are inevitable, which makes pure CA an unrealistic choice."
+    },
+    {
+      "id": "26624eb1ed5480ca89b5e50646a41481",
+      "type": "text",
+      "html": "Example:",
+      "text": "Example:"
+    },
+    {
+      "id": "26624eb1ed5480cb8843f84192175c95",
+      "type": "bulleted_list",
+      "html": "A single database server stores a variable <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">X = 10</span>.",
+      "text": "A single database server stores a variable X = 10."
+    },
+    {
+      "id": "26624eb1ed54808ca7d3caabf63a47ba",
+      "type": "bulleted_list",
+      "html": "A client updates <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">X = 20</span>, and immediately every read reflects the new value.",
+      "text": "A client updates X = 20, and immediately every read reflects the new value."
+    },
+    {
+      "id": "26624eb1ed54803ba3b2ee60598f982e",
+      "type": "bulleted_list",
+      "html": "The system is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistent</span> (all reads see the same value) and <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">available</span> (every request gets a response).",
+      "text": "The system is consistent (all reads see the same value) and available (every request gets a response)."
+    },
+    {
+      "id": "26624eb1ed54800a8424cbe0137af374",
+      "type": "text",
+      "html": "Now, imagine scaling this to 3 nodes: A, B, &amp; C.",
+      "text": "Now, imagine scaling this to 3 nodes: A, B, & C."
+    },
+    {
+      "id": "26624eb1ed5480f0b8d5ef478b1989b3",
+      "type": "bulleted_list",
+      "html": "As long as the network is healthy, all nodes stay in sync → CA holds.",
+      "text": "As long as the network is healthy, all nodes stay in sync → CA holds."
+    },
+    {
+      "id": "26624eb1ed5480f98b23e1ddc5b7908e",
+      "type": "bulleted_list",
+      "html": "But if a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">network partition</span> occurs (e.g., A is cut off from B and C):",
+      "text": "But if a network partition occurs (e.g., A is cut off from B and C):"
+    },
+    {
+      "id": "26624eb1ed5480368f3ac21aea5d120b",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480f98b23e1ddc5b7908e",
+      "html": "To remain <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistent</span>, either B and C must reject requests (sacrificing availability → CP),",
+      "text": "To remain consistent, either B and C must reject requests (sacrificing availability → CP),"
+    },
+    {
+      "id": "26624eb1ed54807a91cfe2f474d6b593",
+      "type": "bulleted_list",
+      "parent": "26624eb1ed5480f98b23e1ddc5b7908e",
+      "html": "Or to remain <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">available</span>, B and C must continue serving possibly stale data (sacrificing consistency → AP).",
+      "text": "Or to remain available, B and C must continue serving possibly stale data (sacrificing consistency → AP)."
+    },
+    {
+      "id": "26624eb1ed5480019ef6d36dbc9e10e4",
+      "type": "text",
+      "html": "This shows that <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">CA cannot be guaranteed once partitions happen.</span>",
+      "text": "This shows that CA cannot be guaranteed once partitions happen."
+    },
+    {
+      "id": "26624eb1ed54808c901af1197068652a",
+      "type": "sub_sub_header",
+      "html": "Key point:",
+      "text": "Key point:"
+    },
+    {
+      "id": "26624eb1ed5480199141c33f81d5bf58",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">CA systems exist only in theory (with perfectly reliable networks) or in practice as single-node systems.</span>",
+      "text": "CA systems exist only in theory (with perfectly reliable networks) or in practice as single-node systems."
+    },
+    {
+      "id": "26624eb1ed548020a814e8324f77cef0",
+      "type": "bulleted_list",
+      "html": "In distributed real-world systems, we always have to choose between <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">CP</span> and <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">AP</span> during partitions.",
+      "text": "In distributed real-world systems, we always have to choose between CP and AP during partitions."
+    },
+    {
+      "id": "26624eb1ed5480d9af38c9151278ced5",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed54800d9535d53c2fd92366",
+      "type": "sub_header",
+      "html": "AP",
+      "text": "AP"
+    },
+    {
+      "id": "26624eb1ed548078853ae733151c7b35",
+      "type": "text",
+      "html": "Choosing <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">AP (Availability + Partition Tolerance)</span> means the system always remains responsive, even during partitions, but <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">consistency may be temporarily sacrificed.</span>",
+      "text": "Choosing AP (Availability + Partition Tolerance) means the system always remains responsive, even during partitions, but consistency may be temporarily sacrificed."
+    },
+    {
+      "id": "26624eb1ed5480a89366da79661c48ca",
+      "type": "text",
+      "html": "Example:",
+      "text": "Example:"
+    },
+    {
+      "id": "26624eb1ed54805987b4e606e6c38613",
+      "type": "bulleted_list",
+      "html": "3 Nodes: A, B, &amp; C.",
+      "text": "3 Nodes: A, B, & C."
+    },
+    {
+      "id": "26624eb1ed5480e49074df89705cb26a",
+      "type": "bulleted_list",
+      "html": "By default, clients near A talk to A and similarly for B and C.",
+      "text": "By default, clients near A talk to A and similarly for B and C."
+    },
+    {
+      "id": "26624eb1ed548003873be3b342c73a47",
+      "type": "bulleted_list",
+      "html": "System stores a variable <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">X = 10</span>, means the variable is stored at each node.",
+      "text": "System stores a variable X = 10, means the variable is stored at each node."
+    },
+    {
+      "id": "26624eb1ed54806f8658dd85c2aaaa63",
+      "type": "bulleted_list",
+      "html": "Client near A updates <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">X = 20</span>, means the value is updated at A.",
+      "text": "Client near A updates X = 20, means the value is updated at A."
+    },
+    {
+      "id": "26624eb1ed5480f1b03af924e75a65bc",
+      "type": "text",
+      "html": "Now, a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">network partition</span> occurs:",
+      "text": "Now, a network partition occurs:"
+    },
+    {
+      "id": "26624eb1ed5480d9ad06e36503e222c7",
+      "type": "bulleted_list",
+      "html": "A is isolated from B and C.",
+      "text": "A is isolated from B and C."
+    },
+    {
+      "id": "26624eb1ed548068adb7d97d4073db21",
+      "type": "bulleted_list",
+      "html": "The changes are not propagated to B and C.",
+      "text": "The changes are not propagated to B and C."
+    },
+    {
+      "id": "26624eb1ed5480bbbddffb88b6d3c99c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Clients of B and C can still access their local nodes.</span>",
+      "text": "Clients of B and C can still access their local nodes."
+    },
+    {
+      "id": "26624eb1ed54806fa4c4f2d902fe572a",
+      "type": "bulleted_list",
+      "html": "But they may still read <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">X = 10</span>, while clients near A read <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">X = 20</span>.",
+      "text": "But they may still read X = 10, while clients near A read X = 20."
+    },
+    {
+      "id": "26624eb1ed5480558e49cc258d176cbf",
+      "type": "bulleted_list",
+      "html": "Consistency is lost, but <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">the system continues serving all clients without downtime.</span>",
+      "text": "Consistency is lost, but the system continues serving all clients without downtime."
+    },
+    {
+      "id": "26624eb1ed54804bb637ed4ec9360694",
+      "type": "sub_sub_header",
+      "html": "When to choose AP:",
+      "text": "When to choose AP:"
+    },
+    {
+      "id": "26624eb1ed5480e18283fbe00531ef08",
+      "type": "bulleted_list",
+      "html": "When <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">availability is critical</span> (e.g., social media feeds).",
+      "text": "When availability is critical (e.g., social media feeds)."
+    },
+    {
+      "id": "26624eb1ed5480e8a1f6fa07e632c3ae",
+      "type": "bulleted_list",
+      "html": "When <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">temporary inconsistencies are acceptable</span> and can be resolved later via <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">eventual consistency</span>.",
+      "text": "When temporary inconsistencies are acceptable and can be resolved later via eventual consistency."
+    },
+    {
+      "id": "26624eb1ed548095ab22dc08d64a86c8",
+      "type": "bulleted_list",
+      "html": "When user experience matters more than strict correctness in real time.",
+      "text": "When user experience matters more than strict correctness in real time."
+    },
+    {
+      "id": "26624eb1ed5480fb8462e12f557cbd9a",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed548073b4a4fe48cd6ff18c",
+      "type": "sub_header",
+      "html": "CP",
+      "text": "CP"
+    },
+    {
+      "id": "26624eb1ed5480a3b0bbfb0775bf254f",
+      "type": "text",
+      "html": "Choosing <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">CP (Consistency + Partition Tolerance)</span> means the system always ensures correctness across nodes, even during partitions, but <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">availability may be sacrificed.</span>",
+      "text": "Choosing CP (Consistency + Partition Tolerance) means the system always ensures correctness across nodes, even during partitions, but availability may be sacrificed."
+    },
+    {
+      "id": "26624eb1ed5480149e9ff242ed8e549d",
+      "type": "text",
+      "html": "Example:",
+      "text": "Example:"
+    },
+    {
+      "id": "26624eb1ed5480b9b98de45c28a00da8",
+      "type": "bulleted_list",
+      "html": "3 Nodes: A, B, &amp; C.",
+      "text": "3 Nodes: A, B, & C."
+    },
+    {
+      "id": "26624eb1ed548017b31cfe7af1c02332",
+      "type": "bulleted_list",
+      "html": "By default, clients near A talk to A and similarly for B and C.",
+      "text": "By default, clients near A talk to A and similarly for B and C."
+    },
+    {
+      "id": "26624eb1ed54809b8904eb3948ad0919",
+      "type": "bulleted_list",
+      "html": "System stores a variable <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">X = 10</span>, means the variable is stored at each node.",
+      "text": "System stores a variable X = 10, means the variable is stored at each node."
+    },
+    {
+      "id": "26624eb1ed548019a060fcbb6aebf037",
+      "type": "bulleted_list",
+      "html": "Client near A updates <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">X = 20</span>, means the value is updated at A.",
+      "text": "Client near A updates X = 20, means the value is updated at A."
+    },
+    {
+      "id": "26624eb1ed5480fcbf99de824050ede5",
+      "type": "text",
+      "html": "Now, a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">network partition</span> occurs:",
+      "text": "Now, a network partition occurs:"
+    },
+    {
+      "id": "26624eb1ed548048b6f7d0687087a5b0",
+      "type": "bulleted_list",
+      "html": "A is isolated from B and C.",
+      "text": "A is isolated from B and C."
+    },
+    {
+      "id": "26624eb1ed5480b4a4f5f386b66c9451",
+      "type": "bulleted_list",
+      "html": "The changes are not propagated to B and C.",
+      "text": "The changes are not propagated to B and C."
+    },
+    {
+      "id": "26624eb1ed5480b5b40bd3a81aec49fb",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Clients near A can still see X = 20.</span>",
+      "text": "Clients near A can still see X = 20."
+    },
+    {
+      "id": "26624eb1ed5480688e6cf371212d3c3a",
+      "type": "bulleted_list",
+      "html": "But requests to B and C may be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">blocked or rejected</span>, since serving them could break consistency.",
+      "text": "But requests to B and C may be blocked or rejected, since serving them could break consistency."
+    },
+    {
+      "id": "26624eb1ed5480f58174fe42dda0690e",
+      "type": "bulleted_list",
+      "html": "The system stays consistent, but <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">availability suffers</span> for the clients of B and C until the partition is resolved.",
+      "text": "The system stays consistent, but availability suffers for the clients of B and C until the partition is resolved."
+    },
+    {
+      "id": "26624eb1ed5480d39154e5866f47656c",
+      "type": "sub_sub_header",
+      "html": "When to choose CP:",
+      "text": "When to choose CP:"
+    },
+    {
+      "id": "26624eb1ed54800ab9c7d8d802c29cb4",
+      "type": "bulleted_list",
+      "html": "When <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">data correctness is critical</span> (e.g., banking).",
+      "text": "When data correctness is critical (e.g., banking)."
+    },
+    {
+      "id": "26624eb1ed5480fbbfd6cd314d318f33",
+      "type": "bulleted_list",
+      "html": "When serving stale or conflicting data is unacceptable.",
+      "text": "When serving stale or conflicting data is unacceptable."
+    },
+    {
+      "id": "26624eb1ed54807b945bec180f26b789",
+      "type": "bulleted_list",
+      "html": "When users can tolerate downtime but not incorrect data.",
+      "text": "When users can tolerate downtime but not incorrect data."
+    },
+    {
+      "id": "26624eb1ed54801d9467d91e17762da2",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed54801ca5a8e99af7780fe4",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    },
+    {
+      "id": "26e24eb1ed5480dc958df91683a1a3f7",
+      "type": "text"
+    }
+  ]
+}

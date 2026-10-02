@@ -1,0 +1,149 @@
+{
+  "id": "26c24eb1ed54807ca59be7b4ddb4f901",
+  "title": "Read-Your-Writes Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Read-Your-Writes-Consistency-26c24eb1ed54807ca59be7b4ddb4f901?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed548037a17ff7f3bd816bf7",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">After a client performs a write, it will always see the effects of that write in its subsequent reads, even if other clients see stale data.</span>",
+      "text": "After a client performs a write, it will always see the effects of that write in its subsequent reads, even if other clients see stale data."
+    },
+    {
+      "id": "26c24eb1ed54805ba664e04901df2972",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span>",
+      "text": "Guarantee:"
+    },
+    {
+      "id": "26c24eb1ed5480c79eeff8530e3cae74",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54805ba664e04901df2972",
+      "html": "Each client always sees <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">its own updates</span> immediately.",
+      "text": "Each client always sees its own updates immediately."
+    },
+    {
+      "id": "26c24eb1ed5480e68133ed76846dc208",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54805ba664e04901df2972",
+      "html": "Does <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not guarantee</span> that other clients see the updates at the same time.",
+      "text": "Does not guarantee that other clients see the updates at the same time."
+    },
+    {
+      "id": "26c24eb1ed5480a78651df18fb76c050",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed5480f6b107ffabada282ac",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a78651df18fb76c050",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed5480068ff5cfacd49d1516",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480f6b107ffabada282ac",
+      "html": "Simple and intuitive for a single user.",
+      "text": "Simple and intuitive for a single user."
+    },
+    {
+      "id": "26c24eb1ed548043b562e1c8160e9891",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480f6b107ffabada282ac",
+      "html": "Prevents confusion where a user cannot see what they just wrote.",
+      "text": "Prevents confusion where a user cannot see what they just wrote."
+    },
+    {
+      "id": "26c24eb1ed5480e69933efd48d491adc",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a78651df18fb76c050",
+      "html": "Cons/Anomalies:",
+      "text": "Cons/Anomalies:"
+    },
+    {
+      "id": "26c24eb1ed5480f19522dd439c038fb1",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480e69933efd48d491adc",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Stale Reads from Other Clients:</span> Other users may still see outdated values.",
+      "text": "Stale Reads from Other Clients: Other users may still see outdated values."
+    },
+    {
+      "id": "26c24eb1ed5480069d58c3999e74b69a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480e69933efd48d491adc",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cross-Client Inconsistency:</span> No guarantee that others observe the same state as the writer.",
+      "text": "Cross-Client Inconsistency: No guarantee that others observe the same state as the writer."
+    },
+    {
+      "id": "26c24eb1ed54805a9f81e0ebf3cf970b",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases:</span> Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">user experience matters per client</span>, e.g.:",
+      "text": "Use Cases: Systems where user experience matters per client, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed5480a093b6fc307dcca625",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54805a9f81e0ebf3cf970b",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Social Media Posts:</span>",
+      "text": "Social Media Posts:"
+    },
+    {
+      "id": "26c24eb1ed54805ca361e7e276486984",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a093b6fc307dcca625",
+      "html": "After posting a status, you immediately see it on your profile.",
+      "text": "After posting a status, you immediately see it on your profile."
+    },
+    {
+      "id": "26c24eb1ed5480009a19f2d839116a38",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54805a9f81e0ebf3cf970b",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Online Forms / Account Settings:</span>",
+      "text": "Online Forms / Account Settings:"
+    },
+    {
+      "id": "26c24eb1ed548080b364df22f15a7267",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480009a19f2d839116a38",
+      "html": "After changing your password or email, your session always reflects the new value.",
+      "text": "After changing your password or email, your session always reflects the new value."
+    },
+    {
+      "id": "26c24eb1ed5480889110e40d59cc6e1a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54805a9f81e0ebf3cf970b",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Shopping Carts:</span>",
+      "text": "Shopping Carts:"
+    },
+    {
+      "id": "26c24eb1ed5480bdb128d1ab081bf103",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480889110e40d59cc6e1a",
+      "html": "Items you add are immediately visible when you continue shopping, but the items count for other person doing the shopping may not update immediately.",
+      "text": "Items you add are immediately visible when you continue shopping, but the items count for other person doing the shopping may not update immediately."
+    },
+    {
+      "id": "26c24eb1ed5480a59a86c5509d50912f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed5480d79e59df08602cd96a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a59a86c5509d50912f",
+      "html": "Track <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">writes per client session</span> and ensure subsequent reads are routed or merged with those writes.",
+      "text": "Track writes per client session and ensure subsequent reads are routed or merged with those writes."
+    },
+    {
+      "id": "26c24eb1ed5480098daac93676167cab",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a59a86c5509d50912f",
+      "html": "Often implemented using <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">session stickiness</span> or <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">client-specific caches</span>.",
+      "text": "Often implemented using session stickiness or client-specific caches."
+    }
+  ]
+}

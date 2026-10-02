@@ -1,0 +1,27 @@
+{
+  "id": "29e24eb1ed548064ae18dd527c9d97e8",
+  "title": "Ungrouped",
+  "sourceUrl": "https://xpandeyed.notion.site/Ungrouped-29e24eb1ed548064ae18dd527c9d97e8?pvs=23",
+  "blocks": [
+    {
+      "id": "29e24eb1ed5480cdabf2c045ecb4c819",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The Confused Deputy Problem (Related to API Gateway)</span>",
+      "text": "The Confused Deputy Problem (Related to API Gateway)"
+    },
+    {
+      "id": "29e24eb1ed5480d68edee709d380db10",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480cdabf2c045ecb4c819",
+      "html": "This vulnerability can arise when an upstream party (like the gateway) authorizes a request but a downstream service blindly trusts that authorization.",
+      "text": "This vulnerability can arise when an upstream party (like the gateway) authorizes a request but a downstream service blindly trusts that authorization."
+    },
+    {
+      "id": "29e24eb1ed5480098b7fec8aca92e29b",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480cdabf2c045ecb4c819",
+      "html": "JWT (JSON Web Tokens) are often used to pass validated user credentials and authorization claims securely from the gateway to the microservices, enabling decentralized authorization checks.",
+      "text": "JWT (JSON Web Tokens) are often used to pass validated user credentials and authorization claims securely from the gateway to the microservices, enabling decentralized authorization checks."
+    }
+  ]
+}

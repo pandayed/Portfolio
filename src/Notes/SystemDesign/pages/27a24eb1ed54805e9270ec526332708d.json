@@ -1,0 +1,597 @@
+{
+  "id": "27a24eb1ed54805e9270ec526332708d",
+  "title": "API Gateway",
+  "sourceUrl": "https://xpandeyed.notion.site/API-Gateway-27a24eb1ed54805e9270ec526332708d?pvs=23",
+  "blocks": [
+    {
+      "id": "29024eb1ed5480df8c7adcac5d6d1cd0",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Intermediary servers sitting between clients and a cluster of backend servers, to fine-tune the flow of requests.</span>",
+      "text": "Intermediary servers sitting between clients and a cluster of backend servers, to fine-tune the flow of requests."
+    },
+    {
+      "id": "29e24eb1ed54808ea386eb5110234b8d",
+      "type": "divider"
+    },
+    {
+      "id": "2f824eb1ed5480b6a868f6f9f0b59612",
+      "type": "transclusion_container"
+    },
+    {
+      "id": "2f824eb1ed54804d8714f8118ba0fc3c",
+      "type": "transclusion_reference",
+      "parent": "2f824eb1ed5480b6a868f6f9f0b59612"
+    },
+    {
+      "id": "29e24eb1ed548009bd08cdb34353d01a",
+      "type": "shared_ref",
+      "parent": "2f824eb1ed54804d8714f8118ba0fc3c"
+    },
+    {
+      "id": "29324eb1ed5480599068fe6ea6afaac3",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed5480e79cf9f73dbe15142f",
+      "type": "bulleted_list",
+      "html": "Transitioning from a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">monolithic architecture</span> to a <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">microservices architecture</span> introduces multiple operational challenges.",
+      "text": "Transitioning from a monolithic architecture to a microservices architecture introduces multiple operational challenges."
+    },
+    {
+      "id": "29e24eb1ed54803dbf81e4235620f4eb",
+      "type": "bulleted_list",
+      "html": "Each <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">microservice</span> must individually handle <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">authentication, authorization</span>, and other repeated concerns.",
+      "text": "Each microservice must individually handle authentication, authorization, and other repeated concerns."
+    },
+    {
+      "id": "29e24eb1ed5480d59d39da74c29b0071",
+      "type": "bulleted_list",
+      "html": "These duplicated responsibilities increase complexity and reduce efficiency across services.",
+      "text": "These duplicated responsibilities increase complexity and reduce efficiency across services."
+    },
+    {
+      "id": "29e24eb1ed5480a1b3f1ff98e4159d75",
+      "type": "bulleted_list",
+      "html": "To simplify this, an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">intermediary layer</span> is placed between the clients and the microservices.",
+      "text": "To simplify this, an intermediary layer is placed between the clients and the microservices."
+    },
+    {
+      "id": "29e24eb1ed548042977bf882c7604cda",
+      "type": "bulleted_list",
+      "html": "This layer, called an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">API Gateway</span>, acts as the <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">central entry point</span> for all client requests.",
+      "text": "This layer, called an API Gateway, acts as the central entry point for all client requests."
+    },
+    {
+      "id": "29e24eb1ed548044bd21f19051b0be00",
+      "type": "bulleted_list",
+      "html": "The <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">API Gateway</span> offloads shared responsibilities, allowing microservices to concentrate solely on their <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">core business logic</span>.",
+      "text": "The API Gateway offloads shared responsibilities, allowing microservices to concentrate solely on their core business logic."
+    },
+    {
+      "id": "29e24eb1ed5480c1b32bd274b2b8f6b2",
+      "type": "divider"
+    },
+    {
+      "id": "29324eb1ed5480fbb1cac555e5027439",
+      "type": "header",
+      "html": "Primary Roles",
+      "text": "Primary Roles"
+    },
+    {
+      "id": "29324eb1ed54806f89ace5da731802be",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Single Entry Point</span>",
+      "text": "Single Entry Point"
+    },
+    {
+      "id": "29e24eb1ed54801e9f45dcd633ee6f75",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed54806f89ace5da731802be",
+      "html": "Acts as the single unified access point for all client requests to multiple backend microservices.",
+      "text": "Acts as the single unified access point for all client requests to multiple backend microservices."
+    },
+    {
+      "id": "29e24eb1ed5480a78cd4f0873e460590",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">TLS (Transport Layer Security) Enforcement &amp; Termination</span>",
+      "text": "TLS (Transport Layer Security) Enforcement & Termination"
+    },
+    {
+      "id": "29e24eb1ed5480d28e69c0e4ab9c90b9",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480a78cd4f0873e460590",
+      "html": "The API Gateway <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">enforces encryption</span> by accepting only <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">encrypted traffic (mainly HTTPS)</span> and rejecting all unencrypted <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">(HTTP) requests</span>.",
+      "text": "The API Gateway enforces encryption by accepting only encrypted traffic (mainly HTTPS) and rejecting all unencrypted (HTTP) requests."
+    },
+    {
+      "id": "29e24eb1ed54802dbab0fd615b0ba1da",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480a78cd4f0873e460590",
+      "html": "The gateway then performs <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">TLS termination</span>, where it <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">decrypts</span> the incoming encrypted data.",
+      "text": "The gateway then performs TLS termination, where it decrypts the incoming encrypted data."
+    },
+    {
+      "id": "29e24eb1ed548099ba95f8769efac05e",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480a78cd4f0873e460590",
+      "html": "After decryption, the gateway can <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">inspect, validate, and route</span> requests to internal services.",
+      "text": "After decryption, the gateway can inspect, validate, and route requests to internal services."
+    },
+    {
+      "id": "29e24eb1ed548019afcef433860d918d",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480a78cd4f0873e460590",
+      "html": "This ensures that <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">external communication stays secure</span>, while internal routing and processing can happen efficiently as the internal services would not have to bother about decryption.",
+      "text": "This ensures that external communication stays secure, while internal routing and processing can happen efficiently as the internal services would not have to bother about decryption."
+    },
+    {
+      "id": "29e24eb1ed54803f9bf6e53b740fdcc7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Request Validation</span>",
+      "text": "Request Validation"
+    },
+    {
+      "id": "29e24eb1ed548022943ad68262fc55a1",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54803f9bf6e53b740fdcc7",
+      "html": "The API gateway checks if the URL is valid, scans headers for malicious content, and validates the body to prevent injection attacks.",
+      "text": "The API gateway checks if the URL is valid, scans headers for malicious content, and validates the body to prevent injection attacks."
+    },
+    {
+      "id": "29324eb1ed548059a590ec6b647c35df",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Authentication and Authorization</span>",
+      "text": "Authentication and Authorization"
+    },
+    {
+      "id": "29e24eb1ed5480969260f2ef01bf3a84",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed548059a590ec6b647c35df",
+      "html": "Verifies client identity (authentication) and checks permissions (authorization) before forwarding requests.",
+      "text": "Verifies client identity (authentication) and checks permissions (authorization) before forwarding requests."
+    },
+    {
+      "id": "29324eb1ed5480f0adc5de28ad86cafc",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rate Limiting</span>",
+      "text": "Rate Limiting"
+    },
+    {
+      "id": "29e24eb1ed5480fd833ce4d0d53b8ab9",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480f0adc5de28ad86cafc",
+      "html": "Defines a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">fixed maximum number of requests</span> a client can make within a specific <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">time window</span> (e.g., 100 requests per minute).",
+      "text": "Defines a fixed maximum number of requests a client can make within a specific time window (e.g., 100 requests per minute)."
+    },
+    {
+      "id": "29e24eb1ed5480e3ae09dbc211a8fa52",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480f0adc5de28ad86cafc",
+      "html": "Once the limit is reached, the gateway <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">rejects further requests</span> (usually with HTTP status <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">429 – Too Many Requests</span>).",
+      "text": "Once the limit is reached, the gateway rejects further requests (usually with HTTP status 429 – Too Many Requests)."
+    },
+    {
+      "id": "29e24eb1ed548047a15cdb9e5b7beff5",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480f0adc5de28ad86cafc",
+      "html": "Ensures <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">fair usage</span> among clients and prevents <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">denial-of-service (DoS)</span> attacks.",
+      "text": "Ensures fair usage among clients and prevents denial-of-service (DoS) attacks."
+    },
+    {
+      "id": "29e24eb1ed548077bd33f23b871eb7da",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480f0adc5de28ad86cafc",
+      "html": "Rate Limiting is done using algos, which I will write later.",
+      "text": "Rate Limiting is done using algos, which I will write later."
+    },
+    {
+      "id": "29e24eb1ed5480dfb74fd648681156dc",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Throttling</span>",
+      "text": "Throttling"
+    },
+    {
+      "id": "29e24eb1ed5480169904ebfca18177c9",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480dfb74fd648681156dc",
+      "html": "Instead of rejecting excess requests outright (as in Rate Limiting), it <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">slows down</span> request processing.",
+      "text": "Instead of rejecting excess requests outright (as in Rate Limiting), it slows down request processing."
+    },
+    {
+      "id": "29e24eb1ed548088b163f3803f5cc1a5",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480dfb74fd648681156dc",
+      "html": "Can <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">queue</span>, <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">delay</span>, or <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">degrade service</span> when limits are exceeded.",
+      "text": "Can queue, delay, or degrade service when limits are exceeded."
+    },
+    {
+      "id": "29e24eb1ed5480beb45ee243dca02256",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480dfb74fd648681156dc",
+      "html": "Useful for <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">graceful degradation</span> — preventing system crash under heavy load.",
+      "text": "Useful for graceful degradation — preventing system crash under heavy load."
+    },
+    {
+      "id": "29e24eb1ed5480088814f62ced48f1c6",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480dfb74fd648681156dc",
+      "html": "Often combined with <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">rate limiting</span> to handle temporary spikes more smoothly.",
+      "text": "Often combined with rate limiting to handle temporary spikes more smoothly."
+    },
+    {
+      "id": "29e24eb1ed548006afe5e0c77b1531a9",
+      "type": "callout"
+    },
+    {
+      "id": "29e24eb1ed54801184a9d8cb47bfe0a6",
+      "type": "toggle",
+      "parent": "29e24eb1ed548006afe5e0c77b1531a9",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rate Limiting vs Throttling:</span>",
+      "text": "Rate Limiting vs Throttling:"
+    },
+    {
+      "id": "29e24eb1ed54806fbd72edd8ad1dbcd2",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54801184a9d8cb47bfe0a6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rate Limiting:</span> Hard cap — excess requests are blocked.",
+      "text": "Rate Limiting: Hard cap — excess requests are blocked."
+    },
+    {
+      "id": "29e24eb1ed5480088f15c9c6d9f3ba54",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54801184a9d8cb47bfe0a6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Throttling:</span> Soft control — excess requests are delayed or slowed down.",
+      "text": "Throttling: Soft control — excess requests are delayed or slowed down."
+    },
+    {
+      "id": "29e24eb1ed54808a8144d5bbee07b044",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Request Routing</span>",
+      "text": "Request Routing"
+    },
+    {
+      "id": "29e24eb1ed54809cb07cf09066870de4",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54808a8144d5bbee07b044",
+      "html": "Determines which microservice should handle each incoming API request and forwards it accordingly.",
+      "text": "Determines which microservice should handle each incoming API request and forwards it accordingly."
+    },
+    {
+      "id": "29324eb1ed5480269da2d6335a9b02a9",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transformation</span>",
+      "text": "Transformation"
+    },
+    {
+      "id": "29e24eb1ed5480cca3c6c63f65caaf4d",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480269da2d6335a9b02a9",
+      "html": "One backend may serve different types of clients, Mobile &amp; Web Apps, IoT Devices etc.",
+      "text": "One backend may serve different types of clients, Mobile & Web Apps, IoT Devices etc."
+    },
+    {
+      "id": "29e24eb1ed548057919dc7aaa637b17e",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480269da2d6335a9b02a9",
+      "html": "Each client may send different payload formats, and may expect the response in a different format.",
+      "text": "Each client may send different payload formats, and may expect the response in a different format."
+    },
+    {
+      "id": "29e24eb1ed5480de94fccc69e92541b5",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480269da2d6335a9b02a9",
+      "html": "Also, APIs may have multiple versions, and each version may have a different payload/response structure.",
+      "text": "Also, APIs may have multiple versions, and each version may have a different payload/response structure."
+    },
+    {
+      "id": "29e24eb1ed5480babceacf6988444064",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480269da2d6335a9b02a9",
+      "html": "The API gateway does these transformations.",
+      "text": "The API gateway does these transformations."
+    },
+    {
+      "id": "29e24eb1ed5480669eacc4cc235a65e6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Aggregation</span>",
+      "text": "Aggregation"
+    },
+    {
+      "id": "29e24eb1ed5480d28947fa72ad09b950",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480669eacc4cc235a65e6",
+      "html": "Backends are often structured so clients can fetch all required data with minimal requests.",
+      "text": "Backends are often structured so clients can fetch all required data with minimal requests."
+    },
+    {
+      "id": "29e24eb1ed54803e9c40d54bdccdb72f",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480669eacc4cc235a65e6",
+      "html": "When a single client operation needs data from multiple microservices, an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">aggregated endpoint</span> is created at the API Gateway.",
+      "text": "When a single client operation needs data from multiple microservices, an aggregated endpoint is created at the API Gateway."
+    },
+    {
+      "id": "29e24eb1ed5480dabe19c54a8d46733c",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480669eacc4cc235a65e6",
+      "html": "The API Gateway breaks that aggregated request into multiple internal calls, gathers the responses, merges them, and returns a unified result to the client.",
+      "text": "The API Gateway breaks that aggregated request into multiple internal calls, gathers the responses, merges them, and returns a unified result to the client."
+    },
+    {
+      "id": "29e24eb1ed5480759a38dce5c0f0d5c6",
+      "type": "callout",
+      "parent": "29e24eb1ed5480669eacc4cc235a65e6"
+    },
+    {
+      "id": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "type": "toggle",
+      "parent": "29e24eb1ed5480759a38dce5c0f0d5c6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example</span>",
+      "text": "Example"
+    },
+    {
+      "id": "29e24eb1ed5480f5bd8dd03ac177f4fe",
+      "type": "text",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "A shopping app’s “Home Screen” needs to display:",
+      "text": "A shopping app’s “Home Screen” needs to display:"
+    },
+    {
+      "id": "29e24eb1ed54804c82b7c151cd2b5ceb",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "User profile",
+      "text": "User profile"
+    },
+    {
+      "id": "29e24eb1ed5480ef8d85e3d0a0887e0c",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "Recommended products",
+      "text": "Recommended products"
+    },
+    {
+      "id": "29e24eb1ed5480ef8a74f632453f364f",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "Cart summary",
+      "text": "Cart summary"
+    },
+    {
+      "id": "29e24eb1ed5480e283d1cd3707d18dc5",
+      "type": "text",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "These come from <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">three separate microservices</span>:",
+      "text": "These come from three separate microservices:"
+    },
+    {
+      "id": "29e24eb1ed5480878fd5f0baa515fc40",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">UserService</span></div> → <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">/users/{id}</span></div>",
+      "text": "UserService → /users/{id}"
+    },
+    {
+      "id": "29e24eb1ed5480a59028e005283fad07",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">ProductService</span></div> → <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">/products/recommended/{id}</span></div>",
+      "text": "ProductService → /products/recommended/{id}"
+    },
+    {
+      "id": "29e24eb1ed5480b09359ef3e8d5758f9",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">CartService</span></div> → <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">/cart/{id}</span></div>",
+      "text": "CartService → /cart/{id}"
+    },
+    {
+      "id": "29e24eb1ed54809e9690fa82b65f05f7",
+      "type": "text",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Without aggregation:</span>",
+      "text": "Without aggregation:"
+    },
+    {
+      "id": "29e24eb1ed5480dc918fed6b840246bc",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "The client must call all three APIs individually and combine results.",
+      "text": "The client must call all three APIs individually and combine results."
+    },
+    {
+      "id": "29e24eb1ed5480f69937c35f715eb1c3",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "Leads to:",
+      "text": "Leads to:"
+    },
+    {
+      "id": "29e24eb1ed5480b7ba3ef9a4375e2804",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480f69937c35f715eb1c3",
+      "html": "3 separate network calls",
+      "text": "3 separate network calls"
+    },
+    {
+      "id": "29e24eb1ed5480aaa27bc805d073aef2",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480f69937c35f715eb1c3",
+      "html": "Higher latency",
+      "text": "Higher latency"
+    },
+    {
+      "id": "29e24eb1ed548069927bf40d5d72d256",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480f69937c35f715eb1c3",
+      "html": "More client-side processing",
+      "text": "More client-side processing"
+    },
+    {
+      "id": "29e24eb1ed5480f9b53de2e63507da91",
+      "type": "text",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">With API Gateway aggregation:</span>",
+      "text": "With API Gateway aggregation:"
+    },
+    {
+      "id": "29e24eb1ed54803295cff29b07be9247",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "The client calls a single endpoint: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">/api/home/{userId}</span></div>",
+      "text": "The client calls a single endpoint: /api/home/{userId}"
+    },
+    {
+      "id": "29e24eb1ed54803d8b55da6a38b0210a",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed5480e7bfb2d6a467da6816",
+      "html": "The API Gateway:",
+      "text": "The API Gateway:"
+    },
+    {
+      "id": "29e24eb1ed548016b102d3fd4372d9f9",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54803d8b55da6a38b0210a",
+      "html": "Calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">/users/{id}</span></div>",
+      "text": "Calls /users/{id}"
+    },
+    {
+      "id": "29e24eb1ed5480c3b901d59754fe46c0",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54803d8b55da6a38b0210a",
+      "html": "Calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">/products/recommended/{id}</span></div>",
+      "text": "Calls /products/recommended/{id}"
+    },
+    {
+      "id": "29e24eb1ed5480dd9dc6f0e2fad82553",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54803d8b55da6a38b0210a",
+      "html": "Calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">/cart/{id}</span></div>",
+      "text": "Calls /cart/{id}"
+    },
+    {
+      "id": "29e24eb1ed5480579e81ecfe0814a424",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed54803d8b55da6a38b0210a",
+      "html": "Combines all responses into one payload and returns it to the client",
+      "text": "Combines all responses into one payload and returns it to the client"
+    },
+    {
+      "id": "29324eb1ed548051810ae9fb59e77fee",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">API Versioning and Management</span>",
+      "text": "API Versioning and Management"
+    },
+    {
+      "id": "29e24eb1ed5480f19705cc941c7f5f49",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed548051810ae9fb59e77fee",
+      "html": "Handles multiple versions of APIs and provides a structured way to evolve them without breaking existing clients.",
+      "text": "Handles multiple versions of APIs and provides a structured way to evolve them without breaking existing clients."
+    },
+    {
+      "id": "29324eb1ed5480d09a06c97464da921a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Centralized Logging and Monitoring</span>",
+      "text": "Centralized Logging and Monitoring"
+    },
+    {
+      "id": "29e24eb1ed5480b783c5ef48d39bc5a1",
+      "type": "bulleted_list",
+      "parent": "29324eb1ed5480d09a06c97464da921a",
+      "html": "Tracks all API traffic and performance metrics to help in debugging, analytics, and observability.",
+      "text": "Tracks all API traffic and performance metrics to help in debugging, analytics, and observability."
+    },
+    {
+      "id": "29324eb1ed54803f92add8b6e2b847d0",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed548058ab09cdf30c27d420",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantages</span>",
+      "text": "Advantages"
+    },
+    {
+      "id": "29e24eb1ed5480929a3dd01e94453fc6",
+      "type": "bulleted_list",
+      "html": "It enables <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">centralized security</span> management for the system perimeter.",
+      "text": "It enables centralized security management for the system perimeter."
+    },
+    {
+      "id": "29e24eb1ed5480b78b3ad089f06fdcc5",
+      "type": "bulleted_list",
+      "html": "It achieves <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">reduced coupling</span> because the client implementation does not need to worry about the backend architecture.",
+      "text": "It achieves reduced coupling because the client implementation does not need to worry about the backend architecture."
+    },
+    {
+      "id": "29e24eb1ed548087abcbf091d173b57d",
+      "type": "bulleted_list",
+      "html": "It improves <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">fault tolerance</span> of the overall system.",
+      "text": "It improves fault tolerance of the overall system."
+    },
+    {
+      "id": "29e24eb1ed5480da8c30f775e90ee04b",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548087abcbf091d173b57d",
+      "html": "There are many ways, one way is that, in case if the microservices fails to respond, it can internally retry.",
+      "text": "There are many ways, one way is that, in case if the microservices fails to respond, it can internally retry."
+    },
+    {
+      "id": "29e24eb1ed54809f928ae1c71481c8cd",
+      "type": "bulleted_list",
+      "html": "It can improve <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">performance</span> through aggregation, reducing client chattiness and latency.",
+      "text": "It can improve performance through aggregation, reducing client chattiness and latency."
+    },
+    {
+      "id": "29e24eb1ed5480abbaa5d6e5050b73a8",
+      "type": "bulleted_list",
+      "html": "It allows scaling up internal services more easily.",
+      "text": "It allows scaling up internal services more easily."
+    },
+    {
+      "id": "29e24eb1ed5480cf985bf6d65df0b17f",
+      "type": "bulleted_list",
+      "html": "You can think of more based on the primary roles.",
+      "text": "You can think of more based on the primary roles."
+    },
+    {
+      "id": "29e24eb1ed54806db40ce5dfc17999d2",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Disadvantages</span>",
+      "text": "Disadvantages"
+    },
+    {
+      "id": "29e24eb1ed5480bfb8bdccfe36cdb73e",
+      "type": "bulleted_list",
+      "html": "It introduces <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">latency</span> because it adds a component (network hop) between the client and the server.",
+      "text": "It introduces latency because it adds a component (network hop) between the client and the server."
+    },
+    {
+      "id": "29e24eb1ed54800dadd2c328b56bafe2",
+      "type": "bulleted_list",
+      "html": "It is highly <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">complex to operate</span> and requires continuous updates against new market attacks.",
+      "text": "It is highly complex to operate and requires continuous updates against new market attacks."
+    },
+    {
+      "id": "29e24eb1ed548000ae35e0062f675ea3",
+      "type": "bulleted_list",
+      "html": "It can be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">costly</span> to implement.",
+      "text": "It can be costly to implement."
+    },
+    {
+      "id": "29e24eb1ed5480dfb42fcc892f6ec3a2",
+      "type": "bulleted_list",
+      "html": "It can become a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">single point of failure</span> if all system functions rely on it.",
+      "text": "It can become a single point of failure if all system functions rely on it."
+    },
+    {
+      "id": "29e24eb1ed54801b9ed6f76d9e2df505",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed54803d8c3bebc848288e85",
+      "type": "text"
+    }
+  ]
+}

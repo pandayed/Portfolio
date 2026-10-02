@@ -4,9 +4,12 @@ import Page from '../../Page/Page';
 import { NOTES_ROUTE, PROGRAMMING_DICTIONARY_ROUTE, toHref } from '../../routing/routes';
 import NoteTree from '../NoteTree';
 import { pythonNotes } from '../noteTreeData';
+import NoteReadingTime from '../NoteReadingTime';
+import { getNodeReadingMinutes } from '../readingTime';
 
 const PythonNotesIndex = () => (
     <Page title="Python notes">
+        <NoteReadingTime minutes={getNodeReadingMinutes(pythonNotes)} total />
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>

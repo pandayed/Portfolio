@@ -1,0 +1,1155 @@
+{
+  "id": "31124eb1ed5480579b03c0fe7cc40927",
+  "title": "Dependency Injection and Inversion",
+  "sourceUrl": "https://xpandeyed.notion.site/Dependency-Injection-and-Inversion-31124eb1ed5480579b03c0fe7cc40927?pvs=23",
+  "blocks": [
+    {
+      "id": "31124eb1ed54809f9228c9380a0ec74e",
+      "type": "sub_header",
+      "html": "Overview of This Chapter",
+      "text": "Overview of This Chapter"
+    },
+    {
+      "id": "31124eb1ed5480aa9f0de92b3363d461",
+      "type": "bulleted_list",
+      "html": "Topic: Dependency Injection (DI) and Dependency Inversion Principle (DIP)",
+      "text": "Topic: Dependency Injection (DI) and Dependency Inversion Principle (DIP)"
+    },
+    {
+      "id": "31124eb1ed5480f78db0ffb41b477789",
+      "type": "bulleted_list",
+      "html": "Focus: What they are, how they differ, why “inversion” is used, and how higher/lower relates to inner/outer",
+      "text": "Focus: What they are, how they differ, why “inversion” is used, and how higher/lower relates to inner/outer"
+    },
+    {
+      "id": "31124eb1ed5480e9bef3cfd18e7ca398",
+      "type": "bulleted_list",
+      "html": "Scope: Backend architecture, layered systems, Clean Architecture",
+      "text": "Scope: Backend architecture, layered systems, Clean Architecture"
+    },
+    {
+      "id": "31124eb1ed5480fbbcf1d54d2c81beb6",
+      "type": "bulleted_list",
+      "html": "Why this matters: Prevents tight coupling, improves testability, enables scalable system design",
+      "text": "Why this matters: Prevents tight coupling, improves testability, enables scalable system design"
+    },
+    {
+      "id": "31124eb1ed5480bcae17d0596a800a1a",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed548031aa0ce7f6bf70dcc2",
+      "type": "header",
+      "html": "1. Dependency Injection (DI)",
+      "text": "1. Dependency Injection (DI)"
+    },
+    {
+      "id": "31124eb1ed5480b6b064e529238a4c8a",
+      "type": "sub_header",
+      "html": "What It Is",
+      "text": "What It Is"
+    },
+    {
+      "id": "31124eb1ed5480ada636f799eb3c66a0",
+      "type": "bulleted_list",
+      "html": "A technique / pattern",
+      "text": "A technique / pattern"
+    },
+    {
+      "id": "31124eb1ed54803fae64cfc146b02c21",
+      "type": "bulleted_list",
+      "html": "Concerned with how objects receive their dependencies",
+      "text": "Concerned with how objects receive their dependencies"
+    },
+    {
+      "id": "31124eb1ed5480f4a911c90048634fcc",
+      "type": "bulleted_list",
+      "html": "Solves object construction and wiring problems",
+      "text": "Solves object construction and wiring problems"
+    },
+    {
+      "id": "31124eb1ed548016be05e752b062d2e5",
+      "type": "text",
+      "html": "It does NOT define architectural direction.",
+      "text": "It does NOT define architectural direction."
+    },
+    {
+      "id": "31124eb1ed54800c981ee96736d72743",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480f3a795dc9067b33a52",
+      "type": "sub_header",
+      "html": "Without Dependency Injection",
+      "text": "Without Dependency Injection"
+    },
+    {
+      "id": "31124eb1ed54801dba93fd5e2732e4fd",
+      "type": "code",
+      "html": "<span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">Service</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">__init__</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">repo </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> Repository</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span>\n</span>",
+      "text": "class Service:\n    def __init__(self):\n        self.repo = Repository()\n"
+    },
+    {
+      "id": "31124eb1ed5480119ecbef7fea579603",
+      "type": "text",
+      "html": "Problems:",
+      "text": "Problems:"
+    },
+    {
+      "id": "31124eb1ed548007b759fdab96d652e5",
+      "type": "bulleted_list",
+      "html": "Hard-coded dependency",
+      "text": "Hard-coded dependency"
+    },
+    {
+      "id": "31124eb1ed548084963efe9dd1ec901a",
+      "type": "bulleted_list",
+      "html": "Tight coupling",
+      "text": "Tight coupling"
+    },
+    {
+      "id": "31124eb1ed54809787c1de7822a5030d",
+      "type": "bulleted_list",
+      "html": "Difficult to test",
+      "text": "Difficult to test"
+    },
+    {
+      "id": "31124eb1ed548034b42fcf318425a2df",
+      "type": "bulleted_list",
+      "html": "Cannot swap implementation easily",
+      "text": "Cannot swap implementation easily"
+    },
+    {
+      "id": "31124eb1ed5480ebbd95f40bd9b2151f",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480ff890aea0855662561",
+      "type": "sub_header",
+      "html": "With Dependency Injection",
+      "text": "With Dependency Injection"
+    },
+    {
+      "id": "31124eb1ed54804bbe72dc7d7f501e5c",
+      "type": "code",
+      "html": "<span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">Service</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">__init__</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> repo</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">repo </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> repo</span><span>\n</span>",
+      "text": "class Service:\n    def __init__(self, repo):\n        self.repo = repo\n"
+    },
+    {
+      "id": "31124eb1ed5480648267ffca345fea51",
+      "type": "text",
+      "html": "Effects:",
+      "text": "Effects:"
+    },
+    {
+      "id": "31124eb1ed54807d942af25f8f425af4",
+      "type": "bulleted_list",
+      "html": "Dependency is provided from outside",
+      "text": "Dependency is provided from outside"
+    },
+    {
+      "id": "31124eb1ed5480dc9a66db7a6a461bd0",
+      "type": "bulleted_list",
+      "html": "Easier testing (mock injection)",
+      "text": "Easier testing (mock injection)"
+    },
+    {
+      "id": "31124eb1ed5480c69791cd050481638d",
+      "type": "bulleted_list",
+      "html": "Looser coupling",
+      "text": "Looser coupling"
+    },
+    {
+      "id": "31124eb1ed5480d1b49bddc6aa7410bd",
+      "type": "bulleted_list",
+      "html": "More flexible architecture",
+      "text": "More flexible architecture"
+    },
+    {
+      "id": "31124eb1ed5480008182fda1b364e7f7",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480fab5bffb6625f6c68e",
+      "type": "sub_header",
+      "html": "What DI Actually Solves",
+      "text": "What DI Actually Solves"
+    },
+    {
+      "id": "31124eb1ed54805d91afe24f76c7622c",
+      "type": "bulleted_list",
+      "html": "Construction-level coupling",
+      "text": "Construction-level coupling"
+    },
+    {
+      "id": "31124eb1ed5480a4aa17e2e6c3e805b9",
+      "type": "bulleted_list",
+      "html": "Object creation responsibility",
+      "text": "Object creation responsibility"
+    },
+    {
+      "id": "31124eb1ed5480d49d6bc9bf010e8312",
+      "type": "bulleted_list",
+      "html": "Swapping implementations",
+      "text": "Swapping implementations"
+    },
+    {
+      "id": "31124eb1ed54809f9334e96248cdd76f",
+      "type": "text",
+      "html": "DI answers:",
+      "text": "DI answers:"
+    },
+    {
+      "id": "31124eb1ed54808e9257c26a995abb36",
+      "type": "text",
+      "html": "“How does this object get what it depends on?”",
+      "text": "“How does this object get what it depends on?”"
+    },
+    {
+      "id": "31124eb1ed54800eb9e1c4fd1c991a7a",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed54802c9267ee96608d9303",
+      "type": "header",
+      "html": "2. Dependency Inversion Principle (DIP)",
+      "text": "2. Dependency Inversion Principle (DIP)"
+    },
+    {
+      "id": "31124eb1ed5480949a1de0fb785a06d4",
+      "type": "sub_header",
+      "html": "What It Is",
+      "text": "What It Is"
+    },
+    {
+      "id": "31124eb1ed5480c68bb8cc4dd1216b00",
+      "type": "bulleted_list",
+      "html": "A design principle",
+      "text": "A design principle"
+    },
+    {
+      "id": "31124eb1ed5480df842cd1290b6c1dc0",
+      "type": "bulleted_list",
+      "html": "Part of SOLID",
+      "text": "Part of SOLID"
+    },
+    {
+      "id": "31124eb1ed5480d1b6a0e58da6f8c01f",
+      "type": "bulleted_list",
+      "html": "Governs architectural dependency direction",
+      "text": "Governs architectural dependency direction"
+    },
+    {
+      "id": "31124eb1ed54802eb0f4c2205423f6a3",
+      "type": "text",
+      "html": "It does NOT describe how objects are constructed.",
+      "text": "It does NOT describe how objects are constructed."
+    },
+    {
+      "id": "31124eb1ed5480d68a98e7f7ee2fc684",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed548077a487fb94cfa20297",
+      "type": "sub_header",
+      "html": "The Principle States",
+      "text": "The Principle States"
+    },
+    {
+      "id": "31124eb1ed5480d0ba30fa47c06574c7",
+      "type": "bulleted_list",
+      "html": "High-level modules should not depend on low-level modules",
+      "text": "High-level modules should not depend on low-level modules"
+    },
+    {
+      "id": "31124eb1ed5480bb89f0c427817024cd",
+      "type": "bulleted_list",
+      "html": "Both should depend on abstractions",
+      "text": "Both should depend on abstractions"
+    },
+    {
+      "id": "31124eb1ed5480c5a53dd083eaa32a42",
+      "type": "bulleted_list",
+      "html": "Abstractions should not depend on details",
+      "text": "Abstractions should not depend on details"
+    },
+    {
+      "id": "31124eb1ed54806d9d14cd63dd03b8ea",
+      "type": "bulleted_list",
+      "html": "Details should depend on abstractions",
+      "text": "Details should depend on abstractions"
+    },
+    {
+      "id": "31124eb1ed5480daa27efed1a93021f9",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed54803bb0f2ea6b22917581",
+      "type": "sub_header",
+      "html": "Traditional Dependency Direction",
+      "text": "Traditional Dependency Direction"
+    },
+    {
+      "id": "31124eb1ed5480e0a1eccedf0f2250af",
+      "type": "code",
+      "html": "OrderService → MySQLRepository",
+      "text": "OrderService → MySQLRepository"
+    },
+    {
+      "id": "31124eb1ed5480d29fc1d347232a28d6",
+      "type": "text",
+      "html": "Meaning:",
+      "text": "Meaning:"
+    },
+    {
+      "id": "31124eb1ed5480f4ab8beea2580614d8",
+      "type": "bulleted_list",
+      "html": "Business logic depends on database detail",
+      "text": "Business logic depends on database detail"
+    },
+    {
+      "id": "31124eb1ed54807f8267f54765b747f4",
+      "type": "bulleted_list",
+      "html": "If database changes, service changes",
+      "text": "If database changes, service changes"
+    },
+    {
+      "id": "31124eb1ed54804e8428c69b67b2a7a4",
+      "type": "bulleted_list",
+      "html": "Policy depends on implementation",
+      "text": "Policy depends on implementation"
+    },
+    {
+      "id": "31124eb1ed54808aabb3e9fbe5d9132d",
+      "type": "text",
+      "html": "This is the default direction in many systems.",
+      "text": "This is the default direction in many systems."
+    },
+    {
+      "id": "31124eb1ed5480ad9c39cd112765ebb9",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480da9c30e6074ff36783",
+      "type": "sub_header",
+      "html": "After Applying DIP",
+      "text": "After Applying DIP"
+    },
+    {
+      "id": "31124eb1ed5480caaa17eb5fb90013bb",
+      "type": "code",
+      "html": "OrderService → RepositoryInterface\nMySQLRepository → RepositoryInterface",
+      "text": "OrderService → RepositoryInterface\nMySQLRepository → RepositoryInterface"
+    },
+    {
+      "id": "31124eb1ed5480ada87bea2f1413bf40",
+      "type": "text",
+      "html": "Now:",
+      "text": "Now:"
+    },
+    {
+      "id": "31124eb1ed54803594e8c2eeac8eb709",
+      "type": "bulleted_list",
+      "html": "Service depends on abstraction",
+      "text": "Service depends on abstraction"
+    },
+    {
+      "id": "31124eb1ed5480b0a119d97353630afe",
+      "type": "bulleted_list",
+      "html": "Implementation depends on abstraction",
+      "text": "Implementation depends on abstraction"
+    },
+    {
+      "id": "31124eb1ed5480aa8835f927701b9544",
+      "type": "bulleted_list",
+      "html": "Concrete detail depends upward",
+      "text": "Concrete detail depends upward"
+    },
+    {
+      "id": "31124eb1ed54804681f2d2dde5ae9ea4",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480f2b8eac79a21eeb475",
+      "type": "sub_header",
+      "html": "Why It Is Called “Inversion”",
+      "text": "Why It Is Called “Inversion”"
+    },
+    {
+      "id": "31124eb1ed54804db29afda01f253617",
+      "type": "text",
+      "html": "Control flow still goes:",
+      "text": "Control flow still goes:"
+    },
+    {
+      "id": "31124eb1ed54800b99c6d7d0f925c12b",
+      "type": "text",
+      "html": "Service → Repository",
+      "text": "Service → Repository"
+    },
+    {
+      "id": "31124eb1ed548074b119de09b49163f9",
+      "type": "text",
+      "html": "But dependency direction changes.",
+      "text": "But dependency direction changes."
+    },
+    {
+      "id": "31124eb1ed5480fbabe7c8f516972a4c",
+      "type": "text",
+      "html": "Instead of:",
+      "text": "Instead of:"
+    },
+    {
+      "id": "31124eb1ed5480efb172d051a01cb2af",
+      "type": "text",
+      "html": "High-level → Low-level",
+      "text": "High-level → Low-level"
+    },
+    {
+      "id": "31124eb1ed5480a5a2dec3114336857a",
+      "type": "text",
+      "html": "It becomes:",
+      "text": "It becomes:"
+    },
+    {
+      "id": "31124eb1ed548008ada3f3ba7cdf773e",
+      "type": "text",
+      "html": "Low-level → Abstraction ← High-level",
+      "text": "Low-level → Abstraction ← High-level"
+    },
+    {
+      "id": "31124eb1ed5480f7a32ef279b570acc8",
+      "type": "text",
+      "html": "The dependency direction is reversed from the traditional model.",
+      "text": "The dependency direction is reversed from the traditional model."
+    },
+    {
+      "id": "31124eb1ed548086ab72d4f5aa315b44",
+      "type": "text",
+      "html": "That reversal is the “inversion”.",
+      "text": "That reversal is the “inversion”."
+    },
+    {
+      "id": "31124eb1ed548043b9fad0e577fa43b8",
+      "type": "text",
+      "html": "If nothing changed structurally, it would just be dependency.",
+      "text": "If nothing changed structurally, it would just be dependency."
+    },
+    {
+      "id": "31124eb1ed5480a1a30af9d39e05076a",
+      "type": "text",
+      "html": "The term highlights that the direction was flipped.",
+      "text": "The term highlights that the direction was flipped."
+    },
+    {
+      "id": "31124eb1ed5480c8ba22ca1d1e29247c",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed548018bff4f1f83787db98",
+      "type": "header",
+      "html": "3. Relationship Between DI and DIP",
+      "text": "3. Relationship Between DI and DIP"
+    },
+    {
+      "id": "31124eb1ed54802ca48af90c21fca775",
+      "type": "text",
+      "html": "They are related but not the same.",
+      "text": "They are related but not the same."
+    },
+    {
+      "id": "31124eb1ed5480e79a2fcc9465b8c055",
+      "type": "text",
+      "html": "Dependency Injection:",
+      "text": "Dependency Injection:"
+    },
+    {
+      "id": "31124eb1ed5480f99336f083bd916582",
+      "type": "bulleted_list",
+      "html": "Technique",
+      "text": "Technique"
+    },
+    {
+      "id": "31124eb1ed5480228277e97ae5b36649",
+      "type": "bulleted_list",
+      "html": "Construction-level",
+      "text": "Construction-level"
+    },
+    {
+      "id": "31124eb1ed54808d978bedd91c8c4117",
+      "type": "bulleted_list",
+      "html": "Runtime wiring",
+      "text": "Runtime wiring"
+    },
+    {
+      "id": "31124eb1ed54808f9cc2f0df57baaae5",
+      "type": "text",
+      "html": "Dependency Inversion:",
+      "text": "Dependency Inversion:"
+    },
+    {
+      "id": "31124eb1ed5480afa822e4c1c92a4fa1",
+      "type": "bulleted_list",
+      "html": "Principle",
+      "text": "Principle"
+    },
+    {
+      "id": "31124eb1ed54807ebe24dce899f6e0d4",
+      "type": "bulleted_list",
+      "html": "Architectural-level",
+      "text": "Architectural-level"
+    },
+    {
+      "id": "31124eb1ed548092a515e031d0a74016",
+      "type": "bulleted_list",
+      "html": "Compile-time structure",
+      "text": "Compile-time structure"
+    },
+    {
+      "id": "31124eb1ed54803e9dbae9255194cf18",
+      "type": "text",
+      "html": "Important:",
+      "text": "Important:"
+    },
+    {
+      "id": "31124eb1ed5480ef945cf562d11b69cf",
+      "type": "bulleted_list",
+      "html": "DIP defines structure",
+      "text": "DIP defines structure"
+    },
+    {
+      "id": "31124eb1ed5480759ae0d1a93da651d6",
+      "type": "bulleted_list",
+      "html": "DI helps implement DIP",
+      "text": "DI helps implement DIP"
+    },
+    {
+      "id": "31124eb1ed54805a99dee8aebc823383",
+      "type": "bulleted_list",
+      "html": "You can follow DIP without a DI framework",
+      "text": "You can follow DIP without a DI framework"
+    },
+    {
+      "id": "31124eb1ed5480828b5dc31d85eca098",
+      "type": "bulleted_list",
+      "html": "You cannot realistically implement DIP without injecting dependencies somehow",
+      "text": "You cannot realistically implement DIP without injecting dependencies somehow"
+    },
+    {
+      "id": "31124eb1ed5480cd8703f4a285d882c5",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed548014ae21f5b6fa64a463",
+      "type": "header",
+      "html": "4. What Makes Service Layer a Higher-Level Module",
+      "text": "4. What Makes Service Layer a Higher-Level Module"
+    },
+    {
+      "id": "31124eb1ed5480c998fad83fa8ab7653",
+      "type": "text",
+      "html": "Higher-level does NOT mean:",
+      "text": "Higher-level does NOT mean:"
+    },
+    {
+      "id": "31124eb1ed54808e9a5ee3f02c8e2563",
+      "type": "bulleted_list",
+      "html": "More code",
+      "text": "More code"
+    },
+    {
+      "id": "31124eb1ed5480508d56f0bac7f896f4",
+      "type": "bulleted_list",
+      "html": "Higher folder placement",
+      "text": "Higher folder placement"
+    },
+    {
+      "id": "31124eb1ed54809f8ddbe99494230984",
+      "type": "bulleted_list",
+      "html": "Executed earlier",
+      "text": "Executed earlier"
+    },
+    {
+      "id": "31124eb1ed548001a12dd4d820c73960",
+      "type": "text",
+      "html": "Higher-level means:",
+      "text": "Higher-level means:"
+    },
+    {
+      "id": "31124eb1ed54801a89e9dfedbc89580e",
+      "type": "bulleted_list",
+      "html": "More abstract",
+      "text": "More abstract"
+    },
+    {
+      "id": "31124eb1ed5480558c2cf39fa9a427d9",
+      "type": "bulleted_list",
+      "html": "Defines business policy",
+      "text": "Defines business policy"
+    },
+    {
+      "id": "31124eb1ed5480908643e00e80a2bcb9",
+      "type": "bulleted_list",
+      "html": "Independent of technical detail",
+      "text": "Independent of technical detail"
+    },
+    {
+      "id": "31124eb1ed5480cfa2daf7524f00a403",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480899bc6ff1b02632287",
+      "type": "sub_header",
+      "html": "Service Layer Example",
+      "text": "Service Layer Example"
+    },
+    {
+      "id": "31124eb1ed54809aa8a5d7675dfc1185",
+      "type": "text",
+      "html": "OrderService:",
+      "text": "OrderService:"
+    },
+    {
+      "id": "31124eb1ed548007aa15e225d054c949",
+      "type": "bulleted_list",
+      "html": "Validates orders",
+      "text": "Validates orders"
+    },
+    {
+      "id": "31124eb1ed5480ba8c4bf3e824e15fc8",
+      "type": "bulleted_list",
+      "html": "Applies discount rules",
+      "text": "Applies discount rules"
+    },
+    {
+      "id": "31124eb1ed5480439088d85b6e581630",
+      "type": "bulleted_list",
+      "html": "Checks business constraints",
+      "text": "Checks business constraints"
+    },
+    {
+      "id": "31124eb1ed548089a97fd7a39e651553",
+      "type": "bulleted_list",
+      "html": "Defines use case behavior",
+      "text": "Defines use case behavior"
+    },
+    {
+      "id": "31124eb1ed548074aa4ceec1fad2bf35",
+      "type": "text",
+      "html": "PostgresOrderRepository:",
+      "text": "PostgresOrderRepository:"
+    },
+    {
+      "id": "31124eb1ed5480b98c2afee0581df473",
+      "type": "bulleted_list",
+      "html": "Executes SQL",
+      "text": "Executes SQL"
+    },
+    {
+      "id": "31124eb1ed54805b9911c4a7932808d4",
+      "type": "bulleted_list",
+      "html": "Manages DB connection",
+      "text": "Manages DB connection"
+    },
+    {
+      "id": "31124eb1ed548027a9dad8705b941cb4",
+      "type": "bulleted_list",
+      "html": "Maps rows",
+      "text": "Maps rows"
+    },
+    {
+      "id": "31124eb1ed5480c89b73d50ba7c8f71e",
+      "type": "text",
+      "html": "If you switch:",
+      "text": "If you switch:"
+    },
+    {
+      "id": "31124eb1ed5480f68dcad9b68a79c840",
+      "type": "bulleted_list",
+      "html": "Postgres → MongoDB",
+      "text": "Postgres → MongoDB"
+    },
+    {
+      "id": "31124eb1ed54801eb88afc48ef1cdb66",
+      "type": "bulleted_list",
+      "html": "SQLAlchemy → Raw SQL",
+      "text": "SQLAlchemy → Raw SQL"
+    },
+    {
+      "id": "31124eb1ed54802a86f4d3be61b4432e",
+      "type": "bulleted_list",
+      "html": "REST → gRPC",
+      "text": "REST → gRPC"
+    },
+    {
+      "id": "31124eb1ed5480c881bed5e5d1643cb1",
+      "type": "text",
+      "html": "The service logic should remain unchanged.",
+      "text": "The service logic should remain unchanged."
+    },
+    {
+      "id": "31124eb1ed5480ce82b3c8a2d7172b2e",
+      "type": "text",
+      "html": "That makes it higher-level.",
+      "text": "That makes it higher-level."
+    },
+    {
+      "id": "31124eb1ed5480fea9edf1f512085c7e",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480e4a625d6300f91d00a",
+      "type": "sub_header",
+      "html": "The Real Test",
+      "text": "The Real Test"
+    },
+    {
+      "id": "31124eb1ed5480d58dc2f9f5dc39f137",
+      "type": "text",
+      "html": "Ask:",
+      "text": "Ask:"
+    },
+    {
+      "id": "31124eb1ed548091be67e7db770783bd",
+      "type": "text",
+      "html": "“If I change the database, should this module change?”",
+      "text": "“If I change the database, should this module change?”"
+    },
+    {
+      "id": "31124eb1ed548018b760fb60ab9fa95e",
+      "type": "text",
+      "html": "If yes → lower-level",
+      "text": "If yes → lower-level"
+    },
+    {
+      "id": "31124eb1ed54804a9c88dad85994b1f4",
+      "type": "text",
+      "html": "If no → higher-level",
+      "text": "If no → higher-level"
+    },
+    {
+      "id": "31124eb1ed548071b175cf5e4fc58cda",
+      "type": "text",
+      "html": "Service layer usually passes this test.",
+      "text": "Service layer usually passes this test."
+    },
+    {
+      "id": "31124eb1ed5480cdab0add51da7d8568",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed54804c8e31dd3a2da5acfb",
+      "type": "header",
+      "html": "5. Higher vs Lower",
+      "text": "5. Higher vs Lower"
+    },
+    {
+      "id": "31124eb1ed54802c8ba7ec2759f688bf",
+      "type": "text",
+      "html": "This describes abstraction level.",
+      "text": "This describes abstraction level."
+    },
+    {
+      "id": "31124eb1ed548056b3acce76b1ec38e9",
+      "type": "text",
+      "html": "Higher-level module:",
+      "text": "Higher-level module:"
+    },
+    {
+      "id": "31124eb1ed5480dea6cedc19de56b99a",
+      "type": "bulleted_list",
+      "html": "More abstract",
+      "text": "More abstract"
+    },
+    {
+      "id": "31124eb1ed54809394d3dc55c16d7ff9",
+      "type": "bulleted_list",
+      "html": "Policy-driven",
+      "text": "Policy-driven"
+    },
+    {
+      "id": "31124eb1ed548050a646e696348fcc15",
+      "type": "bulleted_list",
+      "html": "Stable",
+      "text": "Stable"
+    },
+    {
+      "id": "31124eb1ed54804db4b2daad6c8397dd",
+      "type": "bulleted_list",
+      "html": "Independent of detail",
+      "text": "Independent of detail"
+    },
+    {
+      "id": "31124eb1ed548076a00fc749849484aa",
+      "type": "text",
+      "html": "Lower-level module:",
+      "text": "Lower-level module:"
+    },
+    {
+      "id": "31124eb1ed5480be9478ea0110736dd7",
+      "type": "bulleted_list",
+      "html": "Concrete",
+      "text": "Concrete"
+    },
+    {
+      "id": "31124eb1ed548016aea5c31698fc46ab",
+      "type": "bulleted_list",
+      "html": "Technical implementation",
+      "text": "Technical implementation"
+    },
+    {
+      "id": "31124eb1ed548002a9c3fd98c2164814",
+      "type": "bulleted_list",
+      "html": "Framework-dependent",
+      "text": "Framework-dependent"
+    },
+    {
+      "id": "31124eb1ed5480a09afac224ab9d79c8",
+      "type": "bulleted_list",
+      "html": "Changes often",
+      "text": "Changes often"
+    },
+    {
+      "id": "31124eb1ed5480cfba42faa677eceacd",
+      "type": "text",
+      "html": "This is conceptual hierarchy.",
+      "text": "This is conceptual hierarchy."
+    },
+    {
+      "id": "31124eb1ed54807fb651c899a3aec028",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed5480e4854bc3451d0e3fa8",
+      "type": "header",
+      "html": "6. Inner vs Outer (Clean Architecture)",
+      "text": "6. Inner vs Outer (Clean Architecture)"
+    },
+    {
+      "id": "31124eb1ed5480909b46f71b4dedd927",
+      "type": "text",
+      "html": "This describes architectural position.",
+      "text": "This describes architectural position."
+    },
+    {
+      "id": "31124eb1ed5480219751e00a9382b0d8",
+      "type": "text",
+      "html": "Inner layer:",
+      "text": "Inner layer:"
+    },
+    {
+      "id": "31124eb1ed54800cbaa2dcab3fbeaf9a",
+      "type": "bulleted_list",
+      "html": "Domain entities",
+      "text": "Domain entities"
+    },
+    {
+      "id": "31124eb1ed548067ac4ff8ae4c716cf1",
+      "type": "bulleted_list",
+      "html": "Core business rules",
+      "text": "Core business rules"
+    },
+    {
+      "id": "31124eb1ed54805baf33dd782295fcc0",
+      "type": "bulleted_list",
+      "html": "Most stable",
+      "text": "Most stable"
+    },
+    {
+      "id": "31124eb1ed5480aaba10edce5cbb9beb",
+      "type": "text",
+      "html": "Outer layer:",
+      "text": "Outer layer:"
+    },
+    {
+      "id": "31124eb1ed5480088cd9c11aaeb4779c",
+      "type": "bulleted_list",
+      "html": "Controllers",
+      "text": "Controllers"
+    },
+    {
+      "id": "31124eb1ed5480b48538ec31445a4fb0",
+      "type": "bulleted_list",
+      "html": "Frameworks",
+      "text": "Frameworks"
+    },
+    {
+      "id": "31124eb1ed54801aa229d9d5c09a4906",
+      "type": "bulleted_list",
+      "html": "Databases",
+      "text": "Databases"
+    },
+    {
+      "id": "31124eb1ed54809a9bd7e2a4fbb8062c",
+      "type": "bulleted_list",
+      "html": "UI",
+      "text": "UI"
+    },
+    {
+      "id": "31124eb1ed548036a039f0d8cfd123ad",
+      "type": "text",
+      "html": "This describes dependency layout.",
+      "text": "This describes dependency layout."
+    },
+    {
+      "id": "31124eb1ed5480ab84a7fb834a06fbc8",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed548081ab50cfd4d9c0bafb",
+      "type": "header",
+      "html": "7. Do Higher/Lower and Inner/Outer Mean the Same?",
+      "text": "7. Do Higher/Lower and Inner/Outer Mean the Same?"
+    },
+    {
+      "id": "31124eb1ed548080800ad380438da79d",
+      "type": "text",
+      "html": "They describe different axes.",
+      "text": "They describe different axes."
+    },
+    {
+      "id": "31124eb1ed5480a283bad6b0b0bbecd3",
+      "type": "text",
+      "html": "Higher/Lower → Abstraction",
+      "text": "Higher/Lower → Abstraction"
+    },
+    {
+      "id": "31124eb1ed548027aecbd107fa8e5dd0",
+      "type": "text",
+      "html": "Inner/Outer → Diagram position",
+      "text": "Inner/Outer → Diagram position"
+    },
+    {
+      "id": "31124eb1ed54804684b7f71fd1e0d96c",
+      "type": "text",
+      "html": "However, in Clean Architecture they align:",
+      "text": "However, in Clean Architecture they align:"
+    },
+    {
+      "id": "31124eb1ed54809e9802cec968bcfc55",
+      "type": "text",
+      "html": "Inner = Higher-level",
+      "text": "Inner = Higher-level"
+    },
+    {
+      "id": "31124eb1ed54809b8d94c2a168425326",
+      "type": "text",
+      "html": "Outer = Lower-level",
+      "text": "Outer = Lower-level"
+    },
+    {
+      "id": "31124eb1ed5480819e0be377d526e161",
+      "type": "text",
+      "html": "Dependencies must point inward:",
+      "text": "Dependencies must point inward:"
+    },
+    {
+      "id": "31124eb1ed5480ec8939c4d8fb89afd5",
+      "type": "text",
+      "html": "Outer → Inner",
+      "text": "Outer → Inner"
+    },
+    {
+      "id": "31124eb1ed548053b9e8f0f8bd52c240",
+      "type": "text",
+      "html": "Never:",
+      "text": "Never:"
+    },
+    {
+      "id": "31124eb1ed5480ee8b08e1306f9fde0e",
+      "type": "text",
+      "html": "Inner → Outer",
+      "text": "Inner → Outer"
+    },
+    {
+      "id": "31124eb1ed548038b6b2cb3d3027418e",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed54807abd06c26dbd8b0ece",
+      "type": "header",
+      "html": "8. Clear Mapping in Backend Architecture",
+      "text": "8. Clear Mapping in Backend Architecture"
+    },
+    {
+      "id": "31124eb1ed54802c97c7f5a7ee8960a2",
+      "type": "text",
+      "html": "Domain Layer:",
+      "text": "Domain Layer:"
+    },
+    {
+      "id": "31124eb1ed5480a2a698fd54dde542ab",
+      "type": "bulleted_list",
+      "html": "Inner",
+      "text": "Inner"
+    },
+    {
+      "id": "31124eb1ed548024ad68c321c1d647b9",
+      "type": "bulleted_list",
+      "html": "Higher-level",
+      "text": "Higher-level"
+    },
+    {
+      "id": "31124eb1ed5480afa94bc2761f1af3e9",
+      "type": "bulleted_list",
+      "html": "Pure business logic",
+      "text": "Pure business logic"
+    },
+    {
+      "id": "31124eb1ed5480bd99bff3a8f8fdafde",
+      "type": "text",
+      "html": "Application / Service Layer:",
+      "text": "Application / Service Layer:"
+    },
+    {
+      "id": "31124eb1ed54806f9407c3eb3451f3d6",
+      "type": "bulleted_list",
+      "html": "Inner",
+      "text": "Inner"
+    },
+    {
+      "id": "31124eb1ed548045b91dece2e428c96a",
+      "type": "bulleted_list",
+      "html": "Higher-level",
+      "text": "Higher-level"
+    },
+    {
+      "id": "31124eb1ed54807fab5ef154db5027bf",
+      "type": "bulleted_list",
+      "html": "Orchestrates use cases",
+      "text": "Orchestrates use cases"
+    },
+    {
+      "id": "31124eb1ed54809882e6f1e039b0a2a4",
+      "type": "text",
+      "html": "Infrastructure Layer:",
+      "text": "Infrastructure Layer:"
+    },
+    {
+      "id": "31124eb1ed548019a008d8f5fb128bc8",
+      "type": "bulleted_list",
+      "html": "Outer",
+      "text": "Outer"
+    },
+    {
+      "id": "31124eb1ed548014a2dce572384e3d90",
+      "type": "bulleted_list",
+      "html": "Lower-level",
+      "text": "Lower-level"
+    },
+    {
+      "id": "31124eb1ed5480b78b68c43a4afe4a69",
+      "type": "bulleted_list",
+      "html": "Technical implementation",
+      "text": "Technical implementation"
+    },
+    {
+      "id": "31124eb1ed5480dca9b9fa6d1aa1142d",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed54806aa676f0ca8b6db464",
+      "type": "header",
+      "html": "9. Common Confusions",
+      "text": "9. Common Confusions"
+    },
+    {
+      "id": "31124eb1ed548033a7ebc706cf2e2efe",
+      "type": "text",
+      "html": "Confusion 1: DI and DIP are the same",
+      "text": "Confusion 1: DI and DIP are the same"
+    },
+    {
+      "id": "31124eb1ed54801a942ef7d60052d5c6",
+      "type": "text",
+      "html": "Incorrect. One is a principle, the other a technique.",
+      "text": "Incorrect. One is a principle, the other a technique."
+    },
+    {
+      "id": "31124eb1ed5480079161e09ea3ebbb4a",
+      "type": "text",
+      "html": "Confusion 2: Higher means top of folder structure",
+      "text": "Confusion 2: Higher means top of folder structure"
+    },
+    {
+      "id": "31124eb1ed5480998b33eb2d5a8aa9e6",
+      "type": "text",
+      "html": "Incorrect. It means higher abstraction.",
+      "text": "Incorrect. It means higher abstraction."
+    },
+    {
+      "id": "31124eb1ed5480779992cfa387265267",
+      "type": "text",
+      "html": "Confusion 3: Inversion means execution order reversed",
+      "text": "Confusion 3: Inversion means execution order reversed"
+    },
+    {
+      "id": "31124eb1ed54803085b3c608ea2bdc17",
+      "type": "text",
+      "html": "Incorrect. Control flow remains the same.",
+      "text": "Incorrect. Control flow remains the same."
+    },
+    {
+      "id": "31124eb1ed5480379997ffa128802ae4",
+      "type": "text",
+      "html": "Only dependency direction changes.",
+      "text": "Only dependency direction changes."
+    },
+    {
+      "id": "31124eb1ed54809db840c32f18cfa9d3",
+      "type": "text",
+      "html": "Confusion 4: Service is higher because it runs first",
+      "text": "Confusion 4: Service is higher because it runs first"
+    },
+    {
+      "id": "31124eb1ed54806d9194d210c69293d8",
+      "type": "text",
+      "html": "Incorrect. It is higher because it defines policy.",
+      "text": "Incorrect. It is higher because it defines policy."
+    },
+    {
+      "id": "31124eb1ed548055a9dcef5204d8a30c",
+      "type": "divider"
+    },
+    {
+      "id": "31124eb1ed548035921ffcaf89081087",
+      "type": "header",
+      "html": "10. One Sentence Summary",
+      "text": "10. One Sentence Summary"
+    },
+    {
+      "id": "31124eb1ed5480a4bcd3ddf08fe49f89",
+      "type": "text",
+      "html": "Dependency Injection is about how dependencies are provided.",
+      "text": "Dependency Injection is about how dependencies are provided."
+    },
+    {
+      "id": "31124eb1ed548090b607ca587ecc7247",
+      "type": "text",
+      "html": "Dependency Inversion is about who depends on whom.",
+      "text": "Dependency Inversion is about who depends on whom."
+    },
+    {
+      "id": "31124eb1ed548031ae78fa75b3d9fa6e",
+      "type": "text",
+      "html": "Higher-level means more abstract policy.",
+      "text": "Higher-level means more abstract policy."
+    },
+    {
+      "id": "31124eb1ed54809daf25c9f93b7c56b9",
+      "type": "text",
+      "html": "Inner means core architectural position.",
+      "text": "Inner means core architectural position."
+    },
+    {
+      "id": "31124eb1ed5480c38c78dc350cd30150",
+      "type": "text",
+      "html": "In Clean Architecture, higher-level modules live in inner layers, and lower-level modules live in outer layers, with dependencies always pointing inward.",
+      "text": "In Clean Architecture, higher-level modules live in inner layers, and lower-level modules live in outer layers, with dependencies always pointing inward."
+    },
+    {
+      "id": "31124eb1ed5480a3ae53f952e53002e4",
+      "type": "divider"
+    }
+  ]
+}

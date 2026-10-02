@@ -1,0 +1,145 @@
+{
+  "id": "26c24eb1ed54802abd25ff7b66fefaa8",
+  "title": "Strong Consistency (Linearizability)",
+  "sourceUrl": "https://xpandeyed.notion.site/Strong-Consistency-Linearizability-26c24eb1ed54802abd25ff7b66fefaa8?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480b2b378ed67d8555e57",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Every read operation sees the most recent write. All replicas behave as if there is only a single copy of the data.</span>",
+      "text": "Every read operation sees the most recent write. All replicas behave as if there is only a single copy of the data."
+    },
+    {
+      "id": "26c24eb1ed54800d8979d7b7959394fc",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span>",
+      "text": "Guarantee:"
+    },
+    {
+      "id": "26c24eb1ed5480fb8500f311be3d9222",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800d8979d7b7959394fc",
+      "html": "Once a write completes, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">all future reads</span> will return that updated value immediately, no matter which replica a client reads from.",
+      "text": "Once a write completes, all future reads will return that updated value immediately, no matter which replica a client reads from."
+    },
+    {
+      "id": "26c24eb1ed5480dba9adcf9d1460f8e3",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800d8979d7b7959394fc",
+      "html": "Appears as if the system has a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">single, up-to-date copy</span>.",
+      "text": "Appears as if the system has a single, up-to-date copy."
+    },
+    {
+      "id": "26c24eb1ed5480de9a8cc8501b9f19a7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed54808f914ae158f870c9be",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480de9a8cc8501b9f19a7",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed548048bc1ade5e899f2808",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808f914ae158f870c9be",
+      "html": "Simple for developers: no stale reads, predictable behavior.",
+      "text": "Simple for developers: no stale reads, predictable behavior."
+    },
+    {
+      "id": "26c24eb1ed5480a68283f5d6b1252a8c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808f914ae158f870c9be",
+      "html": "Maintains <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">strict correctness</span> for critical operations.",
+      "text": "Maintains strict correctness for critical operations."
+    },
+    {
+      "id": "26c24eb1ed54807dbcf7e5c9aaefa2dc",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480de9a8cc8501b9f19a7",
+      "html": "Cons:",
+      "text": "Cons:"
+    },
+    {
+      "id": "26c24eb1ed548090baedf5f6702163c2",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807dbcf7e5c9aaefa2dc",
+      "html": "Slower writes and reads due to the need to coordinate replicas.",
+      "text": "Slower writes and reads due to the need to coordinate replicas."
+    },
+    {
+      "id": "26c24eb1ed5480cdb392c573b4083d9d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807dbcf7e5c9aaefa2dc",
+      "html": "Unavailability, if some nodes are unreachable (during network partitions).",
+      "text": "Unavailability, if some nodes are unreachable (during network partitions)."
+    },
+    {
+      "id": "26c24eb1ed548026a025cba5ef1461e4",
+      "type": "bulleted_list",
+      "html": "Does not bring any anomaly.",
+      "text": "Does not bring any anomaly."
+    },
+    {
+      "id": "26c24eb1ed5480a8bdc9db5cbc778a96",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases:</span> Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">correctness is more important than availability</span>, e.g.:",
+      "text": "Use Cases: Systems where correctness is more important than availability, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed5480b2a79bf883f2fef31f",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a8bdc9db5cbc778a96",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bank Account Transfers:</span>",
+      "text": "Bank Account Transfers:"
+    },
+    {
+      "id": "26c24eb1ed548047aaafd1f0da9ad103",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480b2a79bf883f2fef31f",
+      "html": "If Alice transfers $100 to Bob, all reads should immediately show the updated balances.",
+      "text": "If Alice transfers $100 to Bob, all reads should immediately show the updated balances."
+    },
+    {
+      "id": "26c24eb1ed5480f7b8e8e9f4e633f9d2",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a8bdc9db5cbc778a96",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Unique Constraints:</span>",
+      "text": "Unique Constraints:"
+    },
+    {
+      "id": "26c24eb1ed5480edbbcedd7b9df43e99",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480f7b8e8e9f4e633f9d2",
+      "html": "Ensuring that no two users can register with the same email.",
+      "text": "Ensuring that no two users can register with the same email."
+    },
+    {
+      "id": "26c24eb1ed5480a29bb4c25f1ac8819f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed5480dc8746e7555227ddb4",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a29bb4c25f1ac8819f",
+      "html": "Consensus algorithms like <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Raft</span>, <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">Paxos</span>, or <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">Zab</span> to agree on updates.",
+      "text": "Consensus algorithms like Raft, Paxos, or Zab to agree on updates."
+    },
+    {
+      "id": "26c24eb1ed54800d8f80ccc9877aace4",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a29bb4c25f1ac8819f",
+      "html": "Single-leader synchronous replication: updates are sent to all replicas before confirming.",
+      "text": "Single-leader synchronous replication: updates are sent to all replicas before confirming."
+    },
+    {
+      "id": "26c24eb1ed5480ddafd3cdec5ac7586c",
+      "type": "text"
+    }
+  ]
+}

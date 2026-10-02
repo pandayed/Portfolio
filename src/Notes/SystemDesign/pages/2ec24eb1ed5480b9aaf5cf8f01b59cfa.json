@@ -1,0 +1,1282 @@
+{
+  "id": "2ec24eb1ed5480b9aaf5cf8f01b59cfa",
+  "title": "RabbitMQ vs Apache Kafka",
+  "sourceUrl": "https://xpandeyed.notion.site/RabbitMQ-vs-Apache-Kafka-2ec24eb1ed5480b9aaf5cf8f01b59cfa?pvs=23",
+  "blocks": [
+    {
+      "id": "2ec24eb1ed5480d3911ce7a71634088f",
+      "type": "sub_header",
+      "html": "What this chapter is about",
+      "text": "What this chapter is about"
+    },
+    {
+      "id": "2ec24eb1ed54801e8539e6c89a6b6446",
+      "type": "bulleted_list",
+      "html": "Explains <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">RabbitMQ and Kafka from fundamentals</span>",
+      "text": "Explains RabbitMQ and Kafka from fundamentals"
+    },
+    {
+      "id": "2ec24eb1ed548090a186fa666617d33f",
+      "type": "bulleted_list",
+      "html": "Focuses on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">differences, not marketing</span>",
+      "text": "Focuses on differences, not marketing"
+    },
+    {
+      "id": "2ec24eb1ed548070a10de0166675a79b",
+      "type": "bulleted_list",
+      "html": "Builds <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">interview-grade decision clarity</span>",
+      "text": "Builds interview-grade decision clarity"
+    },
+    {
+      "id": "2ec24eb1ed5480d9ac81d63dd8767cd2",
+      "type": "bulleted_list",
+      "html": "Answers: <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">when to use what, and why</span>",
+      "text": "Answers: when to use what, and why"
+    },
+    {
+      "id": "2ec24eb1ed5480aaa073c9a91bfbdd0e",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480548a0bc47cd5472206",
+      "type": "sub_header",
+      "html": "Why this comparison matters",
+      "text": "Why this comparison matters"
+    },
+    {
+      "id": "2ec24eb1ed5480fdb6f9f78f59114852",
+      "type": "bulleted_list",
+      "html": "Very common <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">system design interview question</span>",
+      "text": "Very common system design interview question"
+    },
+    {
+      "id": "2ec24eb1ed5480d38c36cf6dc077f561",
+      "type": "bulleted_list",
+      "html": "Wrong choice leads to:",
+      "text": "Wrong choice leads to:"
+    },
+    {
+      "id": "2ec24eb1ed5480a19bb0eec979636636",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480d38c36cf6dc077f561",
+      "html": "Data loss",
+      "text": "Data loss"
+    },
+    {
+      "id": "2ec24eb1ed548022b919e36cf8b32985",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480d38c36cf6dc077f561",
+      "html": "Scaling issues",
+      "text": "Scaling issues"
+    },
+    {
+      "id": "2ec24eb1ed5480a5bf05c0b9b2db1fdc",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480d38c36cf6dc077f561",
+      "html": "Overengineering",
+      "text": "Overengineering"
+    },
+    {
+      "id": "2ec24eb1ed54800f885bdcb4f5709817",
+      "type": "bulleted_list",
+      "html": "RabbitMQ and Kafka solve <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different core problems</span>",
+      "text": "RabbitMQ and Kafka solve different core problems"
+    },
+    {
+      "id": "2ec24eb1ed5480ba9f9dea92089d75af",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548038bc06c9435dbfb29c",
+      "type": "sub_header",
+      "html": "Core purpose (one line each)",
+      "text": "Core purpose (one line each)"
+    },
+    {
+      "id": "2ec24eb1ed5480c7b409e9a1fa693f97",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed548010ae4adcb74beed775",
+      "type": "bulleted_list",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">message broker</span> for <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">reliable message delivery</span>",
+      "text": "A message broker for reliable message delivery"
+    },
+    {
+      "id": "2ec24eb1ed5480649c11daca4e48f8dd",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed54801e9b39e043d9f9d19c",
+      "type": "bulleted_list",
+      "html": "An <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">event streaming platform</span> for <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">durable event storage and replay</span>",
+      "text": "An event streaming platform for durable event storage and replay"
+    },
+    {
+      "id": "2ec24eb1ed548001b877c1232e18d08e",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480b685e5c4f39b125cf2",
+      "type": "sub_header",
+      "html": "Mental model (lock this first)",
+      "text": "Mental model (lock this first)"
+    },
+    {
+      "id": "2ec24eb1ed5480c6ad6ce9b6337a0e80",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ mental model",
+      "text": "RabbitMQ mental model"
+    },
+    {
+      "id": "2ec24eb1ed5480d99acccd808ec20b95",
+      "type": "bulleted_list",
+      "html": "Messages are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">sent</span>",
+      "text": "Messages are sent"
+    },
+    {
+      "id": "2ec24eb1ed548038a003fa5698a8e11e",
+      "type": "bulleted_list",
+      "html": "Messages are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consumed</span>",
+      "text": "Messages are consumed"
+    },
+    {
+      "id": "2ec24eb1ed548015af58e703d946bce6",
+      "type": "bulleted_list",
+      "html": "Messages are usually <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">removed</span>",
+      "text": "Messages are usually removed"
+    },
+    {
+      "id": "2ec24eb1ed5480f59966dc516b70a0bb",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54802fa341c713b14e43b8",
+      "type": "sub_sub_header",
+      "html": "Kafka mental model",
+      "text": "Kafka mental model"
+    },
+    {
+      "id": "2ec24eb1ed5480989769e6cf598be4e6",
+      "type": "bulleted_list",
+      "html": "Events are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">written</span>",
+      "text": "Events are written"
+    },
+    {
+      "id": "2ec24eb1ed548017a09fce95110ec6cc",
+      "type": "bulleted_list",
+      "html": "Events are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">stored</span>",
+      "text": "Events are stored"
+    },
+    {
+      "id": "2ec24eb1ed548088b860fbcdff554bab",
+      "type": "bulleted_list",
+      "html": "Events are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">read many times</span>",
+      "text": "Events are read many times"
+    },
+    {
+      "id": "2ec24eb1ed5480fea399e57caec33e85",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480b4a69ed3cb63323200",
+      "type": "sub_header",
+      "html": "Data nature",
+      "text": "Data nature"
+    },
+    {
+      "id": "2ec24eb1ed54801ca5ccd55c1cf9036a",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed54807a8591e511e1aa8562",
+      "type": "bulleted_list",
+      "html": "Data is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">transient by default</span>",
+      "text": "Data is transient by default"
+    },
+    {
+      "id": "2ec24eb1ed54802591fdd84a19abc695",
+      "type": "bulleted_list",
+      "html": "Messages are meant to be:",
+      "text": "Messages are meant to be:"
+    },
+    {
+      "id": "2ec24eb1ed54805d81e0f53722bc8cb1",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54802591fdd84a19abc695",
+      "html": "Delivered",
+      "text": "Delivered"
+    },
+    {
+      "id": "2ec24eb1ed54802c8909fe1755ef71e0",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54802591fdd84a19abc695",
+      "html": "Acknowledged",
+      "text": "Acknowledged"
+    },
+    {
+      "id": "2ec24eb1ed548056bae6f3684dcd1824",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54802591fdd84a19abc695",
+      "html": "Removed",
+      "text": "Removed"
+    },
+    {
+      "id": "2ec24eb1ed548029a926f436f475bb18",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548019b501c11c67e92ea3",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed5480bf97f2c1d9579546d1",
+      "type": "bulleted_list",
+      "html": "Data is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">persistent by default</span>",
+      "text": "Data is persistent by default"
+    },
+    {
+      "id": "2ec24eb1ed548040b1fac1c4e5c3d275",
+      "type": "bulleted_list",
+      "html": "Events are:",
+      "text": "Events are:"
+    },
+    {
+      "id": "2ec24eb1ed5480b2aa56f77cbed7843c",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548040b1fac1c4e5c3d275",
+      "html": "Stored on disk",
+      "text": "Stored on disk"
+    },
+    {
+      "id": "2ec24eb1ed5480b9b702e2ccfa7a449a",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548040b1fac1c4e5c3d275",
+      "html": "Retained for time/size",
+      "text": "Retained for time/size"
+    },
+    {
+      "id": "2ec24eb1ed5480819db7e78c1cd86d7b",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548040b1fac1c4e5c3d275",
+      "html": "Replayable",
+      "text": "Replayable"
+    },
+    {
+      "id": "2ec24eb1ed5480ff9d49f64e1da7b5e3",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54809b8dd1e5b70d802c51",
+      "type": "sub_header",
+      "html": "Message vs Event (very important)",
+      "text": "Message vs Event (very important)"
+    },
+    {
+      "id": "2ec24eb1ed5480b385d6f8699fcc4775",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed54800cb2fac4e79d1f3921",
+      "type": "bulleted_list",
+      "html": "Handles <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">messages</span>",
+      "text": "Handles messages"
+    },
+    {
+      "id": "2ec24eb1ed54809ea10dd34f388809d0",
+      "type": "bulleted_list",
+      "html": "Message meaning:",
+      "text": "Message meaning:"
+    },
+    {
+      "id": "2ec24eb1ed54801f82eadf778dbe0888",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54809ea10dd34f388809d0",
+      "html": "“Do this task”",
+      "text": "“Do this task”"
+    },
+    {
+      "id": "2ec24eb1ed54807bb4c0c54fa10f2ca9",
+      "type": "bulleted_list",
+      "html": "Task-oriented",
+      "text": "Task-oriented"
+    },
+    {
+      "id": "2ec24eb1ed54805fa5a4cdb1a146faa8",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548067bfb6f211d3735dae",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed54802baf4ad01c2d3844f1",
+      "type": "bulleted_list",
+      "html": "Handles <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">events</span>",
+      "text": "Handles events"
+    },
+    {
+      "id": "2ec24eb1ed5480b4b41ff3762b9fa7ee",
+      "type": "bulleted_list",
+      "html": "Event meaning:",
+      "text": "Event meaning:"
+    },
+    {
+      "id": "2ec24eb1ed548096a759f1337df6d0b2",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480b4b41ff3762b9fa7ee",
+      "html": "“This happened”",
+      "text": "“This happened”"
+    },
+    {
+      "id": "2ec24eb1ed5480eeb311fd3a5c12d69d",
+      "type": "bulleted_list",
+      "html": "Fact-oriented",
+      "text": "Fact-oriented"
+    },
+    {
+      "id": "2ec24eb1ed5480caa819eb28c03994b5",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54806f918bce2cc76d2a94",
+      "type": "sub_header",
+      "html": "Storage behavior",
+      "text": "Storage behavior"
+    },
+    {
+      "id": "2ec24eb1ed5480f9a2fcff0ebfea39df",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed548017abdecad7ed5fface",
+      "type": "bulleted_list",
+      "html": "Message is removed:",
+      "text": "Message is removed:"
+    },
+    {
+      "id": "2ec24eb1ed54807fb007d785094bfd9c",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548017abdecad7ed5fface",
+      "html": "After acknowledgment",
+      "text": "After acknowledgment"
+    },
+    {
+      "id": "2ec24eb1ed54808db8add3aea3f832c0",
+      "type": "bulleted_list",
+      "html": "Persistence is:",
+      "text": "Persistence is:"
+    },
+    {
+      "id": "2ec24eb1ed548029a325edcc6ca315f3",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54808db8add3aea3f832c0",
+      "html": "Optional",
+      "text": "Optional"
+    },
+    {
+      "id": "2ec24eb1ed54807194e1f7d0d96ef380",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54808db8add3aea3f832c0",
+      "html": "Not core to design",
+      "text": "Not core to design"
+    },
+    {
+      "id": "2ec24eb1ed548082a959eb9925b02810",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480818394fd451078dcb1",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed54802c84fadcfdd41fccc1",
+      "type": "bulleted_list",
+      "html": "Event is never removed by consumers",
+      "text": "Event is never removed by consumers"
+    },
+    {
+      "id": "2ec24eb1ed548070ab32f2e2a0c4c70c",
+      "type": "bulleted_list",
+      "html": "Removal only via:",
+      "text": "Removal only via:"
+    },
+    {
+      "id": "2ec24eb1ed5480e8ac8dd6deecb60c28",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548070ab32f2e2a0c4c70c",
+      "html": "Retention policy",
+      "text": "Retention policy"
+    },
+    {
+      "id": "2ec24eb1ed5480a0a2d2ee0ee2d4722d",
+      "type": "bulleted_list",
+      "html": "Persistence is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">core</span>",
+      "text": "Persistence is core"
+    },
+    {
+      "id": "2ec24eb1ed5480ea8c40e08d955e31a5",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54805194c9ebbeed3b6f85",
+      "type": "sub_header",
+      "html": "Consumer behavior",
+      "text": "Consumer behavior"
+    },
+    {
+      "id": "2ec24eb1ed54807d8012cd60d9a49d0c",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed548053a0c9fbb16b1a9fe5",
+      "type": "bulleted_list",
+      "html": "Message is consumed by:",
+      "text": "Message is consumed by:"
+    },
+    {
+      "id": "2ec24eb1ed5480e5997ef1984cdcd983",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548053a0c9fbb16b1a9fe5",
+      "html": "One consumer (in most cases)",
+      "text": "One consumer (in most cases)"
+    },
+    {
+      "id": "2ec24eb1ed54809a9ce0d24305f671a1",
+      "type": "bulleted_list",
+      "html": "After consumption:",
+      "text": "After consumption:"
+    },
+    {
+      "id": "2ec24eb1ed5480de85a9f8de0e32156b",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54809a9ce0d24305f671a1",
+      "html": "Message is gone",
+      "text": "Message is gone"
+    },
+    {
+      "id": "2ec24eb1ed548022bb6ee8021df2616d",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480c28917f62fc0325873",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed5480bcbc5ae941d20d9a90",
+      "type": "bulleted_list",
+      "html": "Same event can be read by:",
+      "text": "Same event can be read by:"
+    },
+    {
+      "id": "2ec24eb1ed54803693edc8ebcc47e299",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480bcbc5ae941d20d9a90",
+      "html": "Many consumer groups",
+      "text": "Many consumer groups"
+    },
+    {
+      "id": "2ec24eb1ed54805883d1d9aeeea92849",
+      "type": "bulleted_list",
+      "html": "Reading does not delete data",
+      "text": "Reading does not delete data"
+    },
+    {
+      "id": "2ec24eb1ed5480078631f2939e223bf2",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54808c9dfdfa4c78646b14",
+      "type": "sub_header",
+      "html": "Fan-out capability",
+      "text": "Fan-out capability"
+    },
+    {
+      "id": "2ec24eb1ed5480c6a08cfd2553b10382",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed548091be6eff4792383743",
+      "type": "bulleted_list",
+      "html": "Fan-out via:",
+      "text": "Fan-out via:"
+    },
+    {
+      "id": "2ec24eb1ed5480229a1feeebf0bf9c03",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548091be6eff4792383743",
+      "html": "Exchanges",
+      "text": "Exchanges"
+    },
+    {
+      "id": "2ec24eb1ed54803587f6e80e6da5139d",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548091be6eff4792383743",
+      "html": "Explicit configuration",
+      "text": "Explicit configuration"
+    },
+    {
+      "id": "2ec24eb1ed5480da8489f6cab603c86d",
+      "type": "bulleted_list",
+      "html": "Adds complexity",
+      "text": "Adds complexity"
+    },
+    {
+      "id": "2ec24eb1ed5480f8a3eed78a581160ab",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480f0aec3c067e87d434c",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed54803a9a44cb329908c728",
+      "type": "bulleted_list",
+      "html": "Fan-out is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">natural</span>",
+      "text": "Fan-out is natural"
+    },
+    {
+      "id": "2ec24eb1ed5480d2807fee7b182f2154",
+      "type": "bulleted_list",
+      "html": "Each consumer group:",
+      "text": "Each consumer group:"
+    },
+    {
+      "id": "2ec24eb1ed54800e8b9be8d8a6dc47b2",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480d2807fee7b182f2154",
+      "html": "Reads independently",
+      "text": "Reads independently"
+    },
+    {
+      "id": "2ec24eb1ed548041b6b3f04fd07735bc",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480d2807fee7b182f2154",
+      "html": "Has its own offsets",
+      "text": "Has its own offsets"
+    },
+    {
+      "id": "2ec24eb1ed54804e83a1f12047ad0390",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480e98ac0e081b0edcd4e",
+      "type": "sub_header",
+      "html": "Ordering guarantees",
+      "text": "Ordering guarantees"
+    },
+    {
+      "id": "2ec24eb1ed5480d98004e197be9b7890",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed5480349366c1ceb91225af",
+      "type": "bulleted_list",
+      "html": "Ordering depends on:",
+      "text": "Ordering depends on:"
+    },
+    {
+      "id": "2ec24eb1ed5480edbbeae757b5b2cc4e",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480349366c1ceb91225af",
+      "html": "Queue",
+      "text": "Queue"
+    },
+    {
+      "id": "2ec24eb1ed548065b1dfe0ccd3168a1e",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480349366c1ceb91225af",
+      "html": "Consumer behavior",
+      "text": "Consumer behavior"
+    },
+    {
+      "id": "2ec24eb1ed54805b833df4ef529bde30",
+      "type": "bulleted_list",
+      "html": "Not strong across scaling",
+      "text": "Not strong across scaling"
+    },
+    {
+      "id": "2ec24eb1ed5480469ffbcb13ab09e467",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480c0b03df007b259ef7e",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed54807385f3e374ee4e0f7a",
+      "type": "bulleted_list",
+      "html": "Strong ordering:",
+      "text": "Strong ordering:"
+    },
+    {
+      "id": "2ec24eb1ed5480d586c6f37932f8cd31",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54807385f3e374ee4e0f7a",
+      "html": "Guaranteed within a partition",
+      "text": "Guaranteed within a partition"
+    },
+    {
+      "id": "2ec24eb1ed54806f8ff4fc88714a1ef4",
+      "type": "bulleted_list",
+      "html": "Explicit and predictable",
+      "text": "Explicit and predictable"
+    },
+    {
+      "id": "2ec24eb1ed54801a8ba0eb0c57b39ff3",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54806ca8f0f250ecfc32e5",
+      "type": "sub_header",
+      "html": "Scaling model",
+      "text": "Scaling model"
+    },
+    {
+      "id": "2ec24eb1ed5480afbf63f90b455e7f40",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed548080b78eca636e724e5a",
+      "type": "bulleted_list",
+      "html": "Scales by:",
+      "text": "Scales by:"
+    },
+    {
+      "id": "2ec24eb1ed5480288493fb7eb1394e58",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548080b78eca636e724e5a",
+      "html": "Adding queues",
+      "text": "Adding queues"
+    },
+    {
+      "id": "2ec24eb1ed5480d1ae7dc938d0c21cf9",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548080b78eca636e724e5a",
+      "html": "Sharding manually",
+      "text": "Sharding manually"
+    },
+    {
+      "id": "2ec24eb1ed5480cc9a18d323e13d81eb",
+      "type": "bulleted_list",
+      "html": "Horizontal scaling is harder",
+      "text": "Horizontal scaling is harder"
+    },
+    {
+      "id": "2ec24eb1ed5480cfbe9feef07b57873e",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54807ea102d19029f6dd7b",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed54804ca3d3d3dd911d855c",
+      "type": "bulleted_list",
+      "html": "Scales by:",
+      "text": "Scales by:"
+    },
+    {
+      "id": "2ec24eb1ed54806ea4b8c194861feaf0",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54804ca3d3d3dd911d855c",
+      "html": "Adding partitions",
+      "text": "Adding partitions"
+    },
+    {
+      "id": "2ec24eb1ed5480599211dff4f123a21f",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54804ca3d3d3dd911d855c",
+      "html": "Adding brokers",
+      "text": "Adding brokers"
+    },
+    {
+      "id": "2ec24eb1ed5480c2b1aeeec4bb8268df",
+      "type": "bulleted_list",
+      "html": "Built for horizontal scale",
+      "text": "Built for horizontal scale"
+    },
+    {
+      "id": "2ec24eb1ed5480c3a3faee95edef356b",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54804d933ef0a8bc9244c6",
+      "type": "sub_header",
+      "html": "Throughput characteristics",
+      "text": "Throughput characteristics"
+    },
+    {
+      "id": "2ec24eb1ed5480959f9ffb6eada996c8",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed548012a4aaf81f21327499",
+      "type": "bulleted_list",
+      "html": "Optimized for:",
+      "text": "Optimized for:"
+    },
+    {
+      "id": "2ec24eb1ed5480a0acc9ed8c833a9e6a",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548012a4aaf81f21327499",
+      "html": "Low latency",
+      "text": "Low latency"
+    },
+    {
+      "id": "2ec24eb1ed54803a8975fd7d18ea91b5",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548012a4aaf81f21327499",
+      "html": "Task execution",
+      "text": "Task execution"
+    },
+    {
+      "id": "2ec24eb1ed5480e4ab86cc0a1acd31c7",
+      "type": "bulleted_list",
+      "html": "Moderate throughput",
+      "text": "Moderate throughput"
+    },
+    {
+      "id": "2ec24eb1ed5480ac90d6f0a13ecae904",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480cd8e55e817c08976ae",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed5480289956cc4cb9a85e00",
+      "type": "bulleted_list",
+      "html": "Optimized for:",
+      "text": "Optimized for:"
+    },
+    {
+      "id": "2ec24eb1ed548070a479f51667c1c79e",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480289956cc4cb9a85e00",
+      "html": "Very high throughput",
+      "text": "Very high throughput"
+    },
+    {
+      "id": "2ec24eb1ed5480cdb6d1f77064c73a35",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480289956cc4cb9a85e00",
+      "html": "Sequential disk writes",
+      "text": "Sequential disk writes"
+    },
+    {
+      "id": "2ec24eb1ed54809fbb65cdf02063baaa",
+      "type": "bulleted_list",
+      "html": "Handles millions of events per second",
+      "text": "Handles millions of events per second"
+    },
+    {
+      "id": "2ec24eb1ed54806f97b1f79ac624ff76",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54806c9a38ffdce6ef7a6e",
+      "type": "sub_header",
+      "html": "Replay capability",
+      "text": "Replay capability"
+    },
+    {
+      "id": "2ec24eb1ed54805ea247d2812efd2090",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed548028b37fe8ba5d932111",
+      "type": "bulleted_list",
+      "html": "Replay is:",
+      "text": "Replay is:"
+    },
+    {
+      "id": "2ec24eb1ed54802d8199c9977076ca3b",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548028b37fe8ba5d932111",
+      "html": "Not natural",
+      "text": "Not natural"
+    },
+    {
+      "id": "2ec24eb1ed5480c5bdc1d6dd31a0e8db",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548028b37fe8ba5d932111",
+      "html": "Requires custom logic",
+      "text": "Requires custom logic"
+    },
+    {
+      "id": "2ec24eb1ed548053a2bbe0cea81a70aa",
+      "type": "bulleted_list",
+      "html": "Once consumed, message is gone",
+      "text": "Once consumed, message is gone"
+    },
+    {
+      "id": "2ec24eb1ed5480fd87ded4ee4d801626",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480198936cdbb580dfdeb",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed5480e2b874f07d54be8bfb",
+      "type": "bulleted_list",
+      "html": "Replay is:",
+      "text": "Replay is:"
+    },
+    {
+      "id": "2ec24eb1ed548048b68ce8b41f86ff61",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e2b874f07d54be8bfb",
+      "html": "Core feature",
+      "text": "Core feature"
+    },
+    {
+      "id": "2ec24eb1ed5480789b4bcaf384b301b7",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e2b874f07d54be8bfb",
+      "html": "Offset-based",
+      "text": "Offset-based"
+    },
+    {
+      "id": "2ec24eb1ed5480eb901cf683076a6d73",
+      "type": "bulleted_list",
+      "html": "Consumers choose where to start",
+      "text": "Consumers choose where to start"
+    },
+    {
+      "id": "2ec24eb1ed5480119592e64bcbed89ff",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548050a9def452d8217d08",
+      "type": "sub_header",
+      "html": "Delivery guarantees",
+      "text": "Delivery guarantees"
+    },
+    {
+      "id": "2ec24eb1ed5480169664c6d0bbb4f6be",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed5480c7abc4fcfd567df68d",
+      "type": "bulleted_list",
+      "html": "Supports:",
+      "text": "Supports:"
+    },
+    {
+      "id": "2ec24eb1ed54805f8fcef8bc514f0344",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480c7abc4fcfd567df68d",
+      "html": "At-most-once",
+      "text": "At-most-once"
+    },
+    {
+      "id": "2ec24eb1ed548057b946d843b1d101a9",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480c7abc4fcfd567df68d",
+      "html": "At-least-once",
+      "text": "At-least-once"
+    },
+    {
+      "id": "2ec24eb1ed5480e6b18fd9551f258882",
+      "type": "bulleted_list",
+      "html": "Exactly-once is not native",
+      "text": "Exactly-once is not native"
+    },
+    {
+      "id": "2ec24eb1ed5480cc8d8ef04ca1178f47",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54804b9020dbb2d8bf8c47",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed548065a57bd38d9c6585e2",
+      "type": "bulleted_list",
+      "html": "Default:",
+      "text": "Default:"
+    },
+    {
+      "id": "2ec24eb1ed54802ca3e9f3ff447b6c11",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548065a57bd38d9c6585e2",
+      "html": "At-least-once",
+      "text": "At-least-once"
+    },
+    {
+      "id": "2ec24eb1ed54809e8406f0a5bc39e5ce",
+      "type": "bulleted_list",
+      "html": "Supports:",
+      "text": "Supports:"
+    },
+    {
+      "id": "2ec24eb1ed5480dc81c2eae57bf19dcd",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54809e8406f0a5bc39e5ce",
+      "html": "Exactly-once with transactions",
+      "text": "Exactly-once with transactions"
+    },
+    {
+      "id": "2ec24eb1ed5480f3a7ffcc76abd1fdb1",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480c1a634d92b3b27ea96",
+      "type": "sub_header",
+      "html": "Failure handling",
+      "text": "Failure handling"
+    },
+    {
+      "id": "2ec24eb1ed5480c99ab1ff42f0c8c207",
+      "type": "sub_sub_header",
+      "html": "RabbitMQ",
+      "text": "RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed5480aaa449c962bf974fdb",
+      "type": "bulleted_list",
+      "html": "Broker failure can:",
+      "text": "Broker failure can:"
+    },
+    {
+      "id": "2ec24eb1ed5480f0a723cca558d73265",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480aaa449c962bf974fdb",
+      "html": "Block queues",
+      "text": "Block queues"
+    },
+    {
+      "id": "2ec24eb1ed5480a98994c49266e0af8b",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480aaa449c962bf974fdb",
+      "html": "Affect availability",
+      "text": "Affect availability"
+    },
+    {
+      "id": "2ec24eb1ed5480e5a28fd4aed6bf468f",
+      "type": "bulleted_list",
+      "html": "Clustering is complex",
+      "text": "Clustering is complex"
+    },
+    {
+      "id": "2ec24eb1ed54807e8c6cf7364471748d",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480d4afb6c1747f6bd095",
+      "type": "sub_sub_header",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2ec24eb1ed5480edb6d8d3f543b4745a",
+      "type": "bulleted_list",
+      "html": "Broker failure:",
+      "text": "Broker failure:"
+    },
+    {
+      "id": "2ec24eb1ed548011a5c6f8afc2766d77",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480edb6d8d3f543b4745a",
+      "html": "Leader switches to follower",
+      "text": "Leader switches to follower"
+    },
+    {
+      "id": "2ec24eb1ed5480ff8c1ad31b5b8e4eb4",
+      "type": "bulleted_list",
+      "html": "Designed for failure by default",
+      "text": "Designed for failure by default"
+    },
+    {
+      "id": "2ec24eb1ed5480eea71dc4e24a6d670c",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548029acb4d73e18183326",
+      "type": "sub_header",
+      "html": "Typical use cases",
+      "text": "Typical use cases"
+    },
+    {
+      "id": "2ec24eb1ed5480e1b332e696e9005a92",
+      "type": "sub_sub_header",
+      "html": "Use RabbitMQ when",
+      "text": "Use RabbitMQ when"
+    },
+    {
+      "id": "2ec24eb1ed5480e6a920e9422147bbfb",
+      "type": "bulleted_list",
+      "html": "You need:",
+      "text": "You need:"
+    },
+    {
+      "id": "2ec24eb1ed5480f487c0f8985f7dc38e",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e6a920e9422147bbfb",
+      "html": "Task queues",
+      "text": "Task queues"
+    },
+    {
+      "id": "2ec24eb1ed548020852ad16b13d5ae42",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e6a920e9422147bbfb",
+      "html": "Background jobs",
+      "text": "Background jobs"
+    },
+    {
+      "id": "2ec24eb1ed5480729057d55f6d33d96e",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e6a920e9422147bbfb",
+      "html": "Request-like messaging",
+      "text": "Request-like messaging"
+    },
+    {
+      "id": "2ec24eb1ed548091b522f01248ea528c",
+      "type": "bulleted_list",
+      "html": "Low latency is critical",
+      "text": "Low latency is critical"
+    },
+    {
+      "id": "2ec24eb1ed5480e7a0efcc8827b1b03b",
+      "type": "bulleted_list",
+      "html": "Message does not need replay",
+      "text": "Message does not need replay"
+    },
+    {
+      "id": "2ec24eb1ed5480f6b9c7d6e16a7378f3",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480288517cb6b3c044689",
+      "type": "sub_sub_header",
+      "html": "Use Kafka when",
+      "text": "Use Kafka when"
+    },
+    {
+      "id": "2ec24eb1ed5480e08e13d9be03f121bd",
+      "type": "bulleted_list",
+      "html": "You need:",
+      "text": "You need:"
+    },
+    {
+      "id": "2ec24eb1ed5480ebaf61d11c976e7742",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e08e13d9be03f121bd",
+      "html": "Event sourcing",
+      "text": "Event sourcing"
+    },
+    {
+      "id": "2ec24eb1ed5480fcad71f66318f67cc7",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e08e13d9be03f121bd",
+      "html": "Audit logs",
+      "text": "Audit logs"
+    },
+    {
+      "id": "2ec24eb1ed54801cb4bef75c2630fc2a",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e08e13d9be03f121bd",
+      "html": "Analytics pipelines",
+      "text": "Analytics pipelines"
+    },
+    {
+      "id": "2ec24eb1ed5480b694cbc8f0f9a72693",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480e08e13d9be03f121bd",
+      "html": "Multiple consumers",
+      "text": "Multiple consumers"
+    },
+    {
+      "id": "2ec24eb1ed54802688b8e1bd903eedd7",
+      "type": "bulleted_list",
+      "html": "Replay is required",
+      "text": "Replay is required"
+    },
+    {
+      "id": "2ec24eb1ed5480cf8726d6c1f5adfc4b",
+      "type": "bulleted_list",
+      "html": "High throughput is expected",
+      "text": "High throughput is expected"
+    },
+    {
+      "id": "2ec24eb1ed54807aa68adc2231b307f4",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480f785d0f78e0cf13ee8",
+      "type": "sub_header",
+      "html": "What RabbitMQ is NOT good at",
+      "text": "What RabbitMQ is NOT good at"
+    },
+    {
+      "id": "2ec24eb1ed54801a8d42d95ddb2bec85",
+      "type": "bulleted_list",
+      "html": "Large-scale event storage",
+      "text": "Large-scale event storage"
+    },
+    {
+      "id": "2ec24eb1ed54802b9df3c27faa15cc42",
+      "type": "bulleted_list",
+      "html": "Long-term data retention",
+      "text": "Long-term data retention"
+    },
+    {
+      "id": "2ec24eb1ed54809197cafaba3d3e046c",
+      "type": "bulleted_list",
+      "html": "High fan-out with replay",
+      "text": "High fan-out with replay"
+    },
+    {
+      "id": "2ec24eb1ed5480ad9ba4e0a658a7f7fb",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480279b61f75d9fcee5e5",
+      "type": "sub_header",
+      "html": "What Kafka is NOT good at",
+      "text": "What Kafka is NOT good at"
+    },
+    {
+      "id": "2ec24eb1ed548021b510e3b8f123d633",
+      "type": "bulleted_list",
+      "html": "Request–response workflows",
+      "text": "Request–response workflows"
+    },
+    {
+      "id": "2ec24eb1ed548018944be2773d4e05e2",
+      "type": "bulleted_list",
+      "html": "Simple task execution",
+      "text": "Simple task execution"
+    },
+    {
+      "id": "2ec24eb1ed548012a18ac38d1d12840c",
+      "type": "bulleted_list",
+      "html": "Low-volume simple messaging",
+      "text": "Low-volume simple messaging"
+    },
+    {
+      "id": "2ec24eb1ed5480919f0bda9acc0f8d4a",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480eb9deceacdc28c91e5",
+      "type": "sub_header",
+      "html": "Interview-safe decision rule (memorize)",
+      "text": "Interview-safe decision rule (memorize)"
+    },
+    {
+      "id": "2ec24eb1ed54809ab013dbbf29010c2f",
+      "type": "bulleted_list",
+      "html": "If the system is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">task-driven</span>, choose RabbitMQ",
+      "text": "If the system is task-driven, choose RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed54805b8627c2ebf5662f1c",
+      "type": "bulleted_list",
+      "html": "If the system is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">event-driven</span>, choose Kafka",
+      "text": "If the system is event-driven, choose Kafka"
+    },
+    {
+      "id": "2ec24eb1ed54807bb2f4cca235edb732",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54809c9921f9eff871fe39",
+      "type": "sub_header",
+      "html": "One-line comparison (final)",
+      "text": "One-line comparison (final)"
+    },
+    {
+      "id": "2ec24eb1ed54802289d1d5727270ee7e",
+      "type": "bulleted_list",
+      "html": "RabbitMQ delivers messages and forgets them; Kafka stores events and lets the system remember.",
+      "text": "RabbitMQ delivers messages and forgets them; Kafka stores events and lets the system remember."
+    },
+    {
+      "id": "2ec24eb1ed54804faf94fb88c04fd4f8",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548029b1ffefd4b9b889e9",
+      "type": "text",
+      "html": "If you want next, I can:",
+      "text": "If you want next, I can:"
+    },
+    {
+      "id": "2ec24eb1ed54800c9950ed2055223c9b",
+      "type": "bulleted_list",
+      "html": "Add <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">real interview questions with answers</span>",
+      "text": "Add real interview questions with answers"
+    },
+    {
+      "id": "2ec24eb1ed5480ad96dfc074802b4587",
+      "type": "bulleted_list",
+      "html": "Create a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">decision flowchart</span>",
+      "text": "Create a decision flowchart"
+    },
+    {
+      "id": "2ec24eb1ed5480d1b91dd47a04084677",
+      "type": "bulleted_list",
+      "html": "Explain <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Kafka vs RabbitMQ using one real system design</span>",
+      "text": "Explain Kafka vs RabbitMQ using one real system design"
+    },
+    {
+      "id": "2ec24eb1ed548013aeb5dff5645652fc",
+      "type": "bulleted_list",
+      "html": "Convert this into <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">revision notes</span>",
+      "text": "Convert this into revision notes"
+    },
+    {
+      "id": "2ec24eb1ed5480f79abfc5726ab5d9bc",
+      "type": "text",
+      "html": "Reply with <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one choice only</span>.",
+      "text": "Reply with one choice only."
+    }
+  ]
+}

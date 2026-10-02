@@ -1,0 +1,278 @@
+{
+  "id": "26824eb1ed5480948347d10941fabac4",
+  "title": "Data Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=23",
+  "blocks": [
+    {
+      "id": "26a24eb1ed5480479a22e8175ac98ec3",
+      "type": "table_of_contents",
+      "links": [
+        {
+          "href": "/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=25#26824eb1ed5480968709f321428dacc3",
+          "text": "Data Consistency"
+        },
+        {
+          "href": "/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=25#26824eb1ed54800a8786c78cf8d08254",
+          "text": "Consistency Models"
+        },
+        {
+          "href": "/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=25#26a24eb1ed5480c2a643c17c6bcb2e21",
+          "text": "Theorems Explaining Consistency Trade-offs in Distributed Systems"
+        },
+        {
+          "href": "/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=25#26824eb1ed54800192f8fa0499c93590",
+          "text": "@CAP Theorem "
+        },
+        {
+          "href": "/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=25#26824eb1ed5480dda7bef9734111f713",
+          "text": "@PACELC Theorem "
+        }
+      ]
+    },
+    {
+      "id": "26a24eb1ed5480bdb126f24695d4d748",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed5480278bd7d7dffd4b0de0",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed5480f58480def338fbbc72",
+      "type": "toggle",
+      "parent": "26824eb1ed5480278bd7d7dffd4b0de0",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Recommended Read: </span><a style=\"font-weight:600;cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Consistency-Definitions-Based-on-Context-26824eb1ed5480da91f3c623df4ea23d?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Consistency: Definitions Based on Context</span><span style=\"white-space:nowrap\"></span></a><span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\"> </span>",
+      "text": "Recommended Read: Consistency: Definitions Based on Context ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Consistency-Definitions-Based-on-Context-26824eb1ed5480da91f3c623df4ea23d?pvs=24",
+          "text": "Consistency: Definitions Based on Context"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed5480a685d1f568b5e9a0df",
+      "type": "text",
+      "parent": "26824eb1ed5480f58480def338fbbc72",
+      "html": "Consistency is used in many contexts with different meanings. These notes gives an overview of these definitions and are recommended to gain clarity.",
+      "text": "Consistency is used in many contexts with different meanings. These notes gives an overview of these definitions and are recommended to gain clarity."
+    },
+    {
+      "id": "26824eb1ed5480eba070dd0834634526",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed5480968709f321428dacc3",
+      "type": "header",
+      "html": "Data Consistency",
+      "text": "Data Consistency"
+    },
+    {
+      "id": "26824eb1ed54805e8c78c274e11bb579",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Data Consistency means that clients see same data, with strictness or relaxations applied as needed based on system requirements and feasibility.</span>",
+      "text": "Data Consistency means that clients see same data, with strictness or relaxations applied as needed based on system requirements and feasibility."
+    },
+    {
+      "id": "26824eb1ed5480249575ff1d9bc1ca9a",
+      "type": "bulleted_list",
+      "html": "In distributed systems, data is usually <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">replicated across multiple nodes</span> to improve availability, fault tolerance, and latency.",
+      "text": "In distributed systems, data is usually replicated across multiple nodes to improve availability, fault tolerance, and latency."
+    },
+    {
+      "id": "26824eb1ed5480029b05e0eea85b4e00",
+      "type": "bulleted_list",
+      "html": "However, this replication introduces a challenge: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">keeping all replicas in sync</span>.",
+      "text": "However, this replication introduces a challenge: keeping all replicas in sync."
+    },
+    {
+      "id": "26824eb1ed54808c9f1dfec495c73f77",
+      "type": "bulleted_list",
+      "html": "Because of <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">network delays or faults</span>, updates may reach replicas at different times.",
+      "text": "Because of network delays or faults, updates may reach replicas at different times."
+    },
+    {
+      "id": "26824eb1ed548008a252d7466a780c5f",
+      "type": "bulleted_list",
+      "html": "As a result, two clients querying different nodes may <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">see different values temporarily</span>.",
+      "text": "As a result, two clients querying different nodes may see different values temporarily."
+    },
+    {
+      "id": "26824eb1ed5480d59b6ee42969107312",
+      "type": "bulleted_list",
+      "html": "These <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">temporary inconsistencies cannot be completely avoided</span> in a replicated system.",
+      "text": "These temporary inconsistencies cannot be completely avoided in a replicated system."
+    },
+    {
+      "id": "26824eb1ed5480709f06d329c0c44ccd",
+      "type": "bulleted_list",
+      "html": "To manage them, systems adopt different <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency models</span>.",
+      "text": "To manage them, systems adopt different consistency models."
+    },
+    {
+      "id": "26824eb1ed54807188a1dcaf9853943e",
+      "type": "bulleted_list",
+      "html": "Each model defines <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">rules for when updates become visible</span> across replicas.",
+      "text": "Each model defines rules for when updates become visible across replicas."
+    },
+    {
+      "id": "26824eb1ed5480a8942cf926e817f3c4",
+      "type": "bulleted_list",
+      "html": "No model is universally best — each comes with <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">trade-offs</span> between consistency, availability, performance, and complexity.",
+      "text": "No model is universally best — each comes with trade-offs between consistency, availability, performance, and complexity."
+    },
+    {
+      "id": "26b24eb1ed5480b1be47c005bce98e81",
+      "type": "bulleted_list",
+      "html": "<span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:inherit;word-wrap:break-word;font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consistency in distributed systems is not absolute but exists on a spectrum</span>, with different models offering varying degrees of guarantees about how and when updates are observed.",
+      "text": "Consistency in distributed systems is not absolute but exists on a spectrum, with different models offering varying degrees of guarantees about how and when updates are observed."
+    },
+    {
+      "id": "26a24eb1ed5480e891dffc32cbbe64ea",
+      "type": "callout"
+    },
+    {
+      "id": "26a24eb1ed5480e78e47e0e099e03926",
+      "type": "toggle",
+      "parent": "26a24eb1ed5480e891dffc32cbbe64ea",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consistency vs Correctness</span>",
+      "text": "Consistency vs Correctness"
+    },
+    {
+      "id": "26a24eb1ed5480c4a2b9ef0597adedfe",
+      "type": "bulleted_list",
+      "parent": "26a24eb1ed5480e78e47e0e099e03926",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Data Correctness</span>: Means the data itself is <span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\">logically accurate</span> according to the application rules (e.g., account balance, like counts on a post, timestamp etc should never be negative).",
+      "text": "Data Correctness: Means the data itself is logically accurate according to the application rules (e.g., account balance, like counts on a post, timestamp etc should never be negative)."
+    },
+    {
+      "id": "26a24eb1ed54801fa651f4df3cd7dd0d",
+      "type": "bulleted_list",
+      "parent": "26a24eb1ed5480e78e47e0e099e03926",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Data Consistency (in distributed systems)</span>: Means <span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\">all replicas agree on the same value</span> (strictly or with relaxations), even if that value is wrong due to a bug.",
+      "text": "Data Consistency (in distributed systems): Means all replicas agree on the same value (strictly or with relaxations), even if that value is wrong due to a bug."
+    },
+    {
+      "id": "26a24eb1ed5480509b30c914b0e293f1",
+      "type": "bulleted_list",
+      "parent": "26a24eb1ed5480e78e47e0e099e03926",
+      "html": "Key difference:",
+      "text": "Key difference:"
+    },
+    {
+      "id": "26a24eb1ed54802c856afc265f82627b",
+      "type": "bulleted_list",
+      "parent": "26a24eb1ed5480509b30c914b0e293f1",
+      "html": "A system can be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistent but incorrect</span> (e.g., all replicas show the like count on a post as -10).",
+      "text": "A system can be consistent but incorrect (e.g., all replicas show the like count on a post as -10)."
+    },
+    {
+      "id": "26a24eb1ed54803096d4d259b470e34f",
+      "type": "bulleted_list",
+      "parent": "26a24eb1ed5480509b30c914b0e293f1",
+      "html": "A system can be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">correct but inconsistent</span> (e.g., two replicas show the like count 10 and 20 respectively).",
+      "text": "A system can be correct but inconsistent (e.g., two replicas show the like count 10 and 20 respectively)."
+    },
+    {
+      "id": "26a24eb1ed5480409f3af1eed904ce5f",
+      "type": "bulleted_list",
+      "parent": "26a24eb1ed5480e78e47e0e099e03926",
+      "html": "Correctness is about <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">truth of the data (can it be really true if seen alone in one DB)</span>; Consistency is about <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">agreement of the replicas</span>.",
+      "text": "Correctness is about truth of the data (can it be really true if seen alone in one DB); Consistency is about agreement of the replicas."
+    },
+    {
+      "id": "26824eb1ed5480e391a9c1e1e10dddb0",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed54800a8786c78cf8d08254",
+      "type": "header",
+      "html": "Consistency Models",
+      "text": "Consistency Models"
+    },
+    {
+      "id": "26c24eb1ed5480d6ba96e38dc04077e9",
+      "type": "text",
+      "html": "These are sorted based on importance. First 4 are must to read. Others optional.",
+      "text": "These are sorted based on importance. First 4 are must to read. Others optional."
+    },
+    {
+      "id": "26d24eb1ed5480409a88d74fc59e105b",
+      "type": "text",
+      "html": "These consistency models are NOT mutually exclusive, they share features, so many of them may seem very similar.",
+      "text": "These consistency models are NOT mutually exclusive, they share features, so many of them may seem very similar."
+    },
+    {
+      "id": "26c24eb1ed54801f83d6c31069a8e86c",
+      "type": "collection_view",
+      "pageIds": [
+        "26c24eb1ed54802abd25ff7b66fefaa8",
+        "26c24eb1ed5480c4b741ea9f5c459fa1",
+        "26c24eb1ed548027bc75ef231718fdbc",
+        "26c24eb1ed5480a3899ac3571cfcce75",
+        "26c24eb1ed54807ca59be7b4ddb4f901",
+        "26c24eb1ed548091844bc2f5f3cd12b9",
+        "26c24eb1ed5480eb951bf3ca6de5eae5",
+        "26c24eb1ed5480f7bdf4f069ffbc73bd"
+      ]
+    },
+    {
+      "id": "26824eb1ed5480d08105e915e98a97ef",
+      "type": "divider"
+    },
+    {
+      "id": "26a24eb1ed5480c2a643c17c6bcb2e21",
+      "type": "header",
+      "html": "Theorems Explaining Consistency Trade-offs in Distributed Systems",
+      "text": "Theorems Explaining Consistency Trade-offs in Distributed Systems"
+    },
+    {
+      "id": "26824eb1ed54800192f8fa0499c93590",
+      "type": "sub_sub_header",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "CAP Theorem ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed5480dda7bef9734111f713",
+      "type": "sub_sub_header",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/PACELC-Theorem-26824eb1ed5480bc813bdc099fe7b892?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">PACELC Theorem</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "PACELC Theorem ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/PACELC-Theorem-26824eb1ed5480bc813bdc099fe7b892?pvs=24",
+          "text": "PACELC Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed5480708fe3fc05bf8d969f",
+      "type": "divider"
+    },
+    {
+      "id": "26e24eb1ed548033a251cca67f6b5e95",
+      "type": "text",
+      "html": "Data consistency is not as simple as it seems — it requires understanding how reads and writes work in a distributed system. I’ll be adding notes on that soon and links for them here.",
+      "text": "Data consistency is not as simple as it seems — it requires understanding how reads and writes work in a distributed system. I’ll be adding notes on that soon and links for them here."
+    },
+    {
+      "id": "26e24eb1ed548073950ee2170a969d7d",
+      "type": "divider"
+    },
+    {
+      "id": "26e24eb1ed5480fc8648ec70de6970cd",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    },
+    {
+      "id": "26e24eb1ed54801fa6ecea94fc44d33b",
+      "type": "text"
+    }
+  ]
+}

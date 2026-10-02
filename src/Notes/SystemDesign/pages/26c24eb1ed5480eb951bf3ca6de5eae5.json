@@ -1,0 +1,142 @@
+{
+  "id": "26c24eb1ed5480eb951bf3ca6de5eae5",
+  "title": "Monotonic Writes Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Monotonic-Writes-Consistency-26c24eb1ed5480eb951bf3ca6de5eae5?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480c1a4a0d3b6f4165f4e",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Writes from a single client are applied in the order they were issued, preventing earlier writes from overwriting later ones.</span>",
+      "text": "Writes from a single client are applied in the order they were issued, preventing earlier writes from overwriting later ones."
+    },
+    {
+      "id": "26c24eb1ed5480e78f6cf3917132e4a7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span>",
+      "text": "Guarantee:"
+    },
+    {
+      "id": "26c24eb1ed548047b67ae7debc7660b2",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480e78f6cf3917132e4a7",
+      "html": "A client’s writes are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">never seen out of order</span> by the system.",
+      "text": "A client’s writes are never seen out of order by the system."
+    },
+    {
+      "id": "26c24eb1ed5480d8a3dfdc96cc017c84",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480e78f6cf3917132e4a7",
+      "html": "Ensures that updates happen in the correct sequence, preserving causality for that client.",
+      "text": "Ensures that updates happen in the correct sequence, preserving causality for that client."
+    },
+    {
+      "id": "26c24eb1ed548071a4f5c6d027c52b21",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed54808bb0ced4e33029a044",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548071a4f5c6d027c52b21",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed5480d29a32e47859151523",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808bb0ced4e33029a044",
+      "html": "Prevents data anomalies caused by out-of-order updates.",
+      "text": "Prevents data anomalies caused by out-of-order updates."
+    },
+    {
+      "id": "26c24eb1ed54809ebe66ca950cbfdf25",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808bb0ced4e33029a044",
+      "html": "Makes the system more predictable for individual clients.",
+      "text": "Makes the system more predictable for individual clients."
+    },
+    {
+      "id": "26c24eb1ed548046815cf63d460d0aad",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548071a4f5c6d027c52b21",
+      "html": "Cons/Anomalies:",
+      "text": "Cons/Anomalies:"
+    },
+    {
+      "id": "26c24eb1ed5480448425cfd123aca607",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548046815cf63d460d0aad",
+      "html": "Does <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not guarantee global ordering</span> across all clients.",
+      "text": "Does not guarantee global ordering across all clients."
+    },
+    {
+      "id": "26c24eb1ed548059bee5fed2deb711e2",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548046815cf63d460d0aad",
+      "html": "Slight overhead to track and sequence writes per client.",
+      "text": "Slight overhead to track and sequence writes per client."
+    },
+    {
+      "id": "26c24eb1ed54806c90edd9afba02e197",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548046815cf63d460d0aad",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cross-Client Reordering:</span> Global ordering across different clients is not guaranteed.",
+      "text": "Cross-Client Reordering: Global ordering across different clients is not guaranteed."
+    },
+    {
+      "id": "26c24eb1ed54808bb8a7f7645fceb3ff",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases:</span> Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">the order of operations matters per user</span>, e.g.:",
+      "text": "Use Cases: Systems where the order of operations matters per user, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed54802b9d63e1709be9474f",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808bb8a7f7645fceb3ff",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Social Media Status Updates:</span>",
+      "text": "Social Media Status Updates:"
+    },
+    {
+      "id": "26c24eb1ed5480b9abdef73d5300e3db",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54802b9d63e1709be9474f",
+      "html": "User posts 3 status on Whatsapp. They must appear in same order as they are posted.",
+      "text": "User posts 3 status on Whatsapp. They must appear in same order as they are posted."
+    },
+    {
+      "id": "26c24eb1ed548045b679ec851ef74921",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808bb8a7f7645fceb3ff",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Shopping Carts:</span>",
+      "text": "Shopping Carts:"
+    },
+    {
+      "id": "26c24eb1ed5480f99c6cf5999b7bb38b",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548045b679ec851ef74921",
+      "html": "Adding items to cart, then removing one — operations must occur in the same sequence.",
+      "text": "Adding items to cart, then removing one — operations must occur in the same sequence."
+    },
+    {
+      "id": "26c24eb1ed548001ab3ef4c209586f79",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed5480c39a9dca946f06544a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548001ab3ef4c209586f79",
+      "html": "Route all writes from a client to the same replica.",
+      "text": "Route all writes from a client to the same replica."
+    },
+    {
+      "id": "26c24eb1ed5480d5adf6c5984a8d60fe",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548001ab3ef4c209586f79",
+      "html": "Use <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">client write logs or sequence numbers</span> to enforce order before applying updates.",
+      "text": "Use client write logs or sequence numbers to enforce order before applying updates."
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "id": "26524eb1ed548063b5bee98feef734e1",
+  "title": "Distributed Systems",
+  "sourceUrl": "https://xpandeyed.notion.site/Distributed-Systems-26524eb1ed548063b5bee98feef734e1?pvs=23",
+  "blocks": [
+    {
+      "id": "26524eb1ed54808bb2eac45a1536ace7",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Multiple independent computers (nodes/servers) working together which appear as a single system to the end user</span>.",
+      "text": "Multiple independent computers (nodes/servers) working together which appear as a single system to the end user."
+    },
+    {
+      "id": "26524eb1ed548087b50ac50a234bf6b3",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed54806ba60df9fb1797af58",
+      "type": "header",
+      "html": "Why",
+      "text": "Why"
+    },
+    {
+      "id": "26524eb1ed5480d78308fd38224f8bb2",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">One machine is never enough — either for performance, reliability, or geography.</span>",
+      "text": "One machine is never enough — either for performance, reliability, or geography."
+    },
+    {
+      "id": "26524eb1ed5480f98f10e2946a5cf702",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Scalability (handling growth)</span>",
+      "text": "Scalability (handling growth)"
+    },
+    {
+      "id": "26524eb1ed5480a788f4e313d80a4dd9",
+      "type": "bulleted_list",
+      "html": "A single server has limits (CPU, RAM, disk).",
+      "text": "A single server has limits (CPU, RAM, disk)."
+    },
+    {
+      "id": "26524eb1ed5480c38baee8c0880a836a",
+      "type": "bulleted_list",
+      "html": "What if you need to handle <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">millions of users</span> or store <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">petabytes of data</span>?",
+      "text": "What if you need to handle millions of users or store petabytes of data?"
+    },
+    {
+      "id": "26524eb1ed548075ae75dd7f05f65011",
+      "type": "bulleted_list",
+      "html": "Solution → Split work across multiple servers.",
+      "text": "Solution → Split work across multiple servers."
+    },
+    {
+      "id": "26524eb1ed5480bcbb26d8ac306adefd",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fault Tolerance &amp; High Availability</span>",
+      "text": "Fault Tolerance & High Availability"
+    },
+    {
+      "id": "26524eb1ed5480949dc2e5e24cc1a09e",
+      "type": "bulleted_list",
+      "html": "Machines do crash. Yes, they do.",
+      "text": "Machines do crash. Yes, they do."
+    },
+    {
+      "id": "26524eb1ed54801b9933d16552991369",
+      "type": "bulleted_list",
+      "html": "If everything runs on one box, risk is too high of the application going down.",
+      "text": "If everything runs on one box, risk is too high of the application going down."
+    },
+    {
+      "id": "26524eb1ed548013aa33d8961c13a9ef",
+      "type": "bulleted_list",
+      "html": "Solution → Replicate across machines, so if one fails, others keep serving traffic.",
+      "text": "Solution → Replicate across machines, so if one fails, others keep serving traffic."
+    },
+    {
+      "id": "26524eb1ed54800497def2a9a47db597",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Geographical Distribution (low latency)</span>",
+      "text": "Geographical Distribution (low latency)"
+    },
+    {
+      "id": "26524eb1ed54800f8ae6d3bbaee0f618",
+      "type": "bulleted_list",
+      "html": "Serving Indian users from a US server will make the latency too high.",
+      "text": "Serving Indian users from a US server will make the latency too high."
+    },
+    {
+      "id": "26524eb1ed548044b0f6e4324e318a3e",
+      "type": "bulleted_list",
+      "html": "Solution → Run servers close to users, to keep the latency low.",
+      "text": "Solution → Run servers close to users, to keep the latency low."
+    },
+    {
+      "id": "26524eb1ed54805dacc5c0813403e788",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed5480888ad9fb5536d8a674",
+      "type": "alias",
+      "links": [
+        {
+          "href": "/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=25",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26524eb1ed5480419c54f90c6a335984",
+      "type": "divider"
+    },
+    {
+      "id": "29024eb1ed5480609a4bd74ccf688ee9",
+      "type": "text",
+      "html": "Scalability requires redundancy (not always but many of the times.)",
+      "text": "Scalability requires redundancy (not always but many of the times.)"
+    }
+  ]
+}

@@ -1,0 +1,662 @@
+{
+  "id": "34f24eb1ed5480119e1ecc317ca13b28",
+  "title": "Concurrency",
+  "sourceUrl": "https://xpandeyed.notion.site/Concurrency-34f24eb1ed5480119e1ecc317ca13b28?pvs=23",
+  "blocks": [
+    {
+      "id": "34f24eb1ed5480c09ce7dbae5310f515",
+      "type": "text",
+      "html": "Read <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Concurrency-vs-Parallelism-25824eb1ed5480be96b5f100ebcbfea4?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Concurrency vs Parallelism</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Read Concurrency vs Parallelism ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Concurrency-vs-Parallelism-25824eb1ed5480be96b5f100ebcbfea4?pvs=24",
+          "text": "Concurrency vs Parallelism"
+        }
+      ]
+    },
+    {
+      "id": "34f24eb1ed548074a948df7faa3dd5be",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed5480ef80d6f0f46ed1e391",
+      "type": "text",
+      "html": "Referenced Docs: <a href=\"https://www.hellointerview.com/learn/low-level-design/concurrency/intro\" class=\"notion-link-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" contenteditable=\"false\" tabindex=\"0\" target=\"_blank\" style=\"color:inherit;text-decoration:inherit;cursor:pointer\" rel=\"noopener noreferrer\"><img style=\"width:1.2em;height:1.2em;border-radius:3px;vertical-align:-0.22em;margin-inline-end:0.3em\" src=\"https://www.hellointerview.com/favicon.ico\" alt=\"\"><span class=\"\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500;flex-shrink:0\">Introduction to Concurrency | Hello Interview Low Level Desi…</span></span></a>​",
+      "text": "Referenced Docs: Introduction to Concurrency | Hello Interview Low Level Desi…​",
+      "links": [
+        {
+          "href": "https://www.hellointerview.com/learn/low-level-design/concurrency/intro",
+          "text": "Introduction to Concurrency | Hello Interview Low Level Desi…"
+        }
+      ]
+    },
+    {
+      "id": "34f24eb1ed5480f5bb68c7efd475b120",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed54809d9b4bede296682d46",
+      "type": "text",
+      "html": "Concurrency starts with a basic fact: threads in the same process share memory. ",
+      "text": "Concurrency starts with a basic fact: threads in the same process share memory. "
+    },
+    {
+      "id": "34f24eb1ed548060a741c15da1bec2ce",
+      "type": "text",
+      "html": "Concurrency exists whenever multiple threads can make progress independently and their execution can overlap.",
+      "text": "Concurrency exists whenever multiple threads can make progress independently and their execution can overlap."
+    },
+    {
+      "id": "34f24eb1ed548098b9cec85453a56e95",
+      "type": "text",
+      "html": "When multiple running threads use the same memory space, the OS switches between the threads really really fast and in an unpredictable manner, leading to indeterministic results.",
+      "text": "When multiple running threads use the same memory space, the OS switches between the threads really really fast and in an unpredictable manner, leading to indeterministic results."
+    },
+    {
+      "id": "34f24eb1ed54803888bbdb0e2446ab39",
+      "type": "text",
+      "html": "Even the debugging is really tough in such systems, because the switching manner is unpredictable, therefore the same set of actions may not lead to same results.",
+      "text": "Even the debugging is really tough in such systems, because the switching manner is unpredictable, therefore the same set of actions may not lead to same results."
+    },
+    {
+      "id": "34f24eb1ed54809a9ef9eb93c335a9b2",
+      "type": "text",
+      "html": "So, concurrency comes with its own problems.",
+      "text": "So, concurrency comes with its own problems."
+    },
+    {
+      "id": "34f24eb1ed5480ac972fc60c4bce6c89",
+      "type": "callout"
+    },
+    {
+      "id": "34f24eb1ed54804486d1eac386d2dcd0",
+      "type": "text",
+      "parent": "34f24eb1ed5480ac972fc60c4bce6c89",
+      "html": "What looks like one instruction on the source code level, could be a multiple machine instructions.",
+      "text": "What looks like one instruction on the source code level, could be a multiple machine instructions."
+    },
+    {
+      "id": "34f24eb1ed548097badbebaab66a26db",
+      "type": "text",
+      "parent": "34f24eb1ed5480ac972fc60c4bce6c89",
+      "html": "a = b + c; may look like one instruction on the source code level, but at machine level these are many instructions.",
+      "text": "a = b + c; may look like one instruction on the source code level, but at machine level these are many instructions."
+    },
+    {
+      "id": "34f24eb1ed548081b180c80fc7f7decb",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed54809b80aefee7336a177e",
+      "type": "text",
+      "html": "To deal with the concurrency problems, programming languages/libraries/frameworks etc, provide some tools. The most common ones are listed. One thing to clear is that, the tools listed below, are provided by the language/library/framework so we do not need to implement them, we need to only consume them.",
+      "text": "To deal with the concurrency problems, programming languages/libraries/frameworks etc, provide some tools. The most common ones are listed. One thing to clear is that, the tools listed below, are provided by the language/library/framework so we do not need to implement them, we need to only consume them."
+    },
+    {
+      "id": "34f24eb1ed5480ca9a7ad5b40414402c",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed5480f1a8cec03f2518d429",
+      "type": "header",
+      "html": "Atomics",
+      "text": "Atomics"
+    },
+    {
+      "id": "34f24eb1ed5480bbb500eb384ba78c6b",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Atomics</span>&nbsp;are the lowest-level tool for concurrency: operations that complete in a single, indivisible step.",
+      "text": "Atomics are the lowest-level tool for concurrency: operations that complete in a single, indivisible step."
+    },
+    {
+      "id": "34f24eb1ed5480bbbbf3dddc94ebf74b",
+      "type": "text",
+      "html": "No thread can see a half-done state.",
+      "text": "No thread can see a half-done state."
+    },
+    {
+      "id": "34f24eb1ed548038bfafc14d301a7152",
+      "type": "text",
+      "html": "If two threads do&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">atomic_increment(x)</span></div>&nbsp;at the same time,&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">x</span></div>&nbsp;goes up by 2, never 1. No race condition, no mutex needed. The CPU guarantees it (basically the language does but you can say CPU).",
+      "text": "If two threads do atomic_increment(x) at the same time, x goes up by 2, never 1. No race condition, no mutex needed. The CPU guarantees it (basically the language does but you can say CPU)."
+    },
+    {
+      "id": "34f24eb1ed5480c391e2e3130f04c4e9",
+      "type": "text",
+      "html": "Therefore, when using atomics, no need to put any other thing like counter, locks, flags, pointers, etc.",
+      "text": "Therefore, when using atomics, no need to put any other thing like counter, locks, flags, pointers, etc."
+    },
+    {
+      "id": "34f24eb1ed5480759061dd4b78fbc29b",
+      "type": "text",
+      "html": "You can search internet to know if a specific language provides it or not, and if yes, then how.",
+      "text": "You can search internet to know if a specific language provides it or not, and if yes, then how."
+    },
+    {
+      "id": "34f24eb1ed5480208a68df6428a407cd",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed54802bbf5af7ba04e31fe4",
+      "type": "header",
+      "html": "Locks",
+      "text": "Locks"
+    },
+    {
+      "id": "34f24eb1ed54803c95bafa6464f7581e",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Locks</span>&nbsp;guarantee&nbsp;<span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\">mutual exclusion</span>: only one thread can run a block of code at a time. If atomics are a scalpel for single variables, locks are a sledgehammer for protecting whole chunks of logic and multiple variables together.",
+      "text": "Locks guarantee mutual exclusion: only one thread can run a block of code at a time. If atomics are a scalpel for single variables, locks are a sledgehammer for protecting whole chunks of logic and multiple variables together."
+    },
+    {
+      "id": "34f24eb1ed5480a3a739f1393d83d6f4",
+      "type": "text",
+      "html": "You use them when atomics aren’t enough. Example: transferring money needs&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">accountA -= 100</span></div>&nbsp;and&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">accountB += 100</span></div>&nbsp;to happen together.",
+      "text": "You use them when atomics aren’t enough. Example: transferring money needs accountA -= 100 and accountB += 100 to happen together."
+    },
+    {
+      "id": "34f24eb1ed54806eb130c75be8df8f48",
+      "type": "text",
+      "html": "Deadlock, popular problem, is a problem that may arise if locks are not used intelligently.",
+      "text": "Deadlock, popular problem, is a problem that may arise if locks are not used intelligently."
+    },
+    {
+      "id": "34f24eb1ed548093990ec99613c0dfdf",
+      "type": "callout"
+    },
+    {
+      "id": "34f24eb1ed54805e829fdfff1fc6c519",
+      "type": "text",
+      "parent": "34f24eb1ed548093990ec99613c0dfdf",
+      "html": "Exclusion does not mean that only one thread can do a operation at time. It can be more than one threads. The only thing exclusion here means is that a set (set of one or more) of threads doing an operation, does not let any other thread outside the set do anything.",
+      "text": "Exclusion does not mean that only one thread can do a operation at time. It can be more than one threads. The only thing exclusion here means is that a set (set of one or more) of threads doing an operation, does not let any other thread outside the set do anything."
+    },
+    {
+      "id": "34f24eb1ed5480bc8c2df98a9b7a5628",
+      "type": "text",
+      "parent": "34f24eb1ed548093990ec99613c0dfdf",
+      "html": "For example: 10 threads reading (reading means reading no writing) a data, prevent any thread to write.",
+      "text": "For example: 10 threads reading (reading means reading no writing) a data, prevent any thread to write."
+    },
+    {
+      "id": "34f24eb1ed548077a8f0eef780a40afb",
+      "type": "text",
+      "parent": "34f24eb1ed548093990ec99613c0dfdf",
+      "html": "What does mutual mean, if thread A prevents B from interfering, then on B’s turn, B would prevent A, provided they are doing same operations.",
+      "text": "What does mutual mean, if thread A prevents B from interfering, then on B’s turn, B would prevent A, provided they are doing same operations."
+    },
+    {
+      "id": "34f24eb1ed54805199a9dcb762311284",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed5480ae9f45e55a9f2a0d7e",
+      "type": "header",
+      "html": "Mutexes",
+      "text": "Mutexes"
+    },
+    {
+      "id": "34f24eb1ed5480abbf6cd5d30edebd32",
+      "type": "text",
+      "html": "Mutexes are special types of locks. In which only one thread is allowed to do the operation at a time. Whether it be read or write.",
+      "text": "Mutexes are special types of locks. In which only one thread is allowed to do the operation at a time. Whether it be read or write."
+    },
+    {
+      "id": "34f24eb1ed5480e6b7ede3ce37fff336",
+      "type": "text",
+      "html": "10 threads reading a data simultaneously, and preventing any thread to write data is not mutex.",
+      "text": "10 threads reading a data simultaneously, and preventing any thread to write data is not mutex."
+    },
+    {
+      "id": "34f24eb1ed5480dd80d1c9a67c343042",
+      "type": "text",
+      "html": "The mutex doesn't care&nbsp;<span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">what</span>&nbsp;you're doing. It only cares&nbsp;<span style=\"font-style:italic\" data-token-index=\"3\" class=\"notion-enable-hover\">how many</span>. And the number must be one and one only.",
+      "text": "The mutex doesn't care what you're doing. It only cares how many. And the number must be one and one only."
+    },
+    {
+      "id": "34f24eb1ed5480e68207e4bd79d8b6a4",
+      "type": "callout"
+    },
+    {
+      "id": "34f24eb1ed548013b82acc72768b6cb5",
+      "type": "text",
+      "parent": "34f24eb1ed5480e68207e4bd79d8b6a4",
+      "html": "When people say \"lock\" in casual conversation, 90% of the time they mean \"mutex\". Because mutex = the simplest, most common lock.",
+      "text": "When people say \"lock\" in casual conversation, 90% of the time they mean \"mutex\". Because mutex = the simplest, most common lock."
+    },
+    {
+      "id": "34f24eb1ed5480aeb00ac6b314c9cd78",
+      "type": "text",
+      "parent": "34f24eb1ed5480e68207e4bd79d8b6a4",
+      "html": "That's because a mutex IS the canonical example of a lock.",
+      "text": "That's because a mutex IS the canonical example of a lock."
+    },
+    {
+      "id": "34f24eb1ed54805896a9ff9933ae1d7d",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed5480ab9c69d125246f1f87",
+      "type": "header",
+      "html": "Semaphores",
+      "text": "Semaphores"
+    },
+    {
+      "id": "34f24eb1ed54801f8dceec5e202becae",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Semaphore = a lock with a counter.</span>&nbsp;Instead of \"1 thread only\", it says \"N threads allowed at once\". And, a few more nuances.",
+      "text": "Semaphore = a lock with a counter. Instead of \"1 thread only\", it says \"N threads allowed at once\". And, a few more nuances."
+    },
+    {
+      "id": "34f24eb1ed548056b562dcc523c71a96",
+      "type": "text",
+      "html": "N threads allowed at once, means N permits that can be given.",
+      "text": "N threads allowed at once, means N permits that can be given."
+    },
+    {
+      "id": "34f24eb1ed54801e944ecf9dfef544df",
+      "type": "text",
+      "html": "A counter variable is used to store the free permits. Initially counter = N",
+      "text": "A counter variable is used to store the free permits. Initially counter = N"
+    },
+    {
+      "id": "34f24eb1ed5480f6a1fcdd879bf8b4b3",
+      "type": "text",
+      "html": "When a thread acquires a permit, better to say acquires the semaphore, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">counter--</span></div> is done. When thread releases a permit <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">counter++</span></div> is done.",
+      "text": "When a thread acquires a permit, better to say acquires the semaphore, counter-- is done. When thread releases a permit counter++ is done."
+    },
+    {
+      "id": "34f24eb1ed548041a37bdb38fd90cf7b",
+      "type": "text",
+      "html": "Here is a catch, if A acquires a permit, it does not mean A releases the permit. How??",
+      "text": "Here is a catch, if A acquires a permit, it does not mean A releases the permit. How??"
+    },
+    {
+      "id": "34f24eb1ed548092a214db0a9dc60df3",
+      "type": "text",
+      "html": "There are two main operations in semaphores:",
+      "text": "There are two main operations in semaphores:"
+    },
+    {
+      "id": "34f24eb1ed54805fb695f81ac32d6063",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Operation"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "wait / acquire / P"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "signal / release / V"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "34f24eb1ed5480c5af8fee7cb1bfdee4",
+      "type": "text",
+      "html": "P and V names were given to the operations by Dijkstra. Dijkstra invented semaphores in 1965. And Mutexes came later, because of issues in semaphores.",
+      "text": "P and V names were given to the operations by Dijkstra. Dijkstra invented semaphores in 1965. And Mutexes came later, because of issues in semaphores."
+    },
+    {
+      "id": "34f24eb1ed54803f93d6e4e3b6184583",
+      "type": "text",
+      "html": "The names confused me.",
+      "text": "The names confused me."
+    },
+    {
+      "id": "34f24eb1ed548056bcd6cafca74d0401",
+      "type": "text",
+      "html": "How can wait and acquire mean the same thing?",
+      "text": "How can wait and acquire mean the same thing?"
+    },
+    {
+      "id": "34f24eb1ed5480d8a5d7fa91fc3f4b5e",
+      "type": "text",
+      "html": "When we do <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">semaphore.acquire()</span></div>, the thread may not immediately acquire the semaphore, it may wait, and if it has to wait, it will sleep.",
+      "text": "When we do semaphore.acquire(), the thread may not immediately acquire the semaphore, it may wait, and if it has to wait, it will sleep."
+    },
+    {
+      "id": "34f24eb1ed5480f9a05cc8a234a02ade",
+      "type": "text",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">semaphore.acquire()</span></div> means <span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\">wait until you get a chance to acquire, and acquire the moment you get the chance. </span>At source code level we do not write wait and acquire separately. And that is why wait/acquire mean the same thing at the source code level.",
+      "text": "semaphore.acquire() means wait until you get a chance to acquire, and acquire the moment you get the chance. At source code level we do not write wait and acquire separately. And that is why wait/acquire mean the same thing at the source code level."
+    },
+    {
+      "id": "34f24eb1ed5480f4b8e2f77d9492e7ab",
+      "type": "text",
+      "html": "Similarly, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">signal()</span></div>&nbsp;/&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">release()</span></div>&nbsp;means <span style=\"font-style:italic\" data-token-index=\"5\" class=\"notion-enable-hover\">I'm done with my permit. Increment the count, and wake someone up if they're waiting</span>.",
+      "text": "Similarly, signal() / release() means I'm done with my permit. Increment the count, and wake someone up if they're waiting."
+    },
+    {
+      "id": "34f24eb1ed5480cfa4c9c0708ad2c50e",
+      "type": "text",
+      "html": "One more catch.",
+      "text": "One more catch."
+    },
+    {
+      "id": "34f24eb1ed5480efb568f6fbafeca0a2",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">With&nbsp;semaphores&nbsp;there&nbsp;is&nbsp;no&nbsp;ownership.&nbsp;With&nbsp;mutexes&nbsp;there&nbsp;is.</span>&nbsp;That’s&nbsp;the&nbsp;biggest&nbsp;behavioral&nbsp;difference.",
+      "text": "With semaphores there is no ownership. With mutexes there is. That’s the biggest behavioral difference."
+    },
+    {
+      "id": "34f24eb1ed5480d89280f84f7b06f56d",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Mutex: ownership is enforced</span>",
+      "text": "Mutex: ownership is enforced"
+    },
+    {
+      "id": "34f24eb1ed5480cf9b93c0bc394b7a23",
+      "type": "text",
+      "html": "The OS/library remembers which thread called&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">lock()</span></div>. Only that same thread is allowed to call&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">unlock()</span></div>.",
+      "text": "The OS/library remembers which thread called lock(). Only that same thread is allowed to call unlock()."
+    },
+    {
+      "id": "34f24eb1ed5480d693f0c36ea07015fb",
+      "type": "text",
+      "html": "If Thread A dies while holding the mutex, you get a deadlock or \"abandoned mutex\" error. The system knows who the owner was.",
+      "text": "If Thread A dies while holding the mutex, you get a deadlock or \"abandoned mutex\" error. The system knows who the owner was."
+    },
+    {
+      "id": "34f24eb1ed548086a20fe3b869be011c",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Semaphore: no ownership, just a counter</span>",
+      "text": "Semaphore: no ownership, just a counter"
+    },
+    {
+      "id": "34f24eb1ed5480e6b5f1d12f2d06104e",
+      "type": "text",
+      "html": "The semaphore is just an integer. It doesn't track who did&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">acquire()</span></div>. Anyone can&nbsp;<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">release()</span></div>. This is an issue in semaphores, but if used carefully acts as a feature.",
+      "text": "The semaphore is just an integer. It doesn't track who did acquire(). Anyone can release(). This is an issue in semaphores, but if used carefully acts as a feature."
+    },
+    {
+      "id": "34f24eb1ed5480f0a47afd46686fde3a",
+      "type": "text",
+      "html": "I will write more sometimes about it.",
+      "text": "I will write more sometimes about it."
+    },
+    {
+      "id": "34f24eb1ed548006abc2d6b41417173d",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed5480a4a100f8f97bc9a88b",
+      "type": "header",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Conditional-Variables-34f24eb1ed54801990cfe7aa757be3b7?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 20 20\" style=\"width:1.25em;height:1.25em;display:block;fill:rgba(173, 169, 163, 1);flex-shrink:0\" class=\"page\"><path d=\"M13.3 14.25a.55.55 0 0 1-.55.55h-5.5a.55.55 0 1 1 0-1.1h5.5a.55.55 0 0 1 .55.55m-.55-1.95a.55.55 0 1 0 0-1.1h-5.5a.55.55 0 0 0 0 1.1z\"></path><path d=\"M6.25 2.375A2.125 2.125 0 0 0 4.125 4.5v11c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125V8.121c0-.563-.224-1.104-.622-1.502L11.63 2.997a2.13 2.13 0 0 0-1.502-.622zM5.375 4.5c0-.483.392-.875.875-.875h3.7V6.25A2.05 2.05 0 0 0 12 8.3h2.625v7.2a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875zm8.691 2.7H12a.95.95 0 0 1-.95-.95V4.184z\"></path></svg><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Conditional Variables</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Conditional Variables ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Conditional-Variables-34f24eb1ed54801990cfe7aa757be3b7?pvs=24",
+          "text": "Conditional Variables"
+        }
+      ]
+    },
+    {
+      "id": "34f24eb1ed5480c8903ce654f9324c86",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed5480099851d910a7ff7185",
+      "type": "header",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Blocking-Queues-34f24eb1ed5480499f98db158827527c?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 20 20\" style=\"width:1.25em;height:1.25em;display:block;fill:rgba(173, 169, 163, 1);flex-shrink:0\" class=\"page\"><path d=\"M13.3 14.25a.55.55 0 0 1-.55.55h-5.5a.55.55 0 1 1 0-1.1h5.5a.55.55 0 0 1 .55.55m-.55-1.95a.55.55 0 1 0 0-1.1h-5.5a.55.55 0 0 0 0 1.1z\"></path><path d=\"M6.25 2.375A2.125 2.125 0 0 0 4.125 4.5v11c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125V8.121c0-.563-.224-1.104-.622-1.502L11.63 2.997a2.13 2.13 0 0 0-1.502-.622zM5.375 4.5c0-.483.392-.875.875-.875h3.7V6.25A2.05 2.05 0 0 0 12 8.3h2.625v7.2a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875zm8.691 2.7H12a.95.95 0 0 1-.95-.95V4.184z\"></path></svg><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Blocking Queues</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Blocking Queues ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Blocking-Queues-34f24eb1ed5480499f98db158827527c?pvs=24",
+          "text": "Blocking Queues"
+        }
+      ]
+    },
+    {
+      "id": "34f24eb1ed54807dac4dc590fef92a86",
+      "type": "divider"
+    },
+    {
+      "id": "34f24eb1ed54808887d7c158d8aa58d2",
+      "type": "header",
+      "html": "Language Reference",
+      "text": "Language Reference"
+    },
+    {
+      "id": "34f24eb1ed5480b49aa6fb0158a11347",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Concept</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Java</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Python</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Go</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">C++</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">C#</span>"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Lock/Mutex"
+          },
+          {
+            "header": false,
+            "html": "synchronized&nbsp;/&nbsp;ReentrantLock"
+          },
+          {
+            "header": false,
+            "html": "threading.Lock"
+          },
+          {
+            "header": false,
+            "html": "sync.Mutex"
+          },
+          {
+            "header": false,
+            "html": "std::mutex"
+          },
+          {
+            "header": false,
+            "html": "lock&nbsp;/&nbsp;Monitor"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Read-write lock"
+          },
+          {
+            "header": false,
+            "html": "ReentrantReadWriteLock"
+          },
+          {
+            "header": false,
+            "html": "N/A (3rd party)"
+          },
+          {
+            "header": false,
+            "html": "sync.RWMutex"
+          },
+          {
+            "header": false,
+            "html": "std::shared_mutex"
+          },
+          {
+            "header": false,
+            "html": "ReaderWriterLockSlim"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Condition variable"
+          },
+          {
+            "header": false,
+            "html": "Object.wait/notify"
+          },
+          {
+            "header": false,
+            "html": "threading.Condition"
+          },
+          {
+            "header": false,
+            "html": "sync.Cond"
+          },
+          {
+            "header": false,
+            "html": "std::condition_variable"
+          },
+          {
+            "header": false,
+            "html": "Monitor.Wait/Pulse"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Semaphore"
+          },
+          {
+            "header": false,
+            "html": "Semaphore"
+          },
+          {
+            "header": false,
+            "html": "threading.Semaphore"
+          },
+          {
+            "header": false,
+            "html": "x/sync/semaphore"
+          },
+          {
+            "header": false,
+            "html": "std::counting_semaphore"
+          },
+          {
+            "header": false,
+            "html": "SemaphoreSlim"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Blocking queue"
+          },
+          {
+            "header": false,
+            "html": "LinkedBlockingQueue"
+          },
+          {
+            "header": false,
+            "html": "queue.Queue"
+          },
+          {
+            "header": false,
+            "html": "buffered channel"
+          },
+          {
+            "header": false,
+            "html": "manual"
+          },
+          {
+            "header": false,
+            "html": "BlockingCollection"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Atomic integer"
+          },
+          {
+            "header": false,
+            "html": "AtomicInteger"
+          },
+          {
+            "header": false,
+            "html": "N/A (use Lock)"
+          },
+          {
+            "header": false,
+            "html": "sync/atomic"
+          },
+          {
+            "header": false,
+            "html": "std::atomic&lt;int&gt;"
+          },
+          {
+            "header": false,
+            "html": "Interlocked"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Concurrent map"
+          },
+          {
+            "header": false,
+            "html": "ConcurrentHashMap"
+          },
+          {
+            "header": false,
+            "html": "N/A (GIL)"
+          },
+          {
+            "header": false,
+            "html": "sync.Map"
+          },
+          {
+            "header": false,
+            "html": "tbb::concurrent_hash_map"
+          },
+          {
+            "header": false,
+            "html": "ConcurrentDictionary"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "34f24eb1ed5480538878f3b2b9f0da96",
+      "type": "text"
+    },
+    {
+      "id": "34f24eb1ed5480868e46f593a6be3035",
+      "type": "text"
+    },
+    {
+      "id": "34f24eb1ed54807696c6ecebbdcb03e2",
+      "type": "text"
+    },
+    {
+      "id": "34f24eb1ed54803fbbb2c3a6705b3af0",
+      "type": "text"
+    }
+  ]
+}

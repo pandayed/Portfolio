@@ -1,0 +1,424 @@
+{
+  "id": "26824eb1ed5480bc813bdc099fe7b892",
+  "title": "PACELC Theorem",
+  "sourceUrl": "https://xpandeyed.notion.site/PACELC-Theorem-26824eb1ed5480bc813bdc099fe7b892",
+  "blocks": [
+    {
+      "id": "26d24eb1ed5480eabf5cf04e5fffcf9a",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">PACELC is an extension of the </span><a style=\"font-style:italic;cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\"> . It not only considers what happens </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">during a network partition (P)</span><span style=\"font-style:italic\" data-token-index=\"4\" class=\"notion-enable-hover\">, but also what happens </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">Else (E)</span><span style=\"font-style:italic\" data-token-index=\"6\" class=\"notion-enable-hover\"> when the system is running normally without partitions.</span>",
+      "text": "PACELC is an extension of the CAP Theorem . It not only considers what happens during a network partition (P), but also what happens Else (E) when the system is running normally without partitions.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26d24eb1ed5480cb83fdeb1d8597c687",
+      "type": "bulleted_list",
+      "html": "Expands CAP by adding the trade-off between <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Latency (L)</span> and <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">Consistency (C)</span> during normal operations.",
+      "text": "Expands CAP by adding the trade-off between Latency (L) and Consistency (C) during normal operations."
+    },
+    {
+      "id": "26d24eb1ed54806eb1fadf7483eae7a3",
+      "type": "bulleted_list",
+      "html": "States:",
+      "text": "States:"
+    },
+    {
+      "id": "26d24eb1ed5480ffae44d4068e1c6d7a",
+      "type": "text",
+      "parent": "26d24eb1ed54806eb1fadf7483eae7a3",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">If there is a partition (P), the system must choose between Availability (A) and Consistency (C) — same as CAP. Else (E), when there is no partition, the system must choose between Latency (L) and Consistency (C).</span>",
+      "text": "If there is a partition (P), the system must choose between Availability (A) and Consistency (C) — same as CAP. Else (E), when there is no partition, the system must choose between Latency (L) and Consistency (C)."
+    },
+    {
+      "id": "26d24eb1ed5480349123f7e811b8f3e7",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed54800b8abac5c7c0a88bc2",
+      "type": "header",
+      "html": "[P]: Partition",
+      "text": "[P]: Partition"
+    },
+    {
+      "id": "26d24eb1ed5480beaad7ce3ea56dbd54",
+      "type": "bulleted_list",
+      "html": "Same as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Partition Tolerance in </span><a style=\"font-weight:600;cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"2\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a><span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\"> </span>.",
+      "text": "Same as Partition Tolerance in CAP Theorem .",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26d24eb1ed548001ae56d367bdcb5e3a",
+      "type": "bulleted_list",
+      "html": "System must tolerate partitions since they are inevitable.",
+      "text": "System must tolerate partitions since they are inevitable."
+    },
+    {
+      "id": "26d24eb1ed5480f38455dea5287d6188",
+      "type": "header",
+      "html": "[A]: Availability",
+      "text": "[A]: Availability"
+    },
+    {
+      "id": "26d24eb1ed5480fea433f55a8ccb32d6",
+      "type": "bulleted_list",
+      "html": "Same as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Availability in </span><a style=\"font-weight:600;cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"2\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a><span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\"> </span>.",
+      "text": "Same as Availability in CAP Theorem .",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26d24eb1ed5480b99a08fffa1bd600db",
+      "type": "header",
+      "html": "[C]: Consistency",
+      "text": "[C]: Consistency"
+    },
+    {
+      "id": "26d24eb1ed54803e885bc190fedc100c",
+      "type": "bulleted_list",
+      "html": "Same as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Consistency in </span><a style=\"font-weight:600;cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"2\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a><span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\"> </span>.",
+      "text": "Same as Consistency in CAP Theorem .",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26d24eb1ed5480fb9611ed9a903fd028",
+      "type": "header",
+      "html": "[E]: Else (Normal Operation Case)",
+      "text": "[E]: Else (Normal Operation Case)"
+    },
+    {
+      "id": "26d24eb1ed5480fb985ee16864d86ed9",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">When there is no partition.</span>",
+      "text": "When there is no partition."
+    },
+    {
+      "id": "26d24eb1ed548037995be5b50cbd7018",
+      "type": "bulleted_list",
+      "html": "The system still faces a design choice: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Consistency vs Latency</span>.",
+      "text": "The system still faces a design choice: Consistency vs Latency."
+    },
+    {
+      "id": "26d24eb1ed5480faa056e516681abcf7",
+      "type": "bulleted_list",
+      "html": "Do we make every read consistent across replicas? Or do we return faster with possibly stale results?",
+      "text": "Do we make every read consistent across replicas? Or do we return faster with possibly stale results?"
+    },
+    {
+      "id": "26d24eb1ed548014b48ece1fedf7ea0d",
+      "type": "header",
+      "html": "[L]: Latency",
+      "text": "[L]: Latency"
+    },
+    {
+      "id": "26d24eb1ed5480caa209c548f5c1fcdf",
+      "type": "bulleted_list",
+      "html": "Time taken for requests (especially reads/writes) to complete.",
+      "text": "Time taken for requests (especially reads/writes) to complete."
+    },
+    {
+      "id": "26d24eb1ed5480ac8e3ddb1d94856381",
+      "type": "bulleted_list",
+      "html": "Low latency often conflicts with strong consistency.",
+      "text": "Low latency often conflicts with strong consistency."
+    },
+    {
+      "id": "26d24eb1ed5480c6b416c2aca38339e3",
+      "type": "bulleted_list",
+      "html": "Example: Serving reads from the nearest replica improves latency but may return stale data.",
+      "text": "Example: Serving reads from the nearest replica improves latency but may return stale data."
+    },
+    {
+      "id": "26d24eb1ed5480099522d8da3e1caea4",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed54802d8b96e83926508f4c",
+      "type": "header",
+      "html": "Why PACELC is Needed?",
+      "text": "Why PACELC is Needed?"
+    },
+    {
+      "id": "26d24eb1ed54805fa6c7fd755b67c96a",
+      "type": "bulleted_list",
+      "html": "CAP only talks about trade-offs <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">during partitions</span>.",
+      "text": "CAP only talks about trade-offs during partitions."
+    },
+    {
+      "id": "26d24eb1ed5480dbafdec9ae5b6720b3",
+      "type": "bulleted_list",
+      "html": "But in real-world systems, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">partitions are rare</span>, while <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">latency–consistency trade-offs happen all the time</span>.",
+      "text": "But in real-world systems, partitions are rare, while latency–consistency trade-offs happen all the time."
+    },
+    {
+      "id": "26d24eb1ed5480b9a86fd2afe7cda883",
+      "type": "bulleted_list",
+      "html": "PACELC captures this everyday trade-off.",
+      "text": "PACELC captures this everyday trade-off."
+    },
+    {
+      "id": "26d24eb1ed5480d0a1e8da893af62864",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed5480b69b5df93e65a13ec7",
+      "type": "header",
+      "html": "PACELC in Action",
+      "text": "PACELC in Action"
+    },
+    {
+      "id": "26d24eb1ed54801d9e1afe76846ca9d9",
+      "type": "sub_header",
+      "html": "PA/EL Systems (Availability during Partitions, Low Latency Else)",
+      "text": "PA/EL Systems (Availability during Partitions, Low Latency Else)"
+    },
+    {
+      "id": "26d24eb1ed54804785dffeb78a88e072",
+      "type": "bulleted_list",
+      "html": "Prioritize <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">availability</span> in partitions (AP from <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"3\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a> ).",
+      "text": "Prioritize availability in partitions (AP from CAP Theorem ).",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26d24eb1ed5480889e7ae0dbc3d8109e",
+      "type": "bulleted_list",
+      "html": "Else, prioritize <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">latency</span> over consistency.",
+      "text": "Else, prioritize latency over consistency."
+    },
+    {
+      "id": "26d24eb1ed5480acaa5df731dce6eaae",
+      "type": "bulleted_list",
+      "html": "Example: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Amazon Dynamo, Cassandra, Riak</span>.",
+      "text": "Example: Amazon Dynamo, Cassandra, Riak."
+    },
+    {
+      "id": "26d24eb1ed54802b9670f08fd0a33d38",
+      "type": "bulleted_list",
+      "html": "Characteristics:",
+      "text": "Characteristics:"
+    },
+    {
+      "id": "26d24eb1ed548050ab06e6b40224f77e",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed54802b9670f08fd0a33d38",
+      "html": "During partitions: remain available, but allow inconsistencies.",
+      "text": "During partitions: remain available, but allow inconsistencies."
+    },
+    {
+      "id": "26d24eb1ed548080b103e14da8317017",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed54802b9670f08fd0a33d38",
+      "html": "Else: serve from nearest replica → fast, but possibly stale reads.",
+      "text": "Else: serve from nearest replica → fast, but possibly stale reads."
+    },
+    {
+      "id": "26d24eb1ed54806dac63fb240109d4a6",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed54801ba9d2c9d638afbe4e",
+      "type": "sub_header",
+      "html": "PC/EC Systems (Consistency during Partitions, Consistency Else)",
+      "text": "PC/EC Systems (Consistency during Partitions, Consistency Else)"
+    },
+    {
+      "id": "26d24eb1ed5480c4a1e7fc27c3243f82",
+      "type": "bulleted_list",
+      "html": "Prioritize <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency</span> in partitions (CP from @CAP).",
+      "text": "Prioritize consistency in partitions (CP from @CAP)."
+    },
+    {
+      "id": "26d24eb1ed54802eb314fd5d2214438c",
+      "type": "bulleted_list",
+      "html": "Else, prioritize <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency</span> even at the cost of latency.",
+      "text": "Else, prioritize consistency even at the cost of latency."
+    },
+    {
+      "id": "26d24eb1ed54806b8387c0b82ef36f40",
+      "type": "bulleted_list",
+      "html": "Example: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">HBase, VoltDB, Spanner</span>.",
+      "text": "Example: HBase, VoltDB, Spanner."
+    },
+    {
+      "id": "26d24eb1ed548069892afc317bc4828b",
+      "type": "bulleted_list",
+      "html": "Characteristics:",
+      "text": "Characteristics:"
+    },
+    {
+      "id": "26d24eb1ed548041b309f744331de822",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed548069892afc317bc4828b",
+      "html": "During partitions: may block requests to ensure consistency.",
+      "text": "During partitions: may block requests to ensure consistency."
+    },
+    {
+      "id": "26d24eb1ed5480d69f72cc16dca05e6a",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed548069892afc317bc4828b",
+      "html": "Else: strong consistency enforced with higher latency (e.g., cross-node coordination).",
+      "text": "Else: strong consistency enforced with higher latency (e.g., cross-node coordination)."
+    },
+    {
+      "id": "26d24eb1ed54805ea0b7f0f2aa733e93",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed548049966df0e5599682aa",
+      "type": "sub_header",
+      "html": "PA/EC Systems (Availability during Partitions, Consistency Else)",
+      "text": "PA/EC Systems (Availability during Partitions, Consistency Else)"
+    },
+    {
+      "id": "26d24eb1ed548071a536ca44ef2622a6",
+      "type": "bulleted_list",
+      "html": "Partition case: choose <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">availability</span>.",
+      "text": "Partition case: choose availability."
+    },
+    {
+      "id": "26d24eb1ed54806e925ec6c474420d82",
+      "type": "bulleted_list",
+      "html": "Else: choose <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency</span> (higher latency acceptable).",
+      "text": "Else: choose consistency (higher latency acceptable)."
+    },
+    {
+      "id": "26d24eb1ed54802f9427d82589a8b43a",
+      "type": "bulleted_list",
+      "html": "Example: Some <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">tunable systems like Cosmos DB</span> can be configured this way.",
+      "text": "Example: Some tunable systems like Cosmos DB can be configured this way."
+    },
+    {
+      "id": "26d24eb1ed5480d5b677da7bb93d8d41",
+      "type": "bulleted_list",
+      "html": "Characteristics:",
+      "text": "Characteristics:"
+    },
+    {
+      "id": "26d24eb1ed5480359a30eb8be98460cf",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed5480d5b677da7bb93d8d41",
+      "html": "During partitions: system responds but may diverge temporarily.",
+      "text": "During partitions: system responds but may diverge temporarily."
+    },
+    {
+      "id": "26d24eb1ed548052accffde998494be3",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed5480d5b677da7bb93d8d41",
+      "html": "Else: prefers consistent state, even if slower.",
+      "text": "Else: prefers consistent state, even if slower."
+    },
+    {
+      "id": "26d24eb1ed5480549d6fe7cba911a54c",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed548056ae9ac635e09ba0b9",
+      "type": "sub_header",
+      "html": "PC/EL Systems (Consistency during Partitions, Low Latency Else)",
+      "text": "PC/EL Systems (Consistency during Partitions, Low Latency Else)"
+    },
+    {
+      "id": "26d24eb1ed548016b6cbfd52ae6a974e",
+      "type": "bulleted_list",
+      "html": "Partition case: choose <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency</span>.",
+      "text": "Partition case: choose consistency."
+    },
+    {
+      "id": "26d24eb1ed54801eb549ce7b8c8f7058",
+      "type": "bulleted_list",
+      "html": "Else: choose <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">low latency</span> (weaker consistency in normal ops).",
+      "text": "Else: choose low latency (weaker consistency in normal ops)."
+    },
+    {
+      "id": "26d24eb1ed5480ba9a85fbbc2900bea9",
+      "type": "bulleted_list",
+      "html": "Rare in practice, but theoretically possible.",
+      "text": "Rare in practice, but theoretically possible."
+    },
+    {
+      "id": "26d24eb1ed5480c3bd63e7ee7c067d9a",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed54809d81b9dc2d54694e91",
+      "type": "header",
+      "html": "Key Takeaways",
+      "text": "Key Takeaways"
+    },
+    {
+      "id": "26d24eb1ed5480a9810af1dd896374bc",
+      "type": "bulleted_list",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a>  tells us the trade-off <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">only during partitions</span>.",
+      "text": "CAP Theorem  tells us the trade-off only during partitions.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26d24eb1ed548034a56ac5b52c8f6fa6",
+      "type": "bulleted_list",
+      "html": "PACELC tells us the trade-off <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">both during partitions and otherwise</span>.",
+      "text": "PACELC tells us the trade-off both during partitions and otherwise."
+    },
+    {
+      "id": "26d24eb1ed5480df9fd1d26960331a54",
+      "type": "bulleted_list",
+      "html": "It answers:",
+      "text": "It answers:"
+    },
+    {
+      "id": "26d24eb1ed5480c6a22df285d9016afa",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed5480df9fd1d26960331a54",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">What do you sacrifice during partitions?</span> (A vs C)",
+      "text": "What do you sacrifice during partitions? (A vs C)"
+    },
+    {
+      "id": "26d24eb1ed54807eab96ed6112dcbc49",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed5480df9fd1d26960331a54",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">What do you sacrifice when no partitions?</span> (L vs C)",
+      "text": "What do you sacrifice when no partitions? (L vs C)"
+    },
+    {
+      "id": "26d24eb1ed5480d6b0a3ca8961a0f0b3",
+      "type": "divider"
+    },
+    {
+      "id": "26e24eb1ed5480b9952eda75126e2219",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    },
+    {
+      "id": "26e24eb1ed54807eb305ec81b5e40b52",
+      "type": "text"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "id": "26c24eb1ed5480c4b741ea9f5c459fa1",
+  "title": "Eventual Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Eventual-Consistency-26c24eb1ed5480c4b741ea9f5c459fa1",
+  "blocks": [
+    {
+      "id": "26c24eb1ed54808a8c27c24792f7ac63",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">If no new updates are made to a piece of data, all copies (replicas) of that data in a distributed system will </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:inherit;word-wrap:break-word;font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">eventually</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\"> become the same.</span>",
+      "text": "If no new updates are made to a piece of data, all copies (replicas) of that data in a distributed system will eventually become the same."
+    },
+    {
+      "id": "26c24eb1ed548079861fe1aa1ac94704",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span> It does <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">not guarantee immediate consistency</span>. Different nodes may return different values for a while.",
+      "text": "Guarantee: It does not guarantee immediate consistency. Different nodes may return different values for a while."
+    },
+    {
+      "id": "26c24eb1ed5480609ac8fda1d1001182",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed54807eb643fd5975b28074",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480609ac8fda1d1001182",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed5480909fc2c3075882fb9c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807eb643fd5975b28074",
+      "html": "High availability: the system can respond even if some nodes are down.",
+      "text": "High availability: the system can respond even if some nodes are down."
+    },
+    {
+      "id": "26c24eb1ed548006a5e0d58d05e7eed9",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807eb643fd5975b28074",
+      "html": "Fast writes: updates don’t need to wait for all replicas to confirm.",
+      "text": "Fast writes: updates don’t need to wait for all replicas to confirm."
+    },
+    {
+      "id": "26c24eb1ed54805baeb5c9e559b0480d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480609ac8fda1d1001182",
+      "html": "Cons/Anomalies:",
+      "text": "Cons/Anomalies:"
+    },
+    {
+      "id": "26c24eb1ed54808baec8fd8113425a71",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54805baeb5c9e559b0480d",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Temporary Inconsistency/Replica Divergence/Stale Reads:</span> A client may read outdated data since replicas are not yet synchronized.",
+      "text": "Temporary Inconsistency/Replica Divergence/Stale Reads: A client may read outdated data since replicas are not yet synchronized."
+    },
+    {
+      "id": "26c24eb1ed54806798abcb932a22ba0c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases: </span>Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">availability is more important than immediate consistency</span>, e.g.:",
+      "text": "Use Cases: Systems where availability is more important than immediate consistency, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed54807d84c9f917b5d3d9ad",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54806798abcb932a22ba0c",
+      "html": "Social Media Likes<span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">:</span>",
+      "text": "Social Media Likes:"
+    },
+    {
+      "id": "26c24eb1ed5480ee945ecbaed3895fd9",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807d84c9f917b5d3d9ad",
+      "html": "You like a post, but due to replication, one server shows 10 likes and another shows 9.",
+      "text": "You like a post, but due to replication, one server shows 10 likes and another shows 9."
+    },
+    {
+      "id": "26c24eb1ed5480b5b366d9122523d375",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807d84c9f917b5d3d9ad",
+      "html": "Eventually, all servers converge to the same count.",
+      "text": "Eventually, all servers converge to the same count."
+    },
+    {
+      "id": "26c24eb1ed5480579574daa97586841d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54806798abcb932a22ba0c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Online Shopping Inventory:</span>",
+      "text": "Online Shopping Inventory:"
+    },
+    {
+      "id": "26c24eb1ed5480ed9ba0dc821170f912",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480579574daa97586841d",
+      "html": "Two people buy the last item at the same time from different servers.",
+      "text": "Two people buy the last item at the same time from different servers."
+    },
+    {
+      "id": "26c24eb1ed54803daff0fc89b7eb5839",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480579574daa97586841d",
+      "html": "Each server may temporarily think the item is still available.",
+      "text": "Each server may temporarily think the item is still available."
+    },
+    {
+      "id": "26c24eb1ed5480f79fd7f9869254a4f0",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480579574daa97586841d",
+      "html": "Eventually, the system resolves which order succeeded.",
+      "text": "Eventually, the system resolves which order succeeded."
+    },
+    {
+      "id": "26c24eb1ed5480458ac0f1f4f7f58e9e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed54805b80c6c5e3fcac4f3e",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480458ac0f1f4f7f58e9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Asynchronous Replication:</span> Updates are sent to all replicas <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">without waiting</span> for confirmation from each.",
+      "text": "Asynchronous Replication: Updates are sent to all replicas without waiting for confirmation from each."
+    },
+    {
+      "id": "26c24eb1ed54809493bbc829b35a429d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480458ac0f1f4f7f58e9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Anti-Entropy Protocols:</span> Periodically compare and reconcile differences between replicas to ensure convergence.",
+      "text": "Anti-Entropy Protocols: Periodically compare and reconcile differences between replicas to ensure convergence."
+    },
+    {
+      "id": "26c24eb1ed54806c828ad131088a4cbf",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480458ac0f1f4f7f58e9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Gossip Protocols:</span> Nodes randomly share updates with each other until all replicas converge.",
+      "text": "Gossip Protocols: Nodes randomly share updates with each other until all replicas converge."
+    },
+    {
+      "id": "26c24eb1ed54807f85b8cac46b446163",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480458ac0f1f4f7f58e9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Conflict Resolution:</span> Use strategies like <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">last-write-wins</span>, <span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">version vectors</span>, or <span style=\"font-weight:600\" data-token-index=\"6\" class=\"notion-enable-hover\">application-defined merge functions</span> to resolve conflicting updates.",
+      "text": "Conflict Resolution: Use strategies like last-write-wins, version vectors, or application-defined merge functions to resolve conflicting updates."
+    }
+  ]
+}

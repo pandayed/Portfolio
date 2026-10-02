@@ -1,0 +1,193 @@
+{
+  "id": "29e24eb1ed54800e96ded1bdda790278",
+  "title": "Microservices",
+  "sourceUrl": "https://xpandeyed.notion.site/Microservices-29e24eb1ed54800e96ded1bdda790278?pvs=23",
+  "blocks": [
+    {
+      "id": "29e24eb1ed54803fa2add12e937facf9",
+      "type": "bulleted_list",
+      "html": "Imagine a food delivery backend system with all modules — <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">authentication</span>, <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">browsing restaurants</span>, and <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">orders</span> — built together in a <span style=\"font-weight:600\" data-token-index=\"7\" class=\"notion-enable-hover\">single codebase</span>.",
+      "text": "Imagine a food delivery backend system with all modules — authentication, browsing restaurants, and orders — built together in a single codebase."
+    },
+    {
+      "id": "29e24eb1ed54800fa444fce4e8900123",
+      "type": "bulleted_list",
+      "html": "This entire application runs as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one service</span> (e.g., on a single pod).",
+      "text": "This entire application runs as one service (e.g., on a single pod)."
+    },
+    {
+      "id": "29e24eb1ed54801a9fe6c64f947fd6d0",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed54804a9c07f62842b803f6",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Problems as the system grows</span>",
+      "text": "Problems as the system grows"
+    },
+    {
+      "id": "29e24eb1ed5480338023e738e234a908",
+      "type": "bulleted_list",
+      "html": "The <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">codebase becomes very large</span>, making it <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">hard to debug and maintain</span>.",
+      "text": "The codebase becomes very large, making it hard to debug and maintain."
+    },
+    {
+      "id": "29e24eb1ed548049b521e7221788109c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Different features have different loads</span>:",
+      "text": "Different features have different loads:"
+    },
+    {
+      "id": "29e24eb1ed5480a5abf6d437ac00c854",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548049b521e7221788109c",
+      "html": "Sign-ups are rare.",
+      "text": "Sign-ups are rare."
+    },
+    {
+      "id": "29e24eb1ed5480d5bb48ea558c93808c",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548049b521e7221788109c",
+      "html": "Browsing is frequent.",
+      "text": "Browsing is frequent."
+    },
+    {
+      "id": "29e24eb1ed5480679da1dc74da7ff240",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548049b521e7221788109c",
+      "html": "Orders fall in between.",
+      "text": "Orders fall in between."
+    },
+    {
+      "id": "29e24eb1ed54805293aac84b6e7c3e5a",
+      "type": "bulleted_list",
+      "html": "Because it’s one service, the system must <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">scale the entire application</span>, even if only one part (like browsing) is overloaded.",
+      "text": "Because it’s one service, the system must scale the entire application, even if only one part (like browsing) is overloaded."
+    },
+    {
+      "id": "29e24eb1ed5480f6afb8e0e259c39d81",
+      "type": "bulleted_list",
+      "html": "This causes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">inefficient resource usage</span> and <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">slower deployments</span>.",
+      "text": "This causes inefficient resource usage and slower deployments."
+    },
+    {
+      "id": "29e24eb1ed54804e8984c070d50725dc",
+      "type": "bulleted_list",
+      "html": "A small change in one feature may require <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">re-deploying the entire app</span>, risking downtime.",
+      "text": "A small change in one feature may require re-deploying the entire app, risking downtime."
+    },
+    {
+      "id": "29e24eb1ed5480199850c3d181143abe",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed548086abdccb13f17826fc",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Solution: Microservices Architecture</span>",
+      "text": "Solution: Microservices Architecture"
+    },
+    {
+      "id": "29e24eb1ed5480e3bc57f8011e4371b1",
+      "type": "bulleted_list",
+      "html": "The large monolithic codebase is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">split into smaller, independent services</span>, each responsible for one functionality (auth, browse, orders, etc.).",
+      "text": "The large monolithic codebase is split into smaller, independent services, each responsible for one functionality (auth, browse, orders, etc.)."
+    },
+    {
+      "id": "29e24eb1ed5480eca308d4771dca993e",
+      "type": "bulleted_list",
+      "html": "Each service runs <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">independently</span> and communicates with others via <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">APIs</span>.",
+      "text": "Each service runs independently and communicates with others via APIs."
+    },
+    {
+      "id": "29e24eb1ed548076a3f8e992da6f456b",
+      "type": "bulleted_list",
+      "html": "Services can now <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">scale individually</span> based on their traffic:",
+      "text": "Services can now scale individually based on their traffic:"
+    },
+    {
+      "id": "29e24eb1ed54807fbc66c1879894314c",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548076a3f8e992da6f456b",
+      "html": "Auth → 1 instance",
+      "text": "Auth → 1 instance"
+    },
+    {
+      "id": "29e24eb1ed548046a7aac7fe83af4bb0",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548076a3f8e992da6f456b",
+      "html": "Orders → 3 instances",
+      "text": "Orders → 3 instances"
+    },
+    {
+      "id": "29e24eb1ed5480fabae8d2c9ec766511",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548076a3f8e992da6f456b",
+      "html": "Browsing → 5 instances",
+      "text": "Browsing → 5 instances"
+    },
+    {
+      "id": "29e24eb1ed5480968097f165db1f127e",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed548068ac37dc2af0177f9e",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Benefits of Microservices</span>",
+      "text": "Benefits of Microservices"
+    },
+    {
+      "id": "29e24eb1ed5480f0b234f3592dc79fc5",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Independent scaling</span> → Efficient resource usage.",
+      "text": "Independent scaling → Efficient resource usage."
+    },
+    {
+      "id": "29e24eb1ed54806d9da7ca0d89247882",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Faster development and deployment</span> → Teams can work on different services without affecting others.",
+      "text": "Faster development and deployment → Teams can work on different services without affecting others."
+    },
+    {
+      "id": "29e24eb1ed548005b1b5ca0b9fb732c6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Improved fault isolation</span> → One failing service doesn’t crash the entire system.",
+      "text": "Improved fault isolation → One failing service doesn’t crash the entire system."
+    },
+    {
+      "id": "29e24eb1ed5480ebab8ff590655f4fdb",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Easier maintenance</span> → Smaller codebases, focused debugging.",
+      "text": "Easier maintenance → Smaller codebases, focused debugging."
+    },
+    {
+      "id": "29e24eb1ed5480f78286d803960bd8cd",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Technology flexibility</span> → Each service can use its own tech stack if needed.",
+      "text": "Technology flexibility → Each service can use its own tech stack if needed."
+    },
+    {
+      "id": "29e24eb1ed548039a697cc762e2d8e65",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed5480f0b3a1fc8478537b67",
+      "type": "text",
+      "html": "Remember that the problem with monolithic arises when codebase grows, and active users increase.",
+      "text": "Remember that the problem with monolithic arises when codebase grows, and active users increase."
+    },
+    {
+      "id": "29e24eb1ed548067bb3df124c829d85d",
+      "type": "text",
+      "html": "And of course microservices based architectures have challenges too, like writing more APIs for inter-service communication. Try to think more such challenges by yourself.",
+      "text": "And of course microservices based architectures have challenges too, like writing more APIs for inter-service communication. Try to think more such challenges by yourself."
+    },
+    {
+      "id": "29e24eb1ed548059963edd7d6593f7cb",
+      "type": "divider"
+    },
+    {
+      "id": "29e24eb1ed54808bb836e51e360ff70c",
+      "type": "text"
+    }
+  ]
+}

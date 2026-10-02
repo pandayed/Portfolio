@@ -1,0 +1,1931 @@
+{
+  "id": "26524eb1ed5480988bd6d71c87e555a7",
+  "title": "Apache Kafka",
+  "sourceUrl": "https://xpandeyed.notion.site/Apache-Kafka-26524eb1ed5480988bd6d71c87e555a7?pvs=23",
+  "blocks": [
+    {
+      "id": "2e924eb1ed5480aba140f2348c12caea",
+      "type": "text",
+      "html": "Kafka",
+      "text": "Kafka"
+    },
+    {
+      "id": "2e924eb1ed5480918dccc566ff7b58a5",
+      "type": "bulleted_list",
+      "html": "Distributed event streaming platform",
+      "text": "Distributed event streaming platform"
+    },
+    {
+      "id": "2e924eb1ed5480ada49cd69719174daf",
+      "type": "bulleted_list",
+      "html": "Built to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">store</span>, <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">process</span>, and <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">transport</span> streams of events",
+      "text": "Built to store, process, and transport streams of events"
+    },
+    {
+      "id": "2e924eb1ed5480fdad0ace1495a1c32b",
+      "type": "bulleted_list",
+      "html": "Designed for <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">high throughput</span>, <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">low latency</span>, and <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">fault tolerance</span>",
+      "text": "Designed for high throughput, low latency, and fault tolerance"
+    },
+    {
+      "id": "2e924eb1ed548053a538dd2c4860d18a",
+      "type": "text",
+      "html": "The above three statements have been decoded gradually.",
+      "text": "The above three statements have been decoded gradually."
+    },
+    {
+      "id": "2e924eb1ed5480ebaa87e365852f0d37",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed54806b9f98e9859b0322cb",
+      "type": "sub_header",
+      "html": "Event",
+      "text": "Event"
+    },
+    {
+      "id": "2e824eb1ed5480e9a098ee7bf879c4a9",
+      "type": "bulleted_list",
+      "html": "An event is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">a fact that happened</span>",
+      "text": "An event is a fact that happened"
+    },
+    {
+      "id": "2e824eb1ed54805b80f0c3d8e9a8502d",
+      "type": "bulleted_list",
+      "html": "It represents <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">something that already occurred</span>",
+      "text": "It represents something that already occurred"
+    },
+    {
+      "id": "2e824eb1ed54804cac69e1a38dee8546",
+      "type": "bulleted_list",
+      "html": "It is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">immutable</span> (cannot be changed)",
+      "text": "It is immutable (cannot be changed)"
+    },
+    {
+      "id": "2e824eb1ed54809ca1ddd69f7ed70e04",
+      "type": "text",
+      "html": "Examples:",
+      "text": "Examples:"
+    },
+    {
+      "id": "2e824eb1ed54808a84d4f63783237445",
+      "type": "bulleted_list",
+      "html": "“User registered”",
+      "text": "“User registered”"
+    },
+    {
+      "id": "2e824eb1ed5480cfbd64ddb444ec2426",
+      "type": "bulleted_list",
+      "html": "“Order placed”",
+      "text": "“Order placed”"
+    },
+    {
+      "id": "2e824eb1ed54807db47ff99cb2ba413f",
+      "type": "bulleted_list",
+      "html": "“Payment failed”",
+      "text": "“Payment failed”"
+    },
+    {
+      "id": "2e824eb1ed5480bd85ccc2edc1351c34",
+      "type": "sub_header",
+      "html": "Event vs normal data (important)",
+      "text": "Event vs normal data (important)"
+    },
+    {
+      "id": "2e824eb1ed5480a6bbe0da0fc9614251",
+      "type": "bulleted_list",
+      "html": "Normal data:",
+      "text": "Normal data:"
+    },
+    {
+      "id": "2e824eb1ed548021956ae5e98aff7462",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480a6bbe0da0fc9614251",
+      "html": "“User name is Lal”",
+      "text": "“User name is Lal”"
+    },
+    {
+      "id": "2e824eb1ed54809f8085fada41f9f77e",
+      "type": "bulleted_list",
+      "html": "Event:",
+      "text": "Event:"
+    },
+    {
+      "id": "2e824eb1ed54803582cadfaf62f27b54",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed54809f8085fada41f9f77e",
+      "html": "“User name was set to Lal at 10:05”",
+      "text": "“User name was set to Lal at 10:05”"
+    },
+    {
+      "id": "2e824eb1ed5480e391c0e4a36b463ee3",
+      "type": "text",
+      "html": "Difference:",
+      "text": "Difference:"
+    },
+    {
+      "id": "2e824eb1ed5480b2883ac860554d0258",
+      "type": "bulleted_list",
+      "html": "Event includes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">action + time</span>",
+      "text": "Event includes action + time"
+    },
+    {
+      "id": "2e824eb1ed54807a9585f9fb56eba605",
+      "type": "sub_header",
+      "html": "Why events are never changed",
+      "text": "Why events are never changed"
+    },
+    {
+      "id": "2e824eb1ed548053ad25efc15da74be6",
+      "type": "bulleted_list",
+      "html": "You cannot change the past",
+      "text": "You cannot change the past"
+    },
+    {
+      "id": "2e824eb1ed5480b28c8dc52bb3714500",
+      "type": "bulleted_list",
+      "html": "If something changes:",
+      "text": "If something changes:"
+    },
+    {
+      "id": "2e824eb1ed5480b5bfb6e2c7548e2b74",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480b28c8dc52bb3714500",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">new event</span> is created",
+      "text": "A new event is created"
+    },
+    {
+      "id": "2e824eb1ed5480abb5d5f7222c407c46",
+      "type": "text",
+      "html": "Example:",
+      "text": "Example:"
+    },
+    {
+      "id": "2e824eb1ed54804d8361ede93904e7cd",
+      "type": "bulleted_list",
+      "html": "Event 1: “Order created”",
+      "text": "Event 1: “Order created”"
+    },
+    {
+      "id": "2e824eb1ed5480bb925aef64073c7a3a",
+      "type": "bulleted_list",
+      "html": "Event 2: “Order cancelled”",
+      "text": "Event 2: “Order cancelled”"
+    },
+    {
+      "id": "2e824eb1ed54808d9eeae9a418af47f5",
+      "type": "sub_header",
+      "html": "What Kafka stores",
+      "text": "What Kafka stores"
+    },
+    {
+      "id": "2e824eb1ed548048b2d9e07d4827e6f9",
+      "type": "bulleted_list",
+      "html": "Kafka stores <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">events only</span>",
+      "text": "Kafka stores events only"
+    },
+    {
+      "id": "2e824eb1ed548008aaebd5ef07fbadc6",
+      "type": "bulleted_list",
+      "html": "Each event is:",
+      "text": "Each event is:"
+    },
+    {
+      "id": "2e824eb1ed548010abb5f0424f261cd0",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548008aaebd5ef07fbadc6",
+      "html": "Appended",
+      "text": "Appended"
+    },
+    {
+      "id": "2e824eb1ed5480b98e7bdcc37f21686c",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548008aaebd5ef07fbadc6",
+      "html": "Never updated",
+      "text": "Never updated"
+    },
+    {
+      "id": "2e824eb1ed548090983ce374ca89b8c7",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548008aaebd5ef07fbadc6",
+      "html": "Never edited",
+      "text": "Never edited"
+    },
+    {
+      "id": "2e824eb1ed54809d82e0c50760f02e37",
+      "type": "text",
+      "html": "Kafka behaves like:",
+      "text": "Kafka behaves like:"
+    },
+    {
+      "id": "2e824eb1ed548000ab1ad0a3e2a044d2",
+      "type": "bulleted_list",
+      "html": "A notebook",
+      "text": "A notebook"
+    },
+    {
+      "id": "2e824eb1ed548042b3d6d5e0a74c56dc",
+      "type": "bulleted_list",
+      "html": "You only <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">append lines (events)</span>",
+      "text": "You only append lines (events)"
+    },
+    {
+      "id": "2e824eb1ed5480bbbd54c020af55ca37",
+      "type": "bulleted_list",
+      "html": "You never erase immediately",
+      "text": "You never erase immediately"
+    },
+    {
+      "id": "2e824eb1ed5480858554e2e465c34102",
+      "type": "bulleted_list",
+      "html": "Anyone can read from any line",
+      "text": "Anyone can read from any line"
+    },
+    {
+      "id": "2e824eb1ed5480f49ff0f53e5fe3cb28",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed5480358ff0de38e3a0e82b",
+      "type": "sub_header",
+      "html": "Topic",
+      "text": "Topic"
+    },
+    {
+      "id": "2e824eb1ed54805db076c30ff39950e2",
+      "type": "bulleted_list",
+      "html": "A topic is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">named stream of events</span>",
+      "text": "A topic is a named stream of events"
+    },
+    {
+      "id": "2e824eb1ed548000b040ec1696c7f75d",
+      "type": "bulleted_list",
+      "html": "Think of it as:",
+      "text": "Think of it as:"
+    },
+    {
+      "id": "2e824eb1ed54809d9d00f3044b1c690c",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548000b040ec1696c7f75d",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">category</span>",
+      "text": "A category"
+    },
+    {
+      "id": "2e824eb1ed548037974cef9798cb0588",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548000b040ec1696c7f75d",
+      "html": "Or a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">log file with a name</span>",
+      "text": "Or a log file with a name"
+    },
+    {
+      "id": "2e824eb1ed5480ef914af461e464fd29",
+      "type": "text",
+      "html": "Examples:",
+      "text": "Examples:"
+    },
+    {
+      "id": "2e824eb1ed5480c099adc91b025a0648",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">user-signups</span></div>",
+      "text": "user-signups"
+    },
+    {
+      "id": "2e824eb1ed54808b90e6dcc74f443020",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">orders</span></div>",
+      "text": "orders"
+    },
+    {
+      "id": "2e824eb1ed5480eda2cfc214197fbc10",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">payments</span></div>",
+      "text": "payments"
+    },
+    {
+      "id": "2e824eb1ed5480fea4cbeaf9af68cd09",
+      "type": "sub_header",
+      "html": "What events do inside a topic",
+      "text": "What events do inside a topic"
+    },
+    {
+      "id": "2e824eb1ed548067b217e89db23b7f85",
+      "type": "bulleted_list",
+      "html": "Events are:",
+      "text": "Events are:"
+    },
+    {
+      "id": "2e824eb1ed5480a286aaea211655b3c0",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548067b217e89db23b7f85",
+      "html": "Added at the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">end</span>",
+      "text": "Added at the end"
+    },
+    {
+      "id": "2e824eb1ed54803dafc0cd7d59fbacbc",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548067b217e89db23b7f85",
+      "html": "Never inserted in the middle",
+      "text": "Never inserted in the middle"
+    },
+    {
+      "id": "2e824eb1ed54808794d9dc2aeede5778",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548067b217e89db23b7f85",
+      "html": "Never modified",
+      "text": "Never modified"
+    },
+    {
+      "id": "2e824eb1ed54800c8e7aff6b76997059",
+      "type": "text",
+      "html": "This is called <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">append-only</span>",
+      "text": "This is called append-only"
+    },
+    {
+      "id": "2e824eb1ed548020ab4af99a528b0cac",
+      "type": "sub_header",
+      "html": "Why append-only matters",
+      "text": "Why append-only matters"
+    },
+    {
+      "id": "2e824eb1ed54806e99c4f60e876e8b3b",
+      "type": "bulleted_list",
+      "html": "Order is preserved",
+      "text": "Order is preserved"
+    },
+    {
+      "id": "2e824eb1ed54803e9f85dc9851a3116d",
+      "type": "bulleted_list",
+      "html": "Replay is possible",
+      "text": "Replay is possible"
+    },
+    {
+      "id": "2e824eb1ed5480b1adb5e985daebc703",
+      "type": "bulleted_list",
+      "html": "Concurrency is safe",
+      "text": "Concurrency is safe"
+    },
+    {
+      "id": "2e824eb1ed5480a5b730d874b9fbed55",
+      "type": "bulleted_list",
+      "html": "History is trustworthy",
+      "text": "History is trustworthy"
+    },
+    {
+      "id": "2e824eb1ed54805aa05af4d1902a5712",
+      "type": "sub_header",
+      "html": "Topic vs database table (very important)",
+      "text": "Topic vs database table (very important)"
+    },
+    {
+      "id": "2e824eb1ed5480808bf6c551e7d5bf59",
+      "type": "bulleted_list",
+      "html": "Database table:",
+      "text": "Database table:"
+    },
+    {
+      "id": "2e824eb1ed548025add6f1a8ef9678d9",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480808bf6c551e7d5bf59",
+      "html": "Rows can be updated",
+      "text": "Rows can be updated"
+    },
+    {
+      "id": "2e824eb1ed5480d984cecd9e4c697c3a",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480808bf6c551e7d5bf59",
+      "html": "Rows can be deleted",
+      "text": "Rows can be deleted"
+    },
+    {
+      "id": "2e824eb1ed5480f8bf56d00812faaa1c",
+      "type": "bulleted_list",
+      "html": "Kafka topic:",
+      "text": "Kafka topic:"
+    },
+    {
+      "id": "2e824eb1ed54807f9798c9c10ba10412",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480f8bf56d00812faaa1c",
+      "html": "Events cannot be updated",
+      "text": "Events cannot be updated"
+    },
+    {
+      "id": "2e824eb1ed548025931bef4559626678",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480f8bf56d00812faaa1c",
+      "html": "Events are eventually deleted only by retention rules",
+      "text": "Events are eventually deleted only by retention rules"
+    },
+    {
+      "id": "2e824eb1ed54804787a3cbbe460016cc",
+      "type": "sub_header",
+      "html": "What retention means (brief)",
+      "text": "What retention means (brief)"
+    },
+    {
+      "id": "2e824eb1ed5480d8a0b9c6a5626f49be",
+      "type": "bulleted_list",
+      "html": "Kafka keeps events:",
+      "text": "Kafka keeps events:"
+    },
+    {
+      "id": "2e824eb1ed548072a44bfdfc8dd4eb15",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
+      "html": "For a fixed time, or",
+      "text": "For a fixed time, or"
+    },
+    {
+      "id": "2e824eb1ed5480ccb97ee5439c0b28ac",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
+      "html": "Until size limit is reached",
+      "text": "Until size limit is reached"
+    },
+    {
+      "id": "2e824eb1ed54805c816ec80a483bfeda",
+      "type": "bulleted_list",
+      "html": "Deletion is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">automatic</span>, not manual",
+      "text": "Deletion is automatic, not manual"
+    },
+    {
+      "id": "2e824eb1ed5480cd85b4cc4687c31a9f",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed54806fb95ee86f8771fb79",
+      "type": "sub_sub_header",
+      "html": "Problem without partitions",
+      "text": "Problem without partitions"
+    },
+    {
+      "id": "2e824eb1ed54804ab308cd7a2052180e",
+      "type": "bulleted_list",
+      "html": "Topic has <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one append-only log</span>",
+      "text": "Topic has one append-only log"
+    },
+    {
+      "id": "2e824eb1ed54805ba9abee92f4f94c58",
+      "type": "bulleted_list",
+      "html": "Only <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one machine</span> can write",
+      "text": "Only one machine can write"
+    },
+    {
+      "id": "2e824eb1ed548067a611c7b143ce4125",
+      "type": "bulleted_list",
+      "html": "Only <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one reader</span> can read in order",
+      "text": "Only one reader can read in order"
+    },
+    {
+      "id": "2e824eb1ed5480a7914fcd82125445b1",
+      "type": "bulleted_list",
+      "html": "System becomes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">slow and non-scalable</span>",
+      "text": "System becomes slow and non-scalable"
+    },
+    {
+      "id": "2e824eb1ed54805f9879def23902bbdd",
+      "type": "sub_header",
+      "html": "Partition",
+      "text": "Partition"
+    },
+    {
+      "id": "2e824eb1ed5480b08b04d0b41819300c",
+      "type": "bulleted_list",
+      "html": "A partition is:",
+      "text": "A partition is:"
+    },
+    {
+      "id": "2e824eb1ed5480909791d1818fa5675b",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480b08b04d0b41819300c",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">physical append-only log</span>",
+      "text": "A physical append-only log"
+    },
+    {
+      "id": "2e824eb1ed5480cc97dfe2efd59f0e77",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480b08b04d0b41819300c",
+      "html": "Stored on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one Kafka broker</span>",
+      "text": "Stored on one Kafka broker"
+    },
+    {
+      "id": "2e824eb1ed5480bcaf16c292394c4df8",
+      "type": "bulleted_list",
+      "html": "Each partition is:",
+      "text": "Each partition is:"
+    },
+    {
+      "id": "2e824eb1ed5480349035f88d8f3126b0",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480bcaf16c292394c4df8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Independently readable</span>",
+      "text": "Independently readable"
+    },
+    {
+      "id": "2e824eb1ed5480fdaab0f238943bdd40",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480bcaf16c292394c4df8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Independently writable</span>",
+      "text": "Independently writable"
+    },
+    {
+      "id": "2e824eb1ed54806db6ccce5a6906c5e9",
+      "type": "sub_header",
+      "html": "Topic vs partition (clear separation)",
+      "text": "Topic vs partition (clear separation)"
+    },
+    {
+      "id": "2e824eb1ed548033a490e3dc010b8d9f",
+      "type": "bulleted_list",
+      "html": "Topic:",
+      "text": "Topic:"
+    },
+    {
+      "id": "2e824eb1ed5480829822d00013b18c31",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548033a490e3dc010b8d9f",
+      "html": "Logical name",
+      "text": "Logical name"
+    },
+    {
+      "id": "2e824eb1ed5480a0bc4ceabbd00185cc",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548033a490e3dc010b8d9f",
+      "html": "Groups related events",
+      "text": "Groups related events"
+    },
+    {
+      "id": "2e824eb1ed5480f6a266ffa5b7f59eec",
+      "type": "bulleted_list",
+      "html": "Partition:",
+      "text": "Partition:"
+    },
+    {
+      "id": "2e824eb1ed548018bb4bf37a099c2953",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480f6a266ffa5b7f59eec",
+      "html": "Physical storage",
+      "text": "Physical storage"
+    },
+    {
+      "id": "2e824eb1ed548098a674f6845c33f69d",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480f6a266ffa5b7f59eec",
+      "html": "Where events actually live",
+      "text": "Where events actually live"
+    },
+    {
+      "id": "2e824eb1ed5480dcb402d27b77aada55",
+      "type": "sub_header",
+      "html": "Why multiple partitions are needed",
+      "text": "Why multiple partitions are needed"
+    },
+    {
+      "id": "2e824eb1ed548039be0bec662b16a3d2",
+      "type": "sub_sub_header",
+      "html": "Reason 1: Parallel writing",
+      "text": "Reason 1: Parallel writing"
+    },
+    {
+      "id": "2e824eb1ed5480e0867ce4dd6baad7b3",
+      "type": "bulleted_list",
+      "html": "Many producers can write <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at the same time</span>",
+      "text": "Many producers can write at the same time"
+    },
+    {
+      "id": "2e824eb1ed5480cfa31fcfb52c074bd3",
+      "type": "bulleted_list",
+      "html": "Each writes to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different partitions</span>",
+      "text": "Each writes to different partitions"
+    },
+    {
+      "id": "2e824eb1ed548005b29aef170a9c8996",
+      "type": "sub_sub_header",
+      "html": "Reason 2: Parallel reading",
+      "text": "Reason 2: Parallel reading"
+    },
+    {
+      "id": "2e824eb1ed54803284d5f9beb564fc64",
+      "type": "bulleted_list",
+      "html": "Many consumers can read <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at the same time</span>",
+      "text": "Many consumers can read at the same time"
+    },
+    {
+      "id": "2e824eb1ed5480be8d3ceba53228561c",
+      "type": "bulleted_list",
+      "html": "Each reads from <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different partitions</span>",
+      "text": "Each reads from different partitions"
+    },
+    {
+      "id": "2e824eb1ed5480968a0df3d945c9da34",
+      "type": "sub_sub_header",
+      "html": "Reason 3: Scaling across machines",
+      "text": "Reason 3: Scaling across machines"
+    },
+    {
+      "id": "2e824eb1ed54803da45bf339cdcd383c",
+      "type": "bulleted_list",
+      "html": "Partitions are spread across <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple brokers</span>",
+      "text": "Partitions are spread across multiple brokers"
+    },
+    {
+      "id": "2e824eb1ed5480cebeedef7c873f7ce0",
+      "type": "bulleted_list",
+      "html": "Load is shared",
+      "text": "Load is shared"
+    },
+    {
+      "id": "2e824eb1ed5480efa344c15b4ab8e088",
+      "type": "sub_header",
+      "html": "Very important rule (ordering)",
+      "text": "Very important rule (ordering)"
+    },
+    {
+      "id": "2e824eb1ed54801c8305dbdaa6aabf66",
+      "type": "bulleted_list",
+      "html": "Order is guaranteed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only inside one partition</span>",
+      "text": "Order is guaranteed only inside one partition"
+    },
+    {
+      "id": "2e824eb1ed54809683bce45d06ca3319",
+      "type": "bulleted_list",
+      "html": "Order is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not guaranteed across partitions</span>",
+      "text": "Order is not guaranteed across partitions"
+    },
+    {
+      "id": "2e824eb1ed548082913fd043ce25319a",
+      "type": "text",
+      "html": "This is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not optional</span>. This is fundamental.",
+      "text": "This is not optional. This is fundamental."
+    },
+    {
+      "id": "2e824eb1ed5480b398d2eed1c815e71f",
+      "type": "sub_header",
+      "html": "How Kafka decides the partition",
+      "text": "How Kafka decides the partition"
+    },
+    {
+      "id": "2e824eb1ed54804d8ecbf0f8cea18bf3",
+      "type": "bulleted_list",
+      "html": "Event has a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">key</span> (optional)",
+      "text": "Event has a key (optional)"
+    },
+    {
+      "id": "2e824eb1ed5480f8b904cb954475249e",
+      "type": "bulleted_list",
+      "html": "Same key → same partition",
+      "text": "Same key → same partition"
+    },
+    {
+      "id": "2e824eb1ed5480c0941acfb37409624e",
+      "type": "bulleted_list",
+      "html": "No key → round-robin distribution",
+      "text": "No key → round-robin distribution"
+    },
+    {
+      "id": "2e824eb1ed5480b6a852cf4139fafd0e",
+      "type": "sub_header",
+      "html": "One mental picture (lock this)",
+      "text": "One mental picture (lock this)"
+    },
+    {
+      "id": "2e824eb1ed54808b882fef86e42741df",
+      "type": "bulleted_list",
+      "html": "Topic = folder",
+      "text": "Topic = folder"
+    },
+    {
+      "id": "2e824eb1ed548025b78bd4e700f81955",
+      "type": "bulleted_list",
+      "html": "Partition = files inside folder",
+      "text": "Partition = files inside folder"
+    },
+    {
+      "id": "2e824eb1ed5480959b26f3d2b6d5a770",
+      "type": "bulleted_list",
+      "html": "Each file:",
+      "text": "Each file:"
+    },
+    {
+      "id": "2e824eb1ed548013a78bd953e8042120",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480959b26f3d2b6d5a770",
+      "html": "Append-only",
+      "text": "Append-only"
+    },
+    {
+      "id": "2e824eb1ed548017a8d9e56c5f2d73cd",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480959b26f3d2b6d5a770",
+      "html": "Ordered",
+      "text": "Ordered"
+    },
+    {
+      "id": "2e824eb1ed5480799857d92c2dff0e92",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed548067b716df7bf120c25d",
+      "type": "sub_sub_header",
+      "html": "What an offset is",
+      "text": "What an offset is"
+    },
+    {
+      "id": "2e824eb1ed54800eb942f3fdb65c9a8d",
+      "type": "bulleted_list",
+      "html": "Offset is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">number</span>",
+      "text": "Offset is a number"
+    },
+    {
+      "id": "2e824eb1ed5480d0bab3ff0ba24bf6ad",
+      "type": "bulleted_list",
+      "html": "It is the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">position of an event inside a partition</span>",
+      "text": "It is the position of an event inside a partition"
+    },
+    {
+      "id": "2e824eb1ed54807ab547c1adb86fd81a",
+      "type": "bulleted_list",
+      "html": "Offsets:",
+      "text": "Offsets:"
+    },
+    {
+      "id": "2e824eb1ed5480d6a626d54a2766de4d",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed54807ab547c1adb86fd81a",
+      "html": "Start at 0",
+      "text": "Start at 0"
+    },
+    {
+      "id": "2e824eb1ed5480d086dedf5e9c7064ae",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed54807ab547c1adb86fd81a",
+      "html": "Increase monotonically",
+      "text": "Increase monotonically"
+    },
+    {
+      "id": "2e824eb1ed5480d0af49e52516cdade0",
+      "type": "bulleted_list",
+      "html": "Offset is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not a global event number</span>",
+      "text": "Offset is not a global event number"
+    },
+    {
+      "id": "2e824eb1ed548073a533dc72f217ca12",
+      "type": "bulleted_list",
+      "html": "Offset is the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">position of an event inside one partition</span>",
+      "text": "Offset is the position of an event inside one partition"
+    },
+    {
+      "id": "2e824eb1ed5480ac9642f370108b89ab",
+      "type": "sub_sub_header",
+      "html": "Offset 0 means",
+      "text": "Offset 0 means"
+    },
+    {
+      "id": "2e824eb1ed548001bfcef003783e908e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The oldest event</span> in that partition",
+      "text": "The oldest event in that partition"
+    },
+    {
+      "id": "2e824eb1ed5480498f74f2946120432f",
+      "type": "bulleted_list",
+      "html": "The <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">first event ever written</span> to that partition",
+      "text": "The first event ever written to that partition"
+    },
+    {
+      "id": "2e824eb1ed5480459dbac6646093124f",
+      "type": "text",
+      "html": "Example:",
+      "text": "Example:"
+    },
+    {
+      "id": "2e824eb1ed5480aa93b2ce39bd65229d",
+      "type": "bulleted_list",
+      "html": "Partition 0:",
+      "text": "Partition 0:"
+    },
+    {
+      "id": "2e824eb1ed548018a982ca62f69bbfb7",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480aa93b2ce39bd65229d",
+      "html": "Offset 0 → first event",
+      "text": "Offset 0 → first event"
+    },
+    {
+      "id": "2e824eb1ed5480d29920e9f965dcd2b7",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480aa93b2ce39bd65229d",
+      "html": "Offset 1 → second event",
+      "text": "Offset 1 → second event"
+    },
+    {
+      "id": "2e824eb1ed54808caebec276ca8751f8",
+      "type": "sub_header",
+      "html": "Why offset matters",
+      "text": "Why offset matters"
+    },
+    {
+      "id": "2e824eb1ed548063a26cc88c308b514e",
+      "type": "bulleted_list",
+      "html": "Consumers track offsets",
+      "text": "Consumers track offsets"
+    },
+    {
+      "id": "2e824eb1ed548082ac69c947607bacde",
+      "type": "bulleted_list",
+      "html": "Replay means:",
+      "text": "Replay means:"
+    },
+    {
+      "id": "2e824eb1ed5480a19e35db1503ac7a8d",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548082ac69c947607bacde",
+      "html": "Reading from an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">earlier offset</span>",
+      "text": "Reading from an earlier offset"
+    },
+    {
+      "id": "2e824eb1ed548025aacef1e7721ef3b4",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed5480dbad6bdb5058cb7932",
+      "type": "text"
+    },
+    {
+      "id": "2e824eb1ed5480f9a054ca1620aadbf1",
+      "type": "sub_header",
+      "html": "What a producer is",
+      "text": "What a producer is"
+    },
+    {
+      "id": "2e824eb1ed5480649cddd71281879c2c",
+      "type": "bulleted_list",
+      "html": "A producer is an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">application</span>",
+      "text": "A producer is an application"
+    },
+    {
+      "id": "2e824eb1ed5480cda6e7c9d2742203d8",
+      "type": "bulleted_list",
+      "html": "It <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">creates events</span>",
+      "text": "It creates events"
+    },
+    {
+      "id": "2e824eb1ed54809c9086da36a41ddc5e",
+      "type": "bulleted_list",
+      "html": "It <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">writes events to Kafka topics</span>",
+      "text": "It writes events to Kafka topics"
+    },
+    {
+      "id": "2e824eb1ed548035a5c8e5392d8fa09e",
+      "type": "text",
+      "html": "That is all. No extra meaning.",
+      "text": "That is all. No extra meaning."
+    },
+    {
+      "id": "2e824eb1ed548021a916fb7e86b0bba3",
+      "type": "sub_header",
+      "html": "What a producer actually does (step-by-step)",
+      "text": "What a producer actually does (step-by-step)"
+    },
+    {
+      "id": "2e824eb1ed54803db398d72947a6643f",
+      "type": "bulleted_list",
+      "html": "Creates an event (key + value + timestamp)",
+      "text": "Creates an event (key + value + timestamp)"
+    },
+    {
+      "id": "2e824eb1ed54804c8f00cdc0bf4cdd19",
+      "type": "bulleted_list",
+      "html": "Chooses a topic",
+      "text": "Chooses a topic"
+    },
+    {
+      "id": "2e824eb1ed54803a9820e1fa2bcf3914",
+      "type": "bulleted_list",
+      "html": "Kafka decides the partition",
+      "text": "Kafka decides the partition"
+    },
+    {
+      "id": "2e824eb1ed5480288744da53c005211b",
+      "type": "bulleted_list",
+      "html": "Event is appended to the partition",
+      "text": "Event is appended to the partition"
+    },
+    {
+      "id": "2e824eb1ed548099a81cc248451d4d56",
+      "type": "bulleted_list",
+      "html": "Offset is assigned",
+      "text": "Offset is assigned"
+    },
+    {
+      "id": "2e824eb1ed54808ab83af1fd5f6d7c31",
+      "type": "text"
+    },
+    {
+      "id": "2e824eb1ed548049a515d5519813b8b3",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed54809b94ffc6d5b4be2562",
+      "type": "text"
+    },
+    {
+      "id": "2e924eb1ed5480558095cd20f01dc522",
+      "type": "sub_header",
+      "html": "What a consumer is",
+      "text": "What a consumer is"
+    },
+    {
+      "id": "2e924eb1ed5480dc8b14f04cdbf577a1",
+      "type": "bulleted_list",
+      "html": "A consumer is an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">application</span>",
+      "text": "A consumer is an application"
+    },
+    {
+      "id": "2e924eb1ed5480bbbb50f8da4fd397fc",
+      "type": "bulleted_list",
+      "html": "It <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">reads events</span> from Kafka",
+      "text": "It reads events from Kafka"
+    },
+    {
+      "id": "2e924eb1ed5480f8a653e1b92acfbc87",
+      "type": "bulleted_list",
+      "html": "It reads <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">by pulling</span>, not by being pushed",
+      "text": "It reads by pulling, not by being pushed"
+    },
+    {
+      "id": "2e924eb1ed548003b96df734909d4f8a",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548012b466df71622cbae3",
+      "type": "sub_header",
+      "html": "How a consumer reads (step-by-step)",
+      "text": "How a consumer reads (step-by-step)"
+    },
+    {
+      "id": "2e924eb1ed54801ba99cc91df7e6f36d",
+      "type": "bulleted_list",
+      "html": "Subscribes to a topic",
+      "text": "Subscribes to a topic"
+    },
+    {
+      "id": "2e924eb1ed5480688616ee51c30c7eb8",
+      "type": "bulleted_list",
+      "html": "Is assigned partitions",
+      "text": "Is assigned partitions"
+    },
+    {
+      "id": "2e924eb1ed548024a6e0eff8706c0d47",
+      "type": "bulleted_list",
+      "html": "Reads events in order",
+      "text": "Reads events in order"
+    },
+    {
+      "id": "2e924eb1ed548057ac4ad1e18c5c4781",
+      "type": "bulleted_list",
+      "html": "Tracks offsets",
+      "text": "Tracks offsets"
+    },
+    {
+      "id": "2e924eb1ed5480f083deceda1854791c",
+      "type": "bulleted_list",
+      "html": "Commits offsets",
+      "text": "Commits offsets"
+    },
+    {
+      "id": "2e924eb1ed5480d59fcad4487516209a",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed54801582adf494e74a6ade",
+      "type": "sub_header",
+      "html": "Very important clarification",
+      "text": "Very important clarification"
+    },
+    {
+      "id": "2e924eb1ed5480dab61ace2368e7e76e",
+      "type": "bulleted_list",
+      "html": "Consumer does <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not delete events</span>",
+      "text": "Consumer does not delete events"
+    },
+    {
+      "id": "2e924eb1ed54808cb481d5635c580e2a",
+      "type": "bulleted_list",
+      "html": "Reading does <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not remove data</span>",
+      "text": "Reading does not remove data"
+    },
+    {
+      "id": "2e924eb1ed548081a7c2dd560717df6d",
+      "type": "bulleted_list",
+      "html": "Kafka data stays until retention deletes it",
+      "text": "Kafka data stays until retention deletes it"
+    },
+    {
+      "id": "2e924eb1ed5480d4a393cb40f0168328",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480a9b883cac8dee685bf",
+      "type": "sub_header",
+      "html": "Why this matters",
+      "text": "Why this matters"
+    },
+    {
+      "id": "2e924eb1ed54803a80a4c0e7a6f41e37",
+      "type": "bulleted_list",
+      "html": "Multiple consumers can read the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">same data</span>",
+      "text": "Multiple consumers can read the same data"
+    },
+    {
+      "id": "2e924eb1ed5480248461e523caa091ab",
+      "type": "bulleted_list",
+      "html": "Replay is possible",
+      "text": "Replay is possible"
+    },
+    {
+      "id": "2e924eb1ed5480c1a1f1d1a2f3e78a7a",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed548096b745e4fe2a4e0565",
+      "type": "text"
+    },
+    {
+      "id": "2e924eb1ed5480aca9d9f91b9ad71bcf",
+      "type": "sub_header",
+      "html": "What a consumer group is",
+      "text": "What a consumer group is"
+    },
+    {
+      "id": "2e924eb1ed5480e19c6ae37aa30b60c1",
+      "type": "bulleted_list",
+      "html": "A consumer group is:",
+      "text": "A consumer group is:"
+    },
+    {
+      "id": "2e924eb1ed5480c39ba0d03f305c0f34",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480e19c6ae37aa30b60c1",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">logical group of consumers</span>",
+      "text": "A logical group of consumers"
+    },
+    {
+      "id": "2e924eb1ed54808db19cc7bf355ff37d",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480e19c6ae37aa30b60c1",
+      "html": "Acting as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one logical reader</span>",
+      "text": "Acting as one logical reader"
+    },
+    {
+      "id": "2e924eb1ed54805e8b8be53e4b1dfa85",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480f4bcc4da9f0e9f1bf8",
+      "type": "sub_header",
+      "html": "Core rule (must memorize)",
+      "text": "Core rule (must memorize)"
+    },
+    {
+      "id": "2e924eb1ed5480d8b3bdeee4e34af338",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">One partition is read by only one consumer within a group</span>",
+      "text": "One partition is read by only one consumer within a group"
+    },
+    {
+      "id": "2e924eb1ed5480c0912cf2eeabd9b20a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">One consumer can read multiple partitions</span>",
+      "text": "One consumer can read multiple partitions"
+    },
+    {
+      "id": "2e924eb1ed548058afa6d1698432eb81",
+      "type": "text",
+      "html": "This rule is absolute.",
+      "text": "This rule is absolute."
+    },
+    {
+      "id": "2e924eb1ed54807bae05f4f8b2e123af",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed54806c8319f3d4e6bda4a4",
+      "type": "sub_header",
+      "html": "Why consumer groups exist",
+      "text": "Why consumer groups exist"
+    },
+    {
+      "id": "2e924eb1ed548024b981d094bc708f26",
+      "type": "bulleted_list",
+      "html": "Enable <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">parallel processing</span>",
+      "text": "Enable parallel processing"
+    },
+    {
+      "id": "2e924eb1ed548082b76ceeb82962f8bf",
+      "type": "bulleted_list",
+      "html": "Control <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">who reads what</span>",
+      "text": "Control who reads what"
+    },
+    {
+      "id": "2e924eb1ed54801cac89e08d96c5008a",
+      "type": "bulleted_list",
+      "html": "Scale consumption safely",
+      "text": "Scale consumption safely"
+    },
+    {
+      "id": "2e924eb1ed5480b49ef6c2178131bce2",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed54808b877bda43460ae332",
+      "type": "sub_header",
+      "html": "Example (simple)",
+      "text": "Example (simple)"
+    },
+    {
+      "id": "2e924eb1ed5480f0bdb1f0b410c20e45",
+      "type": "bulleted_list",
+      "html": "Topic has 3 partitions",
+      "text": "Topic has 3 partitions"
+    },
+    {
+      "id": "2e924eb1ed5480edaa15e9b3bba467c1",
+      "type": "bulleted_list",
+      "html": "Consumer group has 3 consumers",
+      "text": "Consumer group has 3 consumers"
+    },
+    {
+      "id": "2e924eb1ed5480ce8ffada23034a93b6",
+      "type": "bulleted_list",
+      "html": "Each consumer reads <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one partition</span>",
+      "text": "Each consumer reads one partition"
+    },
+    {
+      "id": "2e924eb1ed54807dbcd2ce8f72ef69af",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed54805aa958cbc1e2139734",
+      "type": "sub_header",
+      "html": "If consumers &gt; partitions",
+      "text": "If consumers > partitions"
+    },
+    {
+      "id": "2e924eb1ed54802db196ee494947d023",
+      "type": "bulleted_list",
+      "html": "Extra consumers stay <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">idle</span>",
+      "text": "Extra consumers stay idle"
+    },
+    {
+      "id": "2e924eb1ed548078b905e273e978d7ff",
+      "type": "bulleted_list",
+      "html": "No partition sharing allowed",
+      "text": "No partition sharing allowed"
+    },
+    {
+      "id": "2e924eb1ed54808fa07effc606484324",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548074b19ecca7e296cb9e",
+      "type": "sub_header",
+      "html": "If consumers &lt; partitions",
+      "text": "If consumers < partitions"
+    },
+    {
+      "id": "2e924eb1ed548079aed4d0e7f7b499c9",
+      "type": "bulleted_list",
+      "html": "Some consumers read <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple partitions</span>",
+      "text": "Some consumers read multiple partitions"
+    },
+    {
+      "id": "2e924eb1ed548090847ac100944b0f7b",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480fdab00eea0a95dc6e8",
+      "type": "sub_header",
+      "html": "Important interview clarification",
+      "text": "Important interview clarification"
+    },
+    {
+      "id": "2e924eb1ed548061bb4fcb865b5327e4",
+      "type": "bulleted_list",
+      "html": "Different consumer groups:",
+      "text": "Different consumer groups:"
+    },
+    {
+      "id": "2e924eb1ed5480df8d0cc400884f8c1f",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548061bb4fcb865b5327e4",
+      "html": "Each get <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">their own offsets</span>",
+      "text": "Each get their own offsets"
+    },
+    {
+      "id": "2e924eb1ed54804a9c58edf3a233891f",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548061bb4fcb865b5327e4",
+      "html": "Can read the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">same data independently</span>",
+      "text": "Can read the same data independently"
+    },
+    {
+      "id": "2e924eb1ed54807e8459e4232e971b7b",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480be8af4dc132cbf7da0",
+      "type": "sub_header",
+      "html": "What this step does",
+      "text": "What this step does"
+    },
+    {
+      "id": "2e924eb1ed5480e1911dc57cfd0bdc1b",
+      "type": "bulleted_list",
+      "html": "Explains fan-out",
+      "text": "Explains fan-out"
+    },
+    {
+      "id": "2e924eb1ed548026bc1ecd07d33a8367",
+      "type": "bulleted_list",
+      "html": "Explains scalability on read side",
+      "text": "Explains scalability on read side"
+    },
+    {
+      "id": "2e924eb1ed5480bda868c02dde99687b",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548096aa12f600ab424b6f",
+      "type": "sub_header",
+      "html": "What a broker is",
+      "text": "What a broker is"
+    },
+    {
+      "id": "2e924eb1ed5480d7af08d222d162a664",
+      "type": "bulleted_list",
+      "html": "A broker is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Kafka server</span>",
+      "text": "A broker is a Kafka server"
+    },
+    {
+      "id": "2e924eb1ed5480cfacbec1d09ecbdefa",
+      "type": "bulleted_list",
+      "html": "It:",
+      "text": "It:"
+    },
+    {
+      "id": "2e924eb1ed5480d1a9f7edda342bdce5",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480cfacbec1d09ecbdefa",
+      "html": "Stores partitions",
+      "text": "Stores partitions"
+    },
+    {
+      "id": "2e924eb1ed548073a10cff99da878ed1",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480cfacbec1d09ecbdefa",
+      "html": "Handles read and write requests",
+      "text": "Handles read and write requests"
+    },
+    {
+      "id": "2e924eb1ed5480429bc1d113479a4e4a",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480df89b1ee1f2d66ed83",
+      "type": "sub_header",
+      "html": "What a cluster is",
+      "text": "What a cluster is"
+    },
+    {
+      "id": "2e924eb1ed548002b604fd52cdf33210",
+      "type": "bulleted_list",
+      "html": "A cluster is:",
+      "text": "A cluster is:"
+    },
+    {
+      "id": "2e924eb1ed54807d8349f5038db97195",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548002b604fd52cdf33210",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">group of brokers</span>",
+      "text": "A group of brokers"
+    },
+    {
+      "id": "2e924eb1ed548038bcfcd31b34b229ac",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548002b604fd52cdf33210",
+      "html": "Working together as one system",
+      "text": "Working together as one system"
+    },
+    {
+      "id": "2e924eb1ed5480a3a809e39b8c063fb5",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548071ab81d45b7b1b8b8d",
+      "type": "sub_header",
+      "html": "Why multiple brokers are needed",
+      "text": "Why multiple brokers are needed"
+    },
+    {
+      "id": "2e924eb1ed54804eb7aceafa55bbccdd",
+      "type": "sub_sub_header",
+      "html": "Reason 1: Distribution",
+      "text": "Reason 1: Distribution"
+    },
+    {
+      "id": "2e924eb1ed5480218a4cfd27230d74a5",
+      "type": "bulleted_list",
+      "html": "Partitions are spread across brokers",
+      "text": "Partitions are spread across brokers"
+    },
+    {
+      "id": "2e924eb1ed54800fbc63fff43a0bb68d",
+      "type": "bulleted_list",
+      "html": "Load is shared",
+      "text": "Load is shared"
+    },
+    {
+      "id": "2e924eb1ed548002a8c9f4a6cf1a1698",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed54808ca376d46c6eb5f792",
+      "type": "sub_sub_header",
+      "html": "Reason 2: Fault tolerance",
+      "text": "Reason 2: Fault tolerance"
+    },
+    {
+      "id": "2e924eb1ed5480939c01cd60301a3d0c",
+      "type": "bulleted_list",
+      "html": "Partitions are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">replicated</span>",
+      "text": "Partitions are replicated"
+    },
+    {
+      "id": "2e924eb1ed548038a6a7f6cbb0cbc163",
+      "type": "bulleted_list",
+      "html": "One broker failure does not lose data",
+      "text": "One broker failure does not lose data"
+    },
+    {
+      "id": "2e924eb1ed54809681e5f784708bafac",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480d98a0bf6ecac443861",
+      "type": "sub_header",
+      "html": "Leader and follower (very important)",
+      "text": "Leader and follower (very important)"
+    },
+    {
+      "id": "2e924eb1ed5480d19149c4ad715df838",
+      "type": "bulleted_list",
+      "html": "Each partition has:",
+      "text": "Each partition has:"
+    },
+    {
+      "id": "2e924eb1ed5480909db9dfed22f87593",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480d19149c4ad715df838",
+      "html": "One <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">leader</span>",
+      "text": "One leader"
+    },
+    {
+      "id": "2e924eb1ed54807e8dd9d61a41961cb1",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480d19149c4ad715df838",
+      "html": "One or more <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">followers</span>",
+      "text": "One or more followers"
+    },
+    {
+      "id": "2e924eb1ed5480208abdfd2028dff76f",
+      "type": "bulleted_list",
+      "html": "Writes go to the leader",
+      "text": "Writes go to the leader"
+    },
+    {
+      "id": "2e924eb1ed548042a09ffd0102dc230d",
+      "type": "bulleted_list",
+      "html": "Followers copy data",
+      "text": "Followers copy data"
+    },
+    {
+      "id": "2e924eb1ed5480f6b6ebcf76aad034b0",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480f89f46ef3b7f781afd",
+      "type": "sub_header",
+      "html": "What happens on failure",
+      "text": "What happens on failure"
+    },
+    {
+      "id": "2e924eb1ed548024b2b4ce715d5c0b56",
+      "type": "bulleted_list",
+      "html": "Leader fails",
+      "text": "Leader fails"
+    },
+    {
+      "id": "2e924eb1ed5480879221ee54006aa39d",
+      "type": "bulleted_list",
+      "html": "One follower becomes new leader",
+      "text": "One follower becomes new leader"
+    },
+    {
+      "id": "2e924eb1ed54801fad71f82312c4bb30",
+      "type": "bulleted_list",
+      "html": "Clients continue",
+      "text": "Clients continue"
+    },
+    {
+      "id": "2e924eb1ed54801ca4cddca0b5d96c1e",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548046a50cd4d746c23f99",
+      "type": "sub_header",
+      "html": "What this step does",
+      "text": "What this step does"
+    },
+    {
+      "id": "2e924eb1ed5480daa5e9cf03e2dba282",
+      "type": "bulleted_list",
+      "html": "Explains “distributed”",
+      "text": "Explains “distributed”"
+    },
+    {
+      "id": "2e924eb1ed5480df8ef4ef91a4772ed3",
+      "type": "bulleted_list",
+      "html": "Explains reliability",
+      "text": "Explains reliability"
+    },
+    {
+      "id": "2e924eb1ed548009bbebcf100f1c0764",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548095a208c7187102d292",
+      "type": "sub_header",
+      "html": "Now decode the scary sentence (finally)",
+      "text": "Now decode the scary sentence (finally)"
+    },
+    {
+      "id": "2e924eb1ed5480c9a3cfc127b1182606",
+      "type": "sub_sub_header",
+      "html": "“Distributed event streaming platform”",
+      "text": "“Distributed event streaming platform”"
+    },
+    {
+      "id": "2e924eb1ed5480b4a439d2453d78fa0c",
+      "type": "text",
+      "html": "We now know every word.",
+      "text": "We now know every word."
+    },
+    {
+      "id": "2e924eb1ed548020aba4f9e8962b0ca5",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed54802e955ffbe2e0b4b58e",
+      "type": "sub_sub_header",
+      "html": "Event",
+      "text": "Event"
+    },
+    {
+      "id": "2e924eb1ed54804c84e6c389848ff099",
+      "type": "bulleted_list",
+      "html": "A fact that happened",
+      "text": "A fact that happened"
+    },
+    {
+      "id": "2e924eb1ed5480d89183e0d4187a40bc",
+      "type": "bulleted_list",
+      "html": "Immutable",
+      "text": "Immutable"
+    },
+    {
+      "id": "2e924eb1ed5480589d69e8acf083bca2",
+      "type": "bulleted_list",
+      "html": "Time-ordered",
+      "text": "Time-ordered"
+    },
+    {
+      "id": "2e924eb1ed5480ad86fee23a4a07643f",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480278223d3633773b378",
+      "type": "sub_sub_header",
+      "html": "Streaming",
+      "text": "Streaming"
+    },
+    {
+      "id": "2e924eb1ed54802eaddcdc64947c8adb",
+      "type": "bulleted_list",
+      "html": "Events are:",
+      "text": "Events are:"
+    },
+    {
+      "id": "2e924eb1ed548048a35ddd8cd5b24fe5",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed54802eaddcdc64947c8adb",
+      "html": "Produced continuously",
+      "text": "Produced continuously"
+    },
+    {
+      "id": "2e924eb1ed5480f3badffa2f77c582ed",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed54802eaddcdc64947c8adb",
+      "html": "Consumed continuously",
+      "text": "Consumed continuously"
+    },
+    {
+      "id": "2e924eb1ed5480568c9af55f4c2cded5",
+      "type": "bulleted_list",
+      "html": "Not a batch dump",
+      "text": "Not a batch dump"
+    },
+    {
+      "id": "2e924eb1ed5480b7b1ccccb63aa6c1ae",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480e58c9ff2f23f070d22",
+      "type": "sub_sub_header",
+      "html": "Distributed",
+      "text": "Distributed"
+    },
+    {
+      "id": "2e924eb1ed5480d5b646f578e05a5126",
+      "type": "bulleted_list",
+      "html": "Runs on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple brokers</span>",
+      "text": "Runs on multiple brokers"
+    },
+    {
+      "id": "2e924eb1ed5480f691fdff46f29934e4",
+      "type": "bulleted_list",
+      "html": "Data spread + replicated",
+      "text": "Data spread + replicated"
+    },
+    {
+      "id": "2e924eb1ed54802e8210c5fdfd688cb3",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548048b2d0c69b2212b777",
+      "type": "sub_sub_header",
+      "html": "Platform",
+      "text": "Platform"
+    },
+    {
+      "id": "2e924eb1ed54806088ade422faab330b",
+      "type": "bulleted_list",
+      "html": "Provides:",
+      "text": "Provides:"
+    },
+    {
+      "id": "2e924eb1ed5480b19d79d556a75072f7",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed54806088ade422faab330b",
+      "html": "Storage",
+      "text": "Storage"
+    },
+    {
+      "id": "2e924eb1ed5480698030fa9361272b3d",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed54806088ade422faab330b",
+      "html": "Transport",
+      "text": "Transport"
+    },
+    {
+      "id": "2e924eb1ed548091a628c48e61824fef",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed54806088ade422faab330b",
+      "html": "Replay",
+      "text": "Replay"
+    },
+    {
+      "id": "2e924eb1ed5480d99eccdda3515348f4",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed54806088ade422faab330b",
+      "html": "Parallelism",
+      "text": "Parallelism"
+    },
+    {
+      "id": "2e924eb1ed54802095c1c7173a4cf914",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548028837de4ce04d97847",
+      "type": "sub_header",
+      "html": "Final decoded meaning (memorize)",
+      "text": "Final decoded meaning (memorize)"
+    },
+    {
+      "id": "2e924eb1ed5480c9bf0fc86c30f4c06d",
+      "type": "bulleted_list",
+      "html": "Kafka is a system that stores and distributes ordered events across multiple servers, allowing many applications to write and read those events continuously and reliably.",
+      "text": "Kafka is a system that stores and distributes ordered events across multiple servers, allowing many applications to write and read those events continuously and reliably."
+    },
+    {
+      "id": "2e924eb1ed54804689cbe54e172879bf",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed54806c967ae1364b3e1794",
+      "type": "sub_header",
+      "html": "What delivery guarantee means",
+      "text": "What delivery guarantee means"
+    },
+    {
+      "id": "2e924eb1ed5480e6b405fe686e1fcdef",
+      "type": "bulleted_list",
+      "html": "It describes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">how many times</span> an event may be processed",
+      "text": "It describes how many times an event may be processed"
+    },
+    {
+      "id": "2e924eb1ed548064a538d71b585c9c4e",
+      "type": "bulleted_list",
+      "html": "Concerns <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">failures</span>:",
+      "text": "Concerns failures:"
+    },
+    {
+      "id": "2e924eb1ed5480a8a6b4c21a5bd1e827",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548064a538d71b585c9c4e",
+      "html": "Crashes",
+      "text": "Crashes"
+    },
+    {
+      "id": "2e924eb1ed54801bb6d6c419d51acabd",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548064a538d71b585c9c4e",
+      "html": "Retries",
+      "text": "Retries"
+    },
+    {
+      "id": "2e924eb1ed548006bcf4f7bca06e0e85",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548064a538d71b585c9c4e",
+      "html": "Network issues",
+      "text": "Network issues"
+    },
+    {
+      "id": "2e924eb1ed5480188306fd66ff809aa1",
+      "type": "sub_header",
+      "html": "Three delivery guarantees in Kafka",
+      "text": "Three delivery guarantees in Kafka"
+    },
+    {
+      "id": "2e924eb1ed5480c2ac32fdaa010d44a3",
+      "type": "sub_header",
+      "html": "At-most-once",
+      "text": "At-most-once"
+    },
+    {
+      "id": "2e924eb1ed5480648ab2e9779330d1ab",
+      "type": "bulleted_list",
+      "html": "Event is processed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">zero or one time</span>",
+      "text": "Event is processed zero or one time"
+    },
+    {
+      "id": "2e924eb1ed5480fa897bcf9b9b26f750",
+      "type": "bulleted_list",
+      "html": "Data <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">may be lost</span>",
+      "text": "Data may be lost"
+    },
+    {
+      "id": "2e924eb1ed5480308caaefa1cdacdf6a",
+      "type": "bulleted_list",
+      "html": "Duplicates <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">never occur</span>",
+      "text": "Duplicates never occur"
+    },
+    {
+      "id": "2e924eb1ed5480b89f21dbb07ea5b34f",
+      "type": "sub_sub_header",
+      "html": "How this happens",
+      "text": "How this happens"
+    },
+    {
+      "id": "2e924eb1ed548023a72ed619511924f5",
+      "type": "bulleted_list",
+      "html": "Offset committed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">before</span> processing",
+      "text": "Offset committed before processing"
+    },
+    {
+      "id": "2e924eb1ed548092a22be1a45eff0bea",
+      "type": "bulleted_list",
+      "html": "Crash happens",
+      "text": "Crash happens"
+    },
+    {
+      "id": "2e924eb1ed54802d902ac50e829651d0",
+      "type": "bulleted_list",
+      "html": "Event is skipped",
+      "text": "Event is skipped"
+    },
+    {
+      "id": "2e924eb1ed5480c1809ccf12842989ef",
+      "type": "sub_header",
+      "html": "At-least-once",
+      "text": "At-least-once"
+    },
+    {
+      "id": "2e924eb1ed5480b19debd70aa6dbf03d",
+      "type": "bulleted_list",
+      "html": "Event is processed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one or more times</span>",
+      "text": "Event is processed one or more times"
+    },
+    {
+      "id": "2e924eb1ed5480bf8b83ceec907ee6e4",
+      "type": "bulleted_list",
+      "html": "Data is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">never lost</span>",
+      "text": "Data is never lost"
+    },
+    {
+      "id": "2e924eb1ed548025b97cca01738c4053",
+      "type": "bulleted_list",
+      "html": "Duplicates <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">may occur</span>",
+      "text": "Duplicates may occur"
+    },
+    {
+      "id": "2e924eb1ed548020ab43c331e1ec905a",
+      "type": "sub_sub_header",
+      "html": "How this happens",
+      "text": "How this happens"
+    },
+    {
+      "id": "2e924eb1ed5480629f42d27b2ff3aac4",
+      "type": "bulleted_list",
+      "html": "Process event",
+      "text": "Process event"
+    },
+    {
+      "id": "2e924eb1ed548010b122c77584db1e5f",
+      "type": "bulleted_list",
+      "html": "Crash <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">before</span> offset commit",
+      "text": "Crash before offset commit"
+    },
+    {
+      "id": "2e924eb1ed54808aa04efc9fc70f1b9d",
+      "type": "bulleted_list",
+      "html": "Event is processed again",
+      "text": "Event is processed again"
+    },
+    {
+      "id": "2e924eb1ed54803dafbcfe9cffa70acd",
+      "type": "sub_header",
+      "html": "Exactly-once (important clarification)",
+      "text": "Exactly-once (important clarification)"
+    },
+    {
+      "id": "2e924eb1ed5480fe9681fde2e313f65a",
+      "type": "bulleted_list",
+      "html": "Event is processed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">exactly one time</span>",
+      "text": "Event is processed exactly one time"
+    },
+    {
+      "id": "2e924eb1ed54807abda7e01c0d5fe0b7",
+      "type": "bulleted_list",
+      "html": "No loss",
+      "text": "No loss"
+    },
+    {
+      "id": "2e924eb1ed5480c7bb35cf6a5ccaf355",
+      "type": "bulleted_list",
+      "html": "No duplicates",
+      "text": "No duplicates"
+    },
+    {
+      "id": "2e924eb1ed5480c2aa51c9b29fcd3080",
+      "type": "sub_sub_header",
+      "html": "Very important truth (interview-level)",
+      "text": "Very important truth (interview-level)"
+    },
+    {
+      "id": "2e924eb1ed5480139a88c55bfa9adb3c",
+      "type": "bulleted_list",
+      "html": "Exactly-once is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not automatic</span>",
+      "text": "Exactly-once is not automatic"
+    },
+    {
+      "id": "2e924eb1ed548004b204fc0528c00d67",
+      "type": "bulleted_list",
+      "html": "Requires:",
+      "text": "Requires:"
+    },
+    {
+      "id": "2e924eb1ed548038be9eeb3eb5f98eba",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548004b204fc0528c00d67",
+      "html": "Kafka transactions",
+      "text": "Kafka transactions"
+    },
+    {
+      "id": "2e924eb1ed548073b932e9c8778420ce",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548004b204fc0528c00d67",
+      "html": "Idempotent producers",
+      "text": "Idempotent producers"
+    },
+    {
+      "id": "2e924eb1ed54804a95e1c8258b3dc1e8",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed548004b204fc0528c00d67",
+      "html": "Careful consumer logic",
+      "text": "Careful consumer logic"
+    },
+    {
+      "id": "2e924eb1ed5480b295fdedd10f2697f3",
+      "type": "sub_header",
+      "html": "Most common real-world choice",
+      "text": "Most common real-world choice"
+    },
+    {
+      "id": "2e924eb1ed548091a6ded777b43994f2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">At-least-once</span>",
+      "text": "At-least-once"
+    },
+    {
+      "id": "2e924eb1ed5480728da6c71670c7c99c",
+      "type": "bulleted_list",
+      "html": "Because:",
+      "text": "Because:"
+    },
+    {
+      "id": "2e924eb1ed54806ba3aec97c3eb45a39",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480728da6c71670c7c99c",
+      "html": "Data loss is worse than duplicates",
+      "text": "Data loss is worse than duplicates"
+    },
+    {
+      "id": "2e924eb1ed548002b562f1677d24b268",
+      "type": "bulleted_list",
+      "parent": "2e924eb1ed5480728da6c71670c7c99c",
+      "html": "Duplicates can be handled",
+      "text": "Duplicates can be handled"
+    },
+    {
+      "id": "2e924eb1ed5480c8a5bdddb164059a6f",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed5480dd89e0c1253ffa0415",
+      "type": "sub_header",
+      "html": "Key interview statement (memorize)",
+      "text": "Key interview statement (memorize)"
+    },
+    {
+      "id": "2e924eb1ed5480e19e7bceb19c935f0c",
+      "type": "bulleted_list",
+      "html": "Kafka guarantees <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at-least-once by default</span>, and exactly-once only with transactions and idempotency.",
+      "text": "Kafka guarantees at-least-once by default, and exactly-once only with transactions and idempotency."
+    },
+    {
+      "id": "2e924eb1ed5480c7a5f9e0d820dc2783",
+      "type": "divider"
+    },
+    {
+      "id": "2e924eb1ed548062a920e49fb7c15569",
+      "type": "sub_header",
+      "html": "Lock-in check (answer in points)",
+      "text": "Lock-in check (answer in points)"
+    },
+    {
+      "id": "2e924eb1ed54803290e3ef6237c0e576",
+      "type": "bulleted_list",
+      "html": "Which guarantee can cause duplicates?",
+      "text": "Which guarantee can cause duplicates?"
+    },
+    {
+      "id": "2e924eb1ed5480bab42efbfb5b469129",
+      "type": "bulleted_list",
+      "html": "Which guarantee can cause data loss?",
+      "text": "Which guarantee can cause data loss?"
+    },
+    {
+      "id": "2e924eb1ed548071bfacde7ad98b90ff",
+      "type": "text",
+      "html": "After this, we will do a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Kafka vs RabbitMQ</span> comparison for system design.",
+      "text": "After this, we will do a Kafka vs RabbitMQ comparison for system design."
+    },
+    {
+      "id": "2e824eb1ed5480db969dde96a413479f",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed5480b28d02e268db1f9260",
+      "type": "text"
+    },
+    {
+      "id": "2e824eb1ed54809280f1eea222d33b62",
+      "type": "text"
+    },
+    {
+      "id": "2e824eb1ed54802fab98c9e0b324fad5",
+      "type": "text"
+    }
+  ]
+}

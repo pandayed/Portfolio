@@ -1,0 +1,93 @@
+{
+  "id": "25824eb1ed5480be96b5f100ebcbfea4",
+  "title": "Concurrency vs Parallelism",
+  "sourceUrl": "https://xpandeyed.notion.site/Concurrency-vs-Parallelism-25824eb1ed5480be96b5f100ebcbfea4?pvs=23",
+  "blocks": [
+    {
+      "id": "29724eb1ed54808480deda7e87031848",
+      "type": "header",
+      "html": "Concurrency",
+      "text": "Concurrency"
+    },
+    {
+      "id": "29724eb1ed54802f9c6ef7e8b735e123",
+      "type": "bulleted_list",
+      "html": "System loads multiple tasks in memory.",
+      "text": "System loads multiple tasks in memory."
+    },
+    {
+      "id": "29724eb1ed5480ef933dd69cbbfe5e04",
+      "type": "bulleted_list",
+      "html": "CPU picks one task.",
+      "text": "CPU picks one task."
+    },
+    {
+      "id": "29724eb1ed54802db61cc2f19ef472e1",
+      "type": "bulleted_list",
+      "html": "Executes it partially.",
+      "text": "Executes it partially."
+    },
+    {
+      "id": "29724eb1ed5480e09679cc97d3fe0c58",
+      "type": "bulleted_list",
+      "html": "Switches to a different task.",
+      "text": "Switches to a different task."
+    },
+    {
+      "id": "29724eb1ed5480e88f1fccdbc82cf49b",
+      "type": "bulleted_list",
+      "html": "Of course, the tasks which get executed completely are removed.",
+      "text": "Of course, the tasks which get executed completely are removed."
+    },
+    {
+      "id": "29724eb1ed54806f9e16de59856c2aa1",
+      "type": "bulleted_list",
+      "html": "CU continues to do so.",
+      "text": "CU continues to do so."
+    },
+    {
+      "id": "29724eb1ed5480f7b324d443bf7ac7aa",
+      "type": "bulleted_list",
+      "html": "This is concurrency.",
+      "text": "This is concurrency."
+    },
+    {
+      "id": "29724eb1ed548028bc69c6af5d7f2189",
+      "type": "bulleted_list",
+      "html": "Gives an illusion that multiple tasks are being executed simultaneously.",
+      "text": "Gives an illusion that multiple tasks are being executed simultaneously."
+    },
+    {
+      "id": "29724eb1ed5480058091e080b13d2f00",
+      "type": "bulleted_list",
+      "html": "Does not require multiple CPUs.",
+      "text": "Does not require multiple CPUs."
+    },
+    {
+      "id": "29724eb1ed5480d3b6bdef41828a5a5b",
+      "type": "header",
+      "html": "Parallelism",
+      "text": "Parallelism"
+    },
+    {
+      "id": "29724eb1ed54801992effdba0ad468f4",
+      "type": "bulleted_list",
+      "html": "Multiple CPUs are used to execute multiple tasks simultaneously.",
+      "text": "Multiple CPUs are used to execute multiple tasks simultaneously."
+    },
+    {
+      "id": "29724eb1ed54800a8bade072183d2405",
+      "type": "divider"
+    },
+    {
+      "id": "29724eb1ed548019869ed3cea5def6bc",
+      "type": "text",
+      "html": "In practical systems, both are used together.",
+      "text": "In practical systems, both are used together."
+    },
+    {
+      "id": "29724eb1ed54803c9eebf14129661432",
+      "type": "text"
+    }
+  ]
+}

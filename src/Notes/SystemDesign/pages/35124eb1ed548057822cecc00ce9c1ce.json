@@ -1,0 +1,329 @@
+{
+  "id": "35124eb1ed548057822cecc00ce9c1ce",
+  "title": "Strategy",
+  "sourceUrl": "https://xpandeyed.notion.site/Strategy-35124eb1ed548057822cecc00ce9c1ce?pvs=23",
+  "blocks": [
+    {
+      "id": "35124eb1ed5480c19634f68d4627718f",
+      "type": "bulleted_list",
+      "html": "Single most important design pattern",
+      "text": "Single most important design pattern"
+    },
+    {
+      "id": "35124eb1ed5480b28d3eda322418c130",
+      "type": "divider"
+    },
+    {
+      "id": "35124eb1ed54806e93c1fcd15f2316de",
+      "type": "text",
+      "html": "Some other really good sources",
+      "text": "Some other really good sources"
+    },
+    {
+      "id": "35124eb1ed5480b6a079f69659e7f528",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.freecodecamp.org/news/a-beginners-guide-to-the-strategy-design-pattern/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-35124eb1-ed54-80b6-a079-f69659e7f528--1485833578\">https://www.freecodecamp.org/news/a-beginners-guide-to-the-strategy-design-pattern/</span></a>",
+      "text": "https://www.freecodecamp.org/news/a-beginners-guide-to-the-strategy-design-pattern/",
+      "links": [
+        {
+          "href": "https://www.freecodecamp.org/news/a-beginners-guide-to-the-strategy-design-pattern/",
+          "text": "https://www.freecodecamp.org/news/a-beginners-guide-to-the-strategy-design-pattern/"
+        }
+      ]
+    },
+    {
+      "id": "35124eb1ed54807aa28cc85382e5a81d",
+      "type": "divider"
+    },
+    {
+      "id": "35124eb1ed5480a88b79fb22539a88f9",
+      "type": "bulleted_list",
+      "html": "It is based on the principle of composition over inheritance.",
+      "text": "It is based on the principle of composition over inheritance."
+    },
+    {
+      "id": "35124eb1ed5480e7969cc52f0c7a22a0",
+      "type": "bulleted_list",
+      "html": "Replaces conditional logic with polymorphism.",
+      "text": "Replaces conditional logic with polymorphism."
+    },
+    {
+      "id": "35124eb1ed5480f0bc8be520b1772df9",
+      "type": "bulleted_list",
+      "html": "Use it when there are different ways of doing the same thing and we need to swap them at <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">runtime.</span>",
+      "text": "Use it when there are different ways of doing the same thing and we need to swap them at runtime."
+    },
+    {
+      "id": "35124eb1ed5480d49e60eaadb90df96f",
+      "type": "text",
+      "html": "Say you're building a <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">PaymentProcessor</span></div> for an e-commerce site. At first, you only support credit cards:",
+      "text": "Say you're building a PaymentProcessor for an e-commerce site. At first, you only support credit cards:"
+    },
+    {
+      "id": "35124eb1ed54807f8657c79b01b3b077",
+      "type": "code",
+      "html": "<span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pay</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># credit card logic</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">print</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\">f\"Paying $</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">amount</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\"> with Credit Card\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span>\n</span>",
+      "text": "class PaymentProcessor:\n    def pay(self, amount):\n        # credit card logic\n        print(f\"Paying ${amount} with Credit Card\")\n"
+    },
+    {
+      "id": "35124eb1ed548095b391fb97dcefb2ce",
+      "type": "text",
+      "html": "Then requirements change. Now you need PayPal, UPI, Crypto, Buy-Now-Pay-Later...",
+      "text": "Then requirements change. Now you need PayPal, UPI, Crypto, Buy-Now-Pay-Later..."
+    },
+    {
+      "id": "35124eb1ed5480c78326d7e5a46f0dbf",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bad approach #1: If-else hell</span>",
+      "text": "Bad approach #1: If-else hell"
+    },
+    {
+      "id": "35124eb1ed5480b78e5fdaab6ba5be34",
+      "type": "code",
+      "html": "<span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pay</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> method</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">if</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> method </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">==</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"credit_card\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># 50 lines of credit card logic</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">elif</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> method </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">==</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"paypal\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># 50 lines of paypal logic</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">elif</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> method </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">==</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"upi\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># 50 lines of upi logic</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">elif</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> method </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">==</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"crypto\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># you get the idea...</span><span>\n</span>",
+      "text": "class PaymentProcessor:\n    def pay(self, amount, method):\n        if method == \"credit_card\":\n            # 50 lines of credit card logic\n        elif method == \"paypal\":\n            # 50 lines of paypal logic\n        elif method == \"upi\":\n            # 50 lines of upi logic\n        elif method == \"crypto\":\n            # you get the idea...\n"
+    },
+    {
+      "id": "35124eb1ed5480c8bdacc80268caef20",
+      "type": "text",
+      "html": "Problems with this:",
+      "text": "Problems with this:"
+    },
+    {
+      "id": "35124eb1ed548085a247f29c0e8b0e7c",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Violates Open/Closed Principle</span>: Every new payment method means modifying this class. Risky.",
+      "text": "Violates Open/Closed Principle: Every new payment method means modifying this class. Risky."
+    },
+    {
+      "id": "35124eb1ed5480c48c19f4dd63a1a7d3",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Becomes massive</span>: This class does everything. Hard to test, hard to maintain.",
+      "text": "Becomes massive: This class does everything. Hard to test, hard to maintain."
+    },
+    {
+      "id": "35124eb1ed5480c08089eba8113b5fcf",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Can't extend at runtime</span>: User picks payment method when they checkout. You can't hardcode it.",
+      "text": "Can't extend at runtime: User picks payment method when they checkout. You can't hardcode it."
+    },
+    {
+      "id": "35124eb1ed548058bfeae0ae8e784400",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bad approach #2: Inheritance explosion</span>",
+      "text": "Bad approach #2: Inheritance explosion"
+    },
+    {
+      "id": "35124eb1ed5480e1976fc0aff8290dca",
+      "type": "code",
+      "html": "<span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">pass</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">CreditCardProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">PayPalProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">UPIProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span>\n</span>",
+      "text": "class PaymentProcessor: pass\nclass CreditCardProcessor(PaymentProcessor): ...\nclass PayPalProcessor(PaymentProcessor): ...\nclass UPIProcessor(PaymentProcessor): ...\n"
+    },
+    {
+      "id": "35124eb1ed54801aa0d2c4bae7cf968f",
+      "type": "text",
+      "html": "Now if you also need different <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">ShippingCalculator</span></div> logic, do you make <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">CreditCardExpressShippingProcessor</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"5\" spellcheck=\"false\" class=\"notion-enable-hover\">PayPalStandardShippingProcessor</span></div>...? You get combinatorial explosion.",
+      "text": "Now if you also need different ShippingCalculator logic, do you make CreditCardExpressShippingProcessor, PayPalStandardShippingProcessor...? You get combinatorial explosion."
+    },
+    {
+      "id": "35124eb1ed54800cbf74e9f9427d3923",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The core problem</span>: You’re mixing “what to do” with “how to do it”. The <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">PaymentProcessor</span></div> shouldn’t care about PayPal’s API details. It just needs to know “I can call <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"4\" spellcheck=\"false\" class=\"notion-enable-hover\">pay()</span></div> somehow”.",
+      "text": "The core problem: You’re mixing “what to do” with “how to do it”. The PaymentProcessor shouldn’t care about PayPal’s API details. It just needs to know “I can call pay() somehow”."
+    },
+    {
+      "id": "35124eb1ed548088a7f9d9937b387259",
+      "type": "sub_sub_header",
+      "html": "2. Strategy to the rescue",
+      "text": "2. Strategy to the rescue"
+    },
+    {
+      "id": "35124eb1ed548068a49ad42257f118ab",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Definition</span>: Define a family of algorithms, put each one in its own class, and make them interchangeable.",
+      "text": "Definition: Define a family of algorithms, put each one in its own class, and make them interchangeable."
+    },
+    {
+      "id": "35124eb1ed54802eb59ed28bfacf834e",
+      "type": "text",
+      "html": "Instead of hardcoding the algorithm, you delegate to a “strategy” object.",
+      "text": "Instead of hardcoding the algorithm, you delegate to a “strategy” object."
+    },
+    {
+      "id": "35124eb1ed54801f8ff0d4bd248a9c83",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The 3 pieces:</span>",
+      "text": "The 3 pieces:"
+    },
+    {
+      "id": "35124eb1ed54808e9cead8062e3d2a2a",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Component"
+          },
+          {
+            "header": true,
+            "html": "Role"
+          },
+          {
+            "header": true,
+            "html": "Example"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Strategy Interface</span>"
+          },
+          {
+            "header": false,
+            "html": "Declares the method all algorithms must have"
+          },
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">PaymentStrategy.pay(amount)</span></div>"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Concrete Strategies</span>"
+          },
+          {
+            "header": false,
+            "html": "Each class implements one algorithm"
+          },
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">CreditCardStrategy</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">PayPalStrategy</span></div>"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Context</span>"
+          },
+          {
+            "header": false,
+            "html": "Uses a Strategy. You can swap it anytime"
+          },
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">PaymentProcessor</span></div> holds a <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">strategy</span></div>"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "35124eb1ed5480eca6e5d2d6919c91ae",
+      "type": "sub_sub_header",
+      "html": "3. Code that actually uses it",
+      "text": "3. Code that actually uses it"
+    },
+    {
+      "id": "35124eb1ed5480ca8a6bca77bf1e33f8",
+      "type": "code",
+      "html": "<span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">from</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> abc </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">import</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> ABC</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> abstractmethod\n\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># 1. Strategy Interface</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">PaymentStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">ABC</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token decorator annotation punctuation notion-enable-hover\" data-token-index=\"0\">@abstractmethod</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pay</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">pass</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># 2. Concrete Strategies - each is one algorithm</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">CreditCardStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">PaymentStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">__init__</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> card_number</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">card_number </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> card_number\n\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pay</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">print</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\">f\"Charging $</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">amount</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\"> to card ending </span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">card_number</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">[</span><span class=\"token operator interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">-</span><span class=\"token number interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">4</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\"token format-spec interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">]</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\">\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">PayPalStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">PaymentStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">__init__</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> email</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">email </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> email\n\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pay</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">print</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\">f\"Paying $</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">amount</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\"> via PayPal account </span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">email</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\">\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">UPIStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">PaymentStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">__init__</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> upi_id</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">upi_id </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> upi_id\n\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pay</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">print</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\">f\"Paying $</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">amount</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\"> using UPI ID </span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">upi_id</span><span class=\"token punctuation interpolation string-interpolation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token string string-interpolation notion-enable-hover\" data-token-index=\"0\">\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># 3. Context - doesn't care which strategy it uses</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">__init__</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> strategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> PaymentStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">strategy </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> strategy\n\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">set_strategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> strategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> PaymentStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token triple-quoted-string string notion-enable-hover\" data-token-index=\"0\">\"\"\"This is the key: swap strategy at runtime\"\"\"</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">strategy </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> strategy\n\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">def</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">checkout</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># Delegate the work to the strategy</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        self</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">strategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">pay</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># Usage: switch behavior at runtime</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\norder_amount </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token number notion-enable-hover\" data-token-index=\"0\">1200</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\nprocessor </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> PaymentProcessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">CreditCardStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"1234-5678-9012-3456\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\nprocessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">checkout</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">order_amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">  </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># Charging $1200 to card ending 3456</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># User changes mind, picks PayPal instead</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\nprocessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">set_strategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">PayPalStrategy</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"user@example.com\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\nprocessor</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">checkout</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">order_amount</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">  </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># Paying $1200 via PayPal account user@example.com</span><span>\n</span>",
+      "text": "from abc import ABC, abstractmethod\n\n# 1. Strategy Interface\nclass PaymentStrategy(ABC):\n    @abstractmethod\n    def pay(self, amount): pass\n\n# 2. Concrete Strategies - each is one algorithm\nclass CreditCardStrategy(PaymentStrategy):\n    def __init__(self, card_number):\n        self.card_number = card_number\n\n    def pay(self, amount):\n        print(f\"Charging ${amount} to card ending {self.card_number[-4:]}\")\n\nclass PayPalStrategy(PaymentStrategy):\n    def __init__(self, email):\n        self.email = email\n\n    def pay(self, amount):\n        print(f\"Paying ${amount} via PayPal account {self.email}\")\n\nclass UPIStrategy(PaymentStrategy):\n    def __init__(self, upi_id):\n        self.upi_id = upi_id\n\n    def pay(self, amount):\n        print(f\"Paying ${amount} using UPI ID {self.upi_id}\")\n\n# 3. Context - doesn't care which strategy it uses\nclass PaymentProcessor:\n    def __init__(self, strategy: PaymentStrategy):\n        self.strategy = strategy\n\n    def set_strategy(self, strategy: PaymentStrategy):\n        \"\"\"This is the key: swap strategy at runtime\"\"\"\n        self.strategy = strategy\n\n    def checkout(self, amount):\n        # Delegate the work to the strategy\n        self.strategy.pay(amount)\n\n# Usage: switch behavior at runtime\norder_amount = 1200\nprocessor = PaymentProcessor(CreditCardStrategy(\"1234-5678-9012-3456\"))\nprocessor.checkout(order_amount)  # Charging $1200 to card ending 3456\n\n# User changes mind, picks PayPal instead\nprocessor.set_strategy(PayPalStrategy(\"user@example.com\"))\nprocessor.checkout(order_amount)  # Paying $1200 via PayPal account user@example.com\n"
+    },
+    {
+      "id": "35124eb1ed5480dbb357f668b040e18b",
+      "type": "sub_sub_header",
+      "html": "4. Why this is powerful",
+      "text": "4. Why this is powerful"
+    },
+    {
+      "id": "35124eb1ed5480eaa817f1957cce9528",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Add new behavior without touching old code</span>: Want Bitcoin? Just add <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">BitcoinStrategy</span></div>. <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"4\" spellcheck=\"false\" class=\"notion-enable-hover\">PaymentProcessor</span></div> never changes.",
+      "text": "Add new behavior without touching old code: Want Bitcoin? Just add BitcoinStrategy. PaymentProcessor never changes."
+    },
+    {
+      "id": "35124eb1ed5480c1ba0bcb06b93652f3",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Swap at runtime</span>: Based on user input, config file, A/B test, whatever.",
+      "text": "Swap at runtime: Based on user input, config file, A/B test, whatever."
+    },
+    {
+      "id": "35124eb1ed54808e9f2dc14132a88fa0",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Each algorithm is isolated</span>: Test <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">CreditCardStrategy</span></div> without even loading PayPal code.",
+      "text": "Each algorithm is isolated: Test CreditCardStrategy without even loading PayPal code."
+    },
+    {
+      "id": "35124eb1ed5480758eeee0579d7f5327",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Removes conditionals</span>: No more 200-line if-else chains.",
+      "text": "Removes conditionals: No more 200-line if-else chains."
+    },
+    {
+      "id": "35124eb1ed54809fb530fa853512577a",
+      "type": "sub_sub_header",
+      "html": "5. When you should reach for Strategy",
+      "text": "5. When you should reach for Strategy"
+    },
+    {
+      "id": "35124eb1ed5480a4a681f7c9a569acc8",
+      "type": "text",
+      "html": "Use it when:",
+      "text": "Use it when:"
+    },
+    {
+      "id": "35124eb1ed5480f78283c8f609e42401",
+      "type": "bulleted_list",
+      "html": "You have multiple ways to perform a task: sorting, compression, pricing, routing, validation, authentication",
+      "text": "You have multiple ways to perform a task: sorting, compression, pricing, routing, validation, authentication"
+    },
+    {
+      "id": "35124eb1ed54800588a3ee153855c9be",
+      "type": "bulleted_list",
+      "html": "You want to choose the algorithm at runtime",
+      "text": "You want to choose the algorithm at runtime"
+    },
+    {
+      "id": "35124eb1ed548069a83fe729ad075ce6",
+      "type": "bulleted_list",
+      "html": "You’re seeing long if/elif/else or switch statements picking behavior",
+      "text": "You’re seeing long if/elif/else or switch statements picking behavior"
+    },
+    {
+      "id": "35124eb1ed5480b58a20fe6d9ce2bd73",
+      "type": "bulleted_list",
+      "html": "You want to A/B test different algorithms",
+      "text": "You want to A/B test different algorithms"
+    },
+    {
+      "id": "35124eb1ed548091afe2fb5ffc0c49ce",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Real examples you already use</span>:",
+      "text": "Real examples you already use:"
+    },
+    {
+      "id": "35124eb1ed54802da4efe7ebdcfcdce7",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">.sort()</span></div> in Python takes a <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">key</span></div> function - that's a Strategy",
+      "text": ".sort() in Python takes a key function - that's a Strategy"
+    },
+    {
+      "id": "35124eb1ed54806284c8e4d713991a24",
+      "type": "bulleted_list",
+      "html": "Express.js middleware - each middleware is a strategy for handling a request",
+      "text": "Express.js middleware - each middleware is a strategy for handling a request"
+    },
+    {
+      "id": "35124eb1ed5480148910d168dc955b9d",
+      "type": "bulleted_list",
+      "html": "Games: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">Character</span></div> has an <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">AttackStrategy</span></div>. Swap between <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"5\" spellcheck=\"false\" class=\"notion-enable-hover\">MeleeStrategy</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"7\" spellcheck=\"false\" class=\"notion-enable-hover\">RangedStrategy</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"9\" spellcheck=\"false\" class=\"notion-enable-hover\">MagicStrategy</span></div>",
+      "text": "Games: Character has an AttackStrategy. Swap between MeleeStrategy, RangedStrategy, MagicStrategy"
+    },
+    {
+      "id": "35124eb1ed5480ffaaa0df75bc284a49",
+      "type": "text",
+      "html": "Want me to walk through how you’d refactor a real if-else mess into Strategy, or cover Strategy vs State vs Template Method?",
+      "text": "Want me to walk through how you’d refactor a real if-else mess into Strategy, or cover Strategy vs State vs Template Method?"
+    }
+  ]
+}

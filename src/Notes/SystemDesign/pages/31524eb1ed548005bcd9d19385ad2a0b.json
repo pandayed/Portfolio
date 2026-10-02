@@ -1,0 +1,35 @@
+{
+  "id": "31524eb1ed548005bcd9d19385ad2a0b",
+  "title": "Abstract Factory",
+  "sourceUrl": "https://xpandeyed.notion.site/Abstract-Factory-31524eb1ed548005bcd9d19385ad2a0b?pvs=23",
+  "blocks": [
+    {
+      "id": "31724eb1ed5480b9b2f3c31052a5166c",
+      "type": "header",
+      "html": "Intent",
+      "text": "Intent"
+    },
+    {
+      "id": "31724eb1ed5480cd8f8aed520711a3b1",
+      "type": "text",
+      "html": "Provide an interface for creating families of related or dependent objects without specifying their concrete classes.",
+      "text": "Provide an interface for creating families of related or dependent objects without specifying their concrete classes."
+    },
+    {
+      "id": "31724eb1ed54801cbc76fe7cd23853f5",
+      "type": "header",
+      "html": " Also Know As",
+      "text": " Also Know As"
+    },
+    {
+      "id": "31724eb1ed54803daf66cab6557d6975",
+      "type": "text",
+      "html": "Kit",
+      "text": "Kit"
+    },
+    {
+      "id": "31724eb1ed54809586ddca54c1efc08b",
+      "type": "text"
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+{
+  "id": "24b24eb1ed5480eba76bd1443607177a",
+  "title": "[I]: Interface Segregation Principle (ISP)",
+  "sourceUrl": "https://xpandeyed.notion.site/I-Interface-Segregation-Principle-ISP-24b24eb1ed5480eba76bd1443607177a?pvs=23",
+  "blocks": [
+    {
+      "id": "24b24eb1ed548026ae66fb6cf501d3d2",
+      "type": "bulleted_list",
+      "html": "Clients (classes or modules that use an interface) should not be forced to depend on methods they do not use.",
+      "text": "Clients (classes or modules that use an interface) should not be forced to depend on methods they do not use."
+    },
+    {
+      "id": "24b24eb1ed548031a5e3e3e484fa05cc",
+      "type": "bulleted_list",
+      "html": "Interfaces (contracts that define available methods) should be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">specific to client needs</span> rather than large, general-purpose contracts.",
+      "text": "Interfaces (contracts that define available methods) should be specific to client needs rather than large, general-purpose contracts."
+    },
+    {
+      "id": "24b24eb1ed5480ee88fef36ab3113b4f",
+      "type": "bulleted_list",
+      "html": "Smaller, more focused interfaces reduce unnecessary dependencies and implementation burden.",
+      "text": "Smaller, more focused interfaces reduce unnecessary dependencies and implementation burden."
+    },
+    {
+      "id": "24b24eb1ed5480779f58f2c296c1af6e",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548043b92ff13087bbf4ce",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why is it important</span>",
+      "text": "Why is it important"
+    },
+    {
+      "id": "24b24eb1ed548000bd63d8c798196470",
+      "type": "bulleted_list",
+      "html": "Prevents “fat interfaces” that become dumping grounds for unrelated functionality.",
+      "text": "Prevents “fat interfaces” that become dumping grounds for unrelated functionality."
+    },
+    {
+      "id": "24b24eb1ed54809aa60bea0d0c8335ec",
+      "type": "bulleted_list",
+      "html": "Reduces unnecessary coupling between clients and unrelated features.",
+      "text": "Reduces unnecessary coupling between clients and unrelated features."
+    },
+    {
+      "id": "24b24eb1ed5480a1afd3ddfacaf66489",
+      "type": "bulleted_list",
+      "html": "Makes implementations simpler and more reliable by removing irrelevant requirements.",
+      "text": "Makes implementations simpler and more reliable by removing irrelevant requirements."
+    },
+    {
+      "id": "24b24eb1ed5480aeacb5d0759cf0ab38",
+      "type": "bulleted_list",
+      "html": "Allows independent evolution of different parts of a system.",
+      "text": "Allows independent evolution of different parts of a system."
+    },
+    {
+      "id": "24b24eb1ed54808aa1bfdbc3f437e380",
+      "type": "bulleted_list",
+      "html": "Improves readability and maintainability of contracts.",
+      "text": "Improves readability and maintainability of contracts."
+    },
+    {
+      "id": "24b24eb1ed5480e6bdffe6e8d673e87f",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480b0a032d76e25b6b951",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bad example</span>",
+      "text": "Bad example"
+    },
+    {
+      "id": "24b24eb1ed5480798805f4a0cf5fbe8c",
+      "type": "code",
+      "html": "// A general-purpose interface for all types of machines\ninterface Machine {\n    method printDocument(doc)\n    method scanDocument(doc)\n    method faxDocument(doc)\n}\n\n// A simple printer that only prints\nclass SimplePrinter implements Machine {\n    method printDocument(doc) {\n        // prints\n    }\n    method scanDocument(doc) {\n        throw Error(\"Not supported\")\n    }\n    method faxDocument(doc) {\n        throw Error(\"Not supported\")\n    }\n}",
+      "text": "// A general-purpose interface for all types of machines\ninterface Machine {\n    method printDocument(doc)\n    method scanDocument(doc)\n    method faxDocument(doc)\n}\n\n// A simple printer that only prints\nclass SimplePrinter implements Machine {\n    method printDocument(doc) {\n        // prints\n    }\n    method scanDocument(doc) {\n        throw Error(\"Not supported\")\n    }\n    method faxDocument(doc) {\n        throw Error(\"Not supported\")\n    }\n}"
+    },
+    {
+      "id": "24b24eb1ed5480d18ed5c527cd4f75a2",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480f78654d07185e387ce",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Problems in the bad code</span>",
+      "text": "Problems in the bad code"
+    },
+    {
+      "id": "24b24eb1ed54806ca1cdf671a0bd4edb",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">SimplePrinter</span></div> is forced to implement irrelevant methods (<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">scanDocument</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"4\" spellcheck=\"false\" class=\"notion-enable-hover\">faxDocument</span></div>).",
+      "text": "SimplePrinter is forced to implement irrelevant methods (scanDocument, faxDocument)."
+    },
+    {
+      "id": "24b24eb1ed5480dcbd82e8b1ae945db8",
+      "type": "bulleted_list",
+      "html": "Throws runtime errors for unsupported functionality.",
+      "text": "Throws runtime errors for unsupported functionality."
+    },
+    {
+      "id": "24b24eb1ed548045b3f9ffd29b4ebdae",
+      "type": "bulleted_list",
+      "html": "Increases maintenance — interface changes affect all implementers, even if they don’t need them.",
+      "text": "Increases maintenance — interface changes affect all implementers, even if they don’t need them."
+    },
+    {
+      "id": "24b24eb1ed5480019d33d201276bb908",
+      "type": "bulleted_list",
+      "html": "Creates false expectations for clients — a <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">SimplePrinter</span></div> appears to support scanning/faxing when it does not.",
+      "text": "Creates false expectations for clients — a SimplePrinter appears to support scanning/faxing when it does not."
+    },
+    {
+      "id": "24b24eb1ed5480a9b2ade92a3e0ac482",
+      "type": "bulleted_list",
+      "html": "Violates substitution — client code expecting a functional scanner will fail with <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">SimplePrinter</span></div>.",
+      "text": "Violates substitution — client code expecting a functional scanner will fail with SimplePrinter."
+    },
+    {
+      "id": "24b24eb1ed548008b307f0e0c5f3c1ed",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548056a66dc44df1a75e45",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fix</span>",
+      "text": "Fix"
+    },
+    {
+      "id": "24b24eb1ed548043932aeadcd0f0d0fc",
+      "type": "code",
+      "html": "// Smaller, focused interfaces\ninterface Printer {\n    method printDocument(doc)\n}\n\ninterface Scanner {\n    method scanDocument(doc)\n}\n\ninterface Fax {\n    method faxDocument(doc)\n}\n\nclass SimplePrinter implements Printer {\n    method printDocument(doc) {\n        // prints\n    }\n}\n\nclass MultiFunctionMachine implements Printer, Scanner, Fax {\n    method printDocument(doc) { /* prints */ }\n    method scanDocument(doc) { /* scans */ }\n    method faxDocument(doc) { /* faxes */ }\n}\n\n",
+      "text": "// Smaller, focused interfaces\ninterface Printer {\n    method printDocument(doc)\n}\n\ninterface Scanner {\n    method scanDocument(doc)\n}\n\ninterface Fax {\n    method faxDocument(doc)\n}\n\nclass SimplePrinter implements Printer {\n    method printDocument(doc) {\n        // prints\n    }\n}\n\nclass MultiFunctionMachine implements Printer, Scanner, Fax {\n    method printDocument(doc) { /* prints */ }\n    method scanDocument(doc) { /* scans */ }\n    method faxDocument(doc) { /* faxes */ }\n}\n\n"
+    },
+    {
+      "id": "24b24eb1ed548093aa63e6402cc94cec",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54804d922af0dde736afa5",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What’s the change and how it fixes the problems</span>",
+      "text": "What’s the change and how it fixes the problems"
+    },
+    {
+      "id": "24b24eb1ed5480aa9e8de3822195f86b",
+      "type": "bulleted_list",
+      "html": "Split one large interface into multiple <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">role-specific interfaces</span>.",
+      "text": "Split one large interface into multiple role-specific interfaces."
+    },
+    {
+      "id": "24b24eb1ed5480daa917dd3859149ece",
+      "type": "bulleted_list",
+      "html": "Each client/implementation now depends only on the contracts it needs.",
+      "text": "Each client/implementation now depends only on the contracts it needs."
+    },
+    {
+      "id": "24b24eb1ed5480ff918ced01ed4af36a",
+      "type": "bulleted_list",
+      "html": "No unnecessary method stubs or runtime errors for unsupported features.",
+      "text": "No unnecessary method stubs or runtime errors for unsupported features."
+    },
+    {
+      "id": "24b24eb1ed5480179458e92e315301a6",
+      "type": "bulleted_list",
+      "html": "Interface changes in one area do not affect unrelated clients.",
+      "text": "Interface changes in one area do not affect unrelated clients."
+    },
+    {
+      "id": "24b24eb1ed5480dcb6cad5a522be5528",
+      "type": "bulleted_list",
+      "html": "Maintains clear, truthful capabilities for each type.",
+      "text": "Maintains clear, truthful capabilities for each type."
+    },
+    {
+      "id": "24b24eb1ed5480cc91c8d8f7987ea055",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480c2b42aedfa13d9b0bf",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How to check if the code follows ISP</span>",
+      "text": "How to check if the code follows ISP"
+    },
+    {
+      "id": "24b24eb1ed5480879d84f104aadec93b",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 1 — No Unused Methods in Implementations</span>",
+      "text": "Rule 1 — No Unused Methods in Implementations"
+    },
+    {
+      "id": "24b24eb1ed548022a6e5f7d55148c71a",
+      "type": "bulleted_list",
+      "html": "Implementations should not have to provide empty or error-throwing methods.",
+      "text": "Implementations should not have to provide empty or error-throwing methods."
+    },
+    {
+      "id": "24b24eb1ed5480c89f10ed2580627c5d",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Review all classes implementing an interface. If any methods are unused or always throw, ISP is violated.",
+      "text": "Check: Review all classes implementing an interface. If any methods are unused or always throw, ISP is violated."
+    },
+    {
+      "id": "24b24eb1ed548017afeef00fe15d13a9",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480eebadceadd7e37282e",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 2 — Interface Size Minimalism</span>",
+      "text": "Rule 2 — Interface Size Minimalism"
+    },
+    {
+      "id": "24b24eb1ed54801eac55c2ac8fd13fef",
+      "type": "bulleted_list",
+      "html": "Interfaces should contain the smallest possible set of methods to define a role.",
+      "text": "Interfaces should contain the smallest possible set of methods to define a role."
+    },
+    {
+      "id": "24b24eb1ed5480749c3ed8dac7ec19f6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If removing a method from an interface would not break some implementers, the interface is too large.",
+      "text": "Check: If removing a method from an interface would not break some implementers, the interface is too large."
+    },
+    {
+      "id": "24b24eb1ed5480b48025df0821e5111b",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54801194a3e14507ee6525",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 3 — Client-Specific Contracts</span>",
+      "text": "Rule 3 — Client-Specific Contracts"
+    },
+    {
+      "id": "24b24eb1ed54804fa4c2c3cbb702f1c9",
+      "type": "bulleted_list",
+      "html": "Each interface should be shaped around the needs of a particular client or role.",
+      "text": "Each interface should be shaped around the needs of a particular client or role."
+    },
+    {
+      "id": "24b24eb1ed5480919c32fc700c7aeacd",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Identify the primary consumers of the interface. If multiple unrelated clients use only parts of it, ISP is violated.",
+      "text": "Check: Identify the primary consumers of the interface. If multiple unrelated clients use only parts of it, ISP is violated."
+    },
+    {
+      "id": "24b24eb1ed548000a146c8f6e79b8c52",
+      "type": "divider"
+    },
+    {
+      "id": "25224eb1ed5480859418fcf0afdbf7a1",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 4 — No Forced Methods</span>",
+      "text": "Rule 4 — No Forced Methods"
+    },
+    {
+      "id": "25224eb1ed54805f966ecb4d79236fe9",
+      "type": "bulleted_list",
+      "html": "A class should not be forced to provide methods it doesn’t actually need or use.",
+      "text": "A class should not be forced to provide methods it doesn’t actually need or use."
+    },
+    {
+      "id": "25224eb1ed548091847dca9c3daa03ea",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Look for methods that are empty, throw errors, or act as placeholders. If you find them, the Interface Segregation Principle is being broken.",
+      "text": "Check: Look for methods that are empty, throw errors, or act as placeholders. If you find them, the Interface Segregation Principle is being broken."
+    },
+    {
+      "id": "24b24eb1ed548019866be4ac9202e6b6",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480af8bfef55c4ba5ddf1",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 5 — No “God Interfaces”</span>",
+      "text": "Rule 5 — No “God Interfaces”"
+    },
+    {
+      "id": "24b24eb1ed5480e2b24fd57ece8d771a",
+      "type": "bulleted_list",
+      "html": "Avoid one-size-fits-all interfaces for a broad range of functionalities.",
+      "text": "Avoid one-size-fits-all interfaces for a broad range of functionalities."
+    },
+    {
+      "id": "24b24eb1ed548061adb8fdaf0435f9f1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If the interface methods naturally group into separate responsibilities, split it.",
+      "text": "Check: If the interface methods naturally group into separate responsibilities, split it."
+    },
+    {
+      "id": "24b24eb1ed5480b5a5fed97c2874d985",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54804e8477d841d79505a6",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 6 — Independent Evolution</span>",
+      "text": "Rule 6 — Independent Evolution"
+    },
+    {
+      "id": "24b24eb1ed54803b87b1e1e5e336603e",
+      "type": "bulleted_list",
+      "html": "Interface changes should affect only relevant implementations.",
+      "text": "Interface changes should affect only relevant implementations."
+    },
+    {
+      "id": "24b24eb1ed548086bc6cdee8d45729fa",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> When a method is added, if unrelated classes must change, ISP is violated.",
+      "text": "Check: When a method is added, if unrelated classes must change, ISP is violated."
+    },
+    {
+      "id": "24b24eb1ed548009ab27f8ce1934b2df",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54807a8f08e529615abc93",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 7 — Dependency Clarity</span>",
+      "text": "Rule 7 — Dependency Clarity"
+    },
+    {
+      "id": "24b24eb1ed5480f193d3c17a2cd37414",
+      "type": "bulleted_list",
+      "html": "Client code should only import and depend on the interfaces relevant to it.",
+      "text": "Client code should only import and depend on the interfaces relevant to it."
+    },
+    {
+      "id": "24b24eb1ed5480669d15cb2c89c71e7f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If a client has to reference an interface and ignore any of its methods, ISP is violated.",
+      "text": "Check: If a client has to reference an interface and ignore any of its methods, ISP is violated."
+    },
+    {
+      "id": "25224eb1ed5480819b38ceab06f22959",
+      "type": "divider"
+    },
+    {
+      "id": "25224eb1ed5480eb86cac1fa53bff317",
+      "type": "text"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import {
     API_COMMUNICATION_ROUTE,
     GO_NOTES_ROUTE,
+    SYSTEM_DESIGN_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
     JAVA_NOTES_ROUTE,
@@ -9,6 +10,7 @@ import {
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
+    POSTGRESQL_DATE_TIME_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     POSTGRESQL_RATIOS_ROUTE,
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
@@ -21,20 +23,30 @@ import {
     SPRING_BOOT_ANNOTATIONS_ROUTE,
     type GoNoteRoute,
     type PythonNoteRoute,
+    type SystemDesignEntryRoute,
     type Route,
 } from '../routing/routes';
 import { goNotes as goNotePages } from './GoNotes/goNotes';
 import { pythonChapters } from './PythonNotes/pythonNotes';
+import {
+    systemDesignPagesById,
+    systemDesignPagesByRoute,
+    systemDesignRootPages,
+    systemDesignViewsByParentId,
+    type SystemDesignPageData,
+    type SystemDesignViewData,
+} from './SystemDesign/registry';
 
 interface NoteBase {
     title: string;
+    icon?: string;
     summary?: string;
     route: Route;
 }
 
 export interface NotePage extends NoteBase {
     type: 'page';
-    updatedOn: string;
+    updatedOn?: string;
 }
 
 export interface NoteGroup extends NoteBase {
@@ -99,6 +111,13 @@ export const postgresqlNotes: NoteGroup = {
             route: POSTGRESQL_MATHS_ROUTE,
             updatedOn: '2026-09-30',
         },
+        {
+            type: 'page',
+            title: 'Date and time in PostgreSQL',
+            summary: 'Types, arithmetic, ranges, time zones, formatting, and common date query patterns.',
+            route: POSTGRESQL_DATE_TIME_ROUTE,
+            updatedOn: '2026-10-02',
+        },
     ],
 };
 
@@ -112,6 +131,37 @@ export const goNotes: NoteGroup = {
         route: `${GO_NOTES_ROUTE}/${slug}` as GoNoteRoute,
         updatedOn,
     })),
+};
+
+const systemDesignViewNode = (view: SystemDesignViewData): NoteNode[] => {
+    const children = view.pageIds.map((id) => {
+        const page = systemDesignPagesById.get(id);
+        if (!page) throw new Error(`Missing System Design note: ${id}`);
+        return systemDesignPageNode(page);
+    });
+    return view.title ? [{ type: 'group', title: view.title, route: view.route, children }] : children;
+};
+
+const systemDesignPageNode = (page: SystemDesignPageData): NoteNode => {
+    const views = systemDesignViewsByParentId.get(page.id) ?? [];
+    const children = views.flatMap(systemDesignViewNode);
+    if (children.length) {
+        return { type: 'group', title: page.title, icon: page.icon, summary: page.status || undefined, route: page.route, children };
+    }
+    return {
+        type: 'page',
+        title: page.title,
+        icon: page.icon,
+        summary: page.status || undefined,
+        route: page.route,
+    };
+};
+
+export const systemDesignNotes: NoteGroup = {
+    type: 'group',
+    title: 'System Design',
+    route: SYSTEM_DESIGN_ROUTE,
+    children: systemDesignRootPages.map(systemDesignPageNode),
 };
 
 export const pythonNotes: NoteGroup = {
@@ -205,6 +255,7 @@ export const noteTree: NoteNode[] = [
         updatedOn: '2026-09-20',
     },
     postgresqlNotes,
+    systemDesignNotes,
     goNotes,
     pythonNotes,
     javaNotes,
@@ -212,9 +263,14 @@ export const noteTree: NoteNode[] = [
 ];
 
 const collectPages = (nodes: NoteNode[]): NotePage[] =>
-    nodes.flatMap((node) =>
-        node.type === 'page' ? [node] : collectPages(node.children),
-    );
+    nodes.flatMap((node) => {
+        if (node.type === 'page') return [node];
+        const page = node.route.startsWith(`${SYSTEM_DESIGN_ROUTE}/`)
+            && systemDesignPagesByRoute.has(node.route as SystemDesignEntryRoute)
+            ? [{ type: 'page' as const, title: node.title, route: node.route, summary: node.summary }]
+            : [];
+        return [...page, ...collectPages(node.children)];
+    });
 
 export const notePages = collectPages(noteTree);
 

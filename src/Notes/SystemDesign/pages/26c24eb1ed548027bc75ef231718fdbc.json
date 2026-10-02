@@ -1,0 +1,156 @@
+{
+  "id": "26c24eb1ed548027bc75ef231718fdbc",
+  "title": "Causal Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Causal-Consistency-26c24eb1ed548027bc75ef231718fdbc?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480e0bb7cf2ea475cf7fd",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Operations that are causally related are seen by all clients in the same order, while unrelated operations may be seen in different orders.</span>",
+      "text": "Operations that are causally related are seen by all clients in the same order, while unrelated operations may be seen in different orders."
+    },
+    {
+      "id": "26c24eb1ed54800a89f7f0562431db51",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span>",
+      "text": "Guarantee:"
+    },
+    {
+      "id": "26c24eb1ed54801b937ed76dbf2df528",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800a89f7f0562431db51",
+      "html": "Preserves the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">“happens-before” relationship</span> between operations.",
+      "text": "Preserves the “happens-before” relationship between operations."
+    },
+    {
+      "id": "26c24eb1ed548089ad63faa771b4958d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800a89f7f0562431db51",
+      "html": "If operation A could have influenced operation B, all clients will see A before B.",
+      "text": "If operation A could have influenced operation B, all clients will see A before B."
+    },
+    {
+      "id": "26c24eb1ed5480969d38c5594396de5f",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800a89f7f0562431db51",
+      "html": "Operations that are independent may appear in different orders on different replicas.",
+      "text": "Operations that are independent may appear in different orders on different replicas."
+    },
+    {
+      "id": "26c24eb1ed5480c68718e26c427ecac3",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed54801bbc45ee897914a081",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c68718e26c427ecac3",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed5480d9ad38ea0c74739385",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54801bbc45ee897914a081",
+      "html": "Provides a more intuitive ordering than eventual consistency.",
+      "text": "Provides a more intuitive ordering than eventual consistency."
+    },
+    {
+      "id": "26c24eb1ed5480b1b37bde60fc66bf0a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54801bbc45ee897914a081",
+      "html": "Avoids some anomalies while still allowing higher availability than strong consistency.",
+      "text": "Avoids some anomalies while still allowing higher availability than strong consistency."
+    },
+    {
+      "id": "26c24eb1ed5480a8a571d4b3690b46e7",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c68718e26c427ecac3",
+      "html": "Cons/Anomalies:",
+      "text": "Cons/Anomalies:"
+    },
+    {
+      "id": "26c24eb1ed548072aab3d6cf7fc78217",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a8a571d4b3690b46e7",
+      "html": "More complex than eventual consistency",
+      "text": "More complex than eventual consistency"
+    },
+    {
+      "id": "26c24eb1ed54807cb203eda847553c3e",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a8a571d4b3690b46e7",
+      "html": "Still weaker than strong consistency",
+      "text": "Still weaker than strong consistency"
+    },
+    {
+      "id": "26c24eb1ed54805fb2efecd9bc0c9b5a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a8a571d4b3690b46e7",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Concurrent Reordering:</span> Independent (unrelated) operations may appear in different orders across replicas.",
+      "text": "Concurrent Reordering: Independent (unrelated) operations may appear in different orders across replicas."
+    },
+    {
+      "id": "26c24eb1ed548058a0dfc09e344ab984",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a8a571d4b3690b46e7",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Non-Deterministic Views:</span> Clients may disagree on the order of independent writes.",
+      "text": "Non-Deterministic Views: Clients may disagree on the order of independent writes."
+    },
+    {
+      "id": "26c24eb1ed548043bb0ee651a4f61fd6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases:</span> Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">causal relationships matter</span>, e.g.:",
+      "text": "Use Cases: Systems where causal relationships matter, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed54802f8bf3f5be4747a727",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548043bb0ee651a4f61fd6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Social Media Comments / Replies:</span>",
+      "text": "Social Media Comments / Replies:"
+    },
+    {
+      "id": "26c24eb1ed54809ba9d8f52ab7f99799",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54802f8bf3f5be4747a727",
+      "html": "If Alice posts a comment and Bob replies, all users should see Alice’s comment before Bob’s reply.",
+      "text": "If Alice posts a comment and Bob replies, all users should see Alice’s comment before Bob’s reply."
+    },
+    {
+      "id": "26c24eb1ed5480f5bb57d06b6ce3c426",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548043bb0ee651a4f61fd6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Collaborative Editing (like Google Docs):</span>",
+      "text": "Collaborative Editing (like Google Docs):"
+    },
+    {
+      "id": "26c24eb1ed5480f994a5f249f63b3156",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480f5bb57d06b6ce3c426",
+      "html": "Edits that depend on previous edits should appear in the correct causal order.",
+      "text": "Edits that depend on previous edits should appear in the correct causal order."
+    },
+    {
+      "id": "26c24eb1ed5480179fe2fee1af430b50",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed5480e690ccfb1f2ea520de",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480179fe2fee1af430b50",
+      "html": "Use <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">version vectors</span> or <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">dependency tracking</span> to keep track of causal relationships between updates.",
+      "text": "Use version vectors or dependency tracking to keep track of causal relationships between updates."
+    },
+    {
+      "id": "26c24eb1ed54804dbf11e625dd569405",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480179fe2fee1af430b50",
+      "html": "Can be combined with <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">replica-based replication</span> to allow updates to propagate while maintaining causal order.",
+      "text": "Can be combined with replica-based replication to allow updates to propagate while maintaining causal order."
+    }
+  ]
+}

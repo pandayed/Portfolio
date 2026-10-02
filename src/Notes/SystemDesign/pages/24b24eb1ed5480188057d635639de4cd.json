@@ -1,0 +1,404 @@
+{
+  "id": "24b24eb1ed5480188057d635639de4cd",
+  "title": "[L]: Liskov Substitution Principle (LSP)",
+  "sourceUrl": "https://xpandeyed.notion.site/L-Liskov-Substitution-Principle-LSP-24b24eb1ed5480188057d635639de4cd?pvs=23",
+  "blocks": [
+    {
+      "id": "24b24eb1ed54802eab60f00006d06809",
+      "type": "bulleted_list",
+      "html": "Subtypes must be substitutable for their base types <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">without altering the correctness</span> of the program.",
+      "text": "Subtypes must be substitutable for their base types without altering the correctness of the program."
+    },
+    {
+      "id": "24b24eb1ed5480f1a8aceb49c9e35eba",
+      "type": "bulleted_list",
+      "html": "If <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">B</span></div> is a subtype of <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">A</span></div>, objects of <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"5\" spellcheck=\"false\" class=\"notion-enable-hover\">B</span></div> should be usable anywhere <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"7\" spellcheck=\"false\" class=\"notion-enable-hover\">A</span></div> is expected, with the same behavior guarantees.",
+      "text": "If B is a subtype of A, objects of B should be usable anywhere A is expected, with the same behavior guarantees."
+    },
+    {
+      "id": "24b24eb1ed5480adb6d9f4ce6be8c8d2",
+      "type": "bulleted_list",
+      "html": "Subtypes must honor the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">contracts, invariants, and expected behavior</span> of their base type.",
+      "text": "Subtypes must honor the contracts, invariants, and expected behavior of their base type."
+    },
+    {
+      "id": "24b24eb1ed5480729ee0efb146fc8efa",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480b0bd67c0366c058f69",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why is it important</span>",
+      "text": "Why is it important"
+    },
+    {
+      "id": "24b24eb1ed5480589a73fc9647989af4",
+      "type": "bulleted_list",
+      "html": "Ensures that polymorphism works safely and predictably.",
+      "text": "Ensures that polymorphism works safely and predictably."
+    },
+    {
+      "id": "24b24eb1ed54809589eeda9e97b1ea2b",
+      "type": "bulleted_list",
+      "html": "Prevents subtle bugs when replacing one implementation with another.",
+      "text": "Prevents subtle bugs when replacing one implementation with another."
+    },
+    {
+      "id": "24b24eb1ed5480db833ef08c950ef5e8",
+      "type": "bulleted_list",
+      "html": "Allows extensions without breaking existing code.",
+      "text": "Allows extensions without breaking existing code."
+    },
+    {
+      "id": "24b24eb1ed54803a9f01f004b241f63c",
+      "type": "bulleted_list",
+      "html": "Maintains consistent interface contracts across hierarchies.",
+      "text": "Maintains consistent interface contracts across hierarchies."
+    },
+    {
+      "id": "24b24eb1ed5480d3a786f7f2c1dfc3d8",
+      "type": "bulleted_list",
+      "html": "Improves reusability and maintainability of abstractions.",
+      "text": "Improves reusability and maintainability of abstractions."
+    },
+    {
+      "id": "24b24eb1ed548019b7a5d4eba33894d3",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480a1beece67d5bd25afe",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bad example</span>",
+      "text": "Bad example"
+    },
+    {
+      "id": "24b24eb1ed548030ab9eda3e409896a1",
+      "type": "code",
+      "html": "// Base class\nclass Bird {\n    method fly() {\n        // Generic flying behavior\n    }\n}\n\n// Subclass that cannot fly\nclass Ostrich extends Bird {\n    method fly() {\n        throw Error(\"Ostrich cannot fly\")\n    }\n}\n\n// Code that expects any Bird to fly\nmethod letBirdFly(bird: Bird) {\n    bird.fly()\n}",
+      "text": "// Base class\nclass Bird {\n    method fly() {\n        // Generic flying behavior\n    }\n}\n\n// Subclass that cannot fly\nclass Ostrich extends Bird {\n    method fly() {\n        throw Error(\"Ostrich cannot fly\")\n    }\n}\n\n// Code that expects any Bird to fly\nmethod letBirdFly(bird: Bird) {\n    bird.fly()\n}"
+    },
+    {
+      "id": "24b24eb1ed54801a946feba7f8f992f2",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480c18745ee1f3fd82178",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Problems in the bad code</span>",
+      "text": "Problems in the bad code"
+    },
+    {
+      "id": "24b24eb1ed54800a94f1ed8ec95c15f3",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">Ostrich</span></div> breaks the expected behavior of <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">Bird</span></div> — violates substitutability.",
+      "text": "Ostrich breaks the expected behavior of Bird — violates substitutability."
+    },
+    {
+      "id": "24b24eb1ed5480899fc8d799973fa9f0",
+      "type": "bulleted_list",
+      "html": "Client code (<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">letBirdFly</span></div>) fails when given an <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">Ostrich</span></div>.",
+      "text": "Client code (letBirdFly) fails when given an Ostrich."
+    },
+    {
+      "id": "24b24eb1ed5480e0b062fecb6e75b24a",
+      "type": "bulleted_list",
+      "html": "The base type contract (“all birds can fly”) is broken by the subclass.",
+      "text": "The base type contract (“all birds can fly”) is broken by the subclass."
+    },
+    {
+      "id": "24b24eb1ed5480d1b0e8ce50fe292166",
+      "type": "bulleted_list",
+      "html": "This leads to runtime errors and loss of trust in the abstraction.",
+      "text": "This leads to runtime errors and loss of trust in the abstraction."
+    },
+    {
+      "id": "24b24eb1ed5480a6924ae28aca76e9b4",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548055830fe96c4997aebe",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fix</span>",
+      "text": "Fix"
+    },
+    {
+      "id": "24b24eb1ed548077a5a5c21f0e971807",
+      "type": "code",
+      "html": "interface Bird {\n    method eat()\n}\n\ninterface FlyingBird extends Bird {\n    method fly()\n}\n\nclass Sparrow implements FlyingBird {\n    method eat() { /* eating */ }\n    method fly() { /* flying */ }\n}\n\nclass Ostrich implements Bird {\n    method eat() { /* eating */ }\n}",
+      "text": "interface Bird {\n    method eat()\n}\n\ninterface FlyingBird extends Bird {\n    method fly()\n}\n\nclass Sparrow implements FlyingBird {\n    method eat() { /* eating */ }\n    method fly() { /* flying */ }\n}\n\nclass Ostrich implements Bird {\n    method eat() { /* eating */ }\n}"
+    },
+    {
+      "id": "24b24eb1ed548046a653fb234872b6f6",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480d491c3dae594a0c8f1",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What’s the change and how it fixes the problems</span>",
+      "text": "What’s the change and how it fixes the problems"
+    },
+    {
+      "id": "24b24eb1ed5480a7a340f3f52215332e",
+      "type": "bulleted_list",
+      "html": "Split the abstraction into <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">Bird</span></div> and <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">FlyingBird</span></div> so only flying birds have a <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"5\" spellcheck=\"false\" class=\"notion-enable-hover\">fly</span></div> method.",
+      "text": "Split the abstraction into Bird and FlyingBird so only flying birds have a fly method."
+    },
+    {
+      "id": "24b24eb1ed54800b8ed6f931900d9d66",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">Ostrich</span></div> no longer inherits unsupported behavior.",
+      "text": "Ostrich no longer inherits unsupported behavior."
+    },
+    {
+      "id": "24b24eb1ed54805db51fc21740319ef3",
+      "type": "bulleted_list",
+      "html": "Client code that expects <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">FlyingBird</span></div> will never get a non-flying bird.",
+      "text": "Client code that expects FlyingBird will never get a non-flying bird."
+    },
+    {
+      "id": "24b24eb1ed548084abcfefb3d98088e0",
+      "type": "bulleted_list",
+      "html": "Substitutability is maintained — all <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">FlyingBird</span></div> objects can fly, all <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">Bird</span></div> objects can eat.",
+      "text": "Substitutability is maintained — all FlyingBird objects can fly, all Bird objects can eat."
+    },
+    {
+      "id": "24b24eb1ed5480478f5fd71181aba9f9",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54803ebbecd63dbf4427b2",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How to check if the code follows LSP</span>",
+      "text": "How to check if the code follows LSP"
+    },
+    {
+      "id": "24b24eb1ed54806ea24ff77a7f7bfa65",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 1 — Behavior Preservation</span>",
+      "text": "Rule 1 — Behavior Preservation"
+    },
+    {
+      "id": "24b24eb1ed5480dc8c9aca8d4594aea7",
+      "type": "bulleted_list",
+      "html": "Subtypes must preserve the behavior promised by the base type.",
+      "text": "Subtypes must preserve the behavior promised by the base type."
+    },
+    {
+      "id": "24b24eb1ed5480a28d49c8dfb9727e18",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Replace a base type with each subtype in tests. If behavior changes unexpectedly, LSP is violated.",
+      "text": "Check: Replace a base type with each subtype in tests. If behavior changes unexpectedly, LSP is violated."
+    },
+    {
+      "id": "24b24eb1ed5480eeaca3fe8f103f366b",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548035ae67c7667c2996fc",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 2 — No Contract Weakening</span>",
+      "text": "Rule 2 — No Contract Weakening"
+    },
+    {
+      "id": "24b24eb1ed5480e49ac1c5dbbbf66e74",
+      "type": "bulleted_list",
+      "html": "Preconditions in subtypes must not be stricter than in the base type.",
+      "text": "Preconditions in subtypes must not be stricter than in the base type."
+    },
+    {
+      "id": "24b24eb1ed548070839ceb1d5007baa1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If a subtype demands extra conditions before methods work, LSP is violated.",
+      "text": "Check: If a subtype demands extra conditions before methods work, LSP is violated."
+    },
+    {
+      "id": "24b24eb1ed548016a561ff5d70d074a5",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54801f9b5bcd1d8c4702fa",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 3 — No Contract Breaking</span>",
+      "text": "Rule 3 — No Contract Breaking"
+    },
+    {
+      "id": "24b24eb1ed548039adf6c507d9381163",
+      "type": "bulleted_list",
+      "html": "Postconditions in subtypes must not be weaker than in the base type.",
+      "text": "Postconditions in subtypes must not be weaker than in the base type."
+    },
+    {
+      "id": "24b24eb1ed548081b78cea05edbc1d7f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Ensure the method returns values or states that meet or exceed base type guarantees.",
+      "text": "Check: Ensure the method returns values or states that meet or exceed base type guarantees."
+    },
+    {
+      "id": "24b24eb1ed5480aeb991d4f82f5478b4",
+      "type": "divider"
+    },
+    {
+      "id": "25224eb1ed5480d28c6ae12cc1c86261",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 4 — Preserve Invariants</span>",
+      "text": "Rule 4 — Preserve Invariants"
+    },
+    {
+      "id": "25224eb1ed5480e08f22da567993f779",
+      "type": "bulleted_list",
+      "html": "<span data-token-index=\"0\" class=\"notion-enable-hover\">A subtype must not break the conditions (invariants) that the base type guarantees to always hold.</span>",
+      "text": "A subtype must not break the conditions (invariants) that the base type guarantees to always hold."
+    },
+    {
+      "id": "25224eb1ed548013bea5d74429c25866",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> List the base type’s invariants. Verify that every subtype also ensures these invariants remain true in all situations.",
+      "text": "Check: List the base type’s invariants. Verify that every subtype also ensures these invariants remain true in all situations."
+    },
+    {
+      "id": "25224eb1ed548002afa1d1ec7a36ec56",
+      "type": "callout"
+    },
+    {
+      "id": "25224eb1ed5480bda992c1152c526c05",
+      "type": "text",
+      "parent": "25224eb1ed548002afa1d1ec7a36ec56",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Invariant (in OOP / LSP context):</span>",
+      "text": "Invariant (in OOP / LSP context):"
+    },
+    {
+      "id": "25224eb1ed548031aa63fa210385ecb0",
+      "type": "bulleted_list",
+      "parent": "25224eb1ed548002afa1d1ec7a36ec56",
+      "html": "An invariant is a condition or rule that must always hold true for an object of a class, no matter what state it’s in.",
+      "text": "An invariant is a condition or rule that must always hold true for an object of a class, no matter what state it’s in."
+    },
+    {
+      "id": "25224eb1ed54806795aff3b970eab5f8",
+      "type": "bulleted_list",
+      "parent": "25224eb1ed548002afa1d1ec7a36ec56",
+      "html": "It’s like a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">guarantee</span> the class gives about its valid state.",
+      "text": "It’s like a guarantee the class gives about its valid state."
+    },
+    {
+      "id": "25224eb1ed54804fba90e123896b52e8",
+      "type": "text",
+      "parent": "25224eb1ed548002afa1d1ec7a36ec56",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Examples:</span>",
+      "text": "Examples:"
+    },
+    {
+      "id": "25224eb1ed54801db633c35b04dd520a",
+      "type": "bulleted_list",
+      "parent": "25224eb1ed548002afa1d1ec7a36ec56",
+      "html": "For a Rectangle, width ≥ 0 and height ≥ 0 are invariants.",
+      "text": "For a Rectangle, width ≥ 0 and height ≥ 0 are invariants."
+    },
+    {
+      "id": "25224eb1ed5480659e1fc700d165ae3e",
+      "type": "bulleted_list",
+      "parent": "25224eb1ed548002afa1d1ec7a36ec56",
+      "html": "For a BankAccount, balance ≥ 0 might be an invariant.",
+      "text": "For a BankAccount, balance ≥ 0 might be an invariant."
+    },
+    {
+      "id": "25224eb1ed5480b7aa7cf29d8ba4d82e",
+      "type": "bulleted_list",
+      "parent": "25224eb1ed548002afa1d1ec7a36ec56",
+      "html": "For a SortedList, the elements are always in ascending order — that’s its invariant.",
+      "text": "For a SortedList, the elements are always in ascending order — that’s its invariant."
+    },
+    {
+      "id": "24b24eb1ed5480678961e1a6944d5eaf",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548076bfe4f9854d6ab942",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 5 — Exception Consistency</span>",
+      "text": "Rule 5 — Exception Consistency"
+    },
+    {
+      "id": "24b24eb1ed548098a9e8f5d7b7e0b4ac",
+      "type": "bulleted_list",
+      "html": "Subtypes should not throw new unexpected exceptions where the base type wouldn’t.",
+      "text": "Subtypes should not throw new unexpected exceptions where the base type wouldn’t."
+    },
+    {
+      "id": "24b24eb1ed54806195f2d9295dda4cef",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Review method signatures and runtime behavior for extra error cases.",
+      "text": "Check: Review method signatures and runtime behavior for extra error cases."
+    },
+    {
+      "id": "24b24eb1ed54803b8de0c9093765dbd9",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480c69b6adda707c8dba3",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 6 — Type Replaceability in Client Code</span>",
+      "text": "Rule 6 — Type Replaceability in Client Code"
+    },
+    {
+      "id": "24b24eb1ed5480619353c4b1b7a3f23c",
+      "type": "bulleted_list",
+      "html": "Code using the base type should work with any subtype without modification.",
+      "text": "Code using the base type should work with any subtype without modification."
+    },
+    {
+      "id": "24b24eb1ed5480149332e490428abb38",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Swap base type objects with subtype objects in integration tests. If failures occur, LSP is violated.",
+      "text": "Check: Swap base type objects with subtype objects in integration tests. If failures occur, LSP is violated."
+    },
+    {
+      "id": "24b24eb1ed5480028c50e12b3c77137c",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54803c8cdec0b67c82545d",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 7 — Interface Segmentation for Capabilities</span>",
+      "text": "Rule 7 — Interface Segmentation for Capabilities"
+    },
+    {
+      "id": "24b24eb1ed54808bbd1bece4ebd5af88",
+      "type": "bulleted_list",
+      "html": "Avoid forcing subtypes to implement unsupported behavior.",
+      "text": "Avoid forcing subtypes to implement unsupported behavior."
+    },
+    {
+      "id": "24b24eb1ed5480daab95e0633feebe4d",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If a subtype’s method is empty, throws errors, or is irrelevant, LSP is likely violated.",
+      "text": "Check: If a subtype’s method is empty, throws errors, or is irrelevant, LSP is likely violated."
+    },
+    {
+      "id": "24b24eb1ed548012a6d7dedc9d1cc7dc",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480b9aa94f32b41e10eda",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 8 — Test with Real Substitutions</span>",
+      "text": "Rule 8 — Test with Real Substitutions"
+    },
+    {
+      "id": "24b24eb1ed5480859f80dc7f64cd1aab",
+      "type": "bulleted_list",
+      "html": "Use real scenarios where subtypes are passed to code expecting the base type.",
+      "text": "Use real scenarios where subtypes are passed to code expecting the base type."
+    },
+    {
+      "id": "24b24eb1ed5480d4933efe042557c8f0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Any break in behavior indicates violation.",
+      "text": "Check: Any break in behavior indicates violation."
+    },
+    {
+      "id": "24b24eb1ed5480bda210c504965faec4",
+      "type": "divider"
+    }
+  ]
+}

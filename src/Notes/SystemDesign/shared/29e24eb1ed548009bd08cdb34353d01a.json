@@ -1,0 +1,58 @@
+{
+  "id": "29e24eb1ed548009bd08cdb34353d01a",
+  "blocks": [
+    {
+      "id": "29e24eb1ed548009bd08cdb34353d01a",
+      "type": "callout",
+      "parent": "2f824eb1ed548025adbed005d7482241"
+    },
+    {
+      "id": "29e24eb1ed5480e68aa8f577c3ba7ff6",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548009bd08cdb34353d01a",
+      "html": "Load balancer, API gateway, and reverse proxy all sit between clients and servers.",
+      "text": "Load balancer, API gateway, and reverse proxy all sit between clients and servers."
+    },
+    {
+      "id": "29e24eb1ed5480988326e9960ad40a79",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548009bd08cdb34353d01a",
+      "html": "They are often combined into a single service running on one server.",
+      "text": "They are often combined into a single service running on one server."
+    },
+    {
+      "id": "29e24eb1ed5480ce9adec4340a45b2ec",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548009bd08cdb34353d01a",
+      "html": "Many service providers offer the features of all three together.",
+      "text": "Many service providers offer the features of all three together."
+    },
+    {
+      "id": "29e24eb1ed54805fa6f7c3d11ccadcd3",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548009bd08cdb34353d01a",
+      "html": "Because of this, their functions are often described together and mixed up in articles, videos etc. But not here.",
+      "text": "Because of this, their functions are often described together and mixed up in articles, videos etc. But not here."
+    },
+    {
+      "id": "29e24eb1ed5480d3b449ce73ecd7109e",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548009bd08cdb34353d01a",
+      "html": "Here, I have focused on the primary responsibilities of the component.",
+      "text": "Here, I have focused on the primary responsibilities of the component."
+    },
+    {
+      "id": "2f824eb1ed54808b96d2e706e60b54f0",
+      "type": "bulleted_list",
+      "parent": "29e24eb1ed548009bd08cdb34353d01a",
+      "html": "Refer to <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Reverse-Proxy-VS-API-Gateway-VS-Load-Balancer-29324eb1ed54809cba1adc5094c49f46?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Reverse Proxy VS API Gateway VS Load Balancer</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Refer to Reverse Proxy VS API Gateway VS Load Balancer ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Reverse-Proxy-VS-API-Gateway-VS-Load-Balancer-29324eb1ed54809cba1adc5094c49f46?pvs=24",
+          "text": "Reverse Proxy VS API Gateway VS Load Balancer"
+        }
+      ]
+    }
+  ]
+}

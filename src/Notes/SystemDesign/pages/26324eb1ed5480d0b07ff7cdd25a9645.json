@@ -1,0 +1,35 @@
+{
+  "id": "26324eb1ed5480d0b07ff7cdd25a9645",
+  "title": "Design Principles",
+  "sourceUrl": "https://xpandeyed.notion.site/Design-Principles-26324eb1ed5480d0b07ff7cdd25a9645?pvs=23",
+  "blocks": [
+    {
+      "id": "26324eb1ed54807b9d4dc21721ec1190",
+      "type": "collection_view",
+      "pageIds": [
+        "26324eb1ed5480e4b1d8e6c56b1f8da3",
+        "26324eb1ed54809eacbbfc67d091b859",
+        "26324eb1ed5480d7ab0dd27519151b38",
+        "26324eb1ed548093ba82da47ad934034"
+      ],
+      "title": "Ungrouped Design Principles"
+    },
+    {
+      "id": "24b24eb1ed5480cc9d94e3997e297c0d",
+      "type": "collection_view",
+      "pageIds": [
+        "24b24eb1ed5480b8b6d8d0282eadec82",
+        "24b24eb1ed54804e9553d69f2d6eb779",
+        "24b24eb1ed54806d8debcd9a0f486496",
+        "24b24eb1ed5480188057d635639de4cd",
+        "24b24eb1ed5480eba76bd1443607177a",
+        "24b24eb1ed5480ddb66add956a07aafd"
+      ],
+      "title": "🪨SOLID Principles"
+    },
+    {
+      "id": "26324eb1ed54804d9a28c438f5fcaf5b",
+      "type": "text"
+    }
+  ]
+}

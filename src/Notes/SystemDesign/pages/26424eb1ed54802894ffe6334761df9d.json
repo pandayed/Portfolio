@@ -1,0 +1,1560 @@
+{
+  "id": "26424eb1ed54802894ffe6334761df9d",
+  "title": "Transactions & ACID Properties",
+  "sourceUrl": "https://xpandeyed.notion.site/Transactions-ACID-Properties-26424eb1ed54802894ffe6334761df9d?pvs=23",
+  "blocks": [
+    {
+      "id": "26524eb1ed5480aeb4bddd5ec347a243",
+      "type": "header",
+      "html": "Transactions",
+      "text": "Transactions"
+    },
+    {
+      "id": "26524eb1ed54803fb820c80564f00ad5",
+      "type": "bulleted_list",
+      "html": "A logical unit of work grouping one or more operations.",
+      "text": "A logical unit of work grouping one or more operations."
+    },
+    {
+      "id": "26524eb1ed5480278638ccd4fea910c1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">All-or-nothing</span>: Either all operations succeed (commit) or none take effect (abort/rollback).",
+      "text": "All-or-nothing: Either all operations succeed (commit) or none take effect (abort/rollback)."
+    },
+    {
+      "id": "26524eb1ed54800e9ff5df6442e0c8fb",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Application Responsibilities</span>",
+      "text": "Application Responsibilities"
+    },
+    {
+      "id": "26524eb1ed548018846dcee0c8e6207d",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800e9ff5df6442e0c8fb",
+      "html": "Decide which operations belong to a transaction (<span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">operation set</span>).",
+      "text": "Decide which operations belong to a transaction (operation set)."
+    },
+    {
+      "id": "26524eb1ed5480438498dac0669cc02d",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800e9ff5df6442e0c8fb",
+      "html": "Define transaction boundaries — where it&nbsp;<span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">begins</span>&nbsp;and where it&nbsp;<span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">ends</span>&nbsp;(commit/abort).",
+      "text": "Define transaction boundaries — where it begins and where it ends (commit/abort)."
+    },
+    {
+      "id": "26524eb1ed548078b86bca3353a6ae5a",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800e9ff5df6442e0c8fb",
+      "html": "Communicate these boundaries and rules to the database, using the chosen interface (programming language, framework, ORM, or raw SQL).",
+      "text": "Communicate these boundaries and rules to the database, using the chosen interface (programming language, framework, ORM, or raw SQL)."
+    },
+    {
+      "id": "26524eb1ed5480ef9f36df8fec8e9de0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Database responsibilities</span>",
+      "text": "Database responsibilities"
+    },
+    {
+      "id": "26524eb1ed5480d69a21ce0932d35208",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480ef9f36df8fec8e9de0",
+      "html": "Enforce the transaction boundaries once informed by the application.",
+      "text": "Enforce the transaction boundaries once informed by the application."
+    },
+    {
+      "id": "26524eb1ed548070a879fc1b4128c1cd",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed5480c1af88d5b322a5bc4b",
+      "type": "header",
+      "html": "ACID",
+      "text": "ACID"
+    },
+    {
+      "id": "26524eb1ed5480c5a0eec6f393aca70e",
+      "type": "bulleted_list",
+      "html": "Coined in 1983 by <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">Andreas Reuter</span> and <span style=\"font-style:italic\" data-token-index=\"3\" class=\"notion-enable-hover\">Theo Härder</span> in their paper, <span style=\"font-style:italic\" data-token-index=\"5\" class=\"notion-enable-hover\">“Principles of Transaction-Oriented Database Recovery”</span>.",
+      "text": "Coined in 1983 by Andreas Reuter and Theo Härder in their paper, “Principles of Transaction-Oriented Database Recovery”."
+    },
+    {
+      "id": "26524eb1ed5480819cf8f0e00153fb6e",
+      "type": "bulleted_list",
+      "html": "Describes the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">properties of transactions</span>, not databases.",
+      "text": "Describes the properties of transactions, not databases."
+    },
+    {
+      "id": "26524eb1ed5480be9783f241dbf692f3",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why confusion with DBs?</span>",
+      "text": "Why confusion with DBs?"
+    },
+    {
+      "id": "26524eb1ed5480b0a9dedf9c30b8230c",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480be9783f241dbf692f3",
+      "html": "Since DBMS must provide tools/feature to support transactions, ACID got associated with databases.",
+      "text": "Since DBMS must provide tools/feature to support transactions, ACID got associated with databases."
+    },
+    {
+      "id": "26524eb1ed5480a99a3ac4c6c59fc676",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Correct view</span>:",
+      "text": "Correct view:"
+    },
+    {
+      "id": "26524eb1ed548017b57ae3924fc279de",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99a3ac4c6c59fc676",
+      "html": "ACID is about <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">transactions</span>.",
+      "text": "ACID is about transactions."
+    },
+    {
+      "id": "26524eb1ed5480fba0f7dc36c70a7e40",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99a3ac4c6c59fc676",
+      "html": "Application defines them → communicates to DB → DB enforces them.",
+      "text": "Application defines them → communicates to DB → DB enforces them."
+    },
+    {
+      "id": "26524eb1ed5480d6a95cd7641fbbbce3",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99a3ac4c6c59fc676",
+      "html": "Transaction integrity emerges from this cooperation, not just DB alone.",
+      "text": "Transaction integrity emerges from this cooperation, not just DB alone."
+    },
+    {
+      "id": "26524eb1ed54803ca2e0ee757083f5f6",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed54805cb80ef89e5f37ef9f",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed548004b6d2c0440edf83f8",
+      "type": "text",
+      "parent": "26524eb1ed54805cb80ef89e5f37ef9f",
+      "html": "<span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"0\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">The terms </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:var(--c-texPri);word-wrap:break-word;font-weight:600;isolation:auto\" data-token-index=\"1\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">Atomicity, Consistency, Isolation, and Durability</span><span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"2\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\"> are used in </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:var(--c-texPri);word-wrap:break-word;font-weight:600;isolation:auto\" data-token-index=\"3\" data-notion-highlight=\"default_background\" class=\"notion-enable-hover\">many contexts</span><span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"4\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">, within Software Engineering, with </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:var(--c-texPri);word-wrap:break-word;font-weight:600;isolation:auto\" data-token-index=\"5\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">different meanings</span><span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"6\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">, but when using the acronym </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:var(--c-texPri);word-wrap:break-word;font-weight:600;isolation:auto\" data-token-index=\"7\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">ACID,</span><span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"8\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\"> implies that the </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:var(--c-texPri);word-wrap:break-word;font-weight:600;isolation:auto\" data-token-index=\"9\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">context is Transactions</span><span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"10\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">, and therefore </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:var(--c-texPri);word-wrap:break-word;font-weight:600;isolation:auto\" data-token-index=\"11\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">unless the context is explicitly mentioned</span><span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"12\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\"> in the notes, </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:var(--c-texPri);word-wrap:break-word;font-weight:600;isolation:auto\" data-token-index=\"13\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">consider the context to be Transactions and not DBs</span><span style=\"color:var(--c-texPri);isolation:auto\" data-token-index=\"14\" data-notion-highlight=\"default\" data-notion-background-highlight=\"default_background\" class=\"notion-enable-hover\">.</span>",
+      "text": "The terms Atomicity, Consistency, Isolation, and Durability are used in many contexts, within Software Engineering, with different meanings, but when using the acronym ACID, implies that the context is Transactions, and therefore unless the context is explicitly mentioned in the notes, consider the context to be Transactions and not DBs."
+    },
+    {
+      "id": "26624eb1ed54803497f2d4aee917a4c0",
+      "type": "divider"
+    },
+    {
+      "id": "26524eb1ed5480319480f64fe86d1037",
+      "type": "header",
+      "html": "[D]: Durability",
+      "text": "[D]: Durability"
+    },
+    {
+      "id": "26524eb1ed5480d3bfa8f1d77710f8c8",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Once saved, always saved.</span>",
+      "text": "Once saved, always saved."
+    },
+    {
+      "id": "26524eb1ed54804e9512dd58f0ce219c",
+      "type": "bulleted_list",
+      "html": "Once a transaction has been committed, it will remain so, even in the event of a power loss, crash, or other system failure.",
+      "text": "Once a transaction has been committed, it will remain so, even in the event of a power loss, crash, or other system failure."
+    },
+    {
+      "id": "26524eb1ed54808daa2ede4f01ccd728",
+      "type": "sub_header",
+      "html": "Enforcing Durability",
+      "text": "Enforcing Durability"
+    },
+    {
+      "id": "26524eb1ed5480589557c31d49081602",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Write-Ahead Logging (WAL)</span>",
+      "text": "Write-Ahead Logging (WAL)"
+    },
+    {
+      "id": "26524eb1ed5480f68675ca98452c4792",
+      "type": "bulleted_list",
+      "html": "Before applying a change, the database records it in a log on disk.",
+      "text": "Before applying a change, the database records it in a log on disk."
+    },
+    {
+      "id": "26524eb1ed5480c68496f8aa4d480c0a",
+      "type": "bulleted_list",
+      "html": "Even if the system crashes mid-operation, the log can be replayed to restore the committed state.",
+      "text": "Even if the system crashes mid-operation, the log can be replayed to restore the committed state."
+    },
+    {
+      "id": "26524eb1ed5480208da4ce09eda305dd",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed548036940cf9e7a32b6295",
+      "type": "toggle",
+      "parent": "26524eb1ed5480208da4ce09eda305dd",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example: Write-Ahead Logging</span>",
+      "text": "Example: Write-Ahead Logging"
+    },
+    {
+      "id": "26524eb1ed548051900cc197a072f4a8",
+      "type": "divider",
+      "parent": "26524eb1ed548036940cf9e7a32b6295"
+    },
+    {
+      "id": "26524eb1ed5480e7b116d96bb49d0e58",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction</span>: Transfer $100 from Account A ($500) to Account B ($300).",
+      "text": "Transaction: Transfer $100 from Account A ($500) to Account B ($300)."
+    },
+    {
+      "id": "26524eb1ed54806db623fef8b31b229a",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 1 (Write Log First)</span>:",
+      "text": "Step 1 (Write Log First):"
+    },
+    {
+      "id": "26524eb1ed548088a6d2d7f1c12259a0",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54806db623fef8b31b229a",
+      "html": "Logs are written:",
+      "text": "Logs are written:"
+    },
+    {
+      "id": "26524eb1ed5480aa9b68f4887ceef3a5",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548088a6d2d7f1c12259a0",
+      "html": "“Subtract 100 from A”",
+      "text": "“Subtract 100 from A”"
+    },
+    {
+      "id": "26524eb1ed5480918024c06705ce86ab",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548088a6d2d7f1c12259a0",
+      "html": "“Add 100 to B”",
+      "text": "“Add 100 to B”"
+    },
+    {
+      "id": "26524eb1ed548009908fd0b691664359",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54806db623fef8b31b229a",
+      "html": "This log entry is flushed to disk.",
+      "text": "This log entry is flushed to disk."
+    },
+    {
+      "id": "26524eb1ed5480c98890d04deb48d0b6",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 2 (Apply Changes)</span>:",
+      "text": "Step 2 (Apply Changes):"
+    },
+    {
+      "id": "26524eb1ed5480bfacddfd8c95a352f6",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480c98890d04deb48d0b6",
+      "html": "Update A → A - $100",
+      "text": "Update A → A - $100"
+    },
+    {
+      "id": "26524eb1ed548075ac1ef1c0e0829c25",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480c98890d04deb48d0b6",
+      "html": "Update B → B + $100",
+      "text": "Update B → B + $100"
+    },
+    {
+      "id": "26524eb1ed548052b395cb8471d5d1ab",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 3 (Commit)</span>:",
+      "text": "Step 3 (Commit):"
+    },
+    {
+      "id": "26524eb1ed5480318749df233683b255",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548052b395cb8471d5d1ab",
+      "html": "Transaction marked as committed.",
+      "text": "Transaction marked as committed."
+    },
+    {
+      "id": "26524eb1ed5480719e29d79736ed52d7",
+      "type": "text",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">If crash after log but before updates</span>:",
+      "text": "If crash after log but before updates:"
+    },
+    {
+      "id": "26524eb1ed5480cdbd8adb9c6aefcb61",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "On restart, DB replays the log.",
+      "text": "On restart, DB replays the log."
+    },
+    {
+      "id": "26524eb1ed5480e78381f55c79dff6ff",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "Updates are re-applied → A → A - $100, B → B + $100.",
+      "text": "Updates are re-applied → A → A - $100, B → B + $100."
+    },
+    {
+      "id": "26524eb1ed5480248b8ae7f1fbbc1411",
+      "type": "text",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">If crash before log is written</span>:",
+      "text": "If crash before log is written:"
+    },
+    {
+      "id": "26524eb1ed5480d09bdee23ffe174a74",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "DB has no record of this transaction.",
+      "text": "DB has no record of this transaction."
+    },
+    {
+      "id": "26524eb1ed54805fac9dce1967988155",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "It is ignored → A = $500, B = $300 remain unchanged.",
+      "text": "It is ignored → A = $500, B = $300 remain unchanged."
+    },
+    {
+      "id": "26524eb1ed5480748854c84864fcef43",
+      "type": "text",
+      "parent": "26524eb1ed548036940cf9e7a32b6295",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee</span>: Once the DB acknowledges commit, the transaction survives crashes — no data is lost.",
+      "text": "Guarantee: Once the DB acknowledges commit, the transaction survives crashes — no data is lost."
+    },
+    {
+      "id": "26524eb1ed548093a133db2089424858",
+      "type": "sub_sub_header",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em;font-weight:600\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">fsync</span></div><span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\"> (Disk Flush)</span>",
+      "text": "fsync (Disk Flush)"
+    },
+    {
+      "id": "26524eb1ed54806d90e7e23ef761a1d0",
+      "type": "bulleted_list",
+      "html": "When a program writes data to disk, it often goes into memory (cache) first — not immediately onto the physical disk.",
+      "text": "When a program writes data to disk, it often goes into memory (cache) first — not immediately onto the physical disk."
+    },
+    {
+      "id": "26524eb1ed54802e801bd766f2f6e467",
+      "type": "bulleted_list",
+      "html": "If the computer crashes before that data is actually written, it can be lost.",
+      "text": "If the computer crashes before that data is actually written, it can be lost."
+    },
+    {
+      "id": "26524eb1ed5480f79f28ce69d5518fdf",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">fsync</span></div> forces the operating system to <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">flush</span> (immediately write) the data from memory to the physical disk.",
+      "text": "fsync forces the operating system to flush (immediately write) the data from memory to the physical disk."
+    },
+    {
+      "id": "26524eb1ed5480288122e7559804261c",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">fsync</span></div> makes sure that, a transaction is marked as \"saved/committed\", if and only if it’s really on the disk — not just sitting in memory waiting.",
+      "text": "fsync makes sure that, a transaction is marked as \"saved/committed\", if and only if it’s really on the disk — not just sitting in memory waiting."
+    },
+    {
+      "id": "26524eb1ed548092b309e97b51424d74",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Replication</span>",
+      "text": "Replication"
+    },
+    {
+      "id": "26524eb1ed54800c9d64ec895964e9e2",
+      "type": "bulleted_list",
+      "html": "The committed transaction is copied to other machines (replicas).",
+      "text": "The committed transaction is copied to other machines (replicas)."
+    },
+    {
+      "id": "26524eb1ed5480259572d9fb179e3672",
+      "type": "bulleted_list",
+      "html": "Even if the main server fails completely, replicas still have the data.",
+      "text": "Even if the main server fails completely, replicas still have the data."
+    },
+    {
+      "id": "26624eb1ed54807ba8c5d0757c391611",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed548025b7abe7f6f8df9a80",
+      "type": "callout"
+    },
+    {
+      "id": "26624eb1ed54805f995af576e7cc2a75",
+      "type": "text",
+      "parent": "26624eb1ed548025b7abe7f6f8df9a80",
+      "html": "The enforcing techniques here are simplified for intuition. Real databases use more advanced methods. \nThe same applies to the rest of these notes.",
+      "text": "The enforcing techniques here are simplified for intuition. Real databases use more advanced methods. \nThe same applies to the rest of these notes."
+    },
+    {
+      "id": "26424eb1ed5480b0be12e0c89968f562",
+      "type": "divider"
+    },
+    {
+      "id": "26424eb1ed548088ac9ff0eccfa1db87",
+      "type": "header",
+      "html": "[C]: Consistency",
+      "text": "[C]: Consistency"
+    },
+    {
+      "id": "26424eb1ed5480e3a5b1dca8e6d4cc31",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Application sets and enforces rules for data and database.</span>",
+      "text": "Application sets and enforces rules for data and database."
+    },
+    {
+      "id": "26424eb1ed548063ac70f1d3196e5fc0",
+      "type": "bulleted_list",
+      "html": "Consistency means that the database moves from <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one valid state to another valid state</span> after a transaction.",
+      "text": "Consistency means that the database moves from one valid state to another valid state after a transaction."
+    },
+    {
+      "id": "26424eb1ed5480ff8666f241cfda0b5c",
+      "type": "bulleted_list",
+      "html": "But, what is a <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">valid state</span>? It’s defined by the <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">rules of the application</span>. Therefore, its <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">an Application Property, Not a Database Property.</span>",
+      "text": "But, what is a valid state? It’s defined by the rules of the application. Therefore, its an Application Property, Not a Database Property."
+    },
+    {
+      "id": "26524eb1ed5480f89670e493c3dbe3f1",
+      "type": "sub_header",
+      "html": "Enforcing Consistency",
+      "text": "Enforcing Consistency"
+    },
+    {
+      "id": "26524eb1ed54800cb009ef21e655b0ba",
+      "type": "bulleted_list",
+      "html": "Since consistency is an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">application-level property</span>, the database cannot enforce it directly.",
+      "text": "Since consistency is an application-level property, the database cannot enforce it directly."
+    },
+    {
+      "id": "26524eb1ed5480249e13fae4cca8cb27",
+      "type": "bulleted_list",
+      "html": "Instead, its application’s responsibility to leverage the tools/features provided by DB to enforce consistency.",
+      "text": "Instead, its application’s responsibility to leverage the tools/features provided by DB to enforce consistency."
+    },
+    {
+      "id": "26524eb1ed5480e1a9d4dc70fe992a9a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Some Basic Tools/Features/Ways used to enforce Consistency:</span>",
+      "text": "Some Basic Tools/Features/Ways used to enforce Consistency:"
+    },
+    {
+      "id": "26524eb1ed5480febeebcd3c5cbd4867",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Constraints</span>: Primary keys, foreign keys, uniqueness, check constraints.",
+      "text": "Constraints: Primary keys, foreign keys, uniqueness, check constraints."
+    },
+    {
+      "id": "26524eb1ed54808b9b43f3874d78a667",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Data types</span>: Prevent storing invalid or corrupted values (e.g., a string in an integer column).",
+      "text": "Data types: Prevent storing invalid or corrupted values (e.g., a string in an integer column)."
+    },
+    {
+      "id": "26524eb1ed548097a6b2fcc40cd1e4e2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Triggers / Stored Procedures</span>: Allow enforcing complex business rules at the database level.",
+      "text": "Triggers / Stored Procedures: Allow enforcing complex business rules at the database level."
+    },
+    {
+      "id": "26524eb1ed5480dd8f47df588d321fdb",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Atomicity + Isolation</span>: Ensure that partial or concurrent transactions don’t break things.",
+      "text": "Atomicity + Isolation: Ensure that partial or concurrent transactions don’t break things."
+    },
+    {
+      "id": "26824eb1ed54804e8cecd6bd07319330",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed548089a14bd43669edb7c5",
+      "type": "toggle",
+      "parent": "26824eb1ed54804e8cecd6bd07319330",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Recommended Read: </span><a style=\"font-weight:600;cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Consistency-Definitions-Based-on-Context-26824eb1ed5480da91f3c623df4ea23d?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Consistency: Definitions Based on Context</span><span style=\"white-space:nowrap\"></span></a><span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\"> </span>",
+      "text": "Recommended Read: Consistency: Definitions Based on Context ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Consistency-Definitions-Based-on-Context-26824eb1ed5480da91f3c623df4ea23d?pvs=24",
+          "text": "Consistency: Definitions Based on Context"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed54806c852fcecb9dd69b6f",
+      "type": "text",
+      "parent": "26824eb1ed548089a14bd43669edb7c5",
+      "html": "Consistency is used in many contexts with different meanings. These notes gives an overview of these definitions and are recommended to avoid confusion and gain clarity.",
+      "text": "Consistency is used in many contexts with different meanings. These notes gives an overview of these definitions and are recommended to avoid confusion and gain clarity."
+    },
+    {
+      "id": "26424eb1ed5480b28d37f1069ab80204",
+      "type": "divider"
+    },
+    {
+      "id": "26424eb1ed5480dbb741f5f4ad2f5e4d",
+      "type": "header",
+      "html": "[A]: Atomicity",
+      "text": "[A]: Atomicity"
+    },
+    {
+      "id": "26424eb1ed54804fb1d1dc08831d23dc",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">All or nothing.</span>",
+      "text": "All or nothing."
+    },
+    {
+      "id": "26424eb1ed5480b891aeefe730aaccf9",
+      "type": "bulleted_list",
+      "html": "Atomicity is about <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">fault handling</span>. It guarantees <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">all-or-nothing</span>: either every step in a transaction is completed, or none of them are.",
+      "text": "Atomicity is about fault handling. It guarantees all-or-nothing: either every step in a transaction is completed, or none of them are."
+    },
+    {
+      "id": "26424eb1ed54805cb2d3ea75502b8728",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">A Better Term: \"Abortability\"</span>: The core idea is that a transaction can be <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">aborted</span>. When that happens, all its partial effects are erased and the database returns to the state before it began.",
+      "text": "A Better Term: \"Abortability\": The core idea is that a transaction can be aborted. When that happens, all its partial effects are erased and the database returns to the state before it began."
+    },
+    {
+      "id": "26524eb1ed548013b245ce96f75c4a05",
+      "type": "sub_sub_header",
+      "html": "Enforcing Atomicity",
+      "text": "Enforcing Atomicity"
+    },
+    {
+      "id": "26524eb1ed5480ff914bc3855ac9e0f1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Undo Logging</span>",
+      "text": "Undo Logging"
+    },
+    {
+      "id": "26524eb1ed54809e89a9eb734074c477",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480ff914bc3855ac9e0f1",
+      "html": "The database keeps track of changes in a log.",
+      "text": "The database keeps track of changes in a log."
+    },
+    {
+      "id": "26524eb1ed54801ea72edc567302d63a",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480ff914bc3855ac9e0f1",
+      "html": "If a transaction fails midway, the log is used to undo any partial changes.",
+      "text": "If a transaction fails midway, the log is used to undo any partial changes."
+    },
+    {
+      "id": "26524eb1ed5480b48c18d3144055f686",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480ff914bc3855ac9e0f1",
+      "html": "When an error or failure is detected, the database aborts the transaction and restores the previous state using the undo log. ",
+      "text": "When an error or failure is detected, the database aborts the transaction and restores the previous state using the undo log. "
+    },
+    {
+      "id": "26524eb1ed5480bcabf9e4e825d43169",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480ff914bc3855ac9e0f1",
+      "html": "After the failure, the application is informed using some errorCallback mechanism.",
+      "text": "After the failure, the application is informed using some errorCallback mechanism."
+    },
+    {
+      "id": "26524eb1ed5480c3b1c8ceb999a81583",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "type": "toggle",
+      "parent": "26524eb1ed5480c3b1c8ceb999a81583",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example: Undo Logging</span>",
+      "text": "Example: Undo Logging"
+    },
+    {
+      "id": "26524eb1ed548071a2c8e90a4bfadba7",
+      "type": "divider",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c"
+    },
+    {
+      "id": "26524eb1ed5480a8b5aae0c8776bac76",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction</span>: Transfer $100 from Account A ($500) to Account B ($300).",
+      "text": "Transaction: Transfer $100 from Account A ($500) to Account B ($300)."
+    },
+    {
+      "id": "26524eb1ed548011b614ef0b2631ab18",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 1 (Debit A)</span>:",
+      "text": "Step 1 (Debit A):"
+    },
+    {
+      "id": "26524eb1ed548073960ec0d4788d6f68",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548011b614ef0b2631ab18",
+      "html": "Write undo log: “Restore A = $500 if failure.”",
+      "text": "Write undo log: “Restore A = $500 if failure.”"
+    },
+    {
+      "id": "26524eb1ed5480c19468c0c39cbc5a91",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548011b614ef0b2631ab18",
+      "html": "Update A → $400.",
+      "text": "Update A → $400."
+    },
+    {
+      "id": "26524eb1ed54806c8dc8dba3b70ae749",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 2 (Credit B)</span>:",
+      "text": "Step 2 (Credit B):"
+    },
+    {
+      "id": "26524eb1ed5480beabecd1768ab616c6",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54806c8dc8dba3b70ae749",
+      "html": "Write undo log: “Restore B = $300 if failure.”",
+      "text": "Write undo log: “Restore B = $300 if failure.”"
+    },
+    {
+      "id": "26524eb1ed548052b726e69af8e329f2",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54806c8dc8dba3b70ae749",
+      "html": "Update B → $400.",
+      "text": "Update B → $400."
+    },
+    {
+      "id": "26524eb1ed54800da93de0e14503d520",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Commit</span>:",
+      "text": "Commit:"
+    },
+    {
+      "id": "26524eb1ed548016b04dc85690a27866",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800da93de0e14503d520",
+      "html": "Write commit record to log.",
+      "text": "Write commit record to log."
+    },
+    {
+      "id": "26524eb1ed54809f92d9ced60853a345",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800da93de0e14503d520",
+      "html": "Changes (A = $400, B = $400) become permanent.",
+      "text": "Changes (A = $400, B = $400) become permanent."
+    },
+    {
+      "id": "26524eb1ed5480b89f74cab6fc7ed313",
+      "type": "text",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">If crash happens before commit</span>:",
+      "text": "If crash happens before commit:"
+    },
+    {
+      "id": "26524eb1ed5480d3a267c6514cb9e12b",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "html": "DB replays log, sees no commit record.",
+      "text": "DB replays log, sees no commit record."
+    },
+    {
+      "id": "26524eb1ed5480999760d78f34c087fd",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480eeb7f0eeab4856cd7c",
+      "html": "Rollback using undo log → A = $500, B = $300.",
+      "text": "Rollback using undo log → A = $500, B = $300."
+    },
+    {
+      "id": "26624eb1ed5480eba8daf0faf3cebf7e",
+      "type": "callout"
+    },
+    {
+      "id": "26624eb1ed5480f099def22a297482b8",
+      "type": "text",
+      "parent": "26624eb1ed5480eba8daf0faf3cebf7e",
+      "html": "From the examples for WAL (Write Ahead Logging) in Durability and Undo Logging in Atomicity, it can be made clear that <span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:inherit;word-wrap:break-word;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Durability is enforced by REDO</span> and <span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:inherit;word-wrap:break-word;font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">Atomicity by UNDO</span>.",
+      "text": "From the examples for WAL (Write Ahead Logging) in Durability and Undo Logging in Atomicity, it can be made clear that Durability is enforced by REDO and Atomicity by UNDO."
+    },
+    {
+      "id": "26424eb1ed5480d0ac0ae2261dd2db3f",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed5480869f03ccd752ffec19",
+      "type": "toggle",
+      "parent": "26424eb1ed5480d0ac0ae2261dd2db3f",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Atomicity: Multi-Threading VS Transactions</span>",
+      "text": "Atomicity: Multi-Threading VS Transactions"
+    },
+    {
+      "id": "26424eb1ed5480a48a61cf220e493b6d",
+      "type": "alias",
+      "parent": "26524eb1ed5480869f03ccd752ffec19",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/Concurrency-vs-Parallelism-25824eb1ed5480be96b5f100ebcbfea4?pvs=25",
+          "text": "Concurrency vs Parallelism"
+        }
+      ]
+    },
+    {
+      "id": "26424eb1ed54800bb3fef344697f7227",
+      "type": "text",
+      "parent": "26524eb1ed5480869f03ccd752ffec19",
+      "html": "The term <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">atomicity</span> is often misunderstood by people familiar with concurrency because it has a different meanings, in the context of multi-threaded programming, and, in the context of ACID database transactions.",
+      "text": "The term atomicity is often misunderstood by people familiar with concurrency because it has a different meanings, in the context of multi-threaded programming, and, in the context of ACID database transactions."
+    },
+    {
+      "id": "26424eb1ed54805286ecd0d371e47b89",
+      "type": "text",
+      "parent": "26524eb1ed5480869f03ccd752ffec19",
+      "html": "The point of confusion stems from these two different definitions:",
+      "text": "The point of confusion stems from these two different definitions:"
+    },
+    {
+      "id": "26424eb1ed54807b8b26cc8ae8459e38",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480869f03ccd752ffec19",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">In Multi-Threaded Programming</span>: In this context, atomicity is about <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">concurrency</span>. An operation, such as an \"atomic increment,\" is indivisible — it ensures that multiple threads can modify a value without interfering with each other and causing race conditions like lost updates. In databases, however, concurrency issues between transactions are actually managed by <span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">\"I\" for Isolation</span>, not by \"A\" for Atomicity.",
+      "text": "In Multi-Threaded Programming: In this context, atomicity is about concurrency. An operation, such as an \"atomic increment,\" is indivisible — it ensures that multiple threads can modify a value without interfering with each other and causing race conditions like lost updates. In databases, however, concurrency issues between transactions are actually managed by \"I\" for Isolation, not by \"A\" for Atomicity."
+    },
+    {
+      "id": "26424eb1ed5480b48732ca7befcf4dc2",
+      "type": "text",
+      "parent": "26424eb1ed54807b8b26cc8ae8459e38",
+      "html": "It may sound confusing, but what we call <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">atomicity</span> in multi-threaded code (indivisible operations under concurrency) maps more closely to <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">Isolation</span> in ACID transactions than to Atomicity in ACID.",
+      "text": "It may sound confusing, but what we call atomicity in multi-threaded code (indivisible operations under concurrency) maps more closely to Isolation in ACID transactions than to Atomicity in ACID."
+    },
+    {
+      "id": "26424eb1ed5480c0bed8e196d1690f66",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480869f03ccd752ffec19",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">In ACID Transactions</span>: Atomicity in ACID is <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">not about concurrency at all</span>. Instead, it’s about <span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">fault handling</span>. It guarantees \"all-or-nothing\": either every operation in a transaction is successfully completed, or none of them are. If a transaction fails or is aborted for any reason (like a crash, constraint violation, or deadlock), all of its partial changes are rolled back, leaving the database unchanged.",
+      "text": "In ACID Transactions: Atomicity in ACID is not about concurrency at all. Instead, it’s about fault handling. It guarantees \"all-or-nothing\": either every operation in a transaction is successfully completed, or none of them are. If a transaction fails or is aborted for any reason (like a crash, constraint violation, or deadlock), all of its partial changes are rolled back, leaving the database unchanged."
+    },
+    {
+      "id": "26424eb1ed5480078812f58b3faebf1c",
+      "type": "divider"
+    },
+    {
+      "id": "26424eb1ed5480d0ad54d033bf706bc2",
+      "type": "header",
+      "html": "[I]: Isolation",
+      "text": "[I]: Isolation"
+    },
+    {
+      "id": "26524eb1ed5480ccaa25d1dd64beeaf8",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">The outcome of concurrent transactions is the same as if they had run one after another, in some order.</span>",
+      "text": "The outcome of concurrent transactions is the same as if they had run one after another, in some order."
+    },
+    {
+      "id": "26424eb1ed548093ae27d05d3f2537d4",
+      "type": "bulleted_list",
+      "html": "Isolation is about <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">concurrency control</span> — what happens when many transactions run at the same time.",
+      "text": "Isolation is about concurrency control — what happens when many transactions run at the same time."
+    },
+    {
+      "id": "26424eb1ed54801e8cfbf8c3d66d4f8f",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Strong Isolation Level</span>:",
+      "text": "Strong Isolation Level:"
+    },
+    {
+      "id": "26524eb1ed54803ab782c8c844b9cfe2",
+      "type": "bulleted_list",
+      "html": "Refers to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Serializable Isolation</span>.",
+      "text": "Refers to Serializable Isolation."
+    },
+    {
+      "id": "26524eb1ed548009aa8dde5781aec091",
+      "type": "bulleted_list",
+      "html": "Guarantees results are the same as if transactions ran one by one in sequence.",
+      "text": "Guarantees results are the same as if transactions ran one by one in sequence."
+    },
+    {
+      "id": "26424eb1ed5480c3949ce850c339e5a3",
+      "type": "bulleted_list",
+      "html": "Prevents all concurrency anomalies.",
+      "text": "Prevents all concurrency anomalies."
+    },
+    {
+      "id": "26424eb1ed5480d5bfbcc8e71da1c076",
+      "type": "bulleted_list",
+      "html": "Considered as the “gold standard” of correctness.",
+      "text": "Considered as the “gold standard” of correctness."
+    },
+    {
+      "id": "26424eb1ed54800bb8fee163222b38c7",
+      "type": "bulleted_list",
+      "html": "Slow.",
+      "text": "Slow."
+    },
+    {
+      "id": "26424eb1ed548025a51ec2a62c263d8a",
+      "type": "bulleted_list",
+      "html": "Very few databases default to serializable isolation, in fact, many don’t even offer it at all.",
+      "text": "Very few databases default to serializable isolation, in fact, many don’t even offer it at all."
+    },
+    {
+      "id": "26424eb1ed548029a29fd723133f293d",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Weaker Isolation Levels</span>:",
+      "text": "Weaker Isolation Levels:"
+    },
+    {
+      "id": "26424eb1ed5480888f4ae4c1ce8ce790",
+      "type": "bulleted_list",
+      "html": "Any level <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">below Serializable</span>.",
+      "text": "Any level below Serializable."
+    },
+    {
+      "id": "26424eb1ed54802ead23c0e8d7bcfde9",
+      "type": "bulleted_list",
+      "html": "Relax some guarantees to improve performance.",
+      "text": "Relax some guarantees to improve performance."
+    },
+    {
+      "id": "26524eb1ed548082aed0dee47a19a621",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Enforcing Isolation</span>",
+      "text": "Enforcing Isolation"
+    },
+    {
+      "id": "26524eb1ed548049810cc6ce85319b6a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Locks</span>",
+      "text": "Locks"
+    },
+    {
+      "id": "26524eb1ed548047b6a5faf97ccae6a8",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548049810cc6ce85319b6a",
+      "html": "Databases use locks (row-level, page-level, table-level) to ensure that two transactions don’t interfere with each other in unsafe ways.",
+      "text": "Databases use locks (row-level, page-level, table-level) to ensure that two transactions don’t interfere with each other in unsafe ways."
+    },
+    {
+      "id": "26524eb1ed54800db5eee489dcde7df7",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548049810cc6ce85319b6a",
+      "html": "Shared locks allow concurrent reads, while exclusive locks prevent others from reading/writing until the lock is released.",
+      "text": "Shared locks allow concurrent reads, while exclusive locks prevent others from reading/writing until the lock is released."
+    },
+    {
+      "id": "26524eb1ed5480f19c63c99acc83889e",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed5480a99e4befa6ad3777c1",
+      "type": "toggle",
+      "parent": "26524eb1ed5480f19c63c99acc83889e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example: Locks</span>",
+      "text": "Example: Locks"
+    },
+    {
+      "id": "26524eb1ed54802fb686e4828d692ec7",
+      "type": "divider",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1"
+    },
+    {
+      "id": "26524eb1ed54809d81e9f29ccac686ec",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction T1</span>: Transfer $100 from Account A ($500) to Account B ($300).",
+      "text": "Transaction T1: Transfer $100 from Account A ($500) to Account B ($300)."
+    },
+    {
+      "id": "26524eb1ed5480a688eeedcc78138786",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction T2</span>: Read balance of Account A.",
+      "text": "Transaction T2: Read balance of Account A."
+    },
+    {
+      "id": "26524eb1ed5480d99b56f84bdcb47bda",
+      "type": "text",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 1 (T1 acquires exclusive lock on A)</span>",
+      "text": "Step 1 (T1 acquires exclusive lock on A)"
+    },
+    {
+      "id": "26524eb1ed5480528cdaeeaf3ba2ac51",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "T1 locks Account A.",
+      "text": "T1 locks Account A."
+    },
+    {
+      "id": "26524eb1ed5480d6a453fb98894953f8",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "Updating A → A - $100 (A = $400).",
+      "text": "Updating A → A - $100 (A = $400)."
+    },
+    {
+      "id": "26524eb1ed5480d68fabc872ba439641",
+      "type": "text",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 2 (T2 tries to read A)</span>",
+      "text": "Step 2 (T2 tries to read A)"
+    },
+    {
+      "id": "26524eb1ed54802da150cb19bc3741d5",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "T2 is blocked because T1 holds an exclusive lock.",
+      "text": "T2 is blocked because T1 holds an exclusive lock."
+    },
+    {
+      "id": "26524eb1ed548012860fe40016ef1dad",
+      "type": "text",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 3 (T1 commits and releases lock)</span>",
+      "text": "Step 3 (T1 commits and releases lock)"
+    },
+    {
+      "id": "26524eb1ed5480c5884ff9d81c41f749",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "Lock on A is released.",
+      "text": "Lock on A is released."
+    },
+    {
+      "id": "26524eb1ed5480d38401d0406bcc4f87",
+      "type": "text",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 4 (T2 reads A)</span>",
+      "text": "Step 4 (T2 reads A)"
+    },
+    {
+      "id": "26524eb1ed5480bfb34bebdbffee0f8b",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "T2 now reads A = $400 (the committed value).",
+      "text": "T2 now reads A = $400 (the committed value)."
+    },
+    {
+      "id": "26524eb1ed548041850fec8064ff6554",
+      "type": "text",
+      "parent": "26524eb1ed5480a99e4befa6ad3777c1",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee</span>: Locks prevent T2 from seeing the uncommitted intermediate value, avoiding <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">dirty reads</span>.",
+      "text": "Guarantee: Locks prevent T2 from seeing the uncommitted intermediate value, avoiding dirty reads."
+    },
+    {
+      "id": "26524eb1ed54800189c0fc3b66fdbc57",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Multiversion Concurrency Control (MVCC)</span>",
+      "text": "Multiversion Concurrency Control (MVCC)"
+    },
+    {
+      "id": "26524eb1ed54806bbb21ed5e6f0af96f",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800189c0fc3b66fdbc57",
+      "html": "Instead of blocking readers/writers with locks, the database keeps multiple versions of data.",
+      "text": "Instead of blocking readers/writers with locks, the database keeps multiple versions of data."
+    },
+    {
+      "id": "26524eb1ed548058b781e66d3e197651",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800189c0fc3b66fdbc57",
+      "html": "Readers see a snapshot (a consistent view) while writers update a newer version.",
+      "text": "Readers see a snapshot (a consistent view) while writers update a newer version."
+    },
+    {
+      "id": "26524eb1ed548044a030f96745fa09c5",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800189c0fc3b66fdbc57",
+      "html": "This avoids many conflicts and improves performance, but still maintains correctness.",
+      "text": "This avoids many conflicts and improves performance, but still maintains correctness."
+    },
+    {
+      "id": "26524eb1ed548077ba98eac34e1c98fd",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed5480218e5ddd7baaad15c5",
+      "type": "toggle",
+      "parent": "26524eb1ed548077ba98eac34e1c98fd",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example: Multiversion Concurrency Control (MVCC)</span>",
+      "text": "Example: Multiversion Concurrency Control (MVCC)"
+    },
+    {
+      "id": "26524eb1ed5480dd88a3d49c8d33939b",
+      "type": "divider",
+      "parent": "26524eb1ed5480218e5ddd7baaad15c5"
+    },
+    {
+      "id": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480218e5ddd7baaad15c5",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction T1</span>: Transfer $100 from Account A ($500) to Account B ($300).",
+      "text": "Transaction T1: Transfer $100 from Account A ($500) to Account B ($300)."
+    },
+    {
+      "id": "26524eb1ed5480829436ea87df702fd6",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction T2</span>: Read balance of Account A.",
+      "text": "Transaction T2: Read balance of Account A."
+    },
+    {
+      "id": "26524eb1ed54808e8b7bd8bd68dd3271",
+      "type": "text",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 1 (T1 starts and updates A)</span>",
+      "text": "Step 1 (T1 starts and updates A)"
+    },
+    {
+      "id": "26524eb1ed5480bf88e6df3ec75e9c6b",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "T1 writes a new version of A (A = $400), but it is not yet committed.",
+      "text": "T1 writes a new version of A (A = $400), but it is not yet committed."
+    },
+    {
+      "id": "26524eb1ed54807fbe8dc2077d07b41a",
+      "type": "text",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 2 (T2 starts after T1 but before T1 commits)</span>",
+      "text": "Step 2 (T2 starts after T1 but before T1 commits)"
+    },
+    {
+      "id": "26524eb1ed5480418f25ca580912a6c0",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "T2 reads the old committed version of A (A = $500).",
+      "text": "T2 reads the old committed version of A (A = $500)."
+    },
+    {
+      "id": "26524eb1ed5480e388bedd3b2461cdce",
+      "type": "text",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 3 (T1 commits)</span>",
+      "text": "Step 3 (T1 commits)"
+    },
+    {
+      "id": "26524eb1ed54802288d5cbb034b4011a",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "New version of A (A = $400) becomes visible to future transactions.",
+      "text": "New version of A (A = $400) becomes visible to future transactions."
+    },
+    {
+      "id": "26524eb1ed5480808d52e5c1054ddee4",
+      "type": "text",
+      "parent": "26524eb1ed5480fc9ea8d02daeb0c958",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee</span>: Readers (T2) never block and always see a <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">consistent snapshot</span> (A = $500), while writers (T1) can still proceed.",
+      "text": "Guarantee: Readers (T2) never block and always see a consistent snapshot (A = $500), while writers (T1) can still proceed."
+    },
+    {
+      "id": "26524eb1ed548079ab90fa9bfb628b9f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Timestamps &amp; Ordering</span>",
+      "text": "Timestamps & Ordering"
+    },
+    {
+      "id": "26524eb1ed5480fb80dcfd8cd6fac67c",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548079ab90fa9bfb628b9f",
+      "html": "Transactions are assigned timestamps or sequence numbers.",
+      "text": "Transactions are assigned timestamps or sequence numbers."
+    },
+    {
+      "id": "26524eb1ed5480e0a88ec370c50a7945",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548079ab90fa9bfb628b9f",
+      "html": "The DB ensures that the outcome respects this ordering (like they had executed serially in that order).",
+      "text": "The DB ensures that the outcome respects this ordering (like they had executed serially in that order)."
+    },
+    {
+      "id": "26524eb1ed5480c089dcc140f73147d3",
+      "type": "callout"
+    },
+    {
+      "id": "26524eb1ed5480d0846fc3cce9a88173",
+      "type": "toggle",
+      "parent": "26524eb1ed5480c089dcc140f73147d3",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example: Timestamps &amp; Ordering</span>",
+      "text": "Example: Timestamps & Ordering"
+    },
+    {
+      "id": "26524eb1ed548043af30d5cb1e69d4c2",
+      "type": "divider",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173"
+    },
+    {
+      "id": "26524eb1ed5480289103ee3be656659f",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction T1 (ts = 10)</span>: Transfer $100 from Account A ($500) to Account B ($300).",
+      "text": "Transaction T1 (ts = 10): Transfer $100 from Account A ($500) to Account B ($300)."
+    },
+    {
+      "id": "26524eb1ed548047b95cd2d55e4823c7",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction T2 (ts = 20)</span>: Read balance of Account A.",
+      "text": "Transaction T2 (ts = 20): Read balance of Account A."
+    },
+    {
+      "id": "26524eb1ed5480c4a9afe3bc23c5da4f",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 1 (Overlap starts)</span>",
+      "text": "Step 1 (Overlap starts)"
+    },
+    {
+      "id": "26524eb1ed5480e89efccae33d8b3a54",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "T1 has not been committed yet.",
+      "text": "T1 has not been committed yet."
+    },
+    {
+      "id": "26524eb1ed5480b1b906f5ce460220a6",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "T2 begins<span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\"> in real-time</span> and reads A = $500, but cannot commit until DB runs the checks and they get passed.",
+      "text": "T2 begins in real-time and reads A = $500, but cannot commit until DB runs the checks and they get passed."
+    },
+    {
+      "id": "26524eb1ed5480e09f10f7a3f38ebb71",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Step 2 (T1 executes in parallel)</span>",
+      "text": "Step 2 (T1 executes in parallel)"
+    },
+    {
+      "id": "26524eb1ed548012a8ecc9e03b1e19ea",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "T1 subtracts $100 from A → writes A = $400, and commits (assuming there were no previous transactions for conflicts).",
+      "text": "T1 subtracts $100 from A → writes A = $400, and commits (assuming there were no previous transactions for conflicts)."
+    },
+    {
+      "id": "26524eb1ed5480c09183cb759472f41b",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Now the problem:</span>",
+      "text": "Now the problem:"
+    },
+    {
+      "id": "26524eb1ed5480d89af0c6ab7b19b6ce",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "In <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">real-time</span>, T2 happened before T1.",
+      "text": "In real-time, T2 happened before T1."
+    },
+    {
+      "id": "26524eb1ed54809a92b7e513704fbf18",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "But, according to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">timestamps</span>, T1 (ts=10) must happen before T2 (ts=20).",
+      "text": "But, according to timestamps, T1 (ts=10) must happen before T2 (ts=20)."
+    },
+    {
+      "id": "26524eb1ed54808e82c3f7a600b22dff",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Conflict Check (at commit)</span>",
+      "text": "Conflict Check (at commit)"
+    },
+    {
+      "id": "26524eb1ed5480d0828ec4495ba5d882",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "DB sees:",
+      "text": "DB sees:"
+    },
+    {
+      "id": "26524eb1ed548091b395db0a97c31342",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0828ec4495ba5d882",
+      "html": "T2 (later timestamp) read an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">old version</span> of A ($500).",
+      "text": "T2 (later timestamp) read an old version of A ($500)."
+    },
+    {
+      "id": "26524eb1ed5480098a80de1008c7a6e1",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0828ec4495ba5d882",
+      "html": "But ordering rules require T2 to see T1’s update ($400).",
+      "text": "But ordering rules require T2 to see T1’s update ($400)."
+    },
+    {
+      "id": "26524eb1ed5480859dc7ff5dbb078c0d",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Resolution</span>",
+      "text": "Resolution"
+    },
+    {
+      "id": "26524eb1ed54808ebd01fdba60c06d48",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "DB cannot allow “T2 saw $500” because that breaks serial order.",
+      "text": "DB cannot allow “T2 saw $500” because that breaks serial order."
+    },
+    {
+      "id": "26524eb1ed548034a21fefadb6b11a7d",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "So DB <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">aborts T2</span> and forces it to restart.",
+      "text": "So DB aborts T2 and forces it to restart."
+    },
+    {
+      "id": "26524eb1ed5480a382c3d51336641471",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "On restart, T2 reads A = $400 (the value after T1).",
+      "text": "On restart, T2 reads A = $400 (the value after T1)."
+    },
+    {
+      "id": "26524eb1ed54807bb19cdd460b9c563b",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee</span>",
+      "text": "Guarantee"
+    },
+    {
+      "id": "26524eb1ed5480748fc8fb0086d2114e",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "Even though T2 executed earlier in real-time, the database enforces the timestamp order (T1 before T2).",
+      "text": "Even though T2 executed earlier in real-time, the database enforces the timestamp order (T1 before T2)."
+    },
+    {
+      "id": "26524eb1ed5480c9ab9bf104dbe494f5",
+      "type": "text",
+      "parent": "26524eb1ed5480d0846fc3cce9a88173",
+      "html": "This is done by <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">aborting/restarting conflicting transactions</span> — not by waiting.",
+      "text": "This is done by aborting/restarting conflicting transactions — not by waiting."
+    },
+    {
+      "id": "26524eb1ed5480b4897fd1c05c18269b",
+      "type": "sub_sub_header",
+      "html": "SQL Standard Isolation Levels (Weakest to Strongest):",
+      "text": "SQL Standard Isolation Levels (Weakest to Strongest):"
+    },
+    {
+      "id": "26524eb1ed54800f9435ca1a4dcbe611",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Read Uncommitted</span>",
+      "text": "Read Uncommitted"
+    },
+    {
+      "id": "26524eb1ed5480b4bcc0f5c9b34a08bf",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800f9435ca1a4dcbe611",
+      "html": "Transactions can see changes made by others even before they are committed.",
+      "text": "Transactions can see changes made by others even before they are committed."
+    },
+    {
+      "id": "26524eb1ed54804dab69c1bf4a25e597",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed54800f9435ca1a4dcbe611",
+      "html": "Allows <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">dirty reads, non-repeatable reads, phantom reads</span>.",
+      "text": "Allows dirty reads, non-repeatable reads, phantom reads."
+    },
+    {
+      "id": "26724eb1ed5480309e46df99f5a04b29",
+      "type": "callout"
+    },
+    {
+      "id": "26724eb1ed548027ba2dfafab5fd07c8",
+      "type": "toggle",
+      "parent": "26724eb1ed5480309e46df99f5a04b29",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Dirty Reads</span>",
+      "text": "Dirty Reads"
+    },
+    {
+      "id": "26724eb1ed54805b86a3db20191ca890",
+      "type": "text",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">dirty read</span> happens when:",
+      "text": "A dirty read happens when:"
+    },
+    {
+      "id": "26724eb1ed5480689cc9cb21603d541a",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "In a transaction, you read data that has been <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">modified by another transaction but not yet committed</span>.",
+      "text": "In a transaction, you read data that has been modified by another transaction but not yet committed."
+    },
+    {
+      "id": "26724eb1ed548087b90dfb13f052d148",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "If that other transaction <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">rolls back</span>, you have read data that never really existed.",
+      "text": "If that other transaction rolls back, you have read data that never really existed."
+    },
+    {
+      "id": "26724eb1ed5480929192deecfe9dee75",
+      "type": "text",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example:</span>",
+      "text": "Example:"
+    },
+    {
+      "id": "26724eb1ed5480d59a6bd2fa2f6763a8",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "Transaction A: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">UPDATE accounts SET balance = 50 WHERE id = 1;</span></div> (not committed yet).",
+      "text": "Transaction A: UPDATE accounts SET balance = 50 WHERE id = 1; (not committed yet)."
+    },
+    {
+      "id": "26724eb1ed548008ad08da0a1b6d589c",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "Transaction B: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">SELECT balance FROM accounts WHERE id = 1;</span></div> → sees <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">50</span>.",
+      "text": "Transaction B: SELECT balance FROM accounts WHERE id = 1; → sees 50."
+    },
+    {
+      "id": "26724eb1ed548087a8b6c1e591ed2958",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "Transaction A later <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">ROLLBACKs</span>, so the real balance is still <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">100</span>.",
+      "text": "Transaction A later ROLLBACKs, so the real balance is still 100."
+    },
+    {
+      "id": "26724eb1ed54803288ccec4648e1555c",
+      "type": "text",
+      "parent": "26724eb1ed548027ba2dfafab5fd07c8",
+      "html": "Transaction B read a “dirty” value that was never permanent.",
+      "text": "Transaction B read a “dirty” value that was never permanent."
+    },
+    {
+      "id": "26724eb1ed548030bd11ea5490b19dbc",
+      "type": "divider",
+      "parent": "26724eb1ed5480309e46df99f5a04b29"
+    },
+    {
+      "id": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "type": "toggle",
+      "parent": "26724eb1ed5480309e46df99f5a04b29",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Non-Repeatable Reads</span>",
+      "text": "Non-Repeatable Reads"
+    },
+    {
+      "id": "26724eb1ed5480b69ed2e8d728fe6d73",
+      "type": "text",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">non-repeatable read</span> happens when:",
+      "text": "A non-repeatable read happens when:"
+    },
+    {
+      "id": "26724eb1ed548012b66ec6e1d2c12028",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "In a transaction, you read the same row twice.",
+      "text": "In a transaction, you read the same row twice."
+    },
+    {
+      "id": "26724eb1ed548051b627f118cb972f88",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "Another transaction modifies and commits changes to that row in between your two reads.",
+      "text": "Another transaction modifies and commits changes to that row in between your two reads."
+    },
+    {
+      "id": "26724eb1ed54806dae1eed7b8a3650c8",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "When you read it again, you see a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different value for the same row</span>.",
+      "text": "When you read it again, you see a different value for the same row."
+    },
+    {
+      "id": "26724eb1ed548071a8ceff58895d2789",
+      "type": "text",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example:</span>",
+      "text": "Example:"
+    },
+    {
+      "id": "26724eb1ed54807b9d70e6f3f17a311e",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "Transaction A: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">SELECT balance FROM accounts WHERE id = 2;</span></div> → gets <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">200</span>.",
+      "text": "Transaction A: SELECT balance FROM accounts WHERE id = 2; → gets 200."
+    },
+    {
+      "id": "26724eb1ed54807282f9ddaa35468499",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "Transaction B: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">UPDATE accounts SET balance = 250 WHERE id = 2; COMMIT;</span></div>",
+      "text": "Transaction B: UPDATE accounts SET balance = 250 WHERE id = 2; COMMIT;"
+    },
+    {
+      "id": "26724eb1ed54806d9da1dd05c46e19ed",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "Transaction A runs the same query again: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">SELECT balance FROM accounts WHERE id = 2;</span></div> → now gets <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">250</span>.",
+      "text": "Transaction A runs the same query again: SELECT balance FROM accounts WHERE id = 2; → now gets 250."
+    },
+    {
+      "id": "26724eb1ed5480ac803bf6bde3cc3dd7",
+      "type": "text",
+      "parent": "26724eb1ed5480f4a640f0cb2d7817e0",
+      "html": "The same row returned different values within one transaction.",
+      "text": "The same row returned different values within one transaction."
+    },
+    {
+      "id": "26724eb1ed5480e280a9dc98f48e4eb1",
+      "type": "divider",
+      "parent": "26724eb1ed5480309e46df99f5a04b29"
+    },
+    {
+      "id": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "type": "toggle",
+      "parent": "26724eb1ed5480309e46df99f5a04b29",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Phantom Reads</span>",
+      "text": "Phantom Reads"
+    },
+    {
+      "id": "26724eb1ed548097b244cf9b0bac8cc7",
+      "type": "text",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">phantom read</span> happens when:",
+      "text": "A phantom read happens when:"
+    },
+    {
+      "id": "26724eb1ed548094af77e279a312276e",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "In a transaction, you run a query that matches a set of rows (e.g., <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">SELECT * FROM table_name WHERE column_name &gt; 200</span></div>).",
+      "text": "In a transaction, you run a query that matches a set of rows (e.g., SELECT * FROM table_name WHERE column_name > 200)."
+    },
+    {
+      "id": "26724eb1ed5480009d92f7adac91a69d",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "Before your transaction finishes, another transaction <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">inserts or deletes</span> rows that satisfy the same condition.",
+      "text": "Before your transaction finishes, another transaction inserts or deletes rows that satisfy the same condition."
+    },
+    {
+      "id": "26724eb1ed5480ddb951d4fd6c267f22",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "If you run the same query again in your transaction, you see a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different set of rows</span> (some new “phantom” rows appear or disappear).",
+      "text": "If you run the same query again in your transaction, you see a different set of rows (some new “phantom” rows appear or disappear)."
+    },
+    {
+      "id": "26724eb1ed548090a3dcd12cebe721f9",
+      "type": "text",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example:</span>",
+      "text": "Example:"
+    },
+    {
+      "id": "26724eb1ed54805f99e4cad03f54837d",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "Transaction A: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">SELECT * FROM orders WHERE amount &gt; 100</span></div> → returns 5 rows.",
+      "text": "Transaction A: SELECT * FROM orders WHERE amount > 100 → returns 5 rows."
+    },
+    {
+      "id": "26724eb1ed548032a13fcd9cbbd55c14",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "Transaction B: inserts a new order with <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">amount = 150</span></div>.",
+      "text": "Transaction B: inserts a new order with amount = 150."
+    },
+    {
+      "id": "26724eb1ed5480d68bb5e7af588f18c9",
+      "type": "bulleted_list",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "Transaction A runs the same query again → now returns 6 rows.",
+      "text": "Transaction A runs the same query again → now returns 6 rows."
+    },
+    {
+      "id": "26724eb1ed54806db566f5d368d805e6",
+      "type": "text",
+      "parent": "26724eb1ed54802ca55bd3a4e14c5cb8",
+      "html": "This change in the <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">set</span> of rows (not just values in existing rows) is the phantom read.",
+      "text": "This change in the set of rows (not just values in existing rows) is the phantom read."
+    },
+    {
+      "id": "26524eb1ed548040a630db36c93d893c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Read Committed</span>",
+      "text": "Read Committed"
+    },
+    {
+      "id": "26524eb1ed548043baf3f6fe2c4e4bea",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548040a630db36c93d893c",
+      "html": "Transactions only see committed data.",
+      "text": "Transactions only see committed data."
+    },
+    {
+      "id": "26524eb1ed5480349ffff7718afcc026",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed548040a630db36c93d893c",
+      "html": "Prevents <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">dirty reads</span>, but still allows <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">non-repeatable reads, phantom reads</span>.",
+      "text": "Prevents dirty reads, but still allows non-repeatable reads, phantom reads."
+    },
+    {
+      "id": "26524eb1ed5480cc856bd0647e7572dc",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Repeatable Read</span>",
+      "text": "Repeatable Read"
+    },
+    {
+      "id": "26524eb1ed548032a0d8fab4c261e3b0",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480cc856bd0647e7572dc",
+      "html": "Guarantees that if you read the same row twice within a transaction, you’ll get the same value.",
+      "text": "Guarantees that if you read the same row twice within a transaction, you’ll get the same value."
+    },
+    {
+      "id": "26524eb1ed5480328c7ae2ca3ced3874",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480cc856bd0647e7572dc",
+      "html": "Prevents <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">dirty reads, non-repeatable reads</span>, but still allows <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">phantom reads</span>.",
+      "text": "Prevents dirty reads, non-repeatable reads, but still allows phantom reads."
+    },
+    {
+      "id": "26524eb1ed5480cfabf2e8bfe75423a1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Serializable</span>",
+      "text": "Serializable"
+    },
+    {
+      "id": "26524eb1ed548035898bea49ae6f3ca1",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480cfabf2e8bfe75423a1",
+      "html": "Strongest level. Transactions behave as if they ran one after another.",
+      "text": "Strongest level. Transactions behave as if they ran one after another."
+    },
+    {
+      "id": "26524eb1ed548003bba7f7a920cddacb",
+      "type": "bulleted_list",
+      "parent": "26524eb1ed5480cfabf2e8bfe75423a1",
+      "html": "Prevents <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">dirty reads, non-repeatable reads, phantom reads</span>.",
+      "text": "Prevents dirty reads, non-repeatable reads, phantom reads."
+    },
+    {
+      "id": "26524eb1ed5480efbf52e545832353cb",
+      "type": "text",
+      "html": "Sometimes later, I will write more about Isolation Levels.",
+      "text": "Sometimes later, I will write more about Isolation Levels."
+    },
+    {
+      "id": "26524eb1ed54803e8290dbd55ed33131",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed5480f4bb98d89f4f303fd6",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    },
+    {
+      "id": "26524eb1ed548002890cece7dfd862cf",
+      "type": "divider"
+    },
+    {
+      "id": "26624eb1ed548037bc81cfdf9f2b3b69",
+      "type": "text"
+    }
+  ]
+}

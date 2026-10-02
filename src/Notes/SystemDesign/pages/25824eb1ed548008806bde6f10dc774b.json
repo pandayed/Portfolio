@@ -1,0 +1,509 @@
+{
+  "id": "25824eb1ed548008806bde6f10dc774b",
+  "title": "CDN",
+  "sourceUrl": "https://xpandeyed.notion.site/CDN-25824eb1ed548008806bde6f10dc774b?pvs=23",
+  "blocks": [
+    {
+      "id": "25824eb1ed54801ebfb8e5f38dd92dd1",
+      "type": "bulleted_list",
+      "html": "CDN = Content Delivery Network = <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Distributed system of servers</span> deployed across multiple geographical locations.",
+      "text": "CDN = Content Delivery Network = Distributed system of servers deployed across multiple geographical locations."
+    },
+    {
+      "id": "25824eb1ed548096a045dd858407ddec",
+      "type": "bulleted_list",
+      "html": "Primary purpose: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Deliver digital content with high availability, performance, and scalability</span>.",
+      "text": "Primary purpose: Deliver digital content with high availability, performance, and scalability."
+    },
+    {
+      "id": "25824eb1ed548078a8e8d62d729eaa5b",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480ee883eed9532370a1d",
+      "type": "sub_header",
+      "html": "Core Concepts",
+      "text": "Core Concepts"
+    },
+    {
+      "id": "25824eb1ed54804a958de3b03eff68ee",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Origin server</span>: Central server where original content is hosted.",
+      "text": "Origin server: Central server where original content is hosted."
+    },
+    {
+      "id": "25824eb1ed5480bdadbddf393affb0ec",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Edge servers / PoPs (Points of Presence)</span>: Geographically distributed servers that cache and serve content closer to users.",
+      "text": "Edge servers / PoPs (Points of Presence): Geographically distributed servers that cache and serve content closer to users."
+    },
+    {
+      "id": "25824eb1ed5480eda744d7004a689c05",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Caching</span>: Storing frequently accessed data temporarily to reduce load and latency.",
+      "text": "Caching: Storing frequently accessed data temporarily to reduce load and latency."
+    },
+    {
+      "id": "25824eb1ed5480e2a92bf2beb4729b12",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Request routing</span>: Mechanism to decide which edge server serves a client request",
+      "text": "Request routing: Mechanism to decide which edge server serves a client request"
+    },
+    {
+      "id": "25824eb1ed5480e79beee6a50d8743ae",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480218733e6938458f867",
+      "type": "sub_header",
+      "html": "How CDN Works (Workflow)",
+      "text": "How CDN Works (Workflow)"
+    },
+    {
+      "id": "25824eb1ed54802fb5bbd745e62a53f9",
+      "type": "numbered_list",
+      "html": "User requests content (e.g., website).",
+      "text": "User requests content (e.g., website)."
+    },
+    {
+      "id": "25824eb1ed5480ed8394cbe4a1328997",
+      "type": "numbered_list",
+      "html": "Request is routed to most optimal edge server (based on routing strategy).",
+      "text": "Request is routed to most optimal edge server (based on routing strategy)."
+    },
+    {
+      "id": "25824eb1ed5480019a3dffd457272fbf",
+      "type": "numbered_list",
+      "html": "If cached copy available → served immediately.",
+      "text": "If cached copy available → served immediately."
+    },
+    {
+      "id": "25824eb1ed54802da6eef298d2dcc496",
+      "type": "numbered_list",
+      "html": "If not cached → edge server fetches from origin → serves to client → caches it for future.",
+      "text": "If not cached → edge server fetches from origin → serves to client → caches it for future."
+    },
+    {
+      "id": "25824eb1ed54809692cef90e31e3a000",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480cf8251c036bb68483a",
+      "type": "sub_header",
+      "html": "Benefits",
+      "text": "Benefits"
+    },
+    {
+      "id": "25824eb1ed548001ac31cf61eeaa863a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Reduced latency</span>: Content delivered from nearest location.",
+      "text": "Reduced latency: Content delivered from nearest location."
+    },
+    {
+      "id": "25824eb1ed54802dac81cc7e75696654",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Lower bandwidth consumption</span>: Cached assets reduce repeated origin fetches.",
+      "text": "Lower bandwidth consumption: Cached assets reduce repeated origin fetches."
+    },
+    {
+      "id": "25824eb1ed548088a3ded676c58810f0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">High availability</span>: Load distributed across multiple servers.",
+      "text": "High availability: Load distributed across multiple servers."
+    },
+    {
+      "id": "25824eb1ed5480b28b34f6a0c97ea310",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Scalability</span>: Handles traffic spikes.",
+      "text": "Scalability: Handles traffic spikes."
+    },
+    {
+      "id": "25824eb1ed5480cbbf5aed524e9c33f0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Security</span>: All user requests first hit the <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">CDN edge servers</span>, not your main server, so lots of filtering can be done here (TLS, DDoS, Bot Mitigation, WAF, Rate Limiting etc).",
+      "text": "Security: All user requests first hit the CDN edge servers, not your main server, so lots of filtering can be done here (TLS, DDoS, Bot Mitigation, WAF, Rate Limiting etc)."
+    },
+    {
+      "id": "25824eb1ed548044accee14ffc248cd0",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed54808eac8bcf8ecb4e0ca6",
+      "type": "sub_header",
+      "html": "Caching Strategies",
+      "text": "Caching Strategies"
+    },
+    {
+      "id": "25824eb1ed548035b47be53010571c42",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Time-to-Live (TTL)</span>: Duration content is cached before revalidation.",
+      "text": "Time-to-Live (TTL): Duration content is cached before revalidation."
+    },
+    {
+      "id": "25824eb1ed548009baa5fbbd05599907",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache Invalidation</span>: Removing outdated or incorrect cache.",
+      "text": "Cache Invalidation: Removing outdated or incorrect cache."
+    },
+    {
+      "id": "25824eb1ed54805ba281cb357e16461f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Stale-while-revalidate</span>: Serve stale cache while refreshing in background.",
+      "text": "Stale-while-revalidate: Serve stale cache while refreshing in background."
+    },
+    {
+      "id": "25824eb1ed54806cbf15c9fe9bec1225",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Stale-if-error</span>: Serve stale cache if origin unavailable.",
+      "text": "Stale-if-error: Serve stale cache if origin unavailable."
+    },
+    {
+      "id": "25824eb1ed5480949269d01bac895d96",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480aa9aecdcaaf6531e71",
+      "type": "sub_header",
+      "html": "Types of Content Served",
+      "text": "Types of Content Served"
+    },
+    {
+      "id": "25824eb1ed548083a191f26b56a97b85",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Static content</span>: Images, scripts, stylesheets.",
+      "text": "Static content: Images, scripts, stylesheets."
+    },
+    {
+      "id": "25824eb1ed5480d09c82facb74a0b26a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Dynamic content</span>: Personalized or user-specific data (can be optimized with edge computation).",
+      "text": "Dynamic content: Personalized or user-specific data (can be optimized with edge computation)."
+    },
+    {
+      "id": "25824eb1ed5480039419e932abc96273",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Streaming content</span>: Video-on-demand (VoD), live streaming with chunked delivery.",
+      "text": "Streaming content: Video-on-demand (VoD), live streaming with chunked delivery."
+    },
+    {
+      "id": "25824eb1ed5480adaa31f8537e8790f6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">APIs</span>: REST, GraphQL served via CDN with caching or edge logic.",
+      "text": "APIs: REST, GraphQL served via CDN with caching or edge logic."
+    },
+    {
+      "id": "25824eb1ed54805591c0c2f77a1439a6",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed54808e8d36d9e3e6eff132",
+      "type": "sub_header",
+      "html": "Request Routing Techniques",
+      "text": "Request Routing Techniques"
+    },
+    {
+      "id": "25824eb1ed548096b78fe5afccbe11c1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">GeoDNS</span>: DNS directs user to closest server.",
+      "text": "GeoDNS: DNS directs user to closest server."
+    },
+    {
+      "id": "25824eb1ed548031904af52c0478be30",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Load-based routing</span>: Directs traffic to servers with available capacity.",
+      "text": "Load-based routing: Directs traffic to servers with available capacity."
+    },
+    {
+      "id": "25824eb1ed5480b7bcd9c2a96bf8d4b9",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Latency-based routing</span>: Chooses server with lowest measured latency.",
+      "text": "Latency-based routing: Chooses server with lowest measured latency."
+    },
+    {
+      "id": "25e24eb1ed54800ea8a3ca371f090578",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Anycast</span>: Same IP advertised from multiple locations; network routes to nearest.",
+      "text": "Anycast: Same IP advertised from multiple locations; network routes to nearest."
+    },
+    {
+      "id": "25e24eb1ed5480458fd4ec7121e279f9",
+      "type": "alias",
+      "links": [
+        {
+          "href": "/Anycast-25e24eb1ed5480f5b3fded23fab67c82?pvs=25",
+          "text": "Anycast"
+        }
+      ]
+    },
+    {
+      "id": "25824eb1ed54801287e4ef9eaf68aeaa",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed54802a9babc9e626f93885",
+      "type": "sub_header",
+      "html": "CDN Architectures",
+      "text": "CDN Architectures"
+    },
+    {
+      "id": "25824eb1ed54807abdc1da66d3cf5cff",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Push CDN</span>: Content uploaded to CDN nodes proactively.",
+      "text": "Push CDN: Content uploaded to CDN nodes proactively."
+    },
+    {
+      "id": "25824eb1ed5480a2b675e1523dc150e0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Pull CDN</span>: Content fetched from origin on first request (lazy population).",
+      "text": "Pull CDN: Content fetched from origin on first request (lazy population)."
+    },
+    {
+      "id": "25824eb1ed54807b8cc4f5ff49d8594a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Hybrid</span>: Combination of push and pull.",
+      "text": "Hybrid: Combination of push and pull."
+    },
+    {
+      "id": "25824eb1ed548002bfb5c8274031cca6",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480098444d842bbedf6de",
+      "type": "sub_header",
+      "html": "CDN Challenges",
+      "text": "CDN Challenges"
+    },
+    {
+      "id": "25824eb1ed5480018134f88b93456a4c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache consistency</span>: Ensuring updated content reaches all edges.",
+      "text": "Cache consistency: Ensuring updated content reaches all edges."
+    },
+    {
+      "id": "25824eb1ed54803a8357caba3cd84c49",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Dynamic personalization</span>: Harder to cache user-specific data.",
+      "text": "Dynamic personalization: Harder to cache user-specific data."
+    },
+    {
+      "id": "25824eb1ed5480eab960d7bd5a3ece2a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Invalidation delays</span>: Some cached objects may remain stale.",
+      "text": "Invalidation delays: Some cached objects may remain stale."
+    },
+    {
+      "id": "25824eb1ed54806ea004e5dc928364a4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Latency in routing decisions</span>: DNS-based routing may not always pick optimal node.",
+      "text": "Latency in routing decisions: DNS-based routing may not always pick optimal node."
+    },
+    {
+      "id": "25824eb1ed54804d94f0d725fc5d6aaf",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cost vs performance tradeoff</span>: More PoPs = higher cost.",
+      "text": "Cost vs performance tradeoff: More PoPs = higher cost."
+    },
+    {
+      "id": "25824eb1ed5480179c4bdf977867963a",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed54800ca4b3ec11e3ecafc4",
+      "type": "sub_header",
+      "html": "Beyond Content Delivery",
+      "text": "Beyond Content Delivery"
+    },
+    {
+      "id": "25824eb1ed5480a1a471ee2aea7c7ce8",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Edge computing</span>: Running logic/functions at edge.",
+      "text": "Edge computing: Running logic/functions at edge."
+    },
+    {
+      "id": "25824eb1ed5480db9cc0f96995936ead",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Serverless at edge</span>: Executing lightweight scripts near users.",
+      "text": "Serverless at edge: Executing lightweight scripts near users."
+    },
+    {
+      "id": "25824eb1ed5480b6a5accc249b45cc8e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Analytics</span>: Collecting metrics on traffic, cache hit ratio, latency, errors.",
+      "text": "Analytics: Collecting metrics on traffic, cache hit ratio, latency, errors."
+    },
+    {
+      "id": "25824eb1ed5480968ae0de2fa5af7459",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480f9ac93fdc904342e14",
+      "type": "sub_header",
+      "html": "Key Metrics",
+      "text": "Key Metrics"
+    },
+    {
+      "id": "25824eb1ed548094b6d0d62330d184a4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Latency</span>: Time to deliver content.",
+      "text": "Latency: Time to deliver content."
+    },
+    {
+      "id": "25824eb1ed548079beb5cd77d01f1837",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Throughput</span>: Amount of data delivered over time.",
+      "text": "Throughput: Amount of data delivered over time."
+    },
+    {
+      "id": "25824eb1ed548057a63fef0a52df3996",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache hit ratio</span>: % of requests served from cache.",
+      "text": "Cache hit ratio: % of requests served from cache."
+    },
+    {
+      "id": "25824eb1ed5480d3977fd3268635bb6c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Origin offload</span>: % of requests offloaded from origin.",
+      "text": "Origin offload: % of requests offloaded from origin."
+    },
+    {
+      "id": "25824eb1ed5480d184d0d3e36fc420d5",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Error rate</span>: Failed requests percentage.",
+      "text": "Error rate: Failed requests percentage."
+    },
+    {
+      "id": "25824eb1ed5480b4a041e80f0d6e6d08",
+      "type": "divider"
+    },
+    {
+      "id": "26124eb1ed54803c8f3adf551e3b0afc",
+      "type": "sub_header",
+      "html": "Popular CDN Providers",
+      "text": "Popular CDN Providers"
+    },
+    {
+      "id": "26124eb1ed54804d8b29e80df5d6e2c3",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.akamai.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-804d-8b29-e80df5d6e2c3--39994952\">Akamai</span></a>",
+      "text": "Akamai",
+      "links": [
+        {
+          "href": "https://www.akamai.com/",
+          "text": "Akamai"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed5480339d55d1746f9934d6",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.cloudflare.com/cdn/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-8033-9d55-d1746f9934d6-1759552127\">Cloudflare</span></a>",
+      "text": "Cloudflare",
+      "links": [
+        {
+          "href": "https://www.cloudflare.com/cdn/",
+          "text": "Cloudflare"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed54802ebacefb3185052174",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://aws.amazon.com/cloudfront/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-802e-bace-fb3185052174--1050721725\">Amazon CloudFront</span></a>",
+      "text": "Amazon CloudFront",
+      "links": [
+        {
+          "href": "https://aws.amazon.com/cloudfront/",
+          "text": "Amazon CloudFront"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed548044871cfcbf945d6de1",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://cloud.google.com/cdn\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-8044-871c-fcbf945d6de1-749236754\">Google Cloud CDN</span></a>",
+      "text": "Google Cloud CDN",
+      "links": [
+        {
+          "href": "https://cloud.google.com/cdn",
+          "text": "Google Cloud CDN"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed5480a3a669d59d172e03c6",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://azure.microsoft.com/en-us/products/cdn\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-80a3-a669-d59d172e03c6--1360143605\">Microsoft Azure CDN</span></a>",
+      "text": "Microsoft Azure CDN",
+      "links": [
+        {
+          "href": "https://azure.microsoft.com/en-us/products/cdn",
+          "text": "Microsoft Azure CDN"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed5480ccb805f749548d5c0b",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.fastly.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-80cc-b805-f749548d5c0b-6351405\">Fastly</span></a>",
+      "text": "Fastly",
+      "links": [
+        {
+          "href": "https://www.fastly.com/",
+          "text": "Fastly"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed5480748252d95ff6637124",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.stackpath.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-8074-8252-d95ff6637124--947476555\">StackPath</span></a>",
+      "text": "StackPath",
+      "links": [
+        {
+          "href": "https://www.stackpath.com/",
+          "text": "StackPath"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed5480e3985dc2764a5756fe",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.imperva.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-80e3-985d-c2764a5756fe--1252648866\">Imperva (formerly Incapsula)</span></a>",
+      "text": "Imperva (formerly Incapsula)",
+      "links": [
+        {
+          "href": "https://www.imperva.com/",
+          "text": "Imperva (formerly Incapsula)"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed548049a552daa9183e085b",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.cdn77.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-8049-a552-daa9183e085b--1104125547\">CDN77</span></a>",
+      "text": "CDN77",
+      "links": [
+        {
+          "href": "https://www.cdn77.com/",
+          "text": "CDN77"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed54803d9d3dc6cdbf60a521",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.keycdn.com/\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-26124eb1-ed54-803d-9d3d-c6cdbf60a521--1817337144\">KeyCDN</span></a>",
+      "text": "KeyCDN",
+      "links": [
+        {
+          "href": "https://www.keycdn.com/",
+          "text": "KeyCDN"
+        }
+      ]
+    },
+    {
+      "id": "26124eb1ed5480fe8825d41ad6b94fdb",
+      "type": "text"
+    }
+  ]
+}

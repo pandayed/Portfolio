@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 
 import { toHref, type Route } from '../routing/routes';
 import type { NoteGroup, NoteNode } from './noteTreeData';
+import NoteReadingTime from './NoteReadingTime';
+import { collectReadingMinutes, readingTimeNodeKey } from './readingTime';
 
 interface NoteTreeProps {
     nodes: NoteNode[];
@@ -14,6 +16,7 @@ interface NoteTreeListProps {
     query: string;
     expandedGroups: Set<string>;
     onToggleGroup: (route: string) => void;
+    readingMinutes: ReadonlyMap<string, number>;
     rootGroupChildLimit?: number;
     viewAll?: {
         route: Route;
@@ -66,6 +69,7 @@ const NoteTreeList = ({
     query,
     expandedGroups,
     onToggleGroup,
+    readingMinutes,
     rootGroupChildLimit,
     viewAll,
 }: NoteTreeListProps) => (
@@ -98,11 +102,12 @@ const NoteTreeList = ({
                             </button>
                         )}
                         <a href={toHref(node.route)} className="Link Link--standalone Notes__title">
-                            {node.title}
+                            {node.icon ? `${node.icon} ` : ''}{node.title}
                         </a>
+                        <NoteReadingTime minutes={readingMinutes.get(readingTimeNodeKey(node)) ?? 0} total={isGroup} />
                     </div>
                     {node.summary && <p className="Notes__summary">{node.summary}</p>}
-                    {node.type === 'page' ? (
+                    {node.type === 'page' && node.updatedOn ? (
                         <p className="Notes__updated">
                             Updated <time dateTime={node.updatedOn}>{formatDate(node.updatedOn)}</time>
                         </p>
@@ -116,6 +121,7 @@ const NoteTreeList = ({
                                 query={query}
                                 expandedGroups={expandedGroups}
                                 onToggleGroup={onToggleGroup}
+                                readingMinutes={readingMinutes}
                                 rootGroupChildLimit={rootGroupChildLimit}
                                 viewAll={shouldLimitChildren
                                     ? { route: node.route, title: node.title }
@@ -149,6 +155,7 @@ const NoteTree = ({ nodes, rootGroupChildLimit }: NoteTreeProps) => {
         [nodes, normalizedQuery],
     );
     const groupRoutes = useMemo(() => collectGroupRoutes(nodes), [nodes]);
+    const readingMinutes = useMemo(() => collectReadingMinutes(nodes), [nodes]);
 
     const toggleGroup = (route: string) => {
         setExpandedGroups((current) => {
@@ -209,6 +216,7 @@ const NoteTree = ({ nodes, rootGroupChildLimit }: NoteTreeProps) => {
                     query={normalizedQuery}
                     expandedGroups={expandedGroups}
                     onToggleGroup={toggleGroup}
+                    readingMinutes={readingMinutes}
                     rootGroupChildLimit={rootGroupChildLimit}
                 />
             ) : (

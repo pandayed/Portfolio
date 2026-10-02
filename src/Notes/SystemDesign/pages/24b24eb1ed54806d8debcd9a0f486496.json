@@ -1,0 +1,337 @@
+{
+  "id": "24b24eb1ed54806d8debcd9a0f486496",
+  "title": "[O]: Open/Closed Principle (OCP)",
+  "sourceUrl": "https://xpandeyed.notion.site/O-Open-Closed-Principle-OCP-24b24eb1ed54806d8debcd9a0f486496?pvs=23",
+  "blocks": [
+    {
+      "id": "24b24eb1ed5480639af0e2179c4477ad",
+      "type": "bulleted_list",
+      "html": "Software entities (classes, modules, functions) should be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">open for extension but closed for modification</span>.",
+      "text": "Software entities (classes, modules, functions) should be open for extension but closed for modification."
+    },
+    {
+      "id": "24b24eb1ed54804b9101ce07495d3b6a",
+      "type": "bulleted_list",
+      "html": "“Open for extension” = able to add new behavior without changing existing code.",
+      "text": "“Open for extension” = able to add new behavior without changing existing code."
+    },
+    {
+      "id": "24b24eb1ed54803fb598c673f68ebb40",
+      "type": "bulleted_list",
+      "html": "“Closed for modification” = existing tested code should not be edited to add that new behavior.",
+      "text": "“Closed for modification” = existing tested code should not be edited to add that new behavior."
+    },
+    {
+      "id": "24b24eb1ed54804db206fe3a038b5d31",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480a28271d61c7cdf8098",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why is it important</span>",
+      "text": "Why is it important"
+    },
+    {
+      "id": "24b24eb1ed54805c896acf4bd00d181f",
+      "type": "bulleted_list",
+      "html": "Prevents breaking existing functionality when adding features.",
+      "text": "Prevents breaking existing functionality when adding features."
+    },
+    {
+      "id": "24b24eb1ed5480359c8fefd6a799e54f",
+      "type": "bulleted_list",
+      "html": "Preserves stability of tested code.",
+      "text": "Preserves stability of tested code."
+    },
+    {
+      "id": "24b24eb1ed548023b41ae958e4dd2792",
+      "type": "bulleted_list",
+      "html": "Encourages writing code that can adapt to new requirements.",
+      "text": "Encourages writing code that can adapt to new requirements."
+    },
+    {
+      "id": "24b24eb1ed548072a996e2ca1673abe9",
+      "type": "bulleted_list",
+      "html": "Reduces regression bugs during feature expansion.",
+      "text": "Reduces regression bugs during feature expansion."
+    },
+    {
+      "id": "24b24eb1ed54801e8068cb7e664aa2ec",
+      "type": "bulleted_list",
+      "html": "Supports parallel development — new features can be added independently.",
+      "text": "Supports parallel development — new features can be added independently."
+    },
+    {
+      "id": "24b24eb1ed5480e7bcb2cadc81a1e25a",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548075850ee1d882d6b1e9",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bad example</span>",
+      "text": "Bad example"
+    },
+    {
+      "id": "24b24eb1ed54808e8642cf6a902595fe",
+      "type": "code",
+      "html": "// Calculates area for specific shapes\nclass AreaCalculator {\n    method calculate(shape) {\n        if shape.type == \"circle\" {\n            return 3.14 * shape.radius * shape.radius\n        }\n        else if shape.type == \"rectangle\" {\n            return shape.width * shape.height\n        }\n    }\n}\n\n// Adding a new shape requires editing this class\n\n",
+      "text": "// Calculates area for specific shapes\nclass AreaCalculator {\n    method calculate(shape) {\n        if shape.type == \"circle\" {\n            return 3.14 * shape.radius * shape.radius\n        }\n        else if shape.type == \"rectangle\" {\n            return shape.width * shape.height\n        }\n    }\n}\n\n// Adding a new shape requires editing this class\n\n"
+    },
+    {
+      "id": "24b24eb1ed5480088ad4fd3389c424e7",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480f6a89be92b130ccece",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Problems in the bad code</span>",
+      "text": "Problems in the bad code"
+    },
+    {
+      "id": "24b24eb1ed548061ac0fd55ddc7020eb",
+      "type": "bulleted_list",
+      "html": "Adding a new shape forces changes in <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">AreaCalculator</span></div> — violates “closed for modification”.",
+      "text": "Adding a new shape forces changes in AreaCalculator — violates “closed for modification”."
+    },
+    {
+      "id": "24b24eb1ed54808cab8cde6ed77ff74b",
+      "type": "bulleted_list",
+      "html": "Code is tightly coupled to specific shape types.",
+      "text": "Code is tightly coupled to specific shape types."
+    },
+    {
+      "id": "24b24eb1ed5480d19380da53864bafcc",
+      "type": "bulleted_list",
+      "html": "Risk of breaking existing calculations when adding new types.",
+      "text": "Risk of breaking existing calculations when adding new types."
+    },
+    {
+      "id": "24b24eb1ed5480e58bb4f7235e861e91",
+      "type": "bulleted_list",
+      "html": "Logic is not scalable — the <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">if/else</span></div> chain grows with every new shape.",
+      "text": "Logic is not scalable — the if/else chain grows with every new shape."
+    },
+    {
+      "id": "24b24eb1ed5480daaa2be44608b14d92",
+      "type": "bulleted_list",
+      "html": "Testing effort increases each time a new shape is introduced.",
+      "text": "Testing effort increases each time a new shape is introduced."
+    },
+    {
+      "id": "24b24eb1ed548053a8bad03552cbaa85",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480baac8bd542d958a817",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fix</span>",
+      "text": "Fix"
+    },
+    {
+      "id": "24b24eb1ed5480088090ffe69e56a09a",
+      "type": "code",
+      "html": "interface Shape {\n    method area()\n}\n\nclass Circle implements Shape {\n    method area() {\n        return 3.14 * radius * radius\n    }\n}\n\nclass Rectangle implements Shape {\n    method area() {\n        return width * height\n    }\n}\n\nclass AreaCalculator {\n    method calculate(shape: Shape) {\n        return shape.area()\n    }\n}\n\n",
+      "text": "interface Shape {\n    method area()\n}\n\nclass Circle implements Shape {\n    method area() {\n        return 3.14 * radius * radius\n    }\n}\n\nclass Rectangle implements Shape {\n    method area() {\n        return width * height\n    }\n}\n\nclass AreaCalculator {\n    method calculate(shape: Shape) {\n        return shape.area()\n    }\n}\n\n"
+    },
+    {
+      "id": "24b24eb1ed5480aca551d37a3be8483a",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54804b8b3efafda24818ef",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What’s the change and how it fixes the problems</span>",
+      "text": "What’s the change and how it fixes the problems"
+    },
+    {
+      "id": "24b24eb1ed5480549184d19ebb164739",
+      "type": "bulleted_list",
+      "html": "Introduced a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">common interface</span> (<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">Shape</span></div>) for all shape types.",
+      "text": "Introduced a common interface (Shape) for all shape types."
+    },
+    {
+      "id": "24b24eb1ed5480a5b5dbe4381c269150",
+      "type": "bulleted_list",
+      "html": "Each shape <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">encapsulates its own area calculation</span>.",
+      "text": "Each shape encapsulates its own area calculation."
+    },
+    {
+      "id": "24b24eb1ed5480e1a065f487a6492c68",
+      "type": "bulleted_list",
+      "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">AreaCalculator</span></div> no longer needs modification — just works with any <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">Shape</span></div>.",
+      "text": "AreaCalculator no longer needs modification — just works with any Shape."
+    },
+    {
+      "id": "24b24eb1ed54803cac30fb1fac4a7117",
+      "type": "bulleted_list",
+      "html": "Adding a new shape only requires creating a new class that implements <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">Shape</span></div>.",
+      "text": "Adding a new shape only requires creating a new class that implements Shape."
+    },
+    {
+      "id": "24b24eb1ed54806eb9abc93c09f9b945",
+      "type": "bulleted_list",
+      "html": "Existing tested code (<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">AreaCalculator</span></div>) stays untouched — lowers regression risk.",
+      "text": "Existing tested code (AreaCalculator) stays untouched — lowers regression risk."
+    },
+    {
+      "id": "24b24eb1ed5480c6b399e836ffb6878a",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54808ab0b7e6d505d167f2",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How to check if the code follows OCP</span>",
+      "text": "How to check if the code follows OCP"
+    },
+    {
+      "id": "24b24eb1ed5480348eb5d17c650cbc33",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 1 — New Feature Addition Without Editing Existing Code</span>",
+      "text": "Rule 1 — New Feature Addition Without Editing Existing Code"
+    },
+    {
+      "id": "24b24eb1ed5480c1b4a3ff2a55e26fc9",
+      "type": "bulleted_list",
+      "html": "It must be possible to add a new feature or variation without modifying existing tested code.",
+      "text": "It must be possible to add a new feature or variation without modifying existing tested code."
+    },
+    {
+      "id": "24b24eb1ed54807eba64dcdfed5f18da",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Simulate adding a new requirement. If it requires touching old business logic, OCP is violated.",
+      "text": "Check: Simulate adding a new requirement. If it requires touching old business logic, OCP is violated."
+    },
+    {
+      "id": "24b24eb1ed548064a751d00cf1257c02",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480e8a998c7eac611bc77",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 2 — Polymorphic Extension</span>",
+      "text": "Rule 2 — Polymorphic Extension"
+    },
+    {
+      "id": "24b24eb1ed5480cd9841e49b868ff211",
+      "type": "bulleted_list",
+      "html": "Behavior variation must be achieved via interfaces, abstract classes, or similar mechanisms.",
+      "text": "Behavior variation must be achieved via interfaces, abstract classes, or similar mechanisms."
+    },
+    {
+      "id": "24b24eb1ed5480c8bed3e6bd9d977ac3",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> See if extending functionality involves creating new types or functions rather than editing old ones.",
+      "text": "Check: See if extending functionality involves creating new types or functions rather than editing old ones."
+    },
+    {
+      "id": "24b24eb1ed54807ba129f61e8ec41a9a",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480fda781f712bb1a66cb",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 3 — No Growing Conditional Chains</span>",
+      "text": "Rule 3 — No Growing Conditional Chains"
+    },
+    {
+      "id": "24b24eb1ed5480cd9281d30477471e0f",
+      "type": "bulleted_list",
+      "html": "No need to modify an existing <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">switch</span></div> or <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">if/else</span></div> block to add new behavior.",
+      "text": "No need to modify an existing switch or if/else block to add new behavior."
+    },
+    {
+      "id": "24b24eb1ed5480b0a34ff8674db000c6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If extending requires adding a new branch to an existing conditional statements, OCP is violated.",
+      "text": "Check: If extending requires adding a new branch to an existing conditional statements, OCP is violated."
+    },
+    {
+      "id": "24b24eb1ed5480168c33dd8b8027b0a7",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548073a9edc4f020b683ce",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 4 — Stable Core Logic</span>",
+      "text": "Rule 4 — Stable Core Logic"
+    },
+    {
+      "id": "24b24eb1ed54804295b4c00224424661",
+      "type": "bulleted_list",
+      "html": "Core processing logic should remain unchanged as new features are added.",
+      "text": "Core processing logic should remain unchanged as new features are added."
+    },
+    {
+      "id": "24b24eb1ed54805eb148c57b976fe4d7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Review recent commits for feature additions. If core files keep changing for each new case, OCP is violated.",
+      "text": "Check: Review recent commits for feature additions. If core files keep changing for each new case, OCP is violated."
+    },
+    {
+      "id": "24b24eb1ed54807b890bd30a1b66f46f",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480a2bd75cdb548fe1b94",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 5 — Dependency on Abstractions</span>",
+      "text": "Rule 5 — Dependency on Abstractions"
+    },
+    {
+      "id": "24b24eb1ed548029824ff1717c420d7e",
+      "type": "bulleted_list",
+      "html": "The system should depend on general contracts (interfaces/abstract classes) rather than specific implementations.",
+      "text": "The system should depend on general contracts (interfaces/abstract classes) rather than specific implementations."
+    },
+    {
+      "id": "24b24eb1ed5480d9b722c54d0db5ab5e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If the main logic depends directly on concrete classes, OCP risk is high.",
+      "text": "Check: If the main logic depends directly on concrete classes, OCP risk is high."
+    },
+    {
+      "id": "24b24eb1ed54808cbcbfce03e1e720f8",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548058a0eff27838fb57c6",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 6 — Isolated Testing for Extensions</span>",
+      "text": "Rule 6 — Isolated Testing for Extensions"
+    },
+    {
+      "id": "24b24eb1ed5480e185cfc17955b47223",
+      "type": "bulleted_list",
+      "html": "New functionality should be testable independently without re-testing unrelated features.",
+      "text": "New functionality should be testable independently without re-testing unrelated features."
+    },
+    {
+      "id": "24b24eb1ed548019bb59fcf06314555e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> See if testing a new feature requires running the old feature’s tests due to shared code changes.",
+      "text": "Check: See if testing a new feature requires running the old feature’s tests due to shared code changes."
+    },
+    {
+      "id": "24b24eb1ed5480879fe7ebabdc231a13",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480e0bd9fff34ba46f0e7",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 7 — Minimal Change Surface</span>",
+      "text": "Rule 7 — Minimal Change Surface"
+    },
+    {
+      "id": "24b24eb1ed54806e8e7ded3b59041204",
+      "type": "bulleted_list",
+      "html": "The number of files modified for an extension should be small and limited to the new functionality.",
+      "text": "The number of files modified for an extension should be small and limited to the new functionality."
+    },
+    {
+      "id": "24b24eb1ed54806d9d50d04c2b9a12e3",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Count modified files for the last feature. If it includes unrelated files, OCP is violated.",
+      "text": "Check: Count modified files for the last feature. If it includes unrelated files, OCP is violated."
+    }
+  ]
+}

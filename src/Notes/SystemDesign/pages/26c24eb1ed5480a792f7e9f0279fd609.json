@@ -1,0 +1,563 @@
+{
+  "id": "26c24eb1ed5480a792f7e9f0279fd609",
+  "title": "Synchronous Writes in Distributed System for Strong Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Synchronous-Writes-in-Distributed-System-for-Strong-Consistency-26c24eb1ed5480a792f7e9f0279fd609?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed548082b09ec7c37a65635b",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">A write operation is considered </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">successful only after all required replicas have confirmed the write</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\">.</span>",
+      "text": "A write operation is considered successful only after all required replicas have confirmed the write."
+    },
+    {
+      "id": "26c24eb1ed5480b19399d9aa25a53978",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use case: </span>Systems needing <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">strong consistency</span> (e.g., banking, inventory management).",
+      "text": "Use case: Systems needing strong consistency (e.g., banking, inventory management)."
+    },
+    {
+      "id": "26c24eb1ed5480f5b103f7f22b221e87",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed54806b9ea5e3b71c4bf604",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How Synchronous Writes Happen</span>",
+      "text": "How Synchronous Writes Happen"
+    },
+    {
+      "id": "26c24eb1ed5480d2b130db2085fe68e4",
+      "type": "numbered_list",
+      "html": "Client sends the request.",
+      "text": "Client sends the request."
+    },
+    {
+      "id": "26c24eb1ed54805a97dae48e783e999a",
+      "type": "numbered_list",
+      "html": "The coordinator sends the request to every replica and waits for the acknowledgement.",
+      "text": "The coordinator sends the request to every replica and waits for the acknowledgement."
+    },
+    {
+      "id": "26c24eb1ed5480a886fec8dec2cb49e4",
+      "type": "numbered_list",
+      "html": "Each of the replicas write the data but do not commit.",
+      "text": "Each of the replicas write the data but do not commit."
+    },
+    {
+      "id": "26c24eb1ed5480cfa4a3f3e4e656f915",
+      "type": "numbered_list",
+      "html": "Those who successfully write the data send the acknowledgement of success.",
+      "text": "Those who successfully write the data send the acknowledgement of success."
+    },
+    {
+      "id": "26c24eb1ed5480aa9fc7e17f47718245",
+      "type": "numbered_list",
+      "html": "Those who cannot write, first they try again and again for a fixed number of times, even after that if they fail, they send the acknowledgement of failure.",
+      "text": "Those who cannot write, first they try again and again for a fixed number of times, even after that if they fail, they send the acknowledgement of failure."
+    },
+    {
+      "id": "26c24eb1ed54804b8444e09d9bb8ceca",
+      "type": "numbered_list",
+      "html": "Coordinator receives the acknowledgements, and if any of them is about failure, it resends the write requests again. This is allowed for a fixed number of times.",
+      "text": "Coordinator receives the acknowledgements, and if any of them is about failure, it resends the write requests again. This is allowed for a fixed number of times."
+    },
+    {
+      "id": "26c24eb1ed54809f835bf47b9d131d68",
+      "type": "numbered_list",
+      "html": "Now, if all the acknowledgements are of success, the coordinator sends a commit request and all the replicas commit the write and send another acknowledment, otherwise a",
+      "text": "Now, if all the acknowledgements are of success, the coordinator sends a commit request and all the replicas commit the write and send another acknowledment, otherwise a"
+    },
+    {
+      "id": "26c24eb1ed5480dfbedbe9cdc821c7a8",
+      "type": "numbered_list",
+      "html": "Now the coordinator send teh ",
+      "text": "Now the coordinator send teh "
+    },
+    {
+      "id": "26c24eb1ed548017bc6ecde78dff148d",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480118bd4e446d0bb07eb",
+      "type": "header",
+      "html": "What if?",
+      "text": "What if?"
+    },
+    {
+      "id": "26c24eb1ed5480edabc8d798132075a0",
+      "type": "sub_header",
+      "html": "Replica Acknowledgment Fails",
+      "text": "Replica Acknowledgment Fails"
+    },
+    {
+      "id": "26c24eb1ed5480c488f2edf8a7ed3496",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Problem:</span>",
+      "text": "Problem:"
+    },
+    {
+      "id": "26c24eb1ed54809a8e03cfa57d842033",
+      "type": "bulleted_list",
+      "html": "A replica successfully writes the data but <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">fails to send an acknowledgment</span> to the coordinator.",
+      "text": "A replica successfully writes the data but fails to send an acknowledgment to the coordinator."
+    },
+    {
+      "id": "26c24eb1ed54801e87d0d4163622648c",
+      "type": "bulleted_list",
+      "html": "The coordinator thinks the replica failed.",
+      "text": "The coordinator thinks the replica failed."
+    },
+    {
+      "id": "26c24eb1ed5480aba3bafa34857e75ff",
+      "type": "bulleted_list",
+      "html": "Too many sub-problems:",
+      "text": "Too many sub-problems:"
+    },
+    {
+      "id": "26c24eb1ed54800e8d8dc61003183216",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480aba3bafa34857e75ff",
+      "html": "The coordinator may try again and again.",
+      "text": "The coordinator may try again and again."
+    },
+    {
+      "id": "26c24eb1ed54808d8de4f06971fb0e9e",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480aba3bafa34857e75ff",
+      "html": "The coordinator may report failure for write which has happened.",
+      "text": "The coordinator may report failure for write which has happened."
+    },
+    {
+      "id": "26c24eb1ed5480e0a3b9d4527813dfb9",
+      "type": "sub_sub_header",
+      "html": "Solution:",
+      "text": "Solution:"
+    },
+    {
+      "id": "26c24eb1ed54803aac51c0a35e9bd06a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Idempotent writes / unique transaction IDs</span>",
+      "text": "Idempotent writes / unique transaction IDs"
+    },
+    {
+      "id": "26c24eb1ed5480bcaaf6fd98e1b743b3",
+      "type": "bulleted_list",
+      "html": "Each write has a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">unique identifier</span>.",
+      "text": "Each write has a unique identifier."
+    },
+    {
+      "id": "26c24eb1ed5480a5a46fd55b0c9fcc05",
+      "type": "bulleted_list",
+      "html": "Retrying a write on the same replica does not create duplicates.",
+      "text": "Retrying a write on the same replica does not create duplicates."
+    },
+    {
+      "id": "26c24eb1ed5480eca6efdf94036cace7",
+      "type": "bulleted_list",
+      "html": "Using the ID, the replica understands that the acknowledgement was not received, so the acknowledgement is sent again.",
+      "text": "Using the ID, the replica understands that the acknowledgement was not received, so the acknowledgement is sent again."
+    },
+    {
+      "id": "26c24eb1ed5480bc88f5e2706cdbd926",
+      "type": "sub_header",
+      "html": "Even Resent Acknowledgement Fails",
+      "text": "Even Resent Acknowledgement Fails"
+    },
+    {
+      "id": "26c24eb1ed54805192befea72568d026",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Problem:</span>",
+      "text": "Problem:"
+    },
+    {
+      "id": "26c24eb1ed5480b3aaaaed84504e97b8",
+      "type": "bulleted_list",
+      "html": "The resent acknowledgement fails.",
+      "text": "The resent acknowledgement fails."
+    },
+    {
+      "id": "26c24eb1ed5480fc870ad3aa843da929",
+      "type": "bulleted_list",
+      "html": "This repeats <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">potentially forever</span>.",
+      "text": "This repeats potentially forever."
+    },
+    {
+      "id": "26c24eb1ed5480dca4abfdc0152825d8",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Solution:</span>",
+      "text": "Solution:"
+    },
+    {
+      "id": "26c24eb1ed548069a618c47107566424",
+      "type": "bulleted_list",
+      "html": "After <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">N retries or timeout period</span>, coordinator <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">stops retrying</span> and reports failure to the client.",
+      "text": "After N retries or timeout period, coordinator stops retrying and reports failure to the client."
+    },
+    {
+      "id": "26c24eb1ed5480bc8a12dd6cb577bcbd",
+      "type": "bulleted_list",
+      "html": "System may mark the transaction as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">“in-doubt”</span> or <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">“pending acknowledgment”</span>.",
+      "text": "System may mark the transaction as “in-doubt” or “pending acknowledgment”."
+    },
+    {
+      "id": "26c24eb1ed54805d8e70d9ba89305b3b",
+      "type": "bulleted_list",
+      "html": "Background processes check for <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">unacknowledged writes</span> and reconcile with coordinator later.",
+      "text": "Background processes check for unacknowledged writes and reconcile with coordinator later."
+    },
+    {
+      "id": "26c24eb1ed5480e78c01ffbf7a4bab22",
+      "type": "text"
+    },
+    {
+      "id": "26c24eb1ed5480d39b33f0af96309e9b",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed54800fa25ec9940980be06",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">3. Problems / Challenges in Synchronous Writes</span>",
+      "text": "3. Problems / Challenges in Synchronous Writes"
+    },
+    {
+      "id": "26c24eb1ed5480c0bbb5f507643257ef",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Increased latency:</span>",
+      "text": "Increased latency:"
+    },
+    {
+      "id": "26c24eb1ed548096ada6e31978953186",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c0bbb5f507643257ef",
+      "html": "The write is delayed by the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">slowest replica</span> in the group.",
+      "text": "The write is delayed by the slowest replica in the group."
+    },
+    {
+      "id": "26c24eb1ed5480ddba85f9f23aaef6a4",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Availability issues:</span>",
+      "text": "Availability issues:"
+    },
+    {
+      "id": "26c24eb1ed5480508ef5d97cfd409bad",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480ddba85f9f23aaef6a4",
+      "html": "If one replica is down or unreachable, the write may fail.",
+      "text": "If one replica is down or unreachable, the write may fail."
+    },
+    {
+      "id": "26c24eb1ed548016b0bec059e328c712",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480ddba85f9f23aaef6a4",
+      "html": "This reduces system availability (CAP tradeoff: strong consistency vs availability).",
+      "text": "This reduces system availability (CAP tradeoff: strong consistency vs availability)."
+    },
+    {
+      "id": "26c24eb1ed54802493c3c094860754c5",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Network partitions / failures:</span>",
+      "text": "Network partitions / failures:"
+    },
+    {
+      "id": "26c24eb1ed548080b5f0f31f8c662549",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54802493c3c094860754c5",
+      "html": "In case of network split, some nodes may not receive the write, leading to potential write failures.",
+      "text": "In case of network split, some nodes may not receive the write, leading to potential write failures."
+    },
+    {
+      "id": "26c24eb1ed5480a09558c3e9b1281392",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Write amplification:</span>",
+      "text": "Write amplification:"
+    },
+    {
+      "id": "26c24eb1ed548011b320d11c2e6ff92d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480a09558c3e9b1281392",
+      "html": "Writing to multiple replicas simultaneously increases I/O operations.",
+      "text": "Writing to multiple replicas simultaneously increases I/O operations."
+    },
+    {
+      "id": "26c24eb1ed5480589be5c3f94387836c",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Blocking writes under load:</span>",
+      "text": "Blocking writes under load:"
+    },
+    {
+      "id": "26c24eb1ed54808c8138d2a07c4564e0",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480589be5c3f94387836c",
+      "html": "High load on replicas can make synchronous writes slow and block clients.",
+      "text": "High load on replicas can make synchronous writes slow and block clients."
+    },
+    {
+      "id": "26c24eb1ed54808abb47cc299a010fc8",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed54805e9a17f0057bd3bbdb",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">4. Solutions / Techniques to Handle Problems</span>",
+      "text": "4. Solutions / Techniques to Handle Problems"
+    },
+    {
+      "id": "26c24eb1ed5480efa78de3b34bc1a079",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Quorum-based writes (e.g., W/N+1)</span>",
+      "text": "Quorum-based writes (e.g., W/N+1)"
+    },
+    {
+      "id": "26c24eb1ed5480cf968cc5151ad3c0fc",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480efa78de3b34bc1a079",
+      "html": "Instead of all replicas, require acknowledgment from a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">majority (quorum)</span>.",
+      "text": "Instead of all replicas, require acknowledgment from a majority (quorum)."
+    },
+    {
+      "id": "26c24eb1ed54807bb6aeed95ec335982",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480efa78de3b34bc1a079",
+      "html": "Reduces latency and allows some failures while maintaining consistency.",
+      "text": "Reduces latency and allows some failures while maintaining consistency."
+    },
+    {
+      "id": "26c24eb1ed5480628843fa376ef0d2e0",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Timeouts and retries</span>",
+      "text": "Timeouts and retries"
+    },
+    {
+      "id": "26c24eb1ed548005a558cb0a0ecc9c62",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480628843fa376ef0d2e0",
+      "html": "If replicas do not respond within a timeout, coordinator retries or fails gracefully.",
+      "text": "If replicas do not respond within a timeout, coordinator retries or fails gracefully."
+    },
+    {
+      "id": "26c24eb1ed5480ff9661f6914d75ab2f",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Leader/Primary node</span>",
+      "text": "Leader/Primary node"
+    },
+    {
+      "id": "26c24eb1ed54800a80b5f313b0569829",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480ff9661f6914d75ab2f",
+      "html": "All writes go through a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">single leader</span> to reduce conflicts and simplify ordering.",
+      "text": "All writes go through a single leader to reduce conflicts and simplify ordering."
+    },
+    {
+      "id": "26c24eb1ed5480d98f50eedbb887ece1",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480ff9661f6914d75ab2f",
+      "html": "Ensures <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">linearizability</span> (strict consistency).",
+      "text": "Ensures linearizability (strict consistency)."
+    },
+    {
+      "id": "26c24eb1ed548011a116f4636aa82c6b",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Write batching</span>",
+      "text": "Write batching"
+    },
+    {
+      "id": "26c24eb1ed548091bfa5f2ec0a830a9e",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548011a116f4636aa82c6b",
+      "html": "Combine multiple write requests into a single batch to reduce network round trips.",
+      "text": "Combine multiple write requests into a single batch to reduce network round trips."
+    },
+    {
+      "id": "26c24eb1ed548020ad59d3df51ff7c8c",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fallback strategies</span>",
+      "text": "Fallback strategies"
+    },
+    {
+      "id": "26c24eb1ed548011be21d40c4aa8e425",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548020ad59d3df51ff7c8c",
+      "html": "If synchronous write fails, systems can:",
+      "text": "If synchronous write fails, systems can:"
+    },
+    {
+      "id": "26c24eb1ed54808e8135c77c4083323b",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548011be21d40c4aa8e425",
+      "html": "Retry asynchronously.",
+      "text": "Retry asynchronously."
+    },
+    {
+      "id": "26c24eb1ed54805abeefde4d50b1071c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548011be21d40c4aa8e425",
+      "html": "Return an error to the client (depends on system guarantees).",
+      "text": "Return an error to the client (depends on system guarantees)."
+    },
+    {
+      "id": "26c24eb1ed5480e18d0df45512ca24a0",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Monitoring and replica health checks</span>",
+      "text": "Monitoring and replica health checks"
+    },
+    {
+      "id": "26c24eb1ed548030883dc8ae20513979",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480e18d0df45512ca24a0",
+      "html": "Proactively remove or isolate slow or failing nodes to maintain write performance.",
+      "text": "Proactively remove or isolate slow or failing nodes to maintain write performance."
+    },
+    {
+      "id": "26c24eb1ed5480f4a539fdec3ab31fb5",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed54800b9d8ec01fe9601217",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">5. Trade-offs in Synchronous Writes</span>",
+      "text": "5. Trade-offs in Synchronous Writes"
+    },
+    {
+      "id": "26c24eb1ed5480a6b0d8e344e79e9282",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Aspect"
+          },
+          {
+            "header": true,
+            "html": "Pros"
+          },
+          {
+            "header": true,
+            "html": "Cons"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Consistency"
+          },
+          {
+            "header": false,
+            "html": "Strong consistency guaranteed"
+          },
+          {
+            "header": false,
+            "html": "Slower than async writes"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Availability"
+          },
+          {
+            "header": false,
+            "html": "Predictable data state"
+          },
+          {
+            "header": false,
+            "html": "Lower availability if replicas fail"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Latency"
+          },
+          {
+            "header": false,
+            "html": "Deterministic"
+          },
+          {
+            "header": false,
+            "html": "Depends on slowest replica"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Complexity"
+          },
+          {
+            "header": false,
+            "html": "Simpler conflict resolution"
+          },
+          {
+            "header": false,
+            "html": "More network and disk load"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "26c24eb1ed548096aa6bcb41a70b2571",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480879741da0fa12b1e17",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">6. Real-World Examples</span>",
+      "text": "6. Real-World Examples"
+    },
+    {
+      "id": "26c24eb1ed5480049a02db37568b892b",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Relational databases with synchronous replication:</span>",
+      "text": "Relational databases with synchronous replication:"
+    },
+    {
+      "id": "26c24eb1ed54805aae1afa31517615c7",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480049a02db37568b892b",
+      "html": "PostgreSQL synchronous replication",
+      "text": "PostgreSQL synchronous replication"
+    },
+    {
+      "id": "26c24eb1ed54806e8cbdfe5ace9c0872",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480049a02db37568b892b",
+      "html": "MySQL Group Replication",
+      "text": "MySQL Group Replication"
+    },
+    {
+      "id": "26c24eb1ed5480478177d38931cd3ab8",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Distributed NoSQL systems with quorum writes:</span>",
+      "text": "Distributed NoSQL systems with quorum writes:"
+    },
+    {
+      "id": "26c24eb1ed548023a880c5d0af888a05",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480478177d38931cd3ab8",
+      "html": "Cassandra (with <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">QUORUM</span></div> write consistency)",
+      "text": "Cassandra (with QUORUM write consistency)"
+    },
+    {
+      "id": "26c24eb1ed5480e2847edde6970ec754",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480478177d38931cd3ab8",
+      "html": "MongoDB (write concern <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">majority</span></div>)",
+      "text": "MongoDB (write concern majority)"
+    },
+    {
+      "id": "26c24eb1ed54801fa801e16e02925953",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480e2a640fc91b3ac4616",
+      "type": "text",
+      "html": "If you want, I can <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">draw a diagram showing exactly how synchronous writes flow between client, coordinator, and replicas</span>. This usually makes it <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">much easier to remember</span>.",
+      "text": "If you want, I can draw a diagram showing exactly how synchronous writes flow between client, coordinator, and replicas. This usually makes it much easier to remember."
+    },
+    {
+      "id": "26c24eb1ed54807a9b92e9bf46fac3b6",
+      "type": "text",
+      "html": "Do you want me to do that next?",
+      "text": "Do you want me to do that next?"
+    }
+  ]
+}

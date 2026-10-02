@@ -1,0 +1,1469 @@
+{
+  "id": "24d24eb1ed548054bd55d5db65a2f091",
+  "title": "Databases",
+  "sourceUrl": "https://xpandeyed.notion.site/Databases-24d24eb1ed548054bd55d5db65a2f091?pvs=23",
+  "blocks": [
+    {
+      "id": "27524eb1ed5480a3a377d9e2f77d0b54",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">A database (DB), at its core, is a </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">logically organized collection of data</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\">—stored, structured, and maintained to allow efficient retrieval, updates, and management.</span>",
+      "text": "A database (DB), at its core, is a logically organized collection of data—stored, structured, and maintained to allow efficient retrieval, updates, and management."
+    },
+    {
+      "id": "27524eb1ed54805db3eeea9c3cd1faf3",
+      "type": "bulleted_list",
+      "html": "There is no single, universally agreed-upon definition of what a database is.",
+      "text": "There is no single, universally agreed-upon definition of what a database is."
+    },
+    {
+      "id": "27524eb1ed5480e4bf34e67b592e6dcd",
+      "type": "bulleted_list",
+      "html": "What’s important to remember is that <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not everything that stores data qualifies as a database</span>.",
+      "text": "What’s important to remember is that not everything that stores data qualifies as a database."
+    },
+    {
+      "id": "27524eb1ed548038b603f2e5f49d276c",
+      "type": "bulleted_list",
+      "html": "What makes storage a database is the presence of a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">defined set of rules that determine how data is organized and made usable</span>.",
+      "text": "What makes storage a database is the presence of a defined set of rules that determine how data is organized and made usable."
+    },
+    {
+      "id": "27524eb1ed54805998b7cb0ab39d43b1",
+      "type": "bulleted_list",
+      "html": "These rules must be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">enforced by a system</span> that manages the database by ensuring consistency, integrity, and efficient access to the data, which is called Database Management System (DBMS).",
+      "text": "These rules must be enforced by a system that manages the database by ensuring consistency, integrity, and efficient access to the data, which is called Database Management System (DBMS)."
+    },
+    {
+      "id": "27524eb1ed5480bda565fe9ba4888d1a",
+      "type": "callout"
+    },
+    {
+      "id": "27524eb1ed5480368710c6994a7b51e8",
+      "type": "toggle",
+      "parent": "27524eb1ed5480bda565fe9ba4888d1a",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Database: Widely-cited definitions (academic + industrial)</span>",
+      "text": "Database: Widely-cited definitions (academic + industrial)"
+    },
+    {
+      "id": "27524eb1ed5480f9a46feb74f5ce37f7",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480368710c6994a7b51e8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">ACM/IEEE Database Systems textbook (Silberschatz, Korth, Sudarshan):</span>",
+      "text": "ACM/IEEE Database Systems textbook (Silberschatz, Korth, Sudarshan):"
+    },
+    {
+      "id": "27524eb1ed5480fb83adf9adacd4c6d4",
+      "type": "quote",
+      "parent": "27524eb1ed5480f9a46feb74f5ce37f7",
+      "html": "A database is a collection of related data. Data is known to be facts that can be recorded and have implicit meaning.",
+      "text": "A database is a collection of related data. Data is known to be facts that can be recorded and have implicit meaning."
+    },
+    {
+      "id": "27524eb1ed5480ec8794e9baf20300b3",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480368710c6994a7b51e8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">ISO/IEC 2382 (Information Technology Vocabulary):</span>",
+      "text": "ISO/IEC 2382 (Information Technology Vocabulary):"
+    },
+    {
+      "id": "27524eb1ed5480dda5cbdd5389da022e",
+      "type": "quote",
+      "parent": "27524eb1ed5480ec8794e9baf20300b3",
+      "html": "A database is a collection of data organized according to a schema, so that it can be accessed, managed, and updated.",
+      "text": "A database is a collection of data organized according to a schema, so that it can be accessed, managed, and updated."
+    },
+    {
+      "id": "27524eb1ed5480e18364c150542bf575",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480368710c6994a7b51e8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Oxford Dictionary of Computing:</span>",
+      "text": "Oxford Dictionary of Computing:"
+    },
+    {
+      "id": "27524eb1ed548024b062e4c280a910f5",
+      "type": "quote",
+      "parent": "27524eb1ed5480e18364c150542bf575",
+      "html": "A structured set of data held in a computer, especially one that is accessible in various ways.",
+      "text": "A structured set of data held in a computer, especially one that is accessible in various ways."
+    },
+    {
+      "id": "27524eb1ed5480da844addb787b59c10",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480368710c6994a7b51e8",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">C.J. Date (one of the founders of relational theory):</span>",
+      "text": "C.J. Date (one of the founders of relational theory):"
+    },
+    {
+      "id": "27524eb1ed5480b199e6c8535f5d8337",
+      "type": "quote",
+      "parent": "27524eb1ed5480da844addb787b59c10",
+      "html": "A database is a persistent, logically coherent collection of inherently meaningful data, with some significance to a given universe of discourse.",
+      "text": "A database is a persistent, logically coherent collection of inherently meaningful data, with some significance to a given universe of discourse."
+    },
+    {
+      "id": "27524eb1ed548089b0a1ed7646b58c90",
+      "type": "callout"
+    },
+    {
+      "id": "27524eb1ed5480bbbe7eccc508042a41",
+      "type": "toggle",
+      "parent": "27524eb1ed548089b0a1ed7646b58c90",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">DB(MS)</span>",
+      "text": "DB(MS)"
+    },
+    {
+      "id": "27524eb1ed548049afd9d8527e3c547b",
+      "type": "text",
+      "parent": "27524eb1ed5480bbbe7eccc508042a41",
+      "html": "In application development, organized data is not meant to just be stored; it is meant to be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">queried, updated, and maintained</span>. For that, a <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">DB Management System is essential</span>.",
+      "text": "In application development, organized data is not meant to just be stored; it is meant to be queried, updated, and maintained. For that, a DB Management System is essential."
+    },
+    {
+      "id": "27524eb1ed5480c9a508e26e3f070293",
+      "type": "text",
+      "parent": "27524eb1ed5480bbbe7eccc508042a41",
+      "html": "A DBMS cannot exist without a database, because there would be nothing for it to manage. This is why providers like MongoDB or Oracle deliver both the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">DBMS software</span> and the <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">database</span> it manages.",
+      "text": "A DBMS cannot exist without a database, because there would be nothing for it to manage. This is why providers like MongoDB or Oracle deliver both the DBMS software and the database it manages."
+    },
+    {
+      "id": "27524eb1ed5480b9a7c9d2b3d1c33506",
+      "type": "text",
+      "parent": "27524eb1ed5480bbbe7eccc508042a41",
+      "html": "These two are tied strongly.",
+      "text": "These two are tied strongly."
+    },
+    {
+      "id": "27524eb1ed5480c2a188cbd4c3256629",
+      "type": "text",
+      "parent": "27524eb1ed5480bbbe7eccc508042a41",
+      "html": "Technically, when people say “we are using a MongoDB database” or “an Oracle DB is being used,” they are combining the two. The precise statement is: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">we are using the database management system provided by MongoDB or Oracle, which manages the database.</span>",
+      "text": "Technically, when people say “we are using a MongoDB database” or “an Oracle DB is being used,” they are combining the two. The precise statement is: we are using the database management system provided by MongoDB or Oracle, which manages the database."
+    },
+    {
+      "id": "24f24eb1ed5480c488b2ca5b7796e9c9",
+      "type": "divider"
+    },
+    {
+      "id": "27524eb1ed548070b64cfedf1bbdfd34",
+      "type": "text",
+      "html": "Based on the logical data model (table, document etc.), schema rigidity, relationship handling, consistency guarantees, and access patterns, there are only two types of databases.",
+      "text": "Based on the logical data model (table, document etc.), schema rigidity, relationship handling, consistency guarantees, and access patterns, there are only two types of databases."
+    },
+    {
+      "id": "27524eb1ed548085a1dac8995e196911",
+      "type": "bulleted_list",
+      "html": "Relational Databases/SQL Databases",
+      "text": "Relational Databases/SQL Databases"
+    },
+    {
+      "id": "27524eb1ed5480118ab2c55af7c54e25",
+      "type": "bulleted_list",
+      "html": "Non-Relational Databases/NoSQL Databases",
+      "text": "Non-Relational Databases/NoSQL Databases"
+    },
+    {
+      "id": "24f24eb1ed5480048efde61d929777d8",
+      "type": "divider"
+    },
+    {
+      "id": "27524eb1ed5480309d95ed5ca95b7b4f",
+      "type": "header",
+      "html": "Relational Databases",
+      "text": "Relational Databases"
+    },
+    {
+      "id": "27524eb1ed5480b9895ef434b27e8957",
+      "type": "bulleted_list",
+      "html": "Also known as, SQL DBs.",
+      "text": "Also known as, SQL DBs."
+    },
+    {
+      "id": "27724eb1ed548078a75ef86a7020fb81",
+      "type": "bulleted_list",
+      "html": "Organises data into <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">relations</span> (called <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">tables</span> in SQL).",
+      "text": "Organises data into relations (called tables in SQL)."
+    },
+    {
+      "id": "27724eb1ed54806b9261f6f8287f6eb6",
+      "type": "bulleted_list",
+      "html": "Relations are unordered collections of&nbsp;<span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">tuples</span>&nbsp;(called&nbsp;<span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">rows</span>&nbsp;in SQL).",
+      "text": "Relations are unordered collections of tuples (called rows in SQL)."
+    },
+    {
+      "id": "27924eb1ed54805581a2df14f110034c",
+      "type": "sub_sub_header",
+      "html": "Core Design Principles: RDBs",
+      "text": "Core Design Principles: RDBs"
+    },
+    {
+      "id": "27924eb1ed548044a7b2ccaca13b59b9",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Normalization of data</span>",
+      "text": "Normalization of data"
+    },
+    {
+      "id": "27924eb1ed5480afb3f0ddbd7e2cc5cb",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed548044a7b2ccaca13b59b9",
+      "html": "Data is broken into multiple tables to avoid duplication.",
+      "text": "Data is broken into multiple tables to avoid duplication."
+    },
+    {
+      "id": "27924eb1ed548042bd7df0dd934567d0",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed548044a7b2ccaca13b59b9",
+      "html": "Promotes separation of concerns, integrity, and reusability.",
+      "text": "Promotes separation of concerns, integrity, and reusability."
+    },
+    {
+      "id": "27924eb1ed548079a597c9765e6bfeb2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consistency prioritized</span>",
+      "text": "Consistency prioritized"
+    },
+    {
+      "id": "27924eb1ed54805abd3fe80f4f1ff1bf",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed548079a597c9765e6bfeb2",
+      "html": "ACID transactions are central (ensuring strong guarantees). <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Transactions-ACID-Properties-26424eb1ed54802894ffe6334761df9d?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Transactions &amp; ACID Properties</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "ACID transactions are central (ensuring strong guarantees). Transactions & ACID Properties ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Transactions-ACID-Properties-26424eb1ed54802894ffe6334761df9d?pvs=24",
+          "text": "Transactions & ACID Properties"
+        }
+      ]
+    },
+    {
+      "id": "27924eb1ed54800fba00df6253343b17",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed548079a597c9765e6bfeb2",
+      "html": "Predictability and correctness of data are considered more important than scale.",
+      "text": "Predictability and correctness of data are considered more important than scale."
+    },
+    {
+      "id": "27924eb1ed5480059a8bdb18eb5d6891",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Schema-on-write</span>",
+      "text": "Schema-on-write"
+    },
+    {
+      "id": "27924eb1ed5480b58209f18dd54135db",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed5480059a8bdb18eb5d6891",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The schema must be designed first</span> (tables, columns, data types, constraints) before inserting data.",
+      "text": "The schema must be designed first (tables, columns, data types, constraints) before inserting data."
+    },
+    {
+      "id": "27a24eb1ed5480ecbbdefff47d2a138c",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed5480059a8bdb18eb5d6891",
+      "html": "All data must <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">strictly conform</span> to this schema to be inserted into the DB.",
+      "text": "All data must strictly conform to this schema to be inserted into the DB."
+    },
+    {
+      "id": "27a24eb1ed5480b2b821ff5b711379fd",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed5480059a8bdb18eb5d6891",
+      "html": "This is called <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">schema-on-write</span> approach.",
+      "text": "This is called schema-on-write approach."
+    },
+    {
+      "id": "27924eb1ed54809793ccf0c4171f3e7f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Joins as a first-class concept</span>",
+      "text": "Joins as a first-class concept"
+    },
+    {
+      "id": "27924eb1ed5480afa181f72d10042fce",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54809793ccf0c4171f3e7f",
+      "html": "Related data is stored separately and joined when needed.",
+      "text": "Related data is stored separately and joined when needed."
+    },
+    {
+      "id": "27924eb1ed5480f093dbc979b54aa28b",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Vertical scaling focus</span>",
+      "text": "Vertical scaling focus"
+    },
+    {
+      "id": "27924eb1ed548095bcf9ec04e513f25c",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed5480f093dbc979b54aa28b",
+      "html": "Systems were originally designed to scale by using more powerful machines.",
+      "text": "Systems were originally designed to scale by using more powerful machines."
+    },
+    {
+      "id": "27924eb1ed548017a840e73c3032c6ff",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">General-purpose model [Tables &amp; Only Tables]</span>",
+      "text": "General-purpose model [Tables & Only Tables]"
+    },
+    {
+      "id": "27924eb1ed5480b4b197ee4f1366db12",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed548017a840e73c3032c6ff",
+      "html": "One-size-fits-all, aiming to support a wide variety of workloads, but not optimized for highly specialized needs.",
+      "text": "One-size-fits-all, aiming to support a wide variety of workloads, but not optimized for highly specialized needs."
+    },
+    {
+      "id": "27524eb1ed548049bd43ea27a172b151",
+      "type": "divider"
+    },
+    {
+      "id": "27524eb1ed548074a881c145899ce890",
+      "type": "header",
+      "html": "Non-Relational Databases",
+      "text": "Non-Relational Databases"
+    },
+    {
+      "id": "27524eb1ed54800d8de7e9027b181bb5",
+      "type": "bulleted_list",
+      "html": "Also known as, NoSQL Databases",
+      "text": "Also known as, NoSQL Databases"
+    },
+    {
+      "id": "27524eb1ed5480078e6ad4880a15a4e5",
+      "type": "bulleted_list",
+      "html": "NoSQL: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Not Only SQL</span> (modern interpretation)",
+      "text": "NoSQL: Not Only SQL (modern interpretation)"
+    },
+    {
+      "id": "27724eb1ed5480bbb38df00d035f8008",
+      "type": "bulleted_list",
+      "html": "Came years later after Relational Databases.",
+      "text": "Came years later after Relational Databases."
+    },
+    {
+      "id": "27724eb1ed548093a75eeabd64413d53",
+      "type": "bulleted_list",
+      "html": "Unlike RDBs, they happen to be in many forms, JSON based, Graph Based etc.",
+      "text": "Unlike RDBs, they happen to be in many forms, JSON based, Graph Based etc."
+    },
+    {
+      "id": "27924eb1ed548033af46eeb778bd45e8",
+      "type": "sub_sub_header",
+      "html": "Core Design Principles: NRDBs",
+      "text": "Core Design Principles: NRDBs"
+    },
+    {
+      "id": "27924eb1ed5480579607e9947715d66d",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Denormalization and embedding</span>",
+      "text": "Denormalization and embedding"
+    },
+    {
+      "id": "27924eb1ed54802099f9e333f12a0632",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed5480579607e9947715d66d",
+      "html": "Related data is often stored together in a single record (document, key-value, etc.) to avoid costly joins.",
+      "text": "Related data is often stored together in a single record (document, key-value, etc.) to avoid costly joins."
+    },
+    {
+      "id": "27924eb1ed54807c98adefbfd2e9d264",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Relaxed ACID in favor of scalability</span>",
+      "text": "Relaxed ACID in favor of scalability"
+    },
+    {
+      "id": "27924eb1ed5480eab023cad4934cb7d1",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54807c98adefbfd2e9d264",
+      "html": "Designed with the Base Model. <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/BASE-Model-27a24eb1ed5480fc81c2cde652ff2938?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">BASE Model</span><span style=\"white-space:nowrap\"></span></a>. [In progress]",
+      "text": "Designed with the Base Model. BASE Model. [In progress]",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/BASE-Model-27a24eb1ed5480fc81c2cde652ff2938?pvs=24",
+          "text": "BASE Model"
+        }
+      ]
+    },
+    {
+      "id": "27924eb1ed54800eaeb9dbaf6972b86e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Schema-on-read</span>",
+      "text": "Schema-on-read"
+    },
+    {
+      "id": "27924eb1ed54805eaf85c6b647e3e3bd",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54800eaeb9dbaf6972b86e",
+      "html": "No schema is enforced at the database level when writing.",
+      "text": "No schema is enforced at the database level when writing."
+    },
+    {
+      "id": "27a24eb1ed5480b4aa52f733814127c5",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54800eaeb9dbaf6972b86e",
+      "html": "The data structure is interpreted <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only when it is read</span> by the application.",
+      "text": "The data structure is interpreted only when it is read by the application."
+    },
+    {
+      "id": "27a24eb1ed5480b8b6a9ea5c20446fcc",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54800eaeb9dbaf6972b86e",
+      "html": "The schema is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">implicit in application code</span>, not explicit in the database.",
+      "text": "The schema is implicit in application code, not explicit in the database."
+    },
+    {
+      "id": "27a24eb1ed5480ab93c4c54ae5ce21b1",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54800eaeb9dbaf6972b86e",
+      "html": "This is called <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">schema-on-read</span> approach.",
+      "text": "This is called schema-on-read approach."
+    },
+    {
+      "id": "27924eb1ed54809c97f3d1f84d42aad0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Horizontal scaling focus</span>",
+      "text": "Horizontal scaling focus"
+    },
+    {
+      "id": "27924eb1ed5480c3932ffb37e6404175",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54809c97f3d1f84d42aad0",
+      "html": "From the start, designed to scale across servers.",
+      "text": "From the start, designed to scale across servers."
+    },
+    {
+      "id": "27a24eb1ed54807bb3fadcba4be50297",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Specialization</span>",
+      "text": "Specialization"
+    },
+    {
+      "id": "27a24eb1ed548059b6fdcbb4701e30b1",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54807bb3fadcba4be50297",
+      "html": "Different use cases demand different data models.",
+      "text": "Different use cases demand different data models."
+    },
+    {
+      "id": "27a24eb1ed5480aa9d80d2e6269f3d9e",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54807bb3fadcba4be50297",
+      "html": "Instead of generalizing database design, non-relational databases are built with specialization in mind:",
+      "text": "Instead of generalizing database design, non-relational databases are built with specialization in mind:"
+    },
+    {
+      "id": "27a24eb1ed5480c3ae99c4d1d2a3fb67",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480aa9d80d2e6269f3d9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Document databases</span> – MongoDB, CouchDB",
+      "text": "Document databases – MongoDB, CouchDB"
+    },
+    {
+      "id": "27a24eb1ed54805aaf1dd2e2194f0cc1",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480aa9d80d2e6269f3d9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key-value stores</span> – Redis, DynamoDB",
+      "text": "Key-value stores – Redis, DynamoDB"
+    },
+    {
+      "id": "27a24eb1ed54805d8a67ee5387652abb",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480aa9d80d2e6269f3d9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Column-family stores</span> – Cassandra, HBase",
+      "text": "Column-family stores – Cassandra, HBase"
+    },
+    {
+      "id": "27a24eb1ed54805a87bde4fb2a39c6f6",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480aa9d80d2e6269f3d9e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Graph databases</span> – Neo4j, ArangoDB",
+      "text": "Graph databases – Neo4j, ArangoDB"
+    },
+    {
+      "id": "27a24eb1ed54804aa3a8cc2b75586d5e",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54807bb3fadcba4be50297",
+      "html": "Later, I will add the specific use cases for each specialization.",
+      "text": "Later, I will add the specific use cases for each specialization."
+    },
+    {
+      "id": "27824eb1ed548063aaaddc7809805773",
+      "type": "divider"
+    },
+    {
+      "id": "27824eb1ed54802b89c9cecd691f47e8",
+      "type": "header",
+      "html": "What Led to the Invention, Development, and Adoption of NoSQL Databases",
+      "text": "What Led to the Invention, Development, and Adoption of NoSQL Databases"
+    },
+    {
+      "id": "27924eb1ed54808a99f0ec98a95301ff",
+      "type": "bulleted_list",
+      "html": "Relational DBs were designed (somewhere around 1970s), which is, far before the internet and technology boom.",
+      "text": "Relational DBs were designed (somewhere around 1970s), which is, far before the internet and technology boom."
+    },
+    {
+      "id": "27924eb1ed5480deb4f9cfc70ae2452a",
+      "type": "bulleted_list",
+      "html": "No-SQL came recently (around 2005), so the core design principles are really different.",
+      "text": "No-SQL came recently (around 2005), so the core design principles are really different."
+    },
+    {
+      "id": "27924eb1ed5480248614e9ba053e10ec",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL was not designed as an improvement over SQL.</span>",
+      "text": "NoSQL was not designed as an improvement over SQL."
+    },
+    {
+      "id": "27a24eb1ed54801a8ab0ffd1fe69546e",
+      "type": "bulleted_list",
+      "html": "NoSQL gave new data modelling philosophy and trade-offs.",
+      "text": "NoSQL gave new data modelling philosophy and trade-offs."
+    },
+    {
+      "id": "27824eb1ed54806c9692c6da45b65636",
+      "type": "sub_header",
+      "html": "Schema Flexibility: Schema-on-Write vs Schema-on-Read",
+      "text": "Schema Flexibility: Schema-on-Write vs Schema-on-Read"
+    },
+    {
+      "id": "27824eb1ed5480888b01f14c374ca236",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Relational Databases (RDBs)</span>",
+      "text": "Relational Databases (RDBs)"
+    },
+    {
+      "id": "27a24eb1ed548017840cf2fd3c9f0187",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480888b01f14c374ca236",
+      "html": "Schema-on-write approach.",
+      "text": "Schema-on-write approach."
+    },
+    {
+      "id": "27824eb1ed54805aa869d2397bf169b0",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480888b01f14c374ca236",
+      "html": "If the data structure changes even slightly (e.g., adding a new field), the schema needs to be altered.",
+      "text": "If the data structure changes even slightly (e.g., adding a new field), the schema needs to be altered."
+    },
+    {
+      "id": "27824eb1ed5480019938ebeb446e6153",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480888b01f14c374ca236",
+      "html": "Schema changes become painful when:",
+      "text": "Schema changes become painful when:"
+    },
+    {
+      "id": "27824eb1ed548073ace3ebba97839a27",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480019938ebeb446e6153",
+      "html": "There is already existing data (requiring updates or migrations).",
+      "text": "There is already existing data (requiring updates or migrations)."
+    },
+    {
+      "id": "27824eb1ed5480f19da3e6b97023bdf3",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480019938ebeb446e6153",
+      "html": "Backward compatibility must be maintained for legacy applications.",
+      "text": "Backward compatibility must be maintained for legacy applications."
+    },
+    {
+      "id": "27824eb1ed5480269145c6313dbb1494",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480888b01f14c374ca236",
+      "html": "This rigidity provides <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">predictability and integrity</span> but reduces agility.",
+      "text": "This rigidity provides predictability and integrity but reduces agility."
+    },
+    {
+      "id": "27824eb1ed5480859158f50ceb337da7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL Databases</span>",
+      "text": "NoSQL Databases"
+    },
+    {
+      "id": "27824eb1ed5480978bd6f07b8d6d4062",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480859158f50ceb337da7",
+      "html": "Schema-on-read approach.",
+      "text": "Schema-on-read approach."
+    },
+    {
+      "id": "27824eb1ed54808f9102d51a95ab4013",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480859158f50ceb337da7",
+      "html": "This allows different objects with slightly different fields to co-exist in the same collection/table.",
+      "text": "This allows different objects with slightly different fields to co-exist in the same collection/table."
+    },
+    {
+      "id": "27824eb1ed54805dad85d36020e6616c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why this mattered</span>",
+      "text": "Why this mattered"
+    },
+    {
+      "id": "27824eb1ed548039a67ce380a9c0bacf",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54805dad85d36020e6616c",
+      "html": "Enabled faster iteration in applications where data shapes were <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">constantly evolving</span>.",
+      "text": "Enabled faster iteration in applications where data shapes were constantly evolving."
+    },
+    {
+      "id": "27824eb1ed548017a2d8fdd39fcfb9f7",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54805dad85d36020e6616c",
+      "html": "Reduced the pain of schema migrations.",
+      "text": "Reduced the pain of schema migrations."
+    },
+    {
+      "id": "27824eb1ed5480c4bfbfc3bbfbcd322a",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54805dad85d36020e6616c",
+      "html": "Example:",
+      "text": "Example:"
+    },
+    {
+      "id": "27824eb1ed5480ccbb2be0780791600a",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480c4bfbfc3bbfbcd322a",
+      "html": "A <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">movie catalog site</span> with one collection <span style=\"font-style:italic\" data-token-index=\"3\" class=\"notion-enable-hover\">mediaItems</span>.",
+      "text": "A movie catalog site with one collection mediaItems."
+    },
+    {
+      "id": "27824eb1ed5480739188cdf371f710fb",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480ccbb2be0780791600a",
+      "html": "Movie → fields: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">director</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">runtime</span></div>",
+      "text": "Movie → fields: director, runtime"
+    },
+    {
+      "id": "27824eb1ed548076b28fdb7367c143f8",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480ccbb2be0780791600a",
+      "html": "TV show → fields: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">seasons</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">episodes</span></div>",
+      "text": "TV show → fields: seasons, episodes"
+    },
+    {
+      "id": "27824eb1ed54801e866bcbca8bd3888e",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480ccbb2be0780791600a",
+      "html": "Documentary → fields: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">narrator</span></div>, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">topic</span></div>",
+      "text": "Documentary → fields: narrator, topic"
+    },
+    {
+      "id": "27824eb1ed548085b85ae2879830f229",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480c4bfbfc3bbfbcd322a",
+      "html": "With schema-on-read, all can live under one bucket without rigid pre-definition.",
+      "text": "With schema-on-read, all can live under one bucket without rigid pre-definition."
+    },
+    {
+      "id": "27824eb1ed54801bbb35d26a8dc28df3",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54805dad85d36020e6616c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">But, </span>This flexibility <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">shifts complexity</span> from the DB to the <span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">application code</span>. Developers must handle multiple possible shapes of data.",
+      "text": "But, This flexibility shifts complexity from the DB to the application code. Developers must handle multiple possible shapes of data."
+    },
+    {
+      "id": "27824eb1ed54801ca2c8db66a64abab3",
+      "type": "sub_header",
+      "html": "Specialised Query Operations",
+      "text": "Specialised Query Operations"
+    },
+    {
+      "id": "27824eb1ed54802a94a9d1758cc36c1c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Limitations of RDBs</span>",
+      "text": "Limitations of RDBs"
+    },
+    {
+      "id": "27824eb1ed548011a16dd02ca1cd5245",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54802a94a9d1758cc36c1c",
+      "html": "RDBs use <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">tables, rows, and joins</span>, which are excellent for structured, relational data.",
+      "text": "RDBs use tables, rows, and joins, which are excellent for structured, relational data."
+    },
+    {
+      "id": "27824eb1ed5480e0bfa9ffb775d24c98",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54802a94a9d1758cc36c1c",
+      "html": "But some queries become inefficient or awkward:",
+      "text": "But some queries become inefficient or awkward:"
+    },
+    {
+      "id": "27824eb1ed548032999ce017aa2f722a",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480e0bfa9ffb775d24c98",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Graph queries</span> (friends-of-friends, social networks).",
+      "text": "Graph queries (friends-of-friends, social networks)."
+    },
+    {
+      "id": "27824eb1ed548094b0aee7b4f09c30e4",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480e0bfa9ffb775d24c98",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Geospatial queries</span> (e.g., \"find all drivers within 2 km\").",
+      "text": "Geospatial queries (e.g., \"find all drivers within 2 km\")."
+    },
+    {
+      "id": "27824eb1ed5480e48a6fefb991e7335a",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480e0bfa9ffb775d24c98",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Full-text search</span> (e.g., articles containing the word “database”).",
+      "text": "Full-text search (e.g., articles containing the word “database”)."
+    },
+    {
+      "id": "27824eb1ed54800da6b3dfe9aaf4e9a7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why NoSQL emerged here</span>",
+      "text": "Why NoSQL emerged here"
+    },
+    {
+      "id": "27824eb1ed548089bc03fdf27a9cfff9",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54800da6b3dfe9aaf4e9a7",
+      "html": "NoSQL systems were often <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">purpose-built</span> for certain workloads:",
+      "text": "NoSQL systems were often purpose-built for certain workloads:"
+    },
+    {
+      "id": "27824eb1ed54803cad5ce537c0bf6e2e",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548089bc03fdf27a9cfff9",
+      "html": "Graph databases (e.g., Neo4j) excel at relationship traversal.",
+      "text": "Graph databases (e.g., Neo4j) excel at relationship traversal."
+    },
+    {
+      "id": "27824eb1ed5480c89ab0f058e0ae6a16",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548089bc03fdf27a9cfff9",
+      "html": "Document stores (e.g., Elasticsearch, MongoDB) excel at text search.",
+      "text": "Document stores (e.g., Elasticsearch, MongoDB) excel at text search."
+    },
+    {
+      "id": "27824eb1ed5480998814c4548a21449c",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548089bc03fdf27a9cfff9",
+      "html": "Key-value stores (e.g., Redis) excel at caching and high-speed lookups.",
+      "text": "Key-value stores (e.g., Redis) excel at caching and high-speed lookups."
+    },
+    {
+      "id": "27824eb1ed54808e920ef92ba013d0d4",
+      "type": "sub_header",
+      "html": "Scalability",
+      "text": "Scalability"
+    },
+    {
+      "id": "27824eb1ed5480cda3ffceeab3d38704",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">RDBs (Traditional Approach)</span>",
+      "text": "RDBs (Traditional Approach)"
+    },
+    {
+      "id": "27824eb1ed5480d4b4d7ce888731bafa",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480cda3ffceeab3d38704",
+      "html": "Designed in the era of <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">single-server, </span>and were designed for<span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\"> vertical scaling.</span>",
+      "text": "Designed in the era of single-server, and were designed for vertical scaling."
+    },
+    {
+      "id": "27824eb1ed54807f82f7ef76ff648e55",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480cda3ffceeab3d38704",
+      "html": "Strong focus on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">ACID transactions</span> (Atomicity, Consistency, Isolation, Durability).",
+      "text": "Strong focus on ACID transactions (Atomicity, Consistency, Isolation, Durability)."
+    },
+    {
+      "id": "27824eb1ed54807cbbdce9f509cc0885",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480cda3ffceeab3d38704",
+      "html": "Heavy reliance on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">joins</span> to normalize data.",
+      "text": "Heavy reliance on joins to normalize data."
+    },
+    {
+      "id": "27824eb1ed5480819224faa64af463a8",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480cda3ffceeab3d38704",
+      "html": "Problems arise when scaling horizontally:",
+      "text": "Problems arise when scaling horizontally:"
+    },
+    {
+      "id": "27824eb1ed5480699837f68b5cb8d9c0",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480819224faa64af463a8",
+      "html": "Joins across distributed servers are slow and complex.",
+      "text": "Joins across distributed servers are slow and complex."
+    },
+    {
+      "id": "27824eb1ed54805b9ee3dd3259da5442",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed5480819224faa64af463a8",
+      "html": "Strong consistency across nodes becomes expensive to maintain.",
+      "text": "Strong consistency across nodes becomes expensive to maintain."
+    },
+    {
+      "id": "27824eb1ed548083b10fddf770c82762",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL Databases (New Approach)</span>",
+      "text": "NoSQL Databases (New Approach)"
+    },
+    {
+      "id": "27824eb1ed5480b2b4efe859e433dec1",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548083b10fddf770c82762",
+      "html": "Designed with <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">horizontal scaling (scale-out)</span> as the primary goal.",
+      "text": "Designed with horizontal scaling (scale-out) as the primary goal."
+    },
+    {
+      "id": "27824eb1ed548028a810c6c7d962568b",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548083b10fddf770c82762",
+      "html": "Strategies:",
+      "text": "Strategies:"
+    },
+    {
+      "id": "27824eb1ed5480a89c56c1076a78984e",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548028a810c6c7d962568b",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Data denormalization</span>: keep related data together in one place, so joins are avoided.",
+      "text": "Data denormalization: keep related data together in one place, so joins are avoided."
+    },
+    {
+      "id": "27824eb1ed548034a745f31fc2797ba0",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548028a810c6c7d962568b",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Partitioning/sharding</span>: split data across many servers.",
+      "text": "Partitioning/sharding: split data across many servers."
+    },
+    {
+      "id": "27824eb1ed54801caaa3c38b9a676725",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed548083b10fddf770c82762",
+      "html": "Trade-offs:",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "27824eb1ed5480ffa6d7c419678238f7",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54801caaa3c38b9a676725",
+      "html": "Often relax ACID guarantees.",
+      "text": "Often relax ACID guarantees."
+    },
+    {
+      "id": "27824eb1ed5480c9b6fee8fc0c0f34f9",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54801caaa3c38b9a676725",
+      "html": "Adopt <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">BASE model</span> (Basically Available, Soft state, Eventually consistent).",
+      "text": "Adopt BASE model (Basically Available, Soft state, Eventually consistent)."
+    },
+    {
+      "id": "27824eb1ed5480a484e3e5f4af165b45",
+      "type": "bulleted_list",
+      "parent": "27824eb1ed54801caaa3c38b9a676725",
+      "html": "Some provide <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">tunable consistency</span> (choose between strong or eventual).",
+      "text": "Some provide tunable consistency (choose between strong or eventual)."
+    },
+    {
+      "id": "27924eb1ed54808a826bfa01b944d404",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Clarifications</span>",
+      "text": "Clarifications"
+    },
+    {
+      "id": "27924eb1ed54800daa0ec6faf3884a64",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54808a826bfa01b944d404",
+      "html": "NoSQL did not \"solve\" scaling/consistency problems.",
+      "text": "NoSQL did not \"solve\" scaling/consistency problems."
+    },
+    {
+      "id": "27924eb1ed5480a5825fc1752050e709",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54808a826bfa01b944d404",
+      "html": "Instead, it <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">asked developers to model data differently</span> so those problems don’t arise in the first place.",
+      "text": "Instead, it asked developers to model data differently so those problems don’t arise in the first place."
+    },
+    {
+      "id": "27924eb1ed5480cfba02d7f2499109a7",
+      "type": "bulleted_list",
+      "parent": "27924eb1ed54808a826bfa01b944d404",
+      "html": "Example: Instead of splitting <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">users</span></div> and <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">orders</span></div> into two tables and joining, MongoDB might store <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"5\" spellcheck=\"false\" class=\"notion-enable-hover\">orders</span></div> inside the user document.",
+      "text": "Example: Instead of splitting users and orders into two tables and joining, MongoDB might store orders inside the user document."
+    },
+    {
+      "id": "27924eb1ed5480809137c700b22ffe3b",
+      "type": "divider"
+    },
+    {
+      "id": "27a24eb1ed5480f0bb5bc244eb709c35",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Note:</span>",
+      "text": "Note:"
+    },
+    {
+      "id": "27a24eb1ed54807999aafca3a0afb657",
+      "type": "bulleted_list",
+      "html": "Both relational and non-relational databases continue to evolve, copying features from each other.",
+      "text": "Both relational and non-relational databases continue to evolve, copying features from each other."
+    },
+    {
+      "id": "27a24eb1ed54809593dbd08872bda5b6",
+      "type": "bulleted_list",
+      "html": "As a result, the boundary between them is becoming less distinct.",
+      "text": "As a result, the boundary between them is becoming less distinct."
+    },
+    {
+      "id": "27a24eb1ed5480e4a773cc924f410c55",
+      "type": "bulleted_list",
+      "html": "The key distinction remains the same: ",
+      "text": "The key distinction remains the same: "
+    },
+    {
+      "id": "27a24eb1ed5480c1bd34f50bd21b5175",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480e4a773cc924f410c55",
+      "html": "SQL ",
+      "text": "SQL "
+    },
+    {
+      "id": "27a24eb1ed548088b85cde8430e57b6e",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480c1bd34f50bd21b5175",
+      "html": "Table-based",
+      "text": "Table-based"
+    },
+    {
+      "id": "27a24eb1ed54800babbaec8fce0ae9fb",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480c1bd34f50bd21b5175",
+      "html": "Schema Rigidity for data quality",
+      "text": "Schema Rigidity for data quality"
+    },
+    {
+      "id": "27a24eb1ed54801d90d2ef5e239b1aa1",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480e4a773cc924f410c55",
+      "html": "NoSQL ",
+      "text": "NoSQL "
+    },
+    {
+      "id": "27a24eb1ed54802db2e7fdd61edbf835",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54801d90d2ef5e239b1aa1",
+      "html": "Data flexibility and specializations, taking many forms.",
+      "text": "Data flexibility and specializations, taking many forms."
+    },
+    {
+      "id": "27a24eb1ed54808eb3eefb84e4b897c0",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54801d90d2ef5e239b1aa1",
+      "html": "Development agility",
+      "text": "Development agility"
+    },
+    {
+      "id": "24f24eb1ed548093b8c1f991259df993",
+      "type": "divider"
+    },
+    {
+      "id": "27a24eb1ed5480058ef5e08958101621",
+      "type": "header",
+      "html": "SQL vs NoSQL – Comprehensive Comparison",
+      "text": "SQL vs NoSQL – Comprehensive Comparison"
+    },
+    {
+      "id": "27a24eb1ed548015b137f9100d9c7c9e",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.notion.so/Core-Design-Principles-RDBs-27924eb1ed54805581a2df14f110034c?pvs=21\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-27a24eb1-ed54-8015-b137-f9100d9c7c9e--750816550\">Core Design Principles: RDBs</span></a>",
+      "text": "Core Design Principles: RDBs",
+      "links": [
+        {
+          "href": "https://www.notion.so/Core-Design-Principles-RDBs-27924eb1ed54805581a2df14f110034c?pvs=21",
+          "text": "Core Design Principles: RDBs"
+        }
+      ]
+    },
+    {
+      "id": "27a24eb1ed5480928d42d7593b411fae",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.notion.so/Core-Design-Principles-NRDBs-27924eb1ed548033af46eeb778bd45e8?pvs=21\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-27a24eb1-ed54-8092-8d42-d7593b411fae-401444182\">Core Design Principles: NRDBs</span></a>",
+      "text": "Core Design Principles: NRDBs",
+      "links": [
+        {
+          "href": "https://www.notion.so/Core-Design-Principles-NRDBs-27924eb1ed548033af46eeb778bd45e8?pvs=21",
+          "text": "Core Design Principles: NRDBs"
+        }
+      ]
+    },
+    {
+      "id": "27a24eb1ed5480f0bc8be972fe266087",
+      "type": "sub_header",
+      "html": "Scaling",
+      "text": "Scaling"
+    },
+    {
+      "id": "27a24eb1ed548080a597ec5dcfeb3609",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">SQL</span>",
+      "text": "SQL"
+    },
+    {
+      "id": "27a24eb1ed54808f9b08efb9fcc674df",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548080a597ec5dcfeb3609",
+      "html": "Suits vertical scaling, as complex joins, referential integrity, and cross-node transactions are costly.",
+      "text": "Suits vertical scaling, as complex joins, referential integrity, and cross-node transactions are costly."
+    },
+    {
+      "id": "27a24eb1ed5480c19c7bf2d8b5e92fc4",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548080a597ec5dcfeb3609",
+      "html": "Sharding possible, but breaks key features (joins, ACID).",
+      "text": "Sharding possible, but breaks key features (joins, ACID)."
+    },
+    {
+      "id": "27a24eb1ed5480118a46fd1866830295",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548080a597ec5dcfeb3609",
+      "html": "Vertical scaling is not a weakness of technology, but a direct result of prioritizing ACID guarantees and joins.",
+      "text": "Vertical scaling is not a weakness of technology, but a direct result of prioritizing ACID guarantees and joins."
+    },
+    {
+      "id": "27a24eb1ed5480ffadfccc42309c37d5",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL</span>",
+      "text": "NoSQL"
+    },
+    {
+      "id": "27a24eb1ed5480cebe51eb9460a4c4ac",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480ffadfccc42309c37d5",
+      "html": "Suits horizontal scaling.",
+      "text": "Suits horizontal scaling."
+    },
+    {
+      "id": "27a24eb1ed5480c98d65df09678a11e4",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480ffadfccc42309c37d5",
+      "html": "Simple models (data embedding, denormalizations) make partitioning and replication efficient.",
+      "text": "Simple models (data embedding, denormalizations) make partitioning and replication efficient."
+    },
+    {
+      "id": "27a24eb1ed5480558568e5ad57c23c7a",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480ffadfccc42309c37d5",
+      "html": "Makes tradeoffs.",
+      "text": "Makes tradeoffs."
+    },
+    {
+      "id": "27a24eb1ed54806eb092de8daa50164f",
+      "type": "sub_header",
+      "html": "Performance (Read/Write Patterns)",
+      "text": "Performance (Read/Write Patterns)"
+    },
+    {
+      "id": "27a24eb1ed5480629961c22058d05f0f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">SQL</span>",
+      "text": "SQL"
+    },
+    {
+      "id": "27a24eb1ed5480d6832ff5f55814d643",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480629961c22058d05f0f",
+      "html": "Optimized for complex queries and multi-table transactions.",
+      "text": "Optimized for complex queries and multi-table transactions."
+    },
+    {
+      "id": "27a24eb1ed54805b8e73fab1786d249e",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480629961c22058d05f0f",
+      "html": "Query optimizers and indexing excel on single-node systems.",
+      "text": "Query optimizers and indexing excel on single-node systems."
+    },
+    {
+      "id": "27a24eb1ed54806bb514c1e9d5ffc24b",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480629961c22058d05f0f",
+      "html": "But, single-node design creates bottlenecks with very large datasets.",
+      "text": "But, single-node design creates bottlenecks with very large datasets."
+    },
+    {
+      "id": "27a24eb1ed5480c4a332cf53cd25fdb1",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480629961c22058d05f0f",
+      "html": "Strong for structured workloads where query complexity is high.",
+      "text": "Strong for structured workloads where query complexity is high."
+    },
+    {
+      "id": "27a24eb1ed54805f993dc9a17fa21c56",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL</span>",
+      "text": "NoSQL"
+    },
+    {
+      "id": "27a24eb1ed5480aea732c96db27d39dd",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54805f993dc9a17fa21c56",
+      "html": "Optimized for high-throughput, low-latency reads/writes on simple queries.",
+      "text": "Optimized for high-throughput, low-latency reads/writes on simple queries."
+    },
+    {
+      "id": "27a24eb1ed5480ea9a25f45f38a94ae5",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54805f993dc9a17fa21c56",
+      "html": "Complex joins often shifted to the application.",
+      "text": "Complex joins often shifted to the application."
+    },
+    {
+      "id": "27a24eb1ed54806ba76ce0056ce1dfff",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54805f993dc9a17fa21c56",
+      "html": "Distribution spreads load but complicates cross-node queries.",
+      "text": "Distribution spreads load but complicates cross-node queries."
+    },
+    {
+      "id": "27a24eb1ed54803d95c8e8c06f23d159",
+      "type": "sub_header",
+      "html": "Fault Tolerance",
+      "text": "Fault Tolerance"
+    },
+    {
+      "id": "27a24eb1ed5480989dddc1817f6b34ca",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">SQL</span>",
+      "text": "SQL"
+    },
+    {
+      "id": "27a24eb1ed54807db167ecf33e425b5b",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480989dddc1817f6b34ca",
+      "html": "Centralized design; replication (master-slave) is possible but adds complexity and limits availability.",
+      "text": "Centralized design; replication (master-slave) is possible but adds complexity and limits availability."
+    },
+    {
+      "id": "27a24eb1ed548002a5dac9207c8f0906",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480989dddc1817f6b34ca",
+      "html": "Less resilient by default compared to distributed-first systems.",
+      "text": "Less resilient by default compared to distributed-first systems."
+    },
+    {
+      "id": "27a24eb1ed54809d95e3e9d8b7ee78e3",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480989dddc1817f6b34ca",
+      "html": "Simplicity prioritized over resilience at massive scale.",
+      "text": "Simplicity prioritized over resilience at massive scale."
+    },
+    {
+      "id": "27a24eb1ed54809fb4c9f714a9698812",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL</span>",
+      "text": "NoSQL"
+    },
+    {
+      "id": "27a24eb1ed5480d48813c281007afff8",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54809fb4c9f714a9698812",
+      "html": "Built-in replication, partitioning, and automatic failover ensure resilience.",
+      "text": "Built-in replication, partitioning, and automatic failover ensure resilience."
+    },
+    {
+      "id": "27a24eb1ed54800baf33e7bb2ffcece8",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54809fb4c9f714a9698812",
+      "html": "Eventual consistency is a deliberate trade-off for uptime and scalability.",
+      "text": "Eventual consistency is a deliberate trade-off for uptime and scalability."
+    },
+    {
+      "id": "27a24eb1ed5480ef9120fa518733f1d1",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54809fb4c9f714a9698812",
+      "html": "Designed to handle node and network failures gracefully.",
+      "text": "Designed to handle node and network failures gracefully."
+    },
+    {
+      "id": "27a24eb1ed5480a9b8c3e442d7c78457",
+      "type": "sub_header",
+      "html": "Schema Evolution",
+      "text": "Schema Evolution"
+    },
+    {
+      "id": "27a24eb1ed5480238533c0a252e5e0b4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">SQL</span>",
+      "text": "SQL"
+    },
+    {
+      "id": "27a24eb1ed548094a238dadad8c5e87d",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480238533c0a252e5e0b4",
+      "html": "Schema migrations require downtime and careful planning.",
+      "text": "Schema migrations require downtime and careful planning."
+    },
+    {
+      "id": "27a24eb1ed548033b4f9d02af694d321",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480238533c0a252e5e0b4",
+      "html": "Hard to maintain backward/forward compatibility.",
+      "text": "Hard to maintain backward/forward compatibility."
+    },
+    {
+      "id": "27a24eb1ed54800990e9c9d01881282c",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480238533c0a252e5e0b4",
+      "html": "Rigid schema ensures data quality but slows evolution.",
+      "text": "Rigid schema ensures data quality but slows evolution."
+    },
+    {
+      "id": "27a24eb1ed5480cd8677cf013ee3680a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL</span>",
+      "text": "NoSQL"
+    },
+    {
+      "id": "27a24eb1ed548067aadac89038ceb3ce",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480cd8677cf013ee3680a",
+      "html": "Schema flexibility allows old and new data to coexist.",
+      "text": "Schema flexibility allows old and new data to coexist."
+    },
+    {
+      "id": "27a24eb1ed5480bf93edfecd9064782a",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480cd8677cf013ee3680a",
+      "html": "Flexible schema accelerates change but risks inconsistency.",
+      "text": "Flexible schema accelerates change but risks inconsistency."
+    },
+    {
+      "id": "27a24eb1ed548005b37cdb60eca57162",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480cd8677cf013ee3680a",
+      "html": "Pushes validation responsibility to the application layer.",
+      "text": "Pushes validation responsibility to the application layer."
+    },
+    {
+      "id": "27a24eb1ed5480389090c1b682096b9b",
+      "type": "divider"
+    },
+    {
+      "id": "27a24eb1ed54800a9121c0f49211e5a5",
+      "type": "sub_header",
+      "html": "Strengths &amp; Weaknesses (Integrated View)",
+      "text": "Strengths & Weaknesses (Integrated View)"
+    },
+    {
+      "id": "27a24eb1ed5480678ce3ccbfab3e6a7f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">SQL</span>",
+      "text": "SQL"
+    },
+    {
+      "id": "27a24eb1ed5480198296cf2dc46285da",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480678ce3ccbfab3e6a7f",
+      "html": "Strengths:",
+      "text": "Strengths:"
+    },
+    {
+      "id": "27a24eb1ed5480979d94dfa421448c6e",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480198296cf2dc46285da",
+      "html": "Strong integrity and ACID guarantees.",
+      "text": "Strong integrity and ACID guarantees."
+    },
+    {
+      "id": "27a24eb1ed54800084ced83e8f4875ff",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480198296cf2dc46285da",
+      "html": "Rich query capabilities and joins.",
+      "text": "Rich query capabilities and joins."
+    },
+    {
+      "id": "27a24eb1ed54801e880bf75ca779b192",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480198296cf2dc46285da",
+      "html": "Ideal for structured, relational data.",
+      "text": "Ideal for structured, relational data."
+    },
+    {
+      "id": "27a24eb1ed5480b6ae60e2dc7dc1367c",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480198296cf2dc46285da",
+      "html": "Excellent for compliance, reporting, and analytics.",
+      "text": "Excellent for compliance, reporting, and analytics."
+    },
+    {
+      "id": "27a24eb1ed548021b183e9eb58ae0248",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480678ce3ccbfab3e6a7f",
+      "html": "Weaknesses:",
+      "text": "Weaknesses:"
+    },
+    {
+      "id": "27a24eb1ed5480cc99bccb147ab95017",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548021b183e9eb58ae0248",
+      "html": "Vertical scaling limits.",
+      "text": "Vertical scaling limits."
+    },
+    {
+      "id": "27a24eb1ed54804082c4e1aa3fa83557",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548021b183e9eb58ae0248",
+      "html": "Complex and costly to distribute.",
+      "text": "Complex and costly to distribute."
+    },
+    {
+      "id": "27a24eb1ed5480188490e788012d7889",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548021b183e9eb58ae0248",
+      "html": "Less resilient without extra setup.",
+      "text": "Less resilient without extra setup."
+    },
+    {
+      "id": "27a24eb1ed5480328f08da3dd3580722",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">NoSQL</span>",
+      "text": "NoSQL"
+    },
+    {
+      "id": "27a24eb1ed54802098e7f2db8ab0eb93",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480328f08da3dd3580722",
+      "html": "Strengths:",
+      "text": "Strengths:"
+    },
+    {
+      "id": "27a24eb1ed5480639fc5ec6fc4b3da77",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54802098e7f2db8ab0eb93",
+      "html": "Elastic scaling across clusters.",
+      "text": "Elastic scaling across clusters."
+    },
+    {
+      "id": "27a24eb1ed54803c89dacc407a66aa49",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54802098e7f2db8ab0eb93",
+      "html": "High availability and partition tolerance.",
+      "text": "High availability and partition tolerance."
+    },
+    {
+      "id": "27a24eb1ed5480ed8b5bd683967cd516",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54802098e7f2db8ab0eb93",
+      "html": "Flexible schemas for evolving data.",
+      "text": "Flexible schemas for evolving data."
+    },
+    {
+      "id": "27a24eb1ed548035b4a5f6ee761c1224",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54802098e7f2db8ab0eb93",
+      "html": "Optimized for unstructured or semi-structured workloads.",
+      "text": "Optimized for unstructured or semi-structured workloads."
+    },
+    {
+      "id": "27a24eb1ed54805183fdf80e21482122",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed5480328f08da3dd3580722",
+      "html": "Weaknesses:",
+      "text": "Weaknesses:"
+    },
+    {
+      "id": "27a24eb1ed5480ed92a5d187ed18021d",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54805183fdf80e21482122",
+      "html": "Eventual consistency model.",
+      "text": "Eventual consistency model."
+    },
+    {
+      "id": "27a24eb1ed5480edb766fcd856b4f0ed",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54805183fdf80e21482122",
+      "html": "Limited standardized querying.",
+      "text": "Limited standardized querying."
+    },
+    {
+      "id": "27a24eb1ed54801b9d5cf09504f6b662",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54805183fdf80e21482122",
+      "html": "Application-side joins and complex migrations.",
+      "text": "Application-side joins and complex migrations."
+    },
+    {
+      "id": "27a24eb1ed54806691b1eb6a93d3040c",
+      "type": "divider"
+    },
+    {
+      "id": "27a24eb1ed548087b089d6b5c31b27dc",
+      "type": "sub_header",
+      "html": "Decision Framework",
+      "text": "Decision Framework"
+    },
+    {
+      "id": "27a24eb1ed54808c8e20f33c2979b8ae",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use SQL when:</span>",
+      "text": "Use SQL when:"
+    },
+    {
+      "id": "27a24eb1ed5480bd99d6f07b601f7d53",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54808c8e20f33c2979b8ae",
+      "html": "Data is structured, relational, and integrity is non-negotiable.",
+      "text": "Data is structured, relational, and integrity is non-negotiable."
+    },
+    {
+      "id": "27a24eb1ed54800281bdfd699a9cc177",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54808c8e20f33c2979b8ae",
+      "html": "Complex queries, joins, and ACID transactions are required.",
+      "text": "Complex queries, joins, and ACID transactions are required."
+    },
+    {
+      "id": "27a24eb1ed5480b3ab96f993b6b75878",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed54808c8e20f33c2979b8ae",
+      "html": "Compliance, reporting, or analytics depend on SQL features.",
+      "text": "Compliance, reporting, or analytics depend on SQL features."
+    },
+    {
+      "id": "27a24eb1ed548057aaabf6bb6a82c9a6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use NoSQL when:</span>",
+      "text": "Use NoSQL when:"
+    },
+    {
+      "id": "27a24eb1ed5480c1a667e09a494d4f53",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548057aaabf6bb6a82c9a6",
+      "html": "Scale, high availability, or partition tolerance is critical.",
+      "text": "Scale, high availability, or partition tolerance is critical."
+    },
+    {
+      "id": "27a24eb1ed54801a852fdc1e90315d81",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548057aaabf6bb6a82c9a6",
+      "html": "Data is unstructured, semi-structured, or rapidly evolving.",
+      "text": "Data is unstructured, semi-structured, or rapidly evolving."
+    },
+    {
+      "id": "27a24eb1ed54802b8e34fd05dc74356c",
+      "type": "bulleted_list",
+      "parent": "27a24eb1ed548057aaabf6bb6a82c9a6",
+      "html": "Simple, high-throughput reads/writes matter more than joins.",
+      "text": "Simple, high-throughput reads/writes matter more than joins."
+    },
+    {
+      "id": "27a24eb1ed548044b5dce6c248b736b2",
+      "type": "bulleted_list",
+      "html": "Choose hybrid based on services and requirements.",
+      "text": "Choose hybrid based on services and requirements."
+    },
+    {
+      "id": "27a24eb1ed5480858d1cd0ce0abfd7b4",
+      "type": "divider"
+    },
+    {
+      "id": "27a24eb1ed5480e0ac11c9880c7b193e",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    },
+    {
+      "id": "27a24eb1ed5480aaab74da540ef05ec2",
+      "type": "text"
+    }
+  ]
+}

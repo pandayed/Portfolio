@@ -1,0 +1,89 @@
+{
+  "id": "24b24eb1ed5480b8b6d8d0282eadec82",
+  "title": "Before You Read",
+  "sourceUrl": "https://xpandeyed.notion.site/Before-You-Read-24b24eb1ed5480b8b6d8d0282eadec82?pvs=23",
+  "blocks": [
+    {
+      "id": "24b24eb1ed5480d68be4f6af6ef21438",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">SOLID</span> is a set of five design principles for software systems that aim to:",
+      "text": "SOLID is a set of five design principles for software systems that aim to:"
+    },
+    {
+      "id": "24b24eb1ed5480e498cffb561ce544c9",
+      "type": "bulleted_list",
+      "parent": "24b24eb1ed5480d68be4f6af6ef21438",
+      "html": "Reduce coupling",
+      "text": "Reduce coupling"
+    },
+    {
+      "id": "24b24eb1ed5480168e54eba757ff54dd",
+      "type": "bulleted_list",
+      "parent": "24b24eb1ed5480d68be4f6af6ef21438",
+      "html": "Increase reusability",
+      "text": "Increase reusability"
+    },
+    {
+      "id": "24b24eb1ed5480319cd9c89a92675af5",
+      "type": "bulleted_list",
+      "parent": "24b24eb1ed5480d68be4f6af6ef21438",
+      "html": "Make systems easier to extend",
+      "text": "Make systems easier to extend"
+    },
+    {
+      "id": "24b24eb1ed54807fb1acfbdf9f5e3d97",
+      "type": "bulleted_list",
+      "parent": "24b24eb1ed5480d68be4f6af6ef21438",
+      "html": "Make systems easier to test",
+      "text": "Make systems easier to test"
+    },
+    {
+      "id": "24b24eb1ed54803ea447d0a284c488b5",
+      "type": "bulleted_list",
+      "html": "The principles focus on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">object-oriented design</span>, but their concepts can be adapted to other paradigms.",
+      "text": "The principles focus on object-oriented design, but their concepts can be adapted to other paradigms."
+    },
+    {
+      "id": "24b24eb1ed548083a9e9f5b2f568f77e",
+      "type": "bulleted_list",
+      "html": "They are not rules to be applied blindly — they require <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">judgment</span> and <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">understanding of the problem domain</span>.",
+      "text": "They are not rules to be applied blindly — they require judgment and understanding of the problem domain."
+    },
+    {
+      "id": "24b24eb1ed54809e9765ed4c1513c049",
+      "type": "bulleted_list",
+      "html": "The SOLID principles work together and sometimes overlap in scope. They are not completely separate from each other. Applying just one in isolation may still lead to design issues if the others are ignored.",
+      "text": "The SOLID principles work together and sometimes overlap in scope. They are not completely separate from each other. Applying just one in isolation may still lead to design issues if the others are ignored."
+    },
+    {
+      "id": "24b24eb1ed5480a5ab4ef17c158dfc27",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548078930adb7617481809",
+      "type": "bulleted_list",
+      "html": "There is no strict, universally defined rule or step-by-step checklist to check or prove SOLID compliance in a software.",
+      "text": "There is no strict, universally defined rule or step-by-step checklist to check or prove SOLID compliance in a software."
+    },
+    {
+      "id": "24b24eb1ed54800f9656fb4954d32809",
+      "type": "bulleted_list",
+      "html": "It’s <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">judgment-based</span>, guided by a clear understanding of responsibilities and relationships in your specific domain.",
+      "text": "It’s judgment-based, guided by a clear understanding of responsibilities and relationships in your specific domain."
+    },
+    {
+      "id": "25224eb1ed5480fbb0e4ff9311d0074f",
+      "type": "bulleted_list",
+      "html": "Each section gives general guidelines, shown as <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">rules</span>, to help apply the principles and notice violations. Some rules may seem repetitive, but that’s on purpose to make things clearer and easier to grasp.",
+      "text": "Each section gives general guidelines, shown as rules, to help apply the principles and notice violations. Some rules may seem repetitive, but that’s on purpose to make things clearer and easier to grasp."
+    },
+    {
+      "id": "24b24eb1ed5480b8a7dae8bed4c35383",
+      "type": "divider"
+    },
+    {
+      "id": "25224eb1ed5480f890f4e9cb61b5c021",
+      "type": "text"
+    }
+  ]
+}

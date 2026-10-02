@@ -1,0 +1,850 @@
+{
+  "id": "24f24eb1ed54806a8dffdc09fbd00b29",
+  "title": "Servers",
+  "sourceUrl": "https://xpandeyed.notion.site/Servers-24f24eb1ed54806a8dffdc09fbd00b29?pvs=23",
+  "blocks": [
+    {
+      "id": "24f24eb1ed54807ebca9d7000e9d9cbe",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">A </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">server</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\"> is a machine that </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">listens for requests</span><span style=\"font-style:italic\" data-token-index=\"4\" class=\"notion-enable-hover\"> from clients and </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">processes them</span><span style=\"font-style:italic\" data-token-index=\"6\" class=\"notion-enable-hover\"> to send back a response.</span>",
+      "text": "A server is a machine that listens for requests from clients and processes them to send back a response."
+    },
+    {
+      "id": "24f24eb1ed54800d86fed48641d3bf4a",
+      "type": "divider"
+    },
+    {
+      "id": "29024eb1ed54802d892dcf8bfe628acb",
+      "type": "text",
+      "html": "In order for a machine to be server, some code is <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">deployed </span>on the machine.",
+      "text": "In order for a machine to be server, some code is deployed on the machine."
+    },
+    {
+      "id": "29024eb1ed548024934fda1556511d67",
+      "type": "text",
+      "html": "Deployment means configuring the application specific environment and running the application, which involves (not necessarily always):",
+      "text": "Deployment means configuring the application specific environment and running the application, which involves (not necessarily always):"
+    },
+    {
+      "id": "29024eb1ed5480db81f1c40ec841bf0a",
+      "type": "bulleted_list",
+      "html": "Installing necessary software/libraries",
+      "text": "Installing necessary software/libraries"
+    },
+    {
+      "id": "29024eb1ed5480fd80b9d6271f563152",
+      "type": "bulleted_list",
+      "html": "Configuring security (firewalls, user permissions)",
+      "text": "Configuring security (firewalls, user permissions)"
+    },
+    {
+      "id": "29024eb1ed5480eaa61fd04702579a9f",
+      "type": "bulleted_list",
+      "html": "Setting up databases or other dependencies",
+      "text": "Setting up databases or other dependencies"
+    },
+    {
+      "id": "29024eb1ed548078b97de59cc12bbb47",
+      "type": "bulleted_list",
+      "html": "Copying, installing and starting the application code",
+      "text": "Copying, installing and starting the application code"
+    },
+    {
+      "id": "29024eb1ed54801f98bbd0577722b1d0",
+      "type": "text",
+      "html": "Installing the OS, and doing basic configuration like internet connectivity are part of provisioning or setup and not deployment.",
+      "text": "Installing the OS, and doing basic configuration like internet connectivity are part of provisioning or setup and not deployment."
+    },
+    {
+      "id": "29024eb1ed5480dfa5c0d55383f680ea",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed5480719f83d9f33365bd49",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Types of Server based on Deployment Type</span>",
+      "text": "Types of Server based on Deployment Type"
+    },
+    {
+      "id": "24f24eb1ed54802482f4f6055e31ee8b",
+      "type": "text",
+      "html": "Deployment type involves the level of control, abstraction, and resource management provided by the underlying environment.",
+      "text": "Deployment type involves the level of control, abstraction, and resource management provided by the underlying environment."
+    },
+    {
+      "id": "24f24eb1ed548060b13dfe42a9440cf3",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Physical Servers</span>",
+      "text": "Physical Servers"
+    },
+    {
+      "id": "24f24eb1ed54802cae2ff22c7f7a01b3",
+      "type": "bulleted_list",
+      "html": "A real, tangible machine dedicated entirely to running your server software. You own or lease it and control both hardware and software.",
+      "text": "A real, tangible machine dedicated entirely to running your server software. You own or lease it and control both hardware and software."
+    },
+    {
+      "id": "24f24eb1ed54809a82b4dc4a933ebeda",
+      "type": "bulleted_list",
+      "html": "Used by banks and other high-security service providers primarily for <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">regulatory compliance</span> and <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">data protection</span>. In many cases, sensitive information—such as financial records—is legally required to stay within specific <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">geographical or physical boundaries</span>. Storing such data on servers located in another country is often prohibited. On-premises infrastructure ensures complete control over <span style=\"font-weight:600\" data-token-index=\"7\" class=\"notion-enable-hover\">where</span> the data resides and <span style=\"font-weight:600\" data-token-index=\"9\" class=\"notion-enable-hover\">who</span> can physically access it, reducing the risk of unauthorized entry or tampering that could compromise security.",
+      "text": "Used by banks and other high-security service providers primarily for regulatory compliance and data protection. In many cases, sensitive information—such as financial records—is legally required to stay within specific geographical or physical boundaries. Storing such data on servers located in another country is often prohibited. On-premises infrastructure ensures complete control over where the data resides and who can physically access it, reducing the risk of unauthorized entry or tampering that could compromise security."
+    },
+    {
+      "id": "24f24eb1ed5480d6be29fb156ed35dcf",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Characteristics:</span>",
+      "text": "Characteristics:"
+    },
+    {
+      "id": "24f24eb1ed54802bb762d1f3ee3372f5",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480d6be29fb156ed35dcf",
+      "html": "Located on-premises or in a colocation data center.",
+      "text": "Located on-premises or in a colocation data center."
+    },
+    {
+      "id": "24f24eb1ed548008881bd0d449f6f232",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480d6be29fb156ed35dcf",
+      "html": "Requires dedicated IT staff for setup, monitoring, and maintenance.",
+      "text": "Requires dedicated IT staff for setup, monitoring, and maintenance."
+    },
+    {
+      "id": "24f24eb1ed5480cab6eaf994d634473b",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480d6be29fb156ed35dcf",
+      "html": "Not easily scalable without buying and setting up new hardware.",
+      "text": "Not easily scalable without buying and setting up new hardware."
+    },
+    {
+      "id": "24f24eb1ed5480e8bb0de5ce988cdef4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantages:</span>",
+      "text": "Advantages:"
+    },
+    {
+      "id": "24f24eb1ed5480e08f25da9c3aa41864",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480e8bb0de5ce988cdef4",
+      "html": "Full control over hardware and software configuration.",
+      "text": "Full control over hardware and software configuration."
+    },
+    {
+      "id": "24f24eb1ed548015b6d5dba147b8b8b6",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480e8bb0de5ce988cdef4",
+      "html": "Maximum performance because no resources are shared.",
+      "text": "Maximum performance because no resources are shared."
+    },
+    {
+      "id": "24f24eb1ed548048a9e1e9172321f557",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480e8bb0de5ce988cdef4",
+      "html": "Meets strict compliance/security requirements.",
+      "text": "Meets strict compliance/security requirements."
+    },
+    {
+      "id": "24f24eb1ed5480a9a50eef60d5976651",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Limitations:</span>",
+      "text": "Limitations:"
+    },
+    {
+      "id": "24f24eb1ed54800f9c79d2b2c3faa03c",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480a9a50eef60d5976651",
+      "html": "High upfront and maintenance costs.",
+      "text": "High upfront and maintenance costs."
+    },
+    {
+      "id": "24f24eb1ed5480ddbee3d4b48c8380b3",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480a9a50eef60d5976651",
+      "html": "Scaling requires physical upgrades.",
+      "text": "Scaling requires physical upgrades."
+    },
+    {
+      "id": "24f24eb1ed5480a29f16f4f22cbe3bab",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480a9a50eef60d5976651",
+      "html": "Slower to deploy compared to cloud solutions.",
+      "text": "Slower to deploy compared to cloud solutions."
+    },
+    {
+      "id": "24f24eb1ed5480e989aaf9532ef1a190",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Virtual Servers</span>",
+      "text": "Virtual Servers"
+    },
+    {
+      "id": "24f24eb1ed5480f9a629fac23ab1924a",
+      "type": "bulleted_list",
+      "html": "A server running inside a larger physical server using virtualization software (hypervisor). Each virtual server has its own full OS.",
+      "text": "A server running inside a larger physical server using virtualization software (hypervisor). Each virtual server has its own full OS."
+    },
+    {
+      "id": "29124eb1ed548074b194d8850f478e75",
+      "type": "bulleted_list",
+      "html": "In simpler terms, one large hardware, running multiple OS. Each application manager gets and (usually) manages their own OS.",
+      "text": "In simpler terms, one large hardware, running multiple OS. Each application manager gets and (usually) manages their own OS."
+    },
+    {
+      "id": "24f24eb1ed54808485faf652b9c7af39",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Characteristics:</span>",
+      "text": "Characteristics:"
+    },
+    {
+      "id": "24f24eb1ed54806c973adf62f8b7b49d",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54808485faf652b9c7af39",
+      "html": "Hosted on-premises or in the cloud.",
+      "text": "Hosted on-premises or in the cloud."
+    },
+    {
+      "id": "24f24eb1ed5480c89037e50f01a5ce61",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54808485faf652b9c7af39",
+      "html": "Easier to scale than physical servers.",
+      "text": "Easier to scale than physical servers."
+    },
+    {
+      "id": "24f24eb1ed54805784d2d1723fbca25a",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54808485faf652b9c7af39",
+      "html": "Shares physical resources with other virtual servers.",
+      "text": "Shares physical resources with other virtual servers."
+    },
+    {
+      "id": "24f24eb1ed54806daffcd2f41967f790",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantages:</span>",
+      "text": "Advantages:"
+    },
+    {
+      "id": "24f24eb1ed5480e7be1df9dcd0985c7c",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54806daffcd2f41967f790",
+      "html": "No need to purchase dedicated hardware.",
+      "text": "No need to purchase dedicated hardware."
+    },
+    {
+      "id": "24f24eb1ed548071a940d42945361b65",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54806daffcd2f41967f790",
+      "html": "Quick to deploy and adjust resources.",
+      "text": "Quick to deploy and adjust resources."
+    },
+    {
+      "id": "24f24eb1ed54807fb044f109096a0ac5",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54806daffcd2f41967f790",
+      "html": "Can run different OS types on the same physical machine.",
+      "text": "Can run different OS types on the same physical machine."
+    },
+    {
+      "id": "24f24eb1ed5480139624e6f6ed6f98c9",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Limitations:</span>",
+      "text": "Limitations:"
+    },
+    {
+      "id": "24f24eb1ed54807e9538da1809a88246",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480139624e6f6ed6f98c9",
+      "html": "Performance can vary if other virtual machines consume resources.",
+      "text": "Performance can vary if other virtual machines consume resources."
+    },
+    {
+      "id": "24f24eb1ed5480bcb294d2a1645effc0",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480139624e6f6ed6f98c9",
+      "html": "You still manage the OS and updates.",
+      "text": "You still manage the OS and updates."
+    },
+    {
+      "id": "24f24eb1ed548016af41f203390dd2ed",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Containerized Servers</span>",
+      "text": "Containerized Servers"
+    },
+    {
+      "id": "24f24eb1ed5480f18584c17d40b5e2ad",
+      "type": "bulleted_list",
+      "html": "Lightweight, isolated environments sharing the host OS kernel but running separate applications with their own dependencies.",
+      "text": "Lightweight, isolated environments sharing the host OS kernel but running separate applications with their own dependencies."
+    },
+    {
+      "id": "24f24eb1ed5480c7b40ac03148317d94",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Characteristics:</span>",
+      "text": "Characteristics:"
+    },
+    {
+      "id": "24f24eb1ed54806589e7d810444eb8b4",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480c7b40ac03148317d94",
+      "html": "Usually run on top of virtual or physical servers.",
+      "text": "Usually run on top of virtual or physical servers."
+    },
+    {
+      "id": "24f24eb1ed548007a7f2d032f2e2b6eb",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480c7b40ac03148317d94",
+      "html": "Managed with tools like Docker and Kubernetes.",
+      "text": "Managed with tools like Docker and Kubernetes."
+    },
+    {
+      "id": "24f24eb1ed54806fa215f3d5c6a11857",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480c7b40ac03148317d94",
+      "html": "Applications start and stop quickly.",
+      "text": "Applications start and stop quickly."
+    },
+    {
+      "id": "24f24eb1ed54800bb35af5a1f35f04bf",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantages:</span>",
+      "text": "Advantages:"
+    },
+    {
+      "id": "24f24eb1ed5480e3bc2ddf46825666b4",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54800bb35af5a1f35f04bf",
+      "html": "Minimal resource overhead (no duplicate OS).",
+      "text": "Minimal resource overhead (no duplicate OS)."
+    },
+    {
+      "id": "24f24eb1ed54801ca132c672063e1f68",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54800bb35af5a1f35f04bf",
+      "html": "Fast scaling and deployment.",
+      "text": "Fast scaling and deployment."
+    },
+    {
+      "id": "24f24eb1ed5480e0b2d4e4963747aa39",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54800bb35af5a1f35f04bf",
+      "html": "Easy to run many isolated services on one machine.",
+      "text": "Easy to run many isolated services on one machine."
+    },
+    {
+      "id": "24f24eb1ed5480ae8c48c17d0de0cb1d",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Limitations:</span>",
+      "text": "Limitations:"
+    },
+    {
+      "id": "24f24eb1ed5480949d2ace812f323b1c",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480ae8c48c17d0de0cb1d",
+      "html": "Shares the same OS kernel — not suitable for apps requiring different OS types.",
+      "text": "Shares the same OS kernel — not suitable for apps requiring different OS types."
+    },
+    {
+      "id": "24f24eb1ed5480f69e7de0c08ae469ed",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480ae8c48c17d0de0cb1d",
+      "html": "Requires container orchestration for large deployments.",
+      "text": "Requires container orchestration for large deployments."
+    },
+    {
+      "id": "24f24eb1ed548095a03be50ce1f7dd78",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Serverless Computing</span>",
+      "text": "Serverless Computing"
+    },
+    {
+      "id": "24f24eb1ed548082be51d2d6df7e040e",
+      "type": "bulleted_list",
+      "html": "Cloud provider runs your code only when needed, managing servers behind the scenes. You only pay for execution time.",
+      "text": "Cloud provider runs your code only when needed, managing servers behind the scenes. You only pay for execution time."
+    },
+    {
+      "id": "24f24eb1ed548066bf99ee55117c170a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Characteristics:</span>",
+      "text": "Characteristics:"
+    },
+    {
+      "id": "24f24eb1ed54800aa919ee6feec757b9",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed548066bf99ee55117c170a",
+      "html": "Event-driven (triggered by actions like file upload, HTTP request, or database change).",
+      "text": "Event-driven (triggered by actions like file upload, HTTP request, or database change)."
+    },
+    {
+      "id": "24f24eb1ed5480a5a446cd74c3075870",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed548066bf99ee55117c170a",
+      "html": "Fully managed infrastructure — no OS or server maintenance.",
+      "text": "Fully managed infrastructure — no OS or server maintenance."
+    },
+    {
+      "id": "24f24eb1ed5480da85d7c0a6468c3039",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantages:</span>",
+      "text": "Advantages:"
+    },
+    {
+      "id": "24f24eb1ed54808b853afe94f007217b",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480da85d7c0a6468c3039",
+      "html": "Zero idle cost.",
+      "text": "Zero idle cost."
+    },
+    {
+      "id": "24f24eb1ed54804481fbf929de86bd40",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480da85d7c0a6468c3039",
+      "html": "Automatically scales with demand.",
+      "text": "Automatically scales with demand."
+    },
+    {
+      "id": "24f24eb1ed548020b525d02161766d28",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480da85d7c0a6468c3039",
+      "html": "No server maintenance work.",
+      "text": "No server maintenance work."
+    },
+    {
+      "id": "24f24eb1ed5480d2adf0d4000b839dd8",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Limitations:</span>",
+      "text": "Limitations:"
+    },
+    {
+      "id": "24f24eb1ed54808f9d7ff17e638b08dd",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480d2adf0d4000b839dd8",
+      "html": "Cold starts may slow down infrequently used functions.",
+      "text": "Cold starts may slow down infrequently used functions."
+    },
+    {
+      "id": "24f24eb1ed5480b8a129dce0d28a44af",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480d2adf0d4000b839dd8",
+      "html": "Limited execution time and resources.",
+      "text": "Limited execution time and resources."
+    },
+    {
+      "id": "24f24eb1ed5480dfa7f7daffc6b760a7",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480d2adf0d4000b839dd8",
+      "html": "Not suited for constantly running workloads.",
+      "text": "Not suited for constantly running workloads."
+    },
+    {
+      "id": "29024eb1ed5480ed8baaf3a53bc18a66",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed5480669095cd35aab925bc",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Scenarios vs. Deployment Types</span>",
+      "text": "Scenarios vs. Deployment Types"
+    },
+    {
+      "id": "24f24eb1ed5480068d94f2e335af46d2",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Scenario</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Physical Server</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Virtual Server</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Containerized Server</span>"
+          },
+          {
+            "header": true,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Serverless</span>"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bank storing sensitive customer data</span>"
+          },
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Perfect fit</span> — maximum control, meets compliance, secure on-premises."
+          },
+          {
+            "header": false,
+            "html": "Not ideal — data may reside in shared cloud hardware, risky for compliance."
+          },
+          {
+            "header": false,
+            "html": "Not ideal — containers usually run on shared infra, lower compliance control."
+          },
+          {
+            "header": false,
+            "html": "Not suitable — serverless is cloud-based, no physical control."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Small business launching a website</span>"
+          },
+          {
+            "header": false,
+            "html": "Not ideal — expensive upfront, overkill for low traffic."
+          },
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Perfect fit</span> — cheap to start, easy to scale as traffic grows."
+          },
+          {
+            "header": false,
+            "html": "Possible — but may be extra complexity for a simple site."
+          },
+          {
+            "header": false,
+            "html": "Not suitable — site needs to be always online, serverless not good for persistent hosting."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">SaaS app with microservices (payments, users, analytics)</span>"
+          },
+          {
+            "header": false,
+            "html": "Not ideal — too slow to scale and inefficient for many small services."
+          },
+          {
+            "header": false,
+            "html": "Works — but will consume more resources than needed for many services."
+          },
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Perfect fit</span> — isolates services, fast deployment, efficient resource usage."
+          },
+          {
+            "header": false,
+            "html": "Not suitable — long-running services don’t fit event-driven model."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Image processing after file upload</span>"
+          },
+          {
+            "header": false,
+            "html": "Not ideal — keeping a physical server idle for rare events wastes money."
+          },
+          {
+            "header": false,
+            "html": "Not ideal — same idle cost problem as physical."
+          },
+          {
+            "header": false,
+            "html": "Possible — containers can run batch jobs, but still billed while running."
+          },
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Perfect fit</span> — runs only when triggered, no cost when idle."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Large e-commerce site with seasonal spikes</span>"
+          },
+          {
+            "header": false,
+            "html": "Works — but scaling is slow and costly (buying hardware)."
+          },
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Good fit</span> — can scale virtual machines up/down with demand."
+          },
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Good fit</span> — can scale microservices independently during peak times."
+          },
+          {
+            "header": false,
+            "html": "Not ideal — constant baseline traffic makes serverless costs high."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "24f24eb1ed54809aa3f5ea57e619ff8e",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed5480d69246ef61d56913fe",
+      "type": "sub_sub_header",
+      "html": "Roles of a Server",
+      "text": "Roles of a Server"
+    },
+    {
+      "id": "24f24eb1ed5480cdac6cc96aa629881c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Receive Requests</span>",
+      "text": "Receive Requests"
+    },
+    {
+      "id": "24f24eb1ed5480f2a5c4e0932f59d1ab",
+      "type": "text",
+      "parent": "24f24eb1ed5480cdac6cc96aa629881c",
+      "html": "Accept incoming data from clients via protocols like HTTP or WebSocket.",
+      "text": "Accept incoming data from clients via protocols like HTTP or WebSocket."
+    },
+    {
+      "id": "24f24eb1ed54803d8e96fc141b62cd5c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Process Logic</span>",
+      "text": "Process Logic"
+    },
+    {
+      "id": "24f24eb1ed5480cf9a80e401dc84f517",
+      "type": "text",
+      "parent": "24f24eb1ed54803d8e96fc141b62cd5c",
+      "html": "Execute business rules or computational tasks.",
+      "text": "Execute business rules or computational tasks."
+    },
+    {
+      "id": "24f24eb1ed54801bbf5bfe7afa7af775",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Access and Manage Data</span>",
+      "text": "Access and Manage Data"
+    },
+    {
+      "id": "24f24eb1ed5480d0a4ced53778e18c10",
+      "type": "text",
+      "parent": "24f24eb1ed54801bbf5bfe7afa7af775",
+      "html": "Query databases, fetch files, or interact with external services.",
+      "text": "Query databases, fetch files, or interact with external services."
+    },
+    {
+      "id": "24f24eb1ed5480c0acd5e124620711e2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Return Responses</span>",
+      "text": "Return Responses"
+    },
+    {
+      "id": "24f24eb1ed54802d9d64d8b84efc80cb",
+      "type": "text",
+      "parent": "24f24eb1ed5480c0acd5e124620711e2",
+      "html": "Send processed results back to the client in an agreed format (e.g., JSON).",
+      "text": "Send processed results back to the client in an agreed format (e.g., JSON)."
+    },
+    {
+      "id": "24f24eb1ed5480afbb1ec55ff8b1810b",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed5480af88e3c65474150144",
+      "type": "sub_sub_header",
+      "html": "Types of Servers by Function",
+      "text": "Types of Servers by Function"
+    },
+    {
+      "id": "24f24eb1ed5480d09885fc9cf0b6efa8",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Application Server</span>",
+      "text": "Application Server"
+    },
+    {
+      "id": "24f24eb1ed5480b2a386e684cf0d7d8f",
+      "type": "bulleted_list",
+      "html": "Runs the main <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">business logic</span> of the application.",
+      "text": "Runs the main business logic of the application."
+    },
+    {
+      "id": "24f24eb1ed548028a24be07c55fb7c75",
+      "type": "bulleted_list",
+      "html": "Often works behind a web server.",
+      "text": "Often works behind a web server."
+    },
+    {
+      "id": "24f24eb1ed548027b265f540a8288104",
+      "type": "bulleted_list",
+      "html": "Examples: Node.js server, Java Spring Boot, Django server.",
+      "text": "Examples: Node.js server, Java Spring Boot, Django server."
+    },
+    {
+      "id": "24f24eb1ed548048a218dfc0f00c946a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use case:</span> Processing e-commerce orders and calculating totals.",
+      "text": "Use case: Processing e-commerce orders and calculating totals."
+    },
+    {
+      "id": "24f24eb1ed5480cb8158ec349722ab2d",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Web Server</span>",
+      "text": "Web Server"
+    },
+    {
+      "id": "24f24eb1ed5480b58626e3b5f206d457",
+      "type": "bulleted_list",
+      "html": "Handles HTTP requests and serves static files (HTML, CSS, images).",
+      "text": "Handles HTTP requests and serves static files (HTML, CSS, images)."
+    },
+    {
+      "id": "24f24eb1ed54803a9a7fdade54da0fa9",
+      "type": "bulleted_list",
+      "html": "Can also forward requests to application servers.",
+      "text": "Can also forward requests to application servers."
+    },
+    {
+      "id": "24f24eb1ed5480d6beb7fbd249765d4f",
+      "type": "bulleted_list",
+      "html": "Examples: Nginx, Apache, Caddy.",
+      "text": "Examples: Nginx, Apache, Caddy."
+    },
+    {
+      "id": "24f24eb1ed548069902ceb43343711e7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use case:</span> Serving a company’s public website pages.",
+      "text": "Use case: Serving a company’s public website pages."
+    },
+    {
+      "id": "24f24eb1ed5480c584cafa4fd33c0fa4",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Proxy Server</span>",
+      "text": "Proxy Server"
+    },
+    {
+      "id": "24f24eb1ed54800aabcdfb18a3fc97ca",
+      "type": "bulleted_list",
+      "html": "Sits between clients and backend servers.",
+      "text": "Sits between clients and backend servers."
+    },
+    {
+      "id": "24f24eb1ed548025a19cc7549a8406df",
+      "type": "bulleted_list",
+      "html": "Used for load balancing, caching, or security filtering.",
+      "text": "Used for load balancing, caching, or security filtering."
+    },
+    {
+      "id": "24f24eb1ed5480739c07fc646db9f572",
+      "type": "bulleted_list",
+      "html": "Examples: HAProxy, Squid, Nginx as a reverse proxy.",
+      "text": "Examples: HAProxy, Squid, Nginx as a reverse proxy."
+    },
+    {
+      "id": "24f24eb1ed54805cb684f20c45a29ca0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use case:</span> Distributing incoming traffic among multiple backend servers for a video streaming platform.",
+      "text": "Use case: Distributing incoming traffic among multiple backend servers for a video streaming platform."
+    },
+    {
+      "id": "24f24eb1ed5480feac30c72296ceab96",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Database Server</span>",
+      "text": "Database Server"
+    },
+    {
+      "id": "24f24eb1ed548063a9abcc3be2a136c8",
+      "type": "bulleted_list",
+      "html": "Dedicated server hosting a database engine.",
+      "text": "Dedicated server hosting a database engine."
+    },
+    {
+      "id": "24f24eb1ed5480d0a835e32c64a9b574",
+      "type": "bulleted_list",
+      "html": "Examples: MySQL Server, PostgreSQL Server, MongoDB Server.",
+      "text": "Examples: MySQL Server, PostgreSQL Server, MongoDB Server."
+    },
+    {
+      "id": "24f24eb1ed54808db158e0bf113f8975",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use case:</span> Storing user profiles and purchase history for an online store.",
+      "text": "Use case: Storing user profiles and purchase history for an online store."
+    },
+    {
+      "id": "24f24eb1ed5480869dbfe7b2eb2f7070",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Mailing Server</span>",
+      "text": "Mailing Server"
+    },
+    {
+      "id": "24f24eb1ed5480d8a3cdf860c2eacb72",
+      "type": "bulleted_list",
+      "html": "Handles sending, receiving, and storing emails.",
+      "text": "Handles sending, receiving, and storing emails."
+    },
+    {
+      "id": "24f24eb1ed5480418ccbec9afd78e4e5",
+      "type": "bulleted_list",
+      "html": "Examples: Postfix, Microsoft Exchange Server.",
+      "text": "Examples: Postfix, Microsoft Exchange Server."
+    },
+    {
+      "id": "24f24eb1ed54804bb60af8bf358e3f38",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use case:</span> Managing company email accounts.",
+      "text": "Use case: Managing company email accounts."
+    },
+    {
+      "id": "24f24eb1ed54800c83f6e92c10b3ac6f",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed548054a2bfe28c1e65590e",
+      "type": "sub_sub_header",
+      "html": "Key Server Metrics used for Monitoring",
+      "text": "Key Server Metrics used for Monitoring"
+    },
+    {
+      "id": "24f24eb1ed548028ab39ef4162add604",
+      "type": "bulleted_list",
+      "html": "CPU usage — measures processing load.",
+      "text": "CPU usage — measures processing load."
+    },
+    {
+      "id": "24f24eb1ed5480298548e79773597fe3",
+      "type": "bulleted_list",
+      "html": "Memory usage — shows how much RAM is in use.",
+      "text": "Memory usage — shows how much RAM is in use."
+    },
+    {
+      "id": "24f24eb1ed54801f9e28ff1dc577caec",
+      "type": "bulleted_list",
+      "html": "Request throughput (req/sec) — how many requests are handled per second.",
+      "text": "Request throughput (req/sec) — how many requests are handled per second."
+    },
+    {
+      "id": "24f24eb1ed5480c19cead2d40f73af06",
+      "type": "bulleted_list",
+      "html": "Response time / latency — how fast the server replies.",
+      "text": "Response time / latency — how fast the server replies."
+    },
+    {
+      "id": "24f24eb1ed54807b8f70ce7d2398638b",
+      "type": "bulleted_list",
+      "html": "Error rates — percentage of failed requests.",
+      "text": "Error rates — percentage of failed requests."
+    },
+    {
+      "id": "24f24eb1ed54800e99d2c474fbdba8e4",
+      "type": "divider"
+    },
+    {
+      "id": "29024eb1ed548015ba1bf827e3b3df2f",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    },
+    {
+      "id": "29024eb1ed54806c9d34ce3d2a30ae19",
+      "type": "text"
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+  "id": "24b24eb1ed54804e9553d69f2d6eb779",
+  "title": "[S]: Single Responsibility Principle (SRP)",
+  "sourceUrl": "https://xpandeyed.notion.site/S-Single-Responsibility-Principle-SRP-24b24eb1ed54804e9553d69f2d6eb779?pvs=23",
+  "blocks": [
+    {
+      "id": "24b24eb1ed5480f7bc2cecf299419706",
+      "type": "bulleted_list",
+      "html": "A class, module, or function should have <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">exactly one responsibility</span>.",
+      "text": "A class, module, or function should have exactly one responsibility."
+    },
+    {
+      "id": "24b24eb1ed54803a85c0d985e3b26463",
+      "type": "bulleted_list",
+      "html": "Responsibility means <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one reason to change</span> in the context of software requirements.",
+      "text": "Responsibility means one reason to change in the context of software requirements."
+    },
+    {
+      "id": "24b24eb1ed5480379bb9ed886fee1ccf",
+      "type": "bulleted_list",
+      "html": "All code inside must contribute to fulfilling that single responsibility.",
+      "text": "All code inside must contribute to fulfilling that single responsibility."
+    },
+    {
+      "id": "24b24eb1ed54809eacded8e8c90ec0a1",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480fa9daedf2d960c30d4",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why is it important</span>",
+      "text": "Why is it important"
+    },
+    {
+      "id": "24b24eb1ed548002a751c33ee76fb867",
+      "type": "bulleted_list",
+      "html": "Reduces complexity by keeping scope small.",
+      "text": "Reduces complexity by keeping scope small."
+    },
+    {
+      "id": "24b24eb1ed5480da9727ff7a4b288f64",
+      "type": "bulleted_list",
+      "html": "Changes in one area don’t cause bugs in unrelated areas.",
+      "text": "Changes in one area don’t cause bugs in unrelated areas."
+    },
+    {
+      "id": "24b24eb1ed5480c79de7ff92c8f7ad6d",
+      "type": "bulleted_list",
+      "html": "Increases maintainability — easier to modify without breaking other parts.",
+      "text": "Increases maintainability — easier to modify without breaking other parts."
+    },
+    {
+      "id": "24b24eb1ed5480ff84c8fc7d70ed4fde",
+      "type": "bulleted_list",
+      "html": "Simplifies testing — fewer dependencies and test cases needed.",
+      "text": "Simplifies testing — fewer dependencies and test cases needed."
+    },
+    {
+      "id": "24b24eb1ed5480d48c4fd6b708c4b89e",
+      "type": "bulleted_list",
+      "html": "Encourages modular, reusable components.",
+      "text": "Encourages modular, reusable components."
+    },
+    {
+      "id": "24b24eb1ed54800e9041d2456074cbe0",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480568bc4f698a8de579d",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bad example</span>",
+      "text": "Bad example"
+    },
+    {
+      "id": "24b24eb1ed5480a99d58ceb20b33fa8d",
+      "type": "code",
+      "html": "// Class handles employee data, report generation, and email sending\nclass EmployeeManager {\n    method addEmployee(data) {\n        // Save employee data to database\n    }\n\n    method generateReport() {\n        // Create PDF report of employees\n    }\n\n    method sendReportByEmail() {\n        // Send the generated PDF via email\n    }\n}",
+      "text": "// Class handles employee data, report generation, and email sending\nclass EmployeeManager {\n    method addEmployee(data) {\n        // Save employee data to database\n    }\n\n    method generateReport() {\n        // Create PDF report of employees\n    }\n\n    method sendReportByEmail() {\n        // Send the generated PDF via email\n    }\n}"
+    },
+    {
+      "id": "24b24eb1ed5480ae9c81d4d0259859ed",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54801bb884d9a0a025c1b0",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Problems in the bad code</span>",
+      "text": "Problems in the bad code"
+    },
+    {
+      "id": "24b24eb1ed5480449e46d6dfbfa1c4e3",
+      "type": "bulleted_list",
+      "html": "Multiple responsibilities: Data persistence, report generation, and email sending.",
+      "text": "Multiple responsibilities: Data persistence, report generation, and email sending."
+    },
+    {
+      "id": "24b24eb1ed548086beb2e409e6706b81",
+      "type": "bulleted_list",
+      "html": "Multiple reasons to change:",
+      "text": "Multiple reasons to change:"
+    },
+    {
+      "id": "24b24eb1ed5480dabe43f6599813de66",
+      "type": "bulleted_list",
+      "parent": "24b24eb1ed548086beb2e409e6706b81",
+      "html": "If database structure changes → edit this class.",
+      "text": "If database structure changes → edit this class."
+    },
+    {
+      "id": "24b24eb1ed5480d2b827d7719aec900a",
+      "type": "bulleted_list",
+      "parent": "24b24eb1ed548086beb2e409e6706b81",
+      "html": "If report format changes → edit this class.",
+      "text": "If report format changes → edit this class."
+    },
+    {
+      "id": "24b24eb1ed5480b885d8f7413f1b9943",
+      "type": "bulleted_list",
+      "parent": "24b24eb1ed548086beb2e409e6706b81",
+      "html": "If email system changes → edit this class.",
+      "text": "If email system changes → edit this class."
+    },
+    {
+      "id": "24b24eb1ed54801f8318e7570746e3af",
+      "type": "bulleted_list",
+      "html": "Testing is hard: Requires mocking database, file generator, and email service in one test.",
+      "text": "Testing is hard: Requires mocking database, file generator, and email service in one test."
+    },
+    {
+      "id": "24b24eb1ed548002ba72d51ed00ab947",
+      "type": "bulleted_list",
+      "html": "High coupling: Changing one feature risks breaking another.",
+      "text": "High coupling: Changing one feature risks breaking another."
+    },
+    {
+      "id": "25024eb1ed54808d9c35dc32231445b3",
+      "type": "bulleted_list",
+      "html": "Merge Nightmares: Two engineers working simultaneously on two different features will have to update the same file.",
+      "text": "Merge Nightmares: Two engineers working simultaneously on two different features will have to update the same file."
+    },
+    {
+      "id": "24b24eb1ed54805793d2cc4794c3b913",
+      "type": "bulleted_list",
+      "html": "Stakeholder conflict: Database team, reporting team, and email team could all request changes here.",
+      "text": "Stakeholder conflict: Database team, reporting team, and email team could all request changes here."
+    },
+    {
+      "id": "24b24eb1ed548029bb43ce027a3aa3f3",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548075b6b6fc66a12cde26",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fix</span>",
+      "text": "Fix"
+    },
+    {
+      "id": "24b24eb1ed5480c4a8d0e949e6805de4",
+      "type": "code",
+      "html": "class EmployeeRepository {\n    method addEmployee(data) {\n        // Save employee data to database\n    }\n}\n\nclass ReportGenerator {\n    method generateReport() {\n        // Create PDF report of employees\n    }\n}\n\nclass EmailService {\n    method sendReportByEmail(report) {\n        // Send the generated PDF via email\n    }\n}",
+      "text": "class EmployeeRepository {\n    method addEmployee(data) {\n        // Save employee data to database\n    }\n}\n\nclass ReportGenerator {\n    method generateReport() {\n        // Create PDF report of employees\n    }\n}\n\nclass EmailService {\n    method sendReportByEmail(report) {\n        // Send the generated PDF via email\n    }\n}"
+    },
+    {
+      "id": "24b24eb1ed5480b6bf4ff0a13e627570",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480b092f7fd7caea4d003",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What’s the change and how it fixes the problems</span>",
+      "text": "What’s the change and how it fixes the problems"
+    },
+    {
+      "id": "24b24eb1ed548012b685db83d06857e2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Separated responsibilities</span> into three classes: persistence, report creation, and email delivery.",
+      "text": "Separated responsibilities into three classes: persistence, report creation, and email delivery."
+    },
+    {
+      "id": "24b24eb1ed5480c38172cb83ed774c7b",
+      "type": "bulleted_list",
+      "html": "Each class now has <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one reason to change</span>.",
+      "text": "Each class now has one reason to change."
+    },
+    {
+      "id": "24b24eb1ed548086ab6ee5212162f761",
+      "type": "bulleted_list",
+      "html": "Testing is easier — mock only what is relevant for each class.",
+      "text": "Testing is easier — mock only what is relevant for each class."
+    },
+    {
+      "id": "24b24eb1ed548019a791ed416168b537",
+      "type": "bulleted_list",
+      "html": "Reduces change ripple effect — changing report format doesn’t touch email or database code.",
+      "text": "Reduces change ripple effect — changing report format doesn’t touch email or database code."
+    },
+    {
+      "id": "24b24eb1ed548093b121e7d1f1026c48",
+      "type": "bulleted_list",
+      "html": "Stakeholders are isolated — each change request affects only one class.",
+      "text": "Stakeholders are isolated — each change request affects only one class."
+    },
+    {
+      "id": "24b24eb1ed548010bb4ccccd106289e5",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480848363f33acb3e3437",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How to check if the code follows SRP</span>",
+      "text": "How to check if the code follows SRP"
+    },
+    {
+      "id": "24b24eb1ed54805aa4cff4703bb624c8",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 1 — One Reason to Change</span>",
+      "text": "Rule 1 — One Reason to Change"
+    },
+    {
+      "id": "24b24eb1ed5480008c17d065dcb7cc27",
+      "type": "bulleted_list",
+      "html": "A unit must have exactly one cause for modification.",
+      "text": "A unit must have exactly one cause for modification."
+    },
+    {
+      "id": "24b24eb1ed5480c7af81fb0fe1a98272",
+      "type": "bulleted_list",
+      "html": "Reason = specific responsibility or feature scope.",
+      "text": "Reason = specific responsibility or feature scope."
+    },
+    {
+      "id": "24b24eb1ed548014b9c2c4441a42add4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> List all possible requirement changes that would require editing this unit. If more than one type of change exists, SRP is violated.",
+      "text": "Check: List all possible requirement changes that would require editing this unit. If more than one type of change exists, SRP is violated."
+    },
+    {
+      "id": "24b24eb1ed5480b0b549d0adefa3c4f7",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548075840bff2205f49298",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 2 — Responsibility Cohesion</span>",
+      "text": "Rule 2 — Responsibility Cohesion"
+    },
+    {
+      "id": "24b24eb1ed5480a4ac1afad675513ad5",
+      "type": "bulleted_list",
+      "html": "All functions and data in the unit must serve the same conceptual goal.",
+      "text": "All functions and data in the unit must serve the same conceptual goal."
+    },
+    {
+      "id": "24b24eb1ed54805e96dfc83a1f256b9d",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Group functions by purpose. If they fall into different categories (e.g., “data access” and “UI formatting”), SRP is violated.",
+      "text": "Check: Group functions by purpose. If they fall into different categories (e.g., “data access” and “UI formatting”), SRP is violated."
+    },
+    {
+      "id": "24b24eb1ed548029ac14d30bab8d363c",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54807d933cffa6e327112f",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 3 — Stakeholder Isolation</span>",
+      "text": "Rule 3 — Stakeholder Isolation"
+    },
+    {
+      "id": "24b24eb1ed54800fb4a9e3e648aeecfb",
+      "type": "bulleted_list",
+      "html": "Only one type of stakeholder should request changes to this unit.",
+      "text": "Only one type of stakeholder should request changes to this unit."
+    },
+    {
+      "id": "24b24eb1ed54802587d8c91e45656907",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Identify all groups who might ask for edits. If unrelated groups appear, responsibilities are mixed.",
+      "text": "Check: Identify all groups who might ask for edits. If unrelated groups appear, responsibilities are mixed."
+    },
+    {
+      "id": "24b24eb1ed54808f8f54fba0586494b2",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480848a12d42aeab511bf",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 4 — Change Cascade Prevention</span>",
+      "text": "Rule 4 — Change Cascade Prevention"
+    },
+    {
+      "id": "24b24eb1ed548099ae83e60bc20c2003",
+      "type": "bulleted_list",
+      "html": "Changing one part of functionality must not risk breaking unrelated functionality.",
+      "text": "Changing one part of functionality must not risk breaking unrelated functionality."
+    },
+    {
+      "id": "24b24eb1ed54808fb590eef28d14861a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Make a hypothetical change. If unrelated tests or features need updates, SRP is violated.",
+      "text": "Check: Make a hypothetical change. If unrelated tests or features need updates, SRP is violated."
+    },
+    {
+      "id": "24b24eb1ed5480868866fc66b2a60abb",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54803790bed79c6ad061b3",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 5 — Single-Axis Testing</span>",
+      "text": "Rule 5 — Single-Axis Testing"
+    },
+    {
+      "id": "24b24eb1ed5480599939f96adf8bd044",
+      "type": "bulleted_list",
+      "html": "Unit tests should focus on one area of behavior.",
+      "text": "Unit tests should focus on one area of behavior."
+    },
+    {
+      "id": "24b24eb1ed548049b5e7fabd16a0cccf",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Count the different kinds of mocks/stubs needed. If more than one unrelated kind is needed, SRP is violated.",
+      "text": "Check: Count the different kinds of mocks/stubs needed. If more than one unrelated kind is needed, SRP is violated."
+    },
+    {
+      "id": "24b24eb1ed54805f9b04cd67fc53d98a",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54808ca926c7f9b20c6071",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 6 — Naming Clarity</span>",
+      "text": "Rule 6 — Naming Clarity"
+    },
+    {
+      "id": "24b24eb1ed5480599ae7d2fef67eb5cd",
+      "type": "bulleted_list",
+      "html": "A class or module name should describe its single purpose without “and” or multiple concepts.",
+      "text": "A class or module name should describe its single purpose without “and” or multiple concepts."
+    },
+    {
+      "id": "24b24eb1ed5480f8bdeae4758cf647cd",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If the name contains multiple domains (e.g., “UserProfileAndLogger”), SRP is violated.",
+      "text": "Check: If the name contains multiple domains (e.g., “UserProfileAndLogger”), SRP is violated."
+    },
+    {
+      "id": "24b24eb1ed5480e29d43ff6f80622877",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed54809e96cce775a6ddeb12",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 7 — Feature Change Impact</span>",
+      "text": "Rule 7 — Feature Change Impact"
+    },
+    {
+      "id": "24b24eb1ed5480c18153c8f25930781a",
+      "type": "bulleted_list",
+      "html": "A change in one feature should require modifying only one unit.",
+      "text": "A change in one feature should require modifying only one unit."
+    },
+    {
+      "id": "24b24eb1ed5480409866d42c1f12833b",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> Track code changes for recent features. If one feature’s change affects unrelated files, SRP may be violated.",
+      "text": "Check: Track code changes for recent features. If one feature’s change affects unrelated files, SRP may be violated."
+    },
+    {
+      "id": "24b24eb1ed5480399dbeebbf432bf953",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed548044a229d121cd758682",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule 8 — Dependency Domain Alignment</span>",
+      "text": "Rule 8 — Dependency Domain Alignment"
+    },
+    {
+      "id": "24b24eb1ed548042be49c7fde9e9626e",
+      "type": "bulleted_list",
+      "html": "Dependencies of a unit should all belong to the same domain.",
+      "text": "Dependencies of a unit should all belong to the same domain."
+    },
+    {
+      "id": "24b24eb1ed5480d19a64c32d36917847",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Check:</span> If the unit depends on unrelated systems (e.g., DB + Email API), SRP is violated.",
+      "text": "Check: If the unit depends on unrelated systems (e.g., DB + Email API), SRP is violated."
+    },
+    {
+      "id": "24b24eb1ed54809a9a10e307822a2e14",
+      "type": "divider"
+    },
+    {
+      "id": "24b24eb1ed5480c48409eae9178b48d5",
+      "type": "text"
+    }
+  ]
+}

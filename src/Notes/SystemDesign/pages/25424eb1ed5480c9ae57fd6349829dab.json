@@ -1,0 +1,711 @@
+{
+  "id": "25424eb1ed5480c9ae57fd6349829dab",
+  "title": "Latency & Throughput",
+  "sourceUrl": "https://xpandeyed.notion.site/Latency-Throughput-25424eb1ed5480c9ae57fd6349829dab?pvs=23",
+  "blocks": [
+    {
+      "id": "25824eb1ed5480a5ba3cf93c08a4f59e",
+      "type": "header",
+      "html": "Latency",
+      "text": "Latency"
+    },
+    {
+      "id": "25824eb1ed5480078fb0c3eca3fa97b0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Definition</span>: Delay between request initiation and completion of response.",
+      "text": "Definition: Delay between request initiation and completion of response."
+    },
+    {
+      "id": "25824eb1ed54803d8541e632ec2b9c21",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Types of Latency</span>:",
+      "text": "Types of Latency:"
+    },
+    {
+      "id": "25824eb1ed54800292eddc81eb61a329",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54803d8541e632ec2b9c21",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Network latency</span>: Time taken for a packet to travel from source to destination.",
+      "text": "Network latency: Time taken for a packet to travel from source to destination."
+    },
+    {
+      "id": "25824eb1ed54805ba81cdcec94329141",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54803d8541e632ec2b9c21",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Disk latency</span>: Time taken to read/write data on storage.",
+      "text": "Disk latency: Time taken to read/write data on storage."
+    },
+    {
+      "id": "25824eb1ed54800fb3a3e6394ca74f3b",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54803d8541e632ec2b9c21",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Memory latency</span>: Time between issuing a memory request and receiving the data.",
+      "text": "Memory latency: Time between issuing a memory request and receiving the data."
+    },
+    {
+      "id": "25824eb1ed5480ca8ceccb6423fd404d",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54803d8541e632ec2b9c21",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">CPU latency</span>: Time to execute an instruction.",
+      "text": "CPU latency: Time to execute an instruction."
+    },
+    {
+      "id": "25824eb1ed54800c8134ceedf54ac0d1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Components</span>:",
+      "text": "Components:"
+    },
+    {
+      "id": "25824eb1ed5480d68692c6dc6a6008d2",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54800c8134ceedf54ac0d1",
+      "html": "Propagation delay (signal travel time).",
+      "text": "Propagation delay (signal travel time)."
+    },
+    {
+      "id": "25824eb1ed5480308c4df46cf2b86efb",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54800c8134ceedf54ac0d1",
+      "html": "Transmission delay (pushing data onto medium).",
+      "text": "Transmission delay (pushing data onto medium)."
+    },
+    {
+      "id": "25824eb1ed54808fbc7bd193617c02c0",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54800c8134ceedf54ac0d1",
+      "html": "Queuing delay (waiting in buffer/queue).",
+      "text": "Queuing delay (waiting in buffer/queue)."
+    },
+    {
+      "id": "25824eb1ed5480409d8ce75045d88e7c",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed54800c8134ceedf54ac0d1",
+      "html": "Processing delay (time to process the request).",
+      "text": "Processing delay (time to process the request)."
+    },
+    {
+      "id": "25824eb1ed5480b6a39ac585b601a47e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Measurement</span>: Latency is measured as <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">time duration (ns, µs, ms) depending on context</span>.",
+      "text": "Measurement: Latency is measured as time duration (ns, µs, ms) depending on context."
+    },
+    {
+      "id": "25824eb1ed548050b3d3edcca841ca1d",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed548035bdbccb7721aecd90",
+      "type": "header",
+      "html": "Throughput",
+      "text": "Throughput"
+    },
+    {
+      "id": "25824eb1ed54807cb7bff20f73430a54",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Definition</span>: Rate of successful data transfer or operations per second.",
+      "text": "Definition: Rate of successful data transfer or operations per second."
+    },
+    {
+      "id": "25824eb1ed54805a8a5afac28557d305",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Formula</span>:",
+      "text": "Formula:"
+    },
+    {
+      "id": "25824eb1ed5480229d76e140153db373",
+      "type": "equation",
+      "parent": "25824eb1ed54805a8a5afac28557d305",
+      "tex": "Throughput = \\dfrac{\\text{Total work completed}}{\\text{Total time taken}}"
+    },
+    {
+      "id": "25824eb1ed5480f9800cdb7f0dea2ad4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Determinants</span>:",
+      "text": "Determinants:"
+    },
+    {
+      "id": "25824eb1ed5480568200ca782e5d732b",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480f9800cdb7f0dea2ad4",
+      "html": "Resource availability (Bandwidth, CPU, memory, disk).",
+      "text": "Resource availability (Bandwidth, CPU, memory, disk)."
+    },
+    {
+      "id": "25824eb1ed548062b8d8d9a16f9cda09",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480f9800cdb7f0dea2ad4",
+      "html": "How much work is competing (if too many tasks fight for resources, throughput drops).",
+      "text": "How much work is competing (if too many tasks fight for resources, throughput drops)."
+    },
+    {
+      "id": "25824eb1ed5480a0bfb0c7ed209d73a4",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480f9800cdb7f0dea2ad4",
+      "html": "Overheads (extra work like protocol headers or waiting in queues).",
+      "text": "Overheads (extra work like protocol headers or waiting in queues)."
+    },
+    {
+      "id": "25824eb1ed54804180a7e505f202cda0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Measurement</span>: Transactions/sec, Mbps, IOPS (Input/Output operations per second).",
+      "text": "Measurement: Transactions/sec, Mbps, IOPS (Input/Output operations per second)."
+    },
+    {
+      "id": "25824eb1ed548096a290d252626432a7",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480809213e3e7b25cacec",
+      "type": "header",
+      "html": "Performance Limits",
+      "text": "Performance Limits"
+    },
+    {
+      "id": "25824eb1ed5480e88367fbec5f20b38d",
+      "type": "alias",
+      "links": [
+        {
+          "href": "/Concurrency-vs-Parallelism-25824eb1ed5480be96b5f100ebcbfea4?pvs=25",
+          "text": "Concurrency vs Parallelism"
+        }
+      ]
+    },
+    {
+      "id": "25824eb1ed5480d78a9bcca7e177856f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Little’s Law</span>:",
+      "text": "Little’s Law:"
+    },
+    {
+      "id": "25824eb1ed5480028544c9150cde66a9",
+      "type": "equation",
+      "parent": "25824eb1ed5480d78a9bcca7e177856f",
+      "tex": "{Concurrency} = \\text{Throughput} \\times \\text{Latency}"
+    },
+    {
+      "id": "25824eb1ed5480a0a37eec63fc7be8b2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What Little’s Law really requires</span>",
+      "text": "What Little’s Law really requires"
+    },
+    {
+      "id": "25824eb1ed54806dad14d53a082453e5",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480a0a37eec63fc7be8b2",
+      "html": "The system must be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">stable</span> (the rate at which requests arrive ≈ the rate at which requests depart).",
+      "text": "The system must be stable (the rate at which requests arrive ≈ the rate at which requests depart)."
+    },
+    {
+      "id": "25824eb1ed5480c28e94c2903ebbc4e0",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480a0a37eec63fc7be8b2",
+      "html": "Requests enter, get processed, and leave — without queues growing infinitely.",
+      "text": "Requests enter, get processed, and leave — without queues growing infinitely."
+    },
+    {
+      "id": "25824eb1ed548050b660ebfd2d4473e6",
+      "type": "sub_sub_header",
+      "html": "Example:",
+      "text": "Example:"
+    },
+    {
+      "id": "25824eb1ed54803f9fccc58af85d8853",
+      "type": "bulleted_list",
+      "html": "Setup: Server has 2 worker threads.",
+      "text": "Setup: Server has 2 worker threads."
+    },
+    {
+      "id": "25824eb1ed5480979c0dca5cd727bf63",
+      "type": "bulleted_list",
+      "html": "Initially:",
+      "text": "Initially:"
+    },
+    {
+      "id": "25824eb1ed548065a53fceb1f25b47ec",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480979c0dca5cd727bf63",
+      "html": "Latency = 0.5 s per request",
+      "text": "Latency = 0.5 s per request"
+    },
+    {
+      "id": "25824eb1ed548034b596f340c9fea5a0",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480979c0dca5cd727bf63",
+      "html": "Throughput = 4 req/s",
+      "text": "Throughput = 4 req/s"
+    },
+    {
+      "id": "25824eb1ed5480718977e78be18e2563",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480979c0dca5cd727bf63",
+      "html": "Concurrency = 4 × 0.5 = 2 requests",
+      "text": "Concurrency = 4 × 0.5 = 2 requests"
+    },
+    {
+      "id": "25824eb1ed5480cbbad4c8786d6202d3",
+      "type": "bulleted_list",
+      "html": "After optimisations:",
+      "text": "After optimisations:"
+    },
+    {
+      "id": "25824eb1ed5480f882fde17972836984",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480cbbad4c8786d6202d3",
+      "html": "Latency = 0.25 s per request (after optimization)",
+      "text": "Latency = 0.25 s per request (after optimization)"
+    },
+    {
+      "id": "25824eb1ed5480f29166d1f2527886f8",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480cbbad4c8786d6202d3",
+      "html": "Throughput = 8 req/s:",
+      "text": "Throughput = 8 req/s:"
+    },
+    {
+      "id": "25824eb1ed54803bab97c7ebb2a35642",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480cbbad4c8786d6202d3",
+      "html": "Concurrency = 8 × 0.25 = 2 requests",
+      "text": "Concurrency = 8 × 0.25 = 2 requests"
+    },
+    {
+      "id": "25824eb1ed548027ad20e35c2ca526c2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">System Overload (Failure of Little’s law)</span>:",
+      "text": "System Overload (Failure of Little’s law):"
+    },
+    {
+      "id": "25824eb1ed5480e8b831d74af71b48df",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed548027ad20e35c2ca526c2",
+      "html": "Requests come at rate 10 res/s.",
+      "text": "Requests come at rate 10 res/s."
+    },
+    {
+      "id": "25824eb1ed5480e2b6c5cd213d6187d3",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed548027ad20e35c2ca526c2",
+      "html": "Server can only process 4 req/s.",
+      "text": "Server can only process 4 req/s."
+    },
+    {
+      "id": "25824eb1ed5480b2874ddfc9ac82435d",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed548027ad20e35c2ca526c2",
+      "html": "The extra 6 req/s pile up in the queue.",
+      "text": "The extra 6 req/s pile up in the queue."
+    },
+    {
+      "id": "25824eb1ed5480e997c2fd096e746e46",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed548027ad20e35c2ca526c2",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Latency</span> grows continuously (queue wait + processing).",
+      "text": "Latency grows continuously (queue wait + processing)."
+    },
+    {
+      "id": "25824eb1ed54801aac3bda09dc3e1944",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed548027ad20e35c2ca526c2",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Throughput</span> remains capped at 4 req/s.",
+      "text": "Throughput remains capped at 4 req/s."
+    },
+    {
+      "id": "25824eb1ed5480dbb163c63a561496ad",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why Little’s Law fails here</span>:",
+      "text": "Why Little’s Law fails here:"
+    },
+    {
+      "id": "25824eb1ed54803193d8f28e1f3742c4",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480dbb163c63a561496ad",
+      "html": "System is not stable (arrival rate &gt; service rate).",
+      "text": "System is not stable (arrival rate > service rate)."
+    },
+    {
+      "id": "25824eb1ed5480789cb1e5f07be6616f",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480dbb163c63a561496ad",
+      "html": "Concurrency keeps increasing without bound, so <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">Concurrency = Throughput × Latency</span></div> no longer matches reality.",
+      "text": "Concurrency keeps increasing without bound, so Concurrency = Throughput × Latency no longer matches reality."
+    },
+    {
+      "id": "25824eb1ed548060a56acbbf818ee480",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480fcb6e1c977939276f2",
+      "type": "header",
+      "html": "Optimisation Techniques",
+      "text": "Optimisation Techniques"
+    },
+    {
+      "id": "25824eb1ed5480f28741e456a355f857",
+      "type": "sub_header",
+      "html": "Throughput",
+      "text": "Throughput"
+    },
+    {
+      "id": "25824eb1ed5480e9aa55d309be0baff8",
+      "type": "text",
+      "html": "In practice, when you want to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">increase throughput</span>, you often look at ways to <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">use bandwidth more efficiently</span>.",
+      "text": "In practice, when you want to increase throughput, you often look at ways to use bandwidth more efficiently."
+    },
+    {
+      "id": "25824eb1ed5480a88d1ec7444521ec53",
+      "type": "callout"
+    },
+    {
+      "id": "25824eb1ed5480d5b536d66e10d34b1f",
+      "type": "text",
+      "parent": "25824eb1ed5480a88d1ec7444521ec53",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bandwidth ≠ Throughput</span>:",
+      "text": "Bandwidth ≠ Throughput:"
+    },
+    {
+      "id": "25824eb1ed5480a593cdf37787263266",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480a88d1ec7444521ec53",
+      "html": "Bandwidth = maximum capacity for the data transfer of the link.",
+      "text": "Bandwidth = maximum capacity for the data transfer of the link."
+    },
+    {
+      "id": "25824eb1ed5480daaba2f4e238621c81",
+      "type": "bulleted_list",
+      "parent": "25824eb1ed5480a88d1ec7444521ec53",
+      "html": "Throughput = actual data transfer achieved, so it cannot exceed bandwidth.",
+      "text": "Throughput = actual data transfer achieved, so it cannot exceed bandwidth."
+    },
+    {
+      "id": "25824eb1ed548072a83bd3259000800c",
+      "type": "text",
+      "html": "The key idea behind almost every bandwidth optimisation technique:",
+      "text": "The key idea behind almost every bandwidth optimisation technique:"
+    },
+    {
+      "id": "25824eb1ed5480a1bf07e6ec2ffa2cdf",
+      "type": "bulleted_list",
+      "html": "Reduce the wasted bandwidth",
+      "text": "Reduce the wasted bandwidth"
+    },
+    {
+      "id": "25824eb1ed5480a0a910f67c2c091878",
+      "type": "bulleted_list",
+      "html": "Offloading load - Shifting/distributing work away from the main/origin server (or bottleneck resource)",
+      "text": "Offloading load - Shifting/distributing work away from the main/origin server (or bottleneck resource)"
+    },
+    {
+      "id": "25824eb1ed548088b048fa9f78d52abd",
+      "type": "sub_sub_header",
+      "html": "Bandwidth",
+      "text": "Bandwidth"
+    },
+    {
+      "id": "25824eb1ed54809d8ce7e0a024b31eac",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Data Compression</span>",
+      "text": "Data Compression"
+    },
+    {
+      "id": "25824eb1ed5480938fc9dbbf7e16f6b1",
+      "type": "bulleted_list",
+      "html": "Compress files, images, or responses before transmission.",
+      "text": "Compress files, images, or responses before transmission."
+    },
+    {
+      "id": "25824eb1ed54806f8bf0d9f8b909b974",
+      "type": "bulleted_list",
+      "html": "Effect: Fewer bytes sent → higher effective bandwidth.",
+      "text": "Effect: Fewer bytes sent → higher effective bandwidth."
+    },
+    {
+      "id": "25824eb1ed5480949da5fed39211b2fe",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Content Delivery Network (CDN)</span>",
+      "text": "Content Delivery Network (CDN)"
+    },
+    {
+      "id": "25824eb1ed548024920ee4617227b0fe",
+      "type": "bulleted_list",
+      "html": "Place content closer to users via distributed edge servers.",
+      "text": "Place content closer to users via distributed edge servers."
+    },
+    {
+      "id": "25824eb1ed5480eb903fd491f20b31f7",
+      "type": "bulleted_list",
+      "html": "Effect: Offloads origin, reduces congestion, increases throughput,",
+      "text": "Effect: Offloads origin, reduces congestion, increases throughput,"
+    },
+    {
+      "id": "25824eb1ed548085a4e0dd6aabd69a8d",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Multiplexing and Persistent Connections</span>",
+      "text": "Multiplexing and Persistent Connections"
+    },
+    {
+      "id": "25824eb1ed5480e7b861d22365bfe2ab",
+      "type": "bulleted_list",
+      "html": "Use HTTP/2 or HTTP/3 to send multiple requests over a single TCP/QUIC connection. ",
+      "text": "Use HTTP/2 or HTTP/3 to send multiple requests over a single TCP/QUIC connection. "
+    },
+    {
+      "id": "25824eb1ed54803295eff4778b81ebe0",
+      "type": "callout",
+      "parent": "25824eb1ed5480e7b861d22365bfe2ab"
+    },
+    {
+      "id": "25824eb1ed54807e91d7dd07d0816e7c",
+      "type": "text",
+      "parent": "25824eb1ed54803295eff4778b81ebe0",
+      "html": "TCP: Transmission Control Protocol",
+      "text": "TCP: Transmission Control Protocol"
+    },
+    {
+      "id": "25824eb1ed5480ad9da2d64999741831",
+      "type": "text",
+      "parent": "25824eb1ed54803295eff4778b81ebe0",
+      "html": "QUIC: Quick UDP Internet Connections",
+      "text": "QUIC: Quick UDP Internet Connections"
+    },
+    {
+      "id": "25824eb1ed54800cb3aad83f725c53b3",
+      "type": "bulleted_list",
+      "html": "Effect: Reduces overhead of opening/closing multiple connections, improves utilization.",
+      "text": "Effect: Reduces overhead of opening/closing multiple connections, improves utilization."
+    },
+    {
+      "id": "25824eb1ed5480e3b0f3c47c5d7095c7",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Caching</span>",
+      "text": "Caching"
+    },
+    {
+      "id": "25824eb1ed54809492bcd6d614a646dd",
+      "type": "bulleted_list",
+      "html": "Browser caching, proxy caching, or edge caching.",
+      "text": "Browser caching, proxy caching, or edge caching."
+    },
+    {
+      "id": "25824eb1ed5480cba842d9ec10a07ae5",
+      "type": "bulleted_list",
+      "html": "Effect: Reduces repeated transfers, increases available bandwidth for unique traffic.",
+      "text": "Effect: Reduces repeated transfers, increases available bandwidth for unique traffic."
+    },
+    {
+      "id": "25824eb1ed548015ac9ec20c61c2ac1f",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Load Balancing</span>",
+      "text": "Load Balancing"
+    },
+    {
+      "id": "25824eb1ed54809485d1c8faa97d2b59",
+      "type": "bulleted_list",
+      "html": "Distribute requests across multiple servers.",
+      "text": "Distribute requests across multiple servers."
+    },
+    {
+      "id": "25824eb1ed54802180aecbab9acbc730",
+      "type": "bulleted_list",
+      "html": "Effect: Prevents one server from becoming a bottleneck, increases overall throughput.",
+      "text": "Effect: Prevents one server from becoming a bottleneck, increases overall throughput."
+    },
+    {
+      "id": "25824eb1ed5480dbb138d596c46e0a6a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Efficient Protocols</span>",
+      "text": "Efficient Protocols"
+    },
+    {
+      "id": "25824eb1ed548028ba15c18199060f0f",
+      "type": "bulleted_list",
+      "html": "Choosing the best protocol as per the requirements can make data smaller (reduced header size or reduced size of data based on format), fewer retransmissions etc.",
+      "text": "Choosing the best protocol as per the requirements can make data smaller (reduced header size or reduced size of data based on format), fewer retransmissions etc."
+    },
+    {
+      "id": "25824eb1ed5480589c28dbaef2480cad",
+      "type": "sub_header",
+      "html": "Latency",
+      "text": "Latency"
+    },
+    {
+      "id": "25824eb1ed54807284abc20795186272",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Reduce Network Hops</span>",
+      "text": "Reduce Network Hops"
+    },
+    {
+      "id": "25824eb1ed5480419277f4f82170edd5",
+      "type": "bulleted_list",
+      "html": "Fewer routers/switches in the request path.",
+      "text": "Fewer routers/switches in the request path."
+    },
+    {
+      "id": "25824eb1ed548040bffec582bd2b84c8",
+      "type": "bulleted_list",
+      "html": "Use edge servers or regional data centers.",
+      "text": "Use edge servers or regional data centers."
+    },
+    {
+      "id": "25824eb1ed5480f39b5bd5b05f6ce0ee",
+      "type": "bulleted_list",
+      "html": "Effect: Shorter path → lower round-trip time (RTT).",
+      "text": "Effect: Shorter path → lower round-trip time (RTT)."
+    },
+    {
+      "id": "25824eb1ed54805790dad8a1e94033c2",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">DNS Optimisation</span>",
+      "text": "DNS Optimisation"
+    },
+    {
+      "id": "25824eb1ed5480bb8ee4e7efad4a51cd",
+      "type": "bulleted_list",
+      "html": "Use faster DNS resolvers, DNS caching, or Anycast DNS.",
+      "text": "Use faster DNS resolvers, DNS caching, or Anycast DNS."
+    },
+    {
+      "id": "25824eb1ed5480c1a432f905522d983b",
+      "type": "bulleted_list",
+      "html": "Effect: Faster domain resolution reduces initial connection delay.",
+      "text": "Effect: Faster domain resolution reduces initial connection delay."
+    },
+    {
+      "id": "25824eb1ed54809384f9d7592b53c4d3",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Connection Reuse and Keep-Alive</span>",
+      "text": "Connection Reuse and Keep-Alive"
+    },
+    {
+      "id": "25824eb1ed5480c2ad55f193bcd59d9d",
+      "type": "bulleted_list",
+      "html": "Avoid re-establishing TCP/TLS handshakes for every request.",
+      "text": "Avoid re-establishing TCP/TLS handshakes for every request."
+    },
+    {
+      "id": "25824eb1ed54807e958fe9cf312c0e3e",
+      "type": "bulleted_list",
+      "html": "Effect: Reduces handshake latency.",
+      "text": "Effect: Reduces handshake latency."
+    },
+    {
+      "id": "25824eb1ed5480c3841be0f887eb6d0a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Asynchronous and Parallel Requests</span>",
+      "text": "Asynchronous and Parallel Requests"
+    },
+    {
+      "id": "25824eb1ed54801ab96acc730cf6aadc",
+      "type": "bulleted_list",
+      "html": "Send independent requests in parallel rather than serial.",
+      "text": "Send independent requests in parallel rather than serial."
+    },
+    {
+      "id": "25824eb1ed548022adbdd7efb859924a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Edge Computing</span>",
+      "text": "Edge Computing"
+    },
+    {
+      "id": "25824eb1ed54800fbcbced52d410335f",
+      "type": "bulleted_list",
+      "html": "Process data closer to the user instead of central servers.",
+      "text": "Process data closer to the user instead of central servers."
+    },
+    {
+      "id": "25824eb1ed54804d936ce911046313c3",
+      "type": "bulleted_list",
+      "html": "Effect: Cuts propagation delay.",
+      "text": "Effect: Cuts propagation delay."
+    },
+    {
+      "id": "25824eb1ed548026a7fbe37bb95b3d19",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Database Query Optimization</span>",
+      "text": "Database Query Optimization"
+    },
+    {
+      "id": "25824eb1ed5480238a08edf47a396777",
+      "type": "bulleted_list",
+      "html": "Use indexing, denormalization, caching, and query tuning.",
+      "text": "Use indexing, denormalization, caching, and query tuning."
+    },
+    {
+      "id": "25824eb1ed548064849ddf1c64c41bb4",
+      "type": "bulleted_list",
+      "html": "Effect: Reduces application-layer latency.",
+      "text": "Effect: Reduces application-layer latency."
+    },
+    {
+      "id": "25824eb1ed54803bbf0ffb5647af7308",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">TCP/QUIC Optimizations</span>",
+      "text": "TCP/QUIC Optimizations"
+    },
+    {
+      "id": "25824eb1ed548089a3e3ee7244611d14",
+      "type": "bulleted_list",
+      "html": "Enable TCP Fast Open, use QUIC (UDP-based, faster recovery from packet loss).",
+      "text": "Enable TCP Fast Open, use QUIC (UDP-based, faster recovery from packet loss)."
+    },
+    {
+      "id": "25824eb1ed54807fa6b8fced57bb7a62",
+      "type": "bulleted_list",
+      "html": "Effect: Faster connections, lower transport latency.",
+      "text": "Effect: Faster connections, lower transport latency."
+    },
+    {
+      "id": "25824eb1ed5480eabe54cb4b682a0d54",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Reduce Payload Size</span>",
+      "text": "Reduce Payload Size"
+    },
+    {
+      "id": "25824eb1ed5480de88ebc5348ddd7736",
+      "type": "bulleted_list",
+      "html": "Minify JavaScript, CSS, bundle requests, use pagination in APIs.",
+      "text": "Minify JavaScript, CSS, bundle requests, use pagination in APIs."
+    },
+    {
+      "id": "25824eb1ed548093b2aff167df8ae9be",
+      "type": "bulleted_list",
+      "html": "Effect: Less data per request → faster response.",
+      "text": "Effect: Less data per request → faster response."
+    },
+    {
+      "id": "25824eb1ed548047a3b7c55d7bc7dbd9",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480e1a644cfd54739ec1d",
+      "type": "sub_header",
+      "html": "Common Misconceptions",
+      "text": "Common Misconceptions"
+    },
+    {
+      "id": "25824eb1ed54808d871cc7f67de0acbe",
+      "type": "bulleted_list",
+      "html": "Latency ≠ Response time (response time includes latency + processing overhead).",
+      "text": "Latency ≠ Response time (response time includes latency + processing overhead)."
+    },
+    {
+      "id": "25824eb1ed548054a132c75592211f0a",
+      "type": "bulleted_list",
+      "html": "High bandwidth ≠ Low latency. Bandwidth affects throughput, not latency.",
+      "text": "High bandwidth ≠ Low latency. Bandwidth affects throughput, not latency."
+    },
+    {
+      "id": "25824eb1ed5480bc8066d0290c34b9da",
+      "type": "bulleted_list",
+      "html": "Increasing throughput does not guarantee lower latency; may even worsen it if queues build up.",
+      "text": "Increasing throughput does not guarantee lower latency; may even worsen it if queues build up."
+    },
+    {
+      "id": "25824eb1ed54808ca3baebc10f841c25",
+      "type": "divider"
+    },
+    {
+      "id": "25824eb1ed5480cd8b1febb6eb7bfca2",
+      "type": "text"
+    }
+  ]
+}

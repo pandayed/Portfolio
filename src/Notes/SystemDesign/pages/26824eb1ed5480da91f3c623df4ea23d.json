@@ -1,0 +1,303 @@
+{
+  "id": "26824eb1ed5480da91f3c623df4ea23d",
+  "title": "Consistency: Definitions Based on Context",
+  "sourceUrl": "https://xpandeyed.notion.site/Consistency-Definitions-Based-on-Context-26824eb1ed5480da91f3c623df4ea23d?pvs=23",
+  "blocks": [
+    {
+      "id": "26824eb1ed548071ba3ee330aa88792f",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed5480de8fa4e4228c4ea659",
+      "type": "text",
+      "parent": "26824eb1ed548071ba3ee330aa88792f",
+      "html": "Consistency is a term widely used in systems design, but its meaning changes depending on the context.",
+      "text": "Consistency is a term widely used in systems design, but its meaning changes depending on the context."
+    },
+    {
+      "id": "26824eb1ed5480e7a9f6f0cbd6b1513c",
+      "type": "text",
+      "parent": "26824eb1ed548071ba3ee330aa88792f",
+      "html": "The notes below aim to give an overview of what <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency</span> means in different contexts.",
+      "text": "The notes below aim to give an overview of what consistency means in different contexts."
+    },
+    {
+      "id": "26824eb1ed5480628786dcef7b6e42ed",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed54807491ebee3d37148713",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Database Consistency</span>",
+      "text": "Database Consistency"
+    },
+    {
+      "id": "26824eb1ed5480ba958ff753e1b69c78",
+      "type": "bulleted_list",
+      "html": "Data must follow rules defined in schema, constraints, and integrity checks.",
+      "text": "Data must follow rules defined in schema, constraints, and integrity checks."
+    },
+    {
+      "id": "26824eb1ed54804caf9cfbd39723a0e3",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Focus</span>: Validity of data inside one database instance.",
+      "text": "Focus: Validity of data inside one database instance."
+    },
+    {
+      "id": "26824eb1ed5480a98fe1f58f4bbc1729",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Examples</span>:",
+      "text": "Examples:"
+    },
+    {
+      "id": "26824eb1ed548021853cc749d2db840c",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed5480a98fe1f58f4bbc1729",
+      "html": "If a table requires <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">age &gt; 0</span></div>, inserting <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">age = -5</span></div> breaks consistency.",
+      "text": "If a table requires age > 0, inserting age = -5 breaks consistency."
+    },
+    {
+      "id": "26824eb1ed5480028760db68aa9682d1",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed5480a98fe1f58f4bbc1729",
+      "html": "If an order has <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">customer_id = 99</span></div> but no such customer exists → consistency violation.",
+      "text": "If an order has customer_id = 99 but no such customer exists → consistency violation."
+    },
+    {
+      "id": "26824eb1ed54806ca50de7e08f93dd00",
+      "type": "bulleted_list",
+      "html": "Database always enforces these rules, otherwise rejects data.",
+      "text": "Database always enforces these rules, otherwise rejects data."
+    },
+    {
+      "id": "26824eb1ed548047b0dae173fc63c776",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed5480ecb942d5376ab4f21e",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">A</span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Consistency</span><span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">ID (ACID)</span>",
+      "text": "AConsistencyID (ACID)"
+    },
+    {
+      "id": "26824eb1ed5480b8905ec5cbf848ecdc",
+      "type": "bulleted_list",
+      "html": "A <span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">transaction</span> takes the database from one <span style=\"font-style:italic\" data-token-index=\"3\" class=\"notion-enable-hover\">valid state</span> to another <span style=\"font-style:italic\" data-token-index=\"5\" class=\"notion-enable-hover\">valid state</span>.",
+      "text": "A transaction takes the database from one valid state to another valid state."
+    },
+    {
+      "id": "26824eb1ed548066bfd0c6e7455953be",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Focus</span>: Business rules and integrity during <span style=\"font-style:italic;font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">transaction </span>execution.",
+      "text": "Focus: Business rules and integrity during transaction execution."
+    },
+    {
+      "id": "26824eb1ed54802a932dd3c70308300b",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example:</span>",
+      "text": "Example:"
+    },
+    {
+      "id": "26824eb1ed5480c5a4d5e24636bacec4",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed54802a932dd3c70308300b",
+      "html": "Bank with two accounts: A and B. Account A has ₹100 and Account B has ₹100.",
+      "text": "Bank with two accounts: A and B. Account A has ₹100 and Account B has ₹100."
+    },
+    {
+      "id": "26824eb1ed5480c7ba6bf6f37ab62760",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed54802a932dd3c70308300b",
+      "html": "Data Integrity Check: Balance of an account cannot be negative.",
+      "text": "Data Integrity Check: Balance of an account cannot be negative."
+    },
+    {
+      "id": "26824eb1ed5480e79880d9e2cb3f3df7",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed54802a932dd3c70308300b",
+      "html": "Business Rule: Total balance in the system remains same in the system.",
+      "text": "Business Rule: Total balance in the system remains same in the system."
+    },
+    {
+      "id": "26824eb1ed548083a933e103e06439a2",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed54802a932dd3c70308300b",
+      "html": "A transfer of ₹30 is recorded as deducted from A (A[100]→A[70]), but never added to B (due to some fault), the database consistency is maintained, but the total balance rule is violated, breaking the ACID Consistency.",
+      "text": "A transfer of ₹30 is recorded as deducted from A (A[100]→A[70]), but never added to B (due to some fault), the database consistency is maintained, but the total balance rule is violated, breaking the ACID Consistency."
+    },
+    {
+      "id": "26824eb1ed54803497efe1b73b1c6cad",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed5480f481ecd503f2c9adab",
+      "type": "alias",
+      "parent": "26824eb1ed54803497efe1b73b1c6cad",
+      "links": [
+        {
+          "href": "/Transactions-ACID-Properties-26424eb1ed54802894ffe6334761df9d?pvs=25",
+          "text": "Transactions & ACID Properties"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed5480bb9978f093d2f80e30",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed54804ca364e42c5f3605fd",
+      "type": "header",
+      "html": "<span style=\"font-style:italic;font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consistency</span><span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">AP (CAP Theorem)</span>",
+      "text": "ConsistencyAP (CAP Theorem)"
+    },
+    {
+      "id": "26924eb1ed54802f97dfc85bbaa0d058",
+      "type": "bulleted_list",
+      "html": "Linearizability (a specific form of strong consistency).",
+      "text": "Linearizability (a specific form of strong consistency)."
+    },
+    {
+      "id": "26824eb1ed5480df9585dec462431ed9",
+      "type": "bulleted_list",
+      "html": "Every read gets the most recent write. ",
+      "text": "Every read gets the most recent write. "
+    },
+    {
+      "id": "26824eb1ed548077a5ace99b8e8866ad",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Focus</span>: User always sees the latest committed value, even in distributed replicas.",
+      "text": "Focus: User always sees the latest committed value, even in distributed replicas."
+    },
+    {
+      "id": "26824eb1ed548073bbaadf5e90509950",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example</span>:",
+      "text": "Example:"
+    },
+    {
+      "id": "26824eb1ed5480d59051ea02f06b2518",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed548073bbaadf5e90509950",
+      "html": "Suppose X = 10. Client1 updates X = 20.",
+      "text": "Suppose X = 10. Client1 updates X = 20."
+    },
+    {
+      "id": "26824eb1ed5480229817d00974c25b30",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed548073bbaadf5e90509950",
+      "html": "Any client reading X must get 20.",
+      "text": "Any client reading X must get 20."
+    },
+    {
+      "id": "26824eb1ed54805c9e75ff0b336687dc",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed548037a723e3157502e3b3",
+      "type": "alias",
+      "parent": "26824eb1ed54805c9e75ff0b336687dc",
+      "links": [
+        {
+          "href": "/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=25",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed54809b9655c23fa75377f4",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed5480c080ebe91a6a295951",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Data Consistency</span>",
+      "text": "Data Consistency"
+    },
+    {
+      "id": "26924eb1ed5480009ba3ed23a67c5572",
+      "type": "bulleted_list",
+      "html": "Consistency as defined in the CAP theorem is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">often impractical</span> and not required in many cases.",
+      "text": "Consistency as defined in the CAP theorem is often impractical and not required in many cases."
+    },
+    {
+      "id": "26924eb1ed54802a93d6f3fd8f808ad2",
+      "type": "bulleted_list",
+      "html": "To address this, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">other definitions of consistency</span> have been introduced.",
+      "text": "To address this, other definitions of consistency have been introduced."
+    },
+    {
+      "id": "26924eb1ed5480c4bfcdcf33c060dd63",
+      "type": "bulleted_list",
+      "html": "These alternative consistency models are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">less strict than CAP’s consistency</span> and allow <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">certain relaxations</span>.",
+      "text": "These alternative consistency models are less strict than CAP’s consistency and allow certain relaxations."
+    },
+    {
+      "id": "26924eb1ed5480ba9e83e6adde45c984",
+      "type": "bulleted_list",
+      "html": "All these forms of consistency—both strict and relaxed—fall under <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Data Consistency</span>, but they are categorized with different names and implemented differently.",
+      "text": "All these forms of consistency—both strict and relaxed—fall under Data Consistency, but they are categorized with different names and implemented differently."
+    },
+    {
+      "id": "26824eb1ed54809a9432cbf174cfa9f8",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Focus</span>: Ensuring that clients see a consistent view of data, with strictness or relaxations applied as needed based on system requirements and feasibility.",
+      "text": "Focus: Ensuring that clients see a consistent view of data, with strictness or relaxations applied as needed based on system requirements and feasibility."
+    },
+    {
+      "id": "26824eb1ed548043a1dafd11e69b0beb",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Examples</span>:",
+      "text": "Examples:"
+    },
+    {
+      "id": "26824eb1ed54801fbe18d0899d094608",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed548043a1dafd11e69b0beb",
+      "html": "Strong consistency: If user updates profile picture → everyone sees the new one immediately.",
+      "text": "Strong consistency: If user updates profile picture → everyone sees the new one immediately."
+    },
+    {
+      "id": "26824eb1ed5480e2aa3ae1aa72d9ac49",
+      "type": "bulleted_list",
+      "parent": "26824eb1ed548043a1dafd11e69b0beb",
+      "html": "Eventual consistency: If user updates profile picture → some people may see old one for a while, but eventually all will see the new one.",
+      "text": "Eventual consistency: If user updates profile picture → some people may see old one for a while, but eventually all will see the new one."
+    },
+    {
+      "id": "26824eb1ed5480768069cb304951ce81",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed548032b698da28bc82f1e1",
+      "type": "text",
+      "parent": "26824eb1ed5480768069cb304951ce81",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Data Consistency</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Data Consistency ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Data-Consistency-26824eb1ed5480948347d10941fabac4?pvs=24",
+          "text": "Data Consistency"
+        }
+      ]
+    },
+    {
+      "id": "26824eb1ed5480da8523f237af86869c",
+      "type": "divider"
+    },
+    {
+      "id": "26824eb1ed548005bb6eddd72b4470b4",
+      "type": "callout"
+    },
+    {
+      "id": "26824eb1ed5480a995c2e98a44387e7d",
+      "type": "text",
+      "parent": "26824eb1ed548005bb6eddd72b4470b4",
+      "html": "There may be additional contexts and definitions, which I will include as I encounter them.",
+      "text": "There may be additional contexts and definitions, which I will include as I encounter them."
+    },
+    {
+      "id": "26824eb1ed5480dd9fb1efff3b0598d1",
+      "type": "text"
+    }
+  ]
+}

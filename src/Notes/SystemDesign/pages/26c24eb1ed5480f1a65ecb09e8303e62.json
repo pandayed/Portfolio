@@ -1,0 +1,491 @@
+{
+  "id": "26c24eb1ed5480f1a65ecb09e8303e62",
+  "title": "Two Phase Commit (2PC)",
+  "sourceUrl": "https://xpandeyed.notion.site/Two-Phase-Commit-2PC-26c24eb1ed5480f1a65ecb09e8303e62",
+  "blocks": [
+    {
+      "id": "26d24eb1ed548074acaaeb5b39673923",
+      "type": "bulleted_list",
+      "html": "2PC is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">distributed algorithm</span> used in distributed systems.",
+      "text": "2PC is a distributed algorithm used in distributed systems."
+    },
+    {
+      "id": "26d24eb1ed5480df8e7afafd577ecab4",
+      "type": "bulleted_list",
+      "html": "Ensures that <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">all participants in a transaction agree</span> to commit or abort, so the system stays consistent.",
+      "text": "Ensures that all participants in a transaction agree to commit or abort, so the system stays consistent."
+    },
+    {
+      "id": "26d24eb1ed5480a8b3afe3d197b5d9cb",
+      "type": "bulleted_list",
+      "html": "Solves the issue of uncertainty in distributed commit (<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Two-Generals-Problem-26c24eb1ed54803ab1f7efc05646d87e?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Two Generals’ Problem</span><span style=\"white-space:nowrap\"></span></a> ), by providing a practical work around.",
+      "text": "Solves the issue of uncertainty in distributed commit (Two Generals’ Problem ), by providing a practical work around.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Two-Generals-Problem-26c24eb1ed54803ab1f7efc05646d87e?pvs=24",
+          "text": "Two Generals’ Problem"
+        }
+      ]
+    },
+    {
+      "id": "26d24eb1ed5480d1aad2da8bd4f3890e",
+      "type": "bulleted_list",
+      "html": "Its a workaround and not a perfect solution.",
+      "text": "Its a workaround and not a perfect solution."
+    },
+    {
+      "id": "26d24eb1ed5480c78ce4ddc4e6fec567",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed5480be90c6ebbc46736c1f",
+      "type": "header",
+      "html": "Two Phase Protocol",
+      "text": "Two Phase Protocol"
+    },
+    {
+      "id": "26d24eb1ed5480ba9431ec4bf5d6efa1",
+      "type": "sub_header",
+      "html": "Practical Scenarios It Considers",
+      "text": "Practical Scenarios It Considers"
+    },
+    {
+      "id": "26d24eb1ed5480f9aab8f207621f6e98",
+      "type": "bulleted_list",
+      "html": "Although network partitions happen but temporarily.",
+      "text": "Although network partitions happen but temporarily."
+    },
+    {
+      "id": "26d24eb1ed5480b397ced4eb390e32a9",
+      "type": "bulleted_list",
+      "html": "Failed nodes will eventually recover.",
+      "text": "Failed nodes will eventually recover."
+    },
+    {
+      "id": "26d24eb1ed54802b879ae02e28409388",
+      "type": "bulleted_list",
+      "html": "Message delivery is \"eventually reliable\" (with retries), even if not guaranteed.",
+      "text": "Message delivery is \"eventually reliable\" (with retries), even if not guaranteed."
+    },
+    {
+      "id": "26d24eb1ed548088a236f377d4180f4a",
+      "type": "sub_header",
+      "html": "Initial Setup",
+      "text": "Initial Setup"
+    },
+    {
+      "id": "26d24eb1ed5480eb8ca5fdcc37af5210",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Coordinator</span>: One designated node that orchestrates the transaction",
+      "text": "Coordinator: One designated node that orchestrates the transaction"
+    },
+    {
+      "id": "26d24eb1ed54802bbaafcb6aaa197f43",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Participants</span>: Multiple nodes that need to agree on the transaction",
+      "text": "Participants: Multiple nodes that need to agree on the transaction"
+    },
+    {
+      "id": "26d24eb1ed5480efbd74c5d07a94e2b9",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Transaction</span>: The operation that needs to be performed atomically across all nodes",
+      "text": "Transaction: The operation that needs to be performed atomically across all nodes"
+    },
+    {
+      "id": "26d24eb1ed548003939dc50ef0265290",
+      "type": "sub_header",
+      "html": "Phase 1: Prepare Phase (Voting Phase)",
+      "text": "Phase 1: Prepare Phase (Voting Phase)"
+    },
+    {
+      "id": "26d24eb1ed54806b99f8e9c4484fa304",
+      "type": "sub_sub_header",
+      "html": "Step 1.1: Coordinator Initiates",
+      "text": "Step 1.1: Coordinator Initiates"
+    },
+    {
+      "id": "26d24eb1ed5480e1a45dfc5e3309e93d",
+      "type": "code",
+      "html": "Coordinator → All Participants: PREPARE(transaction_id)",
+      "text": "Coordinator → All Participants: PREPARE(transaction_id)"
+    },
+    {
+      "id": "26d24eb1ed5480af8c23d2c304f0bda4",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Coordinator Actions:</span>",
+      "text": "Coordinator Actions:"
+    },
+    {
+      "id": "26d24eb1ed5480f6b894c939068bd747",
+      "type": "bulleted_list",
+      "html": "Starts a timeout timer for each participant",
+      "text": "Starts a timeout timer for each participant"
+    },
+    {
+      "id": "26d24eb1ed548071900cde2179284a89",
+      "type": "bulleted_list",
+      "html": "Maintains a list of participants and their response status",
+      "text": "Maintains a list of participants and their response status"
+    },
+    {
+      "id": "26d24eb1ed54806495e9e391cfc02c31",
+      "type": "bulleted_list",
+      "html": "Logs the transaction initiation",
+      "text": "Logs the transaction initiation"
+    },
+    {
+      "id": "26d24eb1ed54805ba3b3c1d172d74600",
+      "type": "sub_sub_header",
+      "html": "Step 1.2: Participant Processing",
+      "text": "Step 1.2: Participant Processing"
+    },
+    {
+      "id": "26d24eb1ed548065b766cdaa082325ef",
+      "type": "text",
+      "html": "Each participant receives the PREPARE message and:",
+      "text": "Each participant receives the PREPARE message and:"
+    },
+    {
+      "id": "26d24eb1ed548055bf9afc51c54bc3f8",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Success Path:</span>",
+      "text": "Success Path:"
+    },
+    {
+      "id": "26d24eb1ed5480009fbbe7aeb2fde7b9",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Validate Transaction</span>: Check if the transaction is valid and can be executed",
+      "text": "Validate Transaction: Check if the transaction is valid and can be executed"
+    },
+    {
+      "id": "26d24eb1ed5480c89752c660b890f9f9",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Lock Resources</span>: Acquire all necessary locks on data items",
+      "text": "Lock Resources: Acquire all necessary locks on data items"
+    },
+    {
+      "id": "26d24eb1ed548093b1a4cf84f0f5de08",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Prepare to Commit</span>:",
+      "text": "Prepare to Commit:"
+    },
+    {
+      "id": "26d24eb1ed54806e89bad13ca80b1656",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed548093b1a4cf84f0f5de08",
+      "html": "Write transaction data to local log (but don't commit)",
+      "text": "Write transaction data to local log (but don't commit)"
+    },
+    {
+      "id": "26d24eb1ed5480f596aecb9cb720e5d1",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed548093b1a4cf84f0f5de08",
+      "html": "Ensure all changes can be made durable",
+      "text": "Ensure all changes can be made durable"
+    },
+    {
+      "id": "26d24eb1ed54807d92dfca896cf7e4cd",
+      "type": "bulleted_list",
+      "parent": "26d24eb1ed548093b1a4cf84f0f5de08",
+      "html": "Reserve necessary resources",
+      "text": "Reserve necessary resources"
+    },
+    {
+      "id": "26d24eb1ed5480b19472d6f3c8b374a6",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Send Response</span>: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">Participant → Coordinator: YES(transaction_id)</span></div>",
+      "text": "Send Response: Participant → Coordinator: YES(transaction_id)"
+    },
+    {
+      "id": "26d24eb1ed548053baecef5d55d51f34",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Failure Paths:</span>",
+      "text": "Failure Paths:"
+    },
+    {
+      "id": "26d24eb1ed54809dbe8bfca3a2b431e2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Resource Conflict</span>: If locks cannot be acquired → Send <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">NO</span></div>",
+      "text": "Resource Conflict: If locks cannot be acquired → Send NO"
+    },
+    {
+      "id": "26d24eb1ed5480dfad39e6215404af17",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Validation Failure</span>: If transaction is invalid → Send <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">NO</span></div>",
+      "text": "Validation Failure: If transaction is invalid → Send NO"
+    },
+    {
+      "id": "26d24eb1ed548082a160df5daae94625",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Local Failure</span>: If participant crashes → No response (timeout)",
+      "text": "Local Failure: If participant crashes → No response (timeout)"
+    },
+    {
+      "id": "26d24eb1ed548059b05bd48363de1116",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Message Drop</span>: PREPARE message never received → No response (timeout)",
+      "text": "Message Drop: PREPARE message never received → No response (timeout)"
+    },
+    {
+      "id": "26d24eb1ed5480cfaa0aeda19eca441c",
+      "type": "sub_sub_header",
+      "html": "Step 1.3: Coordinator Collects Responses",
+      "text": "Step 1.3: Coordinator Collects Responses"
+    },
+    {
+      "id": "26d24eb1ed548036adebf4bbfbd4dce4",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Timeout Handling:</span>",
+      "text": "Timeout Handling:"
+    },
+    {
+      "id": "26d24eb1ed5480e6a491eb59619d94bc",
+      "type": "bulleted_list",
+      "html": "Coordinator waits for responses with a timeout (typically 10-30 seconds)",
+      "text": "Coordinator waits for responses with a timeout (typically 10-30 seconds)"
+    },
+    {
+      "id": "26d24eb1ed548096abf3e5b8401309de",
+      "type": "bulleted_list",
+      "html": "For each participant:",
+      "text": "For each participant:"
+    },
+    {
+      "id": "26d24eb1ed5480c6848ffe1edf3e0bf9",
+      "type": "code",
+      "parent": "26d24eb1ed548096abf3e5b8401309de",
+      "html": "<span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">if</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">response </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">==</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> YES</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n      mark participant as ready\n </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">else</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">if</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">response </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">==</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> NO</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n      decision </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> ABORT\n      </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">break</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">else</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">if</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">timeout_expired</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n      decision </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> ABORT\n      </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">break</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span>\n</span>",
+      "text": "if (response == YES) {\n      mark participant as ready\n } else if (response == NO) {\n      decision = ABORT\n      break\n } else if (timeout_expired) {\n      decision = ABORT\n      break\n }\n"
+    },
+    {
+      "id": "26d24eb1ed5480e09151e743bb40ced0",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Decision Logic:</span>",
+      "text": "Decision Logic:"
+    },
+    {
+      "id": "26d24eb1ed548099b401fc92d0ebdd16",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">COMMIT</span>: Only if ALL participants respond with YES",
+      "text": "COMMIT: Only if ALL participants respond with YES"
+    },
+    {
+      "id": "26d24eb1ed5480e7a348c1dc6f72d702",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">ABORT</span>: If ANY participant responds with NO or times out",
+      "text": "ABORT: If ANY participant responds with NO or times out"
+    },
+    {
+      "id": "26d24eb1ed54809f926df17cf29a1ee4",
+      "type": "sub_header",
+      "html": "Phase 2: Commit Phase (Decision Phase)",
+      "text": "Phase 2: Commit Phase (Decision Phase)"
+    },
+    {
+      "id": "26d24eb1ed5480d1ba87f53ee893db58",
+      "type": "sub_sub_header",
+      "html": "Step 2.1: Coordinator Makes Decision",
+      "text": "Step 2.1: Coordinator Makes Decision"
+    },
+    {
+      "id": "26d24eb1ed548055a9b0d1dbe0ac34d0",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">If Decision = COMMIT:</span>",
+      "text": "If Decision = COMMIT:"
+    },
+    {
+      "id": "26d24eb1ed54808c9edee02cd1e9f559",
+      "type": "code",
+      "html": "Coordinator → All Participants: COMMIT(transaction_id)",
+      "text": "Coordinator → All Participants: COMMIT(transaction_id)"
+    },
+    {
+      "id": "26d24eb1ed548044a759c7eeba1b9d70",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">If Decision = ABORT:</span>",
+      "text": "If Decision = ABORT:"
+    },
+    {
+      "id": "26d24eb1ed5480188aebf95ebb7e5a2e",
+      "type": "code",
+      "html": "Coordinator → All Participants: ABORT(transaction_id)",
+      "text": "Coordinator → All Participants: ABORT(transaction_id)"
+    },
+    {
+      "id": "26d24eb1ed54802ab561cb8a5f408c13",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Coordinator Actions:</span>",
+      "text": "Coordinator Actions:"
+    },
+    {
+      "id": "26d24eb1ed5480848765e5e40f8e5695",
+      "type": "bulleted_list",
+      "html": "Log the decision before sending messages",
+      "text": "Log the decision before sending messages"
+    },
+    {
+      "id": "26d24eb1ed54809c8572f40947f9e3d0",
+      "type": "bulleted_list",
+      "html": "Start timeout timers for acknowledgments",
+      "text": "Start timeout timers for acknowledgments"
+    },
+    {
+      "id": "26d24eb1ed5480eca7d2ed9ad0788cc4",
+      "type": "bulleted_list",
+      "html": "Track which participants have acknowledged",
+      "text": "Track which participants have acknowledged"
+    },
+    {
+      "id": "26d24eb1ed54805882c2ecda4db89a1f",
+      "type": "sub_sub_header",
+      "html": "Step 2.2: Participant Execution",
+      "text": "Step 2.2: Participant Execution"
+    },
+    {
+      "id": "26d24eb1ed548005aba1ed9123ac4d2f",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">On Receiving COMMIT:</span>",
+      "text": "On Receiving COMMIT:"
+    },
+    {
+      "id": "26d24eb1ed54808fbfe0d27c2d314146",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Apply Changes</span>: Make all prepared changes permanent",
+      "text": "Apply Changes: Make all prepared changes permanent"
+    },
+    {
+      "id": "26d24eb1ed548020b03be9b16e69e1bb",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Release Locks</span>: Free all acquired resources",
+      "text": "Release Locks: Free all acquired resources"
+    },
+    {
+      "id": "26d24eb1ed54801682eaf83a8ddd06ad",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Log Commit</span>: Write commit record to local log",
+      "text": "Log Commit: Write commit record to local log"
+    },
+    {
+      "id": "26d24eb1ed5480c09d51e986b9d95079",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Send ACK</span>: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">Participant → Coordinator: ACK_COMMIT(transaction_id)</span></div>",
+      "text": "Send ACK: Participant → Coordinator: ACK_COMMIT(transaction_id)"
+    },
+    {
+      "id": "26d24eb1ed548048954dcdecf8f2d57a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">On Receiving ABORT:</span>",
+      "text": "On Receiving ABORT:"
+    },
+    {
+      "id": "26d24eb1ed5480e5b3f4f1c58eaafe7a",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rollback Changes</span>: Discard all prepared changes",
+      "text": "Rollback Changes: Discard all prepared changes"
+    },
+    {
+      "id": "26d24eb1ed54806b94cee80ce702542b",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Release Locks</span>: Free all acquired resources",
+      "text": "Release Locks: Free all acquired resources"
+    },
+    {
+      "id": "26d24eb1ed5480b18892d92f3c6abe20",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Log Abort</span>: Write abort record to local log",
+      "text": "Log Abort: Write abort record to local log"
+    },
+    {
+      "id": "26d24eb1ed548099b1e8eec7a456cd74",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Send ACK</span>: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">Participant → Coordinator: ACK_ABORT(transaction_id)</span></div>",
+      "text": "Send ACK: Participant → Coordinator: ACK_ABORT(transaction_id)"
+    },
+    {
+      "id": "26d24eb1ed5480d0b21be9ebb06d0fd1",
+      "type": "sub_sub_header",
+      "html": "Step 2.3: Coordinator Finalization",
+      "text": "Step 2.3: Coordinator Finalization"
+    },
+    {
+      "id": "26d24eb1ed5480e1b67fd334f26cf19d",
+      "type": "bulleted_list",
+      "html": "Wait for ACKs from all participants",
+      "text": "Wait for ACKs from all participants"
+    },
+    {
+      "id": "26d24eb1ed5480bebe3add52bbe1c775",
+      "type": "bulleted_list",
+      "html": "Log transaction completion",
+      "text": "Log transaction completion"
+    },
+    {
+      "id": "26d24eb1ed5480889f50f64665d3e233",
+      "type": "bulleted_list",
+      "html": "Clean up transaction state",
+      "text": "Clean up transaction state"
+    },
+    {
+      "id": "26d24eb1ed5480b99e32e7db01aab285",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed5480dfabf4cec84a0d7530",
+      "type": "header",
+      "html": "What if Coordinator Crashes?",
+      "text": "What if Coordinator Crashes?"
+    },
+    {
+      "id": "26d24eb1ed548095a5c9c5d079119f7e",
+      "type": "text",
+      "html": "The system doesn't fail entirely, but it can become partially blocked or inconsistent depending on WHEN the coordinator fails.",
+      "text": "The system doesn't fail entirely, but it can become partially blocked or inconsistent depending on WHEN the coordinator fails."
+    },
+    {
+      "id": "26f24eb1ed5480318103c16b585512d2",
+      "type": "text",
+      "html": "Intuitively it can be found if what can go wrong in cases if the coordinator crashed.",
+      "text": "Intuitively it can be found if what can go wrong in cases if the coordinator crashed."
+    },
+    {
+      "id": "26d24eb1ed54802aa4a4e61313cc55f5",
+      "type": "divider"
+    },
+    {
+      "id": "26d24eb1ed548048a93bc469371e145d",
+      "type": "text",
+      "html": "There are a lot more What Ifs? Most of them can be answered easily and the system can be kept consistent provided the assumptions are correct that:",
+      "text": "There are a lot more What Ifs? Most of them can be answered easily and the system can be kept consistent provided the assumptions are correct that:"
+    },
+    {
+      "id": "26d24eb1ed548073a9a3e8b58b62023a",
+      "type": "bulleted_list",
+      "html": "Network partition is temporary.",
+      "text": "Network partition is temporary."
+    },
+    {
+      "id": "26d24eb1ed548071877ae29c3024f51c",
+      "type": "bulleted_list",
+      "html": "Failed nodes eventually recover.",
+      "text": "Failed nodes eventually recover."
+    },
+    {
+      "id": "26d24eb1ed54801c963be16635278be2",
+      "type": "bulleted_list",
+      "html": "Messages are eventually sent.",
+      "text": "Messages are eventually sent."
+    },
+    {
+      "id": "26d24eb1ed5480a780bbc96bbec6336e",
+      "type": "text"
+    },
+    {
+      "id": "26d24eb1ed548028b354c4cc42c24920",
+      "type": "text"
+    },
+    {
+      "id": "26d24eb1ed548047b1e1d8f415bca263",
+      "type": "text"
+    }
+  ]
+}

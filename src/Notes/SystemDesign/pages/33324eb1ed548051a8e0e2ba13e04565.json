@@ -1,0 +1,145 @@
+{
+  "id": "33324eb1ed548051a8e0e2ba13e04565",
+  "title": "Latency Numbers",
+  "sourceUrl": "https://xpandeyed.notion.site/Latency-Numbers-33324eb1ed548051a8e0e2ba13e04565?pvs=23",
+  "blocks": [
+    {
+      "id": "33324eb1ed5480c8865dcaeb60d3a66d",
+      "type": "text",
+      "html": "No need to remember the exact numbers, just have a good idea of the approximate values and the order.",
+      "text": "No need to remember the exact numbers, just have a good idea of the approximate values and the order."
+    },
+    {
+      "id": "27524eb1ed5480a388ebef4eb6ddc291",
+      "type": "sub_header",
+      "html": "Latency (approx.)",
+      "text": "Latency (approx.)"
+    },
+    {
+      "id": "27524eb1ed5480adb253cd4c9cd4f8d1",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Operation / Medium"
+          },
+          {
+            "header": true,
+            "html": "Latency (approx.)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "L1 cache reference"
+          },
+          {
+            "header": false,
+            "html": "0.5 ns"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "L2 cache reference"
+          },
+          {
+            "header": false,
+            "html": "7 ns"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "L3 cache reference"
+          },
+          {
+            "header": false,
+            "html": "~15 ns"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "System Call"
+          },
+          {
+            "header": false,
+            "html": "~ 1000 ns"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Context Switching (in Linux Threads)"
+          },
+          {
+            "header": false,
+            "html": "~10 µs"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Main memory (RAM) access"
+          },
+          {
+            "header": false,
+            "html": "~100 ns"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "SSD random read (I/O)"
+          },
+          {
+            "header": false,
+            "html": "~100 µs (0.1 ms)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Same datacenter RTT"
+          },
+          {
+            "header": false,
+            "html": "0.5 ms"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Cross-country RTT (US)"
+          },
+          {
+            "header": false,
+            "html": "~75 ms"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "HDD seek"
+          },
+          {
+            "header": false,
+            "html": "10 ms"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Transfer 1 MB @ 1 Gbps"
+          },
+          {
+            "header": false,
+            "html": "~10 ms"
+          }
+        ]
+      ]
+    }
+  ]
+}

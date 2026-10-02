@@ -1,0 +1,319 @@
+{
+  "id": "30d24eb1ed54801b99e6fb8fd36bfcd9",
+  "title": "Architecture Patterns For Domain Heavy Systems",
+  "sourceUrl": "https://xpandeyed.notion.site/Architecture-Patterns-For-Domain-Heavy-Systems-30d24eb1ed54801b99e6fb8fd36bfcd9?pvs=23",
+  "blocks": [
+    {
+      "id": "30d24eb1ed5480be88fcd6b255fa5e03",
+      "type": "text",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">domain-heavy system</span> is a system where the <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">business logic is complex and central</span>, not just data CRUD.",
+      "text": "A domain-heavy system is a system where the business logic is complex and central, not just data CRUD."
+    },
+    {
+      "id": "30d24eb1ed54808faa91c0f9be058dce",
+      "type": "text",
+      "html": "It is the opposite of a simple “save to DB and return JSON” app.",
+      "text": "It is the opposite of a simple “save to DB and return JSON” app."
+    },
+    {
+      "id": "30d24eb1ed54809ab075f7c53600ccec",
+      "type": "divider"
+    },
+    {
+      "id": "30d24eb1ed5480dbad9ff266845ac299",
+      "type": "sub_header",
+      "html": "What “Domain” Means",
+      "text": "What “Domain” Means"
+    },
+    {
+      "id": "30d24eb1ed54806d87a6dcc0cf6e5a5f",
+      "type": "text",
+      "html": "Domain = the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">core business problem</span> your software solves.",
+      "text": "Domain = the core business problem your software solves."
+    },
+    {
+      "id": "30d24eb1ed5480028a22d56ad8d68070",
+      "type": "text",
+      "html": "Examples:",
+      "text": "Examples:"
+    },
+    {
+      "id": "30d24eb1ed54800c9427f95f75b64010",
+      "type": "bulleted_list",
+      "html": "Banking rules",
+      "text": "Banking rules"
+    },
+    {
+      "id": "30d24eb1ed54803790d0dc428d53fe7a",
+      "type": "bulleted_list",
+      "html": "Insurance claim validation",
+      "text": "Insurance claim validation"
+    },
+    {
+      "id": "30d24eb1ed5480b88fa9c38de6eb2b90",
+      "type": "bulleted_list",
+      "html": "Inventory pricing logic",
+      "text": "Inventory pricing logic"
+    },
+    {
+      "id": "30d24eb1ed5480589a1af5f9a9bdfc0d",
+      "type": "bulleted_list",
+      "html": "Order lifecycle rules",
+      "text": "Order lifecycle rules"
+    },
+    {
+      "id": "30d24eb1ed548055a016ef7dd1806bdc",
+      "type": "divider"
+    },
+    {
+      "id": "30d24eb1ed5480faaca0de48007bf807",
+      "type": "sub_header",
+      "html": "Characteristics of Domain-Heavy Systems",
+      "text": "Characteristics of Domain-Heavy Systems"
+    },
+    {
+      "id": "30d24eb1ed5480138babeb9fdd8e225a",
+      "type": "bulleted_list",
+      "html": "Many business rules",
+      "text": "Many business rules"
+    },
+    {
+      "id": "30d24eb1ed5480a9955ef1fdea32d7d4",
+      "type": "bulleted_list",
+      "html": "Complex validations",
+      "text": "Complex validations"
+    },
+    {
+      "id": "30d24eb1ed548008b155f5d8685abf57",
+      "type": "bulleted_list",
+      "html": "Multiple state transitions",
+      "text": "Multiple state transitions"
+    },
+    {
+      "id": "30d24eb1ed548010b6aad4e759a43cf8",
+      "type": "bulleted_list",
+      "html": "Rich domain models (not just DTOs)",
+      "text": "Rich domain models (not just DTOs)"
+    },
+    {
+      "id": "30d24eb1ed5480479991c5126e98cf9a",
+      "type": "bulleted_list",
+      "html": "Rules that frequently change",
+      "text": "Rules that frequently change"
+    },
+    {
+      "id": "30d24eb1ed5480a1b908ff0deb748a3f",
+      "type": "bulleted_list",
+      "html": "High cost of getting logic wrong",
+      "text": "High cost of getting logic wrong"
+    },
+    {
+      "id": "30d24eb1ed54804aa218f218b303cd64",
+      "type": "divider"
+    },
+    {
+      "id": "30d24eb1ed54805a89a6c198c7ab2d88",
+      "type": "sub_header",
+      "html": "Examples",
+      "text": "Examples"
+    },
+    {
+      "id": "30d24eb1ed5480239057dd53b2b89442",
+      "type": "sub_sub_header",
+      "html": "Banking System",
+      "text": "Banking System"
+    },
+    {
+      "id": "30d24eb1ed5480418a4ece438c44d002",
+      "type": "bulleted_list",
+      "html": "Interest calculation rules",
+      "text": "Interest calculation rules"
+    },
+    {
+      "id": "30d24eb1ed5480e099a2f254b6e7ab9f",
+      "type": "bulleted_list",
+      "html": "Fraud detection logic",
+      "text": "Fraud detection logic"
+    },
+    {
+      "id": "30d24eb1ed5480cc85c8dc705bd100d0",
+      "type": "bulleted_list",
+      "html": "Transaction settlement flows",
+      "text": "Transaction settlement flows"
+    },
+    {
+      "id": "30d24eb1ed5480a7bce4d3ca89a397af",
+      "type": "bulleted_list",
+      "html": "Regulatory constraints",
+      "text": "Regulatory constraints"
+    },
+    {
+      "id": "30d24eb1ed5480709d4de39ac663b7a6",
+      "type": "text",
+      "html": "Very domain-heavy.",
+      "text": "Very domain-heavy."
+    },
+    {
+      "id": "30d24eb1ed54801ea127f38d10725f56",
+      "type": "divider"
+    },
+    {
+      "id": "30d24eb1ed5480dcacc4d65aba9f2174",
+      "type": "sub_sub_header",
+      "html": "E-commerce Platform",
+      "text": "E-commerce Platform"
+    },
+    {
+      "id": "30d24eb1ed5480059aa0cb2e353e438d",
+      "type": "bulleted_list",
+      "html": "Discount stacking rules",
+      "text": "Discount stacking rules"
+    },
+    {
+      "id": "30d24eb1ed54802b921ddfcda6c68289",
+      "type": "bulleted_list",
+      "html": "Tax calculation per region",
+      "text": "Tax calculation per region"
+    },
+    {
+      "id": "30d24eb1ed548062882eefa03e68fedc",
+      "type": "bulleted_list",
+      "html": "Inventory reservation logic",
+      "text": "Inventory reservation logic"
+    },
+    {
+      "id": "30d24eb1ed54800896ebf485868e09a0",
+      "type": "bulleted_list",
+      "html": "Order state machine",
+      "text": "Order state machine"
+    },
+    {
+      "id": "30d24eb1ed5480eda9d7db52ccbcbe04",
+      "type": "text",
+      "html": "Moderately domain-heavy.",
+      "text": "Moderately domain-heavy."
+    },
+    {
+      "id": "30d24eb1ed5480b69655dc5ec5983317",
+      "type": "divider"
+    },
+    {
+      "id": "30d24eb1ed5480b48d47e123aa3d44aa",
+      "type": "sub_sub_header",
+      "html": "Simple Blog API",
+      "text": "Simple Blog API"
+    },
+    {
+      "id": "30d24eb1ed548097a72ceffd798edd21",
+      "type": "bulleted_list",
+      "html": "Create post",
+      "text": "Create post"
+    },
+    {
+      "id": "30d24eb1ed5480bbbe83e41333aee060",
+      "type": "bulleted_list",
+      "html": "Edit post",
+      "text": "Edit post"
+    },
+    {
+      "id": "30d24eb1ed5480ebbae0d85bd3b24bd4",
+      "type": "bulleted_list",
+      "html": "Delete post",
+      "text": "Delete post"
+    },
+    {
+      "id": "30d24eb1ed5480389b45c5fb5a91346d",
+      "type": "text",
+      "html": "Not domain-heavy. Mostly CRUD.",
+      "text": "Not domain-heavy. Mostly CRUD."
+    },
+    {
+      "id": "30d24eb1ed5480bfb133d8e45ad2674a",
+      "type": "divider"
+    },
+    {
+      "id": "30d24eb1ed5480ea9371fce00830b879",
+      "type": "sub_header",
+      "html": "Why It Matters",
+      "text": "Why It Matters"
+    },
+    {
+      "id": "30d24eb1ed5480e88d73d3ae06233c07",
+      "type": "text",
+      "html": "Patterns like:",
+      "text": "Patterns like:"
+    },
+    {
+      "id": "30d24eb1ed5480979e38ee3f9215fd85",
+      "type": "bulleted_list",
+      "html": "Hexagonal",
+      "text": "Hexagonal"
+    },
+    {
+      "id": "30d24eb1ed5480c1ab6ecfeadfea0510",
+      "type": "bulleted_list",
+      "html": "Clean",
+      "text": "Clean"
+    },
+    {
+      "id": "30d24eb1ed548088a16ccdd5078660ef",
+      "type": "bulleted_list",
+      "html": "Onion",
+      "text": "Onion"
+    },
+    {
+      "id": "30d24eb1ed54805faf4ad4947bbb771f",
+      "type": "text",
+      "html": "Help when:",
+      "text": "Help when:"
+    },
+    {
+      "id": "30d24eb1ed548042a4e6d736f3ce57ad",
+      "type": "bulleted_list",
+      "html": "Business logic must be protected",
+      "text": "Business logic must be protected"
+    },
+    {
+      "id": "30d24eb1ed54805d9a00ee4c4d380be4",
+      "type": "bulleted_list",
+      "html": "Infrastructure changes often",
+      "text": "Infrastructure changes often"
+    },
+    {
+      "id": "30d24eb1ed5480de8894f48200e9d110",
+      "type": "bulleted_list",
+      "html": "Rules are complex",
+      "text": "Rules are complex"
+    },
+    {
+      "id": "30d24eb1ed54801c82eee99aa535ba6e",
+      "type": "bulleted_list",
+      "html": "Testing core logic is critical",
+      "text": "Testing core logic is critical"
+    },
+    {
+      "id": "30d24eb1ed5480e98683ee4f511dbaa6",
+      "type": "text",
+      "html": "If your app is simple CRUD, these patterns may be overengineering.",
+      "text": "If your app is simple CRUD, these patterns may be overengineering."
+    },
+    {
+      "id": "30d24eb1ed5480f08001d10c479285d8",
+      "type": "divider"
+    },
+    {
+      "id": "30d24eb1ed54807981f6fb4131a2cf67",
+      "type": "collection_view",
+      "pageIds": [
+        "30d24eb1ed5480df9b25f32c39af2bd5",
+        "30d24eb1ed5480c09814dd00bb0060ea",
+        "30d24eb1ed54802d9c5cd7531386ab8e"
+      ],
+      "title": "Architectures"
+    },
+    {
+      "id": "30d24eb1ed54800f8d91d709a54e058e",
+      "type": "text"
+    }
+  ]
+}

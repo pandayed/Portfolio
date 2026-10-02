@@ -1,0 +1,153 @@
+{
+  "id": "2e924eb1ed548071a752d0b44a719ae4",
+  "title": "fan out",
+  "sourceUrl": "https://xpandeyed.notion.site/fan-out-2e924eb1ed548071a752d0b44a719ae4?pvs=23",
+  "blocks": [
+    {
+      "id": "2ea24eb1ed548070ac39d3f7f04f6462",
+      "type": "sub_sub_header",
+      "html": "Fan-out problem",
+      "text": "Fan-out problem"
+    },
+    {
+      "id": "2ea24eb1ed54808c82f9c6daf6306227",
+      "type": "bulleted_list",
+      "html": "A single produced message must be delivered to many consumers.",
+      "text": "A single produced message must be delivered to many consumers."
+    },
+    {
+      "id": "2ea24eb1ed5480919346da80344ce3df",
+      "type": "bulleted_list",
+      "html": "The producer or broker ends up doing multiple copies and sends.",
+      "text": "The producer or broker ends up doing multiple copies and sends."
+    },
+    {
+      "id": "2ea24eb1ed5480edb97dfec26427b4bb",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What goes wrong</span>",
+      "text": "What goes wrong"
+    },
+    {
+      "id": "2ea24eb1ed54801b8c41e2bd39e28020",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">High load on producer/broker</span>: one input becomes many outputs.",
+      "text": "High load on producer/broker: one input becomes many outputs."
+    },
+    {
+      "id": "2ea24eb1ed5480659045fb33fd991e49",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Network amplification</span>: one message → N network sends.",
+      "text": "Network amplification: one message → N network sends."
+    },
+    {
+      "id": "2ea24eb1ed548037a90be07b097e5f2c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Uneven scaling</span>: adding consumers increases work non-linearly.",
+      "text": "Uneven scaling: adding consumers increases work non-linearly."
+    },
+    {
+      "id": "2ea24eb1ed5480a1bbccd47c4a8f1c11",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Latency spikes</span>: slow consumers delay overall delivery if not isolated.",
+      "text": "Latency spikes: slow consumers delay overall delivery if not isolated."
+    },
+    {
+      "id": "2ea24eb1ed5480f2a4b4ec7c051f6337",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Where it appears</span>",
+      "text": "Where it appears"
+    },
+    {
+      "id": "2ea24eb1ed5480239b09c85e6f2f85d4",
+      "type": "bulleted_list",
+      "html": "Publish–subscribe systems.",
+      "text": "Publish–subscribe systems."
+    },
+    {
+      "id": "2ea24eb1ed5480f1a085c59b0d8b9359",
+      "type": "bulleted_list",
+      "html": "Notification systems.",
+      "text": "Notification systems."
+    },
+    {
+      "id": "2ea24eb1ed54808aa347c00b6f01d922",
+      "type": "bulleted_list",
+      "html": "Real-time feeds sent to many users.",
+      "text": "Real-time feeds sent to many users."
+    },
+    {
+      "id": "2ea24eb1ed54806da75afeb0015732cb",
+      "type": "sub_sub_header",
+      "html": "Why it is called “fan-out”",
+      "text": "Why it is called “fan-out”"
+    },
+    {
+      "id": "2ea24eb1ed54805982ddd8d65ff606d0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Visual reason</span>",
+      "text": "Visual reason"
+    },
+    {
+      "id": "2ea24eb1ed54804e8eccd20296130bf1",
+      "type": "bulleted_list",
+      "html": "One input line splits into many output lines.",
+      "text": "One input line splits into many output lines."
+    },
+    {
+      "id": "2ea24eb1ed5480be80dfedf282105a06",
+      "type": "bulleted_list",
+      "html": "The shape looks like a hand fan opening outward.",
+      "text": "The shape looks like a hand fan opening outward."
+    },
+    {
+      "id": "2ea24eb1ed5480e3966cf03955330c2b",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Technical meaning</span>",
+      "text": "Technical meaning"
+    },
+    {
+      "id": "2ea24eb1ed54800a999af98c63f858d3",
+      "type": "bulleted_list",
+      "html": "“Fan-out” means <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">one-to-many distribution</span>.",
+      "text": "“Fan-out” means one-to-many distribution."
+    },
+    {
+      "id": "2ea24eb1ed54801b9eb5f836d77b15bc",
+      "type": "bulleted_list",
+      "html": "Opposite term: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">fan-in</span> (many inputs → one consumer).",
+      "text": "Opposite term: fan-in (many inputs → one consumer)."
+    },
+    {
+      "id": "2ea24eb1ed548070b6fcef22f235cb20",
+      "type": "sub_sub_header",
+      "html": "Key takeaway",
+      "text": "Key takeaway"
+    },
+    {
+      "id": "2ea24eb1ed548084992cc6c62f7824f9",
+      "type": "bulleted_list",
+      "html": "Fan-out is not inherently bad.",
+      "text": "Fan-out is not inherently bad."
+    },
+    {
+      "id": "2ea24eb1ed548089a4b7cdafaf62d8a1",
+      "type": "bulleted_list",
+      "html": "It becomes a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">problem</span> when one message must be duplicated and delivered to many consumers without isolation or scaling control.",
+      "text": "It becomes a problem when one message must be duplicated and delivered to many consumers without isolation or scaling control."
+    },
+    {
+      "id": "2ea24eb1ed54806da71bc983bd22ecbc",
+      "type": "divider"
+    },
+    {
+      "id": "2ea24eb1ed5480b6a09adb35c3ccaab9",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fan-out problem = cost per message grows with number of consumers.</span>",
+      "text": "Fan-out problem = cost per message grows with number of consumers."
+    },
+    {
+      "id": "2ea24eb1ed54808aa020ef9df25dfd1e",
+      "type": "text"
+    }
+  ]
+}

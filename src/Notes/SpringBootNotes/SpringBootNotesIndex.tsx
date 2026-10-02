@@ -4,9 +4,12 @@ import Page from '../../Page/Page';
 import { NOTES_ROUTE, toHref } from '../../routing/routes';
 import NoteTree from '../NoteTree';
 import { springBootNotes } from '../noteTreeData';
+import NoteReadingTime from '../NoteReadingTime';
+import { getNodeReadingMinutes } from '../readingTime';
 
 const SpringBootNotesIndex = () => (
     <Page title="Spring Boot notes">
+        <NoteReadingTime minutes={getNodeReadingMinutes(springBootNotes)} total />
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>

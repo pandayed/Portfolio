@@ -1,0 +1,619 @@
+{
+  "id": "24f24eb1ed5480de982fe549f2e323a4",
+  "title": "Load Balancer",
+  "sourceUrl": "https://xpandeyed.notion.site/Load-Balancer-24f24eb1ed5480de982fe549f2e323a4?pvs=23",
+  "blocks": [
+    {
+      "id": "2f824eb1ed5480bd8fd1ee7f83e27653",
+      "type": "transclusion_reference"
+    },
+    {
+      "id": "2f824eb1ed54804d8714f8118ba0fc3c",
+      "type": "transclusion_reference",
+      "parent": "2f824eb1ed5480bd8fd1ee7f83e27653"
+    },
+    {
+      "id": "29e24eb1ed548009bd08cdb34353d01a",
+      "type": "shared_ref",
+      "parent": "2f824eb1ed54804d8714f8118ba0fc3c"
+    },
+    {
+      "id": "2f824eb1ed548027b11bfc3eca0116e1",
+      "type": "divider"
+    },
+    {
+      "id": "27d24eb1ed548069893dea9509d3f531",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Load balancers are intermediary servers that </span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:inherit;word-wrap:break-word;font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">enable horizontal scaling</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\"> by sitting between clients and a cluster of backend servers, to evenly distribute incoming network traffic across multiple servers.</span>",
+      "text": "Load balancers are intermediary servers that enable horizontal scaling by sitting between clients and a cluster of backend servers, to evenly distribute incoming network traffic across multiple servers."
+    },
+    {
+      "id": "27d24eb1ed548018848afba20959a7e6",
+      "type": "divider"
+    },
+    {
+      "id": "27d24eb1ed54806bbf37ee1622de890c",
+      "type": "header",
+      "html": "Placement of Load Balancers",
+      "text": "Placement of Load Balancers"
+    },
+    {
+      "id": "27d24eb1ed54804fb22af78f0930d0b9",
+      "type": "bulleted_list",
+      "html": "Load balancers can be added at each layer of the system.",
+      "text": "Load balancers can be added at each layer of the system."
+    },
+    {
+      "id": "27d24eb1ed548049bc5dd59344ed7864",
+      "type": "bulleted_list",
+      "html": "Common placements include:",
+      "text": "Common placements include:"
+    },
+    {
+      "id": "27d24eb1ed548047a56dd20ce4c2542d",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548049bc5dd59344ed7864",
+      "html": "Between users (clients) and web servers.",
+      "text": "Between users (clients) and web servers."
+    },
+    {
+      "id": "27d24eb1ed548025a75ef19b13a1f68c",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548049bc5dd59344ed7864",
+      "html": "Between web servers and internal service layers.",
+      "text": "Between web servers and internal service layers."
+    },
+    {
+      "id": "27d24eb1ed5480bb99d5d70603e60a53",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548049bc5dd59344ed7864",
+      "html": "Between internal service layers and database servers.",
+      "text": "Between internal service layers and database servers."
+    },
+    {
+      "id": "27d24eb1ed5480028ee9cf6a68313a10",
+      "type": "divider"
+    },
+    {
+      "id": "27d24eb1ed548017aa38c0f250555fce",
+      "type": "header",
+      "html": "Load Balancing Algorithms",
+      "text": "Load Balancing Algorithms"
+    },
+    {
+      "id": "27d24eb1ed5480ea9dd5f9d045401890",
+      "type": "text",
+      "html": "Load balancers can also be seen as servers which run algorithms which try to evenly distribute the requests.",
+      "text": "Load balancers can also be seen as servers which run algorithms which try to evenly distribute the requests."
+    },
+    {
+      "id": "29024eb1ed548081816ef7c5ad7efad4",
+      "type": "text",
+      "html": "Following are some of those algorithms:",
+      "text": "Following are some of those algorithms:"
+    },
+    {
+      "id": "27d24eb1ed5480d89ff7c3e84315de91",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Round Robin</span>: Sequentially cycle over the servers as the requests come.",
+      "text": "Round Robin: Sequentially cycle over the servers as the requests come."
+    },
+    {
+      "id": "27d24eb1ed5480cfb87df62aa20b476b",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Weighted Round Robin</span>: An extension of Round Robin where each server is assigned a weight based on its processing capacity. Servers with higher weights get more requests.",
+      "text": "Weighted Round Robin: An extension of Round Robin where each server is assigned a weight based on its processing capacity. Servers with higher weights get more requests."
+    },
+    {
+      "id": "29024eb1ed548095be9fe1a5dd672668",
+      "type": "callout",
+      "parent": "27d24eb1ed5480cfb87df62aa20b476b"
+    },
+    {
+      "id": "29024eb1ed5480d293e1d98c63283d84",
+      "type": "toggle",
+      "parent": "29024eb1ed548095be9fe1a5dd672668",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example</span>",
+      "text": "Example"
+    },
+    {
+      "id": "29024eb1ed548014b7b6e408a4a7f6e3",
+      "type": "text",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "Imagine the following server pool:",
+      "text": "Imagine the following server pool:"
+    },
+    {
+      "id": "29024eb1ed548080996ef9b05a5d307d",
+      "type": "table",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "Server",
+      "text": "Server",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Server"
+          },
+          {
+            "header": true,
+            "html": "Assigned Weight (based on Processing Capacity)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Server A"
+          },
+          {
+            "header": false,
+            "html": "5 (High Capacity)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Server B"
+          },
+          {
+            "header": false,
+            "html": "3 (Moderate Capacity)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Server C"
+          },
+          {
+            "header": false,
+            "html": "1 (Low Capacity)"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "29024eb1ed548045a612da0f21ef678e",
+      "type": "text",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "The total weight across the system is 5 + 3 + 1 = 9.",
+      "text": "The total weight across the system is 5 + 3 + 1 = 9."
+    },
+    {
+      "id": "29024eb1ed5480f99a99cadc9a3c3a20",
+      "type": "divider",
+      "parent": "29024eb1ed5480d293e1d98c63283d84"
+    },
+    {
+      "id": "29024eb1ed5480ac92d1ed6301ee60d5",
+      "type": "text",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "If the LB receives 9 requests.",
+      "text": "If the LB receives 9 requests."
+    },
+    {
+      "id": "29024eb1ed54804f8ea5c3e9eb6a2fcd",
+      "type": "bulleted_list",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "A → 5/9 × 9 = 5 reqs",
+      "text": "A → 5/9 × 9 = 5 reqs"
+    },
+    {
+      "id": "29024eb1ed54806c89c7faf357c73931",
+      "type": "bulleted_list",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "B → 3/9 × 9 = 3 reqs",
+      "text": "B → 3/9 × 9 = 3 reqs"
+    },
+    {
+      "id": "29024eb1ed54801cbb9fce262663b9ba",
+      "type": "bulleted_list",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "C → 1/9 × 9 =  1 req",
+      "text": "C → 1/9 × 9 =  1 req"
+    },
+    {
+      "id": "29024eb1ed5480fab292f73823666e1d",
+      "type": "divider",
+      "parent": "29024eb1ed5480d293e1d98c63283d84"
+    },
+    {
+      "id": "29024eb1ed5480b9b520d58b42123203",
+      "type": "text",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "In case if the LB receives 3 requests.",
+      "text": "In case if the LB receives 3 requests."
+    },
+    {
+      "id": "29024eb1ed5480baa577d963e81ff714",
+      "type": "bulleted_list",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "A → 5/9 × 3 = 1.67 ≈ 2 reqs",
+      "text": "A → 5/9 × 3 = 1.67 ≈ 2 reqs"
+    },
+    {
+      "id": "29024eb1ed54805d9883c3cc3a18eac1",
+      "type": "bulleted_list",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "B → 3/9 × 3 = 1.0 ≈ 1 req",
+      "text": "B → 3/9 × 3 = 1.0 ≈ 1 req"
+    },
+    {
+      "id": "29024eb1ed548092807dcc821fa787d6",
+      "type": "bulleted_list",
+      "parent": "29024eb1ed5480d293e1d98c63283d84",
+      "html": "C → 1/9 × 3 = 0.33 ≈ 0 req",
+      "text": "C → 1/9 × 3 = 0.33 ≈ 0 req"
+    },
+    {
+      "id": "27d24eb1ed548053a856f116a69745f6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Least Connection Method</span>: This method directs traffic to the server with the fewest active connections. It is useful when there are many unevenly distributed persistent connections.",
+      "text": "Least Connection Method: This method directs traffic to the server with the fewest active connections. It is useful when there are many unevenly distributed persistent connections."
+    },
+    {
+      "id": "27d24eb1ed5480f0af9bd4a150105eba",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Least Response Time Method</span>: This directs traffic to the server with the fewest active connections and the lowest average response time.",
+      "text": "Least Response Time Method: This directs traffic to the server with the fewest active connections and the lowest average response time."
+    },
+    {
+      "id": "27d24eb1ed54800fb117d9efdd1003fe",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Least Bandwidth Method</span>: This method selects the server that is currently serving the least amount of traffic, measured in megabits per second (Mbps).",
+      "text": "Least Bandwidth Method: This method selects the server that is currently serving the least amount of traffic, measured in megabits per second (Mbps)."
+    },
+    {
+      "id": "27d24eb1ed5480ecafadd2b1a86da919",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">IP Hash</span>: Under this method, a hash of the client's IP address is calculated to determine which server receives the request.",
+      "text": "IP Hash: Under this method, a hash of the client's IP address is calculated to determine which server receives the request."
+    },
+    {
+      "id": "29424eb1ed54806cb3e2ebdfd97913c9",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480ecafadd2b1a86da919",
+      "html": "The load balancer applies a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">hashing function</span> (like MD5 or CRC) to the <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">client’s IP address</span>.",
+      "text": "The load balancer applies a hashing function (like MD5 or CRC) to the client’s IP address."
+    },
+    {
+      "id": "29424eb1ed5480748223ce078f25e9ac",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480ecafadd2b1a86da919",
+      "html": "The result of this hash is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">mapped to a specific backend server</span> in the server pool.",
+      "text": "The result of this hash is mapped to a specific backend server in the server pool."
+    },
+    {
+      "id": "29424eb1ed54807784fef56e4bd248e9",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480ecafadd2b1a86da919",
+      "html": "This way <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">requests from the same client IP</span> always go to <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">the same server</span>, maintaining session consistency, required for stateful applications.",
+      "text": "This way requests from the same client IP always go to the same server, maintaining session consistency, required for stateful applications."
+    },
+    {
+      "id": "29424eb1ed5480899f97f58e12d3b471",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480ecafadd2b1a86da919",
+      "html": "Used for stateful applications. [Related Read: <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Statefulness-vs-Statelessness-29424eb1ed5480fe9face77fde2a51b4?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Statefulness vs Statelessness</span><span style=\"white-space:nowrap\"></span></a> ]",
+      "text": "Used for stateful applications. [Related Read: Statefulness vs Statelessness ]",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Statefulness-vs-Statelessness-29424eb1ed5480fe9face77fde2a51b4?pvs=24",
+          "text": "Statefulness vs Statelessness"
+        }
+      ]
+    },
+    {
+      "id": "27d24eb1ed548015a309e385b6eae328",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Intelligent Load Balancers</span>: These LBs can periodically query backend servers about their load and adjust traffic distribution based on that information.",
+      "text": "Intelligent Load Balancers: These LBs can periodically query backend servers about their load and adjust traffic distribution based on that information."
+    },
+    {
+      "id": "29424eb1ed5480adb505ec3368bee3dd",
+      "type": "divider"
+    },
+    {
+      "id": "27d24eb1ed5480feb58ce66409526505",
+      "type": "sub_sub_header",
+      "html": "Health Checks",
+      "text": "Health Checks"
+    },
+    {
+      "id": "27d24eb1ed54800b9a29d2800eddbf86",
+      "type": "bulleted_list",
+      "html": "Load balancers must forward traffic only to \"healthy\" backend servers to ensure reliability.",
+      "text": "Load balancers must forward traffic only to \"healthy\" backend servers to ensure reliability."
+    },
+    {
+      "id": "27d24eb1ed54806fb52bd33f5f3c832a",
+      "type": "bulleted_list",
+      "html": "To monitor the health of a server, LBs use <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">health checks</span>, which are regular connection attempts to ensure servers are listening and responding appropriately.",
+      "text": "To monitor the health of a server, LBs use health checks, which are regular connection attempts to ensure servers are listening and responding appropriately."
+    },
+    {
+      "id": "27d24eb1ed5480498a80d36391fc4ec8",
+      "type": "bulleted_list",
+      "html": "If a server fails a health check, it is automatically removed from the pool of available servers.",
+      "text": "If a server fails a health check, it is automatically removed from the pool of available servers."
+    },
+    {
+      "id": "27d24eb1ed548016810bd93ae53bf35f",
+      "type": "bulleted_list",
+      "html": "The LB will stop sending traffic to an unhealthy server until it begins to respond to health checks again.",
+      "text": "The LB will stop sending traffic to an unhealthy server until it begins to respond to health checks again."
+    },
+    {
+      "id": "29424eb1ed548042b80adaa284e95caa",
+      "type": "divider"
+    },
+    {
+      "id": "27d24eb1ed54803db7eac0aba6f44f08",
+      "type": "sub_sub_header",
+      "html": "Redundancy in Load Balancers",
+      "text": "Redundancy in Load Balancers"
+    },
+    {
+      "id": "27d24eb1ed5480978f41eb8a9ad50744",
+      "type": "text",
+      "html": "A single load balancer can become a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">single point of failure</span>. To ensure high availability, multiple load balancers can be deployed in two main configurations: <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">Active-Passive</span> and <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">Active-Active</span>.",
+      "text": "A single load balancer can become a single point of failure. To ensure high availability, multiple load balancers can be deployed in two main configurations: Active-Passive and Active-Active."
+    },
+    {
+      "id": "29424eb1ed5480919c91cdd83c86a73a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Active-Passive Configuration</span>",
+      "text": "Active-Passive Configuration"
+    },
+    {
+      "id": "29424eb1ed548089b07ec954b82bf9c0",
+      "type": "bulleted_list",
+      "html": "One load balancer (<span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">active</span>) handles all traffic.",
+      "text": "One load balancer (active) handles all traffic."
+    },
+    {
+      "id": "29424eb1ed5480e3bf13d594575bc17f",
+      "type": "bulleted_list",
+      "html": "The second load balancer (<span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">passive/standby</span>) remains idle, ready to take over if the active fails.",
+      "text": "The second load balancer (passive/standby) remains idle, ready to take over if the active fails."
+    },
+    {
+      "id": "29424eb1ed5480b8be53e354624e3ccc",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works:</span>",
+      "text": "How it works:"
+    },
+    {
+      "id": "29424eb1ed5480f8a558ef87be77d801",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480b8be53e354624e3ccc",
+      "html": "Passive LB constantly monitors the active LB (health checks).",
+      "text": "Passive LB constantly monitors the active LB (health checks)."
+    },
+    {
+      "id": "29424eb1ed54803e8c81fbcd67e65dc3",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480b8be53e354624e3ccc",
+      "html": "If active LB fails, passive LB becomes active and starts handling traffic.",
+      "text": "If active LB fails, passive LB becomes active and starts handling traffic."
+    },
+    {
+      "id": "29424eb1ed54809c83fdfc4be992052f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use cases:</span>",
+      "text": "Use cases:"
+    },
+    {
+      "id": "29424eb1ed5480098e0deaee6114971e",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed54809c83fdfc4be992052f",
+      "html": "Systems where traffic can be handled by a single LB.",
+      "text": "Systems where traffic can be handled by a single LB."
+    },
+    {
+      "id": "29424eb1ed54806ca568c903b13c413d",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed54809c83fdfc4be992052f",
+      "html": "Simpler setup with lower cost.",
+      "text": "Simpler setup with lower cost."
+    },
+    {
+      "id": "29424eb1ed5480e98ed1f18de2d44def",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Pros:</span>",
+      "text": "Pros:"
+    },
+    {
+      "id": "29424eb1ed5480d5b955d069e33f1e6c",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480e98ed1f18de2d44def",
+      "html": "Simpler to implement.",
+      "text": "Simpler to implement."
+    },
+    {
+      "id": "29424eb1ed548028a6edffcb1078dcfc",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480e98ed1f18de2d44def",
+      "html": "Only one LB processes traffic, so no conflicts.",
+      "text": "Only one LB processes traffic, so no conflicts."
+    },
+    {
+      "id": "29424eb1ed5480b497cfc642c0fa093d",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cons:</span>",
+      "text": "Cons:"
+    },
+    {
+      "id": "29424eb1ed5480dbacccc207b80633d7",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480b497cfc642c0fa093d",
+      "html": "Passive LB sits idle most of the time (resources underutilized).",
+      "text": "Passive LB sits idle most of the time (resources underutilized)."
+    },
+    {
+      "id": "29424eb1ed5480b382d8f363db6d9536",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480b497cfc642c0fa093d",
+      "html": "Slight downtime during failover (depending on monitoring and failover mechanism).",
+      "text": "Slight downtime during failover (depending on monitoring and failover mechanism)."
+    },
+    {
+      "id": "29424eb1ed54805eb464de661cbe5ac5",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Active-Active Configuration</span>",
+      "text": "Active-Active Configuration"
+    },
+    {
+      "id": "29424eb1ed5480f28eedf7f4e0e27c19",
+      "type": "bulleted_list",
+      "html": "Multiple load balancers are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">active simultaneously</span>, sharing traffic load.",
+      "text": "Multiple load balancers are active simultaneously, sharing traffic load."
+    },
+    {
+      "id": "29424eb1ed5480248837de9fcdaf3937",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works:</span>",
+      "text": "How it works:"
+    },
+    {
+      "id": "29424eb1ed54803bb70ef875ddfadeba",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480248837de9fcdaf3937",
+      "html": "Traffic is split between all active LBs.",
+      "text": "Traffic is split between all active LBs."
+    },
+    {
+      "id": "29424eb1ed548016afe7e510f7a23b59",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480248837de9fcdaf3937",
+      "html": "Each LB monitors the others for health.",
+      "text": "Each LB monitors the others for health."
+    },
+    {
+      "id": "29424eb1ed5480579b78dadfd36233fc",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480248837de9fcdaf3937",
+      "html": "If one fails, the remaining LBs continue to handle traffic.",
+      "text": "If one fails, the remaining LBs continue to handle traffic."
+    },
+    {
+      "id": "29424eb1ed5480819c17d0dc4eb8017f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use cases:</span>",
+      "text": "Use cases:"
+    },
+    {
+      "id": "29424eb1ed548086a92de143fe282b3a",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480819c17d0dc4eb8017f",
+      "html": "High-traffic systems needing load distribution and zero downtime.",
+      "text": "High-traffic systems needing load distribution and zero downtime."
+    },
+    {
+      "id": "29424eb1ed54809cae8add8f336d772a",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480819c17d0dc4eb8017f",
+      "html": "Critical applications requiring <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">both availability and performance</span>.",
+      "text": "Critical applications requiring both availability and performance."
+    },
+    {
+      "id": "29424eb1ed54808e9546ce2b3bbc9bff",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Pros:</span>",
+      "text": "Pros:"
+    },
+    {
+      "id": "29424eb1ed5480dbac5de41ac81affc4",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed54808e9546ce2b3bbc9bff",
+      "html": "No single point of failure.",
+      "text": "No single point of failure."
+    },
+    {
+      "id": "29424eb1ed54809c8c56cd3f0a08d47b",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed54808e9546ce2b3bbc9bff",
+      "html": "Better resource utilization, as all LBs handle traffic.",
+      "text": "Better resource utilization, as all LBs handle traffic."
+    },
+    {
+      "id": "29424eb1ed548042aa22ce45f4519e7c",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed54808e9546ce2b3bbc9bff",
+      "html": "Seamless failover; traffic continues without interruption.",
+      "text": "Seamless failover; traffic continues without interruption."
+    },
+    {
+      "id": "29424eb1ed5480349e00f158f6746d5f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cons:</span>",
+      "text": "Cons:"
+    },
+    {
+      "id": "29424eb1ed548078b16eed9b962cc69b",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480349e00f158f6746d5f",
+      "html": "More complex setup and configuration.",
+      "text": "More complex setup and configuration."
+    },
+    {
+      "id": "29424eb1ed5480228a44f247c66f4bcb",
+      "type": "bulleted_list",
+      "parent": "29424eb1ed5480349e00f158f6746d5f",
+      "html": "Requires careful synchronization to avoid session inconsistencies (stateful apps).",
+      "text": "Requires careful synchronization to avoid session inconsistencies (stateful apps)."
+    },
+    {
+      "id": "29424eb1ed54808b9400ec65c0ea2b1c",
+      "type": "sub_header",
+      "html": "Distribution of load among LBs",
+      "text": "Distribution of load among LBs"
+    },
+    {
+      "id": "29424eb1ed5480e8bc3fcce858b4eeeb",
+      "type": "text",
+      "html": "In active-active configuration, multiple LBs work at the same time, so to distribution of load among the LBs can happen in several ways.",
+      "text": "In active-active configuration, multiple LBs work at the same time, so to distribution of load among the LBs can happen in several ways."
+    },
+    {
+      "id": "29424eb1ed54806c9a36fda330912968",
+      "type": "text",
+      "html": "Below is a very basic brief of that.",
+      "text": "Below is a very basic brief of that."
+    },
+    {
+      "id": "29424eb1ed5480d8bd47c5312a703727",
+      "type": "bulleted_list",
+      "html": "The DNS has the list of all IPs of the LBs, so it can act as a super LB, distributing the traffic among the LBs.",
+      "text": "The DNS has the list of all IPs of the LBs, so it can act as a super LB, distributing the traffic among the LBs."
+    },
+    {
+      "id": "29424eb1ed5480be994fcd7fa8570cba",
+      "type": "bulleted_list",
+      "html": "All the LBs can have same public IP, and the routers direct the requests to nearest LB, acting as the super LB.",
+      "text": "All the LBs can have same public IP, and the routers direct the requests to nearest LB, acting as the super LB."
+    },
+    {
+      "id": "29424eb1ed5480eb9bcee4dd39b69587",
+      "type": "divider"
+    },
+    {
+      "id": "27d24eb1ed5480b0b65dcf617acbd9b1",
+      "type": "sub_sub_header",
+      "html": "Related Topics",
+      "text": "Related Topics"
+    },
+    {
+      "id": "27d24eb1ed5480fbb85efe91cd86f93f",
+      "type": "bulleted_list",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Statefulness-vs-Statelessness-29424eb1ed5480fe9face77fde2a51b4?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Statefulness vs Statelessness</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Statefulness vs Statelessness ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Statefulness-vs-Statelessness-29424eb1ed5480fe9face77fde2a51b4?pvs=24",
+          "text": "Statefulness vs Statelessness"
+        }
+      ]
+    }
+  ]
+}

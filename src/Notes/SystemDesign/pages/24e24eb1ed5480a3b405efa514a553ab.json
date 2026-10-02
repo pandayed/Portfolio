@@ -1,0 +1,259 @@
+{
+  "id": "24e24eb1ed5480a3b405efa514a553ab",
+  "title": "The Core Components of A System",
+  "sourceUrl": "https://xpandeyed.notion.site/The-Core-Components-of-A-System-24e24eb1ed5480a3b405efa514a553ab?pvs=23",
+  "blocks": [
+    {
+      "id": "24f24eb1ed548062bd85f250b878b19e",
+      "type": "sub_sub_header",
+      "html": "Clients",
+      "text": "Clients"
+    },
+    {
+      "id": "24f24eb1ed548041b837e79ef3c0dced",
+      "type": "bulleted_list",
+      "html": "Devices or applications that send requests to the system.",
+      "text": "Devices or applications that send requests to the system."
+    },
+    {
+      "id": "24f24eb1ed54809ebadbfeb017568d72",
+      "type": "bulleted_list",
+      "html": "Web browsers, mobile apps, IoT devices, CLI tools.",
+      "text": "Web browsers, mobile apps, IoT devices, CLI tools."
+    },
+    {
+      "id": "24f24eb1ed548047a397e64aad7f11e4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Role:</span>",
+      "text": "Role:"
+    },
+    {
+      "id": "24f24eb1ed5480749c82d6970a4629b4",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed548047a397e64aad7f11e4",
+      "html": "Present the interface to users.",
+      "text": "Present the interface to users."
+    },
+    {
+      "id": "24f24eb1ed548020bd13e675ea059189",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed548047a397e64aad7f11e4",
+      "html": "Gather user input and send it to the <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">server</span>.",
+      "text": "Gather user input and send it to the server."
+    },
+    {
+      "id": "24f24eb1ed5480ab9443ec535bff8a9f",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed548047a397e64aad7f11e4",
+      "html": "Display the response from the server.",
+      "text": "Display the response from the server."
+    },
+    {
+      "id": "24f24eb1ed54803c9ff3e86591e5dada",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Types:</span>",
+      "text": "Types:"
+    },
+    {
+      "id": "24f24eb1ed54809b94e4f113578f5952",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54803c9ff3e86591e5dada",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Thin clients:</span> Minimal processing; rely heavily on the server. Example: basic HTML website.",
+      "text": "Thin clients: Minimal processing; rely heavily on the server. Example: basic HTML website."
+    },
+    {
+      "id": "24f24eb1ed5480878459dd83a9354807",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed54803c9ff3e86591e5dada",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Thick clients:</span> Handle more processing locally. Example: desktop applications.",
+      "text": "Thick clients: Handle more processing locally. Example: desktop applications."
+    },
+    {
+      "id": "24f24eb1ed54808eae8beaa5e38dc1f5",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed54802b830bce37b19cf471",
+      "type": "sub_sub_header",
+      "html": "Servers",
+      "text": "Servers"
+    },
+    {
+      "id": "24f24eb1ed5480b2aae5fb543ded519c",
+      "type": "bulleted_list",
+      "html": "Machines <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">(physical or virtual)</span> that process client requests.",
+      "text": "Machines (physical or virtual) that process client requests."
+    },
+    {
+      "id": "24f24eb1ed5480dfb6d3cc04192e7991",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Role:</span>",
+      "text": "Role:"
+    },
+    {
+      "id": "24f24eb1ed54802ca526d2133e4fad56",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480dfb6d3cc04192e7991",
+      "html": "Receive requests from clients.",
+      "text": "Receive requests from clients."
+    },
+    {
+      "id": "24f24eb1ed54805695a7fba431615a2a",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480dfb6d3cc04192e7991",
+      "html": "Process logic, access data, and return responses.",
+      "text": "Process logic, access data, and return responses."
+    },
+    {
+      "id": "24f24eb1ed5480c99c55c911f4479137",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Major Types (based on functinality):</span>",
+      "text": "Major Types (based on functinality):"
+    },
+    {
+      "id": "24f24eb1ed5480238df3d8500c993cc3",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480c99c55c911f4479137",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Application server:</span> Runs business logic.",
+      "text": "Application server: Runs business logic."
+    },
+    {
+      "id": "24f24eb1ed548042aa99e1644ae01c4d",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480c99c55c911f4479137",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Web server:</span> Handles HTTP requests (e.g., Nginx, Apache).",
+      "text": "Web server: Handles HTTP requests (e.g., Nginx, Apache)."
+    },
+    {
+      "id": "24f24eb1ed548058bb14d8081a9286ea",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480c99c55c911f4479137",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Proxy server:</span> Intermediary for load balancing or security.",
+      "text": "Proxy server: Intermediary for load balancing or security."
+    },
+    {
+      "id": "24f24eb1ed54802d811fd789c5fd9a4c",
+      "type": "alias",
+      "links": [
+        {
+          "href": "/Servers-24f24eb1ed54806a8dffdc09fbd00b29?pvs=25",
+          "text": "Servers"
+        }
+      ]
+    },
+    {
+      "id": "24f24eb1ed5480b18b6eec27b0dcca58",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed54807da50ad4a0fd8318c4",
+      "type": "sub_sub_header",
+      "html": "Databases (DBs)",
+      "text": "Databases (DBs)"
+    },
+    {
+      "id": "24f24eb1ed548038a4c3cfba3958c48c",
+      "type": "bulleted_list",
+      "html": "Systems for storing, retrieving, and managing data.",
+      "text": "Systems for storing, retrieving, and managing data."
+    },
+    {
+      "id": "24f24eb1ed5480088575c0d9d28dc8a1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Role:</span>",
+      "text": "Role:"
+    },
+    {
+      "id": "24f24eb1ed5480c8904dc85d9a498456",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480088575c0d9d28dc8a1",
+      "html": "Keep data safe and organized.",
+      "text": "Keep data safe and organized."
+    },
+    {
+      "id": "24f24eb1ed5480c8be6ce1b4d395f521",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed5480088575c0d9d28dc8a1",
+      "html": "Enable fast querying and updating.",
+      "text": "Enable fast querying and updating."
+    },
+    {
+      "id": "24f24eb1ed5480e781b3ce27251947d7",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Types: Relational &amp; Non-Relational</span>",
+      "text": "Types: Relational & Non-Relational"
+    },
+    {
+      "id": "24f24eb1ed548063a5c4d48b95ccc2c5",
+      "type": "alias",
+      "links": [
+        {
+          "href": "/24f24eb1ed5480c2b178f4f3ae4ccf3a?pvs=25",
+          "text": "No access"
+        }
+      ]
+    },
+    {
+      "id": "24f24eb1ed5480d29539eb8c32aacd4e",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed5480afaeabe7f19c8e47a1",
+      "type": "sub_sub_header",
+      "html": "APIs (Application Programming Interfaces)",
+      "text": "APIs (Application Programming Interfaces)"
+    },
+    {
+      "id": "24f24eb1ed5480cd892ac69890f0bb75",
+      "type": "bulleted_list",
+      "html": "Rules that define how software components interact.",
+      "text": "Rules that define how software components interact."
+    },
+    {
+      "id": "24f24eb1ed548080825ccaccc27f2869",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Role:</span>",
+      "text": "Role:"
+    },
+    {
+      "id": "24f24eb1ed5480c9a861cabf811ad6fe",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed548080825ccaccc27f2869",
+      "html": "Allow clients to request specific services from servers.",
+      "text": "Allow clients to request specific services from servers."
+    },
+    {
+      "id": "24f24eb1ed54809690f9c69772f50582",
+      "type": "bulleted_list",
+      "parent": "24f24eb1ed548080825ccaccc27f2869",
+      "html": "Define request/response formats",
+      "text": "Define request/response formats"
+    },
+    {
+      "id": "24f24eb1ed548049b51afbac776b2f06",
+      "type": "alias",
+      "links": [
+        {
+          "href": "/API-Architectural-Styles-24f24eb1ed5480598aabdf711d0761f8?pvs=25",
+          "text": "API Architectural Styles"
+        }
+      ]
+    },
+    {
+      "id": "24f24eb1ed548085b65dc5cd9f4e5071",
+      "type": "divider"
+    },
+    {
+      "id": "24f24eb1ed5480ca9056e7503fbd95af",
+      "type": "sub_sub_header"
+    },
+    {
+      "id": "24e24eb1ed548013be48dae769ae3433",
+      "type": "text"
+    },
+    {
+      "id": "24e24eb1ed54800ba5adcd181988d8ea",
+      "type": "text"
+    }
+  ]
+}

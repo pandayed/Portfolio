@@ -1,0 +1,317 @@
+{
+  "id": "34f24eb1ed5480499f98db158827527c",
+  "title": "Blocking Queues",
+  "sourceUrl": "https://xpandeyed.notion.site/Blocking-Queues-34f24eb1ed5480499f98db158827527c?pvs=23",
+  "blocks": [
+    {
+      "id": "34f24eb1ed54803c8298c253605a1cd4",
+      "type": "text",
+      "html": "Got you — if you've hit locks, mutexes, semaphores, and condition variables, blocking queues are the next logical step. They’re basically all of those tools wrapped into one clean abstraction for passing data between threads.",
+      "text": "Got you — if you've hit locks, mutexes, semaphores, and condition variables, blocking queues are the next logical step. They’re basically all of those tools wrapped into one clean abstraction for passing data between threads."
+    },
+    {
+      "id": "34f24eb1ed54803da4a9c50445b1e419",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">1. What is a blocking queue?</span>",
+      "text": "1. What is a blocking queue?"
+    },
+    {
+      "id": "34f24eb1ed548028a5b1e2fcb494a6bd",
+      "type": "text",
+      "html": "A blocking queue is a thread-safe queue that makes threads <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">wait</span> instead of <span style=\"font-style:italic\" data-token-index=\"3\" class=\"notion-enable-hover\">fail</span> when the queue isn’t ready.",
+      "text": "A blocking queue is a thread-safe queue that makes threads wait instead of fail when the queue isn’t ready."
+    },
+    {
+      "id": "34f24eb1ed54803887f9f570d0c0effe",
+      "type": "text",
+      "html": "Two situations where it “blocks”:",
+      "text": "Two situations where it “blocks”:"
+    },
+    {
+      "id": "34f24eb1ed54809f9f68dbe2c4f5b6ce",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Operation"
+          },
+          {
+            "header": true,
+            "html": "When it blocks"
+          },
+          {
+            "header": true,
+            "html": "When it unblocks"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">put()</span></div> / <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">enqueue()</span></div>"
+          },
+          {
+            "header": false,
+            "html": "Queue is full (bounded queue)"
+          },
+          {
+            "header": false,
+            "html": "Another thread calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">take()</span></div> and makes space"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">take()</span></div> / <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">dequeue()</span></div>"
+          },
+          {
+            "header": false,
+            "html": "Queue is empty"
+          },
+          {
+            "header": false,
+            "html": "Another thread calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">put()</span></div> and adds an item"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "34f24eb1ed5480a6ad7cfffdf41751ad",
+      "type": "text",
+      "html": "So instead of your code having to spin or check <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">if empty</span></div>, the queue handles the waiting for you. That’s the “blocking” part.",
+      "text": "So instead of your code having to spin or check if empty, the queue handles the waiting for you. That’s the “blocking” part."
+    },
+    {
+      "id": "34f24eb1ed54803db4aff43369ca7224",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">2. Why use it vs rolling your own?</span>",
+      "text": "2. Why use it vs rolling your own?"
+    },
+    {
+      "id": "34f24eb1ed5480b6b6a9f2f435df793c",
+      "type": "text",
+      "html": "You <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">could</span> build this with a mutex + condition variable + regular queue. In fact, that’s exactly how it’s implemented under the hood:",
+      "text": "You could build this with a mutex + condition variable + regular queue. In fact, that’s exactly how it’s implemented under the hood:"
+    },
+    {
+      "id": "34f24eb1ed5480648e36f52d6ec2a176",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Pseudocode for </span><div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em;font-weight:600\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">put()</span></div>",
+      "text": "Pseudocode for put()"
+    },
+    {
+      "id": "34f24eb1ed5480edace1c91d68949a71",
+      "type": "code",
+      "html": "lock.acquire()\nwhile queue.is_full():\n    not_full_condition.wait()   # releases lock, sleeps, reacquires on wake\nqueue.push(item)\nnot_empty_condition.signal()    # wake up any waiting consumers\nlock.release()",
+      "text": "lock.acquire()\nwhile queue.is_full():\n    not_full_condition.wait()   # releases lock, sleeps, reacquires on wake\nqueue.push(item)\nnot_empty_condition.signal()    # wake up any waiting consumers\nlock.release()"
+    },
+    {
+      "id": "34f24eb1ed5480659352c3131b938571",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Pseudocode for </span><div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em;font-weight:600\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">take()</span></div>",
+      "text": "Pseudocode for take()"
+    },
+    {
+      "id": "34f24eb1ed5480e3a5aadb9d9383ddce",
+      "type": "code",
+      "html": "lock.acquire()\nwhile queue.is_empty():\n    not_empty_condition.wait()\nitem = queue.pop()\nnot_full_condition.signal()     # wake up any waiting producers\nlock.release()",
+      "text": "lock.acquire()\nwhile queue.is_empty():\n    not_empty_condition.wait()\nitem = queue.pop()\nnot_full_condition.signal()     # wake up any waiting producers\nlock.release()"
+    },
+    {
+      "id": "34f24eb1ed5480569b26f59a6aabb29e",
+      "type": "text",
+      "html": "Blocking queues hide all that boilerplate. You just call <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">put</span></div> and <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">take</span></div>.",
+      "text": "Blocking queues hide all that boilerplate. You just call put and take."
+    },
+    {
+      "id": "34f24eb1ed5480c6a258e540af59081f",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">3. The killer use case: Producer-Consumer</span>",
+      "text": "3. The killer use case: Producer-Consumer"
+    },
+    {
+      "id": "34f24eb1ed5480fd8df1f78aa167089a",
+      "type": "text",
+      "html": "This is what blocking queues were born for.",
+      "text": "This is what blocking queues were born for."
+    },
+    {
+      "id": "34f24eb1ed5480e8adf2f8ff11978743",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Producer threads</span>: Generate work/data → <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">queue.put(work)</span></div>",
+      "text": "Producer threads: Generate work/data → queue.put(work)"
+    },
+    {
+      "id": "34f24eb1ed5480a4b7d7c2954098086c",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consumer threads</span>: Grab work/data → <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">work = queue.take()</span></div> → process it",
+      "text": "Consumer threads: Grab work/data → work = queue.take() → process it"
+    },
+    {
+      "id": "34f24eb1ed5480f08ff6c2d0e467fa2e",
+      "type": "text",
+      "html": "Benefits:",
+      "text": "Benefits:"
+    },
+    {
+      "id": "34f24eb1ed5480ddb368db034c218063",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Backpressure for free</span>: If producers are faster than consumers, a bounded queue blocks producers instead of letting memory explode.",
+      "text": "Backpressure for free: If producers are faster than consumers, a bounded queue blocks producers instead of letting memory explode."
+    },
+    {
+      "id": "34f24eb1ed5480648494c5a329283bd0",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">No busy-waiting</span>: Consumers sleep when there’s no work. 0% CPU used while waiting.",
+      "text": "No busy-waiting: Consumers sleep when there’s no work. 0% CPU used while waiting."
+    },
+    {
+      "id": "34f24eb1ed54806fa67cd480b8888753",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Decoupling</span>: Producers and consumers don’t know about each other. Clean separation.",
+      "text": "Decoupling: Producers and consumers don’t know about each other. Clean separation."
+    },
+    {
+      "id": "34f24eb1ed54802cbd96d2017e3eece4",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Real example</span>: Web server",
+      "text": "Real example: Web server"
+    },
+    {
+      "id": "34f24eb1ed5480fb8d36ddfa9933006b",
+      "type": "text",
+      "html": "10 threads accept HTTP requests = producers → <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">put(request)</span></div>",
+      "text": "10 threads accept HTTP requests = producers → put(request)"
+    },
+    {
+      "id": "34f24eb1ed548046b49dd1059b3bc4f2",
+      "type": "text",
+      "html": "50 worker threads = consumers → <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">take(request)</span></div> → generate response",
+      "text": "50 worker threads = consumers → take(request) → generate response"
+    },
+    {
+      "id": "34f24eb1ed54805c8664d77eaa218df2",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">4. Bounded vs Unbounded</span>",
+      "text": "4. Bounded vs Unbounded"
+    },
+    {
+      "id": "34f24eb1ed5480dab24de211313e7fa2",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Type"
+          },
+          {
+            "header": true,
+            "html": "Behavior"
+          },
+          {
+            "header": true,
+            "html": "Gotcha"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bounded</span>"
+          },
+          {
+            "header": false,
+            "html": "Has max capacity. <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">put()</span></div> blocks when full"
+          },
+          {
+            "header": false,
+            "html": "Prevents memory blow-up. Need to pick good size"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Unbounded</span>"
+          },
+          {
+            "header": false,
+            "html": "Grows forever. <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">put()</span></div> never blocks"
+          },
+          {
+            "header": false,
+            "html": "Can OOM if producers outrun consumers"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "34f24eb1ed548091a393dbaa89c03f1c",
+      "type": "text",
+      "html": "Rule of thumb: Always prefer bounded unless you’re 100% sure consumers can keep up.",
+      "text": "Rule of thumb: Always prefer bounded unless you’re 100% sure consumers can keep up."
+    },
+    {
+      "id": "34f24eb1ed548019aad2e5dce3877691",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Classic pitfall: Poison pills</span>",
+      "text": "Classic pitfall: Poison pills"
+    },
+    {
+      "id": "34f24eb1ed5480c78800d7da98b8b7e9",
+      "type": "text",
+      "html": "How do you tell consumer threads “we’re done, exit”?",
+      "text": "How do you tell consumer threads “we’re done, exit”?"
+    },
+    {
+      "id": "34f24eb1ed54807eba87edd025429909",
+      "type": "text",
+      "html": "You can’t just kill them — they might be blocked in <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">take()</span></div>.",
+      "text": "You can’t just kill them — they might be blocked in take()."
+    },
+    {
+      "id": "34f24eb1ed548074b0b0ee6a01063943",
+      "type": "text",
+      "html": "Standard pattern: Send N special “poison pill” objects for N consumers. When a consumer <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">take()</span></div>s a poison pill, it re-<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">put()</span></div>s it for other consumers, then exits.",
+      "text": "Standard pattern: Send N special “poison pill” objects for N consumers. When a consumer take()s a poison pill, it re-put()s it for other consumers, then exits."
+    },
+    {
+      "id": "34f24eb1ed5480759098fbe27424750f",
+      "type": "code",
+      "html": "<span class=\" notion-enable-hover\" data-token-index=\"0\">POISON </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token builtin notion-enable-hover\" data-token-index=\"0\">object</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\nqueue</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\" notion-enable-hover\" data-token-index=\"0\">put</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">POISON</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\">  </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\"># do this once per consumer thread</span><span>\n</span>",
+      "text": "POISON = object()\nqueue.put(POISON)  # do this once per consumer thread\n"
+    },
+    {
+      "id": "34f24eb1ed54809f8212f0cf437e0437",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">When NOT to use blocking queues</span>",
+      "text": "When NOT to use blocking queues"
+    },
+    {
+      "id": "34f24eb1ed5480c9a530e736e0a03afd",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Single-threaded code</span>: Just use a normal list/deque. No point paying sync cost.",
+      "text": "Single-threaded code: Just use a normal list/deque. No point paying sync cost."
+    },
+    {
+      "id": "34f24eb1ed54800396afca298ad02c4f",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Need priority</span>: Use <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">PriorityBlockingQueue</span></div> instead. Regular BQ is FIFO only.",
+      "text": "Need priority: Use PriorityBlockingQueue instead. Regular BQ is FIFO only."
+    },
+    {
+      "id": "34f24eb1ed5480008613f3fabe5ea950",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Need to peek/search</span>: BQs are terrible for random access. Iteration isn’t thread-safe.",
+      "text": "Need to peek/search: BQs are terrible for random access. Iteration isn’t thread-safe."
+    },
+    {
+      "id": "34f24eb1ed548074a749d395706019b2",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Ultra-low latency</span>: The lock/condition variable overhead is ~50-200ns. For HFT or hard real-time, you’d use lock-free ring buffers.",
+      "text": "Ultra-low latency: The lock/condition variable overhead is ~50-200ns. For HFT or hard real-time, you’d use lock-free ring buffers."
+    },
+    {
+      "id": "34f24eb1ed5480448c91ca4ee33d9389",
+      "type": "text"
+    }
+  ]
+}

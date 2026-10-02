@@ -1,0 +1,166 @@
+{
+  "id": "26c24eb1ed5480a3899ac3571cfcce75",
+  "title": "Sequential Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Sequential-Consistency-26c24eb1ed5480a3899ac3571cfcce75?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480b1ad7cd7586858b671",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Sequential Consistency</span>",
+      "text": "Sequential Consistency"
+    },
+    {
+      "id": "26c24eb1ed54800f9a3ad32dabe977b9",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">All operations appear in some global order that is </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">the same for all clients</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\">, but this order does </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">not</span><span style=\"font-style:italic\" data-token-index=\"4\" class=\"notion-enable-hover\"> have to respect real-time order.</span>",
+      "text": "All operations appear in some global order that is the same for all clients, but this order does not have to respect real-time order."
+    },
+    {
+      "id": "26c24eb1ed548064a300fb2537f78594",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span>",
+      "text": "Guarantee:"
+    },
+    {
+      "id": "26c24eb1ed54803e815fd8acfcc2ebf1",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548064a300fb2537f78594",
+      "html": "Every client sees all operations in the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">same sequence</span>, ensuring agreement on order.",
+      "text": "Every client sees all operations in the same sequence, ensuring agreement on order."
+    },
+    {
+      "id": "26c24eb1ed54800c8640cd421dc1235d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548064a300fb2537f78594",
+      "html": "Unlike linearizability, operations may appear out of real-time order as long as the global sequence is consistent across clients.",
+      "text": "Unlike linearizability, operations may appear out of real-time order as long as the global sequence is consistent across clients."
+    },
+    {
+      "id": "26c24eb1ed548020b223d789cf7cff8e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed548073bbf2ec7ef57bc7bb",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548020b223d789cf7cff8e",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed5480439fdeebd76f9641c6",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548073bbf2ec7ef57bc7bb",
+      "html": "Provides predictable ordering for all clients.",
+      "text": "Provides predictable ordering for all clients."
+    },
+    {
+      "id": "26c24eb1ed54804abd28e6878a5c3a8d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548073bbf2ec7ef57bc7bb",
+      "html": "Easier to implement than strong consistency (linearizability).",
+      "text": "Easier to implement than strong consistency (linearizability)."
+    },
+    {
+      "id": "26c24eb1ed54800c86c9df31d514d9b7",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548020b223d789cf7cff8e",
+      "html": "Cons/Anomalies:",
+      "text": "Cons/Anomalies:"
+    },
+    {
+      "id": "26c24eb1ed54801d8151e5fc550c02e0",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800c86c9df31d514d9b7",
+      "html": "Complex than other weak consistency models.",
+      "text": "Complex than other weak consistency models."
+    },
+    {
+      "id": "26c24eb1ed54804aa097df16b6787651",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800c86c9df31d514d9b7",
+      "html": "Slower than weaker models like eventual consistency due to coordination requirements.",
+      "text": "Slower than weaker models like eventual consistency due to coordination requirements."
+    },
+    {
+      "id": "26c24eb1ed5480d28bd3e965b2db2060",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800c86c9df31d514d9b7",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Real-Time Order Violation:</span> A later operation might appear before an earlier one if timing is ignored.",
+      "text": "Real-Time Order Violation: A later operation might appear before an earlier one if timing is ignored."
+    },
+    {
+      "id": "26c24eb1ed548090b71bdac445914cc5",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases:</span> Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">order agreement across clients matters</span>, e.g.:",
+      "text": "Use Cases: Systems where order agreement across clients matters, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed54807ca090e585c8154c2a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548090b71bdac445914cc5",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Distributed Logging:</span>",
+      "text": "Distributed Logging:"
+    },
+    {
+      "id": "26c24eb1ed54805a827dc5a8a3b51df7",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807ca090e585c8154c2a",
+      "html": "All clients see log entries in the same order, even if timestamps are slightly off.",
+      "text": "All clients see log entries in the same order, even if timestamps are slightly off."
+    },
+    {
+      "id": "26c24eb1ed5480968873e7f95eb606bf",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548090b71bdac445914cc5",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Collaborative Editing:</span>",
+      "text": "Collaborative Editing:"
+    },
+    {
+      "id": "26c24eb1ed54801599edd76357690999",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480968873e7f95eb606bf",
+      "html": "All users see the same sequence of edits, ensuring a consistent document state.",
+      "text": "All users see the same sequence of edits, ensuring a consistent document state."
+    },
+    {
+      "id": "26c24eb1ed5480c189a2c8cfa4e1f93d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548090b71bdac445914cc5",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Shared Counters:</span>",
+      "text": "Shared Counters:"
+    },
+    {
+      "id": "26c24eb1ed5480e485cffc1eecfad688",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c189a2c8cfa4e1f93d",
+      "html": "Increment/decrement operations are applied in the same global order for all clients.",
+      "text": "Increment/decrement operations are applied in the same global order for all clients."
+    },
+    {
+      "id": "26c24eb1ed5480e6b497db0f12bb6b4e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed5480e5b654c4f8efcea18c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480e6b497db0f12bb6b4e",
+      "html": "Use <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">centralized sequencing</span> or <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">consensus protocols</span> to establish a global order of operations.",
+      "text": "Use centralized sequencing or consensus protocols to establish a global order of operations."
+    },
+    {
+      "id": "26c24eb1ed5480fca5e6daf0a0707d66",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480e6b497db0f12bb6b4e",
+      "html": "Can be combined with <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">version numbers</span> or <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">vector clocks</span> to maintain consistent ordering across replicas.",
+      "text": "Can be combined with version numbers or vector clocks to maintain consistent ordering across replicas."
+    },
+    {
+      "id": "26c24eb1ed54801c8eb6ecfd04839b3d",
+      "type": "sub_header"
+    }
+  ]
+}

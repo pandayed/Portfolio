@@ -1,0 +1,23 @@
+{
+  "id": "24f24eb1ed5480598aabdf711d0761f8",
+  "title": "API Architectural Styles",
+  "sourceUrl": "https://xpandeyed.notion.site/API-Architectural-Styles-24f24eb1ed5480598aabdf711d0761f8?pvs=23",
+  "blocks": [
+    {
+      "id": "24f24eb1ed548091b247d9eb3d28e740",
+      "type": "collection_view",
+      "pageIds": [
+        "24f24eb1ed54803d8c27c916d3416385",
+        "24f24eb1ed548006b3d6d9834d064a23",
+        "24f24eb1ed5480faade2db02ad3ebb13",
+        "24f24eb1ed5480729800d4a7a0722595",
+        "24f24eb1ed548072908cd600cffe0b8b",
+        "24f24eb1ed5480468e35cc5c0d188ca0"
+      ]
+    },
+    {
+      "id": "24f24eb1ed54802e9246f6ccacf2839c",
+      "type": "text"
+    }
+  ]
+}

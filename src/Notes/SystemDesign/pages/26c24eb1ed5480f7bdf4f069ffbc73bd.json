@@ -1,0 +1,184 @@
+{
+  "id": "26c24eb1ed5480f7bdf4f069ffbc73bd",
+  "title": "Session Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Session-Consistency-26c24eb1ed5480f7bdf4f069ffbc73bd?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480fe8d46e248d031cb6e",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantees consistency within a single client session, combining multiple weaker guarantees to provide a coherent view for that client.</span>",
+      "text": "Guarantees consistency within a single client session, combining multiple weaker guarantees to provide a coherent view for that client."
+    },
+    {
+      "id": "26c24eb1ed5480d48948cc4971017957",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span>",
+      "text": "Guarantee:"
+    },
+    {
+      "id": "26c24eb1ed5480629994fd0633110aad",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480d48948cc4971017957",
+      "html": "Within a session, a client sees:",
+      "text": "Within a session, a client sees:"
+    },
+    {
+      "id": "26c24eb1ed54807895f3fb21464b4fdc",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480629994fd0633110aad",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Read-Your-Writes Consistency</span> (sees its own updates)",
+      "text": "Read-Your-Writes Consistency (sees its own updates)"
+    },
+    {
+      "id": "26c24eb1ed5480e4b15dd700f6916154",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480629994fd0633110aad",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Monotonic Reads Consistency</span> (never sees older values)",
+      "text": "Monotonic Reads Consistency (never sees older values)"
+    },
+    {
+      "id": "26c24eb1ed54802fbc94f2c5d93fb699",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480629994fd0633110aad",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Monotonic Writes Consistency</span> (writes are applied in order)",
+      "text": "Monotonic Writes Consistency (writes are applied in order)"
+    },
+    {
+      "id": "26c24eb1ed5480b697d2d75338aa6df4",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480d48948cc4971017957",
+      "html": "Does <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not guarantee</span> the same view across different clients.",
+      "text": "Does not guarantee the same view across different clients."
+    },
+    {
+      "id": "26c24eb1ed5480c4a2dfc5166d25d593",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed548050a4cac266f3691160",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c4a2dfc5166d25d593",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed5480a5a3a8c381300b1162",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548050a4cac266f3691160",
+      "html": "Provides a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">logical and predictable experience</span> for users.",
+      "text": "Provides a logical and predictable experience for users."
+    },
+    {
+      "id": "26c24eb1ed548076b3cdcbb41cefd2dc",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548050a4cac266f3691160",
+      "html": "Easier for developers to reason about client-specific state.",
+      "text": "Easier for developers to reason about client-specific state."
+    },
+    {
+      "id": "26c24eb1ed54807aa90af3f42107ba32",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c4a2dfc5166d25d593",
+      "html": "Cons/Anomalies:",
+      "text": "Cons/Anomalies:"
+    },
+    {
+      "id": "26c24eb1ed5480cfbfeeff0875d3b5a8",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807aa90af3f42107ba32",
+      "html": "Other clients may see <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different or stale data</span>.",
+      "text": "Other clients may see different or stale data."
+    },
+    {
+      "id": "26c24eb1ed5480f0b98dc44162cccb0e",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807aa90af3f42107ba32",
+      "html": "Overhead to maintain session-specific tracking.",
+      "text": "Overhead to maintain session-specific tracking."
+    },
+    {
+      "id": "26c24eb1ed5480c4b996eb35128e3f57",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807aa90af3f42107ba32",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Inter-Session Divergence:</span> Different clients/sessions may see different, inconsistent states.",
+      "text": "Inter-Session Divergence: Different clients/sessions may see different, inconsistent states."
+    },
+    {
+      "id": "26c24eb1ed548090bd11ef2fc3f382d8",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807aa90af3f42107ba32",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Staleness Across Sessions:</span> One session may lag behind another’s updates.",
+      "text": "Staleness Across Sessions: One session may lag behind another’s updates."
+    },
+    {
+      "id": "26c24eb1ed5480b8b291fb5a7ba0553e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases:</span> Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">user experience matters per session</span>, e.g.:",
+      "text": "Use Cases: Systems where user experience matters per session, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed548090af94f93b11ddbd2f",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480b8b291fb5a7ba0553e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Shopping Websites:</span>",
+      "text": "Shopping Websites:"
+    },
+    {
+      "id": "26c24eb1ed548034accec4bcfe0fe6ed",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548090af94f93b11ddbd2f",
+      "html": "Items you add to your cart or wishlist appear consistently throughout your session.",
+      "text": "Items you add to your cart or wishlist appear consistently throughout your session."
+    },
+    {
+      "id": "26c24eb1ed548007b2e8cd05d6f24e59",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480b8b291fb5a7ba0553e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Social Media:</span>",
+      "text": "Social Media:"
+    },
+    {
+      "id": "26c24eb1ed5480d3838ae0fc54a908fb",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548007b2e8cd05d6f24e59",
+      "html": "Your posts, likes, or comments appear immediately and consistently for you, even if others see updates later.",
+      "text": "Your posts, likes, or comments appear immediately and consistently for you, even if others see updates later."
+    },
+    {
+      "id": "26c24eb1ed5480ea937ce94015076e5a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480b8b291fb5a7ba0553e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Online Forms / Editing Tools:</span>",
+      "text": "Online Forms / Editing Tools:"
+    },
+    {
+      "id": "26c24eb1ed54804f8758fafa01047e9a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480ea937ce94015076e5a",
+      "html": "Changes you make are reflected consistently while you remain logged in.",
+      "text": "Changes you make are reflected consistently while you remain logged in."
+    },
+    {
+      "id": "26c24eb1ed5480c1a098d812a89fd8e2",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed5480c39bc1c54d577961ce",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c1a098d812a89fd8e2",
+      "html": "Track client-specific state or session IDs to enforce ordering and visibility of reads/writes.",
+      "text": "Track client-specific state or session IDs to enforce ordering and visibility of reads/writes."
+    },
+    {
+      "id": "26c24eb1ed5480c9b3dce97b7b7f7be4",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c1a098d812a89fd8e2",
+      "html": "Often combined with caching or routing strategies to ensure all session operations go to the same replicas.",
+      "text": "Often combined with caching or routing strategies to ensure all session operations go to the same replicas."
+    }
+  ]
+}

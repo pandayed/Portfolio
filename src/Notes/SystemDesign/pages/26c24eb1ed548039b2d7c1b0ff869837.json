@@ -1,0 +1,285 @@
+{
+  "id": "26c24eb1ed548039b2d7c1b0ff869837",
+  "title": "Master Slave Architecture",
+  "sourceUrl": "https://xpandeyed.notion.site/Master-Slave-Architecture-26c24eb1ed548039b2d7c1b0ff869837?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480c387d0cdd78a1b24b8",
+      "type": "bulleted_list",
+      "html": "AKA <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Leader-Follower Architecure</span>",
+      "text": "AKA Leader-Follower Architecure"
+    },
+    {
+      "id": "26c24eb1ed5480609467e6680d1e870f",
+      "type": "bulleted_list",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">distributed system design</span> where:",
+      "text": "A distributed system design where:"
+    },
+    {
+      "id": "26c24eb1ed5480a0ba4bce999b79ee6d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480609467e6680d1e870f",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">One node (Master/Leader)</span> handles all <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">write operations</span>.",
+      "text": "One node (Master/Leader) handles all write operations."
+    },
+    {
+      "id": "26c24eb1ed54800895b7d526b5ae4ad6",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480609467e6680d1e870f",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Other nodes (Slaves/Followers)</span> replicate data from the master and usually handle <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">read operations</span>.",
+      "text": "Other nodes (Slaves/Followers) replicate data from the master and usually handle read operations."
+    },
+    {
+      "id": "26c24eb1ed54800c9804dc0c994c8df6",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480968f2cd849e073e97e",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Master Node</span>",
+      "text": "Master Node"
+    },
+    {
+      "id": "26c24eb1ed54802ea86fcd0f061bfc6a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480968f2cd849e073e97e",
+      "html": "Accepts <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">all writes</span> (insert/update/delete).",
+      "text": "Accepts all writes (insert/update/delete)."
+    },
+    {
+      "id": "26c24eb1ed54802ea23bd65db1a20e44",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480968f2cd849e073e97e",
+      "html": "Coordinates replication to slaves.",
+      "text": "Coordinates replication to slaves."
+    },
+    {
+      "id": "26c24eb1ed548089a044eb1730758888",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480968f2cd849e073e97e",
+      "html": "May handle reads as well.",
+      "text": "May handle reads as well."
+    },
+    {
+      "id": "26c24eb1ed54809a812bf8f1efffde90",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Slave Nodes</span>",
+      "text": "Slave Nodes"
+    },
+    {
+      "id": "26c24eb1ed5480008444d4ba48601cc4",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54809a812bf8f1efffde90",
+      "html": "Maintain a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">copy of master’s data</span>.",
+      "text": "Maintain a copy of master’s data."
+    },
+    {
+      "id": "26c24eb1ed5480a3b0c8ea72ec46f84c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54809a812bf8f1efffde90",
+      "html": "Serve <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">read requests</span>, reducing load on the master.",
+      "text": "Serve read requests, reducing load on the master."
+    },
+    {
+      "id": "26c24eb1ed5480cd8dc3d5c8764cc15d",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54809a812bf8f1efffde90",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cannot accept writes directly</span> (unless in failover scenarios).",
+      "text": "Cannot accept writes directly (unless in failover scenarios)."
+    },
+    {
+      "id": "26c24eb1ed5480e69fd9d66deae02ac7",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed548014860ed8841b017319",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it Works (Step-by-Step)</span>",
+      "text": "How it Works (Step-by-Step)"
+    },
+    {
+      "id": "26c24eb1ed54807cac59fe7dfa727691",
+      "type": "numbered_list",
+      "html": "Client sends a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">write request</span> to the master.",
+      "text": "Client sends a write request to the master."
+    },
+    {
+      "id": "26c24eb1ed548066b7e3f67ff51f2fe0",
+      "type": "numbered_list",
+      "html": "Master <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">updates its data</span>.",
+      "text": "Master updates its data."
+    },
+    {
+      "id": "26c24eb1ed54802bbfb9ea767437424f",
+      "type": "numbered_list",
+      "html": "Master <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">propagates changes</span> to all slave nodes (replication).",
+      "text": "Master propagates changes to all slave nodes (replication)."
+    },
+    {
+      "id": "26c24eb1ed5480b4a6b0d7ae1f0582a4",
+      "type": "numbered_list",
+      "html": "Client sends a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">read request</span> → usually served by a <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">slave</span> to reduce master load.",
+      "text": "Client sends a read request → usually served by a slave to reduce master load."
+    },
+    {
+      "id": "26c24eb1ed54806ebee9ffdc2970883d",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480a0a87adc15861c7fc7",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Replication Types:</span>",
+      "text": "Replication Types:"
+    },
+    {
+      "id": "26c24eb1ed5480beb981ca0538360d80",
+      "type": "bulleted_list",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Synchronous-Writes-in-Distributed-System-for-Strong-Consistency-26c24eb1ed5480a792f7e9f0279fd609?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 20 20\" style=\"width:1.25em;height:1.25em;display:block;fill:rgba(173, 169, 163, 1);flex-shrink:0\" class=\"page\"><path d=\"M13.3 14.25a.55.55 0 0 1-.55.55h-5.5a.55.55 0 1 1 0-1.1h5.5a.55.55 0 0 1 .55.55m-.55-1.95a.55.55 0 1 0 0-1.1h-5.5a.55.55 0 0 0 0 1.1z\"></path><path d=\"M6.25 2.375A2.125 2.125 0 0 0 4.125 4.5v11c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125V8.121c0-.563-.224-1.104-.622-1.502L11.63 2.997a2.13 2.13 0 0 0-1.502-.622zM5.375 4.5c0-.483.392-.875.875-.875h3.7V6.25A2.05 2.05 0 0 0 12 8.3h2.625v7.2a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875zm8.691 2.7H12a.95.95 0 0 1-.95-.95V4.184z\"></path></svg><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Synchronous Writes in Distributed System for Strong Consistency</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Synchronous Writes in Distributed System for Strong Consistency ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Synchronous-Writes-in-Distributed-System-for-Strong-Consistency-26c24eb1ed5480a792f7e9f0279fd609?pvs=24",
+          "text": "Synchronous Writes in Distributed System for Strong Consistency"
+        }
+      ]
+    },
+    {
+      "id": "26c24eb1ed54805ca0e9d14d6f3ab2fc",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Asynchronous:</span> Master does not wait → <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">faster writes</span>, but slaves might lag → eventual consistency.",
+      "text": "Asynchronous: Master does not wait → faster writes, but slaves might lag → eventual consistency."
+    },
+    {
+      "id": "26c24eb1ed5480768a92d60e862f98c2",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480f8ac5ee17681667727",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Pros</span>",
+      "text": "Pros"
+    },
+    {
+      "id": "26c24eb1ed5480069648df5dfca0b8e3",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Simple design</span> → easy to implement and understand.",
+      "text": "Simple design → easy to implement and understand."
+    },
+    {
+      "id": "26c24eb1ed54800aa21ce8835f324044",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Read scaling</span> → slaves can handle multiple reads simultaneously.",
+      "text": "Read scaling → slaves can handle multiple reads simultaneously."
+    },
+    {
+      "id": "26c24eb1ed548070a978dc290ff6e286",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Master-centric control</span> → easy to enforce <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">strong consistency</span> on writes.",
+      "text": "Master-centric control → easy to enforce strong consistency on writes."
+    },
+    {
+      "id": "26c24eb1ed5480589c36c1c1b6a651c8",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed54803780c5f160d8c6d244",
+      "type": "sub_sub_header",
+      "html": "Cons",
+      "text": "Cons"
+    },
+    {
+      "id": "26c24eb1ed5480f29222de6e42ea6694",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Single point of failure (master)</span> → if master fails, writes cannot happen.",
+      "text": "Single point of failure (master) → if master fails, writes cannot happen."
+    },
+    {
+      "id": "26c24eb1ed5480d19341fc79668ce197",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Replication lag</span> → slaves might serve stale data (if async replication is used).",
+      "text": "Replication lag → slaves might serve stale data (if async replication is used)."
+    },
+    {
+      "id": "26c24eb1ed5480e5a507eecf7ba0e3c8",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Limited write scalability</span> → master handles all writes, can become a bottleneck.",
+      "text": "Limited write scalability → master handles all writes, can become a bottleneck."
+    },
+    {
+      "id": "26c24eb1ed5480dda589faa04ece6923",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed548015a312ebd06956a4ba",
+      "type": "sub_sub_header",
+      "html": "Fit Check",
+      "text": "Fit Check"
+    },
+    {
+      "id": "26c24eb1ed5480509e9bf00bc3adae29",
+      "type": "bulleted_list",
+      "html": "Suitable for applications with:",
+      "text": "Suitable for applications with:"
+    },
+    {
+      "id": "26c24eb1ed54803e93ddd16b90726963",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480509e9bf00bc3adae29",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Many reads, few writes</span> (e.g., blogs, news sites, reporting dashboards).",
+      "text": "Many reads, few writes (e.g., blogs, news sites, reporting dashboards)."
+    },
+    {
+      "id": "26c24eb1ed548053ad40c45c5493540a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480509e9bf00bc3adae29",
+      "html": "Strong <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">consistency for writes</span> is important.",
+      "text": "Strong consistency for writes is important."
+    },
+    {
+      "id": "26c24eb1ed5480a18382df0f436eede8",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed548012ac35c1d0119bc2ad",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Variations / Enhancements</span>",
+      "text": "Variations / Enhancements"
+    },
+    {
+      "id": "26c24eb1ed54804ea40ef86ae67dd372",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Failover Master:</span> A slave can be <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">promoted to master</span> if the original master fails.",
+      "text": "Failover Master: A slave can be promoted to master if the original master fails."
+    },
+    {
+      "id": "26c24eb1ed5480e0be2efe6b250c7515",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Read-Write Splitting:</span> Writes go to master, reads go to slaves → improves performance.",
+      "text": "Read-Write Splitting: Writes go to master, reads go to slaves → improves performance."
+    },
+    {
+      "id": "26c24eb1ed5480979414ed27a1576c79",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480569df1c4066b961274",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">More Key Terms to Know</span>",
+      "text": "More Key Terms to Know"
+    },
+    {
+      "id": "26c24eb1ed5480deaab6fd2e73e212c9",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Replication Lag:</span> Delay between master’s write and slave’s copy.",
+      "text": "Replication Lag: Delay between master’s write and slave’s copy."
+    },
+    {
+      "id": "26c24eb1ed5480bdad3fd5a6936b6442",
+      "type": "text"
+    },
+    {
+      "id": "26c24eb1ed548055a0ebe6f4bab8315f",
+      "type": "text"
+    }
+  ]
+}

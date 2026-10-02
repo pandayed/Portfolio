@@ -1,0 +1,527 @@
+{
+  "id": "32f24eb1ed54807dbcacd0554f2ccf82",
+  "title": "Web Socket, Web Hook etc",
+  "sourceUrl": "https://xpandeyed.notion.site/Web-Socket-Web-Hook-etc-32f24eb1ed54807dbcacd0554f2ccf82?pvs=23",
+  "blocks": [
+    {
+      "id": "32f24eb1ed5480a4bcddd91721e55c98",
+      "type": "text",
+      "html": "You’re mixing multiple <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">communication patterns</span>. The confusion is because they all solve <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">“how server sends data without client constantly asking”</span>, but in different ways.",
+      "text": "You’re mixing multiple communication patterns. The confusion is because they all solve “how server sends data without client constantly asking”, but in different ways."
+    },
+    {
+      "id": "32f24eb1ed548002a6f0c57a8207b9b0",
+      "type": "text",
+      "html": "I’ll break this cleanly.",
+      "text": "I’ll break this cleanly."
+    },
+    {
+      "id": "32f24eb1ed548005ba1ef343974a6fd3",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed5480848004f60af0eedfd0",
+      "type": "header",
+      "html": "Core 4 Concepts (you must know)",
+      "text": "Core 4 Concepts (you must know)"
+    },
+    {
+      "id": "32f24eb1ed54802bb36dc622e7d38d63",
+      "type": "sub_header",
+      "html": "Webhook",
+      "text": "Webhook"
+    },
+    {
+      "id": "32f24eb1ed5480dd9dc0d116b9944ea8",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What it is</span>",
+      "text": "What it is"
+    },
+    {
+      "id": "32f24eb1ed54809c9c7dc5932f27a3ca",
+      "type": "bulleted_list",
+      "html": "Server → Server communication (event-driven)",
+      "text": "Server → Server communication (event-driven)"
+    },
+    {
+      "id": "32f24eb1ed5480e58246c1f131b7a0ad",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works</span>",
+      "text": "How it works"
+    },
+    {
+      "id": "32f24eb1ed5480b5833cd3236831ce70",
+      "type": "bulleted_list",
+      "html": "You give your URL to another service",
+      "text": "You give your URL to another service"
+    },
+    {
+      "id": "32f24eb1ed5480928368e47aaa45a91a",
+      "type": "bulleted_list",
+      "html": "That service calls your API when something happens",
+      "text": "That service calls your API when something happens"
+    },
+    {
+      "id": "32f24eb1ed5480b0b87fedc32d6629da",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example</span>",
+      "text": "Example"
+    },
+    {
+      "id": "32f24eb1ed5480b2a2eae5f1d46e16c5",
+      "type": "bulleted_list",
+      "html": "Payment success → Razorpay calls your backend",
+      "text": "Payment success → Razorpay calls your backend"
+    },
+    {
+      "id": "32f24eb1ed54804caec2f5fb95423d69",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key idea</span>",
+      "text": "Key idea"
+    },
+    {
+      "id": "32f24eb1ed548017be8fe45a5b8f5edd",
+      "type": "bulleted_list",
+      "html": "“Don’t ask me, I’ll tell you”",
+      "text": "“Don’t ask me, I’ll tell you”"
+    },
+    {
+      "id": "32f24eb1ed548037ba0ce75b9d32aeaa",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed5480c6b27fdc116eecb1d3",
+      "type": "sub_header",
+      "html": "WebSocket",
+      "text": "WebSocket"
+    },
+    {
+      "id": "32f24eb1ed5480a382bdcbbc894e9749",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What it is</span>",
+      "text": "What it is"
+    },
+    {
+      "id": "32f24eb1ed54806c8237ca5e86d824d2",
+      "type": "bulleted_list",
+      "html": "Persistent two-way connection (client ↔ server)",
+      "text": "Persistent two-way connection (client ↔ server)"
+    },
+    {
+      "id": "32f24eb1ed5480aab7a1ccb48c0083bc",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works</span>",
+      "text": "How it works"
+    },
+    {
+      "id": "32f24eb1ed54803f8f9bdbcd8564c1e3",
+      "type": "bulleted_list",
+      "html": "One connection stays open",
+      "text": "One connection stays open"
+    },
+    {
+      "id": "32f24eb1ed54803eb9a3dc371514c87d",
+      "type": "bulleted_list",
+      "html": "Both sides send messages anytime",
+      "text": "Both sides send messages anytime"
+    },
+    {
+      "id": "32f24eb1ed548063a281c64842812cf1",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example</span>",
+      "text": "Example"
+    },
+    {
+      "id": "32f24eb1ed5480208d81c535cb750cc2",
+      "type": "bulleted_list",
+      "html": "Chat apps, live trading dashboards",
+      "text": "Chat apps, live trading dashboards"
+    },
+    {
+      "id": "32f24eb1ed548007a6f1ea847c85ca3d",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key idea</span>",
+      "text": "Key idea"
+    },
+    {
+      "id": "32f24eb1ed54800fb5c3de981cdb2b0b",
+      "type": "bulleted_list",
+      "html": "“Always connected pipe”",
+      "text": "“Always connected pipe”"
+    },
+    {
+      "id": "32f24eb1ed54803e8a88fd348a47b245",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed5480ed8799e8f78dc06767",
+      "type": "sub_header",
+      "html": "Server-Sent Events (SSE)",
+      "text": "Server-Sent Events (SSE)"
+    },
+    {
+      "id": "32f24eb1ed548014b1bfc82f8e59b247",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What it is</span>",
+      "text": "What it is"
+    },
+    {
+      "id": "32f24eb1ed54803ca15df6771bf5734d",
+      "type": "bulleted_list",
+      "html": "Server → Client one-way streaming over HTTP",
+      "text": "Server → Client one-way streaming over HTTP"
+    },
+    {
+      "id": "32f24eb1ed548047916fd01a631502d3",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works</span>",
+      "text": "How it works"
+    },
+    {
+      "id": "32f24eb1ed5480d5bdb1dbe45fead321",
+      "type": "bulleted_list",
+      "html": "Client opens connection",
+      "text": "Client opens connection"
+    },
+    {
+      "id": "32f24eb1ed5480f4a801f5dea0d91cd6",
+      "type": "bulleted_list",
+      "html": "Server keeps sending updates",
+      "text": "Server keeps sending updates"
+    },
+    {
+      "id": "32f24eb1ed548086abd1dce8e2ce2939",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example</span>",
+      "text": "Example"
+    },
+    {
+      "id": "32f24eb1ed54800a814bf2bc51e9763b",
+      "type": "bulleted_list",
+      "html": "Live scores, notifications feed",
+      "text": "Live scores, notifications feed"
+    },
+    {
+      "id": "32f24eb1ed5480f6bffdf2befc0c2014",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key idea</span>",
+      "text": "Key idea"
+    },
+    {
+      "id": "32f24eb1ed548098b6d7f13f34e96079",
+      "type": "bulleted_list",
+      "html": "“Server keeps talking, client only listens”",
+      "text": "“Server keeps talking, client only listens”"
+    },
+    {
+      "id": "32f24eb1ed5480328e0ae11853f49d0d",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed54808790c6d0124d21f1ff",
+      "type": "sub_header",
+      "html": "Polling (and Long Polling)",
+      "text": "Polling (and Long Polling)"
+    },
+    {
+      "id": "32f24eb1ed54807fbde2d9bf948535a7",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What it is</span>",
+      "text": "What it is"
+    },
+    {
+      "id": "32f24eb1ed5480ecaceee83483c0d180",
+      "type": "bulleted_list",
+      "html": "Client repeatedly asks server",
+      "text": "Client repeatedly asks server"
+    },
+    {
+      "id": "32f24eb1ed5480c08213d2dd693c2294",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">How it works</span>",
+      "text": "How it works"
+    },
+    {
+      "id": "32f24eb1ed5480718781cc5ffa7d8017",
+      "type": "bulleted_list",
+      "html": "Normal: request every few seconds",
+      "text": "Normal: request every few seconds"
+    },
+    {
+      "id": "32f24eb1ed5480419c6cc5a22c090786",
+      "type": "bulleted_list",
+      "html": "Long polling: server holds request until data is ready",
+      "text": "Long polling: server holds request until data is ready"
+    },
+    {
+      "id": "32f24eb1ed5480a9ab63c35d924280ea",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example</span>",
+      "text": "Example"
+    },
+    {
+      "id": "32f24eb1ed54801fbf1df00f93b3d9cc",
+      "type": "bulleted_list",
+      "html": "Checking for new messages every 5 sec",
+      "text": "Checking for new messages every 5 sec"
+    },
+    {
+      "id": "32f24eb1ed548033a474d0aec823e0f6",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key idea</span>",
+      "text": "Key idea"
+    },
+    {
+      "id": "32f24eb1ed5480f5954cd37fe138a6b5",
+      "type": "bulleted_list",
+      "html": "“Are we there yet?” loop",
+      "text": "“Are we there yet?” loop"
+    },
+    {
+      "id": "32f24eb1ed5480aa89b0c0d523d00687",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed54802ca72fd3929b640539",
+      "type": "header",
+      "html": "Quick Comparison (lock this in memory)",
+      "text": "Quick Comparison (lock this in memory)"
+    },
+    {
+      "id": "32f24eb1ed5480e8a297e7409a49ffca",
+      "type": "bulleted_list",
+      "html": "Webhook → server → server (event push)",
+      "text": "Webhook → server → server (event push)"
+    },
+    {
+      "id": "32f24eb1ed5480e696acdf956ef11fba",
+      "type": "bulleted_list",
+      "html": "WebSocket → both ways (real-time pipe)",
+      "text": "WebSocket → both ways (real-time pipe)"
+    },
+    {
+      "id": "32f24eb1ed548002ae27c8dc027c42dc",
+      "type": "bulleted_list",
+      "html": "SSE → server → client (stream)",
+      "text": "SSE → server → client (stream)"
+    },
+    {
+      "id": "32f24eb1ed5480e19b38d8e31c05cea4",
+      "type": "bulleted_list",
+      "html": "Polling → client → server (repeat asking)",
+      "text": "Polling → client → server (repeat asking)"
+    },
+    {
+      "id": "32f24eb1ed5480d3a850f497c38ee098",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed54809a81fece542ba19f7a",
+      "type": "header",
+      "html": "Where you were slightly off",
+      "text": "Where you were slightly off"
+    },
+    {
+      "id": "32f24eb1ed548087bf2bfae89f1c45b8",
+      "type": "text",
+      "html": "You said:",
+      "text": "You said:"
+    },
+    {
+      "id": "32f24eb1ed5480fcb73cea65022d52f4",
+      "type": "quote",
+      "html": "“servers and events… tunnel… channel…”",
+      "text": "“servers and events… tunnel… channel…”"
+    },
+    {
+      "id": "32f24eb1ed5480409012f66da94973ce",
+      "type": "text",
+      "html": "Correction:",
+      "text": "Correction:"
+    },
+    {
+      "id": "32f24eb1ed54802295ebc1209c044c99",
+      "type": "bulleted_list",
+      "html": "“Events” → that’s <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">event-driven architecture</span>, not a protocol",
+      "text": "“Events” → that’s event-driven architecture, not a protocol"
+    },
+    {
+      "id": "32f24eb1ed54804d82a6c489186e8e71",
+      "type": "bulleted_list",
+      "html": "“Tunnel/channel” → that’s more like WebSocket or HTTP streaming",
+      "text": "“Tunnel/channel” → that’s more like WebSocket or HTTP streaming"
+    },
+    {
+      "id": "32f24eb1ed5480cead9eef44beed4d8e",
+      "type": "bulleted_list",
+      "html": "There isn’t a fixed “3 things” → there are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">patterns</span>, not just tools",
+      "text": "There isn’t a fixed “3 things” → there are patterns, not just tools"
+    },
+    {
+      "id": "32f24eb1ed54805eaecaf54fd9d040e7",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed54808e8930d3da55720a3c",
+      "type": "header",
+      "html": "How to remember permanently (this is the key)",
+      "text": "How to remember permanently (this is the key)"
+    },
+    {
+      "id": "32f24eb1ed54804ea22af7929d93a3b5",
+      "type": "text",
+      "html": "Use this mental model:",
+      "text": "Use this mental model:"
+    },
+    {
+      "id": "32f24eb1ed54809a833ae944a4d00c81",
+      "type": "sub_header",
+      "html": "Step 1: Ask → Who starts communication?",
+      "text": "Step 1: Ask → Who starts communication?"
+    },
+    {
+      "id": "32f24eb1ed54804ab3d1c9e807209236",
+      "type": "bulleted_list",
+      "html": "Client → Polling",
+      "text": "Client → Polling"
+    },
+    {
+      "id": "32f24eb1ed5480bc9093f222422cfd57",
+      "type": "bulleted_list",
+      "html": "Server → Webhook / SSE",
+      "text": "Server → Webhook / SSE"
+    },
+    {
+      "id": "32f24eb1ed5480f6815afb370476afb0",
+      "type": "bulleted_list",
+      "html": "Both → WebSocket",
+      "text": "Both → WebSocket"
+    },
+    {
+      "id": "32f24eb1ed548086aebcd66045357a74",
+      "type": "sub_header",
+      "html": "Step 2: Ask → Direction?",
+      "text": "Step 2: Ask → Direction?"
+    },
+    {
+      "id": "32f24eb1ed54803e91ddfacb457ceb68",
+      "type": "bulleted_list",
+      "html": "One-way → SSE / Webhook",
+      "text": "One-way → SSE / Webhook"
+    },
+    {
+      "id": "32f24eb1ed5480bc847fe0ce27645eec",
+      "type": "bulleted_list",
+      "html": "Two-way → WebSocket",
+      "text": "Two-way → WebSocket"
+    },
+    {
+      "id": "32f24eb1ed548013acabecaa6789fde4",
+      "type": "sub_header",
+      "html": "Step 3: Ask → Connection type?",
+      "text": "Step 3: Ask → Connection type?"
+    },
+    {
+      "id": "32f24eb1ed54806e9515e58caec82c1e",
+      "type": "bulleted_list",
+      "html": "Short-lived → Polling / Webhook",
+      "text": "Short-lived → Polling / Webhook"
+    },
+    {
+      "id": "32f24eb1ed5480b1914fc29ab5f8798e",
+      "type": "bulleted_list",
+      "html": "Persistent → WebSocket / SSE",
+      "text": "Persistent → WebSocket / SSE"
+    },
+    {
+      "id": "32f24eb1ed54807fb61cc3417842ceb4",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed5480b88e0fc1e5161141b9",
+      "type": "header",
+      "html": "Super simple memory analogy",
+      "text": "Super simple memory analogy"
+    },
+    {
+      "id": "32f24eb1ed548029b8c0ed29bbba398d",
+      "type": "bulleted_list",
+      "html": "Webhook → “I’ll call you”",
+      "text": "Webhook → “I’ll call you”"
+    },
+    {
+      "id": "32f24eb1ed548021b411df6a97e4f4f5",
+      "type": "bulleted_list",
+      "html": "Polling → “I’ll keep calling you”",
+      "text": "Polling → “I’ll keep calling you”"
+    },
+    {
+      "id": "32f24eb1ed5480bbb6d9d870071475ee",
+      "type": "bulleted_list",
+      "html": "SSE → “I’m broadcasting to you”",
+      "text": "SSE → “I’m broadcasting to you”"
+    },
+    {
+      "id": "32f24eb1ed5480b19c14c41114ed8fdd",
+      "type": "bulleted_list",
+      "html": "WebSocket → “We’re on a phone call”",
+      "text": "WebSocket → “We’re on a phone call”"
+    },
+    {
+      "id": "32f24eb1ed548031b49ec0729f8c779d",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed5480aca263d09fcea5d4cb",
+      "type": "header",
+      "html": "When to use what (practical)",
+      "text": "When to use what (practical)"
+    },
+    {
+      "id": "32f24eb1ed5480f5ae4fec918f3ac4a0",
+      "type": "bulleted_list",
+      "html": "Payments → Webhook",
+      "text": "Payments → Webhook"
+    },
+    {
+      "id": "32f24eb1ed54803e9bd8c4c15486e8f1",
+      "type": "bulleted_list",
+      "html": "Chat → WebSocket",
+      "text": "Chat → WebSocket"
+    },
+    {
+      "id": "32f24eb1ed5480099feafdbad53e31a1",
+      "type": "bulleted_list",
+      "html": "Live feed (stocks, logs) → SSE",
+      "text": "Live feed (stocks, logs) → SSE"
+    },
+    {
+      "id": "32f24eb1ed54804c9341c06b2bc91044",
+      "type": "bulleted_list",
+      "html": "Simple apps / fallback → Polling",
+      "text": "Simple apps / fallback → Polling"
+    },
+    {
+      "id": "32f24eb1ed5480afbf74c640afde86d1",
+      "type": "divider"
+    },
+    {
+      "id": "32f24eb1ed54802d9942ee9a0e81bd05",
+      "type": "text",
+      "html": "If you want, next step I can do:",
+      "text": "If you want, next step I can do:"
+    },
+    {
+      "id": "32f24eb1ed54808c8b10c54f7c70c100",
+      "type": "bulleted_list",
+      "html": "Show <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">actual backend + frontend code for each</span>",
+      "text": "Show actual backend + frontend code for each"
+    },
+    {
+      "id": "32f24eb1ed5480f5bd90d72077289abc",
+      "type": "bulleted_list",
+      "html": "Or give a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">decision tree you can use in interviews</span>",
+      "text": "Or give a decision tree you can use in interviews"
+    }
+  ]
+}

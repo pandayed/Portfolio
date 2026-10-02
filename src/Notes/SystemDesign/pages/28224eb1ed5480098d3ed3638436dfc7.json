@@ -1,0 +1,19 @@
+{
+  "id": "28224eb1ed5480098d3ed3638436dfc7",
+  "title": "Certificates",
+  "sourceUrl": "https://xpandeyed.notion.site/Certificates-28224eb1ed5480098d3ed3638436dfc7?pvs=23",
+  "blocks": [
+    {
+      "id": "28224eb1ed54801aa30ec43a8fc199c4",
+      "type": "collection_view",
+      "pageIds": [
+        "28224eb1ed5480298198e6a15dc4c54b"
+      ],
+      "title": "New database"
+    },
+    {
+      "id": "28224eb1ed5480938f01f90626ef3e6c",
+      "type": "text"
+    }
+  ]
+}

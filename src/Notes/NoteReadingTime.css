@@ -1,0 +1,20 @@
+.NoteReadingTime {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--color-text-subtle);
+}
+
+.Notes__heading .NoteReadingTime {
+    flex: 0 0 auto;
+}
+
+.Page > .NoteReadingTime {
+    margin-top: var(--space-sm);
+}
+
+.NoteReadingTime__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-sm);
+}

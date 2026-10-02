@@ -3,10 +3,22 @@ import './NoteArticleLayout.css';
 import type { ComponentProps } from 'react';
 
 import ArticleLayout from '../Blogs/ArticleLayout/ArticleLayout';
-import { toHref } from '../routing/routes';
-import { notePages, type NotePage } from './noteTreeData';
+import { PYTHON_NOTES_ROUTE, toHref } from '../routing/routes';
+import { notePages, noteTree, type NoteGroup, type NoteNode, type NotePage } from './noteTreeData';
+import NoteReadingTime from './NoteReadingTime';
+import { getNodeReadingMinutes, getPageReadingMinutes, getPageWordCount } from './readingTime';
 
 type NoteArticleLayoutProps = ComponentProps<typeof ArticleLayout>;
+
+const findGroupForRoute = (nodes: NoteNode[], route: string): NoteGroup | undefined => {
+    for (const node of nodes) {
+        if (node.type !== 'group') continue;
+        if (node.route === route) return node;
+        const group = findGroupForRoute(node.children, route);
+        if (group) return group;
+    }
+    return undefined;
+};
 
 const NoteControl = ({
     note,
@@ -36,9 +48,24 @@ const NoteControl = ({
 
 const NoteArticleLayout = ({ route, children, ...props }: NoteArticleLayoutProps) => {
     const index = notePages.findIndex((note) => note.route === route);
+    const group = findGroupForRoute(noteTree, route);
 
     return (
-        <ArticleLayout {...props} route={route}>
+        <ArticleLayout
+            {...props}
+            route={route}
+            headerMeta={(
+                <div className="NoteReadingTime__metadata">
+                    <NoteReadingTime minutes={getPageReadingMinutes(route)} wordCount={getPageWordCount(route)} />
+                    {group && (
+                        <span className="NoteReadingTime">
+                            {route.startsWith(`${PYTHON_NOTES_ROUTE}/`) ? group.title : 'Subnotes'}:{' '}
+                            <NoteReadingTime minutes={getNodeReadingMinutes(group)} total />
+                        </span>
+                    )}
+                </div>
+            )}
+        >
             {children}
             {index >= 0 && (
                 <nav className="NoteNavigation" aria-label="Previous and next notes">

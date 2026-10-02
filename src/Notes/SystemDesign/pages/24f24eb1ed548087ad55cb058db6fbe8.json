@@ -1,0 +1,941 @@
+{
+  "id": "24f24eb1ed548087ad55cb058db6fbe8",
+  "title": "BoE: Back of the Envelope Estimation",
+  "sourceUrl": "https://xpandeyed.notion.site/BoE-Back-of-the-Envelope-Estimation-24f24eb1ed548087ad55cb058db6fbe8?pvs=23",
+  "blocks": [
+    {
+      "id": "27524eb1ed54801a82b3f6d35b3a1865",
+      "type": "bulleted_list",
+      "html": "A quick, approximate calculation to estimate <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">scale, resources, cost, or feasibility</span> of a system.",
+      "text": "A quick, approximate calculation to estimate scale, resources, cost, or feasibility of a system."
+    },
+    {
+      "id": "27524eb1ed54801697c8d46396fc3241",
+      "type": "bulleted_list",
+      "html": "Uses <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">simple assumptions, rounding, and order-of-magnitude reasoning</span>, not exact values.",
+      "text": "Uses simple assumptions, rounding, and order-of-magnitude reasoning, not exact values."
+    },
+    {
+      "id": "29724eb1ed548043824cff7ba76609f4",
+      "type": "callout",
+      "parent": "27524eb1ed54801697c8d46396fc3241"
+    },
+    {
+      "id": "29724eb1ed5480258663c8ba33b54347",
+      "type": "text",
+      "parent": "29724eb1ed548043824cff7ba76609f4",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Order of magnitude reasoning</span> means estimating quantities roughly — by powers of ten — to understand scale, not exact numbers.",
+      "text": "Order of magnitude reasoning means estimating quantities roughly — by powers of ten — to understand scale, not exact numbers."
+    },
+    {
+      "id": "27524eb1ed548000bdf2f685ec04f3d5",
+      "type": "bulleted_list",
+      "html": "Produces <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">ballpark answers</span> fast to guide design choices and highlight dominant factors.",
+      "text": "Produces ballpark answers fast to guide design choices and highlight dominant factors."
+    },
+    {
+      "id": "29724eb1ed54803abf89e3500b9e7591",
+      "type": "callout",
+      "parent": "27524eb1ed548000bdf2f685ec04f3d5"
+    },
+    {
+      "id": "29724eb1ed548036b6dad4cdb7b209a5",
+      "type": "text",
+      "parent": "29724eb1ed54803abf89e3500b9e7591",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Ballpark answers</span> mean <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">rough, approximate estimates</span> — not exact figures, but close enough to understand the <span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">scale or feasibility</span> of something.",
+      "text": "Ballpark answers mean rough, approximate estimates — not exact figures, but close enough to understand the scale or feasibility of something."
+    },
+    {
+      "id": "27524eb1ed548007b4c6f752c409f7f5",
+      "type": "text",
+      "html": "This includes estimating:",
+      "text": "This includes estimating:"
+    },
+    {
+      "id": "27524eb1ed548096aee2f82eb050b92a",
+      "type": "bulleted_list",
+      "html": "Number of users (daily active users [DAU], monthly active users [MAU])",
+      "text": "Number of users (daily active users [DAU], monthly active users [MAU])"
+    },
+    {
+      "id": "27524eb1ed5480b3a032fd4c5be24eb1",
+      "type": "bulleted_list",
+      "html": "Data storage requirements",
+      "text": "Data storage requirements"
+    },
+    {
+      "id": "27524eb1ed5480859a6fdeca74df1e9c",
+      "type": "bulleted_list",
+      "html": "Network traffic (read and write bandwidth)",
+      "text": "Network traffic (read and write bandwidth)"
+    },
+    {
+      "id": "27524eb1ed54809499c1f59bd404c9f0",
+      "type": "bulleted_list",
+      "html": "Compute demand (queries per second, requests per second)",
+      "text": "Compute demand (queries per second, requests per second)"
+    },
+    {
+      "id": "27524eb1ed548011a65aec114da3bf22",
+      "type": "bulleted_list",
+      "html": "Performance expectations (latency and throughput)",
+      "text": "Performance expectations (latency and throughput)"
+    },
+    {
+      "id": "29724eb1ed5480059f98c55b1c0e59f6",
+      "type": "text",
+      "html": "For the purpose of:",
+      "text": "For the purpose of:"
+    },
+    {
+      "id": "29724eb1ed548084b155d490be1cd84a",
+      "type": "bulleted_list",
+      "html": "To check <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">feasibility</span> of a design before detailed modelling.",
+      "text": "To check feasibility of a design before detailed modelling."
+    },
+    {
+      "id": "29724eb1ed548059856dea13e0d69db9",
+      "type": "bulleted_list",
+      "html": "To detect <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">bottlenecks</span> early (compute, storage, bandwidth).",
+      "text": "To detect bottlenecks early (compute, storage, bandwidth)."
+    },
+    {
+      "id": "29724eb1ed5480ec8f85f7c1736743fe",
+      "type": "bulleted_list",
+      "html": "To compare <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">trade-offs</span> between design choices.",
+      "text": "To compare trade-offs between design choices."
+    },
+    {
+      "id": "29724eb1ed5480729a30c0f775b16b5b",
+      "type": "bulleted_list",
+      "html": "To plan <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">capacity and cost</span> in early design phases.",
+      "text": "To plan capacity and cost in early design phases."
+    },
+    {
+      "id": "29724eb1ed5480edac8fdd58979c3769",
+      "type": "bulleted_list",
+      "html": "And of course, to show <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">scale-awareness</span> in interviews.",
+      "text": "And of course, to show scale-awareness in interviews."
+    },
+    {
+      "id": "27524eb1ed5480ebae1cceb8b83729b5",
+      "type": "text",
+      "html": "Without this:",
+      "text": "Without this:"
+    },
+    {
+      "id": "29724eb1ed5480dfb7c1db31eee686f6",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Under-provisioning</span> → system outages, poor user experience, loss of users/revenue.",
+      "text": "Under-provisioning → system outages, poor user experience, loss of users/revenue."
+    },
+    {
+      "id": "27524eb1ed548057a630d7d6b4644314",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Over-provisioning</span> → wasted cost, extra complexity, delayed delivery.",
+      "text": "Over-provisioning → wasted cost, extra complexity, delayed delivery."
+    },
+    {
+      "id": "27524eb1ed5480928b84ce427e1229e0",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">BoE estimation</span> ensures you size resources early and avoid costly mistakes.",
+      "text": "BoE estimation ensures you size resources early and avoid costly mistakes."
+    },
+    {
+      "id": "29724eb1ed5480c08e70ec0c377bf30f",
+      "type": "bulleted_list",
+      "html": "Typical outputs include:",
+      "text": "Typical outputs include:"
+    },
+    {
+      "id": "29724eb1ed5480de8b70dd092adef0b6",
+      "type": "bulleted_list",
+      "parent": "29724eb1ed5480c08e70ec0c377bf30f",
+      "html": "Servers needed",
+      "text": "Servers needed"
+    },
+    {
+      "id": "29724eb1ed5480269d5bdb0d09bc069f",
+      "type": "bulleted_list",
+      "parent": "29724eb1ed5480c08e70ec0c377bf30f",
+      "html": "Storage required",
+      "text": "Storage required"
+    },
+    {
+      "id": "29724eb1ed54809db68bf7fc5a776235",
+      "type": "bulleted_list",
+      "parent": "29724eb1ed5480c08e70ec0c377bf30f",
+      "html": "Bandwidth required",
+      "text": "Bandwidth required"
+    },
+    {
+      "id": "29724eb1ed548029899df093024c2f8f",
+      "type": "bulleted_list",
+      "parent": "29724eb1ed5480c08e70ec0c377bf30f",
+      "html": "Requests per second (RPS)",
+      "text": "Requests per second (RPS)"
+    },
+    {
+      "id": "29724eb1ed54808cbbdfcbf9a82eec9b",
+      "type": "bulleted_list",
+      "parent": "29724eb1ed5480c08e70ec0c377bf30f",
+      "html": "Cost (rough order)",
+      "text": "Cost (rough order)"
+    },
+    {
+      "id": "29724eb1ed548028bbbdfe9c065888dc",
+      "type": "bulleted_list",
+      "parent": "29724eb1ed5480c08e70ec0c377bf30f",
+      "html": "Feasibility (yes/no)",
+      "text": "Feasibility (yes/no)"
+    },
+    {
+      "id": "27524eb1ed5480d1a947d2845c415571",
+      "type": "callout"
+    },
+    {
+      "id": "27524eb1ed5480b39f68d7e5d58be090",
+      "type": "text",
+      "parent": "27524eb1ed5480d1a947d2845c415571",
+      "html": "Demographic division (e.g., “30% users in India, 20% in US”) is usually a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">business or product analysis</span> concern, not part of back-of-the-envelope <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">system design estimation</span> — unless geography directly affects the system load (like needing regional CDNs, data localization laws, or peak-hour traffic patterns).",
+      "text": "Demographic division (e.g., “30% users in India, 20% in US”) is usually a business or product analysis concern, not part of back-of-the-envelope system design estimation — unless geography directly affects the system load (like needing regional CDNs, data localization laws, or peak-hour traffic patterns)."
+    },
+    {
+      "id": "27524eb1ed54807b9b54cc85382e551f",
+      "type": "divider"
+    },
+    {
+      "id": "27524eb1ed5480faa3bcf0f4a96a2629",
+      "type": "header",
+      "html": "Key Numbers",
+      "text": "Key Numbers"
+    },
+    {
+      "id": "27524eb1ed5480fbb2bff767b741110f",
+      "type": "text",
+      "html": "Better to remember these.",
+      "text": "Better to remember these."
+    },
+    {
+      "id": "33324eb1ed5480d3a76cfd6761ceb1de",
+      "type": "text",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Latency-Numbers-33324eb1ed548051a8e0e2ba13e04565?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 20 20\" style=\"width:1.25em;height:1.25em;display:block;fill:rgba(173, 169, 163, 1);flex-shrink:0\" class=\"page\"><path d=\"M13.3 14.25a.55.55 0 0 1-.55.55h-5.5a.55.55 0 1 1 0-1.1h5.5a.55.55 0 0 1 .55.55m-.55-1.95a.55.55 0 1 0 0-1.1h-5.5a.55.55 0 0 0 0 1.1z\"></path><path d=\"M6.25 2.375A2.125 2.125 0 0 0 4.125 4.5v11c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125V8.121c0-.563-.224-1.104-.622-1.502L11.63 2.997a2.13 2.13 0 0 0-1.502-.622zM5.375 4.5c0-.483.392-.875.875-.875h3.7V6.25A2.05 2.05 0 0 0 12 8.3h2.625v7.2a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875zm8.691 2.7H12a.95.95 0 0 1-.95-.95V4.184z\"></path></svg><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Latency Numbers</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Latency Numbers ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Latency-Numbers-33324eb1ed548051a8e0e2ba13e04565?pvs=24",
+          "text": "Latency Numbers"
+        }
+      ]
+    },
+    {
+      "id": "27524eb1ed54801e9f8fc2ac783914e8",
+      "type": "sub_header",
+      "html": "Storage &amp; Transfer Speeds",
+      "text": "Storage & Transfer Speeds"
+    },
+    {
+      "id": "27524eb1ed5480839c59f652a1ea22db",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Medium"
+          },
+          {
+            "header": true,
+            "html": "Read Speed (approx.)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "HDD"
+          },
+          {
+            "header": false,
+            "html": "80–160 MB/s"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "SATA SSD"
+          },
+          {
+            "header": false,
+            "html": "500–600 MB/s"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "NVMe SSD"
+          },
+          {
+            "header": false,
+            "html": "1.5–3.5 GB/s"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Modern high-end NVMe"
+          },
+          {
+            "header": false,
+            "html": "up to 7 GB/s"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "RAM"
+          },
+          {
+            "header": false,
+            "html": "&gt;5–20 GB/s"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Network (1 Gbps)"
+          },
+          {
+            "header": false,
+            "html": "~125 MB/s max"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Network (10 Gbps)"
+          },
+          {
+            "header": false,
+            "html": "~1.25 GB/s max"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "27524eb1ed54801cb13adb76d360422d",
+      "type": "sub_header",
+      "html": "Size Units",
+      "text": "Size Units"
+    },
+    {
+      "id": "27524eb1ed548003bf55c4b6467d0495",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Unit"
+          },
+          {
+            "header": true,
+            "html": "Bytes (decimal, SI)"
+          },
+          {
+            "header": true,
+            "html": "Bytes (binary, IEC)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "1 KB"
+          },
+          {
+            "header": false,
+            "html": "10³ = 1,000"
+          },
+          {
+            "header": false,
+            "html": "2¹⁰ = 1,024 (KiB)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "1 MB"
+          },
+          {
+            "header": false,
+            "html": "10⁶ = 1,000,000"
+          },
+          {
+            "header": false,
+            "html": "2²⁰ = 1,048,576 (MiB)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "1 GB"
+          },
+          {
+            "header": false,
+            "html": "10⁹ = 1,000,000,000"
+          },
+          {
+            "header": false,
+            "html": "2³⁰ = 1,073,741,824 (GiB)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "1 TB"
+          },
+          {
+            "header": false,
+            "html": "10¹²"
+          },
+          {
+            "header": false,
+            "html": "2⁴⁰ = 1,099,511,627,776 (TiB)"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "1 PB"
+          },
+          {
+            "header": false,
+            "html": "10¹⁵"
+          },
+          {
+            "header": false,
+            "html": "2⁵⁰ ≈ 1.1259 × 10¹⁵ (PiB)"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "27524eb1ed54809788a3e8e7802d48ec",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">(Important: computers often use binary values (GiB, TiB), but marketing uses decimal.)</span>",
+      "text": "(Important: computers often use binary values (GiB, TiB), but marketing uses decimal.)"
+    },
+    {
+      "id": "27524eb1ed54802a843dd26a2bedd598",
+      "type": "sub_header",
+      "html": "Availability (Downtime per Year)",
+      "text": "Availability (Downtime per Year)"
+    },
+    {
+      "id": "27524eb1ed54806ca1c0e9c8ca368b43",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Availability %"
+          },
+          {
+            "header": true,
+            "html": "Downtime / Year"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "99% (“two nines”)"
+          },
+          {
+            "header": false,
+            "html": "3.65 days"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "99.9% (“three nines”)"
+          },
+          {
+            "header": false,
+            "html": "8.76 hours"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "99.99% (“four nines”)"
+          },
+          {
+            "header": false,
+            "html": "52.6 minutes"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "99.999% (“five nines”)"
+          },
+          {
+            "header": false,
+            "html": "5.26 minutes"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "99.9999% (“six nines”)"
+          },
+          {
+            "header": false,
+            "html": "31.5 seconds"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "27524eb1ed5480e083c6f6fb5baa7d22",
+      "type": "divider"
+    },
+    {
+      "id": "27524eb1ed548070b0bad2257b6fa484",
+      "type": "header",
+      "html": "Process",
+      "text": "Process"
+    },
+    {
+      "id": "27524eb1ed548003b880d2e72b4c1e47",
+      "type": "sub_header",
+      "html": "1. Clarify Scope",
+      "text": "1. Clarify Scope"
+    },
+    {
+      "id": "27524eb1ed5480209535c8b2fc3fb572",
+      "type": "text",
+      "html": "Before estimating anything, you must <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">define the boundaries of the problem</span>. Without this, numbers are meaningless.",
+      "text": "Before estimating anything, you must define the boundaries of the problem. Without this, numbers are meaningless."
+    },
+    {
+      "id": "27524eb1ed5480f299efe2903443b7ef",
+      "type": "sub_sub_header",
+      "html": "What to clarify",
+      "text": "What to clarify"
+    },
+    {
+      "id": "27524eb1ed548054a363c5c495f5ec93",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Features in scope</span>",
+      "text": "Features in scope"
+    },
+    {
+      "id": "27524eb1ed54804aaeabc6a7d3a233f7",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed548054a363c5c495f5ec93",
+      "html": "What functionality are we supporting? (e.g., photo sharing, messaging, video streaming)",
+      "text": "What functionality are we supporting? (e.g., photo sharing, messaging, video streaming)"
+    },
+    {
+      "id": "27524eb1ed5480749b00ed4af37ba574",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed548054a363c5c495f5ec93",
+      "html": "Each feature has different storage, bandwidth, and compute patterns.",
+      "text": "Each feature has different storage, bandwidth, and compute patterns."
+    },
+    {
+      "id": "27524eb1ed5480249069c5488ea1e4cd",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">User base</span>",
+      "text": "User base"
+    },
+    {
+      "id": "27524eb1ed54808c93bdcb17d7dc0f21",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480249069c5488ea1e4cd",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Total users</span> (registered).",
+      "text": "Total users (registered)."
+    },
+    {
+      "id": "27524eb1ed5480a6a4bbff07754e78e9",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480249069c5488ea1e4cd",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Active users</span> →",
+      "text": "Active users →"
+    },
+    {
+      "id": "27524eb1ed5480998ff0cbd28fe00a7e",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480a6a4bbff07754e78e9",
+      "html": "DAU (Daily Active Users).",
+      "text": "DAU (Daily Active Users)."
+    },
+    {
+      "id": "27524eb1ed5480abafaff01b164485ac",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480a6a4bbff07754e78e9",
+      "html": "MAU (Monthly Active Users).",
+      "text": "MAU (Monthly Active Users)."
+    },
+    {
+      "id": "27524eb1ed548020912fc448fbe7ea15",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480249069c5488ea1e4cd",
+      "html": "Clarify <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">geography</span> (local vs global users → affects latency/bandwidth).",
+      "text": "Clarify geography (local vs global users → affects latency/bandwidth)."
+    },
+    {
+      "id": "27524eb1ed5480119f3dc9ad9c07c0f8",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Usage patterns</span>",
+      "text": "Usage patterns"
+    },
+    {
+      "id": "27524eb1ed5480c1ba12d823e9016d50",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480119f3dc9ad9c07c0f8",
+      "html": "How often does a user interact? (e.g., avg posts/day, reads/day).",
+      "text": "How often does a user interact? (e.g., avg posts/day, reads/day)."
+    },
+    {
+      "id": "27524eb1ed5480b798bcf8b9fb0c280d",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480119f3dc9ad9c07c0f8",
+      "html": "Average session length, request rate, upload/download size.",
+      "text": "Average session length, request rate, upload/download size."
+    },
+    {
+      "id": "27524eb1ed5480eb8280c4a56e9f8db4",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480119f3dc9ad9c07c0f8",
+      "html": "Ratio of reads to writes (often 10:1 or higher).",
+      "text": "Ratio of reads to writes (often 10:1 or higher)."
+    },
+    {
+      "id": "27524eb1ed548086b452e15b68d9ba4a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Growth expectations</span>",
+      "text": "Growth expectations"
+    },
+    {
+      "id": "27524eb1ed54807ba81efa8a90f7a7c7",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed548086b452e15b68d9ba4a",
+      "html": "Year 1, Year 3 horizon.",
+      "text": "Year 1, Year 3 horizon."
+    },
+    {
+      "id": "27524eb1ed5480ad9a35ec298bb5d0b9",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed548086b452e15b68d9ba4a",
+      "html": "Peak events (launch, viral growth, Black Friday spikes).",
+      "text": "Peak events (launch, viral growth, Black Friday spikes)."
+    },
+    {
+      "id": "27524eb1ed548004b937f6faeaaea628",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Non-functional requirements</span>",
+      "text": "Non-functional requirements"
+    },
+    {
+      "id": "27524eb1ed5480c491c9e24ac330b3ae",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed548004b937f6faeaaea628",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Latency targets</span> (e.g., &lt;200 ms for API response).",
+      "text": "Latency targets (e.g., <200 ms for API response)."
+    },
+    {
+      "id": "27524eb1ed54808983a1e10729619c8e",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed548004b937f6faeaaea628",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Availability targets</span> (99.9% vs 99.99%).",
+      "text": "Availability targets (99.9% vs 99.99%)."
+    },
+    {
+      "id": "27524eb1ed54809f9afae1ed4cc22f2f",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed548004b937f6faeaaea628",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consistency model</span> (eventual vs strong).",
+      "text": "Consistency model (eventual vs strong)."
+    },
+    {
+      "id": "27524eb1ed5480e892c3ef8a4a2b789d",
+      "type": "sub_sub_header",
+      "html": "Why this matters",
+      "text": "Why this matters"
+    },
+    {
+      "id": "27524eb1ed5480168b02f328399e9d58",
+      "type": "bulleted_list",
+      "html": "Defines <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">what to calculate</span> and prevents wasted time on irrelevant components.",
+      "text": "Defines what to calculate and prevents wasted time on irrelevant components."
+    },
+    {
+      "id": "27524eb1ed54807f8c8fec506369db25",
+      "type": "bulleted_list",
+      "html": "Guides which <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">constants</span> (latency, bandwidth, storage speeds) to use later.",
+      "text": "Guides which constants (latency, bandwidth, storage speeds) to use later."
+    },
+    {
+      "id": "27524eb1ed54801183d9cfca66a81a19",
+      "type": "sub_header",
+      "html": "2. Break into Components",
+      "text": "2. Break into Components"
+    },
+    {
+      "id": "27524eb1ed5480da849be8f8a735eddd",
+      "type": "text",
+      "html": "Once scope is clear, break the system into <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">major building blocks</span>. Each block has its own resource requirements.",
+      "text": "Once scope is clear, break the system into major building blocks. Each block has its own resource requirements."
+    },
+    {
+      "id": "27524eb1ed5480ca8cb0fb471bdedf37",
+      "type": "sub_sub_header",
+      "html": "Core components to consider",
+      "text": "Core components to consider"
+    },
+    {
+      "id": "27524eb1ed54809585b7dbff07545576",
+      "type": "text",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Servers-24f24eb1ed54806a8dffdc09fbd00b29?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Servers</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Servers ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Servers-24f24eb1ed54806a8dffdc09fbd00b29?pvs=24",
+          "text": "Servers"
+        }
+      ]
+    },
+    {
+      "id": "27524eb1ed548020b9eac46db9f8ae67",
+      "type": "text",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Databases-24d24eb1ed548054bd55d5db65a2f091?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Databases</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Databases ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Databases-24d24eb1ed548054bd55d5db65a2f091?pvs=24",
+          "text": "Databases"
+        }
+      ]
+    },
+    {
+      "id": "27524eb1ed54801ab356f4d417125634",
+      "type": "text",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Caches-27c24eb1ed54800481aec012be8ff712?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Caches</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Caches ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Caches-27c24eb1ed54800481aec012be8ff712?pvs=24",
+          "text": "Caches"
+        }
+      ]
+    },
+    {
+      "id": "27524eb1ed54806bb4eed6ffd455ebdd",
+      "type": "text",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Load-Balancer-24f24eb1ed5480de982fe549f2e323a4?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Load Balancer</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Load Balancer ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Load-Balancer-24f24eb1ed5480de982fe549f2e323a4?pvs=24",
+          "text": "Load Balancer"
+        }
+      ]
+    },
+    {
+      "id": "27524eb1ed54806481aec0a338dfbd81",
+      "type": "text",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/CDN-25824eb1ed548008806bde6f10dc774b?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CDN</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "CDN ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CDN-25824eb1ed548008806bde6f10dc774b?pvs=24",
+          "text": "CDN"
+        }
+      ]
+    },
+    {
+      "id": "27524eb1ed5480509006d6bb26c8c4b3",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Storage Systems</span>",
+      "text": "Storage Systems"
+    },
+    {
+      "id": "27524eb1ed5480d59c16cce7e6577554",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480509006d6bb26c8c4b3",
+      "html": "Object storage (e.g., S3) for files, photos, videos.",
+      "text": "Object storage (e.g., S3) for files, photos, videos."
+    },
+    {
+      "id": "27524eb1ed5480cd8bcafd8c3dd021a6",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480509006d6bb26c8c4b3",
+      "html": "Estimate = file size × upload rate × retention × replication.",
+      "text": "Estimate = file size × upload rate × retention × replication."
+    },
+    {
+      "id": "27524eb1ed54801da512ed411ab4c550",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Message Queues / Streams</span> (if needed)",
+      "text": "Message Queues / Streams (if needed)"
+    },
+    {
+      "id": "27524eb1ed548089a56fed103b28f638",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed54801da512ed411ab4c550",
+      "html": "Handle async workloads (notifications, logs, analytics).",
+      "text": "Handle async workloads (notifications, logs, analytics)."
+    },
+    {
+      "id": "27524eb1ed54806c9b02f5a177c13a74",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed54801da512ed411ab4c550",
+      "html": "Estimate = message size × message rate.",
+      "text": "Estimate = message size × message rate."
+    },
+    {
+      "id": "27524eb1ed5480e0859fd7a57c2c4a3c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Analytics / Logging Systems</span>",
+      "text": "Analytics / Logging Systems"
+    },
+    {
+      "id": "27524eb1ed5480ea981fcde07e060a8d",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480e0859fd7a57c2c4a3c",
+      "html": "Often generate more data than the app itself.",
+      "text": "Often generate more data than the app itself."
+    },
+    {
+      "id": "27524eb1ed5480858aa9eafe2554ecd7",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed5480e0859fd7a57c2c4a3c",
+      "html": "Must estimate log volume separately.",
+      "text": "Must estimate log volume separately."
+    },
+    {
+      "id": "27524eb1ed548040a0a1ca050c204408",
+      "type": "sub_sub_header",
+      "html": "Why this matters",
+      "text": "Why this matters"
+    },
+    {
+      "id": "27524eb1ed5480e08b9ff5d64a6d4049",
+      "type": "bulleted_list",
+      "html": "Ensures <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">no blind spots</span> (many miss caches, logging, or CDN).",
+      "text": "Ensures no blind spots (many miss caches, logging, or CDN)."
+    },
+    {
+      "id": "27524eb1ed5480e595edec5d8696983f",
+      "type": "bulleted_list",
+      "html": "Breaks down a complex system into <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">manageable units</span> for estimation.",
+      "text": "Breaks down a complex system into manageable units for estimation."
+    },
+    {
+      "id": "27524eb1ed5480888927f526ab07ac00",
+      "type": "bulleted_list",
+      "html": "In interviews, shows you can think <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">holistically</span>, not just about databases.",
+      "text": "In interviews, shows you can think holistically, not just about databases."
+    },
+    {
+      "id": "27524eb1ed548015917fe715fe2ece59",
+      "type": "divider"
+    },
+    {
+      "id": "27524eb1ed5480a5a852f811dae84b49",
+      "type": "text",
+      "html": "Do you want me to move on to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Step 3: Estimate Each Component</span> in full detail next,",
+      "text": "Do you want me to move on to Step 3: Estimate Each Component in full detail next,"
+    },
+    {
+      "id": "27524eb1ed5480b486aaec2db534d277",
+      "type": "text",
+      "html": "or first show a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">worked mini-example</span> (e.g., messaging app → mapping into these components) so readers see how to break scope into pieces before estimating?",
+      "text": "or first show a worked mini-example (e.g., messaging app → mapping into these components) so readers see how to break scope into pieces before estimating?"
+    },
+    {
+      "id": "27524eb1ed54804a8902d73c12aaded6",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Estimate each component</span>",
+      "text": "Estimate each component"
+    },
+    {
+      "id": "27524eb1ed548099a7eef946187c53bf",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed54804a8902d73c12aaded6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Storage</span>: unit size × count × replication × growth",
+      "text": "Storage: unit size × count × replication × growth"
+    },
+    {
+      "id": "27524eb1ed5480949488ca0a7bcdbef5",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed54804a8902d73c12aaded6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bandwidth</span>: ingress (writes), egress (reads), peak vs avg",
+      "text": "Bandwidth: ingress (writes), egress (reads), peak vs avg"
+    },
+    {
+      "id": "27524eb1ed5480d69a91e3c6cfc873ca",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed54804a8902d73c12aaded6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Compute</span>: RPS ÷ per-server capacity (CPU, RAM)",
+      "text": "Compute: RPS ÷ per-server capacity (CPU, RAM)"
+    },
+    {
+      "id": "27524eb1ed54809dba2ce5b1495bc5ed",
+      "type": "bulleted_list",
+      "parent": "27524eb1ed54804a8902d73c12aaded6",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache</span>: 20% hot data ≈ 80% traffic",
+      "text": "Cache: 20% hot data ≈ 80% traffic"
+    },
+    {
+      "id": "27524eb1ed54805aa562c4a6504efbfd",
+      "type": "divider"
+    },
+    {
+      "id": "27524eb1ed54804b8329fbc8c38cfadd",
+      "type": "header",
+      "html": "More things to Consider",
+      "text": "More things to Consider"
+    },
+    {
+      "id": "27524eb1ed5480d38587f24351acf90f",
+      "type": "bulleted_list",
+      "html": "Always estimate for 3–5 years growth",
+      "text": "Always estimate for 3–5 years growth"
+    },
+    {
+      "id": "27524eb1ed5480aaa3a0ecdfab6afa2a",
+      "type": "bulleted_list",
+      "html": "Compression reduces storage and I/O needs",
+      "text": "Compression reduces storage and I/O needs"
+    },
+    {
+      "id": "27524eb1ed5480b5a457d4cc60edbc8b",
+      "type": "bulleted_list",
+      "html": "Design for <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">peak load</span>, not average",
+      "text": "Design for peak load, not average"
+    },
+    {
+      "id": "27524eb1ed54807e97eff75559aaa863",
+      "type": "bulleted_list",
+      "html": "Replication: higher cost + write load, better read &amp; availability",
+      "text": "Replication: higher cost + write load, better read & availability"
+    },
+    {
+      "id": "27524eb1ed5480ba8596c1b64027f220",
+      "type": "bulleted_list",
+      "html": "Sharding: distributes load, but key choice matters (hotspot risk)",
+      "text": "Sharding: distributes load, but key choice matters (hotspot risk)"
+    },
+    {
+      "id": "27524eb1ed5480d8aeaed453d128b0f2",
+      "type": "bulleted_list",
+      "html": "Cross-DC traffic: higher latency, consider multi-leader replication",
+      "text": "Cross-DC traffic: higher latency, consider multi-leader replication"
+    },
+    {
+      "id": "27524eb1ed54809088c1d961fdb95685",
+      "type": "divider"
+    }
+  ]
+}

@@ -1,0 +1,1820 @@
+{
+  "id": "2e824eb1ed5480eca2def2b63356ddac",
+  "title": "RabbitMQ",
+  "sourceUrl": "https://xpandeyed.notion.site/RabbitMQ-2e824eb1ed5480eca2def2b63356ddac?pvs=23",
+  "blocks": [
+    {
+      "id": "2ec24eb1ed548052b7e9f692d7dcde64",
+      "type": "sub_sub_header",
+      "html": "What this chapter is about",
+      "text": "What this chapter is about"
+    },
+    {
+      "id": "2ec24eb1ed548068a43df1317c93d628",
+      "type": "bulleted_list",
+      "html": "Understanding <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">RabbitMQ deeply</span>, not just definitions.",
+      "text": "Understanding RabbitMQ deeply, not just definitions."
+    },
+    {
+      "id": "2ec24eb1ed5480979829c7d0d1c5a449",
+      "type": "bulleted_list",
+      "html": "Building an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">interview-safe mental model</span>.",
+      "text": "Building an interview-safe mental model."
+    },
+    {
+      "id": "2ec24eb1ed5480e18233ccf6bb0e1a45",
+      "type": "bulleted_list",
+      "html": "Knowing <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">exactly when and why</span> RabbitMQ is used.",
+      "text": "Knowing exactly when and why RabbitMQ is used."
+    },
+    {
+      "id": "2ec24eb1ed548001b6a4d2388dca8922",
+      "type": "bulleted_list",
+      "html": "Avoiding <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">common but fatal interview mistakes</span>.",
+      "text": "Avoiding common but fatal interview mistakes."
+    },
+    {
+      "id": "2ec24eb1ed5480c78cc0ceeec8b4647e",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480288a4aef7fd530d73a",
+      "type": "sub_sub_header",
+      "html": "What a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">message</span> means in RabbitMQ (very precise)",
+      "text": "What a message means in RabbitMQ (very precise)"
+    },
+    {
+      "id": "2ec24eb1ed5480aea0c0cf02d980511d",
+      "type": "bulleted_list",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">message</span> is a <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">unit of work</span>, not a log.",
+      "text": "A message is a unit of work, not a log."
+    },
+    {
+      "id": "2ec24eb1ed54802eba7ce9bb368c67e7",
+      "type": "bulleted_list",
+      "html": "It represents <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">something that must be done</span>.",
+      "text": "It represents something that must be done."
+    },
+    {
+      "id": "2ec24eb1ed5480a2a431cd9a11ebf33a",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54809cadc6f1391124871c",
+      "type": "sub_sub_header",
+      "html": "What a message typically contains",
+      "text": "What a message typically contains"
+    },
+    {
+      "id": "2ec24eb1ed5480168638d6e79928bafc",
+      "type": "bulleted_list",
+      "html": "Task data.",
+      "text": "Task data."
+    },
+    {
+      "id": "2ec24eb1ed548054a970cc96d30f5bed",
+      "type": "bulleted_list",
+      "html": "Command data.",
+      "text": "Command data."
+    },
+    {
+      "id": "2ec24eb1ed5480e6aa50e3a4bcdabbe8",
+      "type": "bulleted_list",
+      "html": "Event notification <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">for immediate processing</span>.",
+      "text": "Event notification for immediate processing."
+    },
+    {
+      "id": "2ec24eb1ed5480508278eaac0c153e74",
+      "type": "bulleted_list",
+      "html": "Small payloads required to execute work.",
+      "text": "Small payloads required to execute work."
+    },
+    {
+      "id": "2ec24eb1ed548026a246d1aaf2289f5f",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54809d9504e1dbc5c3f38f",
+      "type": "sub_sub_header",
+      "html": "What a message is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">NOT</span>",
+      "text": "What a message is NOT"
+    },
+    {
+      "id": "2ec24eb1ed5480fcb447e560b80dc705",
+      "type": "bulleted_list",
+      "html": "Not logs.",
+      "text": "Not logs."
+    },
+    {
+      "id": "2ec24eb1ed548042bf5af52d4f8e3aea",
+      "type": "bulleted_list",
+      "html": "Not audit trails.",
+      "text": "Not audit trails."
+    },
+    {
+      "id": "2ec24eb1ed54806d9bd6f5946f3737e9",
+      "type": "bulleted_list",
+      "html": "Not historical records.",
+      "text": "Not historical records."
+    },
+    {
+      "id": "2ec24eb1ed54802a8cf7cd730076201c",
+      "type": "bulleted_list",
+      "html": "Not an append-only event.",
+      "text": "Not an append-only event."
+    },
+    {
+      "id": "2ec24eb1ed54806bb85ee060f183912a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why</span>",
+      "text": "Why"
+    },
+    {
+      "id": "2ec24eb1ed5480b3a7e0d9810973e9f3",
+      "type": "bulleted_list",
+      "html": "Messages are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">deleted after acknowledgement</span>.",
+      "text": "Messages are deleted after acknowledgement."
+    },
+    {
+      "id": "2ec24eb1ed54807f97bfc022d69f6598",
+      "type": "bulleted_list",
+      "html": "There is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">no replay mechanism</span>.",
+      "text": "There is no replay mechanism."
+    },
+    {
+      "id": "2ec24eb1ed5480838c1cebcc88213a4d",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54803985e4e0cae64a007b",
+      "type": "sub_sub_header",
+      "html": "Concrete examples of RabbitMQ messages",
+      "text": "Concrete examples of RabbitMQ messages"
+    },
+    {
+      "id": "2ec24eb1ed548046a401f9876c5002af",
+      "type": "bulleted_list",
+      "html": "“Send this email to user X”",
+      "text": "“Send this email to user X”"
+    },
+    {
+      "id": "2ec24eb1ed548015a237c0860c725794",
+      "type": "bulleted_list",
+      "html": "“Resize this image”",
+      "text": "“Resize this image”"
+    },
+    {
+      "id": "2ec24eb1ed548074bf32f7dd0cbdffcc",
+      "type": "bulleted_list",
+      "html": "“Charge this payment”",
+      "text": "“Charge this payment”"
+    },
+    {
+      "id": "2ec24eb1ed548067adcadf02ed66df9a",
+      "type": "bulleted_list",
+      "html": "“Generate this invoice”",
+      "text": "“Generate this invoice”"
+    },
+    {
+      "id": "2ec24eb1ed5480368709c9c1b80933f2",
+      "type": "bulleted_list",
+      "html": "“Notify service B that order was placed”",
+      "text": "“Notify service B that order was placed”"
+    },
+    {
+      "id": "2ec24eb1ed54809cae0fe05e941ab806",
+      "type": "text",
+      "html": "Each message implies <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">action</span>, not storage.",
+      "text": "Each message implies action, not storage."
+    },
+    {
+      "id": "2ec24eb1ed548013b8bdc29b71fa3c38",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548019b82dcbb80edbe2f4",
+      "type": "sub_sub_header",
+      "html": "Common beginner mistake (important)",
+      "text": "Common beginner mistake (important)"
+    },
+    {
+      "id": "2ec24eb1ed548089a2d0f04facbbf448",
+      "type": "bulleted_list",
+      "html": "<span style=\"white-space:nowrap;font-size:1em;font-family:&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;\">❌</span> “RabbitMQ stores logs/events”",
+      "text": "❌ “RabbitMQ stores logs/events”"
+    },
+    {
+      "id": "2ec24eb1ed5480ae8deec38d0d96cd19",
+      "type": "bulleted_list",
+      "html": "<span style=\"white-space:nowrap;font-size:1em;font-family:&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;\">✅</span> RabbitMQ <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">moves work</span> between services",
+      "text": "✅ RabbitMQ moves work between services"
+    },
+    {
+      "id": "2ec24eb1ed5480e0876ee4b660a8e41f",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54803e938bc1ad2d7b93e4",
+      "type": "sub_sub_header",
+      "html": "One-line interview answer (use this)",
+      "text": "One-line interview answer (use this)"
+    },
+    {
+      "id": "2ec24eb1ed548066b8d3c2c08407984f",
+      "type": "bulleted_list",
+      "html": "In RabbitMQ, a message is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">temporary instruction to perform work</span>, not a log or record.",
+      "text": "In RabbitMQ, a message is a temporary instruction to perform work, not a log or record."
+    },
+    {
+      "id": "2ec24eb1ed54804b9a5ffafda74c6723",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54806ab75ef5434679ab7a",
+      "type": "sub_sub_header",
+      "html": "Very important comparison (to avoid confusion)",
+      "text": "Very important comparison (to avoid confusion)"
+    },
+    {
+      "id": "2ec24eb1ed54805d9c5afde9de9d7425",
+      "type": "bulleted_list",
+      "html": "RabbitMQ message = <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">task / command</span>",
+      "text": "RabbitMQ message = task / command"
+    },
+    {
+      "id": "2ec24eb1ed54809f849af1259c45e539",
+      "type": "bulleted_list",
+      "html": "Kafka message = <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">event / log entry</span>",
+      "text": "Kafka message = event / log entry"
+    },
+    {
+      "id": "2ec24eb1ed548037a580cd4a2d2a2143",
+      "type": "text",
+      "html": "If you want, next we can:",
+      "text": "If you want, next we can:"
+    },
+    {
+      "id": "2ec24eb1ed5480198906e2034be5176a",
+      "type": "bulleted_list",
+      "html": "Contrast RabbitMQ message vs Kafka event deeply",
+      "text": "Contrast RabbitMQ message vs Kafka event deeply"
+    },
+    {
+      "id": "2ec24eb1ed5480a2bb03d773d6f10ecd",
+      "type": "bulleted_list",
+      "html": "Design a logging system (and explain why RabbitMQ is wrong)",
+      "text": "Design a logging system (and explain why RabbitMQ is wrong)"
+    },
+    {
+      "id": "2ec24eb1ed5480ff8d70c14534a6473b",
+      "type": "bulleted_list",
+      "html": "Map real systems to RabbitMQ messages",
+      "text": "Map real systems to RabbitMQ messages"
+    },
+    {
+      "id": "2ec24eb1ed54805fa6feffa542c6035f",
+      "type": "text",
+      "html": "Tell me what to do next.",
+      "text": "Tell me what to do next."
+    },
+    {
+      "id": "2ec24eb1ed5480faa905d943a064361b",
+      "type": "text"
+    },
+    {
+      "id": "2ec24eb1ed5480e8ad1cc0dddbf2c37a",
+      "type": "text"
+    },
+    {
+      "id": "2ec24eb1ed548030a06bc849a660a89d",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548018be6af7e3480ef664",
+      "type": "text"
+    },
+    {
+      "id": "2ec24eb1ed5480f09c12de4377342988",
+      "type": "sub_header",
+      "html": "1. What RabbitMQ actually is",
+      "text": "1. What RabbitMQ actually is"
+    },
+    {
+      "id": "2ec24eb1ed5480659568f061ab56dd96",
+      "type": "bulleted_list",
+      "html": "RabbitMQ is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">message broker</span>.",
+      "text": "RabbitMQ is a message broker."
+    },
+    {
+      "id": "2ec24eb1ed548007b03bee1f9cc37e95",
+      "type": "bulleted_list",
+      "html": "It moves <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">messages</span>, not streams.",
+      "text": "It moves messages, not streams."
+    },
+    {
+      "id": "2ec24eb1ed548002a98ae9e01430d398",
+      "type": "bulleted_list",
+      "html": "It is built for <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">asynchronous task execution</span>.",
+      "text": "It is built for asynchronous task execution."
+    },
+    {
+      "id": "2ec24eb1ed54806384a9e9719775a4b6",
+      "type": "sub_sub_header",
+      "html": "What RabbitMQ does",
+      "text": "What RabbitMQ does"
+    },
+    {
+      "id": "2ec24eb1ed5480d4b9d7ea56d3818be9",
+      "type": "bulleted_list",
+      "html": "Accepts messages from producers.",
+      "text": "Accepts messages from producers."
+    },
+    {
+      "id": "2ec24eb1ed548084bd9ddaa2ff2cb720",
+      "type": "bulleted_list",
+      "html": "Routes messages using rules.",
+      "text": "Routes messages using rules."
+    },
+    {
+      "id": "2ec24eb1ed5480f1b05ccb8673759216",
+      "type": "bulleted_list",
+      "html": "Temporarily stores messages.",
+      "text": "Temporarily stores messages."
+    },
+    {
+      "id": "2ec24eb1ed5480109813dcc245f255ff",
+      "type": "bulleted_list",
+      "html": "Delivers messages to consumers.",
+      "text": "Delivers messages to consumers."
+    },
+    {
+      "id": "2ec24eb1ed5480f2a7a8c16796c09a6e",
+      "type": "bulleted_list",
+      "html": "Deletes messages after successful processing.",
+      "text": "Deletes messages after successful processing."
+    },
+    {
+      "id": "2ec24eb1ed5480dbb743ef2f082f20a6",
+      "type": "sub_sub_header",
+      "html": "What RabbitMQ does NOT do",
+      "text": "What RabbitMQ does NOT do"
+    },
+    {
+      "id": "2ec24eb1ed54805e908adff985d71f98",
+      "type": "bulleted_list",
+      "html": "Does not store messages for long-term.",
+      "text": "Does not store messages for long-term."
+    },
+    {
+      "id": "2ec24eb1ed5480a58f77c5009e2e74d0",
+      "type": "bulleted_list",
+      "html": "Does not support message replay.",
+      "text": "Does not support message replay."
+    },
+    {
+      "id": "2ec24eb1ed5480718a40d3d49decae3b",
+      "type": "bulleted_list",
+      "html": "Does not guarantee exactly-once delivery.",
+      "text": "Does not guarantee exactly-once delivery."
+    },
+    {
+      "id": "2ec24eb1ed54805a807bfb9d3d15e5da",
+      "type": "bulleted_list",
+      "html": "Does not act as an event log.",
+      "text": "Does not act as an event log."
+    },
+    {
+      "id": "2ec24eb1ed5480c79480fb6eb7cdc0e9",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54800aa564f01416bef0e4",
+      "type": "sub_header",
+      "html": "2. The core message flow (most important)",
+      "text": "2. The core message flow (most important)"
+    },
+    {
+      "id": "2ec24eb1ed548098aafcd106b9afbf00",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Producer → Exchange → Queue → Consumer</span>",
+      "text": "Producer → Exchange → Queue → Consumer"
+    },
+    {
+      "id": "2ec24eb1ed5480f3b9c1e9d43ec5de8c",
+      "type": "sub_sub_header",
+      "html": "Producer",
+      "text": "Producer"
+    },
+    {
+      "id": "2ec24eb1ed5480f68b6ec4178ab36485",
+      "type": "bulleted_list",
+      "html": "Sends messages to an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">exchange</span>.",
+      "text": "Sends messages to an exchange."
+    },
+    {
+      "id": "2ec24eb1ed5480c5adbec37684971b4b",
+      "type": "bulleted_list",
+      "html": "Never sends messages directly to a queue.",
+      "text": "Never sends messages directly to a queue."
+    },
+    {
+      "id": "2ec24eb1ed54800387c4fb865ff84952",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why</span>",
+      "text": "Why"
+    },
+    {
+      "id": "2ec24eb1ed54802ba75ecbc9f8b322dc",
+      "type": "bulleted_list",
+      "html": "Producer must not know:",
+      "text": "Producer must not know:"
+    },
+    {
+      "id": "2ec24eb1ed5480eeaa5fe49aa5b58246",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54802ba75ecbc9f8b322dc",
+      "html": "Which queues exist.",
+      "text": "Which queues exist."
+    },
+    {
+      "id": "2ec24eb1ed5480ddaa4de59434260c26",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54802ba75ecbc9f8b322dc",
+      "html": "How many consumers exist.",
+      "text": "How many consumers exist."
+    },
+    {
+      "id": "2ec24eb1ed5480d18d71c1fcf5e62a98",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54802ba75ecbc9f8b322dc",
+      "html": "How routing works.",
+      "text": "How routing works."
+    },
+    {
+      "id": "2ec24eb1ed548012b657f686a28c98fb",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480f28bcbf3847c754539",
+      "type": "sub_sub_header",
+      "html": "Exchange",
+      "text": "Exchange"
+    },
+    {
+      "id": "2ec24eb1ed54808988c5cb9c55296aeb",
+      "type": "bulleted_list",
+      "html": "Stateless routing component.",
+      "text": "Stateless routing component."
+    },
+    {
+      "id": "2ec24eb1ed5480839b54c5c5e348510f",
+      "type": "bulleted_list",
+      "html": "Applies routing rules.",
+      "text": "Applies routing rules."
+    },
+    {
+      "id": "2ec24eb1ed5480b1ba0fe21e4e64ba39",
+      "type": "bulleted_list",
+      "html": "Decides <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">which queues get a copy of the message</span>.",
+      "text": "Decides which queues get a copy of the message."
+    },
+    {
+      "id": "2ec24eb1ed5480528705e80d267b551f",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key fact</span>",
+      "text": "Key fact"
+    },
+    {
+      "id": "2ec24eb1ed5480fbb04af8e51f2a187c",
+      "type": "bulleted_list",
+      "html": "Exchange never stores messages.",
+      "text": "Exchange never stores messages."
+    },
+    {
+      "id": "2ec24eb1ed5480bbabc4e0b85ab83617",
+      "type": "bulleted_list",
+      "html": "If no queue matches, the message is dropped.",
+      "text": "If no queue matches, the message is dropped."
+    },
+    {
+      "id": "2ec24eb1ed5480d8aa95dd14453d7936",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480f8acb3f6f17984a0c6",
+      "type": "sub_sub_header",
+      "html": "Queue",
+      "text": "Queue"
+    },
+    {
+      "id": "2ec24eb1ed548056bc89e99b7fecaa9f",
+      "type": "bulleted_list",
+      "html": "Stores messages <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">temporarily</span>.",
+      "text": "Stores messages temporarily."
+    },
+    {
+      "id": "2ec24eb1ed54805eae35d0c66cd159cf",
+      "type": "bulleted_list",
+      "html": "Messages are ordered inside a queue.",
+      "text": "Messages are ordered inside a queue."
+    },
+    {
+      "id": "2ec24eb1ed5480aa950dd7c0944ab35e",
+      "type": "bulleted_list",
+      "html": "Messages wait until consumed.",
+      "text": "Messages wait until consumed."
+    },
+    {
+      "id": "2ec24eb1ed548046b03ad91b5bcd25fd",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Important</span>",
+      "text": "Important"
+    },
+    {
+      "id": "2ec24eb1ed5480e2ae2ed649761af30f",
+      "type": "bulleted_list",
+      "html": "Queue belongs to RabbitMQ, not consumers.",
+      "text": "Queue belongs to RabbitMQ, not consumers."
+    },
+    {
+      "id": "2ec24eb1ed54804ba4f2d438606f2bb4",
+      "type": "bulleted_list",
+      "html": "Queue deletes a message only after acknowledgement.",
+      "text": "Queue deletes a message only after acknowledgement."
+    },
+    {
+      "id": "2ec24eb1ed54807ca80fea1193ec6ef8",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548078a590d6284d7426b7",
+      "type": "sub_sub_header",
+      "html": "Consumer",
+      "text": "Consumer"
+    },
+    {
+      "id": "2ec24eb1ed5480f7b942d3ee34b777f5",
+      "type": "bulleted_list",
+      "html": "Pulls messages from a queue.",
+      "text": "Pulls messages from a queue."
+    },
+    {
+      "id": "2ec24eb1ed54801184dee2ea1ae0c4da",
+      "type": "bulleted_list",
+      "html": "Processes the message.",
+      "text": "Processes the message."
+    },
+    {
+      "id": "2ec24eb1ed54806aad67d0d0a4b86d84",
+      "type": "bulleted_list",
+      "html": "Sends acknowledgement <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">after processing</span>.",
+      "text": "Sends acknowledgement after processing."
+    },
+    {
+      "id": "2ec24eb1ed54808fa0e7c429df73c85e",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480ecb8fbf8f1a7465dcd",
+      "type": "sub_header",
+      "html": "3. Why exchanges exist (interview-critical)",
+      "text": "3. Why exchanges exist (interview-critical)"
+    },
+    {
+      "id": "2ec24eb1ed5480139312fbfde5455491",
+      "type": "bulleted_list",
+      "html": "Enables <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">decoupling</span> between producers and consumers.",
+      "text": "Enables decoupling between producers and consumers."
+    },
+    {
+      "id": "2ec24eb1ed54808ea0aedcc79356dde5",
+      "type": "bulleted_list",
+      "html": "Enables <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">fan-out</span> (one-to-many delivery).",
+      "text": "Enables fan-out (one-to-many delivery)."
+    },
+    {
+      "id": "2ec24eb1ed548009b098cdaf82cbceba",
+      "type": "bulleted_list",
+      "html": "Enables <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">dynamic routing changes</span> without redeploying producers.",
+      "text": "Enables dynamic routing changes without redeploying producers."
+    },
+    {
+      "id": "2ec24eb1ed5480539a0cca1ffce26d03",
+      "type": "bulleted_list",
+      "html": "Prevents tight coupling to queue names.",
+      "text": "Prevents tight coupling to queue names."
+    },
+    {
+      "id": "2ec24eb1ed5480a288bbfc5035243a9c",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54806a81c9faab7fd2d111",
+      "type": "sub_header",
+      "html": "4. Exchange types (routing logic)",
+      "text": "4. Exchange types (routing logic)"
+    },
+    {
+      "id": "2ec24eb1ed5480d6a0bbee69398dd5e6",
+      "type": "text",
+      "html": "Each exchange type defines <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">how routing happens</span>.",
+      "text": "Each exchange type defines how routing happens."
+    },
+    {
+      "id": "2ec24eb1ed5480a6bb52e41a86eab94f",
+      "type": "sub_sub_header",
+      "html": "Direct exchange",
+      "text": "Direct exchange"
+    },
+    {
+      "id": "2ec24eb1ed5480f18c4de165f9b3145e",
+      "type": "bulleted_list",
+      "html": "Exact match on routing key.",
+      "text": "Exact match on routing key."
+    },
+    {
+      "id": "2ec24eb1ed54802c87acf02947e2bc37",
+      "type": "bulleted_list",
+      "html": "Used for simple routing.",
+      "text": "Used for simple routing."
+    },
+    {
+      "id": "2ec24eb1ed54808a8dfbde4cff4ba108",
+      "type": "sub_sub_header",
+      "html": "Fanout exchange",
+      "text": "Fanout exchange"
+    },
+    {
+      "id": "2ec24eb1ed5480dda150f5e2dfefa631",
+      "type": "bulleted_list",
+      "html": "Ignores routing key.",
+      "text": "Ignores routing key."
+    },
+    {
+      "id": "2ec24eb1ed5480bfb8befe102ac0507c",
+      "type": "bulleted_list",
+      "html": "Sends message to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">all bound queues</span>.",
+      "text": "Sends message to all bound queues."
+    },
+    {
+      "id": "2ec24eb1ed54806bba3add6170c884d0",
+      "type": "bulleted_list",
+      "html": "Used for pub-sub.",
+      "text": "Used for pub-sub."
+    },
+    {
+      "id": "2ec24eb1ed5480d6ab27fc7a223e6840",
+      "type": "sub_sub_header",
+      "html": "Topic exchange",
+      "text": "Topic exchange"
+    },
+    {
+      "id": "2ec24eb1ed548073b224e3977b42812a",
+      "type": "bulleted_list",
+      "html": "Pattern-based routing.",
+      "text": "Pattern-based routing."
+    },
+    {
+      "id": "2ec24eb1ed5480cbb952dbc9b0d338ec",
+      "type": "bulleted_list",
+      "html": "Supports wildcards.",
+      "text": "Supports wildcards."
+    },
+    {
+      "id": "2ec24eb1ed54800fbd67effc465ef0d3",
+      "type": "bulleted_list",
+      "html": "Used for complex event routing.",
+      "text": "Used for complex event routing."
+    },
+    {
+      "id": "2ec24eb1ed5480d8bac7f5c042e49c61",
+      "type": "sub_sub_header",
+      "html": "Headers exchange",
+      "text": "Headers exchange"
+    },
+    {
+      "id": "2ec24eb1ed54808fa775ccec26faa155",
+      "type": "bulleted_list",
+      "html": "Routes based on message headers.",
+      "text": "Routes based on message headers."
+    },
+    {
+      "id": "2ec24eb1ed54805da50fd0f07f6ee312",
+      "type": "bulleted_list",
+      "html": "Rarely used in practice.",
+      "text": "Rarely used in practice."
+    },
+    {
+      "id": "2ec24eb1ed5480d49ac3e4989cf5923c",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480e685cdf6e5f0a463eb",
+      "type": "sub_header",
+      "html": "5. Acknowledgements (delivery guarantees)",
+      "text": "5. Acknowledgements (delivery guarantees)"
+    },
+    {
+      "id": "2ec24eb1ed548005ab41f32e109517fd",
+      "type": "text",
+      "html": "Acknowledgement decides <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">when a message can be deleted</span>.",
+      "text": "Acknowledgement decides when a message can be deleted."
+    },
+    {
+      "id": "2ec24eb1ed54809c9ce3e026c1111996",
+      "type": "sub_sub_header",
+      "html": "Auto acknowledgement",
+      "text": "Auto acknowledgement"
+    },
+    {
+      "id": "2ec24eb1ed5480c093e2ca27fabf5682",
+      "type": "bulleted_list",
+      "html": "Message is considered successful on delivery.",
+      "text": "Message is considered successful on delivery."
+    },
+    {
+      "id": "2ec24eb1ed54802f9d59dfe18fd5b8ff",
+      "type": "bulleted_list",
+      "html": "Consumer crash causes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">message loss</span>.",
+      "text": "Consumer crash causes message loss."
+    },
+    {
+      "id": "2ec24eb1ed5480b19ec1f0a48caf3fcf",
+      "type": "bulleted_list",
+      "html": "Delivery type: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at-most-once</span>.",
+      "text": "Delivery type: at-most-once."
+    },
+    {
+      "id": "2ec24eb1ed548019bb66c33256cbb463",
+      "type": "sub_sub_header",
+      "html": "Manual acknowledgement",
+      "text": "Manual acknowledgement"
+    },
+    {
+      "id": "2ec24eb1ed54805c9ed9e585e152e055",
+      "type": "bulleted_list",
+      "html": "Message is deleted only after ack.",
+      "text": "Message is deleted only after ack."
+    },
+    {
+      "id": "2ec24eb1ed5480b69656ef792e6c9090",
+      "type": "bulleted_list",
+      "html": "Consumer crash causes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">redelivery</span>.",
+      "text": "Consumer crash causes redelivery."
+    },
+    {
+      "id": "2ec24eb1ed5480cc9abcf1b1284b1b3e",
+      "type": "bulleted_list",
+      "html": "Delivery type: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at-least-once</span>.",
+      "text": "Delivery type: at-least-once."
+    },
+    {
+      "id": "2ec24eb1ed5480909004c918690cd654",
+      "type": "sub_sub_header",
+      "html": "Important truth",
+      "text": "Important truth"
+    },
+    {
+      "id": "2ec24eb1ed54801281b3d28d24061f90",
+      "type": "bulleted_list",
+      "html": "Exactly-once delivery <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">does not exist</span> in RabbitMQ.",
+      "text": "Exactly-once delivery does not exist in RabbitMQ."
+    },
+    {
+      "id": "2ec24eb1ed54801eb1dae4ef13602696",
+      "type": "bulleted_list",
+      "html": "Consumers must be <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">idempotent</span>.",
+      "text": "Consumers must be idempotent."
+    },
+    {
+      "id": "2ec24eb1ed5480a89bd6f5f3b2ebc271",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54803aa4b3cbd177803679",
+      "type": "sub_header",
+      "html": "6. What happens on consumer failure",
+      "text": "6. What happens on consumer failure"
+    },
+    {
+      "id": "2ec24eb1ed548097a94ccbbf59cae120",
+      "type": "bulleted_list",
+      "html": "Consumer receives message.",
+      "text": "Consumer receives message."
+    },
+    {
+      "id": "2ec24eb1ed54801d9a3cd70175479dc9",
+      "type": "bulleted_list",
+      "html": "Consumer crashes before ack.",
+      "text": "Consumer crashes before ack."
+    },
+    {
+      "id": "2ec24eb1ed54800e851cc7bf2133013e",
+      "type": "bulleted_list",
+      "html": "Broker:",
+      "text": "Broker:"
+    },
+    {
+      "id": "2ec24eb1ed548035bc5cf955a30316a7",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54800e851cc7bf2133013e",
+      "html": "Detects connection loss.",
+      "text": "Detects connection loss."
+    },
+    {
+      "id": "2ec24eb1ed54800f8381c4cb4b99cd54",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54800e851cc7bf2133013e",
+      "html": "Re-queues the message.",
+      "text": "Re-queues the message."
+    },
+    {
+      "id": "2ec24eb1ed54804f8c12ccff8a57ca1e",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54800e851cc7bf2133013e",
+      "html": "Redelivers it to another consumer.",
+      "text": "Redelivers it to another consumer."
+    },
+    {
+      "id": "2ec24eb1ed5480cb9a63e224cd9b912e",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480f9893bd3e367db6c06",
+      "type": "sub_header",
+      "html": "7. Durability and persistence (crash safety)",
+      "text": "7. Durability and persistence (crash safety)"
+    },
+    {
+      "id": "2ec24eb1ed5480ec9a7af2f77225c8c4",
+      "type": "text",
+      "html": "These decide <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">what survives broker restart</span>.",
+      "text": "These decide what survives broker restart."
+    },
+    {
+      "id": "2ec24eb1ed54802da1d6c6765c1a5848",
+      "type": "sub_sub_header",
+      "html": "Durable queue",
+      "text": "Durable queue"
+    },
+    {
+      "id": "2ec24eb1ed5480e9908ff6e0a515d828",
+      "type": "bulleted_list",
+      "html": "Queue metadata survives restart.",
+      "text": "Queue metadata survives restart."
+    },
+    {
+      "id": "2ec24eb1ed54803784e0e1472e9b4f98",
+      "type": "bulleted_list",
+      "html": "Does NOT guarantee message survival.",
+      "text": "Does NOT guarantee message survival."
+    },
+    {
+      "id": "2ec24eb1ed5480c492a6db44a1e05b42",
+      "type": "sub_sub_header",
+      "html": "Persistent message",
+      "text": "Persistent message"
+    },
+    {
+      "id": "2ec24eb1ed5480bbb30efd6a8890cabd",
+      "type": "bulleted_list",
+      "html": "Message is written to disk.",
+      "text": "Message is written to disk."
+    },
+    {
+      "id": "2ec24eb1ed5480f5be1ac27260ec8cb9",
+      "type": "bulleted_list",
+      "html": "Does NOT survive if queue is non-durable.",
+      "text": "Does NOT survive if queue is non-durable."
+    },
+    {
+      "id": "2ec24eb1ed5480b19e9bced141c8f384",
+      "type": "sub_sub_header",
+      "html": "Rule to remember",
+      "text": "Rule to remember"
+    },
+    {
+      "id": "2ec24eb1ed54805c9366ecdfb60a326c",
+      "type": "bulleted_list",
+      "html": "Durable queue + persistent message = crash-safe.",
+      "text": "Durable queue + persistent message = crash-safe."
+    },
+    {
+      "id": "2ec24eb1ed54801ca184cd36c435fd4e",
+      "type": "bulleted_list",
+      "html": "Any other combination = message loss possible.",
+      "text": "Any other combination = message loss possible."
+    },
+    {
+      "id": "2ec24eb1ed548086b981f99597e9d80f",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548061b52fc389532dc5cc",
+      "type": "sub_header",
+      "html": "8. Competing consumers (scaling)",
+      "text": "8. Competing consumers (scaling)"
+    },
+    {
+      "id": "2ec24eb1ed5480ec9847c62c04f6b95e",
+      "type": "bulleted_list",
+      "html": "Multiple consumers read from <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one queue</span>.",
+      "text": "Multiple consumers read from one queue."
+    },
+    {
+      "id": "2ec24eb1ed5480689b60f5573bf0443f",
+      "type": "bulleted_list",
+      "html": "Each message goes to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only one consumer</span>.",
+      "text": "Each message goes to only one consumer."
+    },
+    {
+      "id": "2ec24eb1ed5480b88ee9f8adad194a35",
+      "type": "sub_sub_header",
+      "html": "What this achieves",
+      "text": "What this achieves"
+    },
+    {
+      "id": "2ec24eb1ed54808aa04ef22349bfc563",
+      "type": "bulleted_list",
+      "html": "Load distribution.",
+      "text": "Load distribution."
+    },
+    {
+      "id": "2ec24eb1ed5480f48e4ddc7521271e2b",
+      "type": "bulleted_list",
+      "html": "Horizontal scaling.",
+      "text": "Horizontal scaling."
+    },
+    {
+      "id": "2ec24eb1ed5480789eb4c3e33ff324df",
+      "type": "bulleted_list",
+      "html": "Faster processing.",
+      "text": "Faster processing."
+    },
+    {
+      "id": "2ec24eb1ed54807fb456e95a92d20910",
+      "type": "sub_sub_header",
+      "html": "What it does NOT do",
+      "text": "What it does NOT do"
+    },
+    {
+      "id": "2ec24eb1ed54805c85c3c37a392dd58a",
+      "type": "bulleted_list",
+      "html": "Does not duplicate messages.",
+      "text": "Does not duplicate messages."
+    },
+    {
+      "id": "2ec24eb1ed548072be3df9a9d9dd5ee4",
+      "type": "bulleted_list",
+      "html": "Does not provide pub-sub.",
+      "text": "Does not provide pub-sub."
+    },
+    {
+      "id": "2ec24eb1ed548052aa50eedc0d670c72",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54803693e8cb3da409da25",
+      "type": "sub_header",
+      "html": "9. Pub-Sub in RabbitMQ (frequent confusion)",
+      "text": "9. Pub-Sub in RabbitMQ (frequent confusion)"
+    },
+    {
+      "id": "2ec24eb1ed54809e988bdb2321861a4e",
+      "type": "sub_sub_header",
+      "html": "Wrong model",
+      "text": "Wrong model"
+    },
+    {
+      "id": "2ec24eb1ed5480968b25cbc9ded6041c",
+      "type": "bulleted_list",
+      "html": "One queue with many consumers.",
+      "text": "One queue with many consumers."
+    },
+    {
+      "id": "2ec24eb1ed5480df8fc0f97f6cba7ec6",
+      "type": "sub_sub_header",
+      "html": "Correct model",
+      "text": "Correct model"
+    },
+    {
+      "id": "2ec24eb1ed548021a9cedcc160423c5b",
+      "type": "bulleted_list",
+      "html": "One exchange.",
+      "text": "One exchange."
+    },
+    {
+      "id": "2ec24eb1ed54807db993daa28e06094c",
+      "type": "bulleted_list",
+      "html": "Multiple queues bound to that exchange.",
+      "text": "Multiple queues bound to that exchange."
+    },
+    {
+      "id": "2ec24eb1ed54802e9545cc18e96c2152",
+      "type": "bulleted_list",
+      "html": "One consumer per queue.",
+      "text": "One consumer per queue."
+    },
+    {
+      "id": "2ec24eb1ed5480bfb8e3e2b7d1aa3ec1",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Result</span>",
+      "text": "Result"
+    },
+    {
+      "id": "2ec24eb1ed5480bc9070d4d598f25dfb",
+      "type": "bulleted_list",
+      "html": "Every service gets its own copy of the message.",
+      "text": "Every service gets its own copy of the message."
+    },
+    {
+      "id": "2ec24eb1ed5480fabb48cca11a26d353",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480ff8c3dd938b0f1c03a",
+      "type": "sub_header",
+      "html": "10. When to use RabbitMQ (system design)",
+      "text": "10. When to use RabbitMQ (system design)"
+    },
+    {
+      "id": "2ec24eb1ed5480d0a4a5c02e527a8ea9",
+      "type": "bulleted_list",
+      "html": "Background jobs.",
+      "text": "Background jobs."
+    },
+    {
+      "id": "2ec24eb1ed548021a7cfc3d7fb2d4917",
+      "type": "bulleted_list",
+      "html": "Email sending.",
+      "text": "Email sending."
+    },
+    {
+      "id": "2ec24eb1ed548043af21e25a11dc1230",
+      "type": "bulleted_list",
+      "html": "Payment processing.",
+      "text": "Payment processing."
+    },
+    {
+      "id": "2ec24eb1ed548068a080c848d912ec90",
+      "type": "bulleted_list",
+      "html": "Order processing.",
+      "text": "Order processing."
+    },
+    {
+      "id": "2ec24eb1ed54805fa674d6b6bf29ef53",
+      "type": "bulleted_list",
+      "html": "Any task that must run <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">once and fast</span>.",
+      "text": "Any task that must run once and fast."
+    },
+    {
+      "id": "2ec24eb1ed54807093cae12a83bc02a4",
+      "type": "sub_sub_header",
+      "html": "When NOT to use RabbitMQ",
+      "text": "When NOT to use RabbitMQ"
+    },
+    {
+      "id": "2ec24eb1ed54805b9bade7e2843fed0a",
+      "type": "bulleted_list",
+      "html": "Event replay required.",
+      "text": "Event replay required."
+    },
+    {
+      "id": "2ec24eb1ed5480beb9e5e13da89a3946",
+      "type": "bulleted_list",
+      "html": "Analytics pipelines.",
+      "text": "Analytics pipelines."
+    },
+    {
+      "id": "2ec24eb1ed548039a154c29fcefdaf6e",
+      "type": "bulleted_list",
+      "html": "Long-term retention.",
+      "text": "Long-term retention."
+    },
+    {
+      "id": "2ec24eb1ed5480308969f8dc7ed269cd",
+      "type": "bulleted_list",
+      "html": "Stream processing.",
+      "text": "Stream processing."
+    },
+    {
+      "id": "2ec24eb1ed5480799178cced5cbb9453",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480d4b625fc89f25c5dc7",
+      "type": "sub_header",
+      "html": "11. One-line interview summary (memorize this)",
+      "text": "11. One-line interview summary (memorize this)"
+    },
+    {
+      "id": "2ec24eb1ed548049b775f16eadd1f6dd",
+      "type": "bulleted_list",
+      "html": "RabbitMQ is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">message broker for task distribution</span>, not an event store.",
+      "text": "RabbitMQ is a message broker for task distribution, not an event store."
+    },
+    {
+      "id": "2ec24eb1ed5480d3966ac54b64f941ef",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54809b8ef4c3874ffd3587",
+      "type": "text",
+      "html": "What I understand is that, when a message is read from the queue, it gets discarded from the queue, and if the design is to receive ack, but ack is not received, the message is queued back, which means that the order is changed now. Is that correct? What did I get wrong?",
+      "text": "What I understand is that, when a message is read from the queue, it gets discarded from the queue, and if the design is to receive ack, but ack is not received, the message is queued back, which means that the order is changed now. Is that correct? What did I get wrong?"
+    },
+    {
+      "id": "2ec24eb1ed54806c967ee15210fc11dd",
+      "type": "text",
+      "html": "Your understanding is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">mostly correct</span>, but there are <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">two precise inaccuracies</span>. I will correct them clearly.",
+      "text": "Your understanding is mostly correct, but there are two precise inaccuracies. I will correct them clearly."
+    },
+    {
+      "id": "2ec24eb1ed5480deb262db2f2f5bf27a",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480159430df52f3086061",
+      "type": "sub_header",
+      "html": "What you got right",
+      "text": "What you got right"
+    },
+    {
+      "id": "2ec24eb1ed54804c8710ec6a771b5480",
+      "type": "bulleted_list",
+      "html": "A message is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">removed from the queue only after ack</span>.",
+      "text": "A message is removed from the queue only after ack."
+    },
+    {
+      "id": "2ec24eb1ed54800f888af7eeca313b94",
+      "type": "bulleted_list",
+      "html": "If <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">ack is not received</span>, the message is <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">re-queued</span>.",
+      "text": "If ack is not received, the message is re-queued."
+    },
+    {
+      "id": "2ec24eb1ed5480aaabc2dd269eb3621c",
+      "type": "bulleted_list",
+      "html": "Re-queuing <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">can affect ordering</span>.",
+      "text": "Re-queuing can affect ordering."
+    },
+    {
+      "id": "2ec24eb1ed5480fb88a0e4d6ec320e0b",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480b9b004e553659352d0",
+      "type": "sub_header",
+      "html": "What you got wrong / missed",
+      "text": "What you got wrong / missed"
+    },
+    {
+      "id": "2ec24eb1ed5480a8b988e4c54f1cea2c",
+      "type": "sub_sub_header",
+      "html": "1. <span style=\"white-space:nowrap;font-size:1em;font-family:&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;\">❌</span> “When a message is read, it gets discarded”",
+      "text": "1. ❌ “When a message is read, it gets discarded”"
+    },
+    {
+      "id": "2ec24eb1ed5480f3ac80caee0fb84d06",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Incorrect</span>",
+      "text": "Incorrect"
+    },
+    {
+      "id": "2ec24eb1ed54801c865cccb92c7ebcec",
+      "type": "bulleted_list",
+      "html": "Reading (delivery) does <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not</span> discard the message.",
+      "text": "Reading (delivery) does not discard the message."
+    },
+    {
+      "id": "2ec24eb1ed5480c08559dd03a9ae09a0",
+      "type": "bulleted_list",
+      "html": "The message stays <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">unacked</span> in the queue.",
+      "text": "The message stays unacked in the queue."
+    },
+    {
+      "id": "2ec24eb1ed5480cfb577e3d5f64b0966",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Correct statement</span>",
+      "text": "Correct statement"
+    },
+    {
+      "id": "2ec24eb1ed54809aa8b2ff810c7882e7",
+      "type": "bulleted_list",
+      "html": "A message is discarded <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only after successful acknowledgement</span>.",
+      "text": "A message is discarded only after successful acknowledgement."
+    },
+    {
+      "id": "2ec24eb1ed5480c2a1a2ee303fb7b715",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed548056b1d3e5012692f698",
+      "type": "sub_sub_header",
+      "html": "2. <span style=\"white-space:nowrap;font-size:1em;font-family:&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;\">⚠️</span> Ordering is not always changed (this is subtle)",
+      "text": "2. ⚠️ Ordering is not always changed (this is subtle)"
+    },
+    {
+      "id": "2ec24eb1ed5480e9bdf7f7782b98d4d9",
+      "type": "bulleted_list",
+      "html": "Re-queued messages are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">placed at the front or back</span> depending on configuration and timing.",
+      "text": "Re-queued messages are placed at the front or back depending on configuration and timing."
+    },
+    {
+      "id": "2ec24eb1ed54804eb698ed70e7371522",
+      "type": "bulleted_list",
+      "html": "RabbitMQ <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">does not guarantee original order</span> after redelivery.",
+      "text": "RabbitMQ does not guarantee original order after redelivery."
+    },
+    {
+      "id": "2ec24eb1ed54805486e1e5071bee4c55",
+      "type": "bulleted_list",
+      "html": "Ordering is guaranteed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only if</span>:",
+      "text": "Ordering is guaranteed only if:"
+    },
+    {
+      "id": "2ec24eb1ed548076aaf4d72195ef35ed",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54805486e1e5071bee4c55",
+      "html": "Single queue",
+      "text": "Single queue"
+    },
+    {
+      "id": "2ec24eb1ed5480e0b736c9a73626910f",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54805486e1e5071bee4c55",
+      "html": "Single consumer",
+      "text": "Single consumer"
+    },
+    {
+      "id": "2ec24eb1ed5480e0b598c077a833fb25",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54805486e1e5071bee4c55",
+      "html": "No redeliveries",
+      "text": "No redeliveries"
+    },
+    {
+      "id": "2ec24eb1ed54801f8983de4165526768",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Correct statement</span>",
+      "text": "Correct statement"
+    },
+    {
+      "id": "2ec24eb1ed5480789a10d7b24aa164f5",
+      "type": "bulleted_list",
+      "html": "Once a message is re-queued, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">ordering guarantees are lost</span>.",
+      "text": "Once a message is re-queued, ordering guarantees are lost."
+    },
+    {
+      "id": "2ec24eb1ed5480d8a660e2e1ef2158d6",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54807db6e9ef96fea8e1ce",
+      "type": "sub_header",
+      "html": "Exact life-cycle of a message (step-by-step)",
+      "text": "Exact life-cycle of a message (step-by-step)"
+    },
+    {
+      "id": "2ec24eb1ed54807ab697ec0c1dba75d2",
+      "type": "bulleted_list",
+      "html": "Message enters queue.",
+      "text": "Message enters queue."
+    },
+    {
+      "id": "2ec24eb1ed5480838f25d629df5e10d0",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54807ab697ec0c1dba75d2",
+      "html": "Purpose: Buffer work.",
+      "text": "Purpose: Buffer work."
+    },
+    {
+      "id": "2ec24eb1ed548019aa0acc3374f7b6ac",
+      "type": "bulleted_list",
+      "html": "Message is delivered to consumer.",
+      "text": "Message is delivered to consumer."
+    },
+    {
+      "id": "2ec24eb1ed5480c29875e42466e6afd2",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548019aa0acc3374f7b6ac",
+      "html": "Purpose: Start processing.",
+      "text": "Purpose: Start processing."
+    },
+    {
+      "id": "2ec24eb1ed54807faac8d1177bb436c9",
+      "type": "bulleted_list",
+      "html": "Message waits in <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">unacked state</span>.",
+      "text": "Message waits in unacked state."
+    },
+    {
+      "id": "2ec24eb1ed54804eac4bdc81ec784e23",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed54807faac8d1177bb436c9",
+      "html": "Purpose: Reliability.",
+      "text": "Purpose: Reliability."
+    },
+    {
+      "id": "2ec24eb1ed548031a03bcf65ccbdb9d3",
+      "type": "bulleted_list",
+      "html": "Ack received.",
+      "text": "Ack received."
+    },
+    {
+      "id": "2ec24eb1ed5480079a44d9809b085538",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548031a03bcf65ccbdb9d3",
+      "html": "Purpose: Safe deletion.",
+      "text": "Purpose: Safe deletion."
+    },
+    {
+      "id": "2ec24eb1ed548053b0ade8f2a8c481bb",
+      "type": "bulleted_list",
+      "html": "Or consumer crashes.",
+      "text": "Or consumer crashes."
+    },
+    {
+      "id": "2ec24eb1ed5480448eb5dd7baaa407c8",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed548053b0ade8f2a8c481bb",
+      "html": "Purpose: Trigger redelivery.",
+      "text": "Purpose: Trigger redelivery."
+    },
+    {
+      "id": "2ec24eb1ed5480869d58c7da85326814",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54801983bed46e4903067b",
+      "type": "sub_header",
+      "html": "Interview-safe final understanding",
+      "text": "Interview-safe final understanding"
+    },
+    {
+      "id": "2ec24eb1ed54808d8f21fc0fd77711fb",
+      "type": "bulleted_list",
+      "html": "Messages are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not removed on read</span>.",
+      "text": "Messages are not removed on read."
+    },
+    {
+      "id": "2ec24eb1ed54808a9f0aca12cce88b51",
+      "type": "bulleted_list",
+      "html": "Messages are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">removed on ack</span>.",
+      "text": "Messages are removed on ack."
+    },
+    {
+      "id": "2ec24eb1ed5480d68c52f66608271888",
+      "type": "bulleted_list",
+      "html": "Redelivery <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">breaks ordering guarantees</span>.",
+      "text": "Redelivery breaks ordering guarantees."
+    },
+    {
+      "id": "2ec24eb1ed5480a79301f43daf51c749",
+      "type": "bulleted_list",
+      "html": "RabbitMQ provides <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at-least-once</span>, not ordered-once.",
+      "text": "RabbitMQ provides at-least-once, not ordered-once."
+    },
+    {
+      "id": "2ec24eb1ed54806eb5cbeef1e4102610",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480daafd5fe4d7054fabc",
+      "type": "sub_header",
+      "html": "One-line summary to remember",
+      "text": "One-line summary to remember"
+    },
+    {
+      "id": "2ec24eb1ed5480e7b5d1ea9d6531cdf6",
+      "type": "bulleted_list",
+      "html": "In RabbitMQ, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">ack controls deletion, and redelivery breaks ordering</span>.",
+      "text": "In RabbitMQ, ack controls deletion, and redelivery breaks ordering."
+    },
+    {
+      "id": "2ec24eb1ed5480eaac76da6d70e1793e",
+      "type": "text",
+      "html": "If you want, next we can:",
+      "text": "If you want, next we can:"
+    },
+    {
+      "id": "2ec24eb1ed5480f39246f3d7d8038c71",
+      "type": "bulleted_list",
+      "html": "Draw failure timelines.",
+      "text": "Draw failure timelines."
+    },
+    {
+      "id": "2ec24eb1ed548017a0e4d808a3eb7f35",
+      "type": "bulleted_list",
+      "html": "Compare ordering in RabbitMQ vs Kafka.",
+      "text": "Compare ordering in RabbitMQ vs Kafka."
+    },
+    {
+      "id": "2ec24eb1ed54801f81a8ebd55b643fba",
+      "type": "bulleted_list",
+      "html": "Design idempotent consumers.",
+      "text": "Design idempotent consumers."
+    },
+    {
+      "id": "2ec24eb1ed5480f697cfd2e3a5ba55fa",
+      "type": "text",
+      "html": "Tell me what you want next.",
+      "text": "Tell me what you want next."
+    },
+    {
+      "id": "2ec24eb1ed5480cca131d64bae8fb931",
+      "type": "text",
+      "html": "But how does the redelivery breaks the ordering guarantees? The message was not removed, so how can the order change?",
+      "text": "But how does the redelivery breaks the ordering guarantees? The message was not removed, so how can the order change?"
+    },
+    {
+      "id": "2ec24eb1ed548080939fd8132994e4a6",
+      "type": "text",
+      "html": "This is an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">excellent question</span>. Your confusion is logical.",
+      "text": "This is an excellent question. Your confusion is logical."
+    },
+    {
+      "id": "2ec24eb1ed548049aaf7d1b45332401f",
+      "type": "text",
+      "html": "The gap is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">how RabbitMQ treats “in-flight” (unacked) messages</span>.",
+      "text": "The gap is how RabbitMQ treats “in-flight” (unacked) messages."
+    },
+    {
+      "id": "2ec24eb1ed5480acbbeae77c21d3ba37",
+      "type": "text",
+      "html": "I’ll explain <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">precisely</span>, step by step.",
+      "text": "I’ll explain precisely, step by step."
+    },
+    {
+      "id": "2ec24eb1ed5480e098ffd07bf0a10852",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54801681e9ea42cfce9945",
+      "type": "sub_header",
+      "html": "The wrong hidden assumption",
+      "text": "The wrong hidden assumption"
+    },
+    {
+      "id": "2ec24eb1ed548060abdcf80f6aa9c0ed",
+      "type": "bulleted_list",
+      "html": "<span style=\"white-space:nowrap;font-size:1em;font-family:&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;\">❌</span> “If a message is not removed, it must still block the queue order”",
+      "text": "❌ “If a message is not removed, it must still block the queue order”"
+    },
+    {
+      "id": "2ec24eb1ed5480198ee5efa2ec070ffc",
+      "type": "text",
+      "html": "This is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not how RabbitMQ works</span>.",
+      "text": "This is not how RabbitMQ works."
+    },
+    {
+      "id": "2ec24eb1ed5480adb21bedfb0f53b312",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54809dbe9fdf709140910f",
+      "type": "sub_header",
+      "html": "The key concept you missed: <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">in-flight messages</span>",
+      "text": "The key concept you missed: in-flight messages"
+    },
+    {
+      "id": "2ec24eb1ed5480ee88dac659e41a7e17",
+      "type": "bulleted_list",
+      "html": "When a message is delivered to a consumer:",
+      "text": "When a message is delivered to a consumer:"
+    },
+    {
+      "id": "2ec24eb1ed54807c93bbd2011a7f35ac",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480ee88dac659e41a7e17",
+      "html": "It is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">removed from the queue’s head</span>",
+      "text": "It is removed from the queue’s head"
+    },
+    {
+      "id": "2ec24eb1ed54800d8c83f0adc694b726",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480ee88dac659e41a7e17",
+      "html": "It is placed in the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">unacked state</span>",
+      "text": "It is placed in the unacked state"
+    },
+    {
+      "id": "2ec24eb1ed5480328ee8f455df14ce67",
+      "type": "bulleted_list",
+      "html": "The queue immediately advances to the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">next message</span>",
+      "text": "The queue immediately advances to the next message"
+    },
+    {
+      "id": "2ec24eb1ed548068a27cc469d895f092",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Important</span>",
+      "text": "Important"
+    },
+    {
+      "id": "2ec24eb1ed54809ca96cd0762fb5421e",
+      "type": "bulleted_list",
+      "html": "Unacked messages <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">do not block the queue</span>.",
+      "text": "Unacked messages do not block the queue."
+    },
+    {
+      "id": "2ec24eb1ed5480f98866cc10e342034d",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54804893b3d8d286cad451",
+      "type": "sub_header",
+      "html": "Exact timeline example (ordering break)",
+      "text": "Exact timeline example (ordering break)"
+    },
+    {
+      "id": "2ec24eb1ed54802d9a87dd7eb9981d52",
+      "type": "sub_sub_header",
+      "html": "Initial queue order",
+      "text": "Initial queue order"
+    },
+    {
+      "id": "2ec24eb1ed548098ac3ac2a9a0bc824b",
+      "type": "bulleted_list",
+      "html": "Queue: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">M1 → M2 → M3</span>",
+      "text": "Queue: M1 → M2 → M3"
+    },
+    {
+      "id": "2ec24eb1ed5480528d4afaf7952ce9c1",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed54804bb82df11e55dcc1d5",
+      "type": "sub_sub_header",
+      "html": "Step 1: Delivery",
+      "text": "Step 1: Delivery"
+    },
+    {
+      "id": "2ec24eb1ed5480a8a2a8fc7e99559d6b",
+      "type": "bulleted_list",
+      "html": "M1 is delivered to Consumer A",
+      "text": "M1 is delivered to Consumer A"
+    },
+    {
+      "id": "2ec24eb1ed548032ab4de02f108c2b4e",
+      "type": "bulleted_list",
+      "html": "M1 is now <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">unacked</span>",
+      "text": "M1 is now unacked"
+    },
+    {
+      "id": "2ec24eb1ed5480c09dcbcd7e25c51123",
+      "type": "bulleted_list",
+      "html": "Queue now looks like:",
+      "text": "Queue now looks like:"
+    },
+    {
+      "id": "2ec24eb1ed548060a1cde38f1cc46624",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480c09dcbcd7e25c51123",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">M2 → M3</span>",
+      "text": "M2 → M3"
+    },
+    {
+      "id": "2ec24eb1ed54807cbf41c292ba022a99",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480c4ac13dc9548d3a467",
+      "type": "sub_sub_header",
+      "html": "Step 2: More deliveries",
+      "text": "Step 2: More deliveries"
+    },
+    {
+      "id": "2ec24eb1ed54801db5bbdb9e7aace68c",
+      "type": "bulleted_list",
+      "html": "M2 is delivered to Consumer B",
+      "text": "M2 is delivered to Consumer B"
+    },
+    {
+      "id": "2ec24eb1ed548048bb08f83fe4418fa3",
+      "type": "bulleted_list",
+      "html": "M3 is delivered to Consumer C",
+      "text": "M3 is delivered to Consumer C"
+    },
+    {
+      "id": "2ec24eb1ed548031838ce14af917781a",
+      "type": "text",
+      "html": "Now:",
+      "text": "Now:"
+    },
+    {
+      "id": "2ec24eb1ed54805aad4dccbd26397c49",
+      "type": "bulleted_list",
+      "html": "In-flight: <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">M1, M2, M3</span>",
+      "text": "In-flight: M1, M2, M3"
+    },
+    {
+      "id": "2ec24eb1ed5480299eebdcf6ae09c9ba",
+      "type": "bulleted_list",
+      "html": "Queue is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">empty</span>",
+      "text": "Queue is empty"
+    },
+    {
+      "id": "2ec24eb1ed54800bbe38db629765be95",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480d2920bdcbbf5d7e191",
+      "type": "sub_sub_header",
+      "html": "Step 3: Failure",
+      "text": "Step 3: Failure"
+    },
+    {
+      "id": "2ec24eb1ed54803b83bbc75ff1799dfa",
+      "type": "bulleted_list",
+      "html": "Consumer A crashes",
+      "text": "Consumer A crashes"
+    },
+    {
+      "id": "2ec24eb1ed5480b88c8dde72517b2883",
+      "type": "bulleted_list",
+      "html": "M1 is re-queued",
+      "text": "M1 is re-queued"
+    },
+    {
+      "id": "2ec24eb1ed5480c9b723cf83a6172854",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480259152c8fb3ac40712",
+      "type": "sub_sub_header",
+      "html": "Step 4: Re-queue position",
+      "text": "Step 4: Re-queue position"
+    },
+    {
+      "id": "2ec24eb1ed54809cace6cead5d10fc00",
+      "type": "bulleted_list",
+      "html": "M1 is put back into the queue",
+      "text": "M1 is put back into the queue"
+    },
+    {
+      "id": "2ec24eb1ed5480009e93cc4cd852b3af",
+      "type": "bulleted_list",
+      "html": "It may be placed:",
+      "text": "It may be placed:"
+    },
+    {
+      "id": "2ec24eb1ed548091b1f7e123302c5ab7",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480009e93cc4cd852b3af",
+      "html": "After newer messages",
+      "text": "After newer messages"
+    },
+    {
+      "id": "2ec24eb1ed5480a99e00d1b0c290fd08",
+      "type": "bulleted_list",
+      "parent": "2ec24eb1ed5480009e93cc4cd852b3af",
+      "html": "Or ahead of them",
+      "text": "Or ahead of them"
+    },
+    {
+      "id": "2ec24eb1ed5480858a64c601a034da16",
+      "type": "text",
+      "html": "Result:",
+      "text": "Result:"
+    },
+    {
+      "id": "2ec24eb1ed54803ba4bde8bc0b70f81e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Original order is lost</span>",
+      "text": "Original order is lost"
+    },
+    {
+      "id": "2ec24eb1ed54802d8e58e282167fd923",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480b2b5a4e985e11df189",
+      "type": "sub_header",
+      "html": "Why RabbitMQ works this way (design reason)",
+      "text": "Why RabbitMQ works this way (design reason)"
+    },
+    {
+      "id": "2ec24eb1ed54804888c8effaf152da12",
+      "type": "bulleted_list",
+      "html": "To maximize <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">throughput</span>",
+      "text": "To maximize throughput"
+    },
+    {
+      "id": "2ec24eb1ed548081891fe142b311c6d6",
+      "type": "bulleted_list",
+      "html": "To avoid one slow consumer blocking the entire queue",
+      "text": "To avoid one slow consumer blocking the entire queue"
+    },
+    {
+      "id": "2ec24eb1ed5480d5b750c592964aea43",
+      "type": "bulleted_list",
+      "html": "To enable <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">parallelism</span>",
+      "text": "To enable parallelism"
+    },
+    {
+      "id": "2ec24eb1ed5480ab86c2d764952e9a24",
+      "type": "text",
+      "html": "Blocking the queue would destroy scalability.",
+      "text": "Blocking the queue would destroy scalability."
+    },
+    {
+      "id": "2ec24eb1ed5480618009eb761827a00b",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480aea08efe6b2080b415",
+      "type": "sub_header",
+      "html": "The rule to memorize (interview-critical)",
+      "text": "The rule to memorize (interview-critical)"
+    },
+    {
+      "id": "2ec24eb1ed5480f19b7cc46a0a9d877d",
+      "type": "bulleted_list",
+      "html": "Ordering is guaranteed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only until first delivery</span>.",
+      "text": "Ordering is guaranteed only until first delivery."
+    },
+    {
+      "id": "2ec24eb1ed54805e9ac2f178f0ce4e81",
+      "type": "bulleted_list",
+      "html": "After delivery, messages are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">no longer ordered</span>.",
+      "text": "After delivery, messages are no longer ordered."
+    },
+    {
+      "id": "2ec24eb1ed5480c78ce1c2cbc367d14b",
+      "type": "bulleted_list",
+      "html": "Redelivery <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">voids ordering guarantees</span>.",
+      "text": "Redelivery voids ordering guarantees."
+    },
+    {
+      "id": "2ec24eb1ed5480918d98ea78f10e1d40",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480268ef4f668ab0e508d",
+      "type": "sub_header",
+      "html": "Precise final correction",
+      "text": "Precise final correction"
+    },
+    {
+      "id": "2ec24eb1ed5480fbb03bc476dd32c6e2",
+      "type": "bulleted_list",
+      "html": "Message is removed from the queue <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">on delivery</span>, not on ack.",
+      "text": "Message is removed from the queue on delivery, not on ack."
+    },
+    {
+      "id": "2ec24eb1ed5480ad993fe670ca404f96",
+      "type": "bulleted_list",
+      "html": "Ack decides <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">deletion</span>, not <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">queue position</span>.",
+      "text": "Ack decides deletion, not queue position."
+    },
+    {
+      "id": "2ec24eb1ed5480319942c74058e1e70a",
+      "type": "bulleted_list",
+      "html": "Re-queued messages <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">re-enter the queue</span>, breaking order.",
+      "text": "Re-queued messages re-enter the queue, breaking order."
+    },
+    {
+      "id": "2ec24eb1ed54804ca72dfc349280948f",
+      "type": "divider"
+    },
+    {
+      "id": "2ec24eb1ed5480cfabd6d3fb4b393e0a",
+      "type": "sub_header",
+      "html": "One-line expert takeaway",
+      "text": "One-line expert takeaway"
+    },
+    {
+      "id": "2ec24eb1ed5480afa182c03d8f31423d",
+      "type": "bulleted_list",
+      "html": "RabbitMQ guarantees order <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only for undispatched messages</span>, not for in-flight ones.",
+      "text": "RabbitMQ guarantees order only for undispatched messages, not for in-flight ones."
+    },
+    {
+      "id": "2ec24eb1ed54807887bff044f472690b",
+      "type": "text",
+      "html": "If you want, next we can:",
+      "text": "If you want, next we can:"
+    },
+    {
+      "id": "2ec24eb1ed5480ca80e8e8c3bd219eaa",
+      "type": "bulleted_list",
+      "html": "Draw this with a diagram",
+      "text": "Draw this with a diagram"
+    },
+    {
+      "id": "2ec24eb1ed548058b3b8df8bf3d01158",
+      "type": "bulleted_list",
+      "html": "Explain how Kafka handles this differently",
+      "text": "Explain how Kafka handles this differently"
+    },
+    {
+      "id": "2ec24eb1ed5480638a34c572bce16b24",
+      "type": "bulleted_list",
+      "html": "Design systems that rely on ordering safely",
+      "text": "Design systems that rely on ordering safely"
+    },
+    {
+      "id": "2ec24eb1ed548086bc00ce2c6322a03a",
+      "type": "text",
+      "html": "Just tell me.",
+      "text": "Just tell me."
+    }
+  ]
+}

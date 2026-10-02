@@ -1,0 +1,35 @@
+{
+  "id": "25e24eb1ed5480f5b3fded23fab67c82",
+  "title": "Anycast",
+  "sourceUrl": "https://xpandeyed.notion.site/Anycast-25e24eb1ed5480f5b3fded23fab67c82?pvs=23",
+  "blocks": [
+    {
+      "id": "25e24eb1ed5480cda64fd6158e79cd94",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Anycast</span> is a network routing technique where multiple servers around the world share the <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">same IP address</span>. When a user makes a request to that IP, the internet’s routing system (BGP) automatically directs the request to the <span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">nearest or best-performing server</span> in the group.",
+      "text": "Anycast is a network routing technique where multiple servers around the world share the same IP address. When a user makes a request to that IP, the internet’s routing system (BGP) automatically directs the request to the nearest or best-performing server in the group."
+    },
+    {
+      "id": "25e24eb1ed548056b77cf7269c64e079",
+      "type": "text",
+      "html": "This is heavily used by CDNs and DNS providers. For example, when you hit a CDN’s API endpoint, you don’t connect to a single fixed server — instead, Anycast ensures you’re routed to the closest CDN Point of Presence (PoP), reducing latency and improving reliability.",
+      "text": "This is heavily used by CDNs and DNS providers. For example, when you hit a CDN’s API endpoint, you don’t connect to a single fixed server — instead, Anycast ensures you’re routed to the closest CDN Point of Presence (PoP), reducing latency and improving reliability."
+    },
+    {
+      "id": "25e24eb1ed5480a2b922f5064f315f0b",
+      "type": "text",
+      "html": "In short: Anycast = <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one IP, many servers, user goes to nearest one</span>.",
+      "text": "In short: Anycast = one IP, many servers, user goes to nearest one."
+    },
+    {
+      "id": "25e24eb1ed54807f8eecd6adf4576c64",
+      "type": "text",
+      "html": "// WILL GET BACK TO THIS LATER",
+      "text": "// WILL GET BACK TO THIS LATER"
+    },
+    {
+      "id": "25e24eb1ed54808c9861ee9bacd872a5",
+      "type": "text"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "id": "27a24eb1ed5480fc81c2cde652ff2938",
+  "title": "BASE Model",
+  "sourceUrl": "https://xpandeyed.notion.site/BASE-Model-27a24eb1ed5480fc81c2cde652ff2938?pvs=23",
+  "blocks": [
+    {
+      "id": "27b24eb1ed5480dfbdf4eb4b74b155b5",
+      "type": "callout"
+    },
+    {
+      "id": "27b24eb1ed5480698ca7cfcf5fe1452a",
+      "type": "text",
+      "parent": "27b24eb1ed5480dfbdf4eb4b74b155b5",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Recommended Read: </span><a style=\"font-weight:600;cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Databases-24d24eb1ed548054bd55d5db65a2f091?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Databases</span><span style=\"white-space:nowrap\"></span></a><span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\"> </span>",
+      "text": "Recommended Read: Databases ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Databases-24d24eb1ed548054bd55d5db65a2f091?pvs=24",
+          "text": "Databases"
+        }
+      ]
+    },
+    {
+      "id": "27b24eb1ed5480df8b1bd21f9ec58860",
+      "type": "divider"
+    },
+    {
+      "id": "27b24eb1ed54804683e8c2eb21453a0f",
+      "type": "text"
+    },
+    {
+      "id": "27a24eb1ed5480c78a0ef2ca4932c655",
+      "type": "bulleted_list",
+      "html": "The design and features of SQL DBs, had too many constraints for newer and large scale applications.",
+      "text": "The design and features of SQL DBs, had too many constraints for newer and large scale applications."
+    },
+    {
+      "id": "27b24eb1ed5480fc81aeef9e87b05951",
+      "type": "bulleted_list",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Transactions-ACID-Properties-26424eb1ed54802894ffe6334761df9d?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Transactions &amp; ACID Properties</span><span style=\"white-space:nowrap\"></span></a>, in particular was considered to be anti of scalability.",
+      "text": "Transactions & ACID Properties, in particular was considered to be anti of scalability.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Transactions-ACID-Properties-26424eb1ed54802894ffe6334761df9d?pvs=24",
+          "text": "Transactions & ACID Properties"
+        }
+      ]
+    },
+    {
+      "id": "27b24eb1ed54809d9799f07a97b980c2",
+      "type": "bulleted_list",
+      "html": "Due to this, new types of DBs emerged with relaxed constraints, called NoSQL DBs.",
+      "text": "Due to this, new types of DBs emerged with relaxed constraints, called NoSQL DBs."
+    },
+    {
+      "id": "27b24eb1ed5480e6902ad736ef36ad52",
+      "type": "bulleted_list",
+      "html": "NoSQL DBs were build on a different design philosophy.",
+      "text": "NoSQL DBs were build on a different design philosophy."
+    },
+    {
+      "id": "27b24eb1ed54800eb962f8ad611e0823",
+      "type": "bulleted_list",
+      "html": "This new design was termed BASE Model.",
+      "text": "This new design was termed BASE Model."
+    },
+    {
+      "id": "27b24eb1ed54809482adc617fa95e4af",
+      "type": "text",
+      "html": "The acronym is little vague, but still used, as it highlights that NoSQL is based on a model which is somewhat opposite of SQL DBs, just like Bases are considered to have opposite properties of Acids in chemistry.",
+      "text": "The acronym is little vague, but still used, as it highlights that NoSQL is based on a model which is somewhat opposite of SQL DBs, just like Bases are considered to have opposite properties of Acids in chemistry."
+    },
+    {
+      "id": "27b24eb1ed5480198599f136970f1b7d",
+      "type": "divider"
+    },
+    {
+      "id": "27b24eb1ed5480079fefe29ee25272bd",
+      "type": "header",
+      "html": "[BA]: Basically Available",
+      "text": "[BA]: Basically Available"
+    },
+    {
+      "id": "27b24eb1ed54802ea3f8e84b43978e2a",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Availability is prioritised.</span>",
+      "text": "Availability is prioritised."
+    },
+    {
+      "id": "27b24eb1ed5480fb95edeb0ee460b8bf",
+      "type": "bulleted_list",
+      "html": "As <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CAP Theorem</span><span style=\"white-space:nowrap\"></span></a> says, a system must choose between availability and consistency, in case of partitions, so BASE Model chooses availability and hence relaxes consistency.",
+      "text": "As CAP Theorem says, a system must choose between availability and consistency, in case of partitions, so BASE Model chooses availability and hence relaxes consistency.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CAP-Theorem-24d24eb1ed5480499a2fe0f2032afd7a?pvs=24",
+          "text": "CAP Theorem"
+        }
+      ]
+    },
+    {
+      "id": "27c24eb1ed5480d2a38eeb41435c0ead",
+      "type": "header",
+      "html": "[S]: Soft State",
+      "text": "[S]: Soft State"
+    },
+    {
+      "id": "27c24eb1ed5480e592d0f7545b6d4836",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Systems can have soft states.</span>",
+      "text": "Systems can have soft states."
+    },
+    {
+      "id": "27c24eb1ed548082b23bd9b3f7219334",
+      "type": "bulleted_list",
+      "html": "In this model, databases rely on <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Eventual-Consistency-26c24eb1ed5480c4b741ea9f5c459fa1?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Eventual Consistency</span><span style=\"white-space:nowrap\"></span></a> .",
+      "text": "In this model, databases rely on Eventual Consistency .",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Eventual-Consistency-26c24eb1ed5480c4b741ea9f5c459fa1?pvs=24",
+          "text": "Eventual Consistency"
+        }
+      ]
+    },
+    {
+      "id": "27c24eb1ed5480b38f37f5e7b37e8218",
+      "type": "bulleted_list",
+      "html": "Because of this, the database may temporarily be in a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">transient or inconsistent state</span>, which changes over time, which is called the Soft State.",
+      "text": "Because of this, the database may temporarily be in a transient or inconsistent state, which changes over time, which is called the Soft State."
+    },
+    {
+      "id": "27c24eb1ed54805bb494d5b3f67c2a31",
+      "type": "bulleted_list",
+      "html": "These changes can occur <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">even without direct new external input</span> (for example, background synchronization or replication processes).",
+      "text": "These changes can occur even without direct new external input (for example, background synchronization or replication processes)."
+    },
+    {
+      "id": "27c24eb1ed5480a788a7f5815fb72482",
+      "type": "bulleted_list",
+      "html": "The actual cause often starts with an external input, but that input may update only one replica or part of the system.",
+      "text": "The actual cause often starts with an external input, but that input may update only one replica or part of the system."
+    },
+    {
+      "id": "27c24eb1ed5480969787fba3f9733823",
+      "type": "bulleted_list",
+      "html": "Internal processes (like replication, reconciliation, or anti-entropy mechanisms) then continue updating other replicas until the system reaches a consistent state.",
+      "text": "Internal processes (like replication, reconciliation, or anti-entropy mechanisms) then continue updating other replicas until the system reaches a consistent state."
+    },
+    {
+      "id": "27c24eb1ed548002954dcb5768ac0a30",
+      "type": "bulleted_list",
+      "html": "This ongoing adjustment is why we say the system state can change “without external input.”",
+      "text": "This ongoing adjustment is why we say the system state can change “without external input.”"
+    },
+    {
+      "id": "27c24eb1ed54806ab2bfc2b5ffdff570",
+      "type": "bulleted_list",
+      "html": "Such a temporary, evolving, and not-yet-consistent state is called <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Soft State</span>.",
+      "text": "Such a temporary, evolving, and not-yet-consistent state is called Soft State."
+    },
+    {
+      "id": "27c24eb1ed5480169c87d0df95cd9ccb",
+      "type": "header",
+      "html": "[E]: Eventual Consistency",
+      "text": "[E]: Eventual Consistency"
+    },
+    {
+      "id": "27c24eb1ed5480448197d00fdd164754",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">System is eventually consistent.</span>",
+      "text": "System is eventually consistent."
+    },
+    {
+      "id": "27c24eb1ed5480ef893ee9a7d2682499",
+      "type": "text",
+      "html": "<a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"0\" href=\"https://xpandeyed.notion.site/p/Eventual-Consistency-26c24eb1ed5480c4b741ea9f5c459fa1?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Eventual Consistency</span><span style=\"white-space:nowrap\"></span></a> ",
+      "text": "Eventual Consistency ",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Eventual-Consistency-26c24eb1ed5480c4b741ea9f5c459fa1?pvs=24",
+          "text": "Eventual Consistency"
+        }
+      ]
+    },
+    {
+      "id": "28324eb1ed5480ff8ef8e36ed4da550f",
+      "type": "divider"
+    },
+    {
+      "id": "28324eb1ed548092aa38d425a2f2464a",
+      "type": "callout"
+    },
+    {
+      "id": "28324eb1ed548002b0adce7eb2353f34",
+      "type": "text",
+      "parent": "28324eb1ed548092aa38d425a2f2464a",
+      "html": "The NoSQL DBs when were designed and introduced, they were very closely tied to the discussed BASE Model, but as the time passed, the SQL and NoSQL DBs got equipped with more features and the distinctions got blurred.",
+      "text": "The NoSQL DBs when were designed and introduced, they were very closely tied to the discussed BASE Model, but as the time passed, the SQL and NoSQL DBs got equipped with more features and the distinctions got blurred."
+    },
+    {
+      "id": "28324eb1ed54804099f3d70d27bd6f5f",
+      "type": "text",
+      "parent": "28324eb1ed548092aa38d425a2f2464a",
+      "html": "For full clarity, read <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"1\" href=\"https://xpandeyed.notion.site/p/Databases-24d24eb1ed548054bd55d5db65a2f091?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">Databases</span><span style=\"white-space:nowrap\"></span></a>.",
+      "text": "For full clarity, read Databases.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/Databases-24d24eb1ed548054bd55d5db65a2f091?pvs=24",
+          "text": "Databases"
+        }
+      ]
+    },
+    {
+      "id": "28324eb1ed54804c85d9ebc97c83dd58",
+      "type": "divider"
+    },
+    {
+      "id": "28324eb1ed5480779997fe2d7e11df05",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    }
+  ]
+}

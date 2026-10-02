@@ -3,6 +3,11 @@
 
 import { goNotes } from '../Notes/GoNotes/goNotes';
 import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
+import { systemDesignEntryRoutes } from '../Notes/SystemDesign/registry';
+import { SYSTEM_DESIGN_ROUTE, type SystemDesignEntryRoute } from '../Notes/SystemDesign/path';
+
+export { SYSTEM_DESIGN_ROUTE };
+export type { SystemDesignEntryRoute };
 
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
@@ -34,6 +39,7 @@ export const POSTGRESQL_JOINS_ROUTE = '/notes/postgresql/joins';
 export const POSTGRESQL_RATIOS_ROUTE = '/notes/postgresql/ratios';
 export const POSTGRESQL_WINDOW_FUNCTIONS_ROUTE = '/notes/postgresql/window-functions';
 export const POSTGRESQL_MATHS_ROUTE = '/notes/postgresql/maths';
+export const POSTGRESQL_DATE_TIME_ROUTE = '/notes/postgresql/date-and-time';
 export const SCALAR_IN_POSTGRESQL_ROUTE = '/notes/postgresql/scalar';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
 export const JAVASCRIPT_ASYNC_ROUTE = '/notes/javascript-asynchronous-programming';
@@ -55,6 +61,8 @@ export type Route =
     | typeof POSTGRESQL_ONE_SHOT_SQL_ROUTE
     | typeof GO_NOTES_ROUTE
     | GoNoteRoute
+    | typeof SYSTEM_DESIGN_ROUTE
+    | SystemDesignEntryRoute
     | typeof PYTHON_NOTES_ROUTE
     | PythonNoteRoute
     | typeof JAVA_NOTES_ROUTE
@@ -79,6 +87,7 @@ export type Route =
     | typeof POSTGRESQL_RATIOS_ROUTE
     | typeof POSTGRESQL_WINDOW_FUNCTIONS_ROUTE
     | typeof POSTGRESQL_MATHS_ROUTE
+    | typeof POSTGRESQL_DATE_TIME_ROUTE
     | typeof SCALAR_IN_POSTGRESQL_ROUTE
     | typeof API_COMMUNICATION_ROUTE
     | typeof JAVASCRIPT_ASYNC_ROUTE
@@ -103,6 +112,8 @@ const routes: Route[] = [
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     GO_NOTES_ROUTE,
     ...goNoteRoutes,
+    SYSTEM_DESIGN_ROUTE,
+    ...systemDesignEntryRoutes,
     PYTHON_NOTES_ROUTE,
     PROGRAMMING_DICTIONARY_ROUTE,
     ...pythonNoteRoutes,
@@ -128,6 +139,7 @@ const routes: Route[] = [
     POSTGRESQL_RATIOS_ROUTE,
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
+    POSTGRESQL_DATE_TIME_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     API_COMMUNICATION_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,

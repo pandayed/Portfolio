@@ -1,0 +1,186 @@
+{
+  "id": "2e824eb1ed54801797fee17b2dc1b2d0",
+  "title": "Persistent & Transient Data",
+  "sourceUrl": "https://xpandeyed.notion.site/Persistent-Transient-Data-2e824eb1ed54801797fee17b2dc1b2d0?pvs=23",
+  "blocks": [
+    {
+      "id": "2e824eb1ed5480d081a5c78ecdf6d8f8",
+      "type": "sub_sub_header",
+      "html": "Persistent data",
+      "text": "Persistent data"
+    },
+    {
+      "id": "2e824eb1ed5480b9a6a5d99c9977d4eb",
+      "type": "bulleted_list",
+      "html": "Data that is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">saved</span>",
+      "text": "Data that is saved"
+    },
+    {
+      "id": "2e824eb1ed5480d4a77bfd45dc59b4d0",
+      "type": "bulleted_list",
+      "html": "Data <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">remains even after program stops</span>",
+      "text": "Data remains even after program stops"
+    },
+    {
+      "id": "2e824eb1ed5480c9b8e4ed30a2f7e7b0",
+      "type": "bulleted_list",
+      "html": "Stored on durable storages like:",
+      "text": "Stored on durable storages like:"
+    },
+    {
+      "id": "2e824eb1ed5480959a1fe723986f2452",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480c9b8e4ed30a2f7e7b0",
+      "html": "Disk",
+      "text": "Disk"
+    },
+    {
+      "id": "2e824eb1ed548039aaf9c387f41e3f77",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480c9b8e4ed30a2f7e7b0",
+      "html": "Database",
+      "text": "Database"
+    },
+    {
+      "id": "2e824eb1ed5480ea926bc6e00b0029e6",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480c9b8e4ed30a2f7e7b0",
+      "html": "Files",
+      "text": "Files"
+    },
+    {
+      "id": "2e824eb1ed54801c832ee679bf1b1587",
+      "type": "text",
+      "html": "Examples:",
+      "text": "Examples:"
+    },
+    {
+      "id": "2e824eb1ed5480dcbffef102ecfc8c02",
+      "type": "bulleted_list",
+      "html": "Data in MySQL",
+      "text": "Data in MySQL"
+    },
+    {
+      "id": "2e824eb1ed5480a6a26af8cba541a251",
+      "type": "bulleted_list",
+      "html": "Files on your laptop",
+      "text": "Files on your laptop"
+    },
+    {
+      "id": "2e824eb1ed548079944ef793306bd9b7",
+      "type": "bulleted_list",
+      "html": "Messages saved in Kafka",
+      "text": "Messages saved in Kafka"
+    },
+    {
+      "id": "2e824eb1ed5480b98436eaea75ef61dc",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed548016941fdb651a568a11",
+      "type": "sub_sub_header",
+      "html": "Transient data",
+      "text": "Transient data"
+    },
+    {
+      "id": "2e824eb1ed5480dcb71ae89003c8387b",
+      "type": "bulleted_list",
+      "html": "Data that is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">temporary</span>",
+      "text": "Data that is temporary"
+    },
+    {
+      "id": "2e824eb1ed5480078ebafd310ea69aab",
+      "type": "bulleted_list",
+      "html": "Data <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">disappears once used</span>",
+      "text": "Data disappears once used"
+    },
+    {
+      "id": "2e824eb1ed548075a3cad43894bb2154",
+      "type": "bulleted_list",
+      "html": "Lives only in:",
+      "text": "Lives only in:"
+    },
+    {
+      "id": "2e824eb1ed5480819ba0d2eedbb4c168",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548075a3cad43894bb2154",
+      "html": "Memory (RAM)",
+      "text": "Memory (RAM)"
+    },
+    {
+      "id": "2e824eb1ed548068837cfbcffca587d8",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed548075a3cad43894bb2154",
+      "html": "Network buffers",
+      "text": "Network buffers"
+    },
+    {
+      "id": "2e824eb1ed548013a4c4e32970b75bf5",
+      "type": "text",
+      "html": "Examples:",
+      "text": "Examples:"
+    },
+    {
+      "id": "2e824eb1ed5480e29a4fed6dba287cd5",
+      "type": "bulleted_list",
+      "html": "HTTP request body",
+      "text": "HTTP request body"
+    },
+    {
+      "id": "2e824eb1ed5480c992deeba7388cfe64",
+      "type": "bulleted_list",
+      "html": "Function arguments",
+      "text": "Function arguments"
+    },
+    {
+      "id": "2e824eb1ed548072aea0e51a9e433bee",
+      "type": "bulleted_list",
+      "html": "Message passed directly from one service to another",
+      "text": "Message passed directly from one service to another"
+    },
+    {
+      "id": "2e824eb1ed5480cc8c7aee509a744914",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed548086a6bbcbf855725eaa",
+      "type": "bulleted_list",
+      "html": "Persistent data → <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">can be read again</span>",
+      "text": "Persistent data → can be read again"
+    },
+    {
+      "id": "2e824eb1ed548097bf7bf82498b3b9fb",
+      "type": "bulleted_list",
+      "html": "Transient data → <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">gone forever after use</span>",
+      "text": "Transient data → gone forever after use"
+    },
+    {
+      "id": "2e824eb1ed548006a5ddde699e53d557",
+      "type": "divider"
+    },
+    {
+      "id": "2e824eb1ed5480ea9fdfd3dc610fba16",
+      "type": "sub_sub_header",
+      "html": "Replay past data means",
+      "text": "Replay past data means"
+    },
+    {
+      "id": "2e824eb1ed54801e8989c6c6ee19d8f9",
+      "type": "bulleted_list",
+      "html": "Reading <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">old data again</span>",
+      "text": "Reading old data again"
+    },
+    {
+      "id": "2e824eb1ed54806fb954dacdd3765028",
+      "type": "bulleted_list",
+      "html": "From the place where it was saved",
+      "text": "From the place where it was saved"
+    },
+    {
+      "id": "2e824eb1ed548061bc3cc171ff9a6243",
+      "type": "bulleted_list",
+      "html": "Even if it was already read once",
+      "text": "Even if it was already read once"
+    }
+  ]
+}

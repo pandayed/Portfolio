@@ -1,0 +1,643 @@
+{
+  "id": "27c24eb1ed54800481aec012be8ff712",
+  "title": "Caches",
+  "sourceUrl": "https://xpandeyed.notion.site/Caches-27c24eb1ed54800481aec012be8ff712?pvs=23",
+  "blocks": [
+    {
+      "id": "27c24eb1ed54801ba63fef97fba044cf",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">A cache is a </span><span style=\"font-style:italic;font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">temporary storage layer</span><span style=\"font-style:italic\" data-token-index=\"2\" class=\"notion-enable-hover\"> that holds a subset of data, typically the most frequently or recently accessed items, for faster retrieval.</span>",
+      "text": "A cache is a temporary storage layer that holds a subset of data, typically the most frequently or recently accessed items, for faster retrieval."
+    },
+    {
+      "id": "27c24eb1ed548008a61fe63f4fd17324",
+      "type": "bulleted_list",
+      "html": "It is like a system's <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">short-term memory</span>: it has a limited amount of space but is much faster than the original, persistent data source.",
+      "text": "It is like a system's short-term memory: it has a limited amount of space but is much faster than the original, persistent data source."
+    },
+    {
+      "id": "27c24eb1ed5480e39e68dd30aea55e29",
+      "type": "bulleted_list",
+      "html": "Caches can exist at almost <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">every layer of a system</span>, from CPU Level to <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"3\" href=\"https://xpandeyed.notion.site/p/CDN-25824eb1ed548008806bde6f10dc774b?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CDN</span><span style=\"white-space:nowrap\"></span></a>s.",
+      "text": "Caches can exist at almost every layer of a system, from CPU Level to CDNs.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CDN-25824eb1ed548008806bde6f10dc774b?pvs=24",
+          "text": "CDN"
+        }
+      ]
+    },
+    {
+      "id": "27c24eb1ed5480668ab6d57ac988d103",
+      "type": "bulleted_list",
+      "html": "A cache stores <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">derived data</span>, meaning if the data in the cache is lost (e.g., due to a server restart), it can be reconstructed from the primary data source.",
+      "text": "A cache stores derived data, meaning if the data in the cache is lost (e.g., due to a server restart), it can be reconstructed from the primary data source."
+    },
+    {
+      "id": "27c24eb1ed5480a3859fecae0a1a9ce7",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why is Caching Required?</span>",
+      "text": "Why is Caching Required?"
+    },
+    {
+      "id": "27c24eb1ed548099851fc68258a9e07a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">To accelerate data access:</span> Caches are used to remember the result of an expensive operation, which significantly speeds up subsequent reads of the same data.",
+      "text": "To accelerate data access: Caches are used to remember the result of an expensive operation, which significantly speeds up subsequent reads of the same data."
+    },
+    {
+      "id": "27c24eb1ed5480deb123f11cf1b540d8",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">To reduce latency:</span> By placing data closer to the user, for instance in a <a style=\"cursor:pointer;color:inherit;text-decoration:inherit;transition:all 100ms ease-in\" contenteditable=\"false\" class=\"notion-page-mention-token notion-text-mention-token notion-focusable-token notion-enable-hover\" data-token-index=\"2\" href=\"https://xpandeyed.notion.site/p/CDN-25824eb1ed548008806bde6f10dc774b?pvs=24\" tabindex=\"0\"><span style=\"white-space:nowrap\"></span><span style=\"display:inline-block;vertical-align:text-top;width:1.25em;height:1.25em;white-space:nowrap;position:relative;margin-inline-end:0.5em\"><img style=\"width:1em;height:1em;object-fit:cover;border-radius:1px;margin-top:0.125em;margin-inline-start:0.125em\" src=\"/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fpublic.notion-static.com%2Fbf92097a-e523-4a4b-baad-bda772121379%2Fdimensions.png?table=custom_emoji&amp;id=24d24eb1-ed54-802c-bd05-007a59cdc70f&amp;spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&amp;width=200&amp;userId=&amp;cache=v2&amp;imgBuildSrc=renderMentionIcon\" alt=\"\"><svg aria-hidden=\"true\" role=\"graphics-symbol\" viewBox=\"0 0 16 16\" style=\"width:1em;height:1em;display:block;fill:rgba(230, 229, 227, 1);flex-shrink:0;position:absolute;inset-inline-end:-0.25em;bottom:-0.2em;stroke:rgba(32, 32, 32, 1);stroke-width:1.5;paint-order:stroke\" class=\"arrowDiagonalUpRightSmall directional-icon\"><path d=\"M5.603 3.663a.625.625 0 1 0 0 1.25h4.6l-6.37 6.371a.615.615 0 0 0 .013.87.616.616 0 0 0 .87.014l6.371-6.372v4.601a.625.625 0 1 0 1.25 0v-6.11a.625.625 0 0 0-.625-.624z\"></path></svg></span><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--cl-linDecCol);text-underline-offset:10%;font-weight:500\" class=\"notion-page-mention-token__title\">CDN</span><span style=\"white-space:nowrap\"></span></a>, caches reduce the time it takes for data to travel over the network.",
+      "text": "To reduce latency: By placing data closer to the user, for instance in a CDN, caches reduce the time it takes for data to travel over the network.",
+      "links": [
+        {
+          "href": "https://xpandeyed.notion.site/p/CDN-25824eb1ed548008806bde6f10dc774b?pvs=24",
+          "text": "CDN"
+        }
+      ]
+    },
+    {
+      "id": "27c24eb1ed54802b9c72e08838b83616",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">To lessen the load on backend systems:</span> Caching reduces the number of requests that hit the primary database or backend services, which decreases their workload and can prevent them from being overloaded.",
+      "text": "To lessen the load on backend systems: Caching reduces the number of requests that hit the primary database or backend services, which decreases their workload and can prevent them from being overloaded."
+    },
+    {
+      "id": "27c24eb1ed548096b9d0cd3defdcd4d4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">To increase system availability:</span> If a backend service is down, a cache can continue to serve data, ensuring the system remains partially operational.",
+      "text": "To increase system availability: If a backend service is down, a cache can continue to serve data, ensuring the system remains partially operational."
+    },
+    {
+      "id": "27c24eb1ed54808a8e14e280942fff09",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Fundamental principle:</span> Caching takes advantage of the <span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:inherit;text-underline-offset:10%;color:inherit;word-wrap:break-word;font-style:italic;font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">locality of reference</span> principle, which states that recently requested data is very likely to be requested again in the near future.",
+      "text": "Fundamental principle: Caching takes advantage of the locality of reference principle, which states that recently requested data is very likely to be requested again in the near future."
+    },
+    {
+      "id": "27c24eb1ed548090b0d0c21ff5d19e39",
+      "type": "divider"
+    },
+    {
+      "id": "27c24eb1ed5480caafcefa6141dd1b88",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Architectural Placement of Caches</span>",
+      "text": "Architectural Placement of Caches"
+    },
+    {
+      "id": "27c24eb1ed5480a3870bd0d2539fe93e",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Application Server Cache:</span>",
+      "text": "Application Server Cache:"
+    },
+    {
+      "id": "27c24eb1ed5480b3829ae450b46bc654",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480a3870bd0d2539fe93e",
+      "html": "A cache can be placed directly on a application server, storing response data locally in memory or on the node's disk.",
+      "text": "A cache can be placed directly on a application server, storing response data locally in memory or on the node's disk."
+    },
+    {
+      "id": "27c24eb1ed54801babf8d7152888a3bc",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480a3870bd0d2539fe93e",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Challenge:</span> When multiple application servers are used behind a load balancer, requests for the same data might go to different nodes, leading to cache misses. This issue can be addressed with global or distributed caches.",
+      "text": "Challenge: When multiple application servers are used behind a load balancer, requests for the same data might go to different nodes, leading to cache misses. This issue can be addressed with global or distributed caches."
+    },
+    {
+      "id": "27c24eb1ed548056b940f42ad3f917d0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Dedicated Cache Tier:</span>",
+      "text": "Dedicated Cache Tier:"
+    },
+    {
+      "id": "27c24eb1ed5480bab2fcfdf83b62b638",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed548056b940f42ad3f917d0",
+      "html": "This involves a separate layer of servers whose sole purpose is caching.",
+      "text": "This involves a separate layer of servers whose sole purpose is caching."
+    },
+    {
+      "id": "27c24eb1ed548067b715c0434c92ef94",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed548056b940f42ad3f917d0",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Benefits:</span> This tier can be scaled independently of other services, and it decouples caching from the application logic.",
+      "text": "Benefits: This tier can be scaled independently of other services, and it decouples caching from the application logic."
+    },
+    {
+      "id": "27c24eb1ed54803bacd2c89d940b9658",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed548056b940f42ad3f917d0",
+      "html": "Common tools for this layer include Memcached and Redis.",
+      "text": "Common tools for this layer include Memcached and Redis."
+    },
+    {
+      "id": "27c24eb1ed5480f3a7fdd3f29c96f8b0",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Content Delivery Network (CDN):</span>",
+      "text": "Content Delivery Network (CDN):"
+    },
+    {
+      "id": "27c24eb1ed54801fbad3fd29d3c1786d",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480f3a7fdd3f29c96f8b0",
+      "html": "A CDN is a geographically distributed network of proxy servers that cache <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">static content</span> like images, videos, CSS, and JavaScript files.",
+      "text": "A CDN is a geographically distributed network of proxy servers that cache static content like images, videos, CSS, and JavaScript files."
+    },
+    {
+      "id": "27c24eb1ed54803e9803cdcd9c550178",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480f3a7fdd3f29c96f8b0",
+      "html": "It serves content to users from the cache server that is geographically closest to them, which dramatically reduces latency.",
+      "text": "It serves content to users from the cache server that is geographically closest to them, which dramatically reduces latency."
+    },
+    {
+      "id": "27c24eb1ed548004b0e9ead4daad753e",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480f3a7fdd3f29c96f8b0",
+      "html": "The typical workflow involves the CDN fetching content from an origin server (like Amazon S3 or a web server) on the first request, caching it on the edge server, and then serving subsequent requests directly from its cache.",
+      "text": "The typical workflow involves the CDN fetching content from an origin server (like Amazon S3 or a web server) on the first request, caching it on the edge server, and then serving subsequent requests directly from its cache."
+    },
+    {
+      "id": "27c24eb1ed5480a5a304d661f71d3a16",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Client-Side Caching:</span>",
+      "text": "Client-Side Caching:"
+    },
+    {
+      "id": "27c24eb1ed54807d93ffd1326b72f7e3",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480a5a304d661f71d3a16",
+      "html": "Data can be cached on the user's device, such as in a web browser.",
+      "text": "Data can be cached on the user's device, such as in a web browser."
+    },
+    {
+      "id": "27c24eb1ed54807b884fdc7a7a429557",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480a5a304d661f71d3a16",
+      "html": "This approach can save many round trips to the server, especially for data that doesn't change often.",
+      "text": "This approach can save many round trips to the server, especially for data that doesn't change often."
+    },
+    {
+      "id": "27c24eb1ed5480cb8e13f796bb2d6136",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480a5a304d661f71d3a16",
+      "html": "Modern <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">offline-first applications</span> heavily rely on this, treating the on-device state as a cache of the server's data.",
+      "text": "Modern offline-first applications heavily rely on this, treating the on-device state as a cache of the server's data."
+    },
+    {
+      "id": "27c24eb1ed54802b818ae6618d896ca5",
+      "type": "divider"
+    },
+    {
+      "id": "27c24eb1ed548076828fff765c8e89bb",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Caching Strategies</span>",
+      "text": "Caching Strategies"
+    },
+    {
+      "id": "27c24eb1ed548054b205c08a3b5b8d16",
+      "type": "text",
+      "html": "These strategies define how data is written to the cache and the ori DB.",
+      "text": "These strategies define how data is written to the cache and the ori DB."
+    },
+    {
+      "id": "27c24eb1ed5480f394f5ffa1821c7aca",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Write-through cache:</span>",
+      "text": "Write-through cache:"
+    },
+    {
+      "id": "27c24eb1ed548010bbfcc8da0e6201c8",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480f394f5ffa1821c7aca",
+      "html": "Data is written to both the cache and the permanent storage <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at the same time</span>.",
+      "text": "Data is written to both the cache and the permanent storage at the same time."
+    },
+    {
+      "id": "27c24eb1ed54803b9c3dc1c202582e79",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480f394f5ffa1821c7aca",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantage:</span> Guarantees complete data consistency between the cache and the database. No data is lost if the cache fails.",
+      "text": "Advantage: Guarantees complete data consistency between the cache and the database. No data is lost if the cache fails."
+    },
+    {
+      "id": "27c24eb1ed5480ba8f24cd40aa996984",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480f394f5ffa1821c7aca",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Disadvantage:</span> Higher write latency because the operation is only complete after two writes succeed.",
+      "text": "Disadvantage: Higher write latency because the operation is only complete after two writes succeed."
+    },
+    {
+      "id": "27c24eb1ed54801baa35c21ff274f008",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Write-around cache:</span>",
+      "text": "Write-around cache:"
+    },
+    {
+      "id": "27c24eb1ed5480ae9e49dd2462b1f602",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed54801baa35c21ff274f008",
+      "html": "Data is written directly to the permanent storage, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">bypassing the cache</span>.",
+      "text": "Data is written directly to the permanent storage, bypassing the cache."
+    },
+    {
+      "id": "27c24eb1ed5480a5a7c1dd59ccac30ce",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed54801baa35c21ff274f008",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantage:</span> Prevents the cache from being filled with data that is written once but not read soon after.",
+      "text": "Advantage: Prevents the cache from being filled with data that is written once but not read soon after."
+    },
+    {
+      "id": "27c24eb1ed5480468b67e2ccb7f848e9",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed54801baa35c21ff274f008",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Disadvantage:</span> A read request for recently written data will result in a \"cache miss,\" causing higher read latency as the data must be fetched from the database.",
+      "text": "Disadvantage: A read request for recently written data will result in a \"cache miss,\" causing higher read latency as the data must be fetched from the database."
+    },
+    {
+      "id": "27c24eb1ed548000b51debf41430017c",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Write-back cache:</span>",
+      "text": "Write-back cache:"
+    },
+    {
+      "id": "27c24eb1ed5480939c4bd9debf89a4df",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed548000b51debf41430017c",
+      "html": "Data is written <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">only to the cache</span>, and the write is immediately confirmed to the client.",
+      "text": "Data is written only to the cache, and the write is immediately confirmed to the client."
+    },
+    {
+      "id": "27c24eb1ed54805fa13ce71762d1b814",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed548000b51debf41430017c",
+      "html": "The cache then writes the data to the permanent storage at a later time, such as after a specified interval.",
+      "text": "The cache then writes the data to the permanent storage at a later time, such as after a specified interval."
+    },
+    {
+      "id": "27c24eb1ed548035b43aee194594dbd0",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed548000b51debf41430017c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Advantage:</span> Very low latency and high throughput for write-intensive applications.",
+      "text": "Advantage: Very low latency and high throughput for write-intensive applications."
+    },
+    {
+      "id": "27c24eb1ed5480789d80cb8034ee2750",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed548000b51debf41430017c",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Disadvantage:</span> High risk of data loss if the cache fails before the data has been persisted to the database.",
+      "text": "Disadvantage: High risk of data loss if the cache fails before the data has been persisted to the database."
+    },
+    {
+      "id": "27c24eb1ed5480908b8ee43355ca9ffe",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Read-through cache:</span>",
+      "text": "Read-through cache:"
+    },
+    {
+      "id": "27c24eb1ed548035bd10f6990c051907",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480908b8ee43355ca9ffe",
+      "html": "The application communicates with the cache. When a cache miss occurs, the cache itself is responsible for fetching the data from the database, updating itself, and then returning the data to the application.",
+      "text": "The application communicates with the cache. When a cache miss occurs, the cache itself is responsible for fetching the data from the database, updating itself, and then returning the data to the application."
+    },
+    {
+      "id": "27c24eb1ed5480078e61e1449d6efaf6",
+      "type": "bulleted_list",
+      "parent": "27c24eb1ed5480908b8ee43355ca9ffe",
+      "html": "This seems the best fit for most of the cases.",
+      "text": "This seems the best fit for most of the cases."
+    },
+    {
+      "id": "27c24eb1ed5480669ac2f345738d7e1e",
+      "type": "divider"
+    },
+    {
+      "id": "27c24eb1ed5480598c8dc3d8c0f88d2b",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache Eviction</span>",
+      "text": "Cache Eviction"
+    },
+    {
+      "id": "27c24eb1ed54802ca9cbee4d34a69873",
+      "type": "bulleted_list",
+      "html": "When the cache is full, an eviction policy decides which item to discard to make room for a new one.",
+      "text": "When the cache is full, an eviction policy decides which item to discard to make room for a new one."
+    },
+    {
+      "id": "27c24eb1ed5480ef9eb9cf6a406dbe3a",
+      "type": "bulleted_list",
+      "html": "Deals how cache capacity is utilized the best way possible.",
+      "text": "Deals how cache capacity is utilized the best way possible."
+    },
+    {
+      "id": "27c24eb1ed5480dda751d61606269b1f",
+      "type": "sub_header",
+      "html": "Methods:",
+      "text": "Methods:"
+    },
+    {
+      "id": "27d24eb1ed54807ea53cec84cb1e429e",
+      "type": "bulleted_list",
+      "html": "First In First Out (FIFO)",
+      "text": "First In First Out (FIFO)"
+    },
+    {
+      "id": "27d24eb1ed548048a2d7d62fa2df6996",
+      "type": "bulleted_list",
+      "html": "Last In First Out (LIFO)",
+      "text": "Last In First Out (LIFO)"
+    },
+    {
+      "id": "27d24eb1ed5480a8bf50f61b089df7f7",
+      "type": "bulleted_list",
+      "html": "Least Recently Used (LRU)",
+      "text": "Least Recently Used (LRU)"
+    },
+    {
+      "id": "27d24eb1ed5480d48806cf9249850093",
+      "type": "bulleted_list",
+      "html": "Most Recently Used (MRU)",
+      "text": "Most Recently Used (MRU)"
+    },
+    {
+      "id": "27d24eb1ed5480e4829ef90a05e53122",
+      "type": "bulleted_list",
+      "html": "Least Frequently Used (LFU)",
+      "text": "Least Frequently Used (LFU)"
+    },
+    {
+      "id": "27d24eb1ed54800d869cd9d10d53bc88",
+      "type": "bulleted_list",
+      "html": "Random Replacement (RR)",
+      "text": "Random Replacement (RR)"
+    },
+    {
+      "id": "28a24eb1ed5480ff9d1de0bd167913ac",
+      "type": "text",
+      "html": "The method names explain themselves.",
+      "text": "The method names explain themselves."
+    },
+    {
+      "id": "27c24eb1ed548000bf20df4b027ade3f",
+      "type": "divider"
+    },
+    {
+      "id": "27c24eb1ed5480bdae2fc03e0365bffb",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache Invalidation:</span>",
+      "text": "Cache Invalidation:"
+    },
+    {
+      "id": "27c24eb1ed548086abfae0f56286f2d8",
+      "type": "bulleted_list",
+      "html": "This is the process of ensuring that stale data is removed or updated in the cache when the original data in the database changes.",
+      "text": "This is the process of ensuring that stale data is removed or updated in the cache when the original data in the database changes."
+    },
+    {
+      "id": "27c24eb1ed548077af76cf8f94c28b02",
+      "type": "bulleted_list",
+      "html": "Failure to invalidate the cache properly leads to serving outdated information.",
+      "text": "Failure to invalidate the cache properly leads to serving outdated information."
+    },
+    {
+      "id": "27c24eb1ed5480ecaf71ce869cc1d637",
+      "type": "bulleted_list",
+      "html": "Strategies like <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">write-through</span> handle this implicitly. In other cases, the application must explicitly delete or update the cache entry when it writes to the database.",
+      "text": "Strategies like write-through handle this implicitly. In other cases, the application must explicitly delete or update the cache entry when it writes to the database."
+    },
+    {
+      "id": "27d24eb1ed5480209038ed8a4a4c5089",
+      "type": "sub_header",
+      "html": "Invalidation Methods:",
+      "text": "Invalidation Methods:"
+    },
+    {
+      "id": "27d24eb1ed5480fdbd3fcec219988059",
+      "type": "bulleted_list",
+      "html": "Using explicit API calls from the main server: ",
+      "text": "Using explicit API calls from the main server: "
+    },
+    {
+      "id": "27d24eb1ed5480a1a2fadc06bfd97ac2",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480fdbd3fcec219988059",
+      "html": "When the data is updated on the main server, the main server makes API call(s) to invalidate the cache.",
+      "text": "When the data is updated on the main server, the main server makes API call(s) to invalidate the cache."
+    },
+    {
+      "id": "27d24eb1ed5480eabc30ccb5ccbdb269",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480fdbd3fcec219988059",
+      "html": "Since, there can be multiple caches, and based on consistency requirements, coordinated cache invalidation protocols are used.",
+      "text": "Since, there can be multiple caches, and based on consistency requirements, coordinated cache invalidation protocols are used."
+    },
+    {
+      "id": "27d24eb1ed5480c88b54f80186241a95",
+      "type": "bulleted_list",
+      "html": "Using file versioning:",
+      "text": "Using file versioning:"
+    },
+    {
+      "id": "27d24eb1ed548023bf24d7241f2fb26a",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480c88b54f80186241a95",
+      "html": "The cached files/data have versions and the api requests to fetch these files/data also fetches using the versions.",
+      "text": "The cached files/data have versions and the api requests to fetch these files/data also fetches using the versions."
+    },
+    {
+      "id": "27d24eb1ed548006957ed559c6535480",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed5480c88b54f80186241a95",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Example:</span>",
+      "text": "Example:"
+    },
+    {
+      "id": "27d24eb1ed5480b4b627f800053eabd3",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548006957ed559c6535480",
+      "html": "Let us say a file <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">v1</span></div> is being used.",
+      "text": "Let us say a file v1 is being used."
+    },
+    {
+      "id": "27d24eb1ed548028bec2d5deeacd5517",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548006957ed559c6535480",
+      "html": "Now, the file is updated to <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">v2</span></div> on the main server, but not in the cache yet.",
+      "text": "Now, the file is updated to v2 on the main server, but not in the cache yet."
+    },
+    {
+      "id": "27d24eb1ed5480e7b2d9f52e987ed503",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548006957ed559c6535480",
+      "html": "The file will be fetched using some api like, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">filename.png?v=2</span></div> from the cache.",
+      "text": "The file will be fetched using some api like, filename.png?v=2 from the cache."
+    },
+    {
+      "id": "27d24eb1ed548085921fdcf6449ce35c",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548006957ed559c6535480",
+      "html": "The cache will not be able to serve this version as it stores the older version, and will know that a newer version <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">v2</span></div> exists.",
+      "text": "The cache will not be able to serve this version as it stores the older version, and will know that a newer version v2 exists."
+    },
+    {
+      "id": "27d24eb1ed5480e79e87ff715e0ac0e6",
+      "type": "bulleted_list",
+      "parent": "27d24eb1ed548006957ed559c6535480",
+      "html": "The <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">v1</span></div> from cache will be invalidated and newer version <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">v2</span></div> will be fetched, cached and returned.",
+      "text": "The v1 from cache will be invalidated and newer version v2 will be fetched, cached and returned."
+    },
+    {
+      "id": "27c24eb1ed5480b5b97bd085559a57ef",
+      "type": "divider"
+    },
+    {
+      "id": "27c24eb1ed548066a020d0158a9496ad",
+      "type": "header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key Notes</span>",
+      "text": "Key Notes"
+    },
+    {
+      "id": "27c24eb1ed54801a8b8bed6d0cf17391",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Consistency:</span>",
+      "text": "Consistency:"
+    },
+    {
+      "id": "27d24eb1ed548034bffdcd79e7742723",
+      "type": "bulleted_list",
+      "html": "Keeping the cache and the primary data store perfectly in sync is challenging, especially in a distributed system.",
+      "text": "Keeping the cache and the primary data store perfectly in sync is challenging, especially in a distributed system."
+    },
+    {
+      "id": "27d24eb1ed54808396aaf7b81aea2a9f",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Strong consistency</span> is difficult to achieve without performance penalties. Most systems opt for <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">eventual consistency</span>, where updates to the cache might lag slightly behind the database.",
+      "text": "Strong consistency is difficult to achieve without performance penalties. Most systems opt for eventual consistency, where updates to the cache might lag slightly behind the database."
+    },
+    {
+      "id": "27c24eb1ed5480799d86fd5d81c61e25",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Mitigating Failures:</span>",
+      "text": "Mitigating Failures:"
+    },
+    {
+      "id": "27c24eb1ed5480b5ad23cf73a1958836",
+      "type": "bulleted_list",
+      "html": "A single cache server can be a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Single Point of Failure (SPOF)</span>.",
+      "text": "A single cache server can be a Single Point of Failure (SPOF)."
+    },
+    {
+      "id": "27c24eb1ed54809b9eb5c8fe7c006131",
+      "type": "bulleted_list",
+      "html": "To improve fault tolerance, multiple cache servers should be deployed, often across different data centres.",
+      "text": "To improve fault tolerance, multiple cache servers should be deployed, often across different data centres."
+    },
+    {
+      "id": "27c24eb1ed548046ad63c17933d8d53a",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Overprovisioning</span> memory: Allocation or more memory than current requirements. Provides buffer in case if the data spikes.",
+      "text": "Overprovisioning memory: Allocation or more memory than current requirements. Provides buffer in case if the data spikes."
+    },
+    {
+      "id": "27c24eb1ed5480028a8dfe3cd88d3068",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">TTL Based Cached Content Removal:</span>",
+      "text": "TTL Based Cached Content Removal:"
+    },
+    {
+      "id": "27c24eb1ed548052a81de104c114931d",
+      "type": "bulleted_list",
+      "html": "Many times the cost depends on the amount of data stored. Therefore, More Data ⇒ More Cost.",
+      "text": "Many times the cost depends on the amount of data stored. Therefore, More Data ⇒ More Cost."
+    },
+    {
+      "id": "27c24eb1ed5480daa418d57a5dfed850",
+      "type": "bulleted_list",
+      "html": "In such cases, the data is assigned a time to live, after which the cached content is removed from the cache.",
+      "text": "In such cases, the data is assigned a time to live, after which the cached content is removed from the cache."
+    },
+    {
+      "id": "27d24eb1ed548019911fff204dbe92ba",
+      "type": "bulleted_list",
+      "html": "TTL comes with a trade-off, the data is removed too soon, then cache misses will happen and if data is kept for too long, then cost will increase.",
+      "text": "TTL comes with a trade-off, the data is removed too soon, then cache misses will happen and if data is kept for too long, then cost will increase."
+    },
+    {
+      "id": "27d24eb1ed548060a9eceebb1e230744",
+      "type": "bulleted_list",
+      "html": "Therefore, determining TTL and resetting TTL should be considered.",
+      "text": "Therefore, determining TTL and resetting TTL should be considered."
+    },
+    {
+      "id": "27c24eb1ed5480a0b5bad897f0e14402",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache Stampede (Thundering Herd):</span>",
+      "text": "Cache Stampede (Thundering Herd):"
+    },
+    {
+      "id": "27c24eb1ed5480a1bdb0e0e16c9fe1b1",
+      "type": "bulleted_list",
+      "html": "A cache stampede can occur when a very popular item expires from the cache. Multiple requests for this item will then miss the cache simultaneously and all hit the backend database at the same time, potentially overwhelming it.",
+      "text": "A cache stampede can occur when a very popular item expires from the cache. Multiple requests for this item will then miss the cache simultaneously and all hit the backend database at the same time, potentially overwhelming it."
+    },
+    {
+      "id": "27c24eb1ed54806fbdc2d85339e3de66",
+      "type": "sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Cache Warm-up:</span>",
+      "text": "Cache Warm-up:"
+    },
+    {
+      "id": "27c24eb1ed5480b1ba7cca298f5f91e0",
+      "type": "bulleted_list",
+      "html": "This is the process of pre-loading a cache with data that is expected to be in high demand. This is often done when a system starts up to prevent an initial storm of cache misses.",
+      "text": "This is the process of pre-loading a cache with data that is expected to be in high demand. This is often done when a system starts up to prevent an initial storm of cache misses."
+    },
+    {
+      "id": "28a24eb1ed54809bad0adbcf9a001a20",
+      "type": "divider"
+    },
+    {
+      "id": "28a24eb1ed548063bf58d38a2ff590d0",
+      "type": "text",
+      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
+      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
+    },
+    {
+      "id": "28a24eb1ed54808a9b83f863561f783a",
+      "type": "divider"
+    },
+    {
+      "id": "28a24eb1ed548097811bebd7e7f78a86",
+      "type": "bulleted_list",
+      "html": "Caches do exist in the computer hardwares too, which are well known as L1, L2 and L3 caches.",
+      "text": "Caches do exist in the computer hardwares too, which are well known as L1, L2 and L3 caches."
+    },
+    {
+      "id": "33324eb1ed54804bbc27caef9e4cb115",
+      "type": "bulleted_list",
+      "html": "Apart from L1, L2 and L3, translation lookaside buffers also exist, which are more like caches, which map the physical addresses to the virtual addresses.",
+      "text": "Apart from L1, L2 and L3, translation lookaside buffers also exist, which are more like caches, which map the physical addresses to the virtual addresses."
+    },
+    {
+      "id": "33324eb1ed548024b87dd851c87049d1",
+      "type": "bulleted_list",
+      "html": "Then there exist, file system caches, page caches and inode caches.",
+      "text": "Then there exist, file system caches, page caches and inode caches."
+    },
+    {
+      "id": "33324eb1ed5480c58045f7feff7803e5",
+      "type": "bulleted_list",
+      "html": "One common myth is that the caches exist in memory, and not on disks, but that is false. For example the Kafka can cache a massive amount of messages on disk.",
+      "text": "One common myth is that the caches exist in memory, and not on disks, but that is false. For example the Kafka can cache a massive amount of messages on disk."
+    },
+    {
+      "id": "33324eb1ed548040b647d3a6e2f46b25",
+      "type": "bulleted_list",
+      "html": "The most important take away is that caching can happen at every layer.",
+      "text": "The most important take away is that caching can happen at every layer."
+    }
+  ]
+}

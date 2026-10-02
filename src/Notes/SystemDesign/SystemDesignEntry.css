@@ -1,0 +1,79 @@
+.SystemDesignNote__content {
+    min-width: 0;
+}
+
+.SystemDesignNote__content p,
+.SystemDesignNote__content li,
+.SystemDesignNote__content summary {
+    white-space: pre-wrap;
+}
+
+.SystemDesignNote__content ul,
+.SystemDesignNote__content ol {
+    padding-left: var(--space-lg);
+}
+
+.SystemDesignNote__content ul {
+    list-style: disc;
+}
+
+.SystemDesignNote__content ol {
+    list-style: decimal;
+}
+
+.SystemDesignNote__content li + li {
+    margin-top: var(--space-xs);
+}
+
+.SystemDesignNote__content aside,
+.SystemDesignNote__content blockquote {
+    padding: var(--space-sm);
+    border-left: 2px solid var(--color-border);
+}
+
+.SystemDesignNote__content details {
+    margin-block: var(--space-sm);
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+}
+
+.SystemDesignNote__content summary {
+    cursor: pointer;
+}
+
+.SystemDesignNote__content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.SystemDesignNote__content hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.SystemDesignNote__content .Article__table th,
+.SystemDesignNote__content .Article__table td {
+    padding: var(--space-xs) var(--space-sm);
+}
+
+.SystemDesignNote__math {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.SystemDesignNote__collection {
+    margin-block: var(--space-lg);
+}
+
+.SystemDesignNote__video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.SystemDesignNote__video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}

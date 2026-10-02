@@ -20,6 +20,7 @@ interface ArticleLayoutProps {
     references?: ReferenceEntry[];
     backRoute?: Route;
     backLabel?: string;
+    headerMeta?: ReactNode;
     children?: ReactNode;
 }
 
@@ -35,6 +36,7 @@ const ArticleLayout = ({
     references = [],
     backRoute = BLOGS_ROUTE,
     backLabel = 'Back to blogs',
+    headerMeta,
     children,
 }: ArticleLayoutProps) => {
     const titleId = toId(title);
@@ -56,6 +58,7 @@ const ArticleLayout = ({
                 <h1 id={titleId} className="PageTitle">
                     {title}
                 </h1>
+                {headerMeta}
             </header>
 
             <TableOfContents sections={tocEntries} />

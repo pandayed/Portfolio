@@ -1,0 +1,58 @@
+{
+  "id": "26c24eb1ed5480938e1dd8c670d8c813",
+  "title": "Writes in a Distributed System",
+  "sourceUrl": "https://xpandeyed.notion.site/Writes-in-a-Distributed-System-26c24eb1ed5480938e1dd8c670d8c813?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480b6821cf57945102f73",
+      "type": "bulleted_list",
+      "html": "Data is stored on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple nodes</span> in a distributed system.",
+      "text": "Data is stored on multiple nodes in a distributed system."
+    },
+    {
+      "id": "26c24eb1ed54806cb108cb85368700ff",
+      "type": "bulleted_list",
+      "html": "If every replica accepts writes simultaneously, <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">conflicts can occur</span>, leading to inconsistent data.",
+      "text": "If every replica accepts writes simultaneously, conflicts can occur, leading to inconsistent data."
+    },
+    {
+      "id": "26c24eb1ed5480b6bb76e74e90e4dcf2",
+      "type": "bulleted_list",
+      "html": "Understanding <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">the problems involved in writing</span> is extremely important.",
+      "text": "Understanding the problems involved in writing is extremely important."
+    },
+    {
+      "id": "26c24eb1ed548002ba26d02984401825",
+      "type": "bulleted_list",
+      "html": "Knowing <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">how these problems are handled</span> (replication strategies, coordination protocols) helps design <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">reliable and consistent systems</span>.",
+      "text": "Knowing how these problems are handled (replication strategies, coordination protocols) helps design reliable and consistent systems."
+    },
+    {
+      "id": "26c24eb1ed54802f91c1d2fec988d76c",
+      "type": "bulleted_list",
+      "html": "To address these challenges, systems adopt <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different architectures for write acceptance</span>, which determine <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">who can accept writes and how replicas stay consistent</span>.",
+      "text": "To address these challenges, systems adopt different architectures for write acceptance, which determine who can accept writes and how replicas stay consistent."
+    },
+    {
+      "id": "26c24eb1ed5480ad8d2ed4142c0a783a",
+      "type": "divider"
+    },
+    {
+      "id": "26c24eb1ed5480c28d6cdb3ca1b58a6a",
+      "type": "header",
+      "html": "Write Architectures",
+      "text": "Write Architectures"
+    },
+    {
+      "id": "26c24eb1ed54800f8e97e139e1940f63",
+      "type": "collection_view",
+      "pageIds": [
+        "26c24eb1ed548039b2d7c1b0ff869837"
+      ]
+    },
+    {
+      "id": "26c24eb1ed5480cd851fd3188ac55b0a",
+      "type": "text"
+    }
+  ]
+}

@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import noteWordCounts from './build/noteWordCounts.ts';
 
 // Relative base keeps the gh-pages build working from any sub-path.
 export default defineConfig({
   base: './',
-  plugins: [react()],
+  plugins: [react(), noteWordCounts()],
   server: {
     port: 3000,
     open: true,

@@ -1,0 +1,579 @@
+{
+  "id": "34f24eb1ed54801990cfe7aa757be3b7",
+  "title": "Conditional Variables",
+  "sourceUrl": "https://xpandeyed.notion.site/Conditional-Variables-34f24eb1ed54801990cfe7aa757be3b7",
+  "blocks": [
+    {
+      "id": "34f24eb1ed548082895dff3d659cb174",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Chapter: Condition Variables — Waiting Without Wasting</span>",
+      "text": "Chapter: Condition Variables — Waiting Without Wasting"
+    },
+    {
+      "id": "34f24eb1ed5480fb8bd5f9979c01854a",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">1. The problem: Polling is expensive and slow</span>",
+      "text": "1. The problem: Polling is expensive and slow"
+    },
+    {
+      "id": "34f24eb1ed5480de827ae5653b38120c",
+      "type": "text",
+      "html": "You’ve already learned mutexes. They solve \"don't let two threads touch this data at once.\"",
+      "text": "You’ve already learned mutexes. They solve \"don't let two threads touch this data at once.\""
+    },
+    {
+      "id": "34f24eb1ed548035a757fb865952c371",
+      "type": "text",
+      "html": "But they don't solve \"what if the data isn't ready yet?\"",
+      "text": "But they don't solve \"what if the data isn't ready yet?\""
+    },
+    {
+      "id": "34f24eb1ed5480ef8e98e14e7e4151fb",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Bad solution: busy waiting</span>",
+      "text": "Bad solution: busy waiting"
+    },
+    {
+      "id": "34f24eb1ed548079b462f3279b4e2e38",
+      "type": "code",
+      "html": "<span class=\"token function notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">while</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">task_queue</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">empty</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">unlock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Must unlock or producer can never add work</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">sleep</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token number notion-enable-hover\" data-token-index=\"0\">1</span><span class=\" notion-enable-hover\" data-token-index=\"0\">ms</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Check again soon</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\nTask t </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> task_queue</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pop</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Finally got one</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">unlock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span>\n</span>",
+      "text": "lock(mutex);\nwhile (task_queue.empty()) {\n    unlock(mutex); // Must unlock or producer can never add work\n    sleep(1ms); // Check again soon\n    lock(mutex);\n}\nTask t = task_queue.pop(); // Finally got one\nunlock(mutex);\n"
+    },
+    {
+      "id": "34f24eb1ed5480cd83fecc8ca8faeba2",
+      "type": "text",
+      "html": "Problems:",
+      "text": "Problems:"
+    },
+    {
+      "id": "34f24eb1ed5480218779ddfc41a0b8a5",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">CPU waste</span>: You wake up 1000x per second just to check a boolean",
+      "text": "CPU waste: You wake up 1000x per second just to check a boolean"
+    },
+    {
+      "id": "34f24eb1ed5480e89112eb1b095deb48",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Latency</span>: If a task arrives 0.1ms after you sleep, you still wait 0.9ms",
+      "text": "Latency: If a task arrives 0.1ms after you sleep, you still wait 0.9ms"
+    },
+    {
+      "id": "34f24eb1ed5480ce909cf018aa3b51fa",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Can't scale</span>: 100 threads doing this kills performance",
+      "text": "Can't scale: 100 threads doing this kills performance"
+    },
+    {
+      "id": "34f24eb1ed548031b06ac4a77d722a35",
+      "type": "text",
+      "html": "We need a way for a thread to say \"put me to sleep until this becomes true\" and have 0 CPU cost.",
+      "text": "We need a way for a thread to say \"put me to sleep until this becomes true\" and have 0 CPU cost."
+    },
+    {
+      "id": "34f24eb1ed5480e59682da740feaf390",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">2. What a condition variable is</span>",
+      "text": "2. What a condition variable is"
+    },
+    {
+      "id": "34f24eb1ed5480ffbd42cd76163fc3b5",
+      "type": "text",
+      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">condition variable</span> is a synchronization primitive that lets threads wait efficiently for a condition to become true.",
+      "text": "A condition variable is a synchronization primitive that lets threads wait efficiently for a condition to become true."
+    },
+    {
+      "id": "34f24eb1ed54806b8ddbe75125413c2b",
+      "type": "text",
+      "html": "Here is a catch, the thread which actually waits, sleeps. And it does not have to observe the conditional variable or anything. When the condition becomes true, OS very likely will have to wake it up. One more catch, OS is like the boss, it can wake the thread up, even when its not required.",
+      "text": "Here is a catch, the thread which actually waits, sleeps. And it does not have to observe the conditional variable or anything. When the condition becomes true, OS very likely will have to wake it up. One more catch, OS is like the boss, it can wake the thread up, even when its not required."
+    },
+    {
+      "id": "34f24eb1ed5480ba8d42ddc02e7160fe",
+      "type": "text",
+      "html": "The thing is, OS will definitely wake up the thread, if things are ready, but if OS wakes up the thread, then it does not mean that things are ready. So, there must be check, that will run on wake up to know if things are ready or not.",
+      "text": "The thing is, OS will definitely wake up the thread, if things are ready, but if OS wakes up the thread, then it does not mean that things are ready. So, there must be check, that will run on wake up to know if things are ready or not."
+    },
+    {
+      "id": "34f24eb1ed548069b7e0ec698b9f0ed5",
+      "type": "text",
+      "html": "Conditional variables work with mutexes. A condition variable without a mutex is broken by design.",
+      "text": "Conditional variables work with mutexes. A condition variable without a mutex is broken by design."
+    },
+    {
+      "id": "34f24eb1ed54803a9a73e87684f6e930",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Key idea: It has no state of its own.</span> It’s just a wait queue managed by the OS.",
+      "text": "Key idea: It has no state of its own. It’s just a wait queue managed by the OS."
+    },
+    {
+      "id": "34f24eb1ed5480ccb9b9c44da77d7295",
+      "type": "text",
+      "html": "So, it always works as 2 friends:",
+      "text": "So, it always works as 2 friends:"
+    },
+    {
+      "id": "34f24eb1ed548069b2e4f45991987230",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">A mutex</span>: protects the shared data",
+      "text": "A mutex: protects the shared data"
+    },
+    {
+      "id": "34f24eb1ed548004b182d428457a7408",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">A condition</span>: a boolean expression you define, like <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">!queue.empty()</span></div>",
+      "text": "A condition: a boolean expression you define, like !queue.empty()"
+    },
+    {
+      "id": "34f24eb1ed54809d9750db1e7d2785d9",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The 3 operations:</span>",
+      "text": "The 3 operations:"
+    },
+    {
+      "id": "34f24eb1ed5480b88e42ce61630c6d5b",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Operation"
+          },
+          {
+            "header": true,
+            "html": "What it does"
+          },
+          {
+            "header": true,
+            "html": "Analogy"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">wait(cv, mutex)</span></div>"
+          },
+          {
+            "header": false,
+            "html": "Atomically: unlock mutex → sleep → re-lock on wake"
+          },
+          {
+            "header": false,
+            "html": "\"Put me on the waiting list and wake me later\""
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">notify_one()</span></div>"
+          },
+          {
+            "header": false,
+            "html": "Wake up one waiting thread"
+          },
+          {
+            "header": false,
+            "html": "\"Page the next person in line\""
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">notify_all()</span></div>"
+          },
+          {
+            "header": false,
+            "html": "Wake up ALL waiting threads"
+          },
+          {
+            "header": false,
+            "html": "\"Everyone, come check if you can proceed\""
+          }
+        ]
+      ]
+    },
+    {
+      "id": "34f24eb1ed54804d9ca3f96c237e13a5",
+      "type": "text",
+      "html": "The \"atomic unlock and sleep\" is critical. If it wasn't atomic, you’d have this race:",
+      "text": "The \"atomic unlock and sleep\" is critical. If it wasn't atomic, you’d have this race:"
+    },
+    {
+      "id": "34f24eb1ed548052bae4e007c9ba0e3c",
+      "type": "code",
+      "html": "Thread A: check condition → false\nThread B: make condition true → notify() // nobody waiting yet\nThread A: wait() // now sleeps forever",
+      "text": "Thread A: check condition → false\nThread B: make condition true → notify() // nobody waiting yet\nThread A: wait() // now sleeps forever"
+    },
+    {
+      "id": "34f24eb1ed5480929f33ec223e2dcd2c",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">3. The golden pattern</span>",
+      "text": "3. The golden pattern"
+    },
+    {
+      "id": "34f24eb1ed54803e9c22e2cd9d8b73b8",
+      "type": "text",
+      "html": "Every correct use of a condition variable looks like this:",
+      "text": "Every correct use of a condition variable looks like this:"
+    },
+    {
+      "id": "34f24eb1ed54806c99bff71bb541ccb5",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Waiting thread:</span>",
+      "text": "Waiting thread:"
+    },
+    {
+      "id": "34f24eb1ed5480439e75e401936cfb0a",
+      "type": "code",
+      "html": "<span class=\"token function notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 1. Must hold lock first</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">while</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">!</span><span class=\" notion-enable-hover\" data-token-index=\"0\">condition</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 2. ALWAYS use while, not if</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">wait</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">cv</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 3. Atomically unlocks + sleeps</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 4. On wake: mutex is re-locked automatically</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Condition is true AND we hold the mutex</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">do_work</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">unlock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 5. Done</span><span>\n</span>",
+      "text": "lock(mutex); // 1. Must hold lock first\nwhile (!condition) { // 2. ALWAYS use while, not if\n    wait(cv, mutex); // 3. Atomically unlocks + sleeps\n} // 4. On wake: mutex is re-locked automatically\n// Condition is true AND we hold the mutex\ndo_work();\nunlock(mutex); // 5. Done\n"
+    },
+    {
+      "id": "34f24eb1ed54801796e0ecf8bd7e2af3",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Signaling thread:</span>",
+      "text": "Signaling thread:"
+    },
+    {
+      "id": "34f24eb1ed5480de9c0df61f358f9260",
+      "type": "code",
+      "html": "<span class=\"token function notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 1. Lock to change shared state</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">make_condition_true</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 2. Change the actual data</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">notify_one</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">or</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">notify_all</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 3. Wake waiters</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">unlock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 4. Unlock so waiters can run</span><span>\n</span>",
+      "text": "lock(mutex); // 1. Lock to change shared state\nmake_condition_true(); // 2. Change the actual data\nnotify_one(); or notify_all(); // 3. Wake waiters\nunlock(mutex); // 4. Unlock so waiters can run\n"
+    },
+    {
+      "id": "34f24eb1ed54808c8189e6d7064955db",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why </span><div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em;font-weight:600\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">while</span></div><span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\"> not </span><div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em;font-weight:600\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">if</span></div><span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">?</span> Three reasons:",
+      "text": "Why while not if? Three reasons:"
+    },
+    {
+      "id": "34f24eb1ed5480c1a3f1fc721897d9c4",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Spurious wakeups</span>: The OS is allowed to wake you for no reason",
+      "text": "Spurious wakeups: The OS is allowed to wake you for no reason"
+    },
+    {
+      "id": "34f24eb1ed5480a1b284dc08f69e4a05",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Stolen wakeup</span>: You wake up, but another thread grabs the mutex and makes condition false again before you run",
+      "text": "Stolen wakeup: You wake up, but another thread grabs the mutex and makes condition false again before you run"
+    },
+    {
+      "id": "34f24eb1ed5480b18d12c1d547f68047",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Broadcast</span>: You + 9 others wake up, but there’s only 1 work item",
+      "text": "Broadcast: You + 9 others wake up, but there’s only 1 work item"
+    },
+    {
+      "id": "34f24eb1ed5480609aebcb188edff27b",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">4. Real software engineering example: Thread Pool Job Queue</span>",
+      "text": "4. Real software engineering example: Thread Pool Job Queue"
+    },
+    {
+      "id": "34f24eb1ed54807ab7f3d466b86e340d",
+      "type": "text",
+      "html": "This is the most common use case you’ll see in production code. Web servers, background workers, image processors — they all use this.",
+      "text": "This is the most common use case you’ll see in production code. Web servers, background workers, image processors — they all use this."
+    },
+    {
+      "id": "34f24eb1ed5480fd93a8d55898ac8a6a",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The problem:</span>\nYou have 8 worker threads. You have 1000 jobs coming in at random times. You don’t want to spawn 1000 threads. You want the 8 threads to pick up jobs as they arrive, and sleep when there’s no work.",
+      "text": "The problem:\nYou have 8 worker threads. You have 1000 jobs coming in at random times. You don’t want to spawn 1000 threads. You want the 8 threads to pick up jobs as they arrive, and sleep when there’s no work."
+    },
+    {
+      "id": "34f24eb1ed5480af980fd3ec138e72b5",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Without condition variables</span>: Each thread polls the queue. Wastes CPU.\n<span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">With condition variables</span>: Threads sleep until a job exists. 0 CPU when idle.",
+      "text": "Without condition variables: Each thread polls the queue. Wastes CPU.\nWith condition variables: Threads sleep until a job exists. 0 CPU when idle."
+    },
+    {
+      "id": "34f24eb1ed54804ab8e4d768ee594b60",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Complete C++ example:</span>",
+      "text": "Complete C++ example:"
+    },
+    {
+      "id": "34f24eb1ed5480d8b59ce6cc9bb9e0b1",
+      "type": "code",
+      "html": "<span class=\"token directive-hash macro property notion-enable-hover\" data-token-index=\"0\">#</span><span class=\"token directive keyword macro property notion-enable-hover\" data-token-index=\"0\">include</span><span class=\"token macro property notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string macro property notion-enable-hover\" data-token-index=\"0\">&lt;mutex&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token directive-hash macro property notion-enable-hover\" data-token-index=\"0\">#</span><span class=\"token directive keyword macro property notion-enable-hover\" data-token-index=\"0\">include</span><span class=\"token macro property notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string macro property notion-enable-hover\" data-token-index=\"0\">&lt;condition_variable&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token directive-hash macro property notion-enable-hover\" data-token-index=\"0\">#</span><span class=\"token directive keyword macro property notion-enable-hover\" data-token-index=\"0\">include</span><span class=\"token macro property notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string macro property notion-enable-hover\" data-token-index=\"0\">&lt;queue&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token directive-hash macro property notion-enable-hover\" data-token-index=\"0\">#</span><span class=\"token directive keyword macro property notion-enable-hover\" data-token-index=\"0\">include</span><span class=\"token macro property notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string macro property notion-enable-hover\" data-token-index=\"0\">&lt;thread&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token directive-hash macro property notion-enable-hover\" data-token-index=\"0\">#</span><span class=\"token directive keyword macro property notion-enable-hover\" data-token-index=\"0\">include</span><span class=\"token macro property notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token string macro property notion-enable-hover\" data-token-index=\"0\">&lt;functional&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">class</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token class-name notion-enable-hover\" data-token-index=\"0\">ThreadPool</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">private</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">vector</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">thread</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> workers</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">queue</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">function</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">void</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&gt;&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> jobs</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n    std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex queue_mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Protects the job queue</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">condition_variable cv</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// The waiting room + bell</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">bool</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> shutdown </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token boolean notion-enable-hover\" data-token-index=\"0\">false</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// The condition we care about</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">public</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">ThreadPool</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">size_t num_threads</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">for</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">size_t i </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token number notion-enable-hover\" data-token-index=\"0\">0</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> i </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> num_threads</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">++</span><span class=\" notion-enable-hover\" data-token-index=\"0\">i</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            workers</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">emplace_back</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">[</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">this</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">]</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n                </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">worker_loop</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Each thread runs this</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">void</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">submit</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">function</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">void</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> job</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Scope for lock_guard</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">lock_guard</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">queue_mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            jobs</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">push</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">move</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">job</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 1. Make condition true</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// lock released here</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        cv</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">notify_one</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 2. Wake one sleeping worker</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n    </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">~</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">ThreadPool</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">lock_guard</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">queue_mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            shutdown </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token boolean notion-enable-hover\" data-token-index=\"0\">true</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Signal we’re done</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        cv</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">notify_all</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Wake ALL workers so they can exit</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">for</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">auto</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&amp;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> t </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> workers</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> t</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">join</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">private</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">void</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">worker_loop</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">while</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token boolean notion-enable-hover\" data-token-index=\"0\">true</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">function</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">void</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> job</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n            </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Critical section</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n                std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">unique_lock</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&lt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\" notion-enable-hover\" data-token-index=\"0\">mutex</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&gt;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">queue_mutex</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n                </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Wait until: we have a job OR we're shutting down</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n                cv</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">wait</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">lock</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">,</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">[</span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">this</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">]</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n                    </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">return</span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">!</span><span class=\" notion-enable-hover\" data-token-index=\"0\">jobs</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">empty</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">||</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> shutdown</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n                </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n                </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// If shutting down and no jobs left, exit thread</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n                </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">if</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">shutdown </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">&amp;&amp;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> jobs</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">empty</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token keyword notion-enable-hover\" data-token-index=\"0\">return</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n                job </span><span class=\"token operator notion-enable-hover\" data-token-index=\"0\">=</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> std</span><span class=\"token double-colon punctuation notion-enable-hover\" data-token-index=\"0\">::</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">move</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\" notion-enable-hover\" data-token-index=\"0\">jobs</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">front</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n                jobs</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pop</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n            </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// mutex unlocked here</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n            </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">job</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Run the job WITHOUT holding the lock</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n        </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n    </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Usage:</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\nThreadPool </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">pool</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token number notion-enable-hover\" data-token-index=\"0\">8</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// 8 worker threads, all sleeping initially</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n\npool</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">submit</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">[</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">]</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">process_image</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"cat.jpg\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\npool</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">.</span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">submit</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">[</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">]</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">{</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token function notion-enable-hover\" data-token-index=\"0\">send_email</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">(</span><span class=\"token string notion-enable-hover\" data-token-index=\"0\">\"user@example.com\"</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\"> </span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">}</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">)</span><span class=\"token punctuation notion-enable-hover\" data-token-index=\"0\">;</span><span class=\" notion-enable-hover\" data-token-index=\"0\">\n</span><span class=\"token comment notion-enable-hover\" data-token-index=\"0\">// Workers wake up instantly, no polling, no wasted CPU</span><span>\n</span>",
+      "text": "#include <mutex>\n#include <condition_variable>\n#include <queue>\n#include <thread>\n#include <functional>\n\nclass ThreadPool {\nprivate:\n    std::vector<std::thread> workers;\n    std::queue<std::function<void()>> jobs;\n\n    std::mutex queue_mutex; // Protects the job queue\n    std::condition_variable cv; // The waiting room + bell\n    bool shutdown = false; // The condition we care about\n\npublic:\n    ThreadPool(size_t num_threads) {\n        for (size_t i = 0; i < num_threads; ++i) {\n            workers.emplace_back([this] {\n                worker_loop(); // Each thread runs this\n            });\n        }\n    }\n\n    void submit(std::function<void()> job) {\n        { // Scope for lock_guard\n            std::lock_guard<std::mutex> lock(queue_mutex);\n            jobs.push(std::move(job)); // 1. Make condition true\n        } // lock released here\n        cv.notify_one(); // 2. Wake one sleeping worker\n    }\n\n    ~ThreadPool() {\n        {\n            std::lock_guard<std::mutex> lock(queue_mutex);\n            shutdown = true; // Signal we’re done\n        }\n        cv.notify_all(); // Wake ALL workers so they can exit\n        for (auto& t : workers) t.join();\n    }\n\nprivate:\n    void worker_loop() {\n        while (true) {\n            std::function<void()> job;\n\n            { // Critical section\n                std::unique_lock<std::mutex> lock(queue_mutex);\n\n                // Wait until: we have a job OR we're shutting down\n                cv.wait(lock, [this] {\n                    return!jobs.empty() || shutdown;\n                });\n\n                // If shutting down and no jobs left, exit thread\n                if (shutdown && jobs.empty()) return;\n\n                job = std::move(jobs.front());\n                jobs.pop();\n            } // mutex unlocked here\n\n            job(); // Run the job WITHOUT holding the lock\n        }\n    }\n};\n\n// Usage:\nThreadPool pool(8); // 8 worker threads, all sleeping initially\n\npool.submit([] { process_image(\"cat.jpg\"); });\npool.submit([] { send_email(\"user@example.com\"); });\n// Workers wake up instantly, no polling, no wasted CPU\n"
+    },
+    {
+      "id": "34f24eb1ed54805c85f6fd0c5f409213",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">What happens step by step:</span>",
+      "text": "What happens step by step:"
+    },
+    {
+      "id": "34f24eb1ed548078ab15e9fb407990bd",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Startup</span>: 8 threads call <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">worker_loop()</span></div>. All hit <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"4\" spellcheck=\"false\" class=\"notion-enable-hover\">cv.wait()</span></div> immediately because <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"6\" spellcheck=\"false\" class=\"notion-enable-hover\">jobs.empty()</span></div> is true. All 8 go to sleep. CPU usage = 0%.",
+      "text": "Startup: 8 threads call worker_loop(). All hit cv.wait() immediately because jobs.empty() is true. All 8 go to sleep. CPU usage = 0%."
+    },
+    {
+      "id": "34f24eb1ed5480a69bc2eb038d842834",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Job arrives</span>: Main thread calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">submit()</span></div>. It locks, pushes job, unlocks, calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"4\" spellcheck=\"false\" class=\"notion-enable-hover\">notify_one()</span></div>.",
+      "text": "Job arrives: Main thread calls submit(). It locks, pushes job, unlocks, calls notify_one()."
+    },
+    {
+      "id": "34f24eb1ed5480e7ad84d0630739b145",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">OS wakes one worker</span>: The OS picks one sleeping thread from cv’s wait queue and makes it runnable.",
+      "text": "OS wakes one worker: The OS picks one sleeping thread from cv’s wait queue and makes it runnable."
+    },
+    {
+      "id": "34f24eb1ed548047b69efcd86b079bb5",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Worker re-checks</span>: Worker wakes up with mutex re-locked. The <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">while</span></div> condition <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"4\" spellcheck=\"false\" class=\"notion-enable-hover\">!jobs.empty() || shutdown</span></div> is now true, so it exits <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"6\" spellcheck=\"false\" class=\"notion-enable-hover\">wait()</span></div>, pops job, unlocks, runs job.",
+      "text": "Worker re-checks: Worker wakes up with mutex re-locked. The while condition !jobs.empty() || shutdown is now true, so it exits wait(), pops job, unlocks, runs job."
+    },
+    {
+      "id": "34f24eb1ed5480258f98c29d04d92938",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Idle again</span>: After running job, worker loops back, finds queue empty, calls <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">wait()</span></div> again and sleeps.",
+      "text": "Idle again: After running job, worker loops back, finds queue empty, calls wait() again and sleeps."
+    },
+    {
+      "id": "34f24eb1ed54804eba80e3098fb49492",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Why not use a semaphore?</span>\nYou could. <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">semaphore jobs_available</span></div>. But now you have two things to keep in sync: the queue size AND the semaphore count. With cv + mutex, there’s only one source of truth: <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"4\" spellcheck=\"false\" class=\"notion-enable-hover\">jobs.empty()</span></div>. If you push and forget to <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"6\" spellcheck=\"false\" class=\"notion-enable-hover\">signal()</span></div>, the job just sits there. If you <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"8\" spellcheck=\"false\" class=\"notion-enable-hover\">signal()</span></div> and forget to push, workers wake up for nothing. Cv forces you to tie the signal to the actual state change.",
+      "text": "Why not use a semaphore?\nYou could. semaphore jobs_available. But now you have two things to keep in sync: the queue size AND the semaphore count. With cv + mutex, there’s only one source of truth: jobs.empty(). If you push and forget to signal(), the job just sits there. If you signal() and forget to push, workers wake up for nothing. Cv forces you to tie the signal to the actual state change."
+    },
+    {
+      "id": "34f24eb1ed5480029e34dc3828324ec5",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">5. Common pitfalls</span>",
+      "text": "5. Common pitfalls"
+    },
+    {
+      "id": "34f24eb1ed54803e8dddeb8908a10be1",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Mistake"
+          },
+          {
+            "header": true,
+            "html": "Why it breaks"
+          },
+          {
+            "header": true,
+            "html": "Fix"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">if (!condition) wait()</span></div>"
+          },
+          {
+            "header": false,
+            "html": "Spurious wakeup → you proceed when condition false"
+          },
+          {
+            "header": false,
+            "html": "Always use <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">while</span></div>"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Call <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">wait()</span></div> without holding mutex"
+          },
+          {
+            "header": false,
+            "html": "Undefined behavior, race conditions"
+          },
+          {
+            "header": false,
+            "html": "Lock first, always"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Change condition without lock"
+          },
+          {
+            "header": false,
+            "html": "Missed wakeup: check → true → signal → wait"
+          },
+          {
+            "header": false,
+            "html": "Lock → modify → notify → unlock"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"0\" spellcheck=\"false\" class=\"notion-enable-hover\">notify()</span></div> before <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">unlock()</span></div>"
+          },
+          {
+            "header": false,
+            "html": "Not a bug, but hurts performance"
+          },
+          {
+            "header": false,
+            "html": "Unlock first if possible, though holding lock during notify is safe"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Using <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">notify_one()</span></div> when multiple threads could proceed"
+          },
+          {
+            "header": false,
+            "html": "Some threads starve"
+          },
+          {
+            "header": false,
+            "html": "Use <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">notify_all()</span></div> when in doubt"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "34f24eb1ed5480368757cd071a97f1fa",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">6. Condition Variables vs Semaphores vs Mutexes</span>",
+      "text": "6. Condition Variables vs Semaphores vs Mutexes"
+    },
+    {
+      "id": "34f24eb1ed548025bcc5d382e18ec13b",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Primitive"
+          },
+          {
+            "header": true,
+            "html": "Tracks"
+          },
+          {
+            "header": true,
+            "html": "Use for"
+          },
+          {
+            "header": true,
+            "html": "Can wake all?"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Mutex</span>"
+          },
+          {
+            "header": false,
+            "html": "Ownership: 1 or 0"
+          },
+          {
+            "header": false,
+            "html": "Protecting data from races"
+          },
+          {
+            "header": false,
+            "html": "No"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Semaphore</span>"
+          },
+          {
+            "header": false,
+            "html": "Count: N &gt;= 0"
+          },
+          {
+            "header": false,
+            "html": "Counting resources, simple signaling"
+          },
+          {
+            "header": false,
+            "html": "No"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Condition Variable</span>"
+          },
+          {
+            "header": false,
+            "html": "Nothing. Just a wait queue"
+          },
+          {
+            "header": false,
+            "html": "Waiting for arbitrary conditions"
+          },
+          {
+            "header": false,
+            "html": "Yes, <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">notify_all()</span></div>"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "34f24eb1ed54808da7afcb5f22ee77eb",
+      "type": "text",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Rule of thumb</span>: If you already have a mutex protecting data, and you need to wait for some property of that data to change, use a condition variable. If you just need to count permits, use a semaphore.",
+      "text": "Rule of thumb: If you already have a mutex protecting data, and you need to wait for some property of that data to change, use a condition variable. If you just need to count permits, use a semaphore."
+    },
+    {
+      "id": "34f24eb1ed54803d9e37efa72a49cdd9",
+      "type": "sub_sub_header",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">7. Key takeaways</span>",
+      "text": "7. Key takeaways"
+    },
+    {
+      "id": "34f24eb1ed5480c4a92fd1be6b5357d7",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Condition variables don’t store the condition.</span> You store <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">bool ready</span></div>. The cv only handles sleeping/waking.",
+      "text": "Condition variables don’t store the condition. You store bool ready. The cv only handles sleeping/waking."
+    },
+    {
+      "id": "34f24eb1ed548017af97f781adccd540",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Always </span><div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em;font-weight:600\" data-token-index=\"1\" spellcheck=\"false\" class=\"notion-enable-hover\">while</span></div><span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">, never </span><div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em;font-weight:600\" data-token-index=\"3\" spellcheck=\"false\" class=\"notion-enable-hover\">if</span></div><span style=\"font-weight:600\" data-token-index=\"4\" class=\"notion-enable-hover\">.</span> Spurious wakeups are real.",
+      "text": "Always while, never if. Spurious wakeups are real."
+    },
+    {
+      "id": "34f24eb1ed5480638234d49ff3c8805e",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The mutex protects the condition.</span> You must hold it to check the condition and to call <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">wait()</span></div>.",
+      "text": "The mutex protects the condition. You must hold it to check the condition and to call wait()."
+    },
+    {
+      "id": "34f24eb1ed5480ca8428e20d733a88fc",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">You sleep for free.</span> 10,000 waiting threads use ~0 CPU until <div class=\"notion-inline-code-container\" style=\"display:inline\"><span style=\"font-family:&quot;SFMono-Regular&quot;, Menlo, Consolas, &quot;PT Mono&quot;, &quot;Liberation Mono&quot;, Courier, monospace;line-height:normal;background:var(--ca-bacIntTra);color:var(--c-redTexSec);border-radius:4px;font-size:85%;padding:0.2em 0.4em;position:relative;bottom:0.065em\" data-token-index=\"2\" spellcheck=\"false\" class=\"notion-enable-hover\">notify()</span></div> is called.",
+      "text": "You sleep for free. 10,000 waiting threads use ~0 CPU until notify() is called."
+    },
+    {
+      "id": "34f24eb1ed548018bb13e4846c7cf09e",
+      "type": "numbered_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The signaling thread decides when to wake.</span> The waiting thread does zero observation while asleep.",
+      "text": "The signaling thread decides when to wake. The waiting thread does zero observation while asleep."
+    },
+    {
+      "id": "34f24eb1ed5480749cd5cd097af85cca",
+      "type": "text",
+      "html": "Next time you see a producer-consumer queue, a thread pool, a connection pool, or a \"wait until X is ready\" problem — reach for a condition variable + mutex.",
+      "text": "Next time you see a producer-consumer queue, a thread pool, a connection pool, or a \"wait until X is ready\" problem — reach for a condition variable + mutex."
+    },
+    {
+      "id": "34f24eb1ed5480cb8b5cfa91731e9e8e",
+      "type": "text",
+      "html": "Want me to add a Python version of the thread pool, or walk through how you’d debug a deadlock with cv’s?",
+      "text": "Want me to add a Python version of the thread pool, or walk through how you’d debug a deadlock with cv’s?"
+    }
+  ]
+}

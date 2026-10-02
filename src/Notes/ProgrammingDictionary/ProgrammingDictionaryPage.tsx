@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import ArticleLayout from '../../Blogs/ArticleLayout/ArticleLayout';
 import { PROGRAMMING_DICTIONARY_ROUTE, NOTES_ROUTE } from '../../routing/routes';
 import { programmingTerms } from './terms';
+import NoteReadingTime from '../NoteReadingTime';
+import { getPageReadingMinutes, getPageWordCount } from '../readingTime';
 
 const categories = [...new Set(programmingTerms.map(({ category }) => category))];
 const categoryId = (category: string) => `programming-dictionary-${category.toLowerCase().replace(/ /g, '-')}`;
@@ -48,6 +50,7 @@ const ProgrammingDictionary = () => {
     return (
         <ArticleLayout
             title="Programming dictionary"
+            headerMeta={<NoteReadingTime minutes={getPageReadingMinutes(PROGRAMMING_DICTIONARY_ROUTE)} wordCount={getPageWordCount(PROGRAMMING_DICTIONARY_ROUTE)} />}
             route={PROGRAMMING_DICTIONARY_ROUTE}
             backRoute={NOTES_ROUTE}
             backLabel="Back to notes"

@@ -1,0 +1,149 @@
+{
+  "id": "26c24eb1ed548091844bc2f5f3cd12b9",
+  "title": "Monotonic Reads Consistency",
+  "sourceUrl": "https://xpandeyed.notion.site/Monotonic-Reads-Consistency-26c24eb1ed548091844bc2f5f3cd12b9?pvs=23",
+  "blocks": [
+    {
+      "id": "26c24eb1ed5480cd922bc6fe89401d55",
+      "type": "text",
+      "html": "<span style=\"font-style:italic\" data-token-index=\"0\" class=\"notion-enable-hover\">Once a client reads a value, it will never see an older value in subsequent reads, even if it reads from different replicas.</span>",
+      "text": "Once a client reads a value, it will never see an older value in subsequent reads, even if it reads from different replicas."
+    },
+    {
+      "id": "26c24eb1ed54807996ddd2203ce033c4",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Guarantee:</span>",
+      "text": "Guarantee:"
+    },
+    {
+      "id": "26c24eb1ed548012be4de13e331e21ba",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807996ddd2203ce033c4",
+      "html": "A client’s view of the data <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">never goes backward in time</span>.",
+      "text": "A client’s view of the data never goes backward in time."
+    },
+    {
+      "id": "26c24eb1ed5480d293c9c15397e61bac",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54807996ddd2203ce033c4",
+      "html": "Helps prevent confusing “time-travel” behavior where earlier values reappear.",
+      "text": "Helps prevent confusing “time-travel” behavior where earlier values reappear."
+    },
+    {
+      "id": "26c24eb1ed54808f9d5fee1fac6aabef",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Trade-offs:</span>",
+      "text": "Trade-offs:"
+    },
+    {
+      "id": "26c24eb1ed5480709e9dc59c76ad8a79",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808f9d5fee1fac6aabef",
+      "html": "Pros:",
+      "text": "Pros:"
+    },
+    {
+      "id": "26c24eb1ed54802da192c599d4db3cdc",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480709e9dc59c76ad8a79",
+      "html": "Makes applications more predictable for users.",
+      "text": "Makes applications more predictable for users."
+    },
+    {
+      "id": "26c24eb1ed5480b897e4c0a14462efa1",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480709e9dc59c76ad8a79",
+      "html": "Prevents anomalies where a client sees inconsistent histories.",
+      "text": "Prevents anomalies where a client sees inconsistent histories."
+    },
+    {
+      "id": "26c24eb1ed54804fb4b6d7c044d1ca16",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54808f9d5fee1fac6aabef",
+      "html": "Cons/Anomalies:",
+      "text": "Cons/Anomalies:"
+    },
+    {
+      "id": "26c24eb1ed5480eb9824f8a577a8946c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54804fb4b6d7c044d1ca16",
+      "html": "Does <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not guarantee</span> the most recent value; the client may still see stale data.",
+      "text": "Does not guarantee the most recent value; the client may still see stale data."
+    },
+    {
+      "id": "26c24eb1ed548062b2b3e14479f6852b",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54804fb4b6d7c044d1ca16",
+      "html": "Slight overhead to track previous reads per client.",
+      "text": "Slight overhead to track previous reads per client."
+    },
+    {
+      "id": "26c24eb1ed5480c7ae57c815be978b24",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Use Cases:</span> Systems where <span style=\"font-weight:600\" data-token-index=\"2\" class=\"notion-enable-hover\">historical consistency per user matters</span>, e.g.:",
+      "text": "Use Cases: Systems where historical consistency per user matters, e.g.:"
+    },
+    {
+      "id": "26c24eb1ed54800cb4daed0ee12c632a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c7ae57c815be978b24",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Email Clients:</span>",
+      "text": "Email Clients:"
+    },
+    {
+      "id": "26c24eb1ed5480d4b966c4819cff98e8",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54800cb4daed0ee12c632a",
+      "html": "Once you see an email in your inbox, it should not disappear or appear as “unread” when refreshing.",
+      "text": "Once you see an email in your inbox, it should not disappear or appear as “unread” when refreshing."
+    },
+    {
+      "id": "26c24eb1ed5480ebba0ac95e66311a5e",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c7ae57c815be978b24",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Social Media Feeds:</span>",
+      "text": "Social Media Feeds:"
+    },
+    {
+      "id": "26c24eb1ed5480798fe8dbf528a73e2c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480ebba0ac95e66311a5e",
+      "html": "Once a post appears in your feed, it should not disappear or revert to an older feed state.",
+      "text": "Once a post appears in your feed, it should not disappear or revert to an older feed state."
+    },
+    {
+      "id": "26c24eb1ed54803b95bef2f544e5dd50",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed5480c7ae57c815be978b24",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Financial Dashboards:</span>",
+      "text": "Financial Dashboards:"
+    },
+    {
+      "id": "26c24eb1ed5480fbb1c3dc40da84443a",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed54803b95bef2f544e5dd50",
+      "html": "Once a transaction appears in your account history, earlier states should not reappear.",
+      "text": "Once a transaction appears in your account history, earlier states should not reappear."
+    },
+    {
+      "id": "26c24eb1ed548044a2d4eef5729d90c1",
+      "type": "bulleted_list",
+      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Implementation Techniques:</span>",
+      "text": "Implementation Techniques:"
+    },
+    {
+      "id": "26c24eb1ed5480f2afbbe83b56a0198c",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548044a2d4eef5729d90c1",
+      "html": "Track the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">latest version</span> read by a client and ensure subsequent reads return the same or newer version.",
+      "text": "Track the latest version read by a client and ensure subsequent reads return the same or newer version."
+    },
+    {
+      "id": "26c24eb1ed5480ec9a03c8c37bb2a809",
+      "type": "bulleted_list",
+      "parent": "26c24eb1ed548044a2d4eef5729d90c1",
+      "html": "Can be combined with <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">session-based or versioned replication</span> strategies.",
+      "text": "Can be combined with session-based or versioned replication strategies."
+    }
+  ]
+}

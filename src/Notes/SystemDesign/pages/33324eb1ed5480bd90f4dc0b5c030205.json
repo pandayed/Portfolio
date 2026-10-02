@@ -1,0 +1,155 @@
+{
+  "id": "33324eb1ed5480bd90f4dc0b5c030205",
+  "title": "Cloud Native",
+  "sourceUrl": "https://xpandeyed.notion.site/Cloud-Native-33324eb1ed5480bd90f4dc0b5c030205?pvs=23",
+  "blocks": [
+    {
+      "id": "33324eb1ed5480fca7d3ff7f1d9423c6",
+      "type": "text",
+      "html": "Sources:",
+      "text": "Sources:"
+    },
+    {
+      "id": "33324eb1ed548036af2ef6d412e1911c",
+      "type": "text",
+      "html": "<a href=\"https://youtu.be/p-88GN1WVs8\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-33324eb1-ed54-8036-af2e-f6d412e1911c-874932898\">https://youtu.be/p-88GN1WVs8</span></a>",
+      "text": "https://youtu.be/p-88GN1WVs8",
+      "links": [
+        {
+          "href": "https://youtu.be/p-88GN1WVs8",
+          "text": "https://youtu.be/p-88GN1WVs8"
+        }
+      ]
+    },
+    {
+      "id": "33324eb1ed5480a291bdda04e9aff255",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed5480daac94fe778ea292cf",
+      "type": "text",
+      "html": "“Could native” phrase appeared around 2013, but with no clear definitions, and until now we do not have a clear definition of this. So different sources/people/orgs can have varied definitions for this. But over the time definitions have improved and added under this phrase.",
+      "text": "“Could native” phrase appeared around 2013, but with no clear definitions, and until now we do not have a clear definition of this. So different sources/people/orgs can have varied definitions for this. But over the time definitions have improved and added under this phrase."
+    },
+    {
+      "id": "33324eb1ed548048a3cfff0ffc820ed1",
+      "type": "text",
+      "html": "The below notes are interpretations of the sources mentioned before.",
+      "text": "The below notes are interpretations of the sources mentioned before."
+    },
+    {
+      "id": "33324eb1ed54806babd5e3c61a00f77f",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed5480c3863edc8045d913ff",
+      "type": "bulleted_list",
+      "html": "Cloud native is the blueprint  to building web scale applications on the cloud that are more available and scalable.",
+      "text": "Cloud native is the blueprint  to building web scale applications on the cloud that are more available and scalable."
+    },
+    {
+      "id": "33324eb1ed548064af5eecab7bddd593",
+      "type": "bulleted_list",
+      "html": "It promises increased agility to ship new features quickly without compromising availability, making it quicker to respond to customer demands.",
+      "text": "It promises increased agility to ship new features quickly without compromising availability, making it quicker to respond to customer demands."
+    },
+    {
+      "id": "33324eb1ed54804783fef4cbe7433da5",
+      "type": "bulleted_list",
+      "html": "Simply running an app on cloud does not make it cloud native.",
+      "text": "Simply running an app on cloud does not make it cloud native."
+    },
+    {
+      "id": "33324eb1ed548088b630c89cd26ac69f",
+      "type": "bulleted_list",
+      "html": "For an application to be cloud native, there are at least 4 pillars which must be considered.",
+      "text": "For an application to be cloud native, there are at least 4 pillars which must be considered."
+    },
+    {
+      "id": "33324eb1ed5480f6b0b1e1a66ceaa4e0",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed54805491d8cefe03db102b",
+      "type": "header",
+      "html": "Pillar 1: Microservices based Architecture",
+      "text": "Pillar 1: Microservices based Architecture"
+    },
+    {
+      "id": "33324eb1ed548037888beeb3de7c4c92",
+      "type": "bulleted_list",
+      "html": "Microservices based architecture must be used.",
+      "text": "Microservices based architecture must be used."
+    },
+    {
+      "id": "33324eb1ed54805ca2a3f795d68a7049",
+      "type": "bulleted_list",
+      "html": "Microservices must be loosely coupled.",
+      "text": "Microservices must be loosely coupled."
+    },
+    {
+      "id": "33324eb1ed5480999e56fff63e083430",
+      "type": "bulleted_list",
+      "html": "Dividing responsibilities is easier.",
+      "text": "Dividing responsibilities is easier."
+    },
+    {
+      "id": "33324eb1ed548051a9b8f9e1d7c4d0c5",
+      "type": "bulleted_list",
+      "html": "Independent deployment and scaling.",
+      "text": "Independent deployment and scaling."
+    },
+    {
+      "id": "33324eb1ed5480b79388e3cfc68a22ae",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed5480a286a2c3983bde21e0",
+      "type": "header",
+      "html": "Pillar 2: Containers and Container Orchestration",
+      "text": "Pillar 2: Containers and Container Orchestration"
+    },
+    {
+      "id": "33324eb1ed54809a98c8e7106018940b",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed548001a62ac939b4a16d33",
+      "type": "header",
+      "html": "Pillar 3: DevOps",
+      "text": "Pillar 3: DevOps"
+    },
+    {
+      "id": "33324eb1ed5480ddbb08dff4551ccd39",
+      "type": "bulleted_list",
+      "html": "The development of services happens with loose coupling.",
+      "text": "The development of services happens with loose coupling."
+    },
+    {
+      "id": "33324eb1ed54809e9155ebbd6ece30ec",
+      "type": "bulleted_list",
+      "html": "DevOps, etc.",
+      "text": "DevOps, etc."
+    },
+    {
+      "id": "33324eb1ed5480edb297de33ec00e17b",
+      "type": "divider"
+    },
+    {
+      "id": "33324eb1ed54804d876fc0ba960ce595",
+      "type": "header",
+      "html": "Pillar 4: Cloud Native Open Standards",
+      "text": "Pillar 4: Cloud Native Open Standards"
+    },
+    {
+      "id": "33324eb1ed5480dd9d1bddbb1906de59",
+      "type": "bulleted_list",
+      "html": "Using the standards, the critical components are standardised, like logging, service discovery etc.",
+      "text": "Using the standards, the critical components are standardised, like logging, service discovery etc."
+    },
+    {
+      "id": "33324eb1ed54809391b9dba7a79965eb",
+      "type": "text"
+    }
+  ]
+}
