@@ -20,6 +20,16 @@ export const GO_NOTES_ROUTE = '/notes/go';
 export const PYTHON_NOTES_ROUTE = '/notes/python';
 export const JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE = '/notes/javascript-typescript';
 export const REACT_NOTES_ROUTE = '/notes/react';
+export const DOCKER_NOTES_ROUTE = '/notes/docker';
+export const DOCKER_CONTAINERS_ROUTE = '/notes/docker/containers-images-and-registries';
+export const DOCKER_BUILD_RUN_ROUTE = '/notes/docker/build-and-run';
+export const DOCKER_NETWORK_STORAGE_ROUTE = '/notes/docker/networking-and-storage';
+export const DOCKER_COMPOSE_ROUTE = '/notes/docker/compose-and-workflow';
+export const KUBERNETES_NOTES_ROUTE = '/notes/kubernetes';
+export const KUBERNETES_CLUSTER_ROUTE = '/notes/kubernetes/cluster-nodes-and-pods';
+export const KUBERNETES_DEPLOY_ROUTE = '/notes/kubernetes/deployments-and-services';
+export const KUBERNETES_CONFIG_ROUTE = '/notes/kubernetes/configuration-and-storage';
+export const KUBERNETES_OPERATIONS_ROUTE = '/notes/kubernetes/health-rollouts-and-debugging';
 export const PROGRAMMING_DICTIONARY_ROUTE = '/notes/programming-dictionary';
 export const JAVA_NOTES_ROUTE = '/notes/java';
 export const JAVA_PROGRAM_EXECUTION_ROUTE = '/notes/java/program-execution';
@@ -75,6 +85,16 @@ export type Route =
     | JavaScriptTypeScriptNoteRoute
     | typeof REACT_NOTES_ROUTE
     | ReactNoteRoute
+    | typeof DOCKER_NOTES_ROUTE
+    | typeof DOCKER_CONTAINERS_ROUTE
+    | typeof DOCKER_BUILD_RUN_ROUTE
+    | typeof DOCKER_NETWORK_STORAGE_ROUTE
+    | typeof DOCKER_COMPOSE_ROUTE
+    | typeof KUBERNETES_NOTES_ROUTE
+    | typeof KUBERNETES_CLUSTER_ROUTE
+    | typeof KUBERNETES_DEPLOY_ROUTE
+    | typeof KUBERNETES_CONFIG_ROUTE
+    | typeof KUBERNETES_OPERATIONS_ROUTE
     | typeof JAVA_NOTES_ROUTE
     | typeof JAVA_PROGRAM_EXECUTION_ROUTE
     | typeof SPRING_BOOT_NOTES_ROUTE
@@ -139,6 +159,16 @@ const routes: Route[] = [
     ...javascriptTypeScriptNoteRoutes,
     REACT_NOTES_ROUTE,
     ...reactNoteRoutes,
+    DOCKER_NOTES_ROUTE,
+    DOCKER_CONTAINERS_ROUTE,
+    DOCKER_BUILD_RUN_ROUTE,
+    DOCKER_NETWORK_STORAGE_ROUTE,
+    DOCKER_COMPOSE_ROUTE,
+    KUBERNETES_NOTES_ROUTE,
+    KUBERNETES_CLUSTER_ROUTE,
+    KUBERNETES_DEPLOY_ROUTE,
+    KUBERNETES_CONFIG_ROUTE,
+    KUBERNETES_OPERATIONS_ROUTE,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,

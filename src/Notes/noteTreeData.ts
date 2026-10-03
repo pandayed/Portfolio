@@ -1,10 +1,20 @@
 import {
     API_COMMUNICATION_ROUTE,
+    DOCKER_BUILD_RUN_ROUTE,
+    DOCKER_COMPOSE_ROUTE,
+    DOCKER_CONTAINERS_ROUTE,
+    DOCKER_NETWORK_STORAGE_ROUTE,
+    DOCKER_NOTES_ROUTE,
     GO_NOTES_ROUTE,
     SYSTEM_DESIGN_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
     JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
+    KUBERNETES_CLUSTER_ROUTE,
+    KUBERNETES_CONFIG_ROUTE,
+    KUBERNETES_DEPLOY_ROUTE,
+    KUBERNETES_NOTES_ROUTE,
+    KUBERNETES_OPERATIONS_ROUTE,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
@@ -289,6 +299,80 @@ export const springBootNotes: NoteGroup = {
     ],
 };
 
+export const dockerNotes: NoteGroup = {
+    type: 'group',
+    title: 'Docker',
+    summary: 'Build images, run containers, connect services, and manage local application stacks.',
+    route: DOCKER_NOTES_ROUTE,
+    children: [
+        {
+            type: 'page',
+            title: 'Containers, images, and registries',
+            summary: 'Understand the package, the running process, image layers, tags, and registries.',
+            route: DOCKER_CONTAINERS_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+        {
+            type: 'page',
+            title: 'Build and run an image',
+            summary: 'Write a Dockerfile, control the build context, build an image, and run it safely.',
+            route: DOCKER_BUILD_RUN_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+        {
+            type: 'page',
+            title: 'Ports, networks, and storage',
+            summary: 'Publish ports, connect containers, and choose between volumes and bind mounts.',
+            route: DOCKER_NETWORK_STORAGE_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+        {
+            type: 'page',
+            title: 'Docker Compose and daily workflow',
+            summary: 'Define a multi-container application and use the main inspect, log, and cleanup commands.',
+            route: DOCKER_COMPOSE_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+    ],
+};
+
+export const kubernetesNotes: NoteGroup = {
+    type: 'group',
+    title: 'Kubernetes',
+    summary: 'Run containerized applications through declarative objects and controller-managed desired state.',
+    route: KUBERNETES_NOTES_ROUTE,
+    children: [
+        {
+            type: 'page',
+            title: 'Clusters, nodes, Pods, and controllers',
+            summary: 'Understand the control plane, worker nodes, Pods, scheduling, and reconciliation.',
+            route: KUBERNETES_CLUSTER_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+        {
+            type: 'page',
+            title: 'Deployments and Services',
+            summary: 'Deploy an application, replace Pods safely, and expose them through a stable endpoint.',
+            route: KUBERNETES_DEPLOY_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+        {
+            type: 'page',
+            title: 'Configuration and storage',
+            summary: 'Use ConfigMaps, Secrets, volumes, and PersistentVolumeClaims with clear ownership.',
+            route: KUBERNETES_CONFIG_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+        {
+            type: 'page',
+            title: 'Health, resources, rollouts, and debugging',
+            summary: 'Add probes and resource settings, inspect rollouts, and trace common failures.',
+            route: KUBERNETES_OPERATIONS_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+    ],
+};
+
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
@@ -308,6 +392,8 @@ export const noteTree: NoteNode[] = [
     },
     javascriptTypeScriptNotes,
     reactNotes,
+    dockerNotes,
+    kubernetesNotes,
     postgresqlNotes,
     systemDesignNotes,
     goNotes,

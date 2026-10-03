@@ -4,6 +4,7 @@ import dataFetchingAndAsyncUi from './data/data-fetching-and-async-ui';
 import effectsAndCleanup from './data/effects-and-cleanup';
 import formsAndControlledInputs from './data/forms-and-controlled-inputs';
 import hooksAndRules from './data/hooks-and-rules';
+import reactHooks from './data/react-hooks';
 import performanceAndCustomHooks from './data/performance-and-custom-hooks';
 import reactRenderingAndJsx from './data/react-rendering-and-jsx';
 import refsContextAndReducers from './data/refs-context-and-reducers';
@@ -31,7 +32,7 @@ export const reactChapters: readonly LearningChapter[] = [
         id: 'hooks-and-application-state',
         title: '3. Hooks and application state',
         summary: 'Hook rules, Effects, refs, context, and reducers.',
-        notes: [hooksAndRules, effectsAndCleanup, refsContextAndReducers],
+        notes: [hooksAndRules, reactHooks, effectsAndCleanup, refsContextAndReducers],
     },
     {
         id: 'data-and-performance',

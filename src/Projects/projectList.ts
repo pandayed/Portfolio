@@ -18,6 +18,37 @@ export interface Project {
 
 const entries: Project[] = [
     {
+        name: 'Nerdboard',
+        summary:
+            'Virtual guitar, piano, drums, synthesizer, and harmonium played in the browser with a physical keyboard.',
+        stack: ['React', 'TypeScript', 'Vite', 'Web Audio API'],
+        links: [
+            {
+                title: 'Try it',
+                href: 'https://nerdboard.lalpandey.com/',
+                external: true,
+            },
+            {
+                title: 'Source',
+                href: 'https://github.com/pandayed/open-music',
+                external: true,
+            },
+        ],
+    },
+    {
+        name: 'Redis Server in Go',
+        summary:
+            'An in-memory Redis server built in Go, with RESP support for strings, lists, sets, and hashes.',
+        stack: ['Go', 'TCP', 'RESP'],
+        links: [
+            {
+                title: 'Source',
+                href: 'https://github.com/pandayed/redis-server-go',
+                external: true,
+            },
+        ],
+    },
+    {
         name: 'Instead',
         summary:
             'A Chrome extension that tracks how long you spend on each site, and converts that time into things you could have done instead.',

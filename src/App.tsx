@@ -18,6 +18,16 @@ import JavaScriptTypeScriptNotesIndex from './Notes/JavaScriptTypeScriptNotes/Ja
 import JavaScriptTypeScriptNote from './Notes/JavaScriptTypeScriptNotes/JavaScriptTypeScriptNote';
 import ReactNotesIndex from './Notes/ReactNotes/ReactNotesIndex';
 import ReactNote from './Notes/ReactNotes/ReactNote';
+import DockerNotesIndex from './Notes/DockerNotes/DockerNotesIndex';
+import DockerContainers from './Notes/DockerNotes/DockerContainers';
+import DockerBuildRun from './Notes/DockerNotes/DockerBuildRun';
+import DockerNetworkStorage from './Notes/DockerNotes/DockerNetworkStorage';
+import DockerComposeWorkflow from './Notes/DockerNotes/DockerComposeWorkflow';
+import KubernetesNotesIndex from './Notes/KubernetesNotes/KubernetesNotesIndex';
+import KubernetesCluster from './Notes/KubernetesNotes/KubernetesCluster';
+import KubernetesDeploymentsServices from './Notes/KubernetesNotes/KubernetesDeploymentsServices';
+import KubernetesConfigurationStorage from './Notes/KubernetesNotes/KubernetesConfigurationStorage';
+import KubernetesOperations from './Notes/KubernetesNotes/KubernetesOperations';
 import ProgrammingDictionary from './Notes/ProgrammingDictionary/ProgrammingDictionaryPage';
 import JavaNotesIndex from './Notes/JavaNotes/JavaNotesIndex';
 import JavaProgramExecution from './Notes/JavaNotes/JavaProgramExecution';
@@ -64,6 +74,11 @@ import {
     CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     DRAFTS_ROUTE,
+    DOCKER_BUILD_RUN_ROUTE,
+    DOCKER_COMPOSE_ROUTE,
+    DOCKER_CONTAINERS_ROUTE,
+    DOCKER_NETWORK_STORAGE_ROUTE,
+    DOCKER_NOTES_ROUTE,
     GO_NOTES_ROUTE,
     SYSTEM_DESIGN_ROUTE,
     PYTHON_NOTES_ROUTE,
@@ -78,6 +93,11 @@ import {
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
     JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
+    KUBERNETES_CLUSTER_ROUTE,
+    KUBERNETES_CONFIG_ROUTE,
+    KUBERNETES_DEPLOY_ROUTE,
+    KUBERNETES_NOTES_ROUTE,
+    KUBERNETES_OPERATIONS_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
@@ -117,6 +137,16 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [PYTHON_NOTES_ROUTE]: PythonNotes,
     [JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE]: JavaScriptTypeScriptNotesIndex,
     [REACT_NOTES_ROUTE]: ReactNotesIndex,
+    [DOCKER_NOTES_ROUTE]: DockerNotesIndex,
+    [DOCKER_CONTAINERS_ROUTE]: DockerContainers,
+    [DOCKER_BUILD_RUN_ROUTE]: DockerBuildRun,
+    [DOCKER_NETWORK_STORAGE_ROUTE]: DockerNetworkStorage,
+    [DOCKER_COMPOSE_ROUTE]: DockerComposeWorkflow,
+    [KUBERNETES_NOTES_ROUTE]: KubernetesNotesIndex,
+    [KUBERNETES_CLUSTER_ROUTE]: KubernetesCluster,
+    [KUBERNETES_DEPLOY_ROUTE]: KubernetesDeploymentsServices,
+    [KUBERNETES_CONFIG_ROUTE]: KubernetesConfigurationStorage,
+    [KUBERNETES_OPERATIONS_ROUTE]: KubernetesOperations,
     [PROGRAMMING_DICTIONARY_ROUTE]: ProgrammingDictionary,
     [JAVA_NOTES_ROUTE]: JavaNotesIndex,
     [JAVA_PROGRAM_EXECUTION_ROUTE]: JavaProgramExecution,
