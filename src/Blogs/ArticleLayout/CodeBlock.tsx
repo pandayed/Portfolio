@@ -4,10 +4,21 @@ import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
 
 import { useMemo } from 'react';
 
-type CodeLanguage = 'go' | 'java' | 'javascript' | 'python' | 'sql' | 'text' | 'typescript';
+type CodeLanguage =
+    | 'go'
+    | 'java'
+    | 'javascript'
+    | 'jsx'
+    | 'python'
+    | 'sql'
+    | 'text'
+    | 'tsx'
+    | 'typescript';
 
 interface CodeBlockProps {
     children: string;

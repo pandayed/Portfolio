@@ -14,6 +14,10 @@ import GoNote from './Notes/GoNotes/GoNote';
 import SystemDesignNotes from './Notes/SystemDesign/SystemDesignNotes';
 import PythonNotes from './Notes/PythonNotes/PythonNotesIndex';
 import PythonNote from './Notes/PythonNotes/PythonNote';
+import JavaScriptTypeScriptNotesIndex from './Notes/JavaScriptTypeScriptNotes/JavaScriptTypeScriptNotesIndex';
+import JavaScriptTypeScriptNote from './Notes/JavaScriptTypeScriptNotes/JavaScriptTypeScriptNote';
+import ReactNotesIndex from './Notes/ReactNotes/ReactNotesIndex';
+import ReactNote from './Notes/ReactNotes/ReactNote';
 import ProgrammingDictionary from './Notes/ProgrammingDictionary/ProgrammingDictionaryPage';
 import JavaNotesIndex from './Notes/JavaNotes/JavaNotesIndex';
 import JavaProgramExecution from './Notes/JavaNotes/JavaProgramExecution';
@@ -73,6 +77,7 @@ import {
     INSTEAD_PRIVACY_POLICY_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
+    JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
@@ -83,6 +88,7 @@ import {
     POSTGRESQL_DATE_TIME_ROUTE,
     NOTES_ROUTE,
     PROJECTS_ROUTE,
+    REACT_NOTES_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
@@ -90,8 +96,10 @@ import {
     WHY_REACT_ROUTE,
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     type GoNoteRoute,
+    type JavaScriptTypeScriptNoteRoute,
     type SystemDesignEntryRoute,
     type PythonNoteRoute,
+    type ReactNoteRoute,
     type Route,
 } from './routing/routes';
 import { useRoute } from './routing/useRoute';
@@ -107,6 +115,8 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [GO_NOTES_ROUTE]: GoNotes,
     [SYSTEM_DESIGN_ROUTE]: SystemDesignNotes,
     [PYTHON_NOTES_ROUTE]: PythonNotes,
+    [JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE]: JavaScriptTypeScriptNotesIndex,
+    [REACT_NOTES_ROUTE]: ReactNotesIndex,
     [PROGRAMMING_DICTIONARY_ROUTE]: ProgrammingDictionary,
     [JAVA_NOTES_ROUTE]: JavaNotesIndex,
     [JAVA_PROGRAM_EXECUTION_ROUTE]: JavaProgramExecution,
@@ -147,6 +157,8 @@ function App() {
     const isGoNote = route.startsWith(`${GO_NOTES_ROUTE}/`);
     const isSystemDesignEntry = route.startsWith(`${SYSTEM_DESIGN_ROUTE}/`);
     const isPythonNote = route.startsWith(`${PYTHON_NOTES_ROUTE}/`);
+    const isJavaScriptTypeScriptNote = route.startsWith(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/`);
+    const isReactNote = route.startsWith(`${REACT_NOTES_ROUTE}/`);
 
     return (
         <div className="App">
@@ -161,6 +173,10 @@ function App() {
                     </Suspense>
                 ) : isPythonNote ? (
                     <PythonNote route={route as PythonNoteRoute} />
+                ) : isJavaScriptTypeScriptNote ? (
+                    <JavaScriptTypeScriptNote route={route as JavaScriptTypeScriptNoteRoute} />
+                ) : isReactNote ? (
+                    <ReactNote route={route as ReactNoteRoute} />
                 ) : CurrentPage ? (
                     <CurrentPage />
                 ) : (

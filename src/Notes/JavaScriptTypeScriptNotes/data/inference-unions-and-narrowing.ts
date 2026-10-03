@@ -1,0 +1,157 @@
+import type { LearningNote } from '../../LearningNotes/types';
+
+const note: LearningNote = {
+    slug: 'inference-unions-and-narrowing',
+    title: 'Inference, unions, and narrowing',
+    summary: 'Let TypeScript infer types, describe allowed alternatives, and narrow a value before using it.',
+    scope: 'typescript',
+    updatedOn: '2026-10-03',
+    sections: [
+        {
+            id: 'type-inference',
+            title: 'Type inference',
+            paragraphs: [
+                'TypeScript can infer a type from an initial value, a default parameter, or a function return value. Add an annotation when the intended type is wider than the value TypeScript can see or when the annotation makes a public API clear.',
+                'The inferred types and written annotations are used by the type checker. They are removed from the JavaScript that runs.',
+            ],
+            examples: [{
+                code: [
+                    'const language = "TypeScript"; // inferred as the literal type "TypeScript"',
+                    'let score = 10;                 // inferred as number',
+                    '',
+                    'function double(value: number) {',
+                    '    return value * 2;           // return type is inferred as number',
+                    '}',
+                    '',
+                    'console.log(language, double(score));',
+                ].join('\n'),
+                language: 'typescript',
+                result: 'TypeScript 20',
+                typeCheck: 'score = "ten" is rejected because score was inferred as number.',
+            }],
+        },
+        {
+            id: 'union-types',
+            title: 'Union types',
+            paragraphs: [
+                'A union type lists the types a value may have. TypeScript allows only operations that are safe for every member until the value is narrowed.',
+            ],
+            examples: [{
+                code: [
+                    'type Identifier = string | number;',
+                    '',
+                    'function showId(id: Identifier): string {',
+                    '    return `ID: ${id}`;',
+                    '}',
+                    '',
+                    'console.log(showId(42));',
+                    'console.log(showId("A-7"));',
+                ].join('\n'),
+                language: 'typescript',
+                result: 'The lines print "ID: 42" and "ID: A-7".',
+                typeCheck: 'showId(true) is rejected because boolean is not part of Identifier.',
+            }],
+            pitfalls: [
+                'A union does not mean that every member-specific method is available. A string | number value must be narrowed before calling toUpperCase.',
+            ],
+        },
+        {
+            id: 'control-flow-narrowing',
+            title: 'Narrow with runtime checks',
+            paragraphs: [
+                'TypeScript follows control flow and understands checks such as typeof, Array.isArray, equality, and the in operator. The check runs in JavaScript. TypeScript uses its result to choose a more specific type inside each branch.',
+            ],
+            examples: [{
+                code: [
+                    'function format(value: string | number): string {',
+                    '    if (typeof value === "string") {',
+                    '        return value.toUpperCase();',
+                    '    }',
+                    '',
+                    '    return value.toFixed(2);',
+                    '}',
+                    '',
+                    'console.log(format("ready"));',
+                    'console.log(format(3));',
+                ].join('\n'),
+                language: 'typescript',
+                result: 'The lines print "READY" and "3.00".',
+                typeCheck: 'Inside the first branch value is string. After that branch returns, value is number.',
+            }],
+        },
+        {
+            id: 'discriminated-unions',
+            title: 'Discriminated unions',
+            paragraphs: [
+                'A discriminated union gives every member one shared property with a different literal value. Checking that property narrows the whole object.',
+            ],
+            examples: [{
+                code: [
+                    'type Result =',
+                    '    | { status: "success"; data: string }',
+                    '    | { status: "error"; message: string };',
+                    '',
+                    'function display(result: Result): string {',
+                    '    if (result.status === "success") {',
+                    '        return result.data;',
+                    '    }',
+                    '',
+                    '    return `Error: ${result.message}`;',
+                    '}',
+                    '',
+                    'console.log(display({ status: "success", data: "Saved" }));',
+                ].join('\n'),
+                language: 'typescript',
+                result: 'Saved',
+                typeCheck: 'result.message is not available in the success branch because that member has data instead.',
+            }],
+        },
+        {
+            id: 'unknown-and-exhaustiveness',
+            title: 'Unknown values and exhaustive checks',
+            paragraphs: [
+                'Use unknown when a value may have any type but must be checked before use. It is safer than any because any turns off most checking for that value.',
+                'The never type can mark a branch that should be unreachable. Assigning the remaining union member to never makes a switch fail type checking when a new case is not handled.',
+            ],
+            examples: [{
+                title: 'Check an unknown value',
+                code: [
+                    'function readMessage(value: unknown): string {',
+                    '    if (typeof value === "string") {',
+                    '        return value.trim();',
+                    '    }',
+                    '',
+                    '    return "No message";',
+                    '}',
+                    '',
+                    'console.log(readMessage("  Hello  "));',
+                ].join('\n'),
+                language: 'typescript',
+                result: 'Hello',
+                typeCheck: 'Calling value.trim() before the typeof check is rejected because value is unknown.',
+            }, {
+                title: 'Check every union member',
+                code: [
+                    'type Direction = "north" | "south";',
+                    '',
+                    'function move(direction: Direction): number {',
+                    '    switch (direction) {',
+                    '        case "north":',
+                    '            return 1;',
+                    '        case "south":',
+                    '            return -1;',
+                    '        default: {',
+                    '            const unhandled: never = direction;',
+                    '            return unhandled;',
+                    '        }',
+                    '    }',
+                    '}',
+                ].join('\n'),
+                language: 'typescript',
+                typeCheck: 'If Direction later includes "east" and the switch does not handle it, direction is no longer never in the default branch.',
+            }],
+        },
+    ],
+};
+
+export default note;

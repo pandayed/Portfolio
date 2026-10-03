@@ -1,10 +1,19 @@
 import sourceWordCounts from 'virtual:note-word-counts';
 
-import { GO_NOTES_ROUTE, PYTHON_NOTES_ROUTE, type Route } from '../routing/routes';
+import {
+    GO_NOTES_ROUTE,
+    JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
+    PYTHON_NOTES_ROUTE,
+    REACT_NOTES_ROUTE,
+    type Route,
+} from '../routing/routes';
 import { goNotes } from './GoNotes/goNotes';
 import type { GoNoteBlock } from './GoNotes/types';
+import { javascriptTypeScriptNotes } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
+import type { LearningNote } from './LearningNotes/types';
 import { pythonNotes } from './PythonNotes/pythonNotes';
 import type { PythonInlineContent } from './PythonNotes/types';
+import { reactNotes } from './ReactNotes/reactNotes';
 import { systemDesignPages } from './SystemDesign/registry';
 import type { NoteNode } from './noteTreeData';
 
@@ -25,6 +34,23 @@ const goBlockText = (blocks: readonly GoNoteBlock[]): string =>
         goBlockText(block.children ?? []),
     ].join(' ')).join(' ');
 
+const learningNoteText = (note: LearningNote): string => [
+    note.title,
+    note.summary,
+    ...note.sections.flatMap((section) => [
+        section.title,
+        ...(section.paragraphs ?? []),
+        ...(section.bullets ?? []),
+        ...(section.examples ?? []).flatMap((example) => [
+            example.title ?? '',
+            example.code,
+            example.result ?? '',
+            example.typeCheck ?? '',
+        ]),
+        ...(section.pitfalls ?? []),
+    ]),
+].join(' ');
+
 const pageWordCounts = new Map<string, number>(Object.entries(sourceWordCounts));
 
 for (const note of pythonNotes) {
@@ -44,6 +70,17 @@ for (const note of pythonNotes) {
 
 for (const note of goNotes) {
     pageWordCounts.set(`${GO_NOTES_ROUTE}/${note.slug}`, countWords(`${note.title} ${goBlockText(note.blocks)}`));
+}
+
+for (const note of javascriptTypeScriptNotes) {
+    pageWordCounts.set(
+        `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${note.slug}`,
+        countWords(learningNoteText(note)),
+    );
+}
+
+for (const note of reactNotes) {
+    pageWordCounts.set(`${REACT_NOTES_ROUTE}/${note.slug}`, countWords(learningNoteText(note)));
 }
 
 for (const page of systemDesignPages) {

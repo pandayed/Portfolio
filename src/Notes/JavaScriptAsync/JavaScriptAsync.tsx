@@ -5,7 +5,7 @@ import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
-    NOTES_ROUTE,
+    JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     toHref,
 } from '../../routing/routes';
 
@@ -301,8 +301,8 @@ const JavaScriptAsync = () => (
         title="Asynchronous Programming in JavaScript"
         route={JAVASCRIPT_ASYNC_ROUTE}
         sections={sections}
-        backRoute={NOTES_ROUTE}
-        backLabel="Back to notes"
+        backRoute={JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}
+        backLabel="Back to JavaScript and TypeScript notes"
     >
         <section className="Article__section">
             <p>

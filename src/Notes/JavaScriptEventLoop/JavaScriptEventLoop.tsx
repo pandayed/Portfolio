@@ -5,7 +5,7 @@ import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
-    NOTES_ROUTE,
+    JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     toHref,
 } from '../../routing/routes';
 
@@ -176,8 +176,8 @@ const JavaScriptEventLoop = () => (
         title="JavaScript Event Loop and Task Queues"
         route={JAVASCRIPT_EVENT_LOOP_ROUTE}
         sections={sections}
-        backRoute={NOTES_ROUTE}
-        backLabel="Back to notes"
+        backRoute={JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}
+        backLabel="Back to JavaScript and TypeScript notes"
     >
         <section className="Article__section">
             <p>

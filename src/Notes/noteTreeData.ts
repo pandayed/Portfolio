@@ -4,6 +4,7 @@ import {
     SYSTEM_DESIGN_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
+    JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
@@ -16,18 +17,23 @@ import {
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
+    REACT_NOTES_ROUTE,
     PROGRAMMING_DICTIONARY_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,
     type GoNoteRoute,
+    type JavaScriptTypeScriptNoteRoute,
     type PythonNoteRoute,
+    type ReactNoteRoute,
     type SystemDesignEntryRoute,
     type Route,
 } from '../routing/routes';
 import { goNotes as goNotePages } from './GoNotes/goNotes';
+import { javascriptTypeScriptChapters } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonChapters } from './PythonNotes/pythonNotes';
+import { reactChapters } from './ReactNotes/reactNotes';
 import {
     systemDesignPagesById,
     systemDesignPagesByRoute,
@@ -184,6 +190,66 @@ export const pythonNotes: NoteGroup = {
     })),
 };
 
+const asynchronousJavaScriptPages: NotePage[] = [
+    {
+        type: 'page',
+        title: 'JavaScript Event Loop and Task Queues',
+        summary: 'Microtasks, tasks, Promises, timers, browser scheduling, and the Node.js event loop.',
+        route: JAVASCRIPT_EVENT_LOOP_ROUTE,
+        updatedOn: '2026-09-21',
+    },
+    {
+        type: 'page',
+        title: 'Asynchronous Programming in JavaScript',
+        summary: 'Promises, async and await, concurrency, cancellation, errors, and production patterns.',
+        route: JAVASCRIPT_ASYNC_ROUTE,
+        updatedOn: '2026-09-21',
+    },
+];
+
+export const javascriptTypeScriptNotes: NoteGroup = {
+    type: 'group',
+    title: 'JavaScript and TypeScript',
+    summary: 'Shared JavaScript runtime concepts, TypeScript checks, and TypeScript-only type-system topics.',
+    route: JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
+    children: javascriptTypeScriptChapters.map((chapter) => ({
+        type: 'group',
+        title: chapter.title,
+        summary: chapter.summary,
+        route: `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${chapter.notes[0].slug}` as JavaScriptTypeScriptNoteRoute,
+        children: [
+            ...chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+                type: 'page' as const,
+                title,
+                summary,
+                route: `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${slug}` as JavaScriptTypeScriptNoteRoute,
+                updatedOn,
+            })),
+            ...(chapter.id === 'browser-and-async' ? asynchronousJavaScriptPages : []),
+        ],
+    })),
+};
+
+export const reactNotes: NoteGroup = {
+    type: 'group',
+    title: 'React',
+    summary: 'Components, rendering, state, Effects, application state, data, and performance.',
+    route: REACT_NOTES_ROUTE,
+    children: reactChapters.map((chapter) => ({
+        type: 'group',
+        title: chapter.title,
+        summary: chapter.summary,
+        route: `${REACT_NOTES_ROUTE}/${chapter.notes[0].slug}` as ReactNoteRoute,
+        children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+            type: 'page',
+            title,
+            summary,
+            route: `${REACT_NOTES_ROUTE}/${slug}` as ReactNoteRoute,
+            updatedOn,
+        })),
+    })),
+};
+
 export const javaNotes: NoteGroup = {
     type: 'group',
     title: 'Java',
@@ -235,25 +301,13 @@ export const noteTree: NoteNode[] = [
     },
     {
         type: 'page',
-        title: 'JavaScript Event Loop and Task Queues',
-        summary: 'Microtasks, tasks, Promises, timers, browser scheduling, and the Node.js event loop.',
-        route: JAVASCRIPT_EVENT_LOOP_ROUTE,
-        updatedOn: '2026-09-21',
-    },
-    {
-        type: 'page',
-        title: 'Asynchronous Programming in JavaScript',
-        summary: 'The event loop, Promises, async and await, concurrency, cancellation, errors, and common production patterns.',
-        route: JAVASCRIPT_ASYNC_ROUTE,
-        updatedOn: '2026-09-21',
-    },
-    {
-        type: 'page',
         title: 'The Anatomy of API Communication in a React Application',
         summary: 'Each layer exists for a specific reason, solves a specific problem, and has a clear boundary.',
         route: API_COMMUNICATION_ROUTE,
         updatedOn: '2026-09-20',
     },
+    javascriptTypeScriptNotes,
+    reactNotes,
     postgresqlNotes,
     systemDesignNotes,
     goNotes,

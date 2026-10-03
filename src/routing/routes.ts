@@ -2,7 +2,9 @@
    unknown paths back to index.html. */
 
 import { goNotes } from '../Notes/GoNotes/goNotes';
+import { javascriptTypeScriptNotes } from '../Notes/JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
+import { reactNotes } from '../Notes/ReactNotes/reactNotes';
 import { systemDesignEntryRoutes } from '../Notes/SystemDesign/registry';
 import { SYSTEM_DESIGN_ROUTE, type SystemDesignEntryRoute } from '../Notes/SystemDesign/path';
 
@@ -16,6 +18,8 @@ export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
 export const POSTGRESQL_ONE_SHOT_SQL_ROUTE = '/notes/postgresql/one-shot-sql';
 export const GO_NOTES_ROUTE = '/notes/go';
 export const PYTHON_NOTES_ROUTE = '/notes/python';
+export const JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE = '/notes/javascript-typescript';
+export const REACT_NOTES_ROUTE = '/notes/react';
 export const PROGRAMMING_DICTIONARY_ROUTE = '/notes/programming-dictionary';
 export const JAVA_NOTES_ROUTE = '/notes/java';
 export const JAVA_PROGRAM_EXECUTION_ROUTE = '/notes/java/program-execution';
@@ -50,7 +54,9 @@ export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
 
 export type GoNoteRoute = `${typeof GO_NOTES_ROUTE}/${string}`;
+export type JavaScriptTypeScriptNoteRoute = `${typeof JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${string}`;
 export type PythonNoteRoute = `${typeof PYTHON_NOTES_ROUTE}/${string}`;
+export type ReactNoteRoute = `${typeof REACT_NOTES_ROUTE}/${string}`;
 
 export type Route =
     | typeof HOME_ROUTE
@@ -65,6 +71,10 @@ export type Route =
     | SystemDesignEntryRoute
     | typeof PYTHON_NOTES_ROUTE
     | PythonNoteRoute
+    | typeof JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE
+    | JavaScriptTypeScriptNoteRoute
+    | typeof REACT_NOTES_ROUTE
+    | ReactNoteRoute
     | typeof JAVA_NOTES_ROUTE
     | typeof JAVA_PROGRAM_EXECUTION_ROUTE
     | typeof SPRING_BOOT_NOTES_ROUTE
@@ -105,6 +115,14 @@ const pythonNoteRoutes: PythonNoteRoute[] = pythonNotes.map(
     ({ slug }) => `${PYTHON_NOTES_ROUTE}/${slug}` as PythonNoteRoute,
 );
 
+const javascriptTypeScriptNoteRoutes: JavaScriptTypeScriptNoteRoute[] = javascriptTypeScriptNotes.map(
+    ({ slug }) => `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${slug}` as JavaScriptTypeScriptNoteRoute,
+);
+
+const reactNoteRoutes: ReactNoteRoute[] = reactNotes.map(
+    ({ slug }) => `${REACT_NOTES_ROUTE}/${slug}` as ReactNoteRoute,
+);
+
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
@@ -117,6 +135,10 @@ const routes: Route[] = [
     PYTHON_NOTES_ROUTE,
     PROGRAMMING_DICTIONARY_ROUTE,
     ...pythonNoteRoutes,
+    JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
+    ...javascriptTypeScriptNoteRoutes,
+    REACT_NOTES_ROUTE,
+    ...reactNoteRoutes,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
