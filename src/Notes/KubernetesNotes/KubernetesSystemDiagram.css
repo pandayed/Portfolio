@@ -1,0 +1,177 @@
+.KubernetesSystemDiagram {
+    display: grid;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+}
+
+.KubernetesSystemDiagram__title {
+    font-size: var(--text-subheading);
+    font-weight: 600;
+    text-align: center;
+}
+
+.KubernetesSystemDiagram__cluster {
+    display: grid;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+}
+
+.KubernetesSystemDiagram__boundaryLabel {
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.KubernetesSystemDiagram__controlPlane,
+.KubernetesSystemDiagram__node {
+    display: grid;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-code-background);
+}
+
+.KubernetesSystemDiagram__groupHeading {
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.KubernetesSystemDiagram__groupHeading strong {
+    font-size: var(--text-subheading);
+}
+
+.KubernetesSystemDiagram__groupHeading span,
+.KubernetesSystemDiagram__part span,
+.KubernetesSystemDiagram__podHeading span,
+.KubernetesSystemDiagram__container span,
+.KubernetesSystemDiagram__kernel span,
+.KubernetesSystemDiagram__hardware span,
+.KubernetesSystemDiagram__controlHost span,
+.KubernetesSystemDiagram__note {
+    color: var(--color-text-subtle);
+    font-size: var(--text-fine);
+}
+
+.KubernetesSystemDiagram__controlParts,
+.KubernetesSystemDiagram__nodeServices,
+.KubernetesSystemDiagram__pods,
+.KubernetesSystemDiagram__containers {
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.KubernetesSystemDiagram__controlParts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.KubernetesSystemDiagram__nodeServices {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.KubernetesSystemDiagram__pods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.KubernetesSystemDiagram__containers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.KubernetesSystemDiagram__part,
+.KubernetesSystemDiagram__container {
+    display: grid;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+    border: 1px solid var(--color-border);
+    background: var(--color-paper);
+}
+
+.KubernetesSystemDiagram__part strong,
+.KubernetesSystemDiagram__container strong,
+.KubernetesSystemDiagram__podHeading strong,
+.KubernetesSystemDiagram__kernel strong,
+.KubernetesSystemDiagram__hardware strong,
+.KubernetesSystemDiagram__controlHost strong {
+    font-size: var(--text-fine);
+}
+
+.KubernetesSystemDiagram__connection {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-subtle);
+    font-size: var(--text-fine);
+    text-align: center;
+}
+
+.KubernetesSystemDiagram__connectionLine {
+    width: 1px;
+    height: var(--space-lg);
+    background: var(--color-border);
+}
+
+.KubernetesSystemDiagram__pod {
+    display: grid;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+    border: 1px dashed var(--color-text-subtle);
+    background: var(--color-paper);
+}
+
+.KubernetesSystemDiagram__podHeading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-xs);
+}
+
+.KubernetesSystemDiagram__shared {
+    padding: var(--space-xs);
+    border: 1px solid var(--color-border);
+    font-size: var(--text-fine);
+}
+
+.KubernetesSystemDiagram__kernel,
+.KubernetesSystemDiagram__hardware,
+.KubernetesSystemDiagram__controlHost {
+    display: grid;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+    border: 1px solid var(--color-border);
+}
+
+.KubernetesSystemDiagram__kernel,
+.KubernetesSystemDiagram__controlHost {
+    background: var(--color-paper);
+}
+
+.KubernetesSystemDiagram__hardware {
+    border-style: dashed;
+}
+
+.KubernetesSystemDiagram__note {
+    margin: 0;
+    text-align: center;
+}
+
+@media (max-width: 48rem) {
+    .KubernetesSystemDiagram__controlParts,
+    .KubernetesSystemDiagram__nodeServices {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .KubernetesSystemDiagram__pods {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 30rem) {
+    .KubernetesSystemDiagram__controlParts,
+    .KubernetesSystemDiagram__nodeServices,
+    .KubernetesSystemDiagram__containers {
+        grid-template-columns: 1fr;
+    }
+}

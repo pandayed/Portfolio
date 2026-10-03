@@ -1,7 +1,7 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { DOCKER_NETWORK_STORAGE_ROUTE, DOCKER_NOTES_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'docker-published-ports', title: 'Published ports' },
@@ -36,7 +36,7 @@ const volumeExample = [
 ].join('\n');
 
 const DockerNetworkStorage = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Ports, networks, and storage"
         route={DOCKER_NETWORK_STORAGE_ROUTE}
         sections={sections}
@@ -121,7 +121,7 @@ const DockerNetworkStorage = () => (
                 <a className="Link" href="https://docs.docker.com/engine/storage/volumes/" target="_blank" rel="noreferrer">Volumes</a> in the official Docker documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default DockerNetworkStorage;

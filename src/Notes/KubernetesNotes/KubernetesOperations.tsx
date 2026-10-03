@@ -1,7 +1,7 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { KUBERNETES_NOTES_ROUTE, KUBERNETES_OPERATIONS_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'kubernetes-probes', title: 'Startup, readiness, and liveness probes' },
@@ -63,7 +63,7 @@ const debugCommands = [
 ].join('\n');
 
 const KubernetesOperations = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Health, resources, rollouts, and debugging"
         route={KUBERNETES_OPERATIONS_ROUTE}
         sections={sections}
@@ -168,7 +168,7 @@ const KubernetesOperations = () => (
                 <a className="Link" href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" target="_blank" rel="noreferrer">Deployments</a> in the official Kubernetes documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default KubernetesOperations;

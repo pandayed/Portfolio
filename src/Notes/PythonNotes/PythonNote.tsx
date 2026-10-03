@@ -5,8 +5,6 @@ import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     PYTHON_NOTES_ROUTE,
-    PROGRAMMING_DICTIONARY_ROUTE,
-    toHref,
     type PythonNoteRoute,
 } from '../../routing/routes';
 import { pythonNotes } from './pythonNotes';
@@ -26,6 +24,11 @@ const renderInlineContent = (content: PythonInlineContent, keyPrefix: string) =>
         : content.map((part, index) => (
             typeof part === 'string'
                 ? renderProgrammingTerms(part, `${keyPrefix}-part-${index}`)
+                : 'strong' in part ? (
+                    <strong key={`${keyPrefix}-strong-${index}`}>
+                        {renderProgrammingTerms(part.text, `${keyPrefix}-strong-${index}`)}
+                    </strong>
+                )
                 : (
                     <a className="Link" href={part.href} key={`${keyPrefix}-link-${index}`}>
                         {part.text}
@@ -53,10 +56,6 @@ const PythonNote = ({ route }: PythonNoteProps) => {
             backRoute={PYTHON_NOTES_ROUTE}
             backLabel="Back to Python notes"
         >
-            {!note.sections.every((section) => section.diagram) && <p>
-                Hover over a dotted term link for its meaning, or browse the{' '}
-                <a className="Link" href={toHref(PROGRAMMING_DICTIONARY_ROUTE)}>programming dictionary</a>.
-            </p>}
             {note.sections.map((section) => (
                 <section
                     className="Article__section"

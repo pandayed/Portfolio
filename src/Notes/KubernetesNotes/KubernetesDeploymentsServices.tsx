@@ -1,7 +1,7 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { KUBERNETES_DEPLOY_ROUTE, KUBERNETES_NOTES_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'kubernetes-deployment', title: 'Deployment manifest' },
@@ -59,7 +59,7 @@ const applyCommands = [
 ].join('\n');
 
 const KubernetesDeploymentsServices = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Deployments and Services"
         route={KUBERNETES_DEPLOY_ROUTE}
         sections={sections}
@@ -156,7 +156,7 @@ const KubernetesDeploymentsServices = () => (
                 <a className="Link" href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank" rel="noreferrer">Services</a> in the official Kubernetes documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default KubernetesDeploymentsServices;

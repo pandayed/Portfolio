@@ -1,7 +1,7 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { KUBERNETES_CONFIG_ROUTE, KUBERNETES_NOTES_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'kubernetes-configmap', title: 'ConfigMaps' },
@@ -70,7 +70,7 @@ const persistentStorage = [
 ].join('\n');
 
 const KubernetesConfigurationStorage = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Configuration and storage"
         route={KUBERNETES_CONFIG_ROUTE}
         sections={sections}
@@ -174,7 +174,7 @@ const KubernetesConfigurationStorage = () => (
                 <a className="Link" href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/" target="_blank" rel="noreferrer">Persistent Volumes</a> in the official Kubernetes documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default KubernetesConfigurationStorage;

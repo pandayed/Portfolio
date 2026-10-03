@@ -1,10 +1,13 @@
+import './KubernetesSystemDiagram.css';
+
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { KUBERNETES_CLUSTER_ROUTE, KUBERNETES_NOTES_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'kubernetes-cluster', title: 'Cluster parts' },
+    { id: 'kubernetes-running-system', title: 'How a running system fits together' },
     { id: 'kubernetes-pod', title: 'Pod model' },
     { id: 'kubernetes-controllers', title: 'Desired state and controllers' },
     { id: 'kubernetes-scheduling', title: 'Scheduling and replacement' },
@@ -35,8 +38,149 @@ const podManifest = [
     '          containerPort: 80',
 ].join('\n');
 
+const KubernetesSystemDiagram = () => (
+    <figure className="KubernetesSystemDiagram">
+        <figcaption className="KubernetesSystemDiagram__title">
+            One typical Linux Kubernetes cluster with one worker node
+        </figcaption>
+
+        <div className="KubernetesSystemDiagram__cluster">
+            <div className="KubernetesSystemDiagram__boundaryLabel">Kubernetes cluster</div>
+
+            <section
+                className="KubernetesSystemDiagram__controlPlane"
+                aria-label="Control plane"
+            >
+                <div className="KubernetesSystemDiagram__groupHeading">
+                    <strong>Control plane (logical view)</strong>
+                    <span>Runs on one or more machines and manages the cluster.</span>
+                </div>
+
+                <div className="KubernetesSystemDiagram__controlParts">
+                    <div className="KubernetesSystemDiagram__part">
+                        <strong>API server</strong>
+                        <span>Receives and validates cluster requests</span>
+                    </div>
+                    <div className="KubernetesSystemDiagram__part">
+                        <strong>Scheduler</strong>
+                        <span>Selects a worker node for each new Pod</span>
+                    </div>
+                    <div className="KubernetesSystemDiagram__part">
+                        <strong>Controllers</strong>
+                        <span>Keep actual state close to desired state</span>
+                    </div>
+                    <div className="KubernetesSystemDiagram__part">
+                        <strong>Cluster data</strong>
+                        <span>Stores API objects and cluster state</span>
+                    </div>
+                </div>
+
+                <div className="KubernetesSystemDiagram__controlHost">
+                    <strong>Control-plane machine resources</strong>
+                    <span>
+                        These components also run on an operating system, kernel, CPU, and memory.
+                        A managed Kubernetes provider may hide this machine layer.
+                    </span>
+                </div>
+            </section>
+
+            <div className="KubernetesSystemDiagram__connection" aria-label="Control plane and node communication">
+                <span>Pod specifications and desired state ↓</span>
+                <span className="KubernetesSystemDiagram__connectionLine" aria-hidden="true" />
+                <span>↑ Node, Pod, and container status</span>
+            </div>
+
+            <section
+                className="KubernetesSystemDiagram__node"
+                aria-label="Worker node or host machine"
+            >
+                <div className="KubernetesSystemDiagram__groupHeading">
+                    <strong>Worker node / host machine</strong>
+                    <span>A physical machine or virtual machine that runs application Pods.</span>
+                </div>
+
+                <div className="KubernetesSystemDiagram__nodeServices">
+                    <div className="KubernetesSystemDiagram__part">
+                        <strong>kubelet</strong>
+                        <span>Follows Pod specifications and reports status</span>
+                    </div>
+                    <div className="KubernetesSystemDiagram__part">
+                        <strong>CRI-compatible runtime</strong>
+                        <span>Starts and stops the Pod containers</span>
+                    </div>
+                    <div className="KubernetesSystemDiagram__part">
+                        <strong>Node networking</strong>
+                        <span>Connects Pod addresses to the cluster network</span>
+                    </div>
+                </div>
+
+                <div className="KubernetesSystemDiagram__pods" aria-label="Pods running on the worker node">
+                    <section className="KubernetesSystemDiagram__pod" aria-label="Pod web A">
+                        <div className="KubernetesSystemDiagram__podHeading">
+                            <strong>Pod: web-a</strong>
+                            <span>Own Pod network namespace and IP</span>
+                        </div>
+                        <div className="KubernetesSystemDiagram__shared">
+                            Shared inside this Pod: IP address, port space, and mounted volumes
+                        </div>
+                        <div className="KubernetesSystemDiagram__containers">
+                            <div className="KubernetesSystemDiagram__container">
+                                <strong>App container</strong>
+                                <span>Own process and filesystem view</span>
+                            </div>
+                            <div className="KubernetesSystemDiagram__container">
+                                <strong>Sidecar container</strong>
+                                <span>Own process and filesystem view</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="KubernetesSystemDiagram__pod" aria-label="Pod web B">
+                        <div className="KubernetesSystemDiagram__podHeading">
+                            <strong>Pod: web-b</strong>
+                            <span>Different Pod network namespace and IP</span>
+                        </div>
+                        <div className="KubernetesSystemDiagram__shared">
+                            Shared inside this Pod: IP address, port space, and mounted volumes
+                        </div>
+                        <div className="KubernetesSystemDiagram__containers">
+                            <div className="KubernetesSystemDiagram__container">
+                                <strong>App container</strong>
+                                <span>Own process and filesystem view</span>
+                            </div>
+                            <div className="KubernetesSystemDiagram__container">
+                                <strong>Sidecar container</strong>
+                                <span>Own process and filesystem view</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div className="KubernetesSystemDiagram__kernel">
+                    <strong>Host operating system and kernel</strong>
+                    <span>
+                        Shared by every Pod on this node. Namespaces isolate views. Control groups
+                        account for and constrain resources.
+                    </span>
+                </div>
+
+                <div className="KubernetesSystemDiagram__hardware">
+                    <strong>Host resources</strong>
+                    <span>CPU · memory · disks · network devices</span>
+                </div>
+            </section>
+        </div>
+
+        <p className="KubernetesSystemDiagram__note">
+            A real cluster can have many worker nodes and several control plane machines. A small
+            learning cluster may place both roles on one machine. Each worker node still has its
+            own operating system, kernel, runtime, and resources.
+        </p>
+    </figure>
+);
+
 const KubernetesCluster = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Clusters, nodes, Pods, and controllers"
         route={KUBERNETES_CLUSTER_ROUTE}
         sections={sections}
@@ -71,6 +215,52 @@ const KubernetesCluster = () => (
             </p>
         </section>
 
+        <section className="Article__section" aria-labelledby="kubernetes-running-system">
+            <h2 id="kubernetes-running-system" className="SectionTitle">
+                How a running system fits together
+            </h2>
+            <p>
+                This view uses one worker node so the sharing boundaries stay visible. The control
+                plane stores and manages cluster state. The worker node runs the application Pods.
+            </p>
+            <KubernetesSystemDiagram />
+            <h3 className="Article__subTitle">What is shared at each boundary</h3>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead>
+                        <tr><th>Boundary</th><th>Shared</th><th>Separate by default</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Containers in one Pod</td>
+                            <td>Pod IP, port space, <code>localhost</code>, node kernel, and volumes mounted into both containers.</td>
+                            <td>Image, writable layer, environment, and process namespace.</td>
+                        </tr>
+                        <tr>
+                            <td>Different Pods on one Linux node</td>
+                            <td>Node kernel and underlying CPU, memory, disks, and network devices.</td>
+                            <td>Pod IP, network namespace, <code>localhost</code>, and container filesystems.</td>
+                        </tr>
+                        <tr>
+                            <td>Pods on different nodes</td>
+                            <td>Cluster network reachability and Kubernetes API objects.</td>
+                            <td>Kernel, node hardware, <code>localhost</code>, and node-local ephemeral storage.</td>
+                        </tr>
+                        <tr>
+                            <td>Control plane and workers</td>
+                            <td>Desired and current state exchanged through the API server.</td>
+                            <td>Application processes, memory, filesystems, and network namespaces.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul className="Article__notes">
+                <li>The kubelet talks to the API server, asks the runtime to manage containers, and reports status back to the control plane.</li>
+                <li>Normal application traffic uses the cluster network. It does not pass through the control plane.</li>
+                <li>Namespaces isolate what processes can see. Control groups account for and constrain resource use on a Linux node.</li>
+            </ul>
+        </section>
+
         <section className="Article__section" aria-labelledby="kubernetes-pod">
             <h2 id="kubernetes-pod" className="SectionTitle">Pod model</h2>
             <p>
@@ -80,7 +270,7 @@ const KubernetesCluster = () => (
             <CodeBlock language="text">{podManifest}</CodeBlock>
             <ul className="Article__notes">
                 <li>Containers in one Pod can connect to each other through <code>localhost</code>.</li>
-                <li>Each Pod receives its own cluster IP address.</li>
+                <li>In the normal network model, each Pod receives its own Pod IP address on the cluster network.</li>
                 <li>A Pod is replaceable. Its name, IP, and writable container files should not be treated as durable application state.</li>
                 <li>Use multiple containers in one Pod only when their lifecycle and resources are tightly coupled.</li>
             </ul>
@@ -140,7 +330,7 @@ const KubernetesCluster = () => (
                 <a className="Link" href="https://kubernetes.io/docs/concepts/workloads/pods/" target="_blank" rel="noreferrer">Pods</a> in the official Kubernetes documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default KubernetesCluster;

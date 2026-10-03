@@ -20,7 +20,12 @@ export interface PythonInlineLink {
     href: string;
 }
 
-export type PythonInlineContent = string | readonly (string | PythonInlineLink)[];
+export interface PythonInlineStrong {
+    text: string;
+    strong: true;
+}
+
+export type PythonInlineContent = string | readonly (string | PythonInlineLink | PythonInlineStrong)[];
 
 export interface PythonNote {
     slug: string;

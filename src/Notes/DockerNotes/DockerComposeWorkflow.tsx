@@ -1,7 +1,7 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { DOCKER_COMPOSE_ROUTE, DOCKER_NOTES_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'compose-model', title: 'Compose application model' },
@@ -51,7 +51,7 @@ const dailyCommands = [
 ].join('\n');
 
 const DockerComposeWorkflow = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Docker Compose and daily workflow"
         route={DOCKER_COMPOSE_ROUTE}
         sections={sections}
@@ -132,7 +132,7 @@ const DockerComposeWorkflow = () => (
                 <a className="Link" href="https://docs.docker.com/compose/gettingstarted/" target="_blank" rel="noreferrer">Docker Compose Quickstart</a> in the official Docker documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default DockerComposeWorkflow;

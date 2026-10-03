@@ -1,7 +1,7 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { DOCKER_BUILD_RUN_ROUTE, DOCKER_NOTES_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'dockerfile-instructions', title: 'Dockerfile instructions' },
@@ -38,7 +38,7 @@ const buildAndRun = [
 ].join('\n');
 
 const DockerBuildRun = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Build and run an image"
         route={DOCKER_BUILD_RUN_ROUTE}
         sections={sections}
@@ -127,7 +127,7 @@ const DockerBuildRun = () => (
                 <a className="Link" href="https://docs.docker.com/get-started/docker-concepts/building-images/using-the-build-cache/" target="_blank" rel="noreferrer">Using the build cache</a> in the official Docker documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default DockerBuildRun;

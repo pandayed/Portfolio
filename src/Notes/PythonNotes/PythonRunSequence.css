@@ -1,58 +1,42 @@
 .PythonRunSequence {
-    overflow-x: auto;
+    margin: var(--space-sm) 0;
 }
 
-.PythonRunSequence__svg {
-    display: block;
-    width: 100%;
-    min-width: 76rem;
+.PythonRunSequence__steps {
+    display: grid;
+    gap: var(--space-lg);
+    margin: 0;
+    padding-left: var(--space-lg);
+}
+
+.PythonRunSequence__step {
+    position: relative;
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+}
+
+.PythonRunSequence__step::marker {
+    font-weight: 600;
+}
+
+.PythonRunSequence__step:not(:last-child)::after {
+    content: '↓';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: var(--space-lg);
     font-family: var(--font-sans);
-    font-size: var(--text-secondary);
-    fill: var(--color-text);
 }
 
-.PythonRunSequence__caption {
-    font-weight: 600;
+.PythonRunSequence__step h3 {
+    margin-top: 0;
 }
 
-.PythonRunSequence__participant {
-    fill: none;
-    stroke: var(--color-border);
-}
-
-.PythonRunSequence__heading {
-    font-weight: 600;
-}
-
-.PythonRunSequence__detail {
-    font-size: var(--text-fine);
-    fill: var(--color-text-subtle);
-}
-
-.PythonRunSequence__note {
-    font-size: var(--text-fine);
-    fill: var(--color-text-subtle);
+.PythonRunSequence__step p {
+    margin-bottom: 0;
 }
 
 .PythonRunSequence__code {
-    font-family: var(--font-code);
-}
-
-.PythonRunSequence__lifeline {
-    stroke: var(--color-border);
-    stroke-dasharray: 5 5;
-}
-
-.PythonRunSequence__message {
-    fill: none;
-    stroke: var(--color-text);
-    stroke-width: 1.5;
-}
-
-.PythonRunSequence__return {
-    stroke-dasharray: 5 4;
-}
-
-.PythonRunSequence__arrowHead {
-    fill: var(--color-text);
+    display: block;
 }

@@ -1,7 +1,7 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { DOCKER_CONTAINERS_ROUTE, DOCKER_NOTES_ROUTE } from '../../routing/routes';
-import NoteArticleLayout from '../NoteArticleLayout';
+import ArticleLayout from '../NoteArticleLayout';
 
 const sections: TocEntry[] = [
     { id: 'docker-container', title: 'A container is an isolated process' },
@@ -26,7 +26,7 @@ const imageCommands = [
 ].join('\n');
 
 const DockerContainers = () => (
-    <NoteArticleLayout
+    <ArticleLayout
         title="Containers, images, and registries"
         route={DOCKER_CONTAINERS_ROUTE}
         sections={sections}
@@ -118,7 +118,7 @@ const DockerContainers = () => (
                 <a className="Link" href="https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/" target="_blank" rel="noreferrer">What is an image?</a> in the official Docker documentation.
             </p>
         </section>
-    </NoteArticleLayout>
+    </ArticleLayout>
 );
 
 export default DockerContainers;

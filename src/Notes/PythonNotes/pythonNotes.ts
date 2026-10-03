@@ -1,4 +1,5 @@
 import runtime from './data/runtime';
+import languageFundamentals from './data/language-fundamentals';
 import variablesAndTypes from './data/variables-and-types';
 import numbersAndConversion from './data/numbers-and-conversion';
 import strings from './data/strings';
@@ -39,10 +40,11 @@ import type { PythonChapter } from './types';
 
 export const pythonChapters: readonly PythonChapter[] = [
     {
-        title: '1. Language fundamentals',
-        summary: 'Runtime, values, text, decisions, and iteration.',
+        title: '1. Getting started with Python',
+        summary: 'How Python runs a file, basic syntax, values, text, decisions, and iteration.',
         notes: [
             runtime,
+            languageFundamentals,
             variablesAndTypes,
             numbersAndConversion,
             strings,
