@@ -52,6 +52,8 @@ import PostgreSQLRatios from './Notes/PostgreSQLRatios/PostgreSQLRatios';
 import PostgreSQLWindowFunctions from './Notes/PostgreSQLWindowFunctions/PostgreSQLWindowFunctions';
 import PostgreSQLMaths from './Notes/PostgreSQLMaths/PostgreSQLMaths';
 import PostgreSQLDateTime from './Notes/PostgreSQLDateTime/PostgreSQLDateTime';
+import PostgreSQLIndexing from './Notes/PostgreSQLIndexing/PostgreSQLIndexing';
+import PostgreSQLQueryAnalysis from './Notes/PostgreSQLQueryAnalysis/PostgreSQLQueryAnalysis';
 import ScalarInPostgreSQL from './Notes/ScalarInPostgreSQL/ScalarInPostgreSQL';
 import ApiCommunication from './Notes/ApiCommunication/ApiCommunication';
 import JavaScriptAsync from './Notes/JavaScriptAsync/JavaScriptAsync';
@@ -106,6 +108,8 @@ import {
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
     POSTGRESQL_DATE_TIME_ROUTE,
+    POSTGRESQL_INDEXING_ROUTE,
+    POSTGRESQL_QUERY_ANALYSIS_ROUTE,
     NOTES_ROUTE,
     PROJECTS_ROUTE,
     REACT_NOTES_ROUTE,
@@ -171,6 +175,8 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [POSTGRESQL_WINDOW_FUNCTIONS_ROUTE]: PostgreSQLWindowFunctions,
     [POSTGRESQL_MATHS_ROUTE]: PostgreSQLMaths,
     [POSTGRESQL_DATE_TIME_ROUTE]: PostgreSQLDateTime,
+    [POSTGRESQL_INDEXING_ROUTE]: PostgreSQLIndexing,
+    [POSTGRESQL_QUERY_ANALYSIS_ROUTE]: PostgreSQLQueryAnalysis,
     [SCALAR_IN_POSTGRESQL_ROUTE]: ScalarInPostgreSQL,
     [API_COMMUNICATION_ROUTE]: ApiCommunication,
     [JAVASCRIPT_ASYNC_ROUTE]: JavaScriptAsync,

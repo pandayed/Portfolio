@@ -22,6 +22,8 @@ import {
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
     POSTGRESQL_DATE_TIME_ROUTE,
+    POSTGRESQL_INDEXING_ROUTE,
+    POSTGRESQL_QUERY_ANALYSIS_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     POSTGRESQL_RATIOS_ROUTE,
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
@@ -75,7 +77,7 @@ export type NoteNode = NotePage | NoteGroup;
 export const postgresqlNotes: NoteGroup = {
     type: 'group',
     title: 'PostgreSQL',
-    summary: 'Short notes about PostgreSQL syntax, behaviour, and common terms.',
+    summary: 'Notes about PostgreSQL syntax, query results, indexing, and execution plans.',
     route: POSTGRESQL_NOTES_ROUTE,
     children: [
         {
@@ -133,6 +135,20 @@ export const postgresqlNotes: NoteGroup = {
             summary: 'Types, arithmetic, ranges, time zones, formatting, and common date query patterns.',
             route: POSTGRESQL_DATE_TIME_ROUTE,
             updatedOn: '2026-10-02',
+        },
+        {
+            type: 'page',
+            title: 'Indexing in PostgreSQL',
+            summary: 'Index types, column order, partial and expression indexes, covering indexes, and write costs.',
+            route: POSTGRESQL_INDEXING_ROUTE,
+            updatedOn: '2026-10-03',
+        },
+        {
+            type: 'page',
+            title: 'Query analysis in PostgreSQL',
+            summary: 'Read EXPLAIN plans, compare estimates with actual rows, inspect buffers, and measure changes.',
+            route: POSTGRESQL_QUERY_ANALYSIS_ROUTE,
+            updatedOn: '2026-10-03',
         },
     ],
 };
