@@ -7,29 +7,11 @@ const note = {
     "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "09cf19a8-c88b-5aa9-a964-453190eddcae",
-            "type": "text",
-            "richText": [
-                [
-                    "A function declares parameters and optional results. Arguments are copied into parameters when the function is called."
-                ]
-            ]
-        },
-        {
             "id": "7b00b12b-185e-5b00-b284-f673897c2b42",
             "type": "sub_header",
             "richText": [
                 [
                     "Basic syntax"
-                ]
-            ]
-        },
-        {
-            "id": "f042a41e-268a-5220-a284-4695f1807c56",
-            "type": "text",
-            "richText": [
-                [
-                    "Replace the placeholder names and types."
                 ]
             ]
         },
