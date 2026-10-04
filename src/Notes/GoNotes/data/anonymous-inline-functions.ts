@@ -43,15 +43,6 @@ const note = {
             ]
         },
         {
-            "id": "9e5ca3c2-e1e1-5edf-8deb-0419da6d2edf",
-            "type": "text",
-            "richText": [
-                [
-                    "paramList and returnType are placeholders."
-                ]
-            ]
-        },
-        {
             "id": "24224eb1-ed54-8097-b4ee-c27e93874b1e",
             "type": "code",
             "richText": [
