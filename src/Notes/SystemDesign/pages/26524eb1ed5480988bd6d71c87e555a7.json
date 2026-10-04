@@ -4,10 +4,230 @@
   "sourceUrl": "https://xpandeyed.notion.site/Apache-Kafka-26524eb1ed5480988bd6d71c87e555a7?pvs=23",
   "blocks": [
     {
+      "id": "kafka-order-scenario",
+      "type": "sub_header",
+      "text": "Scenario: an order needs several follow-up actions",
+      "html": "Scenario: an order needs several follow-up actions"
+    },
+    {
+      "id": "kafka-order-requirements",
+      "type": "bulleted_list",
+      "text": "Customer places order ORD-1042.",
+      "html": "Customer places order ORD-1042."
+    },
+    {
+      "id": "kafka-order-requirements-point-2",
+      "type": "bulleted_list",
+      "text": "Order service validates and saves it.",
+      "html": "Order service validates and saves it."
+    },
+    {
+      "id": "kafka-order-requirements-point-3",
+      "type": "bulleted_list",
+      "text": "Customer receives a successful checkout response.",
+      "html": "Customer receives a successful checkout response."
+    },
+    {
+      "id": "kafka-order-requirements-point-4",
+      "type": "bulleted_list",
+      "text": "Email sends the confirmation. Analytics records the sale.",
+      "html": "Email sends the confirmation. Analytics records the sale."
+    },
+    {
+      "id": "kafka-order-requirements-point-5",
+      "type": "bulleted_list",
+      "text": "Both follow-up actions can run later.",
+      "html": "Both follow-up actions can run later."
+    },
+    {
+      "id": "kafka-direct-api",
+      "type": "sub_header",
+      "text": "First approach: direct API calls",
+      "html": "First approach: direct API calls"
+    },
+    {
+      "id": "kafka-direct-api-flow",
+      "type": "numbered_list",
+      "text": "The order service saves ORD-1042.",
+      "html": "The order service saves ORD-1042."
+    },
+    {
+      "id": "kafka-direct-api-email",
+      "type": "numbered_list",
+      "text": "It calls the email service over HTTP and waits for a response.",
+      "html": "It calls the email service over HTTP and waits for a response."
+    },
+    {
+      "id": "kafka-direct-api-analytics",
+      "type": "numbered_list",
+      "text": "It calls the analytics service and waits again before responding to the customer.",
+      "html": "It calls the analytics service and waits again before responding to the customer."
+    },
+    {
+      "id": "kafka-direct-api-limitations",
+      "type": "sub_sub_header",
+      "text": "Where this approach becomes fragile",
+      "html": "Where this approach becomes fragile"
+    },
+    {
+      "id": "kafka-direct-api-latency",
+      "type": "bulleted_list",
+      "text": "Slow calls: waiting for email or analytics delays checkout.",
+      "html": "Slow calls: waiting for email or analytics delays checkout."
+    },
+    {
+      "id": "kafka-direct-api-partial",
+      "type": "bulleted_list",
+      "text": "Partial failure: email succeeds, analytics fails, and the order stays saved.",
+      "html": "Partial failure: email succeeds, analytics fails, and the order stays saved."
+    },
+    {
+      "id": "kafka-direct-api-partial-point-2",
+      "type": "bulleted_list",
+      "text": "Order service must track outcomes and retry unfinished work.",
+      "html": "Order service must track outcomes and retry unfinished work."
+    },
+    {
+      "id": "kafka-direct-api-timeout",
+      "type": "bulleted_list",
+      "text": "Uncertain retry: a timeout may happen after the email was sent.",
+      "html": "Uncertain retry: a timeout may happen after the email was sent."
+    },
+    {
+      "id": "kafka-direct-api-timeout-point-2",
+      "type": "bulleted_list",
+      "text": "Retrying can send it twice unless the operation handles duplicates.",
+      "html": "Retrying can send it twice unless the operation handles duplicates."
+    },
+    {
+      "id": "kafka-direct-api-growth",
+      "type": "bulleted_list",
+      "text": "More recipients: each new service adds a destination and failure path.",
+      "html": "More recipients: each new service adds a destination and failure path."
+    },
+    {
+      "id": "kafka-direct-api-growth-point-2",
+      "type": "bulleted_list",
+      "text": "Replay: direct calls need separate stored history and replay logic.",
+      "html": "Replay: direct calls need separate stored history and replay logic."
+    },
+    {
+      "id": "kafka-fit",
+      "type": "sub_header",
+      "text": "How Kafka changes the flow",
+      "html": "How Kafka changes the flow"
+    },
+    {
+      "id": "kafka-fit-publish",
+      "type": "numbered_list",
+      "text": "Order service publishes OrderPlaced: orderId=ORD-1042, amount=1200, currency=INR.",
+      "html": "Order service publishes OrderPlaced: orderId=ORD-1042, amount=1200, currency=INR."
+    },
+    {
+      "id": "kafka-fit-store",
+      "type": "numbered_list",
+      "text": "Kafka stores it. Email and analytics read independently; checkout does not wait for their work.",
+      "html": "Kafka stores it. Email and analytics read independently; checkout does not wait for their work."
+    },
+    {
+      "id": "kafka-fit-recovery",
+      "type": "numbered_list",
+      "text": "Analytics recovers and resumes from its saved position, while records remain retained.",
+      "html": "Analytics recovers and resumes from its saved position, while records remain retained."
+    },
+    {
+      "id": "kafka-fit-recovery-point-2",
+      "type": "numbered_list",
+      "text": "A new reporting service can read retained history without another direct order-service call.",
+      "html": "A new reporting service can read retained history without another direct order-service call."
+    },
+    {
+      "id": "kafka-fit-roles",
+      "type": "bulleted_list",
+      "text": "Kafka fits several independent readers that need the same history.",
+      "html": "Kafka fits several independent readers that need the same history."
+    },
+    {
+      "id": "kafka-fit-roles-point-2",
+      "type": "bulleted_list",
+      "text": "Kafka provides storage and replay. Applications still handle failures and retries.",
+      "html": "Kafka provides storage and replay. Applications still handle failures and retries."
+    },
+    {
+      "id": "kafka-order-publication",
+      "type": "sub_sub_header",
+      "text": "Keep the saved order and its event consistent",
+      "html": "Keep the saved order and its event consistent"
+    },
+    {
+      "id": "kafka-order-gap",
+      "type": "bulleted_list",
+      "text": "Database save and Kafka publication are separate writes.",
+      "html": "Database save and Kafka publication are separate writes."
+    },
+    {
+      "id": "kafka-order-gap-point-2",
+      "type": "bulleted_list",
+      "text": "Crash between them: order exists, event is missing. Kafka alone cannot close this gap.",
+      "html": "Crash between them: order exists, event is missing. Kafka alone cannot close this gap."
+    },
+    {
+      "id": "kafka-order-outbox",
+      "type": "bulleted_list",
+      "text": "Transactional outbox: save the order and an event row in one database transaction.",
+      "html": "Transactional outbox: save the order and an event row in one database transaction."
+    },
+    {
+      "id": "kafka-order-outbox-point-2",
+      "type": "bulleted_list",
+      "text": "Respond to the customer after the database commit.",
+      "html": "Respond to the customer after the database commit."
+    },
+    {
+      "id": "kafka-order-outbox-point-3",
+      "type": "bulleted_list",
+      "text": "A background relay publishes event rows to Kafka and retries failures.",
+      "html": "A background relay publishes event rows to Kafka and retries failures."
+    },
+    {
+      "id": "kafka-order-outbox-point-4",
+      "type": "bulleted_list",
+      "text": "Follow-up work starts after publication. Consumers must handle duplicates safely.",
+      "html": "Follow-up work starts after publication. Consumers must handle duplicates safely."
+    },
+    {
+      "id": "kafka-api-fit",
+      "type": "sub_sub_header",
+      "text": "When direct API calls still fit",
+      "html": "When direct API calls still fit"
+    },
+    {
+      "id": "kafka-api-fit-text",
+      "type": "bulleted_list",
+      "text": "Direct API: needs an immediate answer, such as a price or payment authorization.",
+      "html": "Direct API: needs an immediate answer, such as a price or payment authorization."
+    },
+    {
+      "id": "kafka-api-fit-text-point-2",
+      "type": "bulleted_list",
+      "text": "Kafka: asynchronous follow-up work and retained history.",
+      "html": "Kafka: asynchronous follow-up work and retained history."
+    },
+    {
+      "id": "kafka-api-fit-text-point-3",
+      "type": "bulleted_list",
+      "text": "Trade-off: operate Kafka and handle broker or consumer failures.",
+      "html": "Trade-off: operate Kafka and handle broker or consumer failures."
+    },
+    {
+      "id": "kafka-opening-divider",
+      "type": "divider"
+    },
+    {
       "id": "2e924eb1ed5480aba140f2348c12caea",
-      "type": "text",
-      "html": "Kafka",
-      "text": "Kafka"
+      "type": "sub_header",
+      "html": "What Kafka is",
+      "text": "What Kafka is"
     },
     {
       "id": "2e924eb1ed5480918dccc566ff7b58a5",
@@ -26,12 +246,6 @@
       "type": "bulleted_list",
       "html": "Designed for <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">high throughput</span>, <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">low latency</span>, and <span style=\"font-weight:600\" data-token-index=\"5\" class=\"notion-enable-hover\">fault tolerance</span>",
       "text": "Designed for high throughput, low latency, and fault tolerance"
-    },
-    {
-      "id": "2e924eb1ed548053a538dd2c4860d18a",
-      "type": "text",
-      "html": "The above three statements have been decoded gradually.",
-      "text": "The above three statements have been decoded gradually."
     },
     {
       "id": "2e924eb1ed5480ebaa87e365852f0d37",
@@ -371,52 +585,6 @@
       "text": "History is trustworthy"
     },
     {
-      "id": "2e824eb1ed54805aa05af4d1902a5712",
-      "type": "sub_header",
-      "html": "Topic vs database table (very important)",
-      "text": "Topic vs database table (very important)"
-    },
-    {
-      "id": "2e824eb1ed5480808bf6c551e7d5bf59",
-      "type": "bulleted_list",
-      "html": "Database table:",
-      "text": "Database table:"
-    },
-    {
-      "id": "2e824eb1ed548025add6f1a8ef9678d9",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480808bf6c551e7d5bf59",
-      "html": "Rows can be updated",
-      "text": "Rows can be updated"
-    },
-    {
-      "id": "2e824eb1ed5480d984cecd9e4c697c3a",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480808bf6c551e7d5bf59",
-      "html": "Rows can be deleted",
-      "text": "Rows can be deleted"
-    },
-    {
-      "id": "2e824eb1ed5480f8bf56d00812faaa1c",
-      "type": "bulleted_list",
-      "html": "Kafka topic:",
-      "text": "Kafka topic:"
-    },
-    {
-      "id": "2e824eb1ed54807f9798c9c10ba10412",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480f8bf56d00812faaa1c",
-      "html": "Events cannot be updated",
-      "text": "Events cannot be updated"
-    },
-    {
-      "id": "2e824eb1ed548025931bef4559626678",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480f8bf56d00812faaa1c",
-      "html": "Events are eventually deleted only by retention rules",
-      "text": "Events are eventually deleted only by retention rules"
-    },
-    {
       "id": "2e824eb1ed54804787a3cbbe460016cc",
       "type": "sub_header",
       "html": "What retention means (brief)",
@@ -425,62 +593,114 @@
     {
       "id": "2e824eb1ed5480d8a0b9c6a5626f49be",
       "type": "bulleted_list",
-      "html": "Kafka keeps events:",
-      "text": "Kafka keeps events:"
+      "html": "For topics using cleanup.policy=delete, retention removes old log segments based on:",
+      "text": "For topics using cleanup.policy=delete, retention removes old log segments based on:"
     },
     {
       "id": "2e824eb1ed548072a44bfdfc8dd4eb15",
       "type": "bulleted_list",
       "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
-      "html": "For a fixed time, or",
-      "text": "For a fixed time, or"
+      "html": "A configured time limit, or",
+      "text": "A configured time limit, or"
     },
     {
       "id": "2e824eb1ed5480ccb97ee5439c0b28ac",
       "type": "bulleted_list",
       "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
-      "html": "Until size limit is reached",
-      "text": "Until size limit is reached"
+      "html": "A configured size limit per partition",
+      "text": "A configured size limit per partition"
     },
     {
       "id": "2e824eb1ed54805c816ec80a483bfeda",
       "type": "bulleted_list",
-      "html": "Deletion is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">automatic</span>, not manual",
-      "text": "Deletion is automatic, not manual"
+      "html": "Cleanup runs automatically, but not necessarily immediately at the limit.",
+      "text": "Cleanup runs automatically, but not necessarily immediately at the limit."
+    },
+    {
+      "id": "2e824eb1ed54805c816ec80a483bfeda-point-2",
+      "type": "bulleted_list",
+      "text": "Administrators can also delete records before an offset.",
+      "html": "Administrators can also delete records before an offset."
+    },
+    {
+      "id": "kafka-compaction",
+      "type": "bulleted_list",
+      "text": "cleanup.policy=compact: remove older values for a key and retain its latest value.",
+      "html": "cleanup.policy=compact: remove older values for a key and retain its latest value."
+    },
+    {
+      "id": "kafka-compaction-point-2",
+      "type": "bulleted_list",
+      "text": "Tombstone: a record with a key and null value marks that key for removal.",
+      "html": "Tombstone: a record with a key and null value marks that key for removal."
+    },
+    {
+      "id": "kafka-compaction-point-3",
+      "type": "bulleted_list",
+      "text": "A topic can enable both delete and compact.",
+      "html": "A topic can enable both delete and compact."
     },
     {
       "id": "2e824eb1ed5480cd85b4cc4687c31a9f",
       "type": "divider"
     },
     {
-      "id": "2e824eb1ed54806fb95ee86f8771fb79",
-      "type": "sub_sub_header",
-      "html": "Problem without partitions",
-      "text": "Problem without partitions"
+      "id": "2e924eb1ed548096aa12f600ab424b6f",
+      "type": "sub_header",
+      "text": "What a Kafka broker is",
+      "html": "What a Kafka broker is"
     },
     {
-      "id": "2e824eb1ed54804ab308cd7a2052180e",
+      "id": "2e924eb1ed5480d7af08d222d162a664",
       "type": "bulleted_list",
-      "html": "Topic has <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one append-only log</span>",
-      "text": "Topic has one append-only log"
+      "text": "Broker: a running Kafka server process.",
+      "html": "Broker: a running Kafka server process."
     },
     {
-      "id": "2e824eb1ed54805ba9abee92f4f94c58",
+      "id": "2e924eb1ed5480d7af08d222d162a664-point-2",
       "type": "bulleted_list",
-      "html": "Only <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one machine</span> can write",
-      "text": "Only one machine can write"
+      "text": "Runs on a physical server, virtual machine, or container.",
+      "html": "Runs on a physical server, virtual machine, or container."
     },
     {
-      "id": "2e824eb1ed548067a611c7b143ce4125",
+      "id": "2e924eb1ed5480d7af08d222d162a664-point-3",
       "type": "bulleted_list",
-      "html": "Only <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one reader</span> can read in order",
-      "text": "Only one reader can read in order"
+      "text": "Order, email, and analytics services are clients that connect to brokers.",
+      "html": "Order, email, and analytics services are clients that connect to brokers."
     },
     {
-      "id": "2e824eb1ed5480a7914fcd82125445b1",
+      "id": "2e924eb1ed5480d1a9f7edda342bdce5",
       "type": "bulleted_list",
-      "html": "System becomes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">slow and non-scalable</span>",
-      "text": "System becomes slow and non-scalable"
+      "text": "Accepts records from writing applications and stores its copies of the data on disk.",
+      "html": "Accepts records from writing applications and stores its copies of the data on disk."
+    },
+    {
+      "id": "2e924eb1ed548073a10cff99da878ed1",
+      "type": "bulleted_list",
+      "text": "Answers requests from reading applications and returns stored records.",
+      "html": "Answers requests from reading applications and returns stored records."
+    },
+    {
+      "id": "kafka-broker-example",
+      "type": "bulleted_list",
+      "text": "Order service writes OrderPlaced to a broker.",
+      "html": "Order service writes OrderPlaced to a broker."
+    },
+    {
+      "id": "kafka-broker-example-point-2",
+      "type": "bulleted_list",
+      "text": "Email service requests stored records from a broker.",
+      "html": "Email service requests stored records from a broker."
+    },
+    {
+      "id": "kafka-broker-example-point-3",
+      "type": "bulleted_list",
+      "text": "Broker stores and serves records. Email service sends the email.",
+      "html": "Broker stores and serves records. Email service sends the email."
+    },
+    {
+      "id": "2e924eb1ed5480429bc1d113479a4e4a",
+      "type": "divider"
     },
     {
       "id": "2e824eb1ed54805f9879def23902bbdd",
@@ -505,8 +725,15 @@
       "id": "2e824eb1ed5480cc97dfe2efd59f0e77",
       "type": "bulleted_list",
       "parent": "2e824eb1ed5480b08b04d0b41819300c",
-      "html": "Stored on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one Kafka broker</span>",
-      "text": "Stored on one Kafka broker"
+      "html": "Each partition copy is stored on a broker.",
+      "text": "Each partition copy is stored on a broker."
+    },
+    {
+      "id": "2e824eb1ed5480cc97dfe2efd59f0e77-point-2",
+      "type": "bulleted_list",
+      "text": "Replication can keep copies on other brokers. Their roles are explained below.",
+      "html": "Replication can keep copies on other brokers. Their roles are explained below.",
+      "parent": "2e824eb1ed5480b08b04d0b41819300c"
     },
     {
       "id": "2e824eb1ed5480bcaf16c292394c4df8",
@@ -581,58 +808,40 @@
       "text": "Why multiple partitions are needed"
     },
     {
-      "id": "2e824eb1ed548039be0bec662b16a3d2",
-      "type": "sub_sub_header",
-      "html": "Reason 1: Parallel writing",
-      "text": "Reason 1: Parallel writing"
+      "id": "2e824eb1ed54804ab308cd7a2052180e",
+      "type": "bulleted_list",
+      "html": "A topic can have one partition.",
+      "text": "A topic can have one partition."
+    },
+    {
+      "id": "2e824eb1ed54804ab308cd7a2052180e-point-2",
+      "type": "bulleted_list",
+      "text": "Multiple partitions share its write, read, and storage load.",
+      "html": "Multiple partitions share its write, read, and storage load."
     },
     {
       "id": "2e824eb1ed5480e0867ce4dd6baad7b3",
       "type": "bulleted_list",
-      "html": "Many producers can write <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at the same time</span>",
-      "text": "Many producers can write at the same time"
-    },
-    {
-      "id": "2e824eb1ed5480cfa31fcfb52c074bd3",
-      "type": "bulleted_list",
-      "html": "Each writes to <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different partitions</span>",
-      "text": "Each writes to different partitions"
-    },
-    {
-      "id": "2e824eb1ed548005b29aef170a9c8996",
-      "type": "sub_sub_header",
-      "html": "Reason 2: Parallel reading",
-      "text": "Reason 2: Parallel reading"
+      "html": "Parallel writing: brokers handle different partitions concurrently. Multiple producers can also write to one partition.",
+      "text": "Parallel writing: brokers handle different partitions concurrently. Multiple producers can also write to one partition."
     },
     {
       "id": "2e824eb1ed54803284d5f9beb564fc64",
       "type": "bulleted_list",
-      "html": "Many consumers can read <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at the same time</span>",
-      "text": "Many consumers can read at the same time"
+      "html": "Parallel reading: consumers in one group share different partitions.",
+      "text": "Parallel reading: consumers in one group share different partitions."
     },
     {
-      "id": "2e824eb1ed5480be8d3ceba53228561c",
+      "id": "2e824eb1ed54803284d5f9beb564fc64-point-2",
       "type": "bulleted_list",
-      "html": "Each reads from <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">different partitions</span>",
-      "text": "Each reads from different partitions"
-    },
-    {
-      "id": "2e824eb1ed5480968a0df3d945c9da34",
-      "type": "sub_sub_header",
-      "html": "Reason 3: Scaling across machines",
-      "text": "Reason 3: Scaling across machines"
+      "text": "With one partition, only one consumer in that group is assigned the work.",
+      "html": "With one partition, only one consumer in that group is assigned the work."
     },
     {
       "id": "2e824eb1ed54803da45bf339cdcd383c",
       "type": "bulleted_list",
-      "html": "Partitions are spread across <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple brokers</span>",
-      "text": "Partitions are spread across multiple brokers"
-    },
-    {
-      "id": "2e824eb1ed5480cebeedef7c873f7ce0",
-      "type": "bulleted_list",
-      "html": "Load is shared",
-      "text": "Load is shared"
+      "html": "Scaling across machines: Partitions can be spread across brokers to share storage and request load.",
+      "text": "Scaling across machines: Partitions can be spread across brokers to share storage and request load."
     },
     {
       "id": "2e824eb1ed5480efa344c15b4ab8e088",
@@ -653,72 +862,58 @@
       "text": "Order is not guaranteed across partitions"
     },
     {
-      "id": "2e824eb1ed548082913fd043ce25319a",
-      "type": "text",
-      "html": "This is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not optional</span>. This is fundamental.",
-      "text": "This is not optional. This is fundamental."
-    },
-    {
       "id": "2e824eb1ed5480b398d2eed1c815e71f",
       "type": "sub_header",
-      "html": "How Kafka decides the partition",
-      "text": "How Kafka decides the partition"
+      "html": "How the producer chooses a partition",
+      "text": "How the producer chooses a partition"
     },
     {
       "id": "2e824eb1ed54804d8ecbf0f8cea18bf3",
       "type": "bulleted_list",
-      "html": "Event has a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">key</span> (optional)",
-      "text": "Event has a key (optional)"
+      "html": "Producer: an application that writes records.",
+      "text": "Producer: an application that writes records."
+    },
+    {
+      "id": "2e824eb1ed54804d8ecbf0f8cea18bf3-point-2",
+      "type": "bulleted_list",
+      "text": "Its client selects the partition unless the application explicitly supplies one.",
+      "html": "Its client selects the partition unless the application explicitly supplies one."
     },
     {
       "id": "2e824eb1ed5480f8b904cb954475249e",
       "type": "bulleted_list",
-      "html": "Same key → same partition",
-      "text": "Same key → same partition"
+      "html": "Default Java producer: hash the serialized key to select a partition.",
+      "text": "Default Java producer: hash the serialized key to select a partition."
+    },
+    {
+      "id": "2e824eb1ed5480f8b904cb954475249e-point-2",
+      "type": "bulleted_list",
+      "text": "Same key maps to the same partition while the partition count stays unchanged.",
+      "html": "Same key maps to the same partition while the partition count stays unchanged."
+    },
+    {
+      "id": "2e824eb1ed5480f8b904cb954475249e-point-3",
+      "type": "bulleted_list",
+      "text": "An explicit partition or custom partitioner can override this rule.",
+      "html": "An explicit partition or custom partitioner can override this rule."
     },
     {
       "id": "2e824eb1ed5480c0941acfb37409624e",
       "type": "bulleted_list",
-      "html": "No key → round-robin distribution",
-      "text": "No key → round-robin distribution"
+      "html": "Java producer in Kafka 4.x, without a key or explicit partition: use sticky batching.",
+      "text": "Java producer in Kafka 4.x, without a key or explicit partition: use sticky batching."
     },
     {
-      "id": "2e824eb1ed5480b6a852cf4139fafd0e",
-      "type": "sub_header",
-      "html": "One mental picture (lock this)",
-      "text": "One mental picture (lock this)"
-    },
-    {
-      "id": "2e824eb1ed54808b882fef86e42741df",
+      "id": "2e824eb1ed5480c0941acfb37409624e-point-2",
       "type": "bulleted_list",
-      "html": "Topic = folder",
-      "text": "Topic = folder"
+      "text": "Keep one partition until at least batch.size bytes are produced, then switch.",
+      "html": "Keep one partition until at least batch.size bytes are produced, then switch."
     },
     {
-      "id": "2e824eb1ed548025b78bd4e700f81955",
+      "id": "2e824eb1ed5480c0941acfb37409624e-point-3",
       "type": "bulleted_list",
-      "html": "Partition = files inside folder",
-      "text": "Partition = files inside folder"
-    },
-    {
-      "id": "2e824eb1ed5480959b26f3d2b6d5a770",
-      "type": "bulleted_list",
-      "html": "Each file:",
-      "text": "Each file:"
-    },
-    {
-      "id": "2e824eb1ed548013a78bd953e8042120",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480959b26f3d2b6d5a770",
-      "html": "Append-only",
-      "text": "Append-only"
-    },
-    {
-      "id": "2e824eb1ed548017a8d9e56c5f2d73cd",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480959b26f3d2b6d5a770",
-      "html": "Ordered",
-      "text": "Ordered"
+      "text": "This is not per-record round-robin. Other clients or partitioners may differ.",
+      "html": "This is not per-record round-robin. Other clients or partitioners may differ."
     },
     {
       "id": "2e824eb1ed5480799857d92c2dff0e92",
@@ -739,8 +934,14 @@
     {
       "id": "2e824eb1ed5480d0bab3ff0ba24bf6ad",
       "type": "bulleted_list",
-      "html": "It is the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">position of an event inside a partition</span>",
-      "text": "It is the position of an event inside a partition"
+      "html": "An offset identifies a record’s position within one partition.",
+      "text": "An offset identifies a record’s position within one partition."
+    },
+    {
+      "id": "2e824eb1ed5480d0bab3ff0ba24bf6ad-point-2",
+      "type": "bulleted_list",
+      "text": "It is not an index into the currently retained records.",
+      "html": "It is not an index into the currently retained records."
     },
     {
       "id": "2e824eb1ed54807ab547c1adb86fd81a",
@@ -769,28 +970,28 @@
       "text": "Offset is not a global event number"
     },
     {
-      "id": "2e824eb1ed548073a533dc72f217ca12",
-      "type": "bulleted_list",
-      "html": "Offset is the <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">position of an event inside one partition</span>",
-      "text": "Offset is the position of an event inside one partition"
-    },
-    {
       "id": "2e824eb1ed5480ac9642f370108b89ab",
       "type": "sub_sub_header",
-      "html": "Offset 0 means",
-      "text": "Offset 0 means"
+      "html": "Original offsets and retained records",
+      "text": "Original offsets and retained records"
     },
     {
       "id": "2e824eb1ed548001bfcef003783e908e",
       "type": "bulleted_list",
-      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">The oldest event</span> in that partition",
-      "text": "The oldest event in that partition"
+      "html": "Offset 0 marks the original log’s start. It may no longer be available.",
+      "text": "Offset 0 marks the original log’s start. It may no longer be available."
     },
     {
       "id": "2e824eb1ed5480498f74f2946120432f",
       "type": "bulleted_list",
-      "html": "The <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">first event ever written</span> to that partition",
-      "text": "The first event ever written to that partition"
+      "html": "Retention and compaction remove records without renumbering offsets.",
+      "text": "Retention and compaction remove records without renumbering offsets."
+    },
+    {
+      "id": "2e824eb1ed5480498f74f2946120432f-point-2",
+      "type": "bulleted_list",
+      "text": "Earliest available offset may exceed 0. Retained offsets may have gaps.",
+      "html": "Earliest available offset may exceed 0. Retained offsets may have gaps."
     },
     {
       "id": "2e824eb1ed5480459dbac6646093124f",
@@ -819,6 +1020,35 @@
       "text": "Offset 1 → second event"
     },
     {
+      "id": "kafka-partition-offset-diagram-title",
+      "type": "text",
+      "text": "One topic, separate partition logs (arrows show append order):",
+      "html": "One topic, separate partition logs (arrows show append order):"
+    },
+    {
+      "id": "kafka-partition-offset-diagram",
+      "type": "code",
+      "text": "Topic: orders\n┌──────────────────────────────────────────────────┐\n│ Partition 0: [offset 0: A] → [1: B] → [2: C] → … │\n│ Partition 1: [offset 0: D] → [1: E] → [2: F] → … │\n│ Partition 2: [offset 0: G] → [1: H] → [2: I] → … │\n└──────────────────────────────────────────────────┘"
+    },
+    {
+      "id": "kafka-partition-offset-diagram-caption",
+      "type": "bulleted_list",
+      "text": "A–I label records in a new topic.",
+      "html": "A–I label records in a new topic."
+    },
+    {
+      "id": "kafka-partition-offset-diagram-caption-point-2",
+      "type": "bulleted_list",
+      "text": "Partition 0 offset 0 and partition 1 offset 0 identify different records.",
+      "html": "Partition 0 offset 0 and partition 1 offset 0 identify different records."
+    },
+    {
+      "id": "kafka-partition-offset-diagram-caption-point-3",
+      "type": "bulleted_list",
+      "text": "Each row has its own order. There is no shared order across rows.",
+      "html": "Each row has its own order. There is no shared order across rows."
+    },
+    {
       "id": "2e824eb1ed54808caebec276ca8751f8",
       "type": "sub_header",
       "html": "Why offset matters",
@@ -840,8 +1070,8 @@
       "id": "2e824eb1ed5480a19e35db1503ac7a8d",
       "type": "bulleted_list",
       "parent": "2e824eb1ed548082ac69c947607bacde",
-      "html": "Reading from an <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">earlier offset</span>",
-      "text": "Reading from an earlier offset"
+      "html": "Reading from an earlier available offset. Removed records cannot be replayed from Kafka.",
+      "text": "Reading from an earlier available offset. Removed records cannot be replayed from Kafka."
     },
     {
       "id": "2e824eb1ed548025aacef1e7721ef3b4",
@@ -876,12 +1106,6 @@
       "text": "It writes events to Kafka topics"
     },
     {
-      "id": "2e824eb1ed548035a5c8e5392d8fa09e",
-      "type": "text",
-      "html": "That is all. No extra meaning.",
-      "text": "That is all. No extra meaning."
-    },
-    {
       "id": "2e824eb1ed548021a916fb7e86b0bba3",
       "type": "sub_header",
       "html": "What a producer actually does (step-by-step)",
@@ -902,8 +1126,8 @@
     {
       "id": "2e824eb1ed54803a9820e1fa2bcf3914",
       "type": "bulleted_list",
-      "html": "Kafka decides the partition",
-      "text": "Kafka decides the partition"
+      "html": "The producer client chooses a partition using its partitioning rules",
+      "text": "The producer client chooses a partition using its partitioning rules"
     },
     {
       "id": "2e824eb1ed5480288744da53c005211b",
@@ -994,6 +1218,42 @@
       "text": "Commits offsets"
     },
     {
+      "id": "kafka-offset-commit-example",
+      "type": "sub_sub_header",
+      "text": "Example: process offset 7, commit offset 8",
+      "html": "Example: process offset 7, commit offset 8"
+    },
+    {
+      "id": "kafka-offset-commit-text",
+      "type": "bulleted_list",
+      "text": "Process every available record through offset 7 in partition 0.",
+      "html": "Process every available record through offset 7 in partition 0."
+    },
+    {
+      "id": "kafka-offset-commit-text-point-2",
+      "type": "bulleted_list",
+      "text": "Commit offset 8: the next position to read, not the last processed record.",
+      "html": "Commit offset 8: the next position to read, not the last processed record."
+    },
+    {
+      "id": "kafka-offset-commit-text-point-3",
+      "type": "bulleted_list",
+      "text": "After restart, resume from 8.",
+      "html": "After restart, resume from 8."
+    },
+    {
+      "id": "kafka-offset-commit-failure",
+      "type": "bulleted_list",
+      "text": "Email sent, crash before committing 8: offset 7 can be read again.",
+      "html": "Email sent, crash before committing 8: offset 7 can be read again."
+    },
+    {
+      "id": "kafka-offset-commit-failure-point-2",
+      "type": "bulleted_list",
+      "text": "Handle retries safely, for example with an idempotency key supported by the email provider.",
+      "html": "Handle retries safely, for example with an idempotency key supported by the email provider."
+    },
+    {
       "id": "2e924eb1ed5480d59fcad4487516209a",
       "type": "divider"
     },
@@ -1018,8 +1278,8 @@
     {
       "id": "2e924eb1ed548081a7c2dd560717df6d",
       "type": "bulleted_list",
-      "html": "Kafka data stays until retention deletes it",
-      "text": "Kafka data stays until retention deletes it"
+      "html": "Retention, compaction, or administrative deletion determines which records remain available",
+      "text": "Retention, compaction, or administrative deletion determines which records remain available"
     },
     {
       "id": "2e924eb1ed5480d4a393cb40f0168328",
@@ -1084,26 +1344,20 @@
     {
       "id": "2e924eb1ed5480f4bcc4da9f0e9f1bf8",
       "type": "sub_header",
-      "html": "Core rule (must memorize)",
-      "text": "Core rule (must memorize)"
+      "html": "Partition assignment within a consumer group",
+      "text": "Partition assignment within a consumer group"
     },
     {
       "id": "2e924eb1ed5480d8b3bdeee4e34af338",
       "type": "bulleted_list",
-      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">One partition is read by only one consumer within a group</span>",
-      "text": "One partition is read by only one consumer within a group"
+      "html": "In a standard consumer group, each partition is assigned to at most one consumer at a time",
+      "text": "In a standard consumer group, each partition is assigned to at most one consumer at a time"
     },
     {
       "id": "2e924eb1ed5480c0912cf2eeabd9b20a",
       "type": "bulleted_list",
       "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">One consumer can read multiple partitions</span>",
       "text": "One consumer can read multiple partitions"
-    },
-    {
-      "id": "2e924eb1ed548058afa6d1698432eb81",
-      "type": "text",
-      "html": "This rule is absolute.",
-      "text": "This rule is absolute."
     },
     {
       "id": "2e924eb1ed54807bae05f4f8b2e123af",
@@ -1206,8 +1460,8 @@
     {
       "id": "2e924eb1ed5480fdab00eea0a95dc6e8",
       "type": "sub_header",
-      "html": "Important interview clarification",
-      "text": "Important interview clarification"
+      "html": "Independent consumer groups",
+      "text": "Independent consumer groups"
     },
     {
       "id": "2e924eb1ed548061bb4fcb865b5327e4",
@@ -1219,8 +1473,8 @@
       "id": "2e924eb1ed5480df8d0cc400884f8c1f",
       "type": "bulleted_list",
       "parent": "2e924eb1ed548061bb4fcb865b5327e4",
-      "html": "Each get <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">their own offsets</span>",
-      "text": "Each get their own offsets"
+      "html": "Each has its own committed offsets for each partition",
+      "text": "Each has its own committed offsets for each partition"
     },
     {
       "id": "2e924eb1ed54804a9c58edf3a233891f",
@@ -1230,65 +1484,42 @@
       "text": "Can read the same data independently"
     },
     {
+      "id": "kafka-consumer-groups-diagram-title",
+      "type": "text",
+      "text": "Example assignments for email and analytics:",
+      "html": "Example assignments for email and analytics:"
+    },
+    {
+      "id": "kafka-consumer-groups-diagram",
+      "type": "code",
+      "text": "Same topic: orders\n\n               Group A: email     Group B: analytics\nPartition 0 ──→ Consumer A1        Consumer B1 ←── Partition 0\nPartition 1 ──→ Consumer A2        Consumer B1 ←── Partition 1\nPartition 2 ──→ Consumer A3        Consumer B1 ←── Partition 2"
+    },
+    {
+      "id": "kafka-consumer-groups-diagram-caption",
+      "type": "bulleted_list",
+      "text": "Both sides show the same partitions, read by independent groups.",
+      "html": "Both sides show the same partitions, read by independent groups."
+    },
+    {
+      "id": "kafka-consumer-groups-diagram-caption-point-2",
+      "type": "bulleted_list",
+      "text": "Email group: three consumers share the three partitions.",
+      "html": "Email group: three consumers share the three partitions."
+    },
+    {
+      "id": "kafka-consumer-groups-diagram-caption-point-3",
+      "type": "bulleted_list",
+      "text": "Analytics group: one consumer reads all three partitions.",
+      "html": "Analytics group: one consumer reads all three partitions."
+    },
+    {
+      "id": "kafka-consumer-groups-diagram-caption-point-4",
+      "type": "bulleted_list",
+      "text": "Separate groups let both services read every record. One shared group would split the work.",
+      "html": "Separate groups let both services read every record. One shared group would split the work."
+    },
+    {
       "id": "2e924eb1ed54807e8459e4232e971b7b",
-      "type": "divider"
-    },
-    {
-      "id": "2e924eb1ed5480be8af4dc132cbf7da0",
-      "type": "sub_header",
-      "html": "What this step does",
-      "text": "What this step does"
-    },
-    {
-      "id": "2e924eb1ed5480e1911dc57cfd0bdc1b",
-      "type": "bulleted_list",
-      "html": "Explains fan-out",
-      "text": "Explains fan-out"
-    },
-    {
-      "id": "2e924eb1ed548026bc1ecd07d33a8367",
-      "type": "bulleted_list",
-      "html": "Explains scalability on read side",
-      "text": "Explains scalability on read side"
-    },
-    {
-      "id": "2e924eb1ed5480bda868c02dde99687b",
-      "type": "divider"
-    },
-    {
-      "id": "2e924eb1ed548096aa12f600ab424b6f",
-      "type": "sub_header",
-      "html": "What a broker is",
-      "text": "What a broker is"
-    },
-    {
-      "id": "2e924eb1ed5480d7af08d222d162a664",
-      "type": "bulleted_list",
-      "html": "A broker is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Kafka server</span>",
-      "text": "A broker is a Kafka server"
-    },
-    {
-      "id": "2e924eb1ed5480cfacbec1d09ecbdefa",
-      "type": "bulleted_list",
-      "html": "It:",
-      "text": "It:"
-    },
-    {
-      "id": "2e924eb1ed5480d1a9f7edda342bdce5",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed5480cfacbec1d09ecbdefa",
-      "html": "Stores partitions",
-      "text": "Stores partitions"
-    },
-    {
-      "id": "2e924eb1ed548073a10cff99da878ed1",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed5480cfacbec1d09ecbdefa",
-      "html": "Handles read and write requests",
-      "text": "Handles read and write requests"
-    },
-    {
-      "id": "2e924eb1ed5480429bc1d113479a4e4a",
       "type": "divider"
     },
     {
@@ -1358,14 +1589,26 @@
     {
       "id": "2e924eb1ed5480939c01cd60301a3d0c",
       "type": "bulleted_list",
-      "html": "Partitions are <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">replicated</span>",
-      "text": "Partitions are replicated"
+      "html": "With a replication factor greater than 1, brokers store additional copies of each partition",
+      "text": "With a replication factor greater than 1, brokers store additional copies of each partition"
     },
     {
       "id": "2e924eb1ed548038a6a7f6cbb0cbc163",
       "type": "bulleted_list",
-      "html": "One broker failure does not lose data",
-      "text": "One broker failure does not lose data"
+      "html": "A surviving up-to-date replica can preserve acknowledged data after a broker fails.",
+      "text": "A surviving up-to-date replica can preserve acknowledged data after a broker fails."
+    },
+    {
+      "id": "2e924eb1ed548038a6a7f6cbb0cbc163-point-2",
+      "type": "bulleted_list",
+      "text": "Durability depends on replication, acks, min.insync.replicas, and safe leader election settings.",
+      "html": "Durability depends on replication, acks, min.insync.replicas, and safe leader election settings."
+    },
+    {
+      "id": "2e924eb1ed548038a6a7f6cbb0cbc163-point-3",
+      "type": "bulleted_list",
+      "text": "Extra brokers alone do not guarantee durability.",
+      "html": "Extra brokers alone do not guarantee durability."
     },
     {
       "id": "2e924eb1ed54809681e5f784708bafac",
@@ -1374,28 +1617,35 @@
     {
       "id": "2e924eb1ed5480d98a0bf6ecac443861",
       "type": "sub_header",
-      "html": "Leader and follower (very important)",
-      "text": "Leader and follower (very important)"
+      "html": "Partition replicas: leader and followers",
+      "text": "Partition replicas: leader and followers"
     },
     {
       "id": "2e924eb1ed5480d19149c4ad715df838",
       "type": "bulleted_list",
-      "html": "Each partition has:",
-      "text": "Each partition has:"
+      "html": "An available partition has:",
+      "text": "An available partition has:"
     },
     {
       "id": "2e924eb1ed5480909db9dfed22f87593",
       "type": "bulleted_list",
       "parent": "2e924eb1ed5480d19149c4ad715df838",
-      "html": "One <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">leader</span>",
-      "text": "One leader"
+      "html": "One leader replica whose broker accepts writes",
+      "text": "One leader replica whose broker accepts writes"
     },
     {
       "id": "2e924eb1ed54807e8dd9d61a41961cb1",
       "type": "bulleted_list",
       "parent": "2e924eb1ed5480d19149c4ad715df838",
-      "html": "One or more <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">followers</span>",
-      "text": "One or more followers"
+      "html": "Zero or more follower replicas on other brokers.",
+      "text": "Zero or more follower replicas on other brokers."
+    },
+    {
+      "id": "2e924eb1ed54807e8dd9d61a41961cb1-point-2",
+      "type": "bulleted_list",
+      "text": "Replication factor 1: one leader, no followers.",
+      "html": "Replication factor 1: one leader, no followers.",
+      "parent": "2e924eb1ed5480d19149c4ad715df838"
     },
     {
       "id": "2e924eb1ed5480208abdfd2028dff76f",
@@ -1408,6 +1658,18 @@
       "type": "bulleted_list",
       "html": "Followers copy data",
       "text": "Followers copy data"
+    },
+    {
+      "id": "kafka-replication-example",
+      "type": "bulleted_list",
+      "text": "Replication factor 3 for partition 0: leader on Broker 1, followers on Brokers 2 and 3.",
+      "html": "Replication factor 3 for partition 0: leader on Broker 1, followers on Brokers 2 and 3."
+    },
+    {
+      "id": "kafka-replication-example-point-2",
+      "type": "bulleted_list",
+      "text": "These are copies of one partition, not three different partitions.",
+      "html": "These are copies of one partition, not three different partitions."
     },
     {
       "id": "2e924eb1ed5480f6b6ebcf76aad034b0",
@@ -1428,204 +1690,54 @@
     {
       "id": "2e924eb1ed5480879221ee54006aa39d",
       "type": "bulleted_list",
-      "html": "One follower becomes new leader",
-      "text": "One follower becomes new leader"
+      "html": "If an eligible surviving replica is available, Kafka elects a new leader",
+      "text": "If an eligible surviving replica is available, Kafka elects a new leader"
     },
     {
       "id": "2e924eb1ed54801fad71f82312c4bb30",
       "type": "bulleted_list",
-      "html": "Clients continue",
-      "text": "Clients continue"
+      "html": "Clients discover the new leader and retry.",
+      "text": "Clients discover the new leader and retry."
+    },
+    {
+      "id": "2e924eb1ed54801fad71f82312c4bb30-point-2",
+      "type": "bulleted_list",
+      "text": "Without an eligible replica, the partition stays unavailable until recovery.",
+      "html": "Without an eligible replica, the partition stays unavailable until recovery."
     },
     {
       "id": "2e924eb1ed54801ca4cddca0b5d96c1e",
       "type": "divider"
     },
     {
-      "id": "2e924eb1ed548046a50cd4d746c23f99",
-      "type": "sub_header",
-      "html": "What this step does",
-      "text": "What this step does"
-    },
-    {
-      "id": "2e924eb1ed5480daa5e9cf03e2dba282",
-      "type": "bulleted_list",
-      "html": "Explains “distributed”",
-      "text": "Explains “distributed”"
-    },
-    {
-      "id": "2e924eb1ed5480df8ef4ef91a4772ed3",
-      "type": "bulleted_list",
-      "html": "Explains reliability",
-      "text": "Explains reliability"
-    },
-    {
-      "id": "2e924eb1ed548009bbebcf100f1c0764",
-      "type": "divider"
-    },
-    {
       "id": "2e924eb1ed548095a208c7187102d292",
       "type": "sub_header",
-      "html": "Now decode the scary sentence (finally)",
-      "text": "Now decode the scary sentence (finally)"
-    },
-    {
-      "id": "2e924eb1ed5480c9a3cfc127b1182606",
-      "type": "sub_sub_header",
-      "html": "“Distributed event streaming platform”",
-      "text": "“Distributed event streaming platform”"
-    },
-    {
-      "id": "2e924eb1ed5480b4a439d2453d78fa0c",
-      "type": "text",
-      "html": "We now know every word.",
-      "text": "We now know every word."
-    },
-    {
-      "id": "2e924eb1ed548020aba4f9e8962b0ca5",
-      "type": "divider"
-    },
-    {
-      "id": "2e924eb1ed54802e955ffbe2e0b4b58e",
-      "type": "sub_sub_header",
-      "html": "Event",
-      "text": "Event"
-    },
-    {
-      "id": "2e924eb1ed54804c84e6c389848ff099",
-      "type": "bulleted_list",
-      "html": "A fact that happened",
-      "text": "A fact that happened"
-    },
-    {
-      "id": "2e924eb1ed5480d89183e0d4187a40bc",
-      "type": "bulleted_list",
-      "html": "Immutable",
-      "text": "Immutable"
-    },
-    {
-      "id": "2e924eb1ed5480589d69e8acf083bca2",
-      "type": "bulleted_list",
-      "html": "Time-ordered",
-      "text": "Time-ordered"
-    },
-    {
-      "id": "2e924eb1ed5480ad86fee23a4a07643f",
-      "type": "divider"
+      "text": "Streaming and distribution",
+      "html": "Streaming and distribution"
     },
     {
       "id": "2e924eb1ed5480278223d3633773b378",
-      "type": "sub_sub_header",
-      "html": "Streaming",
-      "text": "Streaming"
-    },
-    {
-      "id": "2e924eb1ed54802eaddcdc64947c8adb",
       "type": "bulleted_list",
-      "html": "Events are:",
-      "text": "Events are:"
+      "text": "Streaming: publish and read records as they arrive.",
+      "html": "Streaming: publish and read records as they arrive."
     },
     {
-      "id": "2e924eb1ed548048a35ddd8cd5b24fe5",
+      "id": "2e924eb1ed5480278223d3633773b378-point-2",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed54802eaddcdc64947c8adb",
-      "html": "Produced continuously",
-      "text": "Produced continuously"
-    },
-    {
-      "id": "2e924eb1ed5480f3badffa2f77c582ed",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed54802eaddcdc64947c8adb",
-      "html": "Consumed continuously",
-      "text": "Consumed continuously"
-    },
-    {
-      "id": "2e924eb1ed5480568c9af55f4c2cded5",
-      "type": "bulleted_list",
-      "html": "Not a batch dump",
-      "text": "Not a batch dump"
-    },
-    {
-      "id": "2e924eb1ed5480b7b1ccccb63aa6c1ae",
-      "type": "divider"
+      "text": "Clients can batch records for efficiency while processing a continuing stream.",
+      "html": "Clients can batch records for efficiency while processing a continuing stream."
     },
     {
       "id": "2e924eb1ed5480e58c9ff2f23f070d22",
-      "type": "sub_sub_header",
-      "html": "Distributed",
-      "text": "Distributed"
-    },
-    {
-      "id": "2e924eb1ed5480d5b646f578e05a5126",
       "type": "bulleted_list",
-      "html": "Runs on <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">multiple brokers</span>",
-      "text": "Runs on multiple brokers"
+      "text": "Distributed deployment: spread partitions and replicas across brokers.",
+      "html": "Distributed deployment: spread partitions and replicas across brokers."
     },
     {
-      "id": "2e924eb1ed5480f691fdff46f29934e4",
+      "id": "2e924eb1ed5480e58c9ff2f23f070d22-point-2",
       "type": "bulleted_list",
-      "html": "Data spread + replicated",
-      "text": "Data spread + replicated"
-    },
-    {
-      "id": "2e924eb1ed54802e8210c5fdfd688cb3",
-      "type": "divider"
-    },
-    {
-      "id": "2e924eb1ed548048b2d0c69b2212b777",
-      "type": "sub_sub_header",
-      "html": "Platform",
-      "text": "Platform"
-    },
-    {
-      "id": "2e924eb1ed54806088ade422faab330b",
-      "type": "bulleted_list",
-      "html": "Provides:",
-      "text": "Provides:"
-    },
-    {
-      "id": "2e924eb1ed5480b19d79d556a75072f7",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed54806088ade422faab330b",
-      "html": "Storage",
-      "text": "Storage"
-    },
-    {
-      "id": "2e924eb1ed5480698030fa9361272b3d",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed54806088ade422faab330b",
-      "html": "Transport",
-      "text": "Transport"
-    },
-    {
-      "id": "2e924eb1ed548091a628c48e61824fef",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed54806088ade422faab330b",
-      "html": "Replay",
-      "text": "Replay"
-    },
-    {
-      "id": "2e924eb1ed5480d99eccdda3515348f4",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed54806088ade422faab330b",
-      "html": "Parallelism",
-      "text": "Parallelism"
-    },
-    {
-      "id": "2e924eb1ed54802095c1c7173a4cf914",
-      "type": "divider"
-    },
-    {
-      "id": "2e924eb1ed548028837de4ce04d97847",
-      "type": "sub_header",
-      "html": "Final decoded meaning (memorize)",
-      "text": "Final decoded meaning (memorize)"
-    },
-    {
-      "id": "2e924eb1ed5480c9bf0fc86c30f4c06d",
-      "type": "bulleted_list",
-      "html": "Kafka is a system that stores and distributes ordered events across multiple servers, allowing many applications to write and read those events continuously and reliably.",
-      "text": "Kafka is a system that stores and distributes ordered events across multiple servers, allowing many applications to write and read those events continuously and reliably."
+      "text": "Applications use saved reading positions and replay to process data independently.",
+      "html": "Applications use saved reading positions and replay to process data independently."
     },
     {
       "id": "2e924eb1ed54804689cbe54e172879bf",
@@ -1697,8 +1809,14 @@
     {
       "id": "2e924eb1ed5480308caaefa1cdacdf6a",
       "type": "bulleted_list",
-      "html": "Duplicates <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">never occur</span>",
-      "text": "Duplicates never occur"
+      "html": "Consumer does not retry records after committing past them.",
+      "text": "Consumer does not retry records after committing past them."
+    },
+    {
+      "id": "2e924eb1ed5480308caaefa1cdacdf6a-point-2",
+      "type": "bulleted_list",
+      "text": "Duplicates already published upstream can still exist.",
+      "html": "Duplicates already published upstream can still exist."
     },
     {
       "id": "2e924eb1ed5480b89f21dbb07ea5b34f",
@@ -1739,8 +1857,14 @@
     {
       "id": "2e924eb1ed5480bf8b83ceec907ee6e4",
       "type": "bulleted_list",
-      "html": "Data is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">never lost</span>",
-      "text": "Data is never lost"
+      "html": "Commit after successful processing to retry unfinished work.",
+      "text": "Commit after successful processing to retry unfinished work."
+    },
+    {
+      "id": "2e924eb1ed5480bf8b83ceec907ee6e4-point-2",
+      "type": "bulleted_list",
+      "text": "Requires available input records and suitable producer/broker durability settings.",
+      "html": "Requires available input records and suitable producer/broker durability settings."
     },
     {
       "id": "2e924eb1ed548025b97cca01738c4053",
@@ -1775,71 +1899,146 @@
     {
       "id": "2e924eb1ed54803dafbcfe9cffa70acd",
       "type": "sub_header",
-      "html": "Exactly-once (important clarification)",
-      "text": "Exactly-once (important clarification)"
+      "text": "Exactly-once: define the boundary",
+      "html": "Exactly-once: define the boundary"
     },
     {
       "id": "2e924eb1ed5480fe9681fde2e313f65a",
       "type": "bulleted_list",
-      "html": "Event is processed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">exactly one time</span>",
-      "text": "Event is processed exactly one time"
+      "text": "Kafka-to-Kafka exactly-once: each input contributes committed output once.",
+      "html": "Kafka-to-Kafka exactly-once: each input contributes committed output once."
     },
     {
-      "id": "2e924eb1ed54807abda7e01c0d5fe0b7",
+      "id": "2e924eb1ed5480fe9681fde2e313f65a-point-2",
       "type": "bulleted_list",
-      "html": "No loss",
-      "text": "No loss"
-    },
-    {
-      "id": "2e924eb1ed5480c7bb35cf6a5ccaf355",
-      "type": "bulleted_list",
-      "html": "No duplicates",
-      "text": "No duplicates"
-    },
-    {
-      "id": "2e924eb1ed5480c2aa51c9b29fcd3080",
-      "type": "sub_sub_header",
-      "html": "Very important truth (interview-level)",
-      "text": "Very important truth (interview-level)"
-    },
-    {
-      "id": "2e924eb1ed5480139a88c55bfa9adb3c",
-      "type": "bulleted_list",
-      "html": "Exactly-once is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not automatic</span>",
-      "text": "Exactly-once is not automatic"
+      "text": "Processing may run again after a crash. Its retry must not add extra committed output.",
+      "html": "Processing may run again after a crash. Its retry must not add extra committed output."
     },
     {
       "id": "2e924eb1ed548004b204fc0528c00d67",
       "type": "bulleted_list",
-      "html": "Requires:",
-      "text": "Requires:"
+      "text": "Example: analytics reads OrderPlaced and writes a derived record to another Kafka topic.",
+      "html": "Example: analytics reads OrderPlaced and writes a derived record to another Kafka topic."
+    },
+    {
+      "id": "kafka-transaction-settings",
+      "type": "bulleted_list",
+      "text": "transactional.id: stable for a logical producer, distinct for concurrent producers.",
+      "html": "transactional.id: stable for a logical producer, distinct for concurrent producers."
+    },
+    {
+      "id": "kafka-transaction-settings-point-2",
+      "type": "bulleted_list",
+      "text": "Input consumer: enable.auto.commit=false.",
+      "html": "Input consumer: enable.auto.commit=false."
+    },
+    {
+      "id": "kafka-transaction-settings-point-3",
+      "type": "bulleted_list",
+      "text": "Transactional input: isolation.level=read_committed.",
+      "html": "Transactional input: isolation.level=read_committed."
     },
     {
       "id": "2e924eb1ed548038be9eeb3eb5f98eba",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed548004b204fc0528c00d67",
-      "html": "Kafka transactions",
-      "text": "Kafka transactions"
+      "type": "numbered_list",
+      "text": "Initialize with initTransactions. Begin a transaction for each batch and write the output records.",
+      "html": "Initialize with initTransactions. Begin a transaction for each batch and write the output records."
     },
     {
       "id": "2e924eb1ed548073b932e9c8778420ce",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed548004b204fc0528c00d67",
-      "html": "Idempotent producers",
-      "text": "Idempotent producers"
+      "type": "numbered_list",
+      "text": "Add consumed offsets with sendOffsetsToTransaction. Do not commit them separately.",
+      "html": "Add consumed offsets with sendOffsetsToTransaction. Do not commit them separately."
     },
     {
       "id": "2e924eb1ed54804a95e1c8258b3dc1e8",
+      "type": "numbered_list",
+      "text": "Commit the transaction. Downstream consumers use isolation.level=read_committed.",
+      "html": "Commit the transaction. Downstream consumers use isolation.level=read_committed."
+    },
+    {
+      "id": "kafka-exactly-once-abort",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed548004b204fc0528c00d67",
-      "html": "Careful consumer logic",
-      "text": "Careful consumer logic"
+      "text": "Output records and input offsets commit together.",
+      "html": "Output records and input offsets commit together."
+    },
+    {
+      "id": "kafka-exactly-once-abort-point-2",
+      "type": "bulleted_list",
+      "text": "Abort: read_committed consumers cannot see the output; committed input offsets do not advance.",
+      "html": "Abort: read_committed consumers cannot see the output; committed input offsets do not advance."
+    },
+    {
+      "id": "kafka-transaction-abort-step",
+      "type": "bulleted_list",
+      "text": "If a failed transaction can be safely aborted, abort it before resetting and retrying.",
+      "html": "If a failed transaction can be safely aborted, abort it before resetting and retrying."
+    },
+    {
+      "id": "kafka-exactly-once-abort-point-3",
+      "type": "bulleted_list",
+      "text": "Polling may already have advanced the consumer’s in-memory position.",
+      "html": "Polling may already have advanced the consumer’s in-memory position."
+    },
+    {
+      "id": "kafka-exactly-once-abort-point-4",
+      "type": "bulleted_list",
+      "text": "Before retrying, reset to committed offsets or recreate the consumer. Abort does not rewind it.",
+      "html": "Before retrying, reset to committed offsets or recreate the consumer. Abort does not rewind it."
+    },
+    {
+      "id": "kafka-exactly-once-abort-point-5",
+      "type": "bulleted_list",
+      "text": "Stop processing if recovery is unsafe.",
+      "html": "Stop processing if recovery is unsafe."
+    },
+    {
+      "id": "kafka-idempotence-boundary",
+      "type": "bulleted_list",
+      "text": "Producer idempotence prevents duplicate log entries from supported send retries.",
+      "html": "Producer idempotence prevents duplicate log entries from supported send retries."
+    },
+    {
+      "id": "kafka-idempotence-boundary-point-2",
+      "type": "bulleted_list",
+      "text": "It does not deduplicate every new send of the same business event.",
+      "html": "It does not deduplicate every new send of the same business event."
+    },
+    {
+      "id": "kafka-idempotence-boundary-point-3",
+      "type": "bulleted_list",
+      "text": "Transactions include idempotence. Idempotence alone does not make consumer processing exactly-once.",
+      "html": "Transactions include idempotence. Idempotence alone does not make consumer processing exactly-once."
+    },
+    {
+      "id": "kafka-external-effects",
+      "type": "sub_sub_header",
+      "text": "External effects need their own coordination",
+      "html": "External effects need their own coordination"
+    },
+    {
+      "id": "kafka-external-effects-text",
+      "type": "bulleted_list",
+      "text": "Ordinary email calls, payments, and external database writes are outside a Kafka transaction.",
+      "html": "Ordinary email calls, payments, and external database writes are outside a Kafka transaction."
+    },
+    {
+      "id": "kafka-external-effects-text-point-2",
+      "type": "bulleted_list",
+      "text": "Action succeeds, crash before progress is saved: a retry may repeat the action.",
+      "html": "Action succeeds, crash before progress is saved: a retry may repeat the action."
+    },
+    {
+      "id": "kafka-external-effects-text-point-3",
+      "type": "bulleted_list",
+      "text": "Use destination-supported idempotency keys, or one database transaction for the result and processed event ID.",
+      "html": "Use destination-supported idempotency keys, or one database transaction for the result and processed event ID."
     },
     {
       "id": "2e924eb1ed5480b295fdedd10f2697f3",
       "type": "sub_header",
-      "html": "Most common real-world choice",
-      "text": "Most common real-world choice"
+      "html": "At-least-once with safe retries",
+      "text": "At-least-once with safe retries"
     },
     {
       "id": "2e924eb1ed548091a6ded777b43994f2",
@@ -1864,27 +2063,18 @@
       "id": "2e924eb1ed548002b562f1677d24b268",
       "type": "bulleted_list",
       "parent": "2e924eb1ed5480728da6c71670c7c99c",
-      "html": "Duplicates can be handled",
-      "text": "Duplicates can be handled"
+      "html": "Database example: save the event ID and its update in one transaction.",
+      "text": "Database example: save the event ID and its update in one transaction."
+    },
+    {
+      "id": "2e924eb1ed548002b562f1677d24b268-point-2",
+      "type": "bulleted_list",
+      "text": "Check the ID on retries to prevent applying the update twice.",
+      "html": "Check the ID on retries to prevent applying the update twice.",
+      "parent": "2e924eb1ed5480728da6c71670c7c99c"
     },
     {
       "id": "2e924eb1ed5480c8a5bdddb164059a6f",
-      "type": "divider"
-    },
-    {
-      "id": "2e924eb1ed5480dd89e0c1253ffa0415",
-      "type": "sub_header",
-      "html": "Key interview statement (memorize)",
-      "text": "Key interview statement (memorize)"
-    },
-    {
-      "id": "2e924eb1ed5480e19e7bceb19c935f0c",
-      "type": "bulleted_list",
-      "html": "Kafka guarantees <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">at-least-once by default</span>, and exactly-once only with transactions and idempotency.",
-      "text": "Kafka guarantees at-least-once by default, and exactly-once only with transactions and idempotency."
-    },
-    {
-      "id": "2e924eb1ed5480c7a5f9e0d820dc2783",
       "type": "divider"
     },
     {
@@ -1910,6 +2100,48 @@
       "type": "text",
       "html": "After this, we will do a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Kafka vs RabbitMQ</span> comparison for system design.",
       "text": "After this, we will do a Kafka vs RabbitMQ comparison for system design."
+    },
+    {
+      "id": "kafka-sources",
+      "type": "sub_header",
+      "text": "References",
+      "html": "References"
+    },
+    {
+      "id": "kafka-source-intro",
+      "type": "bulleted_list",
+      "text": "Apache Kafka introduction: brokers, topics, partitions, and independent readers.",
+      "html": "<a href=\"https://kafka.apache.org/43/getting-started/introduction/\">Apache Kafka introduction</a>: brokers, topics, partitions, and independent readers."
+    },
+    {
+      "id": "kafka-source-producer",
+      "type": "bulleted_list",
+      "text": "Java producer configuration: partition selection and idempotence.",
+      "html": "<a href=\"https://kafka.apache.org/43/configuration/producer-configs/\">Java producer configuration</a>: partition selection and idempotence."
+    },
+    {
+      "id": "kafka-source-design",
+      "type": "bulleted_list",
+      "text": "Kafka design: replication, compaction, and delivery semantics.",
+      "html": "<a href=\"https://kafka.apache.org/43/design/design/\">Kafka design</a>: replication, compaction, and delivery semantics."
+    },
+    {
+      "id": "kafka-source-consumer",
+      "type": "bulleted_list",
+      "text": "KafkaConsumer API: reading positions and committed offsets.",
+      "html": "<a href=\"https://kafka.apache.org/43/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html\">KafkaConsumer API</a>: reading positions and committed offsets."
+    },
+    {
+      "id": "kafka-source-admin",
+      "type": "bulleted_list",
+      "text": "Admin API: explicit record deletion.",
+      "html": "<a href=\"https://kafka.apache.org/43/javadoc/org/apache/kafka/clients/admin/Admin.html\">Admin API</a>: explicit record deletion."
+    },
+    {
+      "id": "kafka-source-outbox",
+      "type": "bulleted_list",
+      "text": "Debezium outbox pattern: reliable publication after a database transaction.",
+      "html": "<a href=\"https://debezium.io/blog/2019/02/19/reliable-microservices-data-exchange-with-the-outbox-pattern/\">Debezium outbox pattern</a>: reliable publication after a database transaction."
     },
     {
       "id": "2e824eb1ed5480db969dde96a413479f",
