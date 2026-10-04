@@ -245,7 +245,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "This complete example passes the value as an argument. It also works with older language versions and waits for every print:"
+                    "This example passes the value as an argument. It also works with older language versions and waits for every print:"
                 ]
             ]
         },

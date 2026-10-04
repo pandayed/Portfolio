@@ -29,7 +29,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Complete program: the deferred call finishes before the caller receives the result."
+                    "The deferred call finishes before the caller receives the result."
                 ]
             ]
         },
@@ -225,7 +225,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Package-scope function, using os and io: opening failure returns before cleanup is registered."
+                    "Opening failure returns before cleanup is registered."
                 ]
             ]
         },

@@ -62,15 +62,6 @@ const note = {
             ]
         },
         {
-            "id": "6f1588a0-de4e-5efe-8e71-09d43f4618bd",
-            "type": "text",
-            "richText": [
-                [
-                    "Function-body excerpt using errors and fmt:"
-                ]
-            ]
-        },
-        {
             "id": "b35bcbfe-b5fd-5c18-bed7-40977f3071f9",
             "type": "code",
             "richText": [

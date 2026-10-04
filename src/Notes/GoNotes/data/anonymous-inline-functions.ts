@@ -47,7 +47,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Syntax reference: paramList and returnType are placeholders."
+                    "paramList and returnType are placeholders."
                 ]
             ]
         },
@@ -84,7 +84,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Function-body excerpt using fmt: the final parentheses call the literal with arguments."
+                    "The final parentheses call the literal with arguments."
                 ]
             ]
         },
@@ -123,15 +123,6 @@ const note = {
             "richText": [
                 [
                     "Passing a callback"
-                ]
-            ]
-        },
-        {
-            "id": "bed1077c-b658-5599-b00d-f89696ce918f",
-            "type": "text",
-            "richText": [
-                [
-                    "Declarations and call boundary, using fmt:"
                 ]
             ]
         },

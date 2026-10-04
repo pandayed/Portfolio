@@ -278,7 +278,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Deliberately deadlocking function-body fragment.\nch := make(chan int)\nch <- 1 // this goroutine cannot reach the receive below\nvalue := <-ch\n_ = value"
+                    "// Deliberately deadlocking example.\nch := make(chan int)\nch <- 1 // this goroutine cannot reach the receive below\nvalue := <-ch\n_ = value"
                 ]
             ],
             "language": "Go"
@@ -288,7 +288,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "The send needs another goroutine to receive. Buffering one value makes this particular fragment progress, but does not solve an unbounded producer with no consumer. Fix the communication lifecycle instead of assuming a larger buffer proves deadlock freedom."
+                    "The send needs another goroutine to receive. Buffering one value makes this example progress, but does not solve an unbounded producer with no consumer. Fix the communication lifecycle instead of assuming a larger buffer proves deadlock freedom."
                 ]
             ]
         },
@@ -357,7 +357,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Package-level helper; requires import \"context\".\nfunc count(ctx context.Context, limit uint64) (uint64, error) {\n    var completed uint64\n    for completed < limit {\n        if completed%1024 == 0 {\n            if err := ctx.Err(); err != nil {\n                return completed, err\n            }\n        }\n        completed++\n    }\n    return completed, nil\n}"
+                    "func count(ctx context.Context, limit uint64) (uint64, error) {\n    var completed uint64\n    for completed < limit {\n        if completed%1024 == 0 {\n            if err := ctx.Err(); err != nil {\n                return completed, err\n            }\n        }\n        completed++\n    }\n    return completed, nil\n}"
                 ]
             ],
             "language": "Go"

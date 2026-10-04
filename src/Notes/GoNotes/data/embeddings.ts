@@ -16,15 +16,6 @@ const note = {
             ]
         },
         {
-            "id": "db8f3904-27c2-562a-bbc3-b3f75a5c6da7",
-            "type": "text",
-            "richText": [
-                [
-                    "Examples are declaration and function-body excerpts. Use fmt for the printing statements."
-                ]
-            ]
-        },
-        {
             "id": "24024eb1-ed54-80de-87f5-eb7cb6be63de",
             "type": "text",
             "richText": [

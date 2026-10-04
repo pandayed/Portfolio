@@ -13,18 +13,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "If chooses a branch by a boolean condition. Switch chooses a matching case and ends that case automatically unless fallthrough is explicit. Each example is an independent function-body fragment with "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " imported."
+                    "If chooses a branch by a boolean condition. Switch chooses a matching case and ends that case automatically unless fallthrough is explicit."
                 ]
             ]
         },

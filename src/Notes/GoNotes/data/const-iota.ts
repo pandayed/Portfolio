@@ -249,18 +249,7 @@ const note = {
                     ]
                 ],
                 [
-                    ". This example is a function-body fragment with "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " imported:"
+                    "."
                 ]
             ]
         },

@@ -42,7 +42,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Function-body pattern; mu is a shared sync.Mutex.\nmu.Lock()\ndefer mu.Unlock()\n// Read or update the protected data before this function returns."
+                    "// mu is a shared sync.Mutex.\nmu.Lock()\ndefer mu.Unlock()\n// Read or update the protected data before this function returns."
                 ]
             ],
             "language": "Go"

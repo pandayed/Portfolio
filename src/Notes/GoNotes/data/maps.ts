@@ -13,18 +13,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "A map stores key-value pairs. Keys must be comparable, such as strings or integers. Values can have any type. Examples are independent function-body fragments using "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", unless labeled as complete programs."
+                    "A map stores key-value pairs. Keys must be comparable, such as strings or integers. Values can have any type."
                 ]
             ]
         },
@@ -577,37 +566,6 @@ const note = {
             "richText": [
                 [
                     "sync.Map is specialized. A plain typed map with locking is usually easier to use when related state must change together. sync.Map is suited to entries written once and read many times, or concurrent access to disjoint sets of keys. It is not a general promise of better performance."
-                ]
-            ]
-        },
-        {
-            "id": "d457e679-ff91-5647-92dc-72df42187c8a",
-            "type": "text",
-            "richText": [
-                [
-                    "Function-body fragment with "
-                ],
-                [
-                    "sync",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " and "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " imported:"
                 ]
             ]
         },

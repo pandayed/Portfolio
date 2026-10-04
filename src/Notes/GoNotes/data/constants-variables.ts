@@ -22,7 +22,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Each snippet is independent. Invalid declarations are commented out; the remaining lines illustrate valid declarations."
+                    "Invalid declarations are commented out; the remaining lines illustrate valid declarations."
                 ]
             ]
         },

@@ -443,7 +443,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Package-level helper; requires import \"context\".\nfunc receive(ctx context.Context, input <-chan int) (int, bool, error) {\n    select {\n    case <-ctx.Done():\n        return 0, false, ctx.Err()\n    case value, ok := <-input:\n        return value, ok, nil\n    }\n}"
+                    "func receive(ctx context.Context, input <-chan int) (int, bool, error) {\n    select {\n    case <-ctx.Done():\n        return 0, false, ctx.Err()\n    case value, ok := <-input:\n        return value, ok, nil\n    }\n}"
                 ]
             ],
             "language": "Go"

@@ -67,7 +67,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Complete program: Dog and Cat satisfy Speaker independently. makeItSpeak needs only the Speak method."
+                    "Dog and Cat satisfy Speaker independently. makeItSpeak needs only the Speak method."
                 ]
             ]
         },
@@ -291,15 +291,6 @@ const note = {
                 ],
                 [
                     " applies to an interface expression. A concrete T must match the dynamic type; an interface T must be implemented by the dynamic type. The assertion panics on failure. It does not convert the stored value to another type."
-                ]
-            ]
-        },
-        {
-            "id": "7b2f9213-af45-5b5e-a670-125edd999727",
-            "type": "text",
-            "richText": [
-                [
-                    "Function-body excerpt, using fmt:"
                 ]
             ]
         },

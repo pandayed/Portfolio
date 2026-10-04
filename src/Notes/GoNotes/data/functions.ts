@@ -16,15 +16,6 @@ const note = {
             ]
         },
         {
-            "id": "8d4a1fb7-a62e-5908-b8c0-98c34a7acc66",
-            "type": "text",
-            "richText": [
-                [
-                    "Examples below are declarations or function-body excerpts. Printing snippets use fmt."
-                ]
-            ]
-        },
-        {
             "id": "7b00b12b-185e-5b00-b284-f673897c2b42",
             "type": "sub_header",
             "richText": [
@@ -38,7 +29,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Syntax reference: replace the placeholder names and types. Function declarations belong at package scope; call statements belong inside a function."
+                    "Replace the placeholder names and types."
                 ]
             ]
         },
@@ -253,7 +244,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Use the blank identifier for a result that is deliberately unused. Function-body excerpt using the divide declaration above:"
+                    "Use the blank identifier for a result that is deliberately unused."
                 ]
             ]
         },

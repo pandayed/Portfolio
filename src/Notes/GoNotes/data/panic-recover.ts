@@ -150,7 +150,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Complete program. safe returns to its caller after recovery; execution never returns to the line following panic inside safe."
+                    "safe returns to its caller after recovery; execution never returns to the line following panic inside safe."
                 ]
             ]
         },
@@ -260,7 +260,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Package-scope example, using log: work is supplied by the caller. This boundary reports a panic and returns; real request handlers must also define the response or error they produce."
+                    "The caller supplies work. This boundary reports a panic and returns; real request handlers must also define the response or error they produce."
                 ]
             ]
         },

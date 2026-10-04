@@ -49,15 +49,6 @@ const note = {
             ]
         },
         {
-            "id": "9317aff1-5dc8-5da9-ae00-749b6b4ca605",
-            "type": "text",
-            "richText": [
-                [
-                    "Unless a block declares functions or types, examples below are function-body excerpts using fmt."
-                ]
-            ]
-        },
-        {
             "id": "f678a08c-62eb-5ede-90b5-6fa906b78ba5",
             "type": "sub_header",
             "richText": [
@@ -551,7 +542,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Package-scope declarations, using unsafe: this example converts between pointer types whose base types have the same layout. This particular conversion also works directly as "
+                    "This example converts between pointer types whose base types have the same layout. This particular conversion also works directly as "
                 ],
                 [
                     "(*int)(p)",

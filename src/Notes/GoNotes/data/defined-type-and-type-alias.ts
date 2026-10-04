@@ -136,7 +136,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "These examples are independent declaration fragments. The untyped constant "
+                    "The untyped constant "
                 ],
                 [
                     "5",

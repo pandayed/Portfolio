@@ -372,15 +372,6 @@ const note = {
             ]
         },
         {
-            "id": "3becfb30-a9c9-588c-bd15-c0101a38f7b2",
-            "type": "text",
-            "richText": [
-                [
-                    "Complete program:"
-                ]
-            ]
-        },
-        {
             "id": "65b7d3b6-0a18-539d-b89d-30601e322b93",
             "type": "code",
             "language": "Go",

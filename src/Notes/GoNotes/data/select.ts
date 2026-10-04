@@ -358,7 +358,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Complete cancellation and timeout examples: "
+                    "Cancellation and timeout examples: "
                 ],
                 [
                     "Context and Timeout",

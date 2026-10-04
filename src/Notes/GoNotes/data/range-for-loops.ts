@@ -24,18 +24,7 @@ const note = {
                     ]
                 ],
                 [
-                    " for counted loops, condition-only loops, infinite loops, and range iteration. Function-body fragments below use "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " where printing is shown."
+                    " for counted loops, condition-only loops, infinite loops, and range iteration."
                 ]
             ]
         },
@@ -584,7 +573,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "A labeled break or continue selects an enclosing loop. This fragment exits both loops when it reaches i == 1 and j == 1:"
+                    "A labeled break or continue selects an enclosing loop. This example exits both loops when it reaches i == 1 and j == 1:"
                 ]
             ]
         },

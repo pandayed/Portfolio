@@ -43,15 +43,6 @@ const note = {
             ]
         },
         {
-            "id": "7d2cb407-8f77-514f-8b72-47f42758155c",
-            "type": "text",
-            "richText": [
-                [
-                    "Examples are declaration excerpts using fmt. Declarations appear at package scope; call statements below belong inside a function."
-                ]
-            ]
-        },
-        {
             "id": "622d4959-8e83-5854-b115-18cea4bd872d",
             "type": "code",
             "richText": [

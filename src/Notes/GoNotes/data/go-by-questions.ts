@@ -16,15 +16,6 @@ const note = {
             ]
         },
         {
-            "id": "questions-example-scope",
-            "type": "text",
-            "richText": [
-                [
-                    "Examples are independent. Only snippets with package declarations and imports are complete programs. Other snippets show package declarations, function bodies or both; put declarations at package scope and executable statements inside a function. Add the stated standard-library imports. Comments describe expected results rather than recorded executions. Version and implementation limits are stated where they matter."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-81aa-8f77-eea71868dd94",
             "type": "header",
             "richText": [
@@ -380,15 +371,6 @@ const note = {
             ]
         },
         {
-            "id": "question-B08-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt and strconv."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-8185-bfe7-e37cff162f59",
             "type": "code",
             "richText": [
@@ -434,15 +416,6 @@ const note = {
             "richText": [
                 [
                     "Named results are variables declared by the function signature and initialized to zero values. A bare return returns their current values. Explicit return expressions are easier to follow when a function has several branches or many lines."
-                ]
-            ]
-        },
-        {
-            "id": "question-B09-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
                 ]
             ]
         },
@@ -570,15 +543,6 @@ const note = {
             "richText": [
                 [
                     "An error lets the caller decide how to handle a failure. panic unwinds the current goroutine. recover can stop that unwind only when called directly by a deferred function in the same goroutine. If that deferred call recovers the panic, the containing function returns to its caller; execution does not resume at the panic site."
-                ]
-            ]
-        },
-        {
-            "id": "question-B12-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
                 ]
             ]
         },
@@ -730,15 +694,6 @@ const note = {
             ]
         },
         {
-            "id": "question-B15-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-818d-ab18-d267afe035b3",
             "type": "code",
             "richText": [
@@ -784,15 +739,6 @@ const note = {
             "richText": [
                 [
                     "A string is an immutable sequence of bytes; UTF-8 validity is not required. Indexing gives a byte and len counts bytes. rune aliases int32. Ranging over a string decodes UTF-8 into runes and reports byte indices. Invalid UTF-8 yields the replacement rune with a one-byte advance."
-                ]
-            ]
-        },
-        {
-            "id": "question-B16-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
                 ]
             ]
         },
@@ -977,15 +923,6 @@ const note = {
             "richText": [
                 [
                     "x.(T) checks an interface value against T. The comma-ok form avoids a panic if the assertion fails; T can also be an interface. A type switch selects a branch using the interface value’s dynamic type."
-                ]
-            ]
-        },
-        {
-            "id": "question-B21-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
                 ]
             ]
         },
@@ -1177,15 +1114,6 @@ const note = {
             ]
         },
         {
-            "id": "question-B25-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-818e-a71b-c8d0d59f0503",
             "type": "code",
             "richText": [
@@ -1240,15 +1168,6 @@ const note = {
             "richText": [
                 [
                     "Context carries cancellation, deadlines and request-scoped metadata across API calls. Pass ctx explicitly, normally first. Call a derived context’s cancel function to release resources. Cancellation is cooperative: the operation must observe it. Use private key types for metadata and explicit parameters for general options."
-                ]
-            ]
-        },
-        {
-            "id": "question-M01-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: context, io, net/http and time."
                 ]
             ]
         },
@@ -1421,15 +1340,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M04-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-8131-ba2d-ee7a9ce212c2",
             "type": "code",
             "richText": [
@@ -1567,15 +1477,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M07-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-8156-bc41-dfb6052d2654",
             "type": "code",
             "richText": [
@@ -1621,15 +1522,6 @@ const note = {
             "richText": [
                 [
                     "Both nil and non-nil empty slices have length zero and support range and append. Only the nil slice compares equal to nil. An empty slice can have spare capacity. For []int with encoding/json and no omission tags, nil encodes as null and a non-nil empty slice as []."
-                ]
-            ]
-        },
-        {
-            "id": "question-M08-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: encoding/json and fmt."
                 ]
             ]
         },
@@ -1683,15 +1575,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M09-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-81a7-8b23-f7fc1a56400c",
             "type": "code",
             "richText": [
@@ -1741,15 +1624,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M10-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-8173-b312-c7dbd6004af7",
             "type": "code",
             "richText": [
@@ -1795,15 +1669,6 @@ const note = {
             "richText": [
                 [
                     "The sender-side owner should close only after every send has finished. With several senders, a coordinator waits for all of them before closing. A receiver usually cannot know that condition. Closure is a completion signal, not required cleanup for every channel."
-                ]
-            ]
-        },
-        {
-            "id": "question-M11-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt and sync."
                 ]
             ]
         },
@@ -1935,15 +1800,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M14-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: sync."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-8148-85fd-c784dee86a1f",
             "type": "code",
             "richText": [
@@ -2001,15 +1857,6 @@ const note = {
             "richText": [
                 [
                     "%w preserves an error as a wrapped cause. errors.Is searches the error tree for a matching target, including custom Is methods. errors.As finds an error assignable to a target type, including custom As methods. Both can examine more than the outer error."
-                ]
-            ]
-        },
-        {
-            "id": "question-M15-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: errors and fmt."
                 ]
             ]
         },
@@ -2072,15 +1919,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M16-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: errors and os."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-8138-8ae9-db0d0919f1df",
             "type": "code",
             "richText": [
@@ -2130,15 +1968,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M17-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: os."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-81cf-a021-e56bf9421eba",
             "type": "code",
             "richText": [
@@ -2184,15 +2013,6 @@ const note = {
             "richText": [
                 [
                     "Before Go 1.22 semantics, closures could share a loop variable declared by the loop. For language versions Go 1.22 and later, := loop declarations create fresh iteration variables. Assignment to an existing variable with = still reuses it. Passing a value as a goroutine parameter works across versions; output order remains concurrent."
-                ]
-            ]
-        },
-        {
-            "id": "question-M18-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt and sync."
                 ]
             ]
         },
@@ -2284,15 +2104,6 @@ const note = {
             "richText": [
                 [
                     "Legacy timer behavior requires stopping and draining an active timer before reuse, with one goroutine coordinating receives. This example assumes the Go 1.23 behavior instead."
-                ]
-            ]
-        },
-        {
-            "id": "question-M19-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: context, fmt and time."
                 ]
             ]
         },
@@ -2428,15 +2239,6 @@ const note = {
             ]
         },
         {
-            "id": "question-M21-caveat",
-            "type": "text",
-            "richText": [
-                [
-                    "Test-file fragment. Import testing; package and import declarations are omitted."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-81d9-9bf1-da1b0fba1ebc",
             "type": "code",
             "richText": [
@@ -2461,15 +2263,6 @@ const note = {
             "richText": [
                 [
                     "The b.N benchmark form repeats the measured operation b.N times. Exclude setup with ResetTimer, keep observable results to avoid dead-code removal, and report allocations when useful. Newer Go versions also offer b.Loop; this example uses the older, widely supported form."
-                ]
-            ]
-        },
-        {
-            "id": "question-M22-caveat",
-            "type": "text",
-            "richText": [
-                [
-                    "Benchmark-file fragment. Import testing; package and import declarations are omitted."
                 ]
             ]
         },
@@ -2534,7 +2327,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Registering pprof handlers alone does not start a server. This fragment starts a diagnostic server on loopback; import log, net/http and blank-import net/http/pprof."
+                    "Registering pprof handlers alone does not start a server. This example starts a diagnostic server on loopback."
                 ]
             ]
         },
@@ -2726,15 +2519,6 @@ const note = {
             ]
         },
         {
-            "id": "question-H03-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: sync/atomic."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-8191-9c6d-f0825865bb1e",
             "type": "code",
             "richText": [
@@ -2835,15 +2619,6 @@ const note = {
             ]
         },
         {
-            "id": "question-H05-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: context."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-810c-865b-de6275d38a46",
             "type": "code",
             "richText": [
@@ -2889,15 +2664,6 @@ const note = {
             "richText": [
                 [
                     "A goroutine can remain blocked after its caller stops waiting if it never observes cancellation. Select on ctx.Done at channel waits, handle channel closure, and pass ctx into cancellable work. A context does not interrupt arbitrary CPU work or an uncancellable call. The example exits on cancellation or exhausted input."
-                ]
-            ]
-        },
-        {
-            "id": "question-H06-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: context and fmt."
                 ]
             ]
         },
@@ -3223,15 +2989,6 @@ const note = {
             ]
         },
         {
-            "id": "question-H14-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: strings."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-816d-998a-c84c7907f8ff",
             "type": "code",
             "richText": [
@@ -3324,7 +3081,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "type T struct{}\nfunc (T) M(int) {}\n\nvar t T\nf1 := t.M      // method value: func(int)\nf2 := T.M      // method expression: func(T, int)\n\nf1(1)\nf2(t, 1)\n// Declare T and its method at package scope; use f1/f2 inside a function."
+                    "type T struct{}\nfunc (T) M(int) {}\n\nvar t T\nf1 := t.M      // method value: func(int)\nf2 := T.M      // method expression: func(T, int)\n\nf1(1)\nf2(t, 1)"
                 ]
             ],
             "language": "go"
@@ -3365,15 +3122,6 @@ const note = {
             "richText": [
                 [
                     "Check CanSet before writing a reflect.Value. Addressable values can still be unsettable, especially unexported fields. A pointer followed by Elem commonly exposes a settable value. Use a setter compatible with its kind, or Set with an assignable value, to avoid a panic."
-                ]
-            ]
-        },
-        {
-            "id": "question-H17-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: reflect."
                 ]
             ]
         },
@@ -3583,15 +3331,6 @@ const note = {
             ]
         },
         {
-            "id": "question-H22-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: io, net/http and time."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-815b-9221-ea68af31e144",
             "type": "code",
             "richText": [
@@ -3655,15 +3394,6 @@ const note = {
             "richText": [
                 [
                     "A fuzz target starts from seed inputs and generated variations, then checks a stated property. It can find panics and property failures in parsers, encoders or state machines. Choose a property that is valid for arbitrary inputs. The example checks that valid UTF-8 survives a JSON round trip."
-                ]
-            ]
-        },
-        {
-            "id": "question-H24-caveat",
-            "type": "text",
-            "richText": [
-                [
-                    "Fuzz-test-file fragment. Import encoding/json, testing and unicode/utf8."
                 ]
             ]
         },
@@ -3982,15 +3712,6 @@ const note = {
             ]
         },
         {
-            "id": "question-E06-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt and strconv."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-814b-9207-cc21c49d0dbd",
             "type": "code",
             "richText": [
@@ -4096,15 +3817,6 @@ const note = {
             "richText": [
                 [
                     "Go atomic operations behave as if they occur in one sequentially consistent order. If an atomic operation observes another’s effect, the latter synchronizes before it. This can publish preceding ordinary writes through an atomic pointer or flag. It does not permit subsequent unsynchronized writes to published data or make several updates one atomic transaction."
-                ]
-            ]
-        },
-        {
-            "id": "question-E08-extra-0",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt and sync/atomic."
                 ]
             ]
         },
@@ -4381,15 +4093,6 @@ const note = {
             ]
         },
         {
-            "id": "question-E15-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt and io."
-                ]
-            ]
-        },
-        {
             "id": "2ef24eb1-ed54-818e-9ecf-c60e2d70a9c8",
             "type": "code",
             "richText": [
@@ -4414,15 +4117,6 @@ const note = {
             "richText": [
                 [
                     "Functional options apply configuration functions to a constructor’s private settings. The constructor supplies defaults and applies options in order. Export option helpers while keeping configuration fields private when callers should use those helpers. Validate options where the API needs it; this small example demonstrates shape and precedence only."
-                ]
-            ]
-        },
-        {
-            "id": "question-E16-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: time."
                 ]
             ]
         },
@@ -4728,15 +4422,6 @@ const note = {
             "richText": [
                 [
                     "Reducing padding can reduce storage for large slices of this struct. It does not remove pointers or automatically guarantee less GC scanning or better speed."
-                ]
-            ]
-        },
-        {
-            "id": "question-E23-imports",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment imports: fmt and unsafe."
                 ]
             ]
         },

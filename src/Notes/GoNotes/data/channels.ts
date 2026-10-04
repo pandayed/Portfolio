@@ -31,7 +31,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Function-body declarations: these create different channels.\nunbuffered := make(chan int)\nbuffered := make(chan int, 3)\n\n// Operation reference: a send needs a receiver or buffer space.\nbuffered <- 5\nvalue := <-buffered\n_ = value\n_ = unbuffered"
+                    "// These create different channels.\nunbuffered := make(chan int)\nbuffered := make(chan int, 3)\n\n// Operation reference: a send needs a receiver or buffer space.\nbuffered <- 5\nvalue := <-buffered\n_ = value\n_ = unbuffered"
                 ]
             ],
             "language": "Go"
@@ -227,7 +227,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Deliberately blocking function-body example; do not use as a complete program.\nch := make(chan int, 2)\nch <- 1\nch <- 2\nch <- 3 // blocks here unless another goroutine receives"
+                    "// Deliberately blocking example.\nch := make(chan int, 2)\nch <- 1\nch <- 2\nch <- 3 // blocks here unless another goroutine receives"
                 ]
             ],
             "language": "Go"
@@ -255,7 +255,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Function parameters can restrict access to a bidirectional channel. These are signature examples, not complete implementations:"
+                    "Function parameters can restrict access to a bidirectional channel."
                 ]
             ]
         },
@@ -559,7 +559,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "This complete program rejects a send when its one-slot queue is already full:"
+                    "This program rejects a send when its one-slot queue is already full:"
                 ]
             ]
         },
@@ -665,7 +665,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "A pipeline feeds the output of one stage into the next. This complete example drains the whole stream; each stage closes only its own output."
+                    "A pipeline feeds the output of one stage into the next. This example drains the whole stream; each stage closes only its own output."
                 ]
             ]
         },
@@ -702,7 +702,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "This complete program fetches two pages concurrently and handles request, body-read and HTTP-status errors. The client timeout bounds each fetch. The caller consumes every result; a caller that abandons results also needs a cancellation path."
+                    "This program fetches two pages concurrently and handles request, body-read and HTTP-status errors. The client timeout bounds each fetch. The caller consumes every result; a caller that abandons results also needs a cancellation path."
                 ]
             ]
         },
@@ -748,7 +748,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Complete cancellable send and receive examples: "
+                    "Cancellable send and receive examples: "
                 ],
                 [
                     "Context and Timeout",

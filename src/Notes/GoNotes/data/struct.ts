@@ -37,26 +37,6 @@ const note = {
             ]
         },
         {
-            "id": "6b773571-cd33-53e2-8bbe-4959a4ba96f1",
-            "type": "text",
-            "richText": [
-                [
-                    "These function-body fragments use the Person declaration above and import "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " when printing. Each creation form is independent:"
-                ]
-            ]
-        },
-        {
             "id": "b0090981-b73b-5e74-a691-a15514f3deb7",
             "type": "table",
             "columnOrder": [
@@ -390,7 +370,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "This complete program uses one read-only value method and one pointer method that updates a field:"
+                    "This program uses one read-only value method and one pointer method that updates a field:"
                 ]
             ]
         },

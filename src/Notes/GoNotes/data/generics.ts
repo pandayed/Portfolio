@@ -25,15 +25,6 @@ const note = {
             ]
         },
         {
-            "id": "10fcd0a4-09be-5fea-ad64-659472b2bb56",
-            "type": "text",
-            "richText": [
-                [
-                    "Package-scope declaration, using fmt:"
-                ]
-            ]
-        },
-        {
             "id": "25024eb1-ed54-807e-a81e-ccdd7fe5b57b",
             "type": "code",
             "richText": [
@@ -65,7 +56,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Function-body alternatives: both calls print 1, 2 and 3 on separate lines. In the first call, the argument lets Go infer T as int."
+                    "Both calls print 1, 2 and 3 on separate lines. In the first call, the argument lets Go infer T as int."
                 ]
             ]
         },
@@ -106,15 +97,6 @@ const note = {
                 ]
             ],
             "language": "Go"
-        },
-        {
-            "id": "c0336580-d22c-51eb-8963-f2a641f0e76a",
-            "type": "text",
-            "richText": [
-                [
-                    "Function-body example, using fmt:"
-                ]
-            ]
         },
         {
             "id": "f49ee776-b5a7-575b-8d42-414487e46221",

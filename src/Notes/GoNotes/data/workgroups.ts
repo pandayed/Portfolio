@@ -432,7 +432,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Function-body fragment; requires Go 1.25+ and imports fmt and sync.\nvar wg sync.WaitGroup\nwg.Go(func() { fmt.Println(\"task finished\") })\nwg.Wait()"
+                    "// Go 1.25+\nvar wg sync.WaitGroup\nwg.Go(func() { fmt.Println(\"task finished\") })\nwg.Wait()"
                 ]
             ],
             "language": "Go"

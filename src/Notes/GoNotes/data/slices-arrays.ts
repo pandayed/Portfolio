@@ -34,18 +34,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "An array holds a fixed number of elements. A slice describes a portion of an underlying array and can have a different length as the program runs. Examples are independent function-body fragments using "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", unless labeled as complete programs."
+                    "An array holds a fixed number of elements. A slice describes a portion of an underlying array and can have a different length as the program runs."
                 ]
             ]
         },
@@ -132,15 +121,6 @@ const note = {
             "richText": [
                 [
                     "A slice value contains a reference to its underlying array, a length, and a capacity. Assignment and function arguments copy the slice value, while the copies may still share element storage."
-                ]
-            ]
-        },
-        {
-            "id": "98f94f08-3883-5314-8b3a-b8ee259ae306",
-            "type": "text",
-            "richText": [
-                [
-                    "Complete program:"
                 ]
             ]
         },

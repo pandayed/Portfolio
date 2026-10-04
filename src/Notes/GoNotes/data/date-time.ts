@@ -13,7 +13,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "The standard time package provides instants, durations, zones, formatting, and timers. Each Go code block below is a separate program or is explicitly labelled as a fragment."
+                    "The standard time package provides instants, durations, zones, formatting, and timers."
                 ]
             ]
         },
@@ -102,15 +102,6 @@ const note = {
             ]
         },
         {
-            "id": "date-time-04",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment inside a function, importing time:"
-                ]
-            ]
-        },
-        {
             "id": "date-time-05",
             "type": "code",
             "richText": [
@@ -181,7 +172,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Elapsed-time fragment inside a function, importing fmt and time. The printed duration varies:"
+                    "The printed duration varies:"
                 ]
             ]
         },
@@ -397,15 +388,6 @@ const note = {
             ]
         },
         {
-            "id": "date-time-20",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment inside a function, importing fmt and time:"
-                ]
-            ]
-        },
-        {
             "id": "date-time-21",
             "type": "code",
             "richText": [
@@ -486,15 +468,6 @@ const note = {
             "richText": [
                 [
                     "Add adds a fixed duration. AddDate adds calendar years, months, and days in the time's location. A calendar day around a daylight-saving transition may be 23 or 25 hours. AddDate normalizes invalid dates rather than clamping them to month end."
-                ]
-            ]
-        },
-        {
-            "id": "date-time-30",
-            "type": "text",
-            "richText": [
-                [
-                    "Fragment inside a function, importing fmt and time:"
                 ]
             ]
         },
@@ -775,7 +748,7 @@ const note = {
                     ]
                 ],
                 [
-                    " for complete cancellable operations and deadline handling."
+                    " for cancellable operations and deadline handling."
                 ]
             ]
         },

@@ -47,7 +47,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Complete program: each call to makeCounter creates a new count variable. Calls to the same returned function update that same variable."
+                    "Each call to makeCounter creates a new count variable. Calls to the same returned function update that same variable."
                 ]
             ]
         },
@@ -129,7 +129,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "In this function-body excerpt, funcs holds callbacks called after the loop. It isolates capture from goroutine scheduling."
+                    "funcs holds callbacks called after the loop. It isolates capture from goroutine scheduling."
                 ]
             ]
         },
@@ -227,7 +227,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Alternative to the previous excerpt: passing the current value as a function argument avoids sharing the loop variable across goroutines. This works with older language versions too. The function below uses fmt and sync."
+                    "Passing the current value as a function argument avoids sharing the loop variable across goroutines. This works with older language versions too."
                 ]
             ]
         },

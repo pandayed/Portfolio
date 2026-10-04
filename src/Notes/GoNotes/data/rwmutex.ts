@@ -212,7 +212,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "This complete example waits for the write to finish before launching the readers. An explicit completion channel provides the ordering; a sleep would not."
+                    "This example waits for the write to finish before launching the readers. An explicit completion channel provides the ordering; a sleep would not."
                 ]
             ]
         },

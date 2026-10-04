@@ -378,7 +378,7 @@ const note = {
             "type": "code",
             "richText": [
                 [
-                    "// Function-body reference; requires imports fmt and runtime.\ncurrent := runtime.GOMAXPROCS(0) // read without changing the setting\nfmt.Println(current)"
+                    "current := runtime.GOMAXPROCS(0) // read without changing the setting\nfmt.Println(current)"
                 ]
             ],
             "language": "Go"

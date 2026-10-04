@@ -25,15 +25,6 @@ const note = {
             ]
         },
         {
-            "id": "21d5a2a2-0ac9-5119-bd88-e0df6ffaac02",
-            "type": "text",
-            "richText": [
-                [
-                    "Declarations and call boundary, using fmt:"
-                ]
-            ]
-        },
-        {
             "id": "0426c50f-0b95-5f3d-a23d-c7444f31bf09",
             "type": "code",
             "richText": [
@@ -66,7 +57,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Function-body excerpt using sum above: append ... to the slice argument."
+                    "Append ... to the slice argument."
                 ]
             ]
         },
