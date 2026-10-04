@@ -1,4 +1,4 @@
-/* Copied from the Struct page in Notion without changing its content. */
+/* Focused Go study notes, refined from the imported source. */
 
 import type { GoNote } from '../types';
 
@@ -6,303 +6,95 @@ const note = {
     "notionId": "24024eb1-ed54-80a2-a695-ea95dbbf67c0",
     "slug": "struct",
     "title": "Struct",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24024eb1-ed54-80ef-bb42-f05cef96d1ad",
-            "type": "bulleted_list",
+            "id": "bcf81806-866f-599c-b98d-11677e479cd4",
+            "type": "text",
             "richText": [
                 [
-                    "Go does not allow functions in struct."
+                    "A struct groups named fields. Fields can have any type, including function types. Methods are declared separately with a receiver."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8031-aa76-cb6354cb5f0c",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Variable is data."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80c5-b16e-f382b38a3f4e",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Function is behaviour."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-802d-9253-f893265876be",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-807d-a426-e9330fb41e79",
+            "id": "1d9f51ec-0643-5c68-8415-2beec28177a7",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "type Person struct {\n    Name string\n    Age  int\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80d1-8d55-f11917069cb5",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80ce-a307-e34b0ddee81b",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Value struct (named fields)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "type Person struct {\n    Name string\n    Age int\n}"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8043-af1c-d251a0e4e5c5",
-            "type": "code",
+            "id": "63779fa3-7e1d-5911-8d86-39b8508247f1",
+            "type": "sub_header",
             "richText": [
                 [
-                    "p := Person{Name: \"Alice\", Age: 30}\nfmt.Println(p.Name)    // Acces"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-807d-80a2-f83549a0c4f8",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8071-8225-e58b2e3163a1",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Value struct (positional fields)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Creating struct values"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80a7-9fee-c5de7761f3f1",
-            "type": "code",
+            "id": "6b773571-cd33-53e2-8bbe-4959a4ba96f1",
+            "type": "text",
             "richText": [
                 [
-                    "p := Person{\"Bob\", 25}\nfmt.Println(p.Name)"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80ac-b67d-dc32bd7989e6",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80f7-bfa0-dff6b323de71",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Zero value with ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "These function-body fragments use the Person declaration above and import "
                 ],
                 [
-                    "var",
+                    "fmt",
                     [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8076-bd56-c3f46b1839cd",
-            "type": "code",
-            "richText": [
-                [
-                    "// this assigns some defaults to the variables\nvar p Person\nfmt.Println(p.Name) // prints \"\"\nfmt.Println(p.Age) // prints 0"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-8084-81f4-f3d074a983e3",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80c5-b112-ec7e7409905e",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Pointer using address-of (",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "&",
-                    [
-                        [
-                            "b"
-                        ],
                         [
                             "c"
                         ]
                     ]
                 ],
                 [
-                    ")",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    " when printing. Each creation form is independent:"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8040-93a8-f786b9b94264",
-            "type": "code",
-            "richText": [
-                [
-                    "p := &Person{Name: \"Dana\", Age: 40}\nfmt.Println(p.Name)    // Go auto-dereferences\nfmt.Println((*p).Name) // Manual dereference"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-8036-9a87-e3a98dd2e879",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8068-aa0e-f27c1f88aff3",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Pointer using ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "new()",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8069-bfe7-fe31ba83bfbb",
-            "type": "code",
-            "richText": [
-                [
-                    "p := new(Person)\np.Name = \"Eve\"\nfmt.Println(p.Name)     // Auto-dereference\nfmt.Println((*p).Name)  // Manual dereference\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-8073-b8b5-c1a0acac32d3",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80d5-bab8-cc0ff2ba3dd5",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Inside slices/arrays",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8013-a014-f70c736a1a93",
-            "type": "code",
-            "richText": [
-                [
-                    "people := []Person{{Name: \"Frank\", Age: 33}}\nfmt.Println(people[0].Name)"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-8029-a48a-d7c23e2ede6e",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80b7-81e6-d4b66988d0ca",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Summary Table"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80f0-b323-c8159ed5a073",
+            "id": "b0090981-b73b-5e74-a691-a15514f3deb7",
             "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1",
+                "col-2"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
             "children": [
                 {
-                    "id": "24024eb1-ed54-8001-bde1-e74425d2441f",
+                    "id": "51bde10c-bc47-52f0-81d4-8c7aba83e0ac",
                     "type": "table_row",
                     "cells": {
-                        "OB`_": [
+                        "col-0": [
                             [
-                                "Creation Method"
+                                "Creation form"
                             ]
                         ],
-                        "zCzc": [
+                        "col-1": [
                             [
                                 "Type"
                             ]
                         ],
-                        "Xdl^": [
+                        "col-2": [
                             [
-                                "Access Syntax"
+                                "Initial value"
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24024eb1-ed54-8005-b5bd-fd7274ed3fad",
+                    "id": "25724505-95dd-5805-bdca-e30e397534eb",
                     "type": "table_row",
                     "cells": {
-                        "OB`_": [
+                        "col-0": [
                             [
-                                "Person{...}",
+                                "Person{Name: \"Alice\", Age: 30}",
                                 [
                                     [
                                         "c"
@@ -310,28 +102,49 @@ const note = {
                                 ]
                             ]
                         ],
-                        "zCzc": [
+                        "col-1": [
                             [
-                                "Value"
+                                "Person"
                             ]
                         ],
-                        "Xdl^": [
+                        "col-2": [
                             [
-                                "p.Name",
+                                "Named fields; omitted fields use zero values."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "617a73ea-c8e3-52f1-ad79-aff5a60da4bd",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Person{\"Bob\", 25}",
                                 [
                                     [
                                         "c"
                                     ]
                                 ]
                             ]
+                        ],
+                        "col-1": [
+                            [
+                                "Person"
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Positional fields in declaration order."
+                            ]
                         ]
                     }
                 },
                 {
-                    "id": "24024eb1-ed54-80df-8bd6-d65d0cc2073f",
+                    "id": "ca43fd87-279a-5af5-9943-a3d27fd5188d",
                     "type": "table_row",
                     "cells": {
-                        "OB`_": [
+                        "col-0": [
                             [
                                 "var p Person",
                                 [
@@ -341,30 +154,25 @@ const note = {
                                 ]
                             ]
                         ],
-                        "zCzc": [
+                        "col-1": [
                             [
-                                "Value"
+                                "Person"
                             ]
                         ],
-                        "Xdl^": [
+                        "col-2": [
                             [
-                                "p.Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "All fields have their zero values."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24024eb1-ed54-8034-8219-ff6db47481be",
+                    "id": "66861253-e35a-505c-b409-39decb0826fa",
                     "type": "table_row",
                     "cells": {
-                        "OB`_": [
+                        "col-0": [
                             [
-                                "&Person{...}",
+                                "&Person{Name: \"Dana\", Age: 40}",
                                 [
                                     [
                                         "c"
@@ -372,39 +180,23 @@ const note = {
                                 ]
                             ]
                         ],
-                        "zCzc": [
+                        "col-1": [
                             [
-                                "Pointer"
+                                "*Person"
                             ]
                         ],
-                        "Xdl^": [
+                        "col-2": [
                             [
-                                "p.Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                " or "
-                            ],
-                            [
-                                "(*p).Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "Pointer to the initialized struct."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24024eb1-ed54-805f-b549-f7d7da917a7d",
+                    "id": "6d57fff8-5eda-5ba8-820a-9d5bb661de25",
                     "type": "table_row",
                     "cells": {
-                        "OB`_": [
+                        "col-0": [
                             [
                                 "new(Person)",
                                 [
@@ -414,93 +206,85 @@ const note = {
                                 ]
                             ]
                         ],
-                        "zCzc": [
+                        "col-1": [
                             [
-                                "Pointer"
+                                "*Person"
                             ]
                         ],
-                        "Xdl^": [
+                        "col-2": [
                             [
-                                "p.Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                " or "
-                            ],
-                            [
-                                "(*p).Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24024eb1-ed54-80ab-a093-e7c384234417",
-                    "type": "table_row",
-                    "cells": {
-                        "OB`_": [
-                            [
-                                "In slices/arrays"
-                            ]
-                        ],
-                        "zCzc": [
-                            [
-                                "Value"
-                            ]
-                        ],
-                        "Xdl^": [
-                            [
-                                "slice[i].Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "Pointer to a zero-valued struct."
                             ]
                         ]
                     }
                 }
-            ],
-            "columnOrder": [
-                "OB`_",
-                "zCzc",
-                "Xdl^"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
+            ]
         },
         {
-            "id": "24024eb1-ed54-8022-8a1b-eb31ccb04616",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8021-a6f5-eb79bb571693",
-            "type": "sub_sub_header",
+            "id": "562b5025-f9ad-59d5-9d04-82f964542850",
+            "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "Accessing Struct Fields",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "p := Person{Name: \"Alice\", Age: 30}\nfmt.Println(p.Name, p.Age) // Alice 30"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80cf-a251-d6e4e0593fb6",
-            "type": "bulleted_list",
+            "id": "feb8166d-6f55-5c62-ba30-1c672515e714",
+            "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "Use dot notation: "
+                    "p := new(Person)\np.Name = \"Eve\"\nfmt.Println(p.Name, p.Age) // Eve 0"
+                ]
+            ]
+        },
+        {
+            "id": "52cc9775-6c8f-5c9a-94db-f03f9ca0bc21",
+            "type": "text",
+            "richText": [
+                [
+                    "Named fields make the selected fields explicit. Positional literals depend on field order and must provide each field. Prefer named fields when using another package’s struct type."
+                ]
+            ]
+        },
+        {
+            "id": "cdd2e5c1-ac21-5c35-86a1-febcf9c1f8cd",
+            "type": "text",
+            "richText": [
+                [
+                    "Default field values are covered in "
+                ],
+                [
+                    "Zero Values",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/zero-values"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "24024eb1-ed54-8021-a6f5-eb79bb571693",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Accessing Struct Fields"
+                ]
+            ]
+        },
+        {
+            "id": "00b8af66-6aad-5781-a868-4b9d66c884bf",
+            "type": "text",
+            "richText": [
+                [
+                    "Dot notation accesses fields of both a struct value and a pointer to that struct. For a pointer p, "
                 ],
                 [
                     "p.Name",
@@ -509,212 +293,12 @@ const note = {
                             "c"
                         ]
                     ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8008-8aa7-c24242b85292",
-            "type": "bulleted_list",
-            "richText": [
+                ],
                 [
-                    "Works for both value and pointer structs"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80bd-9f71-debeff21cdc3",
-            "type": "bulleted_list",
-            "richText": [
+                    " is shorthand for "
+                ],
                 [
-                    "Pointer auto-dereferencing:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24024eb1-ed54-8022-9c81-ef21aec355ab",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "p := &Person{Name: \"Alice\"}\np.Name         // valid\n(*p).Name      // also valid"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8081-859c-cf45d3b7c622",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80f1-9e58-d6ba6909bb1d",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Struct Field Access – Summary",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80c2-be52-d64d0bb13bb3",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24024eb1-ed54-80f0-b88a-fba4e9a4f42c",
-                    "type": "table_row",
-                    "cells": {
-                        "~Hmm": [
-                            [
-                                "Struct Type"
-                            ]
-                        ],
-                        "_lX;": [
-                            [
-                                "Access Syntax"
-                            ]
-                        ],
-                        "nu~G": [
-                            [
-                                "Notes"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24024eb1-ed54-80c7-bcda-ea6e54f8412d",
-                    "type": "table_row",
-                    "cells": {
-                        "~Hmm": [
-                            [
-                                "Value"
-                            ]
-                        ],
-                        "_lX;": [
-                            [
-                                "p.Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ],
-                        "nu~G": [
-                            [
-                                "Direct field access"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24024eb1-ed54-8070-94ed-d83fe5df6ea7",
-                    "type": "table_row",
-                    "cells": {
-                        "~Hmm": [
-                            [
-                                "Pointer"
-                            ]
-                        ],
-                        "_lX;": [
-                            [
-                                "p.Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ],
-                        "nu~G": [
-                            [
-                                "Auto-dereferenced"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24024eb1-ed54-80a1-a13f-d36c9f9bbcbe",
-                    "type": "table_row",
-                    "cells": {
-                        "~Hmm": [
-                            [
-                                "Pointer"
-                            ]
-                        ],
-                        "_lX;": [
-                            [
-                                "(*p).Name",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ],
-                        "nu~G": [
-                            [
-                                "Manual dereference (optional)"
-                            ]
-                        ]
-                    }
-                }
-            ],
-            "columnOrder": [
-                "~Hmm",
-                "_lX;",
-                "nu~G"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24024eb1-ed54-8072-8600-d3a9b32651c7",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8031-bc25-ecd949c8d97f",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Methods on Structs",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8053-b2bd-e15a848d6855",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Value Receiver:"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80ce-a4b5-dce150921335",
-            "type": "code",
-            "richText": [
-                [
-                    "func (p Person) Greet() string {\n    return \"Hi \" + p.Name\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-804d-ae85-f98ae4a4a110",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "p",
+                    "(*p).Name",
                     [
                         [
                             "c"
@@ -722,256 +306,147 @@ const note = {
                     ]
                 ],
                 [
-                    " is a copy of the struct"
+                    ". This requires a non-nil pointer."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8017-b819-d082d2335c48",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Does not modify",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " original"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8046-9841-faf5fb520eca",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Safe for read-only behavior"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-806c-a261-d857082219f6",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Pointer Receiver:"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80b6-945c-d7daa1ee9d41",
+            "id": "15aff848-229a-5d61-bb0d-72524087452c",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "func (p *Person) HaveBirthday() {\n    p.Age += 1\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-800a-88f8-ff06afed0a14",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "p",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " is a pointer"
+                    "p := &Person{Name: \"Dana\", Age: 40}\nfmt.Println(p.Name)    // Dana\nfmt.Println((*p).Name) // Dana\np.Age++\nfmt.Println(p.Age)     // 41"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80e8-9722-ec2cbd6852c7",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Modifies",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " the original struct"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80e2-a662-d8df4d5c4aba",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Efficient for large structs"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-801f-877a-da65b92e25b1",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80a6-a8c3-c51127a6cb1c",
+            "id": "24024eb1-ed54-80d5-bab8-cc0ff2ba3dd5",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Calling Methods",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Inside slices/arrays"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80a5-bcbc-cd6442e106a7",
+            "id": "fd43bfae-264c-5dee-addf-cef7f24c7ea4",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "people := []Person{{Name: \"Frank\", Age: 33}}\nfmt.Println(people[0].Name) // Frank"
+                ]
+            ]
+        },
+        {
+            "id": "79f9445f-aa79-51e6-8baf-add8baf9719f",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Function-valued fields"
+                ]
+            ]
+        },
+        {
+            "id": "e4c74e9a-1691-500e-b076-0b0a3bb8dd80",
             "type": "text",
             "richText": [
                 [
-                    "Go handles pointer vs value automatically:"
+                    "A function field stores a function value. It is called through the field and is different from a method declared on the struct type."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80c3-8541-f88f51875ebc",
+            "id": "6270a0b2-fc96-5cc0-8164-7916aeaa28ad",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "p := Person{Name: \"Bob\", Age: 20}\np.HaveBirthday()   // OK even though method is on *Person"
+                    "type Formatter struct {\n    Format func(string) string\n}\n\n// Inside a function:\nf := Formatter{\n    Format: func(name string) string {\n        return \"Hi \" + name\n    },\n}\nfmt.Println(f.Format(\"Alice\")) // Hi Alice"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24024eb1-ed54-80ea-ab20-d9180eba06e3",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80b9-a92b-f0dc4dbb5d4f",
-            "type": "sub_sub_header",
+            "id": "dd39e09c-f043-5639-99b3-1883969d9244",
+            "type": "text",
             "richText": [
                 [
-                    "When to Use What",
+                    "A function field’s zero value is nil. Calling it before assigning a function panics."
+                ]
+            ]
+        },
+        {
+            "id": "24024eb1-ed54-8031-bc25-ecd949c8d97f",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Methods on Structs"
+                ]
+            ]
+        },
+        {
+            "id": "14ae6679-9f45-5d89-a009-d8430ab4f5ca",
+            "type": "text",
+            "richText": [
+                [
+                    "This complete program uses one read-only value method and one pointer method that updates a field:"
+                ]
+            ]
+        },
+        {
+            "id": "ec035d97-3d59-5f17-92c6-1e381f42d874",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "package main\n\nimport \"fmt\"\n\ntype Person struct {\n    Name string\n    Age int\n}\n\nfunc (p Person) Greet() string {\n    return \"Hi \" + p.Name\n}\n\nfunc (p *Person) HaveBirthday() {\n    p.Age++\n}\n\nfunc main() {\n    p := Person{Name: \"Bob\", Age: 20}\n    p.HaveBirthday() // p is addressable, so this can use &p\n    fmt.Println(p.Greet(), p.Age) // Hi Bob 21\n}"
+                ]
+            ]
+        },
+        {
+            "id": "324809c0-cfa0-5a17-8f31-209ab56a5848",
+            "type": "text",
+            "richText": [
+                [
+                    "See "
+                ],
+                [
+                    "Methods",
                     [
                         [
-                            "b"
+                            "a",
+                            "#/notes/go/methods"
                         ]
                     ]
+                ],
+                [
+                    " for receiver choices, copying, method sets, interface satisfaction, and addressability. Those rules apply to eligible defined types, not only structs."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8096-af69-f00b468623bf",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24024eb1-ed54-80d7-b0de-e12132e16b70",
-                    "type": "table_row",
-                    "cells": {
-                        "X|}g": [
-                            [
-                                "Receiver Type"
-                            ]
-                        ],
-                        "Igqa": [
-                            [
-                                "Use When…"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24024eb1-ed54-8045-99f4-ef125b0dce6f",
-                    "type": "table_row",
-                    "cells": {
-                        "X|}g": [
-                            [
-                                "Value"
-                            ]
-                        ],
-                        "Igqa": [
-                            [
-                                "Method doesn’t modify struct, struct is small"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24024eb1-ed54-808e-bb64-e74ff47f8858",
-                    "type": "table_row",
-                    "cells": {
-                        "X|}g": [
-                            [
-                                "Pointer"
-                            ]
-                        ],
-                        "Igqa": [
-                            [
-                                "Method modifies struct, struct is large or for consistency"
-                            ]
-                        ]
-                    }
-                }
-            ],
-            "columnOrder": [
-                "X|}g",
-                "Igqa"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24024eb1-ed54-80e6-be40-d336318590da",
-            "type": "callout",
-            "children": [
-                {
-                    "id": "24024eb1-ed54-8072-abf3-ec92224079c3",
-                    "type": "text",
-                    "richText": [
+            "id": "e12c4d8c-1ae3-51d8-aca4-5a8c28f4ba3c",
+            "type": "text",
+            "richText": [
+                [
+                    "Reference: "
+                ],
+                [
+                    "Go specification: struct types",
+                    [
                         [
-                            "Rule of thumb:",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            " Use "
-                        ],
-                        [
-                            "pointer receivers",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            " by default, unless you have a strong reason."
+                            "a",
+                            "https://go.dev/ref/spec#Struct_types"
                         ]
                     ]
-                }
+                ],
+                [
+                    "."
+                ]
             ]
-        },
-        {
-            "id": "24024eb1-ed54-803c-b2eb-d3f1748d8563",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80cc-bb2e-f56c91be9816",
-            "type": "text"
         }
     ]
-} as const satisfies GoNote;
+} satisfies GoNote;
 
 export default note;

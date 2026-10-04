@@ -1,4 +1,4 @@
-/* Copied from the Range & For Loops page in Notion without changing its content. */
+/* Focused Go study notes, refined from the imported source. */
 
 import type { GoNote } from '../types';
 
@@ -6,176 +6,85 @@ const note = {
     "notionId": "24124eb1-ed54-8042-b4af-da4a7534739a",
     "slug": "range-for-loops",
     "title": "Range & For Loops",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
+        {
+            "id": "b2b7c0d9-7bc4-5246-af45-9c744a97d1b5",
+            "type": "text",
+            "richText": [
+                [
+                    "Go uses "
+                ],
+                [
+                    "for",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " for counted loops, condition-only loops, infinite loops, and range iteration. Function-body fragments below use "
+                ],
+                [
+                    "fmt",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " where printing is shown."
+                ]
+            ]
+        },
         {
             "id": "24224eb1-ed54-80ff-87da-e82b91dd7dc8",
             "type": "sub_header",
             "richText": [
                 [
-                    "for",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " Loop – Basics"
+                    "for Loop – Basics"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80f1-8356-ccf3f5aad7d5",
+            "id": "52285243-10d9-53b7-b3be-12a67f5e806c",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "for i := 0; i < 3; i++ {\n    fmt.Println(i)\n}\n// Output, one value per line: 0, 1, 2"
+                ]
+            ]
+        },
+        {
+            "id": "27a6b7e6-6246-53b4-b47d-3e126832da6a",
             "type": "text",
             "richText": [
                 [
-                    "Go has "
-                ],
-                [
-                    "only one looping construct",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ": "
-                ],
-                [
-                    "for",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "The initializer runs once. The condition is checked before each iteration. The post statement runs after each completed iteration."
                 ]
             ]
-        },
-        {
-            "id": "24224eb1-ed54-801c-8fd6-f9f3c9ad31e5",
-            "type": "text",
-            "richText": [
-                [
-                    "It can be used like a traditional "
-                ],
-                [
-                    "for",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", a "
-                ],
-                [
-                    "while",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", or an infinite loop."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80f3-89d9-d80e24621828",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Syntax:"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8021-a8b6-f088ecb76f2c",
-            "type": "code",
-            "richText": [
-                [
-                    "for init; condition; post {\n    // code\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-80b8-befc-c35915f06672",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Example:"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80e4-9762-fb37c433f2a0",
-            "type": "code",
-            "richText": [
-                [
-                    "for i := 0; i < 5; i++ {\n    fmt.Println(i)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8041-845e-def3ef3058e0",
-            "type": "divider"
         },
         {
             "id": "24224eb1-ed54-8086-94b0-fb0cf52acd8d",
             "type": "sub_header",
             "richText": [
                 [
-                    "for",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " as "
-                ],
-                [
-                    "while",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
+                    "for as while"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80f3-8380-c8468483ca7d",
-            "type": "text",
-            "richText": [
-                [
-                    "You can skip init and post."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8000-a823-d1626b107127",
+            "id": "b54c6808-fd84-5e24-8b82-12977eb1c069",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "i := 0\nfor i < 5 {\n    fmt.Println(i)\n    i++\n}"
+                    "i := 0\nfor i < 3 {\n    fmt.Println(i)\n    i++\n}\n// Output, one value per line: 0, 1, 2"
                 ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8032-9c79-f01f0286929a",
-            "type": "divider"
+            ]
         },
         {
             "id": "24224eb1-ed54-80b6-ba64-d20d82f6c0f0",
@@ -187,105 +96,140 @@ const note = {
             ]
         },
         {
-            "id": "24224eb1-ed54-80e2-b167-f109f3bc687d",
-            "type": "text",
-            "richText": [
-                [
-                    "You can skip all three parts."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8091-8d40-fd39730ff59a",
+            "id": "d743409f-0d89-5fca-a2eb-9dfb9aae824f",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "for {\n    fmt.Println(\"infinite\")\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-80c3-a68f-e7d42563ff17",
-            "type": "text",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "break",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " to exit or "
-                ],
-                [
-                    "return",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " to end the function."
+                    "i := 0\nfor {\n    if i == 3 {\n        break\n    }\n    fmt.Println(i)\n    i++\n}\n// Output, one value per line: 0, 1, 2"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-809b-90fc-d1fedce5444b",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8010-bc0d-ec7707f4ea87",
+            "id": "da266570-ffae-55b4-b1c3-a1db4dee3c61",
             "type": "sub_header",
             "richText": [
                 [
-                    "range",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " Loop – Iterating over Data Structures"
+                    "range: iteration values"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8085-b2de-d3e619967fad",
-            "type": "text",
-            "richText": [
-                [
-                    "The "
-                ],
-                [
-                    "range",
-                    [
-                        [
-                            "c"
+            "id": "8aad98bb-c0d2-5cec-8535-d5f7a37dc5bb",
+            "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1",
+                "col-2"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "55b920ce-dad8-5da7-afef-b3ccc962d66e",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Range over"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "First value"
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Second value"
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    " keyword is used to "
-                ],
-                [
-                    "iterate over arrays, slices, maps, strings, and channels",
-                    [
-                        [
-                            "b"
+                    }
+                },
+                {
+                    "id": "001390a3-73d0-5fd2-bfdf-afe909b1be61",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Array or slice"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Element index (int)."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Copy of the element value."
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    "."
-                ]
+                    }
+                },
+                {
+                    "id": "f31ab7e5-0405-5c8f-bc5c-fb8bc2c0af0e",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "String"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Starting byte index (int)."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Unicode code point (rune)."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "14b50858-3de4-565f-9d1c-108ace1519ec",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Map"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Key."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Copy of the associated value."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "ae0d9b9d-0621-56b1-bec6-ffe5120dbafb",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Channel"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Received element value."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "No second value."
+                            ]
+                        ]
+                    }
+                }
             ]
         },
         {
@@ -298,19 +242,22 @@ const note = {
             ]
         },
         {
-            "id": "24224eb1-ed54-8012-8d07-d7d57eb2a56e",
+            "id": "bdb0dadf-73b5-5009-be9b-0deb66adad9f",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "nums := []int{10, 20, 30}\nfor index, value := range nums {\n    fmt.Println(index, value)\n}\n"
+                    "nums := []int{10, 20, 30}\nfor index, value := range nums {\n    fmt.Println(index, value)\n}\n// Output:\n// 0 10\n// 1 20\n// 2 30"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24224eb1-ed54-8001-a369-dff94e93633a",
-            "type": "bulleted_list",
+            "id": "839a873b-2e70-52fa-a6f9-f77d2b745ae1",
+            "type": "text",
             "richText": [
+                [
+                    "Use only "
+                ],
                 [
                     "index",
                     [
@@ -320,16 +267,10 @@ const note = {
                     ]
                 ],
                 [
-                    " is the current index"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80b5-8ad9-f3cd096fe922",
-            "type": "bulleted_list",
-            "richText": [
+                    " for indices, or "
+                ],
                 [
-                    "value",
+                    "_",
                     [
                         [
                             "c"
@@ -337,32 +278,19 @@ const note = {
                     ]
                 ],
                 [
-                    " is the element at that index"
+                    " to ignore it and keep the value. Assigning to the value variable does not replace an element. Update through its index:"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80fe-aecf-fc4fdca4e0d3",
-            "type": "text",
-            "richText": [
-                [
-                    "To ignore the index:"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8049-a2e9-c7e17e483ca1",
+            "id": "42887151-2436-5849-adb6-706b23b3b9e1",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "for _, value := range nums {\n    fmt.Println(value)\n}"
+                    "for index := range nums {\n    nums[index]++\n}\nfor _, value := range nums {\n    fmt.Println(value)\n}\n// Output, one value per line: 11, 21, 31"
                 ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8078-aba9-c25be70f8df3",
-            "type": "divider"
+            ]
         },
         {
             "id": "24224eb1-ed54-8066-8642-dfebc21963c2",
@@ -374,27 +302,23 @@ const note = {
             ]
         },
         {
-            "id": "24224eb1-ed54-804e-98d9-d039b6cab491",
+            "id": "7d8bdd40-942e-5999-91e4-59e1243790a1",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "s := \"hello\"\nfor i, ch := range s {\n    fmt.Println(i, string(ch))\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-80db-a7e2-e755e99dcf97",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Iterates by Unicode code points (runes), not bytes."
+                    "s := \"Géo\"\nfor index, ch := range s {\n    fmt.Printf(\"%d %c\\n\", index, ch)\n}\nfmt.Println(len(s))\n// Output:\n// 0 G\n// 1 é\n// 3 o\n// 4"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80b1-a509-c7229a21c32c",
-            "type": "divider"
+            "id": "44150f0f-418e-5095-adf0-85518394b6d7",
+            "type": "text",
+            "richText": [
+                [
+                    "The string has 4 UTF-8 bytes and 3 runes. The index is a byte offset, not a rune count. Range decodes runes rather than visiting each byte; it is not a count of displayed characters composed from multiple runes."
+                ]
+            ]
         },
         {
             "id": "24224eb1-ed54-8098-8d63-ee6a128dc46f",
@@ -406,141 +330,245 @@ const note = {
             ]
         },
         {
-            "id": "24224eb1-ed54-80ef-88cb-e3392a6b6586",
+            "id": "d6de176b-7cac-5b8b-9f73-2b88900e6b31",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "m := map[string]int{\"a\": 1, \"b\": 2}\nfor key, value := range m {\n    fmt.Println(key, value)\n}\n\n// Maps allow iteration over just keys too\nfor key := range m {\n\t\tfmt.Println(key)\n}"
+                    "m := map[string]int{\"a\": 1, \"b\": 2}\nfor key, value := range m {\n    fmt.Println(key, value)\n}\n// Prints a 1 and b 2, in an unspecified order.\n\nfor key := range m {\n    fmt.Println(key)\n}\n// Prints the keys, also in an unspecified order."
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24224eb1-ed54-80b4-9a5c-ed2a051e327d",
-            "type": "divider"
+            "id": "41773933-a988-5330-80ed-98d3d83ad8d3",
+            "type": "text",
+            "richText": [
+                [
+                    "Map operation and concurrency rules are covered in "
+                ],
+                [
+                    "Maps",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/maps"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
         },
         {
-            "id": "24224eb1-ed54-8028-9735-f16d2eae854d",
+            "id": "826c0d8e-5bbe-5597-8d60-c7a5b3b1e088",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Channel (used with goroutines)"
+                    "Channel"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-801d-a847-c97341ff1b12",
+            "id": "cad40785-b6af-545a-b1dd-5bb8c7373232",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "ch := make(chan int)\ngo func() {\n    ch <- 1\n    ch <- 2\n    close(ch)\n}()\n\nfor v := range ch {\n    fmt.Println(v)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-809d-8b97-d22e95bfd042",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Loops until channel is closed."
+                    "ch := make(chan int)\ngo func() {\n    ch <- 1\n    ch <- 2\n    close(ch)\n}()\n\nfor value := range ch {\n    fmt.Println(value)\n}\n// Output, one value per line: 1, 2"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80e5-a1a2-df3d19558a92",
-            "type": "divider"
+            "id": "052fd9d6-17a8-5209-b0cd-92bd7ab8dc45",
+            "type": "text",
+            "richText": [
+                [
+                    "A channel range receives until the channel is closed and buffered values are drained. It blocks if an open channel has no value ready. Range over a nil channel blocks indefinitely."
+                ]
+            ]
+        },
+        {
+            "id": "00569b1c-d983-5a57-aea5-c1c5114b08ab",
+            "type": "text",
+            "richText": [
+                [
+                    "See "
+                ],
+                [
+                    "Channels",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/channels"
+                        ]
+                    ]
+                ],
+                [
+                    " for send, receive, and closure ownership."
+                ]
+            ]
+        },
+        {
+            "id": "85f21aad-78fa-57df-8b65-8d65b68b2f79",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Loop variable lifetime"
+                ]
+            ]
+        },
+        {
+            "id": "d221cd09-ef85-547d-9e2b-f5912bff8a4c",
+            "type": "text",
+            "richText": [
+                [
+                    "For Go language version 1.22 or later, variables declared by a loop’s "
+                ],
+                [
+                    ":=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " form are new for each iteration. Variables assigned with "
+                ],
+                [
+                    "=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " reuse existing variables. Earlier language versions reuse declared loop variables too."
+                ]
+            ]
+        },
+        {
+            "id": "49d7b8a1-76d3-57e4-9370-759ac4f00292",
+            "type": "text",
+            "richText": [
+                [
+                    "See "
+                ],
+                [
+                    "Closures",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/closures"
+                        ]
+                    ]
+                ],
+                [
+                    " for captured-variable examples and version details."
+                ]
+            ]
         },
         {
             "id": "24224eb1-ed54-803d-9620-d2aebf892c71",
             "type": "sub_header",
             "richText": [
                 [
-                    "break",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "continue",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "return",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
+                    "break, continue, return"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8033-8716-fa493118f3c8",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "break",
-                    [
-                        [
-                            "c"
+            "id": "e75750bd-5d2d-5b89-b68c-1115385553a8",
+            "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "28d4c954-49e9-5541-afc0-24cf605ad6ad",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Statement"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Effect"
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    ": exits loop"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80e3-93e4-da837a0b517d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "continue",
-                    [
-                        [
-                            "c"
+                    }
+                },
+                {
+                    "id": "6a202d82-a79e-56c9-9b36-c8b6d2481436",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "break",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Exit the innermost loop (or switch/select, when inside one)."
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    ": skips current iteration"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80d9-b9f3-f50a08c99ef3",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "return",
-                    [
-                        [
-                            "c"
+                    }
+                },
+                {
+                    "id": "4e0cad14-1e0d-5f3f-8cd2-069282939e39",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "continue",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Proceed to the next iteration of the innermost loop."
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    ": exits the function"
-                ]
+                    }
+                },
+                {
+                    "id": "a3531b0b-44d4-58c9-b654-8c3913cb6d66",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "return",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Exit the enclosing function."
+                            ]
+                        ]
+                    }
+                }
             ]
-        },
-        {
-            "id": "24224eb1-ed54-80d8-bb14-ec4648a5a711",
-            "type": "divider"
         },
         {
             "id": "24224eb1-ed54-8028-88a2-f651fae78ad3",
@@ -552,33 +580,46 @@ const note = {
             ]
         },
         {
-            "id": "24224eb1-ed54-80f4-833b-cdc9fcbdcd10",
+            "id": "00ddb894-90ce-5870-ad6f-8f3c8ac3ef6f",
             "type": "text",
             "richText": [
                 [
-                    "Use labels to control nested loops."
+                    "A labeled break or continue selects an enclosing loop. This fragment exits both loops when it reaches i == 1 and j == 1:"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8017-b294-c647852d1534",
+            "id": "9a8f3ff3-be34-557a-bbb6-4a394aa40af6",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "outer: //label can be anything, not necessarily outer\nfor i := 0; i < 3; i++ {\n    for j := 0; j < 3; j++ {\n        if i == j {\n            break outer\n        }\n    }\n}"
+                    "outer:\nfor i := 0; i < 3; i++ {\n    for j := 0; j < 3; j++ {\n        if i == 1 && j == 1 {\n            break outer\n        }\n        fmt.Println(i, j)\n    }\n}\n// Output:\n// 0 0\n// 0 1\n// 0 2\n// 1 0"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24224eb1-ed54-8012-bd72-f50c2cde72ec",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-801b-91d4-d50ab2a7d8f4",
-            "type": "text"
+            "id": "542ffc10-e206-5d2b-b4ae-d8d5e69d5a3b",
+            "type": "text",
+            "richText": [
+                [
+                    "Reference: "
+                ],
+                [
+                    "Go specification: for statements",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/spec#For_statements"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
         }
     ]
-} as const satisfies GoNote;
+} satisfies GoNote;
 
 export default note;

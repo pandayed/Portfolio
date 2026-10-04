@@ -1,4 +1,4 @@
-/* Copied from the Slices & Arrays page in Notion without changing its content. */
+/* Focused Go study notes, refined from the imported source. */
 
 import type { GoNote } from '../types';
 
@@ -6,59 +6,21 @@ const note = {
     "notionId": "24124eb1-ed54-806b-a0c9-f216d2b44e7e",
     "slug": "slices-arrays",
     "title": "Slices & Arrays",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24a24eb1-ed54-8041-9ab9-c357ee8a9a3d",
-            "type": "callout",
-            "children": [
-                {
-                    "id": "24a24eb1-ed54-8079-9881-f08667074fc9",
-                    "type": "text",
-                    "richText": [
-                        [
-                            "https://go.dev/blog/slices-intro",
-                            [
-                                [
-                                    "a",
-                                    "https://go.dev/blog/slices-intro"
-                                ]
-                            ]
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-80cc-8f3e-fd18a78585f8",
-            "type": "divider"
-        },
-        {
-            "id": "24a24eb1-ed54-8086-bd0e-da3f60b1edb1",
-            "type": "sub_header",
+            "id": "990ab772-5824-5cb6-b8c0-83515954a3bd",
+            "type": "text",
             "richText": [
                 [
-                    "Arrays",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80d1-aa28-c7eec9703977",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Fixed-length sequence of elements of the "
+                    "Source: "
                 ],
                 [
-                    "same type",
+                    "Go Slices: usage and internals",
                     [
                         [
-                            "b"
+                            "a",
+                            "https://go.dev/blog/slices-intro"
                         ]
                     ]
                 ],
@@ -68,58 +30,40 @@ const note = {
             ]
         },
         {
-            "id": "24124eb1-ed54-803f-a563-e8f089a84970",
-            "type": "bulleted_list",
+            "id": "b9671871-f3c1-59f5-8763-e578bccad3f1",
+            "type": "text",
             "richText": [
                 [
-                    "Stored "
+                    "An array holds a fixed number of elements. A slice describes a portion of an underlying array and can have a different length as the program runs. Examples are independent function-body fragments using "
                 ],
                 [
-                    "contiguously",
+                    "fmt",
                     [
                         [
-                            "b"
+                            "c"
                         ]
                     ]
                 ],
                 [
-                    " in memory."
+                    ", unless labeled as complete programs."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8010-a5aa-c0601f35a0d7",
-            "type": "code",
+            "id": "24a24eb1-ed54-8086-bd0e-da3f60b1edb1",
+            "type": "sub_header",
             "richText": [
                 [
-                    "var arr [3]int // array of 3 integers"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-806d-994a-e17e32e46fd3",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Key Properties",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
+                    "Arrays"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8084-8942-f75ae91e45d3",
+            "id": "c818d51f-10eb-5914-8e28-294d976083f6",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Length is part of the type: "
+                    "The length is part of the type: "
                 ],
                 [
                     "[3]int",
@@ -130,7 +74,7 @@ const note = {
                     ]
                 ],
                 [
-                    " ≠ "
+                    " and "
                 ],
                 [
                     "[4]int",
@@ -141,620 +85,278 @@ const note = {
                     ]
                 ],
                 [
-                    "."
+                    " are different types. An array cannot be resized."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-801f-8729-e2193eb11fd2",
+            "id": "edae60a7-6408-567b-9d31-3ad328d0f5d0",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Cannot be resized."
+                    "Indexing starts at 0. Assignment copies the array elements into separate array storage."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8076-bae0-fcbb9efccfd2",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Default zero values assigned on creation."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80a1-8017-cc271c0a7f4f",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Index starts at 0."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8028-ab3a-c9f8c420b243",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Arrays are "
-                ],
-                [
-                    "value types",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " — copied on assignment, and independent data is created."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80a0-b6fc-ddd42634fbf5",
+            "id": "d0eb40fd-b3ad-54c3-8ed7-039aecc1ebf8",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "a := [3]int{1, 2, 3}\nb := a       // creates a copy\nb[0] = 10    // a[0] still 1"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-800c-a9d7-ecbc4256c34d",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Shorthand Declaration",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
+                    "var zeros [3]int\na := [...]int{1, 2, 3} // inferred type: [3]int\nb := a\nb[0] = 10\nfmt.Println(zeros) // [0 0 0]\nfmt.Println(a)     // [1 2 3]\nfmt.Println(b)     // [10 2 3]"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8063-89da-e5dd14a37946",
-            "type": "code",
+            "id": "2f257249-abbe-5193-a02c-1ccf9c87ad16",
+            "type": "text",
             "richText": [
                 [
-                    "arr := [...]int{1, 2, 3} // Compiler infers length"
+                    "An array copy is not a deep copy of objects referenced by its elements. For example, copying an array of pointers copies the pointers."
                 ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-800d-996e-d0cee8ac95f9",
-            "type": "divider"
+            ]
         },
         {
             "id": "24124eb1-ed54-8007-a6a2-e8a793336e80",
             "type": "sub_header",
             "richText": [
                 [
-                    "Slices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Slices"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8053-968d-e2a4dde1e2a0",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A "
-                ],
-                [
-                    "dynamic, flexible view",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " over an array."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-804e-bc71-e739bf97e762",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Internally: a struct with:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-8052-a561-da421bb61740",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Pointer to array"
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-80b1-9a23-caf0892b3837",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Length"
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-80cc-a7c0-d5fbcde1e634",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Capacity"
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80c5-a774-def2b69590cc",
-            "type": "code",
-            "richText": [
-                [
-                    "slice := []int{1, 2, 3}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8078-8877-c5afbad04033",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Key Properties",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80fa-a678-ff55dbaa1481",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Variable length",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ef-a9d8-f0878c8c1576",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Backed by an array"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8094-9508-fc82d975f6fa",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Pass by value (but refers to same underlying array)"
-                ]
-            ]
-        },
-        {
-            "id": "24924eb1-ed54-803e-b0c0-f299d2ba788a",
-            "type": "code",
-            "richText": [
-                [
-                    "func change(s []int) {\n    s[0] = 99 // changes underlying array\n}\n\nfunc main() {\n    a := []int{1, 2, 3}\n    b := a         // copy of slice struct\n    b[1] = 77      // affects 'a' too\n    change(a)      // also affects 'a'\n    fmt.Println(a) // [99 77 3]\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24924eb1-ed54-80b8-9daf-d74c9c8e059f",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Important Note:"
-                ]
-            ]
-        },
-        {
-            "id": "24924eb1-ed54-80df-a065-f6366494a25c",
+            "id": "382721db-ce92-57ac-869f-c68d8a9c988d",
             "type": "text",
             "richText": [
                 [
-                    "in Go, "
-                ],
-                [
-                    "slices are not reference types",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", but they "
-                ],
-                [
-                    "behave like",
-                    [
-                        [
-                            "i"
-                        ]
-                    ]
-                ],
-                [
-                    " references because:"
+                    "A slice value contains a reference to its underlying array, a length, and a capacity. Assignment and function arguments copy the slice value, while the copies may still share element storage."
                 ]
             ]
         },
         {
-            "id": "24924eb1-ed54-8007-aa67-ebe8d0207674",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A slice itself is a "
-                ],
-                [
-                    "value type",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " (struct with pointer, length, capacity)."
-                ]
-            ]
-        },
-        {
-            "id": "24924eb1-ed54-806b-a28b-c26e384a17da",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Copying a slice copies that struct, not the array."
-                ]
-            ]
-        },
-        {
-            "id": "24924eb1-ed54-80ab-97c7-e100f48fb4c3",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Both copies’ pointers can refer to the "
-                ],
-                [
-                    "same underlying array",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", so changes to elements are visible across copies."
-                ]
-            ]
-        },
-        {
-            "id": "24924eb1-ed54-806f-9d63-c78d0e688eaf",
+            "id": "98f94f08-3883-5314-8b3a-b8ee259ae306",
             "type": "text",
             "richText": [
                 [
-                    "So:"
+                    "Complete program:"
                 ]
             ]
         },
         {
-            "id": "24924eb1-ed54-8023-88de-fbf524d91498",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Technically:",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " value type."
-                ]
-            ]
-        },
-        {
-            "id": "24924eb1-ed54-8054-9480-c5190da6cc5d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Practically:",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " acts like a reference to array data."
-                ]
-            ]
-        },
-        {
-            "id": "24924eb1-ed54-80d7-b6ba-f2a17e591496",
+            "id": "b42b90c4-eb85-5c45-ad46-b351e6ba6ffa",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "a := []int{1, 2, 3} // slice\nb := a              // copy of slice header\nb[0] = 10           // changes underlying array\n\nfmt.Println(a) // [10 2 3] — affected\nfmt.Println(b) // [10 2 3] — same underlying array\n// Refer to arrays, they have a different behaviour for same scenario."
+                    "package main\n\nimport \"fmt\"\n\nfunc change(s []int) {\n    s[0] = 99\n    s = s[:1] // changes only this function’s slice length\n}\n\nfunc main() {\n    a := []int{1, 2, 3}\n    b := a\n    b[1] = 77\n    change(a)\n    fmt.Println(a)      // [99 77 3]\n    fmt.Println(len(a)) // 3\n}"
                 ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80b5-a730-e1c88ffcc6f8",
-            "type": "divider"
+            ]
         },
         {
             "id": "24124eb1-ed54-8056-ab2f-ed831bcbb392",
             "type": "sub_header",
             "richText": [
                 [
-                    "Slice Creation",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Slice Creation"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8075-a05e-f27c9922c166",
+            "id": "966c6c88-c401-563a-9a73-b0ae55feba4a",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "From Array",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
+                    "From an array or another slice"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80bd-8450-e69f938a0392",
+            "id": "ce91370f-217d-5e90-b5a6-11a6e08f57b7",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "arr := [5]int{1, 2, 3, 4, 5}\ns := arr[1:4]  // elements 2, 3, 4"
+                    "arr := [5]int{1, 2, 3, 4, 5}\ns := arr[1:4]\ns2 := s[1:2]\nfmt.Println(s)  // [2 3 4]\nfmt.Println(s2) // [3]"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24124eb1-ed54-80d5-8606-e5bec63775f5",
+            "id": "6fa50e27-7b29-5a36-ba3b-8ee92196d099",
+            "type": "text",
+            "richText": [
+                [
+                    "The lower bound is included and the upper bound is excluded. These slices share storage with arr; changing an existing element can affect the other views."
+                ]
+            ]
+        },
+        {
+            "id": "e4411120-df52-5e43-a9f7-68eb92a354f6",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "From Slice",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
+                    "Using make"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8051-a443-e1b75d010005",
+            "id": "cac73ea7-1626-5fc9-87f5-a78b61db3c21",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "s2 := s[1:2] // further slicing allowed"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80c7-a005-e8812b642459",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Using ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "make()",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
+                    "short := make([]int, 3)\nspare := make([]int, 2, 5)\nfmt.Println(short, len(short), cap(short)) // [0 0 0] 3 3\nfmt.Println(spare, len(spare), cap(spare)) // [0 0] 2 5"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-804b-9233-f00806a569ce",
-            "type": "code",
-            "richText": [
-                [
-                    "s := make([]int, 3) // length = 3, capacity = 3\ns := make([]int, 2, 5) // length = 2, capacity = 5"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-802d-8701-ca34c8218ab1",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80b3-ae5b-ff952924462b",
+            "id": "11cd24db-f8ec-5720-b699-c1c9823d4b18",
             "type": "sub_header",
             "richText": [
                 [
-                    "Slice Properties",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Length and capacity"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80f3-80c0-c096043d3819",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "len(slice)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " → number of accessible elements"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-808b-9678-c5431e390dd3",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "cap(slice)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " → max elements before reallocation"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8021-bcfb-c5c203cdae84",
-            "type": "code",
-            "richText": [
-                [
-                    "s := []int{1, 2, 3}\nlen(s) // 3\ncap(s) // 3"
-                ]
+            "id": "1ea19a65-d888-54bd-bf03-eec0e52f385a",
+            "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1"
             ],
-            "language": "Go"
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "e6619ec5-3503-5357-ac58-81f4aad12728",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Expression"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Meaning"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "ad1bb287-25da-5e51-98ba-42bdc5dedd53",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "len(s)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Number of elements that can currently be indexed."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "4193c0c3-32ed-50f5-a4b6-6d1c73e9fc05",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "cap(s)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Number of elements available from this slice’s start in its underlying array."
+                            ]
+                        ]
+                    }
+                }
+            ]
         },
         {
-            "id": "24124eb1-ed54-805f-b9ee-d2ab4bc11425",
-            "type": "divider"
+            "id": "91b165c8-0949-5f40-a441-41c44db3902f",
+            "type": "text",
+            "richText": [
+                [
+                    "A slice can be resliced up to its capacity. Indexing still requires an index below its current length."
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-80fc-9e17-e379ea016a4e",
             "type": "sub_header",
             "richText": [
                 [
-                    "Slice Append",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Slice Append"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8041-b01d-d90f47fe45ff",
+            "id": "681f173b-2476-5bb3-964a-4467dd486c1b",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "s := []int{1, 2}\ns = append(s, 3, 4)"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-808e-833c-d357dd512e98",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "If capacity exceeded, new array is allocated."
+                    "s := make([]int, 2, 4)\ns[0], s[1] = 1, 2\ns = append(s, 3, 4)\nfmt.Println(s) // [1 2 3 4]\ns = append(s, 5) // length 5 exceeds capacity 4\nfmt.Println(s) // [1 2 3 4 5]"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8014-bcc6-e0be782e40a5",
-            "type": "bulleted_list",
+            "id": "cb2f7271-bf1c-5529-8770-d438c0f9637b",
+            "type": "text",
             "richText": [
                 [
-                    "Old slice still points to old array, so do not forget to receive the updated slice."
+                    "Append returns an updated slice. Store the result. If there is enough capacity, append reuses the existing array. Otherwise it allocates a larger array and copies the elements. Other slices keep their own lengths and backing-array references."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80f7-8c25-c2348a559b6b",
-            "type": "divider"
+            "id": "7043a8d6-566c-563b-a12d-b139b3b44417",
+            "type": "sub_sub_header",
+            "richText": [
+                [
+                    "Append can affect another slice"
+                ]
+            ]
+        },
+        {
+            "id": "94034cb6-a27a-5dec-a156-dbddb4507c6e",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "a := []int{1, 2, 3}\nb := a[:2]\nb = append(b, 9) // reuses a’s underlying array\nfmt.Println(a) // [1 2 9]\nfmt.Println(b) // [1 2 9]"
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-80c5-b327-df0cd1b89d8a",
             "type": "sub_header",
             "richText": [
                 [
-                    "Copying Slices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Copying Slices"
                 ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-804d-b3cd-f2200e411577",
-            "type": "bulleted_list",
+            "id": "7f60b00a-5358-5fe1-a5aa-f79e34506d77",
+            "type": "text",
             "richText": [
                 [
                     "copy",
@@ -765,312 +367,186 @@ const note = {
                     ]
                 ],
                 [
-                    " creates an independent copy."
+                    " copies elements into an existing destination. It returns the smaller of the source and destination lengths. It does not allocate or make overlapping slices independent."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80f5-bdb2-d8528010fb16",
+            "id": "91de879d-fb0c-5a05-8870-6d8098352393",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "a := []int{1, 2, 3}\nb := make([]int, len(a))\ncopy(b, a) // b and a do not point to same array"
+                    "a := []int{1, 2, 3}\nb := make([]int, len(a)) // separate backing array\nn := copy(b, a)\nb[0] = 99\nfmt.Println(n) // 3\nfmt.Println(a) // [1 2 3]\nfmt.Println(b) // [99 2 3]"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24124eb1-ed54-80f6-8da9-c81806ae5e52",
-            "type": "divider"
+            "id": "68fd8bc9-561c-55bf-a6c5-2df54372053c",
+            "type": "text",
+            "richText": [
+                [
+                    "Overlapping source and destination are allowed. Copying elements that contain references still shares the referenced objects; it is not a deep copy."
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-8039-8fec-e8adcfd2af47",
             "type": "sub_header",
             "richText": [
                 [
-                    "Nil and Empty Slices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Nil and Empty Slices"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80b3-b0d7-cee241d6ce2e",
+            "id": "55c59225-f243-53e7-a47e-70b7c6281791",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "var a []int       // nil slice\nb := []int{}      // empty but non-nil"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-801b-9cb0-cabdd3eb0833",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " slice: "
-                ],
-                [
-                    "len=0",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "cap=0",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "pointer=nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
+                    "var nilSlice []int\nempty := []int{}\nreserved := make([]int, 0, 5)\nfmt.Println(nilSlice == nil, len(nilSlice), cap(nilSlice)) // true 0 0\nfmt.Println(empty == nil, len(empty), cap(empty))          // false 0 0\nfmt.Println(reserved == nil, len(reserved), cap(reserved)) // false 0 5\nnilSlice = append(nilSlice, 1)\nfmt.Println(nilSlice) // [1]"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80dc-9eab-f4a5ca554dfd",
-            "type": "bulleted_list",
+            "id": "08bf9fc9-3d11-5aa4-9821-67e667492486",
+            "type": "text",
             "richText": [
                 [
-                    "Empty slice: "
-                ],
-                [
-                    "len=0",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "cap=0",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "pointer≠nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
+                    "Empty means length 0. It does not imply zero capacity or nil. A nil slice supports len, cap, range, copy, and append; indexing still requires an existing element."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-805d-827f-ca128f8a6129",
-            "type": "divider"
+            "id": "f86dc108-921e-5419-af15-6df9350beb67",
+            "type": "text",
+            "richText": [
+                [
+                    "See "
+                ],
+                [
+                    "Zero Values",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/zero-values"
+                        ]
+                    ]
+                ],
+                [
+                    " for defaults of other types."
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-8087-94f0-eab216fc592f",
             "type": "sub_header",
             "richText": [
                 [
-                    "Comparison",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Comparison"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8014-8401-f0ff9696ae97",
+            "id": "07cb6c88-acd2-50fd-89c6-27184c7a7811",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Arrays: can compare with "
-                ],
-                [
-                    "==",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " if same length and type."
+                    "Two arrays of the same type can be compared with == if their element type is comparable. An array of slices cannot be compared with ==."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80c4-b121-cfa8dd241a11",
+            "id": "8bb3cea3-a526-5074-8c88-5518d83578be",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Slices: "
-                ],
-                [
-                    "cannot",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " compare directly (except to "
-                ],
-                [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ")."
+                    "Slices cannot be compared with each other using ==. They can be compared with nil."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8040-b559-d77c7328212f",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80c0-903d-fd94a3ecd03f",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "For Loops",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ae-b20e-e8c72e172e20",
+            "id": "85aaa13d-bf04-531e-83d3-264a84a62c49",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "for i, v := range slice {\n    // use i and v\n}"
+                    "a := [2]int{1, 2}\nb := [2]int{1, 2}\nfmt.Println(a == b) // true\n\n// [1][]int{{1}} == [1][]int{{1}} // invalid: slice elements are not comparable"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24124eb1-ed54-8075-a268-e074bb97aa79",
-            "type": "divider"
+            "id": "2340639a-d9b3-529b-ba8d-4bf5dd9bee04",
+            "type": "text",
+            "richText": [
+                [
+                    "Iteration rules and index/value examples are in "
+                ],
+                [
+                    "Range & For Loops",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/range-for-loops"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-802a-8541-d005a86d174c",
             "type": "sub_header",
             "richText": [
                 [
-                    "Multi-dimensional Arrays/Slices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Multi-dimensional Arrays/Slices"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8038-bddc-f149208bbc4d",
-            "type": "sub_sub_header",
+            "id": "e8bcd4f6-973b-5261-8bb6-c8b5ece35441",
+            "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "Arrays",
+                    "var fixed [2][3]int\nrows := [][]int{\n    {1, 2},\n    {3, 4, 5},\n}\nfmt.Println(fixed) // [[0 0 0] [0 0 0]]\nfmt.Println(rows)  // [[1 2] [3 4 5]]"
+                ]
+            ]
+        },
+        {
+            "id": "10657370-5e6e-57bf-be24-29be5d36e878",
+            "type": "text",
+            "richText": [
+                [
+                    "An array has a fixed shape. Each row in a slice of slices is a separate slice and can have a different length."
+                ]
+            ]
+        },
+        {
+            "id": "86717fd7-8e9f-50fe-8145-a25f7e055d32",
+            "type": "text",
+            "richText": [
+                [
+                    "Reference: "
+                ],
+                [
+                    "Go specification: append and copy",
                     [
                         [
-                            "b"
+                            "a",
+                            "https://go.dev/ref/spec#Appending_and_copying_slices"
                         ]
                     ]
                 ],
                 [
-                    ":"
+                    "."
                 ]
             ]
-        },
-        {
-            "id": "24124eb1-ed54-8079-afba-eacebf236cc5",
-            "type": "code",
-            "richText": [
-                [
-                    "var matrix [2][3]int"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8074-9dd6-cbfbc69e3237",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Slices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8082-b427-e2660db7736d",
-            "type": "code",
-            "richText": [
-                [
-                    "matrix := [][]int{\n    {1, 2},\n    {3, 4},\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8085-9ba0-d17eed4ddf01",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80fd-8237-f74a8b5d76c9",
-            "type": "text"
         }
     ]
-} as const satisfies GoNote;
+} satisfies GoNote;
 
 export default note;

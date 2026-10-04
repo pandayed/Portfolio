@@ -1,4 +1,6 @@
-/* Ordered index of the Go note pages copied from Notion. */
+/* Chapters define both the Go index and the reading order. */
+
+import type { GoChapter } from './types';
 
 import goNote1 from './data/why-go';
 import goNote3 from './data/cpp-vs-go';
@@ -42,46 +44,37 @@ import goNote40 from './data/const-iota';
 import goNote41 from './data/defined-type-and-type-alias';
 import goNote42 from './data/go-by-questions';
 
-export const goNotes = [
-    goNote1,
-    goNote3,
-    goNote4,
-    goNote5,
-    goNote6,
-    goNote7,
-    goNote8,
-    goNote9,
-    goNote10,
-    goNote11,
-    goNote12,
-    goNote13,
-    goNote14,
-    goNote15,
-    goNote16,
-    goNote17,
-    goNote18,
-    goNote19,
-    goNote20,
-    goNote21,
-    goNote22,
-    goNote23,
-    goNote24,
-    goNote25,
-    goNote26,
-    goNote27,
-    goNote28,
-    goNote29,
-    goNote30,
-    goNote31,
-    goNote32,
-    goNote33,
-    goNote34,
-    goNote35,
-    goNote36,
-    goNote37,
-    goNote38,
-    goNote39,
-    goNote40,
-    goNote41,
-    goNote42,
-] as const;
+export const goChapters: readonly GoChapter[] = [
+    {
+        title: '1. Language fundamentals',
+        summary: 'Running Go, declarations, constants, default values, and control flow.',
+        notes: [goNote1, goNote4, goNote5, goNote40, goNote6, goNote7, goNote10],
+    },
+    {
+        title: '2. Collections and types',
+        summary: 'Arrays, slices, maps, pointers, defined types, aliases, and structs.',
+        notes: [goNote8, goNote9, goNote26, goNote41, goNote23],
+    },
+    {
+        title: '3. Functions and interfaces',
+        summary: 'Function forms, captured state, methods, interfaces, embedding, and generics.',
+        notes: [goNote11, goNote13, goNote14, goNote15, goNote12, goNote24, goNote25, goNote37],
+    },
+    {
+        title: '4. Program structure and errors',
+        summary: 'Packages, modules, dependency files, initialization, cleanup, and error handling.',
+        notes: [goNote22, goNote21, goNote20, goNote18, goNote19, goNote17, goNote16, goNote27, goNote28],
+    },
+    {
+        title: '5. Concurrency',
+        summary: 'Goroutines, completion, shared state, channels, cancellation, and scheduling.',
+        notes: [goNote29, goNote32, goNote34, goNote35, goNote31, goNote39, goNote36, goNote33, goNote30],
+    },
+    {
+        title: '6. Reference and revision',
+        summary: 'Date and time, C++ comparisons, and questions for reviewing Go concepts.',
+        notes: [goNote38, goNote3, goNote42],
+    },
+];
+
+export const goNotes = goChapters.flatMap((chapter) => chapter.notes);

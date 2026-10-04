@@ -1,4 +1,4 @@
-/* Copied from the Zero Values page in Notion without changing its content. */
+/* Focused Go study notes, refined from the imported source. */
 
 import type { GoNote } from '../types';
 
@@ -6,195 +6,62 @@ const note = {
     "notionId": "24224eb1-ed54-80ac-8351-d559d45a4994",
     "slug": "zero-values",
     "title": "Zero Values",
-    "updatedOn": "2025-08-08",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24224eb1-ed54-8057-b7ba-f16a4bdcb97d",
+            "id": "e78bca00-8779-5cb3-8106-4ebf0b4e2f54",
             "type": "text",
             "richText": [
                 [
-                    "In Go, "
-                ],
-                [
-                    "zero value",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " is the "
-                ],
-                [
-                    "default value assigned to a variable when it's declared without an explicit initializer",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ". Every type has a specific zero value, which is guaranteed to be a valid value of that type (not nil for all types!)."
+                    "A variable declared without an initializer receives its type’s zero value. Struct fields and array elements are initialized recursively, so they do not contain uninitialized values."
                 ]
             ]
-        },
-        {
-            "id": "24224eb1-ed54-8015-8dc7-d27bfb1149fc",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8076-b1e0-d1ea88c20025",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Why zero values matter",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8037-9e8a-cfeb352ff855",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Prevents uninitialized variables."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8042-bec4-c1f2e2b0958e",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Useful for default behavior in data structures."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8017-832e-ecaaeb89f081",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Plays a major role in structs, maps, slices, etc."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80e9-8cee-fb6ca884e27f",
-            "type": "divider"
         },
         {
             "id": "24224eb1-ed54-8037-9e3a-ce008cfb450c",
-            "type": "sub_sub_header",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Zero Values by Type",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Zero Values by Type"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80a9-84c1-f11e42f8df50",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "1. Numeric Types",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8052-988f-c79496c62013",
+            "id": "276924b6-0d42-55b6-a52b-d72abb9525d0",
             "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
             "children": [
                 {
-                    "id": "24224eb1-ed54-80a4-bca7-cf1c8c689d62",
+                    "id": "a21eadd8-ffb0-5fb7-bdb5-51f4d8f4902e",
                     "type": "table_row",
                     "cells": {
-                        "cifu": [
+                        "col-0": [
                             [
                                 "Type"
                             ]
                         ],
-                        "FRTY": [
+                        "col-1": [
                             [
-                                "Zero Value"
+                                "Zero value"
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24224eb1-ed54-804b-ae67-c0c05766f352",
+                    "id": "f639b171-2f8d-5a98-9bf7-1d8eb05436e1",
                     "type": "table_row",
                     "cells": {
-                        "cifu": [
+                        "col-0": [
                             [
-                                "int",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                ", "
-                            ],
-                            [
-                                "int8",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                ", "
-                            ],
-                            [
-                                "int16",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                ", "
-                            ],
-                            [
-                                "int32",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                ", "
-                            ],
-                            [
-                                "int64",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "Signed and unsigned integers, including byte and rune"
                             ]
                         ],
-                        "FRTY": [
+                        "col-1": [
                             [
                                 "0",
                                 [
@@ -207,50 +74,10 @@ const note = {
                     }
                 },
                 {
-                    "id": "24224eb1-ed54-80be-8ae5-fc8f501ce021",
+                    "id": "a297a0f3-dc64-5e84-adf5-9abb91f49d76",
                     "type": "table_row",
                     "cells": {
-                        "cifu": [
-                            [
-                                "uint",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                ", "
-                            ],
-                            [
-                                "uint8",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                ", etc."
-                            ]
-                        ],
-                        "FRTY": [
-                            [
-                                "0",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24224eb1-ed54-8046-82c7-f56b570e9120",
-                    "type": "table_row",
-                    "cells": {
-                        "cifu": [
+                        "col-0": [
                             [
                                 "float32",
                                 [
@@ -271,7 +98,7 @@ const note = {
                                 ]
                             ]
                         ],
-                        "FRTY": [
+                        "col-1": [
                             [
                                 "0.0",
                                 [
@@ -284,10 +111,10 @@ const note = {
                     }
                 },
                 {
-                    "id": "24224eb1-ed54-8030-9b31-d4d462ebf46d",
+                    "id": "8f11188e-699c-5e20-872c-41e363477991",
                     "type": "table_row",
                     "cells": {
-                        "cifu": [
+                        "col-0": [
                             [
                                 "complex64",
                                 [
@@ -308,7 +135,7 @@ const note = {
                                 ]
                             ]
                         ],
-                        "FRTY": [
+                        "col-1": [
                             [
                                 "0 + 0i",
                                 [
@@ -319,58 +146,12 @@ const note = {
                             ]
                         ]
                     }
-                }
-            ],
-            "columnOrder": [
-                "cifu",
-                "FRTY"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24224eb1-ed54-80b4-9b4a-da64f42345f8",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8061-929c-f38f2ce4ab94",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "2. Boolean",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8073-b71f-d4301a0501ee",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24224eb1-ed54-8080-8862-c3302fbeba96",
-                    "type": "table_row",
-                    "cells": {
-                        "\\_Sj": [
-                            [
-                                "Type"
-                            ]
-                        ],
-                        "CBJl": [
-                            [
-                                "Zero Value"
-                            ]
-                        ]
-                    }
                 },
                 {
-                    "id": "24224eb1-ed54-80be-8c3c-f0721571645c",
+                    "id": "92ea63c0-7374-56fc-b013-9ade2688df10",
                     "type": "table_row",
                     "cells": {
-                        "\\_Sj": [
+                        "col-0": [
                             [
                                 "bool",
                                 [
@@ -380,7 +161,7 @@ const note = {
                                 ]
                             ]
                         ],
-                        "CBJl": [
+                        "col-1": [
                             [
                                 "false",
                                 [
@@ -391,58 +172,12 @@ const note = {
                             ]
                         ]
                     }
-                }
-            ],
-            "columnOrder": [
-                "\\_Sj",
-                "CBJl"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24224eb1-ed54-80a8-afa1-cd1bf35cd25a",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80c7-be22-eb81cb51200f",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "3. String",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80ee-b902-ce6b8af68317",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24224eb1-ed54-80c5-b0a9-d95bbeea3c62",
-                    "type": "table_row",
-                    "cells": {
-                        "GHgw": [
-                            [
-                                "Type"
-                            ]
-                        ],
-                        "FVbA": [
-                            [
-                                "Zero Value"
-                            ]
-                        ]
-                    }
                 },
                 {
-                    "id": "24224eb1-ed54-8026-b9e3-c312153609c0",
+                    "id": "a8c29c59-9961-5bfc-8705-ee299eb090f0",
                     "type": "table_row",
                     "cells": {
-                        "GHgw": [
+                        "col-0": [
                             [
                                 "string",
                                 [
@@ -452,7 +187,7 @@ const note = {
                                 ]
                             ]
                         ],
-                        "FVbA": [
+                        "col-1": [
                             [
                                 "\"\"",
                                 [
@@ -460,64 +195,18 @@ const note = {
                                         "c"
                                     ]
                                 ]
-                            ],
-                            [
-                                " (empty string)"
-                            ]
-                        ]
-                    }
-                }
-            ],
-            "columnOrder": [
-                "GHgw",
-                "FVbA"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24224eb1-ed54-80ad-b858-daa66d5112f7",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-807b-8034-f185ec399bec",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "4. Pointers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80ed-a4d0-cba9e384e5fa",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24224eb1-ed54-80c5-ac20-df07152b2778",
-                    "type": "table_row",
-                    "cells": {
-                        "pV~i": [
-                            [
-                                "Type"
-                            ]
-                        ],
-                        "eu{r": [
-                            [
-                                "Zero Value"
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24224eb1-ed54-8029-bd5a-ef7f3f0ebfba",
+                    "id": "20e55008-de21-5cc2-b544-ba216bf2c7ce",
                     "type": "table_row",
                     "cells": {
-                        "pV~i": [
+                        "col-0": [
+                            [
+                                "Pointers ("
+                            ],
                             [
                                 "*T",
                                 [
@@ -525,9 +214,12 @@ const note = {
                                         "c"
                                     ]
                                 ]
+                            ],
+                            [
+                                ")"
                             ]
                         ],
-                        "eu{r": [
+                        "col-1": [
                             [
                                 "nil",
                                 [
@@ -538,58 +230,15 @@ const note = {
                             ]
                         ]
                     }
-                }
-            ],
-            "columnOrder": [
-                "pV~i",
-                "eu{r"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24224eb1-ed54-806c-9b79-ff11d6987ac4",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80a5-9fe7-c53dae6ae2e5",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "5. Slices, Maps, Channels, Interfaces, Functions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-807d-867f-fedf1fccc687",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24224eb1-ed54-802d-b4fa-c016c3b1567b",
-                    "type": "table_row",
-                    "cells": {
-                        "dMLI": [
-                            [
-                                "Type"
-                            ]
-                        ],
-                        "bETL": [
-                            [
-                                "Zero Value"
-                            ]
-                        ]
-                    }
                 },
                 {
-                    "id": "24224eb1-ed54-80e3-820e-ee4141bc5082",
+                    "id": "b9eb96fb-d8ef-5424-96ca-c99726382a89",
                     "type": "table_row",
                     "cells": {
-                        "dMLI": [
+                        "col-0": [
+                            [
+                                "Slices ("
+                            ],
                             [
                                 "[]T",
                                 [
@@ -599,26 +248,8 @@ const note = {
                                 ]
                             ],
                             [
-                                " (slice)"
-                            ]
-                        ],
-                        "bETL": [
-                            [
-                                "nil",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24224eb1-ed54-80a2-b5b0-eb6a07c402c0",
-                    "type": "table_row",
-                    "cells": {
-                        "dMLI": [
+                                "), maps ("
+                            ],
                             [
                                 "map[K]V",
                                 [
@@ -626,25 +257,10 @@ const note = {
                                         "c"
                                     ]
                                 ]
-                            ]
-                        ],
-                        "bETL": [
+                            ],
                             [
-                                "nil",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24224eb1-ed54-80ef-8ef7-d8828948d353",
-                    "type": "table_row",
-                    "cells": {
-                        "dMLI": [
+                                "), channels ("
+                            ],
                             [
                                 "chan T",
                                 [
@@ -652,9 +268,12 @@ const note = {
                                         "c"
                                     ]
                                 ]
+                            ],
+                            [
+                                ")"
                             ]
                         ],
-                        "bETL": [
+                        "col-1": [
                             [
                                 "nil",
                                 [
@@ -667,10 +286,13 @@ const note = {
                     }
                 },
                 {
-                    "id": "24224eb1-ed54-80c0-b9b6-d99f907ff441",
+                    "id": "45729987-1a45-516f-8607-af6e3945f7f5",
                     "type": "table_row",
                     "cells": {
-                        "dMLI": [
+                        "col-0": [
+                            [
+                                "Interfaces ("
+                            ],
                             [
                                 "interface{}",
                                 [
@@ -678,9 +300,12 @@ const note = {
                                         "c"
                                     ]
                                 ]
+                            ],
+                            [
+                                "), function types"
                             ]
                         ],
-                        "bETL": [
+                        "col-1": [
                             [
                                 "nil",
                                 [
@@ -693,168 +318,29 @@ const note = {
                     }
                 },
                 {
-                    "id": "24224eb1-ed54-8001-80e2-eeaa41348ff3",
+                    "id": "58c3121a-4afe-50b8-a8c4-424ba94ecf56",
                     "type": "table_row",
                     "cells": {
-                        "dMLI": [
+                        "col-0": [
                             [
-                                "func",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "Structs"
                             ]
                         ],
-                        "bETL": [
+                        "col-1": [
                             [
-                                "nil",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                }
-            ],
-            "columnOrder": [
-                "dMLI",
-                "bETL"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24224eb1-ed54-80a8-9237-d9bb73680193",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8065-a5d5-e6a24f0bc9c4",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "6. Struct",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80ef-a3fc-e445c10842c7",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24224eb1-ed54-8077-ba34-cb88ba78de22",
-                    "type": "table_row",
-                    "cells": {
-                        "wONx": [
-                            [
-                                "Type"
-                            ]
-                        ],
-                        "Ebvr": [
-                            [
-                                "Zero Value"
+                                "Each field has its type’s zero value."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24224eb1-ed54-8094-a352-e69860fa62d4",
+                    "id": "2a245766-c7f2-5e66-b91a-b22f3bdde877",
                     "type": "table_row",
                     "cells": {
-                        "wONx": [
+                        "col-0": [
                             [
-                                "struct",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ],
-                        "Ebvr": [
-                            [
-                                "All fields zero-valued recursively"
-                            ]
-                        ]
-                    }
-                }
-            ],
-            "columnOrder": [
-                "wONx",
-                "Ebvr"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24224eb1-ed54-80cb-b6f6-ff0d6f5d9f4b",
-            "type": "text",
-            "richText": [
-                [
-                    "Example:"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80fe-a080-fb5370a6ff92",
-            "type": "code",
-            "richText": [
-                [
-                    "type Person struct {\n    Name string\n    Age  int\n}\n// Zero value: Person{\"\", 0}\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-80b7-91e3-f992828d42ae",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80c3-8f83-c57c10007660",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "7. Arrays",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8059-b348-f1a03bacf84a",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24224eb1-ed54-809d-a782-cf2371b50e66",
-                    "type": "table_row",
-                    "cells": {
-                        "S]PE": [
-                            [
-                                "Type"
-                            ]
-                        ],
-                        "BiZZ": [
-                            [
-                                "Zero Value"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24224eb1-ed54-80e3-b14a-cece05f4ab6d",
-                    "type": "table_row",
-                    "cells": {
-                        "S]PE": [
+                                "Arrays ("
+                            ],
                             [
                                 "[N]T",
                                 [
@@ -862,86 +348,130 @@ const note = {
                                         "c"
                                     ]
                                 ]
+                            ],
+                            [
+                                ")"
                             ]
                         ],
-                        "BiZZ": [
+                        "col-1": [
                             [
-                                "All N elements zero-valued"
+                                "All N elements have the element type’s zero value."
                             ]
                         ]
                     }
                 }
-            ],
-            "columnOrder": [
-                "S]PE",
-                "BiZZ"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
+            ]
         },
         {
-            "id": "24224eb1-ed54-807e-88fd-c9d6b2adca17",
+            "id": "df7182a8-15f8-561c-89bd-d46fd008432e",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Structs and arrays"
+                ]
+            ]
+        },
+        {
+            "id": "3becfb30-a9c9-588c-bd15-c0101a38f7b2",
             "type": "text",
             "richText": [
                 [
-                    "Example:"
+                    "Complete program:"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-808d-93ea-ca462b132c9e",
+            "id": "65b7d3b6-0a18-539d-b89d-30601e322b93",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "var arr [3]int // [0, 0, 0]\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-80de-88e0-dce7efd7fff0",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80df-9a57-e7547527c7f5",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Special Notes",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "package main\n\nimport \"fmt\"\n\ntype Person struct {\n    Name string\n    Age int\n}\n\nfunc main() {\n    var person Person\n    var numbers [3]int\n    fmt.Printf(\"%q %d\\n\", person.Name, person.Age) // \"\" 0\n    fmt.Println(numbers)                       // [0 0 0]\n\n    p := new(Person) // *Person pointing to a zero-valued Person\n    fmt.Printf(\"%q %d\\n\", p.Name, p.Age)         // \"\" 0\n}"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8072-b632-dbb2bbd93d0d",
+            "id": "10fd0eaa-1933-5f9f-8709-87eee099e663",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Zero value and usable operations"
+                ]
+            ]
+        },
+        {
+            "id": "4fa770df-87da-5b33-9ee6-65e80889efa5",
+            "type": "text",
+            "richText": [
+                [
+                    "A zero value is a value of its type. It does not promise that every operation on that value will succeed."
+                ]
+            ]
+        },
+        {
+            "id": "1b1302b3-54ba-515e-8c71-ca71e6b8bc8b",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You can use the "
+                    "A nil slice has length and capacity 0. It supports iteration and append; indexing it still requires an existing element."
+                ]
+            ]
+        },
+        {
+            "id": "04be4b3e-0768-5688-882f-8fa0dfa869f9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A nil map supports lookup, length, iteration, and deletion. Assigning an entry panics."
+                ]
+            ]
+        },
+        {
+            "id": "71aef097-d210-5578-a38a-bccf291d9b0a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A nil channel blocks on send and receive. Closing it panics. A nil pointer cannot be dereferenced, and calling a nil function panics."
+                ]
+            ]
+        },
+        {
+            "id": "8d43b324-8045-5d9a-b49c-ea0df39d8a5c",
+            "type": "text",
+            "richText": [
+                [
+                    "Operation details: "
                 ],
                 [
-                    "new(T)",
+                    "Slices & Arrays",
                     [
                         [
-                            "b"
-                        ],
-                        [
-                            "c"
+                            "a",
+                            "#/notes/go/slices-arrays"
                         ]
                     ]
                 ],
                 [
-                    " function to get a pointer to a zero value of type "
+                    ", "
                 ],
                 [
-                    "T",
+                    "Maps",
                     [
                         [
-                            "c"
+                            "a",
+                            "#/notes/go/maps"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Channels",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/channels"
                         ]
                     ]
                 ],
@@ -951,54 +481,27 @@ const note = {
             ]
         },
         {
-            "id": "24224eb1-ed54-806f-a8eb-de5cc9fe6e77",
-            "type": "bulleted_list",
+            "id": "05c10439-8d30-5988-9110-aec8465c8101",
+            "type": "text",
             "richText": [
                 [
-                    "Maps, slices, channels are "
+                    "Reference: "
                 ],
                 [
-                    "nil by default",
+                    "Go specification: initial values",
                     [
                         [
-                            "b"
+                            "a",
+                            "https://go.dev/ref/spec#The_zero_value"
                         ]
                     ]
                 ],
                 [
-                    " but still "
-                ],
-                [
-                    "typed",
-                    [
-                        [
-                            "i"
-                        ]
-                    ]
-                ],
-                [
-                    " (you can't use them without initializing)."
+                    "."
                 ]
             ]
-        },
-        {
-            "id": "24224eb1-ed54-801b-9a17-d7ce9cd36e91",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Struct fields and array elements are recursively zero-valued."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-800b-938c-f250b9a55dd6",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8034-b30e-c51d91ea8774",
-            "type": "text"
         }
     ]
-} as const satisfies GoNote;
+} satisfies GoNote;
 
 export default note;

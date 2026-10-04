@@ -1,61 +1,17 @@
-/* Copied from the Errors page in Notion without changing its content. */
-
 import type { GoNote } from '../types';
 
 const note = {
     "notionId": "24024eb1-ed54-8009-a953-e20cad7e6a03",
     "slug": "errors",
     "title": "Errors",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24024eb1-ed54-8024-95d9-f8e95dbf09da",
-            "type": "bulleted_list",
+            "id": "a11cfd1c-e41c-53d7-9085-1d20a6e1c266",
+            "type": "text",
             "richText": [
                 [
-                    "In Go, errors are "
-                ],
-                [
-                    "values",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8014-a9ee-e36b076bc254",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Represented using the built-in "
-                ],
-                [
-                    "error",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " "
-                ],
-                [
-                    "interface",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
+                    "Errors are values returned to callers for handling. The built-in error interface requires one method:"
                 ]
             ]
         },
@@ -70,536 +26,284 @@ const note = {
             "language": "Go"
         },
         {
-            "id": "24024eb1-ed54-8076-93e1-ca3ec256eb51",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Any type implementing the "
-                ],
-                [
-                    "Error() string",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " method becomes an "
-                ],
-                [
-                    "error",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80ce-af88-d55bd06df73f",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-804e-b1f6-ecc072ebc410",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Creating an Error",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-801c-980d-d46371b76673",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Using "
-                ],
-                [
-                    "errors.New",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8056-86f1-c093ee27d7af",
-            "type": "code",
-            "richText": [
-                [
-                    "import \"errors\"\n\nerr := errors.New(\"something went wrong\")\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80f9-8bbe-fea21b908f78",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Using "
-                ],
-                [
-                    "fmt.Errorf",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " (for formatted errors)"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-802b-842e-c60a0073ff7d",
-            "type": "code",
-            "richText": [
-                [
-                    "import \"fmt\"\n\nerr := fmt.Errorf(\"error code %d: %s\", 404, \"not found\")\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-8008-8b5a-f02367db75c5",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80b4-977b-e726a3acc2ff",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Returning Errors From Functions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80be-b4be-e6d698683752",
-            "type": "code",
-            "richText": [
-                [
-                    "func divide(a, b int) (int, error) {\n    if b == 0 {\n        return 0, errors.New(\"division by zero\")\n    }\n    return a / b, nil\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80fd-b9f1-e84a71bf972d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Caller must check:"
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-80a0-b27f-dad7c9bf3b2b",
-            "type": "code",
-            "richText": [
-                [
-                    "result, err := divide(10, 0)\nif err != nil {\n    fmt.Println(\"Error:\", err)\n} else {\n    fmt.Println(\"Result:\", result)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-8078-bfa6-ec1900e501e7",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80d8-9ac1-d42cab8eb166",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Custom Error Types",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80a6-bc32-ff88cf59fd4a",
-            "type": "code",
-            "richText": [
-                [
-                    "type MyError struct {\n    Code int\n    Msg  string\n}\n\nfunc (e MyError) Error() string {\n    return fmt.Sprintf(\"Code %d: %s\", e.Code, e.Msg)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-8033-bca4-dbb737cb4e45",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80c9-b280-ff24fb3d1162",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Sentinel Errors (Predefined Errors)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8047-a237-d23cf19511fe",
+            "id": "ff928875-1a91-519a-b239-4c551dcd18d4",
             "type": "text",
             "richText": [
                 [
-                    "Predefine common errors as package-level variables:"
+                    "A value whose type implements Error() string can be used as an error. Return nil to indicate success."
                 ]
             ]
-        },
-        {
-            "id": "24024eb1-ed54-80d6-836e-e14de80650ed",
-            "type": "code",
-            "richText": [
-                [
-                    "var ErrNotFound = errors.New(\"item not found\")\n\nfunc getItem(id int) (Item, error) {\n    if id == 0 {\n        return Item{}, ErrNotFound\n    }\n    return Item{}, nil\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80c7-82d7-ca24a0e86ff9",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-804c-8a39-dc12f2b7267a",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Error Wrapping (Go 1.13+)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-803f-9e53-ec138128bc97",
-            "type": "text",
-            "richText": [
-                [
-                    "Add context to errors:"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80a4-b10b-d5093c0b14a4",
-            "type": "code",
-            "richText": [
-                [
-                    "import \"fmt\"\n\nerr := someFunc()\nif err != nil {\n    return fmt.Errorf(\"operation failed: %w\", err)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-800e-944d-f26280c5131d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "%w",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " wraps the original error for later unwrapping."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-809c-9e83-c15841b78c53",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80ef-8502-c97aa8064f81",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Unwrapping Errors",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-802a-a712-ce48a1e8adea",
-            "type": "code",
-            "richText": [
-                [
-                    "import \"errors\"\n\nif errors.Is(err, ErrNotFound) {\n    // check if err is or wraps ErrNotFound\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80b3-baf0-dd05ae50a204",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Or extract inner error:"
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-80d7-8508-ebaf0d43ce30",
-            "type": "code",
-            "richText": [
-                [
-                    "unwrapped := errors.Unwrap(err)"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80ba-9e0b-e37b7fef93af",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8019-bb7d-fb86d47c2dd3",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Type Assertion on Errors",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-805c-8391-e6a00f2c7b23",
-            "type": "text",
-            "richText": [
-                [
-                    "Use this to get custom fields:"
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80a4-be7c-c1dd26838ffb",
-            "type": "code",
-            "richText": [
-                [
-                    "var myErr *MyError\nif errors.As(err, &myErr) {\n    fmt.Println(myErr.Code)\n}\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24024eb1-ed54-80d2-83a4-c7cc916d0b33",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-802e-8e38-d68296059765",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Best Practices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80cf-bdd2-c2490b9ed68f",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Return "
-                ],
-                [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " when no error."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8068-b5c1-c259bd71739d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Don’t ignore errors ("
-                ],
-                [
-                    "_ = f()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " is bad)."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-802c-b253-e15bebaf9530",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "errors.Is",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " and "
-                ],
-                [
-                    "errors.As",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " for checks, not string comparisons."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8081-8a41-dedd076608ed",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "fmt.Errorf",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " with "
-                ],
-                [
-                    "%w",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " for wrapping errors with context."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8054-9acd-d00b16f6ec0e",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8038-85f4-ff9d765eb43b",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Third-Party Packages",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80e1-b6bd-fc66444ece32",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "github.com/pkg/errors",
-                    [
-                        [
-                            "a",
-                            "https://pkg.go.dev/github.com/pkg/errors"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ": earlier Go versions used this for wrapping."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80d6-a941-fa18a2c0c223",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go 1.13+ features made it mostly obsolete."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8085-8d60-f6f910bb85a3",
-            "type": "divider"
         },
         {
             "id": "24024eb1-ed54-802f-9103-d722b2eb696a",
-            "type": "text"
+            "type": "text",
+            "richText": [
+                [
+                    "Exceptional control flow: "
+                ],
+                [
+                    "Panic & Recover",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/panic-recover"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "edb14c2f-01af-5025-90be-aac021f10059",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Creating errors"
+                ]
+            ]
+        },
+        {
+            "id": "6f1588a0-de4e-5efe-8e71-09d43f4618bd",
+            "type": "text",
+            "richText": [
+                [
+                    "Function-body excerpt using errors and fmt:"
+                ]
+            ]
+        },
+        {
+            "id": "b35bcbfe-b5fd-5c18-bed7-40977f3071f9",
+            "type": "code",
+            "richText": [
+                [
+                    "plain := errors.New(\"something went wrong\")\nformatted := fmt.Errorf(\"error code %d: %s\", 404, \"not found\")\nfmt.Println(plain)     // something went wrong\nfmt.Println(formatted) // error code 404: not found"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "abdfac89-1349-55b6-b0be-a5eebff23aba",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Returning and checking errors"
+                ]
+            ]
+        },
+        {
+            "id": "69afc17a-da40-51cc-8e38-b4d9ca66e832",
+            "type": "code",
+            "richText": [
+                [
+                    "func divide(a, b int) (int, error) {\n    if b == 0 {\n        return 0, errors.New(\"division by zero\")\n    }\n    return a / b, nil\n}\n\nfunc divideExample() {\n    result, err := divide(10, 0)\n    if err != nil {\n        fmt.Println(\"Error:\", err) // Error: division by zero\n        return\n    }\n    fmt.Println(\"Result:\", result)\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "98900669-8af6-5fe9-b89c-80b11e7b9986",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Custom error types"
+                ]
+            ]
+        },
+        {
+            "id": "6763ee68-b124-5d58-bf2f-5762fa54cef5",
+            "type": "text",
+            "richText": [
+                [
+                    "This example constructs a *MyError value and uses a pointer receiver consistently. The As example below searches for that same type."
+                ]
+            ]
+        },
+        {
+            "id": "ea3e4016-5e3c-5a3e-a3dc-e73e8326c066",
+            "type": "code",
+            "richText": [
+                [
+                    "type MyError struct {\n    Code int\n    Msg string\n}\n\nfunc (e *MyError) Error() string {\n    return fmt.Sprintf(\"Code %d: %s\", e.Code, e.Msg)\n}\n\nfunc customFailure() error {\n    return &MyError{Code: 404, Msg: \"not found\"}\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "fc4d21dd-de21-5d16-98d0-6709c74f72d9",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Sentinel errors"
+                ]
+            ]
+        },
+        {
+            "id": "a0f14f03-9027-5bfa-9a45-cf229d958673",
+            "type": "text",
+            "richText": [
+                [
+                    "A sentinel is a predefined error value callers may match. This example declares the Item type rather than relying on an omitted application type."
+                ]
+            ]
+        },
+        {
+            "id": "67aa779a-0f67-5143-a546-c0af093746ad",
+            "type": "code",
+            "richText": [
+                [
+                    "type Item struct { ID int }\n\nvar ErrNotFound = errors.New(\"item not found\")\n\nfunc getItem(id int) (Item, error) {\n    if id == 0 {\n        return Item{}, ErrNotFound\n    }\n    return Item{ID: id}, nil\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "081e890c-91d5-50e7-b5e7-e202d6dab4da",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Wrapping and matching errors (Go 1.13+)"
+                ]
+            ]
+        },
+        {
+            "id": "0287041a-b702-5d38-a6d4-f48aa1e55698",
+            "type": "text",
+            "richText": [
+                [
+                    "The %w verb adds context while retaining the error for inspection. Use errors.Is to match a sentinel through wrapping, rather than comparing message strings."
+                ]
+            ]
+        },
+        {
+            "id": "4e72ce85-b900-5e42-aef5-59c7f6b0e331",
+            "type": "code",
+            "richText": [
+                [
+                    "func loadItem(id int) (Item, error) {\n    item, err := getItem(id)\n    if err != nil {\n        return Item{}, fmt.Errorf(\"load item %d: %w\", id, err)\n    }\n    return item, nil\n}\n\nfunc matchSentinel() {\n    _, err := loadItem(0)\n    fmt.Println(errors.Is(err, ErrNotFound)) // true\n    fmt.Println(errors.Unwrap(err) == ErrNotFound) // true\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "42501033-5adf-528a-b182-33ed73e9591a",
+            "type": "text",
+            "richText": [
+                [
+                    "errors.Unwrap removes one Unwrap() error layer. It returns nil if that method is absent and does not unwrap Unwrap() []error. Is and As search wrapped error trees, including multi-error wrappers."
+                ]
+            ]
+        },
+        {
+            "id": "e9edf4a9-566b-5c5b-89db-0ff2ce6f202d",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Finding a custom error with errors.As"
+                ]
+            ]
+        },
+        {
+            "id": "68ae1ecf-e1d2-5cef-8094-861854e5c4bf",
+            "type": "text",
+            "richText": [
+                [
+                    "As searches wrapped errors for an assignable type and fills a target variable. It is not a language type assertion, which checks only the interface value being asserted."
+                ]
+            ]
+        },
+        {
+            "id": "452c5d9b-7ab3-5b4c-8575-95e896a5061f",
+            "type": "code",
+            "richText": [
+                [
+                    "func inspectCustomError() {\n    err := fmt.Errorf(\"operation failed: %w\", customFailure())\n    var myErr *MyError\n    if errors.As(err, &myErr) {\n        fmt.Println(myErr.Code) // 404\n    }\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "f91dbcc6-5c48-5331-8c31-8beed0cfcbcf",
+            "type": "text",
+            "richText": [
+                [
+                    "Here myErr has type *MyError, and &myErr is the pointer As fills. If Error used a value receiver and the function returned MyError instead, use "
+                ],
+                [
+                    "var myErr MyError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and pass "
+                ],
+                [
+                    "&myErr",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". Value and pointer dynamic types are distinct; a value receiver does not make them interchangeable for As."
+                ]
+            ]
+        },
+        {
+            "id": "41556061-9bef-5fd8-a344-53f8c517411b",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Error handling decisions"
+                ]
+            ]
+        },
+        {
+            "id": "01943766-83e7-5d51-9a1c-8468be586162",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Handle, return or deliberately document an ignored error. Do not ignore errors just to make a call compile."
+                ]
+            ]
+        },
+        {
+            "id": "a777dea7-35d6-5158-8b3d-ffc5dd6d0c0f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use Is for an error condition and As for type-specific fields. Wrapping can expose an underlying error as part of the API, so wrap deliberately."
+                ]
+            ]
+        },
+        {
+            "id": "ab3f666b-08e3-59ce-b7cc-f4d4381eccc1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go 1.13 added standard-library wrapping, Is and As. Older projects may use github.com/pkg/errors; current notes use the standard library."
+                ]
+            ]
+        },
+        {
+            "id": "8f487491-2fe3-5bf2-9a88-e3a3f7396de5",
+            "type": "text",
+            "richText": [
+                [
+                    "Source: "
+                ],
+                [
+                    "errors package: Is, As and Unwrap",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/errors"
+                        ]
+                    ]
+                ]
+            ]
         }
     ]
 } as const satisfies GoNote;

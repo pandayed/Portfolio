@@ -1,4 +1,4 @@
-/* Copied from the Select page in Notion without changing its content. */
+/* Go study notes, refined from the original Notion import. */
 
 import type { GoNote } from '../types';
 
@@ -6,119 +6,242 @@ const note = {
     "notionId": "24d24eb1-ed54-80bd-9a09-e4e249368ddf",
     "slug": "select",
     "title": "Select",
-    "updatedOn": "2025-08-15",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "25024eb1-ed54-8085-ba6d-f4650a729db9",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Switch-Case but only for channels"
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-80d4-910f-da4f7d601704",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Waits on multiple channel operations simultaneously."
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-8047-bd3b-e251bb91e7da",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Runs the first "
-                ],
-                [
-                    "ready",
-                    [
-                        [
-                            "i"
-                        ]
-                    ]
-                ],
-                [
-                    " case (random if multiple are ready)."
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-801d-99d1-c86a7bdc2d39",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Useful for multiplexing channels, timeouts, cancellation."
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-80fb-863a-cd15f0fe4839",
+            "id": "28d5d4cf-1b1e-5680-963e-ef8cdce5da55",
             "type": "text",
             "richText": [
                 [
-                    "Syntax:",
+                    "A "
+                ],
+                [
+                    "select",
                     [
                         [
-                            "b"
+                            "c"
                         ]
                     ]
+                ],
+                [
+                    " chooses one channel send or receive that can proceed. It is used to wait on multiple channels, make an operation non-blocking, or observe cancellation."
                 ]
             ]
         },
         {
-            "id": "25024eb1-ed54-8015-b537-ff79d97e9880",
+            "id": "277d0313-1343-5fdd-aeea-19b335c6598c",
+            "type": "text",
+            "richText": [
+                [
+                    "Prerequisite: "
+                ],
+                [
+                    "Channels",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/channels"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "7cf4e02c-e6c4-5d3a-9ee6-0e22bd325375",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Ready Cases and Default"
+                ]
+            ]
+        },
+        {
+            "id": "335ca33a-34e6-5162-a699-74e033fa0d61",
+            "type": "table",
+            "columnOrder": [
+                "column-0",
+                "column-1"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "9b9f98c8-425a-50ca-9366-c903ad1e6211",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Situation"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Behavior"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "d6ad65f6-269e-5871-842b-7ef5e93fc5c9",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "One communication is ready"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Run that case."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "c6a07d2c-0196-5b2f-8607-ae6c005f1e34",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Several communications are ready"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Choose one by uniform pseudo-random selection; source order gives no priority."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "599ad5b1-f53f-5daa-b8c9-9c5038fbc870",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "None is ready, with "
+                            ],
+                            [
+                                "default",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Run "
+                            ],
+                            [
+                                "default",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " immediately."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "aa69cab6-07c6-54a6-afcc-bc10a99e42b0",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "None is ready, without "
+                            ],
+                            [
+                                "default",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Block until a communication can proceed."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "f65dc921-99b2-53ce-b4cc-9d82d9e85b2d",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "A case uses a nil channel"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "That case cannot proceed."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "352ff04c-a514-598e-99e4-3e494b759519",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "All channels are nil, without "
+                            ],
+                            [
+                                "default",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Block indefinitely."
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "0b097fa0-49a5-51af-98f1-438d196d9af5",
+            "type": "text",
+            "richText": [
+                [
+                    "A receive from a closed channel is ready, including after its buffered values are drained. A send to a closed channel can be selected and then panics. Handle closure before repeatedly selecting the channel."
+                ]
+            ]
+        },
+        {
+            "id": "e0245016-62de-53fa-ad98-618929192905",
             "type": "code",
             "richText": [
                 [
-                    "select {\ncase v := <-ch1:\n    // received from ch1\ncase ch2 <- data:\n    // sent to ch2\ncase <-time.After(time.Second):\n    // timeout\ndefault:\n    // runs if no channel is ready\n}\n"
+                    "package main\n\nimport \"fmt\"\n\nfunc main() {\n    ch := make(chan int, 1)\n    select {\n    case value := <-ch:\n        fmt.Println(value)\n    default:\n        fmt.Println(\"no value ready\")\n    }\n\n    ch <- 7\n    select {\n    case value := <-ch:\n        fmt.Println(value)\n    default:\n        fmt.Println(\"no value ready\")\n    }\n}"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "25024eb1-ed54-802b-b682-d949d854dc65",
+            "id": "207e294a-46ca-54d9-ba5a-b1b3c8ab8776",
             "type": "text",
             "richText": [
                 [
-                    "Rules:",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-8043-8a87-dfac48b68fee",
-            "type": "numbered_list",
-            "richText": [
-                [
-                    "All "
-                ],
-                [
-                    "case",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " statements must be channel send or receive."
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-800d-b3a5-eaaa1f0446fa",
-            "type": "numbered_list",
-            "richText": [
-                [
-                    "Blocks until one case can proceed (unless "
+                    "Expected output: no value ready, then 7. A loop that repeatedly reaches "
                 ],
                 [
                     "default",
@@ -129,63 +252,132 @@ const note = {
                     ]
                 ],
                 [
-                    " present)."
+                    " can use CPU while doing no useful work; use a blocking wait when polling is unnecessary."
                 ]
             ]
         },
         {
-            "id": "25024eb1-ed54-809d-bb95-cb5c096f04c8",
-            "type": "numbered_list",
+            "id": "b08d39a0-e517-52d5-ab2e-ea6a0a0ff9e2",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Randomly picks one case if several are ready."
+                    "Disable a Finished Channel"
                 ]
             ]
         },
         {
-            "id": "25024eb1-ed54-8087-975e-cc6112c25308",
-            "type": "numbered_list",
-            "richText": [
-                [
-                    "Can be used in loops for continuous channel listening."
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-8054-a933-f3a4ba39427c",
+            "id": "4489d0aa-d71c-5217-a2e3-9e3c300584c4",
             "type": "text",
             "richText": [
                 [
-                    "Common Use Cases:",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-8084-952f-f619e2ce7151",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Listen to multiple channels."
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-8015-b93c-e291b4826abd",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Add timeouts with "
+                    "Set the local channel variable to nil after its input closes. The next "
                 ],
                 [
-                    "time.After",
+                    "select",
                     [
                         [
                             "c"
+                        ]
+                    ]
+                ],
+                [
+                    " then ignores that input instead of repeatedly receiving zero values."
+                ]
+            ]
+        },
+        {
+            "id": "2669dd92-9aee-54a0-b6a8-0604e46714d4",
+            "type": "code",
+            "richText": [
+                [
+                    "package main\n\nimport \"fmt\"\n\nfunc main() {\n    first := make(chan int, 1)\n    second := make(chan int, 1)\n    first <- 10\n    second <- 20\n    close(first)\n    close(second)\n\n    for first != nil || second != nil {\n        select {\n        case value, ok := <-first:\n            if !ok {\n                first = nil\n                continue\n            }\n            fmt.Println(value)\n        case value, ok := <-second:\n            if !ok {\n                second = nil\n                continue\n            }\n            fmt.Println(value)\n        }\n    }\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "374fa693-e10a-54ee-a6a2-497d1933640d",
+            "type": "text",
+            "richText": [
+                [
+                    "The program prints 10 and 20 once each, in either order, then exits. Setting one variable to nil does not change another variable that refers to the same channel."
+                ]
+            ]
+        },
+        {
+            "id": "1921f009-f98e-50c9-8b4e-77acabf6e683",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Evaluation and Cancellation"
+                ]
+            ]
+        },
+        {
+            "id": "c5a18cc6-3589-5315-8200-9b6cd32f3643",
+            "type": "text",
+            "richText": [
+                [
+                    "On entry, "
+                ],
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " evaluates the channel expressions and send values once, in source order, even for cases it does not choose. Put expensive or side-effecting send expressions outside the selection when their evaluation should be explicit."
+                ]
+            ]
+        },
+        {
+            "id": "0cadd8e6-3a50-52c1-8cd5-f4601d5e851c",
+            "type": "text",
+            "richText": [
+                [
+                    "A cancellation case has no automatic priority over another ready case. "
+                ],
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " waits only for its channel operations; it cannot interrupt work already running inside a chosen case."
+                ]
+            ]
+        },
+        {
+            "id": "0c1c8968-d4ec-5c08-93da-4b45ad43ce96",
+            "type": "text",
+            "richText": [
+                [
+                    "Complete cancellation and timeout examples: "
+                ],
+                [
+                    "Context and Timeout",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/context-and-timeout"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Date & Time",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/date-time"
                         ]
                     ]
                 ],
@@ -195,37 +387,18 @@ const note = {
             ]
         },
         {
-            "id": "25024eb1-ed54-804b-abcf-e1f54a7d27e3",
-            "type": "bulleted_list",
+            "id": "6f492890-71a3-5e70-920e-a8b78d714c18",
+            "type": "text",
             "richText": [
                 [
-                    "Cancel goroutines via "
+                    "Source: "
                 ],
                 [
-                    "context.Done()",
+                    "Select statements",
                     [
                         [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "25024eb1-ed54-803c-b96f-e32903917537",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Avoid blocking with "
-                ],
-                [
-                    "default",
-                    [
-                        [
-                            "c"
+                            "a",
+                            "https://go.dev/ref/spec#Select_statements"
                         ]
                     ]
                 ],

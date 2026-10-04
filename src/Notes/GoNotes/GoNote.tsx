@@ -1,6 +1,6 @@
 import './GoNote.css';
 
-import { Fragment, type ReactNode } from 'react';
+import { Fragment, type ComponentProps, type ReactNode } from 'react';
 
 import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
@@ -50,7 +50,18 @@ const applyMark = (content: ReactNode, mark: RichTextMark, key: string): ReactNo
             return <code key={key}>{content}</code>;
         case 'a':
             return (
-                <a key={key} href={mark[1]} className="Link">
+                <a
+                    key={key}
+                    href={mark[1]}
+                    className="Link"
+                    onClick={mark[1].startsWith('#go-note-') ? (event) => {
+                        event.preventDefault();
+                        document.getElementById(mark[1].slice(1))?.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start',
+                        });
+                    } : undefined}
+                >
                     {content}
                 </a>
             );
@@ -75,6 +86,13 @@ const renderRichText = (richText: RichText | undefined) =>
             withLineBreaks(value, key),
         );
     });
+
+const codeLanguage = (language?: string): ComponentProps<typeof CodeBlock>['language'] => {
+    switch (language?.toLowerCase() ?? 'go') {
+        case 'go': return 'go';
+        default: return 'text';
+    }
+};
 
 const renderTable = (block: GoNoteBlock) => {
     const rows = block.children ?? [];
@@ -135,7 +153,7 @@ const renderBlock = (block: GoNoteBlock): ReactNode => {
             );
         case 'code':
             return (
-                <CodeBlock language="go" key={block.id}>
+                <CodeBlock language={codeLanguage(block.language)} key={block.id}>
                     {plainText(block.richText)}
                 </CodeBlock>
             );
@@ -211,6 +229,33 @@ const collectSections = (blocks: readonly GoNoteBlock[]): TocEntry[] =>
         ...collectSections(block.children ?? []),
     ]);
 
+const renderSections = (blocks: readonly GoNoteBlock[]): ReactNode[] => {
+    const sections: GoNoteBlock[][] = [];
+
+    for (const block of blocks) {
+        const isHeading = block.type === 'header' ||
+            block.type === 'sub_header' || block.type === 'sub_sub_header';
+        if (isHeading || sections.length === 0) sections.push([]);
+        sections[sections.length - 1].push(block);
+    }
+
+    return sections.map((section) => {
+        const first = section[0];
+        const heading = first.type === 'header' || first.type === 'sub_header' ||
+            first.type === 'sub_sub_header';
+
+        return (
+            <section
+                className="Article__section GoNote__section"
+                key={first.id}
+                aria-labelledby={heading ? blockId(first.id) : undefined}
+            >
+                {renderBlocks(section)}
+            </section>
+        );
+    });
+};
+
 const GoNote = ({ route }: GoNoteProps) => {
     const slug = route.slice(`${GO_NOTES_ROUTE}/`.length);
     const note = goNotes.find((entry) => entry.slug === slug);
@@ -225,7 +270,7 @@ const GoNote = ({ route }: GoNoteProps) => {
             backRoute={GO_NOTES_ROUTE}
             backLabel="Back to Go notes"
         >
-            <section className="Article__section">{renderBlocks(note.blocks)}</section>
+            {renderSections(note.blocks)}
         </ArticleLayout>
     );
 };

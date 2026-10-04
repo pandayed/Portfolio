@@ -42,7 +42,7 @@ import {
     type SystemDesignEntryRoute,
     type Route,
 } from '../routing/routes';
-import { goNotes as goNotePages } from './GoNotes/goNotes';
+import { goChapters } from './GoNotes/goNotes';
 import { javascriptTypeScriptChapters } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonChapters } from './PythonNotes/pythonNotes';
 import { reactChapters } from './ReactNotes/reactNotes';
@@ -156,12 +156,19 @@ export const postgresqlNotes: NoteGroup = {
 export const goNotes: NoteGroup = {
     type: 'group',
     title: 'Go',
+    summary: 'Go fundamentals, program structure, concurrency, and revision questions.',
     route: GO_NOTES_ROUTE,
-    children: goNotePages.map(({ slug, title, updatedOn }) => ({
-        type: 'page',
-        title,
-        route: `${GO_NOTES_ROUTE}/${slug}` as GoNoteRoute,
-        updatedOn,
+    children: goChapters.map((chapter) => ({
+        type: 'group',
+        title: chapter.title,
+        summary: chapter.summary,
+        route: `${GO_NOTES_ROUTE}/${chapter.notes[0].slug}` as GoNoteRoute,
+        children: chapter.notes.map(({ slug, title, updatedOn }) => ({
+            type: 'page',
+            title,
+            route: `${GO_NOTES_ROUTE}/${slug}` as GoNoteRoute,
+            updatedOn,
+        })),
     })),
 };
 

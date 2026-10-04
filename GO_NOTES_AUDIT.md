@@ -1,4 +1,60 @@
-# Go notes audit
+# Go notes audit and resolution record
+
+Implementation completed: **4 October 2026**, after approval to fix the audit findings.
+
+All 41 Go pages were revised. All 41 slugs and Notion IDs remain unchanged. All 100 revision questions remain, with 25 questions in each category and an anchor for each question. The index now has six topic groups.
+
+## Implementation record
+
+| Audit findings | Result | Current source |
+|---|---|---|
+| O01, R03, A02–A03 | Constants & Variables owns declarations and typed/untyped values. Iota & Flags owns counter specifications, skipped values, flags and renumbering risks. Duplicate const tutorials removed. | [Constants & Variables](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/constants-variables.ts), [Iota & Flags](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/const-iota.ts) |
+| O02, R15–R18, A07–A10 | One module/package comparison. Separate pages cover imports, module layout, directives and checksums. Main-module terminology, initialization and minimum dependency versions corrected. | [Module vs Package](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/module-vs-package.ts), [go.mod](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/go-mod.ts) |
+| O03, O12, A04 | Function literals own syntax and callbacks. Closures owns captured state and loop scope. Go 1.22 language semantics and older behavior distinguished. | [Anonymous/Inline Functions](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/anonymous-inline-functions.ts), [Closures](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/closures.ts), [Goroutines](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/goroutines.ts) |
+| O04–O06, R01–R02, R08, R10, A11, A13 | Methods owns receiver and method-set rules. Struct links there. Interfaces owns interface use and composition; Embeddings owns struct promotion, shadowing and ambiguity. Repeated explanations consolidated. | [Methods](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/methods.ts), [Interfaces](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/interfaces.ts), [Embeddings](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/embeddings.ts), [Struct](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/struct.ts) |
+| O07–O10, R04, R09, R11, R14, A01, A12 | Zero Values owns defaults. Collections own operations and storage sharing. One identity table distinguishes defined types and aliases. new(T), nil operations, copy, capacity and comparability corrected. | [Zero Values](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/zero-values.ts), [Slices & Arrays](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/slices-arrays.ts), [Maps](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/maps.ts), [Pointers](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/pointers.ts), [Defined Type & Alias](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/defined-type-and-type-alias.ts) |
+| O11, R12–R13, A15 | Error handling, deferred cleanup and panic recovery have separate roles. Return timing, loop resource lifetime and recovery flow corrected. | [Errors](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/errors.ts), [Defer](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/defer.ts), [Panic & Recover](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/panic-recover.ts) |
+| O13–O18, R05–R07, R19–R20, A05–A06, A18–A20, A22–A23 | Channels owns blocking/backpressure, streams and closure. Select owns readiness. Context owns cancellation. WaitGroup and locks explain their own contracts. Scheduler waits and application exit paths distinguished. | [Channels](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/channels.ts), [Select](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/select.ts), [Context](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/context-and-timeout.ts), [GMP](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/gmp-model.ts) |
+| O19–O20 | Interfaces explains ordinary value interfaces. Generics explains type parameters, constraints and comparable. any is described as the interface{} alias. Empty Stack.Pop is handled. | [Generics](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/generics.ts) |
+| R21, A14, A21 | Large date/time reference split into focused examples. Fixed Sub arithmetic separated from clock-dependent Since. Equality, parsing, zones, timer compatibility and ticker exit clarified. | [Date & Time](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/date-time.ts) |
+| R22–R24, A16–A17, A24 | Questions use concise answers and links for repeated fundamentals. Advanced cases remain. Unsafe pointer types, atomic ordering, channel closure and worker exit corrected. | [Go by Questions](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/go-by-questions.ts) |
+| All copied-dialogue findings | Removed approval/correction exchanges, invitations to continue, repeated recaps and unfinished conversational prompts. Preserved the underlying rules and answered self-checks. | All revised topic data files |
+| E01–E13, E18–E21 | Restored missing operators; completed or labelled fragments; supplied missing types/functions, outputs and shutdown paths; removed empty headings, orphan glyphs, raw opening URLs and copy errors. Added a Unicode range example. | All affected topic pages |
+| E14–E17, E22 | Revision examples now demonstrate an observable shadowing bug, ongoing cancellation, defined functional-option types and correct profiling flags. Example boundaries and imports stated; repeated Answer/Code example labels removed. | [Go by Questions](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/go-by-questions.ts) |
+| N01–N02 | Six groups order prerequisites together: fundamentals; collections/types; functions/interfaces; program structure/errors; concurrency; reference/revision. Previous/next and reading time use the existing note tree. Existing routes preserved. | [Registry](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/goNotes.ts), [Note tree](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/noteTreeData.ts) |
+| N03–N04 | All questions are headings collected by the contents renderer. Local links scroll without replacing the app route. Go code is highlighted as Go; output/command/manifest text uses plain text. The alleged C example was Go code with incorrect C metadata, now corrected to Go. Sections use the shared article layout. | [Go renderer](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/GoNote.tsx), [Closures](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/closures.ts) |
+| N05–N09 | Small reference pages gained focused examples. Workgroups is displayed as WaitGroup, keeping its slug. Related links replace repeated tutorials. Revision levels have a stated purpose. Why Go gives concrete uses without unmeasured speed promises. | [WaitGroup](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/workgroups.ts), [Why Go](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/why-go.ts), [Basic Commands](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/basic-commands.ts), [go.sum](/Users/lalpande/Documents/Personal/Portfolio/src/Notes/GoNotes/data/go-sum.ts) |
+
+### Resolution of the verification candidates
+
+Every candidate in the original section 5 was addressed. Claims were corrected against public contracts, qualified by implementation/version, or removed where the detail did not help teach the topic. Official sources are linked in the revised pages.
+
+| Candidate group | Resolution |
+|---|---|
+| iota insertion, constant storage, Go overhead, C++ comparison | Explained renumbering; removed blanket storage/performance promises; distinguished Go constructor functions, deferred cleanup and implementation symbol names. |
+| Reference-type wording, slice copy/capacity/equality, map internals/concurrency | Described copied values and shared storage. Qualified copy and comparison rules. Removed bucket-layout teaching; described map synchronization and sync.Map workloads. |
+| Interface safety/conversions/dispatch/design, embedding, aliases, methods | Distinguished static concrete-type knowledge from runtime checking. Avoided universal dispatch-cost promises. Qualified API design and receiver eligibility. Explained selector shadowing and pointer promotion. Explicit nested literals work across Go versions. |
+| Error targets, any, defer costs | Used consistent pointer error construction and As targets. any remains an alias. Defer guidance follows resource lifetime and measured cost. |
+| Time arithmetic, representation, parsing and errors | Recomputed fixed arithmetic. Removed internal epoch claims. Explained Parse/ParseInLocation and handled errors in complete programs. |
+| Scheduler queues, syscall paths, GOMAXPROCS, wait states, diagnostics and preemption | Used a simplified runtime model with version/environment limits. Removed rigid queue/thread promises and unsupported crawler diagnoses. Clarified cancellation and diagnostic-tool limits. |
+| RWMutex and timer lifecycle | Added pending-writer and recursive-read rules. Timer reuse states the Go 1.23 compatibility conditions and single-owner lifecycle. |
+| Profiling commands, returned pointers, heap/RSS, padding and rand | Used a concrete package for profiles. Qualified escape allocation. Separated Go heap samples from RSS. Replaced ineffective padding example with a target-qualified 24/16-byte example. Described rand concurrency separately from runtime internals. |
+
+### Validation and limits
+
+- Static inspection covered all 41 revised data files and compared their concepts with the original pages.
+- All original slugs and Notion IDs are preserved. Block IDs are unique within each page. Internal topic links and local question links resolve in source.
+- All 100 original question IDs and their order are retained. Each category has 25 questions. All question titles are headings.
+- The registry includes each of the 41 pages once across six groups. Routes continue to derive from their unchanged slugs.
+- Searches found no remaining copied correction dialogue, continuation invitations, orphan marker or reported joined-word errors.
+- `npm run build` passed, including `tsc --noEmit` and Vite production bundling. Vite reported the large-chunk warning; bundle optimization is outside this content change.
+- `git diff --check` passed.
+- No tests were added, modified or run. Go snippets and browser behavior were not executed. Expected outputs are source-reasoned examples. Visual layout, runtime behavior and deployment remain unverified.
+- Changes are confined to the Go data, Go registry/renderer/types/style, Go's entry in the note tree, and this report. Other subjects, shared components, package files and route declarations were left untouched. No commit, push or deployment was performed.
+
+## Original read-only audit
+
+The findings below record the pre-edit baseline at Git revision `99dbdf8e45ab1988d5191cf32e02ffcdded3d8f6`. Their source line references and “unchanged” statements belong to the original audit phase. Those line numbers have moved in the revised files. Use the current-source links above to review the implementation. Recommendations and “needs verification” passages below are historical evidence, not an open implementation backlog.
 
 Reviewed: 4 October 2026. Scope: all 41 registered Go note pages, including all 100 questions in **Go by Questions**.
 

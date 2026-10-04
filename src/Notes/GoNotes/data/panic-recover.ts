@@ -1,713 +1,285 @@
-/* Copied from the Panic & Recover page in Notion without changing its content. */
-
 import type { GoNote } from '../types';
 
 const note = {
     "notionId": "24124eb1-ed54-8021-8e5c-c9f30520bd77",
     "slug": "panic-recover",
     "title": "Panic & Recover",
-    "updatedOn": "2026-01-23",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24124eb1-ed54-806d-8a7d-d43149513b35",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "panic",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ": Immediately stops normal execution and begins "
-                ],
-                [
-                    "stack unwinding",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " (like throwing an exception)."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-805e-9a44-d1b9a40ee37e",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "recover",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ": Regains control during a panic, but only "
-                ],
-                [
-                    "within a ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "defer",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " function",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8095-a4b6-dafe37cec235",
+            "id": "245bbc3a-9df3-596b-948b-619572007414",
             "type": "text",
             "richText": [
                 [
-                    "Together, they allow "
-                ],
-                [
-                    "controlled failure handling",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "panic stops ordinary execution in the current goroutine and unwinds its call stack, running registered deferred calls. recover can stop that unwinding when called directly by a deferred function in that goroutine."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80e1-bb31-f827f63ab72d",
-            "type": "divider"
+            "id": "2071f57d-589d-54e5-b1b9-f5bd1a982b74",
+            "type": "text",
+            "richText": [
+                [
+                    "Registration, order and argument timing: "
+                ],
+                [
+                    "Defer",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/defer"
+                        ]
+                    ]
+                ]
+            ]
         },
         {
-            "id": "24124eb1-ed54-8031-8ebb-fe9095026629",
+            "id": "966b4b81-044b-5595-a594-aeaf5e5f6233",
             "type": "sub_header",
             "richText": [
                 [
-                    "When to user?"
+                    "Choosing errors or panics"
                 ]
             ]
         },
         {
             "id": "24124eb1-ed54-80b0-9ed9-eab2ee0e1d85",
             "type": "table",
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80f4-b384-c6d096b16ddb",
-                    "type": "table_row",
-                    "cells": {
-                        "O[Xu": [
-                            [
-                                "Feature"
-                            ]
-                        ],
-                        "KgN}": [
-                            [
-                                "Use When…"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8053-bf33-fd692e089943",
-                    "type": "table_row",
-                    "cells": {
-                        "O[Xu": [
-                            [
-                                "panic",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ],
-                        "KgN}": [
-                            [
-                                "- unrecoverable error (e.g., out of bounds, nil pointer) - programmer bug or critical failure"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8000-86ed-d2bae084fbdd",
-                    "type": "table_row",
-                    "cells": {
-                        "O[Xu": [
-                            [
-                                "recover",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ],
-                        "KgN}": [
-                            [
-                                "- want to gracefully handle a panic and prevent the program from crashing (e.g., in servers, middleware)"
-                            ]
-                        ]
-                    }
-                }
-            ],
             "columnOrder": [
-                "O[Xu",
-                "KgN}"
+                "col-0",
+                "col-1"
             ],
             "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24124eb1-ed54-80df-8703-d51c1c42228a",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-801d-b709-e9a591c7470f",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Panic"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8047-a017-e018e4062123",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Function signature",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ": "
-                ],
-                [
-                    "panic(v interface{})",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ec-9164-fefdc59e4231",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Effect",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
-                ]
-            ],
+            "hasRowHeader": false,
             "children": [
                 {
-                    "id": "24124eb1-ed54-809c-b65d-d070bb7e5edf",
-                    "type": "numbered_list",
-                    "richText": [
-                        [
-                            "Stops function execution."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8054-85f6-e88bf63a1365",
-                    "type": "numbered_list",
-                    "richText": [
-                        [
-                            "Anu code after the panic line is never executed."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-807f-a14a-cb495a1993e4",
-                    "type": "numbered_list",
-                    "richText": [
-                        [
-                            "Runs any "
-                        ],
-                        [
-                            "defer",
+                    "id": "7d327627-e9c3-5e03-b465-8468915e21bb",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
                             [
-                                [
-                                    "c"
-                                ]
+                                "Mechanism"
                             ]
                         ],
-                        [
-                            " statements."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-803e-8e03-ebe479e50d0e",
-                    "type": "numbered_list",
-                    "richText": [
-                        [
-                            "Propagates panic up the call stack."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-8065-964b-cd409f7cf011",
-                    "type": "numbered_list",
-                    "richText": [
-                        [
-                            "Crashes the program "
-                        ],
-                        [
-                            "if not recovered",
+                        "col-1": [
                             [
-                                [
-                                    "b"
-                                ]
+                                "Typical purpose"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "8551e6e2-7c81-51ea-824b-7716c5b360fc",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Returned error"
                             ]
                         ],
-                        [
-                            "."
+                        "col-1": [
+                            [
+                                "Expected failures the caller can handle, such as invalid input or a missing file"
+                            ]
                         ]
-                    ]
+                    }
+                },
+                {
+                    "id": "619c7012-4577-55e9-8858-0312c6da0f32",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "panic"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "A broken invariant, programming error or an explicit must-style contract"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "5ca6a468-5dd6-5b5c-bb37-6c99fa1bdb08",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "recover"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "A boundary that can report or contain a panic and establish a valid outcome"
+                            ]
+                        ]
+                    }
                 }
             ]
         },
         {
-            "id": "24124eb1-ed54-803f-bffa-d65a742e3e53",
-            "type": "code",
-            "richText": [
-                [
-                    "func main() {\n    panic(\"something went wrong\")\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80a8-b05e-fd696c8935f8",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8005-996b-c9f37d24de6b",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Recover"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ba-90b4-dfa483557c22",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Function signature",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ": "
-                ],
-                [
-                    "recover() interface{}",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8053-8ede-e3b0c9cd4ad1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Must be "
-                ],
-                [
-                    "called inside a deferred function",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " to catch the panic."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8005-8e88-fe3f6d67ad68",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "If called outside "
-                ],
-                [
-                    "defer",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", it returns "
-                ],
-                [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " and does nothing."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80a5-bbf3-d8117d4fdd57",
-            "type": "code",
-            "richText": [
-                [
-                    "func safe() {\n    defer func() {\n        if r := recover(); r != nil {\n            fmt.Println(\"Recovered from:\", r)\n        }\n    }()\n    panic(\"fail\")\n}\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8003-8e72-d4f3aac05849",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8055-b0ed-facdf0508673",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Combined Flow"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8098-a777-f11c026fef96",
-            "type": "code",
-            "richText": [
-                [
-                    "func main() {\n    fmt.Println(\"Start\")\n    safe()\n    fmt.Println(\"End\")\n}\n\nfunc safe() {\n    defer func() {\n        if r := recover(); r != nil {\n            fmt.Println(\"Recovered from:\", r)\n        }\n    }()\n    panic(\"fail\") // recovered, program continues\n}\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80d5-a064-fd70e2da63bf",
+            "id": "3efd133a-574f-5191-9a6e-926a359b43e6",
             "type": "text",
             "richText": [
                 [
-                    "Output:",
+                    "Returned and wrapped errors: "
+                ],
+                [
+                    "Errors",
                     [
                         [
-                            "b"
+                            "a",
+                            "#/notes/go/errors"
                         ]
                     ]
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8001-bdf7-febe6fc6d9b0",
+            "id": "a7de9767-24e6-540e-b96b-117b93612844",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Recovery control flow"
+                ]
+            ]
+        },
+        {
+            "id": "cebe6daf-19a6-5b30-b10c-059eb9f105aa",
+            "type": "text",
+            "richText": [
+                [
+                    "Complete program. safe returns to its caller after recovery; execution never returns to the line following panic inside safe."
+                ]
+            ]
+        },
+        {
+            "id": "066511f1-94b5-5272-89b8-f03725513960",
             "type": "code",
             "richText": [
                 [
-                    "Start\nRecovered from: fail\nEnd"
+                    "package main\n\nimport \"fmt\"\n\nfunc safe() {\n    defer func() {\n        if r := recover(); r != nil {\n            fmt.Println(\"Recovered from:\", r)\n        }\n    }()\n\n    defer fmt.Println(\"Cleanup\")\n    panic(\"fail\")\n    // Ordinary statements and new defer statements here are not reached.\n}\n\nfunc main() {\n    fmt.Println(\"Start\")\n    safe()\n    fmt.Println(\"End\")\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "1759e5d3-21bc-5ca1-a128-a840b6ba5f11",
+            "type": "text",
+            "richText": [
+                [
+                    "Expected output:"
+                ]
+            ]
+        },
+        {
+            "id": "1f5d8ccf-4abf-5326-ac16-c68263fcfdf3",
+            "type": "code",
+            "richText": [
+                [
+                    "Start\nCleanup\nRecovered from: fail\nEnd"
                 ]
             ],
             "language": "Plain Text"
         },
         {
-            "id": "24124eb1-ed54-80b5-ba14-c31185c0c908",
-            "type": "divider"
+            "id": "24216aa4-a498-5c24-b735-dc53b14d30ee",
+            "type": "text",
+            "richText": [
+                [
+                    "Cleanup runs first because it was registered last. The recovery function handles the panic, remaining defers in safe finish, and safe returns. If no deferred function recovers the panic, an unrecovered panic terminates the program."
+                ]
+            ]
         },
         {
-            "id": "24124eb1-ed54-80f1-a41a-e75627862eaf",
+            "id": "100c23c0-4b74-5eb8-b6fe-4d381beeca3b",
             "type": "sub_header",
             "richText": [
                 [
-                    "Do not forget"
+                    "Recovery boundaries and limits"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8063-b991-ff4cebc74b6e",
+            "id": "de16cdbd-2c33-5965-b355-b4703e29fc29",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "panic",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " "
-                ],
-                [
-                    "executes all defers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " before propagating."
+                    "recover returns nil during ordinary execution. It cannot catch a panic in another goroutine. Each goroutine that needs a recovery boundary must establish its own deferred function."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80da-9993-f8fc6e6d0314",
+            "id": "0aa52a33-0772-5ebb-8537-b97dcfd5ea99",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "recover",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " "
-                ],
-                [
-                    "only works inside deferred functions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "Call recover directly in the deferred function. A helper called by that function does not satisfy this requirement. A bare defer recover() is also ineffective."
                 ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-80b0-9711-c081be56f598",
+            "id": "c73b293d-6f39-5c15-9d72-2f3d38df4623",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "If no "
-                ],
-                [
-                    "recover",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " is present, panic will "
-                ],
-                [
-                    "crash the program",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "Only reached defer statements are registered. A panic does not execute later ordinary statements or register later defers in the panicking function."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8080-b41e-f16d848840ad",
+            "id": "e17cfad8-f3ce-5b41-b128-0468582fae98",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use "
-                ],
-                [
-                    "panic",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " for "
-                ],
-                [
-                    "bugs",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " or "
-                ],
-                [
-                    "non-recoverable errors",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "not for flow control",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "Calling panic(r) again in the deferred function propagates the failure when the boundary cannot handle it. Do not silently recover and leave corrupted state in use."
                 ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-8050-96cd-f8cb41c0d742",
-            "type": "bulleted_list",
+            "id": "fd93554a-f99b-5cbf-bcc5-1879c5c35b60",
+            "type": "text",
             "richText": [
                 [
-                    "recover()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " returns:"
+                    "Go 1.21+ default behavior turns panic(nil) into a non-nil *runtime.PanicNilError panic value. Legacy behavior can be selected with GODEBUG=panicnil=1 and may be selected automatically for a main module declaring Go 1.20 or earlier. Code using the usual r != nil check must understand this version/configuration difference."
                 ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80b9-9ccd-eea395b14976",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "The panic value (if one exists)"
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-80ac-8e62-c40f71836386",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "nil",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " otherwise"
-                        ]
-                    ]
-                }
             ]
         },
         {
-            "id": "24124eb1-ed54-80e9-a906-f3e0dd7e7521",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8089-9106-cf81ec206b5f",
+            "id": "72dab2fd-2953-5323-9499-bb6382c5ded2",
             "type": "sub_header",
             "richText": [
                 [
-                    "Examples"
+                    "Examples of a boundary and a contract"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-800c-aab2-c8876cec07f8",
-            "type": "sub_sub_header",
+            "id": "19d9c102-5f45-5b93-9f35-35b99187b242",
+            "type": "text",
             "richText": [
                 [
-                    "Catch unexpected bugs in a server:"
+                    "Package-scope example, using log: work is supplied by the caller. This boundary reports a panic and returns; real request handlers must also define the response or error they produce."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80ef-bd51-e1556a687c2b",
+            "id": "9b146835-a8e5-5a86-8651-4b8fd8266aa8",
             "type": "code",
             "richText": [
                 [
-                    "func handler() {\n    defer func() {\n        if r := recover(); r != nil {\n            log.Println(\"Recovered:\", r)\n        }\n    }()\n    potentiallyDangerousCode()\n}"
+                    "func runSafely(work func()) {\n    defer func() {\n        if r := recover(); r != nil {\n            log.Println(\"Recovered:\", r)\n        }\n    }()\n    work()\n}"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24124eb1-ed54-80e1-adeb-de2e8ca4830c",
-            "type": "sub_sub_header",
+            "id": "60da0d4f-1f81-5c3d-a302-227082adf78f",
+            "type": "text",
             "richText": [
                 [
-                    "Validating input:"
+                    "A must-style helper can document that nil is a caller programming error. For normal input validation, return an error instead."
                 ]
             ]
         },
@@ -722,289 +294,38 @@ const note = {
             "language": "Go"
         },
         {
-            "id": "24124eb1-ed54-8038-a438-c7193d1040d6",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8085-a7a2-fa2af8795c4e",
-            "type": "sub_header",
+            "id": "36b01e23-4fd1-50de-a930-5ae3a5e1b6c2",
+            "type": "text",
             "richText": [
                 [
-                    "Internal Working"
+                    "Source: "
+                ],
+                [
+                    "Handling panics",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/spec#Handling_panics"
+                        ]
+                    ]
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8015-b3a0-f8a9b682aef4",
-            "type": "bulleted_list",
+            "id": "94cb42ec-0bdf-59a2-999c-1cd29c3f26fc",
+            "type": "text",
             "richText": [
                 [
-                    "Panic causes "
+                    "Source: "
                 ],
                 [
-                    "stack unwinding",
+                    "Built-in panic and recover",
                     [
                         [
-                            "b"
+                            "a",
+                            "https://pkg.go.dev/builtin#recover"
                         ]
                     ]
-                ],
-                [
-                    ": deferred calls execute in "
-                ],
-                [
-                    "LIFO",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " order."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8040-b5c3-dd6472096af5",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Once recovered, execution resumes "
-                ],
-                [
-                    "after the ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "defer",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " block",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-809e-934a-f223c3418e3d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "You can "
-                ],
-                [
-                    "re-panic",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " by calling "
-                ],
-                [
-                    "panic(r)",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " again inside the deferred function."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-809e-aa13-c4ceb22a8ff5",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80a5-9890-c19cac009df0",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Bad practice"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8076-ae16-fa534a36bafd",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Don’t use panic/recover for regular error handling",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8094-9b1e-e82e028ea376",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Prefer "
-                ],
-                [
-                    "error",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " values for expected failures."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8014-945e-e03c1c3680ec",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "panic",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " sparingly—only for truly exceptional cases."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8051-adc6-ca7b69c9605a",
-            "type": "divider"
-        },
-        {
-            "id": "2f124eb1-ed54-807a-990c-d6b115193d0d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "defer",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " statements are "
-                ],
-                [
-                    "registered only when execution reaches them",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8043-a3c5-ff2d8e566b98",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A panic "
-                ],
-                [
-                    "immediately stops normal execution",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8036-b82c-da2767f76e6f",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Code "
-                ],
-                [
-                    "after the panic line is never reached",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80eb-b142-c12df737ade4",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "So, whatever it be, normal lines or "
-                ],
-                [
-                    "defer",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " statements, nothing is gonna execute after the panic. The "
-                ],
-                [
-                    "defer",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " statements defined before are gonna execute, as they got registered."
                 ]
             ]
         }

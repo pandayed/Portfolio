@@ -1,140 +1,53 @@
-/* Copied from the Anonymous/Inline Functions page in Notion without changing its content. */
-
 import type { GoNote } from '../types';
 
 const note = {
     "notionId": "24124eb1-ed54-801b-af91-ec0564709d69",
     "slug": "anonymous-inline-functions",
     "title": "Anonymous/Inline Functions",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24a24eb1-ed54-80b3-9aa1-d7941f1c5f9f",
-            "type": "callout",
-            "children": [
-                {
-                    "id": "24a24eb1-ed54-8013-8ca8-de1cf93d2656",
-                    "type": "text",
-                    "richText": [
-                        [
-                            "https://en.wikipedia.org/wiki/Anonymous_function",
-                            [
-                                [
-                                    "a",
-                                    "https://en.wikipedia.org/wiki/Anonymous_function"
-                                ]
-                            ]
-                        ]
-                    ]
-                }
+            "id": "2f5a6c45-7601-5996-a8ac-1e7e4301c6b2",
+            "type": "text",
+            "richText": [
+                [
+                    "A function literal declares a function without a name. It can be called immediately, stored in a variable, passed as an argument or returned."
+                ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-800f-8bd0-e1dd73477b1e",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80b1-9665-fcfd92d37a4f",
-            "type": "bulleted_list",
+            "id": "a6be72ab-1df6-5dba-863f-5a49ccd60d4f",
+            "type": "text",
             "richText": [
                 [
-                    "Functions "
+                    "Source: "
                 ],
                 [
-                    "without a name",
+                    "Function literals",
                     [
                         [
-                            "b"
+                            "a",
+                            "https://go.dev/ref/spec#Function_literals"
                         ]
                     ]
-                ],
-                [
-                    "."
                 ]
             ]
-        },
-        {
-            "id": "24224eb1-ed54-80a3-9831-e7c640faad06",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Can be:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24224eb1-ed54-80c2-81e3-dab0b4569acb",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Immediately invoked",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "id": "24224eb1-ed54-80a1-9868-c79c00222f02",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Assigned to variables",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "id": "24224eb1-ed54-8034-8c40-f8667e934804",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Passed as arguments",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ]
-                    ]
-                },
-                {
-                    "id": "24224eb1-ed54-80dc-99fc-da441e1a9779",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Returned from functions",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8058-b992-fffb8d9ffbd7",
-            "type": "divider"
         },
         {
             "id": "24224eb1-ed54-8043-987f-caeaa994664e",
             "type": "sub_header",
             "richText": [
                 [
-                    "Syntax",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Syntax"
+                ]
+            ]
+        },
+        {
+            "id": "9e5ca3c2-e1e1-5edf-8deb-0419da6d2edf",
+            "type": "text",
+            "richText": [
+                [
+                    "Syntax reference: paramList and returnType are placeholders."
                 ]
             ]
         },
@@ -149,120 +62,134 @@ const note = {
             "language": "Go"
         },
         {
-            "id": "24224eb1-ed54-80c6-bb0e-ca7608e8db9f",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8028-82d3-c78331450deb",
-            "type": "sub_header",
+            "id": "65e1f96b-4f48-5853-b541-34150efd9b7d",
+            "type": "text",
             "richText": [
                 [
-                    "Immediately Invoked Function Expression ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "The term inline here means writing a function literal at its use site. It does not guarantee compiler inlining."
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-805d-b418-ef1a3e3d95a8",
+            "id": "356aeedf-0904-5dbc-a64a-85b0061197cf",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Immediate invocation"
+                ]
+            ]
+        },
+        {
+            "id": "4ad56ced-8d0c-52a0-bd6a-3ba3a7eccfd9",
+            "type": "text",
+            "richText": [
+                [
+                    "Function-body excerpt using fmt: the final parentheses call the literal with arguments."
+                ]
+            ]
+        },
+        {
+            "id": "1f012821-3638-50ce-b8ba-c3274c8d8023",
             "type": "code",
             "richText": [
                 [
-                    "result := func(a, b int) int {\n    return a + b\n}(5, 3) // result = 8"
+                    "result := func(a, b int) int {\n    return a + b\n}(5, 3)\nfmt.Println(result) // 8"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24224eb1-ed54-8043-90cb-cef8271277a9",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80f0-b955-f2426f7000df",
+            "id": "0496b9d0-748d-56d2-b0fd-218a743c28bd",
             "type": "sub_header",
             "richText": [
                 [
-                    "Assigning to a Variable",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Assigning a function value"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-806f-80db-e9e50f98dbb8",
+            "id": "c45f33c1-af26-5ce6-9e2a-4359274c2fb6",
             "type": "code",
             "richText": [
                 [
-                    "add := func(x, y int) int {\n    return x + y\n}\nfmt.Println(add(2, 3)) // Output: 5"
+                    "add := func(x, y int) int {\n    return x + y\n}\nfmt.Println(add(2, 3)) // 5"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24224eb1-ed54-80ba-a2e2-ef3174f52503",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8009-95c0-d14df76dbee9",
+            "id": "04023e42-32c3-5c7f-b9af-550ed4b2ce3c",
             "type": "sub_header",
             "richText": [
                 [
-                    "Passing Anonymous Function as Argument",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Passing a callback"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-804b-92e0-cf41e8703ed5",
+            "id": "bed1077c-b658-5599-b00d-f89696ce918f",
+            "type": "text",
+            "richText": [
+                [
+                    "Declarations and call boundary, using fmt:"
+                ]
+            ]
+        },
+        {
+            "id": "8306fb87-8519-5d41-9299-50c1abda4856",
             "type": "code",
             "richText": [
                 [
-                    "func operate(x, y int, op func(int, int) int) int {\n    return op(x, y)\n}\n\nresult := operate(4, 2, func(a, b int) int {\n    return a * b\n})\n// result = 8\n"
+                    "func operate(x, y int, op func(int, int) int) int {\n    return op(x, y)\n}\n\nfunc callbackExample() {\n    result := operate(4, 2, func(a, b int) int {\n        return a * b\n    })\n    fmt.Println(result) // 8\n}"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24224eb1-ed54-8091-b7ba-cfa161976399",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80fe-a43d-f8c81b316841",
+            "id": "967c5d8b-d16e-5941-a297-c2d93fe80521",
             "type": "sub_header",
             "richText": [
                 [
-                    "Returning Anonymous Function",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Returning a function"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8076-ab6e-ca03286295db",
+            "id": "6052927a-e59f-5fef-973e-fc48abd7e6f4",
             "type": "code",
             "richText": [
                 [
-                    "func multiplier(factor int) func(int) int {\n    return func(x int) int {\n        return x * factor\n    }\n}\n\ndouble := multiplier(2)\nfmt.Println(double(5)) // Output: 10\n"
+                    "func multiplier(factor int) func(int) int {\n    return func(x int) int {\n        return x * factor\n    }\n}\n\nfunc multiplierExample() {\n    double := multiplier(2)\n    fmt.Println(double(5)) // 10\n}"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24224eb1-ed54-801e-a1de-f37fe47deee9",
-            "type": "divider"
+            "id": "d85ed29e-6dda-5b10-81ab-3dc178cacf69",
+            "type": "text",
+            "richText": [
+                [
+                    "The returned function captures factor, so this example is also a closure. Function-literal syntax and captured state are separate concepts."
+                ]
+            ]
+        },
+        {
+            "id": "79f7f93f-c218-5bb9-8e2c-ef7c2849b666",
+            "type": "text",
+            "richText": [
+                [
+                    "Captured variables, lifetime and loop scope: "
+                ],
+                [
+                    "Closures",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/closures"
+                        ]
+                    ]
+                ]
+            ]
         }
     ]
 } as const satisfies GoNote;

@@ -1,15 +1,15 @@
-/* Copied from the Workgroups page in Notion without changing its content. */
+/* Go study notes, refined from the original Notion import. */
 
 import type { GoNote } from '../types';
 
 const note = {
     "notionId": "24124eb1-ed54-804e-98a7-ed95eaa0b4c2",
     "slug": "workgroups",
-    "title": "Workgroups",
-    "updatedOn": "2025-07-31",
+    "title": "WaitGroup",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24124eb1-ed54-8050-8180-f2bd6f093b67",
+            "id": "83dc4671-7caf-5b21-94b3-94555b47fede",
             "type": "text",
             "richText": [
                 [
@@ -24,757 +24,50 @@ const note = {
                     ]
                 ],
                 [
-                    " is used to wait for a "
-                ],
-                [
-                    "collection of goroutines",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " to finish."
+                    " waits for a set of tasks to finish. It tracks completion; it does not carry results or prevent workers from racing with each other."
                 ]
             ]
-        },
-        {
-            "id": "24124eb1-ed54-80a8-8d95-e62e7702c0ee",
-            "type": "text",
-            "richText": [
-                [
-                    "It’s a thread-safe counter managed by the main goroutine and "
-                ],
-                [
-                    "shared across multiple goroutines",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80af-b406-d48cddbc4b49",
-            "type": "divider"
         },
         {
             "id": "24124eb1-ed54-8090-b198-df32ddb32ff3",
             "type": "sub_header",
             "richText": [
                 [
-                    "When to Use"
+                    "Methods"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8065-bc35-dbab8e037474",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "You are "
-                ],
-                [
-                    "launching goroutines",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-807e-8df5-d64228c03d2f",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "You want the "
-                ],
-                [
-                    "main goroutine to wait",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " until "
-                ],
-                [
-                    "all launched goroutines finish",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-809c-a817-d623a7bc1af5",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "You don’t want to use channels just for synchronization"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80af-b104-da1eb1b4ac8a",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8029-a0cb-cfddbe78e5e9",
+            "id": "be76ddc7-0c09-556c-b1d8-3a0700dd22ed",
             "type": "table",
+            "columnOrder": [
+                "column-0",
+                "column-1"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
             "children": [
                 {
-                    "id": "24124eb1-ed54-806e-b199-cec04601acd1",
+                    "id": "8c6e0829-ddfb-58be-b15c-267e2e6caa8d",
                     "type": "table_row",
                     "cells": {
-                        "?f:F": [
-                            [
-                                "Purpose"
-                            ]
-                        ],
-                        "nPc@": [
+                        "column-0": [
                             [
                                 "Method"
                             ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8072-8c16-d405bd9abf33",
-                    "type": "table_row",
-                    "cells": {
-                        "?f:F": [
-                            [
-                                "Increases the counter by N (usually 1 per goroutine)"
-                            ]
                         ],
-                        "nPc@": [
-                            [
-                                "Add(int)",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80b2-93bd-e7bbdad8e9b1",
-                    "type": "table_row",
-                    "cells": {
-                        "?f:F": [
-                            [
-                                "Decreases the counter by 1 (usually at end of each goroutine)"
-                            ]
-                        ],
-                        "nPc@": [
-                            [
-                                "Done()",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80ff-9577-fcc2caf26868",
-                    "type": "table_row",
-                    "cells": {
-                        "?f:F": [
-                            [
-                                "Blocks until counter becomes 0 (i.e., all "
-                            ],
-                            [
-                                "Done()",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                "s called)"
-                            ]
-                        ],
-                        "nPc@": [
-                            [
-                                "Wait()",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                }
-            ],
-            "columnOrder": [
-                "nPc@",
-                "?f:F"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24124eb1-ed54-80e1-aa91-f6c4add51ec0",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-806c-8e90-cfb739b9aa7f",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc worker(id int, wg *sync.WaitGroup) {\n\tdefer wg.Done() // Decrease counter when goroutine finishes\n\tfmt.Printf(\"Worker %d starting\\n\", id)\n\t// Simulate work\n\tfmt.Printf(\"Worker %d done\\n\", id)\n}\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\n\tfor i := 1; i <= 3; i++ {\n\t\twg.Add(1) // Increase counter before launching goroutine\n\t\tgo worker(i, &wg)\n\t}\n\n\twg.Wait() // Wait until all workers are done\n\tfmt.Println(\"All workers completed\")\n}\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8048-9dcb-d188964e8fec",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8098-958f-fd48496aee40",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Execution Flow"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-802e-953d-f6f8d476bd87",
-            "type": "numbered_list",
-            "richText": [
-                [
-                    "Add(N)",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " increases counter to N"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-808a-9224-d3e53a1bf2a0",
-            "type": "numbered_list",
-            "richText": [
-                [
-                    "Each goroutine runs and eventually calls "
-                ],
-                [
-                    "Done()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " → counter -= 1"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ca-88f3-c90cfbd9ea8b",
-            "type": "numbered_list",
-            "richText": [
-                [
-                    "Wait()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " blocks until counter == 0"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80e5-92fe-fd3bd4749317",
-            "type": "numbered_list",
-            "richText": [
-                [
-                    "Program continues"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80de-b972-e171c60896ca",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8095-a0fe-d140b84f111d",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Best Practices"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8076-9c49-f1dfff61f652",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Always "
-                ],
-                [
-                    "call ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "Add(1)",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " before",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " starting the goroutine."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ee-a388-dfdb331823bd",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Always "
-                ],
-                [
-                    "call ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "Done()",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " exactly once",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " per goroutine. Use "
-                ],
-                [
-                    "defer",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " immediately inside the goroutine."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8055-9cfe-c72afc7c313b",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Pass "
-                ],
-                [
-                    "WaitGroup",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " by "
-                ],
-                [
-                    "pointer",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", never by value."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-806d-a0f6-c72bab648ed6",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "WaitGroup",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " should "
-                ],
-                [
-                    "not be reused",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " before the previous "
-                ],
-                [
-                    ".Wait()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " has completed."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8012-99cf-dd980fbb9206",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8092-8af0-d3d9c8b4a662",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Common Pitfalls"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-800a-a450-e5f667618b1a",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80cf-a42a-f0379c4fd312",
-                    "type": "table_row",
-                    "cells": {
-                        "Czzb": [
-                            [
-                                "Problem"
-                            ]
-                        ],
-                        "Id=M": [
-                            [
-                                "Mistake"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80bb-b013-df233ed23f05",
-                    "type": "table_row",
-                    "cells": {
-                        "Czzb": [
-                            [
-                                "Risk: goroutine may run before counter is incremented"
-                            ]
-                        ],
-                        "Id=M": [
-                            [
-                                "wg.Add",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                " after "
-                            ],
-                            [
-                                "go",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80b3-ad35-c72d4e58cd1b",
-                    "type": "table_row",
-                    "cells": {
-                        "Czzb": [
-                            [
-                                "Wait()",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                " blocks forever (deadlock)"
-                            ]
-                        ],
-                        "Id=M": [
-                            [
-                                "Forgetting "
-                            ],
-                            [
-                                "Done()",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8070-b86e-dc1754f169c9",
-                    "type": "table_row",
-                    "cells": {
-                        "Czzb": [
-                            [
-                                "Each goroutine modifies a copy → no sync"
-                            ]
-                        ],
-                        "Id=M": [
-                            [
-                                "Passing "
-                            ],
-                            [
-                                "WaitGroup",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                " by value"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80b7-8a69-def38e6ad162",
-                    "type": "table_row",
-                    "cells": {
-                        "Czzb": [
-                            [
-                                "Race conditions and undefined behavior"
-                            ]
-                        ],
-                        "Id=M": [
-                            [
-                                "Reusing WaitGroup too early"
-                            ]
-                        ]
-                    }
-                }
-            ],
-            "columnOrder": [
-                "Id=M",
-                "Czzb"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24124eb1-ed54-80b1-8d56-cb0b2cd00d47",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8042-abb6-f40eacb710fd",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Can WaitGroups return results?"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-800f-9166-d7d2a2e6f3d5",
-            "type": "text",
-            "richText": [
-                [
-                    "No, WaitGroups are for "
-                ],
-                [
-                    "sync only",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", not "
-                ],
-                [
-                    "data sharing",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-801f-bfb0-e2c20cfd2d8f",
-            "type": "text",
-            "richText": [
-                [
-                    "To collect results from goroutines, use "
-                ],
-                [
-                    "channels",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " alongside WaitGroups:"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80c8-ad3b-d7a90b314fcd",
-            "type": "code",
-            "richText": [
-                [
-                    "results := make(chan int, 3)\nvar wg sync.WaitGroup\n\nfor i := 0; i < 3; i++ {\n    wg.Add(1)\n    go func(n int) {\n        defer wg.Done()\n        results <- n * n\n    }(i)\n}\n\nwg.Wait()\nclose(results)\n\nfor r := range results {\n    fmt.Println(r)\n}\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80e4-87dd-da26494fae3a",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8001-bc68-caa9be9bcdcd",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Summary"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8044-aae8-df3936f24a24",
-            "type": "table",
-            "children": [
-                {
-                    "id": "24124eb1-ed54-802c-b5a3-d9068e144c26",
-                    "type": "table_row",
-                    "cells": {
-                        ":vlG": [
-                            [
-                                "Concept"
-                            ]
-                        ],
-                        "pUSw": [
-                            [
-                                "Quick Recap"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8060-8449-c035af45f265",
-                    "type": "table_row",
-                    "cells": {
-                        ":vlG": [
+                        "column-1": [
                             [
                                 "Purpose"
                             ]
-                        ],
-                        "pUSw": [
-                            [
-                                "Wait for goroutines to finish"
-                            ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-8066-9412-d50df017cf3e",
+                    "id": "f5fd863a-e2f7-51d3-a335-c19c3b63f454",
                     "type": "table_row",
                     "cells": {
-                        ":vlG": [
-                            [
-                                "Key Methods"
-                            ]
-                        ],
-                        "pUSw": [
+                        "column-0": [
                             [
                                 "Add(n)",
                                 [
@@ -782,10 +75,20 @@ const note = {
                                         "c"
                                     ]
                                 ]
-                            ],
+                            ]
+                        ],
+                        "column-1": [
                             [
-                                ", "
-                            ],
+                                "Add n outstanding tasks. A negative resulting counter panics."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "71280396-4ce0-5a9e-a635-d7beac4a0fcf",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
                             [
                                 "Done()",
                                 [
@@ -793,10 +96,31 @@ const note = {
                                         "c"
                                     ]
                                 ]
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Complete one task; equivalent to "
                             ],
                             [
-                                ", "
+                                "Add(-1)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ],
+                            [
+                                "."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "7434b80d-4e2b-59d0-8722-dbd6199b116c",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
                             [
                                 "Wait()",
                                 [
@@ -805,99 +129,391 @@ const note = {
                                     ]
                                 ]
                             ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8085-b2a8-f9ec1db851be",
-                    "type": "table_row",
-                    "cells": {
-                        ":vlG": [
-                            [
-                                "Thread-safe?"
-                            ]
                         ],
-                        "pUSw": [
+                        "column-1": [
                             [
-                                "Yes"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8021-b727-f214c76bbd4f",
-                    "type": "table_row",
-                    "cells": {
-                        ":vlG": [
-                            [
-                                "Use Cases"
-                            ]
-                        ],
-                        "pUSw": [
-                            [
-                                "Parallel tasks where main must wait"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80e7-865d-d65e01059a3e",
-                    "type": "table_row",
-                    "cells": {
-                        ":vlG": [
-                            [
-                                "Not for"
-                            ]
-                        ],
-                        "pUSw": [
-                            [
-                                "Passing data (use channels)"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8094-b036-c339910f61f4",
-                    "type": "table_row",
-                    "cells": {
-                        ":vlG": [
-                            [
-                                "Danger"
-                            ]
-                        ],
-                        "pUSw": [
-                            [
-                                "Deadlocks if "
-                            ],
-                            [
-                                "Done()",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                " is missing"
+                                "Block until the outstanding task count reaches zero."
                             ]
                         ]
                     }
                 }
-            ],
-            "columnOrder": [
-                ":vlG",
-                "pUSw"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
+            ]
         },
         {
-            "id": "24124eb1-ed54-804d-b7c7-c707c2c175a4",
-            "type": "divider"
+            "id": "792bc4b0-87ef-5e33-8963-2a456998b67d",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Wait for Workers"
+                ]
+            ]
         },
         {
-            "id": "24124eb1-ed54-8090-96f6-e7914766bac3",
-            "type": "text"
+            "id": "1c8ed295-5750-5959-ac16-603af36035d9",
+            "type": "code",
+            "richText": [
+                [
+                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc worker(id int, wg *sync.WaitGroup) {\n    defer wg.Done()\n    fmt.Printf(\"Worker %d starting\\n\", id)\n    fmt.Printf(\"Worker %d done\\n\", id)\n}\n\nfunc main() {\n    var wg sync.WaitGroup\n    for id := 1; id <= 3; id++ {\n        wg.Add(1)\n        go worker(id, &wg)\n    }\n    wg.Wait()\n    fmt.Println(\"All workers completed\")\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "a3a9e582-6482-5478-9eb0-85fe74a7871d",
+            "type": "text",
+            "richText": [
+                [
+                    "Each worker prints starting before done. Lines from different workers may interleave. All workers completed is always the last line."
+                ]
+            ]
+        },
+        {
+            "id": "24124eb1-ed54-8095-a0fe-d140b84f111d",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Rules and Pitfalls"
+                ]
+            ]
+        },
+        {
+            "id": "4739eedd-f3a5-541c-98a3-fc673587548e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Register a new batch before waiting. With the "
+                ],
+                [
+                    "Add",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "/"
+                ],
+                [
+                    "Done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " pattern, call "
+                ],
+                [
+                    "Add(1)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " before launching each goroutine so "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " cannot observe zero too early."
+                ]
+            ]
+        },
+        {
+            "id": "94b358b3-d29f-50f9-b856-4b214ff5d4fb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each registered task must call "
+                ],
+                [
+                    "Done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " exactly once. A missing call leaves "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " blocked; an extra call can make the counter negative."
+                ]
+            ]
+        },
+        {
+            "id": "bf8afe79-8106-58aa-8579-a82bf8da9e28",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not copy a WaitGroup after first use. Pass a pointer when another function needs the same group."
+                ]
+            ]
+        },
+        {
+            "id": "5d0a08af-4b4c-5235-af5a-5a534bb6c5a9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Reuse for a new independent batch only after all previous "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " calls return."
+                ]
+            ]
+        },
+        {
+            "id": "fb21349b-0305-5d24-b2b0-fdc1edf77568",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " has no cancellation parameter. The tasks themselves must have exit paths; cancelling a context does not change the counter."
+                ]
+            ]
+        },
+        {
+            "id": "24124eb1-ed54-8042-abb6-f40eacb710fd",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Collect Results"
+                ]
+            ]
+        },
+        {
+            "id": "659286dd-cb6b-588b-b466-2061d4495320",
+            "type": "text",
+            "richText": [
+                [
+                    "A channel transports results while the WaitGroup tells the closer when all senders have finished. Consume results while workers run; waiting first could deadlock with an unbuffered results channel."
+                ]
+            ]
+        },
+        {
+            "id": "c6fe4e1c-d0c1-56e0-a1e1-3c2e94fc4436",
+            "type": "code",
+            "richText": [
+                [
+                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    results := make(chan int)\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go func(n int) {\n            defer wg.Done()\n            results <- n * n\n        }(i)\n    }\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n\n    for result := range results {\n        fmt.Println(result)\n    }\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "c18f22c6-a64b-560a-b89d-a369f77dc466",
+            "type": "text",
+            "richText": [
+                [
+                    "The values are 0, 1 and 4, in unspecified order. The closer cannot close "
+                ],
+                [
+                    "results",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " until every send has completed."
+                ]
+            ]
+        },
+        {
+            "id": "e7a83794-c494-59d2-ae2f-29226c9913e5",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Go 1.25+ Alternative"
+                ]
+            ]
+        },
+        {
+            "id": "a5a1ed69-2502-57aa-9df8-10d705c09a2e",
+            "type": "text",
+            "richText": [
+                [
+                    "Go 1.25 introduced "
+                ],
+                [
+                    "wg.Go(f)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", which registers a task, starts its goroutine, and removes the task when "
+                ],
+                [
+                    "f",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns. The function must not panic. Start the initial tasks before calling "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "; do not add a separate "
+                ],
+                [
+                    "Done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " inside "
+                ],
+                [
+                    "f",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "68115a6e-2aef-5f7c-8648-2cb34d16a015",
+            "type": "code",
+            "richText": [
+                [
+                    "// Function-body fragment; requires Go 1.25+ and imports fmt and sync.\nvar wg sync.WaitGroup\nwg.Go(func() { fmt.Println(\"task finished\") })\nwg.Wait()"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "7f122570-0ba5-599c-aca4-34984e98ecab",
+            "type": "text",
+            "richText": [
+                [
+                    "Related notes: "
+                ],
+                [
+                    "Channels",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/channels"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Mutex",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/mutex"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Context and Timeout",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/context-and-timeout"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "b6cdda0e-e268-5edb-9b65-f1e98a042414",
+            "type": "text",
+            "richText": [
+                [
+                    "Sources: "
+                ],
+                [
+                    "WaitGroup documentation",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#WaitGroup"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "WaitGroup implementation and contracts",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/sync/waitgroup.go"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
         }
     ]
 } as const satisfies GoNote;

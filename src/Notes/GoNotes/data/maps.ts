@@ -1,4 +1,4 @@
-/* Copied from the Maps page in Notion without changing its content. */
+/* Focused Go study notes, refined from the imported source. */
 
 import type { GoNote } from '../types';
 
@@ -6,1258 +6,419 @@ const note = {
     "notionId": "24124eb1-ed54-8096-9741-edb8eca726fb",
     "slug": "maps",
     "title": "Maps",
-    "updatedOn": "2026-01-23",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24224eb1-ed54-809a-8afc-d252bad6d1e1",
-            "type": "bulleted_list",
+            "id": "3130dc2a-e005-517a-8013-1ebd37ab9c43",
+            "type": "text",
             "richText": [
                 [
-                    "An unordered collection of key-value pairs",
+                    "A map stores key-value pairs. Keys must be comparable, such as strings or integers. Values can have any type. Examples are independent function-body fragments using "
+                ],
+                [
+                    "fmt",
                     [
                         [
-                            "b"
+                            "c"
                         ]
                     ]
                 ],
                 [
-                    "."
+                    ", unless labeled as complete programs."
                 ]
             ]
-        },
-        {
-            "id": "24224eb1-ed54-80aa-9a27-f31ced372a98",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Keys must be "
-                ],
-                [
-                    "comparable",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " (e.g., strings, ints, not slices or maps)."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8006-b0fc-ee79ea55bcb1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Values can be of any type."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8041-8d3d-f2b128ebe60e",
-            "type": "divider"
         },
         {
             "id": "24224eb1-ed54-8047-935c-cc5e36842afa",
             "type": "sub_header",
             "richText": [
                 [
-                    "Declaring Maps",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Declaring Maps"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8068-9086-da8212a6c8fa",
-            "type": "sub_sub_header",
+            "id": "6216d8f2-5878-5161-acdd-0d32a3b6bc7f",
+            "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "Using ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "empty := make(map[string]int)\nfruit := map[string]int{\n    \"apple\": 5,\n    \"banana\": 10,\n}\nfmt.Println(empty == nil, len(empty)) // false 0\nfmt.Println(fruit[\"apple\"])           // 5"
+                ]
+            ]
+        },
+        {
+            "id": "abb42931-40c5-58e8-96bd-147906204672",
+            "type": "text",
+            "richText": [
+                [
+                    "Make and map literals create initialized maps. An optional size hint such as "
                 ],
                 [
-                    "make()",
+                    "make(map[string]int, 100)",
                     [
-                        [
-                            "b"
-                        ],
                         [
                             "c"
                         ]
                     ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8082-92e3-d702b85848b2",
-            "type": "code",
-            "richText": [
-                [
-                    "m := make(map[string]int) // m is not nil"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8041-adf2-f5d1b19e2d6f",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Using Literal Syntax",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80e0-a40d-f003e4774458",
-            "type": "code",
-            "richText": [
-                [
-                    "m := map[string]int{\n    \"apple\":  5,\n    \"banana\": 10,\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8013-ba4d-d6615b553578",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Nil Map (Read-Only, Will Panic on Write)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80f8-9067-f0276480e983",
-            "type": "code",
-            "richText": [
-                [
-                    "var m map[string]int // nil map"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "2f124eb1-ed54-805a-bcf5-dd1087f16dd1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A nil map is intentionally usable only in read-like contexts.",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80ae-9faf-d817545446d2",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Primary purpose of a nil map"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-80d0-ba13-ded2b1126b92",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Represents "
-                        ],
-                        [
-                            "“no map provided”",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            " or "
-                        ],
-                        [
-                            "“map absent”",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            ", not “empty but usable”."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-803a-ab7b-c031cd096734",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Saves allocation when no writes are needed."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80bc-9ce3-c895645edb63",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Valid uses of a nil map"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-80e6-8d89-de34f96f00b1",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "As a default zero value for function parameters and struct fields."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8024-bf08-dc569ec303b9",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Safe to:"
-                        ]
-                    ],
-                    "children": [
-                        {
-                            "id": "2f124eb1-ed54-80ff-b28f-f2f29f647a3a",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "Read: "
-                                ],
-                                [
-                                    "v := m[k]",
-                                    [
-                                        [
-                                            "c"
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        },
-                        {
-                            "id": "2f124eb1-ed54-80f0-90a7-d8a96b8d3e20",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "Check length: "
-                                ],
-                                [
-                                    "len(m)",
-                                    [
-                                        [
-                                            "c"
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        },
-                        {
-                            "id": "2f124eb1-ed54-8098-86d7-e5ee68a38ee1",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "Iterate: "
-                                ],
-                                [
-                                    "for k, v := range m",
-                                    [
-                                        [
-                                            "c"
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        },
-                        {
-                            "id": "2f124eb1-ed54-8006-8c0b-f28c23e888b2",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "Delete: "
-                                ],
-                                [
-                                    "delete(m, k)",
-                                    [
-                                        [
-                                            "c"
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    " (no-op)"
-                                ]
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-801f-9e99-d09958852894",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Why writes are disallowed"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-8071-8f03-ede6dd3870ee",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Writing requires allocating internal buckets."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8073-a540-fd17c10882ff",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Go does "
-                        ],
-                        [
-                            "not",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            " auto-initialize maps on write."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8061-82dc-f1c6351f12f3",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "This avoids hidden allocations and keeps behavior explicit."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80af-bbde-fbf99e5e641b",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "How you "
                 ],
                 [
-                    "actually",
-                    [
-                        [
-                            "i"
-                        ]
-                    ]
-                ],
-                [
-                    " use a nil map when writes may happen"
+                    " is a hint, not an entry count or a maximum size. Internal allocation details belong to the runtime implementation."
                 ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-806d-9a48-ee37a16459d0",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Pattern:"
-                        ]
-                    ],
-                    "children": [
-                        {
-                            "id": "2f124eb1-ed54-8015-8d15-f3e1c92d46c4",
-                            "type": "code",
-                            "richText": [
-                                [
-                                    "if m == nil {\n    m = make(map[string]int)\n}\nm[\"a\"] = 1"
-                                ]
-                            ],
-                            "language": "Go"
-                        }
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8018-aec1-d9b4ca47467f",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "This makes allocation "
-                        ],
-                        [
-                            "explicit and predictable",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                }
             ]
         },
         {
-            "id": "2f124eb1-ed54-8062-998b-c0d7c3254591",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Design intent (important)"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-8021-a467-cae85a8901eb",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Nil map ≠ empty map."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-80fb-b6eb-ed03a7f42315",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Nil map means “absence”."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-80c0-9ffa-c6b12333f39f",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Empty-but-writable map means “present but currently empty”."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8035-ae61-fa259a5627fb",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Bottom line"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-80ec-a0b0-c6e384129e08",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You "
-                        ],
-                        [
-                            "do not write to a nil map",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8080-a7bd-d6c485b27170",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You "
-                        ],
-                        [
-                            "either treat it as read-only",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            ", or "
-                        ],
-                        [
-                            "initialize it before first write",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80fe-888b-fd58be40fb33",
-            "type": "divider"
-        },
-        {
-            "id": "2f124eb1-ed54-8096-8f5e-df3bed74dad5",
+            "id": "12c727b1-4307-55e3-9436-1b26169a791f",
             "type": "sub_header",
             "richText": [
                 [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " vs "
-                ],
-                [
-                    "non-nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " for map"
+                    "Nil versus empty maps"
                 ]
             ]
         },
         {
-            "id": "2f124eb1-ed54-8099-af60-ca1623bb2406",
-            "type": "bulleted_list",
+            "id": "99f7cb88-f28a-5e5d-8a9d-baf0b7d60c01",
+            "type": "text",
             "richText": [
                 [
-                    "What "
-                ],
-                [
-                    "nil",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " means for a map"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-80fc-bfd4-dbd900889d9a",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "nil",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " means "
-                        ],
-                        [
-                            "no map value exists at all",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-80c3-bbf0-e4c54a09c6c3",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "The map header pointer is "
-                        ],
-                        [
-                            "nil",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8059-8593-f11e3329806a",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "There is "
-                        ],
-                        [
-                            "no internal structure",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            " allocated."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80c6-84fc-df2122d9b9c8",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "What "
-                ],
-                [
-                    "make(map[string]int)",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " does"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-8087-a950-e51f2806a3aa",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Allocates a "
-                        ],
-                        [
-                            "map header",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-807e-a3d8-cf8c2599da83",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Initializes internal bookkeeping so the map can accept inserts."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8005-a4f9-c00d0b4eabd8",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Does "
-                        ],
-                        [
-                            "not",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            " insert any key–value pairs."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80c5-b367-e8f7c4ff5595",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Resulting state"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-801f-b5b1-c8115f46e41b",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Map is "
-                        ],
-                        [
-                            "empty",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            ": it contains zero key–value pairs."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-803a-8d91-e32005f052b3",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Map is "
-                        ],
-                        [
-                            "not nil",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            ": it points to a valid, initialized map structure."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-802c-8ded-d5cb9c3ac94f",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Precise distinction"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-80bd-8244-cfb01113cc1d",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "len(m) == 0",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " → map has no entries."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8044-aade-d8498a7dd178",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "m == nil",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " → map does not exist."
-                        ]
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-8039-a4f5-edfefb446e9c",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "With "
-                        ],
-                        [
-                            "make",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            ", "
-                        ],
-                        [
-                            "len(m) == 0",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " "
-                        ],
-                        [
-                            "and",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            " "
-                        ],
-                        [
-                            "m != nil",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-804c-b22b-f52f19524af8",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Concrete contrast"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "2f124eb1-ed54-805c-807b-efc827c9aa2d",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "var m map[string]int",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ]
-                    ],
-                    "children": [
-                        {
-                            "id": "2f124eb1-ed54-8086-89da-d0164ea440b3",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "No allocation."
-                                ]
-                            ]
-                        },
-                        {
-                            "id": "2f124eb1-ed54-80b4-afa6-e7d524f487d3",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "m == nil",
-                                    [
-                                        [
-                                            "c"
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    "."
-                                ]
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "id": "2f124eb1-ed54-805b-bdfc-e903ceaab8b6",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "m := make(map[string]int)",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ]
-                    ],
-                    "children": [
-                        {
-                            "id": "2f124eb1-ed54-8032-9009-facd1753bafc",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "Allocation happened."
-                                ]
-                            ]
-                        },
-                        {
-                            "id": "2f124eb1-ed54-804e-9984-c3e159877863",
-                            "type": "bulleted_list",
-                            "richText": [
-                                [
-                                    "m != nil",
-                                    [
-                                        [
-                                            "c"
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    ", even though no values are stored."
-                                ]
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-804d-a3fa-f92c32b3c646",
-            "type": "text"
-        },
-        {
-            "id": "24224eb1-ed54-8090-ab9f-f3a429b22fe2",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8060-a63c-ff74aaba395f",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Inserting & Updating Elements",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8026-8920-ccdccce3a0c9",
-            "type": "code",
-            "richText": [
-                [
-                    "m[\"apple\"] = 10      // insert or update"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8057-a8e3-cb5b9f0cbe7e",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "If the key exists, it updates the value."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8074-a730-ebfa7b61ebf1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "If not, it adds a new key-value pair."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80b2-9dd5-fdee985437f8",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80c6-bd2c-f684b14cf516",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Accessing Values",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80be-8e63-dec81210b084",
-            "type": "code",
-            "richText": [
-                [
-                    "val := m[\"apple\"]"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-80cf-9e24-e2aedd7ab21d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "If key doesn’t exist: returns "
+                    "A map’s "
                 ],
                 [
                     "zero value",
                     [
                         [
-                            "b"
+                            "a",
+                            "#/notes/go/zero-values"
                         ]
                     ]
                 ],
                 [
-                    " of value type ("
-                ],
-                [
-                    "0",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "\"\"",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", etc.)"
+                    " is nil. Both a nil map and an initialized empty map have length 0, but only the initialized map accepts entry assignments."
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8071-9d50-fb0e9638565a",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Check if Key Exists:"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-803f-8de3-ccb9e7ad376a",
-            "type": "code",
-            "richText": [
-                [
-                    "val, ok := m[\"apple\"]\nif ok {\n    // key exists\n} else {\n    // key not found\n}"
-                ]
+            "id": "6c502c12-3699-5851-b1b5-3d46fed11b06",
+            "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1",
+                "col-2"
             ],
-            "language": "Go"
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "b8cbd12c-3442-5f02-9732-a6f19eed11c3",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Operation"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Nil map"
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Initialized empty map"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "d1e777cf-d486-564a-a1db-b2d4fe5c2c9a",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Lookup "
+                            ],
+                            [
+                                "m[key]",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Returns the value type’s zero value."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Returns the value type’s zero value."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "48a2284d-f7cb-51fe-bd8d-f62b1ac2fe79",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Lookup "
+                            ],
+                            [
+                                "value, ok := m[key]",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Zero value and false."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Zero value and false."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "8575f94b-da6c-5d3e-acfb-e6d9381ae093",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "len(m)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "0"
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "0"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "fc150932-d45b-5cd8-99ec-9d5fec7e9ac6",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "range m",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "No iterations."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "No iterations."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "66e9525e-c811-59a2-9926-f11b3b980f84",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "delete(m, key)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "No effect."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "No effect for a missing key."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "c7bb9cc9-30ba-54de-abcc-1170947f5601",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "clear(m)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " (Go 1.21+)"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "No effect."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Deletes any entries."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "561d6a37-8615-5d5a-a6cb-7880173962b5",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "m[key] = value",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Panics."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Inserts the entry."
+                            ]
+                        ]
+                    }
+                }
+            ]
         },
         {
-            "id": "24224eb1-ed54-80e9-b4eb-e4918b183082",
-            "type": "divider"
+            "id": "604c0684-dec2-53d0-9ce8-897f1d40012a",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "var counts map[string]int\nif counts == nil {\n    counts = make(map[string]int)\n}\ncounts[\"a\"] = 1\nfmt.Println(counts[\"a\"]) // 1"
+                ]
+            ]
         },
         {
-            "id": "24224eb1-ed54-80fc-8e81-e786f621e214",
+            "id": "686df60a-b123-5ec4-a8c0-d1972fb68fe4",
+            "type": "text",
+            "richText": [
+                [
+                    "Nil can represent an absent map when an API uses that convention. The language does not require a separate meaning for nil and empty maps beyond their operation rules."
+                ]
+            ]
+        },
+        {
+            "id": "b087747d-e007-5be3-b783-7d8d9f548e96",
             "type": "sub_header",
             "richText": [
                 [
-                    "Deleting Keys",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Lookup, insertion, and update"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80ce-b746-f01a5da99702",
+            "id": "ebcb2c5b-ac1c-5e94-bf1a-36e3f6c5afbe",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "delete(m, \"apple\")"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-804a-a1a5-cda518efda84",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Safe even if key doesn’t exist (no panic)."
+                    "fruit := map[string]int{\"apple\": 5}\nfruit[\"apple\"] = 10 // update\nfruit[\"banana\"] = 2 // insert\nfmt.Println(fruit[\"apple\"])  // 10\nfmt.Println(fruit[\"orange\"]) // 0\n\nvalue, ok := fruit[\"orange\"]\nfmt.Println(value, ok) // 0 false"
                 ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-80ce-8503-cb6174cc8896",
-            "type": "divider"
+            "id": "9d8eb708-dd29-5063-9775-a65c450697d5",
+            "type": "text",
+            "richText": [
+                [
+                    "Use the comma-ok lookup when an existing zero value must be distinguished from a missing key."
+                ]
+            ]
         },
         {
-            "id": "24a24eb1-ed54-807e-9232-df6978bb5c87",
+            "id": "6e5521d2-3270-5977-ae47-2f84b880c89d",
             "type": "sub_header",
             "richText": [
                 [
-                    "Deleting all Key Value Pairs of the Map"
+                    "Deleting entries and counting them"
                 ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-804f-8836-c74b7bb170d2",
+            "id": "8e859594-e8a8-5f35-8cb6-1888e089c27e",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "clear(m)"
+                    "fruit := map[string]int{\"apple\": 5, \"banana\": 10}\ndelete(fruit, \"apple\")\ndelete(fruit, \"missing\") // safe\nfmt.Println(len(fruit)) // 1\nclear(fruit)            // Go 1.21 or later\nfmt.Println(len(fruit)) // 0"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24224eb1-ed54-8092-b4fa-e31898453e97",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-8084-9ddc-f79ea11bd419",
+            "id": "da2d2223-0690-58b5-94e3-7eedc69680f3",
             "type": "sub_header",
             "richText": [
                 [
-                    "Length of a Map",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Iteration order"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80bb-8fc1-de1323cf0983",
-            "type": "code",
+            "id": "0bd9c8df-d934-525c-90a5-4d0fcc1879dc",
+            "type": "text",
             "richText": [
                 [
-                    "len(m)"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8012-959d-e969b32fac0c",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Returns the number of key-value pairs."
+                    "Map iteration order is unspecified and may differ between iterations. Sort a separate list of keys when deterministic output is needed."
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8035-b74f-cf86a64d7be3",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80b8-b1c2-f394d8f2667e",
-            "type": "sub_header",
+            "id": "8957acde-df1d-5663-92fa-8aee0a72b17d",
+            "type": "text",
             "richText": [
                 [
-                    "Iterating Over a Map",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8004-ac2a-d450070aaf9d",
-            "type": "code",
-            "richText": [
-                [
-                    "for k, v := range m {\n    fmt.Println(k, v)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8034-9829-f94351b0d8ac",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Order is "
+                    "Key/value range syntax is covered in "
                 ],
                 [
-                    "not guaranteed",
+                    "Range & For Loops",
                     [
                         [
-                            "b"
+                            "a",
+                            "#/notes/go/range-for-loops"
                         ]
                     ]
                 ],
@@ -1267,59 +428,167 @@ const note = {
             ]
         },
         {
-            "id": "24224eb1-ed54-80cd-bbf2-e1ded1774ee6",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "You can get just keys: "
-                ],
-                [
-                    "for k := range m",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8034-ba17-d50aefcc4e88",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80ab-99bd-d93414d8b6be",
+            "id": "59a974c2-1205-591f-9b6d-e0a9e7913e32",
             "type": "sub_header",
             "richText": [
                 [
-                    "Maps are Reference Types",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Assignment and function arguments"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8039-88cd-ff5072dcfd23",
-            "type": "code",
+            "id": "e678b825-3dcc-585b-a232-a3b7a0ecce54",
+            "type": "text",
             "richText": [
                 [
-                    "m1 := map[string]int{\"a\": 1}\nm2 := m1\nm2[\"a\"] = 100\nfmt.Println(m1[\"a\"]) // 100"
+                    "Map assignment and function arguments copy the map value. Those copies refer to the same map data, so entry changes are shared. Reassigning a function parameter does not replace the caller’s map variable."
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24224eb1-ed54-80ad-a645-e6d2490ef8cf",
-            "type": "bulleted_list",
+            "id": "596980d5-58cc-5aa4-9e19-9f824769d73e",
+            "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "Both "
+                    "package main\n\nimport \"fmt\"\n\nfunc change(m map[string]int) {\n    m[\"a\"] = 100\n    m = map[string]int{\"b\": 2} // replaces only the parameter\n}\n\nfunc main() {\n    m1 := map[string]int{\"a\": 1}\n    m2 := m1\n    m2[\"a\"] = 10\n    change(m1)\n    fmt.Println(m1[\"a\"]) // 100\n    _, ok := m1[\"b\"]\n    fmt.Println(ok)      // false\n}"
+                ]
+            ]
+        },
+        {
+            "id": "12aacaf5-fef6-5bfd-807c-e251b26cafa3",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Comparison"
+                ]
+            ]
+        },
+        {
+            "id": "3a454102-e37a-5f2b-9d3d-34ec8df552b5",
+            "type": "text",
+            "richText": [
+                [
+                    "Maps can be compared with nil, but two map values cannot be compared with ==. Compare their entries when content equality is needed."
+                ]
+            ]
+        },
+        {
+            "id": "56ffb695-5cb5-50ed-8f78-12d7bfcd5ed9",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Maps with slice or struct values"
+                ]
+            ]
+        },
+        {
+            "id": "9ebc9515-5001-5757-9f6a-cbcc4474d4e8",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "groups := map[string][]int{\n    \"evens\": {2, 4},\n}\ngroups[\"evens\"] = append(groups[\"evens\"], 6)\nfmt.Println(groups[\"evens\"]) // [2 4 6]"
+                ]
+            ]
+        },
+        {
+            "id": "411b20e4-d1f4-52f9-b12e-0790597add4c",
+            "type": "text",
+            "richText": [
+                [
+                    "A struct-valued map entry is read as a value. Update a copy and assign it back to change a field:"
+                ]
+            ]
+        },
+        {
+            "id": "8d8610c1-bc33-503c-bd2a-40c84496c422",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "type Person struct {\n    Age int\n}\npeople := map[string]Person{\"Alice\": {Age: 30}}\nperson := people[\"Alice\"]\nperson.Age++\npeople[\"Alice\"] = person\nfmt.Println(people[\"Alice\"].Age) // 31"
+                ]
+            ]
+        },
+        {
+            "id": "24224eb1-ed54-80ee-b8ed-f2b48f88af65",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Concurrent Map Access"
+                ]
+            ]
+        },
+        {
+            "id": "1f842927-aef4-540b-80ab-c5ff79cb8f0c",
+            "type": "text",
+            "richText": [
+                [
+                    "Concurrent reads are allowed while no goroutine changes the map. Reads racing with writes and simultaneous writes require synchronization. Protect all related accesses with the same lock or give one goroutine ownership of the map."
+                ]
+            ]
+        },
+        {
+            "id": "1e9c4282-3840-5e3d-bc38-53f34fd4ef90",
+            "type": "text",
+            "richText": [
+                [
+                    "See "
                 ],
                 [
-                    "m1",
+                    "Mutex",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/mutex"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "RWMutex",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/rwmutex"
+                        ]
+                    ]
+                ],
+                [
+                    " for locking examples."
+                ]
+            ]
+        },
+        {
+            "id": "0f6d88f4-3c95-5419-a689-8d0755485dde",
+            "type": "sub_sub_header",
+            "richText": [
+                [
+                    "When to use sync.Map"
+                ]
+            ]
+        },
+        {
+            "id": "bbd5a79d-afa9-5857-8a04-239df551e5ee",
+            "type": "text",
+            "richText": [
+                [
+                    "sync.Map is specialized. A plain typed map with locking is usually easier to use when related state must change together. sync.Map is suited to entries written once and read many times, or concurrent access to disjoint sets of keys. It is not a general promise of better performance."
+                ]
+            ]
+        },
+        {
+            "id": "d457e679-ff91-5647-92dc-72df42187c8a",
+            "type": "text",
+            "richText": [
+                [
+                    "Function-body fragment with "
+                ],
+                [
+                    "sync",
                     [
                         [
                             "c"
@@ -1330,7 +599,7 @@ const note = {
                     " and "
                 ],
                 [
-                    "m2",
+                    "fmt",
                     [
                         [
                             "c"
@@ -1338,377 +607,63 @@ const note = {
                     ]
                 ],
                 [
-                    " point to the "
-                ],
-                [
-                    "same underlying map",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    " imported:"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-8065-a744-c8461842f563",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-807d-b191-c9dc9ff3c2e9",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Maps Cannot Be Compared",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80e2-8e69-e9908aaeaa36",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Only "
-                ],
-                [
-                    "== nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " comparison is allowed."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8038-9f76-d4ba97ad2875",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "You cannot do "
-                ],
-                [
-                    "m1 == m2",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " (invalid)."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80fb-89eb-e5962c184a53",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80f0-8b67-cfe66aa3f3af",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Maps in Functions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8095-a3e2-eda92337055d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Passing maps to functions "
-                ],
-                [
-                    "passes the reference",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80c3-83f3-e5d2030a72d1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Changes inside the function affect the original map."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8065-8ee2-d475e2d06526",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80c9-bc7d-eabd26a8defe",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Zero Value of Map",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-806f-b7af-d1d54e503c44",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The zero value of a map is "
-                ],
-                [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8067-84eb-db7f11993d7c",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Reading from nil map is safe, writing causes panic."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8046-adcd-efd438700058",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80fd-9063-d8aa29dc6b03",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Map of Slices or Structs",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8098-978a-cc20c9c9ab17",
+            "id": "af19adaa-d28e-590b-8c76-5b22413b4049",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "m := map[string][]int{\n    \"evens\": {2, 4},\n}\nm[\"evens\"] = append(m[\"evens\"], 6)"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-8029-94c9-f232be05cce5",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Common in complex data structures."
+                    "var shared sync.Map // zero value is ready for use\nshared.Store(\"a\", 1)\nvalue, ok := shared.Load(\"a\")\nfmt.Println(value, ok) // 1 true"
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-806a-91ff-da44684f53b9",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-80ee-b8ed-f2b48f88af65",
-            "type": "sub_header",
+            "id": "e94927d5-07d7-5372-b078-ab1d1576d690",
+            "type": "text",
             "richText": [
                 [
-                    "Concurrent Map Access",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Load returns an interface value, so concrete use may require a checked type assertion. Do not copy a sync.Map after its first use."
                 ]
             ]
         },
         {
-            "id": "24224eb1-ed54-80bc-90c7-d17a75775797",
-            "type": "bulleted_list",
+            "id": "6802ac53-d282-5d36-b50e-805f3356e5d2",
+            "type": "text",
             "richText": [
                 [
-                    "NOT safe for concurrent writes.",
+                    "References: "
+                ],
+                [
+                    "Go maps in action",
                     [
                         [
-                            "b"
+                            "a",
+                            "https://go.dev/blog/maps"
                         ]
                     ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "sync.Map documentation",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#Map"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
-        },
-        {
-            "id": "24224eb1-ed54-805a-a8e7-f41bcaaa1826",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "sync.Mutex",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "sync.RWMutex",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", or "
-                ],
-                [
-                    "sync.Map",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " if needed."
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8082-9ed2-da293eaa30a4",
-            "type": "divider"
-        },
-        {
-            "id": "24224eb1-ed54-809d-94c9-c6edbd5dd982",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "When to Use ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "sync.Map",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8008-9f6e-c4cbed087c3f",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "sync.Map",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " when:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24224eb1-ed54-80b5-b296-c643e818235b",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You need concurrent access."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24224eb1-ed54-8012-9419-f4e6ca0fa705",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Keys are mostly read, rarely written."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24224eb1-ed54-8017-8376-c04127c3bf35",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Performance is critical."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-8022-ae98-f374bae3f07a",
-            "type": "code",
-            "richText": [
-                [
-                    "var m sync.Map\nm.Store(\"a\", 1)\nval, ok := m.Load(\"a\")"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24224eb1-ed54-80dc-93a5-f745266b601b",
-            "type": "divider"
         }
     ]
-} as const satisfies GoNote;
+} satisfies GoNote;
 
 export default note;

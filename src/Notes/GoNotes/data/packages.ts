@@ -1,4 +1,4 @@
-/* Copied from the Packages page in Notion without changing its content. */
+/* Go study note content. */
 
 import type { GoNote } from '../types';
 
@@ -6,352 +6,318 @@ const note = {
     "notionId": "24024eb1-ed54-8094-af08-c4e58e8100d2",
     "slug": "packages",
     "title": "Packages",
-    "updatedOn": "2026-01-23",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "2f024eb1-ed54-80bd-9860-ef901c7877fb",
-            "type": "bulleted_list",
+            "id": "packages-01",
+            "type": "text",
             "richText": [
                 [
-                    "A "
-                ],
-                [
-                    "package",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " is the unit of compilation and namespace in Go."
+                    "A package groups Go source files and their declarations. With the Go toolchain, source files selected for a package normally share a directory and package name. External test files may use the separate name ending in _test."
                 ]
             ]
         },
         {
-            "id": "2f024eb1-ed54-80f8-b411-cc010cc45dff",
-            "type": "bulleted_list",
+            "id": "packages-02",
+            "type": "text",
             "richText": [
                 [
-                    "A runnable program must have:"
+                    "For module layout and versioning, see "
+                ],
+                [
+                    "Modules",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/modules"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
+            ]
+        },
+        {
+            "id": "packages-03",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Executable and library packages"
+                ]
+            ]
+        },
+        {
+            "id": "packages-04",
+            "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1",
+                "col-2"
             ],
+            "hasColumnHeader": true,
             "children": [
                 {
-                    "id": "2f024eb1-ed54-802c-894c-e355a6390e22",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "package main",
+                    "id": "packages-04-row-0",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
                             [
-                                [
-                                    "c"
-                                ]
+                                "Package"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Purpose"
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "Entry point"
                             ]
                         ]
-                    ]
+                    }
                 },
                 {
-                    "id": "2f024eb1-ed54-803d-b108-e50201b76169",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "A "
-                        ],
-                        [
-                            "func main()",
+                    "id": "packages-04-row-1",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
                             [
-                                [
-                                    "c"
-                                ]
+                                "main"
                             ]
                         ],
-                        [
-                            " entry point (no parameters, no return values)."
+                        "col-1": [
+                            [
+                                "Build an executable program."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "func main() with no parameters or results. It starts after program initialization."
+                            ]
                         ]
-                    ]
+                    }
+                },
+                {
+                    "id": "packages-04-row-2",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Other names, such as pricing"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Provide code imported by another package."
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "No main function required."
+                            ]
+                        ]
+                    }
                 }
             ]
         },
         {
-            "id": "24024eb1-ed54-80e2-ab1f-d206c7f0c7b8",
-            "type": "bulleted_list",
+            "id": "packages-05",
+            "type": "text",
             "richText": [
                 [
-                    "A group of "
-                ],
-                [
-                    ".go",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " files in the same directory with the same "
-                ],
-                [
-                    "package",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " declaration."
+                    "A library-only repository needs no executable package. A repository can contain several executable directories, each declaring package main and its own main function."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8095-9f0c-dbf8002b1385",
-            "type": "bulleted_list",
+            "id": "packages-06",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Used to organize and reuse code."
+                    "Imports and exported names"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8098-ac12-fbe1b3691c8d",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8051-9c37-fe01737a77db",
-            "type": "bulleted_list",
+            "id": "packages-07",
+            "type": "text",
             "richText": [
                 [
-                    "package main",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ": Used to build executables. Must have "
-                ],
-                [
-                    "func main()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "An identifier beginning with an uppercase Unicode letter is exported when declared at package level or used as a field or method name. Other package-level identifiers are accessible within the same package. Imports are declared separately in each source file that uses them."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80a8-8d7d-e27b1419ef5c",
-            "type": "bulleted_list",
+            "id": "packages-08",
+            "type": "text",
             "richText": [
                 [
-                    "Other packages (e.g., "
-                ],
-                [
-                    "fmt",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "math",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "utils",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ") are libraries meant to be imported."
+                    "Example files in a module whose go.mod declares module example.com/shop:"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-807d-9efa-ec57f56bfa43",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80a7-9e87-da74e4e94154",
-            "type": "bulleted_list",
+            "id": "packages-09",
+            "type": "code",
             "richText": [
                 [
-                    "Identifiers starting with "
-                ],
+                    "// pricing/pricing.go\npackage pricing\n\nconst defaultTax = 10 // available only within package pricing\n\nfunc Total(amount int) int {\n    return amount + defaultTax\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "packages-10",
+            "type": "code",
+            "richText": [
                 [
-                    "capital letters",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
+                    "// cmd/shop/main.go\npackage main\n\nimport (\n    \"fmt\"\n    \"example.com/shop/pricing\"\n)\n\nfunc main() {\n    fmt.Println(pricing.Total(100))\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "packages-11",
+            "type": "text",
+            "richText": [
                 [
-                    " are exported (public)."
+                    "Expected output: 110. Code outside pricing cannot access pricing.defaultTax."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80e2-8e83-d7cb6257e725",
-            "type": "bulleted_list",
+            "id": "packages-12",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Lowercase names are unexported (private to the package)."
+                    "Nested paths and import names"
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-8001-b93b-cd836157fe4c",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-80fe-851c-fca287f5c4bb",
-            "type": "sub_sub_header",
+            "id": "packages-13",
+            "type": "text",
             "richText": [
                 [
-                    "Directory  Package",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "A nested directory creates a separate package; it does not automatically share the parent package's declarations or imports. Code in example.com/shop/pricing must explicitly import example.com/shop/pricing/rules to use that package. Path rules such as internal restrict access, so import paths are not simply unrestricted flat names."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80eb-9398-fb8827d045f7",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Each directory "
-                ],
-                [
-                    "typically",
-                    [
-                        [
-                            "i"
-                        ]
-                    ]
-                ],
-                [
-                    " contains one package."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80a8-be0a-ed3ac0dace18",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A repo can have multiple directories → multiple packages."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8080-97ae-c42081f236f3",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-809c-802a-e3dfb922a342",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "package main",
-                    [
-                        [
-                            "b"
+            "id": "packages-14",
+            "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1"
+            ],
+            "hasColumnHeader": true,
+            "children": [
+                {
+                    "id": "packages-14-row-0",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Import form"
+                            ]
                         ],
-                        [
-                            "c"
+                        "col-1": [
+                            [
+                                "Meaning"
+                            ]
                         ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80a1-83b6-e71815c2f08b",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "When a project runs, the main function from the main package is executed, and hence is the starting point of the execution."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-802c-a406-edb6f6cf0a33",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Must have if you are building an executable go repo."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8004-b6d2-decdb8e3f82f",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8047-b974-cc186db59501",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Does Every Repo Need ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "package main",
-                    [
-                        [
-                            "b"
+                    }
+                },
+                {
+                    "id": "packages-14-row-1",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "import \"example.com/shop/pricing\""
+                            ]
                         ],
-                        [
-                            "c"
+                        "col-1": [
+                            [
+                                "Use the imported package name, usually pricing."
+                            ]
                         ]
-                    ]
-                ],
+                    }
+                },
+                {
+                    "id": "packages-14-row-2",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "import cost \"example.com/shop/pricing\""
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Use the local alias cost, for example cost.Total(100)."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "packages-14-row-3",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "import _ \"example.com/shop/pricing\""
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Import only for initialization side effects."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "packages-14-row-4",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "import . \"example.com/shop/pricing\""
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Use exported names without a qualifier. This can obscure where names come from."
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "packages-15",
+            "type": "text",
+            "richText": [
                 [
-                    "?",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "A package clause supplies the package name; its import path identifies the package location. The last path segment and the declared name can differ."
                 ]
             ]
         },
         {
-            "id": "24024eb1-ed54-80bd-a5d9-f8b2279d0533",
-            "type": "bulleted_list",
+            "id": "packages-16",
+            "type": "text",
             "richText": [
                 [
-                    "No",
+                    "Initialization details are on "
+                ],
+                [
+                    "init() Function",
                     [
                         [
-                            "b"
+                            "a",
+                            "#/notes/go/init-function"
                         ]
                     ]
                 ],
@@ -361,272 +327,25 @@ const note = {
             ]
         },
         {
-            "id": "24024eb1-ed54-8031-a195-ed5621b5a426",
-            "type": "bulleted_list",
+            "id": "packages-17",
+            "type": "text",
             "richText": [
                 [
-                    "Only needed if you want to build an executable."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-809a-a764-d32e959f4f2b",
-            "type": "bulleted_list",
-            "richText": [
+                    "Source: "
+                ],
                 [
-                    "Library-only repos can skip it."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80ff-8a99-f025aa178029",
-            "type": "divider"
-        },
-        {
-            "id": "24024eb1-ed54-8024-902b-f61dc8cd1ab0",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Can a Repo Have Multiple Packages?",
+                    "Packages and imports",
                     [
                         [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-80b4-8c89-dbbd146de6c7",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Yes",
-                    [
-                        [
-                            "b"
+                            "a",
+                            "https://go.dev/ref/spec#Packages"
                         ]
                     ]
                 ],
                 [
-                    "."
+                    ""
                 ]
             ]
-        },
-        {
-            "id": "24024eb1-ed54-80cf-af4c-f2d39e7774cf",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Technically: each subdirectory can define its own package, and must do so for separation of concerns and logical segregation."
-                ]
-            ]
-        },
-        {
-            "id": "24024eb1-ed54-8049-8572-e9f70fe09a77",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-807f-a90f-c62c17111275",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Subpackages"
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8053-a8a1-ded4ea6f639c",
-            "type": "bulleted_list"
-        },
-        {
-            "id": "2f124eb1-ed54-8077-955b-e1288b232f55",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go has no subpackages."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-807b-89e3-f7a751c46bd7",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A directory structure like "
-                ],
-                [
-                    "package1/package2",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " does "
-                ],
-                [
-                    "not",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " imply containment."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80b4-b553-e531530b8103",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "package1",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " and "
-                ],
-                [
-                    "package2",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " are "
-                ],
-                [
-                    "two independent packages",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8053-b61a-c81c3ad221e4",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "package1",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " must explicitly import "
-                ],
-                [
-                    "package2",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " to use it."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-806a-bd9b-fa7ddeb4d2f1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go does not treat import paths as hierarchical relationships."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80df-b488-ff15f8047377",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go treats the full import path as a "
-                ],
-                [
-                    "flat identifier",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", not a hierarchy."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-80b2-96c6-d2b7b0252af3",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The module root only defines the "
-                ],
-                [
-                    "prefix",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " for import paths."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8008-9457-ec8ac715d762",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Each package is identified solely by its "
-                ],
-                [
-                    "full import path",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8011-8547-d4b1696d3feb",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Any code that needs both packages must import both explicitly."
-                ]
-            ]
-        },
-        {
-            "id": "2f124eb1-ed54-8006-a49b-df4fcde6baa3",
-            "type": "text"
         }
     ]
 } as const satisfies GoNote;

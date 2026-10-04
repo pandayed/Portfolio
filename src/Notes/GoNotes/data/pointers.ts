@@ -1,615 +1,188 @@
-/* Copied from the Pointers page in Notion without changing its content. */
-
 import type { GoNote } from '../types';
 
 const note = {
     "notionId": "24024eb1-ed54-8046-a462-c0176675768d",
     "slug": "pointers",
     "title": "Pointers",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24124eb1-ed54-803c-853f-fe644887f036",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A pointer stores the "
-                ],
-                [
-                    "memory address",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " of a variable."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80bf-9fe5-c6a4c480d3ca",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Syntax: "
-                ],
-                [
-                    "var ptr *int",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " means "
-                ],
-                [
-                    "ptr",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " is a pointer to an "
-                ],
-                [
-                    "int",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80a3-9648-e1222cae2461",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "You use "
-                ],
-                [
-                    "&",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " to get the address, and  to dereference (access the value at the address)."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8007-8580-c846df69fcfa",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8096-911f-ffb938570965",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Declaring and Using Pointers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8028-921d-ce739abae8d6",
-            "type": "code",
-            "richText": [
-                [
-                    "var x int = 10\nvar p *int = &x   // p stores the address of x\nfmt.Println(*p)   // dereference: prints 10\n*p = 20           // updates x to 20\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80b5-821a-c4347a348563",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8082-9a6a-e7ddc798f74a",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Zero Value of Pointers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80a5-a2de-c6445e6a6d56",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The zero value of a pointer is "
-                ],
-                [
-                    "nil",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8009-8cd8-df48ea4e3577",
-            "type": "code",
-            "richText": [
-                [
-                    "var p *int\nfmt.Println(p)  // prints: <nil>\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-808d-b292-e5690e3a150a",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80a8-b8a7-e91fdfad2a46",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Short Declaration with Pointers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80c8-a75e-c46acccd4def",
-            "type": "code",
-            "richText": [
-                [
-                    "x := 5\np := &x\nfmt.Println(*p)  // prints: 5\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-806c-82d3-de5c75204a01",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8084-bf70-ec9b3ec58dc8",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Pointer to a Pointer",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80b8-b5a6-eb0f47163631",
-            "type": "code",
-            "richText": [
-                [
-                    "x := 10\np := &x\npp := &p\nfmt.Println(**pp)  // prints: 10\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80dc-8472-c96e88b88164",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8003-9a7c-c67fd920629f",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Passing Pointers to Functions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8033-8035-ff7d2212ab95",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go passes everything by value, but you can pass a "
-                ],
-                [
-                    "pointer",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " to modify the original value."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-808d-b6e7-f343d5454e8b",
-            "type": "code",
-            "richText": [
-                [
-                    "func increment(n *int) {\n    *n++\n}\n\nx := 5\nincrement(&x)\nfmt.Println(x) // prints: 6\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80da-a21c-e1e594e564c6",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8091-a916-f173841a2caf",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Pointers with Structs",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-802a-add6-db1c5f2ddc15",
-            "type": "code",
-            "richText": [
-                [
-                    "type User struct {\n    name string\n}\n\nfunc changeName(u *User) {\n    u.name = \"Alice\"\n}\n\nuser := User{name: \"Bob\"}\nchangeName(&user)\nfmt.Println(user.name) // prints: Alice\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-80d1-9d46-e19bdf0a8bcb",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8081-851e-ddce35f18a54",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Using ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "new()",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " Function",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80e7-a8cd-f17930fa5be0",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Allocates zeroed memory and returns a pointer."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-801d-921b-eb07c92eee67",
-            "type": "code",
-            "richText": [
-                [
-                    "p := new(int) // *int initialized to 0\n*p = 42\nfmt.Println(*p) // prints: 42\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8063-9c8b-cb7f68ea8ac8",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80e6-9b6d-e1aa6eef9de7",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "When to Use ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "new",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " vs ",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "&",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-801b-a6ce-e5d0862450d5",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "new(T)",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " allocates memory for type "
-                ],
-                [
-                    "T",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " and returns "
-                ],
-                [
-                    "T",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " (zero value)."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8050-9bb3-c0ca9b077ca5",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "&T{}",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " gives a pointer to a composite literal."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8010-869a-ded8c503e651",
-            "type": "code",
-            "richText": [
-                [
-                    "x := new(int)   // *int, initialized to 0\ny := &[]int{}   // *[]int, empty slice\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8062-8938-ed52f797d48e",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Compare "
-                ],
-                [
-                    "new(T)",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " vs "
-                ],
-                [
-                    "&T{}",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80f3-920c-cbab916b547e",
+            "id": "c033f3d5-be59-5c4f-a32b-85dc25451ef4",
             "type": "text",
             "richText": [
                 [
-                    "Both gives us pointers, but they’re used differently."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8059-b2aa-c9dc91e9b4ce",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8025-978d-f43bc12252a6",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "new(T)",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8032-96fa-d0b4fac4f525",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Allocates memory for type "
+                    "A pointer value identifies a variable. "
                 ],
                 [
-                    "T",
+                    "*int",
                     [
                         [
                             "c"
                         ]
                     ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80d0-9f84-ed50d560e8e2",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Initializes it with "
                 ],
                 [
-                    "zero value",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80f3-a7ca-fbb1b8d823dd",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Returns a "
+                    " is a pointer type, "
                 ],
                 [
-                    "pointer to that zero value",
+                    "&x",
                     [
                         [
-                            "b"
+                            "c"
                         ]
                     ]
+                ],
+                [
+                    " takes an address, and "
+                ],
+                [
+                    "*p",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " accesses the pointed-to variable."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8098-8319-dcfbf320105a",
-            "type": "sub_sub_header",
+            "id": "9317aff1-5dc8-5da9-ae00-749b6b4ca605",
+            "type": "text",
             "richText": [
                 [
-                    "Example:"
+                    "Unless a block declares functions or types, examples below are function-body excerpts using fmt."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8094-9df8-fa1bc78dd9c0",
+            "id": "f678a08c-62eb-5ede-90b5-6fa906b78ba5",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Declaring and using pointers"
+                ]
+            ]
+        },
+        {
+            "id": "dacc80eb-d402-57fb-a813-903929d20b99",
             "type": "code",
             "richText": [
                 [
-                    "x := new(int)     // *int, value = 0\nfmt.Println(*x)   // prints: 0\n*x = 42\nfmt.Println(*x)   // prints: 42\n"
+                    "x := 10\nvar p *int = &x\nfmt.Println(*p) // 10\n*p = 20\nfmt.Println(x)  // 20\n\ny := 5\nq := &y\nfmt.Println(*q) // 5"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24124eb1-ed54-804d-9334-e4e9aedf6560",
+            "id": "96138b1d-b29e-51a2-a24c-994f76a44a45",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Nil and pointers to pointers"
+                ]
+            ]
+        },
+        {
+            "id": "53206999-b37c-5273-8df1-13fb5638d8a2",
+            "type": "code",
+            "richText": [
+                [
+                    "var p *int\nfmt.Println(p == nil) // true\n// fmt.Println(*p)    // panics: p is nil\n\nx := 10\np = &x\npp := &p\nfmt.Println(**pp) // 10"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "4a6712a7-6aa8-5912-8e04-0b8e92558106",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Passing a pointer by value"
+                ]
+            ]
+        },
+        {
+            "id": "1a8a12f1-f0fe-5357-979a-e70df9317c58",
             "type": "text",
             "richText": [
                 [
-                    "Key Point",
+                    "Go copies arguments into parameters, including pointer values. Copying a pointer preserves access to the same variable. Reassigning the parameter itself does not replace the caller’s pointer."
+                ]
+            ]
+        },
+        {
+            "id": "b540d455-c0dc-525e-9f0a-c2d316ef2af6",
+            "type": "code",
+            "richText": [
+                [
+                    "func increment(n *int) {\n    (*n)++\n}\n\nfunc incrementExample() {\n    x := 5\n    increment(&x)\n    fmt.Println(x) // 6\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "28a59d15-d7bb-5661-8b0d-2c00744bd543",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Pointers to structs"
+                ]
+            ]
+        },
+        {
+            "id": "f16d9fdf-11d2-5ceb-8f3c-50c0e544dc3a",
+            "type": "code",
+            "richText": [
+                [
+                    "type User struct { Name string }\n\nfunc changeName(u *User) {\n    u.Name = \"Alice\" // same field access as (*u).Name\n}\n\nfunc changeNameExample() {\n    user := User{Name: \"Bob\"}\n    changeName(&user)\n    fmt.Println(user.Name) // Alice\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "7286b5f1-53eb-5ac8-8487-4b29b0632538",
+            "type": "text",
+            "richText": [
+                [
+                    "Construction and fields: "
+                ],
+                [
+                    "Structs",
                     [
                         [
-                            "b"
+                            "a",
+                            "#/notes/go/struct"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "08cdd5dd-96df-5ba8-a6e7-4fcedf77cc4e",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "new(T) and addresses of literals"
+                ]
+            ]
+        },
+        {
+            "id": "270cd0ac-70a5-532b-9296-3094f592e0f7",
+            "type": "text",
+            "richText": [
+                [
+                    "new(T)",
+                    [
+                        [
+                            "c"
                         ]
                     ]
                 ],
                 [
-                    ": You don’t initialize anything explicitly. It gives you "
+                    " creates a zero-initialized variable of type T and returns "
                 ],
                 [
                     "*T",
@@ -620,307 +193,47 @@ const note = {
                     ]
                 ],
                 [
-                    " with default zero values."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-805b-99d2-c94b8e88ab60",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "&T{}",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8071-93db-edcbfded63e8",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Used with "
-                ],
-                [
-                    "composite types",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " like "
-                ],
-                [
-                    "struct",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "slice",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "map",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", etc."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80e6-9d26-f5104dfa6fcf",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Initializes the value using a "
-                ],
-                [
-                    "literal",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-803d-bf80-df902b617601",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Returns a "
-                ],
-                [
-                    "pointer",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " to the initialized value"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8074-9f43-d6d38971957a",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Example with struct:"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8060-b428-d83fbaa66a78",
-            "type": "code",
-            "richText": [
-                [
-                    "type Point struct {\n    X int\n    Y int\n}\n\np := &Point{X: 1, Y: 2}  // pointer to Point with values\nfmt.Println(p.X)         // prints: 1\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8011-aa1b-dfa637df76b0",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Example with slice:"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80f4-96bc-f996649c05ac",
-            "type": "code",
-            "richText": [
-                [
-                    "s := &[]int{1, 2, 3}     // pointer to a slice\nfmt.Println((*s)[0])     // prints: 1\n"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-800c-a91e-c61f3d54f579",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8029-8bb5-de2d86dc0091",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Summary Table"
+                    ". Taking the address of a composite literal creates a pointer to a value initialized by that literal."
                 ]
             ]
         },
         {
             "id": "24124eb1-ed54-80b5-95d9-df4055bd2d54",
             "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1",
+                "col-2"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
             "children": [
                 {
-                    "id": "24124eb1-ed54-807f-82be-fc7ea4218c19",
+                    "id": "c05b6d8f-a8dc-599c-9b6b-4d0c7e0328a3",
                     "type": "table_row",
                     "cells": {
-                        "aa:c": [
+                        "col-0": [
                             [
-                                "Feature"
+                                "Expression"
                             ]
                         ],
-                        "dzmw": [
+                        "col-1": [
                             [
-                                "new(T)",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "Pointer type"
                             ]
                         ],
-                        ";nVF": [
+                        "col-2": [
                             [
-                                "&T{}",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "Initial pointed-to value"
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-8025-ac7b-efa90013e85a",
+                    "id": "62811742-41f9-5a33-a493-4891b14b7d88",
                     "type": "table_row",
                     "cells": {
-                        "aa:c": [
-                            [
-                                "Allocates memory"
-                            ]
-                        ],
-                        "dzmw": [
-                            [
-                                "✅ Yes"
-                            ]
-                        ],
-                        ";nVF": [
-                            [
-                                "✅ Yes"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8034-b56e-edb02692e2e9",
-                    "type": "table_row",
-                    "cells": {
-                        "aa:c": [
-                            [
-                                "Initializes"
-                            ]
-                        ],
-                        "dzmw": [
-                            [
-                                "❌ No (zero value)"
-                            ]
-                        ],
-                        ";nVF": [
-                            [
-                                "✅ Yes (your values)"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80fd-9780-daa88686940c",
-                    "type": "table_row",
-                    "cells": {
-                        "aa:c": [
-                            [
-                                "Returns"
-                            ]
-                        ],
-                        "dzmw": [
-                            [
-                                "*T",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ],
-                        ";nVF": [
-                            [
-                                "*T",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-80fc-bacb-e315bab4b005",
-                    "type": "table_row",
-                    "cells": {
-                        "aa:c": [
-                            [
-                                "Usable with"
-                            ]
-                        ],
-                        "dzmw": [
-                            [
-                                "Any type"
-                            ]
-                        ],
-                        ";nVF": [
-                            [
-                                "Composite types only"
-                            ]
-                        ]
-                    }
-                },
-                {
-                    "id": "24124eb1-ed54-8049-8bb6-fcea37c75490",
-                    "type": "table_row",
-                    "cells": {
-                        "aa:c": [
-                            [
-                                "Example"
-                            ]
-                        ],
-                        "dzmw": [
+                        "col-0": [
                             [
                                 "new(int)",
                                 [
@@ -930,9 +243,19 @@ const note = {
                                 ]
                             ]
                         ],
-                        ";nVF": [
+                        "col-1": [
                             [
-                                "&Point{X: 1}",
+                                "*int",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "0",
                                 [
                                     [
                                         "c"
@@ -941,275 +264,166 @@ const note = {
                             ]
                         ]
                     }
-                }
-            ],
-            "columnOrder": [
-                "aa:c",
-                "dzmw",
-                ";nVF"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24124eb1-ed54-8034-9a9c-d1f2e82607d2",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8087-8a50-f9e4bb734706",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "When to Use"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8074-a8a6-ccba04793b30",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "new(T)",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " when:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-8053-98b5-f1db0afeaf81",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You just want a zero-initialized value."
-                        ]
-                    ]
                 },
                 {
-                    "id": "24124eb1-ed54-8095-a0a3-cd840ea6c9c1",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You don’t care about setting fields/specific values now."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8031-9744-e3af99eb3a18",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "&T{}",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " when:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-807e-ae7b-e9648f1ad4fa",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You want to "
-                        ],
-                        [
-                            "set initial values",
+                    "id": "9a785181-518d-5528-8436-d71168497a1f",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
                             [
+                                "new(Point)",
                                 [
-                                    "b"
+                                    [
+                                        "c"
+                                    ]
                                 ]
                             ]
                         ],
-                        [
-                            " during allocation."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-807c-b373-d74e56c9a4b6",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You’re dealing with "
-                        ],
-                        [
-                            "composite literals",
+                        "col-1": [
                             [
+                                "*Point",
                                 [
-                                    "b"
+                                    [
+                                        "c"
+                                    ]
                                 ]
                             ]
                         ],
-                        [
-                            " (structs, slices, maps)."
+                        "col-2": [
+                            [
+                                "Point{X: 0, Y: 0}",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
                         ]
-                    ]
+                    }
+                },
+                {
+                    "id": "304ea705-4744-5f47-b90d-4b75fbb1ced2",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "&Point{X: 1, Y: 2}",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "*Point",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "The specified fields"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "9d473be7-e7ac-5b05-ad8e-ba72b8e7155b",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "new([]int)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "*[]int",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "A nil slice"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "9d99d03c-576c-5f0c-a688-d14fea7f3fdf",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "&[]int{}",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "*[]int",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-2": [
+                            [
+                                "A non-nil empty slice"
+                            ]
+                        ]
+                    }
                 }
             ]
         },
         {
-            "id": "24124eb1-ed54-80a2-8825-f90c83b7527a",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80de-971a-d071fc0f2658",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Arrays/Slices/Maps/Channels and Pointers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-804b-b0d1-ebf7f42447c6",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Slices, maps, and channels are "
-                ],
-                [
-                    "reference types",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " already — passing them around is like passing pointers."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8043-a113-e62e29dc2630",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "No need to use pointers for modifying these."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-806b-9f1b-f7dcdfae7acc",
+            "id": "38099d50-0061-5049-8b32-4c781ead99b4",
             "type": "code",
             "richText": [
                 [
-                    "func add(s []int) {\n    s[0] = 100\n}\n"
+                    "type Point struct { X, Y int }\n\nfunc pointerConstruction() {\n    x := new(int)\n    fmt.Println(*x) // 0\n    *x = 42\n    fmt.Println(*x) // 42\n\n    p := &Point{X: 1, Y: 2}\n    fmt.Println(p.X) // 1\n\n    s := &[]int{1, 2, 3}\n    fmt.Println((*s)[0]) // 1\n}"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24124eb1-ed54-80c4-b898-fe5ef531a108",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80fa-919e-ec1567d9fd09",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Go Does Not Support Pointer Arithmetic",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8002-942a-ce8f46f920c7",
+            "id": "d9e9d268-84bf-5f6a-a771-6514d4b518ba",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Unlike C/C++, Go does "
-                ],
-                [
-                    "not",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " allow pointer arithmetic ("
-                ],
-                [
-                    "p++",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "p+1",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", etc.)."
+                    "Use new(T) when the zero value is the desired starting point. Use a composite literal when explicit field or element values make construction clearer."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-806c-a70e-cc3368f2a4df",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80a2-8277-c660d7597883",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Unsafe Pointers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80d2-aec2-c234c7b5bda7",
+            "id": "52d7737e-dab6-59b8-b640-191dd5d74cf6",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Using "
+                    "Composite literal syntax applies to structs, arrays, slices and maps. "
                 ],
                 [
-                    "unsafe.Pointer",
+                    "&int{}",
                     [
                         [
                             "c"
@@ -1217,13 +431,13 @@ const note = {
                     ]
                 ],
                 [
-                    " allows converting between types at pointer level — "
+                    " is not valid. An existing integer variable can be addressed with "
                 ],
                 [
-                    "use with caution",
+                    "&x",
                     [
                         [
-                            "b"
+                            "c"
                         ]
                     ]
                 ],
@@ -1233,105 +447,114 @@ const note = {
             ]
         },
         {
-            "id": "24124eb1-ed54-80e8-b966-c5ff56e56be1",
+            "id": "a80d9e70-6e98-5db3-888a-b65b0465f357",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Neither form promises heap allocation. Placement depends on compiler analysis and how the value is used."
+                ]
+            ]
+        },
+        {
+            "id": "575972fa-4e90-5836-a78b-c07840eedf5c",
+            "type": "text",
+            "richText": [
+                [
+                    "Source: "
+                ],
+                [
+                    "Built-in new",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/builtin#new"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "a7901b7d-8485-593b-9df6-2b30ae26e494",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Copied values and shared storage"
+                ]
+            ]
+        },
+        {
+            "id": "f666ffe6-c513-509c-90d0-6cd5c534272a",
+            "type": "text",
+            "richText": [
+                [
+                    "A slice value describes backing storage; map and channel values refer to their respective data structures. Passing them still copies a value. Element updates can affect shared storage, while reassigning a parameter does not reassign the caller’s variable."
+                ]
+            ]
+        },
+        {
+            "id": "34f56cfc-72e6-5909-a8ec-a87fd319c36d",
             "type": "code",
             "richText": [
                 [
-                    "import \"unsafe\"\nvar f float64 = 3.14\np := (*int)(unsafe.Pointer(&f))  // not recommended for general use\n"
+                    "func changeFirst(s []int) {\n    s[0] = 100       // modifies a shared element; requires a non-empty slice\n    s = s[:0]        // changes only this local slice value\n}\n\nfunc sliceArgument() {\n    values := []int{1, 2}\n    changeFirst(values)\n    fmt.Println(values, len(values)) // [100 2] 2\n}"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24124eb1-ed54-803c-bdbd-d63c87987682",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8099-a642-ce311ee5d85c",
-            "type": "sub_header",
+            "id": "ab561547-528e-53a0-b1b1-14a8360886be",
+            "type": "text",
             "richText": [
                 [
-                    "Garbage Collection and Pointers",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Return an updated slice when a function appends or changes its length and the caller needs that slice value. Arrays are copied as whole values."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80ca-b99c-ef220c088c75",
-            "type": "bulleted_list",
+            "id": "7e5d6164-c7f5-53dd-85e2-df5db060b64d",
+            "type": "text",
             "richText": [
                 [
-                    "Go has garbage collection; no need to manually free memory."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8008-b6ae-c0543070b972",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "When nothing references a value anymore, Go GC reclaims it."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80f7-bb10-fd5a963a6286",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8021-93fa-e5de746a7d9d",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Common Use-Cases",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8053-bb18-cbb1237e5e6c",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Mutating function parameters."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-804e-a03d-e1ac0004e3e3",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Efficient passing of large structs."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8015-af3f-ed83dbcdd3d2",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Shared state between functions."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-809e-ad9d-fcc21cac20fc",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Managing optional values ("
+                    "Backing storage, copying and append: "
                 ],
                 [
-                    "nil",
+                    "Slices & Arrays",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/slices-arrays"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "1de1e274-5b54-5b0c-8490-ccf48a703f72",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Pointer arithmetic and unsafe"
+                ]
+            ]
+        },
+        {
+            "id": "5ccba88d-0dda-5a95-bb53-9683ded3a8ec",
+            "type": "text",
+            "richText": [
+                [
+                    "Ordinary Go pointers do not support arithmetic such as p++ or p+1. unsafe.Pointer permits restricted conversions between pointer types and other unsafe operations. It does not remove the documented validity requirements."
+                ]
+            ]
+        },
+        {
+            "id": "33d6da38-d7ff-5f4a-a713-f8e7c929e337",
+            "type": "text",
+            "richText": [
+                [
+                    "Package-scope declarations, using unsafe: this example converts between pointer types whose base types have the same layout. This particular conversion also works directly as "
+                ],
+                [
+                    "(*int)(p)",
                     [
                         [
                             "c"
@@ -1339,109 +562,73 @@ const note = {
                     ]
                 ],
                 [
-                    " as a signal)."
+                    "; unsafe is unnecessary here and is shown only to explain the syntax."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80bd-83b3-d0be68fb9bcf",
-            "type": "bulleted_list",
+            "id": "a6a38abb-b213-5d06-a25b-312a53c3e6a3",
+            "type": "code",
             "richText": [
                 [
-                    "Dependency injection in applications."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-807d-b05f-db35d408b1be",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8098-bc9e-d0a1d6046cc4",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Best Practices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80d4-92e1-c62d5cf3b36d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use pointers when you:"
+                    "type Counter int\n\nfunc counterPointer(p *Counter) *int {\n    return (*int)(unsafe.Pointer(p))\n}"
                 ]
             ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80e3-a27b-c48c4f10ce31",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Need to modify the original value."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-8012-a0ef-f7d5c9cbe4ce",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Want to avoid copying large structs."
-                        ]
-                    ]
-                }
-            ]
+            "language": "Go"
         },
         {
-            "id": "24124eb1-ed54-80e4-8299-feab45b8b74c",
-            "type": "bulleted_list",
+            "id": "a6d60dc0-f171-55f3-a34d-5e3703e2da20",
+            "type": "text",
             "richText": [
                 [
-                    "Avoid pointers to basic types unless necessary."
+                    "Source: "
+                ],
+                [
+                    "unsafe.Pointer conversion restrictions",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/unsafe#Pointer"
+                        ]
+                    ]
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80d5-baf3-cab009153a5c",
-            "type": "bulleted_list",
+            "id": "900b8f2c-8c77-5562-9a3e-c29a5a93b1fa",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Don't overuse "
-                ],
-                [
-                    "new()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " — "
-                ],
-                [
-                    "&T{}",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " is often simpler."
+                    "Choosing pointers and lifetime"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80e5-a9c6-d2d3fc1e6bc8",
-            "type": "divider"
+            "id": "dec84052-81fe-5a1e-8d71-af2019b48027",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use pointers for mutation, shared identity, optional values represented by nil, or avoiding a copy when that fits the API. A pointer to a basic type can be appropriate for an optional field."
+                ]
+            ]
+        },
+        {
+            "id": "7573f22f-b1ec-555e-b392-61a660681aaa",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Garbage collection manages memory lifetime. A reachable pointer keeps its referenced Go object reachable; reclamation is not immediate when the last reference disappears."
+                ]
+            ]
+        },
+        {
+            "id": "da9e1b3d-d11e-5472-9df0-8fcc0ba31fcb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pointers do not provide synchronization. Concurrent access to shared mutable data still needs coordination."
+                ]
+            ]
         }
     ]
 } as const satisfies GoNote;

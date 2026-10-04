@@ -1,24 +1,44 @@
-/* Copied from the Functions page in Notion without changing its content. */
-
 import type { GoNote } from '../types';
 
 const note = {
     "notionId": "24a24eb1-ed54-807f-82ae-e73c3476d760",
     "slug": "functions",
     "title": "Functions",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24a24eb1-ed54-80d9-b4a8-df2e6011ff7a",
-            "type": "sub_sub_header",
+            "id": "09cf19a8-c88b-5aa9-a964-453190eddcae",
+            "type": "text",
             "richText": [
                 [
-                    "Basic Syntax",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "A function declares parameters and optional results. Arguments are copied into parameters when the function is called."
+                ]
+            ]
+        },
+        {
+            "id": "8d4a1fb7-a62e-5908-b8c0-98c34a7acc66",
+            "type": "text",
+            "richText": [
+                [
+                    "Examples below are declarations or function-body excerpts. Printing snippets use fmt."
+                ]
+            ]
+        },
+        {
+            "id": "7b00b12b-185e-5b00-b284-f673897c2b42",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Basic syntax"
+                ]
+            ]
+        },
+        {
+            "id": "f042a41e-268a-5220-a284-4695f1807c56",
+            "type": "text",
+            "richText": [
+                [
+                    "Syntax reference: replace the placeholder names and types. Function declarations belong at package scope; call statements belong inside a function."
                 ]
             ]
         },
@@ -33,55 +53,20 @@ const note = {
             "language": "Go"
         },
         {
-            "id": "24a24eb1-ed54-80fd-8a76-ca1c740dd41e",
-            "type": "bulleted_list",
+            "id": "9191b47b-72be-5a84-836c-21b858713496",
+            "type": "text",
             "richText": [
                 [
-                    "func",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " keyword starts the declaration."
+                    "The func keyword starts the declaration. Each parameter has a name and type; result types follow the parameter list. Omit the result type for a function that returns nothing."
                 ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-8003-a3f8-d889e3c53904",
-            "type": "bulleted_list",
+            "id": "790c56e4-94b3-5334-b8ea-6cdcbfa58407",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Parameters: name + type."
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-80c3-a429-d6fb23f47f8c",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Return type after parameter list."
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-8082-aa42-e1b3b488e307",
-            "type": "divider"
-        },
-        {
-            "id": "24a24eb1-ed54-8073-b8af-e0f669718657",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Single Return Value",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Single return value"
                 ]
             ]
         },
@@ -96,208 +81,11 @@ const note = {
             "language": "Go"
         },
         {
-            "id": "24a24eb1-ed54-8097-91f9-db942fb47338",
-            "type": "divider"
-        },
-        {
-            "id": "24a24eb1-ed54-8007-bbac-c4edd698688a",
-            "type": "sub_sub_header",
+            "id": "8f25e9cb-0f04-5d17-9d68-974491624923",
+            "type": "text",
             "richText": [
                 [
-                    "Multiple Return Values",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-801c-bf96-fd130c3cb0e7",
-            "type": "code",
-            "richText": [
-                [
-                    "func divide(a, b int) (int, int) {\n    return a / b, a % b\n}\n\nq, r := divide(10, 3) // q=3, r=1"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24a24eb1-ed54-80e2-9434-e0da0e2df6be",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Commonly used for returning a value and an error."
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-80e7-bc72-d0b532d70a4a",
-            "type": "divider"
-        },
-        {
-            "id": "24a24eb1-ed54-8057-8e70-fea185826a69",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Named Return Values",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-807e-ac38-cafe8b76165c",
-            "type": "code",
-            "richText": [
-                [
-                    "func rectProps(length, width float64) (area, perimeter float64) {\n    area = length * width\n    perimeter = 2 * (length + width)\n    return // implicit return of named values\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24a24eb1-ed54-8046-bd9a-e4dc694af743",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Return variables are declared in the signature."
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-80d7-8ddd-d689aff6489a",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "A plain "
-                ],
-                [
-                    "return",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " returns them as they are."
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-8073-b775-c841e9793512",
-            "type": "divider"
-        },
-        {
-            "id": "24a24eb1-ed54-80ec-b807-d8cb91d448a0",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Parameter Notes",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-8058-b444-cc5717194962",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Type grouping:",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " If parameters share a type, write it once:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24a24eb1-ed54-8053-93fa-eca279bccffb",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "func add(a, b int) int { return a + b }"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-8066-8ce8-fc54a8949ba9",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Pass by value:",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " Arguments are copied into parameters."
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-80e4-bb90-dcf1b50c6972",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "For large data or to modify original, use pointers:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24a24eb1-ed54-8054-9350-fac1d4e305bd",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "func update(val *int) { *val = 100 }"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-8084-8a16-ec1d84742b7e",
-            "type": "divider"
-        },
-        {
-            "id": "24a24eb1-ed54-8043-9b1a-e873838313e6",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Calling Functions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24a24eb1-ed54-8091-a070-c765eb955aed",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Normal call: "
+                    "Inside a function, "
                 ],
                 [
                     "result := add(2, 3)",
@@ -306,37 +94,214 @@ const note = {
                             "c"
                         ]
                     ]
+                ],
+                [
+                    " assigns 5 to result."
                 ]
             ]
         },
         {
-            "id": "24a24eb1-ed54-8070-ab61-f40a4d97b260",
-            "type": "bulleted_list",
+            "id": "43aea64e-0992-57aa-a2ce-8de7867ad8de",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Ignoring values:"
+                    "Multiple return values"
                 ]
-            ],
-            "children": [
-                {
-                    "id": "24a24eb1-ed54-80c2-983e-cc10cb1c51f8",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "_, remainder := divide(10, 3)"
-                        ]
-                    ],
-                    "language": "Go"
-                }
             ]
         },
         {
-            "id": "24a24eb1-ed54-80af-890c-ef2ed6e74bfb",
-            "type": "divider"
+            "id": "f4c11ae2-d5c9-5c2b-a4c2-951694a4180e",
+            "type": "text",
+            "richText": [
+                [
+                    "This integer division example requires b to be nonzero. Each result is assigned separately."
+                ]
+            ]
+        },
+        {
+            "id": "4145098c-ad25-5d21-a8c4-816c0eae8909",
+            "type": "code",
+            "richText": [
+                [
+                    "func divide(a, b int) (int, int) {\n    return a / b, a % b\n}\n\nfunc divisionExample() {\n    q, r := divide(10, 3)\n    fmt.Println(q, r) // 3 1\n}"
+                ]
+            ],
+            "language": "Go"
         },
         {
             "id": "24a24eb1-ed54-80a7-b0c7-f31f6195e612",
-            "type": "text"
+            "type": "text",
+            "richText": [
+                [
+                    "Returning a value and an error: "
+                ],
+                [
+                    "Errors",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/errors"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "a9e7b60e-a772-574f-8396-3237f7630b2b",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Named return values"
+                ]
+            ]
+        },
+        {
+            "id": "01b167d3-85cd-545c-b223-015914b83120",
+            "type": "code",
+            "richText": [
+                [
+                    "func rectProps(length, width float64) (area, perimeter float64) {\n    area = length * width\n    perimeter = 2 * (length + width)\n    return // returns the current named result values\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "f4017b69-98b1-5f90-9b2b-66688a9f42da",
+            "type": "text",
+            "richText": [
+                [
+                    "Named results are variables declared by the signature. A plain return uses their current values. rectProps(3, 2) returns 6 and 10."
+                ]
+            ]
+        },
+        {
+            "id": "7f7acfef-f527-5b2c-9f73-3f27531291fb",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Parameter grouping and pointers"
+                ]
+            ]
+        },
+        {
+            "id": "15260d92-6376-54f3-892f-2eacfb685820",
+            "type": "text",
+            "richText": [
+                [
+                    "When adjacent parameters have the same type, write it once. This is an alternative declaration of add, not a second declaration in the same package."
+                ]
+            ]
+        },
+        {
+            "id": "24a24eb1-ed54-8053-93fa-eca279bccffb",
+            "type": "code",
+            "richText": [
+                [
+                    "func add(a, b int) int { return a + b }"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "1d4bd13b-d45f-5ea0-8a6b-65e4e7428d5a",
+            "type": "text",
+            "richText": [
+                [
+                    "Passing a pointer copies its address value. A function can use it to change the pointed-to variable."
+                ]
+            ]
+        },
+        {
+            "id": "24a24eb1-ed54-8054-9350-fac1d4e305bd",
+            "type": "code",
+            "richText": [
+                [
+                    "func update(val *int) { *val = 100 }"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "4ed2c3c0-8641-5214-a2e3-b261bc0f141e",
+            "type": "text",
+            "richText": [
+                [
+                    "Mutation and copied values: "
+                ],
+                [
+                    "Pointers",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/pointers"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "81de0be2-c8cf-544b-a1f3-6379bfb2c2ef",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Ignoring a result"
+                ]
+            ]
+        },
+        {
+            "id": "62c99716-181c-52e0-97e1-42921d5c1ede",
+            "type": "text",
+            "richText": [
+                [
+                    "Use the blank identifier for a result that is deliberately unused. Function-body excerpt using the divide declaration above:"
+                ]
+            ]
+        },
+        {
+            "id": "f6f57905-88e3-5405-b342-66bc7022fcfe",
+            "type": "code",
+            "richText": [
+                [
+                    "_, remainder := divide(10, 3)\nfmt.Println(remainder) // 1"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "ab2f0905-c8e6-516a-8625-f746a16ee72b",
+            "type": "text",
+            "richText": [
+                [
+                    "Function values and callbacks: "
+                ],
+                [
+                    "Anonymous/Inline Functions",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/anonymous-inline-functions"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "1916d6cb-c73a-5f8c-a5c4-59e884e7d3a0",
+            "type": "text",
+            "richText": [
+                [
+                    "Variable argument lists: "
+                ],
+                [
+                    "Variadic Functions",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/variadic-functions"
+                        ]
+                    ]
+                ]
+            ]
         }
     ]
 } as const satisfies GoNote;

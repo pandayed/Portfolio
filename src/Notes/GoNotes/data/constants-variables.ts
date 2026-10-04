@@ -1,4 +1,4 @@
-/* Copied from the Constants & Variables page in Notion without changing its content. */
+/* Focused Go study notes, refined from the imported source. */
 
 import type { GoNote } from '../types';
 
@@ -6,616 +6,415 @@ const note = {
     "notionId": "24124eb1-ed54-8073-b1bd-cc1e8381338d",
     "slug": "constants-variables",
     "title": "Constants & Variables",
-    "updatedOn": "2025-08-08",
+    "updatedOn": "2026-10-04",
     "blocks": [
+        {
+            "id": "f2e35985-ef4a-5625-be47-01c81d81632f",
+            "type": "text",
+            "richText": [
+                [
+                    "A constant names a fixed compile-time value. A variable stores a value that can change."
+                ]
+            ]
+        },
+        {
+            "id": "73722251-f923-5c47-903e-b4c6cfa3bedf",
+            "type": "text",
+            "richText": [
+                [
+                    "Each snippet is independent. Invalid declarations are commented out; the remaining lines illustrate valid declarations."
+                ]
+            ]
+        },
         {
             "id": "24124eb1-ed54-80e8-b3a2-ee4df8b423e5",
             "type": "sub_header",
             "richText": [
                 [
-                    "Constants (",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "const",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ")",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Constants (const)"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80f4-a048-ddbea91290d3",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Named value",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " that "
-                ],
-                [
-                    "doesn’t change",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-800a-8a50-fec944b16a7b",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Declared using "
-                ],
-                [
-                    "const",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8006-8dce-f509c363a43b",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Value must be known at compile time",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80cd-9644-dcd40f0bd898",
+            "id": "a01743cd-b607-5c74-886f-92d19a2df73c",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "const name type = value  // `type` is optional"
+                    "const version = \"1.0\"\nconst limit int = 100\nconst enabled = true"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24124eb1-ed54-8075-a4f1-c0d3034fadfc",
-            "type": "divider"
+            "id": "d8c2542e-63fa-5cc8-93e9-7ba27b9b03b3",
+            "type": "text",
+            "richText": [
+                [
+                    "Constants can be boolean, string, or numeric values, including runes and complex numbers. Slices, maps, structs, functions, and "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " cannot be constants."
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-805e-b2e6-ed417c9d43c6",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Typed vs Untyped Constants",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Typed vs Untyped Constants"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80f7-9625-f8e77817783e",
-            "type": "bulleted_list",
+            "id": "b9203129-796f-5fe5-91db-d6fbb265a241",
+            "type": "text",
             "richText": [
                 [
-                    "Untyped",
+                    "An untyped constant can be assigned to a compatible type when its value fits. A typed constant follows that type’s assignment rules."
+                ]
+            ]
+        },
+        {
+            "id": "1ae24bc8-b3e8-5c49-9464-89c9a09b598f",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "const untyped = 42\nvar small int32 = untyped\nvar large int64 = untyped\n\nconst typed int32 = 42\n// var wrong int64 = typed // invalid: int32 is not assignable to int64\nvar converted int64 = int64(typed)\n\n// var overflow uint8 = 256 // invalid: 256 does not fit in uint8"
+                ]
+            ]
+        },
+        {
+            "id": "355fe16c-c02e-5994-890a-2d1ea2cb4eab",
+            "type": "text",
+            "richText": [
+                [
+                    "Without an explicit variable type, an untyped constant uses its default type. For example, "
+                ],
+                [
+                    "count := 42",
                     [
                         [
-                            "b"
+                            "c"
                         ]
                     ]
                 ],
                 [
-                    ": More flexible"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80a3-b1b1-feb139c5dce2",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "const x = 42        // untyped int\nvar y int32 = x     // OK"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80bc-bf45-cecfe1f6620d",
-            "type": "bulleted_list",
-            "richText": [
+                    " creates an "
+                ],
                 [
-                    "Typed",
+                    "int",
                     [
                         [
-                            "b"
+                            "c"
                         ]
                     ]
                 ],
                 [
-                    ": Restrictive"
+                    " variable."
                 ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80c8-a1b6-e855d09318ba",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "const x int32 = 42\nvar y int64 = x     // Error"
-                        ]
-                    ],
-                    "language": "Go"
-                }
             ]
-        },
-        {
-            "id": "24124eb1-ed54-80e5-90fc-f8cfdea00949",
-            "type": "divider"
         },
         {
             "id": "24124eb1-ed54-80a3-8f76-fe2eee715660",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Constant Expressions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Constant Expressions"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8065-8dc1-c09e7b6f62cc",
-            "type": "bulleted_list",
+            "id": "8e80b0c2-d4f3-5444-a4cd-c478b03f4eed",
+            "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "Allowed only if computable at compile-time"
+                    "const sum = 5 + 3\nconst name = \"Go\" + \"Lang\"\nconst letters = len(\"Go\") // allowed: length of a constant string"
                 ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-8060-b0d3-e312ae364c11",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "const a = 5 + 3\nconst b = \"Go\" + \"Lang\""
-                        ]
-                    ],
-                    "language": "Go"
-                }
             ]
         },
         {
-            "id": "24124eb1-ed54-80b8-ab93-d97d257a3933",
-            "type": "divider"
+            "id": "d2f7f564-4554-5a52-947b-590c572b8d7d",
+            "type": "text",
+            "richText": [
+                [
+                    "Ordinary function calls and runtime variable values are not constant expressions. Some built-ins have constant results under specific rules, such as "
+                ],
+                [
+                    "len",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " of a constant string."
+                ]
+            ]
+        },
+        {
+            "id": "5c0bda93-9233-565d-b20f-759c9cf25e3c",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "var current = 10\n// const fromVariable = current // invalid: current is a variable\n// const sine = math.Sin(1.0)   // invalid even with math imported"
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-80ac-aebe-d9eede70b838",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Multiple Constants",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Multiple Constants"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80db-9afd-c818c1b60145",
+            "id": "ea2398ae-7865-532f-b24c-cc8449ead137",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
                     "const (\n    A = 1\n    B = 2\n    C = 3\n)"
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24124eb1-ed54-808b-86de-feddecce7d55",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80ac-9ab3-f1e7e00014af",
-            "type": "sub_sub_header",
+            "id": "f00b0f7a-d583-52f9-a3cf-003c05e2efc4",
+            "type": "text",
             "richText": [
                 [
-                    "iota",
+                    "Use constants for fixed limits, version strings, and related named values. See "
+                ],
+                [
+                    "Iota & Flags",
                     [
                         [
-                            "b"
-                        ],
-                        [
-                            "c"
+                            "a",
+                            "#/notes/go/const-iota"
                         ]
                     ]
                 ],
                 [
-                    " – Constant Generator",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    " for sequences, skipped values, and bit flags."
                 ]
             ]
-        },
-        {
-            "id": "24124eb1-ed54-803f-ac1b-dfdf9cdd6a99",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Starts at "
-                ],
-                [
-                    "0",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " in each block, increments per line"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80c3-b39c-f6d7e7dfdb6a",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "const (\n    X = iota  // 0\n    Y         // 1\n    Z         // 2\n)"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-803d-8138-f7db334c27fe",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "With expressions:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80ad-ad80-c99fc77732ea",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "const (\n    A = iota + 1  // 1\n    B             // 2\n    C             // 3\n)"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ab-8563-e85b06c00fb7",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Skipping values:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80c2-9d7f-e944d5be44df",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "const (\n    _  = iota\n    KB = 1 << (10 * iota)  // 1024\n    MB                     // 1048576\n    GB                     // 1073741824\n)"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8009-947f-eef3aac744f2",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-801f-b98c-e7ad94f6df48",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Disallowed in Constants",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8059-8a19-df5bc1bad6fa",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "No variables",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " or "
-                ],
-                [
-                    "function calls",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-8019-9fb5-d95b5ba58582",
-                    "type": "code",
-                    "richText": [
-                        [
-                            "var x = 10\nconst y = x              // Error\nconst z = math.Sin(1.0)  // Error"
-                        ]
-                    ],
-                    "language": "Go"
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-809c-a68b-ebc228fb416a",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80f6-921e-c7bbccbe3662",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Good Use Cases",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8002-bc2e-d2c1ccc5e081",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Configs, limits, enums ("
-                ],
-                [
-                    "iota",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "), version strings, math constants"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80e7-863d-dbd9eb503e7a",
-            "type": "divider"
         },
         {
             "id": "24124eb1-ed54-80a1-87da-e8b26adf4908",
             "type": "sub_header",
             "richText": [
                 [
-                    "Variables (",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "var",
-                    [
-                        [
-                            "b"
-                        ],
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ")",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Variables (var)"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80ac-9892-f344c72c9bc9",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Named value that can change",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ca-8ebc-eda7e74e31f6",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Declared using "
-                ],
-                [
-                    "var",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ", can be initialized later"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8052-9b50-eb6b31752c2b",
-            "type": "code",
-            "richText": [
-                [
-                    "var name type = value"
-                ]
+            "id": "b15b3d8e-b6ae-5f58-8397-196f8e6cf54a",
+            "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1"
             ],
-            "language": "Go"
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "13aa5fdb-85d0-5e3e-bc04-b0389ce54012",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "Declaration"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Meaning"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "f120af0a-ea32-5f29-a7fe-8a6b73a24e98",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "var count int",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Declare an int with no explicit initializer."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "14095691-3264-5433-a63c-fadefc1d5ee3",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "var count int = 10",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Provide both type and initial value."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "c79c121b-11ec-5dc7-a713-ef698c155575",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "var count = 10",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Infer the type from the initializer."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "5ea3cfde-e603-5248-92f7-cd8964040952",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "count := 10",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Short declaration inside a function."
+                            ]
+                        ]
+                    }
+                }
+            ]
         },
         {
-            "id": "24124eb1-ed54-80ff-9e3c-d111d0161e9b",
-            "type": "bulleted_list",
+            "id": "ee145fd1-9332-5176-9385-ca8cee22529f",
+            "type": "text",
             "richText": [
                 [
-                    "type",
+                    "Without an initializer, a variable receives its type’s "
+                ],
+                [
+                    "zero value",
                     [
                         [
-                            "c"
+                            "a",
+                            "#/notes/go/zero-values"
                         ]
                     ]
                 ],
                 [
-                    " or "
-                ],
-                [
-                    "value",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " can be omitted if the other is present"
+                    "."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-807c-b176-e18b13bc691c",
-            "type": "divider"
+            "id": "eaa1d482-94a1-58ac-b6a4-a986c360d72c",
+            "type": "code",
+            "language": "Go",
+            "richText": [
+                [
+                    "var (\n    count int = 1\n    language = \"Go\"\n    active = true\n)"
+                ]
+            ]
         },
         {
             "id": "24124eb1-ed54-808c-8a4f-dec4d6351ce9",
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Short Declaration (Inside Functions Only)",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Short Declaration (Inside Functions Only)"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-807d-8cff-f9a068b5f8c3",
+            "id": "01e36cc1-2ef0-5899-8a45-db8b572ed542",
             "type": "code",
+            "language": "Go",
             "richText": [
                 [
-                    "x := 10  // infer type"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24124eb1-ed54-8059-bd13-c96ee5ffc6b0",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8015-9e13-ca77d0065d1d",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Multiple Variable Declaration",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "func example() {\n    count := 10\n    count = 11 // assignment changes the existing variable\n    count, ready := 12, true // ready is new in this scope\n    _ = count\n    _ = ready\n}"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80a0-8f20-e5fe668df88b",
-            "type": "code",
+            "id": "7b568de3-1c1e-5a63-865c-17b106445c26",
+            "type": "text",
             "richText": [
                 [
-                    "var (\n    a int = 1\n    b     = \"Go\"\n    c     = true\n)"
+                    "A short declaration must introduce at least one new non-blank variable in the same scope. It cannot appear at package scope."
                 ]
-            ],
-            "language": "Go"
+            ]
         },
         {
-            "id": "24124eb1-ed54-8048-a92f-f947d6e51f3d",
-            "type": "divider"
+            "id": "320bc3b0-1701-5d34-b796-70876c9cad11",
+            "type": "text",
+            "richText": [
+                [
+                    "Reference: "
+                ],
+                [
+                    "Go specification: constants and variable declarations",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/spec#Constants"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
         }
     ]
-} as const satisfies GoNote;
+} satisfies GoNote;
 
 export default note;

@@ -1,4 +1,4 @@
-/* Copied from the go.mod page in Notion without changing its content. */
+/* Go study note content. */
 
 import type { GoNote } from '../types';
 
@@ -6,128 +6,45 @@ const note = {
     "notionId": "24024eb1-ed54-8060-8c25-fda6dee5d9bf",
     "slug": "go-mod",
     "title": "go.mod",
-    "updatedOn": "2025-08-09",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24124eb1-ed54-8080-8e2c-cc4e09b2946c",
-            "type": "bulleted_list",
+            "id": "go-mod-01",
+            "type": "text",
             "richText": [
                 [
-                    "Module definition file",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " in Go."
+                    "go.mod records the module path, Go language/toolchain requirements, and dependency requirements. It belongs at the module root."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80eb-8903-e2cdf926a64c",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Introduced with Go Modules (Go 1.11+)."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80e6-b8dc-d5eb629e7060",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Declares the current module's "
-                ],
-                [
-                    "name",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
-                    "Go version",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", and "
-                ],
-                [
-                    "dependencies",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8048-992b-e17807877282",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Located at the "
-                ],
-                [
-                    "root of your module",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8063-860d-c618d89d94e0",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80b5-8d83-f9fc035e9ca5",
+            "id": "go-mod-02",
             "type": "sub_header",
             "richText": [
                 [
-                    "Important Keywords",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Directive reference"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80c0-96bf-e5afa89123b5",
+            "id": "go-mod-03",
             "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1"
+            ],
+            "hasColumnHeader": true,
             "children": [
                 {
-                    "id": "24124eb1-ed54-80c4-89af-d6f0c42c766c",
+                    "id": "go-mod-03-row-0",
                     "type": "table_row",
                     "cells": {
-                        "wb_V": [
+                        "col-0": [
                             [
-                                "Keyword"
+                                "Directive"
                             ]
                         ],
-                        "{~_f": [
+                        "col-1": [
                             [
                                 "Meaning"
                             ]
@@ -135,727 +52,378 @@ const note = {
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-8072-a919-f0f7e8e0e205",
+                    "id": "go-mod-03-row-1",
                     "type": "table_row",
                     "cells": {
-                        "wb_V": [
+                        "col-0": [
                             [
-                                "module",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "module"
                             ]
                         ],
-                        "{~_f": [
+                        "col-1": [
                             [
-                                "Name/path of your module (usually your repo path)."
+                                "Module path used as the prefix of its package import paths."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-801f-8e92-f788881d3acf",
+                    "id": "go-mod-03-row-2",
                     "type": "table_row",
                     "cells": {
-                        "wb_V": [
+                        "col-0": [
                             [
-                                "go",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "go"
                             ]
                         ],
-                        "{~_f": [
+                        "col-1": [
                             [
-                                "Go version used (minimum version)."
+                                "Minimum Go version and language semantics. Since Go 1.21 this is an enforced toolchain minimum."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-80f0-98bf-e0dc9591c1c2",
+                    "id": "go-mod-03-row-3",
                     "type": "table_row",
                     "cells": {
-                        "wb_V": [
+                        "col-0": [
                             [
-                                "require",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "toolchain"
                             ]
                         ],
-                        "{~_f": [
+                        "col-1": [
                             [
-                                "List of module dependencies and their versions."
+                                "Suggested Go toolchain when this is a main module (Go 1.21+)."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-80da-8e6c-f4a17cddb259",
+                    "id": "go-mod-03-row-4",
                     "type": "table_row",
                     "cells": {
-                        "wb_V": [
+                        "col-0": [
                             [
-                                "replace",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "require"
                             ]
                         ],
-                        "{~_f": [
+                        "col-1": [
                             [
-                                "Override dependency source or version."
+                                "Minimum required version of another module. // indirect means no package in the current module directly imports a package from it."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-801f-8eb4-fc4cf543bf7f",
+                    "id": "go-mod-03-row-5",
                     "type": "table_row",
                     "cells": {
-                        "wb_V": [
+                        "col-0": [
                             [
-                                "exclude",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "replace"
                             ]
                         ],
-                        "{~_f": [
+                        "col-1": [
                             [
-                                "Prevent a specific version of a module from being used."
+                                "Use another module version or local directory in place of a dependency."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "go-mod-03-row-6",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "exclude"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "Disallow a specific dependency version in the main module."
                             ]
                         ]
                     }
                 }
-            ],
-            "columnOrder": [
-                "wb_V",
-                "{~_f"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
+            ]
         },
         {
-            "id": "24124eb1-ed54-80ec-831f-e85091a981b4",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80b9-a183-c7521ba9d377",
-            "type": "sub_header",
+            "id": "go-mod-04",
+            "type": "text",
             "richText": [
                 [
-                    "Common Commands",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Illustrative manifest. example.com/lib is a placeholder dependency, not a command to download a real package:"
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8013-8ed6-efb2710dbcab",
+            "id": "go-mod-05",
+            "type": "code",
+            "richText": [
+                [
+                    "module example.com/shop\n\ngo 1.23.0\n\nrequire example.com/lib v1.2.3"
+                ]
+            ],
+            "language": "Plain Text"
+        },
+        {
+            "id": "go-mod-06",
+            "type": "text",
+            "richText": [
+                [
+                    "require is a minimum, not a lockfile pin. If another requirement needs v1.4.0 of that same module, version selection can choose v1.4.0. go.sum authenticates downloaded content; it does not select dependency versions."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-07",
+            "type": "text",
+            "richText": [
+                [
+                    "Checksum entries are covered in "
+                ],
+                [
+                    "go.sum",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/go-sum"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-08",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Commands"
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-09",
             "type": "table",
+            "columnOrder": [
+                "col-0",
+                "col-1"
+            ],
+            "hasColumnHeader": true,
             "children": [
                 {
-                    "id": "24124eb1-ed54-800a-b63e-da97467c0b3a",
+                    "id": "go-mod-09-row-0",
                     "type": "table_row",
                     "cells": {
-                        "noc`": [
+                        "col-0": [
                             [
                                 "Command"
                             ]
                         ],
-                        "O~\\Y": [
+                        "col-1": [
                             [
-                                "What it does"
+                                "Effect"
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-8042-b419-e853d666c4dd",
+                    "id": "go-mod-09-row-1",
                     "type": "table_row",
                     "cells": {
-                        "noc`": [
+                        "col-0": [
                             [
-                                "go mod init <module-path>",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "go mod init example.com/shop"
                             ]
                         ],
-                        "O~\\Y": [
+                        "col-1": [
                             [
-                                "Creates a new "
-                            ],
-                            [
-                                "go.mod",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
-                            ],
-                            [
-                                "."
+                                "Create go.mod for the new module."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-8031-81b1-efb3ae997e5f",
+                    "id": "go-mod-09-row-2",
                     "type": "table_row",
                     "cells": {
-                        "noc`": [
+                        "col-0": [
                             [
-                                "go mod tidy",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "go get module/path@version"
                             ]
                         ],
-                        "O~\\Y": [
+                        "col-1": [
                             [
-                                "Adds missing and removes unused modules."
+                                "Add or change a dependency requirement. The path and version here are placeholders."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-8015-96c7-df0c5a799f49",
+                    "id": "go-mod-09-row-3",
                     "type": "table_row",
                     "cells": {
-                        "noc`": [
+                        "col-0": [
                             [
-                                "go mod download",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "go mod tidy"
                             ]
                         ],
-                        "O~\\Y": [
+                        "col-1": [
                             [
-                                "Downloads all required modules to local cache."
+                                "Reconcile requirements and checksums with imports, including tests."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-80a6-aa43-e4541d5efabb",
+                    "id": "go-mod-09-row-4",
                     "type": "table_row",
                     "cells": {
-                        "noc`": [
+                        "col-0": [
                             [
-                                "go mod verify",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "go mod download"
                             ]
                         ],
-                        "O~\\Y": [
+                        "col-1": [
                             [
-                                "Verifies checksum of downloaded modules."
+                                "Pre-fill the module cache with needed downloads."
                             ]
                         ]
                     }
                 },
                 {
-                    "id": "24124eb1-ed54-80b7-8d18-e72c14d2ed90",
+                    "id": "go-mod-09-row-5",
                     "type": "table_row",
                     "cells": {
-                        "noc`": [
+                        "col-0": [
                             [
-                                "go list -m all",
-                                [
-                                    [
-                                        "c"
-                                    ]
-                                ]
+                                "go mod verify"
                             ]
                         ],
-                        "O~\\Y": [
+                        "col-1": [
                             [
-                                "Lists all modules in use."
+                                "Check that cached module archives and extracted files have not changed since download."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "go-mod-09-row-6",
+                    "type": "table_row",
+                    "cells": {
+                        "col-0": [
+                            [
+                                "go list -m all"
+                            ]
+                        ],
+                        "col-1": [
+                            [
+                                "List selected modules in the build list."
                             ]
                         ]
                     }
                 }
-            ],
-            "columnOrder": [
-                "noc`",
-                "O~\\Y"
-            ],
-            "hasColumnHeader": true,
-            "hasRowHeader": false
-        },
-        {
-            "id": "24124eb1-ed54-80ad-8e60-c2fa8b7a0156",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80d7-876e-db70021c105c",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "How Dependencies are Tracked",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8051-a036-cd7a35288ceb",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Dependencies are added when:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-8008-90d0-d77705b0aa21",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You run "
-                        ],
-                        [
-                            "go get <package>",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-8084-add4-da18c96577cc",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "You import a new module/package and run "
-                        ],
-                        [
-                            "go build",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " or "
-                        ],
-                        [
-                            "go mod tidy",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8043-9a03-e93c30c87ae5",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The required version is pinned in "
-                ],
-                [
-                    "go.mod",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8090-97e3-fc2df7f76276",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Exact module versions and checksums are stored in "
-                ],
-                [
-                    "go.sum",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8006-90f4-d6204c758b56",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-808f-a8f8-cd9bbbd32414",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "replace and exclude – when and why",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-800b-86c7-c35d972350cf",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "replace",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8049-a69c-d9259fb18351",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use when:"
-                ]
-            ],
-            "children": [
-                {
-                    "id": "24124eb1-ed54-80b9-bd17-f37345957545",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Using a "
-                        ],
-                        [
-                            "local version",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            ":"
-                        ]
-                    ],
-                    "children": [
-                        {
-                            "id": "24124eb1-ed54-80c4-b0b2-efa4ba2eb94b",
-                            "type": "text",
-                            "richText": [
-                                [
-                                    "replace my/module => ../local-module",
-                                    [
-                                        [
-                                            "c"
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "id": "24124eb1-ed54-80f1-8910-c450c96e6e5b",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Pointing to a "
-                        ],
-                        [
-                            "fork or fixed version",
-                            [
-                                [
-                                    "b"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-807f-bccb-e70b88a3136d",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "exclude",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ea-8fb6-ded6b7943679",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use to "
-                ],
-                [
-                    "block bad or broken versions",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " from being used."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80a5-b828-c00dc6bb3d98",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-80bc-98ab-fdd7b167d862",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Best Practices",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8044-8485-d44dd5a6c9e1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Commit both "
-                ],
-                [
-                    "go.mod",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " and "
-                ],
-                [
-                    "go.sum",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8093-a8e0-c55f24e6cf7a",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Run "
-                ],
-                [
-                    "go mod tidy",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " often to keep it clean."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8098-a53c-f9d6ae19e35f",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use "
-                ],
-                [
-                    "replace",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " carefully; don't leave local paths in production code."
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-8046-bfe0-dcd8a68ffbfe",
-            "type": "divider"
-        },
-        {
-            "id": "24124eb1-ed54-8097-a8e6-d3c17fcc878f",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Summary"
-                ]
-            ]
-        },
-        {
-            "id": "24124eb1-ed54-80ec-994e-cc0621e8bcdf",
+            "id": "go-mod-10",
             "type": "text",
             "richText": [
                 [
-                    "go.mod",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " is your Go project’s dependency manifest."
+                    "Since Go 1.16, ordinary build commands default to avoiding changes to go.mod and report missing requirements. Use go get or go mod tidy to update dependencies deliberately. Downloading an already required module during a build is different from adding a requirement."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80d2-a597-f5f5838f1efe",
+            "id": "go-mod-11",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Replacements and exclusions"
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-12",
+            "type": "code",
+            "richText": [
+                [
+                    "require example.com/lib v1.2.3\nreplace example.com/lib => ../lib\nexclude example.com/other v1.3.0"
+                ]
+            ],
+            "language": "Plain Text"
+        },
+        {
+            "id": "go-mod-13",
             "type": "text",
             "richText": [
                 [
-                    "It:"
+                    "A local replacement uses ../lib instead of downloading example.com/lib. The target needs an appropriate go.mod. replace alone does not add the module as a dependency. Replacements and exclusions in dependency modules do not override the main module's choices."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-80ea-8ec1-d337e4b59263",
+            "id": "go-mod-14",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Declares your module and Go version"
+                    "Commit go.mod and go.sum when present. Review dependency-file changes after changing imports or running tidy."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8088-92db-d3e6859d20fa",
+            "id": "go-mod-15",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Lists and locks down dependencies"
+                    "Avoid committing local replacements that other developers or release builds cannot resolve."
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-8060-b9eb-d0b52a4ce78e",
-            "type": "bulleted_list",
+            "id": "go-mod-16",
+            "type": "text",
             "richText": [
                 [
-                    "Supports overrides ("
+                    "Source: "
                 ],
                 [
-                    "replace",
+                    "go.mod file reference",
                     [
                         [
-                            "c"
+                            "a",
+                            "https://go.dev/doc/modules/gomod-ref"
                         ]
                     ]
                 ],
                 [
-                    ") and exclusions ("
-                ],
-                [
-                    "exclude",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    ")"
+                    ""
                 ]
             ]
         },
         {
-            "id": "24124eb1-ed54-804f-8464-d6740e7790c5",
-            "type": "bulleted_list",
+            "id": "go-mod-17",
+            "type": "text",
             "richText": [
                 [
-                    "Works with "
+                    ""
                 ],
                 [
-                    "go.sum",
+                    "Module command behavior",
                     [
                         [
-                            "c"
+                            "a",
+                            "https://go.dev/ref/mod#go-mod-file"
                         ]
                     ]
                 ],
                 [
-                    " for secure, reproducible builds"
+                    ""
                 ]
             ]
         }

@@ -43,3 +43,9 @@ export interface GoNote {
     updatedOn: string;
     blocks: readonly GoNoteBlock[];
 }
+
+export interface GoChapter {
+    title: string;
+    summary: string;
+    notes: readonly GoNote[];
+}

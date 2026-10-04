@@ -1,3 +1,7 @@
+.GoNote__section > .Article__subTitle {
+    scroll-margin-top: var(--header-offset, 0);
+}
+
 .GoNote__callout,
 .GoNote__quote {
     padding: var(--space-sm);

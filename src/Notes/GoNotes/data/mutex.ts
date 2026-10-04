@@ -1,4 +1,4 @@
-/* Copied from the Mutex page in Notion without changing its content. */
+/* Go study notes, refined from the original Notion import. */
 
 import type { GoNote } from '../types';
 
@@ -6,77 +6,15 @@ const note = {
     "notionId": "24e24eb1-ed54-80ef-92fc-e43daf413d10",
     "slug": "mutex",
     "title": "Mutex",
-    "updatedOn": "2025-08-14",
+    "updatedOn": "2026-10-04",
     "blocks": [
         {
-            "id": "24f24eb1-ed54-8017-9394-c69ca41aaa59",
-            "type": "bulleted_list",
+            "id": "b5788241-9408-5b06-b92e-fa6743bbfef5",
+            "type": "text",
             "richText": [
                 [
                     "A "
                 ],
-                [
-                    "mutex",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " (mutual exclusion lock) is used to protect shared data from "
-                ],
-                [
-                    "concurrent access",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " by multiple goroutines."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-80df-aab5-f3a59abfab19",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Without a mutex, simultaneous reads/writes can cause "
-                ],
-                [
-                    "data races",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-80d5-a2e4-e93f4dfb7034",
-            "type": "divider"
-        },
-        {
-            "id": "24f24eb1-ed54-8008-a330-e9666caada59",
-            "type": "code",
-            "richText": [
-                [
-                    "import \"sync\"\n\nvar mu sync.Mutex"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24f24eb1-ed54-80cd-8df6-d53ecc92997c",
-            "type": "bulleted_list",
-            "richText": [
                 [
                     "sync.Mutex",
                     [
@@ -86,111 +24,35 @@ const note = {
                     ]
                 ],
                 [
-                    " is a struct type with "
-                ],
-                [
-                    "two main methods",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ":"
+                    " gives exclusive access to shared data. Use the same mutex for every conflicting access, including reads while another goroutine may write."
                 ]
-            ],
-            "children": [
-                {
-                    "id": "24f24eb1-ed54-80ec-8b83-c7fc9f6b1e76",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Lock()",
-                            [
-                                [
-                                    "b"
-                                ],
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " – Blocks until the mutex is acquired."
-                        ]
-                    ]
-                },
-                {
-                    "id": "24f24eb1-ed54-8081-9d80-ce6541ef8cb8",
-                    "type": "bulleted_list",
-                    "richText": [
-                        [
-                            "Unlock()",
-                            [
-                                [
-                                    "b"
-                                ],
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            " – Releases the mutex; must be called after "
-                        ],
-                        [
-                            "Lock()",
-                            [
-                                [
-                                    "c"
-                                ]
-                            ]
-                        ],
-                        [
-                            "."
-                        ]
-                    ]
-                }
             ]
-        },
-        {
-            "id": "24f24eb1-ed54-800c-ab65-e7d8d2abfb96",
-            "type": "divider"
         },
         {
             "id": "24f24eb1-ed54-8093-a847-fc517a36cc0b",
-            "type": "sub_sub_header",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Basic Pattern",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Basic Pattern"
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-80bb-bf58-f458b526c0d7",
+            "id": "0fe8aecc-4986-5a9a-97f4-1032375e979e",
             "type": "code",
             "richText": [
                 [
-                    "mu.Lock()\n// Critical section: read/write shared data here\nmu.Unlock()\n"
+                    "// Function-body pattern; mu is a shared sync.Mutex.\nmu.Lock()\ndefer mu.Unlock()\n// Read or update the protected data before this function returns."
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24f24eb1-ed54-802d-89a4-f685e2ff2217",
-            "type": "bulleted_list",
+            "id": "c437bc74-f697-5779-a9cd-8c209559d385",
+            "type": "text",
             "richText": [
                 [
-                    "Always ensure "
-                ],
-                [
-                    "Unlock()",
+                    "Lock",
                     [
                         [
                             "c"
@@ -198,10 +60,10 @@ const note = {
                     ]
                 ],
                 [
-                    " is called — use "
+                    " waits until it can acquire the lock. "
                 ],
                 [
-                    "defer",
+                    "Unlock",
                     [
                         [
                             "c"
@@ -209,89 +71,37 @@ const note = {
                     ]
                 ],
                 [
-                    " immediately after locking:"
+                    " releases it. A deferred unlock runs at function return, so use a short helper function if a loop needs a separate lock scope for each iteration."
                 ]
             ]
-        },
-        {
-            "id": "24f24eb1-ed54-8040-b69f-de5b79a39627",
-            "type": "code",
-            "richText": [
-                [
-                    "mu.Lock()\ndefer mu.Unlock()"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "24f24eb1-ed54-8012-8ded-ee2873e5aa38",
-            "type": "divider"
         },
         {
             "id": "24f24eb1-ed54-80f5-9f45-d0321260a4de",
-            "type": "sub_sub_header",
+            "type": "sub_header",
             "richText": [
                 [
-                    "Key Properties",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "Key Properties"
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-807c-9697-ec263e3a84c5",
+            "id": "6a9ce3a6-5ae1-50c9-afb5-06f1428209f1",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Exclusive lock",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ": Only one goroutine can hold the lock at a time."
+                    "The zero value is an unlocked, usable mutex. Do not copy it after first use, including by copying a struct that contains it."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-80af-87e9-f3deb1e58ae8",
+            "id": "e41c3e07-8f78-57bd-ab85-c791a4d4578e",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Not recursive",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
+                    "A mutex is not recursive. Calling "
                 ],
                 [
-                    ": A goroutine cannot lock the same mutex twice without unlocking; doing so causes a deadlock."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-80f3-98b9-e854e8f03f9b",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Zero value is usable",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ": No "
-                ],
-                [
-                    "new",
+                    "Lock",
                     [
                         [
                             "c"
@@ -299,243 +109,120 @@ const note = {
                     ]
                 ],
                 [
-                    " or "
-                ],
-                [
-                    "init",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " required before first use."
+                    " again while the same goroutine holds it blocks unless another goroutine releases it."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-8065-8e78-ca1d36ad8bdb",
+            "id": "62abe873-592b-5a83-b75c-808f0148e534",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Copying is unsafe",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ": Never copy a mutex after first use."
+                    "Unlocking an unlocked mutex is a runtime error. A locked mutex is not tied to one goroutine, although keeping lock and unlock together is usually easier to reason about."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-80ff-8454-cc18833ced5b",
-            "type": "divider"
+            "id": "742ca8a5-0161-5319-8e43-7119f0fd86ba",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Protect a Counter"
+                ]
+            ]
         },
         {
-            "id": "24f24eb1-ed54-80be-b3d5-fe6a0ac8e0f7",
+            "id": "431f2719-c8cd-5ae4-a284-10868df374b5",
             "type": "code",
             "richText": [
                 [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nvar (\n    counter int\n    mu      sync.Mutex\n)\n\nfunc increment(wg *sync.WaitGroup) {\n    defer wg.Done()\n\n    mu.Lock()\n    defer mu.Unlock() // ensures unlock happens even if function exits early\n\n    counter++\n}\n\nfunc main() {\n    var wg sync.WaitGroup\n\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go increment(&wg)\n    }\n\n    wg.Wait()\n    fmt.Println(\"Final counter:\", counter) // would print 5\n}"
+                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nvar (\n    counter int\n    mu sync.Mutex\n)\n\nfunc increment(wg *sync.WaitGroup) {\n    defer wg.Done()\n    mu.Lock()\n    defer mu.Unlock()\n    counter++\n}\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go increment(&wg)\n    }\n    wg.Wait()\n    fmt.Println(\"Final counter:\", counter)\n}"
                 ]
             ],
             "language": "Go"
         },
         {
-            "id": "24f24eb1-ed54-80ab-a275-d1cf165b5927",
+            "id": "97bff678-2ebe-536b-893d-18d0c52d5541",
             "type": "text",
             "richText": [
                 [
-                    "Here’s why:"
+                    "Expected output: Final counter: 5. The mutex serializes updates; the WaitGroup makes the final read happen after every worker finishes. Removing the mutex introduces a data race even if a particular run still prints 5."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-8052-9588-eaaeed29287e",
+            "id": "24f24eb1-ed54-8093-998e-dc4ecd22fd66",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Lock Scope and Alternatives"
+                ]
+            ]
+        },
+        {
+            "id": "44b327aa-2a0e-5316-a799-7c6c6cacc97a",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "counter",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " starts at "
-                ],
-                [
-                    "0",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "Use a consistent order when acquiring several locks. Opposite lock orders can create a cycle of waiting."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-802e-982d-e0de6356f72a",
+            "id": "411661e4-55da-5496-a9e3-f2f39792fa9c",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "We launch "
-                ],
-                [
-                    "5 goroutines",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", each calling "
-                ],
-                [
-                    "increment()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "."
+                    "Avoid holding a lock during unrelated slow operations. Waiting for work that itself needs the lock can deadlock."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-800e-9f26-c6f2a169d4bc",
+            "id": "f37097e0-136b-5288-a427-fa8259df532d",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The mutex ensures "
-                ],
-                [
-                    "only one goroutine increments at a time",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    ", so no increments are lost."
+                    "Measure contention before choosing a more complex design. More locks or a different primitive do not guarantee faster execution."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-80c7-9058-e3d12306af7b",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "After all goroutines finish, "
-                ],
-                [
-                    "counter",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " has been incremented exactly 5 times."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-808e-91d9-eedb49c87989",
+            "id": "f53c4855-edb9-5da6-81ef-68a458faee8f",
             "type": "text",
             "richText": [
                 [
-                    "If we removed the mutex, you might see results like "
+                    "Alternatives and their contracts: "
                 ],
                 [
-                    "3",
+                    "RWMutex for parallel reads",
                     [
                         [
-                            "c"
+                            "a",
+                            "#/notes/go/rwmutex"
                         ]
                     ]
                 ],
                 [
-                    " or "
+                    ", "
                 ],
                 [
-                    "4",
+                    "Channels for communication and ownership transfer",
                     [
                         [
-                            "c"
+                            "a",
+                            "#/notes/go/channels"
                         ]
                     ]
                 ],
                 [
-                    " due to "
+                    ", "
                 ],
                 [
-                    "race conditions",
+                    "WaitGroup for completion",
                     [
                         [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    "."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-803b-8a55-dab01103e785",
-            "type": "divider"
-        },
-        {
-            "id": "24f24eb1-ed54-8084-81cb-e5c8626435f2",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "When to Use",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-808c-a076-f5c9ba1a54eb",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "When "
-                ],
-                [
-                    "multiple goroutines",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " read/write "
-                ],
-                [
-                    "shared state",
-                    [
-                        [
-                            "b"
+                            "a",
+                            "#/notes/go/workgroups"
                         ]
                     ]
                 ],
@@ -545,91 +232,11 @@ const note = {
             ]
         },
         {
-            "id": "24f24eb1-ed54-8096-85a9-f6b45d54c068",
-            "type": "bulleted_list",
+            "id": "112b9cc1-1bbe-540b-8bef-2dc74d843d02",
+            "type": "text",
             "richText": [
                 [
-                    "When you need "
-                ],
-                [
-                    "simple, full mutual exclusion",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " (not partial or read-only)."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-8001-a856-edf1992a6a67",
-            "type": "divider"
-        },
-        {
-            "id": "24f24eb1-ed54-8088-90af-f02720b07001",
-            "type": "sub_sub_header",
-            "richText": [
-                [
-                    "Alternatives",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-8061-a1db-db39408daf58",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "sync.RWMutex",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " – Allows multiple readers but one writer."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-808d-9553-fab363dc5dcc",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Channels",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " – Can also coordinate access without explicit locks."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-8028-9df0-e0ffbe2e83de",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Atomic operations",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " – For simple numeric counters ("
+                    "For an independent numeric counter, "
                 ],
                 [
                     "sync/atomic",
@@ -640,93 +247,42 @@ const note = {
                     ]
                 ],
                 [
-                    ")."
+                    " can be appropriate. It does not automatically protect an invariant involving several fields."
                 ]
             ]
         },
         {
-            "id": "24f24eb1-ed54-80d5-acd6-fe5b0200dcd7",
-            "type": "divider"
-        },
-        {
-            "id": "24f24eb1-ed54-8093-998e-dc4ecd22fd66",
-            "type": "sub_sub_header",
+            "id": "ee37dddb-c78a-5932-8191-39587eb80aad",
+            "type": "text",
             "richText": [
                 [
-                    "Common Pitfalls",
+                    "Sources: "
+                ],
+                [
+                    "Mutex contract",
                     [
                         [
-                            "b"
+                            "a",
+                            "https://pkg.go.dev/sync#Mutex"
                         ]
                     ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Mutex source",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/sync/mutex.go"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
-        },
-        {
-            "id": "24f24eb1-ed54-802f-bbbf-e64b0f09769d",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Deadlock",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " – Forgetting to "
-                ],
-                [
-                    "Unlock()",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " or locking in inconsistent order between goroutines."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-8064-a4c3-f3ba47806433",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Lock contention",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " – Too much locking can slow down performance."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-802d-a664-fb3b73897c61",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Overprotecting",
-                    [
-                        [
-                            "b"
-                        ]
-                    ]
-                ],
-                [
-                    " – Locking more data than necessary reduces concurrency."
-                ]
-            ]
-        },
-        {
-            "id": "24f24eb1-ed54-8099-821f-cb8839ae1197",
-            "type": "divider"
         }
     ]
 } as const satisfies GoNote;
