@@ -1,6 +1,6 @@
 ---
 name: plain-writing
-description: Write in plain, simple language. Use this skill for any writing task - docs, articles, README files, commit messages, PR descriptions, code comments, UI copy, or chat replies. It keeps the text direct and note-like instead of bookish or literary.
+description: Write or refine learning notes on any topic using short bullets, simple English, and clear explanations of technical terms. Also use for docs, articles, README files, commit messages, PR descriptions, code comments, UI copy, and chat replies that need plain language.
 ---
 
 # Plain Writing
@@ -26,10 +26,45 @@ Write like a person taking notes. Do not write like a book.
 
 ## Structure
 
-- Use short paragraphs, two to four sentences.
+- For learning notes, follow the notes rules below. Use bullets as the default.
+- For other writing, use short paragraphs where connected prose helps.
 - Use bullet lists for steps, options, and items.
 - Use headings when the text has more than one topic.
 - Put the conclusion first, then the details.
+
+## Learning notes on any topic
+
+- Write for someone learning the topic, including a tired reader or a reader with weak English.
+- Use short bullets. Keep one main idea in each bullet. Use a short paragraph only when it makes an explanation easier to follow.
+- Start with the actual topic, rule, or example. Do not add an introduction about what the notes will cover.
+- Keep technical terms. Explain a new term in common words near its first use. Simple English must not remove the vocabulary the reader needs to learn.
+- State what happens and when it happens. Avoid dense sentences that combine a rule, several conditions, and an exception.
+- Keep conditions, exceptions, version limits, and other details that change the meaning. Give them separate bullets when needed.
+- Place an example near the point it teaches. Keep meaningful outputs and explanations of what the example shows.
+- Use tables when the reader needs to compare things. Keep table cells short and direct.
+- Explain a shared concept in one main place. Link to that explanation from related topics. Keep a brief reminder when the reader needs it for the current example or question.
+- Remove copied chat replies such as "Yes, you are correct," praise, offers to continue, and references to the conversation.
+- Remove obvious instructions and labels such as "replace the placeholders," "Complete Program," and repeated notices about snippets or imports. Keep setup instructions when they explain a real requirement the reader needs.
+
+### When refining existing notes
+
+- Preserve the author's simple wording and bullet style wherever they already work. Fix the requested problems; do not rewrite every sentence to make the style uniform.
+- Remove repeated explanations and filler. Do not remove a distinct case just because it uses the same technical term.
+- Preserve accurate facts, useful examples, outputs, and links. Simplify the explanation without weakening its meaning.
+- Keep existing topic boundaries, headings, IDs, and routes unless the task requires changing them.
+- Do not turn a notes edit into a layout or code refactor.
+
+### Notes example
+
+Dense: "Cases do not fall through automatically, so a trailing break is unnecessary."
+
+Simple:
+
+- Go stops the switch after running the matched case.
+- You do not need `break` at the end of that case.
+- Use `fallthrough` to run the next case without checking its condition.
+
+Use the same approach for other topics: keep the technical term and explain what it does in plain words.
 
 ## Keep it focused
 
@@ -59,7 +94,7 @@ Replace them:
 
 Bad: "Let's dive into the beating heart of the app and unlock the magic behind routing."
 
-Good: "This section explains how routing works."
+Good: "The router chooses which page to show based on the URL."
 
 Bad: "Utilizing a caching layer can be a game-changer for performance."
 
@@ -76,6 +111,9 @@ Good: "A cache stores the API response for five minutes. Here is how to add one.
 ## Check before you finish
 
 - Can a tired reader understand each sentence on the first read?
+- For notes, did I use short bullets and preserve the existing simple style?
+- Are technical terms explained without losing conditions, exceptions, or useful examples?
+- Did I remove chat residue and unnecessary snippet or placeholder labels?
 - Did I use any idiom or metaphor? Remove it.
 - Did I use a fancy word where a plain word works? Replace it.
 - Does the first sentence tell the reader the main point?

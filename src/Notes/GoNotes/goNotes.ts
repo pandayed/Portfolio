@@ -43,6 +43,7 @@ import goNote39 from './data/select';
 import goNote40 from './data/const-iota';
 import goNote41 from './data/defined-type-and-type-alias';
 import goNote42 from './data/go-by-questions';
+import goroutinesChannelsWaitGroup from './data/goroutines-channels-waitgroup';
 
 export const goChapters: readonly GoChapter[] = [
     {
@@ -68,7 +69,7 @@ export const goChapters: readonly GoChapter[] = [
     {
         title: '5. Concurrency',
         summary: 'Goroutines, completion, shared state, channels, cancellation, and scheduling.',
-        notes: [goNote29, goNote32, goNote34, goNote35, goNote31, goNote39, goNote36, goNote33, goNote30],
+        notes: [goNote29, goNote32, goNote34, goNote35, goNote31, goroutinesChannelsWaitGroup, goNote39, goNote36, goNote33, goNote30],
     },
     {
         title: '6. Reference and revision',
