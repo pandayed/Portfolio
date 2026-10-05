@@ -333,26 +333,6 @@ const note = {
             ]
         },
         {
-            "id": "5d0a08af-4b4c-5235-af5a-5a534bb6c5a9",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Start a new independent group of tasks only after every previous "
-                ],
-                [
-                    "Wait",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " call has returned."
-                ]
-            ]
-        },
-        {
             "id": "fb21349b-0305-5d24-b2b0-fdc1edf77568",
             "type": "bulleted_list",
             "richText": [
@@ -385,6 +365,397 @@ const note = {
                 [
                     "Cancelling a context does not reduce the WaitGroup counter."
                 ]
+            ]
+        },
+        {
+            "id": "wg-reuse-adding",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Adding tasks while Wait is waiting"
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-active",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can call "
+                ],
+                [
+                    "Add",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " while "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is waiting if the counter is still above zero."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-same-group",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These tasks join the same group. "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " also waits for them."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-before-done",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An active worker can add more tasks before calling its own "
+                ],
+                [
+                    "Done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". This keeps the counter above zero."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-before-start",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Call "
+                ],
+                [
+                    "Add",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " before starting each extra worker."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-zero",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Once the counter reaches zero, let all previous "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " calls return before adding another group."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-misuse",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Adding too early breaks the WaitGroup rules and may cause a panic."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-after",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "After Wait returns"
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-empty",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns when the counter reaches zero. If it is already zero, "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns immediately."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-alive",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The WaitGroup can still be used. "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not destroy it."
+                ]
+            ]
+        },
+        {
+            "id": "5d0a08af-4b4c-5235-af5a-5a534bb6c5a9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Before starting a new group on the same WaitGroup, every previous "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " call must have returned."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-new-add",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can then call "
+                ],
+                [
+                    "Add",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " again. Those tasks belong to a new group."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-new-wait",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The earlier "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not wait for these new tasks. Start the workers and call "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " again."
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-example",
+            "type": "sub_sub_header",
+            "richText": [
+                [
+                    "Two groups, one WaitGroup"
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-example-code",
+            "type": "code",
+            "richText": [
+                [
+                    "var wg sync.WaitGroup\n\nwg.Add(1)\ngo func() {\n    defer wg.Done()\n    fmt.Println(\"First group\")\n}()\nwg.Wait()\n\nwg.Add(1)\ngo func() {\n    defer wg.Done()\n    fmt.Println(\"Second group\")\n}()\nwg.Wait()"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "wg-reuse-example-output",
+            "type": "code",
+            "richText": [
+                [
+                    "First group\nSecond group"
+                ]
+            ],
+            "language": "text"
+        },
+        {
+            "id": "wg-reuse-choice",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Reuse it or create a new one?"
+                ]
+            ]
+        },
+        {
+            "id": "wg-reuse-choice-table",
+            "type": "table",
+            "columnOrder": [
+                "situation",
+                "choice",
+                "why"
+            ],
+            "hasColumnHeader": true,
+            "children": [
+                {
+                    "id": "wg-reuse-choice-row-0",
+                    "type": "table_row",
+                    "cells": {
+                        "situation": [
+                            [
+                                "Situation"
+                            ]
+                        ],
+                        "choice": [
+                            [
+                                "Choice"
+                            ]
+                        ],
+                        "why": [
+                            [
+                                "Why"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "wg-reuse-choice-row-1",
+                    "type": "table_row",
+                    "cells": {
+                        "situation": [
+                            [
+                                "The next group starts after all previous Wait calls return."
+                            ]
+                        ],
+                        "choice": [
+                            [
+                                "Reuse the same WaitGroup."
+                            ]
+                        ],
+                        "why": [
+                            [
+                                "The previous group is finished."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "wg-reuse-choice-row-2",
+                    "type": "table_row",
+                    "cells": {
+                        "situation": [
+                            [
+                                "Two independent groups run at the same time."
+                            ]
+                        ],
+                        "choice": [
+                            [
+                                "Use a separate WaitGroup for each."
+                            ]
+                        ],
+                        "why": [
+                            [
+                                "Each Wait should wait for its own group."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "wg-reuse-choice-row-3",
+                    "type": "table_row",
+                    "cells": {
+                        "situation": [
+                            [
+                                "New tasks join a group whose counter is still above zero."
+                            ]
+                        ],
+                        "choice": [
+                            [
+                                "Use the same WaitGroup."
+                            ]
+                        ],
+                        "why": [
+                            [
+                                "Wait should include those tasks too."
+                            ]
+                        ]
+                    }
+                }
             ]
         },
         {

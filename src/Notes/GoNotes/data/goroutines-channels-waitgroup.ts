@@ -592,6 +592,73 @@ const note = {
             ]
         },
         {
+            "id": "together-next-group",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Starting another group of workers"
+                ]
+            ]
+        },
+        {
+            "id": "together-reuse-wg",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The WaitGroup can be reused after every previous "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " call has returned."
+                ]
+            ]
+        },
+        {
+            "id": "together-new-channel",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The closed "
+                ],
+                [
+                    "results",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " channel cannot be reused. Create a new results channel for the next group."
+                ]
+            ]
+        },
+        {
+            "id": "together-reuse-details",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When to add tasks, reuse a WaitGroup or create a new one",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/workgroups"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
             "id": "together-related",
             "type": "sub_header",
             "richText": [
