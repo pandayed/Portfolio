@@ -4,23 +4,52 @@ const note = {
     "notionId": "24024eb1-ed54-80f1-9158-f4bcf0b5ae56",
     "slug": "interfaces",
     "title": "Interfaces",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "2692494b-1fa9-553d-90ac-156643cfad5a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A basic interface specifies methods. Different types can be used through it when their method sets contain every required method with the matching signature. Satisfaction is implicit; there is no implements keyword."
+                    "A basic interface lists the methods a value must provide."
+                ]
+            ]
+        },
+        {
+            "id": "09fd37c7-6840-52c5-9e74-31f6d87f5dd0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A type implements the interface when it has every listed method with the right signature."
+                ]
+            ]
+        },
+        {
+            "id": "7d2ef0d9-1e59-5daf-b2be-ad0526d543e4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go checks this automatically. There is no "
+                ],
+                [
+                    "implements",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " keyword."
                 ]
             ]
         },
         {
             "id": "4c3a14dc-ec83-53b2-99b1-e03676eac6b9",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This page covers interfaces used as values. Interfaces with type terms such as "
+                    "An interface with type rules such as "
                 ],
                 [
                     "~int",
@@ -31,7 +60,47 @@ const note = {
                     ]
                 ],
                 [
-                    " or unions are constraints; see Generics."
+                    " is used as a constraint."
+                ]
+            ]
+        },
+        {
+            "id": "d802cdef-6e27-5c0b-84d3-547fb15d99ea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A union joins type choices with "
+                ],
+                [
+                    "|",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", such as "
+                ],
+                [
+                    "int | float64",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". It also belongs in a constraint."
+                ]
+            ]
+        },
+        {
+            "id": "03614866-629d-5e78-b1e8-691a3787024d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A constraint limits the type arguments allowed in generic code."
                 ]
             ]
         },
@@ -64,10 +133,71 @@ const note = {
         },
         {
             "id": "dd353c53-2f3d-5932-bb34-36a47fc0a16a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Dog and Cat satisfy Speaker independently. makeItSpeak needs only the Speak method."
+                    "Both "
+                ],
+                [
+                    "Dog",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Cat",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " implement "
+                ],
+                [
+                    "Speaker",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "cb76e558-5a0d-50f3-b1d5-5ff676a100aa",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "makeItSpeak",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " needs only the "
+                ],
+                [
+                    "Speak",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " method."
                 ]
             ]
         },
@@ -129,10 +259,63 @@ const note = {
         },
         {
             "id": "e51517ff-f590-51ca-8943-ec60dfd522ec",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Embed small interfaces when a consumer needs their combined methods. These are simplified teaching signatures, distinct from the standard library’s io.Reader and io.Writer."
+                    "Embed smaller interfaces to combine their required methods."
+                ]
+            ]
+        },
+        {
+            "id": "0fe2668d-e015-5f08-b625-3c46f5095be6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These "
+                ],
+                [
+                    "Reader",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Writer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " types differ from "
+                ],
+                [
+                    "io.Reader",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "io.Writer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -148,10 +331,100 @@ const note = {
         },
         {
             "id": "4684dfb5-e9a2-55ab-ab9d-3284beaa6832",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use Reader for a function that only reads; require ReaderWriter only when both operations are needed. FileReader can exist without Write, but it cannot be assigned or passed as ReaderWriter."
+                    "Use "
+                ],
+                [
+                    "Reader",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when the function only reads."
+                ]
+            ]
+        },
+        {
+            "id": "4c4a0df0-98f7-50d9-bd77-7e4ebfd49847",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
+                ],
+                [
+                    "ReaderWriter",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when it needs both reading and writing."
+                ]
+            ]
+        },
+        {
+            "id": "40fc1881-6978-52bb-9cf1-a972db63d7da",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "FileReader",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is valid without a "
+                ],
+                [
+                    "Write",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " method."
+                ]
+            ]
+        },
+        {
+            "id": "b323b83f-c31a-5974-bdea-a9ea9de224af",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It cannot be used as a "
+                ],
+                [
+                    "ReaderWriter",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " because "
+                ],
+                [
+                    "Write",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is missing."
                 ]
             ]
         },
@@ -184,10 +457,37 @@ const note = {
         },
         {
             "id": "ae456fe7-c568-5a92-bda0-753db266b509",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Conceptually, an interface value carries a concrete dynamic type and a value of that type. Its static interface type controls which methods the code may call."
+                    "Dynamic type means the actual type of the value stored in an interface."
+                ]
+            ]
+        },
+        {
+            "id": "e384c630-c776-59d7-9e98-77cbb98e4e55",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Dynamic value means the value stored in it."
+                ]
+            ]
+        },
+        {
+            "id": "73a692ce-0aa1-51fd-9a72-e1da6a10b796",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The static type is the interface type written in the declaration."
+                ]
+            ]
+        },
+        {
+            "id": "2f8bf8a8-6c77-58b6-a34e-36e4009d687b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The static type controls which methods your code can call."
                 ]
             ]
         },
@@ -212,7 +512,7 @@ const note = {
         },
         {
             "id": "207de379-20b9-55f7-9bf3-46b94fe7f0c7",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "interface{}",
@@ -223,7 +523,53 @@ const note = {
                     ]
                 ],
                 [
-                    " has no methods, so any value may be assigned to it. "
+                    " has no methods. It can hold a value of any type."
+                ]
+            ]
+        },
+        {
+            "id": "250f227b-c419-5d58-b935-5fd077ee5dd3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is another name for "
+                ],
+                [
+                    "interface{}",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " in Go 1.18+."
+                ]
+            ]
+        },
+        {
+            "id": "2a18200b-1eac-5393-bb2d-f8d6f989a527",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use it when values can have different types, such as unknown JSON fields."
+                ]
+            ]
+        },
+        {
+            "id": "91844aea-7c9c-5a57-9352-5303f120cd10",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go still checks types when you use "
                 ],
                 [
                     "any",
@@ -234,27 +580,25 @@ const note = {
                     ]
                 ],
                 [
-                    " is an alias for "
-                ],
-                [
-                    "interface{}",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " in Go 1.18+. It is useful for values whose types vary, such as unknown JSON fields."
+                    "."
                 ]
             ]
         },
         {
-            "id": "91844aea-7c9c-5a57-9352-5303f120cd10",
-            "type": "text",
+            "id": "f784481b-8d4b-5b12-bdea-a78c5d34a862",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Static knowledge of the concrete type is lost, but Go still checks types. Use an assertion or switch before operations that need a particular concrete type."
+                    "The compiler no longer knows which concrete type is stored in that value."
+                ]
+            ]
+        },
+        {
+            "id": "6aee9ef4-5085-5d38-b30f-2b589b8f5403",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a type assertion or type switch before doing work that needs a specific type."
                 ]
             ]
         },
@@ -279,8 +623,11 @@ const note = {
         },
         {
             "id": "d7f2f81a-3d3c-502f-9167-c812a82248e6",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
+                [
+                    "Use "
+                ],
                 [
                     "x.(T)",
                     [
@@ -290,7 +637,76 @@ const note = {
                     ]
                 ],
                 [
-                    " applies to an interface expression. A concrete T must match the dynamic type; an interface T must be implemented by the dynamic type. The assertion panics on failure. It does not convert the stored value to another type."
+                    " when "
+                ],
+                [
+                    "x",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is an interface value."
+                ]
+            ]
+        },
+        {
+            "id": "5a7835fd-bb6b-5a05-a45b-2c3c190ad60f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is a concrete type, it must match the stored dynamic type."
+                ]
+            ]
+        },
+        {
+            "id": "5b3ad9c4-f39b-5b9e-bd5b-9c6fd8286d14",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is an interface, the stored type must implement it."
+                ]
+            ]
+        },
+        {
+            "id": "9c05a58f-d642-510e-a074-8160a4c32a50",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The single-result form panics if the assertion fails."
+                ]
+            ]
+        },
+        {
+            "id": "b4d81743-0880-560a-86de-89ca7e24f75e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An assertion checks the stored value. It does not convert it to a different type."
                 ]
             ]
         },
@@ -306,7 +722,7 @@ const note = {
         },
         {
             "id": "e0398331-e80b-59ff-9249-8eccbc6dc0ab",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "A conversion such as "
@@ -320,7 +736,16 @@ const note = {
                     ]
                 ],
                 [
-                    " produces a value of the target type. It can involve runtime work and is separate from a dynamic-type assertion."
+                    " creates a value of the target type."
+                ]
+            ]
+        },
+        {
+            "id": "ff212080-9e22-515b-a340-109027591b30",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A conversion may do work at runtime. It is different from checking an interface’s stored type."
                 ]
             ]
         },
@@ -345,10 +770,18 @@ const note = {
         },
         {
             "id": "988e7fe1-cf42-58ff-bb7c-82b1b0a45321",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "PrintType(10) prints "
+                    "PrintType(10)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " prints "
                 ],
                 [
                     "int: 10",
@@ -359,7 +792,24 @@ const note = {
                     ]
                 ],
                 [
-                    "; PrintType(\"hi\") prints "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "56731411-b2ef-52b5-8665-5badae343700",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "PrintType(\"hi\")",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " prints "
                 ],
                 [
                     "string: hi",
@@ -370,7 +820,35 @@ const note = {
                     ]
                 ],
                 [
-                    ". The default handles other dynamic types, including nil."
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "bb88e55a-e792-557f-802e-3b8db54edadd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "default",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " handles other types and "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -385,10 +863,61 @@ const note = {
         },
         {
             "id": "269bf3cf-b195-5a9d-9ae8-aabd0b31f74f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An interface is nil only when it has neither a dynamic type nor a dynamic value. Assigning a typed nil pointer gives the interface a dynamic type, so the interface is non-nil."
+                    "An interface is "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " only when it has no dynamic type and no dynamic value."
+                ]
+            ]
+        },
+        {
+            "id": "7c8ed812-0623-57ba-ac9b-6aaed79d75af",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assigning a typed nil pointer gives the interface a dynamic type."
+                ]
+            ]
+        },
+        {
+            "id": "7e9f5e56-1c41-545e-8927-940108073d8e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The interface is then not "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", even though the pointer inside it is "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -404,10 +933,10 @@ const note = {
         },
         {
             "id": "4f641ff4-6388-5b51-8226-161dad806eca",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Return an explicit "
+                    "Return "
                 ],
                 [
                     "nil",
@@ -418,7 +947,18 @@ const note = {
                     ]
                 ],
                 [
-                    " error for success rather than a nil pointer converted to error."
+                    " for success. Do not return a typed nil pointer as an "
+                ],
+                [
+                    "error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -451,10 +991,19 @@ const note = {
         },
         {
             "id": "036073fa-d61c-5fea-8ed5-7f58ed4a52ef",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Declare the behavior where it is needed. A consumer can accept a real implementation or a small fake with the same method."
+                    "The consumer is the code that uses an interface. Define the interface where that code needs it."
+                ]
+            ]
+        },
+        {
+            "id": "2595bc64-d951-5996-b3c2-eae53a9473d0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The consumer can use a real implementation or a small fake with the same methods."
                 ]
             ]
         },
@@ -473,7 +1022,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Keep an interface limited to the methods the consumer actually uses. Add it when substitution or a package boundary needs that behavior."
+                    "Put only the methods the consumer uses in its interface."
+                ]
+            ]
+        },
+        {
+            "id": "0c6fe1b2-5d5b-51d1-ac50-718628f91442",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Add an interface when the code needs to accept different implementations or work across packages."
                 ]
             ]
         },
@@ -482,7 +1040,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Accept a small interface when a parameter needs only those operations. Accept a concrete type when the code needs its concrete features. Implementing packages usually return concrete types so callers retain those features."
+                    "Accept a small interface when a function needs only its listed operations."
+                ]
+            ]
+        },
+        {
+            "id": "f7060996-0687-5393-8d0b-8548346df5fc",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Accept a concrete type when the function needs features of that type."
+                ]
+            ]
+        },
+        {
+            "id": "f1441d78-222c-5f31-a8e5-cf015fdb54b6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An implementing package usually returns a concrete type. Callers can then use its other methods too."
                 ]
             ]
         },
@@ -491,7 +1067,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Returning an interface can still fit an API that intentionally hides implementation choices. This is an API decision, not a universal rule."
+                    "Returning an interface can be useful when an API should hide its implementation."
+                ]
+            ]
+        },
+        {
+            "id": "c8ead531-5292-5e17-be61-abf11d0d6bea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Choose based on what the API needs."
                 ]
             ]
         },
@@ -500,7 +1085,27 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use any only when varied dynamic types are part of the contract. Generics preserve a type relationship across parameters and results when that is the requirement."
+                    "Use "
+                ],
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when the API needs to accept values of different types."
+                ]
+            ]
+        },
+        {
+            "id": "8a5927ac-3e9a-52ea-8c26-3f456c69c715",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use generics when inputs and results need to keep the same chosen type."
                 ]
             ]
         },
@@ -533,28 +1138,109 @@ const note = {
         },
         {
             "id": "93a228a0-bd58-5dd0-87bd-1bd169c4ea9a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An interface method call invokes the implementation associated with the dynamic value. The compiler checks the interface contract. It may know the concrete type and optimize the call."
+                    "An interface call runs the method for the value stored inside it."
+                ]
+            ]
+        },
+        {
+            "id": "3942941f-5870-56f5-b5ad-0b3655620fcd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The compiler checks that the interface allows the call."
+                ]
+            ]
+        },
+        {
+            "id": "da6db444-e9fa-5427-8cf0-07fe660fb2e6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the compiler knows the concrete type, it may simplify the call."
                 ]
             ]
         },
         {
             "id": "fab1f04b-ac6c-5f46-901a-2e87a512fc3d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An indirect call can add work or restrict inlining. Go compilers can devirtualize some interface calls, including with profile-guided optimization. Allocation and call costs depend on the program, compiler and optimization settings; measure a relevant workload before choosing an API for speed."
+                    "An indirect call finds the method through the interface. It can add work."
+                ]
+            ]
+        },
+        {
+            "id": "30763494-ace4-54d5-a80b-c130f725b528",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Indirect calls can also limit inlining. Inlining places the called function’s code directly inside the caller."
+                ]
+            ]
+        },
+        {
+            "id": "74c86831-9eeb-5067-b69e-7837e80d631a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The compiler can turn some interface calls into direct calls. This is called devirtualization."
+                ]
+            ]
+        },
+        {
+            "id": "cb3a39da-9408-5c55-805a-7de1654c5692",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Profile-guided optimization uses data from a previous run to help the compiler make this choice."
+                ]
+            ]
+        },
+        {
+            "id": "c0bc1e9a-b763-57cc-8c38-5f1a830f91da",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Call and memory-allocation costs depend on the code, compiler and settings."
+                ]
+            ]
+        },
+        {
+            "id": "0cbd6bb0-edb5-5204-a4dc-8bceb975db18",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure the code you care about before choosing an API for speed."
                 ]
             ]
         },
         {
             "id": "99a05595-d07b-5837-9261-ff6130768f5f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Runtime method tables are implementation details, not a guaranteed lookup count for every call. Interfaces and generics solve different type contracts; neither implies a fixed performance advantage."
+                    "A runtime may use method tables to find interface methods. This is an implementation detail."
+                ]
+            ]
+        },
+        {
+            "id": "50f4c5e5-c8cc-5802-8743-abb092f56c08",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not assume every interface call performs the same number of lookups."
+                ]
+            ]
+        },
+        {
+            "id": "7eec9555-51bd-5e61-9a00-096d3052399c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Interfaces and generics have different type rules. Neither is always faster."
                 ]
             ]
         },

@@ -6,20 +6,38 @@ const note = {
     "notionId": "24024eb1-ed54-8002-a487-ee1362bdf312",
     "slug": "modules",
     "title": "Modules",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "modules-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A module groups packages under one module path and release version. Its root contains go.mod. Packages below a nested go.mod belong to that nested module instead."
+                    "A module groups packages under one module path and version."
+                ]
+            ]
+        },
+        {
+            "id": "modules-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Its root directory contains go.mod."
+                ]
+            ]
+        },
+        {
+            "id": "modules-01-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A directory with another go.mod starts a separate module. Packages inside it belong to that module."
                 ]
             ]
         },
         {
             "id": "modules-02",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "For the terminology comparison, see "
@@ -59,10 +77,28 @@ const note = {
         },
         {
             "id": "modules-05",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The module path prefixes its package import paths. The pricing directory above is imported as example.com/shop/pricing, regardless of the local checkout directory name."
+                    "The module path is the first part of each package import path."
+                ]
+            ]
+        },
+        {
+            "id": "modules-05-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Here, import the pricing package as example.com/shop/pricing."
+                ]
+            ]
+        },
+        {
+            "id": "modules-05-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The local folder name does not change that import path."
                 ]
             ]
         },
@@ -80,7 +116,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A module release versions its packages together. Releases commonly use semantic version tags such as v1.2.3."
+                    "A module releases its packages together."
+                ]
+            ]
+        },
+        {
+            "id": "modules-07-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Release tags commonly use semantic versions such as v1.2.3: major, minor, and patch."
                 ]
             ]
         },
@@ -89,7 +134,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "For module versions v2 and later, the module path normally ends in /v2, /v3, and so on. This lets incompatible major versions have different import paths."
+                    "For v2 and later, the module path normally ends in /v2, /v3, and so on."
+                ]
+            ]
+        },
+        {
+            "id": "modules-08-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Different major versions use different import paths because they may have incompatible APIs."
                 ]
             ]
         },
@@ -98,7 +152,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A repository can contain one module or several modules. Each module has its own go.mod and can have its own versioned release."
+                    "A repository can have one module or several."
+                ]
+            ]
+        },
+        {
+            "id": "modules-09-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each module has its own go.mod and can release its own versions."
                 ]
             ]
         },
@@ -107,7 +170,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Start with one module when packages share a release cycle. Separate modules when independent releases or dependency boundaries justify the extra maintenance. Multiple modules are not required merely to organize code."
+                    "Use one module when the packages release together."
+                ]
+            ]
+        },
+        {
+            "id": "modules-10-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use separate modules when parts need independent releases or separate dependencies."
+                ]
+            ]
+        },
+        {
+            "id": "modules-10-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Several modules add maintenance work. Use packages to organize code within one module."
                 ]
             ]
         },
@@ -122,16 +203,34 @@ const note = {
         },
         {
             "id": "modules-12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Main module is official Go terminology. In a single-module operation, it is the module being developed, usually found from go.mod in the current directory or a parent. A workspace can include several main modules through go.work."
+                    "The main module is the module where you run a Go command."
+                ]
+            ]
+        },
+        {
+            "id": "modules-12-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go usually finds its go.mod in the current directory or a parent directory."
+                ]
+            ]
+        },
+        {
+            "id": "modules-12-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A workspace can list several main modules in go.work."
                 ]
             ]
         },
         {
             "id": "modules-13",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Manifest commands and dependency requirements are covered in "
@@ -152,7 +251,7 @@ const note = {
         },
         {
             "id": "modules-14",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Source: "

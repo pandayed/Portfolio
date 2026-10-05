@@ -4,14 +4,45 @@ const note = {
     "notionId": "24024eb1-ed54-8009-a953-e20cad7e6a03",
     "slug": "errors",
     "title": "Errors",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "a11cfd1c-e41c-53d7-9085-1d20a6e1c266",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Errors are values returned to callers for handling. The built-in error interface requires one method:"
+                    "An error is a value returned for the caller to handle."
+                ]
+            ]
+        },
+        {
+            "id": "a39e42ca-ec69-5617-bcac-3b4af1221c6b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The built-in "
+                ],
+                [
+                    "error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " interface requires one method: "
+                ],
+                [
+                    "Error() string",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -27,10 +58,41 @@ const note = {
         },
         {
             "id": "ff928875-1a91-519a-b239-4c551dcd18d4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A value whose type implements Error() string can be used as an error. Return nil to indicate success."
+                    "A type with an "
+                ],
+                [
+                    "Error() string",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " method can be used as an error."
+                ]
+            ]
+        },
+        {
+            "id": "7d36eef2-4d48-5a7d-bd67-0c08031a49a6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Return "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when there is no error."
                 ]
             ]
         },
@@ -101,10 +163,69 @@ const note = {
         },
         {
             "id": "6763ee68-b124-5d58-bf2f-5762fa54cef5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This example constructs a *MyError value and uses a pointer receiver consistently. The As example below searches for that same type."
+                    "customFailure",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns a "
+                ],
+                [
+                    "*MyError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "fae41604-b470-5bea-962e-fdcf71e33ef5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Its "
+                ],
+                [
+                    "Error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " method uses a pointer receiver."
+                ]
+            ]
+        },
+        {
+            "id": "5a405ad0-3c89-5a48-8314-bfd8cba6cc81",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The "
+                ],
+                [
+                    "errors.As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " call later searches for that same pointer type."
                 ]
             ]
         },
@@ -129,10 +250,27 @@ const note = {
         },
         {
             "id": "a0f14f03-9027-5bfa-9a45-cf229d958673",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A sentinel is a predefined error value callers may match. This example declares the Item type rather than relying on an omitted application type."
+                    "A sentinel error is one predefined error value that callers can check for."
+                ]
+            ]
+        },
+        {
+            "id": "6979b526-6a40-5a57-9960-f688681ad8fe",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "ErrNotFound",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is a sentinel error below."
                 ]
             ]
         },
@@ -157,10 +295,47 @@ const note = {
         },
         {
             "id": "0287041a-b702-5d38-a6d4-f48aa1e55698",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The %w verb adds context while retaining the error for inspection. Use errors.Is to match a sentinel through wrapping, rather than comparing message strings."
+                    "%w",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " adds a message around an error and keeps the original error inside it."
+                ]
+            ]
+        },
+        {
+            "id": "ac772925-32a0-586a-9bd7-fe427f9c88ce",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
+                ],
+                [
+                    "errors.Is",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to find a sentinel even when it is wrapped."
+                ]
+            ]
+        },
+        {
+            "id": "3d9b13c6-2ae0-5226-8e0e-e61c6fa8dab1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not decide which error occurred by comparing message strings."
                 ]
             ]
         },
@@ -176,10 +351,97 @@ const note = {
         },
         {
             "id": "42501033-5adf-528a-b182-33ed73e9591a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "errors.Unwrap removes one Unwrap() error layer. It returns nil if that method is absent and does not unwrap Unwrap() []error. Is and As search wrapped error trees, including multi-error wrappers."
+                    "errors.Unwrap",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " removes one wrapping layer by calling "
+                ],
+                [
+                    "Unwrap() error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "4421f0c8-2644-5260-b59e-a16407f85ea6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It returns "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " if that method is missing."
+                ]
+            ]
+        },
+        {
+            "id": "4413a3a7-811c-53ea-8040-4098deb270cd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not call "
+                ],
+                [
+                    "Unwrap() []error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", which returns several wrapped errors."
+                ]
+            ]
+        },
+        {
+            "id": "b5bececf-e8a7-53fc-b607-3c9295a0ef1c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "errors.Is",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "errors.As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can search through both kinds of wrapping."
                 ]
             ]
         },
@@ -194,10 +456,36 @@ const note = {
         },
         {
             "id": "68ae1ecf-e1d2-5cef-8094-861854e5c4bf",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "As searches wrapped errors for an assignable type and fills a target variable. It is not a language type assertion, which checks only the interface value being asserted."
+                    "errors.As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " searches through wrapped errors for a value that can be assigned to the target."
+                ]
+            ]
+        },
+        {
+            "id": "e11eef01-bcc0-5299-9f55-38cb6b98d2c6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It stores the found value in the target variable."
+                ]
+            ]
+        },
+        {
+            "id": "bfeb88e6-fca4-52a9-b0e6-bcf8a938fb79",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A language type assertion checks only the interface value you apply it to. It does not search through wrappers."
                 ]
             ]
         },
@@ -213,13 +501,10 @@ const note = {
         },
         {
             "id": "f91dbcc6-5c48-5331-8c31-8beed0cfcbcf",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Here myErr has type *MyError, and &myErr is the pointer As fills. If Error used a value receiver and the function returned MyError instead, use "
-                ],
-                [
-                    "var myErr MyError",
+                    "myErr",
                     [
                         [
                             "c"
@@ -227,7 +512,18 @@ const note = {
                     ]
                 ],
                 [
-                    " and pass "
+                    " is a "
+                ],
+                [
+                    "*MyError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". Passing "
                 ],
                 [
                     "&myErr",
@@ -238,7 +534,130 @@ const note = {
                     ]
                 ],
                 [
-                    ". Value and pointer dynamic types are distinct; a value receiver does not make them interchangeable for As."
+                    " lets "
+                ],
+                [
+                    "As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " fill that variable."
+                ]
+            ]
+        },
+        {
+            "id": "94398ad1-5ae1-5d8d-8585-c6c26ce5fced",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If "
+                ],
+                [
+                    "Error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses a value receiver and the returned error is a "
+                ],
+                [
+                    "MyError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " value, declare "
+                ],
+                [
+                    "var myErr MyError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " instead."
+                ]
+            ]
+        },
+        {
+            "id": "2ada05bd-c60c-52c2-a9b0-623cbccf3d24",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Still pass "
+                ],
+                [
+                    "&myErr",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to "
+                ],
+                [
+                    "As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "3ac4535a-c74c-5f49-a670-d3963f990d33",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "MyError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "*MyError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " are different dynamic types. A value receiver does not make them interchangeable in "
+                ],
+                [
+                    "As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -256,7 +675,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Handle, return or deliberately document an ignored error. Do not ignore errors just to make a call compile."
+                    "Handle an error or return it to the caller."
+                ]
+            ]
+        },
+        {
+            "id": "02d1074e-82e7-567a-b9e4-80a13d04fe2c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If you choose to ignore it, make that choice clear."
+                ]
+            ]
+        },
+        {
+            "id": "6fffc7d4-f7d1-5bb9-ab2a-e0d826378adb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not ignore an error just to make the code compile."
                 ]
             ]
         },
@@ -265,7 +702,47 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use Is for an error condition and As for type-specific fields. Wrapping can expose an underlying error as part of the API, so wrap deliberately."
+                    "Use "
+                ],
+                [
+                    "Is",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to check an error condition."
+                ]
+            ]
+        },
+        {
+            "id": "7471f139-1158-58e6-933a-eaa03e66bb5a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
+                ],
+                [
+                    "As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to read fields from a particular error type."
+                ]
+            ]
+        },
+        {
+            "id": "71e8532a-dfcc-5219-bd47-3ddbc115b699",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Wrapping lets callers inspect the original error. They may start depending on it as part of the API."
                 ]
             ]
         },
@@ -274,7 +751,49 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go 1.13 added standard-library wrapping, Is and As. Older projects may use github.com/pkg/errors; current notes use the standard library."
+                    "Go 1.13 added wrapping, "
+                ],
+                [
+                    "Is",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to the standard library."
+                ]
+            ]
+        },
+        {
+            "id": "7ea06e15-b287-58ec-bded-a81da0a85b81",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Older projects may use "
+                ],
+                [
+                    "github.com/pkg/errors",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". These notes use the standard library."
                 ]
             ]
         },

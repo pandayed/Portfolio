@@ -6,11 +6,11 @@ const note = {
     "notionId": "24024eb1-ed54-804f-9003-d174de99397f",
     "slug": "context-and-timeout",
     "title": "Context and Timeout",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "edcec9f3-ae36-5427-ac4a-86e1f7f798ed",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "A "
@@ -24,7 +24,43 @@ const note = {
                     ]
                 ],
                 [
-                    " carries cancellation, a deadline, and request-scoped values across API boundaries. Cancellation is cooperative: an operation must check the signal or call an API that observes it."
+                    " carries a cancellation signal, a deadline and request-scoped values."
+                ]
+            ]
+        },
+        {
+            "id": "c5911ac6-6a7d-513c-8c08-f36c8dc0cfa2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A deadline is the time when an operation should stop."
+                ]
+            ]
+        },
+        {
+            "id": "0f004ce5-9afb-552d-9f8b-a2cb8e1d097d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Request-scoped values belong to one request, such as its authenticated user ID."
+                ]
+            ]
+        },
+        {
+            "id": "15ab9ea9-2431-5028-9237-fead1e19813c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pass the context between functions that take part in the same operation."
+                ]
+            ]
+        },
+        {
+            "id": "7a80d980-6e25-5f0e-80c3-1f1ea54d55db",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The work must check cancellation or use an API that checks it. The signal does not force work to stop."
                 ]
             ]
         },
@@ -79,7 +115,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Return the deadline and whether one exists."
+                                "Return the deadline and a boolean that says whether one exists."
                             ]
                         ]
                     }
@@ -100,7 +136,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Return a channel that closes on cancellation; it may be nil for a context that cannot be cancelled."
+                                "A channel that closes on cancellation. It can be nil when the context cannot be cancelled."
                             ]
                         ]
                     }
@@ -121,7 +157,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Return nil before cancellation, then "
+                                "Nil before cancellation. Then "
                             ],
                             [
                                 "context.Canceled",
@@ -164,7 +200,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Look up request-scoped data."
+                                "Find request-scoped data for this key."
                             ]
                         ]
                     }
@@ -222,7 +258,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Start a top-level operation with no cancellation or values."
+                                "Start top-level work with no cancellation or values."
                             ]
                         ]
                     }
@@ -243,7 +279,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Temporary placeholder when the appropriate context is not yet available."
+                                "Use while deciding which context to pass."
                             ]
                         ]
                     }
@@ -264,7 +300,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Derive a context with an explicit cancellation function."
+                                "Create a child context and a cancel function."
                             ]
                         ]
                     }
@@ -285,7 +321,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Derive a context with a relative deadline."
+                                "Create a child context with a deadline after this duration."
                             ]
                         ]
                     }
@@ -306,7 +342,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Derive a context with an absolute deadline."
+                                "Create a child context with a deadline at this time."
                             ]
                         ]
                     }
@@ -315,10 +351,46 @@ const note = {
         },
         {
             "id": "ff3c49b7-1265-534f-b2d8-eb92ad629a99",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Parent cancellation reaches derived contexts. Cancelling a child does not cancel its parent. A child cannot extend an earlier parent deadline. Call the returned cancel function when the operation ends to release resources, even if the deadline will eventually expire."
+                    "Cancelling a parent also cancels its child contexts."
+                ]
+            ]
+        },
+        {
+            "id": "22667e35-8341-59c9-af04-a75b43685e43",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Cancelling a child does not cancel its parent."
+                ]
+            ]
+        },
+        {
+            "id": "0f9dce5e-2a49-5648-abb9-0d26a7f31cc8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A child cannot extend an earlier parent deadline."
+                ]
+            ]
+        },
+        {
+            "id": "47af76d7-2fef-5939-9e19-d7b77c7daefd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Call the returned cancel function when the operation ends to release its resources."
+                ]
+            ]
+        },
+        {
+            "id": "e79433be-0d23-567e-b149-29a1db4c6da4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do this even when a deadline would cancel it later."
                 ]
             ]
         },
@@ -334,11 +406,17 @@ const note = {
         },
         {
             "id": "6960ba08-0c44-5572-99f8-9c9d5a7c2849",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: context canceled. Waiting for "
-                ],
+                    "Output: context canceled."
+                ]
+            ]
+        },
+        {
+            "id": "c4d03241-be9b-50eb-a755-547e55d50a44",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "Done",
                     [
@@ -348,7 +426,16 @@ const note = {
                     ]
                 ],
                 [
-                    " observes the cancellation signal; it does not wait for all workers using the context to finish."
+                    " tells you that cancellation has been signalled."
+                ]
+            ]
+        },
+        {
+            "id": "c73f2052-0605-54ba-be69-dabcd8b3dacf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not tell you that every worker has finished."
                 ]
             ]
         },
@@ -363,10 +450,39 @@ const note = {
         },
         {
             "id": "2edf5a50-4d30-591f-b848-baa1a0a5a08d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Timing out only the receiver leaves a producer blocked if it later sends to an unbuffered channel. This example lets the producer exit both during its simulated wait and while sending its result. A completion channel lets the caller wait for that exit."
+                    "If only the receiver times out, the producer may later wait forever while sending."
+                ]
+            ]
+        },
+        {
+            "id": "2b8be8f8-a364-5e92-b767-6ec829040315",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The producer below checks cancellation while waiting and while sending."
+                ]
+            ]
+        },
+        {
+            "id": "fe6be5d5-86fd-5b56-910a-0b821683c45c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It closes "
+                ],
+                [
+                    "stopped",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when it exits. The caller waits for that signal."
                 ]
             ]
         },
@@ -382,16 +498,54 @@ const note = {
         },
         {
             "id": "907c07fb-ea1e-5a7f-9a59-4b7683a7c1f3",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Normally the one-second deadline ends the two-second wait. If cancellation and channel closure are both ready, the caller may print timed out or stopped, followed by context deadline exceeded. Severe scheduling delays can change which event is observed first; the example promises an exit path, not a fixed timing transcript."
+                    "The context timeout is one second. The work timer waits two seconds."
+                ]
+            ]
+        },
+        {
+            "id": "2418c875-3f33-57d8-af35-47d47de62d50",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The usual output is timed out: context deadline exceeded or stopped: context deadline exceeded."
+                ]
+            ]
+        },
+        {
+            "id": "f7f12ffc-8118-5909-a8f3-225c3dca155e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Either cancellation or the closed results channel may be chosen when both are ready."
+                ]
+            ]
+        },
+        {
+            "id": "6e2fe593-edce-58b2-91cb-dedbfa1dc390",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Long delays in running the goroutines can change which event happens first, so "
+                ],
+                [
+                    "done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " may also be printed."
                 ]
             ]
         },
         {
             "id": "b45b2f20-70fd-59c5-bbc1-d6d292fdfd70",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "The second "
@@ -405,7 +559,16 @@ const note = {
                     ]
                 ],
                 [
-                    " also prevents a blocked send when a caller stops receiving. Checking "
+                    " lets the producer stop even if nobody receives its result."
+                ]
+            ]
+        },
+        {
+            "id": "aacf2197-5b05-56df-97e0-bd73a75e8d91",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Checking "
                 ],
                 [
                     "ctx.Err()",
@@ -416,7 +579,16 @@ const note = {
                     ]
                 ],
                 [
-                    " once before an ordinary blocking send is insufficient: cancellation can happen after the check."
+                    " once before a normal send is not enough."
+                ]
+            ]
+        },
+        {
+            "id": "84bf2476-cb86-5c25-b1e8-ff797e2f8b30",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Cancellation can happen after that check, while the send is still waiting."
                 ]
             ]
         },
@@ -431,10 +603,36 @@ const note = {
         },
         {
             "id": "46bf5168-20d4-5f6f-9ea2-b1a37b650e15",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This helper returns on cancellation, a received value, or channel closure. It does not start a goroutine or own the producer; the caller must also arrange producer shutdown if it abandons the input."
+                    "receive",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns a value, reports a closed input channel, or returns a cancellation error."
+                ]
+            ]
+        },
+        {
+            "id": "9c1f1bd3-280c-5a97-8170-e101d2e460a6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not start or stop the producer."
+                ]
+            ]
+        },
+        {
+            "id": "fcd16201-0632-5c1d-80c4-3c3258d71e25",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the caller stops receiving, it must arrange for the producer to stop too."
                 ]
             ]
         },
@@ -450,10 +648,10 @@ const note = {
         },
         {
             "id": "dc8ca252-f536-5379-b007-232ce4c567f2",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "When both cases are ready, either may be chosen. Cancellation does not automatically take priority over a value."
+                    "When a value and cancellation are both ready, either case may run."
                 ]
             ]
         },
@@ -468,10 +666,28 @@ const note = {
         },
         {
             "id": "b8661d50-1f53-5935-832c-d858faaf5f19",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use context values for request metadata that crosses API boundaries, such as an authenticated user ID. Keep required business inputs and configuration as explicit parameters. A private key type avoids collisions with other packages."
+                    "Use context values for request data that needs to pass between APIs, such as an authenticated user ID."
+                ]
+            ]
+        },
+        {
+            "id": "90c2bdff-ca34-5f39-8a4a-7ad81b98cf87",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pass required business inputs and configuration as normal function arguments."
+                ]
+            ]
+        },
+        {
+            "id": "9c7784d9-6f58-5cc8-8f14-536ae163280c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a private key type so other packages do not accidentally use the same key."
                 ]
             ]
         },
@@ -487,10 +703,27 @@ const note = {
         },
         {
             "id": "37c0b3cb-85e9-56ef-860e-c96cf544f291",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: 42 true. The accessor makes the type assertion and missing-value case explicit."
+                    "Output: 42 true."
+                ]
+            ]
+        },
+        {
+            "id": "c292141d-57e9-5903-b026-a574b37d093e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "userID",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns the ID and a boolean that says whether an ID was found."
                 ]
             ]
         },
@@ -519,7 +752,16 @@ const note = {
                     ]
                 ],
                 [
-                    " as the first parameter to functions that need it. Prefer a per-operation context over storing one in a long-lived struct."
+                    " as the first argument to functions that need it."
+                ]
+            ]
+        },
+        {
+            "id": "b6c36a8c-deb5-5b48-afe2-511350b58ef7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Prefer a context for each operation over keeping one in a long-lived struct."
                 ]
             ]
         },
@@ -528,7 +770,27 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Pass the caller’s context into context-aware HTTP or database APIs. Starting a new Background context inside those operations discards the caller’s cancellation."
+                    "Pass the caller’s context to HTTP and database APIs that support context."
+                ]
+            ]
+        },
+        {
+            "id": "ad410840-a05e-5098-baed-bcf28a070fb7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Creating a new "
+                ],
+                [
+                    "Background",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " context there loses the caller’s cancellation signal."
                 ]
             ]
         },
@@ -537,7 +799,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not pass nil. Use "
+                    "Do not pass a nil context."
+                ]
+            ]
+        },
+        {
+            "id": "636c5793-4054-53b6-bcd5-48bee3e8f114",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
                 ],
                 [
                     "TODO",
@@ -548,7 +819,7 @@ const note = {
                     ]
                 ],
                 [
-                    " only while the appropriate context is unresolved."
+                    " while you have not yet decided which context should be passed."
                 ]
             ]
         },
@@ -557,7 +828,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Check cancellation at useful points in long computation. A context does not interrupt an arbitrary function, a mutex lock, or "
+                    "Check cancellation during long computations."
+                ]
+            ]
+        },
+        {
+            "id": "8207c15c-b246-51f0-b61f-39d8947159fd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A context does not interrupt an ordinary function call, a mutex lock or "
                 ],
                 [
                     "time.Sleep",
@@ -577,7 +857,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Cancellation and joining are separate. Use a WaitGroup or completion channel when the caller must wait for cleanup."
+                    "Sending a cancellation signal and waiting for work to finish are separate steps."
+                ]
+            ]
+        },
+        {
+            "id": "a2c0f459-071e-58d9-8590-b28c5c6c628d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a WaitGroup or a completion channel if the caller must wait for cleanup."
                 ]
             ]
         },

@@ -4,7 +4,7 @@ const note = {
     "notionId": "24a24eb1-ed54-807f-82ae-e73c3476d760",
     "slug": "functions",
     "title": "Functions",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "7b00b12b-185e-5b00-b284-f673897c2b42",
@@ -27,10 +27,48 @@ const note = {
         },
         {
             "id": "9191b47b-72be-5a84-836c-21b858713496",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The func keyword starts the declaration. Each parameter has a name and type; result types follow the parameter list. Omit the result type for a function that returns nothing."
+                    "Start the declaration with "
+                ],
+                [
+                    "func",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "9c2638b3-c50a-5203-9355-4fd322727253",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Give each parameter a name and a type."
+                ]
+            ]
+        },
+        {
+            "id": "6405724f-02cd-55a3-981a-240a38358213",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Write return types after the parameter list."
+                ]
+            ]
+        },
+        {
+            "id": "5565ab1c-df98-5fba-9d53-3ce30c1a2059",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Leave out the return type if the function returns nothing."
                 ]
             ]
         },
@@ -55,11 +93,8 @@ const note = {
         },
         {
             "id": "8f25e9cb-0f04-5d17-9d68-974491624923",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
-                [
-                    "Inside a function, "
-                ],
                 [
                     "result := add(2, 3)",
                     [
@@ -69,7 +104,18 @@ const note = {
                     ]
                 ],
                 [
-                    " assigns 5 to result."
+                    " stores 5 in "
+                ],
+                [
+                    "result",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -84,10 +130,38 @@ const note = {
         },
         {
             "id": "f4c11ae2-d5c9-5c2b-a4c2-951694a4180e",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This integer division example requires b to be nonzero. Each result is assigned separately."
+                    "b",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " must not be zero when calling "
+                ],
+                [
+                    "divide",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "832b9bc9-ec2b-5b4a-9545-47e16ac02e2a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assign the two results to two variables."
                 ]
             ]
         },
@@ -140,10 +214,47 @@ const note = {
         },
         {
             "id": "f4017b69-98b1-5f90-9b2b-66688a9f42da",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Named results are variables declared by the signature. A plain return uses their current values. rectProps(3, 2) returns 6 and 10."
+                    "Named results are variables declared in the function signature."
+                ]
+            ]
+        },
+        {
+            "id": "b12142d0-800b-5bdc-a014-1bacdc3b74c3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A plain "
+                ],
+                [
+                    "return",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns their current values."
+                ]
+            ]
+        },
+        {
+            "id": "3723abfe-e641-5833-bd91-bc8d43bfa73e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "rectProps(3, 2)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns 6 and 10."
                 ]
             ]
         },
@@ -158,10 +269,10 @@ const note = {
         },
         {
             "id": "15260d92-6376-54f3-892f-2eacfb685820",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "When adjacent parameters have the same type, write it once. This is an alternative declaration of add, not a second declaration in the same package."
+                    "Write the type once when neighboring parameters share it."
                 ]
             ]
         },
@@ -177,10 +288,19 @@ const note = {
         },
         {
             "id": "1d4bd13b-d45f-5ea0-8a6b-65e4e7428d5a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Passing a pointer copies its address value. A function can use it to change the pointed-to variable."
+                    "Passing a pointer copies the address it holds."
+                ]
+            ]
+        },
+        {
+            "id": "ef8bff37-7ef2-53bb-9126-b789a83d2202",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The function can use that address to change the original variable."
                 ]
             ]
         },
@@ -223,10 +343,21 @@ const note = {
         },
         {
             "id": "62c99716-181c-52e0-97e1-42921d5c1ede",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use the blank identifier for a result that is deliberately unused."
+                    "Use the blank identifier "
+                ],
+                [
+                    "_",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when you do not need a result."
                 ]
             ]
         },

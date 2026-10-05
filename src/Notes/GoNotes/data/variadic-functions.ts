@@ -4,14 +4,54 @@ const note = {
     "notionId": "24a24eb1-ed54-8030-b2e0-e5685daa55e6",
     "slug": "variadic-functions",
     "title": "Variadic Functions",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "507f2a4c-0d76-5136-97ab-6d729df21546",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A variadic function accepts zero or more arguments for its final parameter. Declare it with ...T; inside the function that parameter has type []T."
+                    "A variadic function accepts zero or more arguments for its last parameter."
+                ]
+            ]
+        },
+        {
+            "id": "5a89b651-5df7-5d0d-a8f3-4e478edca031",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Write this parameter as "
+                ],
+                [
+                    "...T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "867598cd-5906-52f1-9d31-c6cb2c569f50",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Inside the function, the parameter is a slice of type "
+                ],
+                [
+                    "[]T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -39,7 +79,27 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Only one parameter can be variadic, and it must be last. With no trailing arguments, the variadic slice is nil."
+                    "Only one parameter can be variadic, and it must come last."
+                ]
+            ]
+        },
+        {
+            "id": "86ed4a7c-a0a1-541c-920c-f944366f738c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If you pass no arguments for it, the slice inside the function is "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -54,10 +114,21 @@ const note = {
         },
         {
             "id": "53eb9c6f-ebde-5f17-857a-67f1f7bf8f3b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Append ... to the slice argument."
+                    "Write "
+                ],
+                [
+                    "...",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after the slice argument."
                 ]
             ]
         },
@@ -73,10 +144,30 @@ const note = {
         },
         {
             "id": "bc57401a-252f-5ab7-9527-9de700118f1f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The slice is passed as the variadic slice value; it is not copied into a new backing array. A function that changes its elements can change the caller’s elements."
+                    "Passing "
+                ],
+                [
+                    "nums...",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not copy the slice’s underlying array."
+                ]
+            ]
+        },
+        {
+            "id": "52e5bd8d-a10f-5036-8a2f-a2d49fafaea4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Changing an element inside the function can change that element for the caller too."
                 ]
             ]
         },

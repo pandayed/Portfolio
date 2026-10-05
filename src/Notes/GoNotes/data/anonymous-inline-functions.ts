@@ -4,14 +4,32 @@ const note = {
     "notionId": "24124eb1-ed54-801b-af91-ec0564709d69",
     "slug": "anonymous-inline-functions",
     "title": "Anonymous/Inline Functions",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "2f5a6c45-7601-5996-a8ac-1e7e4301c6b2",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A function literal declares a function without a name. It can be called immediately, stored in a variable, passed as an argument or returned."
+                    "A function literal is a function written without a name."
+                ]
+            ]
+        },
+        {
+            "id": "0ca69771-6bd2-5a92-a444-0d25607c6063",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can call it immediately."
+                ]
+            ]
+        },
+        {
+            "id": "0fbca97b-e84d-5884-ba6d-aad8448ddff0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can store it in a variable, pass it as an argument or return it from another function."
                 ]
             ]
         },
@@ -54,10 +72,19 @@ const note = {
         },
         {
             "id": "65e1f96b-4f48-5853-b541-34150efd9b7d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The term inline here means writing a function literal at its use site. It does not guarantee compiler inlining."
+                    "Here, inline means writing the function where you use it."
+                ]
+            ]
+        },
+        {
+            "id": "94e00850-c492-5e5a-8972-0dfe1fc98fe8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Compiler inlining means placing the function’s code directly inside the caller. A function literal does not force this optimization."
                 ]
             ]
         },
@@ -72,10 +99,10 @@ const note = {
         },
         {
             "id": "4ad56ced-8d0c-52a0-bd6a-3ba3a7eccfd9",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The final parentheses call the literal with arguments."
+                    "The parentheses after the closing brace call the function with the given arguments."
                 ]
             ]
         },
@@ -148,10 +175,30 @@ const note = {
         },
         {
             "id": "d85ed29e-6dda-5b10-81ab-3dc178cacf69",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The returned function captures factor, so this example is also a closure. Function-literal syntax and captured state are separate concepts."
+                    "The returned function keeps access to "
+                ],
+                [
+                    "factor",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". This makes it a closure."
+                ]
+            ]
+        },
+        {
+            "id": "7a418a0b-34dd-5a55-a62c-e2ae65d34cb1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Function-literal syntax describes how to write the function. A closure describes its access to surrounding variables."
                 ]
             ]
         },

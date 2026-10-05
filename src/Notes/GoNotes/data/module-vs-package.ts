@@ -6,14 +6,23 @@ const note = {
     "notionId": "24024eb1-ed54-8097-9e0c-d66ddacb377e",
     "slug": "module-vs-package",
     "title": "Module vs Package",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "module-vs-package-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A package organizes source code. A module versions a collection of packages and describes its dependencies for Go tooling."
+                    "A package organizes code."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A module groups packages under one version and records the modules they depend on."
                 ]
             ]
         },
@@ -68,12 +77,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "A directory tree rooted at go.mod, excluding nested modules."
+                                "The go.mod directory and its subdirectories, except separate nested modules."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Source files selected together, normally in one directory."
+                                "Source files compiled together, normally in one directory."
                             ]
                         ]
                     }
@@ -110,12 +119,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Dependency management and release versioning."
+                                "Manage dependencies and release versions."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Declarations, imports, and compilation."
+                                "Group declared names and compile source files together."
                             ]
                         ]
                     }
@@ -136,7 +145,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "package main with func main() supplies a program entry point."
+                                "package main with func main() starts the program after initialization."
                             ]
                         ]
                     }
@@ -157,7 +166,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The go command uses module requirements to resolve versioned imports. It compiles the selected packages and links an executable."
+                    "The go command uses module requirements to find the versions needed by imports."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-05-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It compiles packages and links them into an executable."
                 ]
             ]
         },
@@ -166,7 +184,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The operating system starts the executable. Go startup initializes imported packages, then the main package, and invokes main.main."
+                    "The operating system starts the executable."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-06-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go initializes imported packages first, then the main package."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-06-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go then calls main.main."
                 ]
             ]
         },
@@ -175,16 +211,34 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Code from imported packages can run during initialization and when called later. The program does not execute only the main package."
+                    "Imported package code can run during initialization or when another function calls it."
                 ]
             ]
         },
         {
             "id": "module-vs-package-08",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "go.mod is build metadata, not an executable. An already built program does not need to read the source go.mod to start. Module build information can be embedded in a binary and read at runtime, so saying modules have no runtime representation at all is too broad."
+                    "go.mod is a file used during the build. It is not executable code."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-08-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A built program can start without reading its source go.mod."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-08-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A binary can contain module build information. The program can read that information while running."
                 ]
             ]
         },
@@ -219,16 +273,43 @@ const note = {
         },
         {
             "id": "module-vs-package-12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "These commands select the executable package. The module supplies import paths and dependencies for its build. A simple named-file program using only the standard library can also run with go run main.go without a local go.mod; that does not replace module management for projects."
+                    "The commands select the executable package."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-12-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The module supplies import paths and dependencies for the build."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-12-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A simple file using only the standard library can run with go run main.go without a local go.mod."
+                ]
+            ]
+        },
+        {
+            "id": "module-vs-package-12-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use modules to manage dependencies in a project."
                 ]
             ]
         },
         {
             "id": "module-vs-package-13",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Continue with "
@@ -249,7 +330,7 @@ const note = {
         },
         {
             "id": "module-vs-package-14",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -270,7 +351,7 @@ const note = {
         },
         {
             "id": "module-vs-package-15",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Sources: "
@@ -291,7 +372,7 @@ const note = {
         },
         {
             "id": "module-vs-package-16",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     ""

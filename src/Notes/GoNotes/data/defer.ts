@@ -4,14 +4,40 @@ const note = {
     "notionId": "24124eb1-ed54-80eb-8bed-c90a4e5d795f",
     "slug": "defer",
     "title": "Defer",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "014b4781-b3d6-5000-a744-5573bd4d0595",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A defer statement registers a function call for the current function’s exit. Deferred calls run in reverse registration order on a normal return or while a panic unwinds the function."
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " saves a function call to run when the current function exits."
+                ]
+            ]
+        },
+        {
+            "id": "83870a95-8e9a-5fd6-8c7d-98e4d493c7ea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The saved calls run in reverse order. The last saved call runs first."
+                ]
+            ]
+        },
+        {
+            "id": "c9bfaf8d-6d7c-56b3-837f-9c31868255d8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "They run on a normal return and when a panic leaves the function."
                 ]
             ]
         },
@@ -26,10 +52,10 @@ const note = {
         },
         {
             "id": "8d94d633-27dc-5bba-9a9f-77a30991a77d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The deferred call finishes before the caller receives the result."
+                    "The deferred call runs before the caller receives the result."
                 ]
             ]
         },
@@ -64,10 +90,28 @@ const note = {
         },
         {
             "id": "a8d12f23-5804-500e-b648-bd801c26412d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The return value is set first, then the deferred calls run, then control returns to the caller."
+                    "First, Go sets the return value."
+                ]
+            ]
+        },
+        {
+            "id": "08365832-45e2-5885-a0ee-210d8bb9d5f8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Next, it runs the deferred calls."
+                ]
+            ]
+        },
+        {
+            "id": "878030ae-d82b-5548-aa4b-754f8776c38a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Then, it returns to the caller."
                 ]
             ]
         },
@@ -120,10 +164,39 @@ const note = {
         },
         {
             "id": "4a3bd411-a8f0-5aeb-935d-8eb68f881521",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The called function value and its arguments are evaluated when the defer statement is reached. The call runs later. A deferred closure can instead read a variable when the closure runs."
+                    "Go evaluates the function and its arguments when it reaches "
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "2ce69072-057b-5089-8986-a60eb2c3a9f9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It saves them for the later call."
+                ]
+            ]
+        },
+        {
+            "id": "b4f98ef6-d50e-53c6-aa59-d2c984911091",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A deferred closure can read a variable’s current value when the closure runs."
                 ]
             ]
         },
@@ -167,10 +240,21 @@ const note = {
         },
         {
             "id": "fe7e7f32-adb5-5341-bd3d-29c81bc71e2b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A deferred closure can modify a named result after a return statement assigns it."
+                    "A deferred closure can change a named result after "
+                ],
+                [
+                    "return",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " has set it."
                 ]
             ]
         },
@@ -186,10 +270,35 @@ const note = {
         },
         {
             "id": "99a9d0cf-02ff-5410-ae8e-1342526afc36",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "f() returns 6. Named results are variables in the function scope; the closure reads and changes result."
+                    "f()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns 6."
+                ]
+            ]
+        },
+        {
+            "id": "06c20817-8936-54cc-8173-105f008798c3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "result",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is a variable in the function. The deferred closure adds 1 to it."
                 ]
             ]
         },
@@ -207,7 +316,47 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Register cleanup after successful resource acquisition: defer file.Close() after opening a file, or defer mu.Unlock() after locking a mutex."
+                    "Set up cleanup after the resource is acquired successfully."
+                ]
+            ]
+        },
+        {
+            "id": "7e12252f-348e-5ddb-8837-1f5a2d38058f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "After opening a file, use "
+                ],
+                [
+                    "defer file.Close()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "7e7dc826-cd8f-5ef2-b8d9-30765cc2f979",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "After locking a mutex, use "
+                ],
+                [
+                    "defer mu.Unlock()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -216,16 +365,45 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Check cleanup errors when they matter, such as a write or flush failure. A deferred call’s return value is discarded unless a closure handles it."
+                    "A deferred call’s return value is normally discarded."
+                ]
+            ]
+        },
+        {
+            "id": "caf8614b-de3b-58c4-a68e-29b37115d346",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a closure to check that value when the cleanup can fail."
+                ]
+            ]
+        },
+        {
+            "id": "3bd85e68-c579-574c-9bc6-db81fd76b847",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Errors from writing or flushing data may need to be reported."
                 ]
             ]
         },
         {
             "id": "3cd0c446-44e7-5fce-ab42-abfcdf6a058f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Opening failure returns before cleanup is registered."
+                    "If opening the file fails, the function returns before reaching "
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -241,10 +419,10 @@ const note = {
         },
         {
             "id": "0ea39363-f2a0-527d-8e56-525b7277570d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The example reads a file. An application that needs to report a close error should handle that error explicitly."
+                    "Handle the close error explicitly if the application needs to report it."
                 ]
             ]
         },
@@ -259,10 +437,19 @@ const note = {
         },
         {
             "id": "c9b69b53-7156-5a25-9ed2-59e4b7f072c0",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A loop iteration is not a function exit. Every deferred call waits until the enclosing function returns."
+                    "Ending a loop iteration does not run its deferred calls."
+                ]
+            ]
+        },
+        {
+            "id": "1c6d3766-aa45-51c5-8035-ab08a0826d39",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "They wait until the enclosing function returns."
                 ]
             ]
         },
@@ -297,10 +484,28 @@ const note = {
         },
         {
             "id": "e159f287-e698-57aa-8a3d-e58a88f3427a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "If each iteration owns a file or lock that must be released promptly, put that iteration’s work in a helper function or close/unlock explicitly. Deferring all cleanup until the outer function returns can keep resources open longer than intended."
+                    "A loop can keep files open or locks held until the outer function returns."
+                ]
+            ]
+        },
+        {
+            "id": "d72cee7b-2b75-588f-b3ed-5f8b9fe2d79d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a helper function for each iteration when its resources must be released sooner."
+                ]
+            ]
+        },
+        {
+            "id": "a239f583-fb3d-5f7b-b016-a93e137d9ecc",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can also close the file or unlock the mutex explicitly at the right point."
                 ]
             ]
         },
@@ -315,10 +520,50 @@ const note = {
         },
         {
             "id": "24f7166a-afb8-59af-b8a5-d91fab797e3b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A panic also runs registered defers. To recover, call recover directly from a deferred function in the same goroutine. A bare defer recover() does not provide the required recovering function body."
+                    "A panic runs the deferred calls that were already saved."
+                ]
+            ]
+        },
+        {
+            "id": "867d8f6b-3006-5ee9-a742-30260b0efe63",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Call "
+                ],
+                [
+                    "recover",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " directly inside a deferred function in the same goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "590f6a67-45b4-5be5-9f58-698f2b146cf6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Writing only "
+                ],
+                [
+                    "defer recover()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not recover a panic."
                 ]
             ]
         },
@@ -351,10 +596,70 @@ const note = {
         },
         {
             "id": "20646300-8499-5b4b-aab5-84484356fc22",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The cost of defer depends on the compiler and the code shape. Go 1.14 introduced cheaper defers for many common cases. Measure a relevant workload before removing cleanup for speed; resource lifetime in a long-running function is a separate concern."
+                    "The cost of "
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " depends on the compiler and the code."
+                ]
+            ]
+        },
+        {
+            "id": "8f1904f3-7d59-5aff-aa5f-e35553c8f515",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go 1.14 made many common uses of "
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " cheaper."
+                ]
+            ]
+        },
+        {
+            "id": "602761f6-476d-53d7-b1fc-8c5a4d5b8c1f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure performance before removing deferred cleanup for speed."
+                ]
+            ]
+        },
+        {
+            "id": "46a9927a-fe8e-5f31-8f12-840d70601a47",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Separately check how long files stay open or locks stay held. A long delay can be a problem even when "
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is fast."
                 ]
             ]
         },

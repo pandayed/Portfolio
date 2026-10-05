@@ -6,14 +6,32 @@ const note = {
     "notionId": "24124eb1-ed54-8092-97f6-e0dccdba5a19",
     "slug": "go-sum",
     "title": "go.sum",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "go-sum-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "go.sum records checksums for downloaded module content and module manifests. Go commands manage it alongside go.mod."
+                    "go.sum records checksums for downloaded module files and go.mod files."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A checksum is a hash used to check whether content has changed."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-01-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go commands manage go.sum alongside go.mod."
                 ]
             ]
         },
@@ -28,10 +46,10 @@ const note = {
         },
         {
             "id": "go-sum-03",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Illustrative format. The hash values below are placeholders, not valid checksums to paste into a project:"
+                    "The sample hashes below are not real checksums."
                 ]
             ]
         },
@@ -97,7 +115,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Version whose module content was hashed."
+                                "The version checked by this hash."
                             ]
                         ]
                     }
@@ -113,7 +131,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Hash covers only that version's go.mod."
+                                "This hash checks only the go.mod file for that version."
                             ]
                         ]
                     }
@@ -129,7 +147,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Algorithm identifier and base64-encoded hash. h1 uses SHA-256."
+                                "h1 means SHA-256. The rest is the hash written as base64 text."
                             ]
                         ]
                     }
@@ -150,7 +168,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go checks downloaded content against recorded hashes and reports mismatches. For public modules, the checksum database can verify hashes that are missing locally."
+                    "Go checks downloaded content against its recorded hash."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-07-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the hashes differ, Go reports an error."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-07-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For public modules, Go can check a missing local hash against the checksum database."
                 ]
             ]
         },
@@ -159,7 +195,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "go.sum may contain several versions of one module or manifest hashes without a content hash. Its entries are not a list of the versions selected for the build."
+                    "go.sum can contain several versions of one module."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-08-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It can record a go.mod hash without a hash for the rest of that module."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-08-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These entries do not say which versions the build selects."
                 ]
             ]
         },
@@ -168,7 +222,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "go mod tidy adds needed hashes and removes unnecessary ones. Keep the generated file in version control; do not invent or manually change hashes."
+                    "go mod tidy adds needed hashes and removes unused ones."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-09-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keep go.sum in version control. Let Go tools update its hashes."
                 ]
             ]
         },
@@ -177,13 +240,22 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A module with no downloaded dependencies can have no go.sum. Locally replaced modules do not need downloaded-content hashes."
+                    "A module with no downloaded dependencies may have no go.sum."
+                ]
+            ]
+        },
+        {
+            "id": "go-sum-10-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Modules replaced by local directories do not need download hashes."
                 ]
             ]
         },
         {
             "id": "go-sum-11",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Version requirements and selection begin with "
@@ -204,7 +276,7 @@ const note = {
         },
         {
             "id": "go-sum-12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Source: "

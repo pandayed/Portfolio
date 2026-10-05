@@ -6,14 +6,23 @@ const note = {
     "notionId": "24924eb1-ed54-8009-8e03-fdae5e42cfbd",
     "slug": "basic-commands",
     "title": "Basic Commands",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "basic-commands-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Run these commands from the directory containing the executable package. The package must declare package main and func main()."
+                    "Run these commands from the executable package directory."
+                ]
+            ]
+        },
+        {
+            "id": "basic-commands-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That package needs package main and func main()."
                 ]
             ]
         },
@@ -38,10 +47,19 @@ const note = {
         },
         {
             "id": "basic-commands-04",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Compiles and runs the current package using a temporary executable. It does not leave a named executable in the current directory."
+                    "Compiles and runs the current package."
+                ]
+            ]
+        },
+        {
+            "id": "basic-commands-04-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Uses a temporary executable. It does not leave a named executable in the current directory."
                 ]
             ]
         },
@@ -57,10 +75,19 @@ const note = {
         },
         {
             "id": "basic-commands-06",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Runs the listed Go file. Use go run . when the package has multiple source files so they are included together."
+                    "Runs the listed Go file."
+                ]
+            ]
+        },
+        {
+            "id": "basic-commands-06-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use go run . to include all source files in the current package."
                 ]
             ]
         },
@@ -85,10 +112,19 @@ const note = {
         },
         {
             "id": "basic-commands-09",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Builds the current main package as app. Building a library package checks and caches compilation; it does not create a runnable application."
+                    "Builds the current main package into an executable named app."
+                ]
+            ]
+        },
+        {
+            "id": "basic-commands-09-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For a library package, go build checks and caches compiled code. It does not make an executable."
                 ]
             ]
         },
@@ -178,7 +214,7 @@ const note = {
         },
         {
             "id": "basic-commands-12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -199,7 +235,7 @@ const note = {
         },
         {
             "id": "basic-commands-13",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Source: "

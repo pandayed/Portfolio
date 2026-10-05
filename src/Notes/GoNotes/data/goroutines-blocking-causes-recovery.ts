@@ -6,14 +6,41 @@ const note = {
     "notionId": "24124eb1-ed54-80be-9eeb-c1699387a64d",
     "slug": "goroutines-blocking-causes-recovery",
     "title": "Goroutines Blocking: Causes & Recovery",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "1ddef1dc-a5e8-5cdc-a2c3-0659fbb57459",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A blocked goroutine is waiting for progress from an operation or another goroutine. Blocking can be intentional. Diagnose the missing event and give every long-lived task an exit path before changing buffers, locks, or scheduling."
+                    "A blocked goroutine is waiting for an operation or another goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "1bf6ad85-68da-5d6d-a34d-47ea96b2dfe9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Waiting is sometimes normal."
+                ]
+            ]
+        },
+        {
+            "id": "6f2c116c-821f-53a4-8a33-b49aaf68e430",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Find what needs to happen before the goroutine can continue."
+                ]
+            ]
+        },
+        {
+            "id": "4365bb08-2a98-5fba-ab91-fb0501e3d51f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Give long-running tasks a way to stop before changing buffers, locks or runtime settings."
                 ]
             ]
         },
@@ -48,12 +75,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Inspect"
+                                "Check"
                             ]
                         ],
                         "column-2": [
                             [
-                                "Repair or exit path"
+                                "What to fix"
                             ]
                         ]
                     }
@@ -69,12 +96,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Is there a consumer? Did it return early? Is the queue full?"
+                                "Is the receiver still receiving? Is the queue full?"
                             ]
                         ],
                         "column-2": [
                             [
-                                "Drain results or make the send cancellable; define who owns consumer shutdown."
+                                "Keep receiving results, or let the sender stop on cancellation."
                             ]
                         ]
                     }
@@ -90,12 +117,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Can a producer still send? Who closes the stream?"
+                                "Can a producer still send? Who closes the channel?"
                             ]
                         ],
                         "column-2": [
                             [
-                                "Close after the last sender finishes, or allow cancellation when waiting."
+                                "Close after the last sender finishes, or let the receiver stop on cancellation."
                             ]
                         ]
                     }
@@ -111,12 +138,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Does every registered task reach Done exactly once?"
+                                "Does every added task call Done exactly once?"
                             ]
                         ],
                         "column-2": [
                             [
-                                "Fix registration/completion balance and make each task able to return."
+                                "Fix the task counter and give every task a way to return."
                             ]
                         ]
                     }
@@ -132,12 +159,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Who owns the lock? Is it held across a wait? Is there a lock-order cycle?"
+                                "Who holds the lock? Are goroutines taking locks in opposite orders?"
                             ]
                         ],
                         "column-2": [
                             [
-                                "Release on every path, shorten the scope, and use a consistent lock order."
+                                "Release on every path. Keep lock scopes short and use a consistent lock order."
                             ]
                         ]
                     }
@@ -153,12 +180,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Does the API observe context or have a timeout?"
+                                "Does the API support context or a timeout?"
                             ]
                         ],
                         "column-2": [
                             [
-                                "Use the API’s supported cancellation or deadline mechanism."
+                                "Use the cancellation or timeout supported by that API."
                             ]
                         ]
                     }
@@ -174,12 +201,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Is work progressing, or looping without useful progress?"
+                                "Is the work progressing, or looping without useful work?"
                             ]
                         ],
                         "column-2": [
                             [
-                                "Bound the work and check cancellation at suitable points."
+                                "Limit the work and check cancellation during it."
                             ]
                         ]
                     }
@@ -191,7 +218,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Primitive contracts and examples: "
+                    "Rules and examples: "
                 ],
                 [
                     "Channels",
@@ -266,10 +293,37 @@ const note = {
         },
         {
             "id": "b35a64ff-8e87-56e8-8b89-a5fe5b2e7686",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A deadlock is a dependency cycle or missing event that prevents the affected work from progressing. The entire program need not be blocked: a request can deadlock while other requests still work. A goroutine leak is work that remains alive after it is no longer needed, often because a wait has no exit path."
+                    "Deadlock: work cannot continue because a needed event never happens, or tasks wait on each other."
+                ]
+            ]
+        },
+        {
+            "id": "782f8530-488b-5931-856e-693e059d4ec4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "One request can deadlock while other requests continue."
+                ]
+            ]
+        },
+        {
+            "id": "8748a700-a013-54b5-bfad-abaf610d2fcd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Goroutine leak: a goroutine stays alive after its work is no longer needed."
+                ]
+            ]
+        },
+        {
+            "id": "1f5fb70d-75df-5a44-af5c-fb5bfff9c6da",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A leak often happens when the goroutine waits with no way to stop."
                 ]
             ]
         },
@@ -285,20 +339,44 @@ const note = {
         },
         {
             "id": "a4c80fce-96e3-5b4a-aad5-b97b369e9bf3",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The send needs another goroutine to receive. Buffering one value makes this example progress, but does not solve an unbounded producer with no consumer. Fix the communication lifecycle instead of assuming a larger buffer proves deadlock freedom."
+                    "The send above needs another goroutine to receive."
+                ]
+            ]
+        },
+        {
+            "id": "0b2a1b7d-2385-50b7-b488-21bed0821f6b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A one-value buffer would let this particular send finish."
+                ]
+            ]
+        },
+        {
+            "id": "93893aa8-e01f-57f3-be10-c56a293ad07b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Any finite buffer eventually fills if a producer keeps sending and nobody receives."
+                ]
+            ]
+        },
+        {
+            "id": "8c3cf9d0-3aad-5e77-83b9-47d9dfcca0de",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Decide who receives, who closes the channel and how the work stops."
                 ]
             ]
         },
         {
             "id": "c800fa44-abe3-5678-9c3b-e2a84803bfd4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
-                [
-                    "A "
-                ],
                 [
                     "select",
                     [
@@ -319,7 +397,34 @@ const note = {
                     ]
                 ],
                 [
-                    " can reject work instead of waiting, but that changes the behavior: it may drop a value or busy-loop on retries. Use it only when that policy is intended. A runtime deadlock report does not detect every application-level deadlock or leak."
+                    " can reject a send instead of waiting."
+                ]
+            ]
+        },
+        {
+            "id": "a591529b-4490-5118-aa3f-3a88f9edd352",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That may drop a value. Repeating it in a loop may keep the CPU busy without making progress."
+                ]
+            ]
+        },
+        {
+            "id": "62a1d99f-e724-5266-b9a6-a968a95ca920",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use this behavior only when it is intended."
+                ]
+            ]
+        },
+        {
+            "id": "30811c4e-e5a4-5945-9dd2-13751a4a8b8c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime does not report every deadlocked request or leaked goroutine."
                 ]
             ]
         },
@@ -334,10 +439,19 @@ const note = {
         },
         {
             "id": "52f0655f-515c-53f6-b675-3135afb29adf",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Modern Go runtimes can preempt goroutines on supported platforms, so a tight loop does not generally require "
+                    "Preemption means the runtime pauses one goroutine so other goroutines can run."
+                ]
+            ]
+        },
+        {
+            "id": "e2438ae9-bc4e-5397-aebc-89affb1f9e55",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Modern Go supports preemption on supported platforms. A tight loop usually does not need "
                 ],
                 [
                     "runtime.Gosched()",
@@ -348,7 +462,25 @@ const note = {
                     ]
                 ],
                 [
-                    " to let the scheduler run. Preemption still does not end useless computation. A context provides a signal; the computation must observe it."
+                    " just to let other goroutines run."
+                ]
+            ]
+        },
+        {
+            "id": "c0e41a6e-110d-5fe2-83dd-cec79322cdf2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Preemption does not stop unwanted work."
+                ]
+            ]
+        },
+        {
+            "id": "21855397-9d8b-5334-b162-cf8f32a2b546",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A context sends a cancellation signal. The computation must check it."
                 ]
             ]
         },
@@ -364,11 +496,35 @@ const note = {
         },
         {
             "id": "21feb72b-f234-532a-a432-a67eacf2c9bd",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The helper checks every 1024 iterations. Choose check frequency from acceptable cancellation latency and the cost of one iteration. "
-                ],
+                    "The function checks cancellation every 1024 iterations."
+                ]
+            ]
+        },
+        {
+            "id": "55f0347e-73cd-518c-8bde-2713752edc90",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check more often when cancellation needs to be faster."
+                ]
+            ]
+        },
+        {
+            "id": "2ae1236d-87dc-5ea6-87cc-23159b0e160a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Also consider how long one iteration takes."
+                ]
+            ]
+        },
+        {
+            "id": "3550e7a5-dc93-5ed0-ab71-68080a1e4b58",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "Gosched",
                     [
@@ -378,7 +534,7 @@ const note = {
                     ]
                 ],
                 [
-                    " yields execution; it does not release an application lock, produce a missing channel value, or cancel an operation."
+                    " lets another goroutine run. It does not unlock a mutex, send a missing value or cancel the work."
                 ]
             ]
         },
@@ -396,7 +552,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Record task entry and exit, queue sizes and operation deadlines. A rising goroutine count is a clue, not proof of a leak."
+                    "Record when tasks start and finish, queue sizes and operation deadlines."
+                ]
+            ]
+        },
+        {
+            "id": "30f46e1b-95e6-5b92-a5f9-a8f98121f9ba",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A growing goroutine count suggests a problem but does not prove a leak."
                 ]
             ]
         },
@@ -405,7 +570,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Inspect goroutine stacks to find blocked call sites and their owners. Repeated snapshots help identify waits that persist after a request ends."
+                    "Goroutine stack traces show where work is waiting."
+                ]
+            ]
+        },
+        {
+            "id": "aea40cd3-cbf6-539b-ae18-14d49de93dd6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Take several snapshots to find waits that remain after a request has ended."
                 ]
             ]
         },
@@ -414,7 +588,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use CPU profiles for computation, block or mutex profiles for enabled wait samples, and execution traces for scheduling and events."
+                    "CPU profiles show which functions use CPU time."
+                ]
+            ]
+        },
+        {
+            "id": "c989e127-e4b6-5f72-bd73-696f7e742a0b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Block and mutex profiles show sampled waits when those profiles are enabled."
+                ]
+            ]
+        },
+        {
+            "id": "3f668545-8e3e-576f-bf62-2cc65ed2b776",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Execution traces show when goroutines run, wait and wake up."
                 ]
             ]
         },
@@ -431,7 +623,34 @@ const note = {
                     ]
                 ],
                 [
-                    " reports selected suspicious code patterns. The race detector finds data races on executed paths. Neither tool proves absence of deadlocks or fixes a blocked program."
+                    " checks selected suspicious code patterns."
+                ]
+            ]
+        },
+        {
+            "id": "5d0cc6aa-bf14-5f58-a3cb-df7e49359269",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The race detector finds data races in code that actually runs."
+                ]
+            ]
+        },
+        {
+            "id": "a8db28a8-3c22-5318-b650-447d9372f26a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Neither tool proves that the program is free of deadlocks."
+                ]
+            ]
+        },
+        {
+            "id": "1792e52a-0081-5cf4-95a6-a92e6f6d03d3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Neither tool repairs a blocked program."
                 ]
             ]
         },

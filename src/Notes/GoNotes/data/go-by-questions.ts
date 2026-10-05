@@ -4,17 +4,8 @@ const note = {
     "notionId": "2ef24eb1-ed54-809e-8b5d-f92ac35da6cc",
     "slug": "go-by-questions",
     "title": "Go by Questions",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
-        {
-            "id": "questions-revision-intro",
-            "type": "text",
-            "richText": [
-                [
-                    "Use these 100 questions for revision. Each answer gives the rule or edge case, with links to the main explanations. Beginner and Medium cover common language use; Hard and Expert add runtime, tooling and API details."
-                ]
-            ]
-        },
         {
             "id": "2ef24eb1-ed54-81aa-8f77-eea71868dd94",
             "type": "header",
@@ -35,10 +26,59 @@ const note = {
         },
         {
             "id": "question-B01-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A package groups Go source files into a namespace. A runnable program needs package main and func main() with no parameters or results. Identifiers beginning with an uppercase letter are exported."
+                    "A package groups related Go files under one name."
+                ]
+            ]
+        },
+        {
+            "id": "question-B01-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A runnable program needs "
+                ],
+                [
+                    "package main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B01-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It also needs "
+                ],
+                [
+                    "func main()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with no parameters or return values."
+                ]
+            ]
+        },
+        {
+            "id": "question-B01-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A name that starts with an uppercase letter is exported. Other packages can use it."
                 ]
             ]
         },
@@ -74,10 +114,48 @@ const note = {
         },
         {
             "id": "question-B02-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A regular import uses the imported package name. An alias changes that name locally. A dot import brings exported names into the file scope. A blank import runs package initialization without introducing a usable name."
+                    "A normal import uses the imported package’s name."
+                ]
+            ]
+        },
+        {
+            "id": "question-B02-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An import alias gives that package a different name in the current file."
+                ]
+            ]
+        },
+        {
+            "id": "question-B02-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A dot import puts exported names directly into the current file’s scope."
+                ]
+            ]
+        },
+        {
+            "id": "question-B02-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A blank import, written with "
+                ],
+                [
+                    "_",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", runs package initialization without giving you a name to call."
                 ]
             ]
         },
@@ -123,10 +201,98 @@ const note = {
         },
         {
             "id": "question-B03-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "var works at package or function scope and can declare a type without an initializer. := works inside functions and infers types. In the same block, it can reassign existing variables only when at least one non-blank variable is new and existing types match."
+                    "Use "
+                ],
+                [
+                    "var",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " at package level or inside a function."
+                ]
+            ]
+        },
+        {
+            "id": "question-B03-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "var",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can declare a variable without an initial value. It then gets its type’s zero value."
+                ]
+            ]
+        },
+        {
+            "id": "question-B03-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
+                ],
+                [
+                    ":=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " inside a function. Go gets the types from the values on the right."
+                ]
+            ]
+        },
+        {
+            "id": "question-B03-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In the same block, "
+                ],
+                [
+                    ":=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " needs at least one new name other than "
+                ],
+                [
+                    "_",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B03-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It can also update existing variables in that block, but their types must stay the same."
                 ]
             ]
         },
@@ -162,10 +328,64 @@ const note = {
         },
         {
             "id": "question-B04-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "const declares constant values. iota starts at zero in each const declaration and increments for each constant specification, including skipped entries. An untyped numeric constant can fit different numeric types if its value is representable."
+                    "const",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " declares a value that cannot change."
+                ]
+            ]
+        },
+        {
+            "id": "question-B04-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "iota",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " starts at 0 in each "
+                ],
+                [
+                    "const",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " declaration."
+                ]
+            ]
+        },
+        {
+            "id": "question-B04-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It increases for each constant specification, including skipped entries. It does not count physical lines."
+                ]
+            ]
+        },
+        {
+            "id": "question-B04-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An untyped numeric constant can fit several numeric types. Its value must fit the chosen type."
                 ]
             ]
         },
@@ -234,10 +454,156 @@ const note = {
         },
         {
             "id": "question-B05-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Numeric types default to 0, bool to false, and string to \"\". Pointers, slices, maps, channels, functions and interfaces default to nil. Array elements and struct fields get their own zero values. byte aliases uint8; rune aliases int32."
+                    "Numeric types start at "
+                ],
+                [
+                    "0",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B05-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "bool",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " starts at "
+                ],
+                [
+                    "false",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B05-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "string",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " starts at "
+                ],
+                [
+                    "\"\"",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", an empty string."
+                ]
+            ]
+        },
+        {
+            "id": "question-B05-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pointers, slices, maps, channels, functions and interfaces start at "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B05-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Array elements and struct fields each get their own type’s zero value."
+                ]
+            ]
+        },
+        {
+            "id": "question-B05-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "byte",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is another name for "
+                ],
+                [
+                    "uint8",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". "
+                ],
+                [
+                    "rune",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is another name for "
+                ],
+                [
+                    "int32",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -273,10 +639,97 @@ const note = {
         },
         {
             "id": "question-B06-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "type MyInt int defines a distinct type with underlying type int. Converting an int variable to MyInt requires an explicit conversion. type MyInt = int is an alias for the same type. Go does not implicitly convert between different numeric variable types."
+                    "type MyInt int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " creates a new type based on "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". Its underlying type is "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B06-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Convert an "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " variable explicitly with "
+                ],
+                [
+                    "MyInt(value)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B06-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "type MyInt = int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " creates an alias. It is another name for the same type."
+                ]
+            ]
+        },
+        {
+            "id": "question-B06-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go does not automatically convert variables between different numeric types."
                 ]
             ]
         },
@@ -312,10 +765,80 @@ const note = {
         },
         {
             "id": "question-B07-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "if can start with a short statement scoped to its branches. for supports counted, condition-only, infinite and range loops. switch selects a matching case and does not fall through automatically. Explicit fallthrough runs the next case body without testing its condition."
+                    "if",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can begin with a short statement. Its variables are available in the condition and branches."
+                ]
+            ]
+        },
+        {
+            "id": "question-B07-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "for",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " handles counted loops, condition-only loops, infinite loops and "
+                ],
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " loops."
+                ]
+            ]
+        },
+        {
+            "id": "question-B07-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "switch",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " runs a matching case. It does not move into the next case automatically."
+                ]
+            ]
+        },
+        {
+            "id": "question-B07-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "fallthrough",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " runs the next case’s body without checking that case’s condition."
                 ]
             ]
         },
@@ -363,10 +886,45 @@ const note = {
         },
         {
             "id": "question-B08-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Functions can return several values, often a result and an error. Assign them to separate variables. The blank identifier _ discards a value; discarding an error should be a deliberate choice."
+                    "A function can return several values, often a result and an error."
+                ]
+            ]
+        },
+        {
+            "id": "question-B08-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assign those values to separate variables."
+                ]
+            ]
+        },
+        {
+            "id": "question-B08-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "_",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " discards a value you do not need."
+                ]
+            ]
+        },
+        {
+            "id": "question-B08-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Ignore an error only when you have a reason to do so."
                 ]
             ]
         },
@@ -412,10 +970,48 @@ const note = {
         },
         {
             "id": "question-B09-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Named results are variables declared by the function signature and initialized to zero values. A bare return returns their current values. Explicit return expressions are easier to follow when a function has several branches or many lines."
+                    "Named return values are variables declared in the function’s result list."
+                ]
+            ]
+        },
+        {
+            "id": "question-B09-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "They start at their zero values."
+                ]
+            ]
+        },
+        {
+            "id": "question-B09-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A "
+                ],
+                [
+                    "return",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with no values returns their current values. This is also called a naked return."
+                ]
+            ]
+        },
+        {
+            "id": "question-B09-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use explicit return values when several branches or many lines make the result hard to follow."
                 ]
             ]
         },
@@ -461,10 +1057,56 @@ const note = {
         },
         {
             "id": "question-B10-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "defer runs a call when the surrounding function returns, including while a panic unwinds it. Deferred calls run last-in, first-out. The function value and arguments are evaluated when the defer statement executes."
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " runs a call when the surrounding function returns."
+                ]
+            ]
+        },
+        {
+            "id": "question-B10-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It also runs while a panic returns through that function."
+                ]
+            ]
+        },
+        {
+            "id": "question-B10-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The last deferred call runs first."
+                ]
+            ]
+        },
+        {
+            "id": "question-B10-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go evaluates the deferred function and its arguments when it reaches the "
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " statement."
                 ]
             ]
         },
@@ -500,10 +1142,37 @@ const note = {
         },
         {
             "id": "question-B11-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Return an error for expected failures and check it before using the result. Add useful operation context when propagating it. Returning a wrapped error preserves its cause for callers."
+                    "Return an error for an expected failure."
+                ]
+            ]
+        },
+        {
+            "id": "question-B11-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check the error before using the result."
+                ]
+            ]
+        },
+        {
+            "id": "question-B11-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Add the operation’s name or other useful context when returning an error."
+                ]
+            ]
+        },
+        {
+            "id": "question-B11-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Wrap the error when callers need to check its original cause."
                 ]
             ]
         },
@@ -539,10 +1208,62 @@ const note = {
         },
         {
             "id": "question-B12-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An error lets the caller decide how to handle a failure. panic unwinds the current goroutine. recover can stop that unwind only when called directly by a deferred function in the same goroutine. If that deferred call recovers the panic, the containing function returns to its caller; execution does not resume at the panic site."
+                    "Returning an error lets the caller choose how to handle the failure."
+                ]
+            ]
+        },
+        {
+            "id": "question-B12-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "panic",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " stops normal execution and returns through the current goroutine’s calls."
+                ]
+            ]
+        },
+        {
+            "id": "question-B12-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "recover",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " must be called directly inside a deferred function in the same goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "question-B12-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If that deferred call recovers, the function containing the defer returns to its caller."
+                ]
+            ]
+        },
+        {
+            "id": "question-B12-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Execution does not restart at the line that panicked."
                 ]
             ]
         },
@@ -588,10 +1309,37 @@ const note = {
         },
         {
             "id": "question-B13-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An array has a length in its type and assignment copies its elements. A slice value describes a portion of an underlying array. Assigning a slice copies that description, so both slices may still share elements."
+                    "An array has a fixed length, and that length is part of its type."
+                ]
+            ]
+        },
+        {
+            "id": "question-B13-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assigning an array copies its elements."
+                ]
+            ]
+        },
+        {
+            "id": "question-B13-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A slice describes part of an array. That backing array holds the actual elements."
+                ]
+            ]
+        },
+        {
+            "id": "question-B13-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assigning a slice copies that description. The two slices can still share the same elements."
                 ]
             ]
         },
@@ -637,10 +1385,89 @@ const note = {
         },
         {
             "id": "question-B14-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "len is the visible element count; cap is the remaining capacity from the slice start in its backing array. make sets the initial length and optional capacity. append returns the updated slice and allocates a new backing array when capacity is insufficient."
+                    "len(s)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " counts the elements currently visible in the slice."
+                ]
+            ]
+        },
+        {
+            "id": "question-B14-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "cap(s)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " counts how many elements fit from the slice’s start to the end of its backing array."
+                ]
+            ]
+        },
+        {
+            "id": "question-B14-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "make",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " sets the initial length and optional capacity."
+                ]
+            ]
+        },
+        {
+            "id": "question-B14-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns the updated slice. Store that result."
+                ]
+            ]
+        },
+        {
+            "id": "question-B14-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When capacity is too small, "
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " creates a new backing array."
                 ]
             ]
         },
@@ -686,10 +1513,70 @@ const note = {
         },
         {
             "id": "question-B15-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A map associates comparable keys with values. m[k] returns the value or its zero value; v, ok := m[k] also reports whether the key exists. delete is safe for absent keys and nil maps. Reading a nil map is safe; assigning an entry panics."
+                    "A map stores values under keys. Keys must support comparison."
+                ]
+            ]
+        },
+        {
+            "id": "question-B15-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "m[k]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns the stored value, or its zero value when the key is absent."
+                ]
+            ]
+        },
+        {
+            "id": "question-B15-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "v, ok := m[k]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " also tells you whether the key exists."
+                ]
+            ]
+        },
+        {
+            "id": "question-B15-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "delete",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is safe when the key is absent or the map is nil."
+                ]
+            ]
+        },
+        {
+            "id": "question-B15-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can read a nil map. Writing an entry into it panics."
                 ]
             ]
         },
@@ -735,10 +1622,104 @@ const note = {
         },
         {
             "id": "question-B16-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A string is an immutable sequence of bytes; UTF-8 validity is not required. Indexing gives a byte and len counts bytes. rune aliases int32. Ranging over a string decodes UTF-8 into runes and reports byte indices. Invalid UTF-8 yields the replacement rune with a one-byte advance."
+                    "A string is a sequence of bytes that cannot be changed."
+                ]
+            ]
+        },
+        {
+            "id": "question-B16-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A string often contains UTF-8 text, but Go does not require valid UTF-8."
+                ]
+            ]
+        },
+        {
+            "id": "question-B16-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Indexing a string gives a byte. "
+                ],
+                [
+                    "len",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " counts bytes."
+                ]
+            ]
+        },
+        {
+            "id": "question-B16-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "rune",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is another name for "
+                ],
+                [
+                    "int32",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". It can hold a Unicode code point."
+                ]
+            ]
+        },
+        {
+            "id": "question-B16-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " decodes UTF-8 and gives each rune’s byte index."
+                ]
+            ]
+        },
+        {
+            "id": "question-B16-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For invalid UTF-8, "
+                ],
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives the replacement rune and moves forward one byte."
                 ]
             ]
         },
@@ -763,10 +1744,57 @@ const note = {
         },
         {
             "id": "question-B17-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A struct groups named fields. A keyed literal such as User{Name: \"Ada\"} makes field choices clear and leaves omitted fields at zero values. An unkeyed literal depends on field order. Function-valued fields are allowed; methods are declared separately."
+                    "A struct groups named fields."
+                ]
+            ]
+        },
+        {
+            "id": "question-B17-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A keyed literal such as "
+                ],
+                [
+                    "User{Name: \"Ada\"}",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " names the fields you set."
+                ]
+            ]
+        },
+        {
+            "id": "question-B17-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Fields you omit get zero values."
+                ]
+            ]
+        },
+        {
+            "id": "question-B17-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An unkeyed literal depends on the fields’ order."
+                ]
+            ]
+        },
+        {
+            "id": "question-B17-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A field can hold a function. Declare methods separately."
                 ]
             ]
         },
@@ -802,10 +1830,103 @@ const note = {
         },
         {
             "id": "question-B18-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "&x takes an address, *p accesses the pointed-to value, and *T is a pointer type. A pointer starts as nil unless initialized. Dereferencing nil panics. Ordinary Go pointers do not support arithmetic."
+                    "&x",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gets the address of "
+                ],
+                [
+                    "x",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B18-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "*p",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " accesses the value at pointer "
+                ],
+                [
+                    "p",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B18-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "*T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " means a pointer to a value of type "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B18-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An uninitialized pointer is nil. Dereferencing nil panics."
+                ]
+            ]
+        },
+        {
+            "id": "question-B18-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Ordinary Go pointers do not support pointer arithmetic."
                 ]
             ]
         },
@@ -841,10 +1962,70 @@ const note = {
         },
         {
             "id": "question-B19-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A method is a function with a receiver, such as func (c *Counter) Inc(). Its receiver base must be a defined type in the same package, rather than a pointer or interface type. Receiver choice also affects method sets and mutation."
+                    "A method is a function with a receiver, such as "
+                ],
+                [
+                    "func (c *Counter) Inc()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B19-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The receiver base type must be defined in the same package."
+                ]
+            ]
+        },
+        {
+            "id": "question-B19-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That base type cannot itself be a pointer or an interface."
+                ]
+            ]
+        },
+        {
+            "id": "question-B19-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Choosing "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or "
+                ],
+                [
+                    "*T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " affects which methods a type has and whether the method can change the original value."
                 ]
             ]
         },
@@ -880,10 +2061,76 @@ const note = {
         },
         {
             "id": "question-B20-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A value interface describes required methods. A type implements it implicitly by having those methods. any aliases interface{} and accepts any value. Interfaces with type-set terms serve as generic constraints rather than ordinary value types."
+                    "An interface used as a value lists the methods it needs."
+                ]
+            ]
+        },
+        {
+            "id": "question-B20-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A type implements that interface by having those methods. No "
+                ],
+                [
+                    "implements",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " declaration is needed."
+                ]
+            ]
+        },
+        {
+            "id": "question-B20-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is an alias for "
+                ],
+                [
+                    "interface{}",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". It can hold any value."
+                ]
+            ]
+        },
+        {
+            "id": "question-B20-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Some interfaces also list allowed types for generics. This list is called a type set."
+                ]
+            ]
+        },
+        {
+            "id": "question-B20-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These interfaces restrict generic type parameters. You cannot use them as ordinary value types."
                 ]
             ]
         },
@@ -919,10 +2166,72 @@ const note = {
         },
         {
             "id": "question-B21-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "x.(T) checks an interface value against T. The comma-ok form avoids a panic if the assertion fails; T can also be an interface. A type switch selects a branch using the interface value’s dynamic type."
+                    "x.(T)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " checks an interface value against type "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B21-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "v, ok := x.(T)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " reports failure without panicking."
+                ]
+            ]
+        },
+        {
+            "id": "question-B21-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can be a concrete type or another interface."
+                ]
+            ]
+        },
+        {
+            "id": "question-B21-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A type switch chooses a branch using the actual type stored in the interface."
                 ]
             ]
         },
@@ -968,10 +2277,37 @@ const note = {
         },
         {
             "id": "question-B22-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An embedded field can promote selectors from its type. Embedding composes values rather than creating a subtype. Accessibility, ambiguous names and the outer type’s method set determine which promoted selectors are available."
+                    "Embedding adds a field without writing a separate field name."
+                ]
+            ]
+        },
+        {
+            "id": "question-B22-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Its fields and methods can be promoted. You can then use their names through the outer value."
+                ]
+            ]
+        },
+        {
+            "id": "question-B22-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The outer type does not become a subtype of the embedded type."
+                ]
+            ]
+        },
+        {
+            "id": "question-B22-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Access rules, duplicate names and method sets still decide which promoted names you can use."
                 ]
             ]
         },
@@ -1007,10 +2343,80 @@ const note = {
         },
         {
             "id": "question-B23-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "new(T) returns *T pointing to a zero-initialized T. make creates a slice, map or channel value with the requested size or capacity. For example, new(map[string]int) points to a nil map, while make(map[string]int) creates a map that accepts entries."
+                    "new(T)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns a "
+                ],
+                [
+                    "*T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " pointing to a zero-initialized value."
+                ]
+            ]
+        },
+        {
+            "id": "question-B23-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "make",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " creates a slice, map or channel with the size or capacity you request."
+                ]
+            ]
+        },
+        {
+            "id": "question-B23-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "new(map[string]int)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " points to a nil map."
+                ]
+            ]
+        },
+        {
+            "id": "question-B23-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "make(map[string]int)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " creates a map that accepts entries."
                 ]
             ]
         },
@@ -1067,10 +2473,46 @@ const note = {
         },
         {
             "id": "question-B24-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A goroutine runs a function concurrently under the Go runtime. Synchronize accesses to shared data when at least one access writes it. Read-only sharing does not itself cause a race. Starting a goroutine does not wait for it to finish."
+                    "A goroutine runs a function concurrently with other work."
+                ]
+            ]
+        },
+        {
+            "id": "question-B24-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The Go runtime chooses when goroutines run."
+                ]
+            ]
+        },
+        {
+            "id": "question-B24-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Protect shared data when goroutines access it and at least one access writes it."
+                ]
+            ]
+        },
+        {
+            "id": "question-B24-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Sharing data only for reading does not itself cause a race."
+                ]
+            ]
+        },
+        {
+            "id": "question-B24-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Starting a goroutine does not wait for it to finish."
                 ]
             ]
         },
@@ -1106,10 +2548,74 @@ const note = {
         },
         {
             "id": "question-B25-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An unbuffered send waits for a receiver. A buffered send waits when the buffer is full; receives wait while an open channel is empty. close means no more sends. Receivers drain buffered values, then get the zero value with ok == false. Sending after close or closing twice panics."
+                    "An unbuffered send waits for a receiver."
+                ]
+            ]
+        },
+        {
+            "id": "question-B25-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A buffered send waits when the buffer is full."
+                ]
+            ]
+        },
+        {
+            "id": "question-B25-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A receive waits while an open channel is empty."
+                ]
+            ]
+        },
+        {
+            "id": "question-B25-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "close",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " means no more values will be sent."
+                ]
+            ]
+        },
+        {
+            "id": "question-B25-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Receivers can still read buffered values. After that, a receive gives the zero value and "
+                ],
+                [
+                    "ok == false",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-B25-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Sending after close or closing twice panics."
                 ]
             ]
         },
@@ -1164,10 +2670,66 @@ const note = {
         },
         {
             "id": "question-M01-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Context carries cancellation, deadlines and request-scoped metadata across API calls. Pass ctx explicitly, normally first. Call a derived context’s cancel function to release resources. Cancellation is cooperative: the operation must observe it. Use private key types for metadata and explicit parameters for general options."
+                    "Context carries cancellation, deadlines and values for the current request across API calls."
+                ]
+            ]
+        },
+        {
+            "id": "question-M01-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pass "
+                ],
+                [
+                    "ctx",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " explicitly, usually as the first argument."
+                ]
+            ]
+        },
+        {
+            "id": "question-M01-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Call the cancel function returned when you create a child context."
+                ]
+            ]
+        },
+        {
+            "id": "question-M01-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Cancellation is cooperative. Work must check the context or call an operation that checks it."
+                ]
+            ]
+        },
+        {
+            "id": "question-M01-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a private key type for context values."
+                ]
+            ]
+        },
+        {
+            "id": "question-M01-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use normal parameters for general options."
                 ]
             ]
         },
@@ -1213,10 +2775,85 @@ const note = {
         },
         {
             "id": "question-M02-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Imported packages initialize before their importers. Within a package, variables initialize in dependency order, then each init function runs in source order. Across files, that order follows how files are presented to the compiler; build systems are encouraged to use lexical file order. main starts after initialization finishes."
+                    "Imported packages initialize before the package that imports them."
+                ]
+            ]
+        },
+        {
+            "id": "question-M02-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Within a package, variables initialize before "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " functions."
+                ]
+            ]
+        },
+        {
+            "id": "question-M02-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A variable initializes after the variables it depends on."
+                ]
+            ]
+        },
+        {
+            "id": "question-M02-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " function then runs in source order."
+                ]
+            ]
+        },
+        {
+            "id": "question-M02-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Across files, order follows how files are passed to the compiler. Build systems are encouraged to use sorted file-name order."
+                ]
+            ]
+        },
+        {
+            "id": "question-M02-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " starts after package initialization finishes."
                 ]
             ]
         },
@@ -1283,10 +2920,82 @@ const note = {
         },
         {
             "id": "question-M03-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Minimal Version Selection chooses the highest required version of each module path in the build graph, rather than the newest published version. replace substitutes another version or a local directory. It does not add a requirement, and replacement directives in dependencies do not control the main module’s build."
+                    "Minimal Version Selection compares the versions required by your app and its dependencies."
+                ]
+            ]
+        },
+        {
+            "id": "question-M03-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For each module path, it chooses the highest required version."
+                ]
+            ]
+        },
+        {
+            "id": "question-M03-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not automatically choose the newest published version."
+                ]
+            ]
+        },
+        {
+            "id": "question-M03-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "replace",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " substitutes another version or a local directory."
+                ]
+            ]
+        },
+        {
+            "id": "question-M03-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "replace",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not add a dependency requirement."
+                ]
+            ]
+        },
+        {
+            "id": "question-M03-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A dependency’s "
+                ],
+                [
+                    "replace",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " directives do not control the main module’s build."
                 ]
             ]
         },
@@ -1332,10 +3041,56 @@ const note = {
         },
         {
             "id": "question-M04-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A declaration in an inner scope can shadow an outer variable. := inside an if or loop can therefore leave the outer value unchanged. Shadowing is valid syntax; a bug occurs when later code uses the wrong variable."
+                    "Shadowing means declaring a new variable with the same name as an outer variable."
+                ]
+            ]
+        },
+        {
+            "id": "question-M04-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    ":=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " inside an "
+                ],
+                [
+                    "if",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or loop can create that new variable."
+                ]
+            ]
+        },
+        {
+            "id": "question-M04-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The outer variable then stays unchanged."
+                ]
+            ]
+        },
+        {
+            "id": "question-M04-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Shadowing is valid Go. It becomes a bug when later code uses the outer value by mistake."
                 ]
             ]
         },
@@ -1381,10 +3136,55 @@ const note = {
         },
         {
             "id": "question-M05-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A value receiver copies the receiver. A pointer receiver receives a pointer and can mutate the original. Copying a struct still copies references in its fields, so a value receiver may mutate shared slice or map contents. Avoid copying synchronization values and measure copy costs before choosing for performance."
+                    "A value receiver gets a copy of the value."
+                ]
+            ]
+        },
+        {
+            "id": "question-M05-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A pointer receiver gets a pointer and can change the original value."
+                ]
+            ]
+        },
+        {
+            "id": "question-M05-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A copied struct can still refer to the same slice or map data."
+                ]
+            ]
+        },
+        {
+            "id": "question-M05-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A value receiver can therefore change shared slice elements or map entries."
+                ]
+            ]
+        },
+        {
+            "id": "question-M05-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not copy synchronization values after use."
+                ]
+            ]
+        },
+        {
+            "id": "question-M05-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure copying costs before choosing a receiver only for speed."
                 ]
             ]
         },
@@ -1420,10 +3220,79 @@ const note = {
         },
         {
             "id": "question-M06-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "For a defined non-interface type T, T has its value-receiver methods; *T has both value- and pointer-receiver methods. An addressable value can call a pointer method through automatic address-taking. That convenience does not add the method to T’s method set for interface assignment."
+                    "A method set is the list of methods a type has."
+                ]
+            ]
+        },
+        {
+            "id": "question-M06-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For a defined non-interface type "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", the set contains its value-receiver methods."
+                ]
+            ]
+        },
+        {
+            "id": "question-M06-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For "
+                ],
+                [
+                    "*T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", the set contains both value- and pointer-receiver methods."
+                ]
+            ]
+        },
+        {
+            "id": "question-M06-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If a value has an address you can take, Go can take it automatically for a pointer-method call."
+                ]
+            ]
+        },
+        {
+            "id": "question-M06-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That call shortcut does not add the pointer method to "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when assigning to an interface."
                 ]
             ]
         },
@@ -1469,10 +3338,48 @@ const note = {
         },
         {
             "id": "question-M07-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A nil interface has no dynamic type or value. Assigning a nil *MyErr gives the interface a dynamic type, so the interface is non-nil. Return a nil error explicitly on success rather than returning a typed nil pointer as error."
+                    "An interface is nil only when it has no actual type or value."
+                ]
+            ]
+        },
+        {
+            "id": "question-M07-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A nil "
+                ],
+                [
+                    "*MyErr",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " still has a type when stored in an interface."
+                ]
+            ]
+        },
+        {
+            "id": "question-M07-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The interface is then non-nil, even though the stored pointer is nil."
+                ]
+            ]
+        },
+        {
+            "id": "question-M07-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Return a plain nil error on success. Do not return a typed nil pointer as an error."
                 ]
             ]
         },
@@ -1518,10 +3425,112 @@ const note = {
         },
         {
             "id": "question-M08-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Both nil and non-nil empty slices have length zero and support range and append. Only the nil slice compares equal to nil. An empty slice can have spare capacity. For []int with encoding/json and no omission tags, nil encodes as null and a non-nil empty slice as []."
+                    "Nil and non-nil empty slices both have length zero."
+                ]
+            ]
+        },
+        {
+            "id": "question-M08-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Both support "
+                ],
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-M08-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Only a nil slice compares equal to nil."
+                ]
+            ]
+        },
+        {
+            "id": "question-M08-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A non-nil empty slice can still have spare capacity."
+                ]
+            ]
+        },
+        {
+            "id": "question-M08-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For "
+                ],
+                [
+                    "[]int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with "
+                ],
+                [
+                    "encoding/json",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and no omission tags, nil becomes "
+                ],
+                [
+                    "null",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and a non-nil empty slice becomes "
+                ],
+                [
+                    "[]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -1567,10 +3576,56 @@ const note = {
         },
         {
             "id": "question-M09-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "append writes into the existing backing array when capacity permits. Another slice covering those positions observes the overwrite. A full slice expression such as base[:2:2] restricts capacity so the next append allocates; copying provides independent element storage."
+                    "When capacity is available, "
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " writes into the existing backing array."
+                ]
+            ]
+        },
+        {
+            "id": "question-M09-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Another slice that covers those positions sees the changed values."
+                ]
+            ]
+        },
+        {
+            "id": "question-M09-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "base[:2:2]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " limits the new slice’s capacity to 2. Its next append must use a new backing array."
+                ]
+            ]
+        },
+        {
+            "id": "question-M09-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Copy the elements when you need separate storage."
                 ]
             ]
         },
@@ -1616,10 +3671,73 @@ const note = {
         },
         {
             "id": "question-M10-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "copy copies min(len(dst), len(src)) elements and handles overlapping source and destination correctly. It does not allocate a new destination or promise that the resulting slices are independent. Element values such as pointers are copied without cloning their targets."
+                    "copy(dst, src)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " copies as many elements as fit in both slices."
+                ]
+            ]
+        },
+        {
+            "id": "question-M10-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That count is "
+                ],
+                [
+                    "min(len(dst), len(src))",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-M10-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It handles overlapping source and destination correctly."
+                ]
+            ]
+        },
+        {
+            "id": "question-M10-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "copy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not allocate a new destination. The slices may still share storage."
+                ]
+            ]
+        },
+        {
+            "id": "question-M10-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Copying a pointer copies the address. It does not copy the pointed-to object."
                 ]
             ]
         },
@@ -1665,10 +3783,37 @@ const note = {
         },
         {
             "id": "question-M11-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The sender-side owner should close only after every send has finished. With several senders, a coordinator waits for all of them before closing. A receiver usually cannot know that condition. Closure is a completion signal, not required cleanup for every channel."
+                    "The owner of sending should close the channel after all sends finish."
+                ]
+            ]
+        },
+        {
+            "id": "question-M11-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "With several senders, one coordinator waits for all of them and then closes it."
+                ]
+            ]
+        },
+        {
+            "id": "question-M11-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A receiver usually cannot know whether every sender is finished."
+                ]
+            ]
+        },
+        {
+            "id": "question-M11-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Close signals completion. A channel does not need closing just to release its memory."
                 ]
             ]
         },
@@ -1714,10 +3859,107 @@ const note = {
         },
         {
             "id": "question-M12-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "select chooses one ready communication case uniformly pseudo-randomly when several are ready. With none ready, default runs immediately if present; otherwise select blocks. This provides no source-order priority or strict fairness guarantee. Repeating a default case without blocking can spin."
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " runs one ready send or receive case."
+                ]
+            ]
+        },
+        {
+            "id": "question-M12-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If several cases are ready, it chooses pseudo-randomly. Each ready case has the same chance."
+                ]
+            ]
+        },
+        {
+            "id": "question-M12-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If none is ready, "
+                ],
+                [
+                    "default",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " runs immediately when present."
+                ]
+            ]
+        },
+        {
+            "id": "question-M12-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Without a ready case or "
+                ],
+                [
+                    "default",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " waits."
+                ]
+            ]
+        },
+        {
+            "id": "question-M12-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Case order does not set priority. A case is not guaranteed to get its turn within a fixed time."
+                ]
+            ]
+        },
+        {
+            "id": "question-M12-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A loop with "
+                ],
+                [
+                    "default",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can keep running and use CPU without waiting."
                 ]
             ]
         },
@@ -1753,10 +3995,90 @@ const note = {
         },
         {
             "id": "question-M13-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "For the Add/Done pattern, register work before launching it and before Wait can observe a zero counter. Match every increment with Done. Do not copy a WaitGroup after use, and finish an earlier Wait before reusing it for a new batch. WaitGroup tracks completion rather than protecting shared mutations."
+                    "Call "
+                ],
+                [
+                    "Add",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " before starting the work and before "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can see a zero counter."
+                ]
+            ]
+        },
+        {
+            "id": "question-M13-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Match every added task with one "
+                ],
+                [
+                    "Done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-M13-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not copy a WaitGroup after first use."
+                ]
+            ]
+        },
+        {
+            "id": "question-M13-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Let an earlier "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " finish before reusing the group for a new batch."
+                ]
+            ]
+        },
+        {
+            "id": "question-M13-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A WaitGroup waits for completion. It does not protect other shared data from concurrent changes."
                 ]
             ]
         },
@@ -1792,10 +4114,57 @@ const note = {
         },
         {
             "id": "question-M14-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Mutex grants one exclusive lock. RWMutex permits simultaneous readers but excludes writers. When a writer is waiting, later readers block; recursive RLock can therefore deadlock. Start with the simpler lock and benchmark realistic workloads before assuming RWMutex is faster."
+                    "A Mutex lets one goroutine hold the lock at a time."
+                ]
+            ]
+        },
+        {
+            "id": "question-M14-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An RWMutex allows several readers together, but a writer needs exclusive access."
+                ]
+            ]
+        },
+        {
+            "id": "question-M14-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When a writer is waiting, new readers must wait."
+                ]
+            ]
+        },
+        {
+            "id": "question-M14-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Taking "
+                ],
+                [
+                    "RLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " again while already holding it can deadlock if a writer is waiting."
+                ]
+            ]
+        },
+        {
+            "id": "question-M14-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Start with the simpler lock. Benchmark your workload before assuming RWMutex is faster."
                 ]
             ]
         },
@@ -1853,10 +4222,92 @@ const note = {
         },
         {
             "id": "question-M15-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "%w preserves an error as a wrapped cause. errors.Is searches the error tree for a matching target, including custom Is methods. errors.As finds an error assignable to a target type, including custom As methods. Both can examine more than the outer error."
+                    "%w",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " wraps an error and keeps its original cause available."
+                ]
+            ]
+        },
+        {
+            "id": "question-M15-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "errors.Is",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " looks for a matching error through the wrapped errors."
+                ]
+            ]
+        },
+        {
+            "id": "question-M15-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "errors.As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " looks for an error that fits the requested type."
+                ]
+            ]
+        },
+        {
+            "id": "question-M15-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An error can customize those checks with "
+                ],
+                [
+                    "Is",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or "
+                ],
+                [
+                    "As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " methods."
+                ]
+            ]
+        },
+        {
+            "id": "question-M15-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The search can include several branches, not just the outer error."
                 ]
             ]
         },
@@ -1902,19 +4353,128 @@ const note = {
         },
         {
             "id": "question-M16-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A custom error implements Error() string. Unwrap() error exposes one cause to errors.Is and errors.As. Construct the pointer type shown below, and require a non-nil cause because Error calls the cause’s Error method."
+                    "A custom error type needs an "
+                ],
+                [
+                    "Error() string",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " method."
+                ]
+            ]
+        },
+        {
+            "id": "question-M16-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Unwrap() error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns its original cause."
+                ]
+            ]
+        },
+        {
+            "id": "question-M16-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "errors.Is",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "errors.As",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can then inspect that cause."
+                ]
+            ]
+        },
+        {
+            "id": "question-M16-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Construct the pointer type used in the example with "
+                ],
+                [
+                    "&OpError{...}",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
         {
             "id": "question-M16-caveat",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The error type and helper are package declarations; the errors.Is expression is an illustrative call."
+                    "Pass a non-nil cause to this "
+                ],
+                [
+                    "OpError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". Its "
+                ],
+                [
+                    "Error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " method calls the cause’s "
+                ],
+                [
+                    "Error",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " method."
                 ]
             ]
         },
@@ -1960,10 +4520,46 @@ const note = {
         },
         {
             "id": "question-M17-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A defer inside a loop runs at function exit, so open files and other resources can accumulate across iterations. Use a helper whose return ends each resource lifetime. Defer cost depends on the compiler and code shape; measure a hot path rather than removing defer categorically."
+                    "A defer inside a loop runs when the surrounding function returns."
+                ]
+            ]
+        },
+        {
+            "id": "question-M17-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Open files can therefore stay open across many loop iterations."
+                ]
+            ]
+        },
+        {
+            "id": "question-M17-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Move one iteration into a helper. Its deferred cleanup runs when that helper returns."
+                ]
+            ]
+        },
+        {
+            "id": "question-M17-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The cost of defer depends on the compiler and code."
+                ]
+            ]
+        },
+        {
+            "id": "question-M17-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure a frequently run path before removing defer for speed."
                 ]
             ]
         },
@@ -2009,10 +4605,77 @@ const note = {
         },
         {
             "id": "question-M18-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Before Go 1.22 semantics, closures could share a loop variable declared by the loop. For language versions Go 1.22 and later, := loop declarations create fresh iteration variables. Assignment to an existing variable with = still reuses it. Passing a value as a goroutine parameter works across versions; output order remains concurrent."
+                    "With pre-Go 1.22 loop rules, closures could share one variable declared by the loop."
+                ]
+            ]
+        },
+        {
+            "id": "question-M18-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A closure is a function that uses variables from the surrounding code."
+                ]
+            ]
+        },
+        {
+            "id": "question-M18-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "With Go 1.22 or later language rules, "
+                ],
+                [
+                    ":=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " in the loop declaration gives each iteration a fresh variable."
+                ]
+            ]
+        },
+        {
+            "id": "question-M18-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Using "
+                ],
+                [
+                    "=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to assign an existing variable still reuses that variable."
+                ]
+            ]
+        },
+        {
+            "id": "question-M18-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Passing the value as a goroutine argument works across versions."
+                ]
+            ]
+        },
+        {
+            "id": "question-M18-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The goroutines can still print their results in any order."
                 ]
             ]
         },
@@ -2091,19 +4754,175 @@ const note = {
         },
         {
             "id": "question-M19-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "time.After returns only the timer channel; NewTimer exposes Stop and Reset for control and reuse. Reuse can avoid repeated timer allocation. Go 1.23 timer semantics prevent stale channel values after Reset or Stop and allow collection of unreachable timers. They require a main-module go version of at least 1.23 and no legacy asynctimerchan setting."
+                    "time.After",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives you the timer’s channel."
+                ]
+            ]
+        },
+        {
+            "id": "question-M19-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "time.NewTimer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " also lets you call "
+                ],
+                [
+                    "Stop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Reset",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-M19-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Reusing one timer can avoid creating a new timer for each wait."
+                ]
+            ]
+        },
+        {
+            "id": "question-M19-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "With Go 1.23 timer rules, "
+                ],
+                [
+                    "Reset",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Stop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " prevent old timer values from arriving afterward."
+                ]
+            ]
+        },
+        {
+            "id": "question-M19-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Those rules also let the GC collect timers that the program no longer references."
+                ]
+            ]
+        },
+        {
+            "id": "question-M19-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The main module’s "
+                ],
+                [
+                    "go",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " version must be at least 1.23. Do not enable the old behavior with "
+                ],
+                [
+                    "GODEBUG=asynctimerchan=1",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
         {
             "id": "question-M19-caveat",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Legacy timer behavior requires stopping and draining an active timer before reuse, with one goroutine coordinating receives. This example assumes the Go 1.23 behavior instead."
+                    "With older timer behavior, stop an active timer and drain any pending value before "
+                ],
+                [
+                    "Reset",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-M19-caveat-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "One goroutine should manage the timer and its channel receives."
+                ]
+            ]
+        },
+        {
+            "id": "question-M19-caveat-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This example uses the Go 1.23 timer behavior."
                 ]
             ]
         },
@@ -2182,10 +5001,57 @@ const note = {
         },
         {
             "id": "question-M20-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A fixed set of workers reads a jobs channel. The producer closes it after submitting all jobs, workers finish their range loops, and a WaitGroup joins them. The example processes each submitted integer once; worker execution and result order are unspecified."
+                    "Start a fixed number of workers that read from a jobs channel."
+                ]
+            ]
+        },
+        {
+            "id": "question-M20-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The producer closes the channel after sending all jobs."
+                ]
+            ]
+        },
+        {
+            "id": "question-M20-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The workers finish their "
+                ],
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " loops when the channel is drained and closed."
+                ]
+            ]
+        },
+        {
+            "id": "question-M20-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A WaitGroup waits for the workers to finish."
+                ]
+            ]
+        },
+        {
+            "id": "question-M20-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The example processes each integer once. The workers and results can run in any order."
                 ]
             ]
         },
@@ -2231,10 +5097,46 @@ const note = {
         },
         {
             "id": "question-M21-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Table-driven tests put inputs and expected results in a slice and run the same check for each case. Subtests give cases separate names and failure reports. Add boundary and error cases that check behavior, rather than duplicating implementation details."
+                    "Table-driven tests store inputs and expected results in a slice."
+                ]
+            ]
+        },
+        {
+            "id": "question-M21-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Run the same check for each case."
+                ]
+            ]
+        },
+        {
+            "id": "question-M21-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Subtests give each case a name and its own failure report."
+                ]
+            ]
+        },
+        {
+            "id": "question-M21-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Include boundary values and error cases."
+                ]
+            ]
+        },
+        {
+            "id": "question-M21-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check what the function should do, rather than copying its implementation into the test."
                 ]
             ]
         },
@@ -2259,10 +5161,101 @@ const note = {
         },
         {
             "id": "question-M22-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The b.N benchmark form repeats the measured operation b.N times. Exclude setup with ResetTimer, keep observable results to avoid dead-code removal, and report allocations when useful. Newer Go versions also offer b.Loop; this example uses the older, widely supported form."
+                    "The benchmark repeats the operation "
+                ],
+                [
+                    "b.N",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " times."
+                ]
+            ]
+        },
+        {
+            "id": "question-M22-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Call "
+                ],
+                [
+                    "ResetTimer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after setup so setup time is not counted."
+                ]
+            ]
+        },
+        {
+            "id": "question-M22-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keep the result in a place the compiler cannot discard as unused."
+                ]
+            ]
+        },
+        {
+            "id": "question-M22-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
+                ],
+                [
+                    "ReportAllocs",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to report memory allocations."
+                ]
+            ]
+        },
+        {
+            "id": "question-M22-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Newer Go versions also have "
+                ],
+                [
+                    "b.Loop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". This example uses the older "
+                ],
+                [
+                    "b.N",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " form."
                 ]
             ]
         },
@@ -2287,10 +5280,46 @@ const note = {
         },
         {
             "id": "question-M23-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The race detector instruments executed memory accesses and reports unsynchronized conflicting accesses. It only covers paths and schedules that run. A clean run is not proof of race freedom, deadlock freedom or correct higher-level invariants. Instrumentation also changes timing and resource use."
+                    "The race detector watches memory accesses while the program runs."
+                ]
+            ]
+        },
+        {
+            "id": "question-M23-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It reports conflicting accesses that lack the required synchronization."
+                ]
+            ]
+        },
+        {
+            "id": "question-M23-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It can inspect only code paths and execution orders that actually run."
+                ]
+            ]
+        },
+        {
+            "id": "question-M23-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A clean result does not prove there are no races, deadlocks or other logic errors."
+                ]
+            ]
+        },
+        {
+            "id": "question-M23-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The detector also changes timing and uses extra CPU and memory."
                 ]
             ]
         },
@@ -2305,10 +5334,68 @@ const note = {
         },
         {
             "id": "question-M24-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Profile one concrete package at a time and keep its test binary with the profile. CPU profiles sample running code; memory profiles sample allocations. Replace ./mypkg below with the package to inspect. For a running service, net/http/pprof can expose a local diagnostic endpoint."
+                    "Profile one package at a time. Keep its test binary with the profile."
+                ]
+            ]
+        },
+        {
+            "id": "question-M24-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A CPU profile samples code that is running."
+                ]
+            ]
+        },
+        {
+            "id": "question-M24-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A memory profile samples memory allocations."
+                ]
+            ]
+        },
+        {
+            "id": "question-M24-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Replace "
+                ],
+                [
+                    "./mypkg",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with the package you want to inspect."
+                ]
+            ]
+        },
+        {
+            "id": "question-M24-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For a running service, "
+                ],
+                [
+                    "net/http/pprof",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can provide a local profiling server."
                 ]
             ]
         },
@@ -2324,10 +5411,19 @@ const note = {
         },
         {
             "id": "question-M24-extra-0",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Registering pprof handlers alone does not start a server. This example starts a diagnostic server on loopback."
+                    "Registering pprof handlers does not start a server."
+                ]
+            ]
+        },
+        {
+            "id": "question-M24-extra-0-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This example starts a profiling server on localhost, so it listens on this computer."
                 ]
             ]
         },
@@ -2385,10 +5481,105 @@ const note = {
         },
         {
             "id": "question-M25-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Generics add type parameters checked against constraints. any allows any type; comparable permits equality operations. Since Go 1.20, an interface type such as any can satisfy comparable, but comparing interface values with non-comparable dynamic values can still panic. Type inference can infer arguments from a call."
+                    "Generics let a function or type work with different types."
+                ]
+            ]
+        },
+        {
+            "id": "question-M25-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A type parameter stands for a type chosen when that function or type is used."
+                ]
+            ]
+        },
+        {
+            "id": "question-M25-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A constraint is a rule for which types a parameter accepts."
+                ]
+            ]
+        },
+        {
+            "id": "question-M25-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " accepts any type. "
+                ],
+                [
+                    "comparable",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " allows equality checks."
+                ]
+            ]
+        },
+        {
+            "id": "question-M25-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Since Go 1.20, an interface type such as "
+                ],
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can satisfy "
+                ],
+                [
+                    "comparable",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-M25-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Comparing interface values can still panic if they hold values such as slices that cannot be compared."
+                ]
+            ]
+        },
+        {
+            "id": "question-M25-answer-7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Type inference means Go can work out a type argument from the values passed to a call."
                 ]
             ]
         },
@@ -2433,10 +5624,55 @@ const note = {
         },
         {
             "id": "question-H01-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The memory model defines visibility through sequencing within a goroutine and synchronization between goroutines. A data-race-free program has a sequentially consistent execution. Missing synchronization does not automatically imply a race when data is not shared or is read-only, but conflicting unordered accesses do."
+                    "The memory model describes when one goroutine can see another goroutine’s writes."
+                ]
+            ]
+        },
+        {
+            "id": "question-H01-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A happens-before relationship orders two operations so the later one can see the earlier work."
+                ]
+            ]
+        },
+        {
+            "id": "question-H01-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Locks, channels and atomics can establish that relationship between goroutines."
+                ]
+            ]
+        },
+        {
+            "id": "question-H01-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A program without data races behaves as if its operations run in a single order that respects each goroutine’s own order."
+                ]
+            ]
+        },
+        {
+            "id": "question-H01-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This guarantee is called sequential consistency."
+                ]
+            ]
+        },
+        {
+            "id": "question-H01-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Shared conflicting accesses need ordering. Data used only for reading does not itself need it."
                 ]
             ]
         },
@@ -2493,10 +5729,46 @@ const note = {
         },
         {
             "id": "question-H02-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A data race is an unordered pair of accesses to the same memory location from different goroutines, with at least one write and at least one non-atomic access. Synchronization establishes the ordering needed to exclude the race. Races on multiword values can expose inconsistent representations."
+                    "A data race involves two goroutines accessing the same memory location without the required ordering."
+                ]
+            ]
+        },
+        {
+            "id": "question-H02-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "At least one access writes, and at least one access is non-atomic."
+                ]
+            ]
+        },
+        {
+            "id": "question-H02-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A non-atomic access is an ordinary read or write without an atomic operation."
+                ]
+            ]
+        },
+        {
+            "id": "question-H02-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Synchronization orders the accesses and prevents this race."
+                ]
+            ]
+        },
+        {
+            "id": "question-H02-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For values stored in several machine words, a race can expose parts from different updates."
                 ]
             ]
         },
@@ -2511,10 +5783,46 @@ const note = {
         },
         {
             "id": "question-H03-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use atomics for independently updated counters, flags or published pointers whose protocol fits atomic operations. Use a mutex for related fields that must change together. A series of atomic operations does not make a whole transaction atomic. Use atomic access consistently for the shared location."
+                    "An atomic operation reads or updates a value as one indivisible operation."
+                ]
+            ]
+        },
+        {
+            "id": "question-H03-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use atomics for simple shared counters, flags or pointers when the whole update fits that operation."
+                ]
+            ]
+        },
+        {
+            "id": "question-H03-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a mutex when several related fields must change together."
+                ]
+            ]
+        },
+        {
+            "id": "question-H03-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Several atomic operations do not make one atomic transaction. Another goroutine can run between them."
+                ]
+            ]
+        },
+        {
+            "id": "question-H03-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Access the shared location consistently with atomic operations."
                 ]
             ]
         },
@@ -2572,10 +5880,37 @@ const note = {
         },
         {
             "id": "question-H04-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A channel send synchronizes before its corresponding receive completes. Closing synchronizes before a receive that returns the zero value because the channel is closed. For an unbuffered channel, the receive also synchronizes before the send completes. These rules publish preceding writes; they do not protect later unsynchronized mutations."
+                    "A send happens-before its matching receive finishes. Writes before the send are then visible after the receive."
+                ]
+            ]
+        },
+        {
+            "id": "question-H04-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Closing happens-before a receive that returns the zero value because the channel is closed."
+                ]
+            ]
+        },
+        {
+            "id": "question-H04-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For an unbuffered channel, the receive also happens-before the send finishes."
+                ]
+            ]
+        },
+        {
+            "id": "question-H04-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These rules make earlier writes visible. They do not protect later writes that lack synchronization."
                 ]
             ]
         },
@@ -2611,10 +5946,70 @@ const note = {
         },
         {
             "id": "question-H05-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A nil channel disables its send or receive case in select. Setting an exhausted input to nil prevents a closed input from remaining ready forever while another input is still active. A select with only nil channels and no default blocks indefinitely."
+                    "A nil channel disables its send or receive case in "
+                ],
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-H05-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "After an input channel is closed and drained, set it to nil to disable its case."
+                ]
+            ]
+        },
+        {
+            "id": "question-H05-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Otherwise, that closed input stays ready even while you still need another input."
+                ]
+            ]
+        },
+        {
+            "id": "question-H05-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If all channels are nil and there is no "
+                ],
+                [
+                    "default",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " waits forever."
                 ]
             ]
         },
@@ -2660,10 +6055,77 @@ const note = {
         },
         {
             "id": "question-H06-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A goroutine can remain blocked after its caller stops waiting if it never observes cancellation. Select on ctx.Done at channel waits, handle channel closure, and pass ctx into cancellable work. A context does not interrupt arbitrary CPU work or an uncancellable call. The example exits on cancellation or exhausted input."
+                    "A goroutine can stay blocked after its caller stops waiting for it."
+                ]
+            ]
+        },
+        {
+            "id": "question-H06-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "At a channel wait, also select on "
+                ],
+                [
+                    "ctx.Done()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-H06-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check whether the input channel is closed."
+                ]
+            ]
+        },
+        {
+            "id": "question-H06-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pass "
+                ],
+                [
+                    "ctx",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to work that supports cancellation."
+                ]
+            ]
+        },
+        {
+            "id": "question-H06-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A context cannot interrupt arbitrary CPU work or a call that does not support cancellation."
+                ]
+            ]
+        },
+        {
+            "id": "question-H06-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The example exits when cancellation arrives or the input closes."
                 ]
             ]
         },
@@ -2709,10 +6171,66 @@ const note = {
         },
         {
             "id": "question-H07-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Escape analysis helps the compiler choose stack or heap storage. A returned address must remain valid after the function returns, but inlining and caller use can avoid a separate heap allocation. Pointer syntax, new and closures do not by themselves guarantee heap allocation. Inspect the actual build’s diagnostics."
+                    "Escape analysis checks whether a value can stay in a goroutine’s stack memory."
+                ]
+            ]
+        },
+        {
+            "id": "question-H07-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A stack holds function-call data. The heap holds memory managed separately by the runtime."
+                ]
+            ]
+        },
+        {
+            "id": "question-H07-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A returned pointer must remain valid after its function returns."
+                ]
+            ]
+        },
+        {
+            "id": "question-H07-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The compiler can inline a function, putting its work into the caller. That can avoid a separate heap allocation."
+                ]
+            ]
+        },
+        {
+            "id": "question-H07-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Using a pointer, "
+                ],
+                [
+                    "new",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or a closure does not always allocate on the heap."
+                ]
+            ]
+        },
+        {
+            "id": "question-H07-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check the compiler’s messages for the actual build."
                 ]
             ]
         },
@@ -2758,10 +6276,46 @@ const note = {
         },
         {
             "id": "question-H08-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "In the standard Go runtime, goroutine stacks start small and can grow by copying; the runtime may later shrink them. Ordinary Go pointers are handled by the runtime during stack movement. Storing addresses as integers or breaking unsafe rules can defeat that handling. Excessive recursion can still exhaust the stack limit."
+                    "In the standard runtime, each goroutine’s stack starts small."
+                ]
+            ]
+        },
+        {
+            "id": "question-H08-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime can copy the stack into a larger space when it grows. It can also shrink it later."
+                ]
+            ]
+        },
+        {
+            "id": "question-H08-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime updates ordinary Go pointers during a stack move."
+                ]
+            ]
+        },
+        {
+            "id": "question-H08-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An address stored as an integer does not get the same pointer handling."
+                ]
+            ]
+        },
+        {
+            "id": "question-H08-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Too many nested calls can still reach the stack limit."
                 ]
             ]
         },
@@ -2776,10 +6330,80 @@ const note = {
         },
         {
             "id": "question-H09-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The standard Go runtime marks objects reachable from roots such as stacks and globals, then sweeps unreachable objects. Most collection work is concurrent, with brief stop-the-world phases. GOGC adjusts the target growth between collections. A higher value generally trades more heap space for less collection work; a lower value makes the opposite trade. This is a target rather than a fixed memory cap."
+                    "The garbage collector, or GC, finds objects the program can still reach through its stacks and globals."
+                ]
+            ]
+        },
+        {
+            "id": "question-H09-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It marks those objects and later frees memory from unreachable objects."
+                ]
+            ]
+        },
+        {
+            "id": "question-H09-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Most of this work runs alongside the program. Brief stop-the-world phases pause the program."
+                ]
+            ]
+        },
+        {
+            "id": "question-H09-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "GOGC",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " sets a target for memory growth between collections."
+                ]
+            ]
+        },
+        {
+            "id": "question-H09-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A higher value usually allows more heap memory and less collection work."
+                ]
+            ]
+        },
+        {
+            "id": "question-H09-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A lower value usually means more collection work and less heap growth."
+                ]
+            ]
+        },
+        {
+            "id": "question-H09-answer-7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "GOGC",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is a target, not a fixed memory limit."
                 ]
             ]
         },
@@ -2836,10 +6460,95 @@ const note = {
         },
         {
             "id": "question-H10-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "sync.Pool holds temporary reusable objects. Get may ignore stored objects and return a new value; any item may disappear at any time without notification. Put hands ownership back to the pool, so stop accessing that object until you get it again. Use explicit ownership for caches and resources requiring Close."
+                    "sync.Pool",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " holds temporary objects for reuse."
+                ]
+            ]
+        },
+        {
+            "id": "question-H10-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Get",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " may ignore stored objects and use "
+                ],
+                [
+                    "New",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", or return nil if "
+                ],
+                [
+                    "New",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is unset."
+                ]
+            ]
+        },
+        {
+            "id": "question-H10-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An item can disappear at any time without notification."
+                ]
+            ]
+        },
+        {
+            "id": "question-H10-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "After "
+                ],
+                [
+                    "Put",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", stop using that object until you get it again."
+                ]
+            ]
+        },
+        {
+            "id": "question-H10-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not rely on a pool for a lasting cache or for resources that must be closed."
                 ]
             ]
         },
@@ -2854,10 +6563,57 @@ const note = {
         },
         {
             "id": "question-H11-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Concurrent reads of an unchanged map are safe. A read, iteration or write racing with a write requires synchronization. Runtime map checks are not a reliable race detector. Protect a regular map and its invariants with a lock, or use sync.Map when its documented workload fits."
+                    "Several goroutines can read a map that nobody changes."
+                ]
+            ]
+        },
+        {
+            "id": "question-H11-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A read, iteration or write that races with a write needs synchronization."
+                ]
+            ]
+        },
+        {
+            "id": "question-H11-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime’s map checks do not detect every race."
+                ]
+            ]
+        },
+        {
+            "id": "question-H11-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a lock to protect a normal map and any rules its values must satisfy together."
+                ]
+            ]
+        },
+        {
+            "id": "question-H11-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
+                ],
+                [
+                    "sync.Map",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when its supported workload fits your case."
                 ]
             ]
         },
@@ -2893,10 +6649,37 @@ const note = {
         },
         {
             "id": "question-H12-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Map iteration order is unspecified and is not guaranteed to match the preceding iteration. Copy and sort keys when deterministic output is required. If the map is shared with writers, synchronize the snapshot too; sorting does not make concurrent map access safe."
+                    "Go does not promise a map iteration order."
+                ]
+            ]
+        },
+        {
+            "id": "question-H12-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The next iteration can use a different order."
+                ]
+            ]
+        },
+        {
+            "id": "question-H12-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For repeatable output, copy the keys, sort them and then read values in that order."
+                ]
+            ]
+        },
+        {
+            "id": "question-H12-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If writers share the map, protect the copy and reads too. Sorting alone does not make access safe."
                 ]
             ]
         },
@@ -2932,10 +6715,37 @@ const note = {
         },
         {
             "id": "question-H13-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A small subslice can retain an entire large backing array. Copy the needed elements into a new array-backed slice, then let every reference to the original array become unreachable. A smaller length or capacity alone does not release that array."
+                    "A small subslice can keep a large backing array alive."
+                ]
+            ]
+        },
+        {
+            "id": "question-H13-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Copy the needed elements into a slice with its own backing array."
+                ]
+            ]
+        },
+        {
+            "id": "question-H13-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The old array can be collected only when no references to it remain."
+                ]
+            ]
+        },
+        {
+            "id": "question-H13-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Reducing the slice’s length or capacity does not free that array."
                 ]
             ]
         },
@@ -2981,10 +6791,45 @@ const note = {
         },
         {
             "id": "question-H14-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "In the standard Go implementation, a substring can share its original byte storage and retain a large string. The language guarantees the resulting contents rather than a particular allocation strategy. strings.Clone provides independent storage for a non-empty substring when retention matters."
+                    "In the standard Go implementation, a substring can share the original string’s bytes."
+                ]
+            ]
+        },
+        {
+            "id": "question-H14-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A small substring can therefore keep a large original string alive."
+                ]
+            ]
+        },
+        {
+            "id": "question-H14-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The language promises the contents, not a particular storage layout."
+                ]
+            ]
+        },
+        {
+            "id": "question-H14-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "strings.Clone",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives a non-empty substring its own storage."
                 ]
             ]
         },
@@ -3030,10 +6875,46 @@ const note = {
         },
         {
             "id": "question-H15-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An interface has a dynamic type and value. The standard runtime represents these using type or method metadata and data storage, but that layout is not a language guarantee. Conversion may need storage for the value. Escape analysis, compiler optimization and usage determine whether that storage requires a heap allocation."
+                    "An interface stores a dynamic type and value: the actual type and value assigned to it."
+                ]
+            ]
+        },
+        {
+            "id": "question-H15-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The standard runtime uses type or method information together with data storage."
+                ]
+            ]
+        },
+        {
+            "id": "question-H15-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That internal layout is not a Go language guarantee."
+                ]
+            ]
+        },
+        {
+            "id": "question-H15-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Putting a value in an interface may need extra storage for that value."
+                ]
+            ]
+        },
+        {
+            "id": "question-H15-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The compiler and the way you use the value decide whether that storage must be on the heap."
                 ]
             ]
         },
@@ -3069,10 +6950,68 @@ const note = {
         },
         {
             "id": "question-H16-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A method value such as t.M evaluates and saves a receiver, yielding a function that accepts the remaining arguments. A method expression such as T.M takes the receiver explicitly as its first argument. Saving a pointer receiver preserves a pointer to the original; saving a value receiver copies the value. A saved receiver that escapes may require allocation, depending on compiler optimization and use."
+                    "A method value such as "
+                ],
+                [
+                    "t.M",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " saves a receiver and creates a callable function."
+                ]
+            ]
+        },
+        {
+            "id": "question-H16-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A method expression such as "
+                ],
+                [
+                    "T.M",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " takes the receiver as its first argument instead."
+                ]
+            ]
+        },
+        {
+            "id": "question-H16-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Saving a pointer receiver keeps a pointer to the original value."
+                ]
+            ]
+        },
+        {
+            "id": "question-H16-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Saving a value receiver copies the value."
+                ]
+            ]
+        },
+        {
+            "id": "question-H16-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A saved receiver may need heap memory if it must live beyond the current call. Compiler optimization can change this."
                 ]
             ]
         },
@@ -3118,10 +7057,107 @@ const note = {
         },
         {
             "id": "question-H17-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Check CanSet before writing a reflect.Value. Addressable values can still be unsettable, especially unexported fields. A pointer followed by Elem commonly exposes a settable value. Use a setter compatible with its kind, or Set with an assignable value, to avoid a panic."
+                    "Reflection lets code inspect and change values using "
+                ],
+                [
+                    "reflect.Value",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-H17-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check "
+                ],
+                [
+                    "CanSet",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " before changing a value."
+                ]
+            ]
+        },
+        {
+            "id": "question-H17-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Having an address is not enough. An unexported field may still be unsettable."
+                ]
+            ]
+        },
+        {
+            "id": "question-H17-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "ValueOf(&x).Elem()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " commonly gets a settable value for "
+                ],
+                [
+                    "x",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-H17-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a setter that matches its kind, such as integer or string."
+                ]
+            ]
+        },
+        {
+            "id": "question-H17-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "With "
+                ],
+                [
+                    "Set",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", the new value’s type must be assignable to the target’s type. A wrong setter or type can panic."
                 ]
             ]
         },
@@ -3146,10 +7182,96 @@ const note = {
         },
         {
             "id": "question-H18-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "unsafe.Pointer can convert to and from *T. Reinterpreting types requires compatible layout, sufficient storage and alignment. uintptr is an integer: it neither keeps an object alive nor follows moved pointers. Pointer arithmetic must follow a documented valid pattern, with conversion and arithmetic together rather than storing the integer address for later."
+                    "Convert "
+                ],
+                [
+                    "unsafe.Pointer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to or from "
+                ],
+                [
+                    "*T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", not an ordinary value of type "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-H18-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Changing the pointer type requires matching memory layout, enough space and correct alignment."
+                ]
+            ]
+        },
+        {
+            "id": "question-H18-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Alignment means the address meets the target type’s memory requirements."
+                ]
+            ]
+        },
+        {
+            "id": "question-H18-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "uintptr",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " stores an integer address. It does not keep the object alive or follow a moved pointer."
+                ]
+            ]
+        },
+        {
+            "id": "question-H18-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use only documented pointer-arithmetic patterns. Keep the conversions and arithmetic in one expression."
+                ]
+            ]
+        },
+        {
+            "id": "question-H18-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not save the integer address and convert it back later."
                 ]
             ]
         },
@@ -3206,10 +7328,63 @@ const note = {
         },
         {
             "id": "question-H19-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "G is a goroutine, M an OS thread, and P the runtime state required to execute Go code. GOMAXPROCS limits simultaneous execution of Go code using Ps. It does not cap goroutines or all OS threads. Queue layout and scheduling decisions are runtime implementation details."
+                    "G means goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "question-H19-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "M means operating-system thread."
+                ]
+            ]
+        },
+        {
+            "id": "question-H19-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "P holds the runtime state needed to run Go code."
+                ]
+            ]
+        },
+        {
+            "id": "question-H19-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "GOMAXPROCS",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " limits how many Ps can run Go code at the same time."
+                ]
+            ]
+        },
+        {
+            "id": "question-H19-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not limit the total goroutines or all operating-system threads."
+                ]
+            ]
+        },
+        {
+            "id": "question-H19-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime can change its queue layout and scheduling details between versions."
                 ]
             ]
         },
@@ -3245,10 +7420,46 @@ const note = {
         },
         {
             "id": "question-H20-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A blocking syscall can occupy an OS thread while the runtime makes its P available to other work. Go-managed network polling often parks a goroutine without keeping a thread blocked for the whole wait. Disk I/O and foreign calls may behave differently; avoid treating every blocking operation as one syscall path."
+                    "A syscall asks the operating system to do work. A blocking syscall can keep an OS thread waiting."
+                ]
+            ]
+        },
+        {
+            "id": "question-H20-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime can make that thread’s P available so another thread runs Go work."
+                ]
+            ]
+        },
+        {
+            "id": "question-H20-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go’s network polling often pauses only the waiting goroutine, without keeping a thread blocked for the whole wait."
+                ]
+            ]
+        },
+        {
+            "id": "question-H20-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Disk I/O and calls into C or other non-Go code can behave differently."
+                ]
+            ]
+        },
+        {
+            "id": "question-H20-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not assume every waiting operation follows the same syscall path."
                 ]
             ]
         },
@@ -3284,10 +7495,64 @@ const note = {
         },
         {
             "id": "question-H21-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Common deadlock causes are an unmatched channel operation, a WaitGroup count that never reaches zero, inconsistent lock order, and a nil-channel wait without an exit path. Trace which operation each goroutine awaits and which goroutine can complete it. Buffering changes when a send blocks but cannot replace a missing consumer."
+                    "A deadlock means work cannot continue because needed operations are waiting on each other or cannot finish."
+                ]
+            ]
+        },
+        {
+            "id": "question-H21-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A channel operation may have no matching sender or receiver."
+                ]
+            ]
+        },
+        {
+            "id": "question-H21-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A WaitGroup may never reach zero."
+                ]
+            ]
+        },
+        {
+            "id": "question-H21-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Two goroutines may take locks in opposite orders and then wait on each other."
+                ]
+            ]
+        },
+        {
+            "id": "question-H21-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A nil-channel wait may have no way to exit."
+                ]
+            ]
+        },
+        {
+            "id": "question-H21-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For each wait, find which goroutine can complete it."
+                ]
+            ]
+        },
+        {
+            "id": "question-H21-answer-7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A buffer cannot fix a missing consumer. It only delays when the send blocks."
                 ]
             ]
         },
@@ -3323,10 +7588,65 @@ const note = {
         },
         {
             "id": "question-H22-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "net/http serves requests concurrently; handler state needs synchronization if shared. Its internal goroutine structure differs between HTTP protocols. An incoming request’s context is canceled when the client connection closes, an HTTP/2 request is canceled, or ServeHTTP returns. Pass that context into ongoing work; a one-time check is insufficient."
+                    "net/http",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can handle several requests at the same time."
+                ]
+            ]
+        },
+        {
+            "id": "question-H22-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Protect handler data when requests share it and at least one request changes it."
+                ]
+            ]
+        },
+        {
+            "id": "question-H22-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The internal goroutine arrangement depends on the HTTP protocol."
+                ]
+            ]
+        },
+        {
+            "id": "question-H22-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A request’s context is canceled when the client connection closes, the HTTP/2 request is canceled, or "
+                ],
+                [
+                    "ServeHTTP",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns."
+                ]
+            ]
+        },
+        {
+            "id": "question-H22-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pass the request context into ongoing work. Checking it only once does not make later work cancellable."
                 ]
             ]
         },
@@ -3372,10 +7692,71 @@ const note = {
         },
         {
             "id": "question-H23-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "JSON processing can allocate and use reflection, so profile a representative hot path. Struct targets expose expected fields and types; map[string]any trades that knowledge for flexibility. Dynamic values can still be type-checked at runtime. omitempty affects API output, and custom marshaling must preserve required semantics."
+                    "JSON encoding and decoding can allocate memory and inspect types through reflection."
+                ]
+            ]
+        },
+        {
+            "id": "question-H23-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Profile code that processes many JSON values before changing it for speed."
+                ]
+            ]
+        },
+        {
+            "id": "question-H23-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A struct declares the fields and types you expect."
+                ]
+            ]
+        },
+        {
+            "id": "question-H23-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "map[string]any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " allows mixed values, but you may need runtime type checks."
+                ]
+            ]
+        },
+        {
+            "id": "question-H23-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "omitempty",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " changes which fields appear in the output. Check that this matches the API’s meaning."
+                ]
+            ]
+        },
+        {
+            "id": "question-H23-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Custom marshaling must keep the required encoding and decoding behavior."
                 ]
             ]
         },
@@ -3390,10 +7771,46 @@ const note = {
         },
         {
             "id": "question-H24-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A fuzz target starts from seed inputs and generated variations, then checks a stated property. It can find panics and property failures in parsers, encoders or state machines. Choose a property that is valid for arbitrary inputs. The example checks that valid UTF-8 survives a JSON round trip."
+                    "A fuzz test runs code with starting inputs, then with generated variations."
+                ]
+            ]
+        },
+        {
+            "id": "question-H24-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It checks a property: something that should remain true for every supported input."
+                ]
+            ]
+        },
+        {
+            "id": "question-H24-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It can find panics or failed checks in parsers, encoders and state-handling code."
+                ]
+            ]
+        },
+        {
+            "id": "question-H24-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Choose a property that still makes sense for generated inputs."
+                ]
+            ]
+        },
+        {
+            "id": "question-H24-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The example checks that valid UTF-8 text stays unchanged after JSON encoding and decoding."
                 ]
             ]
         },
@@ -3418,10 +7835,84 @@ const note = {
         },
         {
             "id": "question-H25-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Build constraints select source files for platforms or features. An internal directory restricts importers to the subtree rooted at its parent. go:generate records a command to run explicitly with go generate; go build does not run it. Reproducibility also requires pinned generators and inputs."
+                    "Build tags choose which source files are included for a platform or feature."
+                ]
+            ]
+        },
+        {
+            "id": "question-H25-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An "
+                ],
+                [
+                    "internal",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package can be imported only from within the directory tree rooted at its parent."
+                ]
+            ]
+        },
+        {
+            "id": "question-H25-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "go:generate",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " records a command to run with "
+                ],
+                [
+                    "go generate",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-H25-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "go build",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not run that command."
+                ]
+            ]
+        },
+        {
+            "id": "question-H25-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use fixed generator versions and inputs when you need the same generated output each time."
                 ]
             ]
         },
@@ -3455,10 +7946,74 @@ const note = {
         },
         {
             "id": "question-E01-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "GOGC governs heap growth as described in H09. GOMEMLIMIT, available since Go 1.19, adds a soft limit on runtime-managed memory and can make collection more aggressive. It excludes some process memory, such as C allocations. Leave external-memory headroom; the runtime may exceed the limit to avoid excessive GC work."
+                    "GOGC",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " controls the heap-growth target described in H09."
+                ]
+            ]
+        },
+        {
+            "id": "question-E01-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Since Go 1.19, "
+                ],
+                [
+                    "GOMEMLIMIT",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " sets a soft limit on memory managed by the Go runtime."
+                ]
+            ]
+        },
+        {
+            "id": "question-E01-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Near that limit, the runtime can collect more often."
+                ]
+            ]
+        },
+        {
+            "id": "question-E01-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The limit does not include every part of process memory, such as memory allocated by C."
+                ]
+            ]
+        },
+        {
+            "id": "question-E01-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Leave room for that extra memory when choosing the limit."
+                ]
+            ]
+        },
+        {
+            "id": "question-E01-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime may exceed the limit to avoid spending too much time collecting."
                 ]
             ]
         },
@@ -3515,10 +8070,55 @@ const note = {
         },
         {
             "id": "question-E02-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "During concurrent marking, compiler-inserted write barriers help the runtime track pointer changes so it does not miss reachable objects. That adds work to some pointer stores. The exact barrier is an implementation detail. Hiding a Go pointer from the collector can break reachability and lead to invalid access."
+                    "During GC marking, the program can still change pointers."
+                ]
+            ]
+        },
+        {
+            "id": "question-E02-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A write barrier is extra code that records pointer changes for the GC."
+                ]
+            ]
+        },
+        {
+            "id": "question-E02-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It helps the GC avoid missing objects that the program can still reach."
+                ]
+            ]
+        },
+        {
+            "id": "question-E02-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This adds work to some pointer writes."
+                ]
+            ]
+        },
+        {
+            "id": "question-E02-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The exact barrier can change between runtime versions."
+                ]
+            ]
+        },
+        {
+            "id": "question-E02-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Hiding a Go pointer from the GC can let it free memory that your code still tries to use."
                 ]
             ]
         },
@@ -3554,10 +8154,66 @@ const note = {
         },
         {
             "id": "question-E03-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Finalizers have no timely-execution guarantee and may not run before process exit. They complicate ownership, can resurrect objects, and require care about when an object becomes unreachable. Use explicit Close for required cleanup and treat a finalizer as a fallback, rather than normal resource management."
+                    "A finalizer runs after an object becomes unreachable, but its timing is not guaranteed."
+                ]
+            ]
+        },
+        {
+            "id": "question-E03-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It may not run before the program exits."
+                ]
+            ]
+        },
+        {
+            "id": "question-E03-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It can make the object reachable again. This is called resurrection."
+                ]
+            ]
+        },
+        {
+            "id": "question-E03-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Finalizers make resource ownership and object lifetime harder to follow."
+                ]
+            ]
+        },
+        {
+            "id": "question-E03-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use explicit "
+                ],
+                [
+                    "Close",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " calls for required cleanup."
+                ]
+            ]
+        },
+        {
+            "id": "question-E03-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Treat a finalizer as a fallback, not normal cleanup."
                 ]
             ]
         },
@@ -3572,10 +8228,55 @@ const note = {
         },
         {
             "id": "question-E04-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The standard implementation has throughput-oriented and starvation-avoidance mutex paths. Their thresholds and handoff rules are implementation details, not an API fairness guarantee. Measure lock contention with mutex and block profiles. If contention matters, shorten the protected operation or separate independent state while preserving its invariants."
+                    "Lock contention means several goroutines are trying to take the same lock."
+                ]
+            ]
+        },
+        {
+            "id": "question-E04-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The standard mutex implementation has a normal mode and a mode that helps long-waiting goroutines acquire it."
+                ]
+            ]
+        },
+        {
+            "id": "question-E04-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Starvation means a goroutine keeps waiting while others continue getting the lock."
+                ]
+            ]
+        },
+        {
+            "id": "question-E04-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The mode-switch rules are runtime details. The API does not promise strict fairness."
+                ]
+            ]
+        },
+        {
+            "id": "question-E04-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure waiting with mutex and block profiles."
+                ]
+            ]
+        },
+        {
+            "id": "question-E04-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Shorten the locked work or separate independent data while keeping related values consistent."
                 ]
             ]
         },
@@ -3632,10 +8333,54 @@ const note = {
         },
         {
             "id": "question-E05-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The standard runtime channel implementation has buffer state, waiting-sender and waiting-receiver queues, a closed flag and internal locking. A send may hand off to a waiting receiver, fill available buffer space, or park. close wakes waiters: a blocked send then panics, while receives follow the normal closed-channel rules."
+                    "The standard runtime keeps the buffer, waiting senders, waiting receivers and a closed flag inside a channel."
+                ]
+            ]
+        },
+        {
+            "id": "question-E05-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An internal lock protects that channel state."
+                ]
+            ]
+        },
+        {
+            "id": "question-E05-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A send can give a value to a waiting receiver, put it in the buffer, or pause the sender."
+                ]
+            ]
+        },
+        {
+            "id": "question-E05-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "close",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " wakes waiting goroutines."
+                ]
+            ]
+        },
+        {
+            "id": "question-E05-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A blocked sender then panics. Receivers follow the usual closed-channel rules."
                 ]
             ]
         },
@@ -3704,10 +8449,57 @@ const note = {
         },
         {
             "id": "question-E06-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The map size argument is a hint for the initial number of elements, not a fixed capacity or a maximum. A realistic hint can reduce table growth during inserts; a large overestimate can waste memory. Actual allocation and growth depend on the Go implementation and version."
+                    "The number in "
+                ],
+                [
+                    "make(map[K]V, hint)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " suggests how many entries the map will initially hold."
+                ]
+            ]
+        },
+        {
+            "id": "question-E06-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It is not a fixed capacity or a maximum."
+                ]
+            ]
+        },
+        {
+            "id": "question-E06-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A useful estimate can reduce growth work while entries are added."
+                ]
+            ]
+        },
+        {
+            "id": "question-E06-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An estimate that is too large can waste memory."
+                ]
+            ]
+        },
+        {
+            "id": "question-E06-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The actual allocation and growth rules depend on the Go implementation and version."
                 ]
             ]
         },
@@ -3753,10 +8545,73 @@ const note = {
         },
         {
             "id": "question-E07-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "sync.Map is specialized for entries written once and read many times, or goroutines operating on disjoint key sets. Prefer a regular map plus a lock when several entries must satisfy an invariant together. sync.Map stores any, so access needs type checks or a wrapper. Benchmark the actual workload."
+                    "sync.Map",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " suits entries written once and read many times."
+                ]
+            ]
+        },
+        {
+            "id": "question-E07-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It also suits goroutines working on separate sets of keys."
+                ]
+            ]
+        },
+        {
+            "id": "question-E07-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a normal map with a lock when several entries must stay consistent together."
+                ]
+            ]
+        },
+        {
+            "id": "question-E07-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "sync.Map",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " stores "
+                ],
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", so check the actual type or provide a typed wrapper."
+                ]
+            ]
+        },
+        {
+            "id": "question-E07-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Benchmark your real workload before choosing it for speed."
                 ]
             ]
         },
@@ -3813,10 +8668,64 @@ const note = {
         },
         {
             "id": "question-E08-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Go atomic operations behave as if they occur in one sequentially consistent order. If an atomic operation observes another’s effect, the latter synchronizes before it. This can publish preceding ordinary writes through an atomic pointer or flag. It does not permit subsequent unsynchronized writes to published data or make several updates one atomic transaction."
+                    "Go atomics are sequentially consistent. They behave as if all atomic operations run one at a time in a single order."
+                ]
+            ]
+        },
+        {
+            "id": "question-E08-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When an atomic operation sees another’s effect, the earlier operation synchronizes before the later one."
+                ]
+            ]
+        },
+        {
+            "id": "question-E08-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Publishing means making initialized data available to other goroutines."
+                ]
+            ]
+        },
+        {
+            "id": "question-E08-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Initialize the data first. Then store its pointer or ready flag atomically."
+                ]
+            ]
+        },
+        {
+            "id": "question-E08-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A reader that observes that atomic store can see the preceding writes."
+                ]
+            ]
+        },
+        {
+            "id": "question-E08-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not change published data later without more synchronization."
+                ]
+            ]
+        },
+        {
+            "id": "question-E08-answer-7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Several atomic updates do not become one atomic transaction."
                 ]
             ]
         },
@@ -3862,10 +8771,55 @@ const note = {
         },
         {
             "id": "question-E09-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "ABA occurs when a value changes from A to B and back to A. A compare-and-swap can then succeed even though relevant state changed. A version tag can distinguish generations. In manually managed systems, hazard pointers or epoch-based reclamation delay node reuse while readers may still reference nodes. Such schemes address lifetime, but do not automatically solve every logical ABA case. Go GC does not eliminate logical ABA when an algorithm reuses a node or state."
+                    "ABA means a value changes from A to B and then back to A."
+                ]
+            ]
+        },
+        {
+            "id": "question-E09-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Compare-and-swap can see A again and succeed, even though other relevant state changed."
+                ]
+            ]
+        },
+        {
+            "id": "question-E09-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A version tag records which update produced the value. It can distinguish the two A values."
+                ]
+            ]
+        },
+        {
+            "id": "question-E09-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In manually managed systems, hazard pointers or epoch-based reclamation delay reusing nodes while readers may still use them."
+                ]
+            ]
+        },
+        {
+            "id": "question-E09-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These memory-reclamation schemes protect node lifetime. They do not solve every logical ABA case."
+                ]
+            ]
+        },
+        {
+            "id": "question-E09-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go GC does not prevent logical ABA when code reuses a node or state."
                 ]
             ]
         },
@@ -3880,10 +8834,81 @@ const note = {
         },
         {
             "id": "question-E10-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A constraint’s type set specifies permitted type arguments. ~int includes defined types whose underlying type is int, while int alone names that specific type. A union such as ~int | ~int64 accepts either family. Such interfaces with type terms can be constraints, not ordinary value types."
+                    "A type set is the set of types allowed by a constraint."
+                ]
+            ]
+        },
+        {
+            "id": "question-E10-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " alone allows that specific type."
+                ]
+            ]
+        },
+        {
+            "id": "question-E10-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "~int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " also allows defined types whose underlying type is "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-E10-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "~int | ~int64",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " accepts either family of types."
+                ]
+            ]
+        },
+        {
+            "id": "question-E10-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An interface with these type terms can be a constraint, but not an ordinary value type."
                 ]
             ]
         },
@@ -3929,10 +8954,55 @@ const note = {
         },
         {
             "id": "question-E11-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The standard Go gc compiler uses representation-based code sharing (shapes) and type dictionaries for generic instantiations. This is an implementation strategy rather than a language promise. Optimization and escape analysis can change call and allocation costs. Compare a representative generic implementation with alternatives before claiming either is faster."
+                    "The standard Go compiler can share generic machine code between some types with similar memory layouts."
+                ]
+            ]
+        },
+        {
+            "id": "question-E11-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It puts such type arguments into groups called shapes."
+                ]
+            ]
+        },
+        {
+            "id": "question-E11-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A type dictionary supplies extra information about the actual type and its methods."
+                ]
+            ]
+        },
+        {
+            "id": "question-E11-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This is a compiler strategy, not a language guarantee."
+                ]
+            ]
+        },
+        {
+            "id": "question-E11-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Compiler optimization and escape analysis can change call and memory-allocation costs."
+                ]
+            ]
+        },
+        {
+            "id": "question-E11-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Benchmark the generic code and alternatives before claiming which is faster."
                 ]
             ]
         },
@@ -3968,10 +9038,82 @@ const note = {
         },
         {
             "id": "question-E12-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The checksum database provides authenticated checksums for public module versions and makes inconsistent content detectable. It does not certify that code is safe. GOPRIVATE supplies defaults for avoiding the public proxy and checksum database for matching private paths. GONOSUMDB changes the checksum-database policy specifically; local go.sum verification still matters."
+                    "A checksum is a value used to check whether downloaded content matches the expected content."
+                ]
+            ]
+        },
+        {
+            "id": "question-E12-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The checksum database provides authenticated checksums for public module versions."
+                ]
+            ]
+        },
+        {
+            "id": "question-E12-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It helps detect different content published under the same module version. It does not prove the code is safe."
+                ]
+            ]
+        },
+        {
+            "id": "question-E12-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "GOPRIVATE",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " sets defaults that avoid the public proxy and checksum database for matching private modules."
+                ]
+            ]
+        },
+        {
+            "id": "question-E12-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "GONOSUMDB",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " controls which module paths skip the checksum database."
+                ]
+            ]
+        },
+        {
+            "id": "question-E12-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Local "
+                ],
+                [
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " checks still matter when the public database is skipped."
                 ]
             ]
         },
@@ -4007,10 +9149,71 @@ const note = {
         },
         {
             "id": "question-E13-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "cgo crosses the Go/C runtime boundary, with costs that depend on the call. C may retain Go memory only while it is properly pinned under the documented pointer rules; pointer-bearing data needs additional care. runtime.Pinner and runtime/cgo.Handle serve different supported use cases. A stable OS thread alone does not make pointer passing safe."
+                    "cgo lets Go call C code. Each call crosses the two runtimes, and its cost depends on the call."
+                ]
+            ]
+        },
+        {
+            "id": "question-E13-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "C can keep a Go pointer only while the pointed-to memory is properly pinned under the cgo rules."
+                ]
+            ]
+        },
+        {
+            "id": "question-E13-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pinning keeps the memory in place. Data containing other Go pointers needs extra care."
+                ]
+            ]
+        },
+        {
+            "id": "question-E13-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "runtime.Pinner",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " manages supported memory pinning."
+                ]
+            ]
+        },
+        {
+            "id": "question-E13-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "runtime/cgo.Handle",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives C an integer handle through which Go can recover a Go value."
+                ]
+            ]
+        },
+        {
+            "id": "question-E13-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keeping one OS thread does not by itself make passing pointers safe."
                 ]
             ]
         },
@@ -4067,10 +9270,63 @@ const note = {
         },
         {
             "id": "question-E14-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "LockOSThread binds the current goroutine to its current OS thread and keeps other goroutines off that thread until matching unlocks. Use it for APIs with thread-local state or thread affinity. Balance lock calls with unlocks when appropriate. Locking threads limits scheduling flexibility, so keep the requirement explicit."
+                    "LockOSThread",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " keeps the current goroutine on its current OS thread."
+                ]
+            ]
+        },
+        {
+            "id": "question-E14-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It also keeps other goroutines off that thread until matching unlocks."
+                ]
+            ]
+        },
+        {
+            "id": "question-E14-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Thread affinity means an API must keep using the same OS thread."
+                ]
+            ]
+        },
+        {
+            "id": "question-E14-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use this for APIs with thread affinity or state stored per thread."
+                ]
+            ]
+        },
+        {
+            "id": "question-E14-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Balance locks with unlocks when the thread no longer needs to stay locked."
+                ]
+            ]
+        },
+        {
+            "id": "question-E14-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Locked threads give the scheduler less freedom to move work."
                 ]
             ]
         },
@@ -4085,10 +9341,98 @@ const note = {
         },
         {
             "id": "question-E15-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "io.Copy first uses src.WriteTo when the source implements io.WriterTo. Otherwise it uses dst.ReadFrom when the destination implements io.ReaderFrom. Otherwise it copies through a buffer. Those interfaces allow specialized paths, sometimes using kernel support; they do not guarantee zero-copy for every source and destination."
+                    "io.Copy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " first checks whether the source implements "
+                ],
+                [
+                    "io.WriterTo",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and can copy with "
+                ],
+                [
+                    "WriteTo",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-E15-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Otherwise, it checks whether the destination implements "
+                ],
+                [
+                    "io.ReaderFrom",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and can copy with "
+                ],
+                [
+                    "ReadFrom",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "question-E15-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If neither applies, it copies through a buffer."
+                ]
+            ]
+        },
+        {
+            "id": "question-E15-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These methods can use faster transfers, sometimes with operating-system support."
+                ]
+            ]
+        },
+        {
+            "id": "question-E15-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "They do not guarantee zero-copy, where data transfers avoid the usual extra copy through your program."
                 ]
             ]
         },
@@ -4113,10 +9457,55 @@ const note = {
         },
         {
             "id": "question-E16-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Functional options apply configuration functions to a constructor’s private settings. The constructor supplies defaults and applies options in order. Export option helpers while keeping configuration fields private when callers should use those helpers. Validate options where the API needs it; this small example demonstrates shape and precedence only."
+                    "Functional options are functions that change a constructor’s settings."
+                ]
+            ]
+        },
+        {
+            "id": "question-E16-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The constructor starts with defaults, then applies the options in order."
+                ]
+            ]
+        },
+        {
+            "id": "question-E16-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Export option helpers when callers should configure settings through those helpers."
+                ]
+            ]
+        },
+        {
+            "id": "question-E16-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The configuration fields can stay private."
+                ]
+            ]
+        },
+        {
+            "id": "question-E16-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Validate option values when the API needs it."
+                ]
+            ]
+        },
+        {
+            "id": "question-E16-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In this example, later options win when they change the same setting."
                 ]
             ]
         },
@@ -4141,10 +9530,68 @@ const note = {
         },
         {
             "id": "question-E17-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A long-lived object that stores a request context can accidentally reuse a canceled deadline or retain request values. Passing ctx to each operation makes its lifetime explicit. A struct scoped to one operation can intentionally carry context, as http.Request does; the concern is mixing unrelated lifetimes."
+                    "An object kept for a long time may accidentally reuse an old canceled request context."
+                ]
+            ]
+        },
+        {
+            "id": "question-E17-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It may also keep request values alive longer than needed."
+                ]
+            ]
+        },
+        {
+            "id": "question-E17-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pass "
+                ],
+                [
+                    "ctx",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " into each operation to make that operation’s lifetime clear."
+                ]
+            ]
+        },
+        {
+            "id": "question-E17-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A struct used for just one operation can intentionally hold its context, as "
+                ],
+                [
+                    "http.Request",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does."
+                ]
+            ]
+        },
+        {
+            "id": "question-E17-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Avoid mixing the lifetimes of unrelated requests."
                 ]
             ]
         },
@@ -4192,10 +9639,55 @@ const note = {
         },
         {
             "id": "question-E18-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Define a small interface around the behavior the consumer needs. A test double can then implement that behavior without replacing an entire concrete dependency. Returning a concrete type is often useful, but factory or abstraction requirements can justify returning an interface. Choose by the API’s purpose rather than a universal rule."
+                    "Define a small interface with only the behavior the caller needs."
+                ]
+            ]
+        },
+        {
+            "id": "question-E18-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A test double is a small replacement used during a test. It can implement that interface."
+                ]
+            ]
+        },
+        {
+            "id": "question-E18-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This avoids replacing the whole concrete dependency."
+                ]
+            ]
+        },
+        {
+            "id": "question-E18-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Returning a concrete type is often useful."
+                ]
+            ]
+        },
+        {
+            "id": "question-E18-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Returning an interface can help when callers should not depend on one implementation."
+                ]
+            ]
+        },
+        {
+            "id": "question-E18-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Choose based on what the API needs, rather than one rule for every function."
                 ]
             ]
         },
@@ -4231,10 +9723,57 @@ const note = {
         },
         {
             "id": "question-E19-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Calling errors.New repeatedly creates distinct errors, even with equal messages. Comparing text therefore loses error identity and makes callers depend on wording. If a caller needs a stable condition, expose a documented sentinel or typed error. Wrapping exposes that condition as part of the API, so choose it deliberately."
+                    "Each call to "
+                ],
+                [
+                    "errors.New",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " creates a different error, even when the messages match."
+                ]
+            ]
+        },
+        {
+            "id": "question-E19-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Comparing error text makes callers depend on wording."
+                ]
+            ]
+        },
+        {
+            "id": "question-E19-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A sentinel is one shared error value that callers can recognize."
+                ]
+            ]
+        },
+        {
+            "id": "question-E19-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Expose a documented sentinel or typed error when callers need to recognize a condition."
+                ]
+            ]
+        },
+        {
+            "id": "question-E19-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Wrapping preserves that condition for callers. It becomes part of your API’s behavior."
                 ]
             ]
         },
@@ -4282,10 +9821,116 @@ const note = {
         },
         {
             "id": "question-E20-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The zero-value http.Client uses DefaultTransport and has no overall timeout. A request context or Client.Timeout can bound an operation; the client timeout includes response-body reading. Reuse transports for connection pooling and close response bodies. Creating clients that share DefaultTransport still shares its pool; creating new transports per request does not."
+                    "The zero-value "
+                ],
+                [
+                    "http.Client",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses "
+                ],
+                [
+                    "DefaultTransport",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and has no overall timeout."
+                ]
+            ]
+        },
+        {
+            "id": "question-E20-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A request context or "
+                ],
+                [
+                    "Client.Timeout",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can limit how long an operation takes."
+                ]
+            ]
+        },
+        {
+            "id": "question-E20-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Client.Timeout",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " also includes time spent reading the response body."
+                ]
+            ]
+        },
+        {
+            "id": "question-E20-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Reuse transports so requests can reuse connections."
+                ]
+            ]
+        },
+        {
+            "id": "question-E20-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Close response bodies when done."
+                ]
+            ]
+        },
+        {
+            "id": "question-E20-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Clients sharing "
+                ],
+                [
+                    "DefaultTransport",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " share its connection pool."
+                ]
+            ]
+        },
+        {
+            "id": "question-E20-answer-7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Creating a new transport for every request loses that reuse."
                 ]
             ]
         },
@@ -4300,10 +9945,37 @@ const note = {
         },
         {
             "id": "question-E21-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An execution trace records a timeline of goroutine scheduling, synchronization, syscalls and GC activity. It helps explain time spent waiting, which a CPU profile’s samples of running code may not show. Correlate events with request tasks and regions when investigating latency."
+                    "An execution trace records when goroutines run, wait, call the OS and take part in GC work."
+                ]
+            ]
+        },
+        {
+            "id": "question-E21-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A CPU profile mainly samples running code. It may miss time spent waiting."
+                ]
+            ]
+        },
+        {
+            "id": "question-E21-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A trace can show how that waiting adds to request latency."
+                ]
+            ]
+        },
+        {
+            "id": "question-E21-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Trace tasks and regions label related events or parts of work. Use them to connect runtime events to a request."
                 ]
             ]
         },
@@ -4339,10 +10011,55 @@ const note = {
         },
         {
             "id": "question-E22-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The inuse views estimate live Go heap allocations at the most recent completed GC; alloc views count cumulative sampled allocations, including objects later collected. Neither is whole-process RSS: stacks, runtime metadata, reserved pages and foreign allocations differ. High retained memory and high allocation rate require different remedies."
+                    "The inuse views estimate live Go heap allocations as of the most recent completed GC."
+                ]
+            ]
+        },
+        {
+            "id": "question-E22-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The alloc views count sampled allocations since the program started, including objects already collected."
+                ]
+            ]
+        },
+        {
+            "id": "question-E22-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "RSS is the memory the operating system reports as resident for the whole process."
+                ]
+            ]
+        },
+        {
+            "id": "question-E22-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Neither heap view equals RSS. Stacks, runtime data, memory pages and memory allocated outside Go affect the difference."
+                ]
+            ]
+        },
+        {
+            "id": "question-E22-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For large inuse values, look for objects kept alive too long."
+                ]
+            ]
+        },
+        {
+            "id": "question-E22-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For large alloc values, look for repeated temporary allocations."
                 ]
             ]
         },
@@ -4409,19 +10126,73 @@ const note = {
         },
         {
             "id": "question-E23-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Field alignment can insert padding between fields and at the end of a struct. Reordering fields may reduce its size, but swapping only byte and int64 often keeps the same final size. The example below uses two byte fields to demonstrate a reduction on standard gc targets with 8-byte int64 alignment. Layout and performance remain target-specific."
+                    "Alignment rules require fields to start at suitable memory addresses."
+                ]
+            ]
+        },
+        {
+            "id": "question-E23-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Padding is unused space added between fields or at the end to meet those rules."
+                ]
+            ]
+        },
+        {
+            "id": "question-E23-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Reordering fields can reduce a struct’s size."
+                ]
+            ]
+        },
+        {
+            "id": "question-E23-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Swapping only a byte and an int64 often leaves the final size unchanged."
+                ]
+            ]
+        },
+        {
+            "id": "question-E23-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The example uses two byte fields and assumes the standard compiler aligns int64 to 8 bytes."
+                ]
+            ]
+        },
+        {
+            "id": "question-E23-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Its expected sizes depend on the target."
                 ]
             ]
         },
         {
             "id": "question-E23-caveat",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Reducing padding can reduce storage for large slices of this struct. It does not remove pointers or automatically guarantee less GC scanning or better speed."
+                    "A smaller struct can save memory in a large slice of those structs."
+                ]
+            ]
+        },
+        {
+            "id": "question-E23-caveat-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Reordering fields does not remove pointers or guarantee less GC scanning or better speed."
                 ]
             ]
         },
@@ -4467,10 +10238,64 @@ const note = {
         },
         {
             "id": "question-E24-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use allocation profiles to find repeated temporary objects, then consider buffer reuse, realistic preallocation or append-style formatting APIs. Keep ownership clear when sharing buffers. Bound caches to reduce retained memory. Compare allocation rates and latency after a change; lower allocation count alone does not prove a faster service."
+                    "Use allocation profiles to find temporary objects created repeatedly."
+                ]
+            ]
+        },
+        {
+            "id": "question-E24-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Consider reusing buffers or reserving the space you expect to need."
+                ]
+            ]
+        },
+        {
+            "id": "question-E24-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Append-style formatting APIs can write into an existing buffer instead of creating a new string."
+                ]
+            ]
+        },
+        {
+            "id": "question-E24-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keep clear ownership of reused buffers so goroutines do not change the same data unsafely."
+                ]
+            ]
+        },
+        {
+            "id": "question-E24-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Limit cache size so cached objects do not keep growing in memory."
+                ]
+            ]
+        },
+        {
+            "id": "question-E24-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure allocation rate and latency after a change."
+                ]
+            ]
+        },
+        {
+            "id": "question-E24-answer-7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Fewer allocations alone do not prove the service is faster."
                 ]
             ]
         },
@@ -4530,19 +10355,117 @@ const note = {
         },
         {
             "id": "question-E25-answer",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "math/rand top-level functions are safe for concurrent use, while a Rand from NewSource normally needs synchronization when shared. The public contract does not promise a globally locked generator; current runtime-backed paths can avoid that lock. For deterministic simulations, a private generator can be useful. math/rand is unsuitable for secrets. Context-value lookup cost depends on the implementation and wrapper chain, so avoid using it as a general configuration store."
+                    "The top-level "
+                ],
+                [
+                    "math/rand",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " functions are safe to call from several goroutines."
+                ]
+            ]
+        },
+        {
+            "id": "question-E25-answer-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A "
+                ],
+                [
+                    "Rand",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " created from "
+                ],
+                [
+                    "NewSource",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " normally needs synchronization when shared."
+                ]
+            ]
+        },
+        {
+            "id": "question-E25-answer-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The API does not promise a globally locked generator. Current runtime-backed paths can avoid that lock."
+                ]
+            ]
+        },
+        {
+            "id": "question-E25-answer-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a private generator when you need a repeatable random sequence for a simulation."
+                ]
+            ]
+        },
+        {
+            "id": "question-E25-answer-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not use "
+                ],
+                [
+                    "math/rand",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " for secrets."
+                ]
+            ]
+        },
+        {
+            "id": "question-E25-answer-6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Context-value lookup cost depends on the implementation and the chain of wrapped contexts."
+                ]
+            ]
+        },
+        {
+            "id": "question-E25-answer-7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use normal parameters for general configuration instead of context values."
                 ]
             ]
         },
         {
             "id": "question-E25-extra-0",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Timer reuse, copied synchronization objects and context lifetimes are covered by the earlier answers linked below. Do not infer a performance improvement from a particular rand implementation without measurement."
+                    "Measure performance before assuming a private random generator is faster."
                 ]
             ]
         },

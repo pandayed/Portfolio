@@ -4,15 +4,21 @@ const note = {
     "notionId": "24024eb1-ed54-8046-a462-c0176675768d",
     "slug": "pointers",
     "title": "Pointers",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "c033f3d5-be59-5c4f-a32b-85dc25451ef4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A pointer value identifies a variable. "
-                ],
+                    "A pointer holds the address of a variable."
+                ]
+            ]
+        },
+        {
+            "id": "001093b9-435c-5de1-8d2a-61e4163e11a2",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "*int",
                     [
@@ -22,8 +28,25 @@ const note = {
                     ]
                 ],
                 [
-                    " is a pointer type, "
+                    " means a pointer to an "
                 ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "82067d59-e477-59e7-ac70-74b362efb1d6",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "&x",
                     [
@@ -33,8 +56,25 @@ const note = {
                     ]
                 ],
                 [
-                    " takes an address, and "
+                    " gets the address of "
                 ],
+                [
+                    "x",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "1096bb56-984c-51e4-a845-e436950f2f6f",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "*p",
                     [
@@ -44,7 +84,18 @@ const note = {
                     ]
                 ],
                 [
-                    " accesses the pointed-to variable."
+                    " reads or changes the variable at the address in "
+                ],
+                [
+                    "p",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -97,10 +148,28 @@ const note = {
         },
         {
             "id": "1a8a12f1-f0fe-5357-979a-e70df9317c58",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Go copies arguments into parameters, including pointer values. Copying a pointer preserves access to the same variable. Reassigning the parameter itself does not replace the caller’s pointer."
+                    "Go copies arguments into function parameters. This includes pointers."
+                ]
+            ]
+        },
+        {
+            "id": "cb60fd0d-8350-5b2d-b1ef-eadbd575392f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The copied pointer still points to the same variable."
+                ]
+            ]
+        },
+        {
+            "id": "0b456034-4cfa-5917-a3fe-9ec22ffcb364",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Changing the local pointer does not change the caller’s pointer."
                 ]
             ]
         },
@@ -162,7 +231,7 @@ const note = {
         },
         {
             "id": "270cd0ac-70a5-532b-9296-3094f592e0f7",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "new(T)",
@@ -173,7 +242,27 @@ const note = {
                     ]
                 ],
                 [
-                    " creates a zero-initialized variable of type T and returns "
+                    " creates a variable of type "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with its zero value."
+                ]
+            ]
+        },
+        {
+            "id": "888cdf28-c1a8-5628-ba8b-2c73309a6a6c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It returns a pointer of type "
                 ],
                 [
                     "*T",
@@ -184,7 +273,47 @@ const note = {
                     ]
                 ],
                 [
-                    ". Taking the address of a composite literal creates a pointer to a value initialized by that literal."
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "c6099e98-3ca2-56e4-8f66-6e308aaa73bf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A composite literal, such as "
+                ],
+                [
+                    "Point{X: 1}",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", sets the starting fields or elements."
+                ]
+            ]
+        },
+        {
+            "id": "0a17bda4-347b-5231-82a4-d37292a27124",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Taking its address, such as "
+                ],
+                [
+                    "&Point{X: 1}",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", returns a pointer to that value."
                 ]
             ]
         },
@@ -215,7 +344,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Initial pointed-to value"
+                                "Starting value"
                             ]
                         ]
                     }
@@ -402,7 +531,27 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use new(T) when the zero value is the desired starting point. Use a composite literal when explicit field or element values make construction clearer."
+                    "Use "
+                ],
+                [
+                    "new(T)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when you want to start with the zero value."
+                ]
+            ]
+        },
+        {
+            "id": "e7d7419c-62a2-51cd-b035-e88a00369492",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a composite literal when you want to set fields or elements at creation."
                 ]
             ]
         },
@@ -411,8 +560,14 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Composite literal syntax applies to structs, arrays, slices and maps. "
-                ],
+                    "Composite literals work with structs, arrays, slices and maps."
+                ]
+            ]
+        },
+        {
+            "id": "5e1fcf5f-2348-502f-a853-3fe4ff88a411",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "&int{}",
                     [
@@ -422,7 +577,38 @@ const note = {
                     ]
                 ],
                 [
-                    " is not valid. An existing integer variable can be addressed with "
+                    " is invalid because "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is not a composite type."
+                ]
+            ]
+        },
+        {
+            "id": "2f171e7d-b7f2-54ae-b6f2-955bc2d35e82",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For an existing integer variable "
+                ],
+                [
+                    "x",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", use "
                 ],
                 [
                     "&x",
@@ -433,7 +619,7 @@ const note = {
                     ]
                 ],
                 [
-                    "."
+                    " to get its address."
                 ]
             ]
         },
@@ -442,7 +628,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Neither form promises heap allocation. Placement depends on compiler analysis and how the value is used."
+                    "Neither form guarantees that the variable is stored on the heap."
+                ]
+            ]
+        },
+        {
+            "id": "64fd8ea4-9e1d-5d53-9b92-4f2b75d05342",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The heap is memory managed by garbage collection. The compiler decides where to store the variable based on its use."
                 ]
             ]
         },
@@ -475,10 +670,46 @@ const note = {
         },
         {
             "id": "f666ffe6-c513-509c-90d0-6cd5c534272a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A slice value describes backing storage; map and channel values refer to their respective data structures. Passing them still copies a value. Element updates can affect shared storage, while reassigning a parameter does not reassign the caller’s variable."
+                    "A slice describes part of an array. Copying the slice does not copy that array."
+                ]
+            ]
+        },
+        {
+            "id": "40943c03-9a0d-5a9b-817b-4a3303054a57",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Copies of a map or channel value also use the same map or channel."
+                ]
+            ]
+        },
+        {
+            "id": "9bc9e528-0477-564c-92e6-6a627125ab59",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Passing these values to a function still copies the value."
+                ]
+            ]
+        },
+        {
+            "id": "3e2ecb2a-cbbd-5cef-a5c3-e84a1b9d0a7a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Changing a shared slice element or map entry can affect the caller’s data."
+                ]
+            ]
+        },
+        {
+            "id": "e6a626a2-530d-55e3-9e04-54e0115d6512",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assigning a new value to the parameter does not replace the caller’s variable."
                 ]
             ]
         },
@@ -494,10 +725,30 @@ const note = {
         },
         {
             "id": "ab561547-528e-53a0-b1b1-14a8360886be",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Return an updated slice when a function appends or changes its length and the caller needs that slice value. Arrays are copied as whole values."
+                    "Return the updated slice if the caller needs its new length or the result of "
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "db315636-99e5-5297-a843-f942f988dde7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Passing an array copies the whole array."
                 ]
             ]
         },
@@ -530,19 +781,95 @@ const note = {
         },
         {
             "id": "5ccba88d-0dda-5a95-bb53-9683ded3a8ec",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Ordinary Go pointers do not support arithmetic such as p++ or p+1. unsafe.Pointer permits restricted conversions between pointer types and other unsafe operations. It does not remove the documented validity requirements."
+                    "Ordinary Go pointers do not support arithmetic such as "
+                ],
+                [
+                    "p++",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or "
+                ],
+                [
+                    "p+1",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "c42c548a-43ce-5147-b544-f1c3c0a63952",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "unsafe.Pointer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " allows some pointer conversions that ordinary pointers do not."
+                ]
+            ]
+        },
+        {
+            "id": "60da5f83-eb82-5eb6-b5c6-7a0d1e9be5d6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These operations must still follow the rules in the unsafe package documentation."
                 ]
             ]
         },
         {
             "id": "33d6da38-d7ff-5f4a-a713-f8e7c929e337",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This example converts between pointer types whose base types have the same layout. This particular conversion also works directly as "
+                    "Counter",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " use the same memory layout here."
+                ]
+            ]
+        },
+        {
+            "id": "17e96d37-d730-539f-b5f9-648703b23995",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This conversion also works directly as "
                 ],
                 [
                     "(*int)(p)",
@@ -553,7 +880,18 @@ const note = {
                     ]
                 ],
                 [
-                    "; unsafe is unnecessary here and is shown only to explain the syntax."
+                    ". It does not need "
+                ],
+                [
+                    "unsafe",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -599,7 +937,36 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use pointers for mutation, shared identity, optional values represented by nil, or avoiding a copy when that fits the API. A pointer to a basic type can be appropriate for an optional field."
+                    "Use a pointer when a function must change the original variable."
+                ]
+            ]
+        },
+        {
+            "id": "40b2d582-1e81-5bd2-9f10-bf012c5061ad",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use pointers when several places need to share the same value or when copying a large value is unsuitable."
+                ]
+            ]
+        },
+        {
+            "id": "37f31fe4-3fc6-54be-852a-d3104adb259a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A nil pointer can represent a missing optional value. This also applies to basic types such as "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -608,7 +975,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Garbage collection manages memory lifetime. A reachable pointer keeps its referenced Go object reachable; reclamation is not immediate when the last reference disappears."
+                    "Garbage collection frees memory that the program can no longer reach."
+                ]
+            ]
+        },
+        {
+            "id": "22ddc83a-ab5b-5bef-83ac-313f8f28d820",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A reachable pointer keeps the object it points to reachable."
+                ]
+            ]
+        },
+        {
+            "id": "03930cb1-1f88-5a13-9763-95197446f127",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Removing the last reference does not free the memory immediately."
                 ]
             ]
         },
@@ -617,7 +1002,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Pointers do not provide synchronization. Concurrent access to shared mutable data still needs coordination."
+                    "Pointers do not protect data from simultaneous access."
+                ]
+            ]
+        },
+        {
+            "id": "04818507-0df9-57c1-81f5-a06b81b55366",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a lock or another form of synchronization when goroutines share data and at least one changes it."
                 ]
             ]
         }

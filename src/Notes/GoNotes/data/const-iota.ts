@@ -6,14 +6,14 @@ const note = {
     "notionId": "2ef24eb1-ed54-80e2-8aa2-dbdc21358c81",
     "slug": "const-iota",
     "title": "Iota & Flags",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "8e9807a2-3ebd-5634-8adf-3cdfa0349dd3",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Prerequisite: "
+                    "Read "
                 ],
                 [
                     "Constants & Variables",
@@ -25,7 +25,7 @@ const note = {
                     ]
                 ],
                 [
-                    " explains const declarations and typed versus untyped constants."
+                    " for const declarations and typed versus untyped constants."
                 ]
             ]
         },
@@ -40,10 +40,21 @@ const note = {
         },
         {
             "id": "2bf6ad1a-d086-59a7-b45c-8d9f092bcb4e",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Within a const declaration, "
+                    "Inside a "
+                ],
+                [
+                    "const",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " declaration, "
                 ],
                 [
                     "iota",
@@ -54,16 +65,71 @@ const note = {
                     ]
                 ],
                 [
-                    " is an untyped integer constant equal to the index of the current constant specification. The first specification has index 0. Each new const declaration starts again at 0."
+                    " is an untyped integer constant."
+                ]
+            ]
+        },
+        {
+            "id": "5ff4844c-5ea9-5999-ac5a-0b917e7214c6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Its value is the position of the current constant specification, starting at 0."
+                ]
+            ]
+        },
+        {
+            "id": "a083a486-3163-5646-8a77-6bc246fb535c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A new "
+                ],
+                [
+                    "const",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " declaration starts the count again at 0."
                 ]
             ]
         },
         {
             "id": "1448631b-a2d9-514a-86c5-6c350e44d19b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A specification is one declaration entry, rather than one physical line or one constant name. Multiple names in the same entry use the same "
+                    "A constant specification is one entry in the declaration. It can contain more than one name."
+                ]
+            ]
+        },
+        {
+            "id": "43ceb550-58f6-5f9e-b079-ff1299c758a5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "iota",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " counts these entries. It does not count physical lines or names."
+                ]
+            ]
+        },
+        {
+            "id": "7d70113c-4e0f-53da-88d5-188cd90a6ad6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Names in the same entry use the same "
                 ],
                 [
                     "iota",
@@ -90,10 +156,19 @@ const note = {
         },
         {
             "id": "fc7f4afe-aa17-5d3c-a24e-fa19e171ec7f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An entry without expressions repeats the preceding expression list and optional type. Those expressions are evaluated with the new specification’s "
+                    "If an entry leaves out its expressions, Go repeats the previous expressions and their type, if given."
+                ]
+            ]
+        },
+        {
+            "id": "f625214e-2ff9-5493-9ff7-02a6bfcc6b2b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go uses the current entry’s "
                 ],
                 [
                     "iota",
@@ -104,8 +179,14 @@ const note = {
                     ]
                 ],
                 [
-                    " value. "
-                ],
+                    " value in those expressions."
+                ]
+            ]
+        },
+        {
+            "id": "05b178a9-509d-5379-b21b-aaa4931c8ac6",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "iota",
                     [
@@ -115,7 +196,7 @@ const note = {
                     ]
                 ],
                 [
-                    " is not a runtime variable."
+                    " is not a variable that you can change at runtime."
                 ]
             ]
         },
@@ -140,19 +221,76 @@ const note = {
         },
         {
             "id": "e5361627-5442-5250-8049-4de51323cfd7",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Named values describe states or modes. The defined type distinguishes them from ordinary int variables, but it does not restrict values to these three constants."
+                    "Use named constants for states or modes."
+                ]
+            ]
+        },
+        {
+            "id": "2d7bb6c2-b36b-5610-a2ba-299eb61e9b41",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Status",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is a defined type, separate from "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "aca742f3-4c92-5963-a5e2-ba5efd3a223d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A "
+                ],
+                [
+                    "Status",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " value is not limited to the three constants shown here."
                 ]
             ]
         },
         {
             "id": "665c04b2-4e49-5af3-8b45-2341391cd445",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Inserting or reordering a specification can renumber later constants. Use explicit stable numbers for stored values or protocol fields when compatibility requires it."
+                    "Adding or moving an entry can change the numbers of later constants."
+                ]
+            ]
+        },
+        {
+            "id": "adbe1dfd-12f1-581a-b328-ff5cf3518ff3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If stored data or a protocol depends on those numbers, give the constants fixed numbers instead."
                 ]
             ]
         },
@@ -177,10 +315,32 @@ const note = {
         },
         {
             "id": "503e53d7-5b36-5f3c-908b-ac18f9a5bdb0",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The blank identifier discards a name without skipping the specification count."
+                    "Use "
+                ],
+                [
+                    "_",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to discard a value. The entry still counts toward "
+                ],
+                [
+                    "iota",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -224,10 +384,19 @@ const note = {
         },
         {
             "id": "0bec5d77-2de9-528d-a1bc-f511bafb0743",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Each flag sets a different bit. Combine flags with "
+                    "Each flag sets a different bit."
+                ]
+            ]
+        },
+        {
+            "id": "adbcb9c2-8c42-5b58-9cbd-fbc81050ebf9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
                 ],
                 [
                     "|",
@@ -238,7 +407,16 @@ const note = {
                     ]
                 ],
                 [
-                    " and check a flag with "
+                    " to combine flags."
+                ]
+            ]
+        },
+        {
+            "id": "3a20b08b-54a0-5e3b-8774-bd2fd6016be7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
                 ],
                 [
                     "&",
@@ -249,7 +427,7 @@ const note = {
                     ]
                 ],
                 [
-                    "."
+                    " to check whether a flag is set."
                 ]
             ]
         },

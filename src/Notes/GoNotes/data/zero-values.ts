@@ -6,14 +6,23 @@ const note = {
     "notionId": "24224eb1-ed54-80ac-8351-d559d45a4994",
     "slug": "zero-values",
     "title": "Zero Values",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "e78bca00-8779-5cb3-8106-4ebf0b4e2f54",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A variable declared without an initializer receives its type’s zero value. Struct fields and array elements are initialized recursively, so they do not contain uninitialized values."
+                    "If you declare a variable without an initial value, Go gives it the zero value for its type."
+                ]
+            ]
+        },
+        {
+            "id": "7ce95c7e-5395-5197-ba57-bfe0bcfc8b01",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go also gives every struct field and array element its zero value. This includes fields and elements nested inside them."
                 ]
             ]
         },
@@ -328,7 +337,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Each field has its type’s zero value."
+                                "Every field gets its type’s zero value."
                             ]
                         ]
                     }
@@ -355,7 +364,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "All N elements have the element type’s zero value."
+                                "Every element gets its type’s zero value."
                             ]
                         ]
                     }
@@ -392,10 +401,10 @@ const note = {
         },
         {
             "id": "4fa770df-87da-5b33-9ee6-65e80889efa5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A zero value is a value of its type. It does not promise that every operation on that value will succeed."
+                    "A zero value belongs to its type. Some operations on it can still fail."
                 ]
             ]
         },
@@ -404,7 +413,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A nil slice has length and capacity 0. It supports iteration and append; indexing it still requires an existing element."
+                    "A nil slice has length 0 and capacity 0."
+                ]
+            ]
+        },
+        {
+            "id": "9ab49fcd-c4fd-553e-9c7f-9f2077e21191",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can iterate over a nil slice or append to it."
+                ]
+            ]
+        },
+        {
+            "id": "b1549f67-ea39-582a-979f-2e9b6984b8d2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You cannot read an element from a nil slice because it has no elements."
                 ]
             ]
         },
@@ -413,7 +440,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A nil map supports lookup, length, iteration, and deletion. Assigning an entry panics."
+                    "You can read from a nil map, check its length, iterate over it, or delete a key."
+                ]
+            ]
+        },
+        {
+            "id": "cbcf4132-8552-5ac0-ae26-41b2e9d4fc8f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Adding or updating an entry in a nil map panics."
                 ]
             ]
         },
@@ -422,7 +458,34 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A nil channel blocks on send and receive. Closing it panics. A nil pointer cannot be dereferenced, and calling a nil function panics."
+                    "Sending to or receiving from a nil channel waits forever."
+                ]
+            ]
+        },
+        {
+            "id": "a2552002-ed0e-5870-bba0-68dccf4b620a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Closing a nil channel panics."
+                ]
+            ]
+        },
+        {
+            "id": "d8a838e8-9501-534f-b269-8af80c8ea85d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You cannot dereference a nil pointer."
+                ]
+            ]
+        },
+        {
+            "id": "449fdc2a-1112-5e75-8cf7-8a41c8127e25",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Calling a nil function panics."
                 ]
             ]
         },

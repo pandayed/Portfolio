@@ -6,14 +6,23 @@ const note = {
     "notionId": "24124eb1-ed54-8079-adc5-d9521cddb953",
     "slug": "cpp-vs-go",
     "title": "CPP vs Go",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "cpp-vs-go-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use this comparison if you already know C++. Similar syntax does not imply the same type system or resource lifetime rules."
+                    "This comparison assumes you know C++."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Similar syntax does not mean the same type or cleanup rules."
                 ]
             ]
         },
@@ -73,7 +82,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Structs hold fields; methods are declared separately with an explicit receiver such as (t T) or (t *T)."
+                                "Structs hold fields. Declare methods separately with a receiver such as (t T) or (t *T)."
                             ]
                         ]
                     }
@@ -89,12 +98,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Single or multiple inheritance; virtual methods can be overridden."
+                                "Single or multiple inheritance. Can override virtual methods."
                             ]
                         ],
                         "col-2": [
                             [
-                                "No class inheritance or overriding. Use composition, embedding, and interfaces. Embedding does not create a subtype."
+                                "No class inheritance or overriding. Use composition, embedding, and interfaces. Embedding does not make one type a subtype of another."
                             ]
                         ]
                     }
@@ -115,7 +124,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Interfaces describe required methods; types implement them implicitly. No virtual keyword."
+                                "Interfaces list required methods. A type implements an interface by having those methods. No virtual keyword."
                             ]
                         ]
                     }
@@ -131,12 +140,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "public, private, protected; friend grants selected access."
+                                "public, private, and protected control access. friend allows selected code to access private members."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Package scope and exported identifiers. Uppercase initial letters export names. No protected or friend keyword."
+                                "Package-level names, fields, and methods are exported when they start uppercase. No protected or friend keyword."
                             ]
                         ]
                     }
@@ -152,12 +161,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Special constructor syntax, overloads, and member initialization lists."
+                                "Special constructor syntax. Supports overloads and member initialization lists."
                             ]
                         ],
                         "col-2": [
                             [
-                                "No special constructor syntax. Use zero values, composite literals, or ordinary functions such as NewClient."
+                                "No special constructor syntax. Use zero values, literals such as T{}, or functions such as NewClient."
                             ]
                         ]
                     }
@@ -173,12 +182,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Function and operator overloading; default arguments."
+                                "Supports function overloading, operator overloading, and default arguments."
                             ]
                         ],
                         "col-2": [
                             [
-                                "No function or operator overloading and no default arguments. Use distinct functions or explicit parameters."
+                                "No function or operator overloading or default arguments. Use different function names or pass arguments explicitly."
                             ]
                         ]
                     }
@@ -199,7 +208,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Type parameters and constraints support generic types and functions (Go 1.18+). The rules differ from C++ templates."
+                                "Generic types and functions use type parameters and constraints (Go 1.18+). A constraint says which types are allowed. The rules differ from C++ templates."
                             ]
                         ]
                     }
@@ -257,12 +266,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Casts include conversions and dynamic_cast for polymorphic hierarchies."
+                                "Casts convert types. dynamic_cast checks conversions in a class hierarchy with polymorphic types."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Explicit conversions for compatible types; type assertions and switches inspect the dynamic type of an interface."
+                                "Explicit conversions for compatible types. Type assertions and type switches check the concrete type stored in an interface."
                             ]
                         ]
                     }
@@ -283,7 +292,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "No C-style preprocessor. Imports, build constraints, and code generation serve different purposes."
+                                "No C-style preprocessor. Uses imports, build constraints, and code generation for different tasks."
                             ]
                         ]
                     }
@@ -299,12 +308,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "inline has language and linkage rules; optimization is a compiler decision."
+                                "inline has language and linking rules. The compiler decides whether to inline a call."
                             ]
                         ],
                         "col-2": [
                             [
-                                "No inline keyword. The compiler may inline eligible functions."
+                                "No inline keyword. The compiler can replace some calls with the function body."
                             ]
                         ]
                     }
@@ -362,12 +371,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Automatic storage duration, containers, smart pointers, or explicit new/delete."
+                                "Uses local objects, containers, smart pointers, or explicit new/delete."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Garbage-collected Go memory. Allocation and collection costs depend on use."
+                                "Garbage collection frees unused Go memory. Memory allocation and collection costs depend on the program."
                             ]
                         ]
                     }
@@ -383,12 +392,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "RAII binds cleanup to object lifetime; destructors run at scope exit for automatic objects."
+                                "RAII ties cleanup to object lifetime. Destructors run when local objects leave scope."
                             ]
                         ],
                         "col-2": [
                             [
-                                "No deterministic destructor. Explicit Close methods and defer commonly release resources when the surrounding function returns."
+                                "No automatic destructor. Use Close and defer for cleanup when the function returns."
                             ]
                         ]
                     }
@@ -409,7 +418,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Errors are values. panic/recover handles panics; it is not ordinary error-return control flow."
+                                "Return errors as values. Use panic/recover for panics, not normal error handling."
                             ]
                         ]
                     }
@@ -418,16 +427,43 @@ const note = {
         },
         {
             "id": "cpp-vs-go-06",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A deferred cleanup does not run at the end of an inner block or loop iteration. For a file opened in each iteration, a helper function can give each file its own function lifetime. Garbage collection does not replace closing the file."
+                    "defer runs cleanup when the current function returns."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-06-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not run cleanup at the end of an inner block or each loop iteration."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-06-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When opening a file in each iteration, use a helper function to close each file before the next iteration."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-06-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Garbage collection does not replace closing files."
                 ]
             ]
         },
         {
             "id": "cpp-vs-go-07",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -457,16 +493,52 @@ const note = {
         },
         {
             "id": "cpp-vs-go-09",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Virtual dispatch tables and Go interface representation are implementation details, not equivalent language guarantees. Compiled Go programs also contain symbol names. Their spelling can include package paths and compiler-generated names; lack of overloads does not mean Go has no name transformation."
+                    "C++ virtual dispatch tables and Go interface layouts are compiler details."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-09-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The languages do not guarantee the same layout."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-09-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Compiled Go programs also contain symbols, which name functions and other program parts."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-09-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Symbol names can include package paths and names made by the compiler."
+                ]
+            ]
+        },
+        {
+            "id": "cpp-vs-go-09-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The compiler can change symbol names even though Go does not overload functions."
                 ]
             ]
         },
         {
             "id": "cpp-vs-go-10",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Sources: "
@@ -487,7 +559,7 @@ const note = {
         },
         {
             "id": "cpp-vs-go-11",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     ""
@@ -508,7 +580,7 @@ const note = {
         },
         {
             "id": "cpp-vs-go-12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     ""

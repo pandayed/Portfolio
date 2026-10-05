@@ -6,14 +6,23 @@ const note = {
     "notionId": "2ef24eb1-ed54-8042-8203-daa588d641d1",
     "slug": "defined-type-and-type-alias",
     "title": "Defined type and type alias",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "ab55fc54-cb7b-59de-bc5a-86e00a97acd2",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A type definition creates a distinct type. A type alias adds another name for an existing type."
+                    "A type definition creates a new type."
+                ]
+            ]
+        },
+        {
+            "id": "2e3ebf16-d441-5523-bd3f-73cad2c7148c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A type alias gives an existing type another name."
                 ]
             ]
         },
@@ -74,12 +83,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "MyInt is a distinct type with underlying type int."
+                                "MyInt is a new type. Its underlying type is int."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Domain-specific values or methods."
+                                "Values with a specific meaning, or types that need methods."
                             ]
                         ]
                     }
@@ -100,12 +109,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "MyInt and int denote the same type."
+                                "MyInt and int are the same type."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Compatibility or renaming without changing identity."
+                                "A new name for the same type."
                             ]
                         ]
                     }
@@ -133,7 +142,7 @@ const note = {
         },
         {
             "id": "3250c673-f8b4-5b91-b93a-5499c22fea99",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "The untyped constant "
@@ -147,7 +156,102 @@ const note = {
                     ]
                 ],
                 [
-                    " can initialize a MyInt when it fits. An int variable and a MyInt variable do not become interchangeable just because they have the same underlying type."
+                    " can be used as a "
+                ],
+                [
+                    "MyInt",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " because the value fits."
+                ]
+            ]
+        },
+        {
+            "id": "186854d9-4b6d-5288-b72a-e8df1b518126",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "MyInt is based on "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", so "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is its underlying type. "
+                ],
+                [
+                    "MyInt",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is still a separate type."
+                ]
+            ]
+        },
+        {
+            "id": "feb47fdd-ae37-5545-95ef-cf72f423dc53",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "To assign a "
+                ],
+                [
+                    "MyInt",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " variable to an "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " variable, convert it to "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -172,10 +276,80 @@ const note = {
         },
         {
             "id": "38fee8c2-1227-5565-8617-2b68fd4a32ce",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Meter and Second both have underlying type int. They are distinct types. Explicit conversions are still possible, so the names help detect accidental mixing rather than validate units automatically."
+                    "Meter",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Second",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " both have the underlying type "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". They are separate types."
+                ]
+            ]
+        },
+        {
+            "id": "8724c762-7f6a-5901-9882-84ee40ca2846",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go catches accidental mixing, such as passing a "
+                ],
+                [
+                    "Second",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " where a "
+                ],
+                [
+                    "Meter",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is required."
+                ]
+            ]
+        },
+        {
+            "id": "6e4ba762-e9f0-5ba0-8bbb-d2774ce6fb19",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can still convert between them. Go does not check whether that conversion makes sense for the units."
                 ]
             ]
         },
@@ -200,10 +374,19 @@ const note = {
         },
         {
             "id": "cff542e7-a2fd-5c15-b3c5-ac1cfd25c2b5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An alias adds no new type identity or independent method set. It is useful when an API keeps an older name while moving to a new name."
+                    "An alias refers to the same type. It does not get a separate set of methods."
+                ]
+            ]
+        },
+        {
+            "id": "781a62cd-fd1e-5f88-8b18-e52c32a0a937",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use an alias to keep an old API name while moving to a new name."
                 ]
             ]
         },
@@ -228,10 +411,57 @@ const note = {
         },
         {
             "id": "cf0025e7-625c-599f-abc8-47b539745337",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Methods require an eligible receiver base type defined in the same package. A simple alias to such a local type may name the receiver; the method belongs to the original type. An alias to int or a type defined in another package does not grant permission to add methods."
+                    "The receiver base type is the type you attach the method to."
+                ]
+            ]
+        },
+        {
+            "id": "9bc52ae3-40f8-5400-96ca-b95dc53e35bb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It must be a defined type in the same package and follow the receiver rules."
+                ]
+            ]
+        },
+        {
+            "id": "ce4fe997-ca78-5132-b29e-68574068e49b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A simple alias to an allowed local type can name the receiver."
+                ]
+            ]
+        },
+        {
+            "id": "bce56eae-2c8e-50c6-9911-421c236bbcc6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That method belongs to the original type."
+                ]
+            ]
+        },
+        {
+            "id": "2fbc3b2c-2989-53a9-a008-8c666753bb15",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An alias to "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or to a type from another package does not let you add methods."
                 ]
             ]
         },
@@ -247,10 +477,10 @@ const note = {
         },
         {
             "id": "138a2b2f-5ee3-56ce-914a-bace80d95671",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Receiver and method-set details are covered in "
+                    "See "
                 ],
                 [
                     "Methods",
@@ -262,7 +492,16 @@ const note = {
                     ]
                 ],
                 [
-                    ". The alias example above uses a non-generic local type."
+                    " for receivers and method sets."
+                ]
+            ]
+        },
+        {
+            "id": "b1a30435-a719-5750-a904-9e703a40a48e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This example uses a local type without type parameters."
                 ]
             ]
         },
@@ -287,10 +526,19 @@ const note = {
         },
         {
             "id": "61699374-ed8a-50a3-a0db-89c502021647",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An explicit numeric conversion states the target type. It does not guarantee that data is preserved: converting to a narrower integer type can truncate the value."
+                    "A numeric conversion names the type you want."
+                ]
+            ]
+        },
+        {
+            "id": "1431185c-5675-558d-9c8f-7ee489b45600",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A conversion can lose data. A smaller integer type may not keep the full value."
                 ]
             ]
         },

@@ -6,23 +6,32 @@ const note = {
     "notionId": "24124eb1-ed54-8073-b1bd-cc1e8381338d",
     "slug": "constants-variables",
     "title": "Constants & Variables",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "f2e35985-ef4a-5625-be47-01c81d81632f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A constant names a fixed compile-time value. A variable stores a value that can change."
+                    "A constant names a value that is fixed when the program is compiled."
+                ]
+            ]
+        },
+        {
+            "id": "019e7f68-5afd-5a39-b803-d61871998b58",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A variable stores a value that can change."
                 ]
             ]
         },
         {
             "id": "73722251-f923-5c47-903e-b4c6cfa3bedf",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Invalid declarations are commented out; the remaining lines illustrate valid declarations."
+                    "The commented-out declarations below show errors."
                 ]
             ]
         },
@@ -47,10 +56,28 @@ const note = {
         },
         {
             "id": "d8c2542e-63fa-5cc8-93e9-7ba27b9b03b3",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Constants can be boolean, string, or numeric values, including runes and complex numbers. Slices, maps, structs, functions, and "
+                    "Constants can be booleans, strings, or numbers."
+                ]
+            ]
+        },
+        {
+            "id": "d01bb446-95b7-5b25-b529-87332242d974",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Rune and complex values can also be constants."
+                ]
+            ]
+        },
+        {
+            "id": "6fec60d0-4cbe-55c0-a454-9f3eaca909d7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Slices, maps, structs, functions, and "
                 ],
                 [
                     "nil",
@@ -76,10 +103,19 @@ const note = {
         },
         {
             "id": "b9203129-796f-5fe5-91db-d6fbb265a241",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An untyped constant can be assigned to a compatible type when its value fits. A typed constant follows that type’s assignment rules."
+                    "An untyped constant has no fixed type. You can assign it to a type that can hold its value."
+                ]
+            ]
+        },
+        {
+            "id": "45e8f307-390e-51b9-994a-5da34b258e1f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A typed constant already has a type. Assigning it follows the rules for that type."
                 ]
             ]
         },
@@ -95,10 +131,19 @@ const note = {
         },
         {
             "id": "355fe16c-c02e-5994-890a-2d1ea2cb4eab",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Without an explicit variable type, an untyped constant uses its default type. For example, "
+                    "If you do not give the variable a type, Go uses the constant’s default type."
+                ]
+            ]
+        },
+        {
+            "id": "835c109f-2379-563f-8149-6ee9cab866e7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For example, "
                 ],
                 [
                     "count := 42",
@@ -145,13 +190,31 @@ const note = {
         },
         {
             "id": "d2f7f564-4554-5a52-947b-590c572b8d7d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Ordinary function calls and runtime variable values are not constant expressions. Some built-ins have constant results under specific rules, such as "
+                    "A constant expression cannot use the value of a variable."
+                ]
+            ]
+        },
+        {
+            "id": "81f1c20e-334c-5444-8e93-e6f5a9542c8b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Ordinary function calls cannot produce constants."
+                ]
+            ]
+        },
+        {
+            "id": "30a7f149-7b6e-5bed-ba6b-317c1083a6df",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Some built-in functions can produce constants. For example, "
                 ],
                 [
-                    "len",
+                    "len(\"Go\")",
                     [
                         [
                             "c"
@@ -159,7 +222,7 @@ const note = {
                     ]
                 ],
                 [
-                    " of a constant string."
+                    " is a constant."
                 ]
             ]
         },
@@ -194,10 +257,19 @@ const note = {
         },
         {
             "id": "f00b0f7a-d583-52f9-a3cf-003c05e2efc4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use constants for fixed limits, version strings, and related named values. See "
+                    "Use constants for fixed limits, version strings, and related named values."
+                ]
+            ]
+        },
+        {
+            "id": "192af8be-1669-5d0a-9d20-8d97ef34bb8f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "See "
                 ],
                 [
                     "Iota & Flags",
@@ -336,10 +408,10 @@ const note = {
         },
         {
             "id": "ee145fd1-9332-5176-9385-ca8cee22529f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Without an initializer, a variable receives its type’s "
+                    "If you do not give a variable an initial value, it gets its type’s "
                 ],
                 [
                     "zero value",
@@ -386,10 +458,50 @@ const note = {
         },
         {
             "id": "7b568de3-1c1e-5a63-865c-17b106445c26",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A short declaration must introduce at least one new non-blank variable in the same scope. It cannot appear at package scope."
+                    "Use "
+                ],
+                [
+                    ":=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " only inside a function."
+                ]
+            ]
+        },
+        {
+            "id": "19c7328f-f385-5dc0-9ed8-5fa19dd5e78a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "At least one variable on the left must be new in that scope."
+                ]
+            ]
+        },
+        {
+            "id": "256bfa4c-4e7b-5390-8232-eb0d2bd2e906",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The blank identifier "
+                ],
+                [
+                    "_",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not count as a new variable."
                 ]
             ]
         },

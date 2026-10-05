@@ -6,14 +6,32 @@ const note = {
     "notionId": "24124eb1-ed54-80ff-bb0c-d5185ec41a80",
     "slug": "gmp-model",
     "title": "GMP Model",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "c4e86aee-2baf-5bf6-828a-2c85297b5519",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "G, M and P describe how the Go runtime schedules goroutines. This is a simplified implementation model, not a language guarantee about queues, thread counts, or scheduling order."
+                    "G, M and P are names used inside the Go runtime."
+                ]
+            ]
+        },
+        {
+            "id": "1e57a9b1-942f-51cd-b7d2-c4e1fc113f75",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime manages goroutines and chooses which ones run."
+                ]
+            ]
+        },
+        {
+            "id": "09e18337-495e-5057-87fc-a28ba456b4a8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The Go language does not promise particular queues, thread counts or scheduling order."
                 ]
             ]
         },
@@ -63,7 +81,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "The work and execution state of a goroutine."
+                                "A goroutine’s work and current execution state."
                             ]
                         ]
                     }
@@ -79,7 +97,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "The thread on which code executes; the OS schedules it onto CPUs."
+                                "Runs code. OS means operating system. The OS chooses which CPU runs the thread."
                             ]
                         ]
                     }
@@ -95,7 +113,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "The runtime resources needed to execute user Go code, including scheduler and allocator state."
+                                "Keeps the scheduling and memory-allocation state needed to run Go code."
                             ]
                         ]
                     }
@@ -104,10 +122,37 @@ const note = {
         },
         {
             "id": "ed906c25-7c3e-5a2c-881d-f173414fbb99",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An M needs a P to execute user Go code. A P can support one executing goroutine at a time. The runtime manages Ms, and their number can exceed the number of Ps because threads may be idle or blocked in syscalls."
+                    "An M needs a P to run user Go code."
+                ]
+            ]
+        },
+        {
+            "id": "1860c342-9963-5784-a4a9-65cb5eeb51cf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "One P supports one running goroutine at a time."
+                ]
+            ]
+        },
+        {
+            "id": "ded06468-f88e-546e-92c8-6f4cd03a4f22",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime manages the Ms."
+                ]
+            ]
+        },
+        {
+            "id": "f1056190-c819-5bec-bf7e-28161b64c710",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "There can be more Ms than Ps. Some threads may be idle or waiting inside an OS call."
                 ]
             ]
         },
@@ -157,7 +202,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Ready to execute but waiting for scheduling."
+                                "Ready to run, but waiting for the runtime to choose it."
                             ]
                         ]
                     }
@@ -173,7 +218,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Currently executing."
+                                "Executing code now."
                             ]
                         ]
                     }
@@ -189,7 +234,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Parked until an event such as a channel operation, lock release or timer makes progress possible."
+                                "Waiting for an event, such as a send, lock release or timer."
                             ]
                         ]
                     }
@@ -205,7 +250,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Executing or waiting in an OS call; handled separately from a Go-managed wait."
+                                "Making an OS call, or waiting for that call to finish."
                             ]
                         ]
                     }
@@ -221,7 +266,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "The goroutine has returned or otherwise exited."
+                                "The goroutine has returned or exited."
                             ]
                         ]
                     }
@@ -230,10 +275,46 @@ const note = {
         },
         {
             "id": "796df7c5-ed7d-5a10-a268-94ce98bcac01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The scheduler uses local and global runnable queues, work stealing, timers and network polling. A runnable goroutine does not have to enter a particular local queue before it can execute. Queue placement and wake-up paths can change between runtime versions."
+                    "Local run queues hold ready goroutines for individual Ps. The global run queue is shared."
+                ]
+            ]
+        },
+        {
+            "id": "70bf2f1c-4b61-528b-b4f5-b60d0a664907",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Work stealing means an idle P takes runnable work from another P."
+                ]
+            ]
+        },
+        {
+            "id": "3438ce52-b42a-58ff-bfde-b01192dc8d31",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime also finds work when timers expire or network operations become ready."
+                ]
+            ]
+        },
+        {
+            "id": "c5695ad6-7a0a-54b7-b8b7-b5cc4ef5b3b7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A goroutine does not always need to enter a particular P’s queue before it runs."
+                ]
+            ]
+        },
+        {
+            "id": "94a7e6cd-98b2-5705-a3a7-a3bfac65cc68",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Queue choices and wake-up steps can change between Go versions."
                 ]
             ]
         },
@@ -267,7 +348,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Simplified behavior"
+                                "What happens"
                             ]
                         ]
                     }
@@ -278,12 +359,12 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "Go-managed wait: channel, mutex or sleep"
+                                "Channel, mutex or sleep wait"
                             ]
                         ],
                         "column-1": [
                             [
-                                "The runtime can park G and schedule other runnable work on the available execution resources."
+                                "The runtime can park G, meaning it pauses G until the needed event. Other runnable work can run."
                             ]
                         ]
                     }
@@ -294,12 +375,12 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "Pollable network I/O"
+                                "Network input/output (I/O) handled by the poller"
                             ]
                         ],
                         "column-1": [
                             [
-                                "When data is unavailable, the network poller can park G and wake it on readiness without dedicating a blocked OS thread to each connection."
+                                "The poller waits for network readiness and wakes G. Each connection does not need its own blocked OS thread."
                             ]
                         ]
                     }
@@ -315,7 +396,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "M may block. The runtime can make its P available to another M so other Go work can continue."
+                                "M may wait inside the OS call. The runtime can let another M use its P."
                             ]
                         ]
                     }
@@ -331,7 +412,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "M must acquire a P before resuming user Go code. It may resume G directly or place G back into scheduling if no P is available."
+                                "M needs a P to run Go code again. It may resume G directly, or put G back into scheduling when no P is available."
                             ]
                         ]
                     }
@@ -340,10 +421,28 @@ const note = {
         },
         {
             "id": "81a548d6-2e84-5e47-bbb3-37e7ac9240f1",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not classify every HTTP request or database query as an OS-thread-blocking syscall. The actual behavior depends on the operation, driver, platform and runtime path. A blocked goroutine does not prove that its P is blocked or that all its queued work is stuck."
+                    "An HTTP request or database query does not always block an OS thread."
+                ]
+            ]
+        },
+        {
+            "id": "91e8426c-3da0-5330-92e7-d6919c64f914",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The behavior depends on the operation, driver, OS and Go runtime."
+                ]
+            ]
+        },
+        {
+            "id": "f0623480-9efb-542f-8f91-af119945fda2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A waiting goroutine does not prove that its P or the other work in its queue is stuck."
                 ]
             ]
         },
@@ -358,7 +457,7 @@ const note = {
         },
         {
             "id": "fd0411ff-2b8d-5ab0-8db6-293d3e0e9588",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "GOMAXPROCS",
@@ -369,7 +468,25 @@ const note = {
                     ]
                 ],
                 [
-                    " determines the number of Ps and limits simultaneous execution of user Go code. It does not limit the total number of goroutines, OS threads, or outstanding I/O operations."
+                    " sets the number of Ps."
+                ]
+            ]
+        },
+        {
+            "id": "a5e445b2-c9e1-5ece-b932-30b1bd20b64a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It limits how much user Go code can run at the same time."
+                ]
+            ]
+        },
+        {
+            "id": "363d0027-14cd-5c50-8782-9dd7ce8da1ed",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not limit the total number of goroutines, OS threads or waiting I/O operations."
                 ]
             ]
         },
@@ -385,10 +502,66 @@ const note = {
         },
         {
             "id": "d16e8407-6f5f-5d3c-83ad-9b949ce7387f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The default is version- and environment-dependent. Go 1.25+ added container-aware defaults and automatic updates based on logical CPUs, CPU affinity and Linux cgroup CPU limits. Programs declaring Go 1.24 or earlier default to compatibility settings that disable these behaviors unless overridden. An explicit environment setting or "
+                    "The default depends on the Go version and the environment."
+                ]
+            ]
+        },
+        {
+            "id": "e60adffd-ac0e-50d6-966f-fc3d672c75bd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go 1.25+ uses the logical CPU count and CPU affinity. CPU affinity limits which CPUs the program may use."
+                ]
+            ]
+        },
+        {
+            "id": "d43b8037-d6a2-5100-9a74-ef3f7a3d83ad",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "On Linux, it also considers CPU limits set by cgroups. A cgroup controls the resources available to a process."
+                ]
+            ]
+        },
+        {
+            "id": "ee3c2fb2-a3a4-58c0-9499-37d2d0a1559b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime can update the default when available CPU resources change."
+                ]
+            ]
+        },
+        {
+            "id": "80938dc5-f86c-5f61-bf50-4c84edf394f3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Programs declaring Go 1.24 or earlier normally disable these new defaults and updates through compatibility settings. Those settings can be overridden."
+                ]
+            ]
+        },
+        {
+            "id": "8a995b63-d467-5855-8cb3-072274a10716",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Setting the "
+                ],
+                [
+                    "GOMAXPROCS",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " environment variable or calling "
                 ],
                 [
                     "runtime.GOMAXPROCS(n)",
@@ -399,7 +572,27 @@ const note = {
                     ]
                 ],
                 [
-                    " with n > 0 disables automatic updates; "
+                    " with "
+                ],
+                [
+                    "n > 0",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " turns off automatic updates."
+                ]
+            ]
+        },
+        {
+            "id": "18217b23-1726-5aba-96a5-6ad2b0db409c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "On Go 1.25+, "
                 ],
                 [
                     "runtime.SetDefaultGOMAXPROCS()",
@@ -410,16 +603,34 @@ const note = {
                     ]
                 ],
                 [
-                    " restores the runtime default on supported versions."
+                    " restores the runtime default and its updates."
                 ]
             ]
         },
         {
             "id": "1c04d25a-9696-518c-9e01-42aa78ddd5bb",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Start with the runtime default. Tune only with workload measurements; setting it below or equal to the logical CPU count is not a universal performance rule."
+                    "Start with the runtime default."
+                ]
+            ]
+        },
+        {
+            "id": "bcf8631e-f58f-5b35-b1a7-e8236800e29a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure the actual workload before changing it."
+                ]
+            ]
+        },
+        {
+            "id": "85573f30-1d41-5714-b9cf-03ae8dbed367",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keeping the value at or below the logical CPU count does not guarantee the best performance."
                 ]
             ]
         },
@@ -434,10 +645,37 @@ const note = {
         },
         {
             "id": "f99216f0-353a-5d5e-994b-bdcc820d6532",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Many goroutines, low CPU use and rising memory are symptoms. They do not establish a scheduler defect. A crawler may be waiting for slow servers, connection limits, a full results channel, a lock, or work that never observes cancellation."
+                    "A crawler may have many goroutines, low CPU use and growing memory use."
+                ]
+            ]
+        },
+        {
+            "id": "47bacb99-bedf-5753-9a3b-71c3827839d1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These symptoms alone do not prove a scheduler problem."
+                ]
+            ]
+        },
+        {
+            "id": "408071f1-4c3b-5d0e-bc09-4e213f2a65ea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Work may be waiting for slow servers, connection limits, a full results channel or a lock."
+                ]
+            ]
+        },
+        {
+            "id": "8d1ddb50-2071-580e-854d-1a8dc4ed8cc3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Some work may never stop because it does not check cancellation."
                 ]
             ]
         },
@@ -446,7 +684,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Inspect goroutine stacks to locate waits. Compare repeated snapshots to distinguish normal outstanding requests from work that never exits."
+                    "Look at goroutine stack traces to find where work is waiting."
+                ]
+            ]
+        },
+        {
+            "id": "96c15fa6-f361-540f-ae77-77fe8c679664",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Compare several snapshots to see which waits never end."
                 ]
             ]
         },
@@ -455,7 +702,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use traces and relevant profiles to investigate scheduling, blocking and CPU work. Measure thread count separately from goroutine count."
+                    "Use execution traces and profiles to inspect waiting, CPU work and scheduling."
+                ]
+            ]
+        },
+        {
+            "id": "58cb8485-7657-5f85-96a9-a93ddbb8f67e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Count OS threads separately from goroutines."
                 ]
             ]
         },
@@ -464,7 +720,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Bound concurrent requests and provide timeouts or cancellation. More goroutines do not increase a server’s capacity or remove a downstream bottleneck."
+                    "Limit how many requests run at once."
+                ]
+            ]
+        },
+        {
+            "id": "7baa0f1c-254b-5300-8514-22119623424c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Give requests a timeout or a way to stop."
+                ]
+            ]
+        },
+        {
+            "id": "35754985-bae6-5739-bd50-33741dae24d7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "More goroutines cannot make a slow server process requests faster."
                 ]
             ]
         },

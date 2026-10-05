@@ -6,14 +6,14 @@ const note = {
     "notionId": "24e24eb1-ed54-808d-a0bc-d85fd9588363",
     "slug": "date-time",
     "title": "Date & Time",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "date-time-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The standard time package provides instants, durations, zones, formatting, and timers."
+                    "Use the standard time package for dates, durations, time zones, and timers."
                 ]
             ]
         },
@@ -62,7 +62,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "An instant with an associated location and optional monotonic clock reading."
+                                "A point in time, its display location, and sometimes a monotonic reading for elapsed time."
                             ]
                         ]
                     }
@@ -78,7 +78,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "An int64 count of nanoseconds. Use units such as time.Second, time.Minute, and time.Hour."
+                                "An int64 count of nanoseconds. Use time.Second, time.Minute, or time.Hour as units."
                             ]
                         ]
                     }
@@ -94,7 +94,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "A time zone and its offset-transition rules, including daylight saving where applicable."
+                                "A time zone with rules for offset changes, including daylight saving."
                             ]
                         ]
                     }
@@ -113,10 +113,28 @@ const note = {
         },
         {
             "id": "date-time-06",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Time accessors include Year, Month, Day, Hour, Minute, Second, Nanosecond, Weekday, YearDay, and Location. Do not assume time.Time is stored as a Unix timestamp internally; use its public methods."
+                    "Read time parts with Year, Month, Day, Hour, Minute, Second, and Nanosecond."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-06-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Weekday, YearDay, and Location give more date and zone details."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-06-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use these methods rather than depending on how time.Time stores data internally."
                 ]
             ]
         },
@@ -160,19 +178,55 @@ const note = {
         },
         {
             "id": "date-time-11",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Sub subtracts two supplied instants. Since(start) measures time from start to the actual current clock reading; its output cannot be fixed by declaring another variable named now. Duration conversions such as d.Hours(), d.Minutes(), and d.Seconds() return floating-point counts. Duration arithmetic can overflow its roughly 290-year range."
+                    "Sub gives the duration between two times you supply."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-11-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Since(start) measures from start to the actual current time."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-11-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A variable named now does not change what Since reads from the clock."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-11-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "d.Hours(), d.Minutes(), and d.Seconds() return decimal counts."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-11-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A Duration holds about 290 years. Larger calculations can overflow."
                 ]
             ]
         },
         {
             "id": "date-time-12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The printed duration varies:"
+                    "The elapsed duration changes each time you run the code."
                 ]
             ]
         },
@@ -207,10 +261,46 @@ const note = {
         },
         {
             "id": "date-time-16",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: true, then false. Equal compares instants, including across locations. == also compares the location and any monotonic reading. Before and After compare order."
+                    "Expected output: true, then false."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-16-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Equal checks whether two values represent the same point in time, even in different zones."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-16-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "== also compares the location and any monotonic clock reading."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-16-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A monotonic reading measures elapsed time even if the system clock is changed."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-16-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Before and After check time order."
                 ]
             ]
         },
@@ -225,10 +315,37 @@ const note = {
         },
         {
             "id": "date-time-18",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A layout shows how the reference date Mon Jan 2 15:04:05 MST 2006 should appear. Choose the components you need; YYYY and DD are not Go layout tokens. Use time.RFC3339 for timestamps with a numeric offset."
+                    "A layout shows how to write the reference date: Mon Jan 2 15:04:05 MST 2006."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-18-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Choose the date and time parts you need from that reference."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-18-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "YYYY and DD are not Go layout tokens."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-18-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use time.RFC3339 for a timestamp with a numeric zone offset."
                 ]
             ]
         },
@@ -408,10 +525,46 @@ const note = {
         },
         {
             "id": "date-time-23",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Without zone information, Parse interprets input as UTC and ParseInLocation uses the supplied location. With an explicit offset or abbreviation, parsing uses that information and attempts to match zone rules. Parse uses time.Local for matching; ParseInLocation uses the supplied location. Unknown abbreviations can receive a zero offset, so numeric offsets or a known location are safer."
+                    "If the input has no time zone, Parse uses UTC."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-23-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "ParseInLocation uses the location you supply when the input has no zone."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-23-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the input has an offset or zone abbreviation, parsing uses that information."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-23-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Parse tries to match the zone against time.Local. ParseInLocation uses the supplied location instead."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-23-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An unknown abbreviation can get a zero offset. Prefer a numeric offset or a known location."
                 ]
             ]
         },
@@ -427,10 +580,10 @@ const note = {
         },
         {
             "id": "date-time-25",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output, when the zone data is available:"
+                    "Expected output when the zone data is available:"
                 ]
             ]
         },
@@ -446,10 +599,55 @@ const note = {
         },
         {
             "id": "date-time-27",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "LoadLocation needs zone data and can fail. Use named zones such as America/New_York when daylight-saving rules matter. FixedZone uses one offset throughout the year. In(loc), UTC(), and Local() change the display location while preserving the instant. Use UTC or explicit offsets when exchanging timestamps, then convert for display. Retain the named zone when future calendar schedules depend on its rules."
+                    "LoadLocation can fail if it cannot find the zone data."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-27-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a named zone such as America/New_York when daylight-saving rules matter."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-27-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "FixedZone uses the same offset all year."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-27-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In(loc), UTC(), and Local() change the display zone, not the point in time."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-27-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use UTC or explicit offsets when sending timestamps between systems. Convert to the display zone when needed."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-27-read-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keep the named zone for future calendar schedules that depend on its rules."
                 ]
             ]
         },
@@ -464,10 +662,37 @@ const note = {
         },
         {
             "id": "date-time-29",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Add adds a fixed duration. AddDate adds calendar years, months, and days in the time's location. A calendar day around a daylight-saving transition may be 23 or 25 hours. AddDate normalizes invalid dates rather than clamping them to month end."
+                    "Add adds a fixed duration."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-29-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "AddDate adds calendar years, months, and days in the time's location."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-29-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A day near a daylight-saving change can last 23 or 25 hours."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-29-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "AddDate normalizes an invalid date. It does not always choose the last day of the month."
                 ]
             ]
         },
@@ -483,10 +708,28 @@ const note = {
         },
         {
             "id": "date-time-32",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Truncate rounds the absolute duration since the zero time. It does not round the displayed local clock. For a half-hour zone, truncating this instant to an hour leaves the displayed minute at 30. Construct local midnight explicitly as above."
+                    "Truncate rounds down the duration since the zero time, not the displayed local clock."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-32-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For the +05:30 zone above, truncating to an hour leaves the displayed minute at 30."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-32-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "To find local midnight, create a time with the same date and location and set the clock parts to zero."
                 ]
             ]
         },
@@ -501,10 +744,37 @@ const note = {
         },
         {
             "id": "date-time-34",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Unix, UnixMilli, and UnixNano return counts since 1970-01-01 UTC in different units. The result is independent of display location. UnixNano only represents a limited date range, approximately 1678–2262."
+                    "Unix gives seconds since 1970-01-01 UTC."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-34-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "UnixMilli gives milliseconds. UnixNano gives nanoseconds."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-34-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Changing the display zone does not change these numbers."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-34-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "UnixNano can represent dates only from about 1678 to 2262."
                 ]
             ]
         },
@@ -598,7 +868,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Receive a time after a delay; shorthand for a one-shot timer channel."
+                                "A channel that sends a time once after the delay."
                             ]
                         ]
                     }
@@ -614,7 +884,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "A one-shot timer with a handle for Stop or Reset. Receive from timer.C to wait."
+                                "A timer that fires once. Use Stop or Reset to control it. Wait by receiving from timer.C."
                             ]
                         ]
                     }
@@ -630,7 +900,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Repeated notifications. Slow receivers can miss ticks. Stop when work ends."
+                                "Sends ticks repeatedly. Slow receivers can miss ticks. Stop when work ends."
                             ]
                         ]
                     }
@@ -639,10 +909,28 @@ const note = {
         },
         {
             "id": "date-time-40",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Timer channels do not close after firing. Ticker.Stop also does not close ticker.C. A loop must return or use a separate cancellation signal to exit."
+                    "A timer channel does not close after the timer fires."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-40-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Ticker.Stop stops ticks but does not close ticker.C."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-40-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Return from the loop or use a separate cancellation signal to exit."
                 ]
             ]
         },
@@ -658,10 +946,19 @@ const note = {
         },
         {
             "id": "date-time-42",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: tick 1, tick 2, tick 3 on separate lines. Actual timing varies."
+                    "Expected output: tick 1, tick 2, tick 3 on separate lines."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-42-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The time between printed lines can vary."
                 ]
             ]
         },
@@ -676,25 +973,106 @@ const note = {
         },
         {
             "id": "date-time-44",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "With Go 1.23 timer semantics, unreachable timers and tickers can be collected, and Stop/Reset prevents later receives of stale values from the old timer configuration. These semantics apply by default when the main module declares go 1.23 or later; the asynctimerchan GODEBUG setting can change the behavior."
+                    "Go 1.23 added new timer behavior."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-44-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The garbage collector can free timers and tickers that are no longer reachable."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-44-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "With this behavior, Stop and Reset prevent later receives of old values from the previous timer setting."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-44-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The new behavior is the default when the main module declares go 1.23 or later."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-44-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The asynctimerchan GODEBUG setting can select different behavior."
                 ]
             ]
         },
         {
             "id": "date-time-45",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Older semantics retain some timers until expiry and retain unstopped tickers. Reusing a channel timer then requires coordinating Stop and draining an unread expiry before Reset. Do not copy an unconditional drain into Go 1.23 code: it can block. Stop remains useful for preventing unwanted work regardless of collection behavior."
+                    "With older behavior, some timers stay in memory until they expire."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-45-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Unstopped tickers also stay in memory with the older behavior."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-45-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Before reusing a channel timer with older behavior, stop it and remove an unread expiry value when needed."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-45-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Then call Reset. Coordinate this with any other receiver."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-45-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not always drain the channel in Go 1.23 code. A receive can block when there is no value."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-45-read-5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Stop is still useful when you want to prevent future timer or ticker work."
                 ]
             ]
         },
         {
             "id": "date-time-46",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Version details: "
@@ -724,16 +1102,34 @@ const note = {
         },
         {
             "id": "date-time-48",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A timer can limit how long a caller waits. It does not cancel other goroutines by itself. An operation must observe a cancellation signal and release its resources."
+                    "A timer can limit how long the caller waits."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-48-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not stop other goroutines by itself."
+                ]
+            ]
+        },
+        {
+            "id": "date-time-48-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The operation must check for cancellation and release its resources."
                 ]
             ]
         },
         {
             "id": "date-time-49",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -754,7 +1150,7 @@ const note = {
         },
         {
             "id": "date-time-50",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "API reference: "

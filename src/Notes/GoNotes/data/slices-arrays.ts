@@ -6,7 +6,7 @@ const note = {
     "notionId": "24124eb1-ed54-806b-a0c9-f216d2b44e7e",
     "slug": "slices-arrays",
     "title": "Slices & Arrays",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "990ab772-5824-5cb6-b8c0-83515954a3bd",
@@ -31,10 +31,19 @@ const note = {
         },
         {
             "id": "b9671871-f3c1-59f5-8763-e578bccad3f1",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An array holds a fixed number of elements. A slice describes a portion of an underlying array and can have a different length as the program runs."
+                    "An array holds a fixed number of elements."
+                ]
+            ]
+        },
+        {
+            "id": "e6b0c67f-797e-583b-af46-61bcb8ae75ea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A slice refers to part of an underlying array (its backing array). Its length can change while the program runs."
                 ]
             ]
         },
@@ -52,7 +61,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The length is part of the type: "
+                    "The length is part of the array type. "
                 ],
                 [
                     "[3]int",
@@ -74,7 +83,16 @@ const note = {
                     ]
                 ],
                 [
-                    " are different types. An array cannot be resized."
+                    " are different types."
+                ]
+            ]
+        },
+        {
+            "id": "2d1a6fa7-210b-5950-b624-64d94559eeb8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You cannot resize an array."
                 ]
             ]
         },
@@ -83,7 +101,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Indexing starts at 0. Assignment copies the array elements into separate array storage."
+                    "The first element has index 0."
+                ]
+            ]
+        },
+        {
+            "id": "9ac0de66-9993-5361-8dff-f617a707d34f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assigning an array copies its elements into a separate array."
                 ]
             ]
         },
@@ -99,10 +126,10 @@ const note = {
         },
         {
             "id": "2f257249-abbe-5193-a02c-1ccf9c87ad16",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An array copy is not a deep copy of objects referenced by its elements. For example, copying an array of pointers copies the pointers."
+                    "Copying an array of pointers copies the pointers. It does not copy the objects they point to."
                 ]
             ]
         },
@@ -117,10 +144,28 @@ const note = {
         },
         {
             "id": "382721db-ce92-57ac-869f-c68d8a9c988d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A slice value contains a reference to its underlying array, a length, and a capacity. Assignment and function arguments copy the slice value, while the copies may still share element storage."
+                    "A slice value has three parts: a reference to an array, a length, and a capacity."
+                ]
+            ]
+        },
+        {
+            "id": "85dc6f0b-57a4-540b-8d6c-dcbbbc8d0106",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assignment copies the slice value. Passing it to a function also copies the slice value."
+                ]
+            ]
+        },
+        {
+            "id": "98306799-56af-52a7-a140-1cdbf68508f6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These copies can still refer to the same array. Changing an element can affect both slices."
                 ]
             ]
         },
@@ -164,10 +209,27 @@ const note = {
         },
         {
             "id": "6fa50e27-7b29-5a36-ba3b-8ee92196d099",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The lower bound is included and the upper bound is excluded. These slices share storage with arr; changing an existing element can affect the other views."
+                    "arr[1:4]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " includes index 1 and stops before index 4."
+                ]
+            ]
+        },
+        {
+            "id": "8eea0b26-8e32-5d9f-8fa4-ec9c91f6e627",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The slices in this example refer to the same array. Changing an element can affect the other slices."
                 ]
             ]
         },
@@ -262,7 +324,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Number of elements available from this slice’s start in its underlying array."
+                                "How far the slice can grow within its current array."
                             ]
                         ]
                     }
@@ -271,10 +333,19 @@ const note = {
         },
         {
             "id": "91b165c8-0949-5f40-a441-41c44db3902f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A slice can be resliced up to its capacity. Indexing still requires an index below its current length."
+                    "You can extend a slice up to its capacity by slicing it again."
+                ]
+            ]
+        },
+        {
+            "id": "454d782d-8987-579d-8e37-8b27d04e437a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "To access an element, its index must be less than the slice’s current length."
                 ]
             ]
         },
@@ -299,10 +370,78 @@ const note = {
         },
         {
             "id": "cb2f7271-bf1c-5529-8770-d438c0f9637b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Append returns an updated slice. Store the result. If there is enough capacity, append reuses the existing array. Otherwise it allocates a larger array and copies the elements. Other slices keep their own lengths and backing-array references."
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns the updated slice. Store the result, as in "
+                ],
+                [
+                    "s = append(s, value)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "b49f691f-acbb-567d-a084-ca75f00e0501",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the slice has enough capacity, "
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses the same array."
+                ]
+            ]
+        },
+        {
+            "id": "fdc643a5-c6d0-58d8-8664-bdb0591090e0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If it needs more capacity, "
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " creates a larger array and copies the elements into it."
+                ]
+            ]
+        },
+        {
+            "id": "dca050f3-2183-57aa-8928-ffa9c5c79eac",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Other slices keep their own lengths and still refer to their previous arrays."
                 ]
             ]
         },
@@ -336,7 +475,7 @@ const note = {
         },
         {
             "id": "7f60b00a-5358-5fe1-a5aa-f79e34506d77",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "copy",
@@ -347,7 +486,53 @@ const note = {
                     ]
                 ],
                 [
-                    " copies elements into an existing destination. It returns the smaller of the source and destination lengths. It does not allocate or make overlapping slices independent."
+                    " copies elements into a destination slice that already exists."
+                ]
+            ]
+        },
+        {
+            "id": "4f691d56-c0fc-5479-9e30-6dd675286e9e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It returns the number of elements copied: the smaller of the two slice lengths."
+                ]
+            ]
+        },
+        {
+            "id": "4999ce25-65ba-5fcf-9608-b9ebd99dee41",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "copy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not create a new array."
+                ]
+            ]
+        },
+        {
+            "id": "b0019c6f-a4b9-55c7-ac59-fdff5d37f96c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the slices share an array, "
+                ],
+                [
+                    "copy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not separate them."
                 ]
             ]
         },
@@ -363,10 +548,30 @@ const note = {
         },
         {
             "id": "68fd8bc9-561c-55bf-a6c5-2df54372053c",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Overlapping source and destination are allowed. Copying elements that contain references still shares the referenced objects; it is not a deep copy."
+                    "The source and destination can overlap in the same array."
+                ]
+            ]
+        },
+        {
+            "id": "0568b63a-4044-5422-a0e6-d22d3a339acf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If an element contains a reference, "
+                ],
+                [
+                    "copy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " copies that reference. It does not copy the object it refers to."
                 ]
             ]
         },
@@ -391,10 +596,92 @@ const note = {
         },
         {
             "id": "08bf9fc9-3d11-5aa4-9821-67e667492486",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Empty means length 0. It does not imply zero capacity or nil. A nil slice supports len, cap, range, copy, and append; indexing still requires an existing element."
+                    "An empty slice has length 0. It can still have capacity greater than 0."
+                ]
+            ]
+        },
+        {
+            "id": "8ac2d4c2-c95d-5f84-bb36-e96f8d0e9ebd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An empty slice can be nil or non-nil."
+                ]
+            ]
+        },
+        {
+            "id": "906ca3d6-af53-5595-a6d9-b559cd401a17",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can use "
+                ],
+                [
+                    "len",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "cap",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "copy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", and "
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with a nil slice."
+                ]
+            ]
+        },
+        {
+            "id": "de621ecb-c5e2-5583-a6a9-8fe99899bcbe",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You need an existing element before you can access it by index."
                 ]
             ]
         },
@@ -433,7 +720,49 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Two arrays of the same type can be compared with == if their element type is comparable. An array of slices cannot be compared with ==."
+                    "Two arrays of the same type can use "
+                ],
+                [
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " if their elements can use "
+                ],
+                [
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "3a85b721-6a6d-565f-a597-b5790a2aa5e7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An array of slices cannot use "
+                ],
+                [
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", because slices cannot be compared with each other that way."
                 ]
             ]
         },
@@ -442,7 +771,38 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Slices cannot be compared with each other using ==. They can be compared with nil."
+                    "You cannot compare two slices with "
+                ],
+                [
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "95daa5d6-a5c6-558c-9f75-3080abfd1ce2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can compare a slice with "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -458,10 +818,10 @@ const note = {
         },
         {
             "id": "2340639a-d9b3-529b-ba8d-4bf5dd9bee04",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Iteration rules and index/value examples are in "
+                    "See "
                 ],
                 [
                     "Range & For Loops",
@@ -473,7 +833,7 @@ const note = {
                     ]
                 ],
                 [
-                    "."
+                    " for iteration rules and index/value examples."
                 ]
             ]
         },
@@ -498,10 +858,19 @@ const note = {
         },
         {
             "id": "10657370-5e6e-57bf-be24-29be5d36e878",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An array has a fixed shape. Each row in a slice of slices is a separate slice and can have a different length."
+                    "A multi-dimensional array has a fixed number of rows and columns."
+                ]
+            ]
+        },
+        {
+            "id": "a323bd2f-97ce-5587-a584-55151b250608",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In a slice of slices, each row is a slice. The rows can have different lengths."
                 ]
             ]
         },

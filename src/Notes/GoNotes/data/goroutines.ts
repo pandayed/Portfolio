@@ -6,14 +6,32 @@ const note = {
     "notionId": "24024eb1-ed54-8077-ac46-f5730db152f5",
     "slug": "goroutines",
     "title": "Goroutines",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "670dd769-c4c6-5cc0-8459-8b0493a1de12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A goroutine runs a function concurrently with other goroutines in the same program. The Go runtime schedules goroutines on OS threads. Concurrency does not guarantee simultaneous execution on multiple CPUs."
+                    "A goroutine runs a function independently of the caller."
+                ]
+            ]
+        },
+        {
+            "id": "0e471899-9086-5449-83ef-73daeca42c02",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go manages goroutines and runs them on operating-system (OS) threads."
+                ]
+            ]
+        },
+        {
+            "id": "a3816b26-5ac1-5610-bc85-a7b3e89ac084",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Concurrency means tasks can make progress during the same period. They do not always run at the same instant on different CPUs."
                 ]
             ]
         },
@@ -28,10 +46,10 @@ const note = {
         },
         {
             "id": "196f8bb1-1e9e-542d-880a-20b51d3a770f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The "
+                    "Put "
                 ],
                 [
                     "go",
@@ -42,7 +60,25 @@ const note = {
                     ]
                 ],
                 [
-                    " statement starts a function call and lets the caller continue. Arguments are evaluated in the calling goroutine before the new goroutine starts."
+                    " before a function call to start a goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "33e3ed51-11e1-568c-8b80-2994e6438679",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The caller continues without waiting for that function to finish."
+                ]
+            ]
+        },
+        {
+            "id": "ca28106c-662f-5e46-81dd-63a22812bd0d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go evaluates the arguments in the caller before starting the goroutine."
                 ]
             ]
         },
@@ -58,10 +94,27 @@ const note = {
         },
         {
             "id": "b5c9157a-18db-59b2-9f66-aef1c94b6598",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: worker finished, then main finished. The receive waits for the worker to close "
+                    "Output: worker finished, then main finished."
+                ]
+            ]
+        },
+        {
+            "id": "de4e63d1-ea21-5f10-a4ce-e865d4e39243",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "<-done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " waits for the worker to close "
                 ],
                 [
                     "done",
@@ -72,7 +125,16 @@ const note = {
                     ]
                 ],
                 [
-                    ". Without that wait, "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "a97a3693-450c-52d7-bc8d-c5509bbb1e1a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Without this wait, "
                 ],
                 [
                     "main",
@@ -101,7 +163,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Returning from "
+                    "When "
                 ],
                 [
                     "main",
@@ -112,7 +174,16 @@ const note = {
                     ]
                 ],
                 [
-                    " ends the program. Go does not wait for other goroutines or run their deferred cleanup as part of that exit."
+                    " returns, the program ends."
+                ]
+            ]
+        },
+        {
+            "id": "58886dfc-bcea-588c-8c7f-2e860a9bcb73",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go does not wait for other goroutines or run their deferred cleanup during program exit."
                 ]
             ]
         },
@@ -121,7 +192,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Plan both completion and cancellation when starting a goroutine. A goroutine waiting forever can retain its stack and referenced data."
+                    "Decide how each goroutine finishes and how it stops when its work is no longer needed."
+                ]
+            ]
+        },
+        {
+            "id": "a876503a-2f7d-5a1c-8f80-ab8c67caf517",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A goroutine that waits forever can keep its stack and the data it uses in memory."
                 ]
             ]
         },
@@ -130,7 +210,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Goroutines share memory. Protect concurrent reads and writes with synchronization or transfer ownership through a channel."
+                    "Goroutines share the program’s memory."
+                ]
+            ]
+        },
+        {
+            "id": "e7b2ac75-02be-5737-b9c9-9c9d332ee7fd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use locks to protect shared reads and writes, or let one goroutine own the data and communicate through channels."
                 ]
             ]
         },
@@ -139,7 +228,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Goroutines use resources. Their number and memory cost depend on the workload; there is no general promise that launching millions is appropriate."
+                    "Each goroutine uses memory and runtime resources."
+                ]
+            ]
+        },
+        {
+            "id": "92d77d00-4bcb-55db-b224-3217cfc4a184",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check the workload before launching very large numbers of goroutines."
                 ]
             ]
         },
@@ -211,10 +309,10 @@ const note = {
         },
         {
             "id": "16f70b5f-f1b3-5386-a8c8-64bb1fbee649",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "With Go 1.22+ language semantics, loop variables declared with "
+                    "Go 1.22+ language rules give each iteration its own loop variables when the loop declares them with "
                 ],
                 [
                     ":=",
@@ -225,7 +323,25 @@ const note = {
                     ]
                 ],
                 [
-                    " have a separate variable for each iteration. Older language versions reuse that variable. Assignment to an existing variable with "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "c5f11aab-50b8-532d-9b4b-e29e102dcde3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Older Go language versions reuse the same loop variables."
+                ]
+            ]
+        },
+        {
+            "id": "6a782a78-be5b-5ded-96b4-0c7aa8ce3fbe",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A loop that assigns to existing variables with "
                 ],
                 [
                     "=",
@@ -236,16 +352,25 @@ const note = {
                     ]
                 ],
                 [
-                    " still shares it. Concurrent access to a shared loop variable can cause a data race."
+                    " still shares those variables."
+                ]
+            ]
+        },
+        {
+            "id": "78f1301e-1b1e-5f53-ba0d-b08b5bdccdf6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Concurrent reads and writes to a shared loop variable can cause a data race."
                 ]
             ]
         },
         {
             "id": "6f272514-1959-59ae-a431-2af93e0a0b21",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This example passes the value as an argument. It also works with older language versions and waits for every print:"
+                    "Passing the loop value as an argument also works with older Go versions."
                 ]
             ]
         },
@@ -261,10 +386,19 @@ const note = {
         },
         {
             "id": "210f3c8a-c13a-5cf6-9b27-7e3f61fabfd5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The program prints 1, 2 and 3 once each. Their order is unspecified."
+                    "Prints 1, 2 and 3 once each."
+                ]
+            ]
+        },
+        {
+            "id": "c149cafc-07f6-58b9-a9c5-604016a643c0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The order can change between runs."
                 ]
             ]
         },

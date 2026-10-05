@@ -6,11 +6,11 @@ const note = {
     "notionId": "24f24eb1-ed54-8044-8f81-f2d7e87bf938",
     "slug": "rwmutex",
     "title": "RWMutex",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "898ef37b-7753-5066-8d54-0d78e54eb831",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "A "
@@ -24,7 +24,16 @@ const note = {
                     ]
                 ],
                 [
-                    " protects shared state with either several readers or one exclusive writer. Readers must not modify the protected state."
+                    " allows several readers or one writer to access protected data."
+                ]
+            ]
+        },
+        {
+            "id": "2d315b9f-e519-5f0c-96b3-bf4baa7e33df",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Code holding a read lock must not change the protected data."
                 ]
             ]
         },
@@ -95,7 +104,7 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "Read shared state without changing it."
+                                "Read shared data without changing it."
                             ]
                         ]
                     }
@@ -126,7 +135,7 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "Change shared state with exclusive access."
+                                "Change shared data while other readers and writers wait."
                             ]
                         ]
                     }
@@ -147,7 +156,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The zero value is usable. Do not copy an RWMutex after first use."
+                    "The zero value is ready to use."
+                ]
+            ]
+        },
+        {
+            "id": "0f338b15-6f65-5e93-b1c8-a5075f56b904",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not copy an RWMutex after first use."
                 ]
             ]
         },
@@ -156,7 +174,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Readers can hold the lock together. When a writer is waiting behind existing readers, new read-lock attempts block until that writer acquires and releases the lock."
+                    "Several readers can hold the read lock together."
+                ]
+            ]
+        },
+        {
+            "id": "e2c03beb-86a5-5ed7-bbd9-ec225bbf3167",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If a writer waits behind those readers, new readers also wait."
+                ]
+            ]
+        },
+        {
+            "id": "e97803e0-b5dd-5d1b-959f-ec2f38c2ab1a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "New readers can enter after that writer gets and releases the write lock."
                 ]
             ]
         },
@@ -165,7 +201,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not recursively acquire read locks: a pending writer can cause a second "
+                    "Do not take a read lock again while already holding a read lock."
+                ]
+            ]
+        },
+        {
+            "id": "22f1d41c-8df6-55e4-a880-06fa93d8c365",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The second "
                 ],
                 [
                     "RLock",
@@ -176,7 +221,16 @@ const note = {
                     ]
                 ],
                 [
-                    " to block while the first still prevents the writer from proceeding."
+                    " may wait for a pending writer."
+                ]
+            ]
+        },
+        {
+            "id": "9197bc8b-4248-503f-a7f1-3a2db6c335dd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That writer cannot continue until the first read lock is released. This can deadlock."
                 ]
             ]
         },
@@ -185,7 +239,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Read locks cannot be upgraded to write locks, and write locks cannot be downgraded to read locks. Release first, then reacquire and recheck any assumption that may have changed."
+                    "You cannot change a held read lock directly into a write lock, or a write lock into a read lock."
+                ]
+            ]
+        },
+        {
+            "id": "a1c59eca-472a-50a3-9a71-5747c12193ea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Release the lock before taking the other kind of lock."
+                ]
+            ]
+        },
+        {
+            "id": "287fde6f-db96-572b-94c5-7450009d7b8c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check the data again after taking the new lock. Another goroutine may have changed it while you were unlocked."
                 ]
             ]
         },
@@ -194,7 +266,69 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Pair each lock with the matching unlock. Reacquiring the write lock while holding it blocks; repeated read locking is not accurately described as always deadlocking."
+                    "Pair "
+                ],
+                [
+                    "RLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with "
+                ],
+                [
+                    "RUnlock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", and "
+                ],
+                [
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with "
+                ],
+                [
+                    "Unlock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "0dd6e46c-3e4d-507b-824b-7f323c44866c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Taking the write lock again while holding it makes the goroutine wait."
+                ]
+            ]
+        },
+        {
+            "id": "07f69cf0-2c3f-508e-804f-eae95b83df74",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Taking a read lock twice does not always deadlock, but it is unsafe when a writer may be waiting."
                 ]
             ]
         },
@@ -209,10 +343,47 @@ const note = {
         },
         {
             "id": "ca654946-225d-52d5-a9bb-ced150243d8c",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This example waits for the write to finish before launching the readers. An explicit completion channel provides the ordering; a sleep would not."
+                    "The writer closes "
+                ],
+                [
+                    "written",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after its write has finished."
+                ]
+            ]
+        },
+        {
+            "id": "b836d14e-1c51-5d76-bdb2-17b6ff8c3961",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " waits for that signal before starting the readers."
+                ]
+            ]
+        },
+        {
+            "id": "93c8206f-e862-51a2-a3b2-c21f19b4a645",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Sleeping for a fixed time would not guarantee that the write has finished."
                 ]
             ]
         },
@@ -228,10 +399,19 @@ const note = {
         },
         {
             "id": "2b67da4b-5b65-5695-9571-253f43032ecd",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: Wrote: foo => bar first, then three Read: foo => bar lines. The readers may run concurrently; their scheduling order is unspecified."
+                    "Output: Wrote: foo => bar first, then three Read: foo => bar lines."
+                ]
+            ]
+        },
+        {
+            "id": "854a0644-af53-5a21-8500-8ab1fe15b7b6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The readers may run together. Their order is not fixed."
                 ]
             ]
         },
@@ -246,10 +426,28 @@ const note = {
         },
         {
             "id": "649f7560-8cc0-5824-bb17-5c3534ad13b9",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Consider an RWMutex when reads can safely overlap and the workload has enough read work to benefit. It is not automatically faster than a Mutex; measure the actual access pattern and contention."
+                    "Consider an RWMutex when reads can run together without changing data."
+                ]
+            ]
+        },
+        {
+            "id": "1e3b3123-0bc9-591f-be3a-424543d9ff91",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It is not always faster than a Mutex."
+                ]
+            ]
+        },
+        {
+            "id": "ddb34b1b-0287-5f65-9290-49c84063a908",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure the actual reads, writes and lock waiting before choosing."
                 ]
             ]
         },

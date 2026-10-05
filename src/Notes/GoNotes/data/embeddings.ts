@@ -4,14 +4,41 @@ const note = {
     "notionId": "24024eb1-ed54-805c-8026-c2b48701fc5e",
     "slug": "embeddings",
     "title": "Embeddings",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "c1822212-0876-5940-be61-785d9b063eba",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Embedding includes a type as a field without an explicit field name. Selectors can expose its fields and methods through promotion. The outer value still contains an inner value; it does not become a subtype of it."
+                    "Embedding adds a field by writing its type without a separate field name."
+                ]
+            ]
+        },
+        {
+            "id": "f8650cc4-abda-584c-ba73-cec4208f9260",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Promotion lets you access some inner fields and methods directly through the outer struct."
+                ]
+            ]
+        },
+        {
+            "id": "fadc271d-19ee-59fd-8259-671e38b6ce57",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The outer struct contains the inner value, but it is a separate type."
+                ]
+            ]
+        },
+        {
+            "id": "94930a51-40aa-5687-8691-74c98922ce05",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Embedding does not make it a subtype. You cannot use the outer value where the inner type is required."
                 ]
             ]
         },
@@ -54,10 +81,28 @@ const note = {
         },
         {
             "id": "a9b989f9-c4c4-5d94-b2f9-848315e249ca",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Promotion requires a valid, unambiguous selector and respects package accessibility. Initialize embedded fields explicitly, as shown; this form works across Go versions."
+                    "A promoted name must identify one field or method clearly."
+                ]
+            ]
+        },
+        {
+            "id": "b6cfa7aa-ee10-5f1c-8f21-acb9f8796054",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Embedding does not give access to another package’s unexported members."
+                ]
+            ]
+        },
+        {
+            "id": "746e2acb-b36c-5330-9031-870d3ca59020",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Initialize the embedded field explicitly, as shown. This form works across Go versions."
                 ]
             ]
         },
@@ -72,10 +117,28 @@ const note = {
         },
         {
             "id": "5f8a898a-d03f-5416-9f1a-3bad7b011503",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An outer method with the same name takes precedence for the outer selector. This is selector shadowing, not inheritance or virtual overriding. The embedded method remains available explicitly."
+                    "If the outer type defines the same method name, a call through the outer value uses that method."
+                ]
+            ]
+        },
+        {
+            "id": "1a3ad339-36d7-5c0c-b577-38b016b5a42f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This is called shadowing. It does not change the method on the embedded type."
+                ]
+            ]
+        },
+        {
+            "id": "b855f839-a12c-56da-bf26-5e5a7f91593c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can still call the embedded method by naming the embedded field."
                 ]
             ]
         },
@@ -100,10 +163,80 @@ const note = {
         },
         {
             "id": "96ba73d8-ddef-58a1-aa80-243c0d2e4b5c",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "For an outer struct S embedding a defined non-pointer type T, the receiver types determine which promoted methods belong to S and *S:"
+                    "In the table, "
+                ],
+                [
+                    "S",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is the outer struct and "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is the embedded defined type."
+                ]
+            ]
+        },
+        {
+            "id": "0f67fe93-c221-5337-8f51-5aee3afb3e8f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " itself is not a pointer type."
+                ]
+            ]
+        },
+        {
+            "id": "9cb56e17-af79-5dd3-ae23-a34eb2c8550f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The method receiver decides which methods belong to "
+                ],
+                [
+                    "S",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "*S",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -195,10 +328,30 @@ const note = {
         },
         {
             "id": "2feb8613-23a7-533e-8af4-75a309a6a47c",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "These rules assume no selector ambiguity or shadowing prevents promotion. An addressable S value can also call a promoted pointer method through automatic address-taking."
+                    "The table applies when a name is not ambiguous or hidden by an outer member."
+                ]
+            ]
+        },
+        {
+            "id": "19537cba-f956-5ae5-9e31-7547379746cf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An addressable "
+                ],
+                [
+                    "S",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " value can also call a promoted pointer method. Go automatically takes the outer value’s address."
                 ]
             ]
         },
@@ -214,10 +367,72 @@ const note = {
         },
         {
             "id": "47c0a54c-d43f-5832-bc0c-54d0b61f76ca",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The zero value of PointerOuter has a nil embedded pointer. Calling Add through that value panics when Add accesses Count. Interface satisfaction alone does not make the receiver safe to use."
+                    "A zero-value "
+                ],
+                [
+                    "PointerOuter",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " contains a nil "
+                ],
+                [
+                    "*Inner",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "b2892819-fc6f-5b65-b7b9-dafcde0b4170",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Calling "
+                ],
+                [
+                    "Add",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " on it panics when the method accesses "
+                ],
+                [
+                    "Count",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "e03cf255-9a87-53d0-bdba-fee0f20cd5f3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Implementing an interface does not guarantee that every receiver value is safe to use."
                 ]
             ]
         },
@@ -250,10 +465,48 @@ const note = {
         },
         {
             "id": "8fded7e0-268f-5a90-b987-d9579159b797",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Two members with the same name at the same shallowest depth make the outer selector ambiguous. A directly declared outer member takes precedence; use a qualified selector to access the embedded member."
+                    "Go first looks for the name at the outer level, then in embedded fields."
+                ]
+            ]
+        },
+        {
+            "id": "b5c2a573-6d66-56b4-8da0-1a51dc357526",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If two embedded members have that name at the nearest level, Go cannot choose between them."
+                ]
+            ]
+        },
+        {
+            "id": "2fbedaaa-2aea-5f6e-b94e-f947ea7a4137",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use the embedded field name, such as "
+                ],
+                [
+                    "c.NamedA.Name",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", to choose one."
+                ]
+            ]
+        },
+        {
+            "id": "efa93ed4-1db2-589d-bcc0-00dd1af61595",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A field declared directly in the outer struct takes precedence over an embedded field."
                 ]
             ]
         },
@@ -288,10 +541,19 @@ const note = {
         },
         {
             "id": "a17a0577-b8af-5957-b3b9-2c98b5de6f01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Methods from two embedded types can also have conflicting names. Call them through the embedded field when the promoted selector is ambiguous."
+                    "Two embedded types can have methods with the same name."
+                ]
+            ]
+        },
+        {
+            "id": "2a3e5809-8253-53f7-804c-c2500fd63f42",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Name the embedded field when Go cannot choose which method to call."
                 ]
             ]
         },
@@ -306,10 +568,19 @@ const note = {
         },
         {
             "id": "8875f025-ed6f-5437-b280-3f2561f86297",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Embedding interfaces combines required methods rather than storing an implementation. See Interfaces for a composed-interface use case and a Reader/Writer example."
+                    "Embedding interfaces combines their required methods. It does not store a concrete implementation."
+                ]
+            ]
+        },
+        {
+            "id": "0cbc0797-f212-5bc6-8030-06f5bbc53fb8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "See Interfaces for the Reader/Writer example."
                 ]
             ]
         },

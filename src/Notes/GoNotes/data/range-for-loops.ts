@@ -6,11 +6,11 @@ const note = {
     "notionId": "24124eb1-ed54-8042-b4af-da4a7534739a",
     "slug": "range-for-loops",
     "title": "Range & For Loops",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "b2b7c0d9-7bc4-5246-af45-9c744a97d1b5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Go uses "
@@ -24,7 +24,27 @@ const note = {
                     ]
                 ],
                 [
-                    " for counted loops, condition-only loops, infinite loops, and range iteration."
+                    " for every loop form."
+                ]
+            ]
+        },
+        {
+            "id": "ab33ef2e-b834-5c05-af41-9188f5e26fa3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It can repeat a fixed number of times, check a condition, run forever, or iterate with "
+                ],
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -49,10 +69,61 @@ const note = {
         },
         {
             "id": "27a6b7e6-6246-53b4-b47d-3e126832da6a",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The initializer runs once. The condition is checked before each iteration. The post statement runs after each completed iteration."
+                    "The initializer, "
+                ],
+                [
+                    "i := 0",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", runs once before the loop."
+                ]
+            ]
+        },
+        {
+            "id": "733cb271-6e2f-5f93-901d-fbfcf1730d42",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go checks "
+                ],
+                [
+                    "i < 3",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " before each iteration."
+                ]
+            ]
+        },
+        {
+            "id": "ae65bf05-c0e5-505d-8550-68da6cc3cf86",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The post statement, "
+                ],
+                [
+                    "i++",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", runs after each completed iteration."
                 ]
             ]
         },
@@ -167,7 +238,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Starting byte index (int)."
+                                "Index of the first byte of the rune (int)."
                             ]
                         ],
                         "col-2": [
@@ -193,7 +264,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Copy of the associated value."
+                                "Copy of the value for that key."
                             ]
                         ]
                     }
@@ -242,13 +313,13 @@ const note = {
         },
         {
             "id": "839a873b-2e70-52fa-a6f9-f77d2b745ae1",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use only "
+                    "Use "
                 ],
                 [
-                    "index",
+                    "for index := range nums",
                     [
                         [
                             "c"
@@ -256,10 +327,19 @@ const note = {
                     ]
                 ],
                 [
-                    " for indices, or "
+                    " if you need only the index."
+                ]
+            ]
+        },
+        {
+            "id": "fef79df6-8277-5d66-8f96-ef9d7c4537e1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use "
                 ],
                 [
-                    "_",
+                    "for _, value := range nums",
                     [
                         [
                             "c"
@@ -267,7 +347,36 @@ const note = {
                     ]
                 ],
                 [
-                    " to ignore it and keep the value. Assigning to the value variable does not replace an element. Update through its index:"
+                    " if you need only the value."
+                ]
+            ]
+        },
+        {
+            "id": "017f17f0-3dda-5234-90fd-00be8dc822d3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The value variable holds a copy. Assigning to it does not replace the element."
+                ]
+            ]
+        },
+        {
+            "id": "48ae7e22-91f4-5343-9d10-9fe3013cd062",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "To change an element, use its index: "
+                ],
+                [
+                    "nums[index] = newValue",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -302,10 +411,45 @@ const note = {
         },
         {
             "id": "44150f0f-418e-5095-adf0-85518394b6d7",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The string has 4 UTF-8 bytes and 3 runes. The index is a byte offset, not a rune count. Range decodes runes rather than visiting each byte; it is not a count of displayed characters composed from multiple runes."
+                    "The string has 4 UTF-8 bytes and 3 runes. A rune is a Unicode code point."
+                ]
+            ]
+        },
+        {
+            "id": "3b8b6f7e-7599-5366-844c-2874f94dbc2c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The index tells you where the rune starts in the string’s bytes."
+                ]
+            ]
+        },
+        {
+            "id": "a6cfdb81-737f-513d-817a-4029a4624286",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " reads one rune at a time, instead of one byte at a time."
+                ]
+            ]
+        },
+        {
+            "id": "195255ab-d140-5b7c-ab14-d5a9f5318714",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A displayed character can contain several runes. Counting runes is not always the same as counting displayed characters."
                 ]
             ]
         },
@@ -330,10 +474,10 @@ const note = {
         },
         {
             "id": "41773933-a988-5330-80ed-98d3d83ad8d3",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Map operation and concurrency rules are covered in "
+                    "See "
                 ],
                 [
                     "Maps",
@@ -345,7 +489,7 @@ const note = {
                     ]
                 ],
                 [
-                    "."
+                    " for map operations and concurrent access."
                 ]
             ]
         },
@@ -370,16 +514,43 @@ const note = {
         },
         {
             "id": "052fd9d6-17a8-5209-b0cd-92bd7ab8dc45",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A channel range receives until the channel is closed and buffered values are drained. It blocks if an open channel has no value ready. Range over a nil channel blocks indefinitely."
+                    "A channel range receives values one at a time."
+                ]
+            ]
+        },
+        {
+            "id": "c3d44eca-2d3a-538b-ad7c-5a38a5657edf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It ends after the channel is closed and all buffered values have been received."
+                ]
+            ]
+        },
+        {
+            "id": "9ca78de2-e7fb-5433-b2e3-54815f275dc6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the channel is open but has no value ready, the loop waits."
+                ]
+            ]
+        },
+        {
+            "id": "4fc05261-9763-5d43-91f8-a864a477e70b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Range over a nil channel waits forever."
                 ]
             ]
         },
         {
             "id": "00569b1c-d983-5a57-aea5-c1c5114b08ab",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -394,7 +565,7 @@ const note = {
                     ]
                 ],
                 [
-                    " for send, receive, and closure ownership."
+                    " for sending, receiving, and deciding who closes a channel."
                 ]
             ]
         },
@@ -409,10 +580,10 @@ const note = {
         },
         {
             "id": "d221cd09-ef85-547d-9e2b-f5912bff8a4c",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "For Go language version 1.22 or later, variables declared by a loop’s "
+                    "In Go language version 1.22 or later, a loop using "
                 ],
                 [
                     ":=",
@@ -423,7 +594,16 @@ const note = {
                     ]
                 ],
                 [
-                    " form are new for each iteration. Variables assigned with "
+                    " creates new loop variables for each iteration."
+                ]
+            ]
+        },
+        {
+            "id": "673a8c2a-00d1-56ad-b814-ae6790ff1455",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A loop using "
                 ],
                 [
                     "=",
@@ -434,13 +614,22 @@ const note = {
                     ]
                 ],
                 [
-                    " reuse existing variables. Earlier language versions reuse declared loop variables too."
+                    " keeps using the existing variables."
+                ]
+            ]
+        },
+        {
+            "id": "0b8c82a4-467c-50a5-9492-44d8f958bae8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Before Go 1.22, loops reused their declared variables across iterations too."
                 ]
             ]
         },
         {
             "id": "49d7b8a1-76d3-57e4-9370-759ac4f00292",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -455,7 +644,7 @@ const note = {
                     ]
                 ],
                 [
-                    " for captured-variable examples and version details."
+                    " for variable capture and Go version differences."
                 ]
             ]
         },
@@ -510,7 +699,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Exit the innermost loop (or switch/select, when inside one)."
+                                "Leave the nearest enclosing loop, switch, or select."
                             ]
                         ]
                     }
@@ -531,7 +720,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Proceed to the next iteration of the innermost loop."
+                                "Skip to the next iteration of the nearest enclosing loop."
                             ]
                         ]
                     }
@@ -552,7 +741,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Exit the enclosing function."
+                                "Leave the function."
                             ]
                         ]
                     }
@@ -570,10 +759,74 @@ const note = {
         },
         {
             "id": "00ddb894-90ce-5870-ad6f-8f3c8ac3ef6f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A labeled break or continue selects an enclosing loop. This example exits both loops when it reaches i == 1 and j == 1:"
+                    "A label lets "
+                ],
+                [
+                    "break",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or "
+                ],
+                [
+                    "continue",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " select an outer loop."
+                ]
+            ]
+        },
+        {
+            "id": "5804918f-87d3-5b49-a083-9fc0ce0376c7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In this example, "
+                ],
+                [
+                    "break outer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " exits both loops when "
+                ],
+                [
+                    "i == 1",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "j == 1",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },

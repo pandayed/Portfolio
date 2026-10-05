@@ -4,14 +4,48 @@ const note = {
     "notionId": "24124eb1-ed54-8021-8e5c-c9f30520bd77",
     "slug": "panic-recover",
     "title": "Panic & Recover",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "245bbc3a-9df3-596b-948b-619572007414",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "panic stops ordinary execution in the current goroutine and unwinds its call stack, running registered deferred calls. recover can stop that unwinding when called directly by a deferred function in that goroutine."
+                    "panic",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " stops normal execution in the current goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "c741adfb-130f-5943-acb6-040a8e58e9a7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It works back through the active function calls and runs their saved defers. This is called stack unwinding."
+                ]
+            ]
+        },
+        {
+            "id": "5a43efd0-e607-5f13-853d-791dedba0ff0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "recover",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can stop this process when called directly inside a deferred function in that goroutine."
                 ]
             ]
         },
@@ -95,7 +129,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "A broken invariant, programming error or an explicit must-style contract"
+                                "A broken invariant (a rule that must stay true), a programming bug or a must-style helper"
                             ]
                         ]
                     }
@@ -111,7 +145,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "A boundary that can report or contain a panic and establish a valid outcome"
+                                "Handle a panic and report the failure at a chosen point"
                             ]
                         ]
                     }
@@ -147,10 +181,52 @@ const note = {
         },
         {
             "id": "cebe6daf-19a6-5b30-b10c-059eb9f105aa",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "safe returns to its caller after recovery; execution never returns to the line following panic inside safe."
+                    "After recovery, "
+                ],
+                [
+                    "safe",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns to its caller."
+                ]
+            ]
+        },
+        {
+            "id": "f6c5296f-c9d6-5683-9664-a169a2a1fd7f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not continue at the line after "
+                ],
+                [
+                    "panic",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " inside "
+                ],
+                [
+                    "safe",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -185,10 +261,67 @@ const note = {
         },
         {
             "id": "24216aa4-a498-5c24-b735-dc53b14d30ee",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Cleanup runs first because it was registered last. The recovery function handles the panic, remaining defers in safe finish, and safe returns. If no deferred function recovers the panic, an unrecovered panic terminates the program."
+                    "Cleanup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " runs first because it was deferred last."
+                ]
+            ]
+        },
+        {
+            "id": "8ab03e58-c0b0-57e2-b43a-8157a99139e3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The recovery function handles the panic."
+                ]
+            ]
+        },
+        {
+            "id": "bf8bb090-b2b9-52ff-8949-31b75a16f2b6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Any remaining defers in "
+                ],
+                [
+                    "safe",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " finish before "
+                ],
+                [
+                    "safe",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns."
+                ]
+            ]
+        },
+        {
+            "id": "49e7fb0d-eace-59ff-a7d1-b3a7e18220bd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An unrecovered panic terminates the program."
                 ]
             ]
         },
@@ -206,7 +339,44 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "recover returns nil during ordinary execution. It cannot catch a panic in another goroutine. Each goroutine that needs a recovery boundary must establish its own deferred function."
+                    "recover",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when the goroutine is not panicking."
+                ]
+            ]
+        },
+        {
+            "id": "454ea716-74dd-562f-8b91-808a87df80ab",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It cannot catch a panic from another goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "2611420b-6479-5d88-b9dd-a1fddd37a11c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each goroutine that must handle panics needs its own deferred recovery function."
                 ]
             ]
         },
@@ -215,7 +385,47 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Call recover directly in the deferred function. A helper called by that function does not satisfy this requirement. A bare defer recover() is also ineffective."
+                    "Call "
+                ],
+                [
+                    "recover",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " directly inside the deferred function."
+                ]
+            ]
+        },
+        {
+            "id": "6b739e17-a2cf-5345-9fb3-420bb12e895b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Calling it from a helper used by that deferred function does not recover the panic."
+                ]
+            ]
+        },
+        {
+            "id": "cb28d44d-38db-58ad-afce-268e5d7e88a9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A bare "
+                ],
+                [
+                    "defer recover()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not work either."
                 ]
             ]
         },
@@ -224,7 +434,27 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Only reached defer statements are registered. A panic does not execute later ordinary statements or register later defers in the panicking function."
+                    "Go saves a deferred call only when execution reaches its "
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " statement."
+                ]
+            ]
+        },
+        {
+            "id": "f19c188f-f10f-5227-beaf-c937b73ed51a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A panic does not run the later normal statements or save the later defers in that function."
                 ]
             ]
         },
@@ -233,16 +463,126 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Calling panic(r) again in the deferred function propagates the failure when the boundary cannot handle it. Do not silently recover and leave corrupted state in use."
+                    "Call "
+                ],
+                [
+                    "panic(r)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " again when the recovery function cannot handle the failure."
+                ]
+            ]
+        },
+        {
+            "id": "050fad10-30aa-51aa-b77f-15c731d6fc23",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not hide a panic and keep using state that may be broken."
                 ]
             ]
         },
         {
             "id": "fd93554a-f99b-5cbf-bcc5-1879c5c35b60",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Go 1.21+ default behavior turns panic(nil) into a non-nil *runtime.PanicNilError panic value. Legacy behavior can be selected with GODEBUG=panicnil=1 and may be selected automatically for a main module declaring Go 1.20 or earlier. Code using the usual r != nil check must understand this version/configuration difference."
+                    "By default, Go 1.21+ turns "
+                ],
+                [
+                    "panic(nil)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " into a non-nil "
+                ],
+                [
+                    "*runtime.PanicNilError",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "e1a0bcb2-c384-566e-b225-86c64501bf1e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "GODEBUG=panicnil=1",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " selects the older behavior, where recovering "
+                ],
+                [
+                    "panic(nil)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "91dde520-2c4d-502c-8f13-cb1984219678",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The older behavior may be selected automatically when the main module declares Go 1.20 or earlier."
+                ]
+            ]
+        },
+        {
+            "id": "d6f696f4-6e66-53e8-ac76-65999f5872a8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If you check "
+                ],
+                [
+                    "r != nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", account for the Go version and this setting."
                 ]
             ]
         },
@@ -257,10 +597,47 @@ const note = {
         },
         {
             "id": "19d9c102-5f45-5b93-9f35-35b99187b242",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The caller supplies work. This boundary reports a panic and returns; real request handlers must also define the response or error they produce."
+                    "The caller supplies the "
+                ],
+                [
+                    "work",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " function."
+                ]
+            ]
+        },
+        {
+            "id": "5d067d04-0926-5a62-97eb-3fabb6d1138f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "runSafely",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " logs a panic and returns."
+                ]
+            ]
+        },
+        {
+            "id": "55690406-c5c6-5de4-9336-d61d71d2b288",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A real request handler also needs to send a response or return an error after recovery."
                 ]
             ]
         },
@@ -276,10 +653,39 @@ const note = {
         },
         {
             "id": "60da0d4f-1f81-5c3d-a302-227082adf78f",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A must-style helper can document that nil is a caller programming error. For normal input validation, return an error instead."
+                    "A must-style helper promises to panic when its required condition is not met."
+                ]
+            ]
+        },
+        {
+            "id": "c0ae9b94-b303-5447-a409-a58f297f48c3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Here, passing "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " breaks that condition and is treated as a caller bug."
+                ]
+            ]
+        },
+        {
+            "id": "5099a1fa-15dd-5634-a496-5e85046827a2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Return an error for normal input validation."
                 ]
             ]
         },

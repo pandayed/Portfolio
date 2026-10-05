@@ -6,14 +6,23 @@ const note = {
     "notionId": "24024eb1-ed54-8060-8c25-fda6dee5d9bf",
     "slug": "go-mod",
     "title": "go.mod",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "go-mod-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "go.mod records the module path, Go language/toolchain requirements, and dependency requirements. It belongs at the module root."
+                    "go.mod records the module path, required Go version, and dependencies."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It is in the module root directory."
                 ]
             ]
         },
@@ -62,7 +71,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Module path used as the prefix of its package import paths."
+                                "The first part of its package import paths."
                             ]
                         ]
                     }
@@ -78,7 +87,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Minimum Go version and language semantics. Since Go 1.21 this is an enforced toolchain minimum."
+                                "Minimum Go version and language rules. Since Go 1.21, an older toolchain cannot use the module."
                             ]
                         ]
                     }
@@ -94,7 +103,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Suggested Go toolchain when this is a main module (Go 1.21+)."
+                                "Suggested version of the Go tools for a main module (Go 1.21+)."
                             ]
                         ]
                     }
@@ -110,7 +119,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Minimum required version of another module. // indirect means no package in the current module directly imports a package from it."
+                                "Minimum version of another module. // indirect means this module does not directly import a package from it."
                             ]
                         ]
                     }
@@ -142,7 +151,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Disallow a specific dependency version in the main module."
+                                "Prevent the main module from using a specific dependency version."
                             ]
                         ]
                     }
@@ -151,10 +160,10 @@ const note = {
         },
         {
             "id": "go-mod-04",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Illustrative manifest. example.com/lib is a placeholder dependency, not a command to download a real package:"
+                    "The module path here is example.com/shop."
                 ]
             ]
         },
@@ -170,16 +179,43 @@ const note = {
         },
         {
             "id": "go-mod-06",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "require is a minimum, not a lockfile pin. If another requirement needs v1.4.0 of that same module, version selection can choose v1.4.0. go.sum authenticates downloaded content; it does not select dependency versions."
+                    "require sets a minimum version. It does not lock the build to that version."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-06-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Another dependency can require a newer version of the same module."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-06-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For example, a requirement for v1.4.0 can raise the selected version from v1.2.3 to v1.4.0."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-06-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "go.sum checks downloaded content. It does not choose versions."
                 ]
             ]
         },
         {
             "id": "go-mod-07",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Checksum entries are covered in "
@@ -259,7 +295,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Add or change a dependency requirement. The path and version here are placeholders."
+                                "Add or change the required version of a dependency."
                             ]
                         ]
                     }
@@ -275,7 +311,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Reconcile requirements and checksums with imports, including tests."
+                                "Add needed requirements and checksums. Remove unused ones. Includes test imports."
                             ]
                         ]
                     }
@@ -291,7 +327,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Pre-fill the module cache with needed downloads."
+                                "Download needed modules into the local cache."
                             ]
                         ]
                     }
@@ -307,7 +343,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Check that cached module archives and extracted files have not changed since download."
+                                "Check whether cached module archives or extracted files changed after download."
                             ]
                         ]
                     }
@@ -323,7 +359,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "List selected modules in the build list."
+                                "List the modules and versions selected for the build."
                             ]
                         ]
                     }
@@ -332,10 +368,28 @@ const note = {
         },
         {
             "id": "go-mod-10",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Since Go 1.16, ordinary build commands default to avoiding changes to go.mod and report missing requirements. Use go get or go mod tidy to update dependencies deliberately. Downloading an already required module during a build is different from adding a requirement."
+                    "Since Go 1.16, build commands normally leave go.mod unchanged and report missing requirements."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-10-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use go get or go mod tidy to update dependencies."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-10-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A build can download a module already listed in go.mod. That does not add a new requirement."
                 ]
             ]
         },
@@ -360,10 +414,37 @@ const note = {
         },
         {
             "id": "go-mod-13",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A local replacement uses ../lib instead of downloading example.com/lib. The target needs an appropriate go.mod. replace alone does not add the module as a dependency. Replacements and exclusions in dependency modules do not override the main module's choices."
+                    "The local replacement uses ../lib instead of downloading example.com/lib."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-13-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That directory needs the correct go.mod."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-13-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "replace alone does not add a dependency. The module must also be required."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-13-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go ignores replacements and exclusions from dependency modules. The main module controls them."
                 ]
             ]
         },
@@ -372,7 +453,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Commit go.mod and go.sum when present. Review dependency-file changes after changing imports or running tidy."
+                    "Commit go.mod and go.sum when present."
+                ]
+            ]
+        },
+        {
+            "id": "go-mod-14-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Review their changes after updating imports or running go mod tidy."
                 ]
             ]
         },
@@ -381,13 +471,13 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Avoid committing local replacements that other developers or release builds cannot resolve."
+                    "Do not commit local replacement paths that other developers or release builds cannot use."
                 ]
             ]
         },
         {
             "id": "go-mod-16",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Source: "
@@ -408,7 +498,7 @@ const note = {
         },
         {
             "id": "go-mod-17",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     ""

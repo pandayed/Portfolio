@@ -6,11 +6,11 @@ const note = {
     "notionId": "24124eb1-ed54-804e-98a7-ed95eaa0b4c2",
     "slug": "workgroups",
     "title": "WaitGroup",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "83dc4671-7caf-5b21-94b3-94555b47fede",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "A "
@@ -24,7 +24,16 @@ const note = {
                     ]
                 ],
                 [
-                    " waits for a set of tasks to finish. It tracks completion; it does not carry results or prevent workers from racing with each other."
+                    " waits for a group of tasks to finish."
+                ]
+            ]
+        },
+        {
+            "id": "6c716114-db82-5046-8185-98ab0c366ca2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not carry results or stop workers from racing while changing shared data."
                 ]
             ]
         },
@@ -79,7 +88,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Add n outstanding tasks. A negative resulting counter panics."
+                                "Add n tasks to the counter. A negative resulting counter causes a panic."
                             ]
                         ]
                     }
@@ -100,7 +109,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Complete one task; equivalent to "
+                                "Mark one task done. Same as "
                             ],
                             [
                                 "Add(-1)",
@@ -132,7 +141,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Block until the outstanding task count reaches zero."
+                                "Wait until the task counter reaches zero."
                             ]
                         ]
                     }
@@ -160,10 +169,28 @@ const note = {
         },
         {
             "id": "a3a9e582-6482-5478-9eb0-85fe74a7871d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Each worker prints starting before done. Lines from different workers may interleave. All workers completed is always the last line."
+                    "Each worker prints starting before done."
+                ]
+            ]
+        },
+        {
+            "id": "263a17cb-b4d9-525b-aeda-1427ed0c7452",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Lines from different workers may appear between each other’s lines."
+                ]
+            ]
+        },
+        {
+            "id": "8706a2c5-0ccf-5132-b254-c7a886392579",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "All workers completed is always the last line."
                 ]
             ]
         },
@@ -181,29 +208,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Register a new batch before waiting. With the "
-                ],
-                [
-                    "Add",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    "/"
-                ],
-                [
-                    "Done",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " pattern, call "
+                    "Call "
                 ],
                 [
                     "Add(1)",
@@ -214,7 +219,16 @@ const note = {
                     ]
                 ],
                 [
-                    " before launching each goroutine so "
+                    " before starting each goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "b19e8311-9623-50dd-bbbe-5e3b40f33163",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If "
                 ],
                 [
                     "Wait",
@@ -225,7 +239,7 @@ const note = {
                     ]
                 ],
                 [
-                    " cannot observe zero too early."
+                    " runs before the task is added, it may see zero and return too early."
                 ]
             ]
         },
@@ -234,7 +248,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Each registered task must call "
+                    "Call "
                 ],
                 [
                     "Done",
@@ -245,7 +259,27 @@ const note = {
                     ]
                 ],
                 [
-                    " exactly once. A missing call leaves "
+                    " exactly once for each added task."
+                ]
+            ]
+        },
+        {
+            "id": "eeb40453-5c0b-51d1-b0cb-14a8f2b3dc0b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Missing "
+                ],
+                [
+                    "Done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " leaves "
                 ],
                 [
                     "Wait",
@@ -256,7 +290,27 @@ const note = {
                     ]
                 ],
                 [
-                    " blocked; an extra call can make the counter negative."
+                    " blocked."
+                ]
+            ]
+        },
+        {
+            "id": "8ef38b86-4801-526d-a89d-bce46971ea8f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An extra "
+                ],
+                [
+                    "Done",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can make the counter negative and cause a panic."
                 ]
             ]
         },
@@ -265,7 +319,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not copy a WaitGroup after first use. Pass a pointer when another function needs the same group."
+                    "Do not copy a WaitGroup after first use."
+                ]
+            ]
+        },
+        {
+            "id": "15505d90-a82f-570b-9502-6e5bdae0bd8e",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pass a pointer when another function needs to use the same WaitGroup."
                 ]
             ]
         },
@@ -274,7 +337,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Reuse for a new independent batch only after all previous "
+                    "Start a new independent group of tasks only after every previous "
                 ],
                 [
                     "Wait",
@@ -285,7 +348,7 @@ const note = {
                     ]
                 ],
                 [
-                    " calls return."
+                    " call has returned."
                 ]
             ]
         },
@@ -302,7 +365,25 @@ const note = {
                     ]
                 ],
                 [
-                    " has no cancellation parameter. The tasks themselves must have exit paths; cancelling a context does not change the counter."
+                    " does not accept a context or cancellation signal."
+                ]
+            ]
+        },
+        {
+            "id": "c503744e-af29-54eb-ae22-83dfa8ade22c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each task must have a way to return."
+                ]
+            ]
+        },
+        {
+            "id": "3f8d3915-e989-5d51-a1f2-f95d34f44cf8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Cancelling a context does not reduce the WaitGroup counter."
                 ]
             ]
         },
@@ -317,10 +398,37 @@ const note = {
         },
         {
             "id": "659286dd-cb6b-588b-b466-2061d4495320",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A channel transports results while the WaitGroup tells the closer when all senders have finished. Consume results while workers run; waiting first could deadlock with an unbuffered results channel."
+                    "Use a channel to send results."
+                ]
+            ]
+        },
+        {
+            "id": "f077ba19-0c60-5656-8110-a160fbcd3e1b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use the WaitGroup to know when every sender has finished."
+                ]
+            ]
+        },
+        {
+            "id": "890c85a6-6df7-5745-98aa-6000c5ff1e37",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Receive results while workers run."
+                ]
+            ]
+        },
+        {
+            "id": "553cd511-ae54-5d44-958f-ef4392d194a0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Waiting first can deadlock if workers are still waiting to send on an unbuffered channel."
                 ]
             ]
         },
@@ -336,21 +444,19 @@ const note = {
         },
         {
             "id": "c18f22c6-a64b-560a-b89d-a369f77dc466",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The values are 0, 1 and 4, in unspecified order. The closer cannot close "
-                ],
+                    "Prints 0, 1 and 4. Their order can change."
+                ]
+            ]
+        },
+        {
+            "id": "3106944e-dd03-539b-8883-580dbaba6af0",
+            "type": "bulleted_list",
+            "richText": [
                 [
-                    "results",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " until every send has completed."
+                    "The coordinator closes results only after every send has finished."
                 ]
             ]
         },
@@ -365,10 +471,10 @@ const note = {
         },
         {
             "id": "a5a1ed69-2502-57aa-9df8-10d705c09a2e",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Go 1.25 introduced "
+                    "Go 1.25 added "
                 ],
                 [
                     "wg.Go(f)",
@@ -379,7 +485,16 @@ const note = {
                     ]
                 ],
                 [
-                    ", which registers a task, starts its goroutine, and removes the task when "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "2d395881-8aa8-5db9-a889-3a6c505ac4cc",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It adds a task, starts a goroutine and marks the task done when "
                 ],
                 [
                     "f",
@@ -390,7 +505,33 @@ const note = {
                     ]
                 ],
                 [
-                    " returns. The function must not panic. Start the initial tasks before calling "
+                    " returns."
+                ]
+            ]
+        },
+        {
+            "id": "f68a8bff-eaec-51b6-ad3d-fdd6b131d039",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "f",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " must not panic."
+                ]
+            ]
+        },
+        {
+            "id": "090948fa-ecbe-5be6-91f8-a4b3d2444e02",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Start the initial tasks before calling "
                 ],
                 [
                     "Wait",
@@ -401,7 +542,16 @@ const note = {
                     ]
                 ],
                 [
-                    "; do not add a separate "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "df207311-efc2-5b17-95e4-0719210cf491",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not call "
                 ],
                 [
                     "Done",
@@ -412,7 +562,7 @@ const note = {
                     ]
                 ],
                 [
-                    " inside "
+                    " yourself inside "
                 ],
                 [
                     "f",

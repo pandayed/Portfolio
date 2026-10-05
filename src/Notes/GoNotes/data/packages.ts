@@ -6,20 +6,38 @@ const note = {
     "notionId": "24024eb1-ed54-8094-af08-c4e58e8100d2",
     "slug": "packages",
     "title": "Packages",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "packages-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A package groups Go source files and their declarations. With the Go toolchain, source files selected for a package normally share a directory and package name. External test files may use the separate name ending in _test."
+                    "A package groups Go source files and the names they declare."
+                ]
+            ]
+        },
+        {
+            "id": "packages-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Files compiled as one package normally share a directory and package name."
+                ]
+            ]
+        },
+        {
+            "id": "packages-01-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "External test files can use a separate package name ending in _test."
                 ]
             ]
         },
         {
             "id": "packages-02",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "For module layout and versioning, see "
@@ -94,7 +112,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "func main() with no parameters or results. It starts after program initialization."
+                                "func main() with no parameters or return values. Runs after package initialization."
                             ]
                         ]
                     }
@@ -124,10 +142,28 @@ const note = {
         },
         {
             "id": "packages-05",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A library-only repository needs no executable package. A repository can contain several executable directories, each declaring package main and its own main function."
+                    "A library-only repository does not need package main."
+                ]
+            ]
+        },
+        {
+            "id": "packages-05-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A repository can have several executable directories."
+                ]
+            ]
+        },
+        {
+            "id": "packages-05-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each executable directory has its own package main and main function."
                 ]
             ]
         },
@@ -142,19 +178,55 @@ const note = {
         },
         {
             "id": "packages-07",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An identifier beginning with an uppercase Unicode letter is exported when declared at package level or used as a field or method name. Other package-level identifiers are accessible within the same package. Imports are declared separately in each source file that uses them."
+                    "Exported names are available to other packages."
+                ]
+            ]
+        },
+        {
+            "id": "packages-07-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A name starts with an uppercase Unicode letter to be exported."
+                ]
+            ]
+        },
+        {
+            "id": "packages-07-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "This rule applies to package-level names, fields, and methods."
+                ]
+            ]
+        },
+        {
+            "id": "packages-07-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Other package-level names are available only inside that package."
+                ]
+            ]
+        },
+        {
+            "id": "packages-07-read-4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each file declares the imports that it uses."
                 ]
             ]
         },
         {
             "id": "packages-08",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Example files in a module whose go.mod declares module example.com/shop:"
+                    "go.mod declares module example.com/shop."
                 ]
             ]
         },
@@ -180,10 +252,19 @@ const note = {
         },
         {
             "id": "packages-11",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: 110. Code outside pricing cannot access pricing.defaultTax."
+                    "Expected output: 110."
+                ]
+            ]
+        },
+        {
+            "id": "packages-11-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Code outside pricing cannot access pricing.defaultTax."
                 ]
             ]
         },
@@ -198,10 +279,37 @@ const note = {
         },
         {
             "id": "packages-13",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A nested directory creates a separate package; it does not automatically share the parent package's declarations or imports. Code in example.com/shop/pricing must explicitly import example.com/shop/pricing/rules to use that package. Path rules such as internal restrict access, so import paths are not simply unrestricted flat names."
+                    "A nested directory is a separate package."
+                ]
+            ]
+        },
+        {
+            "id": "packages-13-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not share the parent package's names or imports automatically."
+                ]
+            ]
+        },
+        {
+            "id": "packages-13-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "To use example.com/shop/pricing/rules, the pricing package must import it."
+                ]
+            ]
+        },
+        {
+            "id": "packages-13-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An internal directory also limits which code can import its packages. Import paths have access rules."
                 ]
             ]
         },
@@ -257,7 +365,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Use the local alias cost, for example cost.Total(100)."
+                                "Use the local name cost, such as cost.Total(100)."
                             ]
                         ]
                     }
@@ -273,7 +381,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Import only for initialization side effects."
+                                "Run package initialization without using its exported names."
                             ]
                         ]
                     }
@@ -289,7 +397,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Use exported names without a qualifier. This can obscure where names come from."
+                                "Use exported names without the package name. This can make their source hard to see."
                             ]
                         ]
                     }
@@ -298,16 +406,34 @@ const note = {
         },
         {
             "id": "packages-15",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A package clause supplies the package name; its import path identifies the package location. The last path segment and the declared name can differ."
+                    "The package declaration gives the package its name."
+                ]
+            ]
+        },
+        {
+            "id": "packages-15-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The import path identifies where the package is found."
+                ]
+            ]
+        },
+        {
+            "id": "packages-15-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The package name can differ from the last part of the import path."
                 ]
             ]
         },
         {
             "id": "packages-16",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Initialization details are on "
@@ -328,7 +454,7 @@ const note = {
         },
         {
             "id": "packages-17",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Source: "

@@ -6,14 +6,43 @@ const note = {
     "notionId": "24124eb1-ed54-8096-9741-edb8eca726fb",
     "slug": "maps",
     "title": "Maps",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "3130dc2a-e005-517a-8013-1ebd37ab9c43",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A map stores key-value pairs. Keys must be comparable, such as strings or integers. Values can have any type."
+                    "A map stores key-value pairs."
+                ]
+            ]
+        },
+        {
+            "id": "698c596e-2fae-520c-8463-1959bb6891cb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keys must be comparable. This means they support comparison with "
+                ],
+                [
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". Strings and integers can be keys."
+                ]
+            ]
+        },
+        {
+            "id": "3e1754c8-3a97-5cc6-ad92-ff731eaf6aff",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Values can have any type."
                 ]
             ]
         },
@@ -38,10 +67,30 @@ const note = {
         },
         {
             "id": "abb42931-40c5-58e8-96bd-147906204672",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Make and map literals create initialized maps. An optional size hint such as "
+                    "Use "
+                ],
+                [
+                    "make",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or a map literal to create a map you can write to."
+                ]
+            ]
+        },
+        {
+            "id": "7dcb3d95-aae5-5fa9-8f36-faeabfc411a2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The number in "
                 ],
                 [
                     "make(map[string]int, 100)",
@@ -52,7 +101,25 @@ const note = {
                     ]
                 ],
                 [
-                    " is a hint, not an entry count or a maximum size. Internal allocation details belong to the runtime implementation."
+                    " is a size hint."
+                ]
+            ]
+        },
+        {
+            "id": "3d1ae801-2b93-5d86-9a10-a3f91155587b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It does not add 100 entries or limit the map to 100 entries."
+                ]
+            ]
+        },
+        {
+            "id": "5887e928-e395-5ab9-94ff-4e048a42216f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The Go runtime decides how to allocate the map’s storage."
                 ]
             ]
         },
@@ -67,7 +134,7 @@ const note = {
         },
         {
             "id": "99f7cb88-f28a-5e5d-8a9d-baf0b7d60c01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "A map’s "
@@ -82,7 +149,25 @@ const note = {
                     ]
                 ],
                 [
-                    " is nil. Both a nil map and an initialized empty map have length 0, but only the initialized map accepts entry assignments."
+                    " is nil."
+                ]
+            ]
+        },
+        {
+            "id": "fe5c86b5-9ffa-56ac-aed7-c04a0bb2f41c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A nil map and an empty map both have length 0."
+                ]
+            ]
+        },
+        {
+            "id": "ab72658f-5c3e-5385-9cda-33dff03fa764",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You can add entries only after the map has been initialized."
                 ]
             ]
         },
@@ -323,10 +408,19 @@ const note = {
         },
         {
             "id": "686df60a-b123-5ec4-a8c0-d1972fb68fe4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Nil can represent an absent map when an API uses that convention. The language does not require a separate meaning for nil and empty maps beyond their operation rules."
+                    "An API can use nil to mean that no map was provided."
+                ]
+            ]
+        },
+        {
+            "id": "96ea7cb8-690f-5d6d-9875-e32873e4cae2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go does not require this meaning. The API decides how to treat nil and empty maps."
                 ]
             ]
         },
@@ -351,10 +445,30 @@ const note = {
         },
         {
             "id": "9d8eb708-dd29-5063-9775-a65c450697d5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Use the comma-ok lookup when an existing zero value must be distinguished from a missing key."
+                    "Use "
+                ],
+                [
+                    "value, ok := m[key]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to check whether the key exists."
+                ]
+            ]
+        },
+        {
+            "id": "def99714-be07-5186-8e04-de5debd31846",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A value of 0 alone does not tell you whether the key is missing."
                 ]
             ]
         },
@@ -388,19 +502,28 @@ const note = {
         },
         {
             "id": "0bd9c8df-d934-525c-90a5-4d0fcc1879dc",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Map iteration order is unspecified and may differ between iterations. Sort a separate list of keys when deterministic output is needed."
+                    "Go does not guarantee the order of map iteration. The order can change each time."
+                ]
+            ]
+        },
+        {
+            "id": "a031ff96-d180-5ccc-8adb-dd12db1b2de4",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If you need a fixed order, collect the keys in a slice and sort them."
                 ]
             ]
         },
         {
             "id": "8957acde-df1d-5663-92fa-8aee0a72b17d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Key/value range syntax is covered in "
+                    "See "
                 ],
                 [
                     "Range & For Loops",
@@ -412,7 +535,7 @@ const note = {
                     ]
                 ],
                 [
-                    "."
+                    " for key/value iteration."
                 ]
             ]
         },
@@ -427,10 +550,28 @@ const note = {
         },
         {
             "id": "e678b825-3dcc-585b-a232-a3b7a0ecce54",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Map assignment and function arguments copy the map value. Those copies refer to the same map data, so entry changes are shared. Reassigning a function parameter does not replace the caller’s map variable."
+                    "Assignment copies the map value. Passing a map to a function also copies the map value."
+                ]
+            ]
+        },
+        {
+            "id": "0f33d084-656b-5376-98ca-948300d51d98",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The copies refer to the same map data. Adding, changing, or deleting an entry affects the shared map."
+                ]
+            ]
+        },
+        {
+            "id": "fcc3dee6-4efc-5840-8fd9-1f4a5d22b96a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Assigning a different map to a function parameter changes only that parameter. The caller’s variable still refers to its original map."
                 ]
             ]
         },
@@ -455,10 +596,50 @@ const note = {
         },
         {
             "id": "3a454102-e37a-5f2b-9d3d-34ec8df552b5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Maps can be compared with nil, but two map values cannot be compared with ==. Compare their entries when content equality is needed."
+                    "You can compare a map with "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "19b1c7e5-25f3-558a-a9d1-842f9ead28c0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You cannot compare two maps with "
+                ],
+                [
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "fccda2fb-0637-501e-ba14-b60bf4fb5da8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "To check whether two maps have the same contents, compare their entries."
                 ]
             ]
         },
@@ -483,10 +664,19 @@ const note = {
         },
         {
             "id": "411b20e4-d1f4-52f9-b12e-0790597add4c",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A struct-valued map entry is read as a value. Update a copy and assign it back to change a field:"
+                    "Reading a struct from a map gives you a copy of that struct."
+                ]
+            ]
+        },
+        {
+            "id": "49b7bbb6-2d53-5114-89f4-46bf7eaed7a8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "To change a field, change the copy and assign it back to the map."
                 ]
             ]
         },
@@ -511,10 +701,46 @@ const note = {
         },
         {
             "id": "1f842927-aef4-540b-80ab-c5ff79cb8f0c",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Concurrent reads are allowed while no goroutine changes the map. Reads racing with writes and simultaneous writes require synchronization. Protect all related accesses with the same lock or give one goroutine ownership of the map."
+                    "Multiple goroutines can read a map at the same time if none of them changes it."
+                ]
+            ]
+        },
+        {
+            "id": "2e6927a8-d320-5dc1-98b5-ec29c4f93f37",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Reading while another goroutine writes requires synchronization, such as a lock."
+                ]
+            ]
+        },
+        {
+            "id": "f44fb010-dfd8-5021-ae48-9f4dc6118260",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Writing from multiple goroutines also requires synchronization."
+                ]
+            ]
+        },
+        {
+            "id": "9769ca9c-187b-5e8d-bfc2-efcbd039e949",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use the same lock for all related reads and writes."
+                ]
+            ]
+        },
+        {
+            "id": "dcc92222-a42d-55f6-bdb2-62d89802ecd6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Another option is to let only one goroutine use the map."
                 ]
             ]
         },
@@ -562,10 +788,62 @@ const note = {
         },
         {
             "id": "bbd5a79d-afa9-5857-8a04-239df551e5ee",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "sync.Map is specialized. A plain typed map with locking is usually easier to use when related state must change together. sync.Map is suited to entries written once and read many times, or concurrent access to disjoint sets of keys. It is not a general promise of better performance."
+                    "sync.Map",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is useful for specific patterns of concurrent access."
+                ]
+            ]
+        },
+        {
+            "id": "1dcaf843-cb2f-5d7c-b2cf-9832cd9632b7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "One pattern is writing each key once and reading it many times."
+                ]
+            ]
+        },
+        {
+            "id": "d6f3b526-938e-5683-92bc-b9b19b551b9d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Another pattern is multiple goroutines working on separate sets of keys."
+                ]
+            ]
+        },
+        {
+            "id": "6d140241-1a4c-536e-903c-ad55cb8c5d52",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A regular typed map with a lock is usually easier when map entries and other state must change together."
+                ]
+            ]
+        },
+        {
+            "id": "7091275d-73bc-5317-a6f0-e68c7b409b07",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "sync.Map",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is not always faster."
                 ]
             ]
         },
@@ -581,10 +859,47 @@ const note = {
         },
         {
             "id": "e94927d5-07d7-5372-b078-ab1d1576d690",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Load returns an interface value, so concrete use may require a checked type assertion. Do not copy a sync.Map after its first use."
+                    "Load",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns an interface value. You may need a type assertion to use it as a specific type."
+                ]
+            ]
+        },
+        {
+            "id": "a11280cc-71ea-573c-97f3-ea6d1da26e20",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a checked type assertion if the stored type is uncertain."
+                ]
+            ]
+        },
+        {
+            "id": "cb53997d-ecd8-55ae-929f-76ad1e8314cc",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not copy a "
+                ],
+                [
+                    "sync.Map",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after using it."
                 ]
             ]
         },

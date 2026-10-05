@@ -6,14 +6,50 @@ const note = {
     "notionId": "24024eb1-ed54-80e4-ae95-d890f035f808",
     "slug": "channels",
     "title": "Channels",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "ff025372-f4f7-5756-98a5-dc14120d4ab6",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A channel sends values of one element type between goroutines. Sending a value copies that value; sending a pointer or slice does not copy the data it refers to. Channel communication can coordinate ownership, but shared mutable data still needs a consistent synchronization plan."
+                    "A channel sends values of one type between goroutines."
+                ]
+            ]
+        },
+        {
+            "id": "65b291ca-8bed-5998-adc2-9cdb4224ccae",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Sending copies the value."
+                ]
+            ]
+        },
+        {
+            "id": "08db5b69-d269-59af-b382-30d9947f34f9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Sending a pointer or slice does not copy the data it refers to."
+                ]
+            ]
+        },
+        {
+            "id": "1128258d-fc63-5fa4-8d70-0b5233f6a5d2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A channel can pass control of data to another goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "94bcfd9f-dad9-50b5-91bd-537f26acf7d8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If goroutines share data and one writes, protect their accesses."
                 ]
             ]
         },
@@ -38,8 +74,11 @@ const note = {
         },
         {
             "id": "d56c3e93-38a7-552f-aaba-6ea3a26455fd",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
+                [
+                    "Send: "
+                ],
                 [
                     "ch <- value",
                     [
@@ -49,7 +88,16 @@ const note = {
                     ]
                 ],
                 [
-                    " sends a value. "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "ab08691f-0159-5884-bc79-a86b05101aae",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Receive: "
                 ],
                 [
                     "<-ch",
@@ -60,7 +108,16 @@ const note = {
                     ]
                 ],
                 [
-                    " receives one; "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "2b43af84-56d0-5fff-b850-de127759621d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Receive and store: "
                 ],
                 [
                     "value := <-ch",
@@ -71,8 +128,23 @@ const note = {
                     ]
                 ],
                 [
-                    " stores it. A buffered channel holds at most its capacity. "
-                ],
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "374b60d1-6cbd-5193-b6ee-eb4c5d69f00f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A buffered channel holds at most its capacity."
+                ]
+            ]
+        },
+        {
+            "id": "17455973-9b08-5858-900f-34ad098be3f9",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "len(ch)",
                     [
@@ -82,7 +154,16 @@ const note = {
                     ]
                 ],
                 [
-                    " reports queued values at that moment, not a guarantee that a later send or receive will proceed."
+                    " gives the number of queued values at that moment."
+                ]
+            ]
+        },
+        {
+            "id": "933259b0-2123-542c-a1ac-d1162a893f66",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That number does not guarantee that a later send or receive will be ready."
                 ]
             ]
         },
@@ -159,12 +240,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Wait if the buffer is full and no receiver can make space."
+                                "Wait if the buffer is full and no receiver makes space."
                             ]
                         ],
                         "column-2": [
                             [
-                                "Wait if the buffer is empty and no sender can supply a value."
+                                "Wait if the buffer is empty and no sender supplies a value."
                             ]
                         ]
                     }
@@ -185,7 +266,7 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "Drain queued values, then return the element zero value without blocking."
+                                "Receive queued values first. Then return the zero value without waiting."
                             ]
                         ]
                     }
@@ -201,12 +282,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Block indefinitely."
+                                "Wait forever."
                             ]
                         ],
                         "column-2": [
                             [
-                                "Block indefinitely."
+                                "Wait forever."
                             ]
                         ]
                     }
@@ -215,10 +296,37 @@ const note = {
         },
         {
             "id": "0f284ac4-b2dc-5d60-becf-703b9bca6eab",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Backpressure means that downstream capacity limits how quickly a producer can submit work. An unbuffered channel requires a receiver for each send. A buffer lets the producer enqueue some work before waiting; it does not increase the consumer’s processing capacity or fix an absent consumer."
+                    "Backpressure means a slow receiver makes the sender wait."
+                ]
+            ]
+        },
+        {
+            "id": "acd047a2-8695-580d-886f-f513f0d32c8c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An unbuffered channel needs a receiver for each send."
+                ]
+            ]
+        },
+        {
+            "id": "f2f24d7a-36f2-586d-a177-ae74bd0afdab",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A buffer lets the sender queue some values before waiting."
+                ]
+            ]
+        },
+        {
+            "id": "8eed765a-5e42-5308-a58a-d5670e4c9634",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A buffer does not make the receiver faster or fix a missing receiver."
                 ]
             ]
         },
@@ -234,10 +342,28 @@ const note = {
         },
         {
             "id": "4ee85b29-9b20-5105-bd74-08580ca10ce0",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Choose buffer capacity from the expected burst and resource limits. A full queue needs an explicit policy: wait, reject, drop, or cancel. None of those policies is a general throughput guarantee."
+                    "Choose a buffer size that fits the expected bursts of values and the available memory."
+                ]
+            ]
+        },
+        {
+            "id": "c81aaeb9-2da4-546f-a9ad-cd1a10f33cd5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Decide what to do when the queue is full: wait, reject the value, drop it or cancel the work."
+                ]
+            ]
+        },
+        {
+            "id": "f7a5bbde-3643-52a2-8e60-3618e87bf82c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A larger buffer does not guarantee faster processing."
                 ]
             ]
         },
@@ -252,10 +378,10 @@ const note = {
         },
         {
             "id": "58bf51ad-3c3c-5a1d-a4f9-701c71a1b07e",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Function parameters can restrict access to a bidirectional channel."
+                    "A function parameter can allow only sending or only receiving."
                 ]
             ]
         },
@@ -271,7 +397,7 @@ const note = {
         },
         {
             "id": "f1bc4eb5-36e7-5064-8a2d-81992dac3540",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "chan<- T",
@@ -282,8 +408,14 @@ const note = {
                     ]
                 ],
                 [
-                    " permits sends and closing. "
-                ],
+                    ": send values and close the channel."
+                ]
+            ]
+        },
+        {
+            "id": "677e6d68-9934-563b-9dcb-a6b1da4496cb",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "<-chan T",
                     [
@@ -293,7 +425,25 @@ const note = {
                     ]
                 ],
                 [
-                    " permits receives. Direction restricts the operations available through that variable; it does not create another channel or enforce which sender owns closure."
+                    ": receive values."
+                ]
+            ]
+        },
+        {
+            "id": "f6aebe04-e03d-54d4-9111-225a9a12c708",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Changing the direction does not create a new channel."
+                ]
+            ]
+        },
+        {
+            "id": "1ed83181-17f7-582a-83d9-69f62d527609",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The direction limits operations through that variable. It does not decide which sender should close the channel."
                 ]
             ]
         },
@@ -311,7 +461,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Close when no more values will be sent. The sender or a coordinator that knows every sender has finished should own that decision."
+                    "Close the channel when no more values will be sent."
+                ]
+            ]
+        },
+        {
+            "id": "d234ea8e-a10f-5355-8395-d0246779136c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Let the sender close it, or use a coordinator that waits until every sender has finished."
                 ]
             ]
         },
@@ -320,7 +479,34 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Sending after close or closing an already closed channel panics. Closing a nil channel also panics. You do not need to close every channel for garbage collection."
+                    "Sending to a closed channel panics."
+                ]
+            ]
+        },
+        {
+            "id": "bed2aad6-91c4-519c-ab6d-ec33255e3e0a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Closing an already closed channel panics."
+                ]
+            ]
+        },
+        {
+            "id": "6456603e-e427-52d2-ad2e-355f38f2560b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Closing a nil channel panics."
+                ]
+            ]
+        },
+        {
+            "id": "71ab8914-a410-5c13-9518-8008aee4a6c8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A channel does not need to be closed for garbage collection."
                 ]
             ]
         },
@@ -329,7 +515,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "For "
+                    "Use "
                 ],
                 [
                     "value, ok := <-ch",
@@ -340,8 +526,14 @@ const note = {
                     ]
                 ],
                 [
-                    ", "
-                ],
+                    " to detect the end of a stream."
+                ]
+            ]
+        },
+        {
+            "id": "c829aefd-1013-51b1-98ff-6d52fdb2acdb",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "ok",
                     [
@@ -351,7 +543,24 @@ const note = {
                     ]
                 ],
                 [
-                    " remains true for queued values. It becomes false only after the channel is closed and drained."
+                    " is true while receiving values that were sent, including buffered values."
+                ]
+            ]
+        },
+        {
+            "id": "6842cf79-90d5-550b-b006-aa13644fc03c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "ok",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " becomes false after the channel is closed and all buffered values have been received."
                 ]
             ]
         },
@@ -360,7 +569,24 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A channel range receives until closure and drainage. It waits indefinitely if the input stays open without future sends."
+                    "range",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " receives values until the channel is closed and empty."
+                ]
+            ]
+        },
+        {
+            "id": "a25faae9-af84-5773-b072-5ee337536ded",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If nobody sends or closes the channel, the range keeps waiting."
                 ]
             ]
         },
@@ -376,10 +602,19 @@ const note = {
         },
         {
             "id": "ed0cf350-3816-5ed1-aab0-b609baca2930",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: 7 true, then 0 false. The zero value can also be sent as real data, so use "
+                    "Output: 7 true, then 0 false."
+                ]
+            ]
+        },
+        {
+            "id": "f2abd55e-f308-5637-a2f7-4a4f6b4a9d05",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Zero can also be a real sent value. Use "
                 ],
                 [
                     "ok",
@@ -390,7 +625,7 @@ const note = {
                     ]
                 ],
                 [
-                    " to distinguish a drained channel from a real zero."
+                    " to tell whether the stream has ended."
                 ]
             ]
         },
@@ -425,7 +660,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Owns"
+                                "Use"
                             ]
                         ],
                         "column-2": [
@@ -446,12 +681,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Communicate values, transfer ownership, or signal an event."
+                                "Send values, pass control of data, or signal an event."
                             ]
                         ],
                         "column-2": [
                             [
-                                "Does not automatically protect objects that goroutines still share."
+                                "Does not automatically protect data that goroutines still share."
                             ]
                         ]
                     }
@@ -467,12 +702,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Protect shared state during an agreed lock scope."
+                                "Protect shared data while the lock is held."
                             ]
                         ],
                         "column-2": [
                             [
-                                "Every conflicting access must follow the same locking rules."
+                                "All accesses that may conflict must follow the same locking rules."
                             ]
                         ]
                     }
@@ -488,12 +723,12 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Wait for registered tasks to finish."
+                                "Wait for added tasks to finish."
                             ]
                         ],
                         "column-2": [
                             [
-                                "Does not carry results or serialize workers’ shared updates."
+                                "Does not send results or let only one worker update shared data at a time."
                             ]
                         ]
                     }
@@ -505,7 +740,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Detailed contracts: "
+                    "Rules and examples: "
                 ],
                 [
                     "Mutex",
@@ -555,11 +790,20 @@ const note = {
             ]
         },
         {
-            "id": "750e95e6-23f3-578f-883e-bc04dedd82e8",
-            "type": "text",
+            "id": "channels-multiplexing-meaning",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This program rejects a send when its one-slot queue is already full:"
+                    "Multiplexing means handling several channels through one select statement."
+                ]
+            ]
+        },
+        {
+            "id": "750e95e6-23f3-578f-883e-bc04dedd82e8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The queue below has room for one value. It already contains that value."
                 ]
             ]
         },
@@ -575,11 +819,17 @@ const note = {
         },
         {
             "id": "cb4f623c-ca4f-5e4e-880b-b27d272e4160",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: queue full. Using "
-                ],
+                    "Output: queue full."
+                ]
+            ]
+        },
+        {
+            "id": "7e647512-f6b9-5112-8d44-943db53e2584",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "default",
                     [
@@ -589,7 +839,7 @@ const note = {
                     ]
                 ],
                 [
-                    " chooses rejection here; it does not make a receiver appear."
+                    " rejects the second send instead of waiting."
                 ]
             ]
         },
@@ -625,10 +875,37 @@ const note = {
         },
         {
             "id": "08ed5e3f-b395-5610-b9d7-1215177b7a5b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Three workers share one jobs channel (fan-out) and send to one results channel (fan-in). The producer closes jobs. A coordinator closes results only after every worker returns."
+                    "Fan-out: several workers receive from the same jobs channel."
+                ]
+            ]
+        },
+        {
+            "id": "3fafe27f-48cc-5b16-9e59-527adc2bb4de",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Fan-in: the workers send their results to the same results channel."
+                ]
+            ]
+        },
+        {
+            "id": "08975a31-7643-5c8e-9068-f7580626ea30",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The producer closes jobs after sending all jobs."
+                ]
+            ]
+        },
+        {
+            "id": "c25128d2-1a57-557e-b4a1-12a907950440",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The coordinator closes results after every worker returns."
                 ]
             ]
         },
@@ -644,10 +921,27 @@ const note = {
         },
         {
             "id": "3f1dafd4-6c44-5f11-aa21-c328acccfb0b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The values are 1, 4, 9, 16 and 25, in unspecified order. Main drains results while workers run, so an unbuffered results send has a receiver."
+                    "Prints 1, 4, 9, 16 and 25. Their order can change."
+                ]
+            ]
+        },
+        {
+            "id": "877b1cef-b5e9-5af3-9fde-12d1e578692b",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " receives results while the workers run, so their unbuffered sends can finish."
                 ]
             ]
         },
@@ -662,10 +956,19 @@ const note = {
         },
         {
             "id": "b42e2234-f49a-5e77-91bc-e6ae6a1d6821",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A pipeline feeds the output of one stage into the next. This example drains the whole stream; each stage closes only its own output."
+                    "A pipeline passes the output of one stage to the next stage."
+                ]
+            ]
+        },
+        {
+            "id": "5a8cd86c-8849-553a-bdba-0bf8dea41577",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each stage closes its own output channel."
                 ]
             ]
         },
@@ -681,10 +984,19 @@ const note = {
         },
         {
             "id": "f185770e-e264-567d-9a4f-a2c6ae323caf",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected values in order: 0, 1, 4, 9, 16. If a consumer returns early, the stages need cancellation instead of continuing their ordinary blocking sends."
+                    "Prints 0, 1, 4, 9 and 16, in that order."
+                ]
+            ]
+        },
+        {
+            "id": "edc1ad7b-a200-562d-9d15-9ddaa39d8ea0",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If the receiver stops early, cancel the stages so they do not wait forever on their sends."
                 ]
             ]
         },
@@ -699,10 +1011,37 @@ const note = {
         },
         {
             "id": "a3f07fa4-bce0-5701-ab0f-03b00007fa84",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This program fetches two pages concurrently and handles request, body-read and HTTP-status errors. The client timeout bounds each fetch. The caller consumes every result; a caller that abandons results also needs a cancellation path."
+                    "The crawler fetches two pages at the same time."
+                ]
+            ]
+        },
+        {
+            "id": "13b4e0c6-8db2-5890-b90d-31d047c72b4f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It checks request errors, body-read errors and HTTP status errors."
+                ]
+            ]
+        },
+        {
+            "id": "b56f83e6-8d92-5634-b8ad-170a1b4444ce",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The client timeout limits how long each fetch can take."
+                ]
+            ]
+        },
+        {
+            "id": "2d338caa-506e-5395-987c-d004f9233344",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The caller receives every result. If it stops receiving early, it must also cancel the senders."
                 ]
             ]
         },
@@ -718,10 +1057,19 @@ const note = {
         },
         {
             "id": "e786471f-a8bc-5c04-a796-a5b31a599cce",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Order, page sizes and errors depend on scheduling and the network. For many URLs, bound concurrent work with a pool rather than starting one goroutine for every URL."
+                    "Result order, page sizes and errors depend on the network and which goroutine runs first."
+                ]
+            ]
+        },
+        {
+            "id": "264cf262-8d88-5c5f-bd5f-129fa4ed7594",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For many URLs, use a worker pool to limit how many fetches run at once."
                 ]
             ]
         },
@@ -736,10 +1084,28 @@ const note = {
         },
         {
             "id": "1f3ed4fa-24d7-5b56-8bf9-3305eb396c72",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A producer blocked on an unbuffered send cannot return if its consumer has stopped receiving. An open-channel receive likewise has no exit when no sender remains. Adding finite buffer space may postpone the failure but does not provide shutdown."
+                    "An unbuffered sender keeps waiting if the receiver has stopped receiving."
+                ]
+            ]
+        },
+        {
+            "id": "5af8ca2d-f8e4-57d2-beb0-556f330e0d33",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A receiver keeps waiting if the channel stays open and no sender remains."
+                ]
+            ]
+        },
+        {
+            "id": "b9712b05-36f2-522f-a6b3-d2b3ff3ec4a8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A finite buffer may delay the problem. It does not provide a way to stop the goroutines."
                 ]
             ]
         },
@@ -769,7 +1135,7 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Diagnosis and operation ownership: "
+                    "Finding why a goroutine is waiting: "
                 ],
                 [
                     "Goroutines Blocking: Causes & Recovery",

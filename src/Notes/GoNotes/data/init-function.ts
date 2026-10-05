@@ -6,14 +6,23 @@ const note = {
     "notionId": "24124eb1-ed54-805e-955e-f3e6320ff4ab",
     "slug": "init-function",
     "title": "init() Function",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "init-function-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "An init function performs package setup after package-level variables are initialized and before main starts. It has no parameters or results."
+                    "init runs package setup before main starts."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It has no parameters or return values."
                 ]
             ]
         },
@@ -31,7 +40,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Imported packages initialize before the importing package. A package initializes once per program, even when several packages import it."
+                    "Imported packages initialize before the package that imports them."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-03-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Each package initializes once per program, even if several packages import it."
                 ]
             ]
         },
@@ -40,7 +58,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Within a package, variable initialization follows declaration order subject to dependencies on other package variables."
+                    "Package variables initialize in declaration order when their dependencies are ready."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-04-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If one variable needs another variable, that other variable initializes first."
                 ]
             ]
         },
@@ -49,7 +76,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "After all package variables initialize, each init function runs in source order. A file or package can declare several init functions."
+                    "All package variables initialize before init functions run."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-05-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "init functions run in the order they appear in the source."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-05-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A file or package can have several init functions."
                 ]
             ]
         },
@@ -58,7 +103,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Across files, declaration order follows the order files are presented to the compiler. Build systems are encouraged to use lexical file-name order. Avoid using file names as an application dependency mechanism."
+                    "Across files, order depends on which file the compiler receives first."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-06-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Build tools are encouraged to send files in alphabetical file-name order."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-06-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Avoid making application behavior depend on file-name order."
                 ]
             ]
         },
@@ -67,7 +130,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "After program initialization completes, execution calls func main() in package main."
+                    "After all packages initialize, Go calls func main() in package main."
                 ]
             ]
         },
@@ -85,7 +148,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You cannot call init directly or refer to it as an ordinary function value."
+                    "You cannot call init yourself or use it as a function value."
                 ]
             ]
         },
@@ -94,7 +157,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use small, predictable setup operations, such as registering an implementation with another package."
+                    "Keep init small. Registering a package implementation is one use."
                 ]
             ]
         },
@@ -103,7 +166,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use variable initializers for simple package values. Prefer explicit setup functions for configuration, logging, database connections, or work that can fail, so callers can handle errors and control lifetime."
+                    "Use variable initializers for simple package values."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-11-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use explicit setup functions for configuration, logging, or database connections."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-11-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Setup functions let the caller handle errors and decide when to start and stop resources."
                 ]
             ]
         },
@@ -112,7 +193,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Initialization runs sequentially in one goroutine. An init function can start other goroutines, but returning from init does not wait for those goroutines to finish."
+                    "Package initialization runs one step at a time in one goroutine."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-12-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "init can start other goroutines."
+                ]
+            ]
+        },
+        {
+            "id": "init-function-12-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Returning from init does not wait for those goroutines to finish."
                 ]
             ]
         },
@@ -156,7 +255,7 @@ const note = {
         },
         {
             "id": "init-function-17",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Source: "

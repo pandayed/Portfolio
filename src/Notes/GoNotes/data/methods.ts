@@ -4,14 +4,23 @@ const note = {
     "notionId": "2f124eb1-ed54-807a-925e-faca53721562",
     "slug": "methods",
     "title": "Methods",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "13db468b-cded-5686-a3fb-8a75a8cba512",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A method is a function declared with a receiver. The receiver associates the method with a type; ordinary parameters follow the method name."
+                    "A method is a function with a receiver."
+                ]
+            ]
+        },
+        {
+            "id": "c6a97fdf-1faa-5903-92a6-e5d46548f67c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The receiver tells Go which type the method belongs to."
                 ]
             ]
         },
@@ -54,10 +63,28 @@ const note = {
         },
         {
             "id": "670e8395-9b3c-5929-948b-415e57ccd005",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The receiver variable is local to the method body. It is written before the method name and enables "
+                    "Write the receiver before the method name."
+                ]
+            ]
+        },
+        {
+            "id": "583203a0-6fed-5481-a91c-fc84d40b4e6d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The receiver variable exists only inside the method."
+                ]
+            ]
+        },
+        {
+            "id": "3c5ac859-b207-51d0-a1e3-e3f3755afcf8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Call the method through a value, such as "
                 ],
                 [
                     "u.Read()",
@@ -68,7 +95,16 @@ const note = {
                     ]
                 ],
                 [
-                    ". A normal parameter is written after the name and passed by the caller."
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "2f5c4d86-6dcd-53b2-a98d-ef91d4d31044",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Write normal parameters after the method name. The caller passes them in parentheses."
                 ]
             ]
         },
@@ -108,7 +144,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Effect of assigning receiver fields"
+                                "When receiver fields change"
                             ]
                         ]
                     }
@@ -172,7 +208,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use a value receiver for small values when copying matches the intended behavior. A copy can still contain pointers, slices or maps that refer to shared storage."
+                    "Use a value receiver when the value is small and copying it gives the behavior you want."
+                ]
+            ]
+        },
+        {
+            "id": "046459b5-b33e-501f-b6ca-46f64b19cf1d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Copying a value does not copy the data behind its pointers, slices or maps. That data can still be shared."
                 ]
             ]
         },
@@ -181,7 +226,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use a pointer receiver to change the original value or avoid copying a large value. Keep receiver choices consistent when a type needs pointer methods."
+                    "Use a pointer receiver to change the original value."
+                ]
+            ]
+        },
+        {
+            "id": "88c2bbe9-0cb6-5a5a-ab19-22dd3c483470",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A pointer receiver also avoids copying a large value."
+                ]
+            ]
+        },
+        {
+            "id": "6633df6c-11ff-517a-9d87-c9fbc60d5177",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Keep receiver choices consistent when the type needs pointer methods."
                 ]
             ]
         },
@@ -214,10 +277,36 @@ const note = {
         },
         {
             "id": "e899d365-bdf8-587b-8b6f-7df25e28bdef",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Receiver passing can be explained as an extra argument, but "
+                    "A receiver is passed to the method much like a normal argument."
+                ]
+            ]
+        },
+        {
+            "id": "7eab31db-ab43-538d-b0db-05851e33206c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "User.Read",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is a method expression. It lets you pass the receiver as an argument."
+                ]
+            ]
+        },
+        {
+            "id": "cf5ec1f8-9e55-5ec5-b388-9e77d1286ea9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Declaring the method does not create a separate function named "
                 ],
                 [
                     "Read(u)",
@@ -228,18 +317,7 @@ const note = {
                     ]
                 ],
                 [
-                    " is not a free function created by declaring the method. "
-                ],
-                [
-                    "User.Read",
-                    [
-                        [
-                            "c"
-                        ]
-                    ]
-                ],
-                [
-                    " is the valid method expression."
+                    "."
                 ]
             ]
         },
@@ -264,10 +342,36 @@ const note = {
         },
         {
             "id": "6357b24a-3902-5c8a-aa3f-26831179bd62",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A method set is a property of a type. It determines interface satisfaction. For this non-embedded defined type:"
+                    "A method set is the set of methods that belongs to a type."
+                ]
+            ]
+        },
+        {
+            "id": "8e1216d1-c55d-5b1f-8fc2-fcf0a3fb9b26",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go uses it to decide whether the type implements an interface."
+                ]
+            ]
+        },
+        {
+            "id": "5e5da881-d304-584e-a0f8-af7c3c5e1d91",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "User",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " has no embedded types, so its method sets follow the table below."
                 ]
             ]
         },
@@ -374,11 +478,26 @@ const note = {
         },
         {
             "id": "3c1ed0cf-7251-5a77-9938-f414bb0abae4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Both the method names and signatures must match. Automatic address-taking for a method call does not add methods to "
-                ],
+                    "Interface methods must match in name, parameter types and return types."
+                ]
+            ]
+        },
+        {
+            "id": "7a89d1ea-c5d4-5c2b-9a3d-f8cfbf6d415d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go may take an address to call a method. This does not change the method set."
+                ]
+            ]
+        },
+        {
+            "id": "3d5efc44-d5a6-55a8-95cf-e1504925a4b1",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "User",
                     [
@@ -388,7 +507,7 @@ const note = {
                     ]
                 ],
                 [
-                    " or make it implement "
+                    " still does not implement "
                 ],
                 [
                     "Writer",
@@ -399,7 +518,18 @@ const note = {
                     ]
                 ],
                 [
-                    "."
+                    ". Its pointer type, "
+                ],
+                [
+                    "*User",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", does."
                 ]
             ]
         },
@@ -432,10 +562,30 @@ const note = {
         },
         {
             "id": "e411cf98-54c2-59ad-ba1c-8f1d76c88e67",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Go can call a pointer-receiver method through an addressable value: "
+                    "An addressable value is a value whose address Go can take."
+                ]
+            ]
+        },
+        {
+            "id": "ca97f2d6-1ced-57d7-ade1-720dfc1ab345",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For an addressable "
+                ],
+                [
+                    "u",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", Go treats "
                 ],
                 [
                     "u.Write(name)",
@@ -446,7 +596,7 @@ const note = {
                     ]
                 ],
                 [
-                    " is shorthand for "
+                    " as "
                 ],
                 [
                     "(&u).Write(name)",
@@ -457,7 +607,34 @@ const note = {
                     ]
                 ],
                 [
-                    ". Addressable cases include variables, fields of addressable structs, slice elements and elements of addressable arrays."
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "71c5965d-6666-55ec-b389-3ab5e55d9a36",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Variables and slice elements are addressable."
+                ]
+            ]
+        },
+        {
+            "id": "8d08ca6e-332d-5f7d-891d-79b24d13a8dc",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A field is addressable when its struct is addressable."
+                ]
+            ]
+        },
+        {
+            "id": "d75c3904-00fa-536d-84e8-2d7458b8afeb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An array element is addressable when its array is addressable."
                 ]
             ]
         },
@@ -473,11 +650,8 @@ const note = {
         },
         {
             "id": "c087e69e-2acf-53d7-a56e-e56ba47fd8b6",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
-                [
-                    "Self-check: "
-                ],
                 [
                     "User{}.Write(\"x\")",
                     [
@@ -487,10 +661,16 @@ const note = {
                     ]
                 ],
                 [
-                    " fails because the call cannot automatically take that literal’s address. "
-                ],
+                    " fails. Go cannot automatically take the literal’s address for this call."
+                ]
+            ]
+        },
+        {
+            "id": "5c12fe79-9268-5c72-a05a-de24967a3f43",
+            "type": "bulleted_list",
+            "richText": [
                 [
-                    "u := User{}; u.Write(\"x\")",
+                    "u := User{}",
                     [
                         [
                             "c"
@@ -498,7 +678,18 @@ const note = {
                     ]
                 ],
                 [
-                    " works because "
+                    " followed by "
+                ],
+                [
+                    "u.Write(\"x\")",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " works. The variable "
                 ],
                 [
                     "u",
@@ -509,7 +700,7 @@ const note = {
                     ]
                 ],
                 [
-                    " is a variable."
+                    " is addressable."
                 ]
             ]
         },
@@ -524,10 +715,10 @@ const note = {
         },
         {
             "id": "9f361f24-4506-5002-a5d8-792908124ef6",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A method with a pointer receiver may receive "
+                    "A pointer receiver can be "
                 ],
                 [
                     "nil",
@@ -538,7 +729,36 @@ const note = {
                     ]
                 ],
                 [
-                    ". Its body must handle that case before accessing fields. A method body can also panic for reasons unrelated to the receiver."
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "d615795e-dca5-5ad2-924f-e75d07401f57",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check for "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " before reading or writing the receiver’s fields."
+                ]
+            ]
+        },
+        {
+            "id": "636bfee0-fde8-5398-b400-13ce835df2da",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A method can also panic for reasons unrelated to its receiver."
                 ]
             ]
         },
@@ -563,10 +783,68 @@ const note = {
         },
         {
             "id": "73483e92-7934-53e0-8609-d268629db7ce",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The receiver base type must be a defined type from the same package and cannot itself be a pointer or interface type. Declare methods outside the type declaration. Methods are associated with types; struct values do not store method declarations."
+                    "The receiver base type is the type without the pointer. For "
+                ],
+                [
+                    "(u *User)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", the base type is "
+                ],
+                [
+                    "User",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "e9fba99d-c177-5d0a-b87d-e2086560ed7a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The base type must be a defined type from the same package as the method."
+                ]
+            ]
+        },
+        {
+            "id": "32cdc70e-fa74-586a-a7ee-d3636b1daf16",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The base type itself cannot be a pointer type or an interface type."
+                ]
+            ]
+        },
+        {
+            "id": "97ea1704-bbc6-5fe6-9b7a-1720c5405ff5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Declare methods outside the type declaration."
+                ]
+            ]
+        },
+        {
+            "id": "4ff5fd89-1228-5089-b243-d185e84daf51",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Methods belong to types. A struct value does not store method declarations."
                 ]
             ]
         },
@@ -585,7 +863,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You cannot attach methods directly to predeclared "
+                    "Do not declare methods directly on built-in "
                 ],
                 [
                     "int",
@@ -596,7 +874,25 @@ const note = {
                     ]
                 ],
                 [
-                    ", an unnamed struct, or a type defined in another package. A non-generic alias to an eligible local defined type, such as "
+                    ", an unnamed struct or a type from another package."
+                ]
+            ]
+        },
+        {
+            "id": "5d736984-1cab-54fd-afdb-8d1a82e3728c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An alias gives an existing type another name. It does not create a new type."
+                ]
+            ]
+        },
+        {
+            "id": "518fa7e7-a6d8-58bc-ba2b-7582be545e05",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A simple local alias, such as "
                 ],
                 [
                     "type Alias = User",
@@ -607,7 +903,36 @@ const note = {
                     ]
                 ],
                 [
-                    ", may be used to declare a method on that same type. An alias does not create a new type; aliases to imported types are not eligible, and generic aliases have additional restrictions."
+                    ", can be used as a receiver for methods on "
+                ],
+                [
+                    "User",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "894460aa-fd12-5314-ae3b-c1d5d7505e91",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An alias to a type from another package cannot be used for this."
+                ]
+            ]
+        },
+        {
+            "id": "f40d14ad-35fa-53e6-b274-020e37227e13",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A receiver alias cannot be generic or refer to a type created by supplying generic type arguments."
                 ]
             ]
         },

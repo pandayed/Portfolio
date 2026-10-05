@@ -6,14 +6,23 @@ const note = {
     "notionId": "24024eb1-ed54-80f7-a283-c9ba635393a0",
     "slug": "why-go",
     "title": "Why Go?",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "why-go-01",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Go is a statically typed, compiled language for building services, command-line tools, and concurrent programs."
+                    "Go is a compiled language. It checks types before the program runs."
+                ]
+            ]
+        },
+        {
+            "id": "why-go-01-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use Go for services, command-line tools, and programs that do several tasks at once."
                 ]
             ]
         },
@@ -31,7 +40,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "HTTP APIs and network services: the standard library includes HTTP, networking, and encoding packages."
+                    "Go has standard packages for HTTP APIs, networking, and converting data to formats such as JSON."
                 ]
             ]
         },
@@ -40,7 +49,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Command-line tools and automation: the toolchain builds executables for supported operating systems and architectures."
+                    "Go tools build programs for supported operating systems and CPU types."
                 ]
             ]
         },
@@ -49,7 +58,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Cloud and infrastructure software: Go is used in projects such as Kubernetes and Docker."
+                    "Cloud tools such as Kubernetes and Docker use Go."
                 ]
             ]
         },
@@ -67,7 +76,25 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Goroutines and channels provide language support for concurrent work. Programs still need correct synchronization and cancellation."
+                    "Goroutines let a program do several tasks at once."
+                ]
+            ]
+        },
+        {
+            "id": "why-go-07-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Channels let goroutines send values to each other."
+                ]
+            ]
+        },
+        {
+            "id": "why-go-07-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The program still needs to protect shared data and stop work when needed."
                 ]
             ]
         },
@@ -76,7 +103,16 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Garbage collection manages Go memory. Files, sockets, and other resources still need explicit cleanup."
+                    "Garbage collection frees Go memory that the program no longer needs."
+                ]
+            ]
+        },
+        {
+            "id": "why-go-08-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Files and network connections still need cleanup, such as calling Close."
                 ]
             ]
         },
@@ -85,7 +121,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The toolchain includes build commands, formatting, testing, and module dependency management."
+                    "Go tools can build programs, format code, run tests, and manage dependencies."
                 ]
             ]
         },
@@ -110,16 +146,43 @@ const note = {
         },
         {
             "id": "why-go-12",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The standard Go compiler produces machine code for the target platform. The program also uses a runtime for scheduling, garbage collection, and other services. Runtime work and memory use depend on the workload; Go does not guarantee negligible overhead or faster execution than every alternative."
+                    "The standard Go compiler produces machine code for the target computer."
+                ]
+            ]
+        },
+        {
+            "id": "why-go-12-read-1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The Go runtime schedules goroutines and collects unused memory."
+                ]
+            ]
+        },
+        {
+            "id": "why-go-12-read-2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The runtime still uses CPU time and memory."
+                ]
+            ]
+        },
+        {
+            "id": "why-go-12-read-3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The cost depends on the program. Go is not always faster than other languages."
                 ]
             ]
         },
         {
             "id": "why-go-13",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -140,7 +203,7 @@ const note = {
         },
         {
             "id": "why-go-14",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "Sources: "
@@ -161,7 +224,7 @@ const note = {
         },
         {
             "id": "why-go-15",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     ""

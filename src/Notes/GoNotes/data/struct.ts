@@ -6,14 +6,32 @@ const note = {
     "notionId": "24024eb1-ed54-80a2-a695-ea95dbbf67c0",
     "slug": "struct",
     "title": "Struct",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "bcf81806-866f-599c-b98d-11677e479cd4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A struct groups named fields. Fields can have any type, including function types. Methods are declared separately with a receiver."
+                    "A struct groups named fields."
+                ]
+            ]
+        },
+        {
+            "id": "fd217c80-ab73-520f-944e-1d442f2e09f1",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A field can hold any type, including a function."
+                ]
+            ]
+        },
+        {
+            "id": "d73730c6-eb85-59e9-a9eb-d46c838804cf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Methods are declared separately with a receiver."
                 ]
             ]
         },
@@ -89,7 +107,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Named fields; omitted fields use zero values."
+                                "Uses field names. Other fields get zero values."
                             ]
                         ]
                     }
@@ -115,7 +133,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Positional fields in declaration order."
+                                "Uses field order."
                             ]
                         ]
                     }
@@ -141,7 +159,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "All fields have their zero values."
+                                "Every field gets its zero value."
                             ]
                         ]
                     }
@@ -167,7 +185,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Pointer to the initialized struct."
+                                "Points to the struct with the given field values."
                             ]
                         ]
                     }
@@ -193,7 +211,7 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "Pointer to a zero-valued struct."
+                                "Points to a struct with zero values in every field."
                             ]
                         ]
                     }
@@ -222,10 +240,28 @@ const note = {
         },
         {
             "id": "52cc9775-6c8f-5c9a-94db-f03f9ca0bc21",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Named fields make the selected fields explicit. Positional literals depend on field order and must provide each field. Prefer named fields when using another package’s struct type."
+                    "Named fields show which value belongs to each field."
+                ]
+            ]
+        },
+        {
+            "id": "7fa4bd43-3914-5db9-bf3f-b5d1d6cd0e12",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A positional literal gives values in field order. It must give a value for every field."
+                ]
+            ]
+        },
+        {
+            "id": "5eb902ed-a178-565f-8edf-aa3371fea528",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Prefer named fields when using a struct from another package."
                 ]
             ]
         },
@@ -261,10 +297,10 @@ const note = {
         },
         {
             "id": "00b8af66-6aad-5781-a868-4b9d66c884bf",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Dot notation accesses fields of both a struct value and a pointer to that struct. For a pointer p, "
+                    "Use a dot to access a field, such as "
                 ],
                 [
                     "p.Name",
@@ -275,7 +311,47 @@ const note = {
                     ]
                 ],
                 [
-                    " is shorthand for "
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "2d6315ce-1d0f-5261-a909-5453ae8439c7",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The same syntax works when "
+                ],
+                [
+                    "p",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is a pointer to the struct."
+                ]
+            ]
+        },
+        {
+            "id": "a8ee7978-33b8-52a4-8769-7131b47e1044",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "For a pointer, "
+                ],
+                [
+                    "p.Name",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " means "
                 ],
                 [
                     "(*p).Name",
@@ -286,7 +362,16 @@ const note = {
                     ]
                 ],
                 [
-                    ". This requires a non-nil pointer."
+                    ". Go dereferences the pointer for you."
+                ]
+            ]
+        },
+        {
+            "id": "6d914a7f-477a-5035-8a37-449a3ddf0717",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The pointer must not be nil."
                 ]
             ]
         },
@@ -330,10 +415,19 @@ const note = {
         },
         {
             "id": "e4c74e9a-1691-500e-b076-0b0a3bb8dd80",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A function field stores a function value. It is called through the field and is different from a method declared on the struct type."
+                    "A function field stores a function that you can call through the field."
+                ]
+            ]
+        },
+        {
+            "id": "77aa741e-79a4-5c45-8d0b-6bb5860009ea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A function field is different from a method declared on the struct type."
                 ]
             ]
         },
@@ -349,10 +443,19 @@ const note = {
         },
         {
             "id": "dd39e09c-f043-5639-99b3-1883969d9244",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A function field’s zero value is nil. Calling it before assigning a function panics."
+                    "The zero value of a function field is nil."
+                ]
+            ]
+        },
+        {
+            "id": "465324bf-ebf9-53b7-ab81-725f12b4a773",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Calling it before assigning a function panics."
                 ]
             ]
         },
@@ -367,10 +470,35 @@ const note = {
         },
         {
             "id": "14ae6679-9f45-5d89-a009-d8430ab4f5ca",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "This program uses one read-only value method and one pointer method that updates a field:"
+                    "Greet",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses a value receiver to read the fields."
+                ]
+            ]
+        },
+        {
+            "id": "8126d77c-e3fd-52ee-a57e-83b43aa60e2c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "HaveBirthday",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses a pointer receiver to change the Age field."
                 ]
             ]
         },
@@ -386,7 +514,7 @@ const note = {
         },
         {
             "id": "324809c0-cfa0-5a17-8f31-209ab56a5848",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "See "
@@ -401,7 +529,25 @@ const note = {
                     ]
                 ],
                 [
-                    " for receiver choices, copying, method sets, interface satisfaction, and addressability. Those rules apply to eligible defined types, not only structs."
+                    " for receiver choices and copying."
+                ]
+            ]
+        },
+        {
+            "id": "3c593475-63ae-56e2-82ec-d15775195230",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That page also explains method sets, interface rules, and addressability."
+                ]
+            ]
+        },
+        {
+            "id": "a1f415a4-6071-5480-9ef9-a3d1e31dd327",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These rules apply to other allowed defined types too, not just structs."
                 ]
             ]
         },

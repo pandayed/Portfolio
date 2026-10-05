@@ -6,15 +6,12 @@ const note = {
     "notionId": "24d24eb1-ed54-80bd-9a09-e4e249368ddf",
     "slug": "select",
     "title": "Select",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "28d5d4cf-1b1e-5680-963e-ef8cdce5da55",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
-                [
-                    "A "
-                ],
                 [
                     "select",
                     [
@@ -24,7 +21,16 @@ const note = {
                     ]
                 ],
                 [
-                    " chooses one channel send or receive that can proceed. It is used to wait on multiple channels, make an operation non-blocking, or observe cancellation."
+                    " chooses one channel send or receive that can run now."
+                ]
+            ]
+        },
+        {
+            "id": "d2973f37-b317-576b-9dcc-d81372eb7256",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use it to wait on several channels, avoid waiting, or respond to cancellation."
                 ]
             ]
         },
@@ -111,7 +117,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Choose one by uniform pseudo-random selection; source order gives no priority."
+                                "Choose one by uniform pseudo-random selection. Each ready case has the same chance. Source order gives no priority."
                             ]
                         ]
                     }
@@ -170,7 +176,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Block until a communication can proceed."
+                                "Wait until a communication can run."
                             ]
                         ]
                     }
@@ -186,7 +192,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "That case cannot proceed."
+                                "That case cannot run."
                             ]
                         ]
                     }
@@ -210,7 +216,7 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Block indefinitely."
+                                "Wait forever."
                             ]
                         ]
                     }
@@ -219,10 +225,36 @@ const note = {
         },
         {
             "id": "0b097fa0-49a5-51af-98f1-438d196d9af5",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A receive from a closed channel is ready, including after its buffered values are drained. A send to a closed channel can be selected and then panics. Handle closure before repeatedly selecting the channel."
+                    "Receiving from a closed channel is ready, even after its buffer is empty."
+                ]
+            ]
+        },
+        {
+            "id": "94c905c6-0837-5b43-bc5b-f54eabc1b884",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " may choose a send to a closed channel. That send then panics."
+                ]
+            ]
+        },
+        {
+            "id": "29321202-1346-51da-a8e8-0139440ee838",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Handle channel closure before selecting the same channel again in a loop."
                 ]
             ]
         },
@@ -238,10 +270,19 @@ const note = {
         },
         {
             "id": "207e294a-46ca-54d9-ba5a-b1b3c8ab8776",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Expected output: no value ready, then 7. A loop that repeatedly reaches "
+                    "Output: no value ready, then 7."
+                ]
+            ]
+        },
+        {
+            "id": "21469aa7-96a0-58aa-a2a4-f48f897f0c91",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Repeatedly running "
                 ],
                 [
                     "default",
@@ -252,7 +293,16 @@ const note = {
                     ]
                 ],
                 [
-                    " can use CPU while doing no useful work; use a blocking wait when polling is unnecessary."
+                    " in a loop can use CPU without doing useful work."
+                ]
+            ]
+        },
+        {
+            "id": "59776e64-1dbc-5070-a051-cfc78aa76342",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Let the operation wait when repeated checking is unnecessary."
                 ]
             ]
         },
@@ -267,11 +317,17 @@ const note = {
         },
         {
             "id": "4489d0aa-d71c-5217-a2e3-9e3c300584c4",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Set the local channel variable to nil after its input closes. The next "
-                ],
+                    "After a channel closes, set its local variable to nil."
+                ]
+            ]
+        },
+        {
+            "id": "e1e34e55-e6ff-5f6e-a53b-1ac46a668972",
+            "type": "bulleted_list",
+            "richText": [
                 [
                     "select",
                     [
@@ -281,7 +337,7 @@ const note = {
                     ]
                 ],
                 [
-                    " then ignores that input instead of repeatedly receiving zero values."
+                    " then skips that input instead of receiving zero values repeatedly."
                 ]
             ]
         },
@@ -297,10 +353,19 @@ const note = {
         },
         {
             "id": "374fa693-e10a-54ee-a6a2-497d1933640d",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The program prints 10 and 20 once each, in either order, then exits. Setting one variable to nil does not change another variable that refers to the same channel."
+                    "Prints 10 and 20 once each, in either order, then exits."
+                ]
+            ]
+        },
+        {
+            "id": "f6ed5de6-0819-59d1-95c5-3093dbf3162c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Setting one channel variable to nil does not change other variables that refer to that channel."
                 ]
             ]
         },
@@ -315,7 +380,7 @@ const note = {
         },
         {
             "id": "c5a18cc6-3589-5315-8200-9b6cd32f3643",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "On entry, "
@@ -329,16 +394,34 @@ const note = {
                     ]
                 ],
                 [
-                    " evaluates the channel expressions and send values once, in source order, even for cases it does not choose. Put expensive or side-effecting send expressions outside the selection when their evaluation should be explicit."
+                    " evaluates the channel expressions and send values once, in source order."
                 ]
             ]
         },
         {
-            "id": "0cadd8e6-3a50-52c1-8cd5-f4601d5e851c",
-            "type": "text",
+            "id": "1ed56aa5-006e-5a0a-aa0e-7cc047395ce0",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "A cancellation case has no automatic priority over another ready case. "
+                    "It evaluates them even for cases it does not choose."
+                ]
+            ]
+        },
+        {
+            "id": "8e74f5ed-ca96-5e3a-b30d-1cc452fb56a8",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A function call in a send expression therefore runs even if that case is not chosen."
+                ]
+            ]
+        },
+        {
+            "id": "4a8f64e2-8620-5f69-94c4-587512b41653",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Calculate a costly send value before "
                 ],
                 [
                     "select",
@@ -349,7 +432,33 @@ const note = {
                     ]
                 ],
                 [
-                    " waits only for its channel operations; it cannot interrupt work already running inside a chosen case."
+                    " when that makes its timing clearer."
+                ]
+            ]
+        },
+        {
+            "id": "0cadd8e6-3a50-52c1-8cd5-f4601d5e851c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A cancellation case does not take priority over another ready case."
+                ]
+            ]
+        },
+        {
+            "id": "3ee2f564-b9fc-50f3-bc61-10c67218dbbb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " cannot interrupt work already running inside the chosen case."
                 ]
             ]
         },

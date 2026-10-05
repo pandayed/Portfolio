@@ -4,14 +4,52 @@ const note = {
     "notionId": "24e24eb1-ed54-8016-bb3f-e11fa478ed00",
     "slug": "generics",
     "title": "Generics",
-    "updatedOn": "2026-10-04",
+    "updatedOn": "2026-10-05",
     "blocks": [
         {
             "id": "9df65395-5da9-50ca-9bea-4078b7215fe9",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Generics, introduced in Go 1.18, let a function or type use type parameters. A constraint controls which type arguments are accepted and which operations the body may use."
+                    "Generics were introduced in Go 1.18."
+                ]
+            ]
+        },
+        {
+            "id": "19697865-2e03-5d96-8bb2-ab7d7cea37fc",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A type parameter is a placeholder for a type, such as "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "7b6383f2-b406-52a4-9056-37d980f35db9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A constraint limits which types can replace that placeholder."
+                ]
+            ]
+        },
+        {
+            "id": "e8ee96ea-e312-5303-abf6-79db6523d723",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The constraint also decides which operations the generic code can use."
                 ]
             ]
         },
@@ -36,7 +74,7 @@ const note = {
         },
         {
             "id": "6cffdb29-f655-5b8d-b076-5ec5ded93b10",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "[T any]",
@@ -47,16 +85,128 @@ const note = {
                     ]
                 ],
                 [
-                    " declares a type parameter T. any is exactly an alias for interface{}. A type parameter keeps the chosen type consistent throughout each instantiation."
+                    " declares the type parameter "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "bb9e6123-fe27-58f7-a2ab-930c0f6ad036",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is an alias for "
+                ],
+                [
+                    "interface{}",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". It allows any type argument."
+                ]
+            ]
+        },
+        {
+            "id": "96fadeb4-ee8b-53ec-a4ab-eb07342b9efb",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Once a type is chosen for "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", every use of "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " in that function call has the same type."
                 ]
             ]
         },
         {
             "id": "61a2aa74-9c23-57eb-a1d9-0d6372a7622b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Both calls print 1, 2 and 3 on separate lines. In the first call, the argument lets Go infer T as int."
+                    "Both calls print 1, 2 and 3 on separate lines."
+                ]
+            ]
+        },
+        {
+            "id": "98e1f775-f374-5d76-a89f-dcf267dd7b71",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In the first call, Go infers "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " as "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " from the argument. This means you do not need to write "
+                ],
+                [
+                    "[int]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -81,10 +231,66 @@ const note = {
         },
         {
             "id": "a1720035-9003-502a-81e1-73fea9e82dae",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Stack[T] stores elements of T. Pop returns a value and a success flag so an empty stack does not index past the slice."
+                    "Stack[T]",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " stores values of type "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "9f82862f-f8af-543c-9c8f-172e8a9cffd5",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns the value and a boolean that says whether it found an item."
+                ]
+            ]
+        },
+        {
+            "id": "f6e73da0-04f6-5362-9f71-6b0170ece595",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "On an empty stack, it returns the zero value and "
+                ],
+                [
+                    "false",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " instead of reading past the slice."
                 ]
             ]
         },
@@ -119,10 +325,71 @@ const note = {
         },
         {
             "id": "0329b048-4176-5332-928a-ff8a7576442b",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "The Number constraint admits int, float64 and defined types with either underlying type. All admitted types support addition, so Sum can use +."
+                    "Number",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " allows "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "float64",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and defined types based on either of them."
+                ]
+            ]
+        },
+        {
+            "id": "ad66bda1-eea4-5b92-8d38-c940885f6c92",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Every allowed type supports "
+                ],
+                [
+                    "+",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", so "
+                ],
+                [
+                    "Sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can add its values."
                 ]
             ]
         },
@@ -138,7 +405,38 @@ const note = {
         },
         {
             "id": "41ef8f79-cc1b-5b93-abb8-f124f0b11e58",
-            "type": "text",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The underlying type is the type a defined type is based on. For "
+                ],
+                [
+                    "type Count int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", it is "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "0dd74b04-db2e-5f6d-a86d-76ce593ab66d",
+            "type": "bulleted_list",
             "richText": [
                 [
                     "~int",
@@ -149,7 +447,69 @@ const note = {
                     ]
                 ],
                 [
-                    " means any type whose underlying type is int. Without the tilde, an int type term admits int itself. Constraints containing type terms are used as constraints, not ordinary interface value types."
+                    " allows every type whose underlying type is "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "e01aacdc-625b-5e69-85b6-a3f75c1c1114",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Without "
+                ],
+                [
+                    "~",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", the type term "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " allows only "
+                ],
+                [
+                    "int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " itself."
+                ]
+            ]
+        },
+        {
+            "id": "a05e5cc9-9bbe-55b9-a178-e54e74796c1f",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Interfaces with type terms can be used as constraints. They cannot be used as ordinary interface value types."
                 ]
             ]
         },
@@ -214,7 +574,7 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Any type argument; no arbitrary arithmetic or field access"
+                                "Accepts any type. Code cannot assume it supports arithmetic or has a particular field."
                             ]
                         ]
                     }
@@ -254,19 +614,159 @@ const note = {
         },
         {
             "id": "3bff34de-d82e-5416-b5ca-07b944382632",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "IndexOf([]string{\"a\", \"b\"}, \"b\") returns 1. A []int element type is not comparable, so a slice of []int cannot use this function."
+                    "IndexOf([]string{\"a\", \"b\"}, \"b\")",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns 1."
+                ]
+            ]
+        },
+        {
+            "id": "4623809b-20a9-51bc-be64-d5d5166be803",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A slice such as "
+                ],
+                [
+                    "[]int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " cannot be compared with "
+                ],
+                [
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or "
+                ],
+                [
+                    "!=",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", except against "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "216bf7df-79e2-5a87-aa7c-d430759eadcf",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "So a slice whose elements are "
+                ],
+                [
+                    "[]int",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " cannot use this "
+                ],
+                [
+                    "IndexOf",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " function."
                 ]
             ]
         },
         {
             "id": "78fcd204-eca2-5ec6-88e4-a1d49eb90868",
-            "type": "text",
+            "type": "bulleted_list",
             "richText": [
                 [
-                    "Go 1.20+ allows comparable interface types such as any to satisfy comparable. Comparisons of their dynamic values may still panic if those values are slices, maps or functions. comparable does not make every possible interface value safe to compare."
+                    "In Go 1.20+, a comparable interface type such as "
+                ],
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can satisfy "
+                ],
+                [
+                    "comparable",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "f05c90e7-a1e5-599f-9594-8e140e851f87",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Its stored value still matters. Comparing interface values that hold slices, maps or functions can panic."
+                ]
+            ]
+        },
+        {
+            "id": "a9068d15-54ac-5c29-b8f3-f0d5e90ab00d",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "comparable",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not guarantee that every value held in an interface is safe to compare."
                 ]
             ]
         },
