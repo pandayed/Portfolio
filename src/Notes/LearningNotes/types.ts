@@ -1,10 +1,12 @@
 export type LearningNoteScope =
+    | 'java'
     | 'javascript-typescript'
     | 'javascript'
     | 'typescript'
     | 'react';
 
 export type LearningCodeLanguage =
+    | 'java'
     | 'javascript'
     | 'jsx'
     | 'text'

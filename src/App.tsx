@@ -29,6 +29,7 @@ import KubernetesDeploymentsServices from './Notes/KubernetesNotes/KubernetesDep
 import KubernetesConfigurationStorage from './Notes/KubernetesNotes/KubernetesConfigurationStorage';
 import KubernetesOperations from './Notes/KubernetesNotes/KubernetesOperations';
 import ProgrammingDictionary from './Notes/ProgrammingDictionary/ProgrammingDictionaryPage';
+import JavaNote from './Notes/JavaNotes/JavaNote';
 import JavaNotesIndex from './Notes/JavaNotes/JavaNotesIndex';
 import JavaProgramExecution from './Notes/JavaNotes/JavaProgramExecution';
 import SpringBootNotesIndex from './Notes/SpringBootNotes/SpringBootNotesIndex';
@@ -119,6 +120,7 @@ import {
     SSL_TLS_ROUTE,
     WHY_REACT_ROUTE,
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
+    type JavaNoteRoute,
     type GoNoteRoute,
     type JavaScriptTypeScriptNoteRoute,
     type SystemDesignEntryRoute,
@@ -194,6 +196,7 @@ function App() {
     const isSystemDesignEntry = route.startsWith(`${SYSTEM_DESIGN_ROUTE}/`);
     const isPythonNote = route.startsWith(`${PYTHON_NOTES_ROUTE}/`);
     const isJavaScriptTypeScriptNote = route.startsWith(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/`);
+    const isJavaNote = route.startsWith(`${JAVA_NOTES_ROUTE}/`) && route !== JAVA_PROGRAM_EXECUTION_ROUTE;
     const isReactNote = route.startsWith(`${REACT_NOTES_ROUTE}/`);
 
     return (
@@ -213,6 +216,8 @@ function App() {
                     <JavaScriptTypeScriptNote route={route as JavaScriptTypeScriptNoteRoute} />
                 ) : isReactNote ? (
                     <ReactNote route={route as ReactNoteRoute} />
+                ) : isJavaNote ? (
+                    <JavaNote route={route as JavaNoteRoute} />
                 ) : CurrentPage ? (
                     <CurrentPage />
                 ) : (

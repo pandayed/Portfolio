@@ -12,6 +12,7 @@ interface LearningNotePageProps {
 }
 
 const scopeLabels: Record<LearningNoteScope, string> = {
+    java: 'Java language and standard library, with Java 17 or later examples',
     'javascript-typescript': 'JavaScript runtime behavior with TypeScript checks',
     javascript: 'JavaScript',
     typescript: 'TypeScript',
@@ -63,7 +64,12 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                         <div className="Article__section" key={`${section.id}-example-${index}`}>
                             {example.title && <h3 className="Article__subTitle">{example.title}</h3>}
                             <CodeBlock language={example.language}>{example.code}</CodeBlock>
-                            {example.result && <p><strong>Result:</strong> {example.result}</p>}
+                            {example.result && (note.scope === 'java' && example.result.includes('\n') ? (
+                                <>
+                                    <p><strong>Expected output:</strong></p>
+                                    <CodeBlock language="text">{example.result}</CodeBlock>
+                                </>
+                            ) : <p><strong>Result:</strong> {example.result}</p>)}
                             {example.typeCheck && <p><strong>TypeScript check:</strong> {example.typeCheck}</p>}
                         </div>
                     ))}

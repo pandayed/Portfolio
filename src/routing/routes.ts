@@ -1,6 +1,7 @@
 /* Hash routing keeps deep links working on static hosts that cannot rewrite
    unknown paths back to index.html. */
 
+import { javaLearningNotes } from '../Notes/JavaNotes/javaNotes';
 import { goNotes } from '../Notes/GoNotes/goNotes';
 import { javascriptTypeScriptNotes } from '../Notes/JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
@@ -65,6 +66,7 @@ export const INSTEAD_PRIVACY_POLICY_ROUTE = '/instead/privacy-policy';
 export const BOOKSHELF_ROUTE = '/bookshelf';
 export const ABOUT_ROUTE = '/about';
 
+export type JavaNoteRoute = `${typeof JAVA_NOTES_ROUTE}/${string}`;
 export type GoNoteRoute = `${typeof GO_NOTES_ROUTE}/${string}`;
 export type JavaScriptTypeScriptNoteRoute = `${typeof JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${string}`;
 export type PythonNoteRoute = `${typeof PYTHON_NOTES_ROUTE}/${string}`;
@@ -98,6 +100,7 @@ export type Route =
     | typeof KUBERNETES_CONFIG_ROUTE
     | typeof KUBERNETES_OPERATIONS_ROUTE
     | typeof JAVA_NOTES_ROUTE
+    | JavaNoteRoute
     | typeof JAVA_PROGRAM_EXECUTION_ROUTE
     | typeof SPRING_BOOT_NOTES_ROUTE
     | typeof SPRING_BOOT_FIRST_APPLICATION_ROUTE
@@ -130,6 +133,10 @@ export type Route =
     | typeof INSTEAD_PRIVACY_POLICY_ROUTE
     | typeof BOOKSHELF_ROUTE
     | typeof ABOUT_ROUTE;
+
+const javaNoteRoutes: JavaNoteRoute[] = javaLearningNotes.map(
+    ({ slug }) => `${JAVA_NOTES_ROUTE}/${slug}` as JavaNoteRoute,
+);
 
 const goNoteRoutes: GoNoteRoute[] = goNotes.map(
     ({ slug }) => `${GO_NOTES_ROUTE}/${slug}` as GoNoteRoute,
@@ -175,6 +182,7 @@ const routes: Route[] = [
     KUBERNETES_OPERATIONS_ROUTE,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
+    ...javaNoteRoutes,
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,

@@ -35,6 +35,7 @@ import {
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,
+    type JavaNoteRoute,
     type GoNoteRoute,
     type JavaScriptTypeScriptNoteRoute,
     type PythonNoteRoute,
@@ -42,6 +43,7 @@ import {
     type SystemDesignEntryRoute,
     type Route,
 } from '../routing/routes';
+import { javaChapters } from './JavaNotes/javaNotes';
 import { goChapters } from './GoNotes/goNotes';
 import { javascriptTypeScriptChapters } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonChapters } from './PythonNotes/pythonNotes';
@@ -286,7 +288,7 @@ export const reactNotes: NoteGroup = {
 export const javaNotes: NoteGroup = {
     type: 'group',
     title: 'Java',
-    summary: 'Java fundamentals, starting with source files, compilation, and the JVM.',
+    summary: 'Language basics, objects, generics, collections, streams, exceptions, files, and concurrency.',
     route: JAVA_NOTES_ROUTE,
     children: [
         {
@@ -296,6 +298,19 @@ export const javaNotes: NoteGroup = {
             route: JAVA_PROGRAM_EXECUTION_ROUTE,
             updatedOn: '2026-09-30',
         },
+        ...javaChapters.map((chapter): NoteGroup => ({
+            type: 'group',
+            title: chapter.title,
+            summary: chapter.summary,
+            route: `${JAVA_NOTES_ROUTE}/${chapter.notes[0].slug}` as JavaNoteRoute,
+            children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+                type: 'page',
+                title,
+                summary,
+                route: `${JAVA_NOTES_ROUTE}/${slug}` as JavaNoteRoute,
+                updatedOn,
+            })),
+        })),
     ],
 };
 

@@ -1,12 +1,14 @@
 import sourceWordCounts from 'virtual:note-word-counts';
 
 import {
+    JAVA_NOTES_ROUTE,
     GO_NOTES_ROUTE,
     JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
     REACT_NOTES_ROUTE,
     type Route,
 } from '../routing/routes';
+import { javaLearningNotes } from './JavaNotes/javaNotes';
 import { goNotes } from './GoNotes/goNotes';
 import type { GoNoteBlock } from './GoNotes/types';
 import { javascriptTypeScriptNotes } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
@@ -77,6 +79,10 @@ for (const note of javascriptTypeScriptNotes) {
         `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${note.slug}`,
         countWords(learningNoteText(note)),
     );
+}
+
+for (const note of javaLearningNotes) {
+    pageWordCounts.set(`${JAVA_NOTES_ROUTE}/${note.slug}`, countWords(learningNoteText(note)));
 }
 
 for (const note of reactNotes) {

@@ -14,8 +14,18 @@ const JavaNotesIndex = () => (
             Back to notes
         </a>
         <p className="Notes__intro">
-            Java notes start with how a program is compiled and run. Later pages will build on
-            those basics.
+            Start with compilation and the JVM, then learn the language, object design,
+            collections, streams, files, and concurrency. Examples use Java 17 or later
+            without preview features.
+        </p>
+        <p className="Notes__intro">
+            Save a complete example with a public Main class as Main.java, then run
+            <code> javac Main.java</code> and <code>java Main</code> in its directory.
+            Examples labeled as method bodies or declarations need the surrounding class.
+            For further reading, use the{' '}
+            <a className="Link" href="https://dev.java/learn/" target="_blank" rel="noreferrer">official Java learning guide</a>{' '}
+            and the{' '}
+            <a className="Link" href="https://docs.oracle.com/en/java/javase/17/docs/api/index.html" target="_blank" rel="noreferrer">Java 17 API reference</a>.
         </p>
         <NoteTree nodes={javaNotes.children} />
     </Page>
