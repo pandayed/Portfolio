@@ -1,5 +1,6 @@
 import {
     API_COMMUNICATION_ROUTE,
+    AWS_SERVICES_ROUTE,
     DOCKER_BUILD_RUN_ROUTE,
     DOCKER_COMPOSE_ROUTE,
     DOCKER_CONTAINERS_ROUTE,
@@ -432,6 +433,13 @@ export const noteTree: NoteNode[] = [
     reactNotes,
     dockerNotes,
     kubernetesNotes,
+    {
+        type: 'page',
+        title: 'AWS services',
+        summary: 'S3, EC2, IAM, Lambda, databases, queues, containers, analytics, and AI. Three introductory points per service.',
+        route: AWS_SERVICES_ROUTE,
+        updatedOn: '2026-10-05',
+    },
     postgresqlNotes,
     systemDesignNotes,
     goNotes,

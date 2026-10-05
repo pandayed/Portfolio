@@ -15,6 +15,7 @@ export type { SystemDesignEntryRoute };
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
+export const AWS_SERVICES_ROUTE = '/notes/aws-services';
 export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
 export const POSTGRESQL_ONE_SHOT_SQL_ROUTE = '/notes/postgresql/one-shot-sql';
 export const GO_NOTES_ROUTE = '/notes/go';
@@ -76,6 +77,7 @@ export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
     | typeof NOTES_ROUTE
+    | typeof AWS_SERVICES_ROUTE
     | typeof PROGRAMMING_DICTIONARY_ROUTE
     | typeof POSTGRESQL_NOTES_ROUTE
     | typeof POSTGRESQL_ONE_SHOT_SQL_ROUTE
@@ -157,6 +159,7 @@ const reactNoteRoutes: ReactNoteRoute[] = reactNotes.map(
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
+    AWS_SERVICES_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
     GO_NOTES_ROUTE,

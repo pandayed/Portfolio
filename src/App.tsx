@@ -7,6 +7,7 @@ import Header from './Header/Header';
 import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
 import Notes from './Notes/Notes';
+import AwsServices from './Notes/AwsServices/AwsServices';
 import PostgreSQLNotes from './Notes/PostgreSQLNotes';
 import PostgreSQLOneShotSQL from './Notes/PostgreSQLOneShotSQL/PostgreSQLOneShotSQL';
 import GoNotes from './Notes/GoNotes';
@@ -67,6 +68,7 @@ import Footer from './Footer/Footer';
 
 import {
     ABOUT_ROUTE,
+    AWS_SERVICES_ROUTE,
     API_COMMUNICATION_ROUTE,
     AI_OBEDIENCE_ROUTE,
     ARCHIVE_ROUTE,
@@ -136,6 +138,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [HOME_ROUTE]: Home,
     [BLOGS_ROUTE]: Blogs,
     [NOTES_ROUTE]: Notes,
+    [AWS_SERVICES_ROUTE]: AwsServices,
     [POSTGRESQL_NOTES_ROUTE]: PostgreSQLNotes,
     [POSTGRESQL_ONE_SHOT_SQL_ROUTE]: PostgreSQLOneShotSQL,
     [GO_NOTES_ROUTE]: GoNotes,
