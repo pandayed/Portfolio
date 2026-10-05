@@ -98,21 +98,22 @@ const PostgreSQLWindowFunctions = () => (
         backLabel="Back to PostgreSQL notes"
     >
         <section className="Article__section">
-            <p>
-                A window function calculates a value from related rows while keeping each input row
-                in the result. An aggregate with <code>GROUP BY</code> returns one row per group;
-                an aggregate with <code>OVER (...)</code> can return a value beside every row.
-            </p>
-            <p>Run this sample data once to try the queries below:</p>
+            <ul className="Article__notes">
+                <li>A window function calculates a value from related rows. Each input row stays in the result.</li>
+                <li>An aggregate with <code>GROUP BY</code> returns one row per group.</li>
+                <li>An aggregate with <code>OVER (...)</code> can return a value beside every row.</li>
+            </ul>
+            <ul className="Article__notes">
+                <li>Create the sample table and insert its rows once before running the queries.</li>
+            </ul>
             <CodeBlock language="sql">{sampleData}</CodeBlock>
         </section>
 
         <section className="Article__section" aria-labelledby="partition-rows">
             <h2 id="partition-rows" className="SectionTitle">Partition rows</h2>
-            <p>
-                A grouped aggregate returns one row per region. The five sales rows become two
-                result rows:
-            </p>
+            <ul className="Article__notes">
+                <li>This grouped aggregate turns five sales rows into two region totals.</li>
+            </ul>
             <CodeBlock language="sql">{groupedTotalQuery}</CodeBlock>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -124,18 +125,16 @@ const PostgreSQLWindowFunctions = () => (
                 </table>
             </div>
             <p>
-                Use this form when the result needs one summary row per region. The{' '}
+                Selected-column rules and aggregate results:{' '}
                 <a className="Link" href={toHref(POSTGRESQL_GROUP_BY_ROUTE)}>
                     GROUP BY note
-                </a>{' '}
-                explains the selected-column rule and aggregate result shapes.
+                </a>.
             </p>
-            <p>
-                Use a window function when each sale row must remain.{' '}
-                <code>PARTITION BY region</code> starts a separate calculation for each region.
-                Without <code>PARTITION BY</code>, all rows form one partition. This query repeats
-                each region total beside its sales:
-            </p>
+            <ul className="Article__notes">
+                <li>A partition is a group of rows used by a window function.</li>
+                <li><code>PARTITION BY region</code> calculates a separate total for each region.</li>
+                <li>Without <code>PARTITION BY</code>, all rows form one partition.</li>
+            </ul>
             <CodeBlock language="sql">{partitionQuery}</CodeBlock>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -149,19 +148,17 @@ const PostgreSQLWindowFunctions = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                The result still has five rows. Each region total is repeated beside the rows that
-                contributed to it.
-            </p>
+            <ul className="Article__notes">
+                <li>The result still has five rows. Each sale shows its region total.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="rank-rows">
             <h2 id="rank-rows" className="SectionTitle">Rank rows</h2>
-            <p>
-                <code>ORDER BY</code> inside <code>OVER (...)</code> sets the order used by a window
-                function. It does not set the final display order. The query-level{' '}
-                <code>ORDER BY</code> does that.
-            </p>
+            <ul className="Article__notes">
+                <li><code>ORDER BY</code> inside <code>OVER (...)</code> sets the calculation order.</li>
+                <li>The query-level <code>ORDER BY</code> sets the final display order.</li>
+            </ul>
             <CodeBlock language="sql">{rankingQuery}</CodeBlock>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -176,23 +173,25 @@ const PostgreSQLWindowFunctions = () => (
                 </table>
             </div>
             <ul className="Article__notes">
-                <li><code>ROW_NUMBER()</code> gives each row a different number. <code>sale_id</code> settles the tie between Ben and Cam.</li>
+                <li><code>ROW_NUMBER()</code> gives each row a different number.</li>
+                <li>The <code>sale_id</code> order gives Ben a lower row number than Cam when their amounts tie.</li>
                 <li><code>RANK()</code> gives tied amounts the same rank and leaves a gap after the tie.</li>
                 <li><code>DENSE_RANK()</code> gives tied amounts the same rank without a gap.</li>
             </ul>
-            <p>
-                The rank windows sort only by amount, so Ben and Cam stay tied. Adding{' '}
-                <code>sale_id</code> there would give them different ranks.
-            </p>
+            <ul className="Article__notes">
+                <li>The <code>RANK()</code> and <code>DENSE_RANK()</code> windows sort only by amount. Ben and Cam stay tied.</li>
+                <li>Adding <code>sale_id</code> to those windows would give Ben and Cam different ranks.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="totals-and-frames">
             <h2 id="totals-and-frames" className="SectionTitle">Totals and frames</h2>
-            <p>
-                A frame is the set of rows considered for a frame-sensitive function at the current
-                row. The earlier total had no window <code>ORDER BY</code>, so <code>SUM</code> used the
-                whole partition. This query gives a running total in sale order:
-            </p>
+            <ul className="Article__notes">
+                <li>A frame is the set of rows a frame-sensitive function uses for the current row.</li>
+                <li>For example, <code>SUM</code> adds the values in the current frame.</li>
+                <li>The region-total query has no window <code>ORDER BY</code>. Its default frame includes the whole partition.</li>
+                <li>The next query gives a running total in sale order.</li>
+            </ul>
             <CodeBlock language="sql">{runningTotalQuery}</CodeBlock>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -206,12 +205,11 @@ const PostgreSQLWindowFunctions = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                The explicit <code>ROWS</code> frame includes rows from the start of each region
-                through the current row. With a window <code>ORDER BY</code> and no explicit frame,
-                PostgreSQL also includes later rows tied on the sort value. For East, both sales of
-                150 enter the default frame together:
-            </p>
+            <ul className="Article__notes">
+                <li>The explicit <code>ROWS</code> frame includes rows from the start of each region through the current row.</li>
+                <li>With a window <code>ORDER BY</code> and no explicit frame, the default frame also includes later rows tied on the sort value.</li>
+                <li>In the next query, both East sales of 150 enter the default frame together.</li>
+            </ul>
             <CodeBlock language="sql">{peerFrameQuery}</CodeBlock>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -227,11 +225,12 @@ const PostgreSQLWindowFunctions = () => (
 
         <section className="Article__section" aria-labelledby="compare-nearby-rows">
             <h2 id="compare-nearby-rows" className="SectionTitle">Compare nearby rows</h2>
-            <p>
-                <code>LAG</code> reads an earlier row in the partition. <code>LEAD</code> reads a
-                later row. Their default offset is one row, and they return <code>NULL</code> when
-                that row does not exist.
-            </p>
+            <ul className="Article__notes">
+                <li><code>LAG</code> reads an earlier row in the partition.</li>
+                <li><code>LEAD</code> reads a later row in the partition.</li>
+                <li>The offset is the number of rows to move. Both functions use an offset of one by default.</li>
+                <li>By default, both functions return <code>NULL</code> when that row does not exist.</li>
+            </ul>
             <CodeBlock language="sql">{nearbyRowsQuery}</CodeBlock>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -249,11 +248,11 @@ const PostgreSQLWindowFunctions = () => (
 
         <section className="Article__section" aria-labelledby="filter-window-results">
             <h2 id="filter-window-results" className="SectionTitle">Filter window results</h2>
-            <p>
-                PostgreSQL allows window functions in a query&apos;s <code>SELECT</code> list and
-                query-level <code>ORDER BY</code>. To filter by a window result, calculate it in a
-                subquery and filter in the outer query. This keeps one highest sale per region:
-            </p>
+            <ul className="Article__notes">
+                <li>PostgreSQL allows window functions in the <code>SELECT</code> list and query-level <code>ORDER BY</code>.</li>
+                <li>To filter a window result, calculate it in a subquery. Filter it in the outer query.</li>
+                <li>This query keeps one highest sale per region.</li>
+            </ul>
             <CodeBlock language="sql">{topSaleQuery}</CodeBlock>
             <div className="Article__tableWrap">
                 <table className="Article__table">
@@ -264,13 +263,12 @@ const PostgreSQLWindowFunctions = () => (
                     </tbody>
                 </table>
             </div>
+            <ul className="Article__notes">
+                <li>The <code>sale_id</code> tie-breaker chooses Ben before Cam.</li>
+                <li>To keep all tied top sales, use <code>RANK()</code> with <code>ORDER BY amount DESC</code>. Filter for rank 1.</li>
+            </ul>
             <p>
-                The <code>sale_id</code> tie-breaker chooses Ben before Cam. If tied top sales
-                should all remain, use <code>RANK()</code> with <code>ORDER BY amount DESC</code>
-                and filter for rank 1 instead.
-            </p>
-            <p>
-                For more detail, see the{' '}
+                Sources:{' '}
                 <a className="Link" href="https://www.postgresql.org/docs/current/tutorial-window.html">
                     PostgreSQL window functions tutorial
                 </a>

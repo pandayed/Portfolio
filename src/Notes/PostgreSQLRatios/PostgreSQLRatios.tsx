@@ -35,12 +35,12 @@ const PostgreSQLRatios = () => (
         backLabel="Back to PostgreSQL notes"
     >
         <section className="Article__section">
-            <p>
-                A ratio is a numerator divided by a denominator. First decide which rows belong in
-                each count. In PostgreSQL, add <code>FILTER (WHERE ...)</code> to an aggregate when
-                only some rows should contribute to it.
-            </p>
-            <p>For example, a cancellation ratio is cancelled orders divided by all orders.</p>
+            <ul className="Article__notes">
+                <li>A ratio is one amount divided by another amount.</li>
+                <li>The numerator is the amount you divide. The denominator is the amount you divide by.</li>
+                <li>Decide which rows belong in each count before writing the query.</li>
+                <li>A cancellation ratio is cancelled orders divided by all orders.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead>
@@ -64,31 +64,26 @@ const PostgreSQLRatios = () => (
             <h2 id="count-matching-rows" className="SectionTitle">
                 Count matching rows
             </h2>
-            <p>
-                <code>COUNT(*)</code> counts rows. A filter makes it count only rows for which its
-                condition is true:
-            </p>
+            <ul className="Article__notes">
+                <li><code>COUNT(*)</code> counts rows.</li>
+                <li><code>FILTER (WHERE ...)</code> passes only rows where the condition is true to the aggregate.</li>
+            </ul>
             <CodeBlock language="sql">
                 {`COUNT(*) FILTER (WHERE status = 'Cancelled')`}
             </CodeBlock>
-            <p>
-                <code>COUNT(expression)</code> counts every non-<code>NULL</code> result. A boolean
-                comparison can be <code>TRUE</code> or <code>FALSE</code>, and both are non-
-                <code>NULL</code>. So this is not a conditional count:
-            </p>
+            <ul className="Article__notes">
+                <li><code>COUNT(expression)</code> counts every non-<code>NULL</code> result.</li>
+                <li>A boolean comparison returns <code>TRUE</code>, <code>FALSE</code>, or <code>NULL</code>.</li>
+                <li><code>COUNT</code> counts both <code>TRUE</code> and <code>FALSE</code>. This expression does not count only cancelled orders:</li>
+            </ul>
             <CodeBlock language="sql">
                 {`COUNT(status = 'Cancelled') -- Counts TRUE and FALSE results`}
             </CodeBlock>
-            <p>
-                If <code>status</code> is <code>NULL</code>, the comparison is also <code>NULL</code>,
-                so <code>COUNT</code> skips that row. Use <code>FILTER</code> to state the condition
-                directly.
-            </p>
-            <p>
-                <code>COUNT(CASE WHEN condition THEN 1 END)</code> is another valid PostgreSQL
-                conditional count. Non-matching rows produce <code>NULL</code>, which{' '}
-                <code>COUNT</code> skips:
-            </p>
+            <ul className="Article__notes">
+                <li>If <code>status</code> is <code>NULL</code>, the comparison returns <code>NULL</code>. <code>COUNT</code> skips that row.</li>
+                <li><code>COUNT(CASE WHEN condition THEN 1 END)</code> also counts matching rows.</li>
+                <li><code>CASE</code> returns <code>1</code> for a matching row and <code>NULL</code> for any other row.</li>
+            </ul>
             <CodeBlock language="sql">
                 {`COUNT(CASE WHEN status = 'Cancelled' THEN 1 END)`}
             </CodeBlock>
@@ -98,14 +93,17 @@ const PostgreSQLRatios = () => (
             <h2 id="calculate-a-ratio" className="SectionTitle">
                 Calculate a ratio
             </h2>
-            <p>
-                PostgreSQL uses integer division when both operands are integers. Cast the numerator
-                to <code>numeric</code> to keep the fractional part. <code>NULLIF</code> makes the
-                result <code>NULL</code> when there are no orders, instead of raising a division by
-                zero error.
-            </p>
+            <ul className="Article__notes">
+                <li>If both numbers are integers, division drops the fractional part.</li>
+                <li>A cast changes a value's type. <code>value::numeric</code> converts it to <code>numeric</code>.</li>
+                <li>Cast the numerator to <code>numeric</code> to keep the fractional part.</li>
+                <li><code>NULLIF(value, 0)</code> returns <code>NULL</code> when the value is zero.</li>
+                <li>If there are no orders, the query returns <code>NULL</code> instead of causing a division-by-zero error.</li>
+            </ul>
             <CodeBlock language="sql">{ratioQuery}</CodeBlock>
-            <p>There are two cancelled orders and five orders in total, so the result is 0.4.</p>
+            <ul className="Article__notes">
+                <li>Two of the five orders are cancelled. The ratio is 2 / 5 = 0.4.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead>
@@ -122,31 +120,31 @@ const PostgreSQLRatios = () => (
             <h2 id="use-a-filtered-denominator" className="SectionTitle">
                 Use a filtered denominator
             </h2>
-            <p>
-                When the denominator is not all rows, give it its own filter. This example finds the
-                cancellation ratio among premium customers:
-            </p>
+            <ul className="Article__notes">
+                <li>Give the denominator its own filter when it should count only some rows.</li>
+                <li>This query calculates the cancellation ratio for premium orders.</li>
+            </ul>
             <CodeBlock language="sql">{premiumRatioQuery}</CodeBlock>
-            <p>
-                The numerator counts premium orders that were cancelled. The denominator counts all
-                premium orders. If there are no premium orders, the result is <code>NULL</code>.
-            </p>
+            <ul className="Article__notes">
+                <li>The numerator counts cancelled premium orders.</li>
+                <li>The denominator counts all premium orders.</li>
+                <li>If there are no premium orders, the result is <code>NULL</code>.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="return-a-percentage">
             <h2 id="return-a-percentage" className="SectionTitle">
                 Return a percentage
             </h2>
-            <p>
-                Multiply the numerator by <code>100.0</code> before dividing to return a percentage.
-                For the sample orders, the result is 40.
-            </p>
+            <ul className="Article__notes">
+                <li>Multiply the numerator by <code>100.0</code> before dividing to return a percentage.</li>
+                <li>For the sample orders, the result is 40.</li>
+            </ul>
             <CodeBlock language="sql">{percentageQuery}</CodeBlock>
-            <p>
-                For a boolean column such as <code>delivered</code>, use a boolean condition in the
-                filter, for example <code>FILTER (WHERE delivered)</code>. PostgreSQL booleans use{' '}
-                <code>TRUE</code> and <code>FALSE</code>, not numeric values such as 1 and 0.
-            </p>
+            <ul className="Article__notes">
+                <li>For a boolean column such as <code>delivered</code>, use <code>FILTER (WHERE delivered)</code> to count true values.</li>
+                <li>PostgreSQL booleans use <code>TRUE</code> and <code>FALSE</code> rather than the numbers 1 and 0.</li>
+            </ul>
         </section>
     </ArticleLayout>
 );

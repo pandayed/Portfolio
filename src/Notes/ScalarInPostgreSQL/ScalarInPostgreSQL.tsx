@@ -34,24 +34,9 @@ const ScalarInPostgreSQL = () => {
             backLabel="Back to PostgreSQL notes"
         >
             <section className="Article__section">
-                <p>In PostgreSQL, a scalar is one value.</p>
-                <p>A scalar value is one individual value, such as:</p>
                 <ul className="Article__notes">
-                    <li>
-                        <code>42</code>
-                    </li>
-                    <li>
-                        <code>'Lal'</code>
-                    </li>
-                    <li>
-                        <code>3.14</code>
-                    </li>
-                    <li>
-                        <code>DATE '2026-09-20'</code>
-                    </li>
-                    <li>
-                        <code>NULL</code>
-                    </li>
+                    <li>A scalar is one value.</li>
+                    <li>Examples: <code>42</code>, <code>'Lal'</code>, <code>3.14</code>, <code>DATE '2026-09-20'</code>, and <code>NULL</code>.</li>
                 </ul>
             </section>
 
@@ -59,37 +44,38 @@ const ScalarInPostgreSQL = () => {
                 <h2 id="why-you-see-scalar-in-sql" className="SectionTitle">
                     Why you see "scalar" in SQL
                 </h2>
-                <p>It is usually used to distinguish a single value from a set/table of values.</p>
-                <p>For example:</p>
+                <ul className="Article__notes">
+                    <li>A query result can contain one value or many rows and columns.</li>
+                    <li><code>COUNT(*)</code> returns one count.</li>
+                </ul>
                 <CodeBlock language="sql">{countQuery}</CodeBlock>
-                <p>
-                    <code>COUNT(*)</code> returns a scalar value:
-                </p>
+                <p>Example result:</p>
                 <CodeBlock language="sql">{countResult}</CodeBlock>
-                <p>It is just one value.</p>
-                <p>Compare that with:</p>
+                <ul className="Article__notes">
+                    <li><code>SELECT name</code> can return many rows.</li>
+                </ul>
                 <CodeBlock language="sql">{namesQuery}</CodeBlock>
-                <p>which might return:</p>
+                <p>Example result:</p>
                 <CodeBlock language="sql">{namesResult}</CodeBlock>
-                <p>That's a set of values, not a scalar.</p>
             </section>
 
             <section className="Article__section" aria-labelledby="scalar-subquery">
                 <h2 id="scalar-subquery" className="SectionTitle">
                     Scalar subquery
                 </h2>
-                <p>
-                    A scalar subquery must return one column. At runtime, one row supplies the value,
-                    no row produces <code>NULL</code>, and more than one row causes an error:
-                </p>
+                <ul className="Article__notes">
+                    <li>A subquery is a query inside another query.</li>
+                    <li>A scalar subquery must return one column.</li>
+                    <li>If it returns one row, PostgreSQL uses that value.</li>
+                    <li>If it returns no rows, PostgreSQL uses <code>NULL</code>.</li>
+                    <li>If it returns more than one row, PostgreSQL raises an error.</li>
+                </ul>
                 <CodeBlock language="sql">{subqueryExample}</CodeBlock>
-                <p>Here:</p>
-                <CodeBlock language="sql">SELECT AVG(salary) FROM employees</CodeBlock>
-                <p>
-                    is a scalar subquery because <code>AVG()</code> produces one aggregate row. Its
-                    value could be <code>75000</code>. It is <code>NULL</code> when the input is empty.
-                </p>
-                <p>Scalar means one individual value rather than a set of values.</p>
+                <ul className="Article__notes">
+                    <li><code>SELECT AVG(salary) FROM employees</code> returns one row with the average salary.</li>
+                    <li>The average could be <code>75000</code>. It is <code>NULL</code> when there are no input rows.</li>
+                    <li>The outer query returns employees whose salary is above that average.</li>
+                </ul>
             </section>
         </ArticleLayout>
     );

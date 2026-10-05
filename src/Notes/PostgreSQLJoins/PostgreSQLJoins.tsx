@@ -166,11 +166,10 @@ const PostgreSQLJoins = () => (
         backLabel="Back to PostgreSQL notes"
     >
         <section className="Article__section">
-            <p>
-                These sample tables are used in the examples below. Both customers and orders have
-                a <code>customer_id</code> column. Order 102 belongs to customer 3, who is not in
-                the customers table.
-            </p>
+            <ul>
+                <li>Both <code>customers</code> and <code>orders</code> have a <code>customer_id</code> column.</li>
+                <li>Order 102 belongs to customer 3. Customer 3 is not in the <code>customers</code> table.</li>
+            </ul>
             <DataTable
                 caption="customers"
                 columns={['customer_id', 'customer_name']}
@@ -192,33 +191,22 @@ const PostgreSQLJoins = () => (
             <h2 id="how-a-join-works" className="SectionTitle">
                 How a join works
             </h2>
-            <p>
-                A join combines rows from two table expressions. The join condition decides which
-                row pairs match. Each matching pair produces a result row.
-            </p>
-            <p>
-                <code>c</code> and <code>o</code> are table aliases. Prefix a column with its alias
-                when both tables have a column with the same name or when you want to make its source
-                clear. <code>JOIN</code> by itself means <code>INNER JOIN</code>.
-            </p>
-            <p>
-                With <code>SELECT *</code> and a join condition written with <code>ON</code>, the
-                output has all columns from both inputs. Here <code>customers</code> has 2 columns
-                and <code>orders</code> has 4, so the result has 6 columns:{' '}
-                <code>c.customer_id</code>, <code>c.customer_name</code>, <code>o.order_id</code>,{' '}
-                <code>o.customer_id</code>, <code>o.order_date</code>, and <code>o.status</code>.
-                Both <code>customer_id</code> columns remain, even though they have the same name.
-                An outer join can fill columns from an unmatched side with <code>NULL</code>, but it
-                does not remove those columns. The output tables below qualify duplicate headings
-                with <code>c.</code> and <code>o.</code> to show where each value came from. The
-                actual <code>SELECT *</code> result has two columns both named{' '}
-                <code>customer_id</code>.
-            </p>
-            <p>
-                A join returns one result row for each matching pair. For example, if one customer
-                on the left matches four orders on the right, a <code>LEFT JOIN</code> returns four
-                rows for that customer, one for each order:
-            </p>
+            <ul>
+                <li>A join combines rows from two table expressions.</li>
+                <li>The join condition decides which row pairs match.</li>
+                <li>Each matching pair produces a result row.</li>
+                <li><code>c</code> and <code>o</code> are table aliases. An alias is a short name used in the query.</li>
+                <li>Prefix a column with its alias when both tables have a column with the same name.</li>
+                <li>You can also use the alias to show which table supplies the column.</li>
+                <li><code>JOIN</code> by itself means <code>INNER JOIN</code>.</li>
+                <li>With <code>SELECT *</code> and an <code>ON</code> condition, the result has all columns from both inputs.</li>
+                <li>Here, <code>customers</code> has 2 columns and <code>orders</code> has 4. The result has 6 columns.</li>
+                <li>The columns are <code>c.customer_id</code>, <code>c.customer_name</code>, <code>o.order_id</code>, <code>o.customer_id</code>, <code>o.order_date</code>, and <code>o.status</code>.</li>
+                <li>Both <code>customer_id</code> columns remain. The actual result has two columns named <code>customer_id</code>.</li>
+                <li>An outer join fills columns from an unmatched side with <code>NULL</code>. Those columns still appear in the result.</li>
+                <li>The output tables below use <code>c.</code> and <code>o.</code> in the headings to show each column's source.</li>
+                <li>If one customer matches four orders, a <code>LEFT JOIN</code> returns four rows for that customer. Each row contains one order.</li>
+            </ul>
             <DataTable
                 caption="Output when customer 1 matches four orders"
                 columns={['c.customer_id', 'c.customer_name', 'o.order_id']}
@@ -229,23 +217,24 @@ const PostgreSQLJoins = () => (
                     ['1', 'Ada', '104'],
                 ]}
             />
-            <p>A join does not automatically reduce the result to one row per customer.</p>
+            <ul>
+                <li>A join does not automatically reduce the result to one row per customer.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="inner-and-outer-joins">
             <h2 id="inner-and-outer-joins" className="SectionTitle">
                 INNER JOIN and OUTER JOIN
             </h2>
-            <p>
-                There are two broad choices: an <code>INNER JOIN</code> returns matches only. An{' '}
-                <code>OUTER JOIN</code> also keeps rows that have no match. PostgreSQL has three
-                outer-join forms: <code>LEFT</code>, <code>RIGHT</code>, and <code>FULL</code>.
-            </p>
+            <ul>
+                <li>An <code>INNER JOIN</code> returns matches only.</li>
+                <li>An <code>OUTER JOIN</code> also keeps unmatched rows from one or both inputs.</li>
+                <li>PostgreSQL has three outer join forms: <code>LEFT</code>, <code>RIGHT</code>, and <code>FULL</code>.</li>
+            </ul>
             <Accordion summary="INNER JOIN: matching rows only">
-                <p>
-                    Only the matching customer and order appear. The result has 6 columns. Both
-                    copies of <code>customer_id</code> are present.
-                </p>
+                <ul>
+                    <li>Only the matching customer and order appear.</li>
+                </ul>
                 <CodeBlock language="sql">{innerJoinExample}</CodeBlock>
                 <DataTable
                     caption="Output"
@@ -263,11 +252,12 @@ const PostgreSQLJoins = () => (
                 />
             </Accordion>
             <Accordion summary="LEFT OUTER JOIN: keep every left row">
-                <p>
-                    Customers 1 and 2 appear. Customer 2 has <code>NULL</code> in the 4 order
-                    columns. The unmatched order for customer 3 does not appear. The result still
-                    has 6 columns. <code>LEFT JOIN</code> is shorthand for <code>LEFT OUTER JOIN</code>.
-                </p>
+                <ul>
+                    <li>Customers 1 and 2 appear.</li>
+                    <li>Customer 2 has no matching order. Its 4 order columns contain <code>NULL</code>.</li>
+                    <li>The unmatched order for customer 3 does not appear.</li>
+                    <li><code>LEFT JOIN</code> is short for <code>LEFT OUTER JOIN</code>.</li>
+                </ul>
                 <CodeBlock language="sql">{leftJoinExample}</CodeBlock>
                 <DataTable
                     caption="Output"
@@ -286,12 +276,12 @@ const PostgreSQLJoins = () => (
                 />
             </Accordion>
             <Accordion summary="RIGHT OUTER JOIN: keep every right row">
-                <p>
-                    The matched order 101 appears. Order 102 also appears, with <code>NULL</code> in
-                    the 2 customer columns. Its <code>orders.customer_id</code> value is still 3.
-                    The result has 6 columns. Swapping the input order and using a{' '}
-                    <code>LEFT JOIN</code> can express the same row preservation.
-                </p>
+                <ul>
+                    <li>Orders 101 and 102 appear.</li>
+                    <li>Order 102 has no matching customer. Its 2 customer columns contain <code>NULL</code>.</li>
+                    <li>Its <code>orders.customer_id</code> value is still 3.</li>
+                    <li>Swap the input order and use <code>LEFT JOIN</code> to keep the same rows.</li>
+                </ul>
                 <CodeBlock language="sql">{rightJoinExample}</CodeBlock>
                 <DataTable
                     caption="Output"
@@ -310,11 +300,11 @@ const PostgreSQLJoins = () => (
                 />
             </Accordion>
             <Accordion summary="FULL OUTER JOIN: keep unmatched rows from both sides">
-                <p>
-                    The result includes the match, customer 2 without an order, and order 102
-                    without a matching customer. Missing-side columns are <code>NULL</code>. Every
-                    row has the same 6 output columns.
-                </p>
+                <ul>
+                    <li>The result includes the matching customer and order.</li>
+                    <li>It also includes customer 2 without an order and order 102 without a matching customer.</li>
+                    <li>Columns from the unmatched side contain <code>NULL</code>.</li>
+                </ul>
                 <CodeBlock language="sql">{fullJoinExample}</CodeBlock>
                 <DataTable
                     caption="Output"
@@ -339,46 +329,44 @@ const PostgreSQLJoins = () => (
             <h2 id="on-and-where" className="SectionTitle">
                 ON and WHERE
             </h2>
-            <p>
-                <code>ON</code> determines which rows match. With an outer join, it also determines
-                which right-side rows count as matches while preserving unmatched left rows.
-            </p>
-            <p>This keeps every customer and attaches only shipped orders:</p>
+            <ul>
+                <li><code>ON</code> decides which rows match.</li>
+                <li>In this <code>LEFT JOIN</code>, the status condition limits which orders match. Unmatched customers still appear.</li>
+                <li>This query keeps every customer and includes only shipped orders:</li>
+            </ul>
             <CodeBlock language="sql">{filterInOnExample}</CodeBlock>
-            <p>
-                <code>WHERE</code> filters the result after the join. Here, unmatched customers have
-                <code>NULL</code> for <code>o.status</code>, so the condition removes them. This
-                behaves like an inner join for this filter:
-            </p>
+            <ul>
+                <li><code>WHERE</code> filters the result after the join.</li>
+                <li>Unmatched customers have <code>NULL</code> for <code>o.status</code>. The status condition removes them.</li>
+                <li>This query returns the same rows as an inner join with this filter:</li>
+            </ul>
             <CodeBlock language="sql">{filterInWhereExample}</CodeBlock>
-            <p>
-                Put a condition in <code>ON</code> when it controls matching and unmatched left rows
-                must remain. Put it in <code>WHERE</code> when it should filter the joined result.
-            </p>
+            <ul>
+                <li>Put a condition in <code>ON</code> when it controls matching and unmatched left rows must remain.</li>
+                <li>Put it in <code>WHERE</code> when it should filter the joined result.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="using-and-on">
             <h2 id="using-and-on" className="SectionTitle">
                 USING and ON
             </h2>
-            <p>
-                Use <code>USING (column_name)</code> when the join column has the same name in both
-                inputs. It compares those columns for equality and emits one copy of the join column
-                in the joined output. So <code>SELECT *</code> with these tables and{' '}
-                <code>USING (customer_id)</code> returns 5 columns instead of the 6 columns from an
-                <code>ON</code> join: <code>customer_id</code>, <code>customer_name</code>,{' '}
-                <code>order_id</code>, <code>order_date</code>, and <code>status</code>.
-            </p>
+            <ul>
+                <li>Use <code>USING (column_name)</code> when the join column has the same name in both inputs.</li>
+                <li><code>USING</code> compares those columns for equality.</li>
+                <li>The result contains one copy of the join column.</li>
+                <li>Here, <code>SELECT *</code> with <code>USING (customer_id)</code> returns 5 columns instead of 6.</li>
+                <li>The columns are <code>customer_id</code>, <code>customer_name</code>, <code>order_id</code>, <code>order_date</code>, and <code>status</code>.</li>
+            </ul>
             <CodeBlock language="sql">{usingExample}</CodeBlock>
-            <p>
-                <code>NATURAL JOIN</code> also emits one copy of each shared column name. It uses
-                every same-named column as a join condition, so adding a same-named column to either
-                table can change which rows match.
-            </p>
-            <p>
-                Use <code>ON</code> when the column names differ, the condition needs more than a
-                simple same-name equality, or you want to state the table aliases explicitly.
-            </p>
+            <ul>
+                <li><code>NATURAL JOIN</code> uses every column name shared by both inputs as a join condition.</li>
+                <li>The result contains one copy of each shared column.</li>
+                <li>Adding a column whose name exists in the other table can change which rows match.</li>
+                <li>Use <code>ON</code> when the column names differ.</li>
+                <li>Use it when the condition needs more than equality between columns with the same name.</li>
+                <li>Use it to state the table aliases explicitly.</li>
+            </ul>
             <CodeBlock language="sql">{innerJoinExample}</CodeBlock>
         </section>
 
@@ -386,20 +374,17 @@ const PostgreSQLJoins = () => (
             <h2 id="find-unmatched-rows" className="SectionTitle">
                 Find unmatched rows
             </h2>
-            <p>
-                To find customers with no orders, keep all customers in a <code>LEFT JOIN</code> and
-                select rows where a non-nullable order key is missing:
-            </p>
+            <ul>
+                <li>To find customers with no orders, keep all customers in a <code>LEFT JOIN</code>.</li>
+                <li>Select rows where an order key is <code>NULL</code>.</li>
+                <li>Check a column that cannot be <code>NULL</code> in a matched order, such as its primary key:</li>
+            </ul>
             <CodeBlock language="sql">{antiJoinExample}</CodeBlock>
-            <p>
-                <code>NOT EXISTS</code> expresses the same requirement directly. It avoids relying on a
-                selected right-side column to identify a missing match:
-            </p>
+            <ul>
+                <li><code>NOT EXISTS</code> checks that no matching order exists.</li>
+                <li>It does not need a right-side column to identify a missing match:</li>
+            </ul>
             <CodeBlock language="sql">{notExistsExample}</CodeBlock>
-            <p>
-                Use a right-side column that cannot be <code>NULL</code> in a real matched row, such
-                as a primary key, for the <code>IS NULL</code> check.
-            </p>
         </section>
 
         <section className="Article__section" aria-labelledby="cross-and-self-joins">
@@ -407,12 +392,11 @@ const PostgreSQLJoins = () => (
                 CROSS and self joins
             </h2>
             <Accordion summary="CROSS JOIN: every combination">
-                <p>
-                    <code>CROSS JOIN</code> returns every combination of one row from each input.
-                    With the shown columns, <code>SELECT *</code> returns 4 columns: 2 from{' '}
-                    <code>customers</code> and 2 from <code>products</code>. If there are 4
-                    customers and 5 products, it returns 20 rows.
-                </p>
+                <ul>
+                    <li><code>CROSS JOIN</code> returns every combination of one row from each input.</li>
+                    <li>Here, <code>SELECT *</code> returns 4 columns: 2 from <code>customers</code> and 2 from <code>products</code>.</li>
+                    <li>With 4 customers and 5 products, it returns 20 rows.</li>
+                </ul>
                 <CodeBlock language="sql">{crossJoinAllColumnsExample}</CodeBlock>
                 <DataTable
                     caption="Output"
@@ -426,12 +410,12 @@ const PostgreSQLJoins = () => (
                 />
             </Accordion>
             <Accordion summary="Self join: use one table twice">
-                <p>
-                    A self join is a pattern, not a separate join type. This example uses{' '}
-                    <code>LEFT JOIN</code> to match each employee to their manager in the same table.
-                    It selects 2 columns, so its result has 2 columns. With <code>SELECT *</code>,
-                    both table instances' columns would appear, including repeated column names.
-                </p>
+                <ul>
+                    <li>A self join uses the same table twice. It is a pattern, not a separate join type.</li>
+                    <li>This example uses <code>LEFT JOIN</code> to match each employee to their manager.</li>
+                    <li>It selects 2 columns, so the result has 2 columns.</li>
+                    <li>With <code>SELECT *</code>, columns from both table instances appear. This includes repeated column names.</li>
+                </ul>
                 <CodeBlock language="sql">{selfJoinExample}</CodeBlock>
                 <DataTable
                     caption="employees"
@@ -454,17 +438,16 @@ const PostgreSQLJoins = () => (
             <h2 id="row-multiplication" className="SectionTitle">
                 Row multiplication
             </h2>
-            <p>
-                Joining two one-to-many tables through the same parent can multiply rows. If a
-                customer has 2 orders and 3 payments, joining both detail tables by customer produces
-                6 rows for that customer. A direct <code>COUNT</code> or <code>SUM</code> can then
-                overcount or repeat values.
-            </p>
-            <p>This query can overcount orders and repeat each payment total:</p>
+            <ul>
+                <li>Joining two one-to-many tables through the same parent can multiply rows.</li>
+                <li>A one-to-many relationship means one parent can have several detail rows.</li>
+                <li>If a customer has 2 orders and 3 payments, joining both detail tables by customer produces 6 rows.</li>
+                <li>A direct <code>COUNT</code> can overcount orders. A direct <code>SUM</code> can repeat payment amounts:</li>
+            </ul>
             <CodeBlock language="sql">{fanoutExample}</CodeBlock>
-            <p>
-                Aggregate each detail table to one row per customer before joining the results:
-            </p>
+            <ul>
+                <li>Aggregate each detail table to one row per customer before joining the results:</li>
+            </ul>
             <CodeBlock language="sql">{aggregateBeforeJoinExample}</CodeBlock>
         </section>
     </ArticleLayout>
