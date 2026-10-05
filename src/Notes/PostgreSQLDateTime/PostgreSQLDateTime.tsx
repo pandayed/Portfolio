@@ -246,16 +246,20 @@ const PostgreSQLDateTime = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                Sources: PostgreSQL{' '}
-                <a className="Link" href="https://www.postgresql.org/docs/current/functions-datetime.html" target="_blank" rel="noreferrer">
-                    date and time functions
-                </a>{' '}
-                and{' '}
-                <a className="Link" href="https://www.postgresql.org/docs/current/datatype-datetime.html" target="_blank" rel="noreferrer">
-                    date and time types
-                </a>.
-            </p>
+            <ul className="Article__notes">
+                <li>
+                    See the PostgreSQL{' '}
+                    <a className="Link" href="https://www.postgresql.org/docs/current/functions-datetime.html" target="_blank" rel="noreferrer">
+                        date and time functions
+                    </a> reference.
+                </li>
+                <li>
+                    See the PostgreSQL{' '}
+                    <a className="Link" href="https://www.postgresql.org/docs/current/datatype-datetime.html" target="_blank" rel="noreferrer">
+                        date and time types
+                    </a> reference.
+                </li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="choose-a-type">
@@ -277,7 +281,8 @@ const PostgreSQLDateTime = () => (
             <ul className="Article__notes">
                 <li><code>timestamp</code> means <code>timestamp without time zone</code>.</li>
                 <li><code>timestamptz</code> means <code>timestamp with time zone</code>.</li>
-                <li>PostgreSQL stores the instant and displays it in the session time zone. The session time zone is the zone set for the database connection.</li>
+                <li>PostgreSQL stores the instant and displays it in the session time zone.</li>
+                <li>The session time zone is the zone set for the database connection.</li>
                 <li><code>timestamptz</code> does not keep the original zone name.</li>
                 <li><code>time with time zone</code> has no date for daylight-saving rules. It is rarely suitable for application data.</li>
                 <li>Use ISO input such as <code>YYYY-MM-DD</code>.</li>
@@ -289,7 +294,8 @@ const PostgreSQLDateTime = () => (
             <h2 id="create-values" className="SectionTitle">Create date and time values</h2>
             <ul className="Article__notes">
                 <li>A typed literal writes the type before the value, such as <code>DATE '2026-03-15'</code>.</li>
-                <li>Use a time-zone offset with <code>timestamptz</code>. Plain <code>timestamp</code> stores no time zone.</li>
+                <li>Use a time-zone offset with <code>timestamptz</code>.</li>
+                <li>Plain <code>timestamp</code> stores no time zone.</li>
             </ul>
             <CodeBlock language="sql">{typedValuesQuery}</CodeBlock>
             <ul className="Article__notes">
@@ -530,13 +536,15 @@ const PostgreSQLDateTime = () => (
                 <li>Add a unique tie-breaker so equal timestamps always choose the same row.</li>
             </ul>
             <CodeBlock language="sql">{latestPerGroupQuery}</CodeBlock>
-            <p>
-                See the{' '}
-                <a className="Link" href={toHref(POSTGRESQL_WINDOW_FUNCTIONS_ROUTE)}>
-                    window functions note
-                </a>{' '}
-                for ranking rules and result shapes.
-            </p>
+            <ul className="Article__notes">
+                <li>
+                    See the{' '}
+                    <a className="Link" href={toHref(POSTGRESQL_WINDOW_FUNCTIONS_ROUTE)}>
+                        window functions note
+                    </a>{' '}
+                    for ranking rules and result shapes.
+                </li>
+            </ul>
 
             <h3 className="Article__subTitle">Find the earliest and latest date</h3>
             <ul className="Article__notes">

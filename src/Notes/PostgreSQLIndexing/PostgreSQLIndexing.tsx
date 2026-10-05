@@ -148,7 +148,9 @@ FROM orders_index_demo
 WHERE customer_id = 10
   AND created_at >= DATE '2026-10-01'
 ORDER BY created_at DESC;`}</CodeBlock>
-            <p>Expected result: order 6 on 2026-10-02, then order 3 on 2026-10-01.</p>
+            <ul className="Article__notes">
+                <li>The expected result is order 6 on 2026-10-02, then order 3 on 2026-10-01.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead><tr><th scope="col">Query condition</th><th scope="col">Fit for (customer_id, created_at)</th></tr></thead>
@@ -266,10 +268,14 @@ ORDER BY created_at DESC;`}</CodeBlock>
         <section className="Article__section" aria-labelledby="choose-and-check-indexes">
             <h2 id="choose-and-check-indexes" className="SectionTitle">Choose and check an index</h2>
             <ol className="Article__steps">
-                <li>Choose a frequent or slow query. Record its filters, joins, ordering and selected columns.</li>
-                <li>Inspect existing indexes before adding one. Choose from the examples above based on your query.</li>
-                <li>Use data that matches actual use and current statistics. Compare plans, execution time and buffer use before and after.</li>
-                <li>Check write costs and other important queries. Keep the index only if the measured benefit fits how you use the database.</li>
+                <li>Choose a frequent or slow query.</li>
+                <li>Record its filters, joins, ordering, and selected columns.</li>
+                <li>Inspect existing indexes before adding one.</li>
+                <li>Choose from the examples above based on your query.</li>
+                <li>Use data that matches actual use and current statistics.</li>
+                <li>Compare plans, execution time, and buffer use before and after.</li>
+                <li>Check write costs and other important queries.</li>
+                <li>Keep the index only if the measured benefit fits how you use the database.</li>
             </ol>
             <CodeBlock language="sql">{`ANALYZE orders_index_demo;
 

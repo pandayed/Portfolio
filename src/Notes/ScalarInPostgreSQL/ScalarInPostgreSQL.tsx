@@ -49,13 +49,11 @@ const ScalarInPostgreSQL = () => {
                     <li><code>COUNT(*)</code> returns one count.</li>
                 </ul>
                 <CodeBlock language="sql">{countQuery}</CodeBlock>
-                <p>Example result:</p>
                 <CodeBlock language="sql">{countResult}</CodeBlock>
                 <ul className="Article__notes">
                     <li><code>SELECT name</code> can return many rows.</li>
                 </ul>
                 <CodeBlock language="sql">{namesQuery}</CodeBlock>
-                <p>Example result:</p>
                 <CodeBlock language="sql">{namesResult}</CodeBlock>
             </section>
 

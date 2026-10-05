@@ -37,7 +37,8 @@ const PostgreSQLRatios = () => (
         <section className="Article__section">
             <ul className="Article__notes">
                 <li>A ratio is one amount divided by another amount.</li>
-                <li>The numerator is the amount you divide. The denominator is the amount you divide by.</li>
+                <li>The numerator is the amount you divide.</li>
+                <li>The denominator is the amount you divide by.</li>
                 <li>Decide which rows belong in each count before writing the query.</li>
                 <li>A cancellation ratio is cancelled orders divided by all orders.</li>
             </ul>

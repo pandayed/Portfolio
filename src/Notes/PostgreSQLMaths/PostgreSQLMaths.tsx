@@ -178,7 +178,8 @@ const PostgreSQLMaths = () => (
                 <li><code>SQRT</code> returns a square root. <code>SQRT(81)</code> is 9 because 9 × 9 is 81.</li>
                 <li><code>CEIL</code> returns the nearest integer greater than or equal to the number.</li>
                 <li><code>FLOOR</code> returns the nearest integer less than or equal to the number.</li>
-                <li><code>CEIL(-4.2)</code> is -4. <code>FLOOR(-4.2)</code> is -5.</li>
+                <li><code>CEIL(-4.2)</code> is -4.</li>
+                <li><code>FLOOR(-4.2)</code> is -5.</li>
             </ul>
         </section>
     </ArticleLayout>

@@ -259,19 +259,33 @@ const PostgreSQLOneShotSQL = () => (
                 Query order
             </h2>
             <h3 className="Article__subTitle">Common written order</h3>
-            <p>
-                <code>
-                    WITH → SELECT → DISTINCT → FROM (JOIN ... ON/USING) → WHERE → GROUP BY → HAVING
-                    → WINDOW → ORDER BY → LIMIT → OFFSET → FOR UPDATE/FOR SHARE
-                </code>
-            </p>
+            <ol className="Article__steps">
+                <li><code>WITH</code></li>
+                <li><code>SELECT</code></li>
+                <li><code>DISTINCT</code></li>
+                <li><code>FROM (JOIN ... ON/USING)</code></li>
+                <li><code>WHERE</code></li>
+                <li><code>GROUP BY</code></li>
+                <li><code>HAVING</code></li>
+                <li><code>WINDOW</code></li>
+                <li><code>ORDER BY</code></li>
+                <li><code>LIMIT</code></li>
+                <li><code>OFFSET</code></li>
+                <li><code>FOR UPDATE/FOR SHARE</code></li>
+            </ol>
             <h3 className="Article__subTitle">Logical processing order</h3>
-            <p>
-                <code>
-                    FROM (JOIN ... ON/USING) → WHERE → GROUP BY → HAVING → WINDOW FUNCTIONS → SELECT
-                    → DISTINCT → ORDER BY → OFFSET → LIMIT
-                </code>
-            </p>
+            <ol className="Article__steps">
+                <li><code>FROM (JOIN ... ON/USING)</code></li>
+                <li><code>WHERE</code></li>
+                <li><code>GROUP BY</code></li>
+                <li><code>HAVING</code></li>
+                <li>Window functions</li>
+                <li><code>SELECT</code></li>
+                <li><code>DISTINCT</code></li>
+                <li><code>ORDER BY</code></li>
+                <li><code>OFFSET</code></li>
+                <li><code>LIMIT</code></li>
+            </ol>
             <ul className="Article__notes">
                 <li>
                     <code>LIMIT</code> and <code>OFFSET</code> are separate clauses.

@@ -127,7 +127,9 @@ interface DataTableProps {
 
 const DataTable = ({ caption, columns, rows }: DataTableProps) => (
     <>
-        <p><strong>{caption}</strong></p>
+        <ul className="Article__notes">
+            <li><strong>{caption}</strong></li>
+        </ul>
         <div className="Article__tableWrap">
             <table className="Article__table">
                 <thead>

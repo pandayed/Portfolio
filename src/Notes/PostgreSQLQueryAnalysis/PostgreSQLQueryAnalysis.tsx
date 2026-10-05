@@ -82,7 +82,10 @@ const PostgreSQLQueryAnalysis = () => (
                 <li>Run the later examples in the same session.</li>
             </ul>
             <CodeBlock language="sql">{sampleData}</CodeBlock>
-            <p>Expected result of the last SELECT, calculated from the sample formula:</p>
+            <ul className="Article__notes">
+                <li>The table below shows the expected result of the last <code>SELECT</code>.</li>
+                <li>These values are calculated from the sample formula.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead><tr><th scope="col">order_id</th><th scope="col">total</th></tr></thead>

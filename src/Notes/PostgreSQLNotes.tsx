@@ -13,7 +13,6 @@ const PostgreSQLNotes = () => (
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>
-        <p className="Notes__intro">{postgresqlNotes.summary}</p>
         <NoteTree nodes={postgresqlNotes.children} />
     </Page>
 );

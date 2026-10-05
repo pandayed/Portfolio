@@ -124,12 +124,15 @@ const PostgreSQLWindowFunctions = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                Selected-column rules and aggregate results:{' '}
-                <a className="Link" href={toHref(POSTGRESQL_GROUP_BY_ROUTE)}>
-                    GROUP BY note
-                </a>.
-            </p>
+            <ul className="Article__notes">
+                <li>
+                    See the{' '}
+                    <a className="Link" href={toHref(POSTGRESQL_GROUP_BY_ROUTE)}>
+                        GROUP BY note
+                    </a>{' '}
+                    for selected-column rules and aggregate results.
+                </li>
+            </ul>
             <ul className="Article__notes">
                 <li>A partition is a group of rows used by a window function.</li>
                 <li><code>PARTITION BY region</code> calculates a separate total for each region.</li>
@@ -267,16 +270,20 @@ const PostgreSQLWindowFunctions = () => (
                 <li>The <code>sale_id</code> tie-breaker chooses Ben before Cam.</li>
                 <li>To keep all tied top sales, use <code>RANK()</code> with <code>ORDER BY amount DESC</code>. Filter for rank 1.</li>
             </ul>
-            <p>
-                Sources:{' '}
-                <a className="Link" href="https://www.postgresql.org/docs/current/tutorial-window.html">
-                    PostgreSQL window functions tutorial
-                </a>
-                {' '}and the{' '}
-                <a className="Link" href="https://www.postgresql.org/docs/current/functions-window.html">
-                    window function reference
-                </a>.
-            </p>
+            <ul className="Article__notes">
+                <li>
+                    See the{' '}
+                    <a className="Link" href="https://www.postgresql.org/docs/current/tutorial-window.html">
+                        PostgreSQL window functions tutorial
+                    </a>.
+                </li>
+                <li>
+                    See the{' '}
+                    <a className="Link" href="https://www.postgresql.org/docs/current/functions-window.html">
+                        window function reference
+                    </a>.
+                </li>
+            </ul>
         </section>
     </ArticleLayout>
 );

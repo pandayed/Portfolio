@@ -136,7 +136,9 @@ const PostgreSQLGroupBy = () => (
                 <li>Use <code>GROUP BY</code> to return one row per group.</li>
                 <li>Use a window function when every original row must remain.</li>
             </ul>
-            <p><strong>customers</strong></p>
+            <ul className="Article__notes">
+                <li>The <code>customers</code> table contains these rows:</li>
+            </ul>
             <ResultTable
                 rows={[
                     { id: '1', city: 'Delhi', name: 'John' },
