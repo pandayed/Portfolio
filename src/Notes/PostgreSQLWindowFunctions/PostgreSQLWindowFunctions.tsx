@@ -35,6 +35,10 @@ const partitionQuery = `SELECT
 FROM sales
 ORDER BY region, sale_id;`;
 
+const invalidGroupedScalarQuery = `SELECT region, UPPER(person)
+FROM sales
+GROUP BY region;`;
+
 const rankingQuery = `SELECT
     region, person, amount,
     ROW_NUMBER() OVER (
@@ -99,10 +103,37 @@ const PostgreSQLWindowFunctions = () => (
     >
         <section className="Article__section">
             <ul className="Article__notes">
-                <li>A window function calculates a value from related rows. Each input row stays in the result.</li>
-                <li>An aggregate with <code>GROUP BY</code> returns one row per group.</li>
-                <li>An aggregate with <code>OVER (...)</code> can return a value beside every row.</li>
+                <li>To show each sale beside its region total, use a window calculation.</li>
             </ul>
+        </section>
+
+        <section className="Article__section" aria-labelledby="function-type-and-window-use">
+            <h2 id="function-type-and-window-use" className="SectionTitle">Function type and window use</h2>
+            <ul className="Article__notes">
+                <li>PostgreSQL defines the function type. <code>GROUP BY</code> and <code>PARTITION BY</code> organize rows. Neither clause changes the function type.</li>
+            </ul>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead><tr><th scope="col">Function type</th><th scope="col">What it does</th><th scope="col">Examples</th></tr></thead>
+                    <tbody>
+                        <tr><th scope="row">Scalar function</th><td>Calculates one value from its arguments.</td><td><code>UPPER</code>, <code>LENGTH</code>, <code>ROUND</code></td></tr>
+                        <tr><th scope="row">Aggregate function</th><td>Combines values from multiple rows into one value per group.</td><td><code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code></td></tr>
+                        <tr><th scope="row">Window function</th><td>Calculates a result for each input row using its position or related rows. Requires <code>OVER</code>.</td><td><code>ROW_NUMBER</code>, <code>RANK</code>, <code>LAG</code>, <code>LEAD</code>, <code>FIRST_VALUE</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 className="Article__subTitle">Aggregate functions can also be used as window functions</h3>
+            <ul className="Article__notes">
+                <li><code>AVG(amount)</code> is an aggregate call. It returns one average per group, or one overall average without <code>GROUP BY</code>.</li>
+                <li><code>AVG(amount) OVER (PARTITION BY region)</code> uses the same aggregate function as a window function. Each sale gets its region average.</li>
+                <li><code>SUM</code>, <code>COUNT</code>, <code>MIN</code>, and <code>MAX</code> also support this window use.</li>
+                <li><code>ROW_NUMBER()</code> is a window function, not an aggregate. It requires <code>OVER (...)</code>.</li>
+                <li><code>OVER</code> marks the window call. <code>PARTITION BY</code> is optional: <code>AVG(amount) OVER ()</code> gives each sale the overall average.</li>
+                <li>Adding <code>OVER (...)</code> to a scalar function such as <code>UPPER</code> is invalid.</li>
+            </ul>
+        </section>
+
+        <section className="Article__section">
             <ul className="Article__notes">
                 <li>Create the sample table and insert its rows once before running the queries.</li>
             </ul>
@@ -112,6 +143,7 @@ const PostgreSQLWindowFunctions = () => (
         <section className="Article__section" aria-labelledby="partition-rows">
             <h2 id="partition-rows" className="SectionTitle">Partition rows</h2>
             <ul className="Article__notes">
+                <li><code>GROUP BY region</code> returns one row per region. <code>SUM</code> is already an aggregate function.</li>
                 <li>This grouped aggregate turns five sales rows into two region totals.</li>
             </ul>
             <CodeBlock language="sql">{groupedTotalQuery}</CodeBlock>
@@ -134,7 +166,7 @@ const PostgreSQLWindowFunctions = () => (
                 </li>
             </ul>
             <ul className="Article__notes">
-                <li>A partition is a group of rows used by a window function.</li>
+                <li>A partition is a set of rows considered together for a window calculation. <code>PARTITION BY</code> does not merge the rows.</li>
                 <li><code>PARTITION BY region</code> calculates a separate total for each region.</li>
                 <li>Without <code>PARTITION BY</code>, all rows form one partition.</li>
             </ul>
@@ -153,6 +185,13 @@ const PostgreSQLWindowFunctions = () => (
             </div>
             <ul className="Article__notes">
                 <li>The result still has five rows. Each sale shows its region total.</li>
+                <li>Window calculations use the rows left after <code>WHERE</code>, <code>GROUP BY</code>, and <code>HAVING</code>. If the query already groups rows, the window sees those grouped rows.</li>
+            </ul>
+            <h3 className="Article__subTitle">GROUP BY does not make a scalar function an aggregate</h3>
+            <CodeBlock language="sql">{invalidGroupedScalarQuery}</CodeBlock>
+            <ul className="Article__notes">
+                <li>This query fails because <code>person</code> is neither grouped nor used in an aggregate. <code>UPPER</code> changes text to uppercase. It cannot combine several people into one value.</li>
+                <li>Scalar functions can still use grouped columns: <code>UPPER(region)</code> is valid when grouping by <code>region</code>.</li>
             </ul>
         </section>
 

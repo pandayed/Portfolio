@@ -235,6 +235,7 @@ const PostgreSQLGroupBy = () => (
                 </table>
             </div>
             <ul>
+                <li><code>COUNT</code> is an aggregate function. Adding <code>OVER</code> uses it as a window function.</li>
                 <li><code>OVER ()</code> calculates across all rows.</li>
                 <li><code>OVER (PARTITION BY city)</code> calculates separately for each city.</li>
                 <li>Both calculations keep the three original rows.</li>
@@ -254,7 +255,7 @@ const PostgreSQLGroupBy = () => (
                 </table>
             </div>
             <ul>
-                <li>See the <a className="Link" href={toHref(POSTGRESQL_WINDOW_FUNCTIONS_ROUTE)}>window functions note</a> for ranking, running totals, and window frames.</li>
+                <li>See the <a className="Link" href={toHref(POSTGRESQL_WINDOW_FUNCTIONS_ROUTE)}>window functions note</a>, under "Function type and window use", for the scalar, aggregate, and window distinction.</li>
             </ul>
         </section>
 
