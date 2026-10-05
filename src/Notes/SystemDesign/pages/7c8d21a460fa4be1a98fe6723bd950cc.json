@@ -1,0 +1,249 @@
+{
+  "id": "7c8d21a460fa4be1a98fe6723bd950cc",
+  "title": "Object Storage vs File Storage vs Block Storage",
+  "sourceUrl": "",
+  "blocks": [
+    {
+      "id": "storage-scenario",
+      "type": "header",
+      "text": "Example: a photo app"
+    },
+    {
+      "id": "storage-photos",
+      "type": "bulleted_list",
+      "text": "Uploaded photos: use object storage. The app uploads and downloads each photo by its key, a name that identifies the object."
+    },
+    {
+      "id": "storage-shared",
+      "type": "bulleted_list",
+      "text": "Shared editing folder: use file storage when several servers need the same files through normal file operations."
+    },
+    {
+      "id": "storage-database",
+      "type": "bulleted_list",
+      "text": "Database disk: use block storage for a database that needs frequent small reads and writes. The database manages its own records."
+    },
+    {
+      "id": "storage-coexist",
+      "type": "bulleted_list",
+      "text": "One system can use all three. Choose by how the application accesses and changes data."
+    },
+    {
+      "id": "storage-comparison",
+      "type": "header",
+      "text": "Comparison"
+    },
+    {
+      "id": "storage-table",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Property"
+          },
+          {
+            "header": true,
+            "html": "Object storage"
+          },
+          {
+            "header": true,
+            "html": "File storage"
+          },
+          {
+            "header": true,
+            "html": "Block storage"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Exposes"
+          },
+          {
+            "header": false,
+            "html": "Objects: data plus metadata, such as content type"
+          },
+          {
+            "header": false,
+            "html": "Files inside directories"
+          },
+          {
+            "header": false,
+            "html": "A disk volume made of addressable blocks"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Address"
+          },
+          {
+            "header": false,
+            "html": "Bucket + key, e.g. photos/42.jpg. A bucket contains objects."
+          },
+          {
+            "header": false,
+            "html": "Path, e.g. /shared/photos/42.jpg"
+          },
+          {
+            "header": false,
+            "html": "Block address on a volume. A volume is a logical disk."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Access"
+          },
+          {
+            "header": false,
+            "html": "API calls, usually over HTTP: PUT, GET, DELETE"
+          },
+          {
+            "header": false,
+            "html": "File operations: open, read, write. Network shares commonly use NFS or SMB."
+          },
+          {
+            "header": false,
+            "html": "Operating system reads and writes blocks. Usually a filesystem or database sits above it."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Change data"
+          },
+          {
+            "header": false,
+            "html": "Usually replace the object. Some services support append or other updates."
+          },
+          {
+            "header": false,
+            "html": "Read or write part of a file; filesystem manages placement"
+          },
+          {
+            "header": false,
+            "html": "Read or write selected blocks; upper layers manage files and records"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Common fit"
+          },
+          {
+            "header": false,
+            "html": "Photos, videos, backups, large datasets"
+          },
+          {
+            "header": false,
+            "html": "Shared folders, existing apps that require file paths"
+          },
+          {
+            "header": false,
+            "html": "Database volumes, operating system disks"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "AWS example"
+          },
+          {
+            "header": false,
+            "html": "Amazon S3"
+          },
+          {
+            "header": false,
+            "html": "Amazon EFS: a shared NFS filesystem"
+          },
+          {
+            "header": false,
+            "html": "Amazon EBS: block volumes attached to compute instances"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "storage-access-terms",
+      "type": "bulleted_list",
+      "text": "NFS (Network File System) and SMB (Server Message Block) are protocols for accessing files over a network."
+    },
+    {
+      "id": "storage-details",
+      "type": "header",
+      "text": "Details that affect the choice"
+    },
+    {
+      "id": "storage-folders",
+      "type": "bulleted_list",
+      "text": "An S3 general purpose bucket has a flat key namespace. The slash in photos/42.jpg is part of the key; its folder display does not create normal filesystem directories."
+    },
+    {
+      "id": "storage-filesystem",
+      "type": "bulleted_list",
+      "text": "A filesystem organizes files and directories on storage. Creating one on a block volume gives that server file paths, but does not automatically create a shared file service."
+    },
+    {
+      "id": "storage-sharing",
+      "type": "bulleted_list",
+      "text": "A network file share supports multiple clients. Applications still need locking or coordination when clients change the same file."
+    },
+    {
+      "id": "storage-multiattach",
+      "type": "bulleted_list",
+      "text": "Some block volumes allow multiple servers to attach. Safe concurrent writes require a filesystem or application designed for shared block access."
+    },
+    {
+      "id": "storage-updates",
+      "type": "bulleted_list",
+      "text": "Object update rules depend on the service. For example, S3 Express One Zone supports append in directory buckets. Check the API before assuming whole-object replacement is the only option."
+    },
+    {
+      "id": "storage-performance",
+      "type": "bulleted_list",
+      "text": "Compare latency (time per operation), IOPS (operations per second), and throughput (bytes per second) for your workload. The storage type alone does not guarantee performance."
+    },
+    {
+      "id": "storage-cost",
+      "type": "bulleted_list",
+      "text": "Compare total cost: stored capacity, requests, provisioned performance, retrieval, and data transfer. Rates and billing rules depend on the service."
+    },
+    {
+      "id": "storage-sources",
+      "type": "header",
+      "text": "References"
+    },
+    {
+      "id": "storage-reference-s3",
+      "type": "bulleted_list",
+      "text": "Amazon S3: objects, buckets, and keys",
+      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">Amazon S3: objects, buckets, and keys</a>"
+    },
+    {
+      "id": "storage-reference-efs",
+      "type": "bulleted_list",
+      "text": "Amazon EFS: shared file access",
+      "html": "<a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon EFS: shared file access</a>"
+    },
+    {
+      "id": "storage-reference-ebs",
+      "type": "bulleted_list",
+      "text": "Amazon EBS: block volumes and workloads",
+      "html": "<a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html\">Amazon EBS: block volumes and workloads</a>"
+    },
+    {
+      "id": "storage-reference-multi",
+      "type": "bulleted_list",
+      "text": "EBS Multi-Attach: concurrent access requirements",
+      "html": "<a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html\">EBS Multi-Attach: concurrent access requirements</a>"
+    },
+    {
+      "id": "storage-reference-append",
+      "type": "bulleted_list",
+      "text": "S3 append support in directory buckets",
+      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-append.html\">S3 append support in directory buckets</a>"
+    }
+  ]
+}

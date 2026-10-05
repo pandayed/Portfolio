@@ -1,4 +1,4 @@
-// Page IDs, titles, status, row order, and nested database views read from the public Notion pages.
+// Imported Notion pages and locally authored notes, with titles, status, order, and nested views.
 export const pageManifest = [
   {
     "id": "34f24eb1ed54801990cfe7aa757be3b7",
@@ -160,6 +160,13 @@ export const pageManifest = [
     "status": "In progress",
     "parentId": null,
     "sourcePath": "./pages/26f24eb1ed5480bdbd69fb1b0fe78253.json"
+  },
+  {
+    "id": "7c8d21a460fa4be1a98fe6723bd950cc",
+    "title": "Object Storage vs File Storage vs Block Storage",
+    "status": "Published",
+    "parentId": null,
+    "sourcePath": "./pages/7c8d21a460fa4be1a98fe6723bd950cc.json"
   },
   {
     "id": "24d24eb1ed548054bd55d5db65a2f091",
@@ -873,6 +880,7 @@ export const rootPageIds = [
   "24f24eb1ed54806a8dffdc09fbd00b29",
   "26424eb1ed54802894ffe6334761df9d",
   "26f24eb1ed5480bdbd69fb1b0fe78253",
+  "7c8d21a460fa4be1a98fe6723bd950cc",
   "24d24eb1ed548054bd55d5db65a2f091",
   "24d24eb1ed5480499a2fe0f2032afd7a",
   "26824eb1ed5480948347d10941fabac4",
