@@ -6,32 +6,157 @@
     {
       "id": "storage-scenario",
       "type": "header",
-      "text": "Example: a photo app"
+      "text": "The same photo, three ways to store it"
     },
     {
-      "id": "storage-photos",
+      "id": "storage-same-data",
       "type": "bulleted_list",
-      "text": "Uploaded photos: use object storage. The app uploads and downloads each photo by its key, a name that identifies the object."
+      "text": "Suppose your app saves cat.jpg. Its bytes, the numbers that represent the photo, can be stored using any of the three types."
     },
     {
-      "id": "storage-shared",
+      "id": "storage-same-disk",
       "type": "bulleted_list",
-      "text": "Shared editing folder: use file storage when several servers need the same files through normal file operations."
+      "text": "All three can use disks underneath. The difference is what the storage system lets your application ask it to do."
     },
     {
-      "id": "storage-database",
+      "id": "storage-metadata",
       "type": "bulleted_list",
-      "text": "Database disk: use block storage for a database that needs frequent small reads and writes. The database manages its own records."
+      "text": "Metadata means details about the data, such as size or modification time. Files have metadata too. Having metadata does not distinguish object storage from file storage."
     },
     {
-      "id": "storage-coexist",
+      "id": "storage-block-heading",
+      "type": "header",
+      "text": "1. Block storage: the computer receives a disk"
+    },
+    {
+      "id": "storage-volume",
       "type": "bulleted_list",
-      "text": "One system can use all three. Choose by how the application accesses and changes data."
+      "text": "A block volume is storage presented to a computer as a disk, even when the actual hardware is elsewhere."
+    },
+    {
+      "id": "storage-block-number",
+      "type": "bulleted_list",
+      "text": "The disk provides numbered locations for chunks of bytes. These are block addresses. The numbers exist before you save a file."
+    },
+    {
+      "id": "storage-raw-operation",
+      "type": "bulleted_list",
+      "text": "At this level, a write says: put these bytes at this block number. It does not say: save a file named cat.jpg."
+    },
+    {
+      "id": "storage-filesystem",
+      "type": "bulleted_list",
+      "text": "A filesystem is software that manages filenames, folders, permissions, and where file data is stored on a disk. Your computer uses one when you save files."
+    },
+    {
+      "id": "storage-allocation",
+      "type": "bulleted_list",
+      "text": "Simplified example: cat.jpg is 10 KiB. KiB means 1,024 bytes. Suppose the disk and filesystem both use 4 KiB blocks. Without compression or empty gaps, the photo needs three data blocks. This excludes metadata."
+    },
+    {
+      "id": "storage-block-example",
+      "type": "code",
+      "text": "Filesystem records:\n  cat.jpg -> data blocks 40, 41, 90\n\nData in those blocks:\n  40 -> first 4 KiB of the photo\n  41 -> next 4 KiB\n  90 -> final 2 KiB; rest unused"
+    },
+    {
+      "id": "storage-block-mapping",
+      "type": "bulleted_list",
+      "text": "The filesystem chooses free blocks and remembers which ones hold cat.jpg. They need not be next to each other. The block device stores bytes at those addresses; it does not interpret filenames or photos."
+    },
+    {
+      "id": "storage-block-layering",
+      "type": "code",
+      "text": "App: save cat.jpg\n  -> Filesystem: record name and choose data blocks\n  -> Block device: write bytes at numbered locations"
+    },
+    {
+      "id": "storage-block-use",
+      "type": "bulleted_list",
+      "text": "Choose block storage when a server needs its own disk. For example, a database can keep its data files on a filesystem you create on that disk."
+    },
+    {
+      "id": "storage-file-heading",
+      "type": "header",
+      "text": "2. File storage: the application receives files and folders"
+    },
+    {
+      "id": "storage-file-operation",
+      "type": "bulleted_list",
+      "text": "The app asks: open /photos/cat.jpg, read its bytes, or change bytes inside it. The filesystem handles the disk locations."
+    },
+    {
+      "id": "storage-file-path",
+      "type": "bulleted_list",
+      "text": "Here /photos/cat.jpg means: find the photos directory, then find the cat.jpg file inside it. A directory is a folder managed by the filesystem."
+    },
+    {
+      "id": "storage-file-local",
+      "type": "bulleted_list",
+      "text": "Finder and Windows Explorer show this file view. That view may come from a filesystem on your local disk or from a remote file service."
+    },
+    {
+      "id": "storage-file-cloud",
+      "type": "bulleted_list",
+      "text": "A cloud file service manages the filesystem for you. Servers connect to it and use its files through normal file operations. Amazon EFS is one example."
+    },
+    {
+      "id": "storage-file-use",
+      "type": "bulleted_list",
+      "text": "Choose shared file storage when several servers need the same folder, or when existing software requires file operations. Applications must still coordinate conflicting edits."
+    },
+    {
+      "id": "storage-object-heading",
+      "type": "header",
+      "text": "3. Object storage: the application uploads named data"
+    },
+    {
+      "id": "storage-object-operation",
+      "type": "bulleted_list",
+      "text": "The app sends the photo bytes to a service with a name. The service stores them as an object. Later, the app requests the object by that name."
+    },
+    {
+      "id": "storage-object-bucket",
+      "type": "bulleted_list",
+      "text": "In Amazon S3, a bucket is a named container for objects. A key is the full name you assign to an object inside that bucket."
+    },
+    {
+      "id": "storage-object-example",
+      "type": "code",
+      "text": "Upload:\n  bucket = my-photo-app\n  key    = photos/cat.jpg\n  data   = the photo bytes\n\nDownload:\n  request bucket my-photo-app, key photos/cat.jpg"
+    },
+    {
+      "id": "storage-object-key",
+      "type": "bulleted_list",
+      "text": "Two buckets can each contain an object named photos/cat.jpg. The bucket and key together identify which object you mean."
+    },
+    {
+      "id": "storage-object-flat",
+      "type": "bulleted_list",
+      "text": "In an S3 general purpose bucket, photos/cat.jpg is one complete name. You do not need to create a photos directory first. This is what a flat namespace means."
+    },
+    {
+      "id": "storage-object-prefix",
+      "type": "bulleted_list",
+      "text": "S3 can list names beginning with photos/ and display them as a folder. That display does not make photos a filesystem directory."
+    },
+    {
+      "id": "storage-object-rename",
+      "type": "bulleted_list",
+      "text": "Why this matters: a filesystem can rename a directory without copying each file. In this S3 bucket, changing photos/ to animals/ requires copying the objects to new keys and deleting the old ones."
+    },
+    {
+      "id": "storage-object-edit",
+      "type": "bulleted_list",
+      "text": "For ordinary S3 general purpose objects, changing the photo means uploading a replacement object. Reading only a selected byte range is supported. Some object services offer additional update operations."
+    },
+    {
+      "id": "storage-object-use",
+      "type": "bulleted_list",
+      "text": "Choose object storage when your app mainly uploads and retrieves named data, such as photos or backups, and does not require normal filesystem editing."
     },
     {
       "id": "storage-comparison",
       "type": "header",
-      "text": "Comparison"
+      "text": "Choose by the operations your app needs"
     },
     {
       "id": "storage-table",
@@ -40,175 +165,65 @@
         [
           {
             "header": true,
-            "html": "Property"
+            "html": "Requirement"
           },
           {
             "header": true,
+            "html": "Choice"
+          },
+          {
+            "header": true,
+            "html": "Reason"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Upload and retrieve photos by name"
+          },
+          {
+            "header": false,
             "html": "Object storage"
           },
           {
-            "header": true,
+            "header": false,
+            "html": "App uses upload/download requests; service manages storage"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Several servers open and edit files in one shared folder"
+          },
+          {
+            "header": false,
             "html": "File storage"
           },
           {
-            "header": true,
+            "header": false,
+            "html": "Service provides a shared filesystem"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Give one server a disk for its database files"
+          },
+          {
+            "header": false,
             "html": "Block storage"
-          }
-        ],
-        [
-          {
-            "header": false,
-            "html": "Exposes"
           },
           {
             "header": false,
-            "html": "Objects: data plus metadata, such as content type"
-          },
-          {
-            "header": false,
-            "html": "Files inside directories"
-          },
-          {
-            "header": false,
-            "html": "A disk volume made of addressable blocks"
-          }
-        ],
-        [
-          {
-            "header": false,
-            "html": "Address"
-          },
-          {
-            "header": false,
-            "html": "Bucket + key, e.g. photos/42.jpg. A bucket contains objects."
-          },
-          {
-            "header": false,
-            "html": "Path, e.g. /shared/photos/42.jpg"
-          },
-          {
-            "header": false,
-            "html": "Block address on a volume. A volume is a logical disk."
-          }
-        ],
-        [
-          {
-            "header": false,
-            "html": "Access"
-          },
-          {
-            "header": false,
-            "html": "API calls, usually over HTTP: PUT, GET, DELETE"
-          },
-          {
-            "header": false,
-            "html": "File operations: open, read, write. Network shares commonly use NFS or SMB."
-          },
-          {
-            "header": false,
-            "html": "Operating system reads and writes blocks. Usually a filesystem or database sits above it."
-          }
-        ],
-        [
-          {
-            "header": false,
-            "html": "Change data"
-          },
-          {
-            "header": false,
-            "html": "Usually replace the object. Some services support append or other updates."
-          },
-          {
-            "header": false,
-            "html": "Read or write part of a file; filesystem manages placement"
-          },
-          {
-            "header": false,
-            "html": "Read or write selected blocks; upper layers manage files and records"
-          }
-        ],
-        [
-          {
-            "header": false,
-            "html": "Common fit"
-          },
-          {
-            "header": false,
-            "html": "Photos, videos, backups, large datasets"
-          },
-          {
-            "header": false,
-            "html": "Shared folders, existing apps that require file paths"
-          },
-          {
-            "header": false,
-            "html": "Database volumes, operating system disks"
-          }
-        ],
-        [
-          {
-            "header": false,
-            "html": "AWS example"
-          },
-          {
-            "header": false,
-            "html": "Amazon S3"
-          },
-          {
-            "header": false,
-            "html": "Amazon EFS: a shared NFS filesystem"
-          },
-          {
-            "header": false,
-            "html": "Amazon EBS: block volumes attached to compute instances"
+            "html": "Server manages a filesystem on the disk"
           }
         ]
       ]
     },
     {
-      "id": "storage-access-terms",
+      "id": "storage-formats",
       "type": "bulleted_list",
-      "text": "NFS (Network File System) and SMB (Server Message Block) are protocols for accessing files over a network."
-    },
-    {
-      "id": "storage-details",
-      "type": "header",
-      "text": "Details that affect the choice"
-    },
-    {
-      "id": "storage-folders",
-      "type": "bulleted_list",
-      "text": "An S3 general purpose bucket has a flat key namespace. The slash in photos/42.jpg is part of the key; its folder display does not create normal filesystem directories."
-    },
-    {
-      "id": "storage-filesystem",
-      "type": "bulleted_list",
-      "text": "A filesystem organizes files and directories on storage. Creating one on a block volume gives that server file paths, but does not automatically create a shared file service."
-    },
-    {
-      "id": "storage-sharing",
-      "type": "bulleted_list",
-      "text": "A network file share supports multiple clients. Applications still need locking or coordination when clients change the same file."
-    },
-    {
-      "id": "storage-multiattach",
-      "type": "bulleted_list",
-      "text": "Some block volumes allow multiple servers to attach. Safe concurrent writes require a filesystem or application designed for shared block access."
-    },
-    {
-      "id": "storage-updates",
-      "type": "bulleted_list",
-      "text": "Object update rules depend on the service. For example, S3 Express One Zone supports append in directory buckets. Check the API before assuming whole-object replacement is the only option."
-    },
-    {
-      "id": "storage-performance",
-      "type": "bulleted_list",
-      "text": "Compare latency (time per operation), IOPS (operations per second), and throughput (bytes per second) for your workload. The storage type alone does not guarantee performance."
-    },
-    {
-      "id": "storage-cost",
-      "type": "bulleted_list",
-      "text": "Compare total cost: stored capacity, requests, provisioned performance, retrieval, and data transfer. Rates and billing rules depend on the service."
+      "text": "A .jpg, .pdf, or .txt extension does not determine the storage type. The required operations determine the choice. These are common choices, not exclusive rules."
     },
     {
       "id": "storage-sources",
@@ -216,34 +231,46 @@
       "text": "References"
     },
     {
-      "id": "storage-reference-s3",
+      "id": "storage-reference-ebs",
       "type": "bulleted_list",
-      "text": "Amazon S3: objects, buckets, and keys",
-      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">Amazon S3: objects, buckets, and keys</a>"
+      "text": "Amazon EBS: a disk device and the filesystem above it",
+      "html": "<a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html\">Amazon EBS: a disk device and the filesystem above it</a>"
+    },
+    {
+      "id": "storage-reference-ext4",
+      "type": "bulleted_list",
+      "text": "Linux ext4: filesystem blocks",
+      "html": "<a href=\"https://docs.kernel.org/filesystems/ext4/blocks.html\">Linux ext4: filesystem blocks</a>"
     },
     {
       "id": "storage-reference-efs",
       "type": "bulleted_list",
-      "text": "Amazon EFS: shared file access",
-      "html": "<a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon EFS: shared file access</a>"
+      "text": "Amazon EFS: a shared filesystem",
+      "html": "<a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon EFS: a shared filesystem</a>"
     },
     {
-      "id": "storage-reference-ebs",
+      "id": "storage-reference-keys",
       "type": "bulleted_list",
-      "text": "Amazon EBS: block volumes and workloads",
-      "html": "<a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html\">Amazon EBS: block volumes and workloads</a>"
+      "text": "Amazon S3: buckets, keys, and displayed folders",
+      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">Amazon S3: buckets and objects</a>; <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html\">keys and displayed folders</a>"
     },
     {
-      "id": "storage-reference-multi",
+      "id": "storage-reference-copy",
       "type": "bulleted_list",
-      "text": "EBS Multi-Attach: concurrent access requirements",
-      "html": "<a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html\">EBS Multi-Attach: concurrent access requirements</a>"
+      "text": "Amazon S3: copying and renaming objects",
+      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/copy-object.html\">Amazon S3: copying and renaming objects</a>"
     },
     {
-      "id": "storage-reference-append",
+      "id": "storage-reference-get",
       "type": "bulleted_list",
-      "text": "S3 append support in directory buckets",
-      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-append.html\">S3 append support in directory buckets</a>"
+      "text": "Amazon S3: reading objects and byte ranges",
+      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">Amazon S3: reading objects and byte ranges</a>"
+    },
+    {
+      "id": "storage-reference-put",
+      "type": "bulleted_list",
+      "text": "Amazon S3: writing objects",
+      "html": "<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">Amazon S3: writing objects</a>"
     }
   ]
 }
