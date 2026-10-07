@@ -16,36 +16,43 @@ import type { LearningChapter } from '../LearningNotes/types';
 export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'runtime-and-fundamentals',
-        title: '1. Runtime and language fundamentals',
-        summary: 'How JavaScript runs and what TypeScript checks before the code runs.',
+        title: '1. JavaScript basics',
+        summary: 'Start with values and variables. Then use conditions and loops.',
         notes: [runtimeAndTypes, variablesValuesAndOperators, controlFlow],
     },
     {
         id: 'functions-and-data',
         title: '2. Functions and data',
-        summary: 'Functions, scope, arrays, objects, closures, and this.',
+        summary: 'Call functions, read variables from their scope, and work with arrays and objects.',
         notes: [functionsAndScope, arraysAndObjects],
     },
     {
         id: 'objects-and-program-structure',
         title: '3. Objects and program structure',
-        summary: 'Prototypes, classes, modules, errors, and debugging.',
+        summary: 'Use classes and modules. Then trace errors to the expression that failed.',
         notes: [classesPrototypesAndModules, errorsAndDebugging],
     },
     {
         id: 'browser-and-async',
         title: '4. Browser and asynchronous programming',
-        summary: 'The DOM, browser storage, Promises, tasks, and asynchronous control flow.',
+        summary: 'Change a browser page, store values, and handle Promise results. Then study callback order.',
         notes: [browserDomAndStorage],
     },
     {
         id: 'typescript-type-system',
-        title: '5. TypeScript type system',
-        summary: 'Inference, narrowing, object types, generics, type transformations, and configuration.',
+        title: '5. TypeScript basics',
+        summary: 'Check value types, narrow unions, describe objects, and relate types with generics.',
         notes: [
             inferenceUnionsAndNarrowing,
             objectTypesAndInterfaces,
             generics,
+        ],
+    },
+    {
+        id: 'typescript-type-transformations-and-configuration',
+        title: '6. TypeScript derived types and configuration',
+        summary: 'Build types from existing types. Then configure checking, output, and declaration files.',
+        notes: [
             utilityMappedAndConditionalTypes,
             tsconfigAndDeclarationFiles,
         ],

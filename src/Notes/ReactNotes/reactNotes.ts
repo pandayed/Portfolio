@@ -15,7 +15,7 @@ export const reactChapters: readonly LearningChapter[] = [
     {
         id: 'components-and-rendering',
         title: '1. Components and rendering',
-        summary: 'React rendering, JSX, components, props, conditional output, lists, and keys.',
+        summary: 'Display a component, pass props, and render conditions and lists.',
         notes: [
             reactRenderingAndJsx,
             componentsAndProps,
@@ -25,20 +25,26 @@ export const reactChapters: readonly LearningChapter[] = [
     {
         id: 'state-and-input',
         title: '2. State and user input',
-        summary: 'State, events, forms, and controlled inputs.',
+        summary: 'Handle clicks, update state, and keep form inputs in state.',
         notes: [stateAndEvents, formsAndControlledInputs],
     },
     {
         id: 'hooks-and-application-state',
         title: '3. Hooks and application state',
-        summary: 'Hook rules, Effects, refs, context, and reducers.',
-        notes: [hooksAndRules, reactHooks, effectsAndCleanup, refsContextAndReducers],
+        summary: 'Follow Hook rules. Then use Effects, refs, context, and reducers.',
+        notes: [hooksAndRules, effectsAndCleanup, refsContextAndReducers],
     },
     {
         id: 'data-and-performance',
         title: '4. Data and performance',
-        summary: 'Asynchronous UI, data fetching, custom Hooks, and measured performance work.',
+        summary: 'Show request states, reuse Hook logic, and measure work before optimizing it.',
         notes: [dataFetchingAndAsyncUi, performanceAndCustomHooks],
+    },
+    {
+        id: 'hook-reference',
+        title: '5. Hook reference',
+        summary: 'Look up individual Hooks after the focused lessons. React 19 APIs have separate version notes.',
+        notes: [reactHooks],
     },
 ];
 

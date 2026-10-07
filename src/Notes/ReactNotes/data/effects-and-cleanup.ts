@@ -11,28 +11,34 @@ const note: LearningNote = {
             id: 'external-synchronization',
             title: 'An Effect synchronizes with an external system',
             bullets: [
-                'Rendering calculates JSX from props and state.',
-                'An Effect runs after React commits an update to the DOM.',
-                'A commit is the step where React applies the render result to browser elements.',
-                'Use an Effect to keep a component in sync with something outside React.',
-                'Browser APIs, network connections, subscriptions, timers, and third-party widgets are external systems.',
-                'A click-specific action belongs in the click handler.',
-                'A value that can be calculated from props or state belongs in rendering, not in an Effect.',
+                "An Effect runs work that keeps a component in sync with something outside React.",
+                "Read State and events and Hooks and their rules before this page.",
+                "Rendering calls your component to calculate JSX from props and state.",
+                "A commit applies that result to the DOM, the browser objects for page elements.",
+                "useEffect runs its setup function after a commit. It does not run during server rendering.",
+                "Browser event listeners, timers, and network connections are external work.",
+                "A click-specific action belongs in the click handler.",
+                "A value calculated from props or state belongs in rendering. The full-name example below shows this case.",
             ],
         },
         {
             id: 'dependencies',
             title: 'Dependencies describe what the Effect reads',
             bullets: [
-                'A dependency is a value the Effect reads and may need to respond to when it changes.',
-                'List every reactive value the Effect uses.',
-                'Reactive values can change between renders.',
-                'They include props, state, and values declared inside the component.',
-                'State setters and reducer dispatch functions keep the same identity between renders.',
-                'The Hooks linter may allow you to omit those stable functions.',
-                'Values declared outside the component are not reactive because a render cannot change them.',
-                'Do not leave out dependencies to control timing.',
-                'Change the Effect code if it should depend on fewer values.',
+                "The dependency array tells React which values can require new setup.",
+                "In the example, the setup reads title. The array therefore contains title.",
+                "React compares each dependency with its previous value using Object.is. Objects match when they are the same object, not merely when their fields match.",
+                "With [title], setup runs after the first commit and after commits where title changes.",
+                "With [], setup runs when the component is added to the page. This is called mounting.",
+                "With no array, setup runs after every commit of this component.",
+                "List every reactive value read by setup. A reactive value is a prop, state value, or variable or function declared inside the component.",
+                "A state setter keeps the same function between renders. It can be omitted when the Hooks linter accepts that omission.",
+                "The Hooks linter checks calling rules and dependencies in source code. It does not run the Effect.",
+                "Values outside the component do not become reactive dependencies. Changing an external variable alone does not tell React to render.",
+            ],
+            pitfalls: [
+                "Changing [title] to [] leaves document.title at the initial title after typing. It does not throw an exception. Restore [title] so React runs setup for new title values.",
+                "Do not remove a dependency to silence a linter warning. Move an object or helper inside setup when only the Effect needs it.",
             ],
             examples: [{
                 title: 'Synchronize the browser tab title',
@@ -54,16 +60,22 @@ export function DraftTitle() {
         />
     );
 }`,
-                result: 'Typing changes the input and the browser tab title to the same text. The Effect synchronizes the title after a commit when title changes. Development Strict Mode may run one extra setup and cleanup cycle to find cleanup bugs.',
+                result: 'Typing changes the input and the browser tab title to the same text. The Effect synchronizes the title after a commit when title changes. Changing unrelated state does not repeat this Effect when title stays the same.',
             }],
         },
         {
             id: 'cleanup',
             title: 'Cleanup stops the previous synchronization',
             bullets: [
-                'Return a cleanup function when an Effect starts work that needs to stop.',
-                'React runs cleanup before running that Effect again.',
-                'React also runs cleanup when it removes the component.',
+                "Return a cleanup function when setup starts work that must stop.",
+                "When dependencies change, React runs the old cleanup before the new setup.",
+                "When React removes the component, called unmounting, it runs cleanup one final time.",
+                "An event listener registers a function to call when a browser event occurs. Removing it stops those calls.",
+                "In WindowWidth, updateWidth reads the width and stores it in state when resize fires.",
+                "Use the same updateWidth function in addEventListener and removeEventListener.",
+                "This example is for browser rendering. Its initial window.innerWidth read requires a browser.",
+                "useState(() => window.innerWidth) supplies an initializer function. React calls it to get the initial state rather than reading width as the initial argument on every render.",
+                "With React 18 development Strict Mode, initial setup is followed by cleanup and another setup. This checks whether cleanup correctly undoes setup.",
             ],
             examples: [{
                 title: 'Subscribe to the browser window size',
@@ -79,6 +91,7 @@ export function WindowWidth() {
         }
 
         window.addEventListener('resize', updateWidth);
+        updateWidth();
         return () => window.removeEventListener('resize', updateWidth);
     }, []);
 
@@ -87,67 +100,43 @@ export function WindowWidth() {
                 result: 'The paragraph shows the current window width and updates after the window is resized. Removing the component also removes its resize listener.',
             }],
             pitfalls: [
-                'A cleanup function should undo the work started by that Effect.',
-                'A subscription needs an unsubscribe.',
-                'A timer needs clearTimeout or clearInterval.',
+                "Removing return () => window.removeEventListener('resize', updateWidth) leaves the listener registered after unmounting. The unused listener remains registered. This does not necessarily throw an exception.",
+                "Calling removeEventListener with a new function does not remove the original listener. Pass the same updateWidth function.",
+                "For a timer, return cleanup that calls clearTimeout or clearInterval with the timer ID.",
             ],
         },
         {
             id: 'request-races',
-            title: 'Ignore stale request results',
+            title: 'Cleanup marks an earlier request as outdated',
             bullets: [
-                'Requests can finish in a different order from the order they started.',
-                'A stale result belongs to an earlier request that the component no longer needs.',
-                'Cleanup can mark an earlier result as stale so it cannot replace newer data.',
+                'Two requests can finish in a different order from the order they started.',
+                'For example, selecting Mira starts request A. Selecting Dev starts request B. B can finish before A.',
+                'A stale result belongs to a selection the component no longer needs.',
+                'Give each Effect setup its own ignore variable. Cleanup changes that variable to true.',
+                'Before updating state, check !ignore. The earlier request then cannot replace the latest selection.',
+                'The request still runs. Ignoring its result does not cancel the network work.',
+                'Data fetching and async UI contains the full request, loading, error, and cleanup example.',
             ],
             examples: [{
-                title: 'Keep the latest profile selection visible',
-                language: 'tsx',
-                code: `import { useEffect, useState } from 'react';
-
-type Profile = { id: string; name: string };
-type ProfileState =
-    | { userId: string; status: 'loading' }
-    | { userId: string; status: 'success'; profile: Profile }
-    | { userId: string; status: 'error' };
-
-export function ProfileName({ userId }: { userId: string }) {
-    const [state, setState] = useState<ProfileState>({ userId, status: 'loading' });
-
-    useEffect(() => {
-        let ignore = false;
-        setState({ userId, status: 'loading' });
-
-        async function loadProfile() {
-            try {
-                const response = await fetch('/api/users/' + userId);
-                if (!response.ok) throw new Error('Request failed');
-                const profile: Profile = await response.json();
-                if (!ignore) setState({ userId, status: 'success', profile });
-            } catch {
-                if (!ignore) setState({ userId, status: 'error' });
-            }
-        }
-
-        void loadProfile();
-        return () => {
-            ignore = true;
-        };
-    }, [userId]);
-
-    if (state.userId !== userId || state.status === 'loading') return <p>Loading…</p>;
-    if (state.status === 'error') return <p role="alert">Could not load profile.</p>;
-    return <p>{state.profile.name}</p>;
-}`,
-                result: 'The paragraph shows “Loading…” for a new selection, then that user’s name or an error. A slower response for an earlier user cannot replace the latest selection.',
+                title: 'Follow two request lifetimes',
+                language: 'text',
+                code: `Select Mira: setup A starts with ignore = false.
+Select Dev: cleanup A sets ignore = true.
+            setup B starts with its own ignore = false.
+Dev response: B may update state.
+Mira response: A must not update state.
+Remove the component: cleanup B sets its ignore = true.`,
+                result: 'Dev stays selected even when the older Mira response finishes last.',
             }],
         },
         {
             id: 'when-not-to-use-effect',
             title: 'Do not use an Effect for derived UI',
             bullets: [
-                'Calculate a value during rendering if it follows directly from props or state.',
-                'An Effect that stores the calculated value causes an extra render with the old value first.',
+                "A derived value is a value calculated from existing props or state.",
+                "fullName is derived from firstName and lastName. Calculate it while rendering.",
+                "If an Effect calls setFullName instead, React first renders with the old fullName. The Effect then requests another render.",
+                "For firstName=\"Mira\" and lastName=\"Shah\", the example renders Mira Shah immediately.",
             ],
             examples: [{
                 title: 'Calculate the full name during rendering',

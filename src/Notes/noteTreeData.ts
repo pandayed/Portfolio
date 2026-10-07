@@ -229,16 +229,16 @@ export const pythonNotes: NoteGroup = {
 const asynchronousJavaScriptPages: NotePage[] = [
     {
         type: 'page',
-        title: 'JavaScript Event Loop and Task Queues',
-        summary: 'Microtasks, tasks, Promises, timers, browser scheduling, and the Node.js event loop.',
-        route: JAVASCRIPT_EVENT_LOOP_ROUTE,
+        title: 'Asynchronous Programming in JavaScript',
+        summary: 'Read Promise results, handle failures, and choose when operations start.',
+        route: JAVASCRIPT_ASYNC_ROUTE,
         updatedOn: '2026-10-07',
     },
     {
         type: 'page',
-        title: 'Asynchronous Programming in JavaScript',
-        summary: 'Promises, async and await, concurrency, cancellation, errors, and production patterns.',
-        route: JAVASCRIPT_ASYNC_ROUTE,
+        title: 'JavaScript Event Loop and Task Queues',
+        summary: 'Follow the order of synchronous code, Promise handlers, timers, and browser or Node.js callbacks.',
+        route: JAVASCRIPT_EVENT_LOOP_ROUTE,
         updatedOn: '2026-10-07',
     },
 ];
