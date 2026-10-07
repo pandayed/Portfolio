@@ -24,8 +24,8 @@ const ReactNotesIndex = () => (
                 and <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/classes-prototypes-and-modules`)} className="Link">imports and exports</a>.
             </li>
             <li>
-                Typed examples also use <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/inference-unions-and-narrowing`)} className="Link">type annotations and unions</a>
-                {' '}and <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/object-types-and-interfaces`)} className="Link">object types</a>.
+                Typed examples use the TypeScript Basics sequence, starting with <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/inference-unions-and-narrowing`)} className="Link">Annotations and inference</a>.
+                It covers named types, narrowing, object shapes, interfaces, and generics before you use them in React.
             </li>
             <li>Component examples run inside an existing React app. JSX describes the elements to display. TSX is JSX in a TypeScript file.</li>
             <li>The main lessons use React 18 APIs. The reference marks APIs that require React 19.</li>

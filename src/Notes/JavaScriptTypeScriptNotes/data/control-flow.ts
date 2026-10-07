@@ -268,7 +268,7 @@ const note: LearningNote = {
             id: 'equality-instanceof-and-in',
             title: 'Equality, instanceof, and in also narrow types',
             bullets: [
-                'Read these examples after the TypeScript object-types page and Classes, prototypes, and modules. They use object unions, class instances, and prototype methods.',
+                'Read these examples after Narrowing and Classes, prototypes, and modules. They use object unions, class instances, and prototype methods.',
                 'type Shape = ... gives a name to a type. Each object type lists property names and their allowed types.',
                 'An equality check can identify a union member using a property with a fixed value, such as kind: "circle".',
                 'instanceof checks whether an object inherits from a constructor\'s prototype. TypeScript can narrow a union of class instances using that check.',

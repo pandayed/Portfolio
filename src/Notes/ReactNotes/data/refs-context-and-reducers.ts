@@ -101,7 +101,7 @@ export function RememberedLabel() {
                 "createContext creates the context object. Its argument is the fallback value when there is no matching provider.",
                 "A provider is a component that supplies the value. In React 18, write ThemeContext.Provider.",
                 "useContext reads the closest matching provider above the component that calls it.",
-                "Theme is a union type: the string must be either \"light\" or \"dark\". The TypeScript page Inference, unions, and narrowing explains unions.",
+                "Theme is a union type: the string must be either \"light\" or \"dark\". The TypeScript chapter type explains how to name unions.",
                 "createContext<Theme>('light') limits this context to Theme values and gives light as its fallback.",
                 "Toolbar reads dark because Settings renders it inside the provider.",
                 "With no provider above Toolbar, it reads light. Context does not create or update state by itself.",

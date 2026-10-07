@@ -289,6 +289,7 @@ const note: LearningNote = {
             id: 'typescript-collection-types',
             title: 'TypeScript checks array elements and object properties',
             bullets: [
+                'These are TypeScript follow-up examples. Read Object shapes and interface first. The earlier sections on this page teach JavaScript.',
                 'number[] describes an array of numbers. User[] describes an array of User objects. Array<User> is another way to write User[].',
                 'interface User { ... } names an object type. type UserShape = { ... } is a type alias: another way to name an object type.',
                 'The checker rejects a missing required property or a property with the wrong value type.',

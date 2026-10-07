@@ -14,7 +14,7 @@ const note: LearningNote = {
                 "A request needs a status so the component can display loading, data, or failure.",
                 "Async work finishes later. A JavaScript Promise represents its eventual value or failure.",
                 "An async function returns a Promise. await waits inside that function while other JavaScript can continue.",
-                "Read Effects and cleanup and Asynchronous Programming in JavaScript first. Read Inference, unions, and narrowing for the TypeScript state shapes.",
+                "Read Effects and cleanup and Asynchronous Programming in JavaScript first. The TypeScript chapters type and Narrowing explain the state shapes and checks used here.",
                 "The UsersState union below lists three allowed object shapes. The | symbol means one of those shapes.",
                 "The status property identifies each shape. Loading has no users, success has users, and error has a message.",
                 "Checking status narrows the type. After the loading and error returns, TypeScript knows state has users.",

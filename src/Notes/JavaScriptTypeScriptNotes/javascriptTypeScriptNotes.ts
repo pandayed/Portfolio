@@ -5,10 +5,14 @@ import controlFlow from './data/control-flow';
 import errorsAndDebugging from './data/errors-and-debugging';
 import functionsAndScope from './data/functions-and-scope';
 import generics from './data/generics';
-import inferenceUnionsAndNarrowing from './data/inference-unions-and-narrowing';
-import objectTypesAndInterfaces from './data/object-types-and-interfaces';
+import annotationsAndInference from './data/inference-unions-and-narrowing';
+import interfaceNote from './data/interface';
+import narrowing from './data/narrowing';
+import objectShapes from './data/object-shapes';
 import runtimeAndTypes from './data/runtime-and-types';
 import tsconfigAndDeclarationFiles from './data/tsconfig-and-declaration-files';
+import typeNote from './data/type';
+import typeAndInterfaces from './data/type-and-interfaces';
 import utilityMappedAndConditionalTypes from './data/utility-mapped-and-conditional-types';
 import variablesValuesAndOperators from './data/variables-values-and-operators';
 import type { LearningChapter } from '../LearningNotes/types';
@@ -41,10 +45,14 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'typescript-type-system',
         title: '5. TypeScript basics',
-        summary: 'Check value types, narrow unions, describe objects, and relate types with generics.',
+        summary: 'Infer and annotate values, name types, narrow values, apply object rules, define interfaces, compare declarations, then connect types with generics.',
         notes: [
-            inferenceUnionsAndNarrowing,
-            objectTypesAndInterfaces,
+            annotationsAndInference,
+            typeNote,
+            narrowing,
+            objectShapes,
+            interfaceNote,
+            typeAndInterfaces,
             generics,
         ],
     },
