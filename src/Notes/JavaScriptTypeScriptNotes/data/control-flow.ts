@@ -5,14 +5,17 @@ const note: LearningNote = {
     title: 'Control flow',
     summary: 'Choose branches, repeat work, and narrow TypeScript unions through checks.',
     scope: 'javascript-typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'if-and-truthiness',
             title: 'if chooses a branch',
-            paragraphs: [
-                'An if statement converts its condition to a boolean. false, 0, -0, 0n, an empty string, null, undefined, NaN, and the legacy browser value document.all are falsy. Other values, including empty arrays and empty objects, are truthy.',
-                'Use an explicit comparison when zero or an empty string has a different meaning from a missing value.',
+            bullets: [
+                'An if statement converts its condition to a boolean.',
+                'Falsy values become false: false, 0, -0, 0n, an empty string, null, undefined, and NaN.',
+                'The legacy browser value document.all is also falsy.',
+                'Other values are truthy. They become true, including empty arrays and empty objects.',
+                'Use an explicit comparison when zero or an empty string means something different from a missing value.',
             ],
             examples: [{
                 language: 'javascript',
@@ -29,8 +32,10 @@ const note: LearningNote = {
         {
             id: 'switch',
             title: 'switch compares case values strictly',
-            paragraphs: [
-                'switch tests the expression against case values using strict equality. A break ends the matching case. Without break or return, execution continues into the following case.',
+            bullets: [
+                'switch compares its expression with each case value using strict equality.',
+                'break ends the switch.',
+                'Without break or return, execution continues into the next case. This is called fallthrough.',
             ],
             examples: [{
                 language: 'javascript',
@@ -54,8 +59,12 @@ const note: LearningNote = {
         {
             id: 'for-of-and-for-in',
             title: 'Use for...of for values',
-            paragraphs: [
-                'for...of reads values from an iterable such as an array or string. for...in reads enumerable property keys. Use for...of for array values unless the property keys are the intended data.',
+            bullets: [
+                'for...of reads values from an iterable, such as an array or string.',
+                'An iterable provides values one at a time for code to read.',
+                'for...in reads enumerable property keys. These include inherited enumerable keys.',
+                'Enumerable properties are properties marked for inclusion in this kind of loop.',
+                'Use for...of for array values unless you need the property keys.',
             ],
             examples: [{
                 language: 'javascript',
@@ -76,8 +85,11 @@ const note: LearningNote = {
         {
             id: 'while-break-continue',
             title: 'Control a loop with break and continue',
-            paragraphs: [
-                'A while loop repeats while its condition is truthy. break ends the nearest loop. continue skips the rest of the current iteration and starts the next one.',
+            bullets: [
+                'A while loop repeats while its condition is truthy.',
+                'break ends the nearest loop.',
+                'continue skips the remaining code in the current iteration. The loop then starts the next iteration.',
+                'An iteration is one run of the loop body.',
             ],
             examples: [{
                 language: 'javascript',
@@ -97,8 +109,11 @@ const note: LearningNote = {
         {
             id: 'typescript-narrowing',
             title: 'Checks narrow TypeScript unions',
-            paragraphs: [
-                'TypeScript follows control flow and narrows a union after checks such as typeof, equality, instanceof, and the in operator. The narrower type applies only where the check proves it.',
+            bullets: [
+                'A union type allows more than one type, such as string | number.',
+                'TypeScript follows control flow to determine which types remain possible after a check. This is called narrowing.',
+                'Checks such as typeof, equality, instanceof, and the in operator can narrow a union.',
+                'The narrower type applies only where the check proves it.',
             ],
             examples: [{
                 language: 'typescript',

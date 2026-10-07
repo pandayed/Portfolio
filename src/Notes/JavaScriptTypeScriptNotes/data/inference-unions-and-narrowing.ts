@@ -5,14 +5,19 @@ const note: LearningNote = {
     title: 'Inference, unions, and narrowing',
     summary: 'Let TypeScript infer types, describe allowed alternatives, and narrow a value before using it.',
     scope: 'typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'type-inference',
             title: 'Type inference',
-            paragraphs: [
-                'TypeScript can infer a type from an initial value, a default parameter, or a function return value. Add an annotation when the intended type is wider than the value TypeScript can see or when the annotation makes a public API clear.',
-                'The inferred types and written annotations are used by the type checker. They are removed from the JavaScript that runs.',
+            bullets: [
+                'Type inference means TypeScript works out a type from a value.',
+                'TypeScript can infer types from initial values, default parameters, and function return values.',
+                'A type annotation states a type in the code.',
+                'Add an annotation when you need to allow more values than the inferred type allows.',
+                'An annotation can also make a public API clearer.',
+                'The type checker uses inferred types and annotations to check the code.',
+                'These types and annotations do not remain in the JavaScript that runs.',
             ],
             examples: [{
                 code: [
@@ -33,8 +38,10 @@ const note: LearningNote = {
         {
             id: 'union-types',
             title: 'Union types',
-            paragraphs: [
-                'A union type lists the types a value may have. TypeScript allows only operations that are safe for every member until the value is narrowed.',
+            bullets: [
+                'A union type lists the types a value may have.',
+                'Before narrowing, TypeScript allows only operations that work for every type in the union.',
+                'Narrowing uses a check to identify a more specific type.',
             ],
             examples: [{
                 code: [
@@ -52,14 +59,17 @@ const note: LearningNote = {
                 typeCheck: 'showId(true) is rejected because boolean is not part of Identifier.',
             }],
             pitfalls: [
-                'A union does not mean that every member-specific method is available. A string | number value must be narrowed before calling toUpperCase.',
+                'Narrow a string | number value to string before calling toUpperCase.',
             ],
         },
         {
             id: 'control-flow-narrowing',
             title: 'Narrow with runtime checks',
-            paragraphs: [
-                'TypeScript follows control flow and understands checks such as typeof, Array.isArray, equality, and the in operator. The check runs in JavaScript. TypeScript uses its result to choose a more specific type inside each branch.',
+            bullets: [
+                'TypeScript follows control flow: the branches and returns that decide which code runs.',
+                'It recognizes checks such as typeof, Array.isArray, equality, and the in operator.',
+                'These checks run in JavaScript.',
+                'TypeScript uses the checks to narrow the type in each branch.',
             ],
             examples: [{
                 code: [
@@ -82,8 +92,10 @@ const note: LearningNote = {
         {
             id: 'discriminated-unions',
             title: 'Discriminated unions',
-            paragraphs: [
-                'A discriminated union gives every member one shared property with a different literal value. Checking that property narrows the whole object.',
+            bullets: [
+                'A discriminated union gives every member the same property name with a different literal value.',
+                'A literal type allows one exact value, such as "success".',
+                'Checking the shared property narrows the whole object.',
             ],
             examples: [{
                 code: [
@@ -109,9 +121,13 @@ const note: LearningNote = {
         {
             id: 'unknown-and-exhaustiveness',
             title: 'Unknown values and exhaustive checks',
-            paragraphs: [
-                'Use unknown when a value may have any type but must be checked before use. It is safer than any because any turns off most checking for that value.',
-                'The never type can mark a branch that should be unreachable. Assigning the remaining union member to never makes a switch fail type checking when a new case is not handled.',
+            bullets: [
+                'Use unknown when a value may have any type and you need to check it before using it.',
+                'The any type turns off most type checking for that value.',
+                'The never type represents a value that cannot occur.',
+                'An exhaustive check verifies that code handles every member of a union.',
+                'Assign the remaining value to never after handling every member.',
+                'If you add a union member without handling it, that assignment fails type checking.',
             ],
             examples: [{
                 title: 'Check an unknown value',

@@ -20,6 +20,7 @@ const scopeLabels: Record<LearningNoteScope, string> = {
 };
 
 const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePageProps) => {
+    const useBulletExplanations = note.scope !== 'java';
     const sectionId = (id: string) => `learning-note-${note.slug}-${id}`;
     const sections: TocEntry[] = note.sections.map(({ id, title }) => ({
         id: sectionId(id),
@@ -35,7 +36,11 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
             backLabel={backLabel}
         >
             <section className="Article__section">
-                <p><strong>Scope:</strong> {scopeLabels[note.scope]}.</p>
+                {useBulletExplanations ? (
+                    <ul className="Article__notes">
+                        <li><strong>Scope:</strong> {scopeLabels[note.scope]}.</li>
+                    </ul>
+                ) : <p><strong>Scope:</strong> {scopeLabels[note.scope]}.</p>}
             </section>
 
             {note.sections.map((section) => (
@@ -64,13 +69,22 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                         <div className="Article__section" key={`${section.id}-example-${index}`}>
                             {example.title && <h3 className="Article__subTitle">{example.title}</h3>}
                             <CodeBlock language={example.language}>{example.code}</CodeBlock>
-                            {example.result && (note.scope === 'java' && example.result.includes('\n') ? (
+                            {useBulletExplanations && (example.result || example.typeCheck) ? (
+                                <ul className="Article__notes">
+                                    {example.result && <li><strong>Result:</strong> {example.result}</li>}
+                                    {example.typeCheck && <li><strong>TypeScript check:</strong> {example.typeCheck}</li>}
+                                </ul>
+                            ) : (
                                 <>
-                                    <p><strong>Expected output:</strong></p>
-                                    <CodeBlock language="text">{example.result}</CodeBlock>
+                                    {example.result && (note.scope === 'java' && example.result.includes('\n') ? (
+                                        <>
+                                            <p><strong>Expected output:</strong></p>
+                                            <CodeBlock language="text">{example.result}</CodeBlock>
+                                        </>
+                                    ) : <p><strong>Result:</strong> {example.result}</p>)}
+                                    {example.typeCheck && <p><strong>TypeScript check:</strong> {example.typeCheck}</p>}
                                 </>
-                            ) : <p><strong>Result:</strong> {example.result}</p>)}
-                            {example.typeCheck && <p><strong>TypeScript check:</strong> {example.typeCheck}</p>}
+                            )}
                         </div>
                     ))}
 

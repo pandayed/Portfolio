@@ -5,14 +5,18 @@ const note: LearningNote = {
     title: 'Classes, prototypes, and modules',
     summary: 'Create related objects, follow prototype lookup, and split code into modules.',
     scope: 'javascript-typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'prototype-chain',
             title: 'Objects can inherit through prototypes',
-            paragraphs: [
-                'JavaScript is prototype-based. When a property is not found on an object, JavaScript looks at that object’s prototype, then continues up the prototype chain until it finds the property or reaches null.',
-                'Object.create makes a new object with the given prototype. An inherited property is readable but is not an own property of the new object.',
+            bullets: [
+                'A prototype is an object that another object can inherit properties from.',
+                'When JavaScript cannot find a property on an object, it checks that object’s prototype.',
+                'JavaScript keeps checking each prototype until it finds the property or reaches null. This sequence is the prototype chain.',
+                'Object.create makes a new object with the given prototype.',
+                'You can read an inherited property, but it is not an own property of the new object.',
+                'An own property belongs directly to the object.',
             ],
             examples: [{
                 language: 'javascript',
@@ -30,8 +34,10 @@ const note: LearningNote = {
         {
             id: 'class-syntax',
             title: 'Class syntax creates objects over the prototype model',
-            paragraphs: [
-                'A class constructor initializes each new instance. Instance methods are shared through the class prototype. The new operator creates an object, connects its prototype, and runs the constructor.',
+            bullets: [
+                'A class constructor sets up each new instance. An instance is an object created from the class.',
+                'Instances share methods through the class prototype.',
+                'new creates an object, connects its prototype, and runs the constructor.',
             ],
             examples: [{
                 language: 'javascript',
@@ -57,9 +63,12 @@ const note: LearningNote = {
         {
             id: 'inheritance-and-composition',
             title: 'extends links class prototype chains',
-            paragraphs: [
-                'extends creates a subclass whose instances can use inherited methods. super calls the parent constructor or parent method. A derived constructor must call super before it reads this.',
-                'Inheritance is useful for a real is-a relationship. For independent behaviors, small objects and functions are often simpler to combine.',
+            bullets: [
+                'extends creates a subclass. A subclass can use methods inherited from its parent class.',
+                'super calls the parent constructor or parent method.',
+                'A derived constructor must call super before reading this.',
+                'Use inheritance when the subclass represents a kind of the parent class.',
+                'For independent behaviors, combining small objects and functions is often simpler. This is called composition.',
             ],
             examples: [{
                 language: 'javascript',
@@ -88,9 +97,12 @@ const note: LearningNote = {
         {
             id: 'fields-and-privacy',
             title: 'Public, private, and static fields have different owners',
-            paragraphs: [
-                'A public field belongs to each instance. A private field starts with # and can only be accessed inside the class body that declares it. A static field or method belongs to the class itself, not to its instances.',
-                'JavaScript private fields are enforced at runtime. TypeScript private is checked by TypeScript but usually uses ordinary JavaScript properties at runtime.',
+            bullets: [
+                'A public field belongs to each instance.',
+                'A private field starts with #. Code can access it only inside the class body that declares it.',
+                'A static field or method belongs to the class itself, rather than its instances.',
+                'JavaScript enforces private fields at runtime.',
+                'TypeScript checks the private keyword before runtime. It usually produces ordinary JavaScript properties.',
             ],
             examples: [{
                 language: 'typescript',
@@ -117,15 +129,19 @@ const note: LearningNote = {
                     'console.log(account.owner, account.balance, Account.created);',
                 ].join('\n'),
                 result: 'The emitted JavaScript prints Mia 10 1.',
-                typeCheck: 'account.owner = "Noah" is a readonly error. Writing account.#balance outside the Account class is also invalid JavaScript syntax and is rejected before evaluation.',
+                typeCheck: 'account.owner = "Noah" is a readonly error. Writing account.#balance outside the Account class is invalid JavaScript syntax. JavaScript rejects it before running the program.',
             }],
         },
         {
             id: 'javascript-modules',
             title: 'Modules give files explicit dependencies',
-            paragraphs: [
-                'An ECMAScript module exports selected values and imports values from other modules. A module has its own top-level scope. The runtime or build tool resolves module specifiers and decides how files are loaded.',
-                'Named exports use the exported name inside braces. A default export is imported without braces and can be given a local name by the importing module.',
+            bullets: [
+                'An ECMAScript module exports selected values and imports values from other modules.',
+                'A module has its own top-level scope.',
+                'A module specifier is the name or path in an import, such as ./math.js.',
+                'The runtime or build tool resolves module specifiers and decides how to load files.',
+                'Import named exports using the exported name inside braces.',
+                'Import a default export without braces. The importing module chooses its local name.',
             ],
             examples: [{
                 title: 'math.js',
@@ -151,9 +167,12 @@ const note: LearningNote = {
         {
             id: 'typescript-modules',
             title: 'TypeScript checks module boundaries',
-            paragraphs: [
-                'TypeScript checks whether an imported name exists and how it can be used. A type-only import makes it clear that the import is used only by the checker and can be removed from emitted JavaScript.',
-                'Module resolution and emitted module format depend on the target runtime and compiler settings. Match tsconfig module settings to the environment that will load the JavaScript.',
+            bullets: [
+                'TypeScript checks whether an imported name exists and how code can use it.',
+                'A type-only import is used only by the checker. It does not need a runtime import in the emitted JavaScript.',
+                'Module resolution means finding the module named by an import.',
+                'The target runtime and compiler settings determine module resolution and the emitted module format.',
+                'Match tsconfig module settings to the environment that will load the JavaScript.',
             ],
             examples: [{
                 title: 'user.ts',
@@ -177,8 +196,8 @@ const note: LearningNote = {
                     'const user: User = { name: "Mia" };',
                     'console.log(getName(user));',
                 ].join('\n'),
-                result: 'In an ECMAScript module setup that emits these files as user.js and main.js, the JavaScript prints Mia.',
-                typeCheck: 'The User import is used only for checking and does not need a runtime binding in the emitted JavaScript.',
+                result: 'The JavaScript prints Mia when the module setup emits these files as user.js and main.js.',
+                typeCheck: 'The checker uses the User import for type checking. The emitted JavaScript does not need that import.',
             }],
         },
     ],

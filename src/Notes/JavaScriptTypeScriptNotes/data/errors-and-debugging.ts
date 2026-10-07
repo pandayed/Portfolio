@@ -5,16 +5,18 @@ const note: LearningNote = {
     title: 'Errors and debugging',
     summary: 'Read failures, throw useful errors, handle expected failures, and debug with evidence.',
     scope: 'javascript-typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'error-kinds',
             title: 'Syntax, type, and runtime errors happen at different stages',
             bullets: [
-                'A syntax error means the source cannot be parsed as valid JavaScript.',
-                'A TypeScript error means the checker found code that conflicts with its known types or compiler rules. The JavaScript runtime does not read that type error.',
-                'A runtime error happens while JavaScript is executing. It may come from invalid input, an unavailable resource, or an operation that throws.',
-                'A logic error produces the wrong result without necessarily throwing an error.',
+                'A syntax error means that JavaScript cannot parse the source as valid code.',
+                'A TypeScript error means that code conflicts with the types or compiler rules known to the checker.',
+                'The JavaScript runtime does not read TypeScript errors.',
+                'A runtime error happens while JavaScript runs.',
+                'Invalid input, an unavailable resource, or an operation that throws can cause a runtime error.',
+                'A logic error produces the wrong result. It does not always throw an error.',
             ],
             examples: [{
                 language: 'javascript',
@@ -25,15 +27,19 @@ const note: LearningNote = {
                     '',
                     'console.log(divide(10, 0));',
                 ].join('\n'),
-                result: 'The output is Infinity. JavaScript number division by zero does not throw, so the program must decide whether this input is valid.',
+                result: 'The output is Infinity. JavaScript number division by zero does not throw. The program must decide whether this input is valid.',
             }],
         },
         {
             id: 'throw-error',
             title: 'Throw an Error for an invalid operation',
-            paragraphs: [
-                'throw stops normal execution and sends a value up the call stack. JavaScript permits any thrown value, but an Error object supplies a standard name and message. Major engines also provide useful stack information, although its exact format is not standardized.',
-                'Throw where the code can state the violated rule clearly. Include useful context without exposing secrets or personal data.',
+            bullets: [
+                'throw stops normal execution and passes a value to an error handler, if one exists.',
+                'JavaScript looks for the handler in the current function and its callers. The call stack records these active calls.',
+                'JavaScript allows any thrown value. An Error object provides a standard name and message.',
+                'Major engines also provide stack information. Its exact format is not standardized.',
+                'Throw where the code can clearly state which rule the operation breaks.',
+                'Include useful context without exposing secrets or personal data.',
             ],
             examples: [{
                 language: 'javascript',
@@ -53,9 +59,12 @@ const note: LearningNote = {
         {
             id: 'try-catch-finally',
             title: 'Catch only failures the code can handle',
-            paragraphs: [
-                'A catch block runs when code in its try block throws. finally runs before control leaves the full try statement, whether an exception occurred or not. Use finally for cleanup that must always run.',
-                'Do not silently catch an unexpected error. Handle it, add useful context and throw again, or let it continue to a caller that can handle it.',
+            bullets: [
+                'A catch block runs when code in its try block throws.',
+                'finally runs before execution leaves the full try statement, whether or not an error occurred.',
+                'Use finally for cleanup that must always run.',
+                'Do not silently catch an unexpected error.',
+                'Handle the error, add context and throw again, or let a caller handle it.',
             ],
             examples: [{
                 language: 'javascript',
@@ -79,8 +88,10 @@ const note: LearningNote = {
         {
             id: 'typescript-caught-values',
             title: 'Narrow a caught value before using it',
-            paragraphs: [
-                'JavaScript can throw any value, so caught values are not guaranteed to be Error objects. With useUnknownInCatchVariables enabled, TypeScript treats a catch variable as unknown and requires a check before reading properties.',
+            bullets: [
+                'JavaScript can throw any value. A caught value may not be an Error object.',
+                'With useUnknownInCatchVariables enabled, TypeScript gives a catch variable the type unknown.',
+                'unknown requires a check before code reads properties. The check narrows the type to one that has those properties.',
             ],
             examples: [{
                 language: 'typescript',
@@ -103,23 +114,30 @@ const note: LearningNote = {
         {
             id: 'debug-with-evidence',
             title: 'Debug from the failing value and call stack',
-            paragraphs: [
-                'Read the first relevant error message and its call stack. Start at your own application frame, reproduce the failure with the same input, and inspect the values that produced it.',
-                'Browser and editor debuggers can pause on a line, step through execution, and inspect scope values. A console log records a value at one point; a breakpoint lets you inspect the full current state.',
-            ],
             bullets: [
-                'Reduce the failing case until it contains only the input and code needed to reproduce the result.',
+                'Read the first relevant error message and its call stack.',
+                'A stack frame describes one active function call. Start at a frame from your application.',
+                'Reproduce the failure with the same input. Inspect the values that caused it.',
+                'Browser and editor debuggers can pause on a line, run code one step at a time, and inspect variables.',
+                'A console log records a value at one point.',
+                'A breakpoint pauses execution so you can inspect the current state.',
+                'Reduce the failing case to the input and code needed to reproduce it.',
                 'Check the value and its runtime type before the failing operation.',
-                'Use console.error for errors, console.table for rows, and console.assert for conditions that should be true.',
-                'Remove temporary logs and breakpoints after the cause is confirmed.',
+                'Use console.error for errors and console.table for rows.',
+                'Use console.assert for conditions that should be true.',
+                'Remove temporary logs and breakpoints after you confirm the cause.',
             ],
+
         },
         {
             id: 'type-checking-limits',
             title: 'Type checking does not replace runtime checks',
-            paragraphs: [
-                'TypeScript checks the information available in source code and declaration files. It cannot prove that unvalidated data from a user, network response, storage entry, or JavaScript dependency matches an asserted type.',
-                'Validate untrusted data at runtime. After validation, use narrowing to give the checked value a precise TypeScript type.',
+            bullets: [
+                'TypeScript checks information in source code and declaration files. Declaration files describe types without providing runtime code.',
+                'A type assertion tells TypeScript to use a type. It does not check the value at runtime.',
+                'TypeScript cannot prove that unchecked data matches an asserted type.',
+                'Check data from users, network responses, storage, and JavaScript dependencies at runtime.',
+                'After validation, narrowing gives the checked value a more specific TypeScript type.',
             ],
             examples: [{
                 language: 'typescript',
@@ -137,7 +155,7 @@ const note: LearningNote = {
                     '}',
                 ].join('\n'),
                 result: 'The emitted JavaScript prints MIA. The runtime checks run before the value is treated as a user.',
-                typeCheck: 'Inside the if block, the type predicate narrows input to { name: string }.',
+                typeCheck: 'The return type value is { name: string } is a type predicate. It tells TypeScript which type the check proves. Inside the if block, TypeScript narrows input to { name: string }.',
             }],
         },
     ],

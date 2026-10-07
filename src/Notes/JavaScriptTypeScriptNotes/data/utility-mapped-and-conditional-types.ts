@@ -5,13 +5,16 @@ const note: LearningNote = {
     title: 'Utility, mapped, and conditional types',
     summary: 'Create new types from existing types instead of repeating object shapes.',
     scope: 'typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'common-utility-types',
             title: 'Common utility types',
-            paragraphs: [
-                'TypeScript provides utility types for common type changes. Partial makes every property optional. Required makes every property required. Readonly prevents property assignment during type checking.',
+            bullets: [
+                'Utility types create new types from existing types.',
+                'Partial makes every property optional.',
+                'Required makes every property required.',
+                'Readonly prevents assignment to properties during type checking.',
             ],
             examples: [{
                 code: [
@@ -29,14 +32,16 @@ const note: LearningNote = {
                 ].join('\n'),
                 language: 'typescript',
                 result: '4 Ava',
-                typeCheck: 'Partial<User> allows any subset of User properties, but each supplied property must keep its original value type.',
+                typeCheck: 'Partial<User> allows an empty object or any selection of User properties. Each supplied property must keep its original value type.',
             }],
         },
         {
             id: 'pick-omit-record',
             title: 'Pick, Omit, and Record',
-            paragraphs: [
-                'Pick selects named properties from a type. Omit removes named properties. Record creates an object type from a set of keys and one value type.',
+            bullets: [
+                'Pick selects named properties from a type.',
+                'Omit removes named properties from a type.',
+                'Record creates an object type from a set of keys and one value type.',
             ],
             examples: [{
                 code: [
@@ -61,8 +66,10 @@ const note: LearningNote = {
         {
             id: 'mapped-types',
             title: 'Mapped types',
-            paragraphs: [
-                'A mapped type loops over a union of property keys at the type level. keyof often supplies those keys. The mapped type below keeps the property names and changes every value type to boolean.',
+            bullets: [
+                'A mapped type creates a property for each key in a union.',
+                'The keyof operator gives the property keys of an object type.',
+                'FeatureFlags keeps those property names and changes every value type to boolean.',
             ],
             examples: [{
                 code: [
@@ -90,8 +97,11 @@ const note: LearningNote = {
         {
             id: 'mapping-modifiers',
             title: 'Add or remove property modifiers',
-            paragraphs: [
-                'Mapped types can add or remove optional and readonly modifiers. Prefix a modifier with - to remove it and + to add it. The + is optional when adding a modifier.',
+            bullets: [
+                'Mapped types can add or remove optional and readonly modifiers.',
+                'A modifier changes whether a property is required or whether you can assign to it.',
+                'Put - before a modifier to remove it.',
+                'Put + before a modifier to add it. You can leave out the +.',
             ],
             examples: [{
                 code: [
@@ -118,8 +128,11 @@ const note: LearningNote = {
         {
             id: 'conditional-types',
             title: 'Conditional types',
-            paragraphs: [
-                'A conditional type chooses one type or another by checking an assignability relationship. Its form is Condition extends Target ? TrueType : FalseType.',
+            bullets: [
+                'A conditional type chooses a type based on whether one type can be assigned to another.',
+                'Its form is Condition extends Target ? TrueType : FalseType.',
+                'If Condition can be assigned to Target, the result is TrueType.',
+                'Otherwise, the result is FalseType.',
             ],
             examples: [{
                 code: [
@@ -139,9 +152,13 @@ const note: LearningNote = {
         {
             id: 'infer-and-runtime',
             title: 'Infer part of another type',
-            paragraphs: [
-                'The infer keyword introduces a type variable inside the true branch of a conditional type. It is useful when the type should be extracted from another type shape.',
-                'Utility, mapped, and conditional types exist only during type checking. They emit no JavaScript and cannot transform a runtime object. Use JavaScript code when values must change at runtime.',
+            bullets: [
+                'The infer keyword names a type matched in the extends check of a conditional type.',
+                'Use that name in the true branch to get part of the matched type.',
+                'ElementType uses infer Item to get the item type of an array.',
+                'Utility, mapped, and conditional types exist only during type checking.',
+                'They generate no JavaScript and do not change objects when the JavaScript runs.',
+                'Use JavaScript code to change values.',
             ],
             examples: [{
                 code: [
@@ -155,7 +172,7 @@ const note: LearningNote = {
                 ].join('\n'),
                 language: 'typescript',
                 result: 'Ava',
-                typeCheck: 'ElementType<string[]> resolves to string. The type calculation is erased before names is used at runtime.',
+                typeCheck: 'ElementType<string[]> resolves to string. This type does not remain in the generated JavaScript.',
             }],
         },
     ],

@@ -5,14 +5,17 @@ const note: LearningNote = {
     title: 'Data fetching and async UI',
     summary: 'Represent each request state in the UI and prevent old responses from replacing newer data.',
     scope: 'react',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'request-state',
             title: 'Async work has more than a data value',
-            paragraphs: [
-                'A request can be idle, loading, successful, empty, or failed. Model those states so the component can show a clear result for each one.',
-                'TypeScript can make invalid combinations harder to create. React uses the current state to choose what appears on screen.',
+            bullets: [
+                'A request can be idle, loading, successful, empty, or failed.',
+                'Async work finishes later.',
+                'Store its current status so the component can display the right UI.',
+                'A union type lists allowed state shapes. TypeScript can reject combinations that do not match them.',
+                'React uses the current state to choose what appears on screen.',
             ],
             examples: [{
                 title: 'Describe request state with a union',
@@ -37,9 +40,12 @@ function UsersView({ state }: { state: UsersState }) {
         {
             id: 'fetch-in-effect',
             title: 'Fetch in an Effect when rendering requires external data',
-            paragraphs: [
-                'A client component can fetch when a prop such as a query changes. The Effect synchronizes the component with the network response.',
-                'A framework data API or a client cache may handle loading, caching, and server rendering better. Use the project\'s existing data layer when it has one.',
+            bullets: [
+                'A client component runs in the browser.',
+                'It can fetch data when a prop such as a query changes.',
+                'An Effect keeps the component data in sync with the query.',
+                'A framework data API or client cache may already handle loading, caching, and server rendering.',
+                'Use the project\'s existing data layer when it has one.',
             ],
             examples: [{
                 title: 'Load matching users',
@@ -96,16 +102,20 @@ export function UserSearch({ query }: { query: string }) {
         {
             id: 'stale-results',
             title: 'Cleanup prevents stale results',
-            paragraphs: [
-                'A new query can start before the old request finishes. React runs the old Effect\'s cleanup before starting the new Effect. The ignore flag stops that old response from updating state.',
-                'AbortController can also cancel supported requests. You still need to handle cancellation as an expected outcome rather than showing it as a user-facing failure.',
+            bullets: [
+                'A new query can start before the old request finishes.',
+                'React runs the old Effect\'s cleanup before starting its replacement.',
+                'The ignore flag prevents an old response from updating state.',
+                'AbortController can cancel requests that support cancellation.',
+                'Treat cancellation as an expected result rather than a failure to show the user.',
             ],
         },
         {
             id: 'event-requests',
             title: 'User actions start event-specific requests',
-            paragraphs: [
-                'A request caused by a specific submit or button click belongs in that event handler. An Effect is for work caused by the component being rendered with particular values.',
+            bullets: [
+                'Put a request caused by a submit or button click in that event handler.',
+                'Use an Effect when a request needs to stay in sync with the values a component renders with.',
             ],
             examples: [{
                 title: 'Show progress while saving',
@@ -146,9 +156,12 @@ export function SaveButton() {
         {
             id: 'react-versus-promises',
             title: 'Promises and React have separate jobs',
-            paragraphs: [
-                'JavaScript promises represent future completion. TypeScript checks the expected response shapes in source code. React does not make a promise cancelable or validate server data.',
-                'React renders the loading, success, empty, and error states that your component stores. Runtime validation is still needed when server data cannot be trusted.',
+            bullets: [
+                'A JavaScript promise represents work that may finish later with a value or an error.',
+                'TypeScript checks the expected response type in source code.',
+                'React does not cancel promises or validate server data.',
+                'React displays the loading, success, empty, and error states stored by the component.',
+                'Check server data while the code runs when you cannot trust its contents.',
             ],
         },
     ],

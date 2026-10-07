@@ -5,14 +5,15 @@ const note: LearningNote = {
     title: 'Generics',
     summary: 'Use type parameters to keep relationships between input, output, and stored values.',
     scope: 'typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'preserve-type-information',
             title: 'Preserve type information',
-            paragraphs: [
-                'A generic uses a type parameter as a placeholder. The caller supplies or helps TypeScript infer a concrete type for each call.',
-                'Unlike any, a generic can preserve the connection between an input type and an output type.',
+            bullets: [
+                'A generic uses a type parameter to represent a type chosen for each call.',
+                'The caller can supply that type or let TypeScript infer it from the arguments.',
+                'A generic can keep the relationship between an input type and an output type.',
             ],
             examples: [{
                 code: [
@@ -27,14 +28,16 @@ const note: LearningNote = {
                 ].join('\n'),
                 language: 'typescript',
                 result: 'HELLO 4',
-                typeCheck: 'word is inferred as the literal type "hello" and count as the literal type 3. The generic keeps the argument type instead of returning any.',
+                typeCheck: 'word has the literal type "hello". count has the literal type 3. A literal type allows that exact value.',
             }],
         },
         {
             id: 'generic-containers',
             title: 'Generic containers',
-            paragraphs: [
-                'Put a type parameter on an interface or type alias when several members use the same value type. Each use of the generic container chooses its own type argument.',
+            bullets: [
+                'Add a type parameter to an interface or type alias when its properties need a type chosen by the caller.',
+                'A type argument is the specific type supplied for a type parameter.',
+                'Each use of the generic container chooses its own type argument.',
             ],
             examples: [{
                 code: [
@@ -58,8 +61,9 @@ const note: LearningNote = {
         {
             id: 'generic-arrays-and-functions',
             title: 'Generic arrays and functions',
-            paragraphs: [
-                'Generic functions can work with arrays without losing the item type. Type inference often means callers do not need to write the type argument.',
+            bullets: [
+                'A generic function can use an array and keep its item type in the result.',
+                'TypeScript can often infer the type argument from the array.',
             ],
             examples: [{
                 code: [
@@ -77,14 +81,17 @@ const note: LearningNote = {
                 typeCheck: 'The return types are string | undefined and number | undefined because an array can be empty.',
             }],
             pitfalls: [
-                'Do not add a type parameter when no relationship needs to be preserved. A concrete type is clearer when a function accepts only one type.',
+                'Use a specific type when a function accepts only that type.',
+                'Add a type parameter when it connects the types of arguments, results, or stored values.',
             ],
         },
         {
             id: 'generic-constraints',
             title: 'Generic constraints',
-            paragraphs: [
-                'A constraint limits which types a type parameter can represent. The function can safely use members guaranteed by the constraint while still preserving the caller’s more specific type.',
+            bullets: [
+                'A constraint limits the types allowed for a type parameter.',
+                'The function can use the properties required by the constraint.',
+                'The type parameter still keeps the caller’s more specific type.',
             ],
             examples: [{
                 code: [
@@ -103,8 +110,9 @@ const note: LearningNote = {
         {
             id: 'keyof-constraints',
             title: 'Constrain one type parameter with another',
-            paragraphs: [
-                'The keyof operator produces a union of known property keys. Combining keyof with a second type parameter lets a function accept only valid keys for the object it receives.',
+            bullets: [
+                'The keyof operator produces a union of an object type’s property keys.',
+                'Use keyof in a constraint on a second type parameter to accept only keys from the object type.',
             ],
             examples: [{
                 code: [
@@ -126,9 +134,13 @@ const note: LearningNote = {
         {
             id: 'runtime-erasure',
             title: 'Generics do not exist at runtime',
-            paragraphs: [
-                'Type parameters, constraints, and generic type arguments are erased when TypeScript emits JavaScript. They do not create runtime constructors and cannot inspect the type chosen by a caller.',
-                'Pass a JavaScript value, such as a constructor or validator function, when runtime behavior depends on a type. Runtime validation is still required for API responses and other external data.',
+            bullets: [
+                'TypeScript removes type parameters, constraints, and type arguments from the generated JavaScript.',
+                'They do not create constructors that run in JavaScript.',
+                'A generic function cannot inspect its type argument when the JavaScript runs.',
+                'Pass a JavaScript value when the function needs it while running.',
+                'A constructor can create an object. A validator function can check a value.',
+                'Validate API responses and other external data before relying on their types.',
             ],
             examples: [{
                 code: [
@@ -142,7 +154,7 @@ const note: LearningNote = {
                     '// Output is erased. The validate function remains and runs.',
                 ].join('\n'),
                 language: 'typescript',
-                typeCheck: 'Writing JSON.parse(text) as Output without validation would only assert a compile-time type. It would not check the parsed value at runtime.',
+                typeCheck: 'Writing JSON.parse(text) as Output tells the type checker to treat the result as Output. It does not check the parsed value when the JavaScript runs.',
             }],
         },
     ],

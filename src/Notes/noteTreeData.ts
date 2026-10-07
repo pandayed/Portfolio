@@ -232,14 +232,14 @@ const asynchronousJavaScriptPages: NotePage[] = [
         title: 'JavaScript Event Loop and Task Queues',
         summary: 'Microtasks, tasks, Promises, timers, browser scheduling, and the Node.js event loop.',
         route: JAVASCRIPT_EVENT_LOOP_ROUTE,
-        updatedOn: '2026-09-21',
+        updatedOn: '2026-10-07',
     },
     {
         type: 'page',
         title: 'Asynchronous Programming in JavaScript',
         summary: 'Promises, async and await, concurrency, cancellation, errors, and production patterns.',
         route: JAVASCRIPT_ASYNC_ROUTE,
-        updatedOn: '2026-09-21',
+        updatedOn: '2026-10-07',
     },
 ];
 

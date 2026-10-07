@@ -5,14 +5,16 @@ const note: LearningNote = {
     title: 'State and events',
     summary: 'Respond to user actions, store component state, update from previous state, and understand render snapshots.',
     scope: 'react',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'event-handlers',
             title: 'Pass event handler functions',
-            paragraphs: [
-                'An event handler runs because the user interacts with the rendered UI. Pass the function to the React event prop.',
-                'Use a named handler for reusable logic. Use an inline arrow function for a short action that needs a value.',
+            bullets: [
+                'An event handler is a function that runs when an event occurs, such as a user clicking a button.',
+                'Pass the function to the React event prop.',
+                'Use a named handler to reuse the same action.',
+                'Use an inline arrow function for a short action that needs an argument.',
             ],
             examples: [{
                 title: 'Run code after a click',
@@ -29,16 +31,19 @@ const note: LearningNote = {
                 result: 'The page shows an Open help button. Clicking it changes the browser tab title to “Help opened”.',
             }],
             pitfalls: [
-                'Write onClick={showHelp}, not onClick={showHelp()}. Calling it in JSX runs it during rendering.',
+                'Write onClick={showHelp}, not onClick={showHelp()}.',
+                'Calling it in JSX runs it during rendering.',
                 'Write onClick={() => showItem(id)} when the handler needs an argument.',
             ],
         },
         {
             id: 'state-keeps-ui-data',
             title: 'State keeps UI data between renders',
-            paragraphs: [
-                'A local variable is created again whenever React calls the component. State retains a value between renders.',
-                'useState returns the current state value and a setter. Calling the setter requests another render with the new value.',
+            bullets: [
+                'React creates local variables again whenever it calls the component.',
+                'State keeps a value between renders.',
+                'useState returns the current value and a setter function.',
+                'Calling the setter requests another render with the new value.',
             ],
             examples: [{
                 title: 'Store a counter',
@@ -57,15 +62,18 @@ const note: LearningNote = {
                     '}',
                 ].join('\n'),
                 result: 'The button starts at “Count: 0”. Each click increases the number shown on the button.',
-                typeCheck: 'TypeScript infers count as a number from the initial value 0.',
+                typeCheck: 'TypeScript infers the type, which means it determines it from the value. Here, count is a number because its initial value is 0.',
             }],
         },
         {
             id: 'state-is-a-render-snapshot',
             title: 'Each render sees a state snapshot',
-            paragraphs: [
-                'Calling a state setter does not change the state value already captured by the current render. It queues a new render.',
-                'Event handlers created by one render keep the state values from that render. Read the next value from the following render instead of expecting the local value to change immediately.',
+            bullets: [
+                'A state snapshot is the set of state values a render receives.',
+                'A setter queues an update.',
+                'It does not change the state value in the current render.',
+                'An event handler keeps the state values from the render that created it.',
+                'The following render receives the updated value.',
             ],
             examples: [{
                 title: 'Set the value for the next render',
@@ -89,9 +97,10 @@ const note: LearningNote = {
         {
             id: 'update-from-previous-state',
             title: 'Update from previous state',
-            paragraphs: [
-                'Pass an updater function when the next state depends on the previous state. React gives each updater the latest queued value.',
-                'This matters when several updates to the same state are queued before the next render.',
+            bullets: [
+                'Pass an updater function when the next state depends on the previous state.',
+                'React gives each updater the latest queued value.',
+                'Use this when several updates to the same state happen before the next render.',
             ],
             examples: [{
                 title: 'Apply three queued updates',
@@ -117,9 +126,12 @@ const note: LearningNote = {
         {
             id: 'state-is-local',
             title: 'State is local to a component position',
-            paragraphs: [
-                'Rendering the same component twice creates two independent state values. Updating one instance does not update the other.',
-                'When two components must stay in sync, move their shared state to their closest common parent and pass values and handlers down as props.',
+            bullets: [
+                'Each position where React renders a component has its own state.',
+                'Rendering the same component twice creates two independent state values.',
+                'Updating one component does not update the other.',
+                'To keep two components in sync, put their shared state in their closest common parent.',
+                'Pass the values and event handlers to the children as props.',
             ],
             examples: [{
                 title: 'Render independent counters',
@@ -147,9 +159,11 @@ const note: LearningNote = {
         {
             id: 'choose-state-carefully',
             title: 'Store only data that must persist',
-            paragraphs: [
-                'Use state for data that must survive a render and can change the displayed UI. Calculate values from current props and state when possible.',
-                'Do not copy a value into another state variable only to format or combine it. Duplicate state can become inconsistent.',
+            bullets: [
+                'Use state for data that must remain between renders and can change the displayed UI.',
+                'Calculate values from current props and state when possible.',
+                'Do not store a second copy only to format or combine a value.',
+                'Two stored copies can disagree if only one is updated.',
             ],
             examples: [{
                 title: 'Calculate a label from state',

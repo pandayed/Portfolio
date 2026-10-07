@@ -3,28 +3,34 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'performance-and-custom-hooks',
     title: 'Performance and custom Hooks',
-    summary: 'Measure a real slowdown before memoizing, and extract a custom Hook when components share stateful logic.',
+    summary: 'Measure slow interactions before caching values. Reuse state logic with custom Hooks.',
     scope: 'react',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'render-first',
             title: 'Keep rendering correct before optimizing it',
-            paragraphs: [
-                'A component should produce the correct UI without memoization. Fix unnecessary Effects, misplaced state, and broad state updates before adding a cache.',
-                'Rendering is React behavior. The calculations inside rendering are JavaScript. TypeScript checks their inputs and outputs but does not make them faster.',
-            ],
             bullets: [
+                'A component should show the correct UI before you add memoization.',
+                'Memoization means caching a result so later calls can reuse it.',
+                'Fix unnecessary Effects, state stored too far from its users, and updates that affect too many components before adding a cache.',
+                'React controls rendering.',
+                'JavaScript runs the calculations inside it.',
+                'TypeScript checks calculation inputs and outputs.',
+                'It does not make the calculation faster.',
                 'Keep state close to the components that use it.',
-                'Keep rendering pure.',
+                'Keep rendering pure: calculate JSX without changing data outside the calculation.',
                 'Measure the slow interaction before and after an optimization.',
             ],
         },
         {
             id: 'use-memo',
             title: 'useMemo caches an expensive calculation',
-            paragraphs: [
-                'useMemo can reuse a calculated value while its dependencies stay the same. Use it only as a performance optimization. The component must still work if React recalculates the value.',
+            bullets: [
+                'useMemo can reuse a calculated value while its dependencies stay the same.',
+                'Dependencies are the inputs listed for that calculation.',
+                'Use useMemo to improve measured performance.',
+                'The component must still work if React calculates the value again.',
             ],
             examples: [{
                 title: 'Cache a measured list calculation',
@@ -56,28 +62,31 @@ export function ProductList({
                 result: 'The list shows only matching products. React can reuse the filtered array while products and query have not changed.',
             }],
             pitfalls: [
-                'Do not add useMemo to every calculation. Most small calculations are fast, and memoization adds its own code and dependency checks.',
-                'Do not use useMemo to make incorrect code work. Its cached value is not a semantic guarantee.',
+                'Do not add useMemo to every calculation.',
+                'Most small calculations are fast, and memoization adds its own code and dependency checks.',
+                'The component must work even if React discards the cached value.',
             ],
         },
         {
             id: 'stable-props',
             title: 'Stable values help only when something uses that stability',
-            paragraphs: [
-                'useCallback caches a function definition. memo can skip rendering a component when its props are unchanged. These tools help only when a measured slow path depends on stable identity.',
-            ],
             bullets: [
+                'useCallback caches a function definition.',
+                'memo can skip a component render when its props are unchanged.',
+                'A stable identity means React receives the same function or object between renders.',
+                'Use these tools when measurement shows that changing identity causes slow work to repeat.',
                 'A new function or object on each render is not automatically a problem.',
                 'One always-new prop can prevent a memoized child from skipping its render.',
-                'Prefer clear code until measurement shows that identity changes cause useful work to repeat.',
             ],
         },
         {
             id: 'custom-hooks',
             title: 'A custom Hook shares stateful logic',
-            paragraphs: [
-                'A custom Hook is a function whose name starts with use and that calls one or more Hooks. Extract one when several components need the same stateful process.',
-                'Each call gets its own state. A custom Hook shares logic, not one shared state value.',
+            bullets: [
+                'A custom Hook is a function whose name starts with use followed by a capital letter.',
+                'It calls one or more Hooks to reuse stateful logic, which is logic that keeps or responds to state.',
+                'Each call has its own state.',
+                'Reusing a custom Hook does not share one state value between components.',
             ],
             examples: [{
                 title: 'Reuse online-status behavior',
@@ -115,13 +124,13 @@ export function NetworkStatus() {
         {
             id: 'custom-hook-boundaries',
             title: 'Name a custom Hook by its purpose',
-            paragraphs: [
-                'A custom Hook should describe a specific behavior such as useOnlineStatus. Avoid lifecycle names such as useMount because they hide the real synchronization and its dependencies.',
-            ],
             bullets: [
+                'Name a custom Hook for the behavior it provides, such as useOnlineStatus.',
+                'Avoid lifecycle names such as useMount.',
+                'They do not explain what the Hook synchronizes or which values it depends on.',
                 'Custom Hooks follow the same top-level calling rules as built-in Hooks.',
                 'Custom Hook code runs again when the component using it renders.',
-                'Keep the Hook pure outside its event handlers and Effects.',
+                'Outside event handlers and Effects, the Hook must not change data outside its calculation.',
             ],
         },
         {

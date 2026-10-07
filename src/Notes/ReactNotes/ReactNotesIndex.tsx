@@ -13,10 +13,10 @@ const ReactNotesIndex = () => (
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>
-        <p className="Notes__intro">
-            React concepts use TypeScript examples. JavaScript and TypeScript language topics stay in
-            their own shared collection.
-        </p>
+        <ul className="Article__notes">
+            <li>React examples use TypeScript.</li>
+            <li>JavaScript and TypeScript language topics have a separate notes collection.</li>
+        </ul>
         <NoteTree nodes={reactNotes.children} />
     </Page>
 );

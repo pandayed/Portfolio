@@ -5,14 +5,15 @@ const note: LearningNote = {
     title: 'Forms and controlled inputs',
     summary: 'Connect form fields to state, handle text and checkbox changes, submit forms, and choose controlled or uncontrolled inputs.',
     scope: 'react',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'controlled-text-input',
             title: 'Control a text input with state',
-            paragraphs: [
-                'A controlled text input receives its current value from React state. Its onChange handler updates that state after each edit.',
-                'The value and onChange props form one contract. If value is supplied without an update, the field cannot keep the user edit.',
+            bullets: [
+                'A controlled text input receives its current value from React state.',
+                'Its onChange handler updates that state after each edit.',
+                'When you supply value, update the state in onChange to keep the user edit.',
             ],
             examples: [{
                 title: 'Show the current input value',
@@ -36,15 +37,17 @@ const note: LearningNote = {
                     '}',
                 ].join('\n'),
                 result: 'The text beside the field updates after every edit. It shows “Empty” when the field has no text.',
-                typeCheck: 'TypeScript infers event from the input onChange prop and name as a string.',
+                typeCheck: 'TypeScript determines the event type from the input onChange prop. It determines that name is a string from its initial value.',
             }],
         },
         {
             id: 'controlled-checkbox',
             title: 'Use checked for checkboxes',
-            paragraphs: [
-                'A checkbox is controlled with the boolean checked prop. Read event.target.checked in its change handler.',
-                'The value prop has a different purpose for checkboxes. It supplies form data and does not control whether the checkbox is selected.',
+            bullets: [
+                'Control a checkbox with the boolean checked prop.',
+                'Read event.target.checked in the change handler.',
+                'The value prop supplies the checkbox value in submitted form data.',
+                'It does not control whether the checkbox is selected.',
             ],
             examples: [{
                 title: 'Track a checkbox',
@@ -73,9 +76,12 @@ const note: LearningNote = {
         {
             id: 'submit-a-form',
             title: 'Handle form submission',
-            paragraphs: [
-                'Put related fields inside a form and handle onSubmit on the form. A submit button triggers that handler.',
-                'Call preventDefault when the form should stay on the current page and React code will handle the result.',
+            bullets: [
+                'Put related fields inside a form.',
+                'Handle onSubmit on the form.',
+                'A submit button triggers this handler.',
+                'Call preventDefault to stop the browser from submitting the form through its normal page navigation.',
+                'Use it when React code handles the result on the current page.',
             ],
             examples: [{
                 title: 'Submit controlled data',
@@ -106,18 +112,22 @@ const note: LearningNote = {
                     '}',
                 ].join('\n'),
                 result: 'Submitting the form keeps the page open and shows “Searching for:” followed by the submitted text.',
-                typeCheck: 'The explicit FormEvent<HTMLFormElement> type gives currentTarget the form element type.',
+                typeCheck: 'FormEvent<HTMLFormElement> makes currentTarget a form element. currentTarget is the element whose handler is running.',
             }],
             pitfalls: [
-                'Set type="button" on a form button that must not submit the form. A button inside a form submits by default.',
+                'Set type="button" on a form button that must not submit the form.',
+                'A button inside a form submits by default.',
             ],
         },
         {
             id: 'controlled-select',
             title: 'Control a select element',
-            paragraphs: [
-                'Pass value and onChange to a select just as you do for a text input. Put each option value on its option element.',
-                'TypeScript reads event.target.value as a string. Validate or narrow it before storing it as a smaller union type.',
+            bullets: [
+                'Control a select with value and onChange.',
+                'Set each option value on its option element.',
+                'TypeScript treats event.target.value as a string.',
+                'A union type allows a listed set of values, such as "light" or "dark".',
+                'Narrow the string by checking its value before storing it in that union type.',
             ],
             examples: [{
                 title: 'Narrow a selected value',
@@ -157,9 +167,11 @@ const note: LearningNote = {
         {
             id: 'controlled-and-uncontrolled',
             title: 'Choose controlled or uncontrolled inputs',
-            paragraphs: [
-                'A controlled input uses value or checked for its current state. An uncontrolled input lets the browser keep the current value.',
-                'Use defaultValue or defaultChecked only to set an uncontrolled input\'s initial value. Changing that default later does not control the current field value.',
+            bullets: [
+                'A controlled input uses value or checked to set its current value.',
+                'An uncontrolled input lets the browser keep the current value.',
+                'Use defaultValue or defaultChecked to set an uncontrolled input\'s initial value.',
+                'Changing that default later does not control the field\'s current value.',
             ],
             examples: [{
                 title: 'Set an uncontrolled initial value',
@@ -185,9 +197,11 @@ const note: LearningNote = {
         {
             id: 'keep-form-state-minimal',
             title: 'Keep form state minimal',
-            paragraphs: [
-                'Store the editable field values and submission status that the UI needs. Calculate simple validation messages from those values during rendering.',
-                'Do not keep a second state value for a result that can be derived from the current fields. This avoids inconsistent form state.',
+            bullets: [
+                'Store the editable field values and submission status the UI needs.',
+                'Calculate simple validation messages from those values during rendering.',
+                'Do not keep separate state for a value that you can calculate from the current fields.',
+                'This avoids stored values that disagree with each other.',
             ],
             examples: [{
                 title: 'Calculate a validation message',

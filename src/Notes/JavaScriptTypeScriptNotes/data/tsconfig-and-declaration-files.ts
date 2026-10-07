@@ -5,14 +5,19 @@ const note: LearningNote = {
     title: 'TSConfig and declaration files',
     summary: 'Define a TypeScript project, choose compiler behavior, and describe JavaScript APIs with .d.ts files.',
     scope: 'typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'project-config',
             title: 'TSConfig defines a project',
-            paragraphs: [
-                'A tsconfig.json file marks the root of a TypeScript or JavaScript project. It tells the compiler which files belong to the project and which compiler options to use.',
-                'Use files for an exact file list. Use include for path patterns. exclude can remove matched paths from include, but an imported file can still become part of the program.',
+            bullets: [
+                'A tsconfig.json file defines a TypeScript or JavaScript project.',
+                'It tells the compiler which files belong to the project.',
+                'It also sets the compiler options.',
+                'Use files for an exact file list.',
+                'Use include for path patterns.',
+                'Use exclude to remove matching paths from include.',
+                'An imported file can still become part of the program even if exclude matches it.',
             ],
             examples: [{
                 title: 'A small project configuration',
@@ -34,9 +39,12 @@ const note: LearningNote = {
         {
             id: 'strict-checking',
             title: 'Start with strict checking',
-            paragraphs: [
-                'The strict option enables a group of stricter checks. These checks include errors for implicit any in many positions and separate handling for null and undefined.',
-                'A future TypeScript version may add a stricter check under strict. Review type errors when upgrading instead of assuming the setting will never change.',
+            bullets: [
+                'The strict option enables a group of stricter type checks.',
+                'One check reports implicit any in many places: values that get the any type without you writing it.',
+                'Another check treats null and undefined as separate types that you must handle.',
+                'A future TypeScript version may add stricter checks to strict.',
+                'Review type errors when upgrading TypeScript.',
             ],
             examples: [{
                 code: [
@@ -55,9 +63,13 @@ const note: LearningNote = {
         {
             id: 'emit-options',
             title: 'Type checking and JavaScript output',
-            paragraphs: [
-                'target selects the JavaScript language version used for emitted syntax. module selects the module format or preservation behavior. Match these options to the runtime and build tool used by the project.',
-                'Set noEmit to true when another tool creates the runnable JavaScript and TypeScript should only check types. Set outDir when tsc should write emitted files to a separate directory.',
+            bullets: [
+                'The compiler emits code when it writes output files.',
+                'Use target to choose the JavaScript language version of the generated syntax.',
+                'Use module to choose the generated module format or preserve the source module syntax.',
+                'Match these options to the environment and build tool that run the code.',
+                'Set noEmit to true when another tool creates the JavaScript and TypeScript only needs to check types.',
+                'Set outDir when tsc should write output files to a separate directory.',
             ],
             examples: [{
                 title: 'Type-check while a bundler emits code',
@@ -75,16 +87,21 @@ const note: LearningNote = {
                 typeCheck: 'tsc checks the project but does not write JavaScript, source maps, or declaration files when noEmit is true.',
             }],
             pitfalls: [
-                'target changes emitted syntax. It does not install runtime APIs or polyfills.',
-                'Compiler options do not configure every bundler or runtime. Keep their module and resolution settings compatible.',
+                'Changing target does not add APIs to the environment that runs the code.',
+                'It does not install polyfills: code that provides APIs missing from that environment.',
+                'Compiler options do not configure every bundler or environment that runs the code.',
+                'Keep their settings compatible, including module formats and how they find imported files.',
             ],
         },
         {
             id: 'declaration-files',
             title: 'Declaration files describe existing code',
-            paragraphs: [
-                'A .d.ts file describes the types of a JavaScript API. It contains declarations but does not provide the runtime implementation.',
-                'The declared module or global must still exist when the program runs. A declaration file cannot make a missing JavaScript package, function, or variable appear.',
+            bullets: [
+                'A declaration file, named with .d.ts, describes the types of a JavaScript API.',
+                'It declares the available names and types.',
+                'It does not contain the JavaScript that implements the API.',
+                'The declared module or global must exist when the program runs.',
+                'A declaration file does not create a missing package, function, or variable.',
             ],
             examples: [{
                 title: 'Describe a JavaScript module',
@@ -104,9 +121,11 @@ const note: LearningNote = {
         {
             id: 'generate-declarations',
             title: 'Generate declarations for a library',
-            paragraphs: [
-                'The declaration option asks TypeScript to create a .d.ts file for each emitted source file. The generated declaration describes the module’s public API.',
-                'Use emitDeclarationOnly when the build should write declarations but another tool handles JavaScript output. declarationMap can connect declarations back to their source for editor navigation.',
+            bullets: [
+                'Set declaration to generate .d.ts files from source files.',
+                'These files describe the module’s public API: the names and types it exports.',
+                'Use emitDeclarationOnly to write declarations when another tool creates the JavaScript.',
+                'Use declarationMap to help an editor find the source for a declaration.',
             ],
             examples: [{
                 title: 'Emit only type declarations',
@@ -138,9 +157,12 @@ const note: LearningNote = {
         {
             id: 'runtime-boundary',
             title: 'Know the runtime boundary',
-            paragraphs: [
-                'Type annotations, interfaces, type aliases, generic arguments, and import type declarations are removed from emitted JavaScript. They cannot validate a network response, local storage value, or JSON file at runtime.',
-                'Classes and regular imports are JavaScript values, so they remain when used. Some TypeScript features, such as enums, can also emit JavaScript. Check the emitted code when runtime output matters.',
+            bullets: [
+                'TypeScript removes type annotations, interfaces, type aliases, generic arguments, and import type declarations from the generated JavaScript.',
+                'They cannot validate a network response, local storage value, or JSON file when the program runs.',
+                'Classes and regular imports used as JavaScript values remain in the output.',
+                'Some TypeScript features, such as enums, can generate JavaScript too.',
+                'Check the generated code when the output matters.',
             ],
             examples: [{
                 code: [

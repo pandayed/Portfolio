@@ -3,19 +3,21 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'refs-context-and-reducers',
     title: 'Refs, context, and reducers',
-    summary: 'Use refs for non-rendering values, context for distant readers, and reducers for related state transitions.',
+    summary: 'Store values in refs without rendering again. Share values with context and group state updates in reducers.',
     scope: 'react',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'refs',
             title: 'A ref stores a value without rendering again',
-            paragraphs: [
-                'useRef returns the same object on every render. Changing its current property does not ask React to render again.',
-                'Keep information in state when it affects visible output. Use a ref for values needed by event handlers or external APIs when changing the value should not update the screen.',
-            ],
             bullets: [
-                'Common ref values include DOM nodes, timer IDs, and previous external handles.',
+                'useRef returns the same object on every render.',
+                'Changing its current property does not request another render.',
+                'Use state when a value affects what the component displays.',
+                'Use a ref for a value needed by an event handler or external API when changing it should not update the screen.',
+                'A DOM node is a browser element.',
+                'A ref can give access to that element.',
+                'Common ref values include DOM nodes, timer IDs, and references to external objects.',
                 'Do not read or write ref.current during rendering except for predictable one-time initialization.',
             ],
         },
@@ -44,15 +46,18 @@ export function SearchBox() {
                 result: 'Clicking “Focus search” moves keyboard focus into the search input. The ref change does not create another render.',
             }],
             pitfalls: [
-                'A DOM ref is an escape hatch for actions such as focus, scroll, or media control. Use JSX and state for normal UI updates.',
+                'Use a DOM ref to focus, scroll, or control media.',
+                'Use JSX and state for normal UI updates.',
             ],
         },
         {
             id: 'context',
             title: 'Context provides a value to distant children',
-            paragraphs: [
-                'Context lets a parent provide a value to components anywhere below it without forwarding the same prop through every intermediate component.',
-                'Start with props or children because they keep data flow explicit. Use context when distant components in the same tree need the same value.',
+            bullets: [
+                'Context lets a parent provide a value to components anywhere below it.',
+                'Intermediate components do not need to forward that value as a prop.',
+                'Start with props or children so readers can see where values come from.',
+                'Use context when distant components in the same component tree need the same value.',
             ],
             examples: [{
                 title: 'Read a theme from context',
@@ -78,15 +83,19 @@ export function Settings() {
             }],
             pitfalls: [
                 'Updating a provided context value renders the components that read that context.',
-                'Do not move every prop into context. Local props are easier to trace when only nearby components need the value.',
+                'Do not move every prop into context.',
+                'Local props are easier to trace when only nearby components need the value.',
             ],
         },
         {
             id: 'reducers',
             title: 'A reducer groups related state transitions',
-            paragraphs: [
-                'useReducer is useful when several events update related state or when the next state rules have become hard to follow across several setters.',
-                'An event handler dispatches an action. React calls the reducer with the current state and that action. The reducer returns the next state.',
+            bullets: [
+                'A reducer is a function that returns the next state from the current state and an action.',
+                'Use useReducer when several events update related state or many setters make the update rules hard to follow.',
+                'An action describes a state change.',
+                'An event handler dispatches it, which means it sends the action to React.',
+                'React calls the reducer with the current state and that action.',
             ],
             examples: [{
                 title: 'Describe counter changes with actions',
@@ -124,9 +133,12 @@ export function Counter() {
         {
             id: 'pure-reducers',
             title: 'Reducers must stay pure',
-            paragraphs: [
-                'A reducer runs during rendering. It must return the same result for the same state and action. It must not send requests, start timers, mutate the existing state, or change anything outside the reducer.',
-                'TypeScript can make action cases explicit with a union. React still controls when the reducer runs and when the returned state appears on screen.',
+            bullets: [
+                'A pure reducer returns the same result for the same state and action.',
+                'React runs reducers during rendering.',
+                'Do not send requests, start timers, change existing state, or change anything outside the reducer.',
+                'TypeScript can describe the allowed actions with a union type.',
+                'React decides when the reducer runs and when the new state appears on screen.',
             ],
         },
         {

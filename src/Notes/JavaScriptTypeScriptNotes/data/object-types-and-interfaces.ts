@@ -5,13 +5,15 @@ const note: LearningNote = {
     title: 'Object types and interfaces',
     summary: 'Describe object shapes with required, optional, readonly, and indexed properties.',
     scope: 'typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'object-shapes',
             title: 'Describe an object shape',
-            paragraphs: [
-                'An object type says which properties a value must have and what type each property holds. TypeScript checks the shape. It does not add those properties at runtime.',
+            bullets: [
+                'An object type describes an object shape: its properties and their types.',
+                'TypeScript checks that a value has the required properties.',
+                'The type does not add properties when the JavaScript runs.',
             ],
             examples: [{
                 code: [
@@ -34,9 +36,12 @@ const note: LearningNote = {
         {
             id: 'optional-readonly',
             title: 'Optional and readonly properties',
-            paragraphs: [
-                'Add ? when a property may be missing. Code must handle undefined before using an optional property as a definite value.',
-                'readonly prevents assignment during type checking. It does not freeze the object in JavaScript, and a readonly property can still refer to a mutable object.',
+            bullets: [
+                'Add ? when a property may be missing.',
+                'With strict null checking, handle undefined before using an optional property as a definite value.',
+                'readonly prevents assignment to a property during type checking.',
+                'It does not freeze the object in JavaScript.',
+                'A readonly property can refer to an object whose contents can still change.',
             ],
             examples: [{
                 code: [
@@ -50,15 +55,19 @@ const note: LearningNote = {
                 ].join('\n'),
                 language: 'typescript',
                 result: 'Anonymous',
-                typeCheck: 'profile.id = 2 is rejected because id is readonly. That restriction is not a runtime freeze.',
+                typeCheck: 'profile.id = 2 is rejected because id is readonly.',
             }],
         },
         {
             id: 'structural-typing',
             title: 'Structural typing',
-            paragraphs: [
-                'TypeScript compares the members a value has, not the name of its declared type. A value with all required properties can match an object type even when it has extra properties.',
-                'Fresh object literals receive an extra property check. This catches likely misspellings where the object is written at the call site.',
+            bullets: [
+                'Structural typing means TypeScript compares the properties and their types.',
+                'The declared type name does not decide whether the value matches.',
+                'A value with all required properties can match an object type even if it has extra properties.',
+                'TypeScript also checks for extra properties when you pass an object literal directly to a function.',
+                'An object literal creates an object with {...}.',
+                'This extra check can catch misspelled property names.',
             ],
             examples: [{
                 code: [
@@ -81,9 +90,15 @@ const note: LearningNote = {
         {
             id: 'interface-or-type',
             title: 'Interfaces and type aliases',
-            paragraphs: [
-                'Both interface and type can name an object shape. An interface can extend another interface and can be reopened by another declaration with the same name. A type alias can name unions, primitives, tuples, and other types as well as objects.',
-                'Choose the form that matches the model. Use a type alias when the type is not only an object shape.',
+            bullets: [
+                'Both interface and type can name an object shape.',
+                'An interface can extend another interface to include its properties.',
+                'Another interface declaration with the same name can add properties to it.',
+                'A type alias gives a name to a type.',
+                'A type alias can name objects, unions, primitive types, tuples, and other types.',
+                'Primitive types include string and number.',
+                'A tuple describes an array with a specified type at each position.',
+                'Use a type alias when the type describes more than an object shape.',
             ],
             examples: [{
                 code: [
@@ -113,8 +128,9 @@ const note: LearningNote = {
         {
             id: 'index-signatures',
             title: 'Index signatures',
-            paragraphs: [
-                'Use an index signature when property names are not known ahead of time but their value type is known. Every named property covered by a string index signature must also fit its value type.',
+            bullets: [
+                'An index signature describes the value type for property names you do not know ahead of time.',
+                'Every named property covered by a string index signature must also match its value type.',
             ],
             examples: [{
                 code: [
@@ -130,8 +146,11 @@ const note: LearningNote = {
                 typeCheck: 'Adding team: "Blue" is rejected because every string-keyed value must be a number.',
             }],
             pitfalls: [
-                'An index signature describes possible values for a key. It does not prove that a particular key exists at runtime unless stricter indexed-access checking and the code account for that case.',
-                'Interfaces, type aliases, optional markers, and readonly markers disappear from emitted JavaScript. Validate external data at runtime before trusting its shape.',
+                'An index signature does not prove that a particular key exists when the JavaScript runs.',
+                'Use noUncheckedIndexedAccess to include undefined in the type of values read through an index signature.',
+                'Check for undefined before using a value from a key that may be missing.',
+                'Interfaces, type aliases, optional markers, and readonly markers do not remain in the generated JavaScript.',
+                'Validate external data when the JavaScript runs before relying on its properties.',
             ],
         },
     ],

@@ -180,46 +180,42 @@ const JavaScriptEventLoop = () => (
         backLabel="Back to JavaScript and TypeScript notes"
     >
         <section className="Article__section">
-            <p>
-                JavaScript finishes the current synchronous work before it runs queued work.
-                Microtasks run after that work and before the next task. Browsers and Node.js use
-                different task queues around this shared rule.
-            </p>
-            <p>
-                This note focuses on execution order. The
-                {' '}<a className="Link" href={toHref(JAVASCRIPT_ASYNC_ROUTE)}>asynchronous programming note</a>
-                {' '}covers Promise composition, cancellation, retries, and concurrency patterns.
-            </p>
+            <ul className="Article__notes">
+                <li>JavaScript finishes the current synchronous work before it runs queued work.</li>
+                <li>Microtasks run after that work and before the next task.</li>
+                <li>Browsers and Node.js use different task queues.</li>
+                <li>For Promise chains, cancellation, retries, and concurrency, read the <a className="Link" href={toHref(JAVASCRIPT_ASYNC_ROUTE)}>asynchronous programming note</a>.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="execution-model">
             <h2 id="execution-model" className="SectionTitle">The execution model</h2>
-            <p>
-                JavaScript code runs on a call stack. Each callback runs to completion. Another
-                callback cannot interrupt it in the middle. The host environment manages timers,
-                input, network operations, file operations, and other external work.
-            </p>
+            <ul className="Article__notes">
+                <li>The call stack tracks function calls that have not returned.</li>
+                <li>Each callback runs to completion. Another callback cannot interrupt it.</li>
+                <li>The host environment, such as a browser or Node.js, manages timers, input, network operations, and file operations.</li>
+            </ul>
             <ol className="Article__steps">
                 <li>Run the current script or callback until the call stack is empty.</li>
                 <li>Run the queued microtasks until the microtask queue is empty.</li>
                 <li>Let the host perform its next event-loop step.</li>
                 <li>Run the next eligible task or callback.</li>
-                <li>Drain microtasks again before moving on.</li>
+                <li>Run all queued microtasks again before moving on.</li>
             </ol>
-            <p>
-                The event loop does not make slow JavaScript code faster. A long calculation still
-                blocks every callback that uses the same event-loop thread.
-            </p>
+            <ul className="Article__notes">
+                <li>The event loop does not speed up slow JavaScript code.</li>
+                <li>A long calculation blocks other callbacks on the same event-loop thread.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="tasks-and-microtasks">
             <h2 id="tasks-and-microtasks" className="SectionTitle">Tasks and microtasks</h2>
-            <p>
-                Browser specifications use the term <strong>task</strong>. The term
-                <strong> macrotask</strong> is common in tutorials, but it usually means a normal
-                event-loop task. There is not one universal macrotask queue with one fixed priority.
-                A host can have several task sources or phases.
-            </p>
+            <ul className="Article__notes">
+                <li>A <strong>task</strong> is work scheduled by the host, such as a timer callback.</li>
+                <li>A <strong>microtask</strong> is queued work that runs before the next task, such as a Promise handler.</li>
+                <li>Tutorials often use <strong>macrotask</strong> to mean a normal task.</li>
+                <li>The host can have several task sources or phases. There is no single universal macrotask queue with a fixed priority.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead>
@@ -238,22 +234,19 @@ const JavaScriptEventLoop = () => (
                 </table>
             </div>
             <JavaScriptRunner>{browserOrderExample}</JavaScriptRunner>
-            <p>
-                Queue order still matters inside one queue. A microtask queued first runs before a
-                later microtask. A microtask may add another microtask, and the runtime keeps draining
-                the queue before it takes the next task.
-            </p>
+            <ul className="Article__notes">
+                <li>Microtasks in the same queue run in the order they were added.</li>
+                <li>A microtask can add another microtask. The runtime runs all of them before the next task.</li>
+            </ul>
             <JavaScriptRunner>{nestedMicrotaskExample}</JavaScriptRunner>
         </section>
 
         <section className="Article__section" aria-labelledby="promises">
             <h2 id="promises" className="SectionTitle">What Promises schedule</h2>
-            <p>
-                Creating a Promise does not make its executor asynchronous. The function passed to
-                <code> new Promise</code> runs immediately. Promise reaction handlers run later as
-                microtasks. These handlers include <code>then</code>, <code>catch</code>, and
-                <code> finally</code> callbacks.
-            </p>
+            <ul className="Article__notes">
+                <li>The Promise executor is the function passed to <code>new Promise</code>. It runs immediately and synchronously.</li>
+                <li>Promise reactions are the callbacks passed to <code>then</code>, <code>catch</code>, and <code>finally</code>. They run later as microtasks.</li>
+            </ul>
             <JavaScriptRunner>{promiseExecutorExample}</JavaScriptRunner>
             <ul className="Article__notes">
                 <li>Settling a Promise records its result. It does not run a handler on the current stack.</li>
@@ -265,26 +258,22 @@ const JavaScriptEventLoop = () => (
 
         <section className="Article__section" aria-labelledby="async-await">
             <h2 id="async-await" className="SectionTitle">How await resumes</h2>
-            <p>
-                An async function runs synchronously until it reaches <code>await</code>. It then
-                returns a pending Promise to its caller. The code after <code>await</code> resumes in
-                a Promise microtask, even when the awaited value is not a pending Promise.
-            </p>
+            <ul className="Article__notes">
+                <li>An async function runs synchronously until it reaches <code>await</code>.</li>
+                <li>It then returns a pending Promise to its caller.</li>
+                <li>The code after <code>await</code> resumes in a Promise microtask. This also happens when the awaited value is already available.</li>
+            </ul>
             <JavaScriptRunner>{awaitExample}</JavaScriptRunner>
-            <p>
-                <code>await</code> pauses one async function. It does not block the thread, and it
-                does not create a new thread.
-            </p>
+            <ul className="Article__notes">
+                <li><code>await</code> pauses one async function. It does not block the thread or create a new thread.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="timers">
             <h2 id="timers" className="SectionTitle">setTimeout and setInterval</h2>
-            <p>
-                A timer delay is a minimum wait before its callback becomes eligible. It is not an
-                exact execution time. The current callback, queued microtasks, other eligible work,
-                browser throttling, and runtime limits can make it run later.
-            </p>
             <ul className="Article__notes">
+                <li>A timer delay is the minimum wait before its callback becomes eligible to run.</li>
+                <li>The callback can run later because of current work, queued microtasks, other eligible work, browser throttling, or runtime limits.</li>
                 <li><code>setTimeout(callback, 0)</code> queues future task work. It never interrupts the current stack.</li>
                 <li><code>setInterval</code> schedules repeated timer work. It does not wait for an async callback's Promise.</li>
                 <li>Use <code>clearTimeout</code> and <code>clearInterval</code> when the owner no longer needs the timer.</li>
@@ -295,32 +284,31 @@ const JavaScriptEventLoop = () => (
 
         <section className="Article__section" aria-labelledby="browser-loop">
             <h2 id="browser-loop" className="SectionTitle">The browser event loop</h2>
-            <p>A simplified browser turn is:</p>
             <ol className="Article__steps">
                 <li>Run one task, such as a script, timer callback, or event callback.</li>
-                <li>Drain every microtask. Include microtasks added by other microtasks.</li>
+                <li>Run all queued microtasks, including those added by other microtasks.</li>
                 <li>The browser may update layout and paint if it has a rendering opportunity.</li>
                 <li>Choose the next runnable task and repeat.</li>
             </ol>
-            <p>
-                A microtask is not a way to let the browser paint first. A long microtask delays
-                rendering in the same way as long synchronous code.
-            </p>
+            <ul className="Article__notes">
+                <li>A microtask runs before the browser can paint the next update.</li>
+                <li>A long microtask delays rendering, just as long synchronous code does.</li>
+            </ul>
             <CodeBlock language="javascript">{renderingExample}</CodeBlock>
-            <p>
-                Use <code>requestAnimationFrame</code> for work tied to the next visual update. Move
-                CPU-heavy work to a worker when it must not block the main thread.
-            </p>
+            <ul className="Article__notes">
+                <li>Use <code>requestAnimationFrame</code> for work tied to the next visual update.</li>
+                <li>Move long calculations to a worker when they must not block the main thread. A worker runs code on a separate thread.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="node-loop">
             <h2 id="node-loop" className="SectionTitle">The Node.js event loop</h2>
-            <p>
-                Node.js uses phases instead of the browser's rendering cycle. The main phases that
-                application code needs to recognize are timers, poll, check, and close callbacks.
-                Node can also use a worker pool for selected file-system, DNS, crypto, and compression
-                work. The JavaScript completion callbacks still run on the event-loop thread.
-            </p>
+            <ul className="Article__notes">
+                <li>Node.js uses event-loop phases instead of a browser rendering cycle.</li>
+                <li>The main phases shown here are timers, poll, check, and close callbacks.</li>
+                <li>Node can use a worker pool for selected input/output (I/O) work, such as file operations and DNS lookups, and for cryptography and compression.</li>
+                <li>The JavaScript callbacks for completed work still run on the event-loop thread.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead><tr><th scope="col">Phase</th><th scope="col">Typical work</th></tr></thead>
@@ -332,44 +320,40 @@ const JavaScriptEventLoop = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                This phase list is a reasoning model, not a complete implementation specification.
-                Do not build application correctness around internal phase details when an explicit
-                Promise, event, or callback can represent completion.
-            </p>
+            <ul className="Article__notes">
+                <li>This list simplifies the Node.js phases. It is not a complete description of the implementation.</li>
+                <li>Use an explicit Promise, event, or callback to wait for completion. Do not depend on internal phase details.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="next-tick">
             <h2 id="next-tick" className="SectionTitle">process.nextTick</h2>
-            <p>
-                <code>process.nextTick</code> is a Node.js API. Its callback runs after the current
-                operation finishes and before Node continues the event loop. After a normal callback,
-                Node drains the next-tick queue before the Promise microtask queue.
-            </p>
+            <ul className="Article__notes">
+                <li><code>process.nextTick</code> is a Node.js API.</li>
+                <li>Its callback runs after the current operation finishes and before Node continues the event loop.</li>
+                <li>After a normal callback, Node runs the next-tick queue before the Promise microtask queue.</li>
+            </ul>
             <CodeBlock language="javascript">{nextTickExample}</CodeBlock>
-            <p>
-                Recursive next-tick callbacks can prevent Promise reactions, timers, and I/O from
-                running. A next-tick callback created inside a Promise microtask does not interrupt
-                the microtask queue that is already being drained. Use <code>queueMicrotask</code> for
-                portable microtask scheduling. Use <code>process.nextTick</code> only when its
-                Node-specific ordering is required.
-            </p>
+            <ul className="Article__notes">
+                <li>Recursive next-tick callbacks can prevent Promise reactions, timers, and I/O from running.</li>
+                <li>A next-tick callback added inside a Promise microtask does not interrupt the microtask queue already running.</li>
+                <li>Use <code>queueMicrotask</code> for microtask scheduling that works across browsers and Node.js.</li>
+                <li>Use <code>process.nextTick</code> when its Node.js ordering is required.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="set-immediate">
             <h2 id="set-immediate" className="SectionTitle">setImmediate and timers</h2>
-            <p>
-                <code>setImmediate</code> is a Node.js API. It runs callbacks in the check phase,
-                after the poll phase. A zero-delay timer runs when it is eligible and Node reaches
-                the timers phase.
-            </p>
+            <ul className="Article__notes">
+                <li><code>setImmediate</code> is a Node.js API. Its callbacks run in the check phase, after poll.</li>
+                <li>A zero-delay timer runs when it is eligible and Node reaches the timers phase.</li>
+            </ul>
             <CodeBlock language="javascript">{immediateExample}</CodeBlock>
-            <p>
-                At the top level, the order of <code>setTimeout(..., 0)</code> and
-                <code> setImmediate</code> can depend on runtime timing. Inside an I/O callback,
-                <code> setImmediate</code> runs before the zero-delay timer shown above. Do not use
-                either API when the program needs an explicit dependency.
-            </p>
+            <ul className="Article__notes">
+                <li>At the top level, runtime timing can change the order of <code>setTimeout(..., 0)</code> and <code>setImmediate</code>.</li>
+                <li>Inside the I/O callback shown above, <code>setImmediate</code> runs before the zero-delay timer.</li>
+                <li>Use an explicit completion signal when one operation must wait for another.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="execution-order">
@@ -379,29 +363,28 @@ const JavaScriptEventLoop = () => (
                 <li>Record each Promise reaction, <code>queueMicrotask</code> callback, and continuation after <code>await</code>.</li>
                 <li>For Node.js, record <code>process.nextTick</code> callbacks separately.</li>
                 <li>Record timers, events, I/O callbacks, and <code>setImmediate</code> in their host queues or phases.</li>
-                <li>Drain the applicable next-tick and microtask queues when the current callback ends.</li>
-                <li>Take the next eligible host task or phase callback. Then repeat the queue check.</li>
+                <li>Run the applicable next-tick and microtask queues when the current callback ends.</li>
+                <li>Take the next eligible host task or phase callback. Then check those queues again.</li>
             </ol>
             <JavaScriptRunner>{mixedOrderExample}</JavaScriptRunner>
-            <p>
-                The timer that prints <code>5</code> is created before the first timer callback runs,
-                but it is added later than that first timer. The microtask that prints <code>3</code>
-                runs immediately after its timer callback and before the next task.
-            </p>
+            <ul className="Article__notes">
+                <li>The timer that prints <code>5</code> is added after the timer that prints <code>2</code>, but before that first timer runs.</li>
+                <li>The microtask that prints <code>3</code> runs after its timer callback and before the next task.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="starvation">
             <h2 id="starvation" className="SectionTitle">Starvation and blocking</h2>
-            <p>
-                Microtasks have early execution, not unlimited permission to run. The runtime drains
-                them until the queue is empty. A microtask that keeps adding another microtask can
-                starve timers, input, I/O, and browser rendering.
-            </p>
+            <ul className="Article__notes">
+                <li>Starvation means that queued work cannot run because other work keeps running first.</li>
+                <li>The runtime runs microtasks until their queue is empty.</li>
+                <li>A microtask that keeps adding another microtask can prevent timers, input, I/O, and browser rendering from running.</li>
+            </ul>
             <CodeBlock language="javascript">{starvationExample}</CodeBlock>
             <ul className="Article__notes">
                 <li>Keep synchronous callbacks and microtasks short.</li>
                 <li>Do not split CPU-heavy work into an endless microtask chain.</li>
-                <li>Yield with a host task when other work needs a turn.</li>
+                <li>Schedule the next part as a host task so other work can run first.</li>
                 <li>Use browser workers or Node.js worker threads for suitable CPU-heavy work.</li>
             </ul>
         </section>
@@ -422,12 +405,10 @@ const JavaScriptEventLoop = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                For specification-level browser details, see the
-                {' '}<a className="Link" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loops">HTML event-loop model</a>.
-                For Node.js details, see the
-                {' '}<a className="Link" href="https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick">Node.js event-loop guide</a>.
-            </p>
+            <ul className="Article__notes">
+                <li>Read the <a className="Link" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loops">HTML event-loop model</a> for browser specification details.</li>
+                <li>Read the <a className="Link" href="https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick">Node.js event-loop guide</a> for Node.js details.</li>
+            </ul>
         </section>
     </ArticleLayout>
 );

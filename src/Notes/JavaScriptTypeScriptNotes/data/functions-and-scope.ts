@@ -5,14 +5,19 @@ const note: LearningNote = {
     title: 'Functions and scope',
     summary: 'Define functions, pass them as values, and understand lexical scope and closures.',
     scope: 'javascript-typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'declarations-and-return',
             title: 'A function can receive and return values',
-            paragraphs: [
-                'A function declaration defines a reusable callable value. return ends the current call and supplies its result. A function that reaches its end without return produces undefined.',
-                'JavaScript allows a call with fewer or more arguments than the declared parameters. Missing arguments become undefined, and extra arguments are still passed even when named parameters do not read them.',
+            bullets: [
+                'A function declaration defines a function that code can call more than once.',
+                'return ends the current call and provides its result.',
+                'A function that reaches its end without return produces undefined.',
+                'Parameters are the names in a function definition. Arguments are the values passed in a call.',
+                'JavaScript allows calls with fewer or more arguments than the declared parameters.',
+                'Missing arguments become undefined.',
+                'The call still passes extra arguments, even when named parameters do not read them.',
             ],
             examples: [{
                 language: 'javascript',
@@ -24,15 +29,18 @@ const note: LearningNote = {
                     'console.log(add(2, 3));',
                     'console.log(add(2));',
                 ].join('\n'),
-                result: 'The lines print 5 and NaN. The missing right argument is undefined, and 2 + undefined produces NaN.',
+                result: 'The lines print 5 and NaN. The missing right argument is undefined. Adding 2 and undefined produces NaN, which means Not-a-Number.',
             }],
         },
         {
             id: 'functions-as-values',
             title: 'Functions are values',
-            paragraphs: [
-                'A function can be assigned to a variable, stored in an object, passed to another function, or returned from a function. Array methods often receive callback functions.',
-                'An arrow function is a short function expression. Arrow functions do not create their own this, arguments, or new.target bindings.',
+            bullets: [
+                'You can assign a function to a variable or store it in an object.',
+                'You can pass a function to another function or return it from a function.',
+                'A callback is a function passed to other code for that code to call. Array methods often receive callbacks.',
+                'An arrow function is a short function expression.',
+                'Arrow functions use this, arguments, and new.target from the surrounding scope. They do not create their own bindings for these names.',
             ],
             examples: [{
                 language: 'javascript',
@@ -48,8 +56,10 @@ const note: LearningNote = {
         {
             id: 'parameters',
             title: 'Default and rest parameters handle call input',
-            paragraphs: [
-                'A default parameter supplies a value when an argument is missing or explicitly undefined. A rest parameter gathers the remaining arguments into an array and must be the last parameter.',
+            bullets: [
+                'A default parameter supplies a value when the argument is missing or explicitly undefined.',
+                'A rest parameter collects the remaining arguments into an array.',
+                'A rest parameter must be the last parameter.',
             ],
             examples: [{
                 language: 'javascript',
@@ -68,8 +78,12 @@ const note: LearningNote = {
         {
             id: 'block-and-function-scope',
             title: 'Scope controls where a name is available',
-            paragraphs: [
-                'let and const belong to the nearest enclosing block. A function creates a scope for its parameters and local variables. Code inside a scope can read names from its outer scopes unless a closer declaration uses the same name.',
+            bullets: [
+                'Scope controls where code can use a name.',
+                'let and const belong to the nearest enclosing block.',
+                'A function creates a scope for its parameters and local variables.',
+                'Code inside a scope can read names from its outer scopes.',
+                'If a closer declaration uses the same name, code uses that declaration instead. This is called shadowing.',
             ],
             examples: [{
                 language: 'javascript',
@@ -94,8 +108,10 @@ const note: LearningNote = {
         {
             id: 'closures',
             title: 'A closure keeps access to outer variables',
-            paragraphs: [
-                'A function closes over names from the lexical scope where it was created. It can keep using those names after the outer function has returned.',
+            bullets: [
+                'A closure is a function that keeps access to variables from the scope where code created it.',
+                'This is lexical scope: the location of the function in the source determines which outer variables it can use.',
+                'The function can use those variables after the outer function returns.',
             ],
             examples: [{
                 language: 'javascript',
@@ -118,9 +134,12 @@ const note: LearningNote = {
         {
             id: 'this-and-call-site',
             title: 'A call determines this for a regular function',
-            paragraphs: [
-                'A regular function gets this from the way it is called. Calling an object method with object.method() makes that object the receiver for that call.',
-                'An arrow function does not create its own this. It keeps the this value from the surrounding scope. This makes an arrow useful for a callback created inside a method, but unsuitable when the callback needs its own receiver.',
+            bullets: [
+                'A regular function gets this from the way code calls it.',
+                'In object.method(), this refers to object. That object is the receiver for the call.',
+                'An arrow function keeps this from the surrounding scope. It does not create its own this.',
+                'Use an arrow for a callback inside a method when the callback needs the same this.',
+                'Use a regular function when a callback needs its own receiver.',
             ],
             examples: [{
                 language: 'typescript',
@@ -139,18 +158,23 @@ const note: LearningNote = {
                     'console.log(user.showName());',
                     'console.log(label());',
                 ].join('\n'),
-                result: 'The emitted JavaScript prints Mia and MIA. The method call receives user as this, and the arrow keeps that same receiver.',
-                typeCheck: 'TypeScript infers the object shape and checks that this.name is a string inside these methods. The JavaScript call site still determines the runtime receiver for a regular function.',
+                result: 'The emitted JavaScript prints Mia and MIA. The method call receives user as this. The arrow keeps the same receiver.',
+                typeCheck: 'TypeScript infers the object properties and checks that this.name is a string inside these methods. For a regular function, the way JavaScript calls it still determines this at runtime.',
             }],
             pitfalls: [
-                'Detaching a method and calling it as a plain function loses its object receiver. Pass a wrapper or bind the receiver when the method needs this.',
+                'Calling a method as a plain function loses its object receiver.',
+                'When a method needs this, pass a function that calls object.method(), or use bind to set its receiver.',
             ],
         },
         {
             id: 'typescript-functions',
             title: 'TypeScript checks function contracts',
-            paragraphs: [
-                'TypeScript can annotate parameter types, a return type, and the type of a variable that stores a function. A parameter can be omitted only when it uses ? or has a default value. Adding undefined to a parameter type still requires the caller to pass an argument.',
+            bullets: [
+                'TypeScript can annotate parameter types and the return type.',
+                'It can also describe the type of a variable that stores a function.',
+                'For a named parameter, ? allows the caller to omit an argument.',
+                'A default value also allows the caller to omit an argument.',
+                'Adding undefined to a parameter type still requires the caller to pass an argument.',
             ],
             examples: [{
                 language: 'typescript',

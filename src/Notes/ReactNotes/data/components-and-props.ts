@@ -5,14 +5,16 @@ const note: LearningNote = {
     title: 'Components and props',
     summary: 'Build typed components, pass values from parent to child, use defaults, and compose UI with children.',
     scope: 'react',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'define-and-use-components',
             title: 'Define and use components',
-            paragraphs: [
-                'A component owns one part of the UI. Define the function at the top level, then use it as a JSX element inside another component.',
-                'React can render the same component more than once. Each use creates a separate place in the UI.',
+            bullets: [
+                'A component describes one part of the UI.',
+                'Define its function at the top level of the file, outside other components.',
+                'Use it as a JSX element inside another component.',
+                'Each use of the same component creates a separate place in the UI.',
             ],
             examples: [{
                 title: 'Compose a page from components',
@@ -34,15 +36,17 @@ const note: LearningNote = {
                 result: 'The page shows the title “Today’s tasks” followed by the task text.',
             }],
             pitfalls: [
-                'Do not define PageTitle inside TaskPage. Top-level component definitions keep component identity stable.',
+                'Do not define PageTitle inside TaskPage.',
+                'Top-level component definitions keep component identity stable.',
             ],
         },
         {
             id: 'typed-props',
             title: 'Type the component props',
-            paragraphs: [
-                'Props are values a parent passes to a child component. A TypeScript type states which props the child accepts.',
-                'Props may contain any JavaScript value, including strings, numbers, objects, arrays, functions, and JSX.',
+            bullets: [
+                'Props are values a parent component passes to a child component.',
+                'A TypeScript type states which props the child accepts.',
+                'Props can contain any JavaScript value, including strings, numbers, objects, arrays, functions, and JSX.',
             ],
             examples: [{
                 title: 'Pass typed values to a child',
@@ -68,9 +72,12 @@ const note: LearningNote = {
         {
             id: 'optional-props-and-defaults',
             title: 'Use optional props and defaults',
-            paragraphs: [
-                'Mark a prop with ? when the parent may omit it. Give the destructured prop a default when the component needs a value in that case.',
-                'The default is used when the prop is missing or is undefined. Passing null does not select the default.',
+            bullets: [
+                'Mark a prop with ? when the parent may omit it.',
+                'Destructuring takes a named property from an object.',
+                'Give the destructured prop a default if the component needs a value when it is omitted.',
+                'JavaScript uses this default when the prop is missing or undefined.',
+                'Passing null does not use the default.',
             ],
             examples: [{
                 title: 'Default an optional prop',
@@ -96,9 +103,11 @@ const note: LearningNote = {
         {
             id: 'children-prop',
             title: 'Pass nested JSX with children',
-            paragraphs: [
-                'JSX nested inside a component becomes its children prop. This lets a wrapper control layout without needing to know the exact content.',
-                'Use ReactNode for children that may contain normal renderable React content.',
+            bullets: [
+                'JSX nested inside a component becomes its children prop.',
+                'A wrapper can arrange its children without knowing their exact content.',
+                'ReactNode is a type for content React can render, such as JSX, text, numbers, or no content.',
+                'Use ReactNode for a children prop that accepts these values.',
             ],
             examples: [{
                 title: 'Build a reusable panel',
@@ -134,9 +143,12 @@ const note: LearningNote = {
         {
             id: 'props-are-read-only',
             title: 'Treat props as read-only',
-            paragraphs: [
-                'A child reads the props supplied for the current render. It must not assign to a prop or change an object received through props.',
-                'When a value must change, the component that owns the state updates it and passes a new prop value. A callback prop can let the child request that update.',
+            bullets: [
+                'A child reads the props supplied for the current render.',
+                'Do not assign to a prop or change an object received through props.',
+                'The component that owns the state updates it and passes the new value as a prop.',
+                'A callback prop is a function passed to a child.',
+                'The child can call it to request an update.',
             ],
             examples: [{
                 title: 'Request a change with a callback prop',

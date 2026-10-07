@@ -3,16 +3,20 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'runtime-and-types',
     title: 'Runtime and types',
-    summary: 'Separate JavaScript runtime behavior from TypeScript compile-time checks.',
+    summary: 'JavaScript runs the program. TypeScript checks types before it runs.',
     scope: 'javascript-typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'javascript-runs',
             title: 'JavaScript runs the program',
-            paragraphs: [
-                'JavaScript is the language that runs in the browser, Node.js, and other JavaScript runtimes. Values have types at runtime, and an operation can inspect or change those values while the program runs.',
-                'TypeScript checks JavaScript code plus type syntax before the program runs. The emitted program is JavaScript. TypeScript types do not add runtime checks by themselves.',
+            bullets: [
+                'JavaScript runs in browsers, Node.js, and other JavaScript runtimes.',
+                'A runtime is the environment that runs the program.',
+                'Values have types at runtime. Code can inspect or change values while the program runs.',
+                'TypeScript checks JavaScript code and type syntax before the program runs.',
+                'The emitted program is JavaScript. Emitted code is the code that the compiler produces.',
+                'TypeScript types do not add runtime checks by themselves.',
             ],
             examples: [{
                 language: 'typescript',
@@ -26,9 +30,11 @@ const note: LearningNote = {
         {
             id: 'primitive-and-object-values',
             title: 'Primitive values and objects',
-            paragraphs: [
-                'JavaScript has seven primitive types: string, number, bigint, boolean, undefined, symbol, and null. Every other value is an object. Arrays and functions are objects with extra behavior.',
-                'Primitive values are immutable. An object can usually have its properties changed even when the variable that refers to it was declared with const.',
+            bullets: [
+                'JavaScript has seven primitive types: string, number, bigint, boolean, undefined, symbol, and null.',
+                'Every other value is an object. Arrays and functions are objects with extra behavior.',
+                'Primitive values are immutable. You cannot change the value itself.',
+                'You can usually change object properties even when a const variable refers to the object.',
             ],
             examples: [{
                 language: 'javascript',
@@ -39,14 +45,16 @@ const note: LearningNote = {
                     'console.log(profile.name);',
                     'console.log(Array.isArray([]));',
                 ].join('\n'),
-                result: 'The lines print Noah and true. const prevents assigning a different value to profile; it does not freeze the object.',
+                result: 'The lines print Noah and true. const prevents assigning a different value to profile. It does not freeze the object.',
             }],
         },
         {
             id: 'typeof',
             title: 'Inspect runtime types with typeof',
-            paragraphs: [
-                'The typeof operator returns a string that describes a runtime value. It is useful for primitive checks and for detecting functions. Use Array.isArray for arrays.',
+            bullets: [
+                'The typeof operator returns a string that describes the type of a runtime value.',
+                'Use typeof to check primitive types or detect functions.',
+                'Use Array.isArray to check whether a value is an array.',
             ],
             examples: [{
                 language: 'javascript',
@@ -57,15 +65,17 @@ const note: LearningNote = {
                     'console.log(typeof null);',
                     'console.log(Array.isArray([]));',
                 ].join('\n'),
-                result: 'The lines print string, number, function, object, and true. typeof null returning object is a long-standing JavaScript behavior.',
+                result: 'The lines print string, number, function, object, and true. JavaScript returns object for typeof null.',
             }],
         },
         {
             id: 'missing-values',
             title: 'undefined and null are different values',
-            paragraphs: [
-                'undefined usually means that a value was not provided or a property does not exist. null is an explicit value that a program can use to mean no value.',
-                'With strict null checks enabled, TypeScript does not let null or undefined stand in for another type unless that type includes them.',
+            bullets: [
+                'undefined usually means that code did not provide a value or that a property does not exist.',
+                'null is an explicit value that a program can use to mean no value.',
+                'With strict null checks enabled, TypeScript allows null or undefined only when the type includes them.',
+                'A union type lists more than one allowed type. string | null allows a string or null.',
             ],
             examples: [{
                 language: 'typescript',
@@ -83,9 +93,13 @@ const note: LearningNote = {
         {
             id: 'type-inference',
             title: 'TypeScript can infer many types',
-            paragraphs: [
-                'TypeScript often infers a type from the initial value. Add an annotation when it explains an API boundary, when a value has a wider allowed type, or when inference does not describe the intended contract.',
-                'A type error does not prove that a value is safe at runtime. Data from JSON, forms, storage, and network responses still needs runtime validation.',
+            bullets: [
+                'TypeScript often infers a type from the initial value. Inference means that the checker determines the type without an annotation.',
+                'A type annotation states the allowed type in the code.',
+                'Add an annotation when it explains the input or output of an API.',
+                'Also add one when a value allows more types than inference gives it, or inference does not express the intended rule.',
+                'Type checking does not prove that a value is safe at runtime.',
+                'Validate data from JSON, forms, storage, and network responses while the program runs.',
             ],
             examples: [{
                 language: 'typescript',

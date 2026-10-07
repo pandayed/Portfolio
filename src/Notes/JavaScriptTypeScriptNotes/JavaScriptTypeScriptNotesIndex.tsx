@@ -13,10 +13,10 @@ const JavaScriptTypeScriptNotesIndex = () => (
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>
-        <p className="Notes__intro">
-            Shared pages explain JavaScript runtime behavior first, then show what TypeScript checks.
-            TypeScript-only pages cover concepts that have no JavaScript runtime equivalent.
-        </p>
+        <ul className="Article__notes">
+            <li>Shared pages explain what JavaScript does when it runs and what TypeScript checks before it runs.</li>
+            <li>TypeScript-only pages explain types and type checking.</li>
+        </ul>
         <NoteTree nodes={javascriptTypeScriptNotes.children} />
     </Page>
 );

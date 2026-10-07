@@ -5,13 +5,13 @@ const note: LearningNote = {
     title: 'Conditional rendering, lists, and keys',
     summary: 'Choose which JSX to show, render arrays as elements, and give list items stable keys.',
     scope: 'react',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'branch-before-jsx',
             title: 'Branch before returning JSX',
-            paragraphs: [
-                'React uses normal JavaScript control flow. An if statement can select an early return when a component has clearly different states.',
+            bullets: [
+                'Use an if statement to choose which JSX a component returns.',
                 'Return null when the component should render nothing.',
             ],
             examples: [{
@@ -41,9 +41,11 @@ const note: LearningNote = {
         {
             id: 'conditions-inside-jsx',
             title: 'Choose content inside JSX',
-            paragraphs: [
-                'Use a conditional expression when JSX must choose between two values. Use && when content should appear only for a true condition.',
-                'Keep the expression short. Move complex branching above the JSX or into another component.',
+            bullets: [
+                'Use a conditional expression, condition ? firstValue : secondValue, to choose between two values in JSX.',
+                'Use && to show content only when a boolean condition is true.',
+                'Keep the expression short.',
+                'Move complex conditions above the JSX or into another component.',
             ],
             examples: [{
                 title: 'Use a conditional expression and &&',
@@ -66,15 +68,20 @@ const note: LearningNote = {
                 result: 'The status shows either “Signed in” or “Guest”. The Admin tools link appears only when isAdmin is true.',
             }],
             pitfalls: [
-                'Be careful with count && <p>...</p>. When count is 0, React renders 0. Use count > 0 && ... instead.',
+                'Be careful with count && <p>...</p>.',
+                'When count is 0, React renders 0.',
+                'Use count > 0 && ... instead.',
             ],
         },
         {
             id: 'render-arrays',
             title: 'Render arrays with map',
-            paragraphs: [
-                'Use map to turn each data item into a JSX element. Use filter first when only some items should appear.',
-                'map and filter are JavaScript array methods. React renders the JSX array they produce.',
+            bullets: [
+                'map is a JavaScript array method that transforms each item.',
+                'Use it to create a JSX element for each data item.',
+                'filter is a JavaScript array method that keeps matching items.',
+                'Use it before map when only some items should appear.',
+                'React renders the JSX array that map produces.',
             ],
             examples: [{
                 title: 'Map typed data to list items',
@@ -109,14 +116,15 @@ const note: LearningNote = {
         {
             id: 'keys-identify-siblings',
             title: 'Keys identify list items',
-            paragraphs: [
-                'A key lets React match one list item with the same item in the next render. It matters when items are inserted, removed, or reordered.',
-                'Keys must be unique among siblings. The same key may be used in a different array.',
-            ],
             bullets: [
+                'A key lets React match a list item with the same item in the next render.',
+                'React uses this match when items are inserted, removed, or reordered.',
+                'Keys must be unique among siblings, which are items in the same list.',
+                'The same key can appear in a different array.',
                 'Use a stable ID that belongs to the data.',
                 'Create an ID when the data item is created, not while rendering it.',
-                'Do not expect key to arrive inside the child component. Pass the ID as another prop when the child needs it.',
+                'Do not expect key to arrive inside the child component.',
+                'Pass the ID as another prop when the child needs it.',
             ],
             examples: [{
                 title: 'Keep key separate from component props',
@@ -147,14 +155,18 @@ const note: LearningNote = {
         {
             id: 'avoid-unstable-keys',
             title: 'Avoid unstable keys',
-            paragraphs: [
-                'An array index describes a position, not the item at that position. It can match the wrong item after insertion, deletion, or sorting.',
-                'A random key changes on every render. React then creates new elements instead of preserving the existing item state and DOM.',
+            bullets: [
+                'An array index identifies a position rather than a data item.',
+                'After insertion, deletion, or sorting, that position can contain a different item.',
+                'A random key changes on each render.',
+                'React then creates new elements and loses the previous item state and DOM elements.',
             ],
             pitfalls: [
-                'Do not use key={Math.random()}. The key never matches the previous render.',
+                'Do not use key={Math.random()}.',
+                'The key never matches the previous render.',
                 'Do not use the array index when the list can change order or accept inserted or removed items.',
-                'Do not place the key inside the child component. Put it on the JSX element created directly by map.',
+                'Do not place the key inside the child component.',
+                'Put it on the JSX element created directly by map.',
             ],
         },
     ],

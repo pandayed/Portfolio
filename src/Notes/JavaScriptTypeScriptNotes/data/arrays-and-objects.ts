@@ -3,15 +3,18 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'arrays-and-objects',
     title: 'Arrays and objects',
-    summary: 'Store collections, transform arrays, copy values, and describe shapes with TypeScript.',
+    summary: 'Store values in arrays and objects. Use TypeScript to describe their types.',
     scope: 'javascript-typescript',
-    updatedOn: '2026-10-03',
+    updatedOn: '2026-10-07',
     sections: [
         {
             id: 'arrays',
             title: 'Arrays store ordered values',
-            paragraphs: [
-                'An array is an object whose values are usually accessed by zero-based indexes. length reports the array length. push changes the array by adding a value at the end.',
+            bullets: [
+                'An array is an object that stores ordered values.',
+                'Use an index to read a value. Indexes normally start at 0.',
+                'length reports the array length.',
+                'push changes the array by adding a value at the end.',
             ],
             examples: [{
                 language: 'javascript',
@@ -33,9 +36,13 @@ const note: LearningNote = {
         {
             id: 'array-transformations',
             title: 'Use array methods for transformations',
-            paragraphs: [
-                'map returns a new array with one result for each input value. filter returns a new array containing the values that pass its test. reduce combines values into one result.',
-                'These methods do not replace the source array. The callback can still mutate values or objects, so keep callbacks free of unrelated changes.',
+            bullets: [
+                'map returns a new array with one result for each input value.',
+                'filter returns a new array containing values that pass its test.',
+                'reduce combines values into one result.',
+                'These methods do not replace the source array.',
+                'A callback is the function that a method calls for each value it processes.',
+                'A callback can still change values or objects. Avoid unrelated changes inside callbacks.',
             ],
             examples: [{
                 language: 'javascript',
@@ -55,9 +62,13 @@ const note: LearningNote = {
         {
             id: 'objects',
             title: 'Objects group named properties',
-            paragraphs: [
-                'An object groups values under property keys. Dot notation uses a fixed identifier. Bracket notation can use a computed string or symbol key.',
-                'Destructuring reads selected properties into variables. A rest property collects the remaining own enumerable properties into a new object.',
+            bullets: [
+                'An object groups values under property keys.',
+                'Dot notation uses a fixed property name, such as user.name.',
+                'Bracket notation can use a computed string or symbol key, such as user[key].',
+                'Destructuring reads selected properties into variables.',
+                'A rest property collects the remaining own enumerable properties into a new object.',
+                'Own properties belong directly to the object. Enumerable properties are marked for inclusion when code lists or copies properties.',
             ],
             examples: [{
                 language: 'javascript',
@@ -76,9 +87,11 @@ const note: LearningNote = {
         {
             id: 'references-and-spread',
             title: 'Object and array variables hold references',
-            paragraphs: [
-                'Assigning an object or array to another variable does not copy it. Both variables refer to the same value. Object spread and array spread create shallow copies.',
-                'A shallow copy creates a new outer object or array. Nested objects are still shared.',
+            bullets: [
+                'Assigning an object or array to another variable does not copy it.',
+                'Both variables refer to the same object or array.',
+                'Object spread and array spread create shallow copies.',
+                'A shallow copy creates a new outer object or array. Nested objects remain shared.',
             ],
             examples: [{
                 language: 'javascript',
@@ -92,15 +105,18 @@ const note: LearningNote = {
                     'console.log(original.name);',
                     'console.log(original.settings.theme);',
                 ].join('\n'),
-                result: 'The lines print Mia and light. The outer object was copied, but both objects still refer to the same settings object.',
+                result: 'The lines print Mia and light. The copy has a new outer object. Both objects still refer to the same settings object.',
             }],
         },
         {
             id: 'map-and-set',
             title: 'Map and Set handle keyed and unique collections',
-            paragraphs: [
-                'Map stores key-value pairs and can use values of any type as keys. Set stores unique values. Both preserve insertion order during iteration.',
-                'Use a plain object when the data has a known record-like shape. Use Map when keys are dynamic or are not strings or symbols.',
+            bullets: [
+                'Map stores key-value pairs. Its keys can have any type.',
+                'Set stores unique values.',
+                'Both return values in insertion order when code iterates over them.',
+                'Use a plain object when the property names form a known data structure.',
+                'Use Map when keys change dynamically or are not strings or symbols.',
             ],
             examples: [{
                 language: 'javascript',
@@ -120,9 +136,13 @@ const note: LearningNote = {
         {
             id: 'typescript-collection-types',
             title: 'TypeScript describes collection shapes',
-            paragraphs: [
-                'Use T[] or Array<T> for an array whose elements have type T. An object type lists the required property names and their value types. A question mark marks an optional property.',
-                'An interface and a type alias can both name an object shape. readonly prevents assignment through that TypeScript type; it does not freeze the runtime object.',
+            bullets: [
+                'Use T[] or Array<T> for an array whose elements have type T.',
+                'An object type lists required property names and their value types.',
+                'A question mark marks an optional property.',
+                'An interface and a type alias can both name an object shape. The shape describes its properties and their types.',
+                'readonly prevents assignment through that TypeScript type.',
+                'readonly does not freeze the object at runtime.',
             ],
             examples: [{
                 language: 'typescript',
