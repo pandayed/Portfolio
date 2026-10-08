@@ -55,6 +55,7 @@ export const POSTGRESQL_JOINS_ROUTE = '/notes/postgresql/joins';
 export const POSTGRESQL_RATIOS_ROUTE = '/notes/postgresql/ratios';
 export const POSTGRESQL_WINDOW_FUNCTIONS_ROUTE = '/notes/postgresql/window-functions';
 export const POSTGRESQL_MATHS_ROUTE = '/notes/postgresql/maths';
+export const POSTGRESQL_STRINGS_ROUTE = '/notes/postgresql/strings';
 export const POSTGRESQL_DATE_TIME_ROUTE = '/notes/postgresql/date-and-time';
 export const POSTGRESQL_INDEXING_ROUTE = '/notes/postgresql/indexing';
 export const POSTGRESQL_QUERY_ANALYSIS_ROUTE = '/notes/postgresql/query-analysis';
@@ -124,6 +125,7 @@ export type Route =
     | typeof POSTGRESQL_RATIOS_ROUTE
     | typeof POSTGRESQL_WINDOW_FUNCTIONS_ROUTE
     | typeof POSTGRESQL_MATHS_ROUTE
+    | typeof POSTGRESQL_STRINGS_ROUTE
     | typeof POSTGRESQL_DATE_TIME_ROUTE
     | typeof POSTGRESQL_INDEXING_ROUTE
     | typeof POSTGRESQL_QUERY_ANALYSIS_ROUTE
@@ -206,6 +208,7 @@ const routes: Route[] = [
     POSTGRESQL_RATIOS_ROUTE,
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
+    POSTGRESQL_STRINGS_ROUTE,
     POSTGRESQL_DATE_TIME_ROUTE,
     POSTGRESQL_INDEXING_ROUTE,
     POSTGRESQL_QUERY_ANALYSIS_ROUTE,

@@ -53,6 +53,7 @@ import PostgreSQLJoins from './Notes/PostgreSQLJoins/PostgreSQLJoins';
 import PostgreSQLRatios from './Notes/PostgreSQLRatios/PostgreSQLRatios';
 import PostgreSQLWindowFunctions from './Notes/PostgreSQLWindowFunctions/PostgreSQLWindowFunctions';
 import PostgreSQLMaths from './Notes/PostgreSQLMaths/PostgreSQLMaths';
+import PostgreSQLStrings from './Notes/PostgreSQLStrings/PostgreSQLStrings';
 import PostgreSQLDateTime from './Notes/PostgreSQLDateTime/PostgreSQLDateTime';
 import PostgreSQLIndexing from './Notes/PostgreSQLIndexing/PostgreSQLIndexing';
 import PostgreSQLQueryAnalysis from './Notes/PostgreSQLQueryAnalysis/PostgreSQLQueryAnalysis';
@@ -110,6 +111,7 @@ import {
     POSTGRESQL_RATIOS_ROUTE,
     POSTGRESQL_WINDOW_FUNCTIONS_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
+    POSTGRESQL_STRINGS_ROUTE,
     POSTGRESQL_DATE_TIME_ROUTE,
     POSTGRESQL_INDEXING_ROUTE,
     POSTGRESQL_QUERY_ANALYSIS_ROUTE,
@@ -179,6 +181,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [POSTGRESQL_RATIOS_ROUTE]: PostgreSQLRatios,
     [POSTGRESQL_WINDOW_FUNCTIONS_ROUTE]: PostgreSQLWindowFunctions,
     [POSTGRESQL_MATHS_ROUTE]: PostgreSQLMaths,
+    [POSTGRESQL_STRINGS_ROUTE]: PostgreSQLStrings,
     [POSTGRESQL_DATE_TIME_ROUTE]: PostgreSQLDateTime,
     [POSTGRESQL_INDEXING_ROUTE]: PostgreSQLIndexing,
     [POSTGRESQL_QUERY_ANALYSIS_ROUTE]: PostgreSQLQueryAnalysis,

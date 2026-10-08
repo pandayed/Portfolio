@@ -41,6 +41,13 @@ const extractQuery = `SELECT
     EXTRACT(ISODOW FROM DATE '2026-03-15') AS iso_weekday,
     EXTRACT(WEEK FROM DATE '2026-03-15') AS iso_week;`;
 
+const yearMonthQuery = `SELECT
+    EXTRACT(YEAR FROM DATE '2026-03-15') AS year,
+    EXTRACT(MONTH FROM DATE '2026-03-15') AS month_number,
+    TO_CHAR(DATE '2026-03-15', 'YYYY-MM') AS month,
+    DATE_TRUNC('month', TIMESTAMP '2026-03-15 14:30:00')::date
+        AS month_start;`;
+
 const truncateQuery = `SELECT
     date_trunc('day', TIMESTAMP '2026-03-15 14:37:52') AS day_start,
     date_trunc('week', TIMESTAMP '2026-03-15 14:37:52') AS week_start,
@@ -339,7 +346,8 @@ const PostgreSQLDateTime = () => (
         <section className="Article__section" aria-labelledby="extract-parts">
             <h2 id="extract-parts" className="SectionTitle">Extract date and time parts</h2>
             <ul className="Article__notes">
-                <li><code>EXTRACT(field FROM value)</code> returns a date or time part as a <code>numeric</code> value.</li>
+                <li>Each <code>EXTRACT(field FROM value)</code> call returns only one field as a <code>numeric</code> value.</li>
+                <li><code>EXTRACT(MONTH FROM value)</code> returns the month number only. It does not include the year.</li>
                 <li>Common fields are <code>year</code>, <code>quarter</code>, <code>month</code>, <code>day</code>, <code>hour</code>, <code>minute</code>, <code>second</code>, and <code>week</code>.</li>
                 <li><code>isodow</code> is the ISO weekday. <code>doy</code> is the day of the year.</li>
             </ul>
@@ -358,6 +366,26 @@ const PostgreSQLDateTime = () => (
                 <li><code>EXTRACT(EPOCH FROM timestamptz)</code> returns seconds from 1970-01-01 00:00:00 UTC.</li>
                 <li><code>TO_TIMESTAMP(seconds)</code> converts epoch seconds back to <code>timestamptz</code>.</li>
                 <li><code>date_part</code> is similar, but it returns <code>double precision</code>. Prefer <code>EXTRACT</code>.</li>
+            </ul>
+
+            <h3 className="Article__subTitle">Keep year and month together</h3>
+            <ul className="Article__notes">
+                <li><code>EXTRACT</code> has no combined year-month field. Use two calls to get year and month as separate numeric columns.</li>
+                <li>Use <code>TO_CHAR(some_date, 'YYYY-MM') AS month</code> for one value such as <code>2026-03</code>.</li>
+                <li><code>YYYY</code> is the year. <code>MM</code> is the two-digit month number. The result is <code>text</code>.</li>
+                <li>Use <code>DATE_TRUNC('month', some_timestamp)::date</code> for a month value that remains a date. It returns the first day of that month and keeps the year.</li>
+            </ul>
+            <CodeBlock language="sql">{yearMonthQuery}</CodeBlock>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead><tr><th scope="col">year</th><th scope="col">month_number</th><th scope="col">month</th><th scope="col">month_start</th></tr></thead>
+                    <tbody><tr><td>2026</td><td>3</td><td>2026-03</td><td>2026-03-01</td></tr></tbody>
+                </table>
+            </div>
+            <ul className="Article__notes">
+                <li>For monthly totals across years, group by both extracted fields or by <code>DATE_TRUNC('month', some_timestamp)</code>.</li>
+                <li>Grouping by <code>EXTRACT(MONTH FROM value)</code> alone combines the same month from every year.</li>
+                <li>For <code>timestamptz</code>, the session time zone decides the year and month. Use <code>AT TIME ZONE</code> first when the report needs a specific zone.</li>
             </ul>
         </section>
 

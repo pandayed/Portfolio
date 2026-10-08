@@ -5,6 +5,8 @@ import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import {
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_ONE_SHOT_SQL_ROUTE,
+    POSTGRESQL_DATE_TIME_ROUTE,
+    toHref,
 } from '../../routing/routes';
 import { sections } from './sections';
 
@@ -495,13 +497,15 @@ const PostgreSQLOneShotSQL = () => (
             <h3 className="Article__subTitle">EXTRACT</h3>
             <ul className="Article__notes">
                 <li>
-                    <code>EXTRACT(field FROM value)</code> returns one part of a date or timestamp,
-                    such as its year or month.
+                    Each <code>EXTRACT(field FROM value)</code> call returns only one field,
+                    such as the year or the month number. The month number does not include the year.
                 </li>
                 <li>Its result type is <code>numeric</code>.</li>
             </ul>
             <CodeBlock language="sql">{extractDateFieldsExample}</CodeBlock>
             <ul className="Article__notes">
+                <li><code>TO_CHAR(order_date, 'YYYY-MM') AS month</code> returns year and month together as text, such as <code>2026-03</code>.</li>
+                <li>See “Keep year and month together” in the <a className="Link" href={toHref(POSTGRESQL_DATE_TIME_ROUTE)}>date and time notes</a> for outputs and the date-valued alternative.</li>
                 <li><code>ISODOW</code> numbers weekdays from Monday as 1 to Sunday as 7.</li>
                 <li><code>DOW</code> numbers weekdays from Sunday as 0 to Saturday as 6.</li>
             </ul>

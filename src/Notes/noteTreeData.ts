@@ -22,6 +22,7 @@ import {
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     POSTGRESQL_MATHS_ROUTE,
+    POSTGRESQL_STRINGS_ROUTE,
     POSTGRESQL_DATE_TIME_ROUTE,
     POSTGRESQL_INDEXING_ROUTE,
     POSTGRESQL_QUERY_ANALYSIS_ROUTE,
@@ -138,6 +139,13 @@ export const postgresqlNotes: NoteGroup = {
             summary: 'Types, arithmetic, ranges, time zones, formatting, and common date query patterns.',
             route: POSTGRESQL_DATE_TIME_ROUTE,
             updatedOn: '2026-10-02',
+        },
+        {
+            type: 'page',
+            title: 'String functions and operations in PostgreSQL',
+            summary: 'Join, extract, clean, split, format, and match text, with NULL handling and STRING_AGG.',
+            route: POSTGRESQL_STRINGS_ROUTE,
+            updatedOn: '2026-10-08',
         },
         {
             type: 'page',
