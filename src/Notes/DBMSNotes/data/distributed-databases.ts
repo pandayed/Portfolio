@@ -13,7 +13,7 @@ export const distributedDatabaseNotes: readonly LearningNote[] = [
                 title: 'Database models',
                 bullets: [
                     'A data model defines how a database represents data and relationships.',
-                    'A relational database stores data in tables. SQL can filter, join, and group their rows. Examples include PostgreSQL, MySQL, and Oracle Database.',
+                    'A relational database stores data in tables. SQL can filter, join, and group their rows. PostgreSQL is a relational database management system.',
                     'An object-oriented database stores objects with identity, attributes, and relationships. Some support inheritance and methods. Examples include ObjectDB and GemStone.',
                     'Object databases can reduce the work of converting program objects into tables. Their APIs and query tools differ from relational databases.',
                     'An object-relational database keeps tables and adds features such as custom types. It is different from an object-oriented database.',

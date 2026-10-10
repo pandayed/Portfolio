@@ -8,9 +8,16 @@ import { dbmsNotes } from '../noteTreeData';
 import { getNodeReadingMinutes } from '../readingTime';
 
 const references = [
-    ['MySQL 8.4 SELECT and grouping', 'https://dev.mysql.com/doc/refman/8.4/en/select.html'],
-    ['MySQL 8.4 set operations', 'https://dev.mysql.com/doc/refman/8.4/en/set-operations.html'],
-    ['MySQL REPLACE', 'https://dev.mysql.com/doc/refman/8.4/en/replace.html'],
+    ['PostgreSQL SELECT, grouping, and set operations', 'https://www.postgresql.org/docs/current/sql-select.html'],
+    ['PostgreSQL data types', 'https://www.postgresql.org/docs/current/datatype.html'],
+    ['PostgreSQL constraints', 'https://www.postgresql.org/docs/current/ddl-constraints.html'],
+    ['PostgreSQL CREATE DATABASE', 'https://www.postgresql.org/docs/current/sql-createdatabase.html'],
+    ['PostgreSQL psql commands', 'https://www.postgresql.org/docs/current/app-psql.html'],
+    ['PostgreSQL ALTER TABLE', 'https://www.postgresql.org/docs/current/sql-altertable.html'],
+    ['PostgreSQL INSERT and ON CONFLICT', 'https://www.postgresql.org/docs/current/sql-insert.html'],
+    ['PostgreSQL views', 'https://www.postgresql.org/docs/current/sql-createview.html'],
+    ['PostgreSQL indexes', 'https://www.postgresql.org/docs/current/indexes.html'],
+    ['PostgreSQL CLUSTER', 'https://www.postgresql.org/docs/current/sql-cluster.html'],
     ['PostgreSQL transaction isolation', 'https://www.postgresql.org/docs/current/transaction-iso.html'],
     ['PostgreSQL write-ahead logging', 'https://www.postgresql.org/docs/current/wal-intro.html'],
     ['Database System Concepts: indexing', 'https://www.db-book.com/slides-dir/PDF-dir/ch14.pdf'],
@@ -35,7 +42,7 @@ const DBMSNotesIndex = () => (
                 Start with <a href={toHref(`${DBMS_NOTES_ROUTE}/database-basics`)} className="Link">database basics</a>.
                 Read the four groups in order.
             </li>
-            <li>SQL examples mark MySQL-specific syntax. The SQL pages use MySQL 8.4 where a version matters.</li>
+            <li>SQL examples use PostgreSQL. Examples that use psql commands identify them separately from SQL.</li>
             <li>
                 For more PostgreSQL query examples, use the <a href={toHref(POSTGRESQL_NOTES_ROUTE)} className="Link">PostgreSQL notes</a>.
             </li>
@@ -44,7 +51,7 @@ const DBMSNotesIndex = () => (
         <section className="Article__section" aria-labelledby="dbms-source">
             <h2 id="dbms-source" className="SectionTitle">Source and coverage</h2>
             <ul className="Article__notes">
-                <li>Adapted from CodeHelp’s DBMS_Full_Notes.pdf. Repeated explanations are combined. Technical errors and broad claims are corrected.</li>
+                <li>Adapted from CodeHelp’s DBMS_Full_Notes.pdf. SQL examples use PostgreSQL syntax and behaviour. Repeated explanations are combined. Technical errors and broad claims are corrected.</li>
                 <li>Group 1 uses pages 1–13. It covers lectures 1–4, 7, and 8.</li>
                 <li>Group 2 uses pages 14–23. It covers lectures 9 and 11.</li>
                 <li>Group 3 uses pages 24–28. It covers lectures 12–14.</li>

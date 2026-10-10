@@ -4,7 +4,7 @@ export const sqlAndDesignNotes: readonly LearningNote[] = [
     {
         slug: 'sql-basics-and-constraints',
         title: 'SQL basics and constraints',
-        summary: 'SQL commands, MySQL data types, schema changes, and safe row changes.',
+        summary: 'SQL commands, PostgreSQL data types, schema changes, and safe row changes.',
         scope: 'dbms',
         updatedOn: '2026-10-10',
         sections: [
@@ -13,58 +13,67 @@ export const sqlAndDesignNotes: readonly LearningNote[] = [
                 title: 'SQL and command groups',
                 bullets: [
                     'SQL means Structured Query Language. It defines, reads, and changes relational data.',
-                    'MySQL is a relational database management system. Clients send SQL to its server.',
-                    'Examples use MySQL 8.4. Other databases can use different commands.',
+                    'PostgreSQL is a relational database management system. Clients send SQL to its server.',
+                    'Examples use PostgreSQL 18. Other databases can use different commands.',
                     'CRUD means create, read, update, and delete rows. Creating a row uses INSERT. CREATE TABLE creates its structure.',
-                    'Data Definition Language (DDL) defines structures: CREATE, ALTER, DROP, TRUNCATE, and RENAME TABLE.',
+                    'Data Definition Language (DDL) defines structures: CREATE, ALTER, DROP, and TRUNCATE. ALTER TABLE can rename a table.',
                     'Data Manipulation Language (DML) changes rows: INSERT, UPDATE, and DELETE.',
                     'SELECT reads rows. It is also called Data Query Language (DQL) or Data Retrieval Language (DRL).',
                     'Data Control Language (DCL) controls privileges. GRANT gives privileges. REVOKE removes them.',
                     'Transaction Control Language (TCL) controls transactions: START TRANSACTION, COMMIT, ROLLBACK, and SAVEPOINT.',
                     'A savepoint marks a position for a partial rollback.',
-                    'MySQL DDL often commits implicitly. Do not expect ROLLBACK to undo CREATE, DROP, or TRUNCATE.',
-                ],
-                examples: [
-                    {
-                        language: 'sql',
-                        code: `CREATE DATABASE IF NOT EXISTS dbms_notes;
-USE dbms_notes;
-SHOW DATABASES;
-SHOW TABLES;
--- Destructive: removes this database and its contents.
-DROP DATABASE IF EXISTS dbms_notes;`,
-                        result: 'CREATE creates the database when it is absent. USE selects it. SHOW lists accessible databases or tables. DROP removes the database.',
-                    },
-                ],
-            },
-            {
-                id: 'mysql-data-types',
-                title: 'Choose a data type',
-                bullets: [
-                    'A data type limits column values.',
-                    'CHAR(n) stores fixed-length text. VARCHAR(n) stores variable-length text. VARCHAR has length metadata and row-size limits.',
-                    'MySQL CHAR allows up to 255 characters. VARCHAR can exceed 255. Its effective limit depends on character encoding and the row size.',
-                    'TEXT stores character data. BLOB stores binary data. TINY, MEDIUM, and LONG variants have different byte limits.',
-                    'Signed integer ranges are TINYINT: -128 to 127, SMALLINT: -32768 to 32767, and MEDIUMINT: -8388608 to 8388607.',
-                    'Signed INT ranges from -2147483648 to 2147483647. Signed BIGINT ranges from -9223372036854775808 to 9223372036854775807.',
-                    'UNSIGNED integer types allow nonnegative values and a larger maximum.',
-                    'FLOAT and DOUBLE store approximate numbers. Their precision is about 7 and 15 decimal digits respectively.',
-                    'DECIMAL(p, s) stores exact decimal values. p counts all digits. s counts digits after the decimal point. Use it for money.',
-                    'DATE stores a date. DATETIME stores a date and time. TIMESTAMP converts between the session time zone and UTC.',
-                    'TIME stores a time or duration. BIT(n) stores up to 64 bits.',
-                    'ENUM allows one listed value. SET allows several listed values. BOOLEAN is a MySQL alias for TINYINT(1), so it does not itself restrict values to 0 and 1.',
+                    'PostgreSQL supports transactional table DDL, including CREATE TABLE, DROP TABLE, and TRUNCATE.',
+                    'CREATE DATABASE and DROP DATABASE cannot run inside a transaction block.',
+                    'CREATE DATABASE requires a superuser or a role with the CREATEDB privilege.',
+                    'psql is a PostgreSQL command-line client. Commands starting with a backslash belong to psql, not SQL.',
                 ],
                 examples: [
                     {
                         language: 'text',
-                        code: `TEXT / BLOB variant    Maximum bytes
-TINY                   255
-Regular                65,535
-MEDIUM                 16,777,215
-LONG                   4,294,967,295
+                        code: `-- In psql, outside a transaction block:
+CREATE DATABASE dbms_notes;
+\\connect dbms_notes
+\\list
+\\dt
 
-DECIMAL(6, 2): 1234.50 is valid; 12345.67 exceeds the range.`,
-                        result: 'Text limits count bytes, so multibyte characters reduce the number of characters that fit. DECIMAL(6, 2) leaves four digits before the decimal point.',
+-- Connect elsewhere before dropping the database.
+\\connect postgres
+DROP DATABASE IF EXISTS dbms_notes;`,
+                        result: 'CREATE creates a new database and fails if it exists. The psql commands connect, list databases, and list tables visible in the schema search path. DROP removes the database after connecting elsewhere. Other sessions using it can prevent the drop.',
+                    },
+                ],
+            },
+            {
+                id: 'postgresql-data-types',
+                title: 'Choose a data type',
+                bullets: [
+                    'A data type limits column values.',
+                    'CHAR(n) stores blank-padded text. VARCHAR(n) limits text to n characters. TEXT stores variable-length text without a declared length limit.',
+                    'TEXT and VARCHAR have similar performance. CHAR does not provide a PostgreSQL performance advantage.',
+                    'BYTEA stores binary data, such as file bytes.',
+                    'SMALLINT ranges from -32768 to 32767. INTEGER, also called INT, ranges from -2147483648 to 2147483647.',
+                    'BIGINT ranges from -9223372036854775808 to 9223372036854775807.',
+                    'PostgreSQL has no built-in unsigned integer types. Use CHECK (value >= 0) when a signed column must reject negative values.',
+                    'REAL and DOUBLE PRECISION store approximate numbers. They offer at least 6 and 15 decimal digits of precision respectively.',
+                    'NUMERIC(p, s), also called DECIMAL, stores exact decimal values. For ordinary positive scales, p counts all digits and s counts fractional digits. Use it for money.',
+                    'BOOLEAN stores true, false, or NULL. BIT(n) stores fixed-length bit strings. BIT VARYING stores variable-length bit strings.',
+                    'DATE stores a date. TIME stores a time of day. INTERVAL stores a duration.',
+                    'TIMESTAMP means timestamp without time zone. TIMESTAMPTZ stores an instant and displays it in the session time zone. It does not retain the original zone name.',
+                    'Define an ENUM with CREATE TYPE before using it as a column type. Store multiple selections in related rows when they need separate keys or relationships.',
+                ],
+                examples: [
+                    {
+                        language: 'text',
+                        code: `Type                  Use
+VARCHAR(80)           A name limited to 80 characters
+TEXT                  Text without a declared length limit
+BYTEA                 Binary data
+NUMERIC(6, 2)         An exact amount with four integer digits
+TIMESTAMPTZ           An event instant
+INTERVAL              A duration
+
+NUMERIC(6, 2): 1234.50 is valid; 12345.67 exceeds the range.`,
+                        result: 'Choose types by the values and rules they need to represent. NUMERIC(6, 2) leaves four digits before the decimal point. Extra fractional digits are rounded to two places.',
                     },
                 ],
             },
@@ -74,7 +83,7 @@ DECIMAL(6, 2): 1234.50 is valid; 12345.67 exceeds the range.`,
                 bullets: [
                     'A constraint checks a rule when data changes.',
                     'PRIMARY KEY uniquely identifies each row and rejects NULL. One primary-key constraint can contain several columns.',
-                    'UNIQUE rejects duplicate key values. MySQL permits multiple NULL values in a nullable unique column.',
+                    'UNIQUE rejects duplicate key values. PostgreSQL normally permits multiple NULL values. UNIQUE NULLS NOT DISTINCT treats NULL values as equal.',
                     'NOT NULL requires a value. DEFAULT supplies a value when an insert omits that column.',
                     'CHECK rejects a false condition. A condition that evaluates to unknown because of NULL passes, so add NOT NULL when required.',
                     'A FOREIGN KEY references a primary or unique key. Each non-NULL reference must match.',
@@ -95,7 +104,7 @@ DECIMAL(6, 2): 1234.50 is valid; 12345.67 exceeds the range.`,
 CREATE TABLE orders (
     id INT PRIMARY KEY,
     customer_id INT,
-    amount DECIMAL(10, 2) NOT NULL,
+    amount NUMERIC(10, 2) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customers(id)
         ON UPDATE CASCADE ON DELETE SET NULL
 );`,
@@ -107,19 +116,20 @@ CREATE TABLE orders (
                 id: 'alter-and-crud',
                 title: 'Change structures and rows',
                 bullets: [
-                    'ALTER TABLE changes the schema. ADD adds a column. MODIFY changes its definition. CHANGE COLUMN renames and defines it.',
-                    'Restate required attributes such as NOT NULL when using MODIFY or CHANGE COLUMN.',
+                    'ALTER TABLE changes the schema. ADD COLUMN adds a column. ALTER COLUMN TYPE changes its type. RENAME COLUMN changes its name.',
+                    'Use ALTER COLUMN SET NOT NULL or SET DEFAULT to change those rules. Type changes may need USING to convert existing values.',
                     'DROP COLUMN removes a column and its data. RENAME TO changes the table name.',
                     'UPDATE and DELETE affect every row when WHERE is absent. TRUNCATE removes all rows while keeping the table structure.',
-                    'MySQL REPLACE inserts a row. A primary or unique key conflict means deleting the conflicting row and inserting the new row.',
-                    'REPLACE has no WHERE clause. Omitted columns get defaults. Delete triggers and foreign-key actions can run. It is not an ordinary UPDATE.',
+                    'An upsert inserts a new row or updates a conflicting row. PostgreSQL uses INSERT ... ON CONFLICT ... DO UPDATE.',
+                    'Choose the primary or unique key that defines the conflict. EXCLUDED contains the proposed insert values. Only the columns in SET change on an update.',
+                    'ON CONFLICT DO UPDATE updates the existing row. DO NOTHING skips the conflicting insert.',
                 ],
                 examples: [
                     {
                         language: 'sql',
                         code: `ALTER TABLE customers ADD COLUMN nickname VARCHAR(30);
-ALTER TABLE customers MODIFY COLUMN nickname VARCHAR(60);
-ALTER TABLE customers CHANGE COLUMN nickname display_name VARCHAR(60);
+ALTER TABLE customers ALTER COLUMN nickname TYPE VARCHAR(60);
+ALTER TABLE customers RENAME COLUMN nickname TO display_name;
 ALTER TABLE customers DROP COLUMN display_name;
 ALTER TABLE orders RENAME TO customer_orders;
 
@@ -127,9 +137,10 @@ INSERT INTO customers (id, name, age)
 VALUES (1, 'Asha', 20), (2, 'Ravi', 22);
 SELECT name FROM customers WHERE id = 1;
 UPDATE customers SET age = 21 WHERE id = 1;
-REPLACE INTO customers (id, name, age) VALUES (2, 'Ravi', 23);
+INSERT INTO customers (id, name, age) VALUES (2, 'Ravi', 23)
+ON CONFLICT (id) DO UPDATE SET age = EXCLUDED.age;
 DELETE FROM customers WHERE id = 2;`,
-                        result: 'The schema adds, changes, renames, then removes the extra column. SELECT returns Asha. Her age becomes 21. REPLACE replaces Ravi’s row, and DELETE then removes it.',
+                        result: 'The schema adds, changes, renames, then removes the extra column. SELECT returns Asha. Her age becomes 21. The upsert changes Ravi’s age to 23 and keeps his other values. DELETE then removes his row.',
                     },
                 ],
             },
@@ -147,12 +158,13 @@ DELETE FROM customers WHERE id = 2;`,
                 title: 'Filter rows',
                 bullets: [
                     'SELECT chooses output columns. FROM chooses the source. WHERE keeps rows whose condition is true.',
-                    'MySQL allows SELECT without FROM. SELECT 55 + 11 returns 66. A DUAL clause is optional for this expression.',
+                    'PostgreSQL allows SELECT without FROM. SELECT 55 + 11 returns 66. No dummy table is needed.',
                     'BETWEEN includes both endpoints. IN checks membership in a list. AND, OR, and NOT combine conditions.',
                     'Use parentheses when combining AND and OR to show the intended condition.',
                     'NULL means a missing or unknown value. Use IS NULL or IS NOT NULL. Comparing with = NULL does not return true.',
                     'NOT IN can produce unknown when its list contains NULL. Use NOT EXISTS for an exclusion query when nullable values are possible.',
-                    'LIKE uses % for zero or more characters and _ for exactly one character. Letter matching depends on the column collation.',
+                    'LIKE uses % for zero or more characters and _ for exactly one character.',
+                    'LIKE is normally case-sensitive. Its behavior can depend on the collation, which sets text comparison rules. ILIKE provides case-insensitive matching.',
                 ],
                 examples: [
                     {
@@ -179,7 +191,8 @@ SELECT name FROM customers WHERE email IS NULL;`,
                     'COUNT(*) counts rows. COUNT(column) counts non-NULL values. SUM, AVG, MIN, and MAX ignore NULL inputs.',
                     'WHERE filters rows before grouping. HAVING filters the resulting groups.',
                     'Without GROUP BY, an aggregate query treats all selected rows as one group. HAVING can filter this group.',
-                    'With MySQL ONLY_FULL_GROUP_BY, selected nonaggregate columns must be grouped or functionally dependent on grouped columns.',
+                    'Selected nonaggregate columns normally belong in GROUP BY. PostgreSQL also allows a table’s other columns when GROUP BY includes that table’s primary key.',
+                    'This PostgreSQL exception does not cover every logical functional dependency or every UNIQUE constraint.',
                     'DISTINCT removes duplicate output rows. It is not an aggregate function.',
                     'ORDER BY sorts results. ASC means ascending. DESC means descending. Without ORDER BY, row order is not guaranteed.',
                 ],
@@ -236,7 +249,7 @@ SELECT DISTINCT country FROM customers ORDER BY country;`,
                     'An alias gives a table or column a temporary query name.',
                     'INNER JOIN returns matching row pairs. LEFT JOIN also keeps unmatched left rows with NULL right columns. RIGHT JOIN keeps unmatched right rows.',
                     'CROSS JOIN returns every pair. Two rows crossed with three rows produce six rows.',
-                    'FULL OUTER JOIN keeps matches and unmatched rows from both sides. MySQL 8.4 has no direct FULL OUTER JOIN syntax.',
+                    'FULL OUTER JOIN keeps matches and unmatched rows from both sides. PostgreSQL supports it directly.',
                     'A self join reads the same table under different aliases. It can use an inner or outer join.',
                     'Comma-separated tables with a WHERE condition can express an inner join. Explicit JOIN shows the relationship clearly.',
                 ],
@@ -256,12 +269,8 @@ FROM employees AS e LEFT JOIN employees AS m ON e.manager_id = m.id;`,
                     {
                         language: 'sql',
                         code: `SELECT c.id AS customer_id, o.id AS order_id
-FROM customers AS c LEFT JOIN orders AS o ON o.customer_id = c.id
-UNION ALL
-SELECT c.id, o.id
-FROM customers AS c RIGHT JOIN orders AS o ON o.customer_id = c.id
-WHERE c.id IS NULL;`,
-                        result: 'For the rows above, this returns (1, 10), (2, NULL), and (NULL, 11). The second branch adds only unmatched orders, so matching pairs are not counted twice.',
+FROM customers AS c FULL OUTER JOIN orders AS o ON o.customer_id = c.id;`,
+                        result: 'For the rows above, this returns (1, 10), (2, NULL), and (NULL, 11). It keeps both unmatched customers and unmatched orders.',
                     },
                 ],
                 pitfalls: [
@@ -277,7 +286,7 @@ WHERE c.id IS NULL;`,
                     'Both queries need the same number of output columns. Corresponding columns need compatible types.',
                     'UNION returns rows found in either result. INTERSECT returns rows found in both. EXCEPT returns first-result rows absent from the second.',
                     'These operators remove duplicates by default. ALL variants preserve multiplicities. UNION ALL retains every input row.',
-                    'MySQL supports INTERSECT and EXCEPT from version 8.0.31. MINUS is another database’s name for difference, not MySQL syntax.',
+                    'PostgreSQL supports all three operators directly. MINUS is another database’s name for difference. Use EXCEPT in PostgreSQL.',
                 ],
                 examples: [
                     {
@@ -297,7 +306,7 @@ SELECT 1 AS id UNION ALL SELECT 2 UNION ALL SELECT 2;
                     'A subquery is a query inside another query. It can appear in WHERE, FROM, or SELECT.',
                     'A scalar subquery returns one column and at most one row. Zero rows produce NULL. More than one row causes an error.',
                     'IN accepts several values. EXISTS tests whether any matching row exists.',
-                    'A subquery in FROM produces a derived table. Give it an alias in MySQL.',
+                    'A subquery in FROM produces a derived table. Use an alias for clarity. PostgreSQL 16 and later also allow an omitted alias.',
                     'A correlated subquery refers to a row from the outer query. Its meaning depends on that row.',
                     'The optimizer can rewrite or materialize subqueries. Correlation does not prove a fixed number of physical executions.',
                     'Joins are not always faster than subqueries. Compare equivalent results and inspect the execution plan with EXPLAIN.',
@@ -325,10 +334,12 @@ FROM customers AS c;`,
                 id: 'view-lifecycle',
                 title: 'Create and change a view',
                 bullets: [
-                    'A view stores a query definition. A normal MySQL view does not store a separate copy of its result rows.',
+                    'A view stores a query definition. A normal PostgreSQL view does not store a separate copy of its result rows.',
                     'Querying the view reads the current underlying data visible to that statement.',
                     'A view can select from tables, joins, or other views. Some views support writes. Aggregated views generally do not.',
-                    'ALTER VIEW changes its definition. DROP VIEW removes the view, leaving its base tables.',
+                    'CREATE OR REPLACE VIEW changes the query definition. Existing output columns must keep their names, order, and types. New columns may be added at the end.',
+                    'ALTER VIEW changes properties such as the name or owner. DROP VIEW removes the view, leaving its base tables.',
+                    'A materialized view stores query results. REFRESH MATERIALIZED VIEW recomputes them. Base-table changes do not update the stored results automatically.',
                     'Import and export tools can move data through files such as CSV or JSON. A file’s values alone do not define keys or constraints.',
                 ],
                 examples: [
@@ -336,7 +347,7 @@ FROM customers AS c;`,
                         language: 'sql',
                         code: `CREATE VIEW adult_customers AS
 SELECT id, name FROM customers WHERE age >= 18;
-ALTER VIEW adult_customers AS
+CREATE OR REPLACE VIEW adult_customers AS
 SELECT id, name FROM customers WHERE age >= 21;
 SELECT name FROM adult_customers;
 DROP VIEW IF EXISTS adult_customers;`,

@@ -12,7 +12,7 @@ interface LearningNotePageProps {
 }
 
 const scopeLabels: Record<LearningNoteScope, string> = {
-    dbms: 'Database concepts, with SQL dialects marked in examples',
+    dbms: 'Database concepts, with PostgreSQL examples',
     java: 'Java language and standard library, with Java 17 or later examples',
     'javascript-typescript': 'JavaScript runtime behavior with TypeScript checks',
     javascript: 'JavaScript',
