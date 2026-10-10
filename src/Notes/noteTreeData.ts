@@ -1,6 +1,13 @@
 import {
     API_COMMUNICATION_ROUTE,
     AWS_SERVICES_ROUTE,
+    CICD_NOTES_ROUTE,
+    CICD_BASICS_ROUTE,
+    GITHUB_ACTIONS_ROUTE,
+    JENKINS_ROUTE,
+    GITLAB_CICD_ROUTE,
+    ARGO_CD_ROUTE,
+    DBMS_NOTES_ROUTE,
     DOCKER_BUILD_RUN_ROUTE,
     DOCKER_COMPOSE_ROUTE,
     DOCKER_CONTAINERS_ROUTE,
@@ -38,6 +45,7 @@ import {
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,
     type JavaNoteRoute,
+    type DBMSNoteRoute,
     type GoNoteRoute,
     type JavaScriptTypeScriptNoteRoute,
     type PythonNoteRoute,
@@ -46,6 +54,7 @@ import {
     type Route,
 } from '../routing/routes';
 import { javaChapters } from './JavaNotes/javaNotes';
+import { dbmsChapters } from './DBMSNotes/dbmsNotes';
 import { goChapters } from './GoNotes/goNotes';
 import { javascriptTypeScriptChapters } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonChapters } from './PythonNotes/pythonNotes';
@@ -77,6 +86,26 @@ export interface NoteGroup extends NoteBase {
 }
 
 export type NoteNode = NotePage | NoteGroup;
+
+export const dbmsNotes: NoteGroup = {
+    type: 'group',
+    title: 'DBMS',
+    summary: 'Database models, SQL, normalisation, transactions, indexes, and distributed databases.',
+    route: DBMS_NOTES_ROUTE,
+    children: dbmsChapters.map((chapter) => ({
+        type: 'group',
+        title: chapter.title,
+        summary: chapter.summary,
+        route: `${DBMS_NOTES_ROUTE}/${chapter.notes[0].slug}` as DBMSNoteRoute,
+        children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+            type: 'page' as const,
+            title,
+            summary,
+            route: `${DBMS_NOTES_ROUTE}/${slug}` as DBMSNoteRoute,
+            updatedOn,
+        })),
+    })),
+};
 
 export const postgresqlNotes: NoteGroup = {
     type: 'group',
@@ -346,6 +375,50 @@ export const springBootNotes: NoteGroup = {
     ],
 };
 
+export const cicdNotes: NoteGroup = {
+    type: 'group',
+    title: 'CI/CD',
+    summary: 'Release fundamentals and one practical page each for GitHub Actions, Jenkins, GitLab CI/CD, and Argo CD.',
+    route: CICD_NOTES_ROUTE,
+    children: [
+        {
+            type: 'page',
+            title: 'CI/CD fundamentals',
+            summary: 'Integration, delivery, deployment, pipelines, artifacts, release controls, and rollback.',
+            route: CICD_BASICS_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'GitHub Actions',
+            summary: 'Events, workflows, jobs, runners, a Node build, permissions, and logs.',
+            route: GITHUB_ACTIONS_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'Jenkins',
+            summary: 'Controllers, agents, Jenkinsfiles, stages, credentials, and build results.',
+            route: JENKINS_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'GitLab CI/CD',
+            summary: 'Runners, YAML jobs, rules, artifact handoff, manual releases, and variables.',
+            route: GITLAB_CICD_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'Argo CD',
+            summary: 'GitOps delivery, Applications, sync policies, health, and recovery.',
+            route: ARGO_CD_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+    ],
+};
+
 export const dockerNotes: NoteGroup = {
     type: 'group',
     title: 'Docker',
@@ -439,6 +512,7 @@ export const noteTree: NoteNode[] = [
     },
     javascriptTypeScriptNotes,
     reactNotes,
+    cicdNotes,
     dockerNotes,
     kubernetesNotes,
     {
@@ -448,6 +522,7 @@ export const noteTree: NoteNode[] = [
         route: AWS_SERVICES_ROUTE,
         updatedOn: '2026-10-05',
     },
+    dbmsNotes,
     postgresqlNotes,
     systemDesignNotes,
     goNotes,

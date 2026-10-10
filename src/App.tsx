@@ -9,6 +9,8 @@ import Blogs from './Blogs/Blogs';
 import Notes from './Notes/Notes';
 import AwsServices from './Notes/AwsServices/AwsServices';
 import PostgreSQLNotes from './Notes/PostgreSQLNotes';
+import DBMSNotesIndex from './Notes/DBMSNotes/DBMSNotesIndex';
+import DBMSNote from './Notes/DBMSNotes/DBMSNote';
 import PostgreSQLOneShotSQL from './Notes/PostgreSQLOneShotSQL/PostgreSQLOneShotSQL';
 import GoNotes from './Notes/GoNotes';
 import GoNote from './Notes/GoNotes/GoNote';
@@ -19,6 +21,12 @@ import JavaScriptTypeScriptNotesIndex from './Notes/JavaScriptTypeScriptNotes/Ja
 import JavaScriptTypeScriptNote from './Notes/JavaScriptTypeScriptNotes/JavaScriptTypeScriptNote';
 import ReactNotesIndex from './Notes/ReactNotes/ReactNotesIndex';
 import ReactNote from './Notes/ReactNotes/ReactNote';
+import CICDNotesIndex from './Notes/CICDNotes/CICDNotesIndex';
+import CICDBasics from './Notes/CICDNotes/CICDBasics';
+import GitHubActions from './Notes/CICDNotes/GitHubActions';
+import Jenkins from './Notes/CICDNotes/Jenkins';
+import GitLabCICD from './Notes/CICDNotes/GitLabCICD';
+import ArgoCD from './Notes/CICDNotes/ArgoCD';
 import DockerNotesIndex from './Notes/DockerNotes/DockerNotesIndex';
 import DockerContainers from './Notes/DockerNotes/DockerContainers';
 import DockerBuildRun from './Notes/DockerNotes/DockerBuildRun';
@@ -74,12 +82,19 @@ import {
     AI_OBEDIENCE_ROUTE,
     ARCHIVE_ROUTE,
     BLOGS_ROUTE,
+    CICD_NOTES_ROUTE,
+    CICD_BASICS_ROUTE,
+    GITHUB_ACTIONS_ROUTE,
+    JENKINS_ROUTE,
+    GITLAB_CICD_ROUTE,
+    ARGO_CD_ROUTE,
     BOOKSHELF_ROUTE,
     CHAIN_OF_THOUGHT_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     CONSISTENT_HASHING_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     DRAFTS_ROUTE,
+    DBMS_NOTES_ROUTE,
     DOCKER_BUILD_RUN_ROUTE,
     DOCKER_COMPOSE_ROUTE,
     DOCKER_CONTAINERS_ROUTE,
@@ -125,6 +140,7 @@ import {
     WHY_REACT_ROUTE,
     WRITING_BETTER_PLANS_AND_SKILLS_ROUTE,
     type JavaNoteRoute,
+    type DBMSNoteRoute,
     type GoNoteRoute,
     type JavaScriptTypeScriptNoteRoute,
     type SystemDesignEntryRoute,
@@ -142,12 +158,19 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [NOTES_ROUTE]: Notes,
     [AWS_SERVICES_ROUTE]: AwsServices,
     [POSTGRESQL_NOTES_ROUTE]: PostgreSQLNotes,
+    [DBMS_NOTES_ROUTE]: DBMSNotesIndex,
     [POSTGRESQL_ONE_SHOT_SQL_ROUTE]: PostgreSQLOneShotSQL,
     [GO_NOTES_ROUTE]: GoNotes,
     [SYSTEM_DESIGN_ROUTE]: SystemDesignNotes,
     [PYTHON_NOTES_ROUTE]: PythonNotes,
     [JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE]: JavaScriptTypeScriptNotesIndex,
     [REACT_NOTES_ROUTE]: ReactNotesIndex,
+    [CICD_NOTES_ROUTE]: CICDNotesIndex,
+    [CICD_BASICS_ROUTE]: CICDBasics,
+    [GITHUB_ACTIONS_ROUTE]: GitHubActions,
+    [JENKINS_ROUTE]: Jenkins,
+    [GITLAB_CICD_ROUTE]: GitLabCICD,
+    [ARGO_CD_ROUTE]: ArgoCD,
     [DOCKER_NOTES_ROUTE]: DockerNotesIndex,
     [DOCKER_CONTAINERS_ROUTE]: DockerContainers,
     [DOCKER_BUILD_RUN_ROUTE]: DockerBuildRun,
@@ -204,6 +227,7 @@ function App() {
     const isJavaScriptTypeScriptNote = route.startsWith(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/`);
     const isJavaNote = route.startsWith(`${JAVA_NOTES_ROUTE}/`) && route !== JAVA_PROGRAM_EXECUTION_ROUTE;
     const isReactNote = route.startsWith(`${REACT_NOTES_ROUTE}/`);
+    const isDBMSNote = route.startsWith(`${DBMS_NOTES_ROUTE}/`);
 
     return (
         <div className="App">
@@ -222,6 +246,8 @@ function App() {
                     <JavaScriptTypeScriptNote route={route as JavaScriptTypeScriptNoteRoute} />
                 ) : isReactNote ? (
                     <ReactNote route={route as ReactNoteRoute} />
+                ) : isDBMSNote ? (
+                    <DBMSNote route={route as DBMSNoteRoute} />
                 ) : isJavaNote ? (
                     <JavaNote route={route as JavaNoteRoute} />
                 ) : CurrentPage ? (

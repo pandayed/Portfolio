@@ -1,4 +1,5 @@
 export type LearningNoteScope =
+    | 'dbms'
     | 'java'
     | 'javascript-typescript'
     | 'javascript'
@@ -6,6 +7,7 @@ export type LearningNoteScope =
     | 'react';
 
 export type LearningCodeLanguage =
+    | 'sql'
     | 'java'
     | 'javascript'
     | 'jsx'
