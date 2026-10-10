@@ -41,6 +41,7 @@ import {
     REACT_NOTES_ROUTE,
     PROGRAMMING_DICTIONARY_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
+    POSTGRESQL_QUERY_RESULTS_ROUTE,
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,
@@ -133,6 +134,13 @@ export const postgresqlNotes: NoteGroup = {
             summary: 'A scalar is one value. A scalar subquery returns one column and at most one row.',
             route: SCALAR_IN_POSTGRESQL_ROUTE,
             updatedOn: '2026-09-28',
+        },
+        {
+            type: 'page',
+            title: 'Query results: values and relations',
+            summary: 'Understand SELECT results, CTE relations, FROM, aggregates, and scalar subqueries.',
+            route: POSTGRESQL_QUERY_RESULTS_ROUTE,
+            updatedOn: '2026-10-10',
         },
         {
             type: 'page',

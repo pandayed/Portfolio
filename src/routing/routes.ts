@@ -68,6 +68,7 @@ export const POSTGRESQL_DATE_TIME_ROUTE = '/notes/postgresql/date-and-time';
 export const POSTGRESQL_INDEXING_ROUTE = '/notes/postgresql/indexing';
 export const POSTGRESQL_QUERY_ANALYSIS_ROUTE = '/notes/postgresql/query-analysis';
 export const SCALAR_IN_POSTGRESQL_ROUTE = '/notes/postgresql/scalar';
+export const POSTGRESQL_QUERY_RESULTS_ROUTE = '/notes/postgresql/query-results';
 export const API_COMMUNICATION_ROUTE = '/notes/api-communication';
 export const JAVASCRIPT_ASYNC_ROUTE = '/notes/javascript-asynchronous-programming';
 export const JAVASCRIPT_EVENT_LOOP_ROUTE = '/notes/javascript-event-loop';
@@ -147,6 +148,7 @@ export type Route =
     | typeof POSTGRESQL_INDEXING_ROUTE
     | typeof POSTGRESQL_QUERY_ANALYSIS_ROUTE
     | typeof SCALAR_IN_POSTGRESQL_ROUTE
+    | typeof POSTGRESQL_QUERY_RESULTS_ROUTE
     | typeof API_COMMUNICATION_ROUTE
     | typeof JAVASCRIPT_ASYNC_ROUTE
     | typeof JAVASCRIPT_EVENT_LOOP_ROUTE
@@ -242,6 +244,7 @@ const routes: Route[] = [
     POSTGRESQL_INDEXING_ROUTE,
     POSTGRESQL_QUERY_ANALYSIS_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
+    POSTGRESQL_QUERY_RESULTS_ROUTE,
     API_COMMUNICATION_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
     JAVASCRIPT_EVENT_LOOP_ROUTE,
