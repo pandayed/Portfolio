@@ -1,7 +1,7 @@
-import '../../CommonClasses/CommonClasses.css';
+import '../../../CommonClasses/CommonClasses.css';
 
-import ArticleLayout from '../ArticleLayout/ArticleLayout';
-import { CONSISTENT_HASHING_ROUTE } from '../../routing/routes';
+import ArticleLayout from '../../NoteArticleLayout';
+import { CONSISTENT_HASHING_NOTE_ROUTE, CONSISTENT_HASHING_ROUTE, SYSTEM_DESIGN_ROUTE } from '../../../routing/routes';
 import HashRing from './HashRing';
 import { sections } from './sections';
 
@@ -57,7 +57,10 @@ const ConsistentHashing = () => {
     return (
         <ArticleLayout
             title="Consistent hashing"
-            route={CONSISTENT_HASHING_ROUTE}
+            route={CONSISTENT_HASHING_NOTE_ROUTE}
+            commentRoute={CONSISTENT_HASHING_ROUTE}
+            backRoute={SYSTEM_DESIGN_ROUTE}
+            backLabel="Back to System Design notes"
             sections={sections}
             references={[
                 { title: 'System Design Interview – An Insider\'s Guide - Chapter 5', href: SYSTEM_DESIGN_INTERVIEW_BOOK },

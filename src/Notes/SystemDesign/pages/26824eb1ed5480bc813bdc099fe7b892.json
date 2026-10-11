@@ -411,12 +411,6 @@
       "type": "divider"
     },
     {
-      "id": "26e24eb1ed5480b9952eda75126e2219",
-      "type": "text",
-      "html": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on <span style=\"font-style:italic\" data-token-index=\"1\" class=\"notion-enable-hover\">lalbiharipandeyg@gmail.com</span>",
-      "text": "Whether the notes helped you or left you with questions, I’d be happy to hear from you, on lalbiharipandeyg@gmail.com"
-    },
-    {
       "id": "26e24eb1ed54807eb305ec81b5e40b52",
       "type": "text"
     }

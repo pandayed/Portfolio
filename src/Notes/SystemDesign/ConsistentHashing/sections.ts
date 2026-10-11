@@ -1,4 +1,4 @@
-import type { TocEntry } from '../ArticleLayout/types';
+import type { TocEntry } from '../../../Blogs/ArticleLayout/types';
 
 export const sections: TocEntry[] = [
     { id: 'rehashing-problem', title: 'Simple Hash Based Distribution (brief)' },

@@ -1038,6 +1038,432 @@
       "type": "divider"
     },
     {
+      "id": "rabbitmq-kafka-scenarios-heading",
+      "type": "sub_header",
+      "html": "Practical scenarios: which to choose and why",
+      "text": "Practical scenarios: which to choose and why"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-scope",
+      "type": "bulleted_list",
+      "html": "These choices compare RabbitMQ work queues with Kafka topics and traditional consumer groups. They are recommendations for the stated requirements, not rules based only on message volume or the word “event”.",
+      "text": "These choices compare RabbitMQ work queues with Kafka topics and traditional consumer groups. They are recommendations for the stated requirements, not rules based only on message volume or the word “event”."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-choice-table",
+      "type": "table",
+      "rows": [
+        [
+          {
+            "header": true,
+            "html": "Scenario"
+          },
+          {
+            "header": true,
+            "html": "Choice"
+          },
+          {
+            "header": true,
+            "html": "Deciding requirement"
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Generate PDF reports"
+          },
+          {
+            "header": false,
+            "html": "RabbitMQ queues"
+          },
+          {
+            "header": false,
+            "html": "Workers share jobs; completed jobs need no replay."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Route warehouse packing jobs"
+          },
+          {
+            "header": false,
+            "html": "RabbitMQ queues"
+          },
+          {
+            "header": false,
+            "html": "Each task must reach the correct warehouse."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Analyse website clicks"
+          },
+          {
+            "header": false,
+            "html": "Kafka"
+          },
+          {
+            "header": false,
+            "html": "Independent readers need retained history and replay."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Rebuild a product search index"
+          },
+          {
+            "header": false,
+            "html": "Kafka"
+          },
+          {
+            "header": false,
+            "html": "A new reader needs earlier product changes."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Notify two services about stock changes"
+          },
+          {
+            "header": false,
+            "html": "Existing RabbitMQ"
+          },
+          {
+            "header": false,
+            "html": "Both need live events, but neither needs history."
+          }
+        ],
+        [
+          {
+            "header": false,
+            "html": "Keep order history and generate invoices"
+          },
+          {
+            "header": false,
+            "html": "Kafka, possibly RabbitMQ too"
+          },
+          {
+            "header": false,
+            "html": "Retained facts and background jobs have different needs."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-reports-heading",
+      "type": "sub_sub_header",
+      "html": "1. Generate PDF reports: choose RabbitMQ queues",
+      "text": "1. Generate PDF reports: choose RabbitMQ queues"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-reports-1",
+      "type": "bulleted_list",
+      "html": "A user requests a report. Several workers can generate it, but one worker should handle each job. Finished jobs do not need to be read again.",
+      "text": "A user requests a report. Several workers can generate it, but one worker should handle each job. Finished jobs do not need to be read again."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-reports-2",
+      "type": "bulleted_list",
+      "html": "Flow: API → report queue → one worker → save PDF → acknowledge the job. An acknowledgement tells RabbitMQ that processing finished.",
+      "text": "Flow: API → report queue → one worker → save PDF → acknowledge the job. An acknowledgement tells RabbitMQ that processing finished."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-reports-3",
+      "type": "bulleted_list",
+      "html": "Why: workers share the pending jobs. Set a prefetch limit, which caps the unfinished jobs delivered to each worker. A job can be redelivered if its worker disconnects before acknowledging it.",
+      "text": "Why: workers share the pending jobs. Set a prefetch limit, which caps the unfinished jobs delivered to each worker. A job can be redelivered if its worker disconnects before acknowledging it."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-reports-4",
+      "type": "bulleted_list",
+      "html": "Use a stable job ID so a redelivery does not create duplicate output. Store the generated PDF outside the queue and record its location with the job result.",
+      "text": "Use a stable job ID so a redelivery does not create duplicate output. Store the generated PDF outside the queue and record its location with the job result."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-reports-5",
+      "type": "bulleted_list",
+      "html": "When the choice changes: if a report request must also become retained history for independent applications, Kafka may fit that event stream. If Kafka already meets the job requirements, a second broker may be unnecessary.",
+      "text": "When the choice changes: if a report request must also become retained history for independent applications, Kafka may fit that event stream. If Kafka already meets the job requirements, a second broker may be unnecessary."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-warehouses-heading",
+      "type": "sub_sub_header",
+      "html": "2. Route warehouse packing jobs: choose RabbitMQ queues",
+      "text": "2. Route warehouse packing jobs: choose RabbitMQ queues"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-warehouses-1",
+      "type": "bulleted_list",
+      "html": "A Mumbai order must reach Mumbai packers. A Delhi order must reach Delhi packers. Each warehouse has several workers sharing its jobs.",
+      "text": "A Mumbai order must reach Mumbai packers. A Delhi order must reach Delhi packers. Each warehouse has several workers sharing its jobs."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-warehouses-2",
+      "type": "bulleted_list",
+      "html": "Flow: publish warehouse.mumbai.pack to a topic exchange. Bind the Mumbai queue to warehouse.mumbai.* and the Delhi queue to warehouse.delhi.*. An exchange routes messages to queues whose binding patterns match.",
+      "text": "Flow: publish warehouse.mumbai.pack to a topic exchange. Bind the Mumbai queue to warehouse.mumbai.* and the Delhi queue to warehouse.delhi.*. An exchange routes messages to queues whose binding patterns match."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-warehouses-3",
+      "type": "bulleted_list",
+      "html": "Why: RabbitMQ performs the destination routing before workers receive the task. Kafka could use separate topics or application filtering, but this workflow does not require retained event history.",
+      "text": "Why: RabbitMQ performs the destination routing before workers receive the task. Kafka could use separate topics or application filtering, but this workflow does not require retained event history."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-warehouses-4",
+      "type": "bulleted_list",
+      "html": "When the choice changes: if new applications must analyse months of warehouse events, consider Kafka for that history. Delivering a copy to several queues is already possible in RabbitMQ.",
+      "text": "When the choice changes: if new applications must analyse months of warehouse events, consider Kafka for that history. Delivering a copy to several queues is already possible in RabbitMQ."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-clicks-heading",
+      "type": "sub_sub_header",
+      "html": "3. Analyse website clicks: choose Kafka",
+      "text": "3. Analyse website clicks: choose Kafka"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-clicks-1",
+      "type": "bulleted_list",
+      "html": "A website records page views and clicks. Dashboards, recommendations and fraud detection each need the events. A reporting bug requires yesterday’s counts to be recalculated.",
+      "text": "A website records page views and clicks. Dashboards, recommendations and fraud detection each need the events. A reporting bug requires yesterday’s counts to be recalculated."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-clicks-2",
+      "type": "bulleted_list",
+      "html": "Flow: website → clicks topic → separate consumer groups for dashboards, recommendations and fraud detection. Each group tracks its own reading progress.",
+      "text": "Flow: website → clicks topic → separate consumer groups for dashboards, recommendations and fraud detection. Each group tracks its own reading progress."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-clicks-3",
+      "type": "bulleted_list",
+      "html": "Why: readers do not delete the records. The reporting application can replay retained events without resetting the other applications.",
+      "text": "Why: readers do not delete the records. The reporting application can replay retained events without resetting the other applications."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-clicks-4",
+      "type": "bulleted_list",
+      "html": "Keep enough history for the required replay window. Time and size limits can remove old records. A compacted topic may remove earlier values for a key, so it is unsuitable when every click must be preserved.",
+      "text": "Keep enough history for the required replay window. Time and size limits can remove old records. A compacted topic may remove earlier values for a key, so it is unsuitable when every click must be preserved."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-clicks-5",
+      "type": "bulleted_list",
+      "html": "When the choice changes: if a click only schedules one background job and nobody needs its history, a RabbitMQ queue may meet the requirements.",
+      "text": "When the choice changes: if a click only schedules one background job and nobody needs its history, a RabbitMQ queue may meet the requirements."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-search-heading",
+      "type": "sub_sub_header",
+      "html": "4. Rebuild a product search index: choose Kafka",
+      "text": "4. Rebuild a product search index: choose Kafka"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-search-1",
+      "type": "bulleted_list",
+      "html": "Product changes update a search index and a recommendation service. A new search engine must build its index while the existing services continue running.",
+      "text": "Product changes update a search index and a recommendation service. A new search engine must build its index while the existing services continue running."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-search-2",
+      "type": "bulleted_list",
+      "html": "Flow: product changes → products topic → separate consumer groups. The new index builder reads retained changes and then catches up with live changes.",
+      "text": "Flow: product changes → products topic → separate consumer groups. The new index builder reads retained changes and then catches up with live changes."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-search-3",
+      "type": "bulleted_list",
+      "html": "Why: adding a reader does not take the records away from existing readers. Key records by productId and process each partition in sequence when product update order matters.",
+      "text": "Why: adding a reader does not take the records away from existing readers. Key records by productId and process each partition in sequence when product update order matters."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-search-4",
+      "type": "bulleted_list",
+      "html": "A replay only contains retained records. If those records cannot reconstruct every current product, start with a database snapshot and coordinate it with the subsequent changes.",
+      "text": "A replay only contains retained records. If those records cannot reconstruct every current product, start with a database snapshot and coordinate it with the subsequent changes."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-search-5",
+      "type": "bulleted_list",
+      "html": "When the choice changes: if indexing is only an occasional job that reads the database directly, a RabbitMQ work queue can schedule it without maintaining an event history.",
+      "text": "When the choice changes: if indexing is only an occasional job that reads the database directly, a RabbitMQ work queue can schedule it without maintaining an event history."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-stock-heading",
+      "type": "sub_sub_header",
+      "html": "5. Notify two services about stock changes: keep existing RabbitMQ",
+      "text": "5. Notify two services about stock changes: keep existing RabbitMQ"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-stock-1",
+      "type": "bulleted_list",
+      "html": "A small shop already runs RabbitMQ. Its cache and notification service both need StockChanged events. Neither needs old events or a full history.",
+      "text": "A small shop already runs RabbitMQ. Its cache and notification service both need StockChanged events. Neither needs old events or a full history."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-stock-2",
+      "type": "bulleted_list",
+      "html": "Flow: stock service → exchange → cache queue and notification queue. Each service gets a copy and acknowledges its own copy.",
+      "text": "Flow: stock service → exchange → cache queue and notification queue. Each service gets a copy and acknowledges its own copy."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-stock-3",
+      "type": "bulleted_list",
+      "html": "Why: this is event-driven, but the requirement is live delivery. RabbitMQ can provide that. Put the two services on separate queues; workers sharing one queue divide the messages.",
+      "text": "Why: this is event-driven, but the requirement is live delivery. RabbitMQ can provide that. Put the two services on separate queues; workers sharing one queue divide the messages."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-stock-4",
+      "type": "bulleted_list",
+      "html": "When the choice changes: if a new forecasting service must replay earlier stock changes, evaluate Kafka or RabbitMQ Streams. Adding Kafka only because several services read events is not enough reason.",
+      "text": "When the choice changes: if a new forecasting service must replay earlier stock changes, evaluate Kafka or RabbitMQ Streams. Adding Kafka only because several services read events is not enough reason."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-orders-heading",
+      "type": "sub_sub_header",
+      "html": "6. Keep order history and generate invoices: possibly use both",
+      "text": "6. Keep order history and generate invoices: possibly use both"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-orders-1",
+      "type": "bulleted_list",
+      "html": "An order system needs OrderPlaced and OrderShipped history for shipping and analytics. It also needs workers to generate invoice PDFs.",
+      "text": "An order system needs OrderPlaced and OrderShipped history for shipping and analytics. It also needs workers to generate invoice PDFs."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-orders-2",
+      "type": "bulleted_list",
+      "html": "Kafka role: retain order facts for separate readers. Key them by orderId and process each partition in sequence. Ordering is within a partition, not across every order.",
+      "text": "Kafka role: retain order facts for separate readers. Key them by orderId and process each partition in sequence. Ordering is within a partition, not across every order."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-orders-3",
+      "type": "bulleted_list",
+      "html": "RabbitMQ role: distribute GenerateInvoice jobs among workers and acknowledge each completed job. Job completion and event retention are separate requirements.",
+      "text": "RabbitMQ role: distribute GenerateInvoice jobs among workers and acknowledge each completed job. Job completion and event retention are separate requirements."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-orders-4",
+      "type": "bulleted_list",
+      "html": "Why: retained history helps independent readers; a work queue helps distribute pending work. Use both only if those roles justify operating two brokers. An existing platform may meet both needs.",
+      "text": "Why: retained history helps independent readers; a work queue helps distribute pending work. Use both only if those roles justify operating two brokers. An existing platform may meet both needs."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-orders-5",
+      "type": "bulleted_list",
+      "html": "Replaying history must not resend invoices or repeat a payment. Use stable operation IDs and duplicate protection. Kafka transactions do not automatically make email, payment or database side effects happen exactly once.",
+      "text": "Replaying history must not resend invoices or repeat a payment. Use stable operation IDs and duplicate protection. Kafka transactions do not automatically make email, payment or database side effects happen exactly once."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-limits-heading",
+      "type": "sub_sub_header",
+      "html": "Check the requirements before choosing",
+      "text": "Check the requirements before choosing"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-streams",
+      "type": "bulleted_list",
+      "html": "RabbitMQ Streams retain messages for repeated reading. The queue examples above do not mean that RabbitMQ has no replay support.",
+      "text": "RabbitMQ Streams retain messages for repeated reading. The queue examples above do not mean that RabbitMQ has no replay support."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-share-groups",
+      "type": "bulleted_list",
+      "html": "Kafka also supports share groups for distributing individual records among workers. Check the deployed broker and client support before applying the traditional consumer-group model to task queues.",
+      "text": "Kafka also supports share groups for distributing individual records among workers. Check the deployed broker and client support before applying the traditional consumer-group model to task queues."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-reliability",
+      "type": "bulleted_list",
+      "html": "For RabbitMQ jobs that must survive failures, configure durable queues, message persistence and replication as needed. Publisher confirms track broker acceptance; consumer acknowledgements track processing. Neither prevents duplicate side effects.",
+      "text": "For RabbitMQ jobs that must survive failures, configure durable queues, message persistence and replication as needed. Publisher confirms track broker acceptance; consumer acknowledgements track processing. Neither prevents duplicate side effects."
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-sources-heading",
+      "type": "sub_sub_header",
+      "html": "Sources for the scenario choices",
+      "text": "Sources for the scenario choices"
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-source-work-queues",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.rabbitmq.com/tutorials/tutorial-two-python\">RabbitMQ work queues</a>",
+      "text": "RabbitMQ work queues",
+      "links": [
+        {
+          "text": "RabbitMQ work queues",
+          "href": "https://www.rabbitmq.com/tutorials/tutorial-two-python"
+        }
+      ]
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-source-routing",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.rabbitmq.com/tutorials/tutorial-five-python\">RabbitMQ topic routing</a>",
+      "text": "RabbitMQ topic routing",
+      "links": [
+        {
+          "text": "RabbitMQ topic routing",
+          "href": "https://www.rabbitmq.com/tutorials/tutorial-five-python"
+        }
+      ]
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-source-streams",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.rabbitmq.com/docs/streams\">RabbitMQ Streams</a>",
+      "text": "RabbitMQ Streams",
+      "links": [
+        {
+          "text": "RabbitMQ Streams",
+          "href": "https://www.rabbitmq.com/docs/streams"
+        }
+      ]
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-source-confirms",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://www.rabbitmq.com/docs/confirms\">RabbitMQ acknowledgements and publisher confirms</a>",
+      "text": "RabbitMQ acknowledgements and publisher confirms",
+      "links": [
+        {
+          "text": "RabbitMQ acknowledgements and publisher confirms",
+          "href": "https://www.rabbitmq.com/docs/confirms"
+        }
+      ]
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-source-kafka-intro",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://kafka.apache.org/42/getting-started/introduction/\">Apache Kafka topics, retention and consumers</a>",
+      "text": "Apache Kafka topics, retention and consumers",
+      "links": [
+        {
+          "text": "Apache Kafka topics, retention and consumers",
+          "href": "https://kafka.apache.org/42/getting-started/introduction/"
+        }
+      ]
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-source-kafka-design",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://kafka.apache.org/42/design/design/\">Apache Kafka design: consumer groups, transactions and share groups</a>",
+      "text": "Apache Kafka design: consumer groups, transactions and share groups",
+      "links": [
+        {
+          "text": "Apache Kafka design: consumer groups, transactions and share groups",
+          "href": "https://kafka.apache.org/42/design/design/"
+        }
+      ]
+    },
+    {
+      "id": "rabbitmq-kafka-scenarios-end",
+      "type": "divider"
+    },
+    {
       "id": "2ec24eb1ed548029acb4d73e18183326",
       "type": "sub_header",
       "html": "Typical use cases",

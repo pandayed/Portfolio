@@ -44,6 +44,7 @@ import goNote40 from './data/const-iota';
 import goNote41 from './data/defined-type-and-type-alias';
 import goNote42 from './data/go-by-questions';
 import goroutinesChannelsWaitGroup from './data/goroutines-channels-waitgroup';
+import tests from './data/tests';
 
 export const goChapters: readonly GoChapter[] = [
     {
@@ -63,8 +64,8 @@ export const goChapters: readonly GoChapter[] = [
     },
     {
         title: '4. Program structure and errors',
-        summary: 'Packages, modules, dependency files, initialization, cleanup, and error handling.',
-        notes: [goNote22, goNote21, goNote20, goNote18, goNote19, goNote17, goNote16, goNote27, goNote28],
+        summary: 'Packages, modules, dependency files, initialization, cleanup, error handling, and tests.',
+        notes: [goNote22, goNote21, goNote20, goNote18, goNote19, goNote17, goNote16, goNote27, goNote28, tests],
     },
     {
         title: '5. Concurrency',

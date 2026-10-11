@@ -96,7 +96,7 @@ for (const note of reactNotes) {
 }
 
 for (const page of systemDesignPages) {
-    pageWordCounts.set(page.route, sourceWordCounts[page.id] ?? 0);
+    pageWordCounts.set(page.route, sourceWordCounts[page.route] ?? sourceWordCounts[page.id] ?? 0);
 }
 
 export const getPageWordCount = (route: Route): number => pageWordCounts.get(route) ?? 0;

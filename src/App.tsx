@@ -52,7 +52,7 @@ import SqlVsMySql from './Blogs/SqlVsMySql/SqlVsMySql';
 import SslTls from './Blogs/SslTls/SslTls';
 import AiObedience from './Blogs/AiObedience/AiObedience';
 import SieveOfEratosthenes from './Blogs/SieveOfEratosthenes/SieveOfEratosthenes';
-import ConsistentHashing from './Blogs/ConsistentHashing/ConsistentHashing';
+import ConsistentHashing from './Notes/SystemDesign/ConsistentHashing/ConsistentHashing';
 import WhyReact from './Blogs/WhyReact/WhyReact';
 import ChainOfThought from './Blogs/ChainOfThought/ChainOfThought';
 import WritingBetterPlanNSkills from './Blogs/WritingBetterPlanNSkills/WritingBetterPlanNSkills';
@@ -92,7 +92,7 @@ import {
     BOOKSHELF_ROUTE,
     CHAIN_OF_THOUGHT_ROUTE,
     COMPLEXITY_CASES_ROUTE,
-    CONSISTENT_HASHING_ROUTE,
+    CONSISTENT_HASHING_NOTE_ROUTE,
     CPP_COMPLEXITY_ROUTE,
     DRAFTS_ROUTE,
     DBMS_NOTES_ROUTE,
@@ -197,7 +197,6 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [SSL_TLS_ROUTE]: SslTls,
     [AI_OBEDIENCE_ROUTE]: AiObedience,
     [SIEVE_OF_ERATOSTHENES_ROUTE]: SieveOfEratosthenes,
-    [CONSISTENT_HASHING_ROUTE]: ConsistentHashing,
     [WHY_REACT_ROUTE]: WhyReact,
     [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,
     [WRITING_BETTER_PLANS_AND_SKILLS_ROUTE]: WritingBetterPlanNSkills,
@@ -241,7 +240,9 @@ function App() {
                     <GoNote route={route as GoNoteRoute} />
                 ) : isSystemDesignEntry ? (
                     <Suspense fallback={<p>Loading note…</p>}>
-                        <SystemDesignEntry route={route as SystemDesignEntryRoute} />
+                        {route === CONSISTENT_HASHING_NOTE_ROUTE
+                            ? <ConsistentHashing />
+                            : <SystemDesignEntry route={route as SystemDesignEntryRoute} />}
                     </Suspense>
                 ) : isPythonNote ? (
                     <PythonNote route={route as PythonNoteRoute} />

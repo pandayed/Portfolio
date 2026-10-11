@@ -55,6 +55,7 @@ export const SSL_TLS_ROUTE = '/blogs/ssl-tls';
 export const AI_OBEDIENCE_ROUTE = '/blogs/ai-obedience';
 export const SIEVE_OF_ERATOSTHENES_ROUTE = '/blogs/sieve-of-eratosthenes';
 export const CONSISTENT_HASHING_ROUTE = '/blogs/consistent-hashing';
+export const CONSISTENT_HASHING_NOTE_ROUTE = '/notes/system-design/consistent-hashing-32e24eb1';
 export const WHY_REACT_ROUTE = '/blogs/why-react';
 export const CHAIN_OF_THOUGHT_ROUTE = '/blogs/chain-of-thought';
 export const WRITING_BETTER_PLANS_AND_SKILLS_ROUTE = '/blogs/writing-better-plans-and-skills';
@@ -258,6 +259,7 @@ export const toHref = (route: Route): string => `#${route}`;
 
 export const parseRoute = (hash: string): Route => {
     const rawPath = hash.replace(/^#/, '');
+    if (rawPath === CONSISTENT_HASHING_ROUTE) return CONSISTENT_HASHING_NOTE_ROUTE;
     const dictionaryPath = rawPath.split('?')[0];
     const path = dictionaryPath === PROGRAMMING_DICTIONARY_ROUTE || dictionaryPath === '/notes/python/dictionary'
         ? PROGRAMMING_DICTIONARY_ROUTE

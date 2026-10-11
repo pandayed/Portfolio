@@ -4,28 +4,6 @@
   "sourceUrl": "https://xpandeyed.notion.site/Web-Socket-Web-Hook-etc-32f24eb1ed54807dbcacd0554f2ccf82?pvs=23",
   "blocks": [
     {
-      "id": "32f24eb1ed5480a4bcddd91721e55c98",
-      "type": "text",
-      "html": "You’re mixing multiple <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">communication patterns</span>. The confusion is because they all solve <span style=\"font-weight:600\" data-token-index=\"3\" class=\"notion-enable-hover\">“how server sends data without client constantly asking”</span>, but in different ways.",
-      "text": "You’re mixing multiple communication patterns. The confusion is because they all solve “how server sends data without client constantly asking”, but in different ways."
-    },
-    {
-      "id": "32f24eb1ed548002a6f0c57a8207b9b0",
-      "type": "text",
-      "html": "I’ll break this cleanly.",
-      "text": "I’ll break this cleanly."
-    },
-    {
-      "id": "32f24eb1ed548005ba1ef343974a6fd3",
-      "type": "divider"
-    },
-    {
-      "id": "32f24eb1ed5480848004f60af0eedfd0",
-      "type": "header",
-      "html": "Core 4 Concepts (you must know)",
-      "text": "Core 4 Concepts (you must know)"
-    },
-    {
       "id": "32f24eb1ed54802bb36dc622e7d38d63",
       "type": "sub_header",
       "html": "Webhook",

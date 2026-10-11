@@ -108,7 +108,7 @@ export const pageManifest = [
   {
     "id": "32e24eb1ed5480f0b150f3d74858a9b5",
     "title": "Consistent Hashing",
-    "status": "Not started",
+    "status": "Published",
     "parentId": null,
     "sourcePath": "./pages/32e24eb1ed5480f0b150f3d74858a9b5.json"
   },

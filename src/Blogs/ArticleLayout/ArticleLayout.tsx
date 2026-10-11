@@ -12,8 +12,10 @@ import type { TocEntry } from './types';
 
 interface ArticleLayoutProps {
     title: string;
-    /* Keys the comment thread, so it must match the article's own route. */
+    /* The article's route also keys its comment thread by default. */
     route: Route;
+    /* Preserve an existing discussion when an article moves to another route. */
+    commentRoute?: Route;
     sections: TocEntry[];
     /* External sources cited by the article. Omit or leave empty when the
        article cites none. */
@@ -32,6 +34,7 @@ const toId = (title: string) => `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-
 const ArticleLayout = ({
     title,
     route,
+    commentRoute = route,
     sections,
     references = [],
     backRoute = BLOGS_ROUTE,
@@ -66,7 +69,7 @@ const ArticleLayout = ({
             <div className="ArticleLayout__body">
                 {children}
                 <References references={references} />
-                <Comments term={route} />
+                <Comments term={commentRoute} />
             </div>
         </article>
     );
