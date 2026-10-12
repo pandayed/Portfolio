@@ -1,249 +1,74 @@
-/* Go study note content. */
-
 import type { GoNote } from '../types';
 
 const note = {
-    "notionId": "24024eb1-ed54-80f7-a283-c9ba635393a0",
-    "slug": "why-go",
-    "title": "Why Go?",
-    "updatedOn": "2026-10-05",
-    "blocks": [
+    notionId: '24024eb1-ed54-80f7-a283-c9ba635393a0',
+    slug: 'why-go',
+    title: 'Why Go?',
+    updatedOn: '2026-10-12',
+    blocks: [
         {
-            "id": "why-go-01",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go is a compiled language. It checks types before the program runs."
-                ]
-            ]
+            id: 'why-go-01',
+            type: 'bulleted_list',
+            richText: [['Go can give performance close to C/C++ with much simpler development, and excellent tooling for backend services, concurrency, testing etc.']],
         },
         {
-            "id": "why-go-01-read-1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Use Go for services, command-line tools, and programs that do several tasks at once."
-                ]
-            ]
+            id: 'why-go-workflow',
+            type: 'bulleted_list',
+            richText: [['Go’s compiler and build workflow are generally straightforward. Go compiles to native machine code: instructions that the CPU can run directly.']],
         },
         {
-            "id": "why-go-02",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Common uses"
-                ]
-            ]
+            id: 'why-go-executable',
+            type: 'bulleted_list',
+            richText: [['Go commonly produces a single executable containing the application, its compiled Go dependencies, and the Go runtime. This simplifies deployment, particularly in containers and minimal Linux images.']],
         },
         {
-            "id": "why-go-03",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go has standard packages for HTTP APIs, networking, and converting data to formats such as JSON."
-                ]
-            ]
+            id: 'why-go-check-timing',
+            type: 'bulleted_list',
+            richText: [['Go checks types and resolves imports during the build, before the program runs. Some languages do more of this work at runtime.']],
         },
         {
-            "id": "why-go-04",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go tools build programs for supported operating systems and CPU types."
-                ]
-            ]
+            id: 'why-go-runtime-work',
+            type: 'bulleted_list',
+            richText: [['Doing this work earlier reduces the work needed at runtime.']],
         },
         {
-            "id": "why-go-05",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Cloud tools such as Kubernetes and Docker use Go."
-                ]
-            ]
+            id: 'why-not-go',
+            type: 'sub_header',
+            richText: [['Why not Go?']],
         },
         {
-            "id": "why-go-06",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Language and tooling choices"
-                ]
-            ]
+            id: 'why-not-go-ecosystem',
+            type: 'bulleted_list',
+            richText: [['Spring Boot and Python have large library ecosystems. Depending on the task, they may offer more ready-made libraries and integrations than Go.']],
         },
         {
-            "id": "why-go-07",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Goroutines let a program do several tasks at once."
-                ]
-            ]
+            id: 'why-not-go-tooling',
+            type: 'bulleted_list',
+            richText: [['This is a limitation of the library ecosystem.']],
         },
         {
-            "id": "why-go-07-read-1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Channels let goroutines send values to each other."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-07-read-2",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The program still needs to protect shared data and stop work when needed."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-08",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Garbage collection frees Go memory that the program no longer needs."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-08-read-1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Files and network connections still need cleanup, such as calling Close."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-09",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Go tools can build programs, format code, run tests, and manage dependencies."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-10",
-            "type": "sub_header",
-            "richText": [
-                [
-                    "Compilation and runtime"
-                ]
-            ]
-        },
-        {
-            "id": "why-go-11",
-            "type": "code",
-            "richText": [
-                [
-                    "Go source → compiler and linker → executable → program execution"
-                ]
+            id: 'why-go-flow-link',
+            type: 'text',
+            richText: [
+                ['See '],
+                ['From Go Code to Running Instructions', [['a', '#/notes/go/code-to-execution']]],
+                [' for the build and execution steps.'],
             ],
-            "language": "Plain Text"
         },
         {
-            "id": "why-go-12",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The standard Go compiler produces machine code for the target computer."
-                ]
-            ]
+            id: 'why-go-sources',
+            type: 'text',
+            richText: [
+                ['Sources: '],
+                ['Go FAQ', [['a', 'https://go.dev/doc/faq']]],
+                [', '],
+                ['Spring Boot features', [['a', 'https://spring.io/projects/spring-boot/']]],
+                [', and '],
+                ['Python applications and libraries', [['a', 'https://www.python.org/about/apps/']]],
+                ['.'],
+            ],
         },
-        {
-            "id": "why-go-12-read-1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The Go runtime schedules goroutines and collects unused memory."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-12-read-2",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The runtime still uses CPU time and memory."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-12-read-3",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "The cost depends on the program. Go is not always faster than other languages."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-13",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "See "
-                ],
-                [
-                    "Basic Commands",
-                    [
-                        [
-                            "a",
-                            "#/notes/go/basic-commands"
-                        ]
-                    ]
-                ],
-                [
-                    " for the build-and-run workflow."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-14",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Sources: "
-                ],
-                [
-                    "Go FAQ",
-                    [
-                        [
-                            "a",
-                            "https://go.dev/doc/faq"
-                        ]
-                    ]
-                ],
-                [
-                    " and the use cases below."
-                ]
-            ]
-        },
-        {
-            "id": "why-go-15",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    ""
-                ],
-                [
-                    "Official Go use cases",
-                    [
-                        [
-                            "a",
-                            "https://go.dev/solutions/"
-                        ]
-                    ]
-                ],
-                [
-                    ""
-                ]
-            ]
-        }
-    ]
+    ],
 } as const satisfies GoNote;
 
 export default note;

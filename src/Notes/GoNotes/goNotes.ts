@@ -3,6 +3,7 @@
 import type { GoChapter } from './types';
 
 import goNote1 from './data/why-go';
+import codeToExecution from './data/code-to-execution';
 import goNote3 from './data/cpp-vs-go';
 import goNote4 from './data/basic-commands';
 import goNote5 from './data/constants-variables';
@@ -50,7 +51,7 @@ export const goChapters: readonly GoChapter[] = [
     {
         title: '1. Language fundamentals',
         summary: 'Running Go, declarations, constants, default values, and control flow.',
-        notes: [goNote1, goNote4, goNote5, goNote40, goNote6, goNote7, goNote10],
+        notes: [goNote1, codeToExecution, goNote4, goNote5, goNote40, goNote6, goNote7, goNote10],
     },
     {
         title: '2. Collections and types',
