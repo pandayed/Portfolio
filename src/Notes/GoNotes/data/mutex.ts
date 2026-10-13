@@ -5,9 +5,121 @@ import type { GoNote } from '../types';
 const note = {
     "notionId": "24e24eb1-ed54-80ef-92fc-e43daf413d10",
     "slug": "mutex",
-    "title": "Mutex",
-    "updatedOn": "2026-10-05",
+    "title": "Mutex and RWMutex",
+    "updatedOn": "2026-10-13",
     "blocks": [
+        {
+            "id": "mutex-meaning",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Mutex means mutual exclusion. A lock controls access to shared data."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-public-types",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go’s sync package provides two public mutex types: Mutex and RWMutex."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-comparison",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Mutex and RWMutex"
+                ]
+            ]
+        },
+        {
+            "id": "mutex-types-table",
+            "type": "table",
+            "columnOrder": [
+                "column-0",
+                "column-1",
+                "column-2"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "mutex-types-table-0",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Type"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Who can hold the lock"
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Methods"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "mutex-types-table-1",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "sync.Mutex"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "One goroutine at a time, for reads or writes."
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Lock / Unlock"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "mutex-types-table-2",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "sync.RWMutex"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Several readers together, or one writer alone."
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "RLock / RUnlock for reads. Lock / Unlock for writes."
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "mutex-exclusive",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Mutex"
+                ]
+            ]
+        },
         {
             "id": "b5788241-9408-5b06-b92e-fa6743bbfef5",
             "type": "bulleted_list",
@@ -121,7 +233,7 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Key Properties"
+                    "Lock Rules"
                 ]
             ]
         },
@@ -130,7 +242,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A mutex works from its zero value. It starts unlocked."
+                    "Both Mutex and RWMutex work from their zero value. They start unlocked."
                 ]
             ]
         },
@@ -139,7 +251,7 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not copy it after first use."
+                    "Do not copy either mutex type after first use."
                 ]
             ]
         },
@@ -275,6 +387,636 @@ const note = {
             ]
         },
         {
+            "id": "mutex-reader-writer",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "RWMutex"
+                ]
+            ]
+        },
+        {
+            "id": "898ef37b-7753-5066-8d54-0d78e54eb831",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A "
+                ],
+                [
+                    "sync.RWMutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " allows several readers or one writer to access protected data."
+                ]
+            ]
+        },
+        {
+            "id": "2d315b9f-e519-5f0c-96b3-bf4baa7e33df",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Code holding a read lock must not change the protected data."
+                ]
+            ]
+        },
+        {
+            "id": "24f24eb1-ed54-8024-bdfe-f4ed78e6ff7c",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Read and Write Locks"
+                ]
+            ]
+        },
+        {
+            "id": "c3006745-7e37-5387-8090-0a1dd2383c8b",
+            "type": "table",
+            "columnOrder": [
+                "column-0",
+                "column-1",
+                "column-2"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "665d093e-bde1-5c5b-9e42-abe2f75f853b",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Operation"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Matching release"
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Use"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "fec74906-abb1-5fe4-8c4e-d37daa5733b7",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "RLock()",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "RUnlock()",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Read shared data without changing it."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "7d115cff-4bd7-5ed3-97a3-ada71401544b",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Lock()",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Unlock()",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Change shared data while other readers and writers wait."
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "24f24eb1-ed54-80ba-80a6-e70b6187fc06",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "RWMutex Rules"
+                ]
+            ]
+        },
+        {
+            "id": "4bea81f0-d890-562f-9bb5-065efc6774e3",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Several readers can hold the read lock together."
+                ]
+            ]
+        },
+        {
+            "id": "e2c03beb-86a5-5ed7-bbd9-ec225bbf3167",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "If a writer waits behind those readers, new readers also wait."
+                ]
+            ]
+        },
+        {
+            "id": "e97803e0-b5dd-5d1b-959f-ec2f38c2ab1a",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "New readers can enter after that writer gets and releases the write lock."
+                ]
+            ]
+        },
+        {
+            "id": "0a800d04-b0ab-56bc-94ea-493226aa33b2",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not take a read lock again while already holding a read lock."
+                ]
+            ]
+        },
+        {
+            "id": "22f1d41c-8df6-55e4-a880-06fa93d8c365",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The second "
+                ],
+                [
+                    "RLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " may wait for a pending writer."
+                ]
+            ]
+        },
+        {
+            "id": "9197bc8b-4248-503f-a7f1-3a2db6c335dd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "That writer cannot continue until the first read lock is released. This can deadlock."
+                ]
+            ]
+        },
+        {
+            "id": "43a8ea20-5ea6-5ebb-9ac4-953c357fc867",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "You cannot change a held read lock directly into a write lock, or a write lock into a read lock."
+                ]
+            ]
+        },
+        {
+            "id": "a1c59eca-472a-50a3-9a71-5747c12193ea",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Release the lock before taking the other kind of lock."
+                ]
+            ]
+        },
+        {
+            "id": "287fde6f-db96-572b-94c5-7450009d7b8c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Check the data again after taking the new lock. Another goroutine may have changed it while you were unlocked."
+                ]
+            ]
+        },
+        {
+            "id": "d8638bb7-9636-5a93-8075-574d4b340b18",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Pair "
+                ],
+                [
+                    "RLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with "
+                ],
+                [
+                    "RUnlock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", and "
+                ],
+                [
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " with "
+                ],
+                [
+                    "Unlock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
+            ]
+        },
+        {
+            "id": "0dd6e46c-3e4d-507b-824b-7f323c44866c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Taking the write lock again while holding it makes the goroutine wait."
+                ]
+            ]
+        },
+        {
+            "id": "24f24eb1-ed54-8088-8f1a-d9b70b8069bf",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Read a Shared Map"
+                ]
+            ]
+        },
+        {
+            "id": "ca654946-225d-52d5-a9bb-ced150243d8c",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The writer closes "
+                ],
+                [
+                    "written",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after its write has finished."
+                ]
+            ]
+        },
+        {
+            "id": "b836d14e-1c51-5d76-bdb2-17b6ff8c3961",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " waits for that signal before starting the readers."
+                ]
+            ]
+        },
+        {
+            "id": "93c8206f-e862-51a2-a3b2-c21f19b4a645",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Sleeping for a fixed time would not guarantee that the write has finished."
+                ]
+            ]
+        },
+        {
+            "id": "1bc215d8-a73f-5d45-93a9-96ddecc5bd0b",
+            "type": "code",
+            "richText": [
+                [
+                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nvar (\n    data = make(map[string]string)\n    rw sync.RWMutex\n)\n\nfunc write(key, value string) {\n    rw.Lock()\n    defer rw.Unlock()\n    data[key] = value\n    fmt.Println(\"Wrote:\", key, \"=>\", value)\n}\n\nfunc read(key string, wg *sync.WaitGroup) {\n    defer wg.Done()\n    rw.RLock()\n    defer rw.RUnlock()\n    fmt.Println(\"Read:\", key, \"=>\", data[key])\n}\n\nfunc main() {\n    written := make(chan struct{})\n    go func() {\n        write(\"foo\", \"bar\")\n        close(written)\n    }()\n    <-written\n\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go read(\"foo\", &wg)\n    }\n    wg.Wait()\n}"
+                ]
+            ],
+            "language": "Go"
+        },
+        {
+            "id": "2b67da4b-5b65-5695-9571-253f43032ecd",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Output: Wrote: foo => bar first, then three Read: foo => bar lines."
+                ]
+            ]
+        },
+        {
+            "id": "854a0644-af53-5a21-8500-8ab1fe15b7b6",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The readers may run together. Their order is not fixed."
+                ]
+            ]
+        },
+        {
+            "id": "24f24eb1-ed54-8035-bd5a-ea405a33ec06",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "When to Use"
+                ]
+            ]
+        },
+        {
+            "id": "649f7560-8cc0-5824-bb17-5c3534ad13b9",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Consider an RWMutex when reads can run together without changing data."
+                ]
+            ]
+        },
+        {
+            "id": "1e3b3123-0bc9-591f-be3a-424543d9ff91",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "It is not always faster than a Mutex."
+                ]
+            ]
+        },
+        {
+            "id": "ddb34b1b-0287-5f65-9290-49c84063a908",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Measure the actual reads, writes and lock waiting before choosing."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-lock",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "TryLock and TryRLock"
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-version",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Go 1.18 added Mutex.TryLock, RWMutex.TryLock and RWMutex.TryRLock."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-methods",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "These are methods on the existing mutex types. They are not separate mutex types."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-result",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "TryLock tries to take an exclusive lock without waiting. TryRLock tries to take a read lock without waiting."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-success",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A true result means you acquired the lock. Release it with Unlock or RUnlock as appropriate."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-failure",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A false result means you did not acquire the lock. Do not access the protected data through that failed attempt."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-choice",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use these methods when skipping the work is acceptable if the lock cannot be acquired. Correct uses are rare."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-try-no-loop",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not keep calling TryLock in a loop to replace Lock. That loop uses CPU time while waiting."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-other-variants",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Other Lock Variants"
+                ]
+            ]
+        },
+        {
+            "id": "mutex-other-availability",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Other languages and libraries provide these lock variants. Go’s sync package has no public type for them."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-other-table",
+            "type": "table",
+            "columnOrder": [
+                "column-0",
+                "column-1",
+                "column-2"
+            ],
+            "hasColumnHeader": true,
+            "hasRowHeader": false,
+            "children": [
+                {
+                    "id": "mutex-other-table-0",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Variant"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Meaning"
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Go behavior"
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "mutex-other-table-1",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Recursive / reentrant mutex"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "The same owner can lock it again. Each successful lock needs an unlock."
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Mutex and RWMutex do not support recursive locking."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "mutex-other-table-2",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Timed mutex"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Stops waiting when a deadline expires."
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "Lock and RLock have no timeout or context parameter. TryLock returns immediately."
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "id": "mutex-other-table-3",
+                    "type": "table_row",
+                    "cells": {
+                        "column-0": [
+                            [
+                                "Spinlock"
+                            ]
+                        ],
+                        "column-1": [
+                            [
+                                "Repeatedly checks the lock while using CPU time."
+                            ]
+                        ],
+                        "column-2": [
+                            [
+                                "No public sync spinlock type. Mutex may spin briefly inside its implementation."
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "mutex-locker-interface",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "sync.Locker is an interface with Lock and Unlock methods. It is not another mutex type."
+                ]
+            ]
+        },
+        {
+            "id": "mutex-other-tools",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Channels, WaitGroup, Cond and sync/atomic are other synchronization tools. They are not mutex types."
+                ]
+            ]
+        },
+        {
             "id": "24f24eb1-ed54-8093-998e-dc4ecd22fd66",
             "type": "sub_header",
             "richText": [
@@ -354,18 +1096,6 @@ const note = {
                     "Other options: "
                 ],
                 [
-                    "RWMutex for parallel reads",
-                    [
-                        [
-                            "a",
-                            "#/notes/go/rwmutex"
-                        ]
-                    ]
-                ],
-                [
-                    ", "
-                ],
-                [
                     "Channels for communication and ownership transfer",
                     [
                         [
@@ -418,11 +1148,32 @@ const note = {
             ]
         },
         {
+            "id": "mutex-sources",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Sources"
+                ]
+            ]
+        },
+        {
             "id": "ee37dddb-c78a-5932-8191-39587eb80aad",
             "type": "text",
             "richText": [
                 [
                     "Sources: "
+                ],
+                [
+                    "sync API",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#pkg-index"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
                 ],
                 [
                     "Mutex contract",
@@ -437,11 +1188,59 @@ const note = {
                     ", "
                 ],
                 [
+                    "RWMutex contract",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#RWMutex"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
                     "Mutex source",
                     [
                         [
                             "a",
                             "https://go.dev/src/sync/mutex.go"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "RWMutex source",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/sync/rwmutex.go"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Go 1.18 sync changes",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/doc/go1.18#sync"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Mutex implementation",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/internal/sync/mutex.go"
                         ]
                     ]
                 ],

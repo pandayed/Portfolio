@@ -36,7 +36,6 @@ import goNote31 from './data/channels';
 import goNote32 from './data/workgroups';
 import goNote33 from './data/goroutines-blocking-causes-recovery';
 import goNote34 from './data/mutex';
-import goNote35 from './data/rwmutex';
 import goNote36 from './data/context-and-timeout';
 import goNote37 from './data/generics';
 import goNote38 from './data/date-time';
@@ -71,7 +70,7 @@ export const goChapters: readonly GoChapter[] = [
     {
         title: '5. Concurrency',
         summary: 'Goroutines, completion, shared state, channels, cancellation, and scheduling.',
-        notes: [goNote29, goNote32, goNote34, goNote35, goNote31, goroutinesChannelsWaitGroup, goNote39, goNote36, goNote33, goNote30],
+        notes: [goNote29, goNote32, goNote34, goNote31, goroutinesChannelsWaitGroup, goNote39, goNote36, goNote33, goNote30],
     },
     {
         title: '6. Reference and revision',

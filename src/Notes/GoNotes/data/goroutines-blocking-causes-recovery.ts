@@ -261,7 +261,7 @@ const note = {
                     [
                         [
                             "a",
-                            "#/notes/go/rwmutex"
+                            "#/notes/go/mutex"
                         ]
                     ]
                 ],

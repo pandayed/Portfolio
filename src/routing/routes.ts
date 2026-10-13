@@ -266,6 +266,7 @@ export const isSpringBootRoute = (route: string): route is SpringBootRoute =>
 
 export const parseRoute = (hash: string): Route => {
     const rawPath = hash.replace(/^#/, '');
+    if (rawPath === `${GO_NOTES_ROUTE}/rwmutex`) return `${GO_NOTES_ROUTE}/mutex`;
     if (rawPath === CONSISTENT_HASHING_ROUTE) return CONSISTENT_HASHING_NOTE_ROUTE;
     const dictionaryPath = rawPath.split('?')[0];
     const path = dictionaryPath === PROGRAMMING_DICTIONARY_ROUTE || dictionaryPath === '/notes/python/dictionary'
