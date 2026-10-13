@@ -5,23 +5,30 @@ const note: LearningNote = {
     title: 'Lambdas and streams',
     summary: 'Use lambdas and method references. Filter, transform, combine, and group data with streams.',
     scope: 'java',
+    pointwise: true,
     updatedOn: '2026-10-13',
     sections: [
         {
             id: 'functional-interfaces',
-            title: 'A lambda implements a functional interface',
+            title: 'Functional interfaces and lambda syntax',
             bullets: [
-                'A functional interface has one abstract method. An abstract method has no implementation.',
-                'Java counts inherited methods when checking the interface. It does not count methods that match public methods on Object.',
-                'Default and static methods do not count as abstract methods.',
-                'A lambda supplies the implementation of the abstract method.',
-                'The target interface gives the lambda its parameter and return types.',
-                'Add @FunctionalInterface to your interface so the compiler checks that it is a functional interface.',
-                'Predicate<T>: accepts T and returns boolean. Use for a condition.',
-                'Function<T, R>: accepts T and returns R. Use for a transformation.',
-                'Consumer<T>: accepts T and returns nothing. Use for an action.',
-                'Supplier<T>: accepts no arguments and returns T. Use to produce a value.',
+                'A functional interface has one abstract method. An abstract method declares an operation without implementing it.',
+                'Java includes inherited abstract methods in that check. Default methods, static methods, and methods matching public Object methods do not count.',
+                'An annotation adds information to a declaration. @FunctionalInterface asks the compiler to check the interface has one abstract method.',
+                'A lambda implements that abstract method. Its target interface supplies the parameter and return types.',
+                'Use parameter -> expression for one parameter. Use (left, right) -> expression for multiple parameters.',
+                'Use () -> expression when there are no parameters. Use -> { statements; } for a block body.',
+                'An expression body returns its value when the interface requires a result. A block body uses return for that result.',
             ],
+            table: {
+                columns: ['Interface', 'Abstract method', 'Purpose'],
+                rows: [
+                    ['Predicate<T>', 'boolean test(T value)', 'Check a condition.'],
+                    ['Function<T, R>', 'R apply(T value)', 'Transform a value.'],
+                    ['Consumer<T>', 'void accept(T value)', 'Perform an action.'],
+                    ['Supplier<T>', 'T get()', 'Produce a value without an input.'],
+                ],
+            },
             examples: [{
                 title: 'Pass a pricing calculation',
                 language: 'java',
@@ -45,25 +52,42 @@ public class Main {
 }`,
                 result: 'Prints 80, true, and 4 on separate lines.',
             }],
-            pitfalls: [
+        },
+        {
+            id: 'captured-variables',
+            title: 'Local variables captured by lambdas',
+            bullets: [
                 'A lambda captures a local variable when it uses that variable from the surrounding method.',
-                'A captured local variable must be final or effectively final.',
-                'Effectively final means you never reassign the variable after initializing it.',
-                'A final reference can still refer to a mutable object. Mutable means its contents can change.',
-                'Capturing a list does not make it thread-safe.',
-                'Thread-safe means an object behaves correctly when multiple threads use it at the same time.',
+                'A captured local variable must be final or effectively final. Effectively final means it is not reassigned after initialization.',
+                'A captured reference can still point to a mutable object. The capture rule prevents reassignment of the reference, not changes to that object.',
             ],
+            examples: [{
+                title: 'Use a value from the surrounding method',
+                language: 'java',
+                code: `import java.util.function.Predicate;
+
+public class Main {
+    public static void main(String[] args) {
+        int limit = 100;
+        Predicate<Integer> affordable = price -> price <= limit;
+        System.out.println(affordable.test(80));
+        // limit = 90; // Reassignment makes the lambda fail to compile.
+    }
+}`,
+                result: 'Prints true. limit is effectively final because it is initialized once and never reassigned.',
+            }],
         },
         {
             id: 'method-references',
-            title: 'Method references name existing behavior',
+            title: 'Method references',
             bullets: [
-                'A method reference names an existing method. Use it instead of a lambda that only calls a matching method.',
-                'String::length calls length on the String passed to the function.',
-                'Integer::parseInt refers to a static method.',
-                'object::method calls a method on that object.',
-                'Type::new refers to a constructor.',
-                'The target functional interface determines which overload fits. Overloads have the same method name but different parameters.',
+                'A method reference names an existing method or constructor instead of writing a lambda that calls it.',
+                'String::length calls length on the String passed as the function argument.',
+                'Integer::parseInt refers to a static method. System.out::println calls a method on the existing System.out object.',
+                'Type::new refers to a constructor. ArrayList::new can supply a new list.',
+                'The target functional interface determines which overload fits, including its parameters and return type.',
+                'The referenced method keeps its normal behavior. Integer.parseInt throws NumberFormatException for invalid numeric text.',
+                'Use a lambda for extra arguments or a body with several statements.',
             ],
             examples: [{
                 title: 'Refer to methods and a constructor',
@@ -90,23 +114,19 @@ public class Main {
 }`,
                 result: 'Prints Length: 4, Number: 42, and [Asha] on separate lines.',
             }],
-            pitfalls: [
-                'A method reference still follows ordinary method behavior. Integer.parseInt throws NumberFormatException for invalid numeric text.',
-                'Use a lambda when the operation needs extra arguments, validation, or several steps.',
-            ],
         },
         {
             id: 'stream-pipelines',
-            title: 'Filter and map build a lazy pipeline',
+            title: 'Streams, filter, and map',
             bullets: [
                 'A stream processes values from a source. It does not store another collection.',
-                'A pipeline is a sequence of stream operations.',
-                'Intermediate operations such as filter and map describe the steps. They do not start processing.',
-                'A terminal operation such as toList, count, or forEach starts processing.',
-                'filter keeps values that match a predicate. A predicate is a condition that returns true or false.',
-                'map transforms each remaining value.',
-                'This example leaves the original list unchanged.',
-                'The result keeps encounter order. Here, that means the order of values in the original list.',
+                'A pipeline connects a source, intermediate operations, and a terminal operation.',
+                'collection.stream() creates a sequential stream from a collection.',
+                'filter keeps values that pass a Predicate. map transforms each remaining value using a Function.',
+                'Intermediate operations describe the steps. They are lazy: creating the pipeline does not process the elements.',
+                'A terminal operation, such as toList, count, or forEach, starts processing.',
+                'This filter-and-map pipeline leaves the source list unchanged and keeps its encounter order, which is the original list order here.',
+                'Use a stream only once. Reusing it after a terminal operation may throw IllegalStateException. Create a fresh stream for another calculation.',
             ],
             examples: [{
                 title: 'Calculate discounted qualifying prices',
@@ -129,25 +149,21 @@ public class Main {
 }`,
                 result: 'Prints Pipeline created, [110, 190], and [40, 120, 200] on separate lines. No elements are processed by this pipeline until toList starts.',
             }],
-            pitfalls: [
-                'Use a stream only once. Reusing it after a terminal operation may throw IllegalStateException.',
-                'Create a new stream from the source for another calculation.',
-                'A side effect changes something outside the operation, such as an external list.',
-                'Do not depend on side effects in map, filter, or peek.',
-                'The stream implementation may skip operations that do not affect the terminal result.',
-            ],
         },
         {
             id: 'reduce-and-collect',
-            title: 'Reduce to one value or collect into a container',
+            title: 'Reduce values and collect results',
             bullets: [
                 'reduce combines elements into one result.',
-                'An identity is the starting value. Applying the operation to the identity and a value must leave that value unchanged.',
-                'Use 0 as the identity for integer addition.',
-                'The combining operation must be associative. Grouping the inputs differently must not change the result.',
-                'collect builds a result such as a list or a map.',
-                'groupingBy chooses a key for each element and groups elements with the same key.',
-                'A downstream collector processes each group. For example, counting counts the elements in each group.',
+                'An identity is the starting value. Combining the identity with a value must leave that value unchanged.',
+                'For integer addition, the identity is 0 and the operation is Integer::sum.',
+                'The combining operation must be associative: regrouping inputs must not change the result. Subtraction does not satisfy this rule.',
+                'collect builds a result container using a Collector, such as a list or a map.',
+                'Collectors.groupingBy chooses a key for each element and groups elements with the same key.',
+                'A downstream collector processes each group. Collectors.counting returns the number of elements as a Long.',
+                'groupingBy without a map supplier does not guarantee a map type or key order. TreeMap::new sorts the keys in this example.',
+                'Collectors.toMap throws IllegalStateException for duplicate keys unless you supply a merge function.',
+                'The merge function chooses or combines values that map to the same key.',
             ],
             examples: [{
                 title: 'A total and counts by word length',
@@ -175,26 +191,31 @@ public class Main {
 }`,
                 result: 'Prints 10, then {2=1, 3=1, 4=2}. TreeMap sorts the group keys. counting returns Long values.',
             }],
-            pitfalls: [
-                'Subtraction is not associative. Changing the grouping can change the answer.',
-                'Do not use subtraction to combine values in reduce.',
-                'Collectors.groupingBy without a map supplier does not promise a specific map type or key order.',
-                'Collectors.toMap needs a merge function when different inputs can produce the same key.',
-                'The merge function chooses which value to keep or how to combine the values.',
-                'Without a merge function, duplicate keys cause IllegalStateException.',
-            ],
         },
         {
             id: 'results-and-side-effects',
-            title: 'Choose the result mutability explicitly',
+            title: 'Choose the result collection',
             bullets: [
-                'Stream.toList is available since Java 16. It returns an unmodifiable list, so you cannot add, remove, or replace its elements.',
-                'Use Collectors.toCollection(ArrayList::new) when you need to change the result list.',
-                'Collectors.toList does not guarantee a particular list implementation or whether you can change the list.',
-                'Keep pipeline functions independent of shared values that can change.',
-                'Use a collector to build a list. Avoid adding to an external list inside forEach.',
-                'Parallel execution can process elements on different threads. You must account for ordering and access to shared data.',
-                'Parallel execution is not always faster.',
+                'An unmodifiable list rejects adding, removing, and replacing elements.',
+                'An unmodifiable list can still contain mutable objects. Those objects can change.',
+            ],
+            table: {
+                columns: ['Operation', 'Result'],
+                rows: [
+                    ['stream.toList()', 'Unmodifiable list. Available since Java 16.'],
+                    ['collect(Collectors.toList())', 'No guarantee of the list implementation or mutability.'],
+                    ['collect(Collectors.toCollection(ArrayList::new))', 'Mutable ArrayList.'],
+                ],
+            },
+        },
+        {
+            id: 'flatmap',
+            title: 'Flatten nested values with flatMap',
+            bullets: [
+                'map produces one output value for each input. Mapping each list to a stream would produce a stream of streams.',
+                'flatMap maps each input to a stream and combines the elements of those streams into one stream.',
+                'List::stream turns each inner list into a stream in this example.',
+                'Collect the flattened elements with toCollection(ArrayList::new) when you need a mutable list.',
             ],
             examples: [{
                 title: 'Create a mutable list from nested lists',
@@ -224,12 +245,19 @@ public class Main {
 }`,
                 result: 'Prints [java, sql, go, python], then [sql, go]. flatMap turns each inner list stream into elements of one stream.',
             }],
-            pitfalls: [
+        },
+        {
+            id: 'stream-execution',
+            title: 'Source changes, side effects, and parallel streams',
+            bullets: [
+                'A side effect changes something outside an operation, such as adding to an external list.',
+                'Do not depend on side effects in map, filter, or peek. Java may skip operations that do not affect the terminal result.',
+                'Use a collector to build a result list instead of adding to an external list from forEach.',
+                'Keep pipeline functions independent of shared mutable state. Capturing an object in a lambda does not make access to it thread-safe.',
                 'Do not change the source collection while its stream processes elements.',
-                'Streams from collections usually need no closing.',
-                'Close streams that hold file resources, such as Files.lines, with try-with-resources.',
-                'An unmodifiable result list does not make its elements immutable.',
-                'An immutable object cannot change after creation.',
+                'parallelStream() may process elements on multiple threads. Parallel execution needs suitable operations and does not guarantee faster processing.',
+                'Parallel forEach does not guarantee encounter order. Use forEachOrdered when actions must follow that order.',
+                'Streams from collections usually need no closing. Streams that hold file resources, such as Files.lines, need try-with-resources.',
             ],
         },
     ],

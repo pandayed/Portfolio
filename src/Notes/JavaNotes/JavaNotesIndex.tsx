@@ -1,7 +1,7 @@
 import '../Notes.css';
 
 import Page from '../../Page/Page';
-import { NOTES_ROUTE, toHref } from '../../routing/routes';
+import { JAVA_PROGRAM_EXECUTION_ROUTE, NOTES_ROUTE, toHref } from '../../routing/routes';
 import NoteTree from '../NoteTree';
 import { javaNotes } from '../noteTreeData';
 import NoteReadingTime from '../NoteReadingTime';
@@ -15,9 +15,10 @@ const JavaNotesIndex = () => (
         </a>
         <ul className="Article__notes">
             <li>Examples use Java 17 or later. They do not use preview features.</li>
-            <li>Save an example with a public <code>Main</code> class as <code>Main.java</code>.</li>
-            <li>In that directory, run <code>javac Main.java</code>, then <code>java Main</code>.</li>
-            <li>Method bodies and method declarations need a surrounding class.</li>
+            <li>
+                Start with <a className="Link" href={toHref(JAVA_PROGRAM_EXECUTION_ROUTE)}>program execution</a>,
+                then follow the chapters in order.
+            </li>
             <li>
                 References:{' '}
                 <a className="Link" href="https://dev.java/learn/" target="_blank" rel="noreferrer">official Java learning guide</a>{' '}

@@ -28,6 +28,10 @@ export interface LearningNoteSection {
     title: string;
     paragraphs?: readonly string[];
     bullets?: readonly string[];
+    table?: {
+        columns: readonly string[];
+        rows: readonly (readonly string[])[];
+    };
     examples?: readonly LearningNoteExample[];
     pitfalls?: readonly string[];
 }
@@ -38,6 +42,7 @@ export interface LearningNote {
     summary: string;
     scope: LearningNoteScope;
     updatedOn: string;
+    pointwise?: boolean;
     references?: readonly { title: string; href: string }[];
     sections: readonly LearningNoteSection[];
 }

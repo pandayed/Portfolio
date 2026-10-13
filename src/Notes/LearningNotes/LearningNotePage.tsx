@@ -21,7 +21,7 @@ const scopeLabels: Record<LearningNoteScope, string> = {
 };
 
 const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePageProps) => {
-    const useBulletExplanations = note.scope !== 'java';
+    const useBulletExplanations = note.scope !== 'java' || note.pointwise === true;
     const sectionId = (id: string) => `learning-note-${note.slug}-${id}`;
     const sections: TocEntry[] = note.sections.map(({ id, title }) => ({
         id: sectionId(id),
@@ -77,13 +77,41 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                         </ul>
                     )}
 
+                    {section.table && (
+                        <div className="Article__tableWrap">
+                            <table className="Article__table">
+                                <thead>
+                                    <tr>
+                                        {section.table.columns.map((column) => (
+                                            <th scope="col" key={column}>{column}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {section.table.rows.map((row, rowIndex) => (
+                                        <tr key={`${section.id}-row-${rowIndex}`}>
+                                            {row.map((cell, cellIndex) => cellIndex === 0 ? (
+                                                <th scope="row" key={cellIndex}>{cell}</th>
+                                            ) : <td key={cellIndex}>{cell}</td>)}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+
                     {section.examples?.map((example, index) => (
                         <div className="Article__section" key={`${section.id}-example-${index}`}>
                             {example.title && <h3 className="Article__subTitle">{example.title}</h3>}
                             <CodeBlock language={example.language}>{example.code}</CodeBlock>
                             {useBulletExplanations && (example.result || example.typeCheck) ? (
                                 <ul className="Article__notes">
-                                    {example.result && <li><strong>Result:</strong> {example.result}</li>}
+                                    {example.result && (note.scope === 'java' && example.result.includes('\n') ? (
+                                        <li>
+                                            <strong>Expected output:</strong>
+                                            <CodeBlock language="text">{example.result}</CodeBlock>
+                                        </li>
+                                    ) : <li><strong>Result:</strong> {example.result}</li>)}
                                     {example.typeCheck && <li><strong>TypeScript check:</strong> {example.typeCheck}</li>}
                                 </ul>
                             ) : (

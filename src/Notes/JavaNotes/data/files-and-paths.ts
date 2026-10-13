@@ -3,20 +3,24 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'files-and-paths',
     title: 'Files, paths, and text input',
-    summary: 'Represent paths, read and write UTF-8 text, process files incrementally, and handle file failures.',
+    summary: 'Create path values, read and write text, process lines, and handle Java file exceptions.',
     scope: 'java',
     updatedOn: '2026-10-13',
+    pointwise: true,
+    references: [{
+        title: 'Java 17 Files API',
+        href: 'https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html',
+    }],
     sections: [
         {
             id: 'path-values',
-            title: 'Represent a location with Path',
+            title: 'Path values',
             bullets: [
-                'Path represents a file-system location.',
-                'Creating a Path does not create a file or prove that the location exists.',
-                'Files provides operations to read, write, copy, and delete files at those locations.',
-                'A relative path does not start from the file-system root. Java resolves it against the process working directory when used.',
-                'resolve combines a directory path with another path.',
-                'normalize removes unnecessary path parts such as . and .. without checking the file system.',
+                'Path represents a file-system location. Path.of creates a Path from its name or path parts.',
+                'Creating a Path does not create a file or check that the location exists.',
+                'An absolute path starts from the file-system root. A relative path is resolved against the process working directory when used.',
+                'resolve combines a directory path with another path. getFileName returns the final path part.',
+                'Files is the Java utility class for reading, writing, copying, and deleting files at Path locations.',
             ],
             examples: [{
                 language: 'java',
@@ -30,27 +34,34 @@ public class Main {
         System.out.println(file.isAbsolute());
     }
 }`,
-                result: 'java.txt, then false, on separate lines. No file is created.',
+                result: 'java.txt\nfalse',
             }],
-            pitfalls: [
-                'A symbolic link is a file-system entry that points to another location.',
-                'toAbsolutePath and normalize do not resolve symbolic links.',
-                'toRealPath checks the file system and resolves symbolic links by default. It may fail.',
+        },
+        {
+            id: 'path-resolution',
+            title: 'Normalize paths and resolve symbolic links',
+            bullets: [
+                'normalize removes unnecessary path parts such as . and .. without checking the file system.',
+                'toAbsolutePath produces an absolute path. It does not check that the file exists.',
+                'A symbolic link is a file-system entry pointing to another location.',
+                'normalize and toAbsolutePath do not resolve symbolic links.',
+                'toRealPath checks the file system and resolves symbolic links by default. It throws IOException if the path cannot be resolved.',
             ],
         },
         {
             id: 'read-and-write',
-            title: 'Read and write a small text file',
+            title: 'Read and write text',
             bullets: [
-                'Use readString for text that fits in memory.',
-                'Specify UTF-8 when exchanging text. This makes the character encoding explicit.',
-                'An encoding defines how bytes represent text characters.',
-                'writeString without open options creates a missing file.',
-                'If the file exists, writeString replaces its existing contents.',
-                'This example creates a temporary file and deletes it afterward.',
-                'readAllBytes reads binary content into a byte array. readString decodes bytes into text.',
-                'To add text at the end of a file, use open options such as CREATE and APPEND.',
-                'writeString does not create missing parent directories. Use createDirectories when required.',
+                'A character encoding defines how bytes represent text. UTF-8 is one encoding.',
+                'Files.readString decodes file bytes into a String. Files.readAllBytes returns the bytes without decoding them.',
+                'readString and readAllBytes load the whole file into memory.',
+                'Files.writeString encodes a String and writes it to a file.',
+                'Without open options, writeString creates a missing file or replaces the existing file contents.',
+                'readString and writeString use UTF-8 by default. Overloads accept an explicit character encoding.',
+                'writeString does not create missing parent directories. Files.createDirectories creates them.',
+                'The CREATE and APPEND open options create a missing file or add text at the end of an existing file.',
+                'File operations can throw IOException. The method below declares it with throws.',
+                'createTempFile creates a temporary file. deleteIfExists deletes it if it still exists.',
             ],
             examples: [{
                 language: 'java',
@@ -71,64 +82,80 @@ public class Main {
         }
     }
 }`,
-                result: 'Java notes, if temporary-file operations succeed. IOException is propagated on a file failure.',
+                result: 'Java notes, if the file operations succeed. A file failure propagates IOException.',
             }],
         },
         {
             id: 'incremental-reading',
-            title: 'Read lines without loading the whole file',
+            title: 'Read one line at a time',
             bullets: [
-                'BufferedReader reads text in parts instead of loading the whole file at once.',
-                'Call readLine in a loop to process one line at a time.',
-                'readLine returns null at the end of the file.',
-                'The returned string does not include the line-ending characters.',
-                'Use the example inside a method that declares throws IOException.',
-                'The Path variable named file must point to a readable UTF-8 text file.',
+                'BufferedReader reads text in parts. Files.newBufferedReader opens one for a file.',
+                'readLine returns one line without its line-ending characters. It returns null at the end of the file.',
+                'BufferedReader implements AutoCloseable. Try-with-resources closes it when the block finishes.',
+                'The method below receives a Path for an existing UTF-8 text file.',
             ],
             examples: [{
                 title: 'Count nonblank lines',
                 language: 'java',
-                code: `try (java.io.BufferedReader reader = java.nio.file.Files.newBufferedReader(
-        file, java.nio.charset.StandardCharsets.UTF_8)) {
-    String line;
-    int count = 0;
-    while ((line = reader.readLine()) != null) {
-        if (!line.isBlank()) {
-            count++;
+                code: `static int countNonblankLines(java.nio.file.Path file)
+        throws java.io.IOException {
+    try (java.io.BufferedReader reader = java.nio.file.Files.newBufferedReader(
+            file, java.nio.charset.StandardCharsets.UTF_8)) {
+        String line;
+        int count = 0;
+        while ((line = reader.readLine()) != null) {
+            if (!line.isBlank()) {
+                count++;
+            }
         }
+        return count;
     }
-    System.out.println(count);
 }`,
-                result: 'For a file containing "Java", an empty line, and "Streams" on three lines, prints 2.',
+                result: 'For a file with "Java", an empty line, and "Streams" on three lines, returns 2.',
             }],
-            pitfalls: [
-                'Files.lines reads lines when the stream processes them. Its Stream keeps a file resource open.',
-                'Close the stream with try-with-resources.',
-                'readAllLines loads every line into a list. It is unsuitable when the whole file cannot fit in memory.',
+        },
+        {
+            id: 'line-streams',
+            title: 'Read lines as a stream',
+            bullets: [
+                'Files.lines returns a Stream of lines. It reads them as stream operations request them.',
+                'The stream keeps a file resource open. Closing the stream releases that resource.',
+                'Try-with-resources closes the stream after its terminal operation finishes.',
+                'Files.readAllLines instead loads every line into a List before returning.',
+                'Files.lines may throw IOException when opening the file. A failure while traversing its stream is wrapped in UncheckedIOException.',
             ],
+            examples: [{
+                language: 'java',
+                code: `static long countNonblankLines(java.nio.file.Path file)
+        throws java.io.IOException {
+    try (java.util.stream.Stream<String> lines = java.nio.file.Files.lines(file)) {
+        return lines.filter(line -> !line.isBlank()).count();
+    }
+}`,
+                result: 'Returns the number of nonblank lines without collecting all lines into a list.',
+            }],
         },
         {
             id: 'file-failures',
-            title: 'Handle the operation that actually fails',
+            title: 'Java file exceptions',
             bullets: [
-                'A file may disappear after an existence check. Its permissions may also change before the read.',
-                'Catch failures from the read operation itself.',
-                'Catch a specific exception when you need a different response for a missing file.',
-                'Files.exists returns false when the file is absent or Java cannot determine whether it exists.',
-                'The example uses an existing Path variable named file.',
+                'NoSuchFileException is an IOException subclass for a missing file.',
+                'A catch for NoSuchFileException must come before a catch for IOException.',
+                'Files.exists returns false if the file is absent or its existence cannot be determined.',
+                'An existence check does not guarantee that a later readString call will succeed.',
             ],
             examples: [{
-                title: 'Handle missing files separately',
                 language: 'java',
-                code: `try {
-    String content = java.nio.file.Files.readString(file);
-    System.out.println(content);
-} catch (java.nio.file.NoSuchFileException missing) {
-    System.out.println("File not found");
-} catch (java.io.IOException failure) {
-    System.out.println("Could not read the file");
+                code: `static void printFile(java.nio.file.Path file) {
+    try {
+        System.out.println(java.nio.file.Files.readString(file));
+    } catch (java.nio.file.NoSuchFileException missing) {
+        System.out.println("File not found");
+    } catch (java.io.IOException failure) {
+        System.out.println("Could not read the file");
+    }
 }`,
-                result: 'Prints the content on success, File not found for a missing file, or the other message for a different IOException.',
+                result: 'Prints the content on success, File not found for a missing file, or Could not read the file for another IOException.',
             }],
         },
     ],

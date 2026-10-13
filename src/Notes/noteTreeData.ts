@@ -337,7 +337,7 @@ export const reactNotes: NoteGroup = {
 export const javaNotes: NoteGroup = {
     type: 'group',
     title: 'Java',
-    summary: 'Language basics, objects, generics, collections, streams, exceptions, files, and concurrency.',
+    summary: 'Program execution, variables, objects, exceptions, generics, collections, streams, files, and threads.',
     route: JAVA_NOTES_ROUTE,
     children: [
         {
@@ -345,7 +345,7 @@ export const javaNotes: NoteGroup = {
             title: 'Java source, compilation, and the JVM',
             summary: 'Follow a Java source file from javac to a running program.',
             route: JAVA_PROGRAM_EXECUTION_ROUTE,
-            updatedOn: '2026-09-30',
+            updatedOn: '2026-10-13',
         },
         ...javaChapters.map((chapter): NoteGroup => ({
             type: 'group',
