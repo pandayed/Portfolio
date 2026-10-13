@@ -49,6 +49,26 @@ public class Main {
             }],
         },
         {
+            id: 'copying-values',
+            title: 'Primitive values are copied independently',
+            bullets: [
+                'Assigning a primitive copies its value. Changing the copy does not change the original variable.',
+            ],
+            examples: [{
+                language: 'java',
+                code: `public class Main {
+    public static void main(String[] args) {
+        int original = 10;
+        int copy = original;
+        copy = 20;
+
+        System.out.println(original + " " + copy);
+    }
+}`,
+                result: '10 20',
+            }],
+        },
+        {
             id: 'array-copy-and-equality',
             title: 'Assignment shares an array; copying creates another array',
             bullets: [

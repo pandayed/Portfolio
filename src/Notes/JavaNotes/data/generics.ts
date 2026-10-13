@@ -2,8 +2,8 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: 'generics',
-    title: 'Generics and wildcards',
-    summary: 'Write reusable classes and methods with checked types. Understand bounds, invariant lists, wildcard reads and writes, and type erasure.',
+    title: 'Generics',
+    summary: 'Define generic classes and methods, supply type arguments, and limit them with bounds.',
     scope: 'java',
     pointwise: true,
     updatedOn: '2026-10-13',
@@ -78,122 +78,6 @@ const note: LearningNote = {
 }`,
                 result: 'Prints Asha, 12.0, and 5.0 on separate lines.',
             }],
-        },
-        {
-            id: 'invariance',
-            title: 'Invariant types and unknown elements',
-            bullets: [
-                'List<T> is a generic interface for a sequence of elements of type T. get(index) reads an element. add(value) appends one.',
-                'List.of(...) creates an unmodifiable list from its arguments. The example reads these lists without changing them.',
-                'Integer extends Number, but List<Integer> is not a subtype of List<Number>. This rule is called invariance.',
-                'If that assignment were allowed, a List<Number> reference could add a Double to a list that requires Integer elements.',
-                'A wildcard ? means an unknown type argument. List<?> can refer to a list of any element type.',
-                'Reading an element through List<?> gives Object.',
-                'You cannot add a non-null value through List<?>. Java does not know which element type that list accepts.',
-                'List<Object> has a known element type and accepts any Object value. It differs from List<?>.',
-            ],
-            examples: [{
-                title: 'Accept unknown list types for reading',
-                language: 'java',
-                code: `import java.util.List;
-
-public class Main {
-    static void printFirst(List<?> values) {
-        Object first = values.get(0);
-        System.out.println(first);
-    }
-
-    public static void main(String[] args) {
-        List<Integer> counts = List.of(10, 20);
-        // List<Number> numbers = counts; // Compile error.
-        printFirst(counts);
-        printFirst(List.of("ready", "done"));
-    }
-}`,
-                result: 'Prints 10, then ready on a new line.',
-            }],
-        },
-        {
-            id: 'extends-super',
-            title: 'Bounded wildcards for reading and writing',
-            bullets: [
-                'ArrayList<T> implements List<T>. new ArrayList<>() creates an empty mutable list, which accepts additions.',
-                'List<? extends Number> accepts a list of Number or any Number subtype.',
-                'You can read its values as Number. You cannot add Integer or Double values through that reference because its exact element type is unknown.',
-                'List<? super Integer> accepts a list of Integer or an Integer supertype, such as Number or Object.',
-                'You can add Integer values through that reference. Reading gives Object because the declared element type could be a supertype.',
-                'Use extends when a parameter supplies values. Use super when it receives values.',
-                'Use a named type parameter T when parameters or a return value must share a type. The copy method below relates its source and destination using T.',
-                'An extends wildcard does not make the list unmodifiable. clear() remains available, and another reference can change the list.',
-            ],
-            examples: [{
-                title: 'Copy integers into a list of numbers',
-                language: 'java',
-                code: `import java.util.ArrayList;
-import java.util.List;
-
-public class Main {
-    static <T> void copy(List<? extends T> source,
-                         List<? super T> destination) {
-        for (T value : source) {
-            destination.add(value);
-        }
-    }
-
-    public static void main(String[] args) {
-        List<Integer> counts = List.of(2, 4);
-        List<Number> numbers = new ArrayList<>();
-        numbers.add(1.5);
-        copy(counts, numbers);
-        System.out.println(numbers);
-    }
-}`,
-                result: 'Prints [1.5, 2, 4]. The source produces values of T. The destination accepts values of T.',
-            }],
-        },
-        {
-            id: 'type-erasure',
-            title: 'Type erasure and runtime checks',
-            bullets: [
-                'Type erasure replaces type parameters with their bounds or Object in compiled code.',
-                'The compiler checks generic types before erasure and inserts casts where needed.',
-                'A normal list object does not check String or Integer element types at runtime.',
-                'An unchecked cast or raw collection can cause heap pollution: a value does not match the element type declared by the reference.',
-                'A later read of that value may throw ClassCastException.',
-                'instanceof List<?> checks whether a value is a List. It does not check the element type.',
-                'instanceof List<String> cannot check an arbitrary Object value and does not compile in the example below.',
-                'Generic declarations can retain type information for reflection. Reflection inspects declared types at runtime; it does not make a list enforce its element type.',
-            ],
-            examples: [{
-                title: 'List type arguments do not produce different classes',
-                language: 'java',
-                code: `import java.util.ArrayList;
-import java.util.List;
-
-public class Main {
-    public static void main(String[] args) {
-        List<String> names = new ArrayList<>();
-        List<Integer> counts = new ArrayList<>();
-        System.out.println(names.getClass() == counts.getClass());
-
-        Object value = names;
-        System.out.println(value instanceof List<?>);
-        // value instanceof List<String> // Compile error.
-    }
-}`,
-                result: 'Prints true, then true. Both objects are ArrayList instances. The second check establishes that value is a List, without checking its element type.',
-            }],
-        },
-        {
-            id: 'generic-restrictions',
-            title: 'Restrictions caused by type erasure',
-            bullets: [
-                'You cannot construct new T(). Pass a factory that creates a value of type T.',
-                'You cannot construct new T[3] or new List<String>[3]. Use a list of lists when you need nested generic collections.',
-                'Methods that differ only by List<String> versus List<Integer> have the same parameter type after erasure. They cannot be overloads of the same name.',
-                'Give those operations different method names.',
-                'A generic class cannot extend Throwable. A catch parameter cannot be a type parameter.',
-            ],
         },
     ],
 };

@@ -8,7 +8,6 @@ const sections: TocEntry[] = [
     { id: 'program-structure', title: 'A first Java program' },
     { id: 'run-a-class', title: 'Compile and run a class' },
     { id: 'source-and-bytecode', title: 'Source code and bytecode' },
-    { id: 'packages-and-imports', title: 'Packages and imports' },
 ];
 
 const JavaProgramExecution = () => (
@@ -63,6 +62,7 @@ java Hello`}</CodeBlock>
                 <li><code>java Hello</code> uses the class name. It does not include <code>.class</code>.</li>
                 <li>For the notes' examples with a public <code>Main</code> class, use <code>Main.java</code>, <code>javac Main.java</code>, and <code>java Main</code>.</li>
                 <li>A method shown on its own belongs inside a surrounding class.</li>
+                <li>An <code>import</code> lets an example use a short standard-library type name, such as <code>Arrays</code>, instead of <code>java.util.Arrays</code>.</li>
                 <li><strong>Output:</strong> <code>Hello, Java</code>.</li>
             </ul>
         </section>
@@ -77,41 +77,6 @@ java Hello`}</CodeBlock>
             </ul>
         </section>
 
-        <section className="Article__section" aria-labelledby="packages-and-imports">
-            <h2 id="packages-and-imports" className="SectionTitle">Packages and imports</h2>
-            <ul className="Article__notes">
-                <li>A package groups named types. A class named <code>Main</code> in package <code>study</code> has the qualified name <code>study.Main</code>.</li>
-                <li>The package declaration comes before imports and class declarations.</li>
-                <li>An import allows a short type name instead of its qualified name. It does not install a dependency.</li>
-                <li>Types in <code>java.lang</code>, such as <code>String</code> and <code>System</code>, need no explicit import.</li>
-                <li><code>import java.util.*</code> imports accessible types from that package, not its subpackages.</li>
-                <li><code>LocalDate</code> is a standard-library type representing a date. <code>LocalDate.of(year, month, day)</code> creates one.</li>
-                <li>Save the example as <code>src/study/Main.java</code>:</li>
-            </ul>
-            <CodeBlock language="java">{`package study;
-
-import java.time.LocalDate;
-
-public class Main {
-    public static void main(String[] args) {
-        System.out.println(LocalDate.of(2026, 10, 13));
-    }
-}`}</CodeBlock>
-            <ul className="Article__notes">
-                <li>From the directory containing <code>src</code>, compile and run it:</li>
-            </ul>
-            <CodeBlock language="text">{`javac -d out src/study/Main.java
-java -cp out study.Main`}</CodeBlock>
-            <ul className="Article__notes">
-                <li><code>-d out</code> writes compiled classes under <code>out</code>. <code>-cp out</code> sets the class path: where the launcher looks for classes.</li>
-                <li><strong>Output:</strong> <code>2026-10-13</code>.</li>
-                <li>
-                    References:{' '}
-                    <a className="Link" href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/javac.html" target="_blank" rel="noopener noreferrer">javac command documentation</a>{' '}and{' '}
-                    <a className="Link" href="https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html" target="_blank" rel="noopener noreferrer">java command documentation</a>.
-                </li>
-            </ul>
-        </section>
     </ArticleLayout>
 );
 

@@ -45,21 +45,45 @@ public class Main {
         },
         {
             id: 'reduce-and-collect',
-            title: 'Reduce values and collect results',
+            title: 'Reduce elements to one value',
             bullets: [
                 'reduce combines elements into one result.',
                 'An identity is the starting value. Combining the identity with a value must leave that value unchanged.',
                 'For integer addition, the identity is 0 and the operation is Integer::sum.',
-                'The combining operation must be associative: regrouping inputs must not change the result. Subtraction does not satisfy this rule.',
+                'The combining operation must be associative: regrouping inputs must not change the result.',
+                'Subtraction is not associative. Do not use it to combine values in reduce.',
+            ],
+            examples: [{
+                title: 'Calculate a total',
+                language: 'java',
+                code: `import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        int total = List.of(2, 3, 5).stream()
+            .reduce(0, Integer::sum);
+        System.out.println(total);
+    }
+}`,
+                result: 'Prints 10.',
+            }],
+        },
+        {
+            id: 'collect-and-group',
+            title: 'Collect results and group elements',
+            bullets: [
                 'collect builds a result container using a Collector, such as a list or a map.',
+                'Collectors supplies collector implementations. Pass one to collect to choose how to build the result.',
                 'Collectors.groupingBy chooses a key for each element and groups elements with the same key.',
                 'A downstream collector processes each group. Collectors.counting returns the number of elements as a Long.',
-                'groupingBy without a map supplier does not guarantee a map type or key order. TreeMap::new sorts the keys in this example.',
+                'groupingBy without a map supplier does not guarantee a map type or key order.',
+                'TreeMap::new supplies a map that sorts the group keys in this example.',
+                'Collectors.toMap builds a map by choosing a key and a value for each element.',
                 'Collectors.toMap throws IllegalStateException for duplicate keys unless you supply a merge function.',
                 'The merge function chooses or combines values that map to the same key.',
             ],
             examples: [{
-                title: 'A total and counts by word length',
+                title: 'Count words grouped by length',
                 language: 'java',
                 code: `import java.util.List;
 import java.util.Map;
@@ -68,10 +92,6 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int total = List.of(2, 3, 5).stream()
-            .reduce(0, Integer::sum);
-        System.out.println(total);
-
         Map<Integer, Long> counts = List.of("java", "go", "sql", "ruby")
             .stream()
             .collect(Collectors.groupingBy(
@@ -82,7 +102,7 @@ public class Main {
         System.out.println(counts);
     }
 }`,
-                result: 'Prints 10, then {2=1, 3=1, 4=2}. TreeMap sorts the group keys. counting returns Long values.',
+                result: 'Prints {2=1, 3=1, 4=2}. TreeMap sorts the keys. counting returns Long values.',
             }],
         },
         {
