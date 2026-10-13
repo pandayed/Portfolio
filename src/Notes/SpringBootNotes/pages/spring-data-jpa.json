@@ -1,0 +1,1034 @@
+{
+  "id": "20924eb1-ed54-80e4-be00-c1bf8a7f3b5a",
+  "title": "Spring Data JPA (CrudRepository, JpaRepository)",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480e4be00c1bf8a7f3b5a",
+  "blocks": [
+    {
+      "id": "20924eb1-ed54-80d5-be15-dab9a9d334d3",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-800c-900d-f3b8b560308e",
+      "type": "header",
+      "richText": [
+        [
+          "✅ Spring Data JPA Deep Dive (CrudRepository, JpaRepository)"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805e-bc6a-dde40acdb9bd",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-808a-9d1c-ddb9b2899dfe",
+      "type": "sub_header",
+      "richText": [
+        [
+          "1. Core Concept (2–3 Sentences)"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e1-b9dd-d29f1e4719fa",
+      "type": "text",
+      "richText": [
+        [
+          "Spring Data JPA",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " is a part of the Spring ecosystem that helps you "
+        ],
+        [
+          "interact with relational databases (like MySQL, PostgreSQL)",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " using simple "
+        ],
+        [
+          "Java interfaces",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " — without writing boilerplate SQL. It automatically implements common operations like saving, deleting, and finding data through interfaces like "
+        ],
+        [
+          "CrudRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "JpaRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8035-8f20-cc3c906e5a39",
+      "type": "text",
+      "richText": [
+        [
+          "Think of it as a translator between your Java objects and database tables",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ", automating tedious database tasks."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e6-81fd-d84376cf3212",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80ed-aa39-cffa1f296c55",
+      "type": "sub_header",
+      "richText": [
+        [
+          "2. Key Interview Points"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b1-b859-d8716443f438",
+      "type": "text",
+      "richText": [
+        [
+          "🔹 "
+        ],
+        [
+          "What is CrudRepository vs JpaRepository",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-803c-9dd5-f132b411f3de",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "CrudRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " provides basic CRUD (Create, Read, Update, Delete) operations."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-802e-a3b1-f2b4cd55018d",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JpaRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " extends "
+        ],
+        [
+          "CrudRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and adds more powerful features like pagination, batch operations, and custom queries."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8021-a123-d9138af44e2b",
+      "type": "text",
+      "richText": [
+        [
+          "🔹 "
+        ],
+        [
+          "How does Spring Data JPA auto-generate SQL?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-807f-8e7a-f61c860eb188",
+      "type": "text",
+      "richText": [
+        [
+          "It uses "
+        ],
+        [
+          "Java interfaces",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " and method names (like "
+        ],
+        [
+          "findByName()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ") to generate SQL queries "
+        ],
+        [
+          "at runtime",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ", using something called "
+        ],
+        [
+          "proxy classes",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8029-ba83-e8aba283db3a",
+      "type": "text",
+      "richText": [
+        [
+          "🔹 "
+        ],
+        [
+          "Entity classes and annotations (",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Entity",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Id",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-804f-bfc9-d6432dccc696",
+      "type": "text",
+      "richText": [
+        [
+          "You need to map Java classes to DB tables. This is done using "
+        ],
+        [
+          "JPA annotations",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e0-8638-da8f55013e7b",
+      "type": "text",
+      "richText": [
+        [
+          "🔹 "
+        ],
+        [
+          "Custom Queries using ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Query",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and method names",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80d4-a3c4-c39b28c3f8b7",
+      "type": "text",
+      "richText": [
+        [
+          "Spring can derive queries from method names ("
+        ],
+        [
+          "findByEmail",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ") or allow you to write native or JPQL queries using "
+        ],
+        [
+          "@Query",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8024-b067-f009279842e8",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-801d-952a-d70e77bb1f4f",
+      "type": "sub_header",
+      "richText": [
+        [
+          "3. Code Example"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8052-b808-cf9de382ce1f",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Scenario: You’re building a simple employee management system."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8045-9123-d95ae93946a9",
+      "type": "code",
+      "richText": [
+        [
+          "// 1. Entity - maps to a DB table\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.Id;\n\n@Entity\npublic class Employee {\n    @Id\n    private Long id;\n    private String name;\n    private String department;\n\n    // Constructors, Getters, Setters omitted for brevity\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20924eb1-ed54-8036-a114-c3797797b91f",
+      "type": "code",
+      "richText": [
+        [
+          "// 2. Repository - interface to access DB\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport java.util.List;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    List<Employee> findByDepartment(String department); // auto-generated query\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20924eb1-ed54-8048-8630-c98c16b40c78",
+      "type": "code",
+      "richText": [
+        [
+          "// 3. Service - business logic\nimport org.springframework.stereotype.Service;\nimport java.util.List;\n\n@Service\npublic class EmployeeService {\n    private final EmployeeRepository repository;\n\n    public EmployeeService(EmployeeRepository repository) {\n        this.repository = repository;\n    }\n\n    public List<Employee> getByDepartment(String dept) {\n        return repository.findByDepartment(dept);\n    }\n\n    public void addEmployee(Employee emp) {\n        repository.save(emp);\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20924eb1-ed54-8056-a528-e30a5138b752",
+      "type": "code",
+      "richText": [
+        [
+          "// 4. Controller - handles HTTP requests (like API endpoints)\nimport org.springframework.web.bind.annotation.*;\n\nimport java.util.List;\n\n@RestController\n@RequestMapping(\"/employees\")\npublic class EmployeeController {\n    private final EmployeeService service;\n\n    public EmployeeController(EmployeeService service) {\n        this.service = service;\n    }\n\n    @PostMapping\n    public void create(@RequestBody Employee emp) {\n        service.addEmployee(emp);\n    }\n\n    @GetMapping(\"/by-department/{dept}\")\n    public List<Employee> getByDept(@PathVariable String dept) {\n        return service.getByDepartment(dept);\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20924eb1-ed54-808f-b628-de4d5bce9eb6",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80dc-aceb-fc69683b3e92",
+      "type": "sub_header",
+      "richText": [
+        [
+          "4. Common Interview Questions"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e6-97cf-da8541c91bd0",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What’s the difference between CrudRepository and JpaRepository?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-801b-8713-ccaf4edd7c48",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How does Spring Data JPA create queries from method names?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80be-930d-c4d526d47d1b",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How do you create a custom query in a repository?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8009-a869-d09f6ef7df40",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What annotations are required to mark a class as an Entity?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8098-9c9b-c5c6a83282c7",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How does Spring handle database access without writing SQL?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80fd-b3c0-f6c3ad4629c1",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80ae-8b03-f1e328c63624",
+      "type": "sub_header",
+      "richText": [
+        [
+          "5. Best Practices & Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-809c-abfa-fbca3418b760",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "✅ Best Practices"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80a8-b9ed-d4a3a280588f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "JpaRepository",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " instead of "
+        ],
+        [
+          "CrudRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for more functionality."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8051-bf97-da106e2c3be4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "clear method names",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " like "
+        ],
+        [
+          "findByEmail()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to leverage Spring’s auto-query feature."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-807f-8695-eb033c39e153",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep your "
+        ],
+        [
+          "entity classes clean and well-annotated",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " ("
+        ],
+        [
+          "@Entity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@Id",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", etc.)."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80d7-b74a-c7d9a3985795",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "⚠️ Common Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8059-bc19-d56565bbd82d",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Forgetting the "
+        ],
+        [
+          "@Entity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "@Id",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " annotations — this breaks the mapping."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-802c-b617-f9809b8f22a2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Overusing "
+        ],
+        [
+          "@Query",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " when a method name would suffice."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80ed-8622-ddf5ba9baa88",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Using complex business logic inside repositories (violates separation of concerns)."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-801f-a05a-fbdaa0105f9a",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-800f-b5d3-dca04b50c4b1",
+      "type": "sub_header",
+      "richText": [
+        [
+          "6. Connection to Other Concepts"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-809e-a841-d56fdef1110e",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Auto-Configuration",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Automatically sets up the connection between your repository and DB using "
+        ],
+        [
+          "application.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8030-9605-d335996330d2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Dependency Injection",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Your "
+        ],
+        [
+          "EmployeeService",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " gets the "
+        ],
+        [
+          "EmployeeRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " automatically — thanks to Spring's IoC (Inversion of Control)."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805e-bb46-f8823af11922",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring MVC",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Your controller talks to the service, which talks to the repository — classic 3-layer architecture."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8010-9b7d-cc805d662f36",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80af-893d-da6890697550",
+      "type": "sub_header",
+      "richText": [
+        [
+          "7. Quick Interview Answers"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-803f-9318-fccf8d20b9f2",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Q: "
+        ],
+        [
+          "What is Spring Data JPA, and how does it help?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8085-a32d-d65c5818ae59",
+      "type": "quote",
+      "richText": [
+        [
+          "Spring Data JPA is a part of Spring Boot that simplifies working with relational databases. It allows me to define simple Java interfaces like JpaRepository, and Spring automatically provides implementations for common operations like save, delete, and find — even generating SQL based on method names."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-801c-af19-e0f3f8eef3d6",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Q: "
+        ],
+        [
+          "What’s the difference between CrudRepository and JpaRepository?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e4-8e0d-fdf38293bf3e",
+      "type": "quote",
+      "richText": [
+        [
+          "CrudRepository offers basic CRUD methods like save and delete, while JpaRepository extends it with additional features like pagination, batch operations, and more JPA-specific functionality."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80cc-a6a2-d78d6804488e",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Q: "
+        ],
+        [
+          "How do you create custom queries?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80f0-80f1-c5b51284cf95",
+      "type": "quote",
+      "richText": [
+        [
+          "I can define method names like findByDepartment() and Spring will auto-generate the SQL. For more complex queries, I use the @Query annotation to write JPQL or native SQL."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8073-bd36-f3470b8a3af9",
+      "type": "divider"
+    },
+    {
+      "id": "ed-jpa-boundaries",
+      "type": "header",
+      "richText": [
+        [
+          "ORM, JPA and Hibernate"
+        ]
+      ]
+    },
+    {
+      "id": "ed-jpa-boundaries-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "ORM means object-relational mapping. It maps Java objects and their relationships to relational tables."
+        ]
+      ]
+    },
+    {
+      "id": "ed-jpa-boundaries-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPA defines the persistence API and mapping contract. Hibernate is a common implementation of that contract."
+        ]
+      ]
+    },
+    {
+      "id": "ed-jpa-boundaries-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Data JPA builds repository support on JPA. JpaRepository is a Spring Data interface, not the JPA specification itself."
+        ]
+      ]
+    },
+    {
+      "id": "ed-jpa-boundaries-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Engineering Digest journal project uses Spring Data MongoDB. MongoRepository stores documents and does not use Hibernate to map those documents."
+        ]
+      ]
+    },
+    {
+      "id": "ed-jpa-boundaries-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose Spring Data JPA for relational persistence, such as PostgreSQL tables and JPA-managed relationships. Choose Spring Data MongoDB for a MongoDB document model."
+        ]
+      ]
+    },
+    {
+      "id": "ed-jpa-boundaries-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For Spring Boot 3 examples, JPA annotations use jakarta.persistence. Older Spring Boot 2 examples commonly use javax.persistence. Match the namespace to the project version."
+        ]
+      ]
+    },
+    {
+      "id": "ed-jpa-mongo-link",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Study MongoDB documents and repositories separately",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb"
+            ]
+          ]
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Engineering Digest: Step-by-Step Tutorial: How to Integrate MongoDB in Your Spring Boot Application",
+      "url": "https://www.youtube.com/watch?v=jvSicVdHKT8&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Data JPA: reference",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/jpa.html"
+    },
+    {
+      "title": "Spring Data MongoDB: repositories",
+      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/repositories/repositories.html"
+    },
+    {
+      "title": "Spring Boot 3: Jakarta migration",
+      "url": "https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide"
+    },
+    {
+      "title": "Hibernate ORM: architecture",
+      "url": "https://docs.jboss.org/hibernate/orm/6.6/userguide/html_single/Hibernate_User_Guide.html"
+    }
+  ],
+  "updatedOn": "2026-10-13"
+}

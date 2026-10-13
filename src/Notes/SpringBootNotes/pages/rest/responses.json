@@ -1,0 +1,164 @@
+{
+  "id": "spring-boot-rest-responses",
+  "title": "ResponseEntity and HTTP status codes",
+  "summary": "Return explicit status codes, headers and DTO bodies for successful and failed requests.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: ResponseEntity in Spring Boot in Hindi | Handling HttpStatus while creating REST API",
+      "url": "https://www.youtube.com/watch?v=tWBhE1Cn8D0&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring MVC: ResponseEntity",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/responseentity.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "responses-control",
+      "type": "header",
+      "richText": [
+        [
+          "Control the complete response"
+        ]
+      ]
+    },
+    {
+      "id": "responses-control-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "ResponseEntity<T> carries a status code, headers and an optional body of type T. A controller can choose them explicitly instead of returning only a body."
+        ]
+      ]
+    },
+    {
+      "id": "responses-control-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "200 OK fits a successful read or an update that returns data. 201 Created fits a newly created resource; a Location header tells the client where it can be read."
+        ]
+      ]
+    },
+    {
+      "id": "responses-control-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "204 No Content means success with no response body. Do not return a JSON body with 204."
+        ]
+      ]
+    },
+    {
+      "id": "responses-control-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "400 Bad Request describes invalid client input. 401 means authentication is required or failed. 403 means the authenticated caller is not allowed."
+        ]
+      ]
+    },
+    {
+      "id": "responses-control-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "404 Not Found fits a resource that cannot be found or exposed to the caller. 409 Conflict fits a request that conflicts with current resource state."
+        ]
+      ]
+    },
+    {
+      "id": "responses-control-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose status codes from the result of the operation. The annotation @PostMapping does not make every response 201 automatically."
+        ]
+      ]
+    },
+    {
+      "id": "responses-control-code",
+      "type": "code",
+      "richText": [
+        [
+          "@GetMapping(\"/{id}\")\npublic ResponseEntity<JournalResponse> find(@PathVariable String id) {\n    return journalService.findVisible(id)\n        .map(ResponseEntity::ok)\n        .orElseGet(() -> ResponseEntity.notFound().build());\n}\n\n@PostMapping\npublic ResponseEntity<JournalResponse> create(\n        @Valid @RequestBody CreateJournalRequest request) {\n    JournalResponse saved = journalService.create(request);\n    URI location = URI.create(\"/journal/\" + saved.id());\n    return ResponseEntity.created(location).body(saved);\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "responses-contract",
+      "type": "header",
+      "richText": [
+        [
+          "Keep the response contract clear"
+        ]
+      ]
+    },
+    {
+      "id": "responses-contract-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These methods belong in a controller mapped to /journal. JournalResponse is an application DTO, and the service must apply the current user’s ownership rules."
+        ]
+      ]
+    },
+    {
+      "id": "responses-contract-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "findVisible returns Optional<JournalResponse>. No visible result produces 404; a saved result produces 200 with a body."
+        ]
+      ]
+    },
+    {
+      "id": "responses-contract-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "create returns 201, the saved DTO and a Location such as /journal/42. The example assumes the service returns an identifier safe for a path segment."
+        ]
+      ]
+    },
+    {
+      "id": "responses-contract-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use request DTOs to limit which fields clients can supply. Do not allow a request body to set internal IDs, roles or ownership unchecked."
+        ]
+      ]
+    },
+    {
+      "id": "responses-contract-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "ResponseEntity controls the response envelope. @RestController and message converters still handle converting the DTO to JSON."
+        ]
+      ]
+    },
+    {
+      "id": "responses-contract-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep common error shapes in exception advice. Handle authentication failures through Spring Security’s entry point or access-denied handler when they occur before the controller."
+        ]
+      ]
+    },
+    {
+      "id": "responses-contract-b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Returning 200 with a body saying “error” makes client behavior harder to interpret. Match the HTTP status to the actual result."
+        ]
+      ]
+    }
+  ]
+}

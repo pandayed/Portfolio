@@ -7,6 +7,7 @@ import { goNotes } from '../Notes/GoNotes/goNotes';
 import { javascriptTypeScriptNotes } from '../Notes/JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
 import { reactNotes } from '../Notes/ReactNotes/reactNotes';
+import { springBootRoutes } from '../Notes/SpringBootNotes/registry';
 import { systemDesignEntryRoutes } from '../Notes/SystemDesign/registry';
 import { SYSTEM_DESIGN_ROUTE, type SystemDesignEntryRoute } from '../Notes/SystemDesign/path';
 
@@ -84,6 +85,7 @@ export type GoNoteRoute = `${typeof GO_NOTES_ROUTE}/${string}`;
 export type JavaScriptTypeScriptNoteRoute = `${typeof JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${string}`;
 export type PythonNoteRoute = `${typeof PYTHON_NOTES_ROUTE}/${string}`;
 export type ReactNoteRoute = `${typeof REACT_NOTES_ROUTE}/${string}`;
+export type SpringBootRoute = `${typeof SPRING_BOOT_NOTES_ROUTE}/${string}`;
 
 export type Route =
     | typeof HOME_ROUTE
@@ -125,6 +127,7 @@ export type Route =
     | JavaNoteRoute
     | typeof JAVA_PROGRAM_EXECUTION_ROUTE
     | typeof SPRING_BOOT_NOTES_ROUTE
+    | SpringBootRoute
     | typeof SPRING_BOOT_FIRST_APPLICATION_ROUTE
     | typeof SPRING_BOOT_ANNOTATIONS_ROUTE
     | typeof DRAFTS_ROUTE
@@ -223,6 +226,7 @@ const routes: Route[] = [
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,
+    ...springBootRoutes,
     DRAFTS_ROUTE,
     ARCHIVE_ROUTE,
     CPP_COMPLEXITY_ROUTE,
@@ -256,6 +260,9 @@ const routes: Route[] = [
 ];
 
 export const toHref = (route: Route): string => `#${route}`;
+
+export const isSpringBootRoute = (route: string): route is SpringBootRoute =>
+    springBootRoutes.some((springBootRoute) => springBootRoute === route);
 
 export const parseRoute = (hash: string): Route => {
     const rawPath = hash.replace(/^#/, '');

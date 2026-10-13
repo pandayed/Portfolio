@@ -44,6 +44,7 @@ import JavaProgramExecution from './Notes/JavaNotes/JavaProgramExecution';
 import SpringBootNotesIndex from './Notes/SpringBootNotes/SpringBootNotesIndex';
 import SpringBootFirstApplication from './Notes/SpringBootNotes/SpringBootFirstApplication';
 import SpringBootAnnotations from './Notes/SpringBootNotes/SpringBootAnnotations';
+import SpringBootNote from './Notes/SpringBootNotes/SpringBootNote';
 import Drafts from './Blogs/Drafts';
 import Archive from './Blogs/Archive';
 import CppComplexity from './Blogs/CppComplexity/CppComplexity';
@@ -110,6 +111,7 @@ import {
     SPRING_BOOT_NOTES_ROUTE,
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,
+    isSpringBootRoute,
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
@@ -254,6 +256,8 @@ function App() {
                     <DBMSNote route={route as DBMSNoteRoute} />
                 ) : isJavaNote ? (
                     <JavaNote route={route as JavaNoteRoute} />
+                ) : isSpringBootRoute(route) ? (
+                    <SpringBootNote route={route} />
                 ) : CurrentPage ? (
                     <CurrentPage />
                 ) : (

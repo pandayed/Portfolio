@@ -1,0 +1,265 @@
+{
+  "id": "spring-boot-mongodb",
+  "title": "Spring Data MongoDB",
+  "summary": "Connect Spring Boot to MongoDB and choose the right persistence model.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: One-Stop Solution: Installing MongoDB on Mac, Lubuntu, Fedora, Windows 11",
+      "url": "https://www.youtube.com/watch?v=LtnVqa5dYLA&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: A Beginner's Walkthrough to MongoDB: Key Concepts Simplified",
+      "url": "https://www.youtube.com/watch?v=3Dc8YxC0p-s&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Step-by-Step Tutorial: How to Integrate MongoDB in Your Spring Boot Application",
+      "url": "https://www.youtube.com/watch?v=jvSicVdHKT8&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Connecting Spring Boot to MongoDB Atlas: A Step-by-Step Tutorial",
+      "url": "https://www.youtube.com/watch?v=HjDyv7gL4Wg&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Boot 3: MongoDB configuration",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/data/nosql.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "mongo-basics",
+      "type": "header",
+      "richText": [
+        [
+          "Documents and collections"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-basics-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "MongoDB stores documents. A document contains named fields and values, including nested objects and arrays."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-basics-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "BSON is MongoDB’s stored document format. It supports types such as dates and ObjectId in addition to JSON values."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-basics-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A collection groups documents. The journal example uses journal_entries for entries and users for users."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-basics-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Each document has an _id. ObjectId is one possible identifier type. Use the same Java ID type in the document and its repository."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-basics-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Flexible document structure does not remove validation requirements. Validate incoming data before saving it."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-basics-code",
+      "type": "code",
+      "richText": [
+        [
+          "{\n  \"_id\": { \"$oid\": \"65a1e11bf26d918703d00123\" },\n  \"title\": \"Learning Spring\",\n  \"content\": \"Added MongoDB persistence\"\n}"
+        ]
+      ],
+      "language": "JSON"
+    },
+    {
+      "id": "mongo-setup",
+      "type": "header",
+      "richText": [
+        [
+          "Connect Spring Boot"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-setup-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Add spring-boot-starter-data-mongodb for blocking MongoDB access. Let the Spring Boot parent or BOM manage its dependency version."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-setup-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "BOM means bill of materials. It selects compatible dependency versions for the chosen Spring Boot release."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-setup-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot configures the MongoDB client, MongoTemplate and repository support when the dependencies and settings are available."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-setup-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a local MongoDB instance for local learning, or Atlas for a managed MongoDB deployment. Atlas still requires a database user and permitted network access."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-setup-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep the full connection URI in the MONGODB_URI environment variable. Include the intended database in that URI. Do not commit database credentials."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-setup-code",
+      "type": "code",
+      "richText": [
+        [
+          "<!-- pom.xml -->\n<dependency>\n    <groupId>org.springframework.boot</groupId>\n    <artifactId>spring-boot-starter-data-mongodb</artifactId>\n</dependency>"
+        ]
+      ],
+      "language": "XML"
+    },
+    {
+      "id": "mongo-config",
+      "type": "header",
+      "richText": [
+        [
+          "Configuration and boundaries"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-config-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These additions use Spring Boot 3 and Java 17. The course repository uses Spring Boot 2.7.16 and Java 8. Match documentation and dependency versions to your project."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-config-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A connection failure can come from the URI, authentication, network access or an unavailable server. Adding a starter alone does not prove the database connection works."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-config-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose MongoDB when your data and read patterns fit documents. Choose a relational database when your design depends on relational constraints and joins."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-config-code",
+      "type": "code",
+      "richText": [
+        [
+          "spring.data.mongodb.uri=${MONGODB_URI}"
+        ]
+      ],
+      "language": "Properties"
+    },
+    {
+      "id": "mongo-next-repos",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Document mapping and repositories",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb/repositories"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "mongo-next-relations",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Relationships and references",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb/relationships"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "mongo-next-tx",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "MongoDB transactions",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb/transactions"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "mongo-next-query",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "MongoTemplate queries",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb/queries"
+            ]
+          ]
+        ]
+      ]
+    }
+  ]
+}

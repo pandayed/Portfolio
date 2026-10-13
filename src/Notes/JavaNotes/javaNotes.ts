@@ -11,6 +11,7 @@ import lambdasAndStreams from './data/lambdas-and-streams';
 import exceptionsAndResources from './data/exceptions-and-resources';
 import filesAndPaths from './data/files-and-paths';
 import threadsAndConcurrency from './data/threads-and-concurrency';
+import multithreading from './data/multithreading';
 
 export const javaChapters: readonly LearningChapter[] = [
     {
@@ -35,7 +36,7 @@ export const javaChapters: readonly LearningChapter[] = [
         id: 'errors-files-and-concurrency',
         title: '4. Errors, files, and concurrency',
         summary: 'Exceptions, resource cleanup, file operations, threads, and executors.',
-        notes: [exceptionsAndResources, filesAndPaths, threadsAndConcurrency],
+        notes: [exceptionsAndResources, filesAndPaths, threadsAndConcurrency, multithreading],
     },
 ];
 

@@ -1,0 +1,201 @@
+{
+  "id": "spring-boot-mongodb-repositories",
+  "title": "MongoDB Documents and Repositories",
+  "summary": "Map documents, use MongoRepository and handle IDs and indexes.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Step-by-Step Tutorial: How to Integrate MongoDB in Your Spring Boot Application",
+      "url": "https://www.youtube.com/watch?v=jvSicVdHKT8&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Data MongoDB: repositories",
+      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/repositories/repositories.html"
+    },
+    {
+      "title": "Spring Data MongoDB: object mapping",
+      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/mapping/mapping.html"
+    },
+    {
+      "title": "Spring Data MongoDB: index creation",
+      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/mapping/mapping-index-management.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "mongo-repo-mapping",
+      "type": "header",
+      "richText": [
+        [
+          "Map a Java object"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-mapping-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Document selects a MongoDB collection. @Id maps a Java field to the document’s _id."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-mapping-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use org.springframework.data.annotation.Id for MongoDB. jakarta.persistence.Id belongs to JPA and is a different annotation."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-mapping-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Data maps fields to document values. Lombok can generate accessors, but Lombok does not configure persistence or validate an HTTP request."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-mapping-code",
+      "type": "code",
+      "richText": [
+        [
+          "import lombok.Data;\nimport org.bson.types.ObjectId;\nimport org.springframework.data.annotation.Id;\nimport org.springframework.data.mongodb.core.mapping.Document;\n\n@Data\n@Document(collection = \"journal_entries\")\npublic class JournalEntry {\n    @Id private ObjectId id;\n    private String title;\n    private String content;\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "mongo-repo-interface",
+      "type": "header",
+      "richText": [
+        [
+          "Declare a repository"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-interface-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A repository is the persistence interface used by your service. Spring Data creates its implementation as a Spring bean."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-interface-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "MongoRepository<JournalEntry, ObjectId> identifies the document type and its ID type. It supplies save, findById, findAll and deleteById."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-interface-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Derived queries are queries built from method names. findByTitle searches the title property. A misspelled property can prevent repository creation."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-interface-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose a derived method for a stable, simple query. Choose MongoTemplate when optional filters or explicit updates make a method name unclear."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-interface-code",
+      "type": "code",
+      "richText": [
+        [
+          "import org.bson.types.ObjectId;\nimport org.springframework.data.mongodb.repository.MongoRepository;\nimport java.util.List;\n\npublic interface JournalEntryRepository\n        extends MongoRepository<JournalEntry, ObjectId> {\n    List<JournalEntry> findByTitle(String title);\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "mongo-repo-flow",
+      "type": "header",
+      "richText": [
+        [
+          "Save and read boundaries"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-flow-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep HTTP handling in the controller and business rules in a service. Inject the repository into that service."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-flow-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "save persists the document. A new document can receive a generated ID. Saving an existing ID can replace stored fields, so do not pass a partial request object directly as a replacement."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-flow-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "findById returns Optional because an ID may not exist. Convert absence into the API’s chosen response, such as 404."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-flow-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Validate ObjectId text before constructing it at an HTTP boundary. A malformed ID differs from a valid ID with no matching document."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-flow-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Indexed(unique = true) describes a unique index. It enforces uniqueness only after the database index exists. Automatic index creation is disabled by default in Spring Data MongoDB."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-flow-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Create required indexes deliberately. Existing duplicates can prevent a unique index from being created. A pre-save lookup alone cannot prevent concurrent duplicates."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-repo-flow-code",
+      "type": "code",
+      "richText": [
+        [
+          "import java.util.Optional;\n\nJournalEntry entry = new JournalEntry();\nentry.setTitle(\"Learning Spring\");\nJournalEntry saved = repository.save(entry);\nOptional<JournalEntry> found = repository.findById(saved.getId());"
+        ]
+      ],
+      "language": "Java"
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "id": "spring-boot-kafka-delivery-failures",
+  "title": "Kafka Failures, Retries, and Fallback",
+  "summary": "Distinguish failed publishing, uncertain acknowledgment, consumer retries, and duplicate-prone email fallback.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Kafka Fallback: What if Kafka doesn't work ?",
+      "url": "https://www.youtube.com/watch?v=OG9vXOQsi5k&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Kafka message sending",
+      "url": "https://docs.spring.io/spring-kafka/reference/kafka/sending-messages.html"
+    },
+    {
+      "title": "Spring Kafka error handling",
+      "url": "https://docs.spring.io/spring-kafka/reference/kafka/annotation-error-handling.html"
+    },
+    {
+      "title": "Spring Kafka exactly-once semantics",
+      "url": "https://docs.spring.io/spring-kafka/reference/kafka/exactly-once.html"
+    },
+    {
+      "title": "Engineering Digest journalApp source",
+      "url": "https://github.com/EngineeringDigest/journalApp"
+    },
+    {
+      "title": "Debezium outbox pattern",
+      "url": "https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html"
+    },
+    {
+      "title": "Kafka producer idempotence configuration",
+      "url": "https://kafka.apache.org/40/configuration/producer-configs/"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "delivery-boundaries",
+      "type": "header",
+      "richText": [
+        [
+          "Identify which operation failed"
+        ]
+      ]
+    },
+    {
+      "id": "delivery-boundaries-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Publishing, processing, and sending email are separate operations. Kafka and SMTP failures need different responses."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-boundaries-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "KafkaTemplate.send can fail immediately or complete its future exceptionally later. A try/catch around send alone misses asynchronous failures."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-boundaries-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Wait for the future or attach a callback. Record failures by event ID without logging private message bodies."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-boundaries-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A timeout means the caller stopped waiting. The broker may still have accepted the record. Sending email directly as a fallback can then duplicate the consumer’s email."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-boundaries-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These notes use Spring Boot 3, Spring Kafka 3+, and Java 17. The strategy below extends the course fallback topic."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-scenario",
+      "type": "header",
+      "richText": [
+        [
+          "Acknowledge uncertainty instead of claiming success"
+        ]
+      ]
+    },
+    {
+      "id": "delivery-scenario-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Example: digest-42-2026-W41 times out after five seconds. Kafka later completes the send and the consumer sends email."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-scenario-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Direct email fallback after this timeout sends a second email. A failed wait does not prove Kafka stored nothing."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-scenario-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For broker outages, first save a durable outbox record. An outbox records work still waiting to be published."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-scenario-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Save the business change and outbox record in one database transaction when both use a transaction-capable database setup."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-scenario-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A worker retries pending outbox records and marks them published only after broker acknowledgment. After a crash, the worker may publish a record again, so the consumer still needs duplicate handling."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-scenario-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Return a pending or queued state only after durable storage succeeds. If storage also fails, report failure. A log message does not preserve the event."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry",
+      "type": "header",
+      "richText": [
+        [
+          "Retry consumer failures with a limit"
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Let processing exceptions escape the listener. Configure DefaultErrorHandler with bounded backoff for temporary failures."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A backoff waits between attempts. For example, one initial attempt plus two retries with a one-second pause gives three processing attempts."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "After attempts are exhausted, send the failed record to a dead-letter topic with DeadLetterPublishingRecoverer. A dead-letter topic stores failed records for investigation and controlled replay."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Verify dead-letter publishing before completing recovery. Monitor failed records, retries, and consumer lag."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Skip retries for invalid event formats or permanent business errors. Repeatedly sending the same invalid payload does not correct it."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-guarantees",
+      "type": "header",
+      "richText": [
+        [
+          "Know the limits of duplicate prevention"
+        ]
+      ]
+    },
+    {
+      "id": "delivery-guarantees-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Producer idempotence prevents certain duplicate Kafka writes caused by producer retries. It does not make an external email happen exactly once."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-guarantees-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Kafka transactions support exactly-once results for supported Kafka read-process-write flows. SMTP is outside that Kafka transaction."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-guarantees-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A unique event ID lets the consumer detect repeated work. A local “sent” record and an external email cannot be committed atomically through ordinary SMTP."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-guarantees-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Sending before recording completion risks duplicates after a crash. Recording completion first risks losing the email."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-guarantees-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a mail provider with idempotent submission if the contract supports it. Otherwise document the remaining duplicate risk and choose the retry behavior explicitly."
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "id": "spring-boot-mongodb-queries",
+  "title": "MongoTemplate, Criteria and Query",
+  "summary": "Build explicit filters with validated values, bounded results and clear query choices.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Mastering MongoTemplate, Criteria, and Query in Spring Boot MongoDB",
+      "url": "https://www.youtube.com/watch?v=EL2ouT5P4Lc&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Data MongoDB: querying documents",
+      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/template-query-operations.html"
+    },
+    {
+      "title": "MongoDB: regex query behavior",
+      "url": "https://www.mongodb.com/docs/manual/reference/operator/query/regex/"
+    },
+    {
+      "title": "Java 17: Pattern.quote",
+      "url": "https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "mongo-query-tools",
+      "type": "header",
+      "richText": [
+        [
+          "MongoTemplate, Criteria and Query"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-tools-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "MongoTemplate is Spring Data’s API for explicit MongoDB operations. Inject the bean configured by Spring Boot into a service or repository component."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-tools-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Criteria describes a condition. Query contains conditions and options such as sorting, projection and result limits."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-tools-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose MongoRepository methods for simple fixed searches. Choose MongoTemplate when filters depend on runtime choices or you need explicit update operations."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-tools-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The course filters users by sentimentAnalysis and email. Build business conditions separately from request validation. An email pattern alone cannot prove an address can receive mail."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-tools-code",
+      "type": "code",
+      "richText": [
+        [
+          "import org.springframework.data.mongodb.core.query.Criteria;\nimport org.springframework.data.mongodb.core.query.Query;\n\nQuery query = new Query(Criteria.where(\"sentimentAnalysis\").is(true));\nquery.addCriteria(Criteria.where(\"email\").exists(true).ne(null));\nquery.limit(100);\nList<User> users = mongoTemplate.find(query, User.class);"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "mongo-query-values",
+      "type": "header",
+      "richText": [
+        [
+          "Pass values, keep operators controlled"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-values-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "is(value) performs equality matching. Conditions on different fields in this query combine with AND."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-values-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep field names and operators under application control. Pass validated values through Criteria rather than concatenating user input into a raw JSON query."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-values-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Regex means regular expression, a pattern used to match text. Use equality for an exact username lookup."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-values-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "If a feature needs a literal prefix search, bound the input length and quote the prefix. Pattern.quote prevents regex symbols in the input from becoming pattern instructions."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-values-code",
+      "type": "code",
+      "richText": [
+        [
+          "import java.util.regex.Pattern;\n\nif (prefix == null || prefix.isBlank() || prefix.length() > 50) {\n    throw new IllegalArgumentException(\"Invalid username prefix\");\n}\nPattern literalPrefix = Pattern.compile(\"^\" + Pattern.quote(prefix));\nQuery query = new Query(Criteria.where(\"userName\").regex(literalPrefix));\nquery.limit(20);\nList<User> users = mongoTemplate.find(query, User.class);"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "mongo-query-read",
+      "type": "header",
+      "richText": [
+        [
+          "Bound results and inspect query work"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-read-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A limit caps one result set. It does not provide a full pagination design or guarantee stable ordering."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-read-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose deterministic sorting when paging. For equal sort values, add a unique field such as _id to break ties."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-read-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Projection selects only required fields. Use a response DTO, a separate object for API output, when partial data should not be treated as a complete persistent User."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-read-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An index helps MongoDB locate matching documents. Check indexes and explain output for real query patterns. Do not assume any regex query will use an index efficiently."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-read-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "find returns an empty list when nothing matches. Distinguish that result from authentication, connection or query failures."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-query-read-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A query filter is not authorization by itself. Include the authenticated owner’s ID when reading private journal data."
+        ]
+      ]
+    }
+  ]
+}

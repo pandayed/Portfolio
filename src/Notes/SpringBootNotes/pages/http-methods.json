@@ -1,0 +1,689 @@
+{
+  "id": "20824eb1-ed54-80e2-adef-e2fa4afe046d",
+  "title": "HTTP Methods and @GetMapping, @PostMapping, @PutMapping, @DeleteMapping",
+  "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed5480e2adefe2fa4afe046d",
+  "blocks": [
+    {
+      "id": "20824eb1-ed54-8013-b68c-ff5a3c832c66",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-804c-a738-e5aac950ffc1",
+      "type": "header",
+      "richText": [
+        [
+          "1. Core Concept"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8054-9a41-ceaf505ac1db",
+      "type": "text",
+      "richText": [
+        [
+          "HTTP methods define the type of action a client wants to perform on a server resource, such as fetching, creating, updating, or deleting data. In Spring Boot, the annotations "
+        ],
+        [
+          "@GetMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PostMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PutMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "@DeleteMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " map these HTTP methods to Java methods, making it easy to handle web requests and build RESTful APIs."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8080-8649-c93cfa501022",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-801f-b25e-dfc324609092",
+      "type": "header",
+      "richText": [
+        [
+          "2. Key Interview Points"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8071-b689-ea4716a6459c",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Purpose of HTTP Methods:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Understand what each HTTP method is used for — GET (read), POST (create), PUT (update/replace), DELETE (remove)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ff-b6cd-ec25cc3de2c0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Mapping Annotations:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Know how "
+        ],
+        [
+          "@GetMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PostMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", etc., are shorthand for "
+        ],
+        [
+          "@RequestMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with specific HTTP methods."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803d-8d1b-c0063beee9b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Idempotency:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " GET, PUT, and DELETE are idempotent (calling them multiple times has the same effect as once), but POST is not."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8003-91cc-fdef0466eb7e",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Handling Request and Response:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " How data is passed (query params, request body) and how responses are returned (JSON, status codes)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-809b-8218-f764e5e87af6",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80be-9863-db45269d1963",
+      "type": "header",
+      "richText": [
+        [
+          "3. Code Example"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8097-93ac-cb9c1546e977",
+      "type": "code",
+      "richText": [
+        [
+          "import org.springframework.web.bind.annotation.*;\n\nimport java.util.HashMap;\nimport java.util.Map;\n\n@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n\n    private Map<Integer, String> users = new HashMap<>();\n\n    // GET method: Fetch user by id\n    @GetMapping(\"/{id}\")\n    public String getUser(@PathVariable Integer id) {\n        return users.getOrDefault(id, \"User not found\");\n    }\n\n    // POST method: Create a new user\n    @PostMapping(\"/\")\n    public String createUser(@RequestParam Integer id, @RequestParam String name) {\n        users.put(id, name);\n        return \"User created\";\n    }\n\n    // PUT method: Update existing user\n    @PutMapping(\"/{id}\")\n    public String updateUser(@PathVariable Integer id, @RequestParam String name) {\n        if(users.containsKey(id)) {\n            users.put(id, name);\n            return \"User updated\";\n        }\n        return \"User not found\";\n    }\n\n    // DELETE method: Delete user by id\n    @DeleteMapping(\"/{id}\")\n    public String deleteUser(@PathVariable Integer id) {\n        if(users.remove(id) != null) {\n            return \"User deleted\";\n        }\n        return \"User not found\";\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20824eb1-ed54-8038-908a-e748e32d590b",
+      "type": "text",
+      "richText": [
+        [
+          "Explanation:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8038-b6c2-d5e980ba8cc3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RestController",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " marks the class as a REST API controller, so Spring Boot handles HTTP requests and returns JSON/text responses automatically."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8088-b992-d0d72bfbb59a",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RequestMapping(\"/api/users\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " sets the base URL."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-804d-a6df-cbf73ff1599f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Each mapping annotation corresponds to an HTTP method and maps the URL path to Java methods."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803f-873b-d1b7cb762763",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8070-b1f7-ef9b65f433dc",
+      "type": "header",
+      "richText": [
+        [
+          "4. Common Interview Questions"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8007-b0f9-f027bf1379ab",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What are the main HTTP methods, and what do they do?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8031-b54b-d8da0e82f976",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What is the difference between "
+        ],
+        [
+          "@GetMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "@PostMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ce-8895-c912629ab728",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Why is POST not idempotent, but PUT and DELETE are?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807f-a969-f933e5d1e2c9",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How do you extract path variables or request parameters in Spring Boot controllers?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80a1-90dc-c238a4091e7d",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Can you explain what happens behind the scenes when a client calls a "
+        ],
+        [
+          "@GetMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " endpoint?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80d6-a5b8-dab77917d2ae",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-807f-af00-e9a6fa5fc552",
+      "type": "header",
+      "richText": [
+        [
+          "5. Best Practices & Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8040-adee-eb507d760cb5",
+      "type": "text",
+      "richText": [
+        [
+          "Best Practices:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8005-9104-ef2e7915d2f2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use appropriate HTTP methods semantically (e.g., don’t use GET to delete data)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803b-adb5-efcabaac4cbb",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep APIs RESTful — the method name should reflect the action clearly."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8093-a099-c8cebfbedf25",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use path variables for resource identifiers ("
+        ],
+        [
+          "/users/{id}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ") and request body or params for data."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80fd-aa68-d68873420eaa",
+      "type": "text",
+      "richText": [
+        [
+          "Pitfalls to Avoid:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8067-8b58-c966128b09c6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Misusing HTTP methods, e.g., using POST for operations that should be GET or PUT."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80e8-a6ef-c4e07b7c992e",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Not handling cases when a resource isn’t found, leading to unclear responses."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80af-8d0e-ce712a915cf4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Ignoring idempotency implications, which can cause unexpected results in clients or caching."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ea-b3c5-f735ec37e63d",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80b8-83b1-f478d3090152",
+      "type": "header",
+      "richText": [
+        [
+          "6. Connection to Other Concepts"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ef-a309-f85e672f12f4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Controllers & REST APIs:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " These mappings are part of Spring MVC, the framework that handles web requests."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8090-b72b-ca2b8890898d",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Request Body & Response Entity:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Often combined with "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for POST/PUT to accept JSON data."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80c3-993f-cfdf75b99b01",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Exception Handling:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " You’ll want to handle errors (like user not found) using Spring’s exception handling mechanism ("
+        ],
+        [
+          "@ControllerAdvice",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8020-abdb-d69b1cd863bc",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Beans & Dependency Injection:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Controllers themselves are Spring-managed beans, created and injected automatically."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80a6-bc49-e18efd710ace",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80ad-b89b-e4ae62d39b57",
+      "type": "header",
+      "richText": [
+        [
+          "7. Quick Interview Answers"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-808a-ab5a-d73b4eafb177",
+      "type": "text",
+      "richText": [
+        [
+          "Q: What are the HTTP methods and how do ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@GetMapping",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@PostMapping",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", etc., relate to them?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8005-b7d1-eeec81838823",
+      "type": "text",
+      "richText": [
+        [
+          "A: HTTP methods define the action a client wants to perform on a resource — GET to read, POST to create, PUT to update, and DELETE to remove data. In Spring Boot, the annotations "
+        ],
+        [
+          "@GetMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PostMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PutMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "@DeleteMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " map these HTTP requests to Java methods, allowing us to handle these actions easily in REST APIs."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80d7-96de-f6d4bf631f50",
+      "type": "divider"
+    }
+  ]
+}

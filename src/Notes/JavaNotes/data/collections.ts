@@ -5,36 +5,45 @@ const note: LearningNote = {
     title: 'Lists, sets, and maps',
     summary: 'Choose a collection by duplicates, ordering, and lookup needs. Read and update values safely, and understand mutability and hash-based equality.',
     scope: 'java',
-    updatedOn: '2026-10-05',
+    updatedOn: '2026-10-13',
     sections: [
         {
             id: 'choose-collection',
             title: 'Choose by the operations you need',
-            paragraphs: [
-                'List stores a sequence with indexes and permits duplicates. Set stores distinct elements. Map associates each distinct key with one value. Map is part of the collections framework, but does not extend Collection.',
-                'Declare the variable with the interface when callers only need its contract. Choose the implementation to control ordering and operation costs.',
-            ],
             bullets: [
-                'ArrayList: a common list choice. Indexed access is constant time. Adding at the end is amortized constant time. Inserting or removing in the middle shifts later elements.',
-                'HashSet and HashMap: use hashing for membership and key lookup. Do not rely on their iteration order.',
-                'LinkedHashSet and a normal LinkedHashMap: preserve insertion order. LinkedHashMap also has an optional access-order mode.',
-                'TreeSet and TreeMap: keep elements or keys sorted by natural order or a Comparator. Core lookup and update operations take logarithmic time.',
-                'ArrayDeque: use for a queue or stack rather than removing from the front of an ArrayList.',
+                'A List stores elements in a sequence. Each element has an index, and duplicate elements are allowed.',
+                'A Set stores distinct elements.',
+                'A Map associates each distinct key with one value.',
+                'Map belongs to the collections framework, but it does not extend Collection.',
+                'Declare a variable using the interface when callers only need its operations.',
+                'Choose an implementation based on ordering and operation costs.',
+                'ArrayList gives constant-time indexed access: the list size does not increase the number of steps.',
+                'Adding at the end of an ArrayList takes amortized constant time. Occasional resizing adds work, but the average cost per addition stays constant.',
+                'Inserting or removing in the middle of an ArrayList shifts later elements.',
+                'HashSet and HashMap use hashing to find elements or keys from their hash codes. Their iteration order is not guaranteed.',
+                'LinkedHashSet and a normal LinkedHashMap preserve insertion order.',
+                'LinkedHashMap also supports access order, which changes the order when entries are accessed.',
+                'TreeSet and TreeMap sort elements or keys. They use natural order or a Comparator, which defines how two values compare.',
+                'Their core lookup and update operations take logarithmic time. Doubling the size adds a roughly fixed number of steps.',
+                'ArrayDeque supports queue and stack operations. Use it instead of repeatedly removing the first element of an ArrayList.',
             ],
             pitfalls: [
-                'List, Set, and Map interfaces do not imply thread safety. Choose a concurrency approach before sharing mutable collections across threads.',
+                'List, Set, and Map do not guarantee thread safety. Decide how threads will coordinate access before sharing a mutable collection.',
                 'Null support varies by implementation and factory. List.of, Set.of, and Map.of reject null.',
             ],
         },
         {
             id: 'list-operations',
             title: 'List indexes and the two remove overloads',
-            paragraphs: [
-                'List indexes start at zero. get reads an element, set replaces it, and add inserts or appends it. ArrayList grows as elements are added.',
-                'For List<Integer>, remove(1) removes the element at index 1. remove(Integer.valueOf(1)) removes the first element equal to the value 1.',
+            bullets: [
+                'List indexes start at zero.',
+                'get reads an element. set replaces an element. add inserts or appends an element.',
+                'ArrayList grows as you add elements.',
+                'For List<Integer>, remove(1) removes the element at index 1.',
+                'remove(Integer.valueOf(1)) removes the first element equal to the value 1.',
             ],
             examples: [{
-                title: 'Main.java: remove by position and by value',
+                title: 'Remove by position and by value',
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -56,18 +65,22 @@ public class Main {
             }],
             pitfalls: [
                 'get, set, and remove(index) need an index below size(). An empty list has no valid element index.',
-                'Do not structurally modify an ArrayList inside an enhanced for loop. Use removeIf, or an Iterator and its remove method when appropriate.',
+                'Do not add or remove elements from an ArrayList inside an enhanced for loop. Use removeIf, or use an Iterator and its remove method.',
             ],
         },
         {
             id: 'sets-and-maps',
             title: 'Distinct values and lookup by key',
-            paragraphs: [
-                'Set.add returns false when an equal element is already present. Map.put replaces an existing value for the same key. Iterating entrySet gives both the key and its value.',
-                'getOrDefault returns the default only when there is no mapping. If a map permits null and maps the key to null, getOrDefault returns null. containsKey distinguishes that case from a missing key.',
+            bullets: [
+                'Set.add returns false when the set already contains an equal element.',
+                'Map.put replaces the existing value for the same key.',
+                'entrySet lets you read each key and its value together.',
+                'getOrDefault returns the default only when the map has no entry for that key.',
+                'If the map allows null values and the key maps to null, getOrDefault returns null.',
+                'containsKey tells you whether the key exists. Use it to distinguish a null value from a missing key.',
             ],
             examples: [{
-                title: 'Main.java: ordered tags and a word count',
+                title: 'Ordered tags and a word count',
                 language: 'java',
                 code: `import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -97,18 +110,23 @@ public class Main {
             }],
             pitfalls: [
                 'getOrDefault does not insert the default into the map. put performs the update in this example.',
-                'The read-then-write count is suitable for this single-threaded example. It is not an atomic update for concurrent callers.',
+                'This count reads a value and then writes the new value. These steps are not one atomic update, so concurrent callers can lose updates.',
             ],
         },
         {
             id: 'collection-mutability',
             title: 'Mutable collections, fixed size, and unmodifiable views',
-            paragraphs: [
-                'new ArrayList<>(values) creates a mutable list with copied element references. List.of creates an unmodifiable list. Neither deep-copies the objects inside it.',
-                'Arrays.asList returns a fixed-size list backed by the array. set is allowed, but add and remove are not. Collections.unmodifiableList wraps a list with an unmodifiable view. Changes through the original list are still visible through that view.',
+            bullets: [
+                'A mutable collection allows changes. An unmodifiable collection rejects changes through its reference.',
+                'new ArrayList<>(values) creates a mutable list and copies the element references.',
+                'List.of creates an unmodifiable list. Neither operation copies the element objects.',
+                'Arrays.asList returns a fixed-size list that uses the original array for its elements.',
+                'You can use set on that list. You cannot add or remove elements.',
+                'Collections.unmodifiableList creates an unmodifiable view of an existing list.',
+                'A view uses the original list. Changes made through the original list also appear in the view.',
             ],
             examples: [{
-                title: 'Main.java: compare a view and a copy',
+                title: 'Compare a view and a copy',
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,19 +151,20 @@ public class Main {
                 result: 'Prints [ready, review], [A, B], and [A] on separate lines. The copy keeps the original membership while the view reflects source changes.',
             }],
             pitfalls: [
-                'Unmodifiable means collection operations cannot change membership through that reference. Mutable element objects can still change.',
+                'An unmodifiable collection can still contain mutable objects. The contents of those objects can change.',
                 'Set.of rejects duplicate arguments. Map.of rejects duplicate keys. Do not assume their iteration order matches argument order.',
             ],
         },
         {
             id: 'equals-hashcode',
             title: 'Hash-based collections need matching equality and hash codes',
-            paragraphs: [
-                'HashSet uses equals and hashCode to identify equal elements. HashMap does the same for keys. Equal objects must have equal hash codes. Different objects may have the same hash code, so equality checks still matter.',
-                'If you override equals in a class, implement hashCode from the same fields. A record supplies both methods using its components, which fits simple value keys.',
+            bullets: [
+                'HashSet uses equals and hashCode to identify equal elements. HashMap uses them to identify equal keys.',
+                'Override hashCode when you override equals. Use the same fields for both methods.',
+                'A record supplies both methods using its components. Records with immutable components can serve as value keys.',
             ],
             examples: [{
-                title: 'Main.java: two value keys identify one account',
+                title: 'Two value keys identify one account',
                 language: 'java',
                 code: `import java.util.HashMap;
 import java.util.Map;
@@ -167,7 +186,7 @@ public class Main {
             }],
             pitfalls: [
                 'Do not change fields used by equals or hashCode while an object is a set element or map key. Lookup may search using a different hash than the one used at insertion.',
-                'TreeSet and TreeMap use ordering comparisons to identify equivalent elements or keys. Keep the comparator consistent with equals when you need normal Set or Map equality behavior.',
+                'TreeSet and TreeMap treat two values as equivalent when their ordering comparison returns zero. Make that result agree with equals when you need the normal Set or Map equality rules.',
             ],
         },
     ],

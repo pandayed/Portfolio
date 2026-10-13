@@ -1,0 +1,190 @@
+{
+  "id": "spring-boot-deployment-cloud",
+  "title": "Deploy a Spring Boot application on managed hosting",
+  "summary": "Match the Java runtime, assigned port, external configuration, storage and release checks to the host.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Deploy Spring Boot App on Heroku: Easy Guide for Beginners",
+      "url": "https://www.youtube.com/watch?v=Q0Rhup_Vjlk&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Heroku: Java getting started",
+      "url": "https://devcenter.heroku.com/articles/getting-started-with-java"
+    },
+    {
+      "title": "Heroku: Java runtime support",
+      "url": "https://devcenter.heroku.com/articles/java-support"
+    },
+    {
+      "title": "Spring Boot: cloud deployment",
+      "url": "https://docs.spring.io/spring-boot/3.5/how-to/deployment/cloud.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "cloud-process",
+      "type": "header",
+      "richText": [
+        [
+          "Build, configuration and process"
+        ]
+      ]
+    },
+    {
+      "id": "cloud-process-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Managed hosting provides an environment in which your application process runs. You still choose the artifact, runtime settings, database access and application checks."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-process-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Build the executable JAR with the project’s wrapper and declared Java version. Select a host runtime that supports that Java version."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-process-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bind to the port assigned by the platform. In the Heroku example, PORT is supplied at runtime and Spring can read it through a property placeholder."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-process-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep database connections and external API credentials in the host’s configuration or secret system. Keep application defaults in the artifact."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-process-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A Procfile tells the classic Heroku process model how to launch a web process. The JAR path must match the artifact your build actually produces."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-process-code",
+      "type": "code",
+      "richText": [
+        [
+          "# application.properties\nserver.port=${PORT:8080}\n\n# Procfile, with Maven finalName set to journal\nweb: java -jar target/journal.jar"
+        ]
+      ],
+      "language": "Plain Text"
+    },
+    {
+      "id": "cloud-storage",
+      "type": "header",
+      "richText": [
+        [
+          "External services and readiness"
+        ]
+      ]
+    },
+    {
+      "id": "cloud-storage-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An application restart must not lose user data. Use an external database and persistent object storage when needed; do not depend on an ephemeral application filesystem."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-storage-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For MongoDB Atlas, configure the database user and the network access rules needed by the host. A URI alone does not grant network access."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-storage-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Read the platform build log, process log and application startup log separately. A successful upload does not prove the process started."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-storage-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Confirm the app binds to the required port and answers a readiness request. Then check a representative authenticated API request and a database read/write."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-storage-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Platform termination and restart are normal possibilities. Handle shutdown and make retried operations safe rather than assuming a process runs forever."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-release",
+      "type": "header",
+      "richText": [
+        [
+          "A release and its limits"
+        ]
+      ]
+    },
+    {
+      "id": "cloud-release-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The playlist’s Heroku lesson is a deployment topic. Follow the current instructions for the Heroku generation and runtime you use rather than treating old commands as a fixed contract."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-release-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Record which application revision and configuration were released. Diagnose a failing revision using its logs, not the last successful local build."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-release-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep the prior artifact available for rollback. A code rollback does not automatically reverse a database migration or restore deleted data."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-release-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use managed hosting when its supported runtime and operations model fit the application. Use a VPS when you need control of the machine and can maintain it."
+        ]
+      ]
+    }
+  ]
+}

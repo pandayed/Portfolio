@@ -1,0 +1,614 @@
+{
+  "id": "20824eb1-ed54-80e1-b497-e99561eae658",
+  "title": "Spring Boot Starter Projects & Auto-Configuration",
+  "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed5480e1b497e99561eae658",
+  "blocks": [
+    {
+      "id": "20824eb1-ed54-807c-93eb-d3677927cce1",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80f3-a6bd-e03c96ea9c1f",
+      "type": "sub_header",
+      "richText": [
+        [
+          "✅ 1. Core Concept (Simple Summary)"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80bc-83d9-d499ee625189",
+      "type": "text",
+      "richText": [
+        [
+          "Spring Boot Starters",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " are pre-configured templates (dependencies) that help you quickly build specific types of applications (like web apps, REST APIs, or database apps) without manually configuring each library."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8076-939f-fea4279937fc",
+      "type": "text",
+      "richText": [
+        [
+          "Auto-Configuration",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " means Spring Boot automatically sets up default configurations (like web server, database connections, etc.) based on the libraries found in your project—so you write less setup code and focus on writing business logic."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8027-8edf-d09e7816b751",
+      "type": "quote",
+      "richText": [
+        [
+          "Think of Starters as \"meal kits\" that come with all ingredients pre-packed, and auto-configuration as the kitchen setting itself up based on what dish you're cooking."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80b0-a1b6-e0a2bd0b7bc9",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8025-b82a-d8d95ba3f219",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🎯 2. Key Interview Points"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-805f-8bed-e3ec67195630",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "What are Spring Boot Starter Projects?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20824eb1-ed54-803a-9e7a-ca987b3aab07",
+          "type": "text",
+          "richText": [
+            [
+              "Ready-to-use dependency bundles that simplify project setup (e.g., "
+            ],
+            [
+              "spring-boot-starter-web",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              ", "
+            ],
+            [
+              "spring-boot-starter-data-jpa",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              ")."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-805d-adf1-dd7ea5e1cfdc",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "How does Auto-Configuration work?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20824eb1-ed54-8009-96a6-e6156ffb5570",
+          "type": "text",
+          "richText": [
+            [
+              "Spring Boot uses the "
+            ],
+            [
+              "@EnableAutoConfiguration",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " annotation to scan the classpath (list of libraries) and automatically configures components like web servers or data sources."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8077-856e-cf6910dad294",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Can you override auto-configuration?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20824eb1-ed54-8095-beef-dcebf93b5de5",
+          "type": "text",
+          "richText": [
+            [
+              "Yes, you can customize or disable specific auto-configurations using properties or annotations."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8063-967a-c4231a2534cd",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Why are starters and auto-configuration important?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20824eb1-ed54-803b-96f9-e7cf06f87115",
+          "type": "text",
+          "richText": [
+            [
+              "They reduce boilerplate, speed up development, and follow sensible defaults while allowing customization."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-809f-8ec3-fd1b2466d815",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80bb-879a-e36e4c5be7cc",
+      "type": "sub_header",
+      "richText": [
+        [
+          "💡 3. Code Example"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-804f-a185-fa156808fb0c",
+      "type": "text",
+      "richText": [
+        [
+          "Let’s say you want to build a REST API using Spring Boot."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8026-b601-c695ac199c56",
+      "type": "code",
+      "richText": [
+        [
+          "// 1. Create a simple Spring Boot application\n\n@SpringBootApplication  // This includes @EnableAutoConfiguration\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n\n// 2. A basic REST controller\n\n@RestController\npublic class HelloController {\n    @GetMapping(\"/hello\")\n    public String sayHello() {\n        return \"Hello, Spring Boot!\";\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20824eb1-ed54-8095-8db4-f69e82b4de60",
+      "type": "text",
+      "richText": [
+        [
+          "pom.xml",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " dependencies (for Maven):"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80b7-9907-c7569b7ff438",
+      "type": "code",
+      "richText": [
+        [
+          "<dependencies>\n    <dependency>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-web</artifactId> <!-- Starter Project -->\n    </dependency>\n</dependencies>\n"
+        ]
+      ],
+      "language": "XML"
+    },
+    {
+      "id": "20824eb1-ed54-807f-a10f-cfaa278c18d6",
+      "type": "text",
+      "richText": [
+        [
+          "✅ This starter pulls in Tomcat (web server), Jackson (for JSON), Spring MVC—all "
+        ],
+        [
+          "automatically configured",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80a3-a8a3-c6a057fb694e",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8013-a645-e137ca2ee476",
+      "type": "sub_header",
+      "richText": [
+        [
+          "❓ 4. Common Interview Questions"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-802f-a457-dd4c53fdda45",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What is a Spring Boot Starter? Can you give an example?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8028-b8b5-dde671ab3fda",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How does auto-configuration work in Spring Boot?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8013-b3c2-d08282d226be",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What happens behind the scenes when you use "
+        ],
+        [
+          "spring-boot-starter-web",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8081-b0a4-ee9879666f81",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Can you override an auto-configured bean? How?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8098-bda1-cb8cb0e76587",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What are some situations where auto-configuration might not be suitable?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80fa-b6db-e61a93bb9e1f",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-800a-809b-c16bcea4a401",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🔍 5. Best Practices & Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8049-a052-f15ca332b933",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "✅ Best Practices"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-806c-8c7e-ea8c865d5067",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use only the necessary starter dependencies (avoid bloat)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8090-9b75-f8ec6468f9af",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Understand what each starter includes under the hood (check documentation)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80e5-83e6-ee0ab03d3f60",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Override default settings via "
+        ],
+        [
+          "application.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "application.yml",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " when needed."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80bb-8845-d2eb6ed82e32",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "⚠️ Common Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8068-8c02-f7afff0c947f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Blindly relying on auto-configuration without knowing what’s happening."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8001-b213-ede313a2bedd",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Including conflicting starters (e.g., multiple database starters)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8051-8e11-d769e9bffff9",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Not understanding the default behavior of the auto-configured components."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8007-9ad0-dfa9f6635029",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-801f-849b-f69724881524",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🔗 6. Connection to Other Concepts"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80bc-99cf-e5911d0eaf94",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Annotations",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " like "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " include "
+        ],
+        [
+          "@EnableAutoConfiguration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8090-b1b0-e57da98c559f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Beans",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Auto-configuration creates and wires beans automatically."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-800f-bc6e-ed096f96c50a",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Profiles",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": You can change auto-config behavior based on environment (dev, prod)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-804f-b071-d7a2daa18476",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot CLI",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Also leverages starters and auto-config for rapid prototyping."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8079-b5fd-d967031900a0",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80d7-ae70-c27abe9f4490",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🗣️ 7. Quick Interview Answers"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8012-816a-f6102d1a8ec4",
+      "type": "quote",
+      "richText": [
+        [
+          "Q: What are Spring Boot Starters and Auto-Configuration?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80a2-bf8d-f73de13edbda",
+      "type": "text",
+      "richText": [
+        [
+          "“A Spring Boot Starter is a pre-defined dependency bundle that simplifies setting up specific features—like web or data access—without configuring each library manually. Auto-Configuration is a Spring Boot feature that automatically sets up components like a web server or database connection by inspecting the project’s libraries. Together, they help developers focus on business logic instead of boilerplate setup.”"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8042-afd0-f494c26868cd",
+      "type": "divider"
+    }
+  ]
+}

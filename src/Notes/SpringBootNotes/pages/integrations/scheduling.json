@@ -1,0 +1,235 @@
+{
+  "id": "spring-boot-integrations-scheduling",
+  "title": "Scheduled Tasks and Weekly Sentiment",
+  "summary": "Schedule calendar jobs and calculate journal summaries with explicit periods and duplicate handling.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Ultimate Guide to Scheduling Tasks with Cron Jobs in Spring Boot",
+      "url": "https://www.youtube.com/watch?v=9aP0qD3jG_8&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Adding Sentiment to Journal App",
+      "url": "https://www.youtube.com/watch?v=AIgjFvRr820&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring task scheduling",
+      "url": "https://docs.spring.io/spring-framework/reference/integration/scheduling.html"
+    },
+    {
+      "title": "Engineering Digest journalApp source",
+      "url": "https://github.com/EngineeringDigest/journalApp"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "schedule-basics",
+      "type": "header",
+      "richText": [
+        [
+          "Choose a time rule"
+        ]
+      ]
+    },
+    {
+      "id": "schedule-basics-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Scheduled runs a Spring bean method automatically. Add @EnableScheduling to a configuration class to activate annotation-based scheduling."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-basics-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use fixedDelay for polling that should wait a set time after the previous run finishes. Use fixedRate for a periodic target interval measured between scheduled starts."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-basics-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use cron for calendar rules, such as every Sunday morning. Spring cron has six fields: second, minute, hour, day of month, month, and day of week."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-basics-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "0 0 9 * * SUN means Sunday at 09:00:00. The zone attribute chooses the timezone. Server timezone settings should not silently change the business schedule."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-basics-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "This example uses Spring Boot 3, Spring Framework 6, and Java 17. The scheduled method has no arguments and delegates work to a service."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-code",
+      "type": "header",
+      "richText": [
+        [
+          "Run a weekly digest"
+        ]
+      ]
+    },
+    {
+      "id": "schedule-code-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "WeeklyDigestService is the application service that selects eligible users, calculates summaries, and queues digest events. Keep this work separate from the timing rule."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-code-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "When the application is running on Sunday at 09:00 in Asia/Kolkata, Spring invokes aggregateAndQueue. An application that is stopped does not execute this annotation."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-code-code",
+      "type": "code",
+      "richText": [
+        [
+          "@Configuration\n@EnableScheduling\nclass SchedulingConfiguration {}\n\n@Component\nclass WeeklyDigestJob {\n    private final WeeklyDigestService digests;\n\n    WeeklyDigestJob(WeeklyDigestService digests) {\n        this.digests = digests;\n    }\n\n    @Scheduled(cron = \"0 0 9 * * SUN\", zone = \"Asia/Kolkata\")\n    void queueDigests() {\n        digests.aggregateAndQueue();\n    }\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "schedule-sentiment",
+      "type": "header",
+      "richText": [
+        [
+          "Calculate a journal sentiment summary"
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Sentiment is a label for an entry, such as HAPPY, SAD, or ANGRY. The course topic adds this label to the journal application."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For each opted-in user, read entries in one fixed reporting interval. Exclude missing sentiment labels and count each remaining label."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For labels HAPPY, SAD, HAPPY, the counts are HAPPY=2 and SAD=1. The most frequent label is HAPPY."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Define what happens on equal counts. For HAPPY=1 and SAD=1, use a documented tie rule or report both labels. Iteration order should not silently decide the result."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use the same start and end instants for the entire run. Decide whether “week” means the last seven days or a calendar week in the selected timezone."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An empty interval produces no summary. This aggregation counts stored labels. It does not diagnose a person or prove that an AI model analyzed the entry text."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-reliability",
+      "type": "header",
+      "richText": [
+        [
+          "Handle restarts and multiple instances"
+        ]
+      ]
+    },
+    {
+      "id": "schedule-reliability-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Every application instance has its own scheduler. Two running instances can both queue the same digest. A timezone does not prevent this duplication."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-reliability-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a durable job record with a unique user-and-reporting-period key, a shared lock, or a dedicated scheduler when only one instance should run the job."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-reliability-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Persist a pending state if work must survive restarts. Plain @Scheduled does not replay a missed Sunday execution by itself."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-reliability-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bound database batches and network timeouts. Record failed users separately so one unavailable provider does not hide the remaining work."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-reliability-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Queue emails after aggregation. Scheduler completion, Kafka acknowledgment, and email delivery are separate events."
+        ]
+      ]
+    }
+  ]
+}

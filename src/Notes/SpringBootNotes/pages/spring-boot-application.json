@@ -1,0 +1,839 @@
+{
+  "id": "20824eb1-ed54-8036-be4a-e791b40acd6a",
+  "title": "@SpringBootApplication Annotation",
+  "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed548036be4ae791b40acd6a",
+  "blocks": [
+    {
+      "id": "20824eb1-ed54-80b0-b1cc-fa1caa951f91",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80f0-bd28-c4298ae94bd4",
+      "type": "sub_header",
+      "richText": [
+        [
+          "1. "
+        ],
+        [
+          "Core Concept",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-802c-b3d4-f176782ce742",
+      "type": "text",
+      "richText": [
+        [
+          "The "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " annotation is like the \"main switch\" that tells Spring Boot to start your application. It bundles together three important features: setting up Spring configuration, enabling component scanning, and allowing Spring Boot's auto-configuration. Without it, you'd need to configure everything manually."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80bd-ade3-fb598c73d31a",
+      "type": "text",
+      "richText": [
+        [
+          "Think of it like a "
+        ],
+        [
+          "constructor in C++ that also initializes all dependencies, sets up defaults, and scans for components to build your application",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80b9-a96d-c9950df0c81c",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8000-bc27-cedbdf246870",
+      "type": "sub_header",
+      "richText": [
+        [
+          "2. "
+        ],
+        [
+          "Key Interview Points",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8051-bd03-edd0bb9b2e4a",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is a "
+        ],
+        [
+          "meta-annotation",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " combining:"
+        ]
+      ],
+      "children": [
+        {
+          "id": "20824eb1-ed54-80e1-ab34-f92840a2a174",
+          "type": "bulleted_list",
+          "richText": [
+            [
+              "@Configuration",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " (marks the class as a source of Spring configuration)"
+            ]
+          ]
+        },
+        {
+          "id": "20824eb1-ed54-806d-83e7-f1495e39b1ae",
+          "type": "bulleted_list",
+          "richText": [
+            [
+              "@EnableAutoConfiguration",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " (lets Spring Boot configure things automatically based on the classpath)"
+            ]
+          ]
+        },
+        {
+          "id": "20824eb1-ed54-800b-9e47-cbbc406372c8",
+          "type": "bulleted_list",
+          "richText": [
+            [
+              "@ComponentScan",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " (automatically finds classes annotated with "
+            ],
+            [
+              "@Component",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              ", "
+            ],
+            [
+              "@Service",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              ", etc.)"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-805a-a759-eced312a8b8a",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ It must be placed on a "
+        ],
+        [
+          "main class",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " — the one with the "
+        ],
+        [
+          "main()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " method that runs your Spring Boot application."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80d0-9b7f-d4482817541f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ Interviewers often ask about what this annotation combines, how Spring Boot does auto-configuration, and how component scanning works."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ea-b39b-c530b66dbc74",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ It "
+        ],
+        [
+          "reduces boilerplate code",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " and helps developers get started quickly without needing deep configuration knowledge at the beginning."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-805d-a4c0-db5b4a726b18",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8030-960a-ddcc029a753c",
+      "type": "sub_header",
+      "richText": [
+        [
+          "3. "
+        ],
+        [
+          "Code Example",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8076-b9dd-c510de561f1b",
+      "type": "code",
+      "richText": [
+        [
+          "// File: DemoApplication.java\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication  // <--- This is the key annotation!\npublic class DemoApplication {\n\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);  // Starts the app\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20824eb1-ed54-8058-bdf4-f05c79125da6",
+      "type": "text",
+      "richText": [
+        [
+          "What happens here:"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-809f-8f9f-c4d464776dec",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot looks for other components (like Controllers, Services, etc.) in the same package or sub-packages."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80be-8c4f-c6d9cfa0a5db",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It auto-configures beans (objects managed by Spring) like DataSource, Tomcat, etc., based on what’s in your classpath."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80a6-95b1-df6152f08c1d",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It wires everything together, just like C++ constructors linking dependencies."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80fb-a467-ff5f90f2eb15",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8082-8afc-cbc342ac07ea",
+      "type": "sub_header",
+      "richText": [
+        [
+          "4. "
+        ],
+        [
+          "Common Interview Questions",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8052-80de-e18d6b9eb8e4",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What does "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " do behind the scenes?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80a4-beb2-e892922e53d9",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How does component scanning work in Spring Boot?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80a9-9ccc-c81d05d86ce2",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What is the difference between "
+        ],
+        [
+          "@Configuration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "@Component",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-806e-8a5b-e9d69d0fb23a",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What happens if you remove "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " from your main class?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ac-b2e9-c862e636126e",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Can you customize or override the behavior of "
+        ],
+        [
+          "@EnableAutoConfiguration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80cf-8da4-f3558ef484ff",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8048-80f7-c9d244d48555",
+      "type": "sub_header",
+      "richText": [
+        [
+          "5. "
+        ],
+        [
+          "Best Practices & Pitfalls",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-800c-9302-fa029236ebfe",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "✅ Best Practices"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8022-a555-d3de30aee61f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Place "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in the "
+        ],
+        [
+          "root package",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " of your project so that component scanning includes all sub-packages."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80e9-b33f-ffab4b46b6d0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use it only "
+        ],
+        [
+          "once",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " in the main class (avoid multiple startup classes unless in complex modular apps)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80b1-baf5-e74544c6792b",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Combine it with proper package structure to ensure Spring picks up your components."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-802d-8147-c8b8c2716837",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "❌ Common Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803d-aa72-eaa92341b1ee",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Placing it in a "
+        ],
+        [
+          "deep sub-package",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " — Spring won't scan sibling or parent packages by default."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8001-9798-fde0b0896c82",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Ignoring logs — if auto-configuration fails, Spring Boot prints helpful info in the logs that you shouldn’t skip."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8083-8349-ebc33943b374",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Forgetting to include a "
+        ],
+        [
+          "main()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " method to run the application."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-800f-8b8b-e6d6ecf8597f",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8000-a7a6-ce899f76830c",
+      "type": "sub_header",
+      "richText": [
+        [
+          "6. "
+        ],
+        [
+          "Connection to Other Concepts",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80cf-8333-d3458230e415",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Component Scanning",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Works through "
+        ],
+        [
+          "@ComponentScan",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " — helps find "
+        ],
+        [
+          "@Component",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@Service",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@Controller",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", etc."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8000-a9e2-cfac4f018d05",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Auto Configuration",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Triggered via "
+        ],
+        [
+          "@EnableAutoConfiguration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", sets up things like database configs automatically."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8044-a759-dc34e27dcbc1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Beans",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Objects created and managed by Spring, loaded thanks to configuration and scanning."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8064-9f51-ca2fcc6cce06",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Application Context",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": The Spring \"container\" that holds all these beans and manages dependencies."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-805d-baad-f830d41d4e44",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80ce-bbe6-d873c39fede5",
+      "type": "sub_header",
+      "richText": [
+        [
+          "7. "
+        ],
+        [
+          "Quick Interview Answers",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-809d-938a-fbee5993c91e",
+      "type": "quote",
+      "richText": [
+        [
+          "\"What is @SpringBootApplication and why is it important?\""
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8059-a325-f7b197526f40",
+      "type": "text",
+      "richText": [
+        [
+          "Answer",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ":"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-804b-a711-f8d92e8155aa",
+      "type": "text",
+      "richText": [
+        [
+          "\""
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is a convenience annotation in Spring Boot that combines "
+        ],
+        [
+          "@Configuration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@ComponentScan",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "@EnableAutoConfiguration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". It marks the main class of a Spring Boot app and sets up automatic configuration and component scanning. It simplifies project setup by reducing boilerplate and allowing Spring to auto-configure beans based on the classpath. It’s essential because it enables Spring Boot’s core features with a single annotation.\"**"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80b9-ad0f-e5973521a218",
+      "type": "divider"
+    }
+  ]
+}

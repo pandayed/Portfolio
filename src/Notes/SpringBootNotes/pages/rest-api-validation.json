@@ -1,0 +1,854 @@
+{
+  "id": "20924eb1-ed54-804e-8c3e-d28bc655cab3",
+  "title": "REST API Validation (JSR-380: @NotNull, @Size, etc. with @Valid)",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54804e8c3ed28bc655cab3",
+  "blocks": [
+    {
+      "id": "20924eb1-ed54-8081-b25d-db30bd37c3bc",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8094-a9ba-d568b6cfc147",
+      "type": "sub_header",
+      "richText": [
+        [
+          "✅ 1. Core Concept"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80ac-bacb-dcec4380589f",
+      "type": "text",
+      "richText": [
+        [
+          "What is it?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80bd-ad5f-ee2d92ecf7af",
+      "type": "text",
+      "richText": [
+        [
+          "REST API validation ensures that the data a client (like a frontend app or another system) sends to your Spring Boot backend is valid and safe "
+        ],
+        [
+          "before",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " your logic processes it. JSR-380 (Java Specification Request) is a standard for Java Bean Validation — think of it as adding rules directly on your class fields (like saying a field "
+        ],
+        [
+          "must not be null",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80d7-a1f3-eb06809c70f9",
+      "type": "text",
+      "richText": [
+        [
+          "Why does it exist?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8006-aec5-fe646a41dfb5",
+      "type": "text",
+      "richText": [
+        [
+          "To "
+        ],
+        [
+          "prevent bad data",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " (like empty names, null emails, or too-short passwords) from causing errors or saving incorrect info into your database. It improves "
+        ],
+        [
+          "security, reliability, and user feedback",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-806a-94b5-e9f3ca9c4111",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80dc-bb54-f5bb6cdc615c",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🎯 2. Key Interview Points"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8032-a90b-ff8637eabf06",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "What is Bean Validation (JSR-380)?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " And how does Spring Boot integrate it using annotations like "
+        ],
+        [
+          "@NotNull",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@Size",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", etc."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80d7-a876-d75428056f98",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "How ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Valid",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " works",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " in REST Controllers — triggers validation before processing input."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-804b-a718-c509925fe7f6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Handling validation errors",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " using "
+        ],
+        [
+          "BindingResult",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@ExceptionHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", or "
+        ],
+        [
+          "@ControllerAdvice",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b2-9214-f82e4b3af65b",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Custom validation",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": When built-in annotations aren’t enough, you can create your own validator with "
+        ],
+        [
+          "@Constraint",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8086-a407-f4126514adab",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80cc-9ca1-d77ea5ad1c87",
+      "type": "sub_header",
+      "richText": [
+        [
+          "👨‍💻 3. Code Example"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-96f1-c16aaec3ab2e",
+      "type": "code",
+      "richText": [
+        [
+          "// 1. DTO (Data Transfer Object) with validation annotations\npublic class UserRequest {\n    @NotNull(message = \"Username cannot be null\")\n    @Size(min = 3, max = 20, message = \"Username must be 3-20 characters\")\n    private String username;\n\n    @NotNull(message = \"Email is required\")\n    @Email(message = \"Email format is invalid\")\n    private String email;\n\n    // Getters and setters\n}\n\n// 2. REST Controller using @Valid\n@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n\n    @PostMapping\n    public ResponseEntity<String> createUser(@RequestBody @Valid UserRequest userRequest) {\n        // If validation passes, this code runs\n        return ResponseEntity.ok(\"User created successfully!\");\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20924eb1-ed54-8058-b62e-e8e73b60aa8e",
+      "type": "text",
+      "richText": [
+        [
+          "🔎 If any validation fails, Spring Boot will automatically return a "
+        ],
+        [
+          "400 Bad Request",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with the error message unless you handle it manually."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805c-b29b-e77d30de9e2f",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80f8-bcbb-cbed35194639",
+      "type": "sub_header",
+      "richText": [
+        [
+          "❓ 4. Common Interview Questions"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80ab-8f5f-fd5c6addecca",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What is JSR-380 and how does Spring Boot support it?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-806e-86bd-d2f06f890233",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How do you validate incoming REST API data in Spring Boot?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8047-9cba-f1c544c4e623",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What does ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Valid",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " do in a controller method?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80c4-8f83-d8ff28d78158",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How do you handle validation errors in a structured way (custom error response)?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80a9-899e-c2cfd765d3d0",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "When would you create a custom validator? How?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8069-987c-fda0cb463b31",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-804f-803c-f01fcf56f685",
+      "type": "sub_header",
+      "richText": [
+        [
+          "✅ 5. Best Practices & Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8015-8093-e51a4e224216",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "✅ Best Practices:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b4-80ab-df64f3c236cd",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "meaningful error messages",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " inside annotations ("
+        ],
+        [
+          "message = \"\"",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8060-b8a6-d220ce145af3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Validate only "
+        ],
+        [
+          "DTOs",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ", not entities (don’t mix DB logic with client input)."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-806c-ad32-d8ab9c8a4097",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a "
+        ],
+        [
+          "global error handler",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " ("
+        ],
+        [
+          "@ControllerAdvice",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ") to return consistent error formats."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80fb-a388-f4afedc16de0",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "⚠️ Common Pitfalls:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805c-bf65-f1b8487209e3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Forgetting "
+        ],
+        [
+          "@Valid",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in the controller parameter — no validation will run!"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8011-9108-d46ed5ddaa8d",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Applying constraints on the "
+        ],
+        [
+          "wrong type",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " (e.g., "
+        ],
+        [
+          "@NotEmpty",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on "
+        ],
+        [
+          "int",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " — use "
+        ],
+        [
+          "@Min",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "@NotNull",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8099-9cba-dcf57f56dd13",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Returning raw validation errors — it's better to return structured error responses."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8052-98bf-ed3516ef83e8",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8010-b415-d9e5fb4929c4",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🔄 6. Connection to Other Concepts"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80f6-a8fc-ceba38b53e9a",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "DTO (Data Transfer Object):",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Usually combined with validation to separate API models from DB models."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80ea-b1b9-da9af031d00f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Exception Handling:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Often used with validation to format errors ("
+        ],
+        [
+          "@ExceptionHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@ControllerAdvice",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8066-bf4a-fbdc43c358d3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Starter Validation:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Provided via "
+        ],
+        [
+          "spring-boot-starter-validation",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " dependency (which uses Hibernate Validator under the hood)."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8018-ba1c-d5e8e34e2da9",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bean Lifecycle:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " Validation runs "
+        ],
+        [
+          "before",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " your controller logic, during request deserialization."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-801b-a983-c2904660e9b7",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8074-b206-f0f46b4f7a72",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🎤 7. Quick Interview Answers"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80a2-971d-f11e57b8d8f9",
+      "type": "quote",
+      "richText": [
+        [
+          "Q: How does Spring Boot validate REST API input?"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8059-a9c9-c57cf89b5a94",
+      "type": "text",
+      "richText": [
+        [
+          "Spring Boot uses JSR-380 Bean Validation, which allows you to annotate fields in a DTO class with constraints like "
+        ],
+        [
+          "@NotNull",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@Size",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", or "
+        ],
+        [
+          "@Email",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". When a REST controller method uses "
+        ],
+        [
+          "@Valid",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", Spring checks the incoming data against these rules before running the method. If validation fails, it returns a "
+        ],
+        [
+          "400 Bad Request",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with the error. You can customize validation messages and handle errors globally for consistency."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8072-affd-fcbec169a284",
+      "type": "divider"
+    }
+  ]
+}

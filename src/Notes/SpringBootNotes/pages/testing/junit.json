@@ -1,0 +1,187 @@
+{
+  "id": "spring-boot-testing-junit",
+  "title": "JUnit and Parameterized Tests",
+  "summary": "Use focused assertions, independent setup and parameterized input cases.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: JUnit Testing in Spring Boot | @Test @ParameterizedTest @CsvSource @ArgumentsSource @SpringBootTest",
+      "url": "https://www.youtube.com/watch?v=mILLHaIjGn4&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "JUnit 5.11: user guide",
+      "url": "https://junit.org/junit5/docs/5.11.0/user-guide/index.html"
+    },
+    {
+      "title": "Spring Boot 3.4: testing applications",
+      "url": "https://docs.spring.io/spring-boot/3.4/reference/testing/spring-boot-applications.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "junit-basics",
+      "type": "header",
+      "richText": [
+        [
+          "JUnit Jupiter runs the test method"
+        ]
+      ]
+    },
+    {
+      "id": "junit-basics-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JUnit Jupiter is the JUnit 5 programming model. @Test marks a test method. Assertions compare the expected result with the actual result. A failed assertion fails the test."
+        ]
+      ]
+    },
+    {
+      "id": "junit-basics-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use spring-boot-starter-test in test scope for the Boot-managed testing dependencies. A plain Jupiter test does not need @SpringBootTest."
+        ]
+      ]
+    },
+    {
+      "id": "junit-basics-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Structure a test as arrange, act and assert. Prepare input, call the behavior, then check a result. Give the method a name that describes the rule being checked."
+        ]
+      ]
+    },
+    {
+      "id": "junit-basics-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use assertEquals(expected, actual), assertTrue for a boolean rule, and assertThrows for an expected failure. A not-null assertion does not prove that fields or permissions are correct."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter",
+      "type": "header",
+      "richText": [
+        [
+          "Run one rule with several inputs"
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ParameterizedTest runs the same method once for each argument set. @CsvSource suits short rows containing simple values. Each row maps to the method parameters."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "This example checks a real input rule. Titles must contain at least one non-whitespace character. A row that only repeats the implementation would give weak evidence."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ValueSource supplies one value per invocation. @ArgumentsSource delegates argument creation to an ArgumentsProvider. Use it for objects or reusable datasets that are awkward to express as CSV."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-code",
+      "type": "code",
+      "richText": [
+        [
+          "class TitleRules {\n    static boolean valid(String title) {\n        return title != null && !title.isBlank();\n    }\n}\n\nclass TitleRulesTest {\n    @ParameterizedTest\n    @CsvSource({\"Morning,true\", \"'   ',false\", \"'',false\"})\n    void titleNeedsVisibleText(String title, boolean expected) {\n        assertEquals(expected, TitleRules.valid(title));\n    }\n\n    @Test\n    void rejectsMissingTitle() {\n        assertFalse(TitleRules.valid(null));\n    }\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "junit-provider",
+      "type": "header",
+      "richText": [
+        [
+          "Provide structured arguments"
+        ]
+      ]
+    },
+    {
+      "id": "junit-provider-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "ArgumentsProvider returns a stream of Arguments. JUnit calls the provider and invokes the test for each returned argument set. Use fresh mutable objects if the test changes its input."
+        ]
+      ]
+    },
+    {
+      "id": "junit-provider-code",
+      "type": "code",
+      "richText": [
+        [
+          "class MissingTitles implements ArgumentsProvider {\n    @Override\n    public Stream<? extends Arguments> provideArguments(\n            ExtensionContext context) {\n        return Stream.of(Arguments.of((Object) null),\n                         Arguments.of(\"\"), Arguments.of(\" \"));\n    }\n}\n\n@ParameterizedTest\n@ArgumentsSource(MissingTitles.class)\nvoid rejectsMissingOrBlankTitle(String title) {\n    assertFalse(TitleRules.valid(title));\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "junit-lifecycle",
+      "type": "header",
+      "richText": [
+        [
+          "Control setup and scope"
+        ]
+      ]
+    },
+    {
+      "id": "junit-lifecycle-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@BeforeEach runs before every invocation. Use it to prepare independent state. @AfterEach releases resources. @BeforeAll and @AfterAll handle class-level setup and cleanup."
+        ]
+      ]
+    },
+    {
+      "id": "junit-lifecycle-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Disabled skips a test. A skipped test proves no behavior. In the tutorial repository, several sample service tests are disabled. Their presence is not evidence that the application passes those checks."
+        ]
+      ]
+    },
+    {
+      "id": "junit-lifecycle-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @SpringBootTest only when Spring wiring is part of the requirement. An ordinary rule test should construct the class directly."
+        ]
+      ]
+    },
+    {
+      "id": "junit-lifecycle-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check boundary cases deliberately. For journal ownership, include the owner, another user and a missing entry. For title rules, include normal text, whitespace and null. These cases exercise different paths."
+        ]
+      ]
+    }
+  ]
+}

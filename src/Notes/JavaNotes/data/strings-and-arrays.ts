@@ -5,17 +5,18 @@ const note: LearningNote = {
     title: 'Strings and arrays',
     summary: 'Compare and transform text, build strings, and read, copy, and traverse fixed-length arrays.',
     scope: 'java',
-    updatedOn: '2026-10-05',
+    updatedOn: '2026-10-13',
     sections: [
         {
             id: 'string-values',
             title: 'Strings are immutable objects',
-            paragraphs: [
-                'A String object holds text that cannot change after creation. Methods such as strip, replace, and substring return a result without changing the original text. Store the returned value when you need it.',
-                'Use equals to compare text contents. == compares whether two references refer to the same object. Some equal strings share an object through interning, so == can appear to work and still be the wrong comparison.',
+            bullets: [
+                'A String is immutable. Its text cannot change after creation.',
+                'strip, replace, and substring return a result without changing the original text. Store the returned value when you need it.',
+                'Use equals to compare text contents. == checks whether two references point to the same object.',
+                'Interning lets equal strings share one object. This can make == appear to work for text comparison. Use equals even when some strings share an object.',
             ],
             examples: [{
-                title: 'Main.java',
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -32,19 +33,26 @@ const note: LearningNote = {
                 result: '[  Java  ]\n[Java]\ntrue\nfalse',
             }],
             pitfalls: [
-                'Calling equals on a null variable throws NullPointerException. "ready".equals(value) is safe for a possibly null value. Objects.equals(first, second) handles either operand being null.',
-                'final String prevents reassigning the variable. String immutability comes from the String class, independently of final.',
+                'Calling equals on null throws NullPointerException. "ready".equals(value) is safe when value may be null.',
+                'Objects.equals(first, second) handles either value being null.',
+                'final prevents assigning another String to the variable. The String class makes the text immutable, independently of final.',
             ],
         },
         {
             id: 'text-operations',
             title: 'String positions use UTF-16 indices',
-            paragraphs: [
-                'length() counts UTF-16 code units. charAt(index) reads one code unit. substring(start, end) includes start and excludes end. These indices do not always correspond to whole Unicode characters.',
-                'indexOf returns the first matching position or -1 when it finds no match. split accepts a regular expression. Escape regex characters when you want a literal separator.',
+            bullets: [
+                'UTF-16 stores text in 16-bit code units. length() counts these units. charAt(index) reads one unit.',
+                'An index is a position in the string. The first position is 0.',
+                'substring(start, end) includes start and excludes end.',
+                'Some Unicode characters use two UTF-16 code units. An index may point to part of a character.',
+                'indexOf returns the first matching position. It returns -1 when there is no match.',
+                'split accepts a regular expression, which is a pattern for matching text. Escape pattern characters when you need a literal separator.',
+                'The symbol below is one Unicode code point stored as two UTF-16 code units. A code point is the number Unicode assigns to a character.',
+                'A character that a reader sees may contain several code points.',
+                'split discards trailing empty fields by default. Use split(",", -1) to keep a final empty field.',
             ],
             examples: [{
-                title: 'Main.java',
                 language: 'java',
                 code: String.raw`import java.util.Arrays;
 
@@ -63,21 +71,20 @@ public class Main {
 }`,
                 result: 'notes\n5\n-1\n[a, b]\n2\n1',
             }],
-            bullets: [
-                'The symbol is one Unicode code point represented by two UTF-16 code units. User-perceived characters can be more complex and may contain several code points.',
-                'split discards trailing empty fields by default. Use split(",", -1) when a final empty field must be preserved.',
+            pitfalls: [
+                'charAt(length()) is outside the valid range. For a nonempty string, the last valid index is length() - 1.',
             ],
-            pitfalls: ['charAt(length()) is out of bounds. The last valid charAt index is length() - 1 for a nonempty string.'],
         },
         {
             id: 'string-builder',
             title: 'StringBuilder accumulates text',
-            paragraphs: [
-                'StringBuilder is mutable. append adds text to the same builder. toString returns a String containing its current contents. Use a builder when a loop assembles many pieces of text.',
-                'Ordinary + concatenation is readable for a small expression. A builder makes repeated accumulation explicit. StringBuilder does not provide synchronization for concurrent mutation.',
+            bullets: [
+                'StringBuilder is mutable, so its contents can change. append adds text to the same builder.',
+                "toString returns a String with the builder's current contents. Later changes to the builder do not change that String.",
+                'Use a builder when a loop joins many pieces of text. Ordinary + concatenation is readable for a small expression.',
+                'StringBuilder does not synchronize changes from multiple threads. It does not coordinate their access to its contents.',
             ],
             examples: [{
-                title: 'Main.java',
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -96,17 +103,22 @@ public class Main {
 }`,
                 result: 'Ana, Bo, Cy\nAna, Bo, Cy!\nAna / Bo / Cy',
             }],
-            pitfalls: ['Keep mutable builders local to the operation when possible. The String already returned by toString does not change when the builder changes.'],
+            pitfalls: [
+                'Keep a mutable builder local to the operation when possible.',
+            ],
         },
         {
             id: 'array-basics',
             title: 'Arrays have a fixed length and zero-based positions',
-            paragraphs: [
-                'An array stores elements of one component type. Its length is fixed when the array is created. Valid indices run from 0 through length - 1. Reading or writing outside that range throws ArrayIndexOutOfBoundsException.',
-                'New int array elements start at 0. New boolean array elements start at false. New reference array elements start at null. The array length is a field, so write values.length rather than values.length().',
+            bullets: [
+                'An array stores elements of one component type. The component type is the type declared for its elements.',
+                'Java fixes the length when it creates the array.',
+                "An index is an element's position. Valid indices run from 0 to length - 1.",
+                'Reading or writing outside that range throws ArrayIndexOutOfBoundsException.',
+                'New int array elements start at 0. New boolean array elements start at false. New reference array elements start at null.',
+                "An array's length is a field. Write values.length, without parentheses.",
             ],
             examples: [{
-                title: 'Main.java',
                 language: 'java',
                 code: `import java.util.Arrays;
 
@@ -129,17 +141,23 @@ public class Main {
 }`,
                 result: '3\n[8, 5, 9]\n22\ntrue',
             }],
-            pitfalls: ['for (int i = 0; i <= scores.length; i++) attempts to access one position too far if the body reads scores[i]. Use i < scores.length.'],
+            pitfalls: [
+                'Use i < scores.length when a loop reads scores[i]. i <= scores.length includes one index outside the array.',
+            ],
         },
         {
             id: 'array-copy-and-equality',
             title: 'Assignment shares an array; copying creates another array',
-            paragraphs: [
-                'Assigning an array variable to another variable shares the same array. Arrays.copyOf creates a new array and copies the elements. For reference elements, those copied values still refer to the same objects. This is a shallow copy.',
-                'Arrays.equals compares one-dimensional array contents. Array.equals and == compare array identity. Arrays.sort changes the supplied array in place.',
+            bullets: [
+                'Assigning one array variable to another copies the reference. Both variables then share the same array.',
+                'Arrays.copyOf creates a new array and copies the elements.',
+                'For reference elements, the copied references still point to the same objects. Changing a shared mutable object can affect both arrays.',
+                'This is a shallow copy. Java copies the array without copying each object.',
+                'Arrays.equals compares the contents of one-dimensional arrays.',
+                'Calling equals on an array, or using ==, checks whether the references point to the same array.',
+                'Arrays.sort changes the supplied array.',
             ],
             examples: [{
-                title: 'Main.java',
                 language: 'java',
                 code: `import java.util.Arrays;
 
@@ -159,17 +177,18 @@ public class Main {
 }`,
                 result: '[9, 1, 2]\n[1, 2, 3]\ntrue\ntrue',
             }],
-            pitfalls: ['Arrays.copyOf on an array of mutable objects does not copy each object. Mutating an element object may still be visible through both arrays.'],
         },
         {
             id: 'nested-arrays',
             title: 'A two-dimensional array is an array of arrays',
-            paragraphs: [
-                'int[][] holds references to int[] rows. Rows can have different lengths. A row can also be null if it has not been created. Read each row length when traversing a ragged array.',
-                'Use Arrays.deepToString to display nested arrays and Arrays.deepEquals to compare their nested contents. Copying only the outer array still shares its rows.',
+            bullets: [
+                'A two-dimensional array is an array of arrays. int[][] holds references to int[] rows.',
+                "Rows can have different lengths. This is called a ragged array. Read each row's length when looping through it.",
+                'A row can be null if it has not been created.',
+                'Use Arrays.deepToString to display nested arrays. Use Arrays.deepEquals to compare their nested contents.',
+                'Copying only the outer array still shares its rows.',
             ],
             examples: [{
-                title: 'Main.java',
                 language: 'java',
                 code: `import java.util.Arrays;
 
@@ -186,7 +205,10 @@ public class Main {
 }`,
                 result: 'length=2, total=3\nlength=1, total=3\nlength=3, total=15\n[[1, 2], [3], [4, 5, 6]]',
             }],
-            pitfalls: ['new int[3][] creates three null row references. Create each row before indexing it. new int[3][2] creates three rows with two int elements each.'],
+            pitfalls: [
+                'new int[3][] creates three null row references. Create each row before accessing its elements.',
+                'new int[3][2] creates three rows with two int elements in each row.',
+            ],
         },
     ],
 };

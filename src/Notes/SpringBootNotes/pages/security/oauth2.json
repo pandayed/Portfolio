@@ -1,0 +1,200 @@
+{
+  "id": "spring-boot-security-oauth2",
+  "title": "OAuth2, OpenID Connect and Google Login",
+  "summary": "Use managed Google OIDC login and keep local account permissions separate.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: OAuth2 in Spring Boot | How to Add Google Login in Spring Boot | Complete Tutorial",
+      "url": "https://www.youtube.com/watch?v=cRiqZ0j1gEM&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Security 6: OAuth2 login",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/login/core.html"
+    },
+    {
+      "title": "Google: OpenID Connect",
+      "url": "https://developers.google.com/identity/openid-connect/openid-connect"
+    },
+    {
+      "title": "Google: verify backend identity",
+      "url": "https://developers.google.com/identity/sign-in/web/backend-auth"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "oauth-concepts",
+      "type": "header",
+      "richText": [
+        [
+          "OAuth2 grants access; OpenID Connect adds identity"
+        ]
+      ]
+    },
+    {
+      "id": "oauth-concepts-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "OAuth2 lets a client request limited access to a resource. A scope names the requested access. OpenID Connect (OIDC) adds login identity using an ID token and the openid scope."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-concepts-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The client is your application. Google is the provider. The browser redirects the user to Google. Your server never needs the user’s Google password."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-concepts-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An access token is for an API. An ID token describes an authenticated user for a client. Do not treat any token from any provider as an access token for your own journal API."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-concepts-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For a server-rendered application, choose oauth2Login and a server session. For a separate API accepting access tokens, configure a resource server. They solve different parts of the flow."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup",
+      "type": "header",
+      "richText": [
+        [
+          "Spring Boot 3 / Spring Security 6 setup"
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Add spring-boot-starter-oauth2-client. Register an OAuth client with Google and register the exact callback URI. Spring’s default callback path is /login/oauth2/code/google."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Supply the client ID and secret through environment configuration or a secret manager. Keep the secret on the server. Do not place it in browser code or commit it to source control."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The google registration name selects Spring’s built-in provider defaults. Request openid, profile and email for OIDC login."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-code",
+      "type": "code",
+      "richText": [
+        [
+          "spring:\n  security:\n    oauth2:\n      client:\n        registration:\n          google:\n            client-id: ${GOOGLE_CLIENT_ID}\n            client-secret: ${GOOGLE_CLIENT_SECRET}\n            scope: openid,profile,email"
+        ]
+      ],
+      "language": "YAML"
+    },
+    {
+      "id": "oauth-chain",
+      "type": "header",
+      "richText": [
+        [
+          "Enable the managed login flow"
+        ]
+      ]
+    },
+    {
+      "id": "oauth-chain-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring starts login at /oauth2/authorization/google. It keeps the authorization request, handles the callback, exchanges the code and validates the OIDC response."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-chain-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The configuration below permits login routes and requires login for application routes. Keep CSRF protection because authenticated browser requests use a session cookie."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-chain-code",
+      "type": "code",
+      "richText": [
+        [
+          "@Bean\nSecurityFilterChain browser(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(auth -> auth\n            .requestMatchers(\"/\", \"/login/**\", \"/oauth2/**\")\n                .permitAll()\n            .anyRequest().authenticated())\n        .oauth2Login(Customizer.withDefaults())\n        .build();\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "oauth-accounts",
+      "type": "header",
+      "richText": [
+        [
+          "Map provider identity to local permissions"
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Identify an external account by the verified issuer and subject (sub). Email can change. Assign local roles through your application’s account policy. Google login does not automatically grant ADMIN."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The authorization request and response must belong to the same login attempt. The state parameter protects this association. Use Spring’s flow rather than building an unvalidated callback handler."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The tutorial repository manually exchanges a code, calls Google tokeninfo, finds or creates a user by email, and returns its own JWT. It also uses an OAuth Playground redirect. This is a learning demonstration."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Google documents tokeninfo as a debugging tool. Production verification must check signature, audience, issuer and expiry using a supported verifier. A successful tokeninfo response alone is not a complete local account-linking policy."
+        ]
+      ]
+    }
+  ]
+}

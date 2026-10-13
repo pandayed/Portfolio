@@ -1,0 +1,1109 @@
+{
+  "id": "20824eb1-ed54-80f1-9e13-e5378147ebc7",
+  "title": "Request and Response Body Handling (@RequestBody, @ResponseBody, @PathVariable, @RequestParam)",
+  "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed5480f19e13e5378147ebc7",
+  "blocks": [
+    {
+      "id": "20824eb1-ed54-80da-bde1-ff93350d0ce0",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80e8-89c3-ee2d27f6b3be",
+      "type": "sub_header",
+      "richText": [
+        [
+          "✅ 1. Core Concept (2–3 sentences)"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ac-896f-cc885e4e97b4",
+      "type": "text",
+      "richText": [
+        [
+          "In Spring Boot, "
+        ],
+        [
+          "request and response body handling",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " is how data is sent "
+        ],
+        [
+          "into",
+          [
+            [
+              "i"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "out of",
+          [
+            [
+              "i"
+            ]
+          ]
+        ],
+        [
+          " your application via HTTP. Using annotations like "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@ResponseBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PathVariable",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", Spring Boot helps map "
+        ],
+        [
+          "web requests",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " (like data in URLs or forms) to "
+        ],
+        [
+          "Java objects",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ", and vice versa. This allows clean, readable, and efficient handling of web APIs."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8016-9fc7-ce205e5d0a3c",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80c7-b869-f1ef75e038d2",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🎯 2. Key Interview Points"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807c-8969-f4465a08bbf1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Difference between ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@PathVariable",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ": Know when to use each and how they map to different parts of an HTTP request."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807d-b8d7-fb6683c81da1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Serialization and Deserialization",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Understand how Spring Boot automatically converts JSON into Java objects (deserialization) and Java objects into JSON (serialization)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8081-bb0f-dbc1e3492a95",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "How ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@RestController",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " uses ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@ResponseBody",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " by default to return data as JSON."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-804c-9edf-ff86a418efdb",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Handling form data vs. JSON payloads",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is typically used for simple form/query data, while "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is used for structured JSON payloads."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80d2-882c-d36127e8168c",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-80af-920a-e99463dca7f3",
+      "type": "sub_header",
+      "richText": [
+        [
+          "💡 3. Code Example"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-802d-8ddb-d2b9d18ecec6",
+      "type": "text",
+      "richText": [
+        [
+          "Here’s a simple REST API to "
+        ],
+        [
+          "create and get user data",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ":"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80c2-9445-fb5387833dfc",
+      "type": "code",
+      "richText": [
+        [
+          "// User.java (model class)\npublic class User {\n    private String name;\n    private int age;\n\n    // Getters and Setters (required for Spring to bind JSON to this object)\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n\n    public int getAge() { return age; }\n    public void setAge(int age) { this.age = age; }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20824eb1-ed54-80b7-a7d9-ccda64eb5649",
+      "type": "code",
+      "richText": [
+        [
+          "// UserController.java\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\n@RequestMapping(\"/users\")\npublic class UserController {\n\n    // Example 1: Get user by name (query param)\n    @GetMapping(\"/get\")\n    public String getUserByName(@RequestParam String name) {\n        return \"User name is: \" + name;\n    }\n\n    // Example 2: Get user by ID (URL path variable)\n    @GetMapping(\"/{id}\")\n    public String getUserById(@PathVariable int id) {\n        return \"Fetching user with ID: \" + id;\n    }\n\n    // Example 3: Create a user (JSON body)\n    @PostMapping(\"/create\")\n    public String createUser(@RequestBody User user) {\n        return \"User created: \" + user.getName() + \", Age: \" + user.getAge();\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20824eb1-ed54-80ef-a553-c83f5b8362ef",
+      "type": "text",
+      "richText": [
+        [
+          "Explanation",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ":"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80c2-b713-fb3ff1552b17",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " maps a "
+        ],
+        [
+          "query string",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " parameter (e.g., "
+        ],
+        [
+          "/get?name=John",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807a-ac7a-eed6eb354774",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@PathVariable",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " maps a "
+        ],
+        [
+          "path parameter",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " (e.g., "
+        ],
+        [
+          "/users/123",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-804e-aa1c-df6609d80bac",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " maps a "
+        ],
+        [
+          "JSON body",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " (e.g., "
+        ],
+        [
+          "{\"name\": \"Alice\", \"age\": 30}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in a POST request)"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-805c-a82e-f63b91fc02fa",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8001-a132-d840d67f6dc7",
+      "type": "sub_header",
+      "richText": [
+        [
+          "❓ 4. Common Interview Questions"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8053-b649-d0fc4d263642",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What’s the difference between "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PathVariable",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-800c-8a42-ff3c1a210b58",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How does Spring Boot automatically convert JSON into Java objects?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80e3-b049-f41fe39287d2",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Why is "
+        ],
+        [
+          "@RestController",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " often used instead of "
+        ],
+        [
+          "@Controller",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80ab-9921-ef38e42eec54",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How can you send data back as JSON in a REST API?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80fd-9954-f4959d8214b4",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Can you use multiple "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or mix it with "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in the same controller method?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807a-9b38-e5077b6d720f",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8012-a059-dc4e0b5f4d54",
+      "type": "sub_header",
+      "richText": [
+        [
+          "✔️ 5. Best Practices & Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8064-98b2-c3c1e65c89f4",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "✅ Best Practices"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8066-8e7e-f9d7bf032ff5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for complex JSON inputs (like entire objects)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-809b-b5d8-c45cb110bf37",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "@PathVariable",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for identifying resources (like "
+        ],
+        [
+          "/user/5",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8051-a110-eba058afb7bd",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for filtering, sorting, or optional query inputs."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80da-94ab-f578872c0b64",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "⚠️ Common Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-805f-84ec-e52923af1406",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "❌ Forgetting getters/setters in your model class—Spring can’t bind JSON properly without them."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8043-807e-f9ac1c36a922",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "❌ Using "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for simple strings or numbers; it’s overkill for that."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8034-aaf3-d54f5bdaffaa",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "❌ Mixing "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " incorrectly in a single method (order matters!)."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8020-bfa2-e23b6828f920",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8033-8946-e9526f64a149",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🔄 6. Connection to Other Concepts"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8047-8b03-ca24781ebd4a",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RestController",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " vs. ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Controller",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ": "
+        ],
+        [
+          "@RestController",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " automatically adds "
+        ],
+        [
+          "@ResponseBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to all methods—ideal for APIs."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8052-a4ee-c8feb25e8480",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Jackson Library",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Spring Boot uses "
+        ],
+        [
+          "Jackson",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " to convert JSON <-> Java objects under the hood."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-806c-89a7-f2d1e0bf7920",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Validation (",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Valid",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Often used with "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to validate incoming data."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8094-b1cd-fbeb89fe41f1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Auto-Configuration",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Automatically wires necessary components like HTTP message converters."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8024-aee6-cc0816a55506",
+      "type": "divider"
+    },
+    {
+      "id": "20824eb1-ed54-8015-8be5-e67f1d63bc26",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🧠 7. Quick Interview Answers"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80e2-b9f4-e7c9310e1e3e",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Q: What’s the difference between "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "@PathVariable",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80e7-b22d-c4957f72b622",
+      "type": "text",
+      "richText": [
+        [
+          "Answer",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ":"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8015-9945-ee0155655bc4",
+      "type": "text",
+      "richText": [
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is used to bind a full JSON request body to a Java object, typically in POST or PUT methods. "
+        ],
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " extracts values from query parameters (like "
+        ],
+        [
+          "?name=John",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "), and "
+        ],
+        [
+          "@PathVariable",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " binds values directly from the URL path (like "
+        ],
+        [
+          "/users/5",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "). Each is used depending on where the data comes from in the HTTP request."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-80bb-bcb8-d5ad68a83851",
+      "type": "divider"
+    }
+  ]
+}

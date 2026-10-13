@@ -5,17 +5,19 @@ const note: LearningNote = {
     title: 'Generics and wildcards',
     summary: 'Write reusable classes and methods with checked types. Understand bounds, invariant lists, wildcard reads and writes, and type erasure.',
     scope: 'java',
-    updatedOn: '2026-10-05',
+    updatedOn: '2026-10-13',
     sections: [
         {
             id: 'generic-class',
             title: 'A type parameter keeps input and output related',
-            paragraphs: [
-                'A generic class takes a type argument such as String. In Box<T>, T names that type throughout the class. Box<String> accepts a String and returns a String without a cast.',
-                'Save each complete example as Main.java. The examples use Java 17 or later and do not need preview features.',
+            bullets: [
+                'A generic class uses a type parameter to work with different types.',
+                'In Box<T>, T is the type parameter. It names the type used by the class.',
+                'In Box<String>, String is the type argument. It supplies the type for T.',
+                'Box<String> accepts and returns a String without a cast. A cast tells Java to treat a value as another type.',
             ],
             examples: [{
-                title: 'Main.java: store a value with its type',
+                title: 'Store a value with its type',
                 language: 'java',
                 code: `public class Main {
     static class Box<T> {
@@ -36,19 +38,22 @@ const note: LearningNote = {
                 result: 'Prints Paid, then 4 on a new line. The diamond <> lets the compiler infer each constructor type argument.',
             }],
             pitfalls: [
-                'Use Box<Integer>, not Box<int>. Type arguments are reference types. Boxing converts the literal 3 to an Integer here.',
+                'Type arguments must be reference types, so use Box<Integer> instead of Box<int>. Boxing converts the int value 3 to an Integer here.',
                 'Avoid raw types such as Box without <T>. They weaken compile-time checks and can require unsafe casts later.',
             ],
         },
         {
             id: 'generic-methods',
             title: 'Generic methods and upper bounds',
-            paragraphs: [
-                'A method can declare its own type parameter. Put <T> before the return type. This works even when the containing class is not generic.',
-                'A bound such as T extends Number allows the method to call Number methods. In a type bound, extends also applies to interfaces.',
+            bullets: [
+                'A generic method declares its own type parameter. Put <T> before the return type.',
+                'The containing class does not need to be generic.',
+                'A bound limits the types allowed for a type parameter.',
+                'T extends Number accepts Number or a subtype. It lets the method call Number methods.',
+                'In a type bound, extends also applies to interfaces.',
             ],
             examples: [{
-                title: 'Main.java: infer method types and restrict numeric input',
+                title: 'Infer method types and restrict numeric input',
                 language: 'java',
                 code: `public class Main {
     static <T> T first(T left, T right) {
@@ -70,19 +75,22 @@ const note: LearningNote = {
                 result: 'Prints Asha, 12.0, and 5.0 on separate lines.',
             }],
             pitfalls: [
-                'A bound does not make arithmetic operators work on T. Use methods such as doubleValue(), or a separate arithmetic strategy.',
+                'A bound does not make arithmetic operators work on T. Use methods such as doubleValue(), or pass code that performs the arithmetic.',
                 'Class type parameters are unavailable in static members. A static generic method must declare its own parameter.',
             ],
         },
         {
             id: 'invariance',
             title: 'List<Integer> is not List<Number>',
-            paragraphs: [
-                'Integer extends Number, but List<Integer> does not extend List<Number>. This rule is called invariance. Otherwise, code receiving a List<Number> could add a Double into a list promised to contain only Integer values.',
-                'List<?> means a list of one unknown element type. Reading gives Object. It is different from List<Object>, which explicitly permits any Object value.',
+            bullets: [
+                'Integer extends Number, but List<Integer> is not a subtype of List<Number>. This rule is called invariance.',
+                'If that assignment were allowed, code using List<Number> could add a Double to a list that requires Integer values.',
+                'List<?> uses a wildcard: ? means one unknown element type.',
+                'Reading through List<?> gives Object.',
+                'List<Object> has a known element type. It allows any Object value.',
             ],
             examples: [{
-                title: 'Main.java: accept unknown list types for reading',
+                title: 'Accept unknown list types for reading',
                 language: 'java',
                 code: `import java.util.List;
 
@@ -109,12 +117,15 @@ public class Main {
         {
             id: 'extends-super',
             title: 'Use extends for reading and super for writing',
-            paragraphs: [
-                'List<? extends Number> accepts a list of Number or any Number subtype. Values can be read as Number. You cannot safely add a new Integer or Double because the actual type might be different.',
-                'List<? super Integer> accepts a list of Integer or a supertype such as Number or Object. You can add Integer values. Reading through that reference gives only Object.',
+            bullets: [
+                'List<? extends Number> accepts a list whose element type is Number or a Number subtype.',
+                'You can read values as Number.',
+                'You cannot add a new Integer or Double through that reference. The actual element type might be another Number subtype.',
+                'List<? super Integer> accepts a list whose element type is Integer or a supertype such as Number or Object.',
+                'You can add Integer values through that reference. Reading gives only Object.',
             ],
             examples: [{
-                title: 'Main.java: copy integers into a list of numbers',
+                title: 'Copy integers into a list of numbers',
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -145,11 +156,18 @@ public class Main {
         {
             id: 'type-erasure',
             title: 'Type erasure limits runtime checks',
-            paragraphs: [
-                'The compiler checks generic types, then erases type parameters to their bounds or Object in compiled code. It inserts casts where needed. Generic metadata can remain available to reflection, but a normal list object does not carry an enforced String or Integer element type.',
+            bullets: [
+                'Type erasure replaces type parameters with their bounds or Object in compiled code.',
+                'The compiler checks generic types before erasure. It inserts casts where needed.',
+                'Generic type information can remain available through reflection. Reflection lets code inspect types at runtime.',
+                'A normal list object does not enforce a String or Integer element type at runtime.',
+                'You cannot construct new T() or new T[3]. Pass a factory, which is code that creates a value of type T.',
+                'You cannot create new List<String>[3]. A list of lists is usually simpler.',
+                'Overloads taking List<String> and List<Integer> have the same parameter types after erasure. This gives them the same erased signature, so give the operations different names.',
+                'A generic class cannot extend Throwable. A catch parameter cannot be a type parameter.',
             ],
             examples: [{
-                title: 'Main.java: list type arguments do not produce different classes',
+                title: 'List type arguments do not produce different classes',
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -167,14 +185,8 @@ public class Main {
 }`,
                 result: 'Prints true, then true. Both objects are ArrayList instances. The second check establishes that value is a List, without checking its element type.',
             }],
-            bullets: [
-                'You cannot construct new T() or new T[3]. Pass a factory when a method needs to create a T.',
-                'You cannot create new List<String>[3]. A list of lists is usually simpler.',
-                'Overloads taking List<String> and List<Integer> have the same erased signature. Give the operations different names.',
-                'A generic class cannot extend Throwable. A catch parameter cannot be a type parameter.',
-            ],
             pitfalls: [
-                'Unchecked casts and raw collections can cause heap pollution: a reference promises one element type but contains another. A later read may throw ClassCastException.',
+                'Unchecked casts and raw collections can cause heap pollution. The collection contains a value that does not match the reference’s element type. A later read may throw ClassCastException.',
             ],
         },
     ],

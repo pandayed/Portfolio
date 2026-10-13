@@ -18,6 +18,8 @@ import type { LearningNote } from './LearningNotes/types';
 import { pythonNotes } from './PythonNotes/pythonNotes';
 import type { PythonInlineContent } from './PythonNotes/types';
 import { reactNotes } from './ReactNotes/reactNotes';
+import { getSpringBootBlocks, springBootPages } from './SpringBootNotes/registry';
+import type { SpringBootBlock } from './SpringBootNotes/types';
 import { systemDesignPages } from './SystemDesign/registry';
 import type { NoteNode } from './noteTreeData';
 
@@ -36,6 +38,13 @@ const goBlockText = (blocks: readonly GoNoteBlock[]): string =>
         block.richText?.map(([text]) => text).join('') ?? '',
         ...Object.values(block.cells ?? {}).map((cell) => cell.map(([text]) => text).join('')),
         goBlockText(block.children ?? []),
+    ].join(' ')).join(' ');
+
+const springBootBlockText = (blocks: readonly SpringBootBlock[]): string =>
+    blocks.map((block) => [
+        block.richText?.map(([text]) => text).join('') ?? '',
+        ...Object.values(block.cells ?? {}).map((cell) => cell.map(([text]) => text).join('')),
+        springBootBlockText(block.children ?? []),
     ].join(' ')).join(' ');
 
 const learningNoteText = (note: LearningNote): string => [
@@ -93,6 +102,10 @@ for (const note of dbmsLearningNotes) {
 
 for (const note of reactNotes) {
     pageWordCounts.set(`${REACT_NOTES_ROUTE}/${note.slug}`, countWords(learningNoteText(note)));
+}
+
+for (const page of springBootPages) {
+    pageWordCounts.set(page.route, countWords(`${page.title} ${springBootBlockText(getSpringBootBlocks(page))}`));
 }
 
 for (const page of systemDesignPages) {

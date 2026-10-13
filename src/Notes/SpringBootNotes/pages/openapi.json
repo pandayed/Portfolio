@@ -1,0 +1,177 @@
+{
+  "id": "spring-boot-openapi",
+  "title": "OpenAPI and Swagger UI",
+  "summary": "Generate API descriptions, inspect Swagger UI, and keep documentation distinct from security enforcement.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: How to Integrate Swagger in Spring Boot | Step-by-Step Tutorial",
+      "url": "https://www.youtube.com/watch?v=7QlvGBJ9Tng&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "springdoc: setup and compatibility matrix",
+      "url": "https://springdoc.org/"
+    },
+    {
+      "title": "OpenAPI specification",
+      "url": "https://spec.openapis.org/oas/latest.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "openapi-purpose",
+      "type": "header",
+      "richText": [
+        [
+          "Describe the API contract"
+        ]
+      ]
+    },
+    {
+      "id": "openapi-purpose-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "OpenAPI is a machine-readable description of endpoints, parameters, request bodies, responses and authentication requirements. Swagger UI renders that description as a browser interface."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-purpose-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "springdoc-openapi can derive a description from Spring MVC controllers and their Java types. A generated description still needs review: annotations cannot prove that the implementation follows the contract."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-purpose-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use the UI to inspect a request shape or send a manual request while learning. This is separate from an automated integration test."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-purpose-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For Spring Boot 3, use a compatible springdoc 2.x springdoc-openapi-starter-webmvc-ui release. The older Boot 2 course dependency springdoc-openapi-ui belongs to a different compatibility line."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-purpose-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check the springdoc compatibility matrix against the actual Boot version. Dependency management for Spring starters does not guarantee compatibility for every third-party library."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-paths",
+      "type": "header",
+      "richText": [
+        [
+          "Paths, schemas and authentication"
+        ]
+      ]
+    },
+    {
+      "id": "openapi-paths-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The usual JSON description is /v3/api-docs. The usual Swagger entry point is /swagger-ui.html, which may redirect to the UI resources."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-paths-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A schema describes the fields clients can send or receive. Use DTOs so password hashes and persistence-only fields do not accidentally become the documented response."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-paths-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Document a 201 response and its Location header for resource creation. Document validation and permission failures as well as success."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-paths-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An OpenAPI security scheme tells API clients how to provide a token. It does not configure Spring Security or authorize a request."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-paths-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use deliberate security rules for documentation routes. Public documentation is a product choice; do not make the application’s remaining routes public just to make Swagger work."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-paths-code",
+      "type": "code",
+      "richText": [
+        [
+          "springdoc:\n  api-docs:\n    enabled: true\n  swagger-ui:\n    enabled: true"
+        ]
+      ],
+      "language": "YAML"
+    },
+    {
+      "id": "openapi-review",
+      "type": "header",
+      "richText": [
+        [
+          "Check one endpoint"
+        ]
+      ]
+    },
+    {
+      "id": "openapi-review-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Compare the displayed HTTP method, path, request fields and response status with the controller."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-review-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Send a valid request, then an invalid one. Confirm that the response follows the documented contract."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-review-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "If the documentation is outdated, update the annotations or DTOs that own the contract. Editing generated JSON alone will be lost at regeneration."
+        ]
+      ]
+    }
+  ]
+}

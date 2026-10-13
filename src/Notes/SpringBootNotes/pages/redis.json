@@ -1,0 +1,235 @@
+{
+  "id": "spring-boot-redis",
+  "title": "Redis Caching and Redis Cloud",
+  "summary": "Cache API responses with explicit serialization, expiration, and secure cloud configuration.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: How to Use Redis in Your Spring Boot Project: Step-by-Step Tutorial",
+      "url": "https://www.youtube.com/watch?v=2srQ-RiJHps&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: How to integrate Redis Cloud with Spring Boot Application",
+      "url": "https://www.youtube.com/watch?v=13HUNj8lHC0&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Data Redis templates",
+      "url": "https://docs.spring.io/spring-data/redis/reference/redis/template.html"
+    },
+    {
+      "title": "Redis key expiration",
+      "url": "https://redis.io/docs/latest/commands/expire/"
+    },
+    {
+      "title": "Spring Boot 3.5 Redis properties",
+      "url": "https://docs.spring.io/spring-boot/3.5/appendix/application-properties/index.html"
+    },
+    {
+      "title": "Engineering Digest journalApp source",
+      "url": "https://github.com/EngineeringDigest/journalApp"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "redis-model",
+      "type": "header",
+      "richText": [
+        [
+          "Use Redis for short-lived cached values"
+        ]
+      ]
+    },
+    {
+      "id": "redis-model-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Redis stores values by key. A cache stores a copy that can be reused instead of calling an API or reading a database again."
+        ]
+      ]
+    },
+    {
+      "id": "redis-model-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A cache hit means the key has a usable value. A cache miss means the value is absent. On a miss, read the source and store the result."
+        ]
+      ]
+    },
+    {
+      "id": "redis-model-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "TTL means time to live. A 300-second TTL expires a weather response after five minutes. Repeat requests can use the cached response during that period."
+        ]
+      ]
+    },
+    {
+      "id": "redis-model-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use caching when repeated reads are expensive and briefly stale data is acceptable. Do not treat an optional cache as the only copy of a journal entry."
+        ]
+      ]
+    },
+    {
+      "id": "redis-model-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These examples use Spring Boot 3, Spring Framework 6, and Java 17. Add spring-boot-starter-data-redis for Redis connections and templates."
+        ]
+      ]
+    },
+    {
+      "id": "redis-code",
+      "type": "header",
+      "richText": [
+        [
+          "Read through a five-minute cache"
+        ]
+      ]
+    },
+    {
+      "id": "redis-code-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "StringRedisTemplate stores text keys and values with string serialization. ObjectMapper converts a Weather record to JSON and back."
+        ]
+      ]
+    },
+    {
+      "id": "redis-code-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Inject and reuse the Boot-managed ObjectMapper. A generic RedisTemplate declaration alone does not select JSON serialization."
+        ]
+      ]
+    },
+    {
+      "id": "redis-code-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The method below belongs to a service with injected redis, mapper, and provider collaborators. WeatherProvider fetches the current external weather response."
+        ]
+      ]
+    },
+    {
+      "id": "redis-code-code",
+      "type": "code",
+      "richText": [
+        [
+          "record Weather(String city, double temperatureC) {}\n\nWeather weather(String city) throws JsonProcessingException {\n    String key = \"weather:v1:\" + city.toLowerCase(Locale.ROOT);\n    String cached = redis.opsForValue().get(key);\n    if (cached != null) {\n        return mapper.readValue(cached, Weather.class);\n    }\n    Weather fresh = provider.fetch(city);\n    if (fresh == null) {\n        throw new IllegalStateException(\"Weather response is empty\");\n    }\n    redis.opsForValue().set(key, mapper.writeValueAsString(fresh),\n            Duration.ofSeconds(300));\n    return fresh;\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "redis-cloud",
+      "type": "header",
+      "richText": [
+        [
+          "Configure the Redis Cloud connection"
+        ]
+      ]
+    },
+    {
+      "id": "redis-cloud-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use the host, port, username, and password supplied by the cloud database. Put credentials in environment variables."
+        ]
+      ]
+    },
+    {
+      "id": "redis-cloud-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "This configuration assumes the provider endpoint supports TLS. TLS encrypts network traffic. Keep certificate verification enabled and use provider-supported trust settings."
+        ]
+      ]
+    },
+    {
+      "id": "redis-cloud-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot 3 uses the spring.data.redis prefix. Older Boot examples may use spring.redis, so check the version before copying properties."
+        ]
+      ]
+    },
+    {
+      "id": "redis-cloud-code",
+      "type": "code",
+      "richText": [
+        [
+          "spring.data.redis.host=${REDIS_HOST}\nspring.data.redis.port=${REDIS_PORT}\nspring.data.redis.username=${REDIS_USERNAME}\nspring.data.redis.password=${REDIS_PASSWORD}\nspring.data.redis.ssl.enabled=true\nspring.data.redis.connect-timeout=2s\nspring.data.redis.timeout=2s"
+        ]
+      ],
+      "language": "Properties"
+    },
+    {
+      "id": "redis-limits",
+      "type": "header",
+      "richText": [
+        [
+          "Choose freshness and failure behavior"
+        ]
+      ]
+    },
+    {
+      "id": "redis-limits-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The first request fetches weather and stores it. A second request before expiration reads Redis. A later request after expiration fetches again."
+        ]
+      ]
+    },
+    {
+      "id": "redis-limits-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Delete or update related keys after changing the source when stale data is unacceptable. TTL alone leaves stale values until expiration."
+        ]
+      ]
+    },
+    {
+      "id": "redis-limits-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A connection failure differs from a miss. The snippet propagates Redis and JSON failures. For an optional cache, explicitly handle those failures and fall back to the provider without hiding them in monitoring."
+        ]
+      ]
+    },
+    {
+      "id": "redis-limits-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Concurrent misses can call the provider more than once. Use coordination when provider limits make that unacceptable."
+        ]
+      ]
+    },
+    {
+      "id": "redis-limits-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Include every input that changes the result in the cache key. Add user or tenant identity for private data so users cannot read each other’s cached values."
+        ]
+      ]
+    }
+  ]
+}

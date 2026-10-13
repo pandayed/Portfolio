@@ -1,0 +1,35 @@
+.SpringBootNote__section .Article__subTitle {
+    scroll-margin-top: var(--header-offset, 0);
+}
+
+.SpringBootNote__callout,
+.SpringBootNote__quote {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: var(--space-sm);
+    border-left: 2px solid var(--color-border);
+}
+
+.SpringBootNote__quote {
+    font-style: italic;
+}
+
+.SpringBootNote__divider {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.SpringBootNote__listChildren {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+}
+
+.SpringBootNote__listChildren .Article__notes,
+.SpringBootNote__listChildren .Article__steps {
+    margin-top: 0;
+}

@@ -1,0 +1,180 @@
+{
+  "id": "spring-boot-code-quality",
+  "title": "SonarQube, SonarQube for IDE and quality gates",
+  "summary": "Use local analysis and CI quality gates, and interpret coverage without treating it as behavior proof.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Master SonarQube, SonarLint, and SonarCloud: Ultimate Guide to Enhancing Your Code Quality",
+      "url": "https://www.youtube.com/watch?v=iZtA-1zBvzY&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "SonarQube: quality gates",
+      "url": "https://docs.sonarsource.com/sonarqube-server/quality-standards-administration/managing-quality-gates/introduction-to-quality-gates"
+    },
+    {
+      "title": "SonarQube for IDE: overview",
+      "url": "https://docs.sonarsource.com/sonarqube-for-ide/intellij/getting-started/overview/"
+    },
+    {
+      "title": "SonarQube: Java coverage reports",
+      "url": "https://docs.sonarsource.com/sonarqube-server/analyzing-source-code/test-coverage/java-test-coverage/"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "quality-tools",
+      "type": "header",
+      "richText": [
+        [
+          "Choose the analysis surface"
+        ]
+      ]
+    },
+    {
+      "id": "quality-tools-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Static analysis reads source code without running the application. It can find risky patterns, duplicated code and maintainability problems."
+        ]
+      ]
+    },
+    {
+      "id": "quality-tools-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "SonarQube for IDE, formerly SonarLint, reports issues while editing. Connected mode can align its rules with the project on SonarQube."
+        ]
+      ]
+    },
+    {
+      "id": "quality-tools-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "SonarQube Server stores analysis results on a server you operate. SonarQube Cloud, formerly SonarCloud, provides hosted project analysis."
+        ]
+      ]
+    },
+    {
+      "id": "quality-tools-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A scanner analyzes the chosen project revision and sends results to the server or cloud service. The Maven scanner integrates this step with a Java build."
+        ]
+      ]
+    },
+    {
+      "id": "quality-tools-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use IDE feedback for a quick local fix. Use CI analysis for a shared result tied to the revision under review."
+        ]
+      ]
+    },
+    {
+      "id": "quality-gates",
+      "type": "header",
+      "richText": [
+        [
+          "What a quality gate proves"
+        ]
+      ]
+    },
+    {
+      "id": "quality-gates-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A quality gate checks configured conditions on analysis results. It may include issues, duplication or coverage for new code."
+        ]
+      ]
+    },
+    {
+      "id": "quality-gates-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A passing gate means those configured conditions passed. It does not prove that every API behavior, permission rule or deployment works."
+        ]
+      ]
+    },
+    {
+      "id": "quality-gates-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Coverage measures which code ran while tests executed. Sonar imports a report produced by a coverage tool such as JaCoCo; Sonar does not run the tests itself."
+        ]
+      ]
+    },
+    {
+      "id": "quality-gates-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "High coverage can coexist with weak assertions. An effective check verifies meaningful outcomes such as an unauthorized record remaining inaccessible."
+        ]
+      ]
+    },
+    {
+      "id": "quality-gates-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Make CI wait for the gate result when release policy depends on it. A scanner upload completing is not automatically a passing gate."
+        ]
+      ]
+    },
+    {
+      "id": "quality-workflow",
+      "type": "header",
+      "richText": [
+        [
+          "Keep analysis useful"
+        ]
+      ]
+    },
+    {
+      "id": "quality-workflow-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Analyze the same revision that the build and review use. Keep the project key, source paths and coverage-report path explicit in CI configuration."
+        ]
+      ]
+    },
+    {
+      "id": "quality-workflow-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Provide the analysis token through a CI secret. Do not place the token in pom.xml, the command history or a public log."
+        ]
+      ]
+    },
+    {
+      "id": "quality-workflow-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Review each finding in its actual context. Fix a real issue; record a justified suppression when a rule does not apply."
+        ]
+      ]
+    },
+    {
+      "id": "quality-workflow-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep generated code out of human-code analysis when the project policy allows it. Do not exclude difficult application code only to improve a score."
+        ]
+      ]
+    }
+  ]
+}

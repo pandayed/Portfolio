@@ -1,0 +1,159 @@
+{
+  "id": "spring-boot-project-structure",
+  "title": "Project structure and request flow",
+  "summary": "Understand source folders, component scanning, and the controller → service → repository flow.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Structure of Spring Boot Application | What's Inside Your Spring Boot App?",
+      "url": "https://www.youtube.com/watch?v=JNzVOpNCcfw&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Creating REST API using Spring Boot in Hindi | A Step-by-Step Tutorial",
+      "url": "https://www.youtube.com/watch?v=rxT5RFYxjSg&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Boot: structuring your code",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/using/structuring-your-code.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "structure-layout",
+      "type": "header",
+      "richText": [
+        [
+          "Files and packages"
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A Maven project describes its dependencies and build plugins in pom.xml. The Maven wrapper keeps the Maven version consistent across machines."
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "src/main/java contains application code. src/main/resources contains configuration and other files packaged with the application."
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "src/test/java contains test code. target contains Maven build output; do not put application source there."
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Place the class with @SpringBootApplication in a root package such as com.example.journal. Put controllers, services and repositories under that package."
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Package names determine class identity and component scanning. A directory named service does not register a bean by itself; its class needs registration."
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Organize a small project by layers. As it grows, grouping related controllers, services and repositories by feature can keep changes close together."
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-code",
+      "type": "code",
+      "richText": [
+        [
+          "src/main/java/com/example/journal/\n  JournalApplication.java\n  controller/JournalController.java\n  service/JournalService.java\n  repository/JournalRepository.java\n  model/JournalEntry.java\nsrc/main/resources/application.yml\nsrc/test/java/com/example/journal/"
+        ]
+      ],
+      "language": "Plain Text"
+    },
+    {
+      "id": "structure-request",
+      "type": "header",
+      "richText": [
+        [
+          "Follow one request"
+        ]
+      ]
+    },
+    {
+      "id": "structure-request-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "POST /journal first passes through servlet filters, including security when configured. Spring MVC then finds the matching controller method."
+        ]
+      ]
+    },
+    {
+      "id": "structure-request-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The controller reads the request and translates the result into an HTTP response. It calls a service for application rules."
+        ]
+      ]
+    },
+    {
+      "id": "structure-request-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The service applies rules such as ownership and transaction boundaries. It calls a repository when data must be stored or read."
+        ]
+      ]
+    },
+    {
+      "id": "structure-request-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The repository uses the database driver. The saved data passes back through the service and controller; a message converter writes the response."
+        ]
+      ]
+    },
+    {
+      "id": "structure-request-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "This separation helps locate failures: a mapping error belongs near the controller, a permission rule near the service, and a connection error near database configuration."
+        ]
+      ]
+    },
+    {
+      "id": "structure-request-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A bean outside the scanned package may cause a missing-dependency startup error. Confirm the package and bean registration before adding unrelated annotations."
+        ]
+      ]
+    }
+  ]
+}

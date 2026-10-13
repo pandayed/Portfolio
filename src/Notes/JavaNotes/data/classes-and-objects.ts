@@ -5,14 +5,15 @@ const note: LearningNote = {
     title: 'Classes and objects',
     summary: 'Create objects with valid state, control access to fields, and understand constructors, this, static, and final.',
     scope: 'java',
-    updatedOn: '2026-10-05',
+    updatedOn: '2026-10-13',
     sections: [
         {
             id: 'object-state',
             title: 'A class defines state and behavior',
-            paragraphs: [
-                'A class defines fields and methods. An object is an instance of that class. Each object has its own instance fields. A variable of a class type holds a reference to an object, or null.',
-                'Each complete example on this page is a separate Main.java file. Compile with javac Main.java and run with java Main using JDK 17 or later.',
+            bullets: [
+                'A class defines fields and methods. A field stores data. A method defines an operation.',
+                'An object is an instance of a class. Each object has its own instance fields.',
+                'A variable of a class type holds a reference to an object, or null.',
             ],
             examples: [{
                 title: 'Two counters keep separate values',
@@ -43,15 +44,18 @@ public class Main {
             }],
             pitfalls: [
                 'Counter other = first copies the reference. It does not create a new counter. Both variables then refer to the same object.',
-                'Instance fields receive default values such as 0, false, or null. Local variables must be assigned before you read them.',
+                'Instance fields receive default values such as 0, false, or null. Assign a value to a local variable before reading it.',
             ],
         },
         {
             id: 'constructors',
             title: 'Constructors establish valid initial state',
-            paragraphs: [
-                'A constructor has the class name and no return type. new invokes it to initialize an object. this refers to the current object. Use this.name to distinguish a field from a parameter named name.',
-                'Overloaded constructors accept different parameter lists. On the Java 17 baseline, a this(...) call to another constructor must be the first statement.',
+            bullets: [
+                'A constructor initializes an object. It has the class name and no return type. new calls it.',
+                'Use a constructor to check that the object starts with valid field values.',
+                'this refers to the current object. Use this.name to distinguish the field from a parameter named name.',
+                'Overloaded constructors have different parameter lists.',
+                'In Java 17, this(...) calls another constructor in the same class. It must be the first statement in the constructor.',
             ],
             examples: [{
                 title: 'Validate a name and reuse one constructor',
@@ -84,30 +88,35 @@ public class Main {
                 result: 'Guest\nAsha',
             }],
             pitfalls: [
-                'The compiler supplies a default no-argument constructor only when you declare no constructor. Adding User(String name) does not automatically retain User().',
-                'void User() declares a method. It is not a constructor.',
+                'The compiler adds a default no-argument constructor only when you declare no constructor.',
+                'Adding User(String name) does not keep User() automatically. Declare User() if you still need it.',
+                'void User() declares a method, not a constructor.',
             ],
         },
         {
             id: 'visibility',
             title: 'Visibility controls who can call or read a member',
             bullets: [
-                'private: access stays within the enclosing top-level class and its nested classes. Use it for implementation details.',
-                'No modifier, called package-private: access stays within the same package.',
-                'protected: access is allowed within the same package and through subclass rules outside that package. It does not allow every caller to use the member.',
-                'public: other code can access the member when the containing type is accessible. Module exports can further limit access.',
+                'Visibility controls which code can access a member. A member is a field, method, or another declaration inside a class.',
+                'private allows access within the enclosing top-level class and its nested classes. Use it for implementation details.',
+                'No modifier means package-private. Code in the same package can access the member.',
+                'protected allows access within the same package. Subclasses outside the package can access it under additional rules.',
+                'public allows access when the containing type is accessible. Module exports can limit access further. An export makes a package available to other modules.',
                 'An ordinary top-level class can be public or package-private. A public class named Main belongs in Main.java.',
             ],
             pitfalls: [
-                'protected access from a subclass in another package has receiver restrictions. A subclass cannot use it on any arbitrary instance of the parent class.',
-                'A public method does not make a private field public. Callers use the method and its rules.',
+                'A subclass in another package cannot access a protected instance member through any arbitrary parent object. The object reference must satisfy the subclass access rules.',
+                'A public method does not make a private field public. Callers use the method and follow its rules.',
             ],
         },
         {
             id: 'encapsulation',
             title: 'Encapsulation keeps state changes behind methods',
-            paragraphs: [
-                'Keep fields private and expose operations that enforce the object’s rules. A method can reject an invalid change before it alters state. Adding a getter and setter for every field is not required.',
+            bullets: [
+                "Encapsulation controls access to an object's fields through methods.",
+                "Keep fields private. Provide operations that enforce the object's rules.",
+                'A method can reject an invalid change before changing a field.',
+                'You do not need a getter and setter for every field. A getter reads a value. A setter assigns a value.',
             ],
             examples: [{
                 title: 'Prevent a negative stock count',
@@ -150,15 +159,20 @@ public class Main {
                 result: '3\nInvalid reservation\n3',
             }],
             pitfalls: [
-                'Returning an internal mutable list lets callers change state outside your methods. Return a suitable copy or an unmodifiable view when that fits the contract.',
+                "Returning an internal mutable list lets callers change it outside your methods. Return a suitable copy or an unmodifiable view when the object's rules require it.",
+                'An unmodifiable view prevents changes through that view. It can still show changes made to the original list.',
             ],
         },
         {
             id: 'static-final',
             title: 'static belongs to the class; final prevents reassignment',
-            paragraphs: [
-                'An instance field belongs to an object. A static field belongs to the loaded class and is shared by its instances. A static method has no this reference. Call it through the class name.',
-                'A final variable can be assigned only once. For a reference, final prevents replacing the reference. It does not prevent changes to the referenced object. A final method cannot be overridden. A final class cannot be extended.',
+            bullets: [
+                'An instance field belongs to an object. A static field belongs to the loaded class and is shared by its instances.',
+                'A static method has no this reference. Call it through the class name.',
+                'A final variable can be assigned only once.',
+                'For a reference variable, final prevents replacing the reference. It does not stop changes to the referenced object.',
+                'A final method cannot be overridden. A subclass cannot replace its implementation.',
+                'A final class cannot be extended. It cannot have subclasses.',
             ],
             examples: [{
                 title: 'A shared count and a final mutable list',
@@ -193,7 +207,7 @@ public class Main {
                 result: '2\n4\n[Asha]',
             }],
             pitfalls: [
-                'The created++ example is for a single thread. static does not make an update safe when multiple threads perform it at once.',
+                'The created++ example uses one thread. static does not make an update safe when several threads perform it at once.',
                 'A static method cannot directly read an instance field. It needs an object reference.',
             ],
         },

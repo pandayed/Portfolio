@@ -1,0 +1,203 @@
+{
+  "id": "spring-boot-testing-mockito",
+  "title": "Mockito Unit Tests",
+  "summary": "Control dependency results and assert service behavior without starting Spring.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Mockito Spring Boot Tutorial | @Mock @InjectMocks",
+      "url": "https://www.youtube.com/watch?v=YcAC59cvcV0&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Mockito: core API",
+      "url": "https://site.mockito.org/javadoc/current/org/mockito/Mockito.html"
+    },
+    {
+      "title": "Mockito: InjectMocks",
+      "url": "https://site.mockito.org/javadoc/current/org/mockito/InjectMocks.html"
+    },
+    {
+      "title": "Mockito: Jupiter extension",
+      "url": "https://www.javadoc.io/static/org.mockito/mockito-junit-jupiter/4.11.0/org/mockito/junit/jupiter/MockitoExtension.html"
+    },
+    {
+      "title": "Spring Boot 3.4: testing applications",
+      "url": "https://docs.spring.io/spring-boot/3.4/reference/testing/spring-boot-applications.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "mockito-scope",
+      "type": "header",
+      "richText": [
+        [
+          "A mock supplies controlled dependency behavior"
+        ]
+      ]
+    },
+    {
+      "id": "mockito-scope-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Mockito creates a replacement object for a dependency. The test decides what the mock returns and can check calls made to it. A mock repository does not connect to the database."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-scope-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use mocks for boundaries such as repositories or email clients when testing a service’s decisions. Use real value objects and the real service under test."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-scope-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Mock creates the mock. @InjectMocks creates the object under test and attempts to inject the mocks. Prefer constructor injection in application code so required dependencies are explicit."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-scope-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ExtendWith(MockitoExtension.class) initializes Mockito for JUnit Jupiter. This test has no @SpringBootTest, no Spring context and no active application profile."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-example",
+      "type": "header",
+      "richText": [
+        [
+          "Test both a result and a boundary call"
+        ]
+      ]
+    },
+    {
+      "id": "mockito-example-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The compact example defines its dependency and service contract. The service returns a stored title or throws for a missing entry. Mockito controls each repository response."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-example-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "when(...).thenReturn(...) is stubbing. It prepares the dependency response. verify(...) checks an interaction. assertEquals checks the observable result. These checks answer different questions."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-example-code",
+      "type": "code",
+      "richText": [
+        [
+          "interface Titles {\n    Optional<String> findById(String id);\n}\n\nclass TitleService {\n    private final Titles titles;\n    TitleService(Titles titles) { this.titles = titles; }\n    String title(String id) {\n        return titles.findById(id)\n            .orElseThrow(() -> new IllegalArgumentException(\"Missing entry\"));\n    }\n}\n\n@ExtendWith(MockitoExtension.class)\nclass TitleServiceTest {\n    @Mock Titles titles;\n    @InjectMocks TitleService service;\n\n    @Test\n    void returnsStoredTitle() {\n        when(titles.findById(\"entry-1\"))\n            .thenReturn(Optional.of(\"Morning\"));\n        assertEquals(\"Morning\", service.title(\"entry-1\"));\n        verify(titles).findById(\"entry-1\");\n    }\n\n    @Test\n    void reportsMissingEntry() {\n        when(titles.findById(\"missing\")).thenReturn(Optional.empty());\n        assertThrows(IllegalArgumentException.class,\n            () -> service.title(\"missing\"));\n    }\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "mockito-choices",
+      "type": "header",
+      "richText": [
+        [
+          "Use precise checks"
+        ]
+      ]
+    },
+    {
+      "id": "mockito-choices-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Prefer exact arguments when they are part of the requirement. anyString() can hide a service passing the wrong user ID. Use matchers only when the value is irrelevant to the rule."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-choices-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "If one argument uses a matcher, use matchers for all arguments in that call. eq(value) checks a particular value while other arguments use broader matchers."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-choices-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use ArgumentCaptor when the service builds a new object for a dependency. Capture the object and assert meaningful fields such as owner ID or encoded-password status."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-choices-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For a void dependency, doThrow(...).when(mock).operation(...) simulates failure. Assert the service’s intended failure behavior. Avoid checking every internal call unless order or call count is required."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-limits",
+      "type": "header",
+      "richText": [
+        [
+          "Keep mock scope distinct from integration scope"
+        ]
+      ]
+    },
+    {
+      "id": "mockito-limits-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@InjectMocks does not apply Spring proxies, transactions, configuration properties or security filters. A Mockito test cannot prove that @Transactional rolls back a database change."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-limits-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A web slice or full application test needs collaborators registered in the Spring context. Plain @Mock fields do not automatically replace Spring beans."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-limits-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The tutorial uses manual Mockito initialization in a disabled sample. The Jupiter extension gives each test managed mock setup without loading Spring."
+        ]
+      ]
+    },
+    {
+      "id": "mockito-limits-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a real database integration test for query correctness. Use HTTP tests for request binding and security filters. Keep the Mockito unit test for service decisions and failure paths."
+        ]
+      ]
+    }
+  ]
+}

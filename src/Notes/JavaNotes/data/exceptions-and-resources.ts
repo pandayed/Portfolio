@@ -5,14 +5,18 @@ const note: LearningNote = {
     title: 'Exceptions and resource cleanup',
     summary: 'Catch specific failures, distinguish checked and unchecked exceptions, and close resources with try-with-resources.',
     scope: 'java',
-    updatedOn: '2026-10-05',
+    updatedOn: '2026-10-13',
     sections: [
         {
             id: 'exception-flow',
             title: 'Handle a failure with try and catch',
-            paragraphs: [
-                'An exception interrupts normal execution. Java looks for a matching catch block in the current method and then in its callers. If no handler is found, the thread terminates and its uncaught exception handler receives the exception.',
-                'Put the operation that can fail inside try. Catch a specific exception when this part of the program can choose a useful response. Statements after the failing operation inside try do not run.',
+            bullets: [
+                'An exception interrupts normal execution.',
+                'Java looks for a matching catch block in the current method. If it finds none, it checks the methods that called it.',
+                'If Java finds no catch block, the thread terminates. Its uncaught exception handler receives the exception.',
+                'Put an operation that can fail inside try.',
+                'Catch a specific exception when this part of the program can handle the failure.',
+                'Statements after the failing operation inside try do not run.',
             ],
             examples: [{
                 language: 'java',
@@ -29,22 +33,27 @@ const note: LearningNote = {
 }`,
                 result: 'Two lines: Enter a whole number, then Done. The count print is skipped.',
             }],
-            pitfalls: ['An empty catch block hides the failure. Either recover, report it at a suitable boundary, or propagate it.'],
+            pitfalls: [
+                'An empty catch block hides the failure.',
+                'Handle the failure, report it where the program can respond, or pass it to the caller.',
+            ],
         },
         {
             id: 'checked-and-unchecked',
             title: 'Distinguish checked and unchecked exceptions',
-            paragraphs: [
-                'Checked exceptions must be caught or declared with throws. IOException is a checked exception. RuntimeException and its subclasses are unchecked, so the compiler does not require a catch or throws declaration. NumberFormatException and IllegalArgumentException are examples.',
-                'Error and its subclasses are also unchecked. They usually represent failures application code should not try to recover from, such as exhaustion of JVM memory. Checked does not mean recoverable, and unchecked does not mean harmless.',
-            ],
             bullets: [
+                'You must catch a checked exception or declare it with throws. IOException is a checked exception.',
+                'RuntimeException and its subclasses are unchecked. The compiler does not require you to catch or declare them.',
+                'NumberFormatException and IllegalArgumentException are unchecked exceptions.',
+                'Error and its subclasses are also unchecked.',
+                'An Error usually reports a failure that application code should not try to recover from. Running out of JVM memory is one example.',
+                'A checked exception may be impossible to recover from. An unchecked exception may still cause a serious failure.',
                 'throw raises an exception object now.',
                 'throws lists exception types a method may pass to its caller. It does not handle the failure.',
                 'Catch more specific types before their parent type. A catch for Exception before IOException would make the IOException handler unreachable.',
             ],
             examples: [{
-                title: 'Method declaration inside a class',
+                title: 'Read a configuration file',
                 language: 'java',
                 code: `static String readConfig(java.nio.file.Path path)
         throws java.io.IOException {
@@ -56,9 +65,12 @@ const note: LearningNote = {
         {
             id: 'validation-and-causes',
             title: 'Validate arguments and preserve the cause',
-            paragraphs: [
-                'Use an exception to report that a method cannot satisfy its contract. For an invalid argument, IllegalArgumentException communicates the problem directly. A custom exception can name a domain failure when callers need to distinguish it.',
-                'When converting a lower-level failure into another exception, pass the original exception as its cause. The cause preserves the original stack trace for diagnosis.',
+            bullets: [
+                'Use an exception when a method cannot do what its contract promises.',
+                'Use IllegalArgumentException for an invalid argument.',
+                'A custom exception names a failure specific to the application. Use one when callers need to distinguish that failure.',
+                'When you convert a failure into another exception, pass the original exception as its cause.',
+                'The cause keeps the original stack trace. A stack trace lists the method calls that led to the failure.',
             ],
             examples: [{
                 language: 'java',
@@ -90,9 +102,14 @@ const note: LearningNote = {
         {
             id: 'try-with-resources',
             title: 'Close resources with try-with-resources',
-            paragraphs: [
-                'A resource such as a reader may hold an operating-system handle. Try-with-resources closes AutoCloseable resources when the block finishes, including when the block throws. Multiple resources close in reverse declaration order.',
-                'If both the body and close fail, the body exception remains the main exception. The close exception is recorded as a suppressed exception. This avoids replacing the original failure with a cleanup failure.',
+            bullets: [
+                'A resource such as a file reader may keep an operating-system file handle open.',
+                'AutoCloseable is an interface with a close method.',
+                'Try-with-resources calls close on AutoCloseable resources when the block finishes.',
+                'It also closes the resources when the block throws an exception.',
+                'When you declare multiple resources, they close in reverse declaration order.',
+                'If both the block and close fail, the block exception stays the main exception.',
+                'Java records the close exception as a suppressed exception. You can inspect it without losing the original failure.',
             ],
             examples: [{
                 title: 'Observe the close step without an external file',
@@ -115,8 +132,9 @@ const note: LearningNote = {
             }],
             pitfalls: [
                 'Garbage collection does not provide prompt resource cleanup. Close file and network resources explicitly.',
-                'Avoid return statements in finally. They can replace a pending return value or suppress an exception.',
-                'Finally normally runs after try and catch, but it is not guaranteed after process termination or JVM failure.',
+                'Avoid return statements in finally. They can replace a pending return value or prevent an exception from reaching the caller.',
+                'finally normally runs after try and catch.',
+                'It may not run if the process terminates or the JVM fails.',
             ],
         },
     ],

@@ -1,0 +1,143 @@
+{
+  "id": "20924eb1-ed54-807b-a8f0-c285d4dff46f",
+  "title": "Spring Boot Test Framework (@SpringBootTest, @WebMvcTest, Unit Testing with JUnit & Mockito)",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54807ba8f0c285d4dff46f",
+  "blocks": [
+    {
+      "id": "test-choose",
+      "type": "header",
+      "richText": [
+        [
+          "Choose the smallest useful test scope"
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JUnit runs tests and provides assertions. Mockito replaces a dependency with a controlled mock. Spring Boot test annotations select how much of the application to load."
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a plain JUnit test for a calculation, validation rule or other class with no Spring wiring. Create the object directly. This keeps the test focused and avoids application startup."
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use JUnit with Mockito when a service must react to repository results or another dependency. Mock that dependency. Assert the service’s output or exception."
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @WebMvcTest for controller request mapping, JSON binding, validation and HTTP responses. It loads a web slice. Supply the controller’s collaborators separately. Include relevant security configuration when checking access rules."
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @SpringBootTest when the requirement depends on application wiring or several real components. The default web environment does not start a real server. RANDOM_PORT does."
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A mock cannot prove a database query, transaction rollback, email delivery or external API behavior. Use an integration test with isolated dependencies for those requirements."
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep each test independent. Use fresh input and controlled dependencies. A passing contextLoads test proves context startup, not correctness of journal ownership."
+        ]
+      ]
+    },
+    {
+      "id": "test-choose-b7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The playlist’s testing topics cover parameterized JUnit tests and Mockito. The focused pages below contain learning examples. They are note content and are not application test files."
+        ]
+      ]
+    },
+    {
+      "id": "test-next",
+      "type": "header",
+      "richText": [
+        [
+          "Focused testing notes"
+        ]
+      ]
+    },
+    {
+      "id": "ed-test-link-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JUnit and parameterized tests",
+          [
+            [
+              "a",
+              "/notes/spring-boot/testing/junit"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "ed-test-link-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Mockito unit tests",
+          [
+            [
+              "a",
+              "/notes/spring-boot/testing/mockito"
+            ]
+          ]
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Engineering Digest: JUnit Testing in Spring Boot | @Test @ParameterizedTest @CsvSource @ArgumentsSource @SpringBootTest",
+      "url": "https://www.youtube.com/watch?v=mILLHaIjGn4&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Mockito Spring Boot Tutorial | @Mock @InjectMocks",
+      "url": "https://www.youtube.com/watch?v=YcAC59cvcV0&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Boot 3.4: testing applications",
+      "url": "https://docs.spring.io/spring-boot/3.4/reference/testing/spring-boot-applications.html"
+    }
+  ],
+  "updatedOn": "2026-10-13",
+  "summary": "Choose plain unit tests, mocked service tests, web slices or full application tests from the behavior being checked."
+}

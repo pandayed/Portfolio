@@ -1,0 +1,1075 @@
+{
+  "id": "20924eb1-ed54-8068-b645-ea1ea4bef013",
+  "title": "Building and Running with Maven or Gradle (spring-boot-maven-plugin)",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed548068b645ea1ea4bef013",
+  "blocks": [
+    {
+      "id": "20924eb1-ed54-805e-9862-cbfd10575c31",
+      "type": "text",
+      "richText": [
+        [
+          "Imagine Maven/Gradle as the “build system” equivalent to "
+        ],
+        [
+          "Makefiles",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "CMake",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in C++."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80ac-8d1c-f761264d7896",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-808f-905a-ce33fc14e8ea",
+      "type": "sub_header",
+      "richText": [
+        [
+          "1. Core Concept",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8068-a519-fefedcf7bc81",
+      "type": "text",
+      "richText": [
+        [
+          "In Spring Boot, "
+        ],
+        [
+          "Maven",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "Gradle",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " are tools used to "
+        ],
+        [
+          "build",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " your Java application—this means compiling code, managing libraries (dependencies), packaging into a "
+        ],
+        [
+          ".jar",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " file, and even running or deploying your app. The "
+        ],
+        [
+          "spring-boot-maven-plugin",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " (or its Gradle counterpart) automates many Spring Boot-specific tasks like running the app, creating executable jars, and more."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80c3-878d-f962e9414572",
+      "type": "quote",
+      "richText": [
+        [
+          "💡 Think of it like this: Maven is your build-and-run command center. It knows where your source code is, which libraries you need, and how to turn it all into something runnable."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8056-ba8b-ec19d3ae6ce4",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8031-94c9-fc8d4680bb4c",
+      "type": "sub_header",
+      "richText": [
+        [
+          "2. Key Interview Points",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80fa-85e6-de914644e095",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "What is ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "spring-boot-maven-plugin",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and why it is used?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-8089-8efa-d7a2432e1c7a",
+          "type": "text",
+          "richText": [
+            [
+              "It adds Spring Boot features to Maven, like running the app using "
+            ],
+            [
+              "mvn spring-boot:run",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " and creating self-contained executable jars ("
+            ],
+            [
+              "fat jars",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              ")."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8049-80a3-c41bea2c47b8",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "How do you build and run a Spring Boot app using Maven or Gradle?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-8016-80f7-f80a466fbf38",
+          "type": "text",
+          "richText": [
+            [
+              "Using commands like "
+            ],
+            [
+              "mvn clean install",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " to build, or "
+            ],
+            [
+              "mvn spring-boot:run",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " to start the app."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-801f-84ee-d5fdaf4729cb",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "What does the plugin do during the build process?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-80ff-abd5-d463f3d76077",
+          "type": "text",
+          "richText": [
+            [
+              "It packages the app into a jar with all dependencies and includes a special main class that starts the Spring Boot app."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b2-b63d-def1b5790def",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "✅ "
+        ],
+        [
+          "Difference between ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "mvn install",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " vs. ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "mvn spring-boot:run",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-8083-80a5-c660b50d9052",
+          "type": "text",
+          "richText": [
+            [
+              "One builds the jar and installs it to the local repository; the other directly runs the app using source code."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-809b-a159-c2c9f1486018",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8042-bc57-ffb725e0bb01",
+      "type": "sub_header",
+      "richText": [
+        [
+          "3. Code Example",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-807c-9c71-f1bd6fe1e34f",
+      "type": "text",
+      "richText": [
+        [
+          "Let’s say you have a basic Spring Boot project using Maven. Your "
+        ],
+        [
+          "pom.xml",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " will look like this:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8023-89b0-c6b840af11b4",
+      "type": "code",
+      "richText": [
+        [
+          "<!-- pom.xml -->\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" ...>\n    <modelVersion>4.0.0</modelVersion>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>0.0.1-SNAPSHOT</version>\n    <packaging>jar</packaging>\n\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.2.0</version>\n    </parent>\n\n    <dependencies>\n        <!-- Web dependency -->\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <!-- Spring Boot Maven Plugin -->\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n</project>\n"
+        ]
+      ],
+      "language": "XML"
+    },
+    {
+      "id": "20924eb1-ed54-8028-871b-c57dab41e6e6",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Running your app:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e8-898a-c6058eba0fb8",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Build app",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": "
+        ],
+        [
+          "mvn clean install",
+          [
+            [
+              "c"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8091-a554-d10a50b6c957",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Run app directly",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": "
+        ],
+        [
+          "mvn spring-boot:run",
+          [
+            [
+              "c"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80c8-b889-f37481c69151",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Run built jar",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": "
+        ],
+        [
+          "java -jar target/demo-0.0.1-SNAPSHOT.jar",
+          [
+            [
+              "c"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8033-9d45-f823702bbe51",
+      "type": "quote",
+      "richText": [
+        [
+          "This builds and runs an embedded web server (like Tomcat) with your code packaged in it."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80ff-8a69-d2946d93d9b6",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-804c-b6e0-c08a78683c18",
+      "type": "sub_header",
+      "richText": [
+        [
+          "4. Common Interview Questions",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8027-8e78-dd4e7b9e6d77",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What does the ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "spring-boot-maven-plugin",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " do?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-809a-9c2b-cf394eda13d1",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How is ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "mvn spring-boot:run",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " different from running the jar manually?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e7-bbea-e0dea575eaae",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What’s the purpose of ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "mvn clean install",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-806d-a8ab-cbc116c61787",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Can you explain the build lifecycle in Maven?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-804e-9822-fc8b065c3c96",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What’s a fat jar in Spring Boot, and how is it created?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80af-88c3-f880312c04d4",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80f8-9adf-dbabd19d5bab",
+      "type": "sub_header",
+      "richText": [
+        [
+          "5. Best Practices & Pitfalls",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b8-a8c2-e5ab88aec018",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "✅ Best Practices:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e0-9709-c762bbff047d",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep your "
+        ],
+        [
+          "pom.xml",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " organized and dependencies clean."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80d0-a0e8-c965050d9ac4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "mvn clean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " before "
+        ],
+        [
+          "install",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to avoid stale builds."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80f3-b4e3-d242c51f617c",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use the plugin to create a fat jar for easy deployment."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-803b-9b65-ef12b89e1a9b",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "❌ Common Pitfalls:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-803a-ac4a-e9ac62d9a5fa",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Forgetting to include the plugin—Spring Boot won’t build correctly."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b6-91d7-ee9882b16b05",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Mixing versions of Spring Boot libraries manually (instead of using the parent "
+        ],
+        [
+          "spring-boot-starter-parent",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80f0-9f17-e0e0c37c3870",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Ignoring dependency bloat—too many or unnecessary dependencies can cause conflicts."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80c9-b369-e305f7acd340",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8003-9a26-fe66f6b32d1f",
+      "type": "sub_header",
+      "richText": [
+        [
+          "6. Connection to Other Concepts",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80a8-94a0-c0379642ca08",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Starters",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": The plugin works with "
+        ],
+        [
+          "spring-boot-starter-*",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " libraries to package and run them easily."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8092-989a-d75159291ec5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Auto-Configuration",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": When you run the app with the plugin, Spring Boot auto-configures beans (think of them as service objects) behind the scenes."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80d8-8fa8-daed627a828f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Devtools",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Works well with the Maven plugin for hot-reload support."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-803b-9e86-e82ef3ea7e8a",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80be-a968-e31ed9060127",
+      "type": "sub_header",
+      "richText": [
+        [
+          "7. Quick Interview Answers",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-806e-b0c5-d4c3fa6648a1",
+      "type": "quote",
+      "richText": [
+        [
+          "🧠 Q: What is the spring-boot-maven-plugin, and why is it used?"
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-80c2-a6b9-d3fb3b74fddb",
+          "type": "text",
+          "richText": [
+            [
+              "A:",
+              [
+                [
+                  "b"
+                ]
+              ]
+            ],
+            [
+              " It's a Maven plugin that simplifies building and running Spring Boot applications. It allows you to run the app directly using "
+            ],
+            [
+              "mvn spring-boot:run",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " and also packages the app into a fat jar with all dependencies, so it can be deployed or run anywhere without installing anything else."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-806a-9c26-ff9c097bea2e",
+      "type": "quote",
+      "richText": [
+        [
+          "🧠 Q: What is the difference between mvn install and mvn spring-boot:run?"
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-80d5-8a28-f8e2c49c5727",
+          "type": "text",
+          "richText": [
+            [
+              "A:",
+              [
+                [
+                  "b"
+                ]
+              ]
+            ],
+            [
+              " "
+            ],
+            [
+              "mvn install",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " compiles the code and packages it into a jar file, saving it to your local Maven repository. "
+            ],
+            [
+              "mvn spring-boot:run",
+              [
+                [
+                  "c"
+                ]
+              ]
+            ],
+            [
+              " skips the packaging step and runs the app directly from your source files—useful during development."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8094-b30b-c067ed508635",
+      "type": "quote",
+      "richText": [
+        [
+          "🧠 Q: How does Spring Boot run without an external server?"
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-8062-8a33-dde92f523e0d",
+          "type": "text",
+          "richText": [
+            [
+              "A:",
+              [
+                [
+                  "b"
+                ]
+              ]
+            ],
+            [
+              " The Spring Boot Maven plugin packages the application with an embedded web server (like Tomcat or Jetty) inside the jar, so the app runs standalone without needing to install a server separately."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8086-8fee-c84c700f45bf",
+      "type": "divider"
+    },
+    {
+      "id": "ed-build-phases",
+      "type": "header",
+      "richText": [
+        [
+          "Maven phases and starter versions"
+        ]
+      ]
+    },
+    {
+      "id": "ed-build-phases-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Maven lifecycle orders phases. test runs tests; package produces the artifact; verify includes checks after packaging; install also copies the artifact into the local Maven repository."
+        ]
+      ]
+    },
+    {
+      "id": "ed-build-phases-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Maven wrapper uses the project’s selected Maven version. It still needs a compatible Java installation."
+        ]
+      ]
+    },
+    {
+      "id": "ed-build-phases-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Let the Spring Boot dependency-management platform select compatible versions for its starters. Adding an unrelated starter version can break that alignment."
+        ]
+      ]
+    },
+    {
+      "id": "ed-build-phases-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The course repository uses Boot 2.7.16 but pins one MongoDB starter to a Boot 3 release. That source choice is not a dependency setup to copy into a new project."
+        ]
+      ]
+    },
+    {
+      "id": "ed-build-phases-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use dependency:tree when a classpath problem may come from competing versions. An artifact downloading successfully does not prove it is compatible."
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Engineering Digest: Install maven on windows 11",
+      "url": "https://www.youtube.com/watch?v=p0vfKL_pZgo&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: What is Maven in Java in Hindi | How Maven Works with Java & Spring Boot: Step-by-Step Explanation",
+      "url": "https://www.youtube.com/watch?v=zAmMPM8dIXc&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Maven: lifecycle",
+      "url": "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    },
+    {
+      "title": "Spring Boot: Maven dependency management",
+      "url": "https://docs.spring.io/spring-boot/maven-plugin/using.html"
+    }
+  ],
+  "updatedOn": "2026-10-13"
+}

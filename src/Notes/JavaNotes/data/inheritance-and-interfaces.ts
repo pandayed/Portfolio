@@ -5,15 +5,19 @@ const note: LearningNote = {
     title: 'Inheritance and interfaces',
     summary: 'Use inheritance for compatible subtypes, interfaces for shared contracts, and composition for replaceable behavior.',
     scope: 'java',
-    updatedOn: '2026-10-05',
+    updatedOn: '2026-10-13',
     sections: [
         {
             id: 'inheritance',
             title: 'A subclass extends one superclass',
-            paragraphs: [
-                'extends declares a subclass. It inherits accessible behavior and can add or override methods. Use inheritance when callers can use the child wherever the parent is expected without breaking the parent’s contract.',
-                'Constructors are not inherited. super(...) calls a parent constructor. On Java 17, it must be the first statement in the child constructor. If you omit it, the compiler inserts super(), which requires an accessible no-argument parent constructor.',
-                'Each complete example is a separate Main.java file. Compile with javac Main.java and run with java Main on JDK 17 or later.',
+            bullets: [
+                'extends declares a subclass, which is a class based on another class.',
+                'The superclass is the parent class. The subclass inherits its accessible methods and can add methods.',
+                'A subclass can override a method by providing its own implementation.',
+                'Use inheritance when callers can use the subclass wherever they expect the superclass. The subclass must keep the behavior the superclass promises.',
+                'Constructors are not inherited. super(...) calls a superclass constructor.',
+                'On Java 17, super(...) must be the first statement in the subclass constructor.',
+                'If you omit it, the compiler inserts super(). This requires an accessible superclass constructor with no arguments.',
             ],
             examples: [{
                 title: 'Initialize inherited state through a constructor',
@@ -51,15 +55,18 @@ public class Main {
             }],
             pitfalls: [
                 'A class extends at most one class. It can implement several interfaces.',
-                'A child cannot directly access a private parent field. Use the parent’s accessible methods.',
+                'A subclass cannot directly access a private superclass field. Use the superclass’s accessible methods.',
             ],
         },
         {
             id: 'polymorphism',
             title: 'An overridden instance method follows the runtime object',
-            paragraphs: [
-                'A parent reference can hold a child object. The reference type controls which members the compiler allows. For an overridden instance method, the runtime object selects the implementation. This is polymorphism.',
-                '@Override asks the compiler to check that the method overrides a superclass method or implements an interface method. Keep it on those methods to catch misspelled names or wrong parameter types.',
+            bullets: [
+                'A superclass reference can hold a subclass object.',
+                'The reference type controls which members the compiler allows you to use.',
+                'For an overridden instance method, Java selects the implementation from the actual object at runtime. This is polymorphism.',
+                '@Override tells the compiler to check that a method overrides a superclass method or implements an interface method.',
+                'Use @Override to catch misspelled names or wrong parameter types.',
             ],
             examples: [{
                 title: 'Call child behavior through a parent reference',
@@ -86,17 +93,22 @@ public class Main {
                 result: 'Low battery',
             }],
             pitfalls: [
-                'Overloading uses a different parameter list. The compiler chooses an overload from compile-time types. It is different from overriding.',
-                'Fields and static methods do not use this instance-method dispatch rule. Static methods can be hidden, not overridden.',
-                'An override cannot reduce access. A public parent method must remain public in the child.',
+                'Overloading declares methods with the same name and different parameter lists. The compiler selects an overload using the types known at compile time.',
+                'Fields and static methods do not follow the runtime object. A subclass static method can hide a superclass static method, but it cannot override it.',
+                'An override cannot reduce access. A public superclass method must remain public in the subclass.',
             ],
         },
         {
             id: 'interfaces',
             title: 'An interface names a contract that classes implement',
-            paragraphs: [
-                'An interface lets callers depend on a set of operations. Unrelated classes can implement the same interface. A basic abstract interface method is public, so its implementation must be public too.',
-                'An interface can also declare default methods with instance behavior, static methods, and private helper methods. Its fields are implicitly public static final. It does not give each object mutable instance fields.',
+            bullets: [
+                'An interface declares operations that a class agrees to provide. This agreement is its contract.',
+                'Unrelated classes can implement the same interface.',
+                'A basic abstract interface method has no implementation. It is public, so the implementing method must be public too.',
+                'A default method supplies an instance method implementation in the interface.',
+                'An interface can also declare static methods and private helper methods.',
+                'Interface fields are public static final even when you omit those keywords.',
+                'An interface does not give each object mutable instance fields.',
             ],
             examples: [{
                 title: 'Use two implementations through one interface',
@@ -132,16 +144,21 @@ public class Main {
                 result: 'Ready\n[Ready]',
             }],
             pitfalls: [
-                'You cannot instantiate an interface directly with new Formatter(). Create an implementing class or another supported implementation such as a lambda for a functional interface.',
-                'If two unrelated interfaces supply conflicting default methods, the implementing class must resolve the conflict with an override.',
+                'You cannot create an interface object directly with new Formatter(). Create an object of a class that implements it.',
+                'A functional interface has one abstract method. You can implement it with a lambda, which defines that method without declaring a class.',
+                'If two unrelated interfaces supply conflicting default methods, the implementing class must override the method.',
             ],
         },
         {
             id: 'abstract-classes',
             title: 'An abstract class can share state and require behavior',
-            paragraphs: [
-                'An abstract class cannot be instantiated directly. It can have constructors, fields, implemented methods, and abstract methods. A concrete subclass must implement its inherited abstract methods.',
-                'Use an abstract class when related subtypes need common state or implementation. Use an interface when callers mainly need a common contract across different classes.',
+            bullets: [
+                'You cannot create an abstract class object directly.',
+                'An abstract class can have constructors, fields, implemented methods, and abstract methods.',
+                'An abstract method declares behavior without providing an implementation.',
+                'A concrete subclass is a subclass you can create objects from. It must implement any inherited abstract methods that still lack an implementation.',
+                'Use an abstract class when related subclasses need common fields or method implementations.',
+                'Use an interface when different classes need to provide the same operations.',
             ],
             examples: [{
                 title: 'Share one description method across shapes',
@@ -179,16 +196,18 @@ public class Main {
                 result: 'Area: 16',
             }],
             pitfalls: [
-                'Avoid calling overridable methods from constructors. The child implementation can run before the child’s fields are initialized.',
+                'Avoid calling overridable methods from constructors. The subclass method can run before the subclass fields are initialized.',
                 'This small area example uses int. Large side values can overflow when multiplied.',
             ],
         },
         {
             id: 'composition',
             title: 'Composition keeps a collaborator in a field',
-            paragraphs: [
-                'With composition, one object holds another object and delegates work to it. You can choose the collaborator through a constructor. This keeps a behavior separate from the class that uses it.',
-                'A report uses a formatter. A report is not a formatter, so extending a formatter would express the wrong relationship.',
+            bullets: [
+                'Composition means one object holds another object in a field and calls its methods.',
+                'The held object is a collaborator. You can pass it through a constructor.',
+                'This keeps the behavior separate from the class that uses it.',
+                'A report uses a formatter. Extending a formatter would make the report a formatter, which does not match this relationship.',
             ],
             examples: [{
                 title: 'Pass formatting behavior to a report',
@@ -222,8 +241,8 @@ public class Main {
                 result: 'Stock\n[Stock]',
             }],
             pitfalls: [
-                'Do not inherit only to reuse a few methods. If the child cannot honor the parent’s contract, keep the reusable behavior in a collaborator.',
-                'Composition and inheritance can work together. Choose each relationship based on the contract, rather than applying one rule to every class.',
+                'Do not inherit only to reuse a few methods. If the subclass cannot keep the superclass’s contract, use a collaborator for those methods.',
+                'Composition and inheritance can work together. Choose each relationship based on the behavior the class must provide.',
             ],
         },
     ],

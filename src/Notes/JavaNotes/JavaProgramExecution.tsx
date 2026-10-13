@@ -19,48 +19,47 @@ const JavaProgramExecution = () => (
     >
         <section className="Article__section" aria-labelledby="source-and-bytecode">
             <h2 id="source-and-bytecode" className="SectionTitle">Source code becomes bytecode</h2>
-            <p>
-                A Java source file contains code people write. The Java compiler, <code>javac</code>,
-                checks and compiles it into a <code>.class</code> file containing Java bytecode.
-                The Java Virtual Machine (JVM) runs that bytecode.
-            </p>
-            <p>
-                The JVM is provided by a Java runtime for the target operating system. This lets
-                the same class file run on different systems that provide a compatible JVM.
-            </p>
+            <ul className="Article__notes">
+                <li>A Java source file contains the code you write.</li>
+                <li>The Java compiler, <code>javac</code>, checks the source code and compiles it into a <code>.class</code> file.</li>
+                <li>The <code>.class</code> file contains bytecode: instructions for the Java Virtual Machine (JVM).</li>
+                <li>The JVM runs that bytecode.</li>
+                <li>A Java runtime provides a JVM for the target operating system.</li>
+                <li>The same class file can run on different systems with a compatible JVM.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="run-a-class">
             <h2 id="run-a-class" className="SectionTitle">Compile and run a class</h2>
-            <p>
-                Save this file as <code>Hello.java</code>. The public class name matches the file
-                name. Its <code>main</code> method is the entry point used by this example.
-            </p>
+            <ul className="Article__notes">
+                <li>Save this file as <code>Hello.java</code>. The file name must match the public class name.</li>
+                <li>The launcher starts the example by calling its <code>main</code> method.</li>
+            </ul>
             <CodeBlock language="java">{`public class Hello {
     public static void main(String[] args) {
         System.out.println("Hello, Java");
     }
 }`}</CodeBlock>
-            <p>From the directory that contains the file, compile it and then run the class:</p>
+            <ol className="Article__steps">
+                <li>Open the directory that contains <code>Hello.java</code>.</li>
+                <li>Compile the file, then run the class:</li>
+            </ol>
             <CodeBlock language="text">{`javac Hello.java
 java Hello`}</CodeBlock>
-            <p>
-                <code>javac</code> writes <code>Hello.class</code> by default. When launching a
-                class by name, use <code>Hello</code>, without the <code>.class</code> suffix.
-            </p>
+            <ul className="Article__notes">
+                <li><code>javac</code> writes <code>Hello.class</code> by default.</li>
+                <li>Run <code>java Hello</code>. Do not include <code>.class</code> in the class name.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="jdk-and-jvm">
             <h2 id="jdk-and-jvm" className="SectionTitle">JDK and JVM</h2>
             <ul className="Article__notes">
-                <li><strong>JDK:</strong> the development kit. It includes tools such as <code>javac</code> and the <code>java</code> launcher.</li>
+                <li><strong>JDK:</strong> the Java Development Kit. Install a JDK to build Java programs.</li>
+                <li>The JDK includes <code>javac</code> and the <code>java</code> launcher.</li>
+                <li>The <code>java</code> launcher starts a JVM to run the program.</li>
                 <li><strong>JVM:</strong> the virtual machine that loads and runs Java bytecode.</li>
-                <li><strong>Bytecode:</strong> the instructions stored in a compiled <code>.class</code> file.</li>
             </ul>
-            <p>
-                These names describe different parts of the toolchain. You install a JDK to build
-                Java programs. The launcher starts a JVM to run a compiled class.
-            </p>
             <p>
                 References:{' '}
                 <a className="Link" href="https://docs.oracle.com/en/java/javase/24/docs/specs/man/javac.html" target="_blank" rel="noreferrer">Oracle javac command documentation</a>{' '}and{' '}

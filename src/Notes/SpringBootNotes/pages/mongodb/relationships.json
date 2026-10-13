@@ -1,0 +1,220 @@
+{
+  "id": "spring-boot-mongodb-relationships",
+  "title": "MongoDB Relationships and @DBRef",
+  "summary": "Choose embedding or references and manage their save, delete and read behavior.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Mastering MongoDB Relationships in Spring Boot: @DBRef Annotation for Seamless Collection Linking!",
+      "url": "https://www.youtube.com/watch?v=Cx81dki8BTA&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Data MongoDB: DBRef and document references",
+      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/mapping/document-references.html"
+    },
+    {
+      "title": "MongoDB: data modeling",
+      "url": "https://www.mongodb.com/docs/manual/data-modeling/"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "mongo-rel-choice",
+      "type": "header",
+      "richText": [
+        [
+          "Embedding and references"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-choice-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Embedding stores a child object inside its parent document. A reference stores a link to a separately stored document."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-choice-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose embedding for small data that belongs to one parent and is usually read with it. One document write can update the parent and its embedded data together."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-choice-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose references when entries have an independent lifecycle, are queried separately or would make the parent document grow without a practical bound."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-choice-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The course stores journal entries separately. User holds a list of journal entry references through @DBRef."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-choice-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@DBRef stores MongoDB database references. It resolves linked documents into Java objects when loading the parent. It does not create JPA relationships."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-choice-code",
+      "type": "code",
+      "richText": [
+        [
+          "import org.springframework.data.mongodb.core.mapping.DBRef;\nimport java.util.ArrayList;\nimport java.util.List;\n\n// Fields inside a @Document User class\n@DBRef\nprivate List<JournalEntry> journalEntries = new ArrayList<>();"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "mongo-rel-save",
+      "type": "header",
+      "richText": [
+        [
+          "Save both documents explicitly"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-save-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "DBRef does not cascade saves. Saving User does not save a new JournalEntry automatically."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-save-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "First save the entry. Then add the saved entry to User and save User. The saved entry has the ID needed for its reference."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-save-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These are two database writes. If the second write fails outside a transaction, the first saved document can remain without the user reference."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-save-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Deleting an entry also needs an explicit policy for its user reference. Deleting a user does not automatically delete its referenced entries."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-save-code",
+      "type": "code",
+      "richText": [
+        [
+          "JournalEntry saved = journalRepository.save(entry);\nuser.getJournalEntries().add(saved);\nuserRepository.save(user);"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "mongo-rel-read",
+      "type": "header",
+      "richText": [
+        [
+          "Read cost and ownership"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-read-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "DBRef resolves eagerly by default. Lazy references defer loading until accessed. Lazy loading still performs database work."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-read-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Loading many referenced entries can increase database and network work. Prefer bounded reads and pagination for growing journals."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-read-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For a large journal, another design stores userId on each entry and queries entries by that ID. This avoids an ever-growing reference list on User."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-read-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A relationship does not establish permission. Read, update and delete operations must verify that the authenticated user owns the requested entry."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-read-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@DocumentReference is another Spring Data mapping option. Its default representation stores referenced IDs. It also requires explicit saves."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-read-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose your storage model from read and update patterns. Do not assume @OneToMany, JPA cascade rules or foreign-key enforcement apply to MongoDB."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-rel-tx",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep multi-document writes consistent with a transaction",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb/transactions"
+            ]
+          ]
+        ]
+      ]
+    }
+  ]
+}

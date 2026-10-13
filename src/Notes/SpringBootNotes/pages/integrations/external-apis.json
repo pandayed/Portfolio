@@ -1,0 +1,213 @@
+{
+  "id": "spring-boot-integrations-external-apis",
+  "title": "External GET and POST APIs",
+  "summary": "Consume external APIs with DTOs, explicit timeouts, and clear failure handling.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Master External API Integration in Spring Boot: A Step-by-Step Guide",
+      "url": "https://www.youtube.com/watch?v=95zTDdXbl_Q&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Spring Boot Tutorial: How to Consume External POST APIs Effectively",
+      "url": "https://www.youtube.com/watch?v=NwADDLFs_SU&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Framework 6.2 REST clients",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/integration/rest-clients.html"
+    },
+    {
+      "title": "JDK request factory timeouts",
+      "url": "https://docs.spring.io/spring-framework/docs/6.1.21/javadoc-api/org/springframework/http/client/JdkClientHttpRequestFactory.html"
+    },
+    {
+      "title": "Engineering Digest journalApp source",
+      "url": "https://github.com/EngineeringDigest/journalApp"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "api-contract",
+      "type": "header",
+      "richText": [
+        [
+          "Choose the request from the API contract"
+        ]
+      ]
+    },
+    {
+      "id": "api-contract-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An external API belongs to another service. Your Spring application sends an HTTP request and reads its response."
+        ]
+      ]
+    },
+    {
+      "id": "api-contract-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use GET to read a resource, such as weather for a city. Use POST when the provider requires a request body or performs an action. Follow the provider contract instead of choosing the method from the Java method name."
+        ]
+      ]
+    },
+    {
+      "id": "api-contract-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep the provider URL, credentials, and request logic in a service. A controller should call that service rather than build provider requests itself."
+        ]
+      ]
+    },
+    {
+      "id": "api-contract-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A DTO is a data transfer object. Define request and response fields from the provider JSON. Keep provider DTOs separate from database entities."
+        ]
+      ]
+    },
+    {
+      "id": "api-contract-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The course repository uses RestTemplate. These examples use Spring Boot 3.2+ with Spring Framework 6.1+ and Java 17. Earlier Spring versions do not provide RestClient."
+        ]
+      ]
+    },
+    {
+      "id": "api-client",
+      "type": "header",
+      "richText": [
+        [
+          "Configure one reusable HTTP client"
+        ]
+      ]
+    },
+    {
+      "id": "api-client-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "RestClient waits for the response. Use it for a normal blocking request flow. WebClient fits a reactive application or streamed responses."
+        ]
+      ]
+    },
+    {
+      "id": "api-client-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A connect timeout limits connection setup. A read timeout limits waiting for the response. This example uses the JDK HTTP client and explicit limits."
+        ]
+      ]
+    },
+    {
+      "id": "api-client-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "api.base-url is application configuration. Use a fixed trusted provider URL. Do not let users choose arbitrary target hosts."
+        ]
+      ]
+    },
+    {
+      "id": "api-client-code",
+      "type": "code",
+      "richText": [
+        [
+          "@Bean\nRestClient providerClient(RestClient.Builder builder,\n        @Value(\"${api.base-url}\") String baseUrl) {\n    HttpClient http = HttpClient.newBuilder()\n            .connectTimeout(Duration.ofSeconds(3)).build();\n    var factory = new JdkClientHttpRequestFactory(http);\n    factory.setReadTimeout(Duration.ofSeconds(5));\n    return builder.baseUrl(baseUrl).requestFactory(factory).build();\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "api-requests",
+      "type": "header",
+      "richText": [
+        [
+          "Read a resource and submit JSON"
+        ]
+      ]
+    },
+    {
+      "id": "api-requests-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For this illustrative provider, GET /weather?city=Pune returns {\"city\":\"Pune\",\"temperatureC\":26.0}. POST /analyses accepts text and returns {\"label\":\"POSITIVE\"}."
+        ]
+      ]
+    },
+    {
+      "id": "api-requests-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "URI parameters encode input. contentType declares the sent body format. The response DTO tells Spring how to read the returned JSON."
+        ]
+      ]
+    },
+    {
+      "id": "api-requests-code",
+      "type": "code",
+      "richText": [
+        [
+          "record Weather(String city, double temperatureC) {}\nrecord AnalysisRequest(String text) {}\nrecord AnalysisResult(String label) {}\n\nWeather weather = providerClient.get()\n        .uri(b -> b.path(\"/weather\").queryParam(\"city\", \"Pune\").build())\n        .retrieve().body(Weather.class);\n\nAnalysisResult result = providerClient.post().uri(\"/analyses\")\n        .contentType(MediaType.APPLICATION_JSON)\n        .body(new AnalysisRequest(\"Today went well.\"))\n        .retrieve().body(AnalysisResult.class);"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "api-failures",
+      "type": "header",
+      "richText": [
+        [
+          "Handle failures at the boundary"
+        ]
+      ]
+    },
+    {
+      "id": "api-failures-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "retrieve throws for HTTP 4xx and 5xx by default. Distinguish bad credentials, rate limits, unavailable services, invalid responses, and timeouts."
+        ]
+      ]
+    },
+    {
+      "id": "api-failures-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check for an empty body before reading DTO fields. Use toEntity when response status or headers are needed."
+        ]
+      ]
+    },
+    {
+      "id": "api-failures-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Retry only failures that can recover. A timed-out POST may already have completed. Retry an action only with a provider-supported idempotency key or another duplicate-prevention contract."
+        ]
+      ]
+    },
+    {
+      "id": "api-failures-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep API keys in environment configuration and the provider-required authentication header. Avoid logging credentials or private request bodies."
+        ]
+      ]
+    }
+  ]
+}

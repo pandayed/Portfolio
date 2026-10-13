@@ -42,6 +42,17 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                         <li><strong>Scope:</strong> {scopeLabels[note.scope]}.</li>
                     </ul>
                 ) : <p><strong>Scope:</strong> {scopeLabels[note.scope]}.</p>}
+                {note.references && (
+                    <ul className="Article__notes">
+                        {note.references.map(({ title, href }) => (
+                            <li key={href}>
+                                <a className="Link" href={href} target="_blank" rel="noopener noreferrer">
+                                    {title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </section>
 
             {note.sections.map((section) => (

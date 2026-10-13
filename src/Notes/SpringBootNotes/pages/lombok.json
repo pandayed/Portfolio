@@ -1,0 +1,811 @@
+{
+  "id": "20924eb1-ed54-8036-946a-ce7ff06748a9",
+  "title": "Lombok for Boilerplate Reduction (@Data, @Getter, @Setter, @NoArgsConstructor, etc.)",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed548036946ace7ff06748a9",
+  "blocks": [
+    {
+      "id": "20924eb1-ed54-808b-bb69-dd5d431c14c3",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8053-84d8-d23d31782cfa",
+      "type": "sub_header",
+      "richText": [
+        [
+          "✅ 1. Core Concept (What & Why)"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8041-ba83-f5f9baeca24c",
+      "type": "text",
+      "richText": [
+        [
+          "Lombok",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " is a Java library that automatically generates common, repetitive code (called "
+        ],
+        [
+          "boilerplate",
+          [
+            [
+              "i"
+            ]
+          ]
+        ],
+        [
+          ") like getters, setters, constructors, "
+        ],
+        [
+          "toString()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "equals()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "hashCode()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-801e-b04c-d8ea838bcb5b",
+      "type": "text",
+      "richText": [
+        [
+          "It exists to reduce manual coding and keep Java classes clean and readable, especially in large Spring Boot applications where data models and DTOs (Data Transfer Objects) are common."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80e6-9219-ccb477c69618",
+      "type": "text",
+      "richText": [
+        [
+          "🔁 "
+        ],
+        [
+          "Think of it like macros in C++",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          " that save you from writing repetitive code for every class."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80cb-b270-d417c772eb09",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80af-bb03-d47212966157",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🎯 2. Key Interview Points"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-804e-a274-f7c54314d893",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "What is Lombok and what problem does it solve?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-80d6-b887-c2ecaea38a6f",
+          "type": "text",
+          "richText": [
+            [
+              "Reduces boilerplate code in Java classes like getters, setters, constructors, etc."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80c4-80f6-e28a2fc621cc",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "What do specific Lombok annotations like ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Data",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Getter",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@Setter",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and ",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "@NoArgsConstructor",
+          [
+            [
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " do?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8048-8b9d-e255875a543e",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "How does Lombok interact with Java compilers and IDEs?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-80fc-9dfc-d319f568c4cc",
+          "type": "text",
+          "richText": [
+            [
+              "It works via annotations and modifies bytecode at "
+            ],
+            [
+              "compile time",
+              [
+                [
+                  "i"
+                ]
+              ]
+            ],
+            [
+              ", not runtime."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80c5-bfa7-c8db13f8b6f4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Is Lombok mandatory in Spring Boot? Why or why not?",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ],
+      "children": [
+        {
+          "id": "20924eb1-ed54-802f-b25f-e2bf4dad5e87",
+          "type": "text",
+          "richText": [
+            [
+              "No—it’s optional, but widely used in Spring Boot projects for convenience and readability."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8072-8738-d1d657a261f1",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80da-9b86-db2e0ef1d6ef",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🧑‍💻 3. Code Example"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8063-adb6-d95472ee7c40",
+      "type": "text",
+      "richText": [
+        [
+          "Let's compare a typical Java class with and without Lombok."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8093-8422-d674ff5aca02",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Without Lombok:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805c-9db5-e7f3dfba17e4",
+      "type": "code",
+      "richText": [
+        [
+          "public class User {\n    private String name;\n    private int age;\n\n    public User() {}\n\n    public User(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n\n    public int getAge() { return age; }\n    public void setAge(int age) { this.age = age; }\n\n    @Override\n    public String toString() {\n        return \"User{name='\" + name + \"', age=\" + age + \"}\";\n    }\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20924eb1-ed54-80cc-b7ca-ce0a8ff6dba2",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "With Lombok:"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805d-a8bb-c6315f8a15b6",
+      "type": "code",
+      "richText": [
+        [
+          "import lombok.Data;\nimport lombok.NoArgsConstructor;\nimport lombok.AllArgsConstructor;\n\n@Data\n@NoArgsConstructor\n@AllArgsConstructor\npublic class User {\n    private String name;\n    private int age;\n}\n"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "20924eb1-ed54-80b8-9700-e616698e68f8",
+      "type": "text",
+      "richText": [
+        [
+          "➡️ Lombok version does exactly the same but is shorter, cleaner, and easier to maintain."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-804d-9580-e124977011e3",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-8065-a253-e71b62f09876",
+      "type": "sub_header",
+      "richText": [
+        [
+          "❓ 4. Common Interview Questions"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8029-ab69-f5137bbd69f1",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What is Lombok and how does it help in Spring Boot projects?"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8097-a84c-ef0599a89765",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "What does the "
+        ],
+        [
+          "@Data",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " annotation do? What if I want only getters, not setters?"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80f2-88dc-cbc533ca1e35",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "How is "
+        ],
+        [
+          "@AllArgsConstructor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " different from "
+        ],
+        [
+          "@NoArgsConstructor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "?"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8025-9de9-df3c8ad13432",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Are there any downsides to using Lombok?"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8053-b3e1-eb07b408aa43",
+      "type": "numbered_list",
+      "richText": [
+        [
+          "Can Lombok cause issues in certain IDEs or build tools?"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8094-93db-e74fd11778ed",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f",
+      "type": "sub_header",
+      "richText": [
+        [
+          "👍 5. Best Practices & Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8050-ad9b-d3944aa2048c",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "✅ Best Practices"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80bf-a894-c3026f97608f",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use "
+        ],
+        [
+          "@Data",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " only when you want a full-featured POJO (getters, setters, "
+        ],
+        [
+          "toString()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", etc.)"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8060-8a14-e2665e1f99c5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Prefer specific annotations like "
+        ],
+        [
+          "@Getter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@Setter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " if you need more control."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b8-b348-f43b873772f9",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use constructor annotations like "
+        ],
+        [
+          "@NoArgsConstructor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "@AllArgsConstructor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " when working with frameworks (e.g., Spring, JPA)."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8059-b5d7-d33459d5e837",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "❌ Common Pitfalls"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-802f-93da-f070ed532707",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Relying too heavily on "
+        ],
+        [
+          "@Data",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for entities can lead to unwanted side effects (e.g., infinite recursion in "
+        ],
+        [
+          "toString()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "equals()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ")."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8021-9b27-cd774a240180",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Forgetting to install Lombok plugin in your IDE (e.g., IntelliJ, Eclipse) may lead to red squiggly errors, even if the code compiles."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b9-abdc-f6ed529a181a",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Using "
+        ],
+        [
+          "@Setter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on immutable or sensitive fields (like passwords) can be a security risk."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80fb-9999-f065274ea3fd",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-80cb-a44f-ebb08d439dd4",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🔗 6. Connection to Other Concepts"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805d-a404-c3bda5f0c9ce",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot & Lombok",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Lombok is often used with DTOs, Entity classes, and Configuration classes to keep code short and maintainable."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8072-a973-f316260770f4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPA/Hibernate",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": "
+        ],
+        [
+          "@NoArgsConstructor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "@AllArgsConstructor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " are especially useful for entity classes that need constructors for ORM (Object Relational Mapping)."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8029-a208-cf2bc5e9d030",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Validation & Jackson",
+          [
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          ": Lombok works well with libraries like Bean Validation ("
+        ],
+        [
+          "@NotNull",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ") and Jackson ("
+        ],
+        [
+          "@JsonProperty",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ") used in Spring Boot."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-805a-9325-d5a53c04353a",
+      "type": "divider"
+    },
+    {
+      "id": "20924eb1-ed54-809a-ad5d-df87e1400e03",
+      "type": "sub_header",
+      "richText": [
+        [
+          "🗣 7. Quick Interview Answers"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80a5-b413-c14d11d7e94e",
+      "type": "sub_sub_header",
+      "richText": [
+        [
+          "Q: What is Lombok and how is it useful in Spring Boot projects?"
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8056-8135-c276d6eabbc7",
+      "type": "text",
+      "richText": [
+        [
+          "A:",
+          [
+            [
+              "b"
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8060-8fd0-e28062aa8d53",
+      "type": "text",
+      "richText": [
+        [
+          "Lombok is a Java library that reduces boilerplate code using annotations. In Spring Boot projects, it's commonly used in DTOs and entity classes to automatically generate getters, setters, constructors, and more. This makes the code cleaner, easier to read, and faster to write—especially when dealing with a lot of data models."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-800e-8a53-c0929457f5b7",
+      "type": "divider"
+    }
+  ]
+}

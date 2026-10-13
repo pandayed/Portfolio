@@ -1,0 +1,180 @@
+{
+  "id": "spring-boot-security-authentication-authorization",
+  "title": "Authentication, Authorization and Ownership",
+  "summary": "Separate login, role rules and checks on a specific user-owned record.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-13",
+  "sources": [
+    {
+      "title": "Engineering Digest: Spring Security in Spring Boot in Hindi | @EnableWebSecurity Annotation",
+      "url": "https://www.youtube.com/watch?v=02WP1FbiNSQ&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Adding Authentication to Journal Endpoints",
+      "url": "https://www.youtube.com/watch?v=QrCVj8ek83k&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Role Based Authorization in Spring Boot Project",
+      "url": "https://www.youtube.com/watch?v=LndqWC4yIU4&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Security 6: HTTP authorization",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authorization/authorize-http-requests.html"
+    },
+    {
+      "title": "Spring Security 6: UserDetailsService",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authentication/passwords/user-details-service.html"
+    },
+    {
+      "title": "Spring Security 6: password storage",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/features/authentication/password-storage.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "identity",
+      "type": "header",
+      "richText": [
+        [
+          "Authentication establishes identity"
+        ]
+      ]
+    },
+    {
+      "id": "identity-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Authentication verifies a login or token and creates an Authentication object. The principal identifies the current user. Granted authorities describe permissions."
+        ]
+      ]
+    },
+    {
+      "id": "identity-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For password login, UserDetailsService loads a user and stored password hash. It does not itself check the submitted password. An authentication provider uses PasswordEncoder to perform that check."
+        ]
+      ]
+    },
+    {
+      "id": "identity-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Store password hashes using an adaptive password encoder such as BCrypt. Hash the password when creating or changing it. Compare with matches during login. Do not encode again and compare strings."
+        ]
+      ]
+    },
+    {
+      "id": "identity-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use an immutable account ID for ownership when usernames can change. Read identity from authenticated server context. Never trust a user ID supplied in a request body as proof of ownership."
+        ]
+      ]
+    },
+    {
+      "id": "permissions",
+      "type": "header",
+      "richText": [
+        [
+          "Roles and request rules"
+        ]
+      ]
+    },
+    {
+      "id": "permissions-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Authorization decides whether the authenticated user can perform an operation. Configure public routes explicitly and require authentication or deny access for the remaining routes."
+        ]
+      ]
+    },
+    {
+      "id": "permissions-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "hasRole(\"ADMIN\") checks ROLE_ADMIN with the default role prefix. User.builder().roles(\"ADMIN\") adds that prefix. hasAuthority(\"journal:read\") checks the exact authority text."
+        ]
+      ]
+    },
+    {
+      "id": "permissions-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A user with USER and ADMIN can access a route requiring ADMIN. A user with only USER cannot. Spring does not infer an ADMIN role from the username."
+        ]
+      ]
+    },
+    {
+      "id": "permissions-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot 3 / Spring Security 6: this filter chain protects routes and enables browser form login. CSRF protection stays enabled. A database-backed login also needs a UserDetailsService and PasswordEncoder."
+        ]
+      ]
+    },
+    {
+      "id": "permissions-code",
+      "type": "code",
+      "richText": [
+        [
+          "@Bean\nSecurityFilterChain security(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(auth -> auth\n            .requestMatchers(\"/public/**\", \"/login\").permitAll()\n            .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n            .requestMatchers(\"/journal/**\").authenticated()\n            .anyRequest().denyAll())\n        .formLogin(Customizer.withDefaults())\n        .build();\n}"
+        ]
+      ],
+      "language": "Java"
+    },
+    {
+      "id": "ownership",
+      "type": "header",
+      "richText": [
+        [
+          "Check the requested record"
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Alice and Bob both have USER. Alice must still be denied access to Bob’s entry. The route rule authenticated() allows the request to reach the application. It does not perform this record check."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Query by both entry ID and authenticated owner ID, or check the stored owner before returning, updating or deleting the entry. Apply the same ownership rule to every operation."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The tutorial journal source checks an entry against the authenticated user’s journal list. Its delete service removes only an entry present in that list."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For an API, invalid or missing authentication usually produces 401. Insufficient permission usually produces 403. Form login may redirect to login instead. An ownership failure may return 404 to avoid revealing a record."
+        ]
+      ]
+    }
+  ]
+}

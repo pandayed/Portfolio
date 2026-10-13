@@ -38,6 +38,7 @@ export interface LearningNote {
     summary: string;
     scope: LearningNoteScope;
     updatedOn: string;
+    references?: readonly { title: string; href: string }[];
     sections: readonly LearningNoteSection[];
 }
 

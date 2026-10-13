@@ -51,6 +51,7 @@ import {
     type JavaScriptTypeScriptNoteRoute,
     type PythonNoteRoute,
     type ReactNoteRoute,
+    type SpringBootRoute,
     type SystemDesignEntryRoute,
     type Route,
 } from '../routing/routes';
@@ -60,6 +61,8 @@ import { goChapters } from './GoNotes/goNotes';
 import { javascriptTypeScriptChapters } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonChapters } from './PythonNotes/pythonNotes';
 import { reactChapters } from './ReactNotes/reactNotes';
+import { springBootChapters, springBootPagesByRoute } from './SpringBootNotes/registry';
+import type { SpringBootOutlineNode } from './SpringBootNotes/types';
 import {
     systemDesignPagesById,
     systemDesignPagesByRoute,
@@ -360,26 +363,57 @@ export const javaNotes: NoteGroup = {
     ],
 };
 
+const springBootIntroPages: NotePage[] = [
+    {
+        type: 'page',
+        title: 'A first Spring Boot web application',
+        summary: 'Create and run a web project, then map an HTTP request.',
+        route: SPRING_BOOT_FIRST_APPLICATION_ROUTE,
+        updatedOn: '2026-10-13',
+    },
+    {
+        type: 'page',
+        title: 'Common annotations at a glance',
+        summary: 'Find common Spring Boot, Spring MVC, validation, and persistence annotations.',
+        route: SPRING_BOOT_ANNOTATIONS_ROUTE,
+        updatedOn: '2026-10-01',
+    },
+];
+
+const springBootOutline = (node: SpringBootOutlineNode): NoteNode => {
+    const route = `/notes/spring-boot/${node.slug}` as SpringBootRoute;
+    const page = springBootPagesByRoute.get(route);
+    const intro = springBootIntroPages.find((item) => item.route === route);
+    if (node.children) return {
+        type: 'group',
+        title: node.title ?? page?.title ?? '',
+        summary: page?.summary,
+        route,
+        children: node.children.map(springBootOutline),
+    };
+    if (intro) return intro;
+    return {
+        type: 'page',
+        title: page?.title ?? '',
+        summary: page?.summary,
+        route,
+        updatedOn: page?.updatedOn,
+    };
+};
+
 export const springBootNotes: NoteGroup = {
     type: 'group',
     title: 'Spring Boot',
-    summary: 'Build on Java fundamentals to understand application startup and HTTP endpoints.',
+    summary: 'Application startup, REST APIs, data access, security, testing, integrations, and deployment.',
     route: SPRING_BOOT_NOTES_ROUTE,
     children: [
-        {
-            type: 'page',
-            title: 'A first Spring Boot web application',
-            summary: 'See how Spring Boot starts an application and maps an HTTP request.',
-            route: SPRING_BOOT_FIRST_APPLICATION_ROUTE,
-            updatedOn: '2026-09-30',
-        },
-        {
-            type: 'page',
-            title: 'Common annotations at a glance',
-            summary: 'Find common Spring Boot, Spring MVC, validation, and persistence annotations.',
-            route: SPRING_BOOT_ANNOTATIONS_ROUTE,
-            updatedOn: '2026-10-01',
-        },
+        ...springBootChapters.map((chapter): NoteGroup => ({
+            type: 'group',
+            title: chapter.title,
+            summary: chapter.summary,
+            route: `/notes/spring-boot/${chapter.children[0].slug}` as SpringBootRoute,
+            children: chapter.children.map(springBootOutline),
+        })),
     ],
 };
 
