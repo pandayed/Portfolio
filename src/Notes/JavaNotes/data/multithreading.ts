@@ -2,44 +2,117 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: 'multithreading',
-    title: 'Threads',
-    summary: 'Create and start threads, wait for completion, handle interruption, and read thread lifecycle states.',
+    title: 'Thread basics',
+    summary: 'Start with the main thread, define a task with Runnable, and run that task on a new thread.',
     scope: 'java',
     pointwise: true,
     updatedOn: '2026-10-13',
     references: [
-        { title: 'Java 17: Thread and thread states', href: 'https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html' },
+        { title: 'Oracle tutorial: defining and starting a thread', href: 'https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html' },
+        { title: 'Java 17 Thread API', href: 'https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html' },
     ],
     sections: [
         {
             id: 'thread-basics',
-            title: 'Processes and threads',
+            title: 'The main thread',
             bullets: [
-                "A process is a running program.",
-                "A thread runs a sequence of instructions inside a process.",
-                "Threads share objects. Each thread has its own call stack, which records its active method calls.",
-            ],
-        },
-        {
-            id: 'create-a-thread',
-            title: 'Create a task and start a thread',
-            bullets: [
-                "Runnable describes a task through its void run() method. A lambda can implement Runnable.",
-                "Pass a Runnable to a Thread to choose the task that the thread runs.",
-                "You can also extend Thread and override run(). Call start() on that Thread object.",
-                "start() schedules a new thread to execute run(). Calling run() directly runs the method on the calling thread.",
-                'Creating a Thread object does not start it. A Thread object can be started only once, even after it terminates.',
-                'Thread.currentThread() returns the calling thread. getName() reads its name.',
-                'Thread order and priority do not establish an output order. Coordinate tasks explicitly when order matters.',
+                'A process is a running program. A Java process can contain several threads.',
+                'A thread executes the statements in a method. It follows those statements in their execution order.',
+                'The thread executing main is called the main thread in these examples.',
+                'Thread is a Java class. Thread.currentThread() returns the Thread object for the thread executing that line.',
+                'getName() returns the name stored in that Thread object.',
             ],
             examples: [{
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
-        Runnable work = () -> System.out.println(
-                Thread.currentThread().getName());
-        Thread worker = new Thread(work, "worker");
+        Thread current = Thread.currentThread();
+        System.out.println(current.getName());
+    }
+}`,
+                result: 'main when launched with java Main. This program has not created another thread.',
+            }],
+        },
+        {
+            id: 'runnable-task',
+            title: 'Define the task with Runnable',
+            bullets: [
+                'A task is the code you want a thread to execute.',
+                'Runnable is a Java interface. It requires a public void run() method.',
+                'A class that implements Runnable supplies that run() method.',
+                '@Override asks the compiler to check that run() matches the method required by the interface.',
+                'Put the task statements inside run(). The method returns no value.',
+                'new PrintTask() creates the task object. Creating it does not execute run() or create a thread.',
+                'Calling task.run() directly executes the method on the calling thread.',
+            ],
+            examples: [{
+                language: 'java',
+                code: `class PrintTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Task body");
+        System.out.println(Thread.currentThread().getName());
+    }
+}
 
+public class Main {
+    public static void main(String[] args) {
+        PrintTask task = new PrintTask();
+        task.run();
+    }
+}`,
+                result: 'Task body\nmain',
+            }],
+        },
+        {
+            id: 'create-a-thread',
+            title: 'Run the task on a new thread',
+            bullets: [
+                'new Thread(task, "worker") creates a Thread object with a task and a name.',
+                'worker.start() starts a new thread. Java calls the task’s run() method on that thread.',
+                'The main thread continues after start(). start() does not wait for the task to finish.',
+                'The task object holds the code. The Thread object manages the thread that executes that code.',
+                'A Thread object can be started only once. Calling start() again throws IllegalThreadStateException, even if its task has finished.',
+            ],
+            examples: [{
+                language: 'java',
+                code: `class PrintTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PrintTask task = new PrintTask();
+        Thread worker = new Thread(task, "worker");
+        worker.start();
+    }
+}`,
+                result: 'worker. The run() method is now executing on the thread named worker.',
+            }],
+        },
+        {
+            id: 'start-and-run',
+            title: 'start() and run() do different things',
+            bullets: [
+                'worker.run() is a normal method call. For the Thread created below, it calls the task on the main thread.',
+                'worker.start() creates the new thread that calls the task.',
+                'Calling run() first does not start the Thread object. The later start() is still its first start.',
+            ],
+            examples: [{
+                language: 'java',
+                code: `class PrintTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread worker = new Thread(new PrintTask(), "worker");
         worker.run();
         worker.start();
     }
@@ -48,90 +121,66 @@ const note: LearningNote = {
             }],
         },
         {
-            id: 'sleep-and-join',
-            title: 'sleep pauses the caller; join waits for a worker',
+            id: 'thread-output-order',
+            title: 'Starting threads does not fix their output order',
             bullets: [
-                "Thread.sleep(duration) pauses the calling thread. It does not wait for a task to finish.",
-                "worker.join() makes the calling thread wait until worker finishes. A timed join may return before worker finishes.",
-                "Start both workers before calling join() to allow their work to overlap.",
-                "If you start and join the first worker before starting the second, the workers run one after another.",
-                'sleep does not guarantee alternating odd and even output. Strict alternation needs a shared condition and coordination.',
+                'Each thread follows its own method statements in order.',
+                'Scheduling is choosing when a ready thread gets to execute. Java and the operating system make that choice.',
+                'Starting first before second does not guarantee that first prints before second.',
+                'The example can print A then B, or B then A. Both results are valid.',
+                'Waiting for a thread to finish is a separate operation. The next lesson introduces join().',
             ],
             examples: [{
-                title: 'Odd and even tasks',
                 language: 'java',
-                code: `public class Main {
-    static void printNumbers(int first) {
-        for (int number = first; number <= 6; number += 2) {
-            System.out.println(number);
-        }
+                code: `class PrintTask implements Runnable {
+    private final String message;
+
+    PrintTask(String message) {
+        this.message = message;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        Thread odd = new Thread(() -> printNumbers(1));
-        Thread even = new Thread(() -> printNumbers(2));
-        odd.start();
-        even.start();
-        odd.join();
-        even.join();
-        System.out.println("Finished");
+    @Override
+    public void run() {
+        System.out.println(message);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread first = new Thread(new PrintTask("A"));
+        Thread second = new Thread(new PrintTask("B"));
+        first.start();
+        second.start();
     }
 }`,
-                result: 'Prints 1, 3, 5 and 2, 4, 6. The two sequences may interleave in any order. Finished is always last.',
+                result: 'One line contains A and one contains B. Their order is not fixed.',
             }],
         },
         {
-            id: 'interruption',
-            title: 'Treat interruption as a request to stop',
+            id: 'extend-thread',
+            title: 'Another way: extend Thread',
             bullets: [
-                'worker.interrupt() requests interruption of worker. The thread must respond to that request.',
-                'Interruption does not force the thread to terminate.',
-                'Thread.sleep() and worker.join() can throw InterruptedException while waiting.',
-                'When sleep() or join() throws InterruptedException, it clears the thread’s interrupted status. This status records an interruption request.',
-                'If a method cannot pass InterruptedException to its caller, restore the status and leave the operation.',
-                'Code that handles cancellation at its boundary may consume the interruption if its contract allows it.',
+                'A class can also extend Thread and override run().',
+                'Call start() on its object to execute the overridden method on a new thread.',
+                'A Java class can extend only one class. A class extending Thread cannot also extend another class.',
+                'The earlier Runnable approach keeps the task in a separate object. That task can also be passed to an executor in a later lesson.',
             ],
             examples: [{
-                title: 'Pause before retrying',
                 language: 'java',
-                code: `static void pauseBeforeRetry() {
-    try {
-        Thread.sleep(100);
-    } catch (InterruptedException interrupted) {
-        Thread.currentThread().interrupt();
-        return;
+                code: `class PrintThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread task");
     }
-    System.out.println("Ready to retry");
-}`,
-                result: 'Prints Ready to retry after the pause if no interruption occurs. On interruption, returns with the interrupted status restored.',
-            }],
-        },
-        {
-            id: 'thread-states',
-            title: 'Thread lifecycle states',
-            bullets: [
-                "NEW: the Thread exists, but start() has not been called.",
-                "RUNNABLE: the thread is running or eligible to run. Java has no separate RUNNING state.",
-                "BLOCKED: the thread waits for an object lock used by synchronized code.",
-                "WAITING: the thread waits without a time limit. An untimed join() can cause this state.",
-                "TIMED_WAITING: the wait has a time limit. sleep() and a timed join() can cause this state.",
-                "TERMINATED: run() returned or ended with an uncaught exception. You cannot restart this Thread.",
-                "getState() reports the state at that moment. The state can change immediately after the call.",
-                "Reading a state does not coordinate when another thread can proceed.",
-                'A sleeping thread is TIMED_WAITING. BLOCKED describes waiting for an object lock.',
-            ],
-            examples: [{
-                language: 'java',
-                code: `public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        Thread worker = new Thread(() -> {});
-        System.out.println(worker.getState());
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PrintThread worker = new PrintThread();
         worker.start();
-        worker.join();
-        System.out.println(worker.getState());
     }
 }`,
-                result: 'NEW\nTERMINATED',
+                result: 'Thread task',
             }],
         },
     ],

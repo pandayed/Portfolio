@@ -3,7 +3,7 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'atomic-variables',
     title: 'Atomic variables',
-    summary: 'Update one shared integer atomically and understand which multi-step operations still need coordination.',
+    summary: 'Create a shared counter, read and replace its value, and increment it with one atomic operation.',
     scope: 'java',
     pointwise: true,
     updatedOn: '2026-10-13',
@@ -12,31 +12,68 @@ const note: LearningNote = {
     ],
     sections: [
         {
-            id: 'atomic-updates',
-            title: 'Protect an update shared by threads',
+            id: 'atomic-value',
+            title: 'Create, read, and replace a counter value',
             bullets: [
-                'An atomic operation completes as one update that other threads cannot partly observe.',
-                'AtomicInteger stores an int and provides atomic operations on that value.',
-                'incrementAndGet() increments the value and returns the new value.',
-                'get() reads the current value.',
-                'The workers below share one AtomicInteger. join() waits for both workers before the final read.',
-                'A separate get() followed by set() is not one atomic operation. Threads can change the value between those calls.',
-                'An atomic variable does not automatically protect a rule involving several shared values.',
+                'A shared counter holds a count that several threads use.',
+                'AtomicInteger is a class that holds one int value and provides atomic operations on it.',
+                'Atomic means an operation takes effect as one indivisible step from the other threads\' point of view.',
+                'Import java.util.concurrent.atomic.AtomicInteger to use the class.',
+                'new AtomicInteger(0) creates a counter starting at 0. The no-argument constructor also starts at 0.',
+                'get() reads the current value. set(value) replaces it with the supplied value.',
             ],
             examples: [{
+                title: 'Read and replace the value',
                 language: 'java',
                 code: `import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
+    public static void main(String[] args) {
+        AtomicInteger count = new AtomicInteger(0);
+        System.out.println(count.get());
+        count.set(5);
+        System.out.println(count.get());
+    }
+}`,
+                result: 'Prints 0, then 5. set(5) replaces the stored value. It does not add 5 to the old value.',
+            }],
+        },
+        {
+            id: 'atomic-updates',
+            title: 'Increment a counter shared by two threads',
+            bullets: [
+                'For an ordinary int field, count++ reads the value, adds 1, and writes the result.',
+                'Two threads can read the same old value and write the same new value. One increment is then lost.',
+                'synchronized protects those steps with a common lock. AtomicInteger offers incrementAndGet() for this single-value update.',
+                'incrementAndGet() adds 1 atomically and returns the new value.',
+                'Both workers below receive the same AtomicInteger object. Each worker increments it 1000 times.',
+                'The main thread joins both workers before reading their completed count.',
+            ],
+            examples: [{
+                title: 'Keep all 2000 increments',
+                language: 'java',
+                code: `import java.util.concurrent.atomic.AtomicInteger;
+
+class IncrementTask implements Runnable {
+    private final AtomicInteger count;
+
+    IncrementTask(AtomicInteger count) {
+        this.count = count;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 1000; i++) {
+            count.incrementAndGet();
+        }
+    }
+}
+
+public class Main {
     public static void main(String[] args) throws InterruptedException {
-        AtomicInteger count = new AtomicInteger();
-        Runnable add = () -> {
-            for (int i = 0; i < 1000; i++) {
-                count.incrementAndGet();
-            }
-        };
-        Thread first = new Thread(add);
-        Thread second = new Thread(add);
+        AtomicInteger count = new AtomicInteger(0);
+        Thread first = new Thread(new IncrementTask(count));
+        Thread second = new Thread(new IncrementTask(count));
         first.start();
         second.start();
         first.join();
@@ -44,8 +81,19 @@ public class Main {
         System.out.println(count.get());
     }
 }`,
-                result: '2000 after both workers finish.',
+                result: 'Prints 2000 after both workers finish. Each atomic increment adds one to the same count without losing the other worker\'s increment.',
             }],
+        },
+        {
+            id: 'atomic-limits',
+            title: 'Separate operations still need coordination',
+            bullets: [
+                'count.set(count.get() + 1) makes separate read and write calls. It is not an atomic increment.',
+                'Another thread can update the value between get() and set(). Use incrementAndGet() for an increment.',
+                'Making two fields atomic does not make a rule involving both fields atomic.',
+                'For a rule involving several shared fields, protect the whole operation with one common lock.',
+                'All reads and writes that rely on that rule must use the same lock.',
+            ],
         },
     ],
 };

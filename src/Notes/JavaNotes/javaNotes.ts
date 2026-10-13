@@ -35,11 +35,18 @@ import filesAndPaths from './data/files-and-paths';
 import paths from './data/paths';
 import threadsAndConcurrency from './data/threads-and-concurrency';
 import multithreading from './data/multithreading';
+import threadWaiting from './data/thread-waiting';
+import threadInterruption from './data/thread-interruption';
+import threadCommunication from './data/thread-communication';
+import threadStates from './data/thread-states';
+import deadlocks from './data/deadlocks';
 import synchronization from './data/synchronization';
 import atomicVariables from './data/atomic-variables';
 import volatile from './data/volatile';
 import futures from './data/futures';
 import completableFuture from './data/completable-future';
+import futureChains from './data/future-chains';
+import futureFailures from './data/future-failures';
 
 export const javaChapters: readonly LearningChapter[] = [
     {
@@ -80,9 +87,9 @@ export const javaChapters: readonly LearningChapter[] = [
     },
     {
         id: 'threads-and-tasks',
-        title: '7. Threads and asynchronous tasks',
-        summary: 'Thread lifecycle, interruption, shared state, executors, futures, and task chains.',
-        notes: [multithreading, synchronization, atomicVariables, volatile, threadsAndConcurrency, futures, completableFuture],
+        title: '7. Multithreading',
+        summary: 'Create threads, wait and interrupt, protect shared data, coordinate tasks, and read asynchronous results.',
+        notes: [multithreading, threadWaiting, threadInterruption, synchronization, threadCommunication, threadStates, deadlocks, atomicVariables, volatile, threadsAndConcurrency, futures, completableFuture, futureChains, futureFailures],
     },
 ];
 
