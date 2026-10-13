@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Create a shared counter, read and replace its value, and increment it with one atomic operation.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [
         { title: 'Java 17: AtomicInteger', href: 'https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html' },
@@ -35,7 +36,15 @@ public class Main {
         System.out.println(count.get());
     }
 }`,
-                result: 'Prints 0, then 5. set(5) replaces the stored value. It does not add 5 to the old value.',
+                description: [
+                    'Read a counter starting at zero, then replace its value with five.',
+                ],
+                result: '0\n5',
+                explanation: [
+                    'count.get() first reads the initial value 0.',
+                    'set(5) replaces the stored value. It does not add 5 to the old value.',
+                    'The second get() reads 5.',
+                ],
             }],
         },
         {
@@ -46,8 +55,6 @@ public class Main {
                 'Two threads can read the same old value and write the same new value. One increment is then lost.',
                 'synchronized protects those steps with a common lock. AtomicInteger offers incrementAndGet() for this single-value update.',
                 'incrementAndGet() adds 1 atomically and returns the new value.',
-                'Both workers below receive the same AtomicInteger object. Each worker increments it 1000 times.',
-                'The main thread joins both workers before reading their completed count.',
             ],
             examples: [{
                 title: 'Keep all 2000 increments',
@@ -81,7 +88,15 @@ public class Main {
         System.out.println(count.get());
     }
 }`,
-                result: 'Prints 2000 after both workers finish. Each atomic increment adds one to the same count without losing the other worker\'s increment.',
+                description: [
+                    'Give two workers the same AtomicInteger and keep all their increments.',
+                ],
+                result: '2000',
+                explanation: [
+                    'Both workers receive the same AtomicInteger object. Each worker increments it 1000 times.',
+                    'incrementAndGet() performs each increment atomically, so neither worker loses the other worker\'s increment.',
+                    'main joins both workers before reading their completed count. The total is 2000.',
+                ],
             }],
         },
         {

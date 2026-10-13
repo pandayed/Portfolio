@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Declare value components with generated methods, validate construction, and protect mutable component data.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -25,6 +26,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Create a record and read its components',
+                description: [
+                    'Create a Coordinate with x = 2 and y = 3, then print its components and generated text.',
+                ],
                 language: 'java',
                 code: `record Coordinate(int x, int y) {}
 
@@ -37,6 +41,11 @@ public class Main {
     }
 }`,
                 result: '2\n3\nCoordinate[x=2, y=3]',
+                explanation: [
+                    'The generated constructor stores 2 and 3 in the component fields.',
+                    'x() and y() return those values.',
+                    'The generated toString prints Coordinate[x=2, y=3].',
+                ],
             }],
         },
         {
@@ -50,6 +59,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Validate components in a compact constructor',
+                description: [
+                    'Reject an OrderLine with a missing or blank product, or a quantity that is zero or negative.',
+                ],
                 language: 'java',
                 code: `import java.util.Objects;
 
@@ -74,6 +86,13 @@ public class Main {
     }
 }`,
                 result: 'Notebook\n2\ntrue\ntrue\nOrderLine[product=Notebook, quantity=2]',
+                explanation: [
+                    'Objects.requireNonNull throws NullPointerException for a null product.',
+                    'The next check throws IllegalArgumentException for a blank product or a non-positive quantity.',
+                    'Both constructed records pass validation and have the same components.',
+                    'The accessors print Notebook and 2. Generated equals and matching hash codes produce the two true lines.',
+                    'Generated toString prints OrderLine[product=Notebook, quantity=2].',
+                ],
             }],
 
         },
@@ -92,6 +111,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Copy array input and accessor results',
+                description: [
+                    'Compare a record that shares its input array with a record that copies the array.',
+                ],
                 language: 'java',
                 code: `import java.util.Arrays;
 
@@ -123,6 +145,12 @@ public class Main {
     }
 }`,
                 result: '[9, 2]\n[1, 2]\n[1, 2]',
+                explanation: [
+                    'SharedNumbers stores input directly. Changing input[0] to 9 changes its values to [9, 2].',
+                    'SnapshotNumbers clones input during construction, before that change. Its stored values remain [1, 2].',
+                    'snapshot.values() returns another clone. Changing returned[1] to 8 does not change the stored array.',
+                    'The last call to snapshot.values() therefore still prints [1, 2].',
+                ],
             }],
         },
     ],

@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'array-basics',
@@ -25,6 +26,10 @@ const note: LearningNote = {
                 'Use i < scores.length when a loop reads scores[i]. i <= scores.length includes one index outside the array.',
             ],
             examples: [{
+                title: 'Fill an array and add its elements',
+                description: [
+                    'Create three scores, print their length and contents, and calculate their total.',
+                ],
                 language: 'java',
                 code: `import java.util.Arrays;
 
@@ -46,6 +51,12 @@ public class Main {
     }
 }`,
                 result: '3\n[8, 5, 9]\n22\ntrue',
+                explanation: [
+                    'scores contains 8, 5, and 9. Its length is 3.',
+                    'The enhanced for loop reads each score and adds it to total, producing 22.',
+                    'Arrays.toString prints the elements in brackets.',
+                    'names contains one reference element. It starts as null, so names[0] == null prints true.',
+                ],
             }],
         },
         {
@@ -55,6 +66,10 @@ public class Main {
                 'Assigning a primitive copies its value. Changing the copy does not change the original variable.',
             ],
             examples: [{
+                title: 'Change a copied primitive value',
+                description: [
+                    'Copy an integer and change only the copy.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -66,6 +81,10 @@ public class Main {
     }
 }`,
                 result: '10 20',
+                explanation: [
+                    'copy receives the value 10 from original.',
+                    'Assigning 20 to copy leaves original at 10. Printing both values gives 10 20.',
+                ],
             }],
         },
         {
@@ -81,6 +100,10 @@ public class Main {
                 'Arrays.sort changes the supplied array.',
             ],
             examples: [{
+                title: 'Compare a shared array with a separate copy',
+                description: [
+                    'Assign an array reference, copy its elements, and change the two arrays.',
+                ],
                 language: 'java',
                 code: `import java.util.Arrays;
 
@@ -99,6 +122,12 @@ public class Main {
     }
 }`,
                 result: '[9, 1, 2]\n[1, 2, 3]\ntrue\ntrue',
+                explanation: [
+                    'alias and original refer to the same array. Setting alias[0] to 9 changes original to [9, 1, 2].',
+                    'Arrays.copyOf creates a separate array before that change. Sorting copy gives [1, 2, 3].',
+                    'original == alias is true because both references identify the same array.',
+                    'Arrays.equals checks the elements of copy against [1, 2, 3], so it prints true.',
+                ],
             }],
         },
         {
@@ -114,6 +143,10 @@ public class Main {
                 'new int[3][2] creates three rows with two int elements in each row.',
             ],
             examples: [{
+                title: 'Read rows with different lengths',
+                description: [
+                    'Print the length and sum of each row in a nested array.',
+                ],
                 language: 'java',
                 code: `import java.util.Arrays;
 
@@ -129,6 +162,12 @@ public class Main {
     }
 }`,
                 result: 'length=2, total=3\nlength=1, total=3\nlength=3, total=15\n[[1, 2], [3], [4, 5, 6]]',
+                explanation: [
+                    'rows contains three arrays with lengths 2, 1, and 3.',
+                    'The outer loop selects a row. The inner loop adds its values, producing totals 3, 3, and 15.',
+                    'total starts at 0 for each row.',
+                    'Arrays.deepToString prints all three rows and their elements.',
+                ],
             }],
         },
     ],

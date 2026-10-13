@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Define a task that returns a value, read its Future result, then handle failures, waiting, and cancellation.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [{
         title: 'Java 17: Future',
@@ -23,7 +24,7 @@ const note: LearningNote = {
                 'pool.submit(task) schedules the Callable and returns a Future for its result.',
                 'Future<Integer> means get() returns the Integer produced by that task.',
                 'get() waits if the task has not finished. Submitting the task does not mean its result is ready.',
-                'get() declares InterruptedException for an interrupted wait and ExecutionException for a failed task. The first example declares both on main.',
+                'get() declares InterruptedException for an interrupted wait and ExecutionException for a failed task.',
             ],
             examples: [{
                 title: 'Return 42 from a worker and read it in main',
@@ -54,7 +55,16 @@ public class Main {
         }
     }
 }`,
-                result: '42. A worker runs call(). main waits in get() until it can read that return value.',
+                description: [
+                    'Submit a Callable that adds 20 and 22, then read its result in main.',
+                ],
+                result: '42',
+                explanation: [
+                    'A worker calls AddTask.call() and receives 42.',
+                    'main waits in answer.get() until it can read that return value, then prints it.',
+                    'main declares InterruptedException and ExecutionException for the get() call.',
+                    'The finally block shuts down the pool.',
+                ],
             }],
         },
         {
@@ -116,7 +126,16 @@ public class Main {
         }
     }
 }`,
-                result: 'Invalid count. The worker throws IllegalArgumentException. main receives ExecutionException and reads its cause.',
+                description: [
+                    'Submit a task that throws, then read its failure from the Future.',
+                ],
+                result: 'Invalid count',
+                explanation: [
+                    'CountTask.call() throws IllegalArgumentException instead of returning a count.',
+                    'answer.get() throws ExecutionException in main.',
+                    'getCause() returns the task\'s exception. Its message is Invalid count.',
+                    'The pool is shut down even when the task fails.',
+                ],
             }],
         },
         {
@@ -126,7 +145,6 @@ public class Main {
                 'get(duration, unit) waits at most that long for a result.',
                 'If the result is still unavailable, get throws TimeoutException.',
                 'A timeout ends this wait. It does not cancel or stop the task.',
-                'This example calls Thread.sleep inside call() to delay the task. call() declares InterruptedException because the sleep can be interrupted.',
             ],
             examples: [{
                 title: 'Wait up to one millisecond',
@@ -157,7 +175,17 @@ public class Main {
         }
     }
 }`,
-                result: 'Prints Result not ready yet if the task is unfinished when the one-millisecond wait expires. If it has already finished, prints 42. shutdown still lets the submitted task finish.',
+                description: [
+                    'Delay a task for 100 milliseconds and wait up to one millisecond for its result.',
+                ],
+                result: 'Result not ready yet',
+                possibleOutput: true,
+                explanation: [
+                    'SlowTask.call() sleeps before returning 42. It declares InterruptedException because the sleep can be interrupted.',
+                    'If the task is unfinished when the wait expires, get() throws TimeoutException and the catch block prints Result not ready yet.',
+                    'If the task has already finished when get() reads it, the output is 42. This is one possible output.',
+                    'shutdown() still lets the submitted task finish.',
+                ],
             }],
         },
         {
@@ -181,7 +209,18 @@ public class Main {
     System.out.println("Cancelled: " + answer.isCancelled());
     System.out.println("Finished: " + answer.isDone());
 }`,
-                result: 'For successful cancellation, prints true for all three checks. The method receives an already submitted task\'s Future. It does not create another task.',
+                description: [
+                    'Place this method inside a class and call it with the Future of an already submitted task.',
+                    'It requests cancellation and prints the resulting status.',
+                ],
+                result: 'Cancellation accepted: true\nCancelled: true\nFinished: true',
+                possibleOutput: true,
+                explanation: [
+                    'The method uses the supplied Future. It does not submit another task.',
+                    'This output shows successful cancellation: cancel(true), isCancelled(), and isDone() all report true.',
+                    'If cancellation is rejected, the first line is false and the status depends on the Future\'s existing state.',
+                    'A cancelled Future does not prove that its running code has stopped.',
+                ],
             }],
         },
     ],

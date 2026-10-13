@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Read the state of a thread after learning how threads start, wait, acquire locks, and finish.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [{ title: 'Java 17 Thread.State', href: 'https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.State.html' }],
     sections: [
@@ -29,17 +30,11 @@ const note: LearningNote = {
                     ['TERMINATED', 'run() has finished or ended with an uncaught exception. The same Thread cannot be started again.'],
                 ],
             },
-        },
-        {
-            id: 'observe-thread-states',
-            title: 'Observe the states before starting and after joining',
-            bullets: [
-                'The new worker has not started when main reads its first state.',
-                'join() returns only after the started worker terminates.',
-                'That makes the two states below predictable. Reading a state immediately after start() would depend on scheduling.',
-                'A sleeping thread is TIMED_WAITING. BLOCKED specifically means waiting for a monitor lock.',
-            ],
             examples: [{
+                title: 'Read a worker’s state before starting and after joining',
+                description: [
+                    'Read the state at two points where the worker’s lifecycle is predictable.',
+                ],
                 language: 'java',
                 code: `class PrintTask implements Runnable {
     @Override
@@ -58,6 +53,12 @@ public class Main {
     }
 }`,
                 result: 'NEW\nTask finished\nTERMINATED',
+                explanation: [
+                    'The worker has not started at the first getState() call, so it prints NEW.',
+                    'The worker prints Task finished from run().',
+                    'join() waits for termination before the second getState() call, so that call prints TERMINATED.',
+                    'Reading the state immediately after start() would depend on scheduling.',
+                ],
             }],
         },
     ],

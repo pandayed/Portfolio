@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Define contracts that classes implement, then use default methods and other interface members.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -16,11 +17,12 @@ const note: LearningNote = {
                 'A class uses implements to name its interfaces. It can implement several interfaces.',
                 'Unrelated classes can implement the same interface.',
                 'An abstract interface method has no body. It is public, so the implementing method must be public.',
-                'You cannot create an interface object with new Formatter(). Create an instance of an implementing class.',
+                'You cannot instantiate an interface directly. Create an instance of an implementing class.',
                 'An interface reference can hold any implementing object. Overridden instance methods follow the runtime object.',
             ],
             examples: [{
                 title: 'Use two implementations through one interface',
+                description: ['Format Ready once as plain text and once with square brackets.'],
                 language: 'java',
                 code: `interface Formatter {
     String format(String value);
@@ -51,6 +53,12 @@ public class Main {
     }
 }`,
                 result: 'Ready\n[Ready]',
+                explanation: [
+                    'Formatter declares format(). Both classes implement that method.',
+                    'The array holds a PlainFormatter followed by a BracketFormatter through Formatter references.',
+                    'The loop calls the implementation belonging to each object.',
+                    'PlainFormatter returns Ready unchanged. BracketFormatter returns [Ready].',
+                ],
             }],
 
         },

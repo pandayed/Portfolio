@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Maps',
     summary: 'Store key-value pairs, distinguish missing keys from null values, and use value objects as keys.',
     scope: 'java',
+    exampleLayout: 'grouped',
     pointwise: true,
     updatedOn: '2026-10-13',
     sections: [
@@ -25,6 +26,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Count words by key',
+                description: [
+                    'Count java, sql, and java, then look up the count for go.',
+                ],
                 language: 'java',
                 code: `import java.util.LinkedHashMap;
 import java.util.List;
@@ -42,7 +46,12 @@ public class Main {
         System.out.println(counts.getOrDefault("go", 0));
     }
 }`,
-                result: 'Prints java: 2, sql: 1, and 0 on separate lines. LinkedHashMap keeps the key insertion order.',
+                result: 'java: 2\nsql: 1\n0',
+                explanation: [
+                    'getOrDefault supplies 0 for a word not yet in counts. Each occurrence adds one.',
+                    'LinkedHashMap keeps the first insertion order, so java prints before sql.',
+                    'go is absent. Its default count is printed without inserting go.',
+                ],
             }],
         },
         {
@@ -57,6 +66,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Two value keys identify one account',
+                description: [
+                    'Store an account owner using one record key, then look it up using another record with the same values.',
+                ],
                 language: 'java',
                 code: `import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +86,12 @@ public class Main {
         System.out.println(owners.get(sameValue));
     }
 }`,
-                result: 'Prints false, true, and Asha on separate lines. The keys are separate objects with equal component values.',
+                result: 'false\ntrue\nAsha',
+                explanation: [
+                    'first and sameValue are separate objects, so == returns false.',
+                    'The record compares region and id in equals. Both keys contain IN and 7, so equals returns true.',
+                    'HashMap finds Asha using the equal key.',
+                ],
             }],
         },
         {

@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Wait for a shared message, notify waiting threads, and check the condition again after waking.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [
         { title: 'Java guarded blocks', href: 'https://docs.oracle.com/javase/tutorial/essential/concurrency/guardmeth.html' },
@@ -16,11 +17,10 @@ const note: LearningNote = {
             id: 'waiting-for-data',
             title: 'Wait until another thread supplies a message',
             bullets: [
-                'Suppose one thread wants to print a message that another thread has not supplied yet.',
-                'A lock protects the message from overlapping access. It does not tell the reader when the message is ready.',
-                'Use a shared boolean field, ready, to record whether the message has been supplied.',
-                'ready is a condition flag. It records whether the reader can proceed.',
-                'The reader must wait while ready is false. The sender sets it to true after storing the message.',
+                'A thread may need to wait until shared data is ready.',
+                'A lock protects shared data from overlapping access. It does not tell a waiting thread when the data is ready.',
+                'A condition flag records whether the waiting thread can proceed.',
+                'The waiting thread checks the condition. The thread preparing the data changes that condition when the data is ready.',
             ],
         },
         {
@@ -29,39 +29,31 @@ const note: LearningNote = {
             bullets: [
                 'wait and notifyAll are methods inherited from Object. Every Java object has them.',
                 'Calling wait on an object suspends the current thread and releases that object\'s monitor lock.',
-                'Releasing the lock lets the sender acquire it and store the message.',
+                'Releasing the lock lets another thread acquire it and change the shared data.',
                 'The waiting thread must acquire the same lock again before wait returns.',
                 'The caller must hold the object\'s lock before calling wait, notify, or notifyAll. Otherwise Java throws IllegalMonitorStateException.',
                 'wait releases only the lock of the object on which it is called. It does not release other locks held by that thread.',
-                'Thread.sleep pauses a thread for time. It keeps the locks held by that thread and does not wait for a message condition.',
+                'Thread.sleep pauses a thread for time. It keeps the locks held by that thread and does not wait for a data condition.',
             ],
         },
         {
             id: 'notifications',
             title: 'notifyAll tells waiting threads to check again',
             bullets: [
-                'After changing ready, the sender calls notifyAll on the same object used for wait.',
+                'After changing the condition, notifyAll can tell threads waiting on the same object to check again.',
                 'notifyAll wakes all threads waiting on that object. notify wakes one of them, chosen by Java.',
-                'A notification does not release the sender\'s lock. The sender must leave the synchronized code before another thread can acquire it.',
+                'A notification does not release the notifying thread\'s lock. It must leave the synchronized code before another thread can acquire it.',
                 'Waking does not guarantee that the condition is true. Check it again with while, not only if.',
                 'Java permits a waiting thread to wake without a notification. This is called a spurious wakeup.',
                 'Another thread can also change the condition before the awakened thread acquires the lock.',
-            ],
-        },
-        {
-            id: 'one-message',
-            title: 'Send and receive one message',
-            bullets: [
-                'MessageBox stores one message. This example sends once and reads once.',
-                'message starts as null. ready starts as false.',
-                'receive holds the MessageBox lock while checking ready. It calls wait only while ready is false.',
-                'send holds the same lock, stores the text, sets ready, and calls notifyAll.',
-                'Both methods are synchronized. wait() and notifyAll() therefore operate on this: the same MessageBox object.',
-                'ReadMessage.box stores the shared MessageBox passed to its constructor. run receives the text and prints it.',
-                'main starts the reader, sends Hello, and joins the reader.',
-                'If the reader arrives first, it waits for send. If send finishes first, ready is already true and the reader does not wait.',
+                'A notification is not saved for a future waiter. The stored condition lets a later thread check whether it can proceed.',
             ],
             examples: [{
+                title: 'Send one message to a waiting reader',
+                description: [
+                    'Share one MessageBox between main and a reader thread. Send Hello once and read it once.',
+                    'The normal output assumes no thread interrupts the reader.',
+                ],
                 language: 'java',
                 code: `class MessageBox {
     private String message;
@@ -109,25 +101,19 @@ public class Main {
     }
 }`,
                 result: 'Hello',
-            }],
-        },
-        {
-            id: 'message-order',
-            title: 'What happens when the reader arrives first',
-            table: {
-                columns: ['Step', 'Reader thread', 'Main thread'],
-                rows: [
-                    ['1', 'Acquires the MessageBox lock and reads ready == false.', '—'],
-                    ['2', 'Calls wait, releases the lock, and waits.', '—'],
-                    ['3', 'Waiting.', 'Acquires the lock, stores Hello, and sets ready = true.'],
-                    ['4', 'Awakened, but cannot yet acquire the lock.', 'Calls notifyAll while still holding the lock.'],
-                    ['5', 'Acquires the released lock and returns from wait.', 'Leaves send and releases the lock.'],
-                    ['6', 'Checks ready again, returns the message, and prints Hello.', 'join waits for the reader to finish.'],
+                explanation: [
+                    'message starts as null. ready starts as false.',
+                    'receive() holds the MessageBox lock while checking ready. It calls wait() only while ready is false.',
+                    'If the reader arrives first, wait() releases the lock so main can enter send().',
+                    'send() stores Hello, sets ready to true, and calls notifyAll() while still holding the lock.',
+                    'The reader acquires the lock again after send() releases it. It checks ready again, returns the message, and prints Hello.',
+                    'If send() finishes first, ready is already true and the reader does not wait.',
+                    'Both methods use the same MessageBox lock. Their wait() and notifyAll() calls operate on this object.',
+                    'ReadMessage.box stores that shared object. main joins the reader after sending.',
+                    'receive() declares InterruptedException. ReadMessage.run() catches it because Runnable.run() cannot declare this checked exception.',
+                    'The catch restores interrupted status and lets run() end without reading an unavailable message.',
                 ],
-            },
-            bullets: [
-                'A notification is not saved for a future waiter. The stored ready value lets a later reader see that the message is available.',
-            ],
+            }],
         },
         {
             id: 'interrupted-wait',
@@ -135,9 +121,6 @@ public class Main {
             bullets: [
                 'wait can throw InterruptedException when the thread is interrupted.',
                 'The thread reacquires the object lock before wait throws. The interrupted status is cleared when this exception is thrown.',
-                'receive declares the exception with throws. ReadMessage.run catches it because Runnable.run cannot declare this checked exception.',
-                'The catch restores the interrupted status and lets run end. It does not read an unavailable message.',
-                'The normal Hello output above assumes no thread interrupts the reader.',
             ],
         },
     ],

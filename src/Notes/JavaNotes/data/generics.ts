@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Define generic classes and methods, supply type arguments, and limit them with bounds.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -24,6 +25,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Store a value with its type',
+                description: [
+                    'Store text in Box<String> and a number in Box<Integer>, then read both values.',
+                ],
                 language: 'java',
                 code: `public class Main {
     static class Box<T> {
@@ -41,7 +45,12 @@ const note: LearningNote = {
         System.out.println(quantity.get() + 1);
     }
 }`,
-                result: 'Prints Paid, then 4 on a new line. The diamond <> lets the compiler infer each constructor type argument.',
+                result: 'Paid\n4',
+                explanation: [
+                    'The diamond <> lets the compiler infer String and Integer for the constructors.',
+                    'label.get() returns String, so text receives Paid without a cast.',
+                    'quantity stores the boxed value 3. Reading it for + 1 unboxes it and produces 4.',
+                ],
             }],
         },
         {
@@ -58,6 +67,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Infer method types and restrict numeric input',
+                description: [
+                    'Choose the first of two values and double inputs that extend Number.',
+                ],
                 language: 'java',
                 code: `public class Main {
     static <T> T first(T left, T right) {
@@ -76,7 +88,12 @@ const note: LearningNote = {
         // twice("6"); // Compile error: String is not a Number.
     }
 }`,
-                result: 'Prints Asha, 12.0, and 5.0 on separate lines.',
+                result: 'Asha\n12.0\n5.0',
+                explanation: [
+                    'first returns its left argument. The String arguments let the compiler infer T as String.',
+                    'twice calls doubleValue() and multiplies the result by 2. The calls produce 12.0 and 5.0.',
+                    'The commented call twice("6") does not compile because String does not extend Number.',
+                ],
             }],
         },
     ],

@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'See how two threads can wait forever for each other, then acquire shared locks in one common order.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [
         { title: 'Java Language Specification: locks and thread execution', href: 'https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html' },
@@ -46,14 +47,15 @@ const note: LearningNote = {
             id: 'common-lock-order',
             title: 'Both threads acquire first before second',
             bullets: [
-                'Use one common order whenever code needs these two locks.',
-                'In the program below, both tasks acquire first and then second.',
-                'Only one thread can acquire first. The other waits for first without holding second.',
-                'The thread holding first can acquire second, finish, and release both locks. The other thread can then run.',
-                'UseBothLocks.first and second store the shared lock objects passed to the constructor.',
-                'run acquires both locks and prints one line. main passes the same objects to both tasks and joins both threads.',
+                'Use one common order whenever code needs the same two locks.',
+                'Only one thread can acquire the first lock. The other waits for that lock without holding the second.',
+                'The thread holding the first lock can acquire the second, finish, and release both locks. The other thread can then run.',
             ],
             examples: [{
+                title: 'Acquire two shared locks in one common order',
+                description: [
+                    'Give both tasks the same two lock objects and have each acquire first before second.',
+                ],
                 language: 'java',
                 code: `class UseBothLocks implements Runnable {
     private final Object first;
@@ -87,6 +89,12 @@ public class Main {
     }
 }`,
                 result: 'Both locks acquired\nBoth locks acquired',
+                explanation: [
+                    'UseBothLocks.first and second store the lock objects passed to its constructor.',
+                    'Only one thread can acquire first. The other waits for first without holding second.',
+                    'The thread holding first can acquire second, print, and release both locks. The other thread can then run.',
+                    'main joins both workers. Each worker prints the same line once.',
+                ],
             }],
         },
         {

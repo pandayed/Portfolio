@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'operators-and-conditions',
@@ -31,6 +32,10 @@ const note: LearningNote = {
                 ],
             },
             examples: [{
+                title: 'Update a count and check conditions',
+                description: [
+                    'Increase a count, check its value, and print a text label.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -44,6 +49,11 @@ const note: LearningNote = {
     }
 }`,
                 result: '5\ntrue\ncount=5',
+                explanation: [
+                    'count += 2 changes count from 3 to 5.',
+                    'enough is true because 5 is at least 4. even is false because 5 % 2 is 1.',
+                    'enough && !even is true. The final + expression joins count= with 5.',
+                ],
             }],
         },
     ],

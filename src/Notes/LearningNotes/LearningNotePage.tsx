@@ -2,6 +2,7 @@ import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import type { Route } from '../../routing/routes';
 import NoteArticleLayout from '../NoteArticleLayout';
+import LearningNoteExampleBlock from './LearningNoteExampleBlock';
 import type { LearningNote, LearningNoteScope } from './types';
 
 interface LearningNotePageProps {
@@ -100,7 +101,12 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                         </div>
                     )}
 
-                    {section.examples?.map((example, index) => (
+                    {section.examples?.map((example, index) => note.exampleLayout === 'grouped' ? (
+                        <LearningNoteExampleBlock
+                            example={example}
+                            key={`${section.id}-example-${index}`}
+                        />
+                    ) : (
                         <div className="Article__section" key={`${section.id}-example-${index}`}>
                             {example.title && <h3 className="Article__subTitle">{example.title}</h3>}
                             <CodeBlock language={example.language}>{example.code}</CodeBlock>

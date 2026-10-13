@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'branches',
@@ -20,6 +21,10 @@ const note: LearningNote = {
                 'The conditional operator condition ? first : second chooses one expression. It chooses first when the condition is true and second when it is false.',
             ],
             examples: [{
+                title: 'Choose a result for a score',
+                description: [
+                    'Print a result for a score of 72 and check whether the score is even.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -36,6 +41,11 @@ const note: LearningNote = {
     }
 }`,
                 result: 'pass\neven',
+                explanation: [
+                    '72 is below 90, so the first branch is skipped. It is at least 60, so the else if branch prints pass.',
+                    'The else branch does not run after a matching branch.',
+                    '72 % 2 is 0. The conditional operator therefore chooses even.',
+                ],
             }],
         },
     ],

@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'numeric-conversions',
@@ -19,6 +20,10 @@ const note: LearningNote = {
                 'Casting a floating-point value to int removes its fractional part toward zero.',
             ],
             examples: [{
+                title: 'Widen an integer and truncate a fraction',
+                description: [
+                    'Assign an int to a long and cast a negative double to int.',
+                ],
                 language: 'java',
                 code: String.raw`public class Main {
     public static void main(String[] args) {
@@ -30,6 +35,10 @@ const note: LearningNote = {
     }
 }`,
                 result: '7\n-3',
+                explanation: [
+                    'Assigning count to widened preserves the value 7.',
+                    'Casting -3.9 to int removes the fractional part toward zero, producing -3.',
+                ],
             }],
         },
         {
@@ -44,6 +53,10 @@ const note: LearningNote = {
                 'double cannot represent every decimal fraction exactly. BigDecimal constructed from a decimal string represents that decimal value exactly.',
             ],
             examples: [{
+                title: 'Keep the fraction when calculating an average',
+                description: [
+                    'Divide 7 by 2 in two ways, then square 50,000 using long arithmetic.',
+                ],
                 language: 'java',
                 code: String.raw`public class Main {
     public static void main(String[] args) {
@@ -58,6 +71,11 @@ const note: LearningNote = {
     }
 }`,
                 result: '3.0\n3.5\n2500000000',
+                explanation: [
+                    'total / people uses integer division and produces 3. Assignment to double then gives 3.0.',
+                    'Casting total before division makes the division use floating-point arithmetic and produces 3.5.',
+                    'The L suffix on 50_000L makes the multiplication use long arithmetic. The product is 2500000000.',
+                ],
             }],
         },
     ],

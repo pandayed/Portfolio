@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Start with the main thread, define a task with Runnable, and run that task on a new thread.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [
         { title: 'Oracle tutorial: defining and starting a thread', href: 'https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html' },
@@ -18,11 +19,15 @@ const note: LearningNote = {
             bullets: [
                 'A process is a running program. A Java process can contain several threads.',
                 'A thread executes the statements in a method. It follows those statements in their execution order.',
-                'The thread executing main is called the main thread in these examples.',
+                'The thread executing main is called the main thread.',
                 'Thread is a Java class. Thread.currentThread() returns the Thread object for the thread executing that line.',
                 'getName() returns the name stored in that Thread object.',
             ],
             examples: [{
+                title: 'Read the main thread’s name',
+                description: [
+                    'Run this program with java Main to read the thread executing main.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -30,7 +35,11 @@ const note: LearningNote = {
         System.out.println(current.getName());
     }
 }`,
-                result: 'main when launched with java Main. This program has not created another thread.',
+                result: 'main',
+                explanation: [
+                    'Thread.currentThread() returns the thread executing this statement.',
+                    'getName() returns main for this launch. The program creates no other thread.',
+                ],
             }],
         },
         {
@@ -42,10 +51,14 @@ const note: LearningNote = {
                 'A class that implements Runnable supplies that run() method.',
                 '@Override asks the compiler to check that run() matches the method required by the interface.',
                 'Put the task statements inside run(). The method returns no value.',
-                'new PrintTask() creates the task object. Creating it does not execute run() or create a thread.',
-                'Calling task.run() directly executes the method on the calling thread.',
+                'Creating a Runnable object does not execute run() or create a thread.',
+                'Calling run() directly executes the method on the calling thread.',
             ],
             examples: [{
+                title: 'Call a Runnable task directly',
+                description: [
+                    'Define a task that prints a message and its executing thread’s name.',
+                ],
                 language: 'java',
                 code: `class PrintTask implements Runnable {
     @Override
@@ -62,19 +75,27 @@ public class Main {
     }
 }`,
                 result: 'Task body\nmain',
+                explanation: [
+                    'new PrintTask() creates the task object. It does not execute run() or create a thread.',
+                    'task.run() is a direct method call, so both lines print on the main thread.',
+                ],
             }],
         },
         {
             id: 'create-a-thread',
             title: 'Run the task on a new thread',
             bullets: [
-                'new Thread(task, "worker") creates a Thread object with a task and a name.',
-                'worker.start() starts a new thread. Java calls the task’s run() method on that thread.',
-                'The main thread continues after start(). start() does not wait for the task to finish.',
+                'A Thread object can hold a Runnable task and a name.',
+                'Calling start() starts a new thread. Java calls the task’s run() method on that thread.',
+                'The calling thread continues after start(). start() does not wait for the task to finish.',
                 'The task object holds the code. The Thread object manages the thread that executes that code.',
                 'A Thread object can be started only once. Calling start() again throws IllegalThreadStateException, even if its task has finished.',
             ],
             examples: [{
+                title: 'Execute a task on a worker thread',
+                description: [
+                    'Create a thread named worker and give it a PrintTask.',
+                ],
                 language: 'java',
                 code: `class PrintTask implements Runnable {
     @Override
@@ -90,18 +111,27 @@ public class Main {
         worker.start();
     }
 }`,
-                result: 'worker. The run() method is now executing on the thread named worker.',
+                result: 'worker',
+                explanation: [
+                    'The task object holds the code. The Thread object manages the thread that executes it.',
+                    'worker.start() starts a new thread that calls the task’s run() method.',
+                    'The task reads its executing thread’s name and prints worker.',
+                ],
             }],
         },
         {
             id: 'start-and-run',
             title: 'start() and run() do different things',
             bullets: [
-                'worker.run() is a normal method call. For the Thread created below, it calls the task on the main thread.',
-                'worker.start() creates the new thread that calls the task.',
-                'Calling run() first does not start the Thread object. The later start() is still its first start.',
+                'Calling run() is a normal method call on the calling thread.',
+                'Calling start() creates the new thread that calls the task.',
+                'Calling run() first does not start the Thread object.',
             ],
             examples: [{
+                title: 'Compare calling run() with calling start()',
+                description: [
+                    'Call run() directly, then start the same Thread object.',
+                ],
                 language: 'java',
                 code: `class PrintTask implements Runnable {
     @Override
@@ -118,6 +148,11 @@ public class Main {
     }
 }`,
                 result: 'main\nworker',
+                explanation: [
+                    'worker.run() calls the task on the main thread and prints main.',
+                    'Calling run() does not start the Thread object. The later start() is its first start.',
+                    'worker.start() runs the task on the new worker thread and prints worker.',
+                ],
             }],
         },
         {
@@ -126,11 +161,14 @@ public class Main {
             bullets: [
                 'Each thread follows its own method statements in order.',
                 'Scheduling is choosing when a ready thread gets to execute. Java and the operating system make that choice.',
-                'Starting first before second does not guarantee that first prints before second.',
-                'The example can print A then B, or B then A. Both results are valid.',
+                'Starting one thread before another does not guarantee their print order.',
                 'Waiting for a thread to finish is a separate operation. The next lesson introduces join().',
             ],
             examples: [{
+                title: 'Start two tasks without fixing their print order',
+                description: [
+                    'Start one task that prints A and another that prints B.',
+                ],
                 language: 'java',
                 code: `class PrintTask implements Runnable {
     private final String message;
@@ -153,7 +191,12 @@ public class Main {
         second.start();
     }
 }`,
-                result: 'One line contains A and one contains B. Their order is not fixed.',
+                result: 'A\nB',
+                possibleOutput: true,
+                explanation: [
+                    'main starts first before second, but that does not guarantee that first prints first.',
+                    'A then B and B then A are both valid outputs. Each task prints exactly one line.',
+                ],
             }],
         },
         {
@@ -166,6 +209,10 @@ public class Main {
                 'The earlier Runnable approach keeps the task in a separate object. That task can also be passed to an executor in a later lesson.',
             ],
             examples: [{
+                title: 'Start a Thread subclass',
+                description: [
+                    'Override run() in a class that extends Thread.',
+                ],
                 language: 'java',
                 code: `class PrintThread extends Thread {
     @Override
@@ -181,6 +228,10 @@ public class Main {
     }
 }`,
                 result: 'Thread task',
+                explanation: [
+                    'new PrintThread() creates the Thread object.',
+                    'start() starts a new thread that executes the overridden run() method and prints the message.',
+                ],
             }],
         },
     ],

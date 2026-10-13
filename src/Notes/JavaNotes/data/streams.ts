@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Streams',
     summary: 'Build stream pipelines to filter, transform, reduce, group, and flatten values. Choose result collections and understand execution rules.',
     scope: 'java',
+    exampleLayout: 'grouped',
     pointwise: true,
     updatedOn: '2026-10-13',
     sections: [
@@ -18,11 +19,13 @@ const note: LearningNote = {
                 'filter keeps values that pass a Predicate. map transforms each remaining value using a Function.',
                 'Intermediate operations describe the steps. They are lazy: creating the pipeline does not process the elements.',
                 'A terminal operation, such as toList, count, or forEach, starts processing.',
-                'This filter-and-map pipeline leaves the source list unchanged and keeps its encounter order, which is the original list order here.',
                 'Use a stream only once. Reusing it after a terminal operation may throw IllegalStateException. Create a fresh stream for another calculation.',
             ],
             examples: [{
                 title: 'Calculate discounted qualifying prices',
+                description: [
+                    'Keep prices of at least 100, then subtract 10 from each qualifying price.',
+                ],
                 language: 'java',
                 code: `import java.util.List;
 import java.util.stream.Stream;
@@ -40,7 +43,12 @@ public class Main {
         System.out.println(prices);
     }
 }`,
-                result: 'Prints Pipeline created, [110, 190], and [40, 120, 200] on separate lines. No elements are processed by this pipeline until toList starts.',
+                result: 'Pipeline created\n[110, 190]\n[40, 120, 200]',
+                explanation: [
+                    'Creating discounted does not process its elements. toList starts the pipeline after Pipeline created is printed.',
+                    'filter removes 40. map turns 120 and 200 into 110 and 190.',
+                    'The result keeps the source list order. The source prices list is unchanged.',
+                ],
             }],
         },
         {
@@ -55,6 +63,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Calculate a total',
+                description: [
+                    'Add the values 2, 3, and 5 using a stream reduction.',
+                ],
                 language: 'java',
                 code: `import java.util.List;
 
@@ -65,7 +76,11 @@ public class Main {
         System.out.println(total);
     }
 }`,
-                result: 'Prints 10.',
+                result: '10',
+                explanation: [
+                    'reduce starts from the identity 0 and combines each value with Integer::sum.',
+                    'The final sum is 0 + 2 + 3 + 5, which is 10.',
+                ],
             }],
         },
         {
@@ -77,13 +92,15 @@ public class Main {
                 'Collectors.groupingBy chooses a key for each element and groups elements with the same key.',
                 'A downstream collector processes each group. Collectors.counting returns the number of elements as a Long.',
                 'groupingBy without a map supplier does not guarantee a map type or key order.',
-                'TreeMap::new supplies a map that sorts the group keys in this example.',
                 'Collectors.toMap builds a map by choosing a key and a value for each element.',
                 'Collectors.toMap throws IllegalStateException for duplicate keys unless you supply a merge function.',
                 'The merge function chooses or combines values that map to the same key.',
             ],
             examples: [{
                 title: 'Count words grouped by length',
+                description: [
+                    'Group java, go, sql, and ruby by their lengths, then count each group.',
+                ],
                 language: 'java',
                 code: `import java.util.List;
 import java.util.Map;
@@ -102,7 +119,12 @@ public class Main {
         System.out.println(counts);
     }
 }`,
-                result: 'Prints {2=1, 3=1, 4=2}. TreeMap sorts the keys. counting returns Long values.',
+                result: '{2=1, 3=1, 4=2}',
+                explanation: [
+                    'String::length selects the group key. go has length 2, sql has length 3, and java and ruby have length 4.',
+                    'TreeMap::new supplies a map that sorts the group keys.',
+                    'Collectors.counting produces a Long count for each group.',
+                ],
             }],
         },
         {
@@ -127,11 +149,13 @@ public class Main {
             bullets: [
                 'map produces one output value for each input. Mapping each list to a stream would produce a stream of streams.',
                 'flatMap maps each input to a stream and combines the elements of those streams into one stream.',
-                'List::stream turns each inner list into a stream in this example.',
                 'Collect the flattened elements with toCollection(ArrayList::new) when you need a mutable list.',
             ],
             examples: [{
                 title: 'Create a mutable list from nested lists',
+                description: [
+                    'Combine the nested language lists, add python, then select names with at most three characters.',
+                ],
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -156,7 +180,13 @@ public class Main {
         // selected.add("c"); // Throws UnsupportedOperationException.
     }
 }`,
-                result: 'Prints [java, sql, go, python], then [sql, go]. flatMap turns each inner list stream into elements of one stream.',
+                result: '[java, sql, go, python]\n[sql, go]',
+                explanation: [
+                    'List::stream turns each inner list into a stream. flatMap combines their elements into one stream.',
+                    'toCollection(ArrayList::new) creates a mutable result, so languages.add("python") succeeds.',
+                    'filter selects sql and go. toList creates an unmodifiable selected list.',
+                    'The commented selected.add call would throw UnsupportedOperationException.',
+                ],
             }],
         },
         {

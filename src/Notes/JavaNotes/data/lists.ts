@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Lists',
     summary: 'Create lists, read and update indexes, remove elements, and compare views with copies.',
     scope: 'java',
+    exampleLayout: 'grouped',
     pointwise: true,
     updatedOn: '2026-10-13',
     sections: [
@@ -15,7 +16,6 @@ const note: LearningNote = {
                 'A List stores elements in index order and allows duplicate values.',
                 'List.of(...) creates an unmodifiable list from its arguments. It rejects null elements.',
                 'new ArrayList<>(values) creates a mutable list with the same element references. new ArrayList<>() creates an empty mutable list.',
-                'The example copies List.of values into an ArrayList before removing and replacing elements.',
             ],
         },
         {
@@ -32,6 +32,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Remove by position and by value',
+                description: [
+                    'Copy the values 1, 2, 1, and 3 into a mutable ArrayList, then remove and replace elements.',
+                ],
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +52,13 @@ public class Main {
         System.out.println(numbers);
     }
 }`,
-                result: 'Prints 1, [1, 1, 3], [1, 3], and [9, 3, 5] on separate lines.',
+                result: '1\n[1, 1, 3]\n[1, 3]\n[9, 3, 5]',
+                explanation: [
+                    'get(0) reads the first element, 1.',
+                    'remove(1) removes the element at index 1, which is 2.',
+                    'remove(Integer.valueOf(1)) removes the first element equal to 1.',
+                    'set(0, 9) replaces the remaining 1. add(5) appends 5.',
+                ],
             }],
         },
         {
@@ -66,6 +75,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Remove entries while iterating',
+                description: [
+                    'Remove empty names from a mutable list while reading its elements.',
+                ],
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.Iterator;
@@ -83,7 +95,11 @@ public class Main {
         System.out.println(names);
     }
 }`,
-                result: 'Prints [Asha, Dev]. Removal uses the same iterator that reads the elements.',
+                result: '[Asha, Dev]',
+                explanation: [
+                    'next() returns each name. isEmpty() matches the empty string.',
+                    'remove() deletes that name through the same iterator that reads the list.',
+                ],
             }],
         },
         {
@@ -100,6 +116,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Compare a view and a copy',
+                description: [
+                    'Replace an element in a fixed-size list, then compare an unmodifiable view with an unmodifiable copy.',
+                ],
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.Arrays;
@@ -121,7 +140,13 @@ public class Main {
         // view.add("C"); // Throws UnsupportedOperationException.
     }
 }`,
-                result: 'Prints [ready, review], [A, B], and [A] on separate lines. The copy keeps the original membership while the view reflects source changes.',
+                result: '[ready, review]\n[A, B]\n[A]',
+                explanation: [
+                    'fixedSize.set changes draft to ready without changing the list size.',
+                    'source.add("B") changes the original list. view reflects that change.',
+                    'copy keeps the original membership, so it still contains only A.',
+                    'The commented view.add call would throw UnsupportedOperationException.',
+                ],
             }],
         },
     ],

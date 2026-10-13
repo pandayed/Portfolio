@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Sets',
     summary: 'Store distinct elements and understand how equality and ordering determine uniqueness.',
     scope: 'java',
+    exampleLayout: 'grouped',
     pointwise: true,
     updatedOn: '2026-10-13',
     sections: [
@@ -20,6 +21,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Keep each tag once',
+                description: [
+                    'Add two tags, then try to add java again.',
+                ],
                 language: 'java',
                 code: `import java.util.LinkedHashSet;
 import java.util.Set;
@@ -34,7 +38,12 @@ public class Main {
         System.out.println(tags.contains("backend"));
     }
 }`,
-                result: 'Prints false, [java, backend], and true on separate lines. Adding java twice leaves one java element.',
+                result: 'false\n[java, backend]\ntrue',
+                explanation: [
+                    'The second java insertion returns false because java is already present.',
+                    'LinkedHashSet prints the tags in insertion order.',
+                    'contains("backend") returns true because backend is in the set.',
+                ],
             }],
         },
         {

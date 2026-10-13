@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'wrappers-and-null',
@@ -32,6 +33,10 @@ const note: LearningNote = {
                 ],
             },
             examples: [{
+                title: 'Box a number and check a missing value',
+                description: [
+                    'Store 12 in an Integer, use it in arithmetic, and check a null wrapper.',
+                ],
                 language: 'java',
                 code: String.raw`public class Main {
     public static void main(String[] args) {
@@ -44,6 +49,11 @@ const note: LearningNote = {
     }
 }`,
                 result: '13\ntrue',
+                explanation: [
+                    'Assigning 12 to stored boxes the int value. stored + 1 unboxes it and produces 13.',
+                    'missing == null checks the reference without unboxing it, so it prints true.',
+                    'The commented assignment would unbox missing and throw NullPointerException.',
+                ],
             }],
         },
         {
@@ -56,6 +66,10 @@ const note: LearningNote = {
                 'Invalid text or a number outside the int range throws NumberFormatException.',
             ],
             examples: [{
+                title: 'Compare wrapper values and parse text',
+                description: [
+                    'Compare two Integer values and a missing reference, then parse "42".',
+                ],
                 language: 'java',
                 code: String.raw`import java.util.Objects;
 
@@ -70,6 +84,11 @@ public class Main {
     }
 }`,
                 result: 'true\nfalse\n42',
+                explanation: [
+                    'first.equals(second) compares their values, so it prints true.',
+                    'Objects.equals(first, missing) safely compares a number with null and prints false.',
+                    'Integer.parseInt("42") returns the int value 42.',
+                ],
             }],
         },
     ],

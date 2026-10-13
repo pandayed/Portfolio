@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Connect a dependent task with thenCompose and combine two independent task results with thenCombine.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [{
         title: 'Java 17: CompletableFuture',
@@ -20,7 +21,6 @@ const note: LearningNote = {
                 'thenCompose passes the previous result to that operation and follows the future it returns.',
                 'The final future gives the returned operation\'s result directly.',
                 'Using thenApply for the same operation would give CompletableFuture<CompletableFuture<String>>. The caller would have a future containing another future.',
-                'loadGreeting below receives a user ID and returns a future containing a greeting. It uses an already completed future to keep this example focused on the connection.',
             ],
             examples: [{
                 title: 'Use a user ID to obtain the next result',
@@ -41,7 +41,16 @@ public class Main {
         System.out.println(greeting.join());
     }
 }`,
-                result: 'Hello user 7. One join() reads the String returned through loadGreeting\'s future.',
+                description: [
+                    'Use the user ID from one future to obtain a greeting from another.',
+                ],
+                result: 'Hello user 7',
+                explanation: [
+                    'userId already contains 7.',
+                    'loadGreeting receives the user ID and returns a completed future containing Hello user 7.',
+                    'thenCompose follows that returned future rather than putting it inside another future.',
+                    'One greeting.join() reads the resulting String.',
+                ],
             }],
         },
         {
@@ -51,7 +60,6 @@ public class Main {
                 'thenCombine(otherFuture, callback) registers a combination and returns a new future. It does not wait on the calling thread.',
                 'After both input futures complete successfully, the callback combines their results. join() waits for that combined result.',
                 'The callback receives their two results and returns one combined value.',
-                'The example starts price and delivery tasks before combining them. Neither task needs the other task\'s result.',
                 'The lambda (left, right) -> expression receives two arguments and returns the expression.',
                 '() -> expression is a Supplier lambda with no arguments. It returns the expression when get() runs.',
             ],
@@ -79,7 +87,16 @@ public class Main {
         }
     }
 }`,
-                result: '120. () -> 100 and () -> 20 are Supplier lambdas with no arguments. The combined result becomes available after both tasks succeed.',
+                description: [
+                    'Start independent price and delivery tasks, then add their results.',
+                ],
+                result: '120',
+                explanation: [
+                    'The Supplier lambdas return 100 and 20. Neither task needs the other task\'s result.',
+                    'After both tasks succeed, thenCombine adds the price and delivery values.',
+                    'total.join() waits for the combined result, then main prints 120.',
+                    'The finally block requests shutdown of the worker pool.',
+                ],
             }],
         },
     ],

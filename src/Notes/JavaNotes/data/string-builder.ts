@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'string-builder',
@@ -19,6 +20,10 @@ const note: LearningNote = {
                 'StringBuilder does not synchronize changes from multiple threads. It does not coordinate their access to its contents.',
             ],
             examples: [{
+                title: 'Join names and keep a String snapshot',
+                description: [
+                    'Build a comma-separated list of names, then change the builder after creating a String.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -36,6 +41,11 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Ana, Bo, Cy\nAna, Bo, Cy!\nAna / Bo / Cy',
+                explanation: [
+                    'The loop adds a comma and space before every name except the first. The builder contains Ana, Bo, Cy.',
+                    'toString stores those contents in result. Appending ! changes the builder but leaves result unchanged.',
+                    'String.join uses / with surrounding spaces as the separator, producing Ana / Bo / Cy.',
+                ],
             }],
         },
     ],

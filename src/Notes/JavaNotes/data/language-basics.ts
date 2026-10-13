@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'declarations',
@@ -20,6 +21,10 @@ const note: LearningNote = {
                 'Give a local variable a value before reading it. Java does not give it a default value.',
             ],
             examples: [{
+                title: 'Update a book count',
+                description: [
+                    'Store a count and a unit, then print them together.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -31,6 +36,10 @@ const note: LearningNote = {
     }
 }`,
                 result: '4 books',
+                explanation: [
+                    'count starts at 3. Assigning 4 replaces that value.',
+                    'unit holds the text books. The + expression joins the count, a space, and the unit.',
+                ],
             }],
         },
         {
@@ -69,6 +78,10 @@ const note: LearningNote = {
                 'You cannot use var as a method parameter type or return type.',
             ],
             examples: [{
+                title: 'Infer a boolean type with var',
+                description: [
+                    'Create a local boolean variable without writing its type.',
+                ],
                 language: 'java',
                 code: String.raw`public class Main {
     public static void main(String[] args) {
@@ -79,6 +92,10 @@ const note: LearningNote = {
     }
 }`,
                 result: 'false',
+                explanation: [
+                    'Java infers boolean for available from its initial value true.',
+                    'Assigning false changes its value. The commented String assignment would not compile.',
+                ],
             }],
         },
         {
@@ -92,6 +109,10 @@ const note: LearningNote = {
                 'Name constants in uppercase with underscores, such as MAX_COUNT.',
             ],
             examples: [{
+                title: 'Keep a limit and a count fixed',
+                description: [
+                    'Declare two final variables and print their values.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -104,6 +125,10 @@ const note: LearningNote = {
     }
 }`,
                 result: '10\n3',
+                explanation: [
+                    'MAX_COUNT receives 10 and count receives 3. Each variable is assigned once.',
+                    'The commented assignment to count would not compile because count is final.',
+                ],
             }],
         },
     ],

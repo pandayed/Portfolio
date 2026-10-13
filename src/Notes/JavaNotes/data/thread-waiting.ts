@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Wait for a task to finish with join, pause the current thread with sleep, and understand timed waits.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [{ title: 'Oracle tutorial: joins', href: 'https://docs.oracle.com/javase/tutorial/essential/concurrency/join.html' }],
     sections: [
@@ -13,13 +14,16 @@ const note: LearningNote = {
             id: 'sleep-and-join',
             title: 'join() waits for a thread to finish',
             bullets: [
-                'start() begins the worker’s task. It does not wait for that task to finish.',
-                'worker.join() makes the calling thread wait until worker terminates.',
-                'In this example, main calls join(). The main thread waits while the worker executes run().',
-                'After join() returns, main executes its next statement.',
-                'join() can throw InterruptedException if the waiting thread is interrupted. The throws declaration passes that exception out of main. The interruption lesson explains how to handle it.',
+                'start() begins a thread’s task. It does not wait for that task to finish.',
+                'Calling join() on a Thread object makes the calling thread wait until that thread terminates.',
+                'After join() returns, the calling thread executes its next statement.',
+                'join() can throw InterruptedException if the waiting thread is interrupted. The interruption lesson explains how to handle it.',
             ],
             examples: [{
+                title: 'Wait for a worker before continuing',
+                description: [
+                    'Start a worker and wait for it before main prints its next message.',
+                ],
                 language: 'java',
                 code: `class PrintTask implements Runnable {
     @Override
@@ -37,18 +41,27 @@ public class Main {
     }
 }`,
                 result: 'Worker finished\nMain continued',
+                explanation: [
+                    'main calls join(), so the main thread waits while the worker executes run().',
+                    'The worker prints Worker finished and terminates.',
+                    'join() then returns, and main prints Main continued.',
+                    'The throws declaration passes InterruptedException out of main if the wait is interrupted.',
+                ],
             }],
         },
         {
             id: 'wait-for-two-workers',
             title: 'Start both workers before waiting',
             bullets: [
-                'Start each worker, then join each worker when main needs their completed results.',
-                'Joining first before starting second makes main wait before second has any chance to begin.',
-                'Joining both after starting them lets both tasks make progress before main reaches the final print.',
-                'The two tasks below each print their own sequence in order. Lines from the two sequences can appear between each other.',
+                'Start each worker, then join each worker when the caller needs their completed results.',
+                'Joining one worker before starting another makes the caller wait before the second task can begin.',
+                'Joining both after starting them lets both tasks make progress before the caller continues.',
             ],
             examples: [{
+                title: 'Wait for odd and even number tasks',
+                description: [
+                    'Start both number tasks before joining either one.',
+                ],
                 language: 'java',
                 code: `class NumberTask implements Runnable {
     private final int first;
@@ -76,7 +89,13 @@ public class Main {
         System.out.println("Finished");
     }
 }`,
-                result: 'Prints 1, 3, 5 and 2, 4, 6. Their lines may mix. Finished is always last.',
+                result: '1\n2\n3\n4\n5\n6\nFinished',
+                possibleOutput: true,
+                explanation: [
+                    'NumberTask(1) prints 1, 3, 5. NumberTask(2) prints 2, 4, 6.',
+                    'Each task prints its own sequence in order. Lines from the two sequences can appear between each other.',
+                    'Both joins finish before main prints Finished, so that line is always last.',
+                ],
             }],
         },
         {
@@ -85,12 +104,15 @@ public class Main {
             bullets: [
                 'Thread.sleep(milliseconds) pauses the thread executing that call.',
                 'Thread.sleep(100) requests a pause of 100 milliseconds, which is one tenth of a second.',
-                'In the example, main calls sleep(), so the main thread pauses.',
                 'The thread can resume later than the requested duration because it must be scheduled again.',
                 'sleep() can also throw InterruptedException.',
                 'A pause does not prove that another task finished. join() waits for completion.',
             ],
             examples: [{
+                title: 'Pause the main thread',
+                description: [
+                    'Print a message before and after a requested 100-millisecond pause.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -100,6 +122,11 @@ public class Main {
     }
 }`,
                 result: 'Before pause\nAfter pause',
+                explanation: [
+                    'main calls sleep(), so the main thread pauses.',
+                    'The pause requests one tenth of a second. Scheduling can delay the second line beyond that time.',
+                    'The throws declaration passes InterruptedException out of main if the pause is interrupted.',
+                ],
             }],
         },
         {

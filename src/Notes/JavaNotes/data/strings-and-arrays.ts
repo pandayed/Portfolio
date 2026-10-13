@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'string-values',
@@ -22,6 +23,10 @@ const note: LearningNote = {
                 'final prevents assigning another String to the variable. The String class makes the text immutable, independently of final.',
             ],
             examples: [{
+                title: 'Strip spaces and compare text',
+                description: [
+                    'Remove surrounding spaces from text and compare the result with another String.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -36,6 +41,12 @@ const note: LearningNote = {
     }
 }`,
                 result: '[  Java  ]\n[Java]\ntrue\nfalse',
+                explanation: [
+                    'raw keeps its spaces because strip does not change the original String. cleaned contains Java.',
+                    'The brackets make the spaces visible in the printed lines.',
+                    'cleaned.equals(other) is true because both strings contain Java.',
+                    'new String("Java") creates a separate object, so cleaned == other is false.',
+                ],
             }],
         },
         {
@@ -50,6 +61,10 @@ const note: LearningNote = {
                 'indexOf returns the first matching position. It returns -1 when there is no match.',
             ],
             examples: [{
+                title: 'Read positions in a filename',
+                description: [
+                    'Read the length, first character, and selected positions in notes.java.',
+                ],
                 language: 'java',
                 code: String.raw`public class Main {
     public static void main(String[] args) {
@@ -62,6 +77,11 @@ const note: LearningNote = {
     }
 }`,
                 result: '10\nn\nnotes\n5\n-1',
+                explanation: [
+                    'filename has 10 UTF-16 code units. Its first character is n.',
+                    'substring(0, 5) includes indices 0 through 4 and returns notes.',
+                    'indexOf(".java") finds a match at index 5. indexOf(".txt") finds no match and returns -1.',
+                ],
             }],
         },
         {
@@ -75,6 +95,10 @@ const note: LearningNote = {
                 'A character that a reader sees may contain several code points.',
             ],
             examples: [{
+                title: 'Count code units and code points in an emoji',
+                description: [
+                    'Count the UTF-16 code units and Unicode code points in one emoji.',
+                ],
                 language: 'java',
                 code: String.raw`public class Main {
     public static void main(String[] args) {
@@ -84,6 +108,10 @@ const note: LearningNote = {
     }
 }`,
                 result: '2\n1',
+                explanation: [
+                    'The two Unicode escapes form one emoji code point.',
+                    'length() counts its two UTF-16 code units. codePointCount counts one code point.',
+                ],
             }],
         },
         {
@@ -98,6 +126,10 @@ const note: LearningNote = {
                 'Arrays.toString displays the elements of an array.',
             ],
             examples: [{
+                title: 'Split on a dot and keep an empty final field',
+                description: [
+                    'Split a.b on its dot, then compare two ways of splitting a,b,.',
+                ],
                 language: 'java',
                 code: String.raw`import java.util.Arrays;
 
@@ -109,6 +141,11 @@ public class Main {
     }
 }`,
                 result: '[a, b]\n2\n3',
+                explanation: [
+                    'The escaped dot pattern matches the dot itself, producing the elements a and b.',
+                    'The default comma split drops the empty field after the final comma, leaving two elements.',
+                    'Passing -1 keeps that empty field, so the last array has three elements.',
+                ],
             }],
         },
     ],

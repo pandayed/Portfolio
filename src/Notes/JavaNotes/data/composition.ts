@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Hold another object in a field and use its behavior without becoming its subtype.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -14,13 +15,13 @@ const note: LearningNote = {
             bullets: [
                 'Composition means one object holds another object in a field and calls its methods.',
                 'Pass the held object through a constructor to choose the implementation.',
-                'The Report example holds a Formatter. Report uses formatting without being a Formatter.',
                 'Use inheritance when the subclass can keep the behavior promised by the superclass.',
                 "Use composition to use another object's behavior without making the caller its subtype.",
                 'Composition and inheritance can be used together.',
             ],
             examples: [{
                 title: 'Pass formatting behavior to a report',
+                description: ['Render the same report title with plain text and square brackets.'],
                 language: 'java',
                 code: `interface Formatter {
     String format(String value);
@@ -61,6 +62,12 @@ public class Main {
     }
 }`,
                 result: 'Stock\n[Stock]',
+                explanation: [
+                    'Each Report stores the Formatter passed to its constructor.',
+                    'plain holds a PlainFormatter. marked holds a BracketFormatter.',
+                    'render() passes the title to the held formatter and returns its result.',
+                    'The two calls print Stock and [Stock]. Report uses a Formatter without being a Formatter.',
+                ],
             }],
 
         },

@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Use unknown type arguments and bounded wildcards to control reads and writes.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -21,6 +22,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Accept unknown list types for reading',
+                description: [
+                    'Read the first element of an integer list and a string list through List<?>.',
+                ],
                 language: 'java',
                 code: `import java.util.List;
 
@@ -37,7 +41,12 @@ public class Main {
         printFirst(List.of("ready", "done"));
     }
 }`,
-                result: 'Prints 10, then ready on a new line.',
+                result: '10\nready',
+                explanation: [
+                    'printFirst reads each element as Object and prints it.',
+                    'counts starts with 10. The string list starts with ready.',
+                    'The commented assignment does not compile because List<Integer> is not a subtype of List<Number>.',
+                ],
             }],
         },
         {
@@ -49,11 +58,14 @@ public class Main {
                 'List<? super Integer> accepts a list of Integer or an Integer supertype, such as Number or Object.',
                 'You can add Integer values through that reference. Reading gives Object because the declared element type could be a supertype.',
                 'Use extends when a parameter supplies values. Use super when it receives values.',
-                'Use a named type parameter T when parameters or a return value must share a type. The copy method below relates its source and destination using T.',
+                'Use a named type parameter T when parameters or a return value must share a type.',
                 'An extends wildcard does not make the list unmodifiable. clear() remains available, and another reference can change the list.',
             ],
             examples: [{
                 title: 'Copy integers into a list of numbers',
+                description: [
+                    'Copy the integers 2 and 4 into a list of numbers that already contains 1.5.',
+                ],
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +86,12 @@ public class Main {
         System.out.println(numbers);
     }
 }`,
-                result: 'Prints [1.5, 2, 4]. The source produces values of T. The destination accepts values of T.',
+                result: '[1.5, 2, 4]',
+                explanation: [
+                    'The source supplies values of T. The destination accepts values of T.',
+                    'T relates the source and destination types, allowing Integer values to enter the Number list.',
+                    'copy appends 2 and 4 after the existing 1.5, preserving their order.',
+                ],
             }],
         },
     ],

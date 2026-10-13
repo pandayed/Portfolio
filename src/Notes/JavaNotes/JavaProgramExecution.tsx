@@ -1,5 +1,5 @@
 import ArticleLayout from '../NoteArticleLayout';
-import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { JAVA_PROGRAM_EXECUTION_ROUTE } from '../../routing/routes';
 
@@ -33,38 +33,47 @@ const JavaProgramExecution = () => (
             <h2 id="program-structure" className="SectionTitle">A first Java program</h2>
             <ul className="Article__notes">
                 <li>A source file contains the Java code you write. Its name ends with <code>.java</code>.</li>
-                <li>A class groups declarations. This example declares a public class named <code>Hello</code>.</li>
-                <li>With <code>javac</code>, a public top-level class belongs in a file with the same name: <code>Hello.java</code>.</li>
-                <li>A method groups statements. The launcher calls <code>main</code> to start this program.</li>
+                <li>A class groups declarations.</li>
+                <li>With <code>javac</code>, a public top-level class belongs in a file with the same name as the class.</li>
+                <li>A method groups statements. The launcher calls <code>main</code> to start a program.</li>
                 <li><code>String[] args</code> receives command-line arguments as an array of strings.</li>
-                <li>Braces group the class body and method body. Statements such as the print below end with a semicolon.</li>
+                <li>Braces group the class body and method body. A method call used as a statement ends with a semicolon.</li>
                 <li><code>System.out.println</code> writes a value followed by a line ending to standard output.</li>
                 <li>The variable and method pages explain declarations. The object pages explain class members and access modifiers.</li>
             </ul>
-            <CodeBlock language="java">{`public class Hello {
-    public static void main(String[] args) {
-        System.out.println("Hello, Java");
-    }
-}`}</CodeBlock>
         </section>
 
         <section className="Article__section" aria-labelledby="run-a-class">
             <h2 id="run-a-class" className="SectionTitle">Compile and run a class</h2>
-            <ol className="Article__steps">
-                <li>Save the program as <code>Hello.java</code>.</li>
-                <li>Open a terminal in the directory containing that file.</li>
-                <li>Compile the source file, then run the compiled class:</li>
-            </ol>
-            <CodeBlock language="text">{`javac Hello.java
-java Hello`}</CodeBlock>
             <ul className="Article__notes">
-                <li><code>javac</code> writes <code>Hello.class</code> by default.</li>
-                <li><code>java Hello</code> uses the class name. It does not include <code>.class</code>.</li>
+                <li><code>javac</code> produces compiled files with the <code>.class</code> extension.</li>
+                <li>Pass the class name to <code>java</code> without the <code>.class</code> extension.</li>
                 <li>For the notes' examples with a public <code>Main</code> class, use <code>Main.java</code>, <code>javac Main.java</code>, and <code>java Main</code>.</li>
                 <li>A method shown on its own belongs inside a surrounding class.</li>
                 <li>An <code>import</code> lets an example use a short standard-library type name, such as <code>Arrays</code>, instead of <code>java.util.Arrays</code>.</li>
-                <li><strong>Output:</strong> <code>Hello, Java</code>.</li>
             </ul>
+            <LearningNoteExampleBlock example={{
+                title: 'Compile and run a greeting',
+                description: [
+                    'Print Hello, Java from a public class named Hello.',
+                    'Save the source as Hello.java. Open a terminal in the directory containing that file.',
+                    'Run the commands shown after the source, with the JDK available in the terminal.',
+                ],
+                language: 'java',
+                code: `public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java");
+    }
+}`,
+                commands: `javac Hello.java
+java Hello`,
+                result: 'Hello, Java',
+                explanation: [
+                    'javac Hello.java compiles the source and writes Hello.class by default.',
+                    'java Hello starts the JVM and calls Hello.main.',
+                    'main calls System.out.println with Hello, Java. It prints that text followed by a line ending.',
+                ],
+            }} />
         </section>
 
         <section className="Article__section" aria-labelledby="source-and-bytecode">

@@ -17,9 +17,13 @@ export type LearningCodeLanguage =
 
 export interface LearningNoteExample {
     title?: string;
+    description?: readonly string[];
     language: LearningCodeLanguage;
     code: string;
+    commands?: string;
     result?: string;
+    possibleOutput?: boolean;
+    explanation?: readonly string[];
     typeCheck?: string;
 }
 
@@ -43,6 +47,7 @@ export interface LearningNote {
     scope: LearningNoteScope;
     updatedOn: string;
     pointwise?: boolean;
+    exampleLayout?: 'grouped';
     references?: readonly { title: string; href: string }[];
     sections: readonly LearningNoteSection[];
 }

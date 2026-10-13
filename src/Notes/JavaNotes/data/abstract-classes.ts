@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Share fields and implemented methods while requiring subclasses to implement abstract methods.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -20,6 +21,7 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Share one description method across shapes',
+                description: ['Let Shape provide a description while Square calculates its own area.'],
                 language: 'java',
                 code: `abstract class Shape {
     public abstract int area();
@@ -49,6 +51,12 @@ public class Main {
     }
 }`,
                 result: 'Area: 16',
+                explanation: [
+                    'Shape declares area() without a body and provides description() with a body.',
+                    'Square implements area() by multiplying side by itself.',
+                    'new Square(4) sets side to 4. The Shape reference holds that Square object.',
+                    'description() calls Square.area(), gets 16, and returns Area: 16.',
+                ],
             }],
 
         },

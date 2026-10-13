@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Extend a superclass, initialize inherited state, and override instance methods with runtime polymorphism.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -22,10 +23,10 @@ const note: LearningNote = {
                 'Constructors are not inherited. super(...) calls a superclass constructor.',
                 'On Java 17, super(...) must be the first statement in the subclass constructor.',
                 'If you omit a constructor call, the compiler inserts super(). The superclass must have an accessible no-argument constructor.',
-                'Inheriting methods does not expose private state. The Employee constructor initializes its own private name field.',
             ],
             examples: [{
                 title: 'Initialize inherited state through a constructor',
+                description: ['Create a developer with a name stored by the Employee superclass.'],
                 language: 'java',
                 code: `class Employee {
     private final String name;
@@ -57,6 +58,12 @@ public class Main {
     }
 }`,
                 result: 'Asha\nDeveloper',
+                explanation: [
+                    'new Developer("Asha") calls the Developer constructor, which passes Asha to Employee through super(name).',
+                    'The Employee constructor initializes its own private name field. Developer cannot directly access that field.',
+                    'developer.name() uses the inherited method and returns Asha.',
+                    'developer.role() uses the method added by Developer and returns Developer.',
+                ],
             }],
 
         },
@@ -78,6 +85,7 @@ public class Main {
             ],
             examples: [{
                 title: 'Call child behavior through a parent reference',
+                description: ['Hold a Warning object in a Message variable and call its text method.'],
                 language: 'java',
                 code: `class Message {
     public String text() {
@@ -99,6 +107,11 @@ public class Main {
     }
 }`,
                 result: 'Low battery',
+                explanation: [
+                    'Warning overrides the text() method declared by Message.',
+                    'message has the reference type Message, but its actual object is a Warning.',
+                    'The call uses Warning.text() at runtime and prints Low battery.',
+                ],
             }],
 
         },

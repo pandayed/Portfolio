@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Compare reference identity and values, then implement the equals and hashCode contracts together.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -23,6 +24,9 @@ const note: LearningNote = {
             ],
             examples: [{
                 title: 'Compare two separate strings with the same text',
+                description: [
+                    'Compare separate String objects, a shared reference, and null references.',
+                ],
                 language: 'java',
                 code: `import java.util.Objects;
 
@@ -41,6 +45,12 @@ public class Main {
     }
 }`,
                 result: 'false\ntrue\ntrue\nfalse\ntrue',
+                explanation: [
+                    'first and second are separate objects, so first == second is false.',
+                    'Their text matches, so first.equals(second) is true.',
+                    'same points to first, so first == same is true.',
+                    'Objects.equals returns false for null versus "Java", and true for two null references.',
+                ],
             }],
 
         },
@@ -58,11 +68,14 @@ public class Main {
                 'Override hashCode whenever you override equals.',
                 'A hash code is an integer used by collections such as HashMap and HashSet to locate matching objects.',
                 'Equal objects must have equal hash codes. Unequal objects can have the same hash code.',
-                'instanceof checks whether an object has a compatible class type. After that check, (ProductCode) other casts the reference to ProductCode.',
+                'instanceof checks whether an object has a compatible class type.',
                 'Objects.requireNonNull returns its argument or throws NullPointerException when that argument is null.',
             ],
             examples: [{
                 title: 'Compare product values and their hash codes',
+                description: [
+                    'Treat ProductCode objects with the same value as equal, with matching hash codes.',
+                ],
                 language: 'java',
                 code: `import java.util.Objects;
 
@@ -101,6 +114,13 @@ public class Main {
     }
 }`,
                 result: 'false\ntrue\ntrue',
+                explanation: [
+                    'The constructor uses Objects.requireNonNull to reject a null value.',
+                    'equals first checks identity, then uses instanceof to reject other types and null.',
+                    'After the type check, the cast lets equals read the other ProductCode value.',
+                    'first and second are separate objects, so == prints false. Their matching values make equals print true.',
+                    'hashCode uses the same value field as equals, so the two hash codes match.',
+                ],
             }],
 
         },

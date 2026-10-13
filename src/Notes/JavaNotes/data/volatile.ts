@@ -3,116 +3,153 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'volatile',
     title: 'Volatile',
-    summary: 'Share a stop flag between threads, then publish other data through a volatile flag.',
+    summary: 'Declare a volatile field, share a flag between threads, and distinguish visibility from atomic updates.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [
-        { title: 'Java Language Specification: threads, locks, and visibility', href: 'https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html' },
+        { title: 'GeeksforGeeks: volatile keyword in Java', href: 'https://www.geeksforgeeks.org/java/volatile-keyword-in-java/' },
+        { title: 'Java Language Specification 17: threads and locks', href: 'https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html' },
     ],
     sections: [
         {
             id: 'volatile',
-            title: 'Make a stop request visible to a worker',
+            title: 'What volatile means',
             bullets: [
-                'A stop flag is a boolean field. One thread sets it to true to ask another thread to finish.',
-                'The worker reads the flag repeatedly. The main thread writes it when requesting a stop.',
-                'Visibility means the worker can observe the flag value written by the main thread.',
-                'Without coordination, an ordinary shared boolean does not guarantee that the worker observes the change.',
-                'That worker might stop, or it might keep reading false. There is no fixed failing output to expect.',
-                'Declare the field volatile so writes to it are visible to subsequent reads of that field.',
-                'The loop below repeatedly checks the flag and uses CPU time while waiting.',
-                'Setting the flag requests a stop. It does not interrupt the worker or force an immediate exit.',
+                'volatile is a Java keyword used on a field accessed by different threads.',
+                'When one thread changes a volatile field, later reads of that field by other threads see the change.',
+                'Without volatile or a common lock, Java does not guarantee that another thread will see a field\'s changed value.',
+                'Write volatile before the field type: volatile boolean fieldName;',
+                'volatile applies to instance and static fields. It cannot be used on a local variable.',
             ],
             examples: [{
-                title: 'Request a stop and wait for the worker',
+                title: 'Tell a worker that work is ready',
+                description: [
+                    'A flag is a boolean field that records a condition, such as whether work is ready.',
+                    'One thread can change a volatile flag while another thread checks it.',
+                ],
                 language: 'java',
-                code: `class StopTask implements Runnable {
-    private volatile boolean stopRequested;
-
-    public void requestStop() {
-        stopRequested = true;
-    }
+                code: `class ReadyTask implements Runnable {
+    volatile boolean ready = false;
 
     @Override
     public void run() {
-        while (!stopRequested) {
-            // Keep checking until a stop is requested.
+        while (!ready) {
+            // Check again until the flag changes.
         }
-        System.out.println("Worker stopped");
+        System.out.println("Ready");
     }
 }
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        StopTask task = new StopTask();
+        ReadyTask task = new ReadyTask();
         Thread worker = new Thread(task);
         worker.start();
-        task.requestStop();
+        task.ready = true;
         worker.join();
-        System.out.println("Main finished");
     }
 }`,
-                result: 'Prints Worker stopped, then Main finished when the worker gets time to run and finishes. The worker may see the request before its first loop check. join() waits for its termination; it does not send the stop request.',
+                result: 'Ready',
+                explanation: [
+                    'main and the worker use the same ReadyTask object. ready starts as false.',
+                    'The worker checks ready in its loop. main sets ready to true after starting the worker.',
+                    'Because ready is volatile, a subsequent read observes the true value. The worker leaves the loop and prints Ready.',
+                    'The worker may see true on its first check. The program does not require it to enter the loop first.',
+                    'join() waits for the worker to finish. It does not make the flag visible to the worker.',
+                    'The loop repeatedly checks the field and uses CPU time while waiting. volatile does not pause a thread or decide when it runs.',
+                ],
             }],
         },
         {
-            id: 'volatile-publication',
-            title: 'Publish other data through a flag',
+            id: 'volatile-use-cases',
+            title: 'When to use volatile',
             bullets: [
-                'Publishing data means making prepared values available for another thread to read.',
-                'Write the data first, then set a volatile ready flag to true.',
-                'A reader first checks ready. After reading true, it can read the data written before that flag was set.',
-                'Happens-before names this ordering guarantee: the earlier writes are visible to the later reads.',
-                'A volatile write happens-before a subsequent read of that same volatile field.',
-                'Here the reader observes ready = true before reading value, so it sees value = 42.',
+                'Use volatile for a ready flag, a stop request, or a status value shared between threads.',
+                'A single writer with other threads reading is a common use.',
+                'Use it when each update replaces one value without depending on a previous read.',
+                'Choose a lock or an atomic operation when a read and its update must stay together.',
             ],
-            examples: [{
-                title: 'Prepare a value before announcing it is ready',
-                language: 'java',
-                code: `class Result {
-    int value;
-    volatile boolean ready;
-}
-
-class ReadResultTask implements Runnable {
-    private final Result result;
-
-    ReadResultTask(Result result) {
-        this.result = result;
-    }
-
-    @Override
-    public void run() {
-        while (!result.ready) {
-            // Wait for the prepared value.
-        }
-        System.out.println(result.value);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        Result result = new Result();
-        Thread reader = new Thread(new ReadResultTask(result));
-        reader.start();
-        result.value = 42;
-        result.ready = true;
-        reader.join();
-    }
-}`,
-                result: 'Prints 42 when the reader finishes. Reading ready as true makes the earlier value write visible. value does not need volatile for this one-time publication.',
-            }],
         },
         {
             id: 'volatile-limits',
-            title: 'Visibility does not protect a multi-step update',
+            title: 'volatile does not make an increment atomic',
             bullets: [
-                'volatile does not acquire a lock. Another thread can act between separate reads and writes.',
-                'volatile int count does not make count++ atomic. Its read, addition, and write remain separate steps.',
-                'Use AtomicInteger for an atomic counter update, or synchronized to protect the complete operation.',
-                'A volatile reference makes writes to that reference visible. It does not make later changes to the referenced object\'s fields safe.',
-                'The publication example protects reads of the prepared value. Later changes to value need their own coordination.',
+                'An atomic operation takes effect as one indivisible step from other threads\' point of view.',
+                'An increment reads a value, adds one, and writes the result. These are separate steps.',
+                'volatile makes the reads and writes visible. It does not combine them into one atomic increment.',
+            ],
+            examples: [{
+                title: 'Two visible writes can still lose an increment',
+                language: 'java',
+                code: `class Counter {
+    volatile int count = 0;
+}
+
+class IncrementTask implements Runnable {
+    private final Counter counter;
+
+    IncrementTask(Counter counter) {
+        this.counter = counter;
+    }
+
+    @Override
+    public void run() {
+        counter.count++;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Counter counter = new Counter();
+        Thread first = new Thread(new IncrementTask(counter));
+        Thread second = new Thread(new IncrementTask(counter));
+        first.start();
+        second.start();
+        first.join();
+        second.join();
+        System.out.println(counter.count);
+    }
+}`,
+                result: '1',
+                possibleOutput: true,
+                explanation: [
+                    'Both tasks share one Counter. Each task executes count++ exactly once.',
+                    'Both threads can read 0 before either writes. Each then adds one and writes 1. That order produces the shown output.',
+                    'If one increment finishes before the other reads, the output is 2. Both 1 and 2 are valid results.',
+                    'main joins both workers before printing, so the output reflects their completed writes.',
+                    'volatile protects visibility of count. It does not prevent another thread from acting between the read and write in count++.',
+                    'Use AtomicInteger.incrementAndGet(), or protect the complete increment with one common synchronized lock, to keep both increments.',
+                ],
+            }],
+        },
+        {
+            id: 'volatile-and-synchronized',
+            title: 'volatile and synchronized',
+            bullets: [
+                'volatile does not acquire a lock.',
+                'synchronized protects a method or block using an object lock.',
+                'All threads must use the same lock to protect the same shared operation.',
+            ],
+            table: {
+                columns: ['Rule', 'volatile', 'synchronized'],
+                rows: [
+                    ['Visibility', 'Writes are visible to subsequent reads of the same field.', 'Writes before releasing a lock are visible after another thread acquires that same lock.'],
+                    ['Access', 'Does not stop other threads from accessing the field.', 'Only one thread holds the chosen lock at a time.'],
+                    ['Multi-step update', 'Does not protect a read followed by an update.', 'Protects the whole operation when every participating access uses the same lock.'],
+                    ['Use', 'Shared flags and independent value replacements.', 'Checks and updates that must stay together.'],
+                ],
+            },
+        },
+        {
+            id: 'volatile-publication',
+            title: 'Visibility of other prepared data',
+            bullets: [
+                'A writer can prepare other data before setting a volatile flag.',
+                'After a reader observes that flag update, it can also observe the earlier data writes.',
+                'Later changes to that data need their own coordination.',
+                'A volatile reference does not make later changes to its object\'s fields safe.',
             ],
         },
     ],

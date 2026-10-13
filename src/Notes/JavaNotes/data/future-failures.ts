@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Replace a failed result, choose an outcome with handle, and observe completion with whenComplete.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [{
         title: 'Java 17: CompletableFuture',
@@ -20,7 +21,6 @@ const note: LearningNote = {
                 'thenApply, thenCompose, thenCombine, thenAccept, and thenRun require successful inputs. They do not run their callbacks for failed inputs.',
                 'exceptionally calls its callback when the previous stage fails. The callback returns a replacement result.',
                 'If the previous stage succeeds, exceptionally keeps that successful result.',
-                'The lambda block below throws instead of returning a price. The replacement callback returns 0.',
             ],
             examples: [{
                 title: 'Use 0 when the price task fails',
@@ -46,7 +46,16 @@ public class Main {
         }
     }
 }`,
-                result: '0. The replacement result is read from recovered, not from the failed price future.',
+                description: [
+                    'Use a replacement price when the original task fails.',
+                ],
+                result: '0',
+                explanation: [
+                    'The Supplier throws IllegalArgumentException instead of returning a price.',
+                    'exceptionally receives the failure and returns the replacement value 0.',
+                    'recovered.join() reads that replacement result. Reading the failed price future would still report its failure.',
+                    'The pool is shut down in the finally block.',
+                ],
             }],
         },
         {
@@ -85,7 +94,15 @@ public class Main {
         System.out.println(message.join());
     }
 }`,
-                result: 'Price: 100. For a failed price stage, the same callback returns Price unavailable.',
+                description: [
+                    'Choose a message from either a successful price or a failure.',
+                ],
+                result: 'Price: 100',
+                explanation: [
+                    'price is already completed successfully with 100, so failure is null.',
+                    'handle returns Price: 100 for this input. message.join() reads that text.',
+                    'If price failed instead, the same callback would return Price unavailable.',
+                ],
             }],
         },
     ],

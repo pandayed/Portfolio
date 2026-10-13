@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'switch-statements',
@@ -18,6 +19,8 @@ const note: LearningNote = {
                 'break exits the switch statement. It does not exit a surrounding loop.',
             ],
             examples: [{
+                title: 'Choose an action from a menu option',
+                description: ['Use option 2 to select the Open action.'],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -35,6 +38,11 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Open',
+                explanation: [
+                    'option holds 2, so the switch runs case 2 and prints Open.',
+                    'break exits the switch before the default case.',
+                    'Option 1 would print Create. Any other value would print Unknown option.',
+                ],
             }],
         },
         {
@@ -42,14 +50,18 @@ const note: LearningNote = {
             title: 'Switch expressions',
             bullets: [
                 'A switch expression chooses a case and produces a value.',
-                'The Status enum below supplies the named values checked by this switch.',
                 'Arrow cases do not fall through. Java does not continue into the next case after running the matched case.',
                 'A block case uses yield to give the switch expression its result.',
-                'Switch expressions are available from Java 14. This example works in Java 17 without preview features.',
-                'A switch expression must cover every possible choice. This example covers all enum constants. Other selector types may need default.',
+                'Switch expressions are available from Java 14.',
+                'A switch expression must cover every possible choice. Covering all enum constants is sufficient. Other selector types may need default.',
                 'In Java 17, switching on a null enum or String throws NullPointerException. Check for null first when it is possible.',
             ],
             examples: [{
+                title: 'Choose a message from an enum status',
+                description: [
+                    'Return a message for each value of the Status enum.',
+                    'This program works in Java 17 without preview features.',
+                ],
                 language: 'java',
                 code: `public class Main {
     enum Status { NEW, PROCESSING, DONE }
@@ -68,6 +80,12 @@ const note: LearningNote = {
     }
 }`,
                 result: 'working',
+                explanation: [
+                    'status holds Status.PROCESSING, so the switch selects that case.',
+                    'The case block sets action to working. yield makes working the value of the switch expression.',
+                    'message receives that value and is printed.',
+                    'All three Status constants have a case, so this switch needs no default.',
+                ],
             }],
         },
     ],

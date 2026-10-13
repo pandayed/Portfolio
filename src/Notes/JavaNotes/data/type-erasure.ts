@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Understand generic runtime checks, erased signatures, and generic construction restrictions.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -18,11 +19,14 @@ const note: LearningNote = {
                 'An unchecked cast or raw collection can cause heap pollution: a value does not match the element type declared by the reference.',
                 'A later read of that value may throw ClassCastException.',
                 'instanceof List<?> checks whether a value is a List. It does not check the element type.',
-                'instanceof List<String> cannot check an arbitrary Object value and does not compile in the example below.',
+                'instanceof List<String> cannot check an arbitrary Object value.',
                 'Generic declarations can retain type information for reflection. Reflection inspects declared types at runtime; it does not make a list enforce its element type.',
             ],
             examples: [{
                 title: 'List type arguments do not produce different classes',
+                description: [
+                    'Compare the runtime classes of lists with different type arguments, then check whether a value is a list.',
+                ],
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +42,12 @@ public class Main {
         // value instanceof List<String> // Compile error.
     }
 }`,
-                result: 'Prints true, then true. Both objects are ArrayList instances. The second check establishes that value is a List, without checking its element type.',
+                result: 'true\ntrue',
+                explanation: [
+                    'Both objects are ArrayList instances, so their runtime classes are equal.',
+                    'value instanceof List<?> confirms that value is a List without checking its element type.',
+                    'The commented List<String> check cannot test the element type of this Object value and does not compile.',
+                ],
             }],
         },
         {

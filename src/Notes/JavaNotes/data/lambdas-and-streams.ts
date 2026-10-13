@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Lambdas and method references',
     summary: 'Implement functional interfaces with lambdas, capture local variables, and refer to existing methods and constructors.',
     scope: 'java',
+    exampleLayout: 'grouped',
     pointwise: true,
     updatedOn: '2026-10-13',
     sections: [
@@ -31,6 +32,9 @@ const note: LearningNote = {
             },
             examples: [{
                 title: 'Pass a pricing calculation',
+                description: [
+                    'Use lambdas to subtract a discount, check affordability, and calculate a name length.',
+                ],
                 language: 'java',
                 code: `import java.util.function.Function;
 import java.util.function.Predicate;
@@ -50,7 +54,12 @@ public class Main {
         System.out.println(length.apply("Java"));
     }
 }`,
-                result: 'Prints 80, true, and 4 on separate lines.',
+                result: '80\ntrue\n4',
+                explanation: [
+                    'discount implements PriceRule.apply and subtracts 10 from 90.',
+                    'affordable implements Predicate.test. The value 80 meets the price <= 100 condition.',
+                    'length implements Function.apply and returns 4, the number of characters in Java.',
+                ],
             }],
         },
         {
@@ -63,6 +72,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Use a value from the surrounding method',
+                description: [
+                    'Check a price against a limit declared in the same method.',
+                ],
                 language: 'java',
                 code: `import java.util.function.Predicate;
 
@@ -74,7 +86,12 @@ public class Main {
         // limit = 90; // Reassignment makes the lambda fail to compile.
     }
 }`,
-                result: 'Prints true. limit is effectively final because it is initialized once and never reassigned.',
+                result: 'true',
+                explanation: [
+                    'The lambda captures limit, whose value is 100. The price 80 is within that limit.',
+                    'limit is effectively final because it is initialized once and never reassigned.',
+                    'Uncommenting limit = 90 makes the lambda fail to compile.',
+                ],
             }],
         },
         {
@@ -91,6 +108,9 @@ public class Main {
             ],
             examples: [{
                 title: 'Refer to methods and a constructor',
+                description: [
+                    'Use method references to calculate a length, parse a number, and print results. Use a constructor reference to create a list.',
+                ],
                 language: 'java',
                 code: `import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +132,12 @@ public class Main {
         print.accept(names.toString());
     }
 }`,
-                result: 'Prints Length: 4, Number: 42, and [Asha] on separate lines.',
+                result: 'Length: 4\nNumber: 42\n[Asha]',
+                explanation: [
+                    'String::length returns 4 for Java. Integer::parseInt converts the text 42 into an integer.',
+                    'System.out::println supplies the printing action used by print.accept.',
+                    'ArrayList::new creates a mutable list. Adding Asha produces [Asha].',
+                ],
             }],
         },
     ],

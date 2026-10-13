@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Give Runnable tasks to reusable worker threads, then close the pool and wait for its tasks to finish.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [{
         title: 'Java 17: ExecutorService',
@@ -66,7 +67,17 @@ public class Main {
         }
     }
 }`,
-                result: 'Prints First task, Second task, and Third task once each. Their output order can vary. Two workers handle all three tasks.',
+                description: [
+                    'Submit three named tasks to a pool with two workers.',
+                ],
+                result: 'First task\nSecond task\nThird task',
+                possibleOutput: true,
+                explanation: [
+                    'Each PrintTask holds one message and prints it when a worker calls run().',
+                    'Two workers handle all three tasks. A worker can run more than one task.',
+                    'This is one possible output. The three messages can appear in another order.',
+                    'The finally block requests shutdown after submission. Submitted tasks can still finish.',
+                ],
             }],
         },
         {
@@ -83,7 +94,7 @@ public class Main {
                 'Java 17 ExecutorService cannot be used in try-with-resources. Close a pool you own with shutdown().',
             ],
             examples: [{
-                title: 'Print the completion message after the pool stops',
+                title: 'Wait up to one second for the pool to stop',
                 language: 'java',
                 code: `import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -108,7 +119,17 @@ public class Main {
         System.out.println("Stopped: " + stopped);
     }
 }`,
-                result: 'When the task finishes within the wait: Task complete, then Stopped: true. If the wait expires, Stopped: false can print before the task finishes.',
+                description: [
+                    'Submit one task, request shutdown, and wait up to one second for the pool to stop.',
+                ],
+                result: 'Task complete\nStopped: true',
+                possibleOutput: true,
+                explanation: [
+                    'PrintTask writes Task complete when its worker runs.',
+                    'awaitTermination waits after shutdown. If the pool stops within the wait, stopped is true.',
+                    'This output assumes the task finishes within the wait. If the wait expires, Stopped: false can print before Task complete.',
+                    'A timeout does not stop the submitted task.',
+                ],
             }],
         },
         {

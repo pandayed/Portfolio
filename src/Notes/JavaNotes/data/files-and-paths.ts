@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'File input and output',
     summary: 'Read and write text at a Path, process lines, and handle Java file exceptions.',
     scope: 'java',
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     pointwise: true,
     references: [{
@@ -24,10 +25,14 @@ const note: LearningNote = {
                 'readString and writeString use UTF-8 by default. Overloads accept an explicit character encoding.',
                 'writeString does not create missing parent directories. Files.createDirectories creates them.',
                 'The CREATE and APPEND open options create a missing file or add text at the end of an existing file.',
-                'File operations can throw IOException. The method below declares it with throws.',
+                'File operations can throw IOException. A method must catch it or declare it with throws.',
                 'createTempFile creates a temporary file. deleteIfExists deletes it if it still exists.',
             ],
             examples: [{
+                title: 'Write and read a temporary text file',
+                description: [
+                    'Create a temporary file, write Java notes in UTF-8, and read it back.',
+                ],
                 language: 'java',
                 code: `import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -46,7 +51,12 @@ public class Main {
         }
     }
 }`,
-                result: 'Java notes, if the file operations succeed. A file failure propagates IOException.',
+                result: 'Java notes',
+                explanation: [
+                    'If the file operations succeed, readString returns the text written by writeString.',
+                    'finally deletes the temporary file when control leaves the try block.',
+                    'main declares throws IOException. A file failure propagates to its caller.',
+                ],
             }],
         },
         {
@@ -56,10 +66,14 @@ public class Main {
                 'BufferedReader reads text in parts. Files.newBufferedReader opens one for a file.',
                 'readLine returns one line without its line-ending characters. It returns null at the end of the file.',
                 'BufferedReader implements AutoCloseable. Try-with-resources closes it when the block finishes.',
-                'The method below receives a Path for an existing UTF-8 text file.',
             ],
             examples: [{
                 title: 'Count nonblank lines',
+                description: [
+                    'Place this method inside a class. A caller must catch or declare IOException.',
+                    'Call this method with a Path for an existing UTF-8 file.',
+                    'For this input, the file has Java on its first line, an empty second line, and Streams on its third line.',
+                ],
                 language: 'java',
                 code: `static int countNonblankLines(java.nio.file.Path file)
         throws java.io.IOException {
@@ -75,7 +89,11 @@ public class Main {
         return count;
     }
 }`,
-                result: 'For a file with "Java", an empty line, and "Streams" on three lines, returns 2.',
+                explanation: [
+                    'readLine returns each line until it returns null at the end of the file.',
+                    'The method counts Java and Streams and skips the empty line, so it returns 2.',
+                    'The method does not print the return value. Try-with-resources closes the reader.',
+                ],
             }],
         },
         {
@@ -89,6 +107,11 @@ public class Main {
                 'Files.lines may throw IOException when opening the file. A failure while traversing its stream is wrapped in UncheckedIOException.',
             ],
             examples: [{
+                title: 'Count nonblank lines with a file stream',
+                description: [
+                    'Place this method inside a class. A caller must catch or declare IOException.',
+                    'Call this method with a Path for an existing UTF-8 text file.',
+                ],
                 language: 'java',
                 code: `static long countNonblankLines(java.nio.file.Path file)
         throws java.io.IOException {
@@ -96,7 +119,11 @@ public class Main {
         return lines.filter(line -> !line.isBlank()).count();
     }
 }`,
-                result: 'Returns the number of nonblank lines without collecting all lines into a list.',
+                explanation: [
+                    'filter keeps lines for which isBlank returns false. count returns the number of remaining lines.',
+                    'The method returns the count without printing it or collecting all lines into a list.',
+                    'Try-with-resources closes the stream after counting finishes.',
+                ],
             }],
         },
         {
@@ -109,6 +136,11 @@ public class Main {
                 'An existence check does not guarantee that a later readString call will succeed.',
             ],
             examples: [{
+                title: 'Handle a missing file while printing its contents',
+                description: [
+                    'Place this method inside a class.',
+                    'Call printFile with a Path. The shown output is for a missing file.',
+                ],
                 language: 'java',
                 code: `static void printFile(java.nio.file.Path file) {
     try {
@@ -119,7 +151,13 @@ public class Main {
         System.out.println("Could not read the file");
     }
 }`,
-                result: 'Prints the content on success, File not found for a missing file, or Could not read the file for another IOException.',
+                result: 'File not found',
+                possibleOutput: true,
+                explanation: [
+                    'For a readable file, the method prints its contents.',
+                    'For a missing file, the NoSuchFileException catch prints File not found.',
+                    'For another IOException, the second catch prints Could not read the file.',
+                ],
             }],
         },
     ],

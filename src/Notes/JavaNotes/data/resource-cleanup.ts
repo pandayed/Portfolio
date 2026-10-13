@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Resource cleanup',
     summary: 'Close AutoCloseable resources with try-with-resources and distinguish cleanup failures from exception causes.',
     scope: 'java',
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     pointwise: true,
     references: [{
@@ -25,6 +26,10 @@ const note: LearningNote = {
                 'Garbage collection does not guarantee prompt release of file or network resources.',
             ],
             examples: [{
+                title: 'Close a resource after the work finishes',
+                description: [
+                    'Create a resource with a close method, then use it in try-with-resources.',
+                ],
                 language: 'java',
                 code: `public class Main {
     static class Resource implements AutoCloseable {
@@ -41,6 +46,10 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Working\nClosed',
+                explanation: [
+                    'The body prints Working.',
+                    'When the body finishes, Java calls resource.close(), which prints Closed.',
+                ],
             }],
         },
         {

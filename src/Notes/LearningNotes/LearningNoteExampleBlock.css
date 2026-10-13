@@ -1,0 +1,97 @@
+.LearningNoteExampleBlock {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    background-color: var(--color-paper);
+}
+
+.LearningNoteExampleBlock__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    min-width: 0;
+    padding: var(--space-sm);
+}
+
+.LearningNoteExampleBlock__summary {
+    display: grid;
+    grid-template-columns: 0.75rem minmax(0, 1fr);
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    cursor: pointer;
+    overflow-wrap: anywhere;
+    list-style: none;
+    font-weight: 600;
+}
+
+.LearningNoteExampleBlock__summary::-webkit-details-marker {
+    display: none;
+}
+
+.LearningNoteExampleBlock__indicator {
+    display: grid;
+    place-items: center;
+    height: 1lh;
+}
+
+.LearningNoteExampleBlock__indicator svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.LearningNoteExampleBlock[open] > .LearningNoteExampleBlock__summary svg {
+    transform: rotate(90deg);
+}
+
+.LearningNoteExampleBlock__summary:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: -4px;
+    border-radius: 0.75rem;
+}
+
+.LearningNoteExampleBlock__summary + .LearningNoteExampleBlock__section:not(.LearningNoteExampleBlock__section--code) {
+    padding-top: 0;
+}
+
+.LearningNoteExampleBlock__section--code,
+.LearningNoteExampleBlock__section + .LearningNoteExampleBlock__section {
+    border-top: 1px solid var(--color-border);
+}
+
+.LearningNoteExampleBlock__section--code {
+    background-color: var(--color-code-background);
+}
+
+.LearningNoteExampleBlock .Article__code {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.LearningNoteExampleBlock .Article__notes {
+    overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .LearningNoteExampleBlock__indicator svg {
+        transition: transform 240ms ease;
+    }
+
+    @supports (interpolate-size: allow-keywords) and selector(details::details-content) {
+        .LearningNoteExampleBlock::details-content {
+            interpolate-size: allow-keywords;
+            block-size: 0;
+            overflow: hidden;
+            transition:
+                block-size 240ms ease,
+                content-visibility 240ms allow-discrete;
+        }
+
+        .LearningNoteExampleBlock[open]::details-content {
+            block-size: auto;
+        }
+    }
+}

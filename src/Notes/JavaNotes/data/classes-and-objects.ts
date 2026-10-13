@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Define classes, create objects, control field access, and use constructors and static members.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     sections: [
         {
@@ -17,13 +18,14 @@ const note: LearningNote = {
                 'An object is an instance of a class. Use new to create an object.',
                 'Each object has its own instance fields.',
                 'A variable of a class type holds a reference to an object, or null.',
-                'Counter other = first copies the reference. Both variables then refer to the same object.',
+                'Assigning an object reference to another variable copies the reference. Both variables then refer to the same object.',
                 'Numeric fields default to zero. boolean fields default to false. char fields default to code unit 0.',
                 'Reference fields default to null.',
                 'Local variables do not receive these defaults. Assign a value before reading a local variable.',
             ],
             examples: [{
                 title: 'Two counters keep separate values',
+                description: ['Create two counters and increment only the first counter.'],
                 language: 'java',
                 code: `class Counter {
     int value;
@@ -48,6 +50,11 @@ public class Main {
     }
 }`,
                 result: '2\n0',
+                explanation: [
+                    'new Counter() creates a separate object for each variable. Each value field starts at zero.',
+                    'Calling first.increment() twice changes only the first object.',
+                    'The first counter prints 2. The second counter still prints 0.',
+                ],
             }],
 
         },
@@ -84,6 +91,7 @@ public class Main {
             ],
             examples: [{
                 title: 'Initialize a name and reuse one constructor',
+                description: ['Create one user with a default name and another with a supplied name.'],
                 language: 'java',
                 code: `class User {
     private final String name;
@@ -108,6 +116,11 @@ public class Main {
     }
 }`,
                 result: 'Guest\nAsha',
+                explanation: [
+                    'new User() calls the no-argument constructor, which passes Guest to the constructor with a name parameter.',
+                    'new User("Asha") passes Asha directly to that constructor.',
+                    'this.name stores the parameter in the field. name() returns the stored name.',
+                ],
             }],
 
         },
@@ -119,10 +132,10 @@ public class Main {
                 'A private field cannot be accessed directly by an unrelated class.',
                 'Public methods provide the operations callers can use.',
                 'A getter reads a value. A setter assigns a value. A class does not need both for every field.',
-                'Counter exposes increment and value. Callers can increase or read its value but cannot assign the field directly.',
             ],
             examples: [{
                 title: 'Change a private field through public methods',
+                description: ['Let callers increase and read a counter without assigning its field directly.'],
                 language: 'java',
                 code: `class Counter {
     private int value;
@@ -146,6 +159,11 @@ public class Main {
     }
 }`,
                 result: '2',
+                explanation: [
+                    'The private value field starts at zero. Two calls to increment() change it to 2.',
+                    'value() returns the field so main can print it.',
+                    'The commented assignment would fail to compile because Main cannot directly access the private field.',
+                ],
             }],
         },
         {
@@ -161,10 +179,10 @@ public class Main {
                 'A constant expression uses values that Java can calculate at compile time, such as 10 + 2.',
                 'Not every final variable is a compile-time constant. A method result can be assigned once at runtime.',
                 'For a final reference field, the reference cannot change. The referenced object can still change.',
-                'The created++ example uses one thread. static does not make an update safe when several threads perform it at once.',
             ],
             examples: [{
                 title: 'A shared count and a class constant',
+                description: ['Count created tickets and print the maximum number of guests.'],
                 language: 'java',
                 code: `class Ticket {
     public static final int MAX_GUESTS = 4;
@@ -188,6 +206,12 @@ public class Main {
     }
 }`,
                 result: '2\n4',
+                explanation: [
+                    'created is a static field shared by all Ticket instances. It starts at zero.',
+                    'Each constructor call increases created. Two tickets make the count 2.',
+                    'Ticket.createdCount() reads the shared count. Ticket.MAX_GUESTS reads the constant value 4.',
+                    'This program uses one thread. static does not make created++ safe when several threads update it at once.',
+                ],
             }],
 
         },

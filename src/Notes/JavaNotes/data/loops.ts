@@ -7,6 +7,7 @@ const note: LearningNote = {
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'loops',
@@ -21,6 +22,10 @@ const note: LearningNote = {
                 'return exits the current method, even from inside a loop.',
             ],
             examples: [{
+                title: 'Sum values, count down, and run one attempt',
+                description: [
+                    'Use for, while, and do-while to repeat three small tasks.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -44,6 +49,11 @@ const note: LearningNote = {
     }
 }`,
                 result: '6\n2\n1\n1',
+                explanation: [
+                    'The for loop adds 1, 2, and 3 to total, producing 6.',
+                    'The while loop prints 2 and 1. Each iteration decreases remaining until the condition becomes false.',
+                    'The do-while body increases attempts to 1 before checking attempts < 0. That condition is false, so the loop stops after one iteration.',
+                ],
             }],
         },
     ],

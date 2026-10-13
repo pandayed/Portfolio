@@ -58,9 +58,12 @@ const learningNoteText = (note: LearningNote): string => [
         ...(section.table?.rows.flat() ?? []),
         ...(section.examples ?? []).flatMap((example) => [
             example.title ?? '',
+            ...(example.description ?? []),
             example.code,
+            example.commands ?? '',
             example.result ?? '',
             example.typeCheck ?? '',
+            ...(example.explanation ?? []),
         ]),
         ...(section.pitfalls ?? []),
     ]),

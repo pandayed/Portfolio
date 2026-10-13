@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Exceptions',
     summary: 'Follow exception flow, throw and declare failures, handle checked exceptions, and understand causes and finally.',
     scope: 'java',
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     pointwise: true,
     references: [{
@@ -26,6 +27,10 @@ const note: LearningNote = {
                 'A catch for a parent type also matches its subclasses. Put the subclass catch first, or Java rejects it as unreachable.',
             ],
             examples: [{
+                title: 'Handle text that is not a whole number',
+                description: [
+                    'Try to parse five as an integer and continue after handling the failure.',
+                ],
                 language: 'java',
                 code: `public class Main {
     public static void main(String[] args) {
@@ -39,6 +44,11 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Enter a whole number\nDone',
+                explanation: [
+                    'Integer.parseInt("five") throws NumberFormatException, so the count print inside try is skipped.',
+                    'The matching catch prints Enter a whole number.',
+                    'The catch completes normally, so execution continues and prints Done.',
+                ],
             }],
         },
         {
@@ -50,6 +60,10 @@ const note: LearningNote = {
                 'getMessage returns the message stored in the exception.',
             ],
             examples: [{
+                title: 'Reject a nonpositive count',
+                description: [
+                    'Pass 0 to a method that requires a positive count.',
+                ],
                 language: 'java',
                 code: `public class Main {
     static int positiveCount(int count) {
@@ -68,6 +82,10 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Count must be positive',
+                explanation: [
+                    'positiveCount throws IllegalArgumentException because 0 is not positive.',
+                    'The catch reads the exception message with getMessage and prints it.',
+                ],
             }],
         },
         {
@@ -85,6 +103,10 @@ const note: LearningNote = {
                 'Checked and unchecked describe compiler requirements, not whether a failure is recoverable.',
             ],
             examples: [{
+                title: 'Declare and handle a checked failure',
+                description: [
+                    'Call a method that declares a checked exception, then handle that exception in its caller.',
+                ],
                 language: 'java',
                 code: `public class Main {
     static void fail() throws Exception {
@@ -100,6 +122,10 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Operation failed',
+                explanation: [
+                    'fail declares throws Exception and throws an Exception with the message Operation failed.',
+                    'main catches the exception and prints its message.',
+                ],
             }],
         },
         {
@@ -113,6 +139,10 @@ const note: LearningNote = {
                 'Wrapping an exception with its cause keeps the original failure and stack trace available.',
             ],
             examples: [{
+                title: 'Keep the original parsing failure as a cause',
+                description: [
+                    'Parse many as a count and report the failure using a custom exception.',
+                ],
                 language: 'java',
                 code: `public class Main {
     static class InvalidCountException extends RuntimeException {
@@ -139,6 +169,10 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Count must be an integer\nNumberFormatException',
+                explanation: [
+                    'parseCount catches NumberFormatException and passes it as the cause of InvalidCountException.',
+                    'The outer catch prints the custom message, then retrieves the cause and prints its class name.',
+                ],
             }],
         },
         {
@@ -151,6 +185,10 @@ const note: LearningNote = {
                 'An exception thrown by finally also replaces a pending exception unless the program preserves it separately.',
             ],
             examples: [{
+                title: 'Run cleanup before returning a value',
+                description: [
+                    'Return 7 from a try block and print a message from finally.',
+                ],
                 language: 'java',
                 code: `public class Main {
     static int value() {
@@ -166,6 +204,10 @@ const note: LearningNote = {
     }
 }`,
                 result: 'Leaving value\n7',
+                explanation: [
+                    'Java runs finally before value returns, so Leaving value prints first.',
+                    'finally does not replace the return value. main receives 7 and prints it.',
+                ],
             }],
         },
     ],

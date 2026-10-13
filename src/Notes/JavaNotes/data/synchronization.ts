@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'See how threads lose counter updates, then protect the counter with synchronized methods and blocks.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [
         { title: 'Java synchronized methods', href: 'https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html' },
@@ -17,12 +18,15 @@ const note: LearningNote = {
             title: 'Two threads can lose a counter update',
             bullets: [
                 'Shared data is data that more than one thread can access.',
-                'Suppose two threads use the same Counter object. Its value field starts at 0.',
-                'Each thread calls increment once. We expect the final value to be 2.',
-                'value++ has three steps: read value, add 1, and write the result.',
-                'The steps from the two calls can overlap. Another thread can read the field before the first thread writes its new value.'
+                'An increment reads a value, adds 1, and writes the result.',
+                'The steps from different threads can overlap. One thread can read a field before another writes its new value.',
             ],
             examples: [{
+                title: 'A counter can lose an increment',
+                description: [
+                    'This Counter class has no lock around increment().',
+                    'Consider two threads calling increment() once on the same Counter starting at 0.',
+                ],
                 language: 'java',
                 code: `class Counter {
     private int value = 0;
@@ -31,30 +35,23 @@ const note: LearningNote = {
         value++;
     }
 }`,
+                explanation: [
+                    'Each value++ reads the current value, adds one, and writes the result.',
+                    'Both threads can read 0 before either writes. Both then calculate 1 and write 1.',
+                    'The second write replaces 1 with 1, so one increment is lost.',
+                    'If one increment finishes before the other reads, the final value is 2. The failure does not happen on every run.',
+                    'This class has no main method or print statement.',
+                ],
             }],
         },
         {
             id: 'lost-update',
-            title: 'Why the result is 1 instead of 2',
+            title: 'Lost updates and race conditions',
             bullets: [
-                'The table shows one possible order for the two increments.',
-                'Both threads calculated from the same old value, 0.',
-                'The second write replaced 1 with 1. One increment was lost.',
-                'This is a lost update. A race condition occurs when the result depends on the order of uncoordinated access to shared data.',
-                'A different order can produce 2. An incorrect counter does not fail on every run.',
-                'Java does not make value++ one indivisible operation. A thread can run between its steps.',
+                'A lost update occurs when one update overwrites another without preserving its change.',
+                'A race condition occurs when the result depends on the order of uncoordinated access to shared data.',
+                'Java does not make an increment one indivisible operation. A thread can run between its steps.',
             ],
-            table: {
-                columns: ['Step', 'Thread A', 'Thread B', 'Shared value'],
-                rows: [
-                    ['1', 'Reads 0', '—', '0'],
-                    ['2', '—', 'Reads 0', '0'],
-                    ['3', 'Calculates 0 + 1', '—', '0'],
-                    ['4', '—', 'Calculates 0 + 1', '0'],
-                    ['5', 'Writes 1', '—', '1'],
-                    ['6', '—', 'Writes 1', '1'],
-                ],
-            },
         },
         {
             id: 'object-locks',
@@ -72,15 +69,14 @@ const note: LearningNote = {
             id: 'synchronized',
             title: 'A synchronized instance method locks its object',
             bullets: [
-                'Add synchronized to increment to protect its whole body.',
-                'A synchronized instance method locks this: the object on which the method was called.',
-                'Both tasks below receive the same Counter object. Both increment methods therefore use the same lock.',
-                'Counter.value stores the total. increment adds 1, and get reads the total.',
-                'AddToCounter.counter stores the Counter passed to its constructor. final keeps that reference fixed. It does not prevent updates to the counter.',
-                'AddToCounter.run calls increment 1,000 times. main starts two tasks and joins both before printing.',
-                'The output is 2000. The common lock prevents overlapping increments from losing an update.',
+                'A synchronized instance method protects its whole body.',
+                'It locks this: the object on which the method was called.',
             ],
             examples: [{
+                title: 'Protect a shared counter with synchronized methods',
+                description: [
+                    'Give two tasks the same Counter and have each increment it 1,000 times.',
+                ],
                 language: 'java',
                 code: `class Counter {
     private int value = 0;
@@ -122,6 +118,13 @@ public class Main {
     }
 }`,
                 result: '2000',
+                explanation: [
+                    'Counter.value stores the total. increment adds 1, and get reads the total.',
+                    'Both tasks receive the same Counter object. Its synchronized methods therefore acquire the same lock.',
+                    'AddToCounter.counter stores the supplied reference. final keeps that reference fixed but permits updates to the counter.',
+                    'main starts both tasks and joins both before reading the total.',
+                    'The common lock keeps each complete increment together, so no update is lost.',
+                ],
             }],
         },
         {
@@ -130,10 +133,13 @@ public class Main {
             bullets: [
                 'A synchronized block protects the code between its braces.',
                 'The expression in parentheses chooses the object whose lock to acquire.',
-                'The Counter below creates one private lock object. Both increment and get use that same object.',
-                'Replace the Counter class in the preceding program with this class. The tasks and main stay the same.',
             ],
             examples: [{
+                title: 'Protect counter methods with a private lock',
+                description: [
+                    'This Counter variant uses a private lock object instead of locking the Counter itself.',
+                    'Use this class with two tasks that each call increment() 1,000 times. Join both tasks before reading get().',
+                ],
                 language: 'java',
                 code: `class Counter {
     private final Object lock = new Object();
@@ -151,7 +157,11 @@ public class Main {
         }
     }
 }`,
-                result: 'The preceding program still prints 2000. Both counter methods use lock instead of the Counter object itself.',
+                explanation: [
+                    'Both increment() and get() acquire the same private lock.',
+                    'increment() holds the lock for the complete read, add, and write operation.',
+                    'The class does not print anything on its own. The two tasks keep all 2,000 increments because both methods use the same lock.',
+                ],
             }],
         },
         {
@@ -160,9 +170,13 @@ public class Main {
             bullets: [
                 'A method may need to check a value before changing it.',
                 'If the check releases the lock before the update, another thread can change the value in between.',
-                'This method belongs in the first Counter class. It keeps the limit check and increment inside one synchronized method.',
             ],
             examples: [{
+                title: 'Keep a limit check and increment together',
+                description: [
+                    'Place this method inside a Counter class with an int value field initialized to 0.',
+                    'Consider two calls with limit 1 on the same counter starting at 0.',
+                ],
                 language: 'java',
                 code: `synchronized boolean incrementBelow(int limit) {
     if (value >= limit) {
@@ -171,7 +185,12 @@ public class Main {
     value++;
     return true;
 }`,
-                result: 'For a counter starting at 0, two calls with limit 1 return true and false. The final value is 1. Which thread succeeds can vary.',
+                explanation: [
+                    'The method holds the counter’s lock while checking value and incrementing it.',
+                    'The first call returns true and changes value to 1. The next call returns false without changing it.',
+                    'Which thread succeeds can vary, but the final value is 1.',
+                    'The method returns a boolean. It does not print anything.',
+                ],
             }],
         },
         {

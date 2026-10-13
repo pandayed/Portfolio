@@ -6,6 +6,7 @@ const note: LearningNote = {
     summary: 'Start one task, transform its result, attach actions, and understand which thread runs a callback.',
     scope: 'java',
     pointwise: true,
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     references: [{
         title: 'Java 17: CompletableFuture',
@@ -20,9 +21,9 @@ const note: LearningNote = {
                 'CompletableFuture<Integer> represents an Integer result that may still be unavailable.',
                 'Supplier<T> is an interface with a get() method that returns T. It receives no arguments.',
                 'CompletableFuture.supplyAsync(supplier, pool) asks the pool to run supplier.get(). It returns a CompletableFuture for the result.',
-                'join() waits for the result and returns it. The supplier runs on a worker while main waits.',
+                'join() waits for the result and returns it.',
                 'If the task fails, join() throws the unchecked CompletionException. get() instead reports failure through checked ExecutionException.',
-                'A stage is one step that produces a result or fails. Each CompletableFuture below represents one stage.',
+                'A stage is one step that produces a result or fails.',
             ],
             examples: [{
                 title: 'A Supplier returns 100 from a worker',
@@ -51,7 +52,15 @@ public class Main {
         }
     }
 }`,
-                result: '100. PriceSupplier.get() produces the result. price.join() waits for it.',
+                description: [
+                    'Run a PriceSupplier in a worker pool and read its result.',
+                ],
+                result: '100',
+                explanation: [
+                    'A worker calls PriceSupplier.get(), which returns 100.',
+                    'price.join() waits for that result. main prints 100.',
+                    'The finally block requests shutdown of the pool.',
+                ],
             }],
         },
         {
@@ -61,7 +70,7 @@ public class Main {
                 'A callback is a function given to an operation so it can call that function later.',
                 'thenApply(callback) calls the callback with the previous successful result.',
                 'The callback returns a new value. thenApply returns a new CompletableFuture holding that value.',
-                'The previous result stays unchanged. The example keeps price at 100 and produces a separate discounted result of 90.',
+                'The previous result stays unchanged.',
                 'In value -> expression, the lambda receives value and returns the expression. This is the lambda syntax from the Lambdas lesson.',
                 'completedFuture(value) creates a CompletableFuture that already contains that value. It does not start a task.',
             ],
@@ -81,7 +90,16 @@ public class Main {
         System.out.println(discounted.join());
     }
 }`,
+                description: [
+                    'Keep the original price and create a separate discounted result.',
+                ],
                 result: '100\n90',
+                explanation: [
+                    'completedFuture(100) supplies the original price without starting a task.',
+                    'thenApply receives 100 and returns 90 after subtracting 10.',
+                    'price still contains 100. discounted contains the new result 90.',
+                    'The two join() calls read and print those values.',
+                ],
             }],
         },
         {
@@ -93,7 +111,6 @@ public class Main {
                 'thenAccept and thenRun return CompletableFuture<Void>. Void indicates that there is no useful result value.',
                 'Calling join() on either returned future waits for the action and returns null.',
                 'runAsync(Runnable, pool) starts a new action in the pool without waiting for a previous result.',
-                'In the example, thenAccept receives the price. thenRun receives no argument and prints Done after the first print succeeds.',
             ],
             table: {
                 columns: ['Operation', 'Callback input', 'Callback result'],
@@ -119,7 +136,15 @@ public class Main {
         finished.join();
     }
 }`,
+                description: [
+                    'Print a price, then print a completion message after that action succeeds.',
+                ],
                 result: '100\nDone',
+                explanation: [
+                    'thenAccept receives the price 100 and prints it.',
+                    'thenRun receives no argument. It prints Done after the first action succeeds.',
+                    'finished.join() waits for both actions to finish.',
+                ],
             }],
         },
         {

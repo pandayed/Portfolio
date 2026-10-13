@@ -5,6 +5,7 @@ const note: LearningNote = {
     title: 'Paths',
     summary: 'Represent file-system locations, combine paths, and resolve symbolic links.',
     scope: 'java',
+    exampleLayout: 'grouped',
     updatedOn: '2026-10-13',
     pointwise: true,
     references: [{
@@ -23,6 +24,10 @@ const note: LearningNote = {
                 'Files is the Java utility class for reading, writing, copying, and deleting files at Path locations.',
             ],
             examples: [{
+                title: 'Build a relative path to a notes file',
+                description: [
+                    'Combine the directory notes with the file name java.txt without creating a file.',
+                ],
                 language: 'java',
                 code: `import java.nio.file.Path;
 
@@ -35,6 +40,11 @@ public class Main {
     }
 }`,
                 result: 'java.txt\nfalse',
+                explanation: [
+                    'resolve creates a path for java.txt inside notes.',
+                    'getFileName returns the final part, java.txt.',
+                    'The path does not start from a file-system root, so isAbsolute returns false.',
+                ],
             }],
         },
         {
