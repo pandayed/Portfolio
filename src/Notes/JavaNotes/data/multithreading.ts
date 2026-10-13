@@ -20,8 +20,6 @@ const note: LearningNote = {
                 "A process is a running program.",
                 "A thread runs a sequence of instructions inside a process.",
                 "Threads share objects. Each thread has its own call stack, which records its active method calls.",
-                "Concurrency means tasks make progress during overlapping periods.",
-                "Parallelism means tasks run at the same time on available processors. Starting two threads does not guarantee parallelism.",
             ],
         },
         {

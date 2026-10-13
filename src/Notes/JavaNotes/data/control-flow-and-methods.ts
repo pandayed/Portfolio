@@ -2,8 +2,8 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: 'control-flow-and-methods',
-    title: 'Control flow and methods',
-    summary: 'Choose branches, repeat work, define methods, and understand how Java passes arguments.',
+    title: 'Methods',
+    summary: 'Declare methods, return values, overload method names, use varargs, and pass arguments by value.',
     scope: 'java',
     updatedOn: '2026-10-13',
     pointwise: true,
@@ -42,109 +42,6 @@ const note: LearningNote = {
             }],
         },
         {
-            id: 'branches',
-            title: 'if chooses a branch',
-            bullets: [
-                'An if condition must produce a boolean. Its branch runs when the condition is true.',
-                'else if checks another condition only when the earlier conditions were false.',
-                'else runs when all earlier conditions were false.',
-                'Use braces to group the statements in each branch.',
-                'Java requires a boolean condition. if (score) does not compile. Write a comparison such as score > 0.',
-                'The conditional operator condition ? first : second chooses one expression. It chooses first when the condition is true and second when it is false.',
-            ],
-            examples: [{
-                language: 'java',
-                code: `public class Main {
-    public static void main(String[] args) {
-        int score = 72;
-        if (score >= 90) {
-            System.out.println("excellent");
-        } else if (score >= 60) {
-            System.out.println("pass");
-        } else {
-            System.out.println("retry");
-        }
-        String parity = score % 2 == 0 ? "even" : "odd";
-        System.out.println(parity);
-    }
-}`,
-                result: 'pass\neven',
-            }],
-        },
-        {
-            id: 'loops',
-            title: 'Loops repeat statements',
-            bullets: [
-                'A loop repeats its body. Each repetition is an iteration.',
-                'A for loop has an initial step, a condition, and an update. It checks the condition before each iteration and runs the update afterward.',
-                'A while loop checks its condition before each iteration.',
-                'A do-while loop checks its condition after each iteration. Its body runs at least once.',
-                'break exits the nearest loop. continue skips the rest of the current iteration.',
-                'In a for loop, continue still runs the update before Java checks the condition again.',
-                'return exits the current method, even from inside a loop.',
-            ],
-            examples: [{
-                language: 'java',
-                code: `public class Main {
-    public static void main(String[] args) {
-        int total = 0;
-        for (int value = 1; value <= 3; value++) {
-            total += value;
-        }
-        System.out.println(total);
-
-        int remaining = 2;
-        while (remaining > 0) {
-            System.out.println(remaining);
-            remaining--;
-        }
-
-        int attempts = 0;
-        do {
-            attempts++;
-        } while (attempts < 0);
-        System.out.println(attempts);
-    }
-}`,
-                result: '6\n2\n1\n1',
-            }],
-        },
-        {
-            id: 'switch-and-enums',
-            title: 'Enums and switch expressions',
-            bullets: [
-                'An enum defines a fixed set of named values.',
-                'A Status variable can hold a Status constant or null. It cannot hold an arbitrary string such as "waiting".',
-                'A switch expression chooses a case and produces a value.',
-                'Arrow cases do not fall through. Java does not continue into the next case after running the matched case.',
-                'A block case uses yield to give the switch expression its result.',
-                'Switch expressions are available from Java 14. This example works in Java 17 without preview features.',
-                'A switch expression must cover every possible choice. This example covers all enum constants. Other selector types may need default.',
-                'Traditional case labels use a colon. Execution can continue into the next case unless break, return, or another statement transfers control.',
-                'In Java 17, switching on a null enum or String throws NullPointerException. Check for null first when it is possible.',
-            ],
-            examples: [{
-                language: 'java',
-                code: `public class Main {
-    enum Status { NEW, PROCESSING, DONE }
-
-    public static void main(String[] args) {
-        Status status = Status.PROCESSING;
-        String message = switch (status) {
-            case NEW -> "queued";
-            case PROCESSING -> {
-                String action = "working";
-                yield action;
-            }
-            case DONE -> "complete";
-        };
-        System.out.println(message);
-    }
-}`,
-                result: 'working',
-            }],
-        },
-        {
             id: 'overloading',
             title: 'Overloads have different parameter lists',
             bullets: [
@@ -179,25 +76,20 @@ const note: LearningNote = {
                 'A varargs parameter accepts zero or more arguments. int... values receives them as an int array.',
                 'The varargs parameter must be last. A method can have only one varargs parameter.',
                 'Callers can pass separate values, an int array, or no values.',
-                'An enhanced for loop, such as for (int value : values), reads one array element in each iteration.',
             ],
             examples: [{
                 language: 'java',
                 code: String.raw`public class Main {
-    static int sum(int... values) {
-        int total = 0;
-        for (int value : values) {
-            total += value;
-        }
-        return total;
+    static int count(int... values) {
+        return values.length;
     }
 
     public static void main(String[] args) {
-        System.out.println(sum(2, 3, 4));
-        System.out.println(sum());
+        System.out.println(count(2, 3, 4));
+        System.out.println(count());
     }
 }`,
-                result: '9\n0',
+                result: '3\n0',
             }],
         },
         {
