@@ -1,830 +1,195 @@
 {
   "id": "20824eb1-ed54-80d4-9f56-d679dcc990ff",
-  "title": "Spring Boot DevTools & Actuator (Basic Usage)",
+  "title": "Spring Boot DevTools",
   "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed5480d49f56d679dcc990ff",
   "blocks": [
     {
-      "id": "20824eb1-ed54-80e2-84ea-f408a63245ee",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8080-a41b-ec8d930afae6",
-      "type": "sub_header",
-      "richText": [
-        [
-          "✅ 1. Core Concept"
-        ]
-      ]
-    },
-    {
       "id": "20824eb1-ed54-8096-bd25-deeedaf850b3",
-      "type": "sub_sub_header",
+      "type": "header",
       "richText": [
         [
-          "Spring Boot DevTools",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Use DevTools during development"
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-80dd-9a15-fbed65ae0993",
-      "type": "text",
-      "richText": [
-        [
-          "Spring Boot DevTools is a developer utility that enhances the development experience by enabling automatic restarts, live reload, and advanced debugging support during app development."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-803d-bd2d-d2155da2c88b",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Spring Boot Actuator",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-802e-8268-e369700bb215",
-      "type": "text",
-      "richText": [
-        [
-          "Spring Boot Actuator adds production-ready features to your application, such as health checks, metrics, environment info, and application monitoring, making it easier to manage and monitor your app in real-time."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80da-805d-d66d59caf99a",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-806c-a976-fc7896fc3927",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🎯 2. Key Interview Points"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80ed-8630-f3f6969e6ff8",
+      "id": "20824eb1-ed54-8096-bd25-deeedaf850b3-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "DevTools",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Spring Boot DevTools adds development features such as automatic restart and browser LiveReload."
         ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-8018-9623-c2f999e45f68",
-          "type": "bulleted_list",
-          "richText": [
-            [
-              "Enables "
-            ],
-            [
-              "automatic application restarts",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              " when code changes are detected."
-            ]
-          ]
-        },
-        {
-          "id": "20824eb1-ed54-80bf-a8af-c502f1667eaa",
-          "type": "bulleted_list",
-          "richText": [
-            [
-              "Supports "
-            ],
-            [
-              "LiveReload",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              " to refresh the browser automatically after HTML or template changes."
-            ]
-          ]
-        },
-        {
-          "id": "20824eb1-ed54-8039-a27b-e47e8336a4d6",
-          "type": "bulleted_list",
-          "richText": [
-            [
-              "Automatically disables in "
-            ],
-            [
-              "production",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              " to avoid performance or security issues."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20824eb1-ed54-807f-b5ac-dfdc76665538",
+      "id": "20824eb1-ed54-8096-bd25-deeedaf850b3-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Actuator",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Add spring-boot-devtools to the development build. It is a module, not a starter."
         ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-8096-8e8d-f820bd1c3170",
-          "type": "bulleted_list",
-          "richText": [
-            [
-              "Exposes REST endpoints like "
-            ],
-            [
-              "/actuator/health",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " and "
-            ],
-            [
-              "/actuator/metrics",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " for "
-            ],
-            [
-              "monitoring and diagnostics",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              "."
-            ]
-          ]
-        },
-        {
-          "id": "20824eb1-ed54-8063-8833-cfb95a318fef",
-          "type": "bulleted_list",
-          "richText": [
-            [
-              "Can be customized to "
-            ],
-            [
-              "expose only selected endpoints",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              " for security."
-            ]
-          ]
-        },
-        {
-          "id": "20824eb1-ed54-807c-ae45-c1d0afb2c3fc",
-          "type": "bulleted_list",
-          "richText": [
-            [
-              "Works well with monitoring tools like "
-            ],
-            [
-              "Prometheus",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              ", "
-            ],
-            [
-              "Grafana",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              ", or "
-            ],
-            [
-              "Spring Admin",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              "."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20824eb1-ed54-806d-8615-f03d54d63bd7",
-      "type": "divider"
+      "id": "20824eb1-ed54-8096-bd25-deeedaf850b3-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep DevTools out of production deployments. Boot’s repackaging tools exclude it by default."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8096-bd25-deeedaf850b3-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Fully packaged applications normally disable DevTools. Do not force it on in production."
+        ]
+      ]
     },
     {
       "id": "20824eb1-ed54-802e-ad2c-d9c9719ea9cd",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "💻 3. Code Example"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a5-9069-cc0a7fef3f9a",
-      "type": "text",
-      "richText": [
-        [
-          "Step 1: Add Dependencies in ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "pom.xml",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " (for Maven)",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Add the dependency"
         ]
       ]
     },
     {
       "id": "20824eb1-ed54-80e3-9e01-e9bda203cc22",
-      "type": "code",
-      "richText": [
-        [
-          "<dependencies>\n    <!-- Spring Boot Starter Web -->\n    <dependency>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-web</artifactId>\n    </dependency>\n\n    <!-- DevTools for Development -->\n    <dependency>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-devtools</artifactId>\n        <scope>runtime</scope>\n        <optional>true</optional>\n    </dependency>\n\n    <!-- Actuator for Monitoring -->\n    <dependency>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-actuator</artifactId>\n    </dependency>\n</dependencies>\n"
-        ]
-      ],
-      "language": "XML"
-    },
-    {
-      "id": "20824eb1-ed54-8008-987c-fd7a36112f0d",
-      "type": "text",
-      "richText": [
-        [
-          "Step 2: Add Config in ",
-          [
-            [
-              "b"
-            ]
-          ]
+      "type": "example",
+      "example": {
+        "title": "Add DevTools to a Maven project",
+        "description": [
+          "Add this dependency inside the dependencies element of pom.xml.",
+          "The project uses Spring Boot dependency management."
         ],
+        "code": "<dependency>\n    <groupId>org.springframework.boot</groupId>\n    <artifactId>spring-boot-devtools</artifactId>\n    <scope>runtime</scope>\n    <optional>true</optional>\n</dependency>",
+        "language": "text",
+        "explanation": [
+          "runtime makes DevTools available while running the development application.",
+          "optional prevents projects that depend on this project from receiving DevTools transitively.",
+          "For Gradle, use the developmentOnly dependency configuration."
+        ]
+      }
+    },
+    {
+      "id": "devtools-restart",
+      "type": "header",
+      "richText": [
         [
-          "application.properties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
+          "Restart after compiled code changes"
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-802e-be30-f67983df1a83",
-      "type": "code",
-      "richText": [
-        [
-          "# Enable selected Actuator endpoints\nmanagement.endpoints.web.exposure.include=health,info\n\n# Optional: Enable live reload if using browser plugin\nspring.devtools.livereload.enabled=true\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20824eb1-ed54-80a5-bf2a-c4dad796851d",
-      "type": "text",
-      "richText": [
-        [
-          "Step 3: Create a Simple REST Controller",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80e8-8e48-f207edcd5d1c",
-      "type": "code",
-      "richText": [
-        [
-          "@RestController\npublic class HelloController {\n    @GetMapping(\"/hello\")\n    public String hello() {\n        return \"Hello, Spring Boot!\";\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20824eb1-ed54-802d-963f-f04c72d46964",
-      "type": "text",
-      "richText": [
-        [
-          "Step 4: Access Actuator Endpoints",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-801f-93b7-d4e9b9d02037",
+      "id": "devtools-restart-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "http://localhost:8080/actuator/health",
-          [
-            [
-              "a",
-              "http://localhost:8080/actuator/health"
-            ]
-          ]
-        ],
-        [
-          " → Shows health status"
+          "DevTools watches directories on the application classpath. The classpath contains the compiled classes and resources used by the application."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8052-9965-cce5a911abd5",
+      "id": "devtools-restart-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "http://localhost:8080/actuator/info",
-          [
-            [
-              "a",
-              "http://localhost:8080/actuator/info"
-            ]
-          ]
-        ],
-        [
-          " → Application info (you can configure this)"
+          "Editing a Java source file alone does not trigger a restart. Compile it so the classpath changes."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-80d0-93d9-f8fac8fbcda8",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8072-8ac9-d83e695fe177",
-      "type": "sub_header",
-      "richText": [
-        [
-          "❓ 4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-805b-851e-e692d13a9fbe",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is Spring Boot DevTools and how does it improve development workflow?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-805b-826e-ddc9263fedeb",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you monitor a Spring Boot application in production?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80ca-804d-ffa2109cecd8",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What are some key Actuator endpoints and how are they used?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8039-8481-e816d73b49fd",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you secure Actuator endpoints in a production environment?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-807f-b184-c426a3b4bf12",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the difference between DevTools and Actuator in terms of usage and scope?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-802b-9b79-c3b5f4bb2d5a",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8099-8139-dba14fb86ef0",
-      "type": "sub_header",
-      "richText": [
-        [
-          "✅ 5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8011-aac4-ff111e7ba251",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-800d-84e2-e88d3e7420a2",
+      "id": "devtools-restart-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use "
-        ],
-        [
-          "DevTools only in development",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", not in production."
+          "Restart recreates the application context using a restart classloader. It does not edit an already-running method in place."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8095-8009-c8f6be40a2e9",
+      "id": "devtools-restart-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Secure actuator endpoints",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " with Spring Security or access restrictions."
+          "Static files and templates normally trigger LiveReload without an application restart."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-801f-8e1e-c911d783b735",
+      "id": "devtools-restart-b4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Customize Actuator endpoints to "
-        ],
-        [
-          "expose only what's needed",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
+          "DevTools also changes some development defaults, such as disabling template caching."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8063-b460-fddcf8fe1bd0",
-      "type": "sub_sub_header",
+      "id": "devtools-livereload",
+      "type": "header",
       "richText": [
         [
-          "❌ Common Pitfalls"
+          "Refresh the browser with LiveReload"
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8068-9af2-d86b70998070",
+      "id": "devtools-livereload-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Accidentally deploying with DevTools enabled can cause "
-        ],
-        [
-          "performance/security issues",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
+          "LiveReload asks a connected browser to refresh after a resource changes."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8030-af32-e4035088be95",
+      "id": "devtools-livereload-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Leaving all actuator endpoints open may expose "
-        ],
-        [
-          "sensitive internal info",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
+          "Install a compatible browser extension and connect it to the DevTools LiveReload server."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-80c5-a7c2-c07409ad6c67",
+      "id": "devtools-livereload-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Forgetting to include necessary configs (like "
-        ],
-        [
-          "management.endpoints.web.exposure.include",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") results in "
-        ],
-        [
-          "empty or inaccessible Actuator output",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
+          "Browser refresh and application restart are separate actions."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-808f-a2a4-d88eb45881be",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8029-b1b8-f2dc7a8f5c16",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔗 6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8095-89ef-da738c476f83",
+      "id": "devtools-livereload-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Security",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Often used with Actuator to "
-        ],
-        [
-          "protect sensitive endpoints",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
+          "Set spring.devtools.livereload.enabled=false if you do not want the LiveReload server."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-80c9-a18e-d00c1bc4e18d",
+      "id": "devtools-livereload-b4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot Auto-Configuration",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": DevTools and Actuator are "
-        ],
-        [
-          "auto-configured",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", meaning Spring Boot sets them up with defaults unless you override them."
+          "Set spring.devtools.restart.enabled=false to stop restart watching. If classloading causes problems, disable restart before startup while diagnosing them."
         ]
       ]
-    },
-    {
-      "id": "20824eb1-ed54-8013-a08c-cb36b3708347",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Boot Starter Projects",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": DevTools and Actuator are added via starter dependencies, a concept that simplifies dependency management."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-809f-8811-e4f71586a630",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-80fa-89da-e9fcf1096739",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🗣️ 7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80bb-b38e-ec7a257f27bd",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Q: "
-        ],
-        [
-          "What are DevTools and Actuator in Spring Boot?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a6-b6d0-df303279f8ac",
-      "type": "quote",
-      "richText": [
-        [
-          "DevTools is a development-only tool that helps speed up your workflow by enabling automatic app restarts and live browser reloads when code or templates change."
-        ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-80a0-bc07-d07658dc0334",
-          "type": "text",
-          "richText": [
-            [
-              "Actuator",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              " is used in both development and production to expose REST endpoints for monitoring the app's health, metrics, and runtime details. Together, they make development smoother and production easier to monitor."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80e4-a767-deb4fd94b413",
-      "type": "divider"
     }
-  ]
+  ],
+  "sources": [
+    {
+      "title": "Spring Boot DevTools",
+      "url": "https://docs.spring.io/spring-boot/reference/using/devtools.html"
+    }
+  ],
+  "summary": "Restart a development application after code changes and refresh the browser with LiveReload.",
+  "updatedOn": "2026-10-14"
 }

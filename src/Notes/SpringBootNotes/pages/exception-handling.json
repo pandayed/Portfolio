@@ -1,705 +1,183 @@
 {
   "id": "20924eb1-ed54-8013-a67f-fbcfd74cb27f",
-  "title": "Exception Handling (using @ControllerAdvice and @ExceptionHandler)",
+  "title": "Controller exception handling",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed548013a67ffbcfd74cb27f",
   "blocks": [
     {
-      "id": "20924eb1-ed54-80e9-b1c9-e038d5e2b61c",
-      "type": "divider"
-    },
-    {
       "id": "20924eb1-ed54-80a9-8cec-eab2a1503ab1",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "🧠 1. Core Concept"
+          "Handle an exception from a controller"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80d2-8d80-eb18c5065cff",
-      "type": "text",
+      "id": "exception-intro-b0",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Exception handling in Spring Boot",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " allows developers to gracefully handle errors and unexpected situations during runtime. Instead of showing raw error messages or stack traces to users, we can return clean, customized responses—like proper error codes and messages. Tools like "
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@ExceptionHandler",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " make this process centralized and reusable across the application."
+          "A controller or a service it calls can throw an exception while processing a request."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80af-b0b3-e8d1d7928af7",
-      "type": "divider"
+      "id": "exception-intro-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ExceptionHandler marks a method that handles a matching exception and returns the HTTP response."
+        ]
+      ]
+    },
+    {
+      "id": "exception-intro-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Place a handler in a controller for errors handled only by that controller."
+        ]
+      ]
+    },
+    {
+      "id": "exception-intro-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A handler can list several exception classes when they need the same response."
+        ]
+      ]
     },
     {
       "id": "20924eb1-ed54-8099-8a79-f514721b827e",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "🎯 2. Key Interview Points"
+          "Share handlers across controllers"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-808b-a2e2-def452a117ca",
+      "id": "exception-advice-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "🔹 "
-        ],
-        [
-          "What is ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@ExceptionHandler",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and how does it work?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "@ControllerAdvice makes its handlers available to controllers across the application."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-806b-8cf5-ceebc7c1ec32",
-          "type": "text",
-          "richText": [
-            [
-              "It maps specific exceptions to custom handler methods in your controller classes."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20924eb1-ed54-80d3-b52c-d6b98aa0c2d8",
+      "id": "exception-advice-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "🔹 "
-        ],
-        [
-          "What is ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Advice can also be restricted to selected controller types or packages."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-809e-a7d9-e7db1b3c6428",
-          "type": "text",
-          "richText": [
-            [
-              "It’s a global error-handling component that can catch exceptions from "
-            ],
-            [
-              "any",
-              [
-                [
-                  "i"
-                ]
-              ]
-            ],
-            [
-              " controller class."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20924eb1-ed54-8098-b749-f4f98cb4e713",
+      "id": "exception-advice-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "🔹 "
-        ],
-        [
-          "How do you return custom error responses (e.g., JSON) for exceptions?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "@RestControllerAdvice combines @ControllerAdvice with @ResponseBody for response data."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-80f9-a098-ee5f46af0217",
-          "type": "text",
-          "richText": [
-            [
-              "By using "
-            ],
-            [
-              "@ResponseBody",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " or returning a "
-            ],
-            [
-              "ResponseEntity",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " with status and body."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20924eb1-ed54-8053-be56-d8864734e335",
+      "id": "exception-advice-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "🔹 "
-        ],
-        [
-          "Why centralize exception handling?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-80f9-bbd1-d81d3256a98e",
-          "type": "text",
-          "richText": [
-            [
-              "Promotes cleaner code, consistency, and easier maintenance across multiple controllers."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809b-bb38-d603611fa1d6",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8007-98d6-ffa4400177ed",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🧪 3. Code Example"
+          "A ResponseEntity return value sets the status, headers and body explicitly."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80a5-9de9-d2bd3952dddd",
-      "type": "text",
+      "id": "exception-advice-b4",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Here’s a complete example with a simulated \"User Not Found\" scenario."
+          "Controller advice handles errors in Spring MVC request processing. It does not handle every error in the application, such as an exception in an independent background task."
         ]
       ]
     },
     {
       "id": "20924eb1-ed54-8024-801d-db90e6d389b9",
-      "type": "code",
-      "richText": [
-        [
-          "// Custom Exception\npublic class UserNotFoundException extends RuntimeException {\n    public UserNotFoundException(String message) {\n        super(message);\n    }\n}\n\n// REST Controller\n@RestController\n@RequestMapping(\"/users\")\npublic class UserController {\n\n    @GetMapping(\"/{id}\")\n    public String getUser(@PathVariable int id) {\n        if (id != 1) {  // Simulating user not found\n            throw new UserNotFoundException(\"User with ID \" + id + \" not found\");\n        }\n        return \"User Found!\";\n    }\n}\n\n// Global Exception Handler\n@ControllerAdvice\npublic class GlobalExceptionHandler {\n\n    @ExceptionHandler(UserNotFoundException.class)\n    public ResponseEntity<String> handleUserNotFound(UserNotFoundException ex) {\n        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);\n    }\n\n    // You can handle more exceptions like this\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-8062-b9be-f8c4f9b7a74f",
-      "type": "text",
-      "richText": [
-        [
-          "🔍 "
+      "type": "example",
+      "example": {
+        "title": "Return 404 when a user cannot be found",
+        "description": [
+          "Place these public types in separate files in a scanned package.",
+          "The controller simulates one existing user with ID 1. Send GET /users/2 with Accept: application/json."
         ],
-        [
-          "Real-World Scenario",
-          [
-            [
-              "b"
-            ]
-          ]
+        "code": "// UserNotFoundException.java\npublic class UserNotFoundException extends RuntimeException {\n    public UserNotFoundException(long id) {\n        super(\"User with ID \" + id + \" not found\");\n    }\n}\n\n// UserController.java\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\n@RequestMapping(\"/users\")\npublic class UserController {\n    @GetMapping(\"/{id}\")\n    public String find(@PathVariable(\"id\") long id) {\n        if (id != 1) {\n            throw new UserNotFoundException(id);\n        }\n        return \"User Found!\";\n    }\n}\n\n// ApiExceptionHandler.java\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.*;\n\n@RestControllerAdvice\npublic class ApiExceptionHandler {\n    public record ApiError(String message) {}\n\n    @ExceptionHandler(UserNotFoundException.class)\n    public ResponseEntity<ApiError> notFound(UserNotFoundException exception) {\n        return ResponseEntity.status(404)\n            .body(new ApiError(exception.getMessage()));\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "ID 2 causes find() to throw UserNotFoundException.",
+          "Spring selects the matching advice method.",
+          "ResponseEntity sets 404. ApiError becomes the JSON response body.",
+          "The error message is written by this exception class. Do not expose arbitrary internal exception messages to clients."
         ],
-        [
-          ": Instead of crashing the app or sending raw error logs to users, this setup returns:"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80e9-ad16-fbb2796e36f1",
-      "type": "code",
-      "richText": [
-        [
-          "Status: 404 Not Found\nBody: \"User with ID 2 not found\"\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20924eb1-ed54-80f8-b44d-c768fcf74e9a",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80b3-89d8-eceec239065c",
-      "type": "sub_header",
-      "richText": [
-        [
-          "❓ 4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80aa-a999-d28fb5f96201",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the difference between "
-        ],
-        [
-          "@ExceptionHandler",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80fa-95a4-cecc753b554f",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you return a custom error response in JSON format?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80e1-a4d7-f04e046b38bd",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "Can you handle multiple exceptions in one method?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b8-8e73-ef8b761b6827",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the benefit of global exception handling over per-method try-catch?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a7-91e2-cdc632fd1bed",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you handle unexpected exceptions like "
-        ],
-        [
-          "NullPointerException",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-801e-8205-c5fdf188048d",
-      "type": "divider"
+        "result": "HTTP status: 404 Not Found\nBody: {\"message\":\"User with ID 2 not found\"}"
+      }
     },
     {
       "id": "20924eb1-ed54-804a-9221-f8e39033ac05",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "✅ 5. Best Practices & Pitfalls"
+          "Choose the error response"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-802d-b495-e057fecd427f",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices:"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c7-913d-cd4dc1b2a7a8",
+      "id": "exception-contract-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use "
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for "
-        ],
-        [
-          "centralized",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " exception handling."
+          "Use a status that matches the failure. A missing resource can produce 404; an unexpected server failure normally produces 500."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80ba-9412-c936d9b328ca",
+      "id": "exception-contract-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Return structured error responses (e.g., JSON with fields like "
-        ],
-        [
-          "message",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "timestamp",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "status",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ")."
+          "Use a consistent error body so clients can read it."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80fb-b059-d9072b2c4a1a",
+      "id": "exception-contract-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Log exceptions properly for debugging and monitoring."
+          "Keep stack traces and internal details in server logs. Send a safe message to the client."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80bb-8210-e1bf424d0e5e",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "⚠️ Pitfalls:"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ac-b1bf-ffc83207f7a5",
+      "id": "exception-contract-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Don’t return raw stack traces to clients — it's a "
-        ],
-        [
-          "security risk",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
+          "Authentication and access failures that occur in Spring Security before controller processing need Spring Security error handlers."
         ]
       ]
+    }
+  ],
+  "summary": "Map controller exceptions to an HTTP status and a response body.",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Spring MVC: exception handlers",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-exceptionhandler.html"
     },
     {
-      "id": "20924eb1-ed54-80f3-b6c1-f11716366184",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Avoid duplicating exception handling logic in every controller."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-803f-ad37-f25e24ce9348",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forgetting to annotate with "
-        ],
-        [
-          "@ResponseBody",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or returning plain Strings (clients may get HTML error pages instead of JSON)."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80cd-aca9-f10289ce9cb8",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-800d-ad5d-fadce4e2067f",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔗 6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8036-82ad-f209052ec076",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring MVC Controllers",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Exception handling is tightly coupled with request handling."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-801b-92d8-de4b135f07c0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "ResponseEntity",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Often used to return custom HTTP status codes and bodies."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8063-9c8d-d81f611a8a11",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "REST APIs",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Helps make APIs robust and client-friendly."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8091-8b18-de094296b1e3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Logging (SLF4J, Logback)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Good exception handling is often paired with logging."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80dd-a9b6-ef6ffa7c6c4d",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8075-bf50-e5b5417e519c",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🗣️ 7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8058-9b32-c2952cacc7cb",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "💬 What is "
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and how is it used?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8014-8000-ee20be419cfa",
-      "type": "text",
-      "richText": [
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " is a Spring annotation that allows you to write global exception handlers. It catches exceptions thrown from any controller and lets you return custom responses like specific status codes or JSON error messages. It helps reduce code duplication and keeps controllers clean."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8027-a5c0-f6232afb91b3",
-      "type": "divider"
+      "title": "Spring MVC: controller advice",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-advice.html"
     }
   ]
 }

@@ -1,0 +1,203 @@
+{
+  "id": "spring-boot-jpa-relationships",
+  "sourceUrl": "https://docs.spring.io/spring-data/",
+  "title": "JPA Relationships",
+  "summary": "Map related entities and keep relationship ownership separate from cascading.",
+  "updatedOn": "2026-10-14",
+  "blocks": [
+    {
+      "id": "jpa-relationship-types",
+      "type": "header",
+      "richText": [
+        [
+          "Related entities"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-types-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A relationship maps a reference from one entity to another entity."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-types-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ManyToOne means many source entities can refer to one target entity. @OneToMany represents the reverse collection."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-types-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@OneToOne represents a single related entity on each side. @ManyToMany represents collections on both sides."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-types-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A foreign key is a database column that refers to a row in another table."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-owner",
+      "type": "header",
+      "richText": [
+        [
+          "The owning side"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-owner-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The owning side controls the stored relationship. For a bidirectional one-to-many mapping, the many-to-one side owns the foreign key."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-owner-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@JoinColumn chooses the foreign-key column."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-owner-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "mappedBy names the Java property on the owning side. It does not name a database column."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationship-owner-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "In a bidirectional relationship, update both Java sides so the in-memory objects agree. Changing only the inverse collection does not set the owning foreign-key reference."
+        ]
+      ]
+    },
+    {
+      "id": "user-post-relationship",
+      "type": "example",
+      "example": {
+        "title": "Map one user to many posts",
+        "description": [
+          "Use these as AppUser.java and Post.java under the application package.",
+          "The relationship is bidirectional: AppUser holds posts and Post holds its author.",
+          "Create the tables through a migration, or use ddl-auto=create only for a disposable learning database."
+        ],
+        "code": "// AppUser.java\nimport jakarta.persistence.*;\nimport java.util.ArrayList;\nimport java.util.List;\n\n@Entity\n@Table(name = \"app_users\")\npublic class AppUser {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String name;\n\n    @OneToMany(mappedBy = \"author\")\n    private List<Post> posts = new ArrayList<>();\n\n    protected AppUser() {}\n    public AppUser(String name) { this.name = name; }\n\n    public void addPost(Post post) {\n        posts.add(post);\n        post.setAuthor(this);\n    }\n}\n\n// Post.java\nimport jakarta.persistence.*;\n\n@Entity\n@Table(name = \"posts\")\npublic class Post {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String title;\n\n    @ManyToOne(fetch = FetchType.LAZY)\n    @JoinColumn(name = \"author_id\", nullable = false)\n    private AppUser author;\n\n    protected Post() {}\n    public Post(String title) { this.title = title; }\n    public void setAuthor(AppUser author) { this.author = author; }\n}",
+        "language": "java",
+        "explanation": [
+          "Post.author owns the relationship. The posts table stores author_id.",
+          "AppUser.posts uses mappedBy=\"author\" to refer to the same relationship.",
+          "addPost updates both objects. Save the user and post explicitly because this mapping has no cascade.",
+          "LAZY defers loading the author when supported by the provider. Fetching is covered separately."
+        ]
+      }
+    },
+    {
+      "id": "jpa-cascade",
+      "type": "header",
+      "richText": [
+        [
+          "Cascade and deletion"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-cascade-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A cascade applies a persistence operation on one entity to its related entities."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-cascade-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "CascadeType.PERSIST propagates persist. MERGE propagates merge. REMOVE propagates remove."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-cascade-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "CascadeType.ALL includes all cascade operations, including removal. Use it only when every propagated operation fits the relationship."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-cascade-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "orphanRemoval=true removes a child when it is removed from an owned one-to-many collection or one-to-one relationship."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-cascade-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Cascading, orphan removal and database foreign-key constraints are different mechanisms."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-cascade-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Avoid including both sides of a bidirectional relationship in toString or generated JSON output. Following both sides can cause repeated traversal."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-loading-next",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Read related entities with a fetch plan",
+          [
+            [
+              "a",
+              "/notes/spring-boot/jpa-fetching"
+            ]
+          ]
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Jakarta Persistence 3.1 specification",
+      "url": "https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.html"
+    }
+  ]
+}

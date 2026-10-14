@@ -1,890 +1,139 @@
 {
   "id": "20824eb1-ed54-8088-bf64-ff0ab534059e",
-  "title": "Spring Boot Application Properties (application.properties / application.yml)",
+  "title": "Application properties and overrides",
   "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed548088bf64ff0ab534059e",
   "blocks": [
-    {
-      "id": "20824eb1-ed54-80f9-b78d-c8d9d26cd544",
-      "type": "divider"
-    },
     {
       "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb",
       "type": "header",
       "richText": [
         [
-          "Spring Boot Application Properties (application.properties / application.yml)"
+          "Configuration files"
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-80dc-a99d-e40d3d9fb6e7",
-      "type": "divider"
+      "id": "application-properties-0-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Configuration values control application settings without changing Java source."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-0-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot loads application.properties or application.yml from standard locations, including the classpath root and external configuration locations."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-0-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "In the project, src/main/resources is the usual location for a packaged configuration file."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-0-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Properties files use key=value lines. YAML uses indentation for nested values."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-0-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "At the same location, application.properties takes precedence over YAML if both exist."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-0-example-0",
+      "type": "example",
+      "example": {
+        "title": "Set the server port",
+        "description": [
+          "Use one of these equivalent configurations in src/main/resources."
+        ],
+        "code": "# application.properties\nserver.port=8081\n\n# Equivalent application.yml\nserver:\n  port: 8081",
+        "language": "text",
+        "explanation": [
+          "Choose one file format for this setting.",
+          "A servlet web application reads server.port during startup and listens on port 8081 unless another source overrides it."
+        ]
+      }
     },
     {
       "id": "20824eb1-ed54-8091-94f9-e3ffc5b794e7",
-      "type": "sub_header",
-      "richText": [
-        [
-          "1. Core Concept"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-800a-bf71-f8646c4e7ac5",
-      "type": "text",
-      "richText": [
-        [
-          "Spring Boot "
-        ],
-        [
-          "application properties",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " are configuration files where you define key settings for your application in a centralized place. These settings control how your app behaves, such as database connections, server ports, logging levels, and more. They exist to separate configuration from code, making your app flexible and easy to customize without recompiling."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80d0-a4db-cc6653d22725",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8075-b3ca-dcc8017034b4",
-      "type": "sub_header",
-      "richText": [
-        [
-          "2. Key Interview Points"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80b8-8776-d981ca154554",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "What are ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "application.yml",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-80c4-81e9-c49b9bb0ee97",
-          "type": "text",
-          "richText": [
-            [
-              "They are files where Spring Boot reads configuration key-value pairs (properties). "
-            ],
-            [
-              ".properties",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " uses plain text key=value format; "
-            ],
-            [
-              ".yml",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " uses YAML, a structured, indentation-based format."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80cb-9c37-c538a20fa1c6",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Why use these files instead of hardcoding values?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-804a-9472-d748794f8b3c",
-          "type": "text",
-          "richText": [
-            [
-              "To externalize configuration, allowing different settings for different environments (development, testing, production) without changing the code."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80aa-ad28-cfe9c9c97b99",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "How does Spring Boot load these properties?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-800b-a467-f3a2ca2e6dde",
-          "type": "text",
-          "richText": [
-            [
-              "Spring Boot auto-loads these files from the classpath root, automatically making properties available to the entire application."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-801d-81ed-f8e8bfc2bc05",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "How do you access these properties in code?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-8098-99a6-f6ebcf991e20",
-          "type": "text",
-          "richText": [
-            [
-              "Using "
-            ],
-            [
-              "@Value",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " annotation or "
-            ],
-            [
-              "@ConfigurationProperties",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " class binding to inject property values into Spring beans."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a2-a0c8-e97042700e38",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-807e-a927-e021fdbab0e5",
-      "type": "sub_header",
-      "richText": [
-        [
-          "3. Code Example"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8094-b0b5-c5ff73c45ac3",
-      "type": "text",
-      "richText": [
-        [
-          "application.properties:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80e1-92cd-ef6c8275dfa4",
-      "type": "code",
-      "richText": [
-        [
-          "server.port=8081\nspring.datasource.url=jdbc:mysql://localhost:3306/mydb\nspring.datasource.username=root\nspring.datasource.password=secret\nlogging.level.org.springframework=DEBUG\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20824eb1-ed54-80eb-bcd8-eae1d84506ef",
-      "type": "text",
-      "richText": [
-        [
-          "Java class using properties:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-807b-8f78-f1d4627d9eac",
-      "type": "code",
-      "richText": [
-        [
-          "import org.springframework.beans.factory.annotation.Value;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class DatabaseConfig {\n\n    @Value(\"${spring.datasource.url}\")\n    private String dbUrl;\n\n    @Value(\"${spring.datasource.username}\")\n    private String dbUser;\n\n    @Value(\"${spring.datasource.password}\")\n    private String dbPass;\n\n    public void printConfig() {\n        System.out.println(\"DB URL: \" + dbUrl);\n        System.out.println(\"DB User: \" + dbUser);\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20824eb1-ed54-80be-8e2a-db70833daeae",
-      "type": "text",
-      "richText": [
-        [
-          "When you run your Spring Boot app, it will start on port 8081 and use the database info defined in your "
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80f1-a26a-eb3352781177",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-801d-8120-d9d31a3a259b",
-      "type": "sub_header",
-      "richText": [
-        [
-          "4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-805b-886d-d4163488ef53",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the difference between ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "application.yml",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-808c-b975-d73a0f7e731f",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How can you override properties for different environments?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80d7-8a8b-dacdf02df377",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you inject property values into Spring beans?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8041-83ea-d29d947b313d",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the priority order when loading properties in Spring Boot?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80ef-bee0-eb69d4dbfd48",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How can you keep sensitive data, like passwords, secure in properties files?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80de-b004-c86bb8bbcda1",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8018-929e-f801e26e67b2",
-      "type": "sub_header",
-      "richText": [
-        [
-          "5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a0-ad23-cc168d10a97a",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Best Practices:"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80ae-a5ec-f9de939e3bab",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use "
-        ],
-        [
-          "profile-specific properties",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (e.g., "
-        ],
-        [
-          "application-dev.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") to separate environment configs."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8094-aa2b-c11d4710c56c",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Prefer "
-        ],
-        [
-          "application.yml",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for complex configurations because it supports nested structures."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-807e-ae6f-d3656cfb931d",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for binding groups of related properties into POJOs (plain old Java objects) for cleaner code."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8010-bec6-d8ab3f290314",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Pitfalls to Avoid:"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a8-8c1c-de0644c29406",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Hardcoding sensitive info",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " in plain text files (use environment variables or Spring Cloud Config for secrets)."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8097-ab7f-f76ca120a885",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Confusing property names or inconsistent naming conventions."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80bd-af01-df0085da4b13",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forgetting that properties are loaded in a specific order — overriding might not work as expected if you don’t understand this."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-803d-b9ba-fc9d20641531",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-804f-b853-c44f27c6d424",
-      "type": "sub_header",
-      "richText": [
-        [
-          "6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8054-bbcb-fc9d93646fdb",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Profiles:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Properties files work hand-in-hand with profiles to switch configurations easily."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8091-8986-f8b5d22d4b04",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Beans and Dependency Injection:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Property values are injected into beans to configure them dynamically."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8085-9233-fe8f4745859d",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Auto-configuration:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Spring Boot’s auto-configured beans often depend on properties to customize behavior (e.g., data source settings)."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-806c-b2fd-f2d1633fbfb4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Externalized Configuration:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " This is a broader concept where properties files represent one way to configure your app outside the code."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8067-9dd2-dfa61b2192e3",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8012-843a-c95015cef441",
-      "type": "sub_header",
-      "richText": [
-        [
-          "7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-807a-a55c-c72f13c84a4c",
-      "type": "text",
-      "richText": [
-        [
-          "Q: What are application properties in Spring Boot?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8015-af16-d960a1f75903",
-      "type": "text",
-      "richText": [
-        [
-          "A: Application properties are configuration files like "
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or "
-        ],
-        [
-          "application.yml",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " where you define key settings for your Spring Boot app, such as server ports, database URLs, or logging levels. These properties allow you to externalize configuration so you can change app behavior without modifying code."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a5-9de5-cc2947038e66",
-      "type": "text",
-      "richText": [
-        [
-          "Q: How do you access properties in your Spring Boot code?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80af-b442-d8094ff9f21d",
-      "type": "text",
-      "richText": [
-        [
-          "A: You can inject properties using the "
-        ],
-        [
-          "@Value(\"${property.name}\")",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " annotation or bind a group of properties to a class with "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ". This lets you use externalized values directly in your beans."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8012-bbc8-dfa42c7b4b92",
-      "type": "text",
-      "richText": [
-        [
-          "Q: How can you manage different configurations for dev and prod?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-808a-9838-e93307e88d06",
-      "type": "text",
-      "richText": [
-        [
-          "A: By using Spring profiles and creating profile-specific files like "
-        ],
-        [
-          "application-dev.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "application-prod.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ". You activate profiles at runtime, so the app loads the right configuration automatically."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80c0-90b4-fc82fa15c77d",
-      "type": "divider"
-    },
-    {
-      "id": "ed-property-overrides",
       "type": "header",
       "richText": [
         [
-          "Configuration overrides and command-line arguments"
+          "Runtime overrides"
         ]
       ]
     },
     {
-      "id": "ed-property-overrides-b0",
+      "id": "application-properties-1-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep a shared default in application.properties or application.yml. For an ordinary runtime property, an environment variable can override that file; a command-line argument can override the environment variable."
+          "For ordinary runtime settings, environment variables override configuration files, and command-line arguments override environment variables. Other property sources also exist."
         ]
       ]
     },
     {
-      "id": "ed-property-overrides-b1",
+      "id": "application-properties-1-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "For example, SERVER_PORT=9090 overrides server.port in the file. Starting with --server.port=9091 takes precedence over that environment variable."
+          "SERVER_PORT is the environment-variable form of server.port."
         ]
       ]
     },
     {
-      "id": "ed-property-overrides-b2",
+      "id": "application-properties-1-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Arguments for the application go after -jar and the JAR name. JVM options such as -Xmx go before -jar."
+          "JVM options go before -jar. Application arguments go after the JAR name."
         ]
       ]
     },
     {
-      "id": "ed-property-overrides-b3",
+      "id": "application-properties-1-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use one file format consistently. When properties and YAML files exist in the same location, .properties takes precedence."
+          "Store credentials outside committed configuration files. A profile-specific file does not hide its contents."
         ]
       ]
     },
     {
-      "id": "ed-property-overrides-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Read credentials from environment variables or an approved secret store. A profile-specific file is still a source file and can expose credentials if committed."
+      "id": "application-properties-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Override the server port at startup",
+        "description": [
+          "Assume the packaged file sets server.port=8081 and the JAR is target/demo.jar."
+        ],
+        "code": "SERVER_PORT=9090 java -Xmx512m -jar target/demo.jar --server.port=9091",
+        "language": "text",
+        "explanation": [
+          "This is a Unix shell command.",
+          "The command-line value 9091 overrides both the environment value 9090 and the file value 8081.",
+          "-Xmx512m sets the JVM\u2019s maximum heap size. It is not a Spring property."
         ]
-      ]
-    },
-    {
-      "id": "ed-property-overrides-code",
-      "type": "code",
-      "richText": [
-        [
-          "java -Xmx512m -jar target/journal.jar --server.port=9091\n\n# application.yml\nspring:\n  data:\n    mongodb:\n      uri: ${MONGODB_URI}"
-        ]
-      ],
-      "language": "Plain Text"
+      }
     }
   ],
   "sources": [
@@ -895,7 +144,11 @@
     {
       "title": "Spring Boot: externalized configuration",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html"
+    },
+    {
+      "title": "Official reference: Application properties and overrides",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html"
     }
   ],
-  "updatedOn": "2026-10-13"
+  "updatedOn": "2026-10-14"
 }

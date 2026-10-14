@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-deployment-vps",
-  "title": "Deploy with systemd, Nginx and HTTPS on a VPS",
-  "summary": "Run a private application process behind Nginx, with managed startup, HTTPS and distinct deployment checks.",
+  "title": "Run the application on a VPS",
+  "summary": "Manage the Java process with a dedicated user, configuration and systemd.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: How to Host Spring Boot on VPS: Production Guide (2026)",
@@ -12,14 +12,6 @@
     {
       "title": "systemd: service units",
       "url": "https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html"
-    },
-    {
-      "title": "Nginx: proxy module",
-      "url": "https://nginx.org/en/docs/http/ngx_http_proxy_module.html"
-    },
-    {
-      "title": "Spring Boot: traditional deployment and proxy configuration",
-      "url": "https://docs.spring.io/spring-boot/3.5/how-to/webserver.html"
     }
   ],
   "blocks": [
@@ -28,7 +20,7 @@
       "type": "header",
       "richText": [
         [
-          "What runs on the server"
+          "Prepare the application host"
         ]
       ]
     },
@@ -37,7 +29,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A virtual private server (VPS) gives you a Linux machine to manage. You maintain the operating system, Java runtime, application process, proxy, network rules and logs."
+          "A virtual private server (VPS) provides a machine that you manage."
         ]
       ]
     },
@@ -46,7 +38,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Build the JAR outside the server when possible, then deploy that known artifact. Use the Java version supported by the application’s Spring Boot release."
+          "Install a Java runtime compatible with the application’s Boot release and compiled classes."
         ]
       ]
     },
@@ -55,7 +47,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Run the application as a dedicated user with access only to its required files. Bind its HTTP port to 127.0.0.1 when Nginx is the public entry point."
+          "Build the JAR from a known application revision and copy that artifact to the server."
         ]
       ]
     },
@@ -64,26 +56,96 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "systemd manages the process, restarts it after failure when configured, and starts it at boot. Running java in an interactive terminal is not a process-management plan."
+          "Use a dedicated operating-system user with access to the application’s required files."
+        ]
+      ]
+    },
+    {
+      "id": "vps-components-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Supply database settings and other credentials through restricted configuration."
+        ]
+      ]
+    },
+    {
+      "id": "vps-process",
+      "type": "header",
+      "richText": [
+        [
+          "Let systemd manage the process"
+        ]
+      ]
+    },
+    {
+      "id": "vps-process-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "systemd is a Linux service manager."
+        ]
+      ]
+    },
+    {
+      "id": "vps-process-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A service unit describes the command to run and how to start or restart it."
+        ]
+      ]
+    },
+    {
+      "id": "vps-process-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It can start the application during boot and restart it after failure."
+        ]
+      ]
+    },
+    {
+      "id": "vps-process-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Starting Java in an interactive terminal does not provide these service settings."
         ]
       ]
     },
     {
       "id": "vps-components-code",
-      "type": "code",
-      "richText": [
-        [
-          "# /etc/systemd/system/journal.service\n[Unit]\nDescription=Journal application\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nUser=journal\nWorkingDirectory=/opt/journal\nEnvironmentFile=/etc/journal.env\nExecStart=/usr/bin/java -jar /opt/journal/journal.jar\nRestart=on-failure\nRestartSec=5\n\n[Install]\nWantedBy=multi-user.target"
-        ]
-      ],
-      "language": "Plain Text"
+      "type": "example",
+      "example": {
+        "title": "Create a service for the journal JAR",
+        "description": [
+          "The server has systemd and Java installed at /usr/bin/java.",
+          "Create the journal user, /opt/journal directory and /etc/journal.env before starting this unit.",
+          "Copy journal.jar into /opt/journal and let the journal user read it.",
+          "Place the unit below in /etc/systemd/system/journal.service.",
+          "For the next reverse-proxy lesson, put SERVER_ADDRESS=127.0.0.1 and SERVER_PORT=8080 in /etc/journal.env.",
+          "Add required database settings to that file and restrict access because it can contain credentials."
+        ],
+        "code": "# /etc/systemd/system/journal.service\n[Unit]\nDescription=Journal application\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nUser=journal\nWorkingDirectory=/opt/journal\nEnvironmentFile=/etc/journal.env\nExecStart=/usr/bin/java -jar /opt/journal/journal.jar\nRestart=on-failure\nRestartSec=5\n\n[Install]\nWantedBy=multi-user.target",
+        "language": "text",
+        "explanation": [
+          "User selects the operating-system account that runs Java.",
+          "EnvironmentFile supplies environment variables to the process.",
+          "ExecStart starts the deployed JAR.",
+          "Restart=on-failure restarts a failed process after five seconds.",
+          "daemon-reload makes systemd reread the unit. enable --now starts it and enables boot-time startup.",
+          "status and journalctl show whether the process started and what it logged."
+        ],
+        "commands": "sudo systemctl daemon-reload\nsudo systemctl enable --now journal.service\nsystemctl status journal.service\njournalctl -u journal.service"
+      }
     },
     {
       "id": "vps-environment",
       "type": "header",
       "richText": [
         [
-          "Configuration and logs"
+          "Diagnose startup failures"
         ]
       ]
     },
@@ -92,7 +154,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Create the user, deploy directory, JAR and environment file before starting the unit. The example assumes those files exist and Java is at /usr/bin/java."
+          "If the process repeatedly restarts, read its logs before changing the restart settings."
         ]
       ]
     },
@@ -101,7 +163,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Set SERVER_ADDRESS=127.0.0.1 and SERVER_PORT=8080 in the environment file. Add database and API settings there or use a supported secret system."
+          "Check the Java version, required settings and database availability."
         ]
       ]
     },
@@ -110,7 +172,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Restrict environment-file access because it may contain credentials. systemd reads EnvironmentFile and passes its variables to the process; do not publish its contents."
+          "Keep application logs available and configure their retention."
         ]
       ]
     },
@@ -119,79 +181,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "After changing a unit file, reload systemd, enable the service and start it. Inspect service status and journal logs to confirm startup."
-        ]
-      ]
-    },
-    {
-      "id": "vps-environment-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A restart loop can indicate a wrong Java version, unavailable database or missing setting. Resolve the logged cause instead of increasing restart frequency."
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy",
-      "type": "header",
-      "richText": [
-        [
-          "Public HTTP and TLS"
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Nginx receives public requests and forwards them to the local application. This is a reverse proxy: clients connect to Nginx, not directly to port 8080."
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Configure a server_name for the domain, proxy_pass to http://127.0.0.1:8080, and suitable proxy timeouts and request-size limits."
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forward the original host and protocol where needed. Trust forwarded headers only from the controlled proxy, especially when generating OAuth callback URLs."
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Point DNS to the VPS and enable HTTPS with a certificate for that domain. Certificate renewal must remain configured after the initial setup."
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Allow the required SSH and public web ports in the firewall while keeping the application port private. Preserve working SSH access when changing remote firewall rules."
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Rate limiting can reduce some abusive request patterns. It does not guarantee protection from every denial-of-service attack."
+          "After a controlled restart or reboot, confirm the service starts again."
         ]
       ]
     },
@@ -200,7 +190,7 @@
       "type": "header",
       "richText": [
         [
-          "Verify and operate the deployment"
+          "Update the deployed artifact"
         ]
       ]
     },
@@ -209,7 +199,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Check the local application, the public HTTPS endpoint, certificate validity and an authenticated database operation as separate boundaries."
+          "Keep the current artifact available before replacing it."
         ]
       ]
     },
@@ -218,7 +208,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep logs available and manage their retention. Monitor process failures, request errors and resource pressure."
+          "Restart the service after installing a new JAR. Check startup and an application request."
         ]
       ]
     },
@@ -227,16 +217,22 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Restart or reboot during a controlled check to confirm service recovery. A green local build does not prove boot-time startup on the server."
+          "Plan database migrations and backups separately from JAR replacement."
         ]
       ]
     },
     {
-      "id": "vps-checks-b3",
+      "id": "vps-proxy-next",
       "type": "bulleted_list",
       "richText": [
         [
-          "Deploy a new artifact with a known rollback path. Database backups and migration planning are separate from JAR replacement."
+          "Expose the application through Nginx and HTTPS",
+          [
+            [
+              "a",
+              "/notes/spring-boot/deployment/nginx-https"
+            ]
+          ]
         ]
       ]
     }

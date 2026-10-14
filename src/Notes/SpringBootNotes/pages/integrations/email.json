@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-integrations-email",
   "title": "Send Email with JavaMailSender",
-  "summary": "Configure SMTP, send plain-text messages, and distinguish submission from actual delivery.",
+  "summary": "Configure an SMTP connection, create a mail service, and understand sending failures.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Send Email Using Spring Boot | Gmail SMTP | Java Mail Sender",
@@ -28,7 +28,7 @@
       "type": "header",
       "richText": [
         [
-          "Submit email through SMTP"
+          "Send email through a mail server"
         ]
       ]
     },
@@ -37,7 +37,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "SMTP is the protocol used to submit email to a mail server. JavaMailSender connects Spring code to that server."
+          "SMTP is the protocol an application uses to submit email to a mail server."
         ]
       ]
     },
@@ -46,7 +46,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Add spring-boot-starter-mail. With the mail libraries and spring.mail.host configured, Boot can create a JavaMailSender bean."
+          "JavaMailSender is Spring’s interface for sending email through that server."
         ]
       ]
     },
@@ -55,7 +55,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use SimpleMailMessage for plain text. Use MimeMessage and MimeMessageHelper for HTML or attachments."
+          "Add spring-boot-starter-mail. Boot can create a JavaMailSender bean when the mail libraries and spring.mail.host are configured."
         ]
       ]
     },
@@ -64,7 +64,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "These examples use Spring Boot 3, Spring Framework 6, and Java 17. Boot 3 uses Jakarta Mail APIs when direct mail types are needed."
+          "Use SimpleMailMessage for plain text. Use MimeMessage with MimeMessageHelper for HTML or attachments."
         ]
       ]
     },
@@ -73,7 +73,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A weekly journal digest is one use case. Calculate the summary in a service, then pass the recipient, subject, and summary to the mail service."
+          "Spring Boot 3 uses Jakarta Mail types when you work directly with mail messages."
         ]
       ]
     },
@@ -82,7 +82,7 @@
       "type": "header",
       "richText": [
         [
-          "Configure authentication and timeouts"
+          "Configure the mail connection"
         ]
       ]
     },
@@ -91,7 +91,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The following properties describe an SMTP server that supports authenticated STARTTLS on port 587. STARTTLS upgrades the connection to TLS. Use the settings required by your provider."
+          "The mail provider supplies the host, port, credentials, and encryption settings."
         ]
       ]
     },
@@ -100,7 +100,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Require the TLS upgrade so credentials are not sent over an unencrypted connection. Keep normal certificate validation enabled."
+          "STARTTLS upgrades an existing connection to TLS. TLS encrypts the connection."
         ]
       ]
     },
@@ -109,7 +109,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "MAIL_USERNAME and MAIL_PASSWORD are environment variables. For Gmail, account policy may require an app password or OAuth. A normal account password is not a universal SMTP credential."
+          "Keep credentials in environment variables or a secret store. Keep certificate validation enabled."
         ]
       ]
     },
@@ -118,63 +118,64 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Connection, read, and write timeouts prevent a scheduled task or request thread from waiting indefinitely."
+          "Set connection, read, and write timeouts so a mail call cannot wait indefinitely."
         ]
       ]
     },
     {
       "id": "email-config-code",
-      "type": "code",
-      "richText": [
-        [
-          "spring.mail.host=${MAIL_HOST}\nspring.mail.port=587\nspring.mail.username=${MAIL_USERNAME}\nspring.mail.password=${MAIL_PASSWORD}\nspring.mail.properties[mail.smtp.auth]=true\nspring.mail.properties[mail.smtp.starttls.enable]=true\nspring.mail.properties[mail.smtp.starttls.required]=true\nspring.mail.properties[mail.smtp.connectiontimeout]=5000\nspring.mail.properties[mail.smtp.timeout]=5000\nspring.mail.properties[mail.smtp.writetimeout]=5000"
+      "type": "example",
+      "example": {
+        "title": "Configure authenticated SMTP with STARTTLS",
+        "description": [
+          "This provider supports authenticated SMTP with STARTTLS on port 587.",
+          "Set MAIL_HOST, MAIL_USERNAME, and MAIL_PASSWORD in the environment. Add these settings to application.properties."
+        ],
+        "code": "spring.mail.host=${MAIL_HOST}\nspring.mail.port=587\nspring.mail.username=${MAIL_USERNAME}\nspring.mail.password=${MAIL_PASSWORD}\nspring.mail.properties[mail.smtp.auth]=true\nspring.mail.properties[mail.smtp.starttls.enable]=true\nspring.mail.properties[mail.smtp.starttls.required]=true\nspring.mail.properties[mail.smtp.connectiontimeout]=5000\nspring.mail.properties[mail.smtp.timeout]=5000\nspring.mail.properties[mail.smtp.writetimeout]=5000",
+        "language": "java",
+        "explanation": [
+          "auth enables SMTP authentication.",
+          "starttls.required rejects connections where the TLS upgrade cannot happen.",
+          "The three timeout values are in milliseconds. Each is five seconds.",
+          "Use your provider’s supported credentials. Gmail account policy may require an app password or OAuth."
         ]
-      ],
-      "language": "Properties"
+      }
     },
     {
       "id": "email-service",
       "type": "header",
       "richText": [
         [
-          "Send a plain-text digest"
-        ]
-      ]
-    },
-    {
-      "id": "email-service-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Inject JavaMailSender through the constructor. Use a configured sender address permitted by the mail provider."
-        ]
-      ]
-    },
-    {
-      "id": "email-service-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The recipient comes from an authorized user record. Do not expose this method through an unauthenticated endpoint that accepts arbitrary recipients."
+          "Create a mail service"
         ]
       ]
     },
     {
       "id": "email-service-code",
-      "type": "code",
-      "richText": [
-        [
-          "@Service\nclass DigestMailService {\n    private final JavaMailSender sender;\n    private final String from;\n\n    DigestMailService(JavaMailSender sender,\n            @Value(\"${app.mail.from}\") String from) {\n        this.sender = sender;\n        this.from = from;\n    }\n\n    void send(String recipient, String summary) {\n        SimpleMailMessage message = new SimpleMailMessage();\n        message.setFrom(from);\n        message.setTo(recipient);\n        message.setSubject(\"Your weekly journal summary\");\n        message.setText(summary);\n        sender.send(message);\n    }\n}"
+      "type": "example",
+      "example": {
+        "title": "Send a plain-text journal summary",
+        "description": [
+          "Inject JavaMailSender into the service.",
+          "Set app.mail.from to a sender address the provider permits.",
+          "The caller supplies the recipient and already-calculated summary."
+        ],
+        "code": "@Service\nclass DigestMailService {\n    private final JavaMailSender sender;\n    private final String from;\n\n    DigestMailService(JavaMailSender sender,\n            @Value(\"${app.mail.from}\") String from) {\n        this.sender = sender;\n        this.from = from;\n    }\n\n    void send(String recipient, String summary) {\n        SimpleMailMessage message = new SimpleMailMessage();\n        message.setFrom(from);\n        message.setTo(recipient);\n        message.setSubject(\"Your weekly journal summary\");\n        message.setText(summary);\n        sender.send(message);\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "The constructor receives the sender bean and configured sender address.",
+          "SimpleMailMessage holds the sender, recipient, subject, and text.",
+          "sender.send submits the message to the mail server.",
+          "A sending failure raises MailException. Let it reach a caller that must retry or record failure."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "email-failures",
       "type": "header",
       "richText": [
         [
-          "Separate submission from delivery"
+          "Submission and delivery are different"
         ]
       ]
     },
@@ -183,7 +184,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "When send returns, SMTP submission completed without a reported error. It does not prove inbox delivery. A later bounce, spam filter, or provider rejection can still prevent delivery."
+          "A successful send call means submission completed without a reported error. It does not guarantee delivery to the inbox."
         ]
       ]
     },
@@ -192,7 +193,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Allow MailException to reach the caller when it must retry or mark work as failed. Logging and returning normally would make a Kafka listener appear successful."
+          "The provider may later reject the message, return a bounce, or place it in spam."
         ]
       ]
     },
@@ -201,7 +202,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Retry temporary failures with a limit. Invalid recipients and rejected credentials need a correction, not endless retries."
+          "Retry temporary failures with a limit. Invalid credentials or recipients need correction."
         ]
       ]
     },
@@ -210,7 +211,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A timeout can occur after the mail server accepted the email. Retrying can send a duplicate. Track a digest ID and delivery state, and document any remaining ambiguity."
+          "A timeout can happen after the server accepts the message. Retrying can submit it twice."
         ]
       ]
     },
@@ -219,7 +220,25 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a queue for large batches so one HTTP request does not send hundreds of emails. Keep recipient lists and message content out of normal logs."
+          "Store pending messages when sending must survive an application restart."
+        ]
+      ]
+    },
+    {
+      "id": "email-failures-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Send large batches through background work. Keep message bodies and recipient lists out of ordinary logs."
+        ]
+      ]
+    },
+    {
+      "id": "email-failures-b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Authorize callers before allowing them to choose recipients or send private content."
         ]
       ]
     }

@@ -1,25 +1,17 @@
 {
   "id": "spring-boot-security-oauth2",
-  "title": "OAuth2, OpenID Connect and Google Login",
-  "summary": "Use managed Google OIDC login and keep local account permissions separate.",
+  "title": "OAuth2 and OpenID Connect",
+  "summary": "Separate delegated API access from login identity.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
-      "title": "Engineering Digest: OAuth2 in Spring Boot | How to Add Google Login in Spring Boot | Complete Tutorial",
-      "url": "https://www.youtube.com/watch?v=cRiqZ0j1gEM&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
-    },
-    {
-      "title": "Spring Security 6: OAuth2 login",
+      "title": "Spring Security 6.5: OAuth2 login",
       "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/login/core.html"
     },
     {
       "title": "Google: OpenID Connect",
       "url": "https://developers.google.com/identity/openid-connect/openid-connect"
-    },
-    {
-      "title": "Google: verify backend identity",
-      "url": "https://developers.google.com/identity/sign-in/web/backend-auth"
     }
   ],
   "blocks": [
@@ -28,7 +20,7 @@
       "type": "header",
       "richText": [
         [
-          "OAuth2 grants access; OpenID Connect adds identity"
+          "OAuth2 grants access"
         ]
       ]
     },
@@ -37,7 +29,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "OAuth2 lets a client request limited access to a resource. A scope names the requested access. OpenID Connect (OIDC) adds login identity using an ID token and the openid scope."
+          "OAuth2 lets an application request access to resources on behalf of a user."
         ]
       ]
     },
@@ -46,7 +38,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The client is your application. Google is the provider. The browser redirects the user to Google. Your server never needs the user’s Google password."
+          "The client is the application requesting access."
         ]
       ]
     },
@@ -55,7 +47,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "An access token is for an API. An ID token describes an authenticated user for a client. Do not treat any token from any provider as an access token for your own journal API."
+          "The authorization server obtains permission and issues an access token."
         ]
       ]
     },
@@ -64,135 +56,216 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "For a server-rendered application, choose oauth2Login and a server session. For a separate API accepting access tokens, configure a resource server. They solve different parts of the flow."
+          "The resource server accepts the access token and serves the protected API."
         ]
       ]
     },
     {
-      "id": "oauth-setup",
+      "id": "oauth-concepts-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A scope names the access requested or granted."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-concepts-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application does not need the user’s password for the provider."
+        ]
+      ]
+    },
+    {
+      "id": "oidc",
       "type": "header",
       "richText": [
         [
-          "Spring Boot 3 / Spring Security 6 setup"
+          "OpenID Connect adds login"
         ]
       ]
     },
     {
-      "id": "oauth-setup-b0",
+      "id": "oidc-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Add spring-boot-starter-oauth2-client. Register an OAuth client with Google and register the exact callback URI. Spring’s default callback path is /login/oauth2/code/google."
+          "OpenID Connect (OIDC) adds user authentication to OAuth2."
         ]
       ]
     },
     {
-      "id": "oauth-setup-b1",
+      "id": "oidc-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Supply the client ID and secret through environment configuration or a secret manager. Keep the secret on the server. Do not place it in browser code or commit it to source control."
+          "The openid scope requests OIDC login."
         ]
       ]
     },
     {
-      "id": "oauth-setup-b2",
+      "id": "oidc-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The google registration name selects Spring’s built-in provider defaults. Request openid, profile and email for OIDC login."
+          "An ID token describes the authenticated user for the client. An access token is used to call an API."
         ]
       ]
     },
     {
-      "id": "oauth-setup-code",
-      "type": "code",
+      "id": "oidc-b3",
+      "type": "bulleted_list",
       "richText": [
         [
-          "spring:\n  security:\n    oauth2:\n      client:\n        registration:\n          google:\n            client-id: ${GOOGLE_CLIENT_ID}\n            client-secret: ${GOOGLE_CLIENT_SECRET}\n            scope: openid,profile,email"
+          "An ID token is not automatically an access token for your own API."
         ]
-      ],
-      "language": "YAML"
+      ]
     },
     {
       "id": "oauth-chain",
       "type": "header",
       "richText": [
         [
-          "Enable the managed login flow"
+          "Authorization-code flow"
         ]
       ]
     },
     {
-      "id": "oauth-chain-b0",
+      "id": "oauth-flow-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring starts login at /oauth2/authorization/google. It keeps the authorization request, handles the callback, exchanges the code and validates the OIDC response."
+          "The client redirects the browser to the provider."
         ]
       ]
     },
     {
-      "id": "oauth-chain-b1",
+      "id": "oauth-flow-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The configuration below permits login routes and requires login for application routes. Keep CSRF protection because authenticated browser requests use a session cookie."
+          "The user signs in and grants the requested access when required."
         ]
       ]
     },
     {
-      "id": "oauth-chain-code",
-      "type": "code",
+      "id": "oauth-flow-b2",
+      "type": "bulleted_list",
       "richText": [
         [
-          "@Bean\nSecurityFilterChain browser(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(auth -> auth\n            .requestMatchers(\"/\", \"/login/**\", \"/oauth2/**\")\n                .permitAll()\n            .anyRequest().authenticated())\n        .oauth2Login(Customizer.withDefaults())\n        .build();\n}"
+          "The provider redirects to the registered callback with an authorization code."
         ]
-      ],
-      "language": "Java"
+      ]
     },
     {
-      "id": "oauth-accounts",
+      "id": "oauth-flow-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The client exchanges that code for tokens."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-flow-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The client validates the login response before creating an application session."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-flow-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The state parameter ties the response to the original login attempt."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-approaches",
       "type": "header",
       "richText": [
         [
-          "Map provider identity to local permissions"
+          "Choose the Spring configuration"
         ]
       ]
     },
     {
-      "id": "oauth-accounts-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Identify an external account by the verified issuer and subject (sub). Email can change. Assign local roles through your application’s account policy. Google login does not automatically grant ADMIN."
-        ]
+      "id": "oauth-approaches-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "oauth-approaches-table-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Application need"
+              ]
+            ],
+            "1": [
+              [
+                "Spring configuration"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "oauth-approaches-table-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Browser login through an external provider"
+              ]
+            ],
+            "1": [
+              [
+                "oauth2Login. The application can remember login with a server session."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "oauth-approaches-table-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "API that receives access tokens"
+              ]
+            ],
+            "1": [
+              [
+                "oauth2ResourceServer. The API validates tokens on incoming requests."
+              ]
+            ]
+          }
+        }
       ]
     },
     {
-      "id": "oauth-accounts-b1",
+      "id": "oauth-google-next",
       "type": "bulleted_list",
       "richText": [
         [
-          "The authorization request and response must belong to the same login attempt. The state parameter protects this association. Use Spring’s flow rather than building an unvalidated callback handler."
-        ]
-      ]
-    },
-    {
-      "id": "oauth-accounts-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The tutorial repository manually exchanges a code, calls Google tokeninfo, finds or creates a user by email, and returns its own JWT. It also uses an OAuth Playground redirect. This is a learning demonstration."
-        ]
-      ]
-    },
-    {
-      "id": "oauth-accounts-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Google documents tokeninfo as a debugging tool. Production verification must check signature, audience, issuer and expiry using a supported verifier. A successful tokeninfo response alone is not a complete local account-linking policy."
+          "Configure Google login",
+          [
+            [
+              "a",
+              "/notes/spring-boot/security/google-login"
+            ]
+          ]
         ]
       ]
     }

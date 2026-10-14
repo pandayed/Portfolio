@@ -1,0 +1,201 @@
+{
+  "id": "spring-boot-jpa-queries",
+  "sourceUrl": "https://docs.spring.io/spring-data/",
+  "title": "JPA Repository Queries",
+  "summary": "Add derived queries, declared JPQL queries and bounded results.",
+  "updatedOn": "2026-10-14",
+  "blocks": [
+    {
+      "id": "jpa-derived",
+      "type": "header",
+      "richText": [
+        [
+          "Queries from method names"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-derived-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A derived query is a query Spring Data builds from a repository method name."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-derived-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The method names use entity property names, not database column names."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-derived-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "findByDepartment searches the department property. And and Or combine conditions."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-derived-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A misspelled property can prevent the repository from being created."
+        ]
+      ]
+    },
+    {
+      "id": "department-query",
+      "type": "example",
+      "example": {
+        "title": "Find employees by department",
+        "description": [
+          "Use the Employee entity and database connection from the preceding lessons."
+        ],
+        "code": "import java.util.List;\nimport org.springframework.data.jpa.repository.JpaRepository;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    List<Employee> findByDepartment(String department);\n}",
+        "language": "java",
+        "explanation": [
+          "Spring Data derives a query for the department property.",
+          "Calling findByDepartment(\"Engineering\") returns employees whose department matches Engineering.",
+          "A query returning List returns an empty list when no rows match."
+        ]
+      }
+    },
+    {
+      "id": "jpa-declared",
+      "type": "header",
+      "richText": [
+        [
+          "Declared queries"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @Query when the query is clearer than a long method name."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPQL is the JPA query language. It uses entity names and properties."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Native SQL uses database tables and columns. Set nativeQuery=true when using SQL with @Query."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bind user-supplied values as parameters. Do not construct a query by joining raw input into its text."
+        ]
+      ]
+    },
+    {
+      "id": "jpql-query",
+      "type": "example",
+      "example": {
+        "title": "Write the same search with JPQL",
+        "description": [
+          "This is an alternative EmployeeRepository declaration. Use it instead of the derived-query declaration above."
+        ],
+        "code": "import java.util.List;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    @Query(\"select e from Employee e where e.department = :department\")\n    List<Employee> findInDepartment(@Param(\"department\") String department);\n}",
+        "language": "java",
+        "explanation": [
+          "Employee is the entity name. department is its Java property.",
+          "The named parameter receives the method argument.",
+          "The persistence provider translates JPQL into SQL for the configured database."
+        ]
+      }
+    },
+    {
+      "id": "jpa-paging",
+      "type": "header",
+      "richText": [
+        [
+          "Read one page"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-paging-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Pageable supplies a page number, page size and sort order. Page numbers start at zero."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-paging-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Page includes the rows and total-count information. Calculating the total can require a separate count query."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-paging-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Slice reports whether another slice exists without requiring the same total-count calculation."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-paging-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a stable sort. Add a unique property such as id when other sort values can repeat."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-page-example",
+      "type": "example",
+      "example": {
+        "title": "Read the first page of employees",
+        "description": [
+          "Run this code inside a service method with an injected EmployeeRepository named repository."
+        ],
+        "code": "import org.springframework.data.domain.Page;\nimport org.springframework.data.domain.PageRequest;\nimport org.springframework.data.domain.Sort;\n\nPage<Employee> page = repository.findAll(\n    PageRequest.of(0, 20, Sort.by(\"id\"))\n);",
+        "language": "java",
+        "explanation": [
+          "Page 0 is the first page. Its size is at most 20 employees.",
+          "Sorting by the unique id gives a defined order.",
+          "page.getContent() returns the employees in this page."
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring Data JPA: query methods",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html"
+    }
+  ]
+}

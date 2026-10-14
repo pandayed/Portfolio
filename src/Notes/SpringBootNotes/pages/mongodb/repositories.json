@@ -1,74 +1,16 @@
 {
   "id": "spring-boot-mongodb-repositories",
-  "title": "MongoDB Documents and Repositories",
-  "summary": "Map documents, use MongoRepository and handle IDs and indexes.",
+  "title": "MongoDB Repositories",
+  "summary": "Declare repository methods and understand save and lookup behavior.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
-    {
-      "title": "Engineering Digest: Step-by-Step Tutorial: How to Integrate MongoDB in Your Spring Boot Application",
-      "url": "https://www.youtube.com/watch?v=jvSicVdHKT8&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
-    },
     {
       "title": "Spring Data MongoDB: repositories",
       "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/repositories/repositories.html"
-    },
-    {
-      "title": "Spring Data MongoDB: object mapping",
-      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/mapping/mapping.html"
-    },
-    {
-      "title": "Spring Data MongoDB: index creation",
-      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/mapping/mapping-index-management.html"
     }
   ],
   "blocks": [
-    {
-      "id": "mongo-repo-mapping",
-      "type": "header",
-      "richText": [
-        [
-          "Map a Java object"
-        ]
-      ]
-    },
-    {
-      "id": "mongo-repo-mapping-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@Document selects a MongoDB collection. @Id maps a Java field to the document’s _id."
-        ]
-      ]
-    },
-    {
-      "id": "mongo-repo-mapping-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use org.springframework.data.annotation.Id for MongoDB. jakarta.persistence.Id belongs to JPA and is a different annotation."
-        ]
-      ]
-    },
-    {
-      "id": "mongo-repo-mapping-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Data maps fields to document values. Lombok can generate accessors, but Lombok does not configure persistence or validate an HTTP request."
-        ]
-      ]
-    },
-    {
-      "id": "mongo-repo-mapping-code",
-      "type": "code",
-      "richText": [
-        [
-          "import lombok.Data;\nimport org.bson.types.ObjectId;\nimport org.springframework.data.annotation.Id;\nimport org.springframework.data.mongodb.core.mapping.Document;\n\n@Data\n@Document(collection = \"journal_entries\")\npublic class JournalEntry {\n    @Id private ObjectId id;\n    private String title;\n    private String content;\n}"
-        ]
-      ],
-      "language": "Java"
-    },
     {
       "id": "mongo-repo-interface",
       "type": "header",
@@ -83,7 +25,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A repository is the persistence interface used by your service. Spring Data creates its implementation as a Spring bean."
+          "A repository provides methods for storing and reading documents."
         ]
       ]
     },
@@ -92,7 +34,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "MongoRepository<JournalEntry, ObjectId> identifies the document type and its ID type. It supplies save, findById, findAll and deleteById."
+          "Spring Data creates the implementation of a MongoRepository interface and registers it as a Spring bean."
         ]
       ]
     },
@@ -101,7 +43,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Derived queries are queries built from method names. findByTitle searches the title property. A misspelled property can prevent repository creation."
+          "The first type argument is the document class. The second is its ID type."
         ]
       ]
     },
@@ -110,26 +52,34 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose a derived method for a stable, simple query. Choose MongoTemplate when optional filters or explicit updates make a method name unclear."
+          "Method names such as findByTitle define derived queries. The property name must exist on the mapped class."
         ]
       ]
     },
     {
       "id": "mongo-repo-interface-code",
-      "type": "code",
-      "richText": [
-        [
-          "import org.bson.types.ObjectId;\nimport org.springframework.data.mongodb.repository.MongoRepository;\nimport java.util.List;\n\npublic interface JournalEntryRepository\n        extends MongoRepository<JournalEntry, ObjectId> {\n    List<JournalEntry> findByTitle(String title);\n}"
+      "type": "example",
+      "example": {
+        "title": "Declare a journal entry repository",
+        "description": [
+          "Use JournalEntry from the document mapping page.",
+          "Place this interface under the application package."
+        ],
+        "code": "import java.util.List;\nimport org.bson.types.ObjectId;\nimport org.springframework.data.mongodb.repository.MongoRepository;\n\npublic interface JournalEntryRepository\n        extends MongoRepository<JournalEntry, ObjectId> {\n    List<JournalEntry> findByTitle(String title);\n}",
+        "language": "java",
+        "explanation": [
+          "The repository provides save, findById, findAll and deleteById.",
+          "findByTitle matches the title property.",
+          "A misspelled property can prevent repository creation."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "mongo-repo-flow",
       "type": "header",
       "richText": [
         [
-          "Save and read boundaries"
+          "Save and read documents"
         ]
       ]
     },
@@ -138,7 +88,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep HTTP handling in the controller and business rules in a service. Inject the repository into that service."
+          "save inserts a new document or saves a document with an existing ID."
         ]
       ]
     },
@@ -147,7 +97,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "save persists the document. A new document can receive a generated ID. Saving an existing ID can replace stored fields, so do not pass a partial request object directly as a replacement."
+          "Saving with an existing ID can replace stored fields. Do not use a partially populated request object as a full document replacement."
         ]
       ]
     },
@@ -156,7 +106,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "findById returns Optional because an ID may not exist. Convert absence into the API’s chosen response, such as 404."
+          "findById returns Optional because the document may not exist."
         ]
       ]
     },
@@ -165,7 +115,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Validate ObjectId text before constructing it at an HTTP boundary. A malformed ID differs from a valid ID with no matching document."
+          "findByTitle returns an empty list when nothing matches. A connection failure is a different result."
         ]
       ]
     },
@@ -174,28 +124,56 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "@Indexed(unique = true) describes a unique index. It enforces uniqueness only after the database index exists. Automatic index creation is disabled by default in Spring Data MongoDB."
-        ]
-      ]
-    },
-    {
-      "id": "mongo-repo-flow-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Create required indexes deliberately. Existing duplicates can prevent a unique index from being created. A pre-save lookup alone cannot prevent concurrent duplicates."
+          "For a growing collection, use bounded queries or pagination instead of findAll."
         ]
       ]
     },
     {
       "id": "mongo-repo-flow-code",
-      "type": "code",
+      "type": "example",
+      "example": {
+        "title": "Save and look up an entry",
+        "description": [
+          "Run this code inside a service method with an injected JournalEntryRepository named repository."
+        ],
+        "code": "import java.util.Optional;\n\nJournalEntry entry = new JournalEntry(\"Learning Spring\", \"Added persistence\");\nJournalEntry saved = repository.save(entry);\nOptional<JournalEntry> found = repository.findById(saved.getId());",
+        "language": "java",
+        "explanation": [
+          "save returns the saved entry, including its generated ID.",
+          "findById uses that ID to read the document.",
+          "found contains the entry if the document still exists."
+        ]
+      }
+    },
+    {
+      "id": "mongo-repo-queries",
+      "type": "bulleted_list",
       "richText": [
         [
-          "import java.util.Optional;\n\nJournalEntry entry = new JournalEntry();\nentry.setTitle(\"Learning Spring\");\nJournalEntry saved = repository.save(entry);\nOptional<JournalEntry> found = repository.findById(saved.getId());"
+          "Build explicit MongoTemplate queries",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb/queries"
+            ]
+          ]
         ]
-      ],
-      "language": "Java"
+      ]
+    },
+    {
+      "id": "mongo-repo-indexes",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Create indexes separately",
+          [
+            [
+              "a",
+              "/notes/spring-boot/mongodb/indexes"
+            ]
+          ]
+        ]
+      ]
     }
   ]
 }

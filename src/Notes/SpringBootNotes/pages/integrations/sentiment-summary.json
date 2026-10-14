@@ -1,0 +1,171 @@
+{
+  "id": "spring-boot-integrations-sentiment-summary",
+  "title": "Journal Sentiment Summary",
+  "summary": "Count stored journal labels within a defined reporting period.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Engineering Digest: Ultimate Guide to Scheduling Tasks with Cron Jobs in Spring Boot",
+      "url": "https://www.youtube.com/watch?v=9aP0qD3jG_8&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Engineering Digest: Adding Sentiment to Journal App",
+      "url": "https://www.youtube.com/watch?v=AIgjFvRr820&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring task scheduling",
+      "url": "https://docs.spring.io/spring-framework/reference/integration/scheduling.html"
+    },
+    {
+      "title": "Engineering Digest journalApp source",
+      "url": "https://github.com/EngineeringDigest/journalApp"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "schedule-sentiment",
+      "type": "header",
+      "richText": [
+        [
+          "Summarize stored sentiment labels"
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A sentiment label describes the tone recorded for an entry, such as HAPPY, SAD, or ANGRY."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "This summary counts stored labels. It does not analyze the entry text."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Select entries for one user and one reporting interval."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Exclude entries with no label. Count the remaining entries for each label."
+        ]
+      ]
+    },
+    {
+      "id": "schedule-sentiment-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For HAPPY, SAD, HAPPY, the counts are HAPPY=2 and SAD=1. HAPPY is the most frequent label."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-period",
+      "type": "header",
+      "richText": [
+        [
+          "Define the reporting interval"
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-period-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose either the previous seven days or a calendar week. These intervals can include different entries."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-period-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For a calendar week, choose a timezone and a consistent week boundary."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-period-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use the same start and end instants throughout a run."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-period-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a start-inclusive, end-exclusive interval so adjacent periods do not count the same entry twice."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-results",
+      "type": "header",
+      "richText": [
+        [
+          "Handle ties and missing entries"
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-results-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For HAPPY=1 and SAD=1, report a tie or apply an explicit tie rule."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-results-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Do not let map iteration order decide a tie."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-results-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "When no entries have a label, report that no labeled entries were found."
+        ]
+      ]
+    },
+    {
+      "id": "sentiment-results-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Send a digest only for users who have opted in. Calculate the summary before submitting it for email delivery."
+        ]
+      ]
+    }
+  ]
+}

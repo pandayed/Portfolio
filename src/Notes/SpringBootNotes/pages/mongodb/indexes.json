@@ -1,0 +1,124 @@
+{
+  "id": "spring-boot-mongodb-indexes",
+  "sourceUrl": "https://docs.spring.io/spring-data/",
+  "title": "MongoDB Indexes",
+  "summary": "Create lookup indexes and enforce unique values in the database.",
+  "updatedOn": "2026-10-14",
+  "blocks": [
+    {
+      "id": "mongo-index-rule",
+      "type": "header",
+      "richText": [
+        [
+          "Indexes"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-rule-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An index stores selected field values in a form MongoDB can search without scanning every document."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-rule-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Indexes can improve reads but require storage and extra work when documents change."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-rule-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A unique index rejects duplicate indexed values. An application lookup before saving cannot enforce uniqueness under concurrent writes."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-rule-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Existing duplicate values can prevent creation of a unique index."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-creation",
+      "type": "header",
+      "richText": [
+        [
+          "Declare and create an index"
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-creation-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Indexed describes an index on a mapped field. The annotation alone does not prove the database index exists."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-creation-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Automatic index creation is disabled by default in Spring Data MongoDB."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-creation-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Create required indexes deliberately, either through deployment migrations or explicit application setup."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-creation-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check the actual database indexes when diagnosing duplicate-value behavior."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-index-example",
+      "type": "example",
+      "example": {
+        "title": "Create a unique username index",
+        "description": [
+          "This setup assumes a mapped User document with a userName field.",
+          "Run this inside controlled database setup code with an injected MongoTemplate named mongoTemplate.",
+          "The collection must not contain duplicate usernames before this index is created."
+        ],
+        "code": "import org.springframework.data.domain.Sort;\nimport org.springframework.data.mongodb.core.index.Index;\n\nmongoTemplate.indexOps(User.class).ensureIndex(\n    new Index().on(\"userName\", Sort.Direction.ASC).unique()\n);",
+        "language": "java",
+        "explanation": [
+          "The index applies to the collection mapped by User.",
+          "unique rejects duplicate userName values after the index exists.",
+          "Handle duplicate-key failures when inserting or updating users."
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring Data MongoDB: index creation",
+      "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/mapping/mapping-index-management.html"
+    }
+  ]
+}

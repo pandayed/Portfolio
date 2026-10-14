@@ -1,0 +1,295 @@
+{
+  "id": "spring-boot-actuator",
+  "title": "Spring Boot Actuator",
+  "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed5480d49f56d679dcc990ff",
+  "blocks": [
+    {
+      "id": "20824eb1-ed54-803d-bd2d-d2155da2c88b",
+      "type": "header",
+      "richText": [
+        [
+          "Inspect a running application"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803d-bd2d-d2155da2c88b-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot Actuator adds endpoints for health, metrics, and other runtime information."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803d-bd2d-d2155da2c88b-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Add spring-boot-starter-actuator to enable it."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803d-bd2d-d2155da2c88b-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "In a web application, the default endpoint prefix is /actuator."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-803d-bd2d-d2155da2c88b-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Only health is exposed over HTTP by default. Expose other endpoints explicitly."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-endpoints",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "actuator-endpoints-r0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Endpoint"
+              ]
+            ],
+            "1": [
+              [
+                "Information"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "actuator-endpoints-r1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "/actuator/health"
+              ]
+            ],
+            "1": [
+              [
+                "Application health status."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "actuator-endpoints-r2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "/actuator/info"
+              ]
+            ],
+            "1": [
+              [
+                "Application information supplied by info contributors."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "actuator-endpoints-r3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "/actuator/metrics"
+              ]
+            ],
+            "1": [
+              [
+                "Names of recorded metrics."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "actuator-endpoints-r4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "/actuator/metrics/{name}"
+              ]
+            ],
+            "1": [
+              [
+                "Measurements for one metric."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "actuator-endpoints-r5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "/actuator/loggers"
+              ]
+            ],
+            "1": [
+              [
+                "Logger levels and supported level changes."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "actuator-exposure",
+      "type": "header",
+      "richText": [
+        [
+          "Expose selected endpoints"
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-802e-be30-f67983df1a83",
+      "type": "example",
+      "example": {
+        "title": "Expose health and application information",
+        "description": [
+          "Use a Spring Boot 3.5 web application with spring-boot-starter-actuator.",
+          "Add these settings to application.properties."
+        ],
+        "code": "management.endpoints.web.exposure.include=health,info\nmanagement.info.env.enabled=true\ninfo.app.name=journal-service",
+        "language": "text",
+        "explanation": [
+          "The include list makes only health and info available over HTTP.",
+          "management.info.env.enabled allows the info contributor to read info.* properties.",
+          "The info endpoint includes app.name with the value journal-service.",
+          "Visit /actuator/health and /actuator/info on the application’s host and port.",
+          "A healthy application normally reports status UP. Health indicators can report other states."
+        ]
+      }
+    },
+    {
+      "id": "actuator-access",
+      "type": "header",
+      "richText": [
+        [
+          "Control access"
+        ]
+      ]
+    },
+    {
+      "id": "actuator-access-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Exposing an endpoint makes it available over HTTP. It does not define who may call it."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-access-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Restrict sensitive endpoints using Spring Security and network access rules."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-access-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "If you define your own SecurityFilterChain, you must include the Actuator access rules yourself."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-access-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Avoid exposing every endpoint with a wildcard unless access is restricted and each exposed endpoint is needed."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-monitoring",
+      "type": "header",
+      "richText": [
+        [
+          "Collect metrics"
+        ]
+      ]
+    },
+    {
+      "id": "actuator-monitoring-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A metric is a numeric measurement, such as request count or elapsed time."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-monitoring-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Actuator uses Micrometer to collect metrics."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-monitoring-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Add micrometer-registry-prometheus and expose the prometheus endpoint when a Prometheus server will collect them."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-monitoring-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Grafana can display metrics collected by Prometheus."
+        ]
+      ]
+    },
+    {
+      "id": "actuator-monitoring-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A health status or a metric does not by itself prove that every application workflow works correctly."
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring Boot 3.5 Actuator endpoints",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/actuator/endpoints.html"
+    }
+  ],
+  "summary": "Inspect health and metrics, expose selected endpoints, and restrict access.",
+  "updatedOn": "2026-10-14"
+}

@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-bean-lifecycle",
-  "title": "Bean lifecycle and @PostConstruct",
+  "title": "Bean initialization and shutdown",
   "summary": "Initialization order, Jakarta imports, startup hooks, and shutdown boundaries.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Mastering @PostConstruct in Spring Boot: Complete Guide for Developers",
@@ -16,6 +16,10 @@
     {
       "title": "Spring Boot: application events and listeners",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/features/spring-application.html"
+    },
+    {
+      "title": "Official reference: Bean initialization and shutdown",
+      "url": "https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/postconstruct-and-predestroy-annotations.html"
     }
   ],
   "blocks": [
@@ -24,143 +28,141 @@
       "type": "header",
       "richText": [
         [
-          "When initialization runs"
+          "Initialization order"
         ]
       ]
     },
     {
-      "id": "lifecycle-order-b0",
+      "id": "bean-lifecycle-0-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A bean is an object managed by the Spring container. For a normal singleton bean, Spring constructs it, supplies its dependencies, then runs initialization callbacks."
+          "For a normal bean, Spring constructs the object, supplies its dependencies, then calls its initialization callbacks."
         ]
       ]
     },
     {
-      "id": "lifecycle-order-b1",
+      "id": "bean-lifecycle-0-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PostConstruct marks an initialization method called after dependency injection. Use it when initialization needs another bean or an injected property."
+          "Constructor-injected dependencies are available in the constructor. Field-injected dependencies are supplied afterward."
         ]
       ]
     },
     {
-      "id": "lifecycle-order-b2",
+      "id": "bean-lifecycle-0-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "For Spring Boot 3, import jakarta.annotation.PostConstruct. Older Spring Boot 2 code commonly uses javax.annotation.PostConstruct."
+          "@PostConstruct marks a method to call after dependency injection. Use jakarta.annotation.PostConstruct with Spring Boot 3."
         ]
       ]
     },
     {
-      "id": "lifecycle-order-b3",
+      "id": "bean-lifecycle-0-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A constructor should establish the object’s required state. A field injected after construction is unavailable inside that constructor."
+          "Initialization runs when that bean instance is initialized. It does not run for every HTTP request."
         ]
       ]
     },
     {
-      "id": "lifecycle-order-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A singleton initialization callback runs for that bean instance when it is initialized. It does not run for every request."
+      "id": "bean-lifecycle-0-example-0",
+      "type": "example",
+      "example": {
+        "title": "Initialize a bean after dependency injection",
+        "description": [
+          "This bean uses an injected Clock to record when initialization occurs."
+        ],
+        "code": "package com.example.demo;\n\nimport java.time.Clock;\nimport java.time.Instant;\nimport jakarta.annotation.PostConstruct;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class StartupTime {\n    private final Clock clock;\n    private Instant initializedAt;\n\n    public StartupTime(Clock clock) {\n        this.clock = clock;\n    }\n\n    @PostConstruct\n    void initialize() {\n        initializedAt = clock.instant();\n    }\n\n    public Instant getInitializedAt() {\n        return initializedAt;\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "Register the Clock bean shown in the beans lesson.",
+          "Spring supplies Clock before calling initialize().",
+          "The stored time belongs to this bean instance; getInitializedAt() does not refresh it."
         ]
-      ]
-    },
-    {
-      "id": "lifecycle-order-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Constructor injection allows the initialization method to use a dependency whose presence is guaranteed."
-        ]
-      ]
-    },
-    {
-      "id": "lifecycle-order-code",
-      "type": "code",
-      "richText": [
-        [
-          "import jakarta.annotation.PostConstruct;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class StartupSettings {\n    private final SettingsRepository repository;\n\n    public StartupSettings(SettingsRepository repository) {\n        this.repository = repository;\n    }\n\n    @PostConstruct\n    void loadSettings() {\n        repository.loadRequiredSettings();\n    }\n}"
-        ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "lifecycle-choice",
       "type": "header",
       "richText": [
         [
-          "Choose the right startup hook"
+          "Application startup callbacks"
         ]
       ]
     },
     {
-      "id": "lifecycle-choice-b0",
+      "id": "bean-lifecycle-1-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "SettingsRepository in the example is an application-defined collaborator. Its loadRequiredSettings method must fail clearly if required settings cannot be loaded."
+          "CommandLineRunner and ApplicationRunner run after the application context has been initialized. They receive application arguments in different forms."
         ]
       ]
     },
     {
-      "id": "lifecycle-choice-b1",
+      "id": "bean-lifecycle-1-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @PostConstruct for local bean initialization. Use ApplicationRunner or CommandLineRunner for work intended to run after SpringApplication has initialized the context."
+          "ApplicationReadyEvent is published after the startup runners complete. It is a startup event, not a recurring timer."
         ]
       ]
     },
     {
-      "id": "lifecycle-choice-b2",
+      "id": "bean-lifecycle-1-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use ApplicationReadyEvent when work must wait until startup runners have completed. It is an application startup signal, not a recurring timer."
+          "@PostConstruct is not a transaction boundary. Transactional proxy behavior may not be available during initialization."
         ]
       ]
     },
     {
-      "id": "lifecycle-choice-b3",
+      "id": "bean-lifecycle-1-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Avoid long remote calls in bean initialization unless startup must depend on their result. Timeouts and a clear failure policy prevent an indefinite startup wait."
+          "A remote operation during initialization delays startup. Give it a timeout if startup depends on it."
         ]
       ]
     },
     {
-      "id": "lifecycle-choice-b4",
-      "type": "bulleted_list",
+      "id": "bean-lifecycle-2",
+      "type": "header",
       "richText": [
         [
-          "@PostConstruct is not a transaction boundary. A callback on the bean itself may run before its transactional proxy is available."
+          "Shutdown cleanup"
         ]
       ]
     },
     {
-      "id": "lifecycle-choice-b5",
+      "id": "bean-lifecycle-2-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @PreDestroy for managed shutdown cleanup. Process termination can still prevent callbacks from completing; cleanup is not a delivery guarantee."
+          "@PreDestroy marks a cleanup method called when Spring destroys a managed bean during normal context shutdown."
         ]
       ]
     },
     {
-      "id": "lifecycle-choice-b6",
+      "id": "bean-lifecycle-2-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A cache loaded at startup needs a refresh policy if its source can change. A one-time callback alone does not keep cached settings current."
+          "Abrupt termination can prevent cleanup callbacks from running or completing."
+        ]
+      ]
+    },
+    {
+      "id": "bean-lifecycle-2-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring does not automatically call destruction callbacks for prototype-scoped beans after handing them to the caller."
         ]
       ]
     }

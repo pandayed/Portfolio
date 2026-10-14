@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-rest-responses",
   "title": "ResponseEntity and HTTP status codes",
-  "summary": "Return explicit status codes, headers and DTO bodies for successful and failed requests.",
+  "summary": "Set a response status, headers and optional body.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: ResponseEntity in Spring Boot in Hindi | Handling HttpStatus while creating REST API",
@@ -12,6 +12,10 @@
     {
       "title": "Spring MVC: ResponseEntity",
       "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/responseentity.html"
+    },
+    {
+      "title": "HTTP semantics: RFC 9110",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
     }
   ],
   "blocks": [
@@ -20,143 +24,290 @@
       "type": "header",
       "richText": [
         [
-          "Control the complete response"
+          "Set the HTTP response"
         ]
       ]
     },
     {
-      "id": "responses-control-b0",
+      "id": "responses-basics-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "ResponseEntity<T> carries a status code, headers and an optional body of type T. A controller can choose them explicitly instead of returning only a body."
+          "An HTTP response has a status code, headers and an optional body."
         ]
       ]
     },
     {
-      "id": "responses-control-b1",
+      "id": "responses-basics-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "200 OK fits a successful read or an update that returns data. 201 Created fits a newly created resource; a Location header tells the client where it can be read."
+          "ResponseEntity<T> lets a controller choose all three. T is the body’s Java type."
         ]
       ]
     },
     {
-      "id": "responses-control-b2",
+      "id": "responses-basics-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "204 No Content means success with no response body. Do not return a JSON body with 204."
+          "ResponseEntity does not convert the body itself. Spring’s message converters still write the response format."
         ]
       ]
     },
     {
-      "id": "responses-control-b3",
+      "id": "responses-statuses",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "responses-statuses-r0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Status"
+              ]
+            ],
+            "1": [
+              [
+                "Meaning"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "200 OK"
+              ]
+            ],
+            "1": [
+              [
+                "The request succeeded. A body can contain the result."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "201 Created"
+              ]
+            ],
+            "1": [
+              [
+                "The request created a resource. Location can identify its URL."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "204 No Content"
+              ]
+            ],
+            "1": [
+              [
+                "The request succeeded with no response body."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "400 Bad Request"
+              ]
+            ],
+            "1": [
+              [
+                "The request is invalid."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "401 Unauthorized"
+              ]
+            ],
+            "1": [
+              [
+                "The request lacks valid authentication credentials."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r6",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "403 Forbidden"
+              ]
+            ],
+            "1": [
+              [
+                "The server refuses the requested operation."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r7",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "404 Not Found"
+              ]
+            ],
+            "1": [
+              [
+                "The resource was not found or the server does not reveal it."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r8",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "409 Conflict"
+              ]
+            ],
+            "1": [
+              [
+                "The request conflicts with the current resource state."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "responses-statuses-r9",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "500 Internal Server Error"
+              ]
+            ],
+            "1": [
+              [
+                "An unexpected server failure prevented completion."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "responses-status-rule-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "400 Bad Request describes invalid client input. 401 means authentication is required or failed. 403 means the authenticated caller is not allowed."
+          "@PostMapping does not set 201 automatically. Choose a status from the operation’s result."
         ]
       ]
     },
     {
-      "id": "responses-control-b4",
+      "id": "responses-status-rule-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "404 Not Found fits a resource that cannot be found or exposed to the caller. 409 Conflict fits a request that conflicts with current resource state."
+          "Do not attach a response body to 204."
         ]
       ]
     },
     {
-      "id": "responses-control-b5",
+      "id": "responses-status-rule-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose status codes from the result of the operation. The annotation @PostMapping does not make every response 201 automatically."
+          "Do not return 200 with an error message when the request failed."
         ]
       ]
     },
     {
       "id": "responses-control-code",
-      "type": "code",
-      "richText": [
-        [
-          "@GetMapping(\"/{id}\")\npublic ResponseEntity<JournalResponse> find(@PathVariable String id) {\n    return journalService.findVisible(id)\n        .map(ResponseEntity::ok)\n        .orElseGet(() -> ResponseEntity.notFound().build());\n}\n\n@PostMapping\npublic ResponseEntity<JournalResponse> create(\n        @Valid @RequestBody CreateJournalRequest request) {\n    JournalResponse saved = journalService.create(request);\n    URI location = URI.create(\"/journal/\" + saved.id());\n    return ResponseEntity.created(location).body(saved);\n}"
+      "type": "example",
+      "example": {
+        "title": "Return a found resource or create a new one",
+        "description": [
+          "These methods belong in a @RestController mapped to /journal.",
+          "journalService is an injected service. JournalResponse and CreateJournalRequest are application DTOs.",
+          "findVisible returns Optional<JournalResponse>. create returns the saved DTO with an ID safe to use as a path segment.",
+          "The service applies ownership rules and performs persistence; those implementations are not shown."
+        ],
+        "code": "@GetMapping(\"/{id}\")\npublic ResponseEntity<JournalResponse> find(@PathVariable(\"id\") String id) {\n    return journalService.findVisible(id)\n        .map(ResponseEntity::ok)\n        .orElseGet(() -> ResponseEntity.notFound().build());\n}\n\n@PostMapping\npublic ResponseEntity<JournalResponse> create(\n        @RequestBody CreateJournalRequest request) {\n    JournalResponse saved = journalService.create(request);\n    java.net.URI location = java.net.URI.create(\"/journal/\" + saved.id());\n    return ResponseEntity.created(location).body(saved);\n}",
+        "language": "java",
+        "explanation": [
+          "A found result produces 200 and the JournalResponse body.",
+          "An empty Optional produces 404 without a body.",
+          "created(location) produces 201 and a Location header. body(saved) adds the saved DTO.",
+          "If the saved ID is 42, Location is /journal/42.",
+          "This code chooses HTTP responses; request validation is covered separately."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "responses-contract",
       "type": "header",
       "richText": [
         [
-          "Keep the response contract clear"
+          "Keep response data separate from stored data"
         ]
       ]
     },
     {
-      "id": "responses-contract-b0",
+      "id": "responses-dto-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "These methods belong in a controller mapped to /journal. JournalResponse is an application DTO, and the service must apply the current user’s ownership rules."
+          "A response DTO declares the fields the API returns."
         ]
       ]
     },
     {
-      "id": "responses-contract-b1",
+      "id": "responses-dto-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "findVisible returns Optional<JournalResponse>. No visible result produces 404; a saved result produces 200 with a body."
+          "Return only fields the caller should receive. Database entities can contain internal data that the API should not expose."
         ]
       ]
     },
     {
-      "id": "responses-contract-b2",
+      "id": "responses-dto-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "create returns 201, the saved DTO and a Location such as /journal/42. The example assumes the service returns an identifier safe for a path segment."
-        ]
-      ]
-    },
-    {
-      "id": "responses-contract-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use request DTOs to limit which fields clients can supply. Do not allow a request body to set internal IDs, roles or ownership unchecked."
-        ]
-      ]
-    },
-    {
-      "id": "responses-contract-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "ResponseEntity controls the response envelope. @RestController and message converters still handle converting the DTO to JSON."
-        ]
-      ]
-    },
-    {
-      "id": "responses-contract-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep common error shapes in exception advice. Handle authentication failures through Spring Security’s entry point or access-denied handler when they occur before the controller."
-        ]
-      ]
-    },
-    {
-      "id": "responses-contract-b6",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Returning 200 with a body saying “error” makes client behavior harder to interpret. Match the HTTP status to the actual result."
+          "Keep shared error response rules in exception advice rather than repeating them in each handler."
         ]
       ]
     }

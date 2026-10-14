@@ -1,661 +1,194 @@
 {
   "id": "20924eb1-ed54-80f9-84a5-fd65e9263256",
-  "title": "Creating Executable JARs and Deploying Spring Boot Apps",
+  "title": "Executable JARs",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480f984a5fd65e9263256",
   "blocks": [
     {
-      "id": "20924eb1-ed54-80b6-a3cf-c0b0d338adfc",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-803c-ac0e-e51f3799fdbe",
+      "id": "20924eb1-ed54-8038-a8b6-f10b900556ea",
       "type": "header",
       "richText": [
         [
-          "Creating Executable JARs and Deploying Spring Boot Apps"
+          "What an executable JAR contains"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-808f-acca-f9dd3e020c2e",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8038-a8b6-f10b900556ea",
-      "type": "sub_header",
-      "richText": [
-        [
-          "1. Core Concept"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c0-9539-e96d963a9e3a",
-      "type": "text",
-      "richText": [
-        [
-          "An "
-        ],
-        [
-          "executable JAR",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (Java ARchive) is a packaged Java application bundled with all the code and libraries needed to run independently. Spring Boot automatically builds these executable JARs to simplify deploying Java applications—so you don’t have to worry about manually managing dependencies or application servers. You just run the JAR with a simple command, and your app starts up anywhere Java is installed."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-806f-8ec9-dae5f7b28b51",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8086-9a85-fb4a836afe28",
-      "type": "sub_header",
-      "richText": [
-        [
-          "2. Key Interview Points"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8042-8007-e09d9217d2f6",
+      "id": "jar-meaning-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "What is an executable JAR and why is it useful?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "A JAR is a Java archive. It packages compiled classes and related files."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-809c-9ba2-ca49280169da",
-          "type": "text",
-          "richText": [
-            [
-              "It packages your app + all dependencies into one file, making deployment easier."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20924eb1-ed54-804e-8f48-e5af9dc5e1f0",
+      "id": "jar-meaning-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "How does Spring Boot build an executable JAR?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "A Spring Boot executable JAR also contains runtime dependencies and a launcher."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-80ca-9969-f18aaf6e455b",
-          "type": "text",
-          "richText": [
-            [
-              "Spring Boot uses a plugin (like Maven or Gradle) to bundle everything, including an embedded server like Tomcat, so you don’t need a separate web server."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20924eb1-ed54-80e4-82a3-d6d0945d15a1",
+      "id": "jar-meaning-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "How do you run and deploy a Spring Boot executable JAR?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "A servlet web application usually includes an embedded server such as Tomcat. It does not need a separately installed servlet container."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-80bd-ad53-e679b18257c4",
-          "type": "text",
-          "richText": [
-            [
-              "Using "
-            ],
-            [
-              "java -jar yourapp.jar",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " on any system with a compatible JVM installed."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20924eb1-ed54-8085-adc4-d887985d0a4a",
+      "id": "jar-meaning-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "What is the difference between a WAR and an executable JAR?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "The machine still needs a compatible Java runtime. The JAR does not include Java itself."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-8081-a609-e40864c89eab",
-          "type": "text",
-          "richText": [
-            [
-              "WAR files are traditional Java web app archives deployed on external servers, whereas Spring Boot executable JARs contain the server inside them (self-contained)."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20924eb1-ed54-8028-92b8-ffeb7ce8baa6",
-      "type": "divider"
+      "id": "jar-meaning-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Database servers, credentials and other external services are not supplied by the JAR."
+        ]
+      ]
     },
     {
       "id": "20924eb1-ed54-8022-b39b-e991034a9799",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "3. Code Example"
+          "Build and run the application"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8046-b31c-c9e54236bfd8",
-      "type": "text",
+      "id": "jar-build-b0",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Here’s a simple Spring Boot app and how you configure it to produce an executable JAR:"
+          "The Spring Boot Maven plugin repackages the application into an executable archive."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8037-9610-e7f4e836997a",
-      "type": "text",
+      "id": "jar-build-b1",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Step 1: Basic Spring Boot Application",
-          [
-            [
-              "b"
-            ]
-          ]
+          "The Spring Boot Gradle plugin supplies the bootJar task."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-805d-a123-e2233e43e6ce",
-      "type": "code",
+      "id": "jar-build-b2",
+      "type": "bulleted_list",
       "richText": [
         [
-          "import org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication  // Marks this as a Spring Boot app\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args); // Bootstraps the app\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-8052-b62d-c90af124c6cc",
-      "type": "text",
-      "richText": [
-        [
-          "Step 2: Maven ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "pom.xml",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for executable JAR",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80fd-8144-f710f9f78e35",
-      "type": "code",
-      "richText": [
-        [
-          "<project>\n    <!-- other config omitted for brevity -->\n    <dependencies>\n        <!-- Spring Boot Starter for web apps -->\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <!-- Spring Boot Maven Plugin -->\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n                <version>3.0.0</version> <!-- use appropriate version -->\n                <executions>\n                    <execution>\n                        <goals>\n                            <goal>repackage</goal> <!-- creates executable JAR -->\n                        </goals>\n                    </execution>\n                </executions>\n            </plugin>\n        </plugins>\n    </build>\n</project>\n"
-        ]
-      ],
-      "language": "XML"
-    },
-    {
-      "id": "20924eb1-ed54-8037-974f-f6231374384e",
-      "type": "text",
-      "richText": [
-        [
-          "Step 3: Build and run",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Use the project’s wrapper and declared Java version. Keep plugin versions aligned with the application’s Spring Boot version."
         ]
       ]
     },
     {
       "id": "20924eb1-ed54-80ec-9a8e-e2295bf95de7",
-      "type": "code",
+      "type": "example",
+      "example": {
+        "title": "Build and run a Maven executable JAR",
+        "description": [
+          "Use an existing Boot Maven application with the spring-boot-starter-parent and spring-boot-maven-plugin.",
+          "Put this plugin declaration inside the existing build/plugins section of pom.xml.",
+          "This example sets Maven finalName to journal so the generated file is target/journal.jar.",
+          "Run the commands from the project directory."
+        ],
+        "code": "<!-- In the existing pom.xml -->\n<build>\n    <finalName>journal</finalName>\n    <plugins>\n        <plugin>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-maven-plugin</artifactId>\n        </plugin>\n    </plugins>\n</build>",
+        "language": "text",
+        "explanation": [
+          "The Boot parent configures the plugin’s repackage execution. A project without that parent must configure the repackage goal explicitly.",
+          "package produces the executable JAR in target.",
+          "java -jar starts the packaged application. Use a Java runtime compatible with its compiled classes and Boot release.",
+          "The same artifact can run with different external settings. Pass --spring.profiles.active=prod when the application has a production profile."
+        ],
+        "commands": "./mvnw clean package\njava -jar target/journal.jar"
+      }
+    },
+    {
+      "id": "jar-war",
+      "type": "header",
       "richText": [
         [
-          "mvn clean package            # Builds the executable JAR in target/\njava -jar target/demo.jar    # Runs the app anywhere with Java installed\n"
+          "Executable JAR and WAR"
         ]
+      ]
+    },
+    {
+      "id": "jar-war-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
       ],
-      "language": "Shell"
-    },
-    {
-      "id": "20924eb1-ed54-80b0-85d3-c2041678e112",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80de-acf1-e26b8d78c644",
-      "type": "sub_header",
-      "richText": [
-        [
-          "4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-806c-8b20-f3b31fc65ded",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is an executable JAR and how does Spring Boot create it?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8046-9b65-c2e0bc0971b1",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you run a Spring Boot application packaged as an executable JAR?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80d4-be38-e4d487eb039b",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the role of the Spring Boot Maven or Gradle plugin?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f4-bb8e-fc96075888b0",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "Why might you choose an executable JAR over a WAR file for deployment?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8088-9a35-c07ff5b03e54",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How does Spring Boot handle embedded web servers in executable JARs?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8064-8fc4-c42426cdc455",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-803d-941d-ff070999d67e",
-      "type": "sub_header",
-      "richText": [
-        [
-          "5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8001-b069-cbceae3a01bb",
-      "type": "text",
-      "richText": [
-        [
-          "Best Practices:",
-          [
-            [
-              "b"
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "jar-war-table-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Package"
+              ]
+            ],
+            "1": [
+              [
+                "Typical use"
+              ]
             ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8040-80a1-f62428bae133",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Always use Spring Boot’s build plugins (Maven/Gradle) to package your app — they handle dependencies and server bundling automatically."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8014-89e1-eaf1c36b12f5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep your application’s external configuration (e.g., "
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "c"
+          }
+        },
+        {
+          "id": "jar-war-table-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Executable JAR"
+              ]
+            ],
+            "1": [
+              [
+                "Run the application directly with java -jar and an embedded server."
+              ]
             ]
-          ]
-        ],
-        [
-          ") separate from the JAR, so you can change settings without rebuilding."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-801b-93b4-f42844c628ab",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Test your JAR on your target deployment environment to ensure it runs as expected."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80d8-979a-f5f157270ff1",
-      "type": "text",
-      "richText": [
-        [
-          "Common Pitfalls:",
-          [
-            [
-              "b"
+          }
+        },
+        {
+          "id": "jar-war-table-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "WAR"
+              ]
+            ],
+            "1": [
+              [
+                "Deploy a servlet web application to an external servlet container. A Boot WAR can also be executable when configured for it."
+              ]
             ]
-          ]
-        ]
+          }
+        }
       ]
-    },
-    {
-      "id": "20924eb1-ed54-800d-836a-c97cbe3c1ecd",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Trying to run the JAR without a compatible Java runtime installed on the deployment machine."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b6-badf-d8f0e2900060",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forgetting to include the Spring Boot plugin in your build file, resulting in a non-executable JAR."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b1-8cd6-de534aa7a160",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Bundling unnecessary large dependencies, making the JAR size too big."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c4-8bb9-f5221641ad09",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80a0-9076-dafc8b335d6f",
-      "type": "sub_header",
-      "richText": [
-        [
-          "6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-803c-b88f-d206c2729aec",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Beans & Auto-configuration:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " The executable JAR includes your Spring beans and auto-configuration classes, enabling your app’s components to start automatically."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8046-b4b4-ca0a002f014e",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Classpath:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " The JAR bundles all dependencies inside, so the classpath is managed internally — no external setup needed."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8087-ad12-fb70ec5b7d7c",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Profiles & Configuration:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " You can supply different configurations at runtime (like dev or prod profiles) even when running the executable JAR."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-808c-a2ab-c21ce2c0a88c",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Embedded Server:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " This topic ties directly into how Spring Boot embeds servers like Tomcat or Jetty inside the JAR."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8082-8a5f-db128100d067",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80ea-a6bd-fc58b0fd87f8",
-      "type": "sub_header",
-      "richText": [
-        [
-          "7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a3-b70d-e243eba7fe78",
-      "type": "text",
-      "richText": [
-        [
-          "Q: What is an executable JAR in Spring Boot?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809d-b191-ffad08368726",
-      "type": "text",
-      "richText": [
-        [
-          "A: It’s a Java archive file packaged by Spring Boot that contains your application code, all dependencies, and an embedded web server, allowing you to run your app with a simple "
-        ],
-        [
-          "java -jar",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " command without needing external servers."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-807f-ab97-ec0be3aabf6b",
-      "type": "text",
-      "richText": [
-        [
-          "Q: How do you create an executable JAR in Spring Boot?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ad-a20a-f704f05d86da",
-      "type": "text",
-      "richText": [
-        [
-          "A: By including the Spring Boot Maven or Gradle plugin in your build configuration, then running the build command ("
-        ],
-        [
-          "mvn package",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or "
-        ],
-        [
-          "gradle build",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "), which packages your app and dependencies into a runnable JAR."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8057-85d1-d2c5bb21d939",
-      "type": "text",
-      "richText": [
-        [
-          "Q: How is deploying a Spring Boot executable JAR different from a traditional Java web app?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8070-a75d-f5e173a6d6a7",
-      "type": "text",
-      "richText": [
-        [
-          "A: Unlike traditional WAR files that need an external server like Tomcat, executable JARs have an embedded server bundled inside, so deployment is as easy as copying and running a single file."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8095-b209-e273c1ffcaf2",
-      "type": "divider"
     },
     {
       "id": "ed-deployment-paths",
       "type": "header",
       "richText": [
         [
-          "Choose a deployment path"
+          "Choose where the application runs"
         ]
       ]
     },
@@ -664,7 +197,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The executable JAR is the packaged application. The host still needs a compatible Java runtime, configuration, network access and a process-management plan."
+          "Managed hosting runs the application process and handles parts of the hosting environment."
         ]
       ]
     },
@@ -673,7 +206,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Managed hosting handles parts of the machine and process environment. A VPS gives more control and also leaves more server maintenance with you."
+          "A virtual private server (VPS) gives you a machine to maintain yourself."
         ]
       ]
     },
@@ -682,7 +215,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Read the managed-hosting page for assigned ports and release configuration. Read the VPS page for systemd, the reverse proxy and HTTPS."
+          "Keep environment-specific configuration and credentials outside the artifact."
         ]
       ]
     },
@@ -691,16 +224,16 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Verify build, startup, public routing, authentication and database operations separately. Success at one boundary does not prove the others."
+          "A successful build only proves packaging succeeded. Check startup and the deployed application’s behavior separately."
         ]
       ]
     },
     {
       "id": "ed-cloud-link",
-      "type": "text",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Managed hosting",
+          "Deploy on managed hosting",
           [
             [
               "a",
@@ -712,10 +245,10 @@
     },
     {
       "id": "ed-vps-link",
-      "type": "text",
+      "type": "bulleted_list",
       "richText": [
         [
-          "VPS deployment",
+          "Run the application on a VPS",
           [
             [
               "a",
@@ -728,17 +261,18 @@
   ],
   "sources": [
     {
-      "title": "Engineering Digest: Deploy Spring Boot App on Heroku: Easy Guide for Beginners",
-      "url": "https://www.youtube.com/watch?v=Q0Rhup_Vjlk&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+      "title": "Spring Boot 3.5: executable archives",
+      "url": "https://docs.spring.io/spring-boot/3.5/maven-plugin/packaging.html"
     },
     {
-      "title": "Engineering Digest: How to Host Spring Boot on VPS: Production Guide (2026)",
-      "url": "https://www.youtube.com/watch?v=nKrQcXMBGRc&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+      "title": "Spring Boot 3.5: Gradle packaging",
+      "url": "https://docs.spring.io/spring-boot/3.5/gradle-plugin/packaging.html"
     },
     {
-      "title": "Spring Boot: deployment",
-      "url": "https://docs.spring.io/spring-boot/3.5/how-to/deployment/index.html"
+      "title": "Spring Boot 3.5: traditional deployment",
+      "url": "https://docs.spring.io/spring-boot/3.5/how-to/deployment/traditional-deployment.html"
     }
   ],
-  "updatedOn": "2026-10-13"
+  "updatedOn": "2026-10-14",
+  "summary": "Package the application and its dependencies, then run the same artifact on a host."
 }

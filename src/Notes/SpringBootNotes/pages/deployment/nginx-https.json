@@ -1,0 +1,213 @@
+{
+  "id": "spring-boot-deployment-nginx-https",
+  "title": "Nginx and HTTPS",
+  "summary": "Forward public requests to a private Spring Boot process, then configure HTTPS.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Nginx: proxy module",
+      "url": "https://nginx.org/en/docs/http/ngx_http_proxy_module.html"
+    },
+    {
+      "title": "Spring Boot: traditional deployment and proxy configuration",
+      "url": "https://docs.spring.io/spring-boot/3.5/how-to/webserver.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "vps-proxy",
+      "type": "header",
+      "richText": [
+        [
+          "Use Nginx as a reverse proxy"
+        ]
+      ]
+    },
+    {
+      "id": "vps-proxy-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A reverse proxy receives a client request and forwards it to another server."
+        ]
+      ]
+    },
+    {
+      "id": "vps-proxy-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Nginx can accept public requests and forward them to the Spring Boot process on the same VPS."
+        ]
+      ]
+    },
+    {
+      "id": "vps-proxy-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bind Spring Boot to 127.0.0.1 so its HTTP port accepts only local connections."
+        ]
+      ]
+    },
+    {
+      "id": "vps-proxy-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Expose the public web ports through Nginx."
+        ]
+      ]
+    },
+    {
+      "id": "nginx-proxy-code",
+      "type": "example",
+      "example": {
+        "title": "Forward HTTP requests to the local application",
+        "description": [
+          "The Spring Boot process listens at 127.0.0.1:8080.",
+          "Use a domain you control in server_name. This example uses journal.example.com.",
+          "Place this server block in the Nginx configuration location used by your Linux distribution.",
+          "This is the HTTP proxy step. Add the HTTPS configuration described below before exposing authenticated application traffic."
+        ],
+        "code": "server {\n    listen 80;\n    server_name journal.example.com;\n\n    location / {\n        proxy_pass http://127.0.0.1:8080;\n        proxy_set_header Host $host;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n    }\n}",
+        "language": "text",
+        "explanation": [
+          "proxy_pass selects the local application server.",
+          "Host preserves the requested domain. X-Forwarded-Proto identifies the original request protocol.",
+          "Only trust forwarded headers from the controlled proxy. Restrict direct access to the application.",
+          "If Spring must use forwarded headers for redirects, configure its forwarded-header handling for this proxy arrangement.",
+          "Validate the Nginx configuration before reloading it."
+        ],
+        "commands": "sudo nginx -t\nsudo systemctl reload nginx"
+      }
+    },
+    {
+      "id": "https",
+      "type": "header",
+      "richText": [
+        [
+          "Enable HTTPS"
+        ]
+      ]
+    },
+    {
+      "id": "https-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Point the domain’s DNS record to the VPS."
+        ]
+      ]
+    },
+    {
+      "id": "https-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Install a TLS certificate for that domain and configure Nginx to serve HTTPS on port 443."
+        ]
+      ]
+    },
+    {
+      "id": "https-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "TLS encrypts traffic between the browser and the public server."
+        ]
+      ]
+    },
+    {
+      "id": "https-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Redirect public HTTP traffic to HTTPS once HTTPS works."
+        ]
+      ]
+    },
+    {
+      "id": "https-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep automatic certificate renewal configured and check that renewed certificates are loaded."
+        ]
+      ]
+    },
+    {
+      "id": "https-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Forward the public HTTPS protocol correctly so generated URLs and OAuth callback URLs use HTTPS."
+        ]
+      ]
+    },
+    {
+      "id": "proxy-network",
+      "type": "header",
+      "richText": [
+        [
+          "Network rules and checks"
+        ]
+      ]
+    },
+    {
+      "id": "proxy-network-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Allow required SSH and public web ports. Keep the application port private."
+        ]
+      ]
+    },
+    {
+      "id": "proxy-network-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Preserve working SSH access when changing remote firewall rules."
+        ]
+      ]
+    },
+    {
+      "id": "proxy-network-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose proxy timeouts and request-size limits for the application’s endpoints."
+        ]
+      ]
+    },
+    {
+      "id": "proxy-network-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Rate limiting can reduce repeated abusive requests. It does not prevent every denial-of-service attack."
+        ]
+      ]
+    },
+    {
+      "id": "proxy-network-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check the local application, public HTTPS endpoint and certificate independently."
+        ]
+      ]
+    },
+    {
+      "id": "proxy-network-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Then check an authenticated operation that reads or writes the database."
+        ]
+      ]
+    }
+  ]
+}

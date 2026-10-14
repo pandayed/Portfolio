@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-security-jwt",
-  "title": "JWT Authentication and Resource Servers",
-  "summary": "Validate bearer access tokens with trusted keys, issuer, audience and request permissions.",
+  "title": "JWT access tokens",
+  "summary": "Understand the contents and checks of a signed JWT before configuring an API.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Complete JWT Authentication and Authorisation in Spring Boot",
@@ -37,7 +37,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A JWT is a token format. A signed JWT contains a header, payload and signature. Claims are named values in the payload. Encoding does not hide the payload. Do not put passwords or private journal content in it."
+          "JSON Web Token (JWT) is a token format."
         ]
       ]
     },
@@ -46,7 +46,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A bearer token grants access to whoever holds it. Send it over HTTPS in the Authorization: Bearer header. Avoid token values in URLs or logs."
+          "A signed JWT has three parts: header, payload and signature."
         ]
       ]
     },
@@ -55,7 +55,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "An authorization server issues an access token. A resource server is the API that accepts and validates it. Configuring a resource server does not create a login endpoint or issue tokens."
+          "The header names the signing algorithm. The payload contains claims, which are named values about the token."
         ]
       ]
     },
@@ -64,71 +64,231 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Validate the signature using trusted keys and allowed algorithms. Check issuer (iss), intended audience (aud), expiration (exp), and not-before time (nbf) when present. Decoding the payload is not validation."
+          "The signature lets the receiver check whether the signed contents were changed and whether a trusted key signed them."
         ]
       ]
     },
     {
-      "id": "jwt-resource",
+      "id": "jwt-meaning-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The payload of a signed JWT is encoded, not hidden. Do not put passwords or private application content in it."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-claims",
       "type": "header",
       "richText": [
         [
-          "Use Spring’s resource server support"
+          "Claims used when checking access"
         ]
       ]
     },
     {
-      "id": "jwt-resource-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "For Spring Boot 3, add spring-boot-starter-oauth2-resource-server. Configure the trusted provider’s issuer-uri. Provider metadata lets the decoder find its public keys."
-        ]
-      ]
-    },
-    {
-      "id": "jwt-resource-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The filter reads the bearer token. JwtDecoder verifies and validates it. Spring creates JwtAuthenticationToken and stores authentication for this request. Request rules then check its authorities."
-        ]
-      ]
-    },
-    {
-      "id": "jwt-resource-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "By default, scopes become authorities such as SCOPE_journal.read. hasRole(\"USER\") does not match this authority. Configure a converter explicitly if the provider has a separate roles claim."
-        ]
-      ]
-    },
-    {
-      "id": "jwt-resource-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Enforce the expected audience with a Jwt validator, or a supported Boot audiences property. issuer-uri does not by itself express which API the token is intended for."
-        ]
-      ]
-    },
-    {
-      "id": "jwt-resource-code",
-      "type": "code",
-      "richText": [
-        [
-          "@Bean\nSecurityFilterChain api(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(auth -> auth\n            .requestMatchers(\"/journal/**\")\n                .hasAuthority(\"SCOPE_journal.read\")\n            .anyRequest().denyAll())\n        .oauth2ResourceServer(oauth ->\n            oauth.jwt(Customizer.withDefaults()))\n        .sessionManagement(session -> session\n            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n        .build();\n}"
-        ]
+      "id": "jwt-claims-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
       ],
-      "language": "Java"
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "jwt-claims-table-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Claim"
+              ]
+            ],
+            "1": [
+              [
+                "Meaning"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "jwt-claims-table-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "iss"
+              ]
+            ],
+            "1": [
+              [
+                "Issuer: who issued the token."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "jwt-claims-table-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "sub"
+              ]
+            ],
+            "1": [
+              [
+                "Subject: the identity described by the token."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "jwt-claims-table-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "aud"
+              ]
+            ],
+            "1": [
+              [
+                "Audience: the recipient the token is intended for."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "jwt-claims-table-4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "exp"
+              ]
+            ],
+            "1": [
+              [
+                "Expiration: the time after which the token must not be accepted."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "jwt-claims-table-5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "nbf"
+              ]
+            ],
+            "1": [
+              [
+                "Not before: the time before which the token must not be accepted."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "jwt-bearer",
+      "type": "header",
+      "richText": [
+        [
+          "Send an access token"
+        ]
+      ]
+    },
+    {
+      "id": "jwt-bearer-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An authorization server issues access tokens."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-bearer-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A resource server is an API that accepts tokens and checks access to its resources."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-bearer-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A bearer token grants access to whoever holds it. Send it over HTTPS in the Authorization header with the Bearer prefix."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-bearer-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Do not put token values in URLs or logs."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-validation",
+      "type": "header",
+      "richText": [
+        [
+          "Validate before trusting claims"
+        ]
+      ]
+    },
+    {
+      "id": "jwt-validation-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check the signature using trusted keys and allowed signing algorithms."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-validation-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check the expected issuer and audience. Check expiration and not-before time when present."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-validation-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Decoding the payload only reads its contents. It does not validate the token."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-validation-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "After validation, apply the permissions required by the operation."
+        ]
+      ]
     },
     {
       "id": "jwt-lifecycle",
       "type": "header",
       "richText": [
         [
-          "Sessions, expiration and revocation"
+          "Expiration and revocation"
         ]
       ]
     },
@@ -137,7 +297,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "This example leaves CSRF enabled. A read-only GET request needs no CSRF token. Before disabling CSRF for writes, ensure authentication relies only on bearer headers that browsers do not send automatically. Cookies or browser-cached Basic credentials change this decision."
+          "A stolen token can remain valid until it expires unless the application has a way to reject it sooner."
         ]
       ]
     },
@@ -146,7 +306,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Stateless means Spring does not persist this authentication in an HTTP session. An API can still call databases, caches and other services."
+          "Use a defined expiration policy for access tokens."
         ]
       ]
     },
@@ -155,7 +315,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A valid signature does not revoke a stolen token. Choose short access-token lifetimes and an explicit revocation or refresh policy. Opaque tokens with introspection are an alternative when central validity checks are needed."
+          "A refresh token can obtain a new access token. It needs its own storage, expiration and revocation rules."
         ]
       ]
     },
@@ -164,7 +324,22 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The tutorial source uses a custom filter and signing utility. It loads roles from the database on requests. Its expiration expression is one hour, despite a five-minute comment. These implementation details are separate from JWT’s general rules."
+          "For centrally checked token validity, an API can use opaque tokens and introspection. Introspection asks the authorization server whether a token is still active."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-resource-next",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Configure a JWT resource server",
+          [
+            [
+              "a",
+              "/notes/spring-boot/security/resource-server"
+            ]
+          ]
         ]
       ]
     }

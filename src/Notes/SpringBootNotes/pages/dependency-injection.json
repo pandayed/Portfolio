@@ -1,1044 +1,159 @@
 {
   "id": "20824eb1-ed54-80e0-b070-cfbb122353b8",
-  "title": "Dependency Injection (@Autowired, @Component, @Service, @Repository)",
+  "title": "Dependency injection",
   "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed5480e0b070cfbb122353b8",
   "blocks": [
     {
-      "id": "20824eb1-ed54-8051-931d-ec2470a5675f",
-      "type": "divider"
-    },
-    {
       "id": "20824eb1-ed54-8014-9464-e1e3b8188db5",
-      "type": "sub_header",
-      "richText": [
-        [
-          "1. Core Concept (What is it and why does it exist?)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8026-a3a9-cc797b4e9916",
-      "type": "text",
-      "richText": [
-        [
-          "Dependency Injection (DI)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " is a design pattern where objects (called dependencies) are passed into a class instead of the class creating them itself."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80d6-8ab1-d024ffdb6a80",
-      "type": "text",
-      "richText": [
-        [
-          "In Spring Boot, DI makes your code "
-        ],
-        [
-          "loosely coupled",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "easier to test",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", and "
-        ],
-        [
-          "easier to maintain",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ". Spring Boot automates this using annotations like "
-        ],
-        [
-          "@Autowired",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", so you don't have to write the wiring code manually."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80c5-8551-f9e2a9b1f4ff",
-      "type": "text",
-      "richText": [
-        [
-          "Think of it like this (C++ analogy)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Instead of a class using "
-        ],
-        [
-          "new",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " to create its own objects, someone else gives it the ready-made object. That “someone else” in Spring is the "
-        ],
-        [
-          "Spring Container",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-804b-80ea-e2d02c1b25a9",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-80a7-afb1-c0773495ee9a",
-      "type": "sub_header",
-      "richText": [
-        [
-          "2. Key Interview Points",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80db-b7c8-fe887ae3e5bc",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "What is Dependency Injection, and why is it useful in Spring?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8001-9c99-c0532372e487",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "Difference between ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Component",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Service",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Repository",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "—and when to use which.",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8001-8d4f-c56c46ad760c",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "How does ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Autowired",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " work, and where can it be applied (constructor, field, setter)?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80f1-9066-c8f14f5cc1a8",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "What are common problems like NoSuchBeanDefinitionException and how to fix them?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-802e-a2a6-df27965ac689",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8003-b7a9-c7e255672327",
-      "type": "sub_header",
-      "richText": [
-        [
-          "3. Code Example",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80dc-a58f-e3d55c218057",
-      "type": "text",
-      "richText": [
-        [
-          "Let’s simulate a "
-        ],
-        [
-          "real-world scenario",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": a simple app that sends notifications."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8020-9006-cddd606284c4",
-      "type": "code",
-      "richText": [
-        [
-          "// Step 1: Create an interface (abstraction)\npublic interface NotificationService {\n    void sendNotification(String message);\n}\n\n// Step 2: Implement the interface\nimport org.springframework.stereotype.Service;\n\n@Service // Marks this class as a Spring-managed bean\npublic class EmailNotificationService implements NotificationService {\n    @Override\n    public void sendNotification(String message) {\n        System.out.println(\"Email sent with message: \" + message);\n    }\n}\n\n// Step 3: Create a consumer class that depends on the service\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.stereotype.Component;\n\n@Component // Marks this class as a Spring-managed bean\npublic class NotificationManager {\n\n    private final NotificationService notificationService;\n\n    @Autowired // Spring will inject an instance of NotificationService here\n    public NotificationManager(NotificationService notificationService) {\n        this.notificationService = notificationService;\n    }\n\n    public void triggerNotification() {\n        notificationService.sendNotification(\"Hello from Spring Boot!\");\n    }\n}\n\n// Step 4: Run the application\nimport org.springframework.boot.CommandLineRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.beans.factory.annotation.Autowired;\n\n@SpringBootApplication\npublic class NotificationApp implements CommandLineRunner {\n\n    @Autowired\n    private NotificationManager notificationManager;\n\n    public static void main(String[] args) {\n        SpringApplication.run(NotificationApp.class, args);\n    }\n\n    @Override\n    public void run(String... args) {\n        notificationManager.triggerNotification();\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20824eb1-ed54-8047-9f09-d8398e4678d5",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "What’s Happening:"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a8-b4fa-ff98ac280a58",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring "
-        ],
-        [
-          "creates",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "manages",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " objects (a.k.a. Beans)."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-806c-9e32-e57413e2f2b9",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@Component",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@Service",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", and "
-        ],
-        [
-          "@Repository",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " tell Spring to "
-        ],
-        [
-          "register",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " those classes."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8030-82a5-c5f90be2c264",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@Autowired",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " tells Spring to "
-        ],
-        [
-          "inject dependencies automatically",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8001-8112-e866d79834a0",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8045-aa2e-c159b960a6b2",
-      "type": "sub_header",
-      "richText": [
-        [
-          "4. Common Interview Questions",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8001-85ca-ed473305aaaf",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is Dependency Injection and how is it implemented in Spring Boot?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80de-bea6-d1dc347c4ec8",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What’s the difference between ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Component",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Service",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Repository",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80fd-92dd-c6f5bd188134",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "Can you explain how ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Autowired",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " works and what are its different types?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-800b-97fe-d6fe5d4a1d90",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is constructor injection vs field injection vs setter injection?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-808b-a016-fb4ab72e80f9",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What happens if Spring can't find a bean to inject? How do you fix it?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80f2-818a-fe2668e04803",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-80a0-a9f1-f70fa45f5c4b",
-      "type": "sub_header",
-      "richText": [
-        [
-          "5. Best Practices & Pitfalls",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80af-9d32-d8915a43df34",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices:"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-804f-bf0e-ea137aad4253",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Prefer "
-        ],
-        [
-          "constructor injection",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " over field injection (testability, immutability)."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8068-a7ce-d1bd52625e5f",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use "
-        ],
-        [
-          "@Service",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@Repository",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for semantic clarity (not just "
-        ],
-        [
-          "@Component",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " everywhere)."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a5-9c29-e076edecd98a",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep interfaces for services to enable easier testing and future extensions."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a9-9ece-ceafc2cb3b6e",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❌ Common Pitfalls:"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80d9-8296-d22b61458a33",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forgetting to annotate your class with "
-        ],
-        [
-          "@Component",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@Service",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", or "
-        ],
-        [
-          "@Repository",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "—Spring won’t manage it."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-806e-9faf-d97b6fb09d76",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Having "
-        ],
-        [
-          "multiple beans",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " for the same interface and not specifying which one to inject."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80b6-b0a5-daed87728cc3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Using field injection—"
-        ],
-        [
-          "harder to test and not recommended",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " in modern Spring."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8079-b2a0-e65f253814f1",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-802c-9e36-e573caa4bda4",
-      "type": "sub_header",
-      "richText": [
-        [
-          "6. Connection to Other Concepts",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8058-b727-fc711e7aec89",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Container / ApplicationContext",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Manages the lifecycle of beans and handles injection."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-806b-90c1-d4b9991e53b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Bean Lifecycle",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": DI is part of how beans are created and wired together."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80ed-9864-e27e61f5b3c6",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Profiles and Qualifiers",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Help manage multiple beans of the same type."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-800f-8651-d826a4f4b9c7",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Testing with Mocks",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Constructor injection makes it easier to test classes using mock dependencies."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80f0-9fed-d1cbfaf99c9e",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-80b9-9552-c098b9d6e2ac",
-      "type": "sub_header",
-      "richText": [
-        [
-          "7. Quick Interview Answers (30-60 seconds)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-800b-9c97-d019aa419c08",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❓ "
-        ],
-        [
-          "What is Dependency Injection and how does Spring Boot handle it?",
-          [
-            [
-              "i"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8015-aab7-fa7f960c1311",
-      "type": "quote",
-      "richText": [
-        [
-          "Dependency Injection is a design pattern where dependencies are passed into a class instead of being created inside it. Spring Boot simplifies this using annotations like @Autowired, which tells the framework to automatically inject the required dependencies. This makes the code more modular, testable, and maintainable."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-807f-b0c8-d6f02ce9ab36",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❓ "
-        ],
-        [
-          "What is the difference between @Component, @Service, and @Repository?",
-          [
-            [
-              "i"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8080-b789-f137f6e1aa79",
-      "type": "quote",
-      "richText": [
-        [
-          "All three are Spring stereotypes that mark a class as a Spring-managed bean. @Component is generic, while @Service is used for business logic, and @Repository is for database interaction. They help organize the code and enable additional Spring features like exception translation in repositories."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80e6-bf40-dfb565d45a32",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❓ "
-        ],
-        [
-          "Why should you prefer constructor injection over field injection?",
-          [
-            [
-              "i"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80c0-bf40-cae82fbd8347",
-      "type": "quote",
-      "richText": [
-        [
-          "Constructor injection promotes immutability and makes your classes easier to test because dependencies must be provided when creating the object. Field injection hides the dependencies and makes unit testing more difficult."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8073-9167-d949718b4b63",
-      "type": "divider"
-    },
-    {
-      "id": "ed-stereotype-choice",
       "type": "header",
       "richText": [
         [
-          "Choose a stereotype by responsibility"
+          "Supply a dependency"
         ]
       ]
     },
     {
-      "id": "ed-stereotype-choice-b0",
+      "id": "dependency-injection-0-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Component registers a general component. @Service communicates that a bean holds application or business operations; it does not automatically create a transaction."
+          "A dependency is another object that a class uses."
         ]
       ]
     },
     {
-      "id": "ed-stereotype-choice-b1",
+      "id": "dependency-injection-0-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Repository identifies data access and participates in Spring’s persistence-exception translation when the relevant infrastructure is configured."
+          "Dependency injection means supplying that object to the class instead of making the class create it."
         ]
       ]
     },
     {
-      "id": "ed-stereotype-choice-b2",
+      "id": "dependency-injection-0-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "These stereotypes do not force a folder structure. Scanning and bean registration determine whether the class is available for injection."
+          "For constructor injection, Spring finds a matching bean and passes it to the constructor."
         ]
       ]
     },
     {
-      "id": "ed-stereotype-choice-b3",
+      "id": "dependency-injection-0-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "When two beans implement the same interface, select intentionally with @Qualifier or a suitable @Primary. Renaming a local variable is not a reliable dependency-selection strategy."
+          "A class with one constructor does not need @Autowired on that constructor."
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-0-example-0",
+      "type": "example",
+      "example": {
+        "title": "Inject GreetingService into a controller",
+        "description": [
+          "Use the GreetingService bean from the beans lesson. Add Spring Web and place the controller in the scanned package tree."
+        ],
+        "code": "package com.example.demo;\n\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\npublic class GreetingController {\n    private final GreetingService greetingService;\n\n    public GreetingController(GreetingService greetingService) {\n        this.greetingService = greetingService;\n    }\n\n    @GetMapping(\"/greeting\")\n    public String greeting() {\n        return greetingService.greet();\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "Spring creates the controller and supplies the GreetingService bean.",
+          "The constructor stores the dependency in a final field.",
+          "GET /greeting calls greeting(), which calls the service."
+        ],
+        "result": "Hello",
+        "commands": "curl http://localhost:8080/greeting"
+      }
+    },
+    {
+      "id": "20824eb1-ed54-80a7-afb1-c0773495ee9a",
+      "type": "header",
+      "richText": [
+        [
+          "Constructor, setter and field injection"
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-1-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Constructor injection makes required dependencies explicit. A caller can also supply them when creating the object without Spring."
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-1-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Setter injection supplies a dependency through a method after construction. It can represent an optional dependency."
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-1-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Field injection writes directly to an annotated field after construction. That field is unavailable inside the constructor."
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-1-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Using new to construct a class yourself does not ask Spring to inject its fields."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-8003-b7a9-c7e255672327",
+      "type": "header",
+      "richText": [
+        [
+          "Select a bean"
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-2-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "If Spring cannot find a required dependency, creating the consuming bean fails. Check registration and scanning."
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-2-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "If several beans match the requested type, use @Qualifier to name the intended bean or @Primary to designate the default candidate."
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-2-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Autowired can mark a constructor when Spring needs to know which constructor to use."
+        ]
+      ]
+    },
+    {
+      "id": "dependency-injection-2-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Two beans whose constructors require each other create a circular dependency. Constructor injection cannot resolve that cycle."
         ]
       ]
     }
@@ -1055,7 +170,11 @@
     {
       "title": "Spring Framework: component scanning",
       "url": "https://docs.spring.io/spring-framework/reference/core/beans/classpath-scanning.html"
+    },
+    {
+      "title": "Official reference: Dependency injection",
+      "url": "https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html"
     }
   ],
-  "updatedOn": "2026-10-13"
+  "updatedOn": "2026-10-14"
 }

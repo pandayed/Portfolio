@@ -7,109 +7,272 @@ const documents = import.meta.glob<SpringBootDocument>('./pages/**/*.json', {
 
 export const springBootChapters: readonly SpringBootChapter[] = [
     {
-        title: '1. Setup and application startup',
-        summary: 'Create a project, understand its structure, and follow how Spring creates beans.',
-        children: [
-            { slug: 'first-application' },
-            { slug: 'project-structure' },
-            { slug: 'starter-projects-auto-configuration' },
-            { slug: 'spring-boot-application' },
-            { slug: 'dependency-injection' },
-            { slug: 'bean-lifecycle' },
-            { slug: 'annotations' },
-        ],
+        "title": "1. Application foundations",
+        "summary": "Create a project, then learn beans, dependencies, and startup.",
+        "children": [
+            {
+                "slug": "first-application"
+            },
+            {
+                "slug": "project-structure"
+            },
+            {
+                "slug": "maven-gradle"
+            },
+            {
+                "slug": "beans"
+            },
+            {
+                "slug": "dependency-injection"
+            },
+            {
+                "slug": "spring-boot-application"
+            },
+            {
+                "slug": "starter-projects-auto-configuration"
+            },
+            {
+                "slug": "auto-configuration"
+            },
+            {
+                "slug": "bean-lifecycle"
+            }
+        ]
     },
     {
-        title: '2. REST APIs',
-        summary: 'Map requests, return useful status codes, validate input, and document endpoints.',
-        children: [
-            { slug: 'restful-web-services' },
-            { slug: 'http-methods' },
-            { slug: 'request-response-body' },
-            { slug: 'rest/responses' },
-            { slug: 'rest-api-validation' },
-            { slug: 'exception-handling' },
-            { slug: 'openapi' },
-        ],
+        "title": "2. Configuration",
+        "summary": "Set values, select profiles, then read settings in Java.",
+        "children": [
+            {
+                "slug": "application-properties"
+            },
+            {
+                "slug": "profiles-configuration-management"
+            },
+            {
+                "slug": "configuration-binding"
+            }
+        ]
     },
     {
-        title: '3. Configuration and development tools',
-        summary: 'Manage environments, bind settings, reduce repetitive code, and inspect application behavior.',
-        children: [
-            { slug: 'application-properties' },
-            { slug: 'profiles-configuration-management' },
-            { slug: 'lombok' },
-            { slug: 'logging' },
-            { slug: 'devtools-actuator' },
-        ],
+        "title": "3. REST APIs",
+        "summary": "Handle a request, read its input, then control responses and failures.",
+        "children": [
+            {
+                "slug": "restful-web-services"
+            },
+            {
+                "slug": "http-methods"
+            },
+            {
+                "slug": "rest/request-parameters"
+            },
+            {
+                "slug": "request-response-body"
+            },
+            {
+                "slug": "request-flow"
+            },
+            {
+                "slug": "rest/responses"
+            },
+            {
+                "slug": "rest-api-validation"
+            },
+            {
+                "slug": "exception-handling"
+            },
+            {
+                "slug": "openapi"
+            }
+        ]
     },
     {
-        title: '4. Data access',
-        summary: 'Use MongoDB documents and queries, then compare them with JPA and relational mappings.',
-        children: [
-            { slug: 'mongodb', title: 'MongoDB', children: [
-                { slug: 'mongodb' },
-                { slug: 'mongodb/repositories' },
-                { slug: 'mongodb/relationships' },
-                { slug: 'mongodb/transactions' },
-                { slug: 'mongodb/queries' },
-            ] },
-            { slug: 'spring-data-jpa' },
-            { slug: 'entity-mapping' },
-            { slug: 'relational-databases' },
-        ],
+        "title": "4. Data access",
+        "summary": "Connect to a database before mapping records and writing queries.",
+        "children": [
+            {
+                "slug": "relational-databases"
+            },
+            {
+                "slug": "entity-mapping"
+            },
+            {
+                "slug": "spring-data-jpa"
+            },
+            {
+                "slug": "jpa-queries"
+            },
+            {
+                "slug": "jpa-transactions"
+            },
+            {
+                "slug": "jpa-relationships"
+            },
+            {
+                "slug": "jpa-fetching"
+            },
+            {
+                "title": "MongoDB",
+                "slug": "mongodb",
+                "children": [
+                    {
+                        "slug": "mongodb"
+                    },
+                    {
+                        "slug": "mongodb/documents"
+                    },
+                    {
+                        "slug": "mongodb/repositories"
+                    },
+                    {
+                        "slug": "mongodb/queries"
+                    },
+                    {
+                        "slug": "mongodb/indexes"
+                    },
+                    {
+                        "slug": "mongodb/relationships"
+                    },
+                    {
+                        "slug": "mongodb/transactions"
+                    }
+                ]
+            }
+        ]
     },
     {
-        title: '5. Security',
-        summary: 'Distinguish login, permissions, and record ownership before adding JWT or Google login.',
-        children: [{ slug: 'security-basics', title: 'Spring Security', children: [
-            { slug: 'security-basics' },
-            { slug: 'security/authentication-authorization' },
-            { slug: 'security/jwt' },
-            { slug: 'security/oauth2' },
-        ] }],
+        "title": "5. Security",
+        "summary": "Identify users, apply access rules, then configure token or browser login.",
+        "children": [
+            {
+                "slug": "security-basics"
+            },
+            {
+                "slug": "security/authentication-authorization"
+            },
+            {
+                "slug": "security/ownership"
+            },
+            {
+                "slug": "security/browser-security"
+            },
+            {
+                "slug": "security/jwt"
+            },
+            {
+                "slug": "security/resource-server"
+            },
+            {
+                "slug": "security/oauth2"
+            },
+            {
+                "slug": "security/google-login"
+            }
+        ]
     },
     {
-        title: '6. Testing and code quality',
-        summary: 'Choose focused unit tests, Spring integration checks, and static analysis for different questions.',
-        children: [
-            { slug: 'test-framework', title: 'Testing', children: [
-                { slug: 'test-framework' },
-                { slug: 'testing/junit' },
-                { slug: 'testing/mockito' },
-            ] },
-            { slug: 'code-quality' },
-        ],
+        "title": "6. Development and diagnostics",
+        "summary": "Use logging, development tools, monitoring, and generated methods.",
+        "children": [
+            {
+                "slug": "logging"
+            },
+            {
+                "slug": "devtools-actuator"
+            },
+            {
+                "slug": "actuator"
+            },
+            {
+                "slug": "lombok"
+            }
+        ]
     },
     {
-        title: '7. Integrations and background work',
-        summary: 'Call external APIs, send email, schedule work, cache results, and publish events.',
-        children: [
-            { slug: 'integrations/external-apis', title: 'External APIs', children: [
-                { slug: 'integrations/external-apis' },
-                { slug: 'integrations/text-to-speech' },
-            ] },
-            { slug: 'integrations/email' },
-            { slug: 'integrations/scheduling' },
-            { slug: 'redis' },
-            { slug: 'kafka', title: 'Kafka', children: [
-                { slug: 'kafka' },
-                { slug: 'kafka/delivery-failures' },
-            ] },
-        ],
+        "title": "7. Testing and code quality",
+        "summary": "Test Java behavior before adding Spring context and HTTP checks.",
+        "children": [
+            {
+                "slug": "test-framework"
+            },
+            {
+                "slug": "testing/junit"
+            },
+            {
+                "slug": "testing/parameterized-tests"
+            },
+            {
+                "slug": "testing/mockito"
+            },
+            {
+                "slug": "testing/web-mvc"
+            },
+            {
+                "slug": "testing/spring-boot"
+            },
+            {
+                "slug": "code-quality"
+            }
+        ]
     },
     {
-        title: '8. Building and deployment',
-        summary: 'Package the application and understand managed hosting and a Linux server deployment.',
-        children: [
-            { slug: 'maven-gradle' },
-            { slug: 'executable-jars-deployment', title: 'Deployment', children: [
-                { slug: 'executable-jars-deployment' },
-                { slug: 'deployment/cloud' },
-                { slug: 'deployment/vps' },
-            ] },
-        ],
+        "title": "8. Integrations and background work",
+        "summary": "Call services, schedule operations, cache data, and process events.",
+        "children": [
+            {
+                "slug": "integrations/external-apis"
+            },
+            {
+                "slug": "integrations/text-to-speech"
+            },
+            {
+                "slug": "integrations/email"
+            },
+            {
+                "slug": "integrations/scheduling"
+            },
+            {
+                "slug": "integrations/sentiment-summary"
+            },
+            {
+                "slug": "redis"
+            },
+            {
+                "slug": "kafka"
+            },
+            {
+                "slug": "kafka/delivery-failures"
+            }
+        ]
     },
+    {
+        "title": "9. Packaging and deployment",
+        "summary": "Package a runnable application, then choose and configure its host.",
+        "children": [
+            {
+                "slug": "executable-jars-deployment"
+            },
+            {
+                "slug": "deployment/cloud"
+            },
+            {
+                "slug": "deployment/vps"
+            },
+            {
+                "slug": "deployment/nginx-https"
+            }
+        ]
+    },
+    {
+        "title": "10. Annotation reference",
+        "summary": "Look up annotations after reading the lessons that introduce them.",
+        "children": [
+            {
+                "slug": "annotations"
+            }
+        ]
+    }
 ];
 
 const outlinePages = (nodes: readonly SpringBootOutlineNode[], parentSlug?: string): { slug: string; parentSlug?: string }[] =>

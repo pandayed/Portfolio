@@ -1,0 +1,120 @@
+{
+  "id": "0af209d3-d726-4efc-8e9a-093a95b41906",
+  "sourceUrl": "https://docs.spring.io/spring-boot/3.5/reference/",
+  "title": "Auto-configuration",
+  "blocks": [
+    {
+      "id": "auto-configuration-0",
+      "type": "header",
+      "richText": [
+        [
+          "Conditional configuration"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-0-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Auto-configuration provides Spring configuration when stated conditions match."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-0-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Conditions can check available classes, existing beans, properties, and the application type."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-0-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A library being present does not guarantee that every related feature will be configured. Required properties and other conditions must also match."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-0-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@SpringBootApplication enables auto-configuration through @EnableAutoConfiguration."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-1",
+      "type": "header",
+      "richText": [
+        [
+          "Change a default"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-1-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Many auto-configured settings can be changed through application properties."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-1-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Many auto-configurations back off when you define the corresponding bean yourself. The exact condition depends on the configuration."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-1-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Excluding an auto-configuration disables that configuration. It does not remove its library dependency."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-1-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Start with --debug to see the condition evaluation report. It shows which configurations matched and which did not."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Inspect auto-configuration decisions",
+        "description": [
+          "Run a packaged application with debug reporting enabled. Use the actual JAR name produced by the build."
+        ],
+        "code": "java -jar target/demo.jar --debug",
+        "language": "text",
+        "explanation": [
+          "Read the condition evaluation report in the startup logs.",
+          "The report describes configuration conditions. It does not prove that a database or external service is reachable."
+        ]
+      }
+    }
+  ],
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Official reference: Auto-configuration",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/using/auto-configuration.html"
+    }
+  ]
+}

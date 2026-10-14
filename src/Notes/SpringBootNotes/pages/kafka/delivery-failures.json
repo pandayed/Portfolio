@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-kafka-delivery-failures",
-  "title": "Kafka Failures, Retries, and Fallback",
-  "summary": "Distinguish failed publishing, uncertain acknowledgment, consumer retries, and duplicate-prone email fallback.",
+  "title": "Kafka Failures and Retries",
+  "summary": "Handle publish failures, consumer retries, durable pending events, and duplicate delivery.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Kafka Fallback: What if Kafka doesn't work ?",
@@ -40,7 +40,7 @@
       "type": "header",
       "richText": [
         [
-          "Identify which operation failed"
+          "Distinguish publication from processing"
         ]
       ]
     },
@@ -49,7 +49,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Publishing, processing, and sending email are separate operations. Kafka and SMTP failures need different responses."
+          "Publishing to Kafka and processing a received record are separate operations. Each can fail independently."
         ]
       ]
     },
@@ -58,7 +58,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "KafkaTemplate.send can fail immediately or complete its future exceptionally later. A try/catch around send alone misses asynchronous failures."
+          "KafkaTemplate.send can throw immediately or complete its future with an error later."
         ]
       ]
     },
@@ -67,7 +67,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Wait for the future or attach a callback. Record failures by event ID without logging private message bodies."
+          "A try/catch around send alone cannot catch a later asynchronous failure. Inspect the future or use a completion callback."
         ]
       ]
     },
@@ -76,7 +76,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A timeout means the caller stopped waiting. The broker may still have accepted the record. Sending email directly as a fallback can then duplicate the consumer’s email."
+          "A timeout means the caller stopped waiting. It does not prove that the broker rejected the record."
         ]
       ]
     },
@@ -85,7 +85,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "These notes use Spring Boot 3, Spring Kafka 3+, and Java 17. The strategy below extends the course fallback topic."
+          "Sending an email directly after a publish timeout can duplicate an email later sent by the consumer."
         ]
       ]
     },
@@ -94,7 +94,7 @@
       "type": "header",
       "richText": [
         [
-          "Acknowledge uncertainty instead of claiming success"
+          "Store work before retrying publication"
         ]
       ]
     },
@@ -103,7 +103,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Example: digest-42-2026-W41 times out after five seconds. Kafka later completes the send and the consumer sends email."
+          "An outbox is a database record for an event that still needs to be published."
         ]
       ]
     },
@@ -112,7 +112,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Direct email fallback after this timeout sends a second email. A failed wait does not prove Kafka stored nothing."
+          "When possible, save the business change and outbox record in the same database transaction."
         ]
       ]
     },
@@ -121,7 +121,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "For broker outages, first save a durable outbox record. An outbox records work still waiting to be published."
+          "A background worker publishes pending outbox records. It marks them published after broker acknowledgment."
         ]
       ]
     },
@@ -130,7 +130,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Save the business change and outbox record in one database transaction when both use a transaction-capable database setup."
+          "A crash between publication and marking the record can cause another publication. Consumers still need duplicate handling."
         ]
       ]
     },
@@ -139,16 +139,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A worker retries pending outbox records and marks them published only after broker acknowledgment. After a crash, the worker may publish a record again, so the consumer still needs duplicate handling."
-        ]
-      ]
-    },
-    {
-      "id": "delivery-scenario-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Return a pending or queued state only after durable storage succeeds. If storage also fails, report failure. A log message does not preserve the event."
+          "Report a queued state only after durable storage succeeds. If storage fails, report failure. Logging an event does not preserve it."
         ]
       ]
     },
@@ -157,7 +148,7 @@
       "type": "header",
       "richText": [
         [
-          "Retry consumer failures with a limit"
+          "Retry a failed consumer"
         ]
       ]
     },
@@ -166,7 +157,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Let processing exceptions escape the listener. Configure DefaultErrorHandler with bounded backoff for temporary failures."
+          "Let exceptions escape the listener so the container can detect failure."
         ]
       ]
     },
@@ -175,7 +166,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A backoff waits between attempts. For example, one initial attempt plus two retries with a one-second pause gives three processing attempts."
+          "DefaultErrorHandler can retry temporary processing failures. Configure a limit."
         ]
       ]
     },
@@ -184,7 +175,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "After attempts are exhausted, send the failed record to a dead-letter topic with DeadLetterPublishingRecoverer. A dead-letter topic stores failed records for investigation and controlled replay."
+          "Backoff is the wait between attempts. One initial attempt plus two retries means three attempts in total."
         ]
       ]
     },
@@ -193,7 +184,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Verify dead-letter publishing before completing recovery. Monitor failed records, retries, and consumer lag."
+          "Do not retry invalid event formats or permanent business errors without correcting them."
         ]
       ]
     },
@@ -202,7 +193,25 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Skip retries for invalid event formats or permanent business errors. Repeatedly sending the same invalid payload does not correct it."
+          "A dead-letter topic stores records that could not be processed after the allowed attempts."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "DeadLetterPublishingRecoverer publishes those failed records. Ensure publication succeeds before treating recovery as complete."
+        ]
+      ]
+    },
+    {
+      "id": "delivery-retry-b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Monitor failed records, retries, and consumer lag. Consumer lag is how far consumption is behind available records."
         ]
       ]
     },
@@ -211,7 +220,7 @@
       "type": "header",
       "richText": [
         [
-          "Know the limits of duplicate prevention"
+          "Understand duplicate handling limits"
         ]
       ]
     },
@@ -220,7 +229,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Producer idempotence prevents certain duplicate Kafka writes caused by producer retries. It does not make an external email happen exactly once."
+          "Producer idempotence prevents certain duplicate Kafka writes caused by producer retries. It does not make an external action happen once."
         ]
       ]
     },
@@ -229,7 +238,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Kafka transactions support exactly-once results for supported Kafka read-process-write flows. SMTP is outside that Kafka transaction."
+          "Kafka transactions can provide exactly-once results for supported Kafka read-process-write flows. Ordinary SMTP is outside that transaction."
         ]
       ]
     },
@@ -238,7 +247,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A unique event ID lets the consumer detect repeated work. A local “sent” record and an external email cannot be committed atomically through ordinary SMTP."
+          "A stable event ID lets a consumer identify repeated work."
         ]
       ]
     },
@@ -247,7 +256,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Sending before recording completion risks duplicates after a crash. Recording completion first risks losing the email."
+          "Sending an email before recording completion risks a duplicate after a crash. Recording completion first risks losing the email."
         ]
       ]
     },
@@ -256,7 +265,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a mail provider with idempotent submission if the contract supports it. Otherwise document the remaining duplicate risk and choose the retry behavior explicitly."
+          "Use idempotent mail submission when the provider supports it. Otherwise choose and document the remaining retry and duplicate behavior."
         ]
       ]
     }

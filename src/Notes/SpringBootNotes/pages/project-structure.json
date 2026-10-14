@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-project-structure",
-  "title": "Project structure and request flow",
-  "summary": "Understand source folders, component scanning, and the controller → service → repository flow.",
+  "title": "Project files and packages",
+  "summary": "Understand source folders, component scanning, and the controller \u2192 service \u2192 repository flow.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Structure of Spring Boot Application | What's Inside Your Spring Boot App?",
@@ -16,6 +16,10 @@
     {
       "title": "Spring Boot: structuring your code",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/using/structuring-your-code.html"
+    },
+    {
+      "title": "Official reference: Project files and packages",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/using/structuring-your-code.html"
     }
   ],
   "blocks": [
@@ -24,134 +28,79 @@
       "type": "header",
       "richText": [
         [
-          "Files and packages"
+          "Project files"
         ]
       ]
     },
     {
-      "id": "structure-layout-b0",
+      "id": "project-structure-0-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A Maven project describes its dependencies and build plugins in pom.xml. The Maven wrapper keeps the Maven version consistent across machines."
+          "pom.xml declares Maven dependencies and build plugins. A Gradle project uses build.gradle or build.gradle.kts."
         ]
       ]
     },
     {
-      "id": "structure-layout-b1",
+      "id": "project-structure-0-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "src/main/java contains application code. src/main/resources contains configuration and other files packaged with the application."
+          "The wrapper runs the build tool version selected by the project. Java must still be installed."
         ]
       ]
     },
     {
-      "id": "structure-layout-b2",
+      "id": "project-structure-0-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "src/test/java contains test code. target contains Maven build output; do not put application source there."
+          "src/main/java contains Java source files. src/main/resources contains configuration and packaged resources."
         ]
       ]
     },
     {
-      "id": "structure-layout-b3",
+      "id": "project-structure-0-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Place the class with @SpringBootApplication in a root package such as com.example.journal. Put controllers, services and repositories under that package."
+          "src/test/java contains test code. Maven writes build output to target; Gradle normally uses build."
         ]
       ]
-    },
-    {
-      "id": "structure-layout-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Package names determine class identity and component scanning. A directory named service does not register a bean by itself; its class needs registration."
-        ]
-      ]
-    },
-    {
-      "id": "structure-layout-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Organize a small project by layers. As it grows, grouping related controllers, services and repositories by feature can keep changes close together."
-        ]
-      ]
-    },
-    {
-      "id": "structure-layout-code",
-      "type": "code",
-      "richText": [
-        [
-          "src/main/java/com/example/journal/\n  JournalApplication.java\n  controller/JournalController.java\n  service/JournalService.java\n  repository/JournalRepository.java\n  model/JournalEntry.java\nsrc/main/resources/application.yml\nsrc/test/java/com/example/journal/"
-        ]
-      ],
-      "language": "Plain Text"
     },
     {
       "id": "structure-request",
       "type": "header",
       "richText": [
         [
-          "Follow one request"
+          "Application packages"
         ]
       ]
     },
     {
-      "id": "structure-request-b0",
+      "id": "project-structure-1-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "POST /journal first passes through servlet filters, including security when configured. Spring MVC then finds the matching controller method."
+          "A package groups Java classes under a name such as com.example.demo."
         ]
       ]
     },
     {
-      "id": "structure-request-b1",
+      "id": "project-structure-1-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The controller reads the request and translates the result into an HTTP response. It calls a service for application rules."
+          "Put the application class in that package and application components in its subpackages. Spring scans this package tree by default."
         ]
       ]
     },
     {
-      "id": "structure-request-b2",
+      "id": "project-structure-1-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The service applies rules such as ownership and transaction boundaries. It calls a repository when data must be stored or read."
-        ]
-      ]
-    },
-    {
-      "id": "structure-request-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The repository uses the database driver. The saved data passes back through the service and controller; a message converter writes the response."
-        ]
-      ]
-    },
-    {
-      "id": "structure-request-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "This separation helps locate failures: a mapping error belongs near the controller, a permission rule near the service, and a connection error near database configuration."
-        ]
-      ]
-    },
-    {
-      "id": "structure-request-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A bean outside the scanned package may cause a missing-dependency startup error. Confirm the package and bean registration before adding unrelated annotations."
+          "A folder name does not make a class a Spring bean. The class must be registered with Spring."
         ]
       ]
     }

@@ -10,7 +10,8 @@ import {
 const sections: TocEntry[] = [
     { id: 'application-and-beans', title: 'Application and beans' },
     { id: 'http-requests', title: 'HTTP requests and responses' },
-    { id: 'validation-and-data', title: 'Validation and data' },
+    { id: 'validation', title: 'Validation' },
+    { id: 'persistence', title: 'Persistence' },
 ];
 
 type AnnotationRow = {
@@ -44,9 +45,12 @@ const webAnnotations: AnnotationRow[] = [
     { annotation: '@ExceptionHandler', where: 'Method', purpose: 'Handles a specified exception from a controller.' },
 ];
 
-const dataAnnotations: AnnotationRow[] = [
+const validationAnnotations: AnnotationRow[] = [
     { annotation: '@Valid', where: 'Controller parameter', purpose: 'Runs Jakarta Bean Validation on an incoming object when validation support is present.' },
     { annotation: '@NotBlank', where: 'Text field', purpose: 'Requires a non-null string with at least one non-whitespace character.' },
+];
+
+const dataAnnotations: AnnotationRow[] = [
     { annotation: '@Entity', where: 'Class', purpose: 'Marks a Jakarta Persistence entity when JPA support is present.' },
     { annotation: '@Id', where: 'Entity field or property', purpose: 'Marks the primary key of an entity.' },
     { annotation: '@GeneratedValue', where: 'Entity ID field or property', purpose: 'Asks the persistence provider to generate the primary key.' },
@@ -78,19 +82,18 @@ const AnnotationTable = ({ rows }: { rows: AnnotationRow[] }) => (
 
 const SpringBootAnnotations = () => (
     <ArticleLayout
-        title="Common Spring Boot annotations at a glance"
+        title="Spring annotation reference"
         route={SPRING_BOOT_ANNOTATIONS_ROUTE}
         sections={sections}
         backRoute={SPRING_BOOT_NOTES_ROUTE}
         backLabel="Back to Spring Boot notes"
     >
         <section className="Article__section">
-            <p>
-                An annotation adds metadata to a Java class, method, field, or parameter. Spring
-                reads many of these annotations to set up beans and handle HTTP requests. Only
-                some come from Spring Boot itself; the validation and persistence annotations
-                below come from Jakarta APIs.
-            </p>
+            <ul className="Article__notes">
+                <li>Use this page to look up annotations after reading their topic lessons.</li>
+                <li>An annotation adds metadata to a Java class, method, field, or parameter.</li>
+                <li>Spring reads its annotations to register beans and handle requests. The validation and persistence annotations below come from Jakarta APIs.</li>
+            </ul>
             <p>
                 For a small working example, see{' '}
                 <a className="Link" href={toHref(SPRING_BOOT_FIRST_APPLICATION_ROUTE)}>
@@ -101,10 +104,10 @@ const SpringBootAnnotations = () => (
 
         <section className="Article__section" aria-labelledby="application-and-beans">
             <h2 id="application-and-beans" className="SectionTitle">Application and beans</h2>
-            <p>
-                A bean is an object managed by Spring. Component scanning finds annotated classes
-                in the application package and its subpackages by default.
-            </p>
+            <ul className="Article__notes">
+                <li>A bean is an object managed by Spring.</li>
+                <li>Component scanning finds annotated classes in the application package and its subpackages by default.</li>
+            </ul>
             <AnnotationTable rows={beanAnnotations} />
             <p>
                 Use <code>@ConfigurationProperties</code> for related settings and register its
@@ -123,11 +126,15 @@ const SpringBootAnnotations = () => (
             </p>
         </section>
 
-        <section className="Article__section" aria-labelledby="validation-and-data">
-            <h2 id="validation-and-data" className="SectionTitle">Validation and data</h2>
+        <section className="Article__section" aria-labelledby="validation">
+            <h2 id="validation" className="SectionTitle">Validation</h2>
+            <ul className="Article__notes"><li>These Jakarta Bean Validation annotations check values when validation is invoked.</li></ul>
+            <AnnotationTable rows={validationAnnotations} />
+        </section>
+        <section className="Article__section" aria-labelledby="persistence">
+            <h2 id="persistence" className="SectionTitle">Persistence</h2>
             <p>
-                Jakarta Bean Validation and Jakarta Persistence require their corresponding
-                dependencies. <code>@Transactional</code> is a Spring annotation and needs
+                Jakarta Persistence requires a persistence provider and its dependencies. <code>@Transactional</code> is a Spring annotation and needs
                 transaction management to be active.
             </p>
             <AnnotationTable rows={dataAnnotations} />

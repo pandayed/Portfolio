@@ -1,29 +1,17 @@
 {
   "id": "spring-boot-mongodb-transactions",
   "title": "MongoDB Transactions",
-  "summary": "Configure MongoTransactionManager and understand rollback and proxy boundaries.",
+  "summary": "Group document writes, then configure and apply their transaction boundary.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
-    {
-      "title": "Engineering Digest: @Transactional Annotation in Spring Boot Example in Hindi | @Enabletransactionmanagement",
-      "url": "https://www.youtube.com/watch?v=6oxyNgZSz9s&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
-    },
     {
       "title": "Spring Data MongoDB: sessions and transactions",
       "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/client-session-transactions.html"
     },
     {
-      "title": "MongoDB: transaction requirements",
-      "url": "https://www.mongodb.com/docs/manual/core/transactions/"
-    },
-    {
-      "title": "Spring Framework: @Transactional",
+      "title": "Spring Framework: declarative transaction behavior",
       "url": "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html"
-    },
-    {
-      "title": "Spring Framework: rollback rules",
-      "url": "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/rolling-back.html"
     }
   ],
   "blocks": [
@@ -41,7 +29,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A transaction groups database operations so they commit together or roll back together. Atomic means the group succeeds completely or leaves no committed partial result."
+          "A transaction groups database operations so they commit together or roll back together."
         ]
       ]
     },
@@ -50,7 +38,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The journal creation flow saves an entry and then adds its reference to User. A transaction prevents a failed user save from leaving only the entry committed."
+          "Commit makes the transaction changes permanent. Rollback discards its uncommitted changes."
         ]
       ]
     },
@@ -59,7 +47,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "MongoDB already makes a single-document write atomic. Use a multi-document transaction when one business rule requires several document writes to succeed together."
+          "MongoDB already makes a single-document write atomic. Use a multi-document transaction when several writes must succeed together."
         ]
       ]
     },
@@ -68,7 +56,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Multi-document transactions require a replica set or a supported sharded cluster. A standalone local MongoDB server does not provide this transaction setup."
+          "Multi-document transactions require a replica set or a supported sharded cluster. A standalone MongoDB server is not enough."
         ]
       ]
     },
@@ -77,7 +65,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A replica set is a group of MongoDB servers maintaining copies of the same data. Configure the driver to discover the correct deployment."
+          "A replica set is a MongoDB deployment whose servers maintain copies of the same data."
         ]
       ]
     },
@@ -95,7 +83,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "MongoTransactionManager uses the MongoDatabaseFactory to manage MongoDB sessions and transactions. @Transactional alone does not supply a MongoDB transaction manager."
+          "MongoTransactionManager starts and manages MongoDB transactions through MongoDatabaseFactory."
         ]
       ]
     },
@@ -104,7 +92,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The manager and participating repositories must use the same database factory. When several transaction managers exist, select the intended manager explicitly."
+          "@Transactional does not supply this manager by itself. Register a MongoTransactionManager bean."
         ]
       ]
     },
@@ -113,19 +101,26 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The course explicitly enables transaction management. This configuration makes that requirement visible in the learning example."
+          "The manager and participating MongoDB operations must use the same database factory."
         ]
       ]
     },
     {
       "id": "mongo-tx-manager-code",
-      "type": "code",
-      "richText": [
-        [
-          "import org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.data.mongodb.MongoDatabaseFactory;\nimport org.springframework.data.mongodb.MongoTransactionManager;\nimport org.springframework.transaction.annotation.EnableTransactionManagement;\n\n@Configuration\n@EnableTransactionManagement\nclass MongoTransactions {\n    @Bean\n    MongoTransactionManager transactionManager(MongoDatabaseFactory factory) {\n        return new MongoTransactionManager(factory);\n    }\n}"
+      "type": "example",
+      "example": {
+        "title": "Register the MongoDB transaction manager",
+        "description": [
+          "Use the MongoDB starter and a URI for a replica-set or supported sharded deployment.",
+          "Place this configuration under the application package."
+        ],
+        "code": "import org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.data.mongodb.MongoDatabaseFactory;\nimport org.springframework.data.mongodb.MongoTransactionManager;\nimport org.springframework.transaction.annotation.EnableTransactionManagement;\n\n@Configuration\n@EnableTransactionManagement\npublic class MongoTransactions {\n    @Bean\n    public MongoTransactionManager mongoTransactionManager(\n            MongoDatabaseFactory factory) {\n        return new MongoTransactionManager(factory);\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "The bean uses the MongoDatabaseFactory configured for the application.",
+          "Its bean name is mongoTransactionManager. A service can select that name explicitly."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "mongo-tx-boundary",
@@ -141,7 +136,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Call the public service method through the Spring bean. Default transaction handling uses a proxy, an object that intercepts the call and starts the transaction."
+          "@Transactional marks the operations that should run in one transaction."
         ]
       ]
     },
@@ -150,7 +145,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A call from one method to another method on the same instance bypasses that proxy. Adding @Transactional to the called method does not create a new boundary for that self-call."
+          "In the default proxy-based setup, another bean must call the service method through the Spring-managed object."
         ]
       ]
     },
@@ -159,7 +154,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "By default, RuntimeException and Error trigger rollback. A checked exception does not. Specify rollbackFor when a checked exception should also roll back."
+          "A call from one method to another method on the same instance bypasses that proxy. The called method annotation does not start a new transaction."
         ]
       ]
     },
@@ -168,7 +163,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Let failures reach the transaction boundary. Catching an exception and returning normally can allow a transaction to commit."
+          "By default, RuntimeException and Error cause rollback. Use rollbackFor when a checked exception must cause rollback."
         ]
       ]
     },
@@ -177,19 +172,38 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A successful database commit does not roll back an email or external HTTP call. Keep such side effects outside assumptions about database atomicity."
+          "If code catches a failure and returns normally, the transaction can commit. Let failures reach the transaction boundary when rollback is required."
+        ]
+      ]
+    },
+    {
+      "id": "mongo-tx-boundary-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A database transaction cannot undo an email or external HTTP request."
         ]
       ]
     },
     {
       "id": "mongo-tx-boundary-code",
-      "type": "code",
-      "richText": [
-        [
-          "import org.springframework.transaction.annotation.Transactional;\n\n@Transactional\npublic void createEntry(JournalEntry entry, User user) {\n    JournalEntry saved = journalRepository.save(entry);\n    user.getJournalEntries().add(saved);\n    userRepository.save(user);\n}"
+      "type": "example",
+      "example": {
+        "title": "Save an entry and reference in one transaction",
+        "description": [
+          "Use JournalEntryRepository, UserRepository and User from the earlier MongoDB pages.",
+          "The user must already exist. Pass a new JournalEntry and its owner ID.",
+          "Call createEntry through the injected JournalService bean."
+        ],
+        "code": "import org.bson.types.ObjectId;\nimport org.springframework.stereotype.Service;\nimport org.springframework.transaction.annotation.Transactional;\n\n@Service\npublic class JournalService {\n    private final JournalEntryRepository journalRepository;\n    private final UserRepository userRepository;\n\n    public JournalService(JournalEntryRepository journalRepository,\n                          UserRepository userRepository) {\n        this.journalRepository = journalRepository;\n        this.userRepository = userRepository;\n    }\n\n    @Transactional(transactionManager = \"mongoTransactionManager\")\n    public JournalEntry createEntry(JournalEntry entry, ObjectId userId) {\n        User user = userRepository.findById(userId)\n                .orElseThrow(() -> new IllegalArgumentException(\"User not found\"));\n        JournalEntry saved = journalRepository.save(entry);\n        user.getJournalEntries().add(saved);\n        userRepository.save(user);\n        return saved;\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "The service explicitly selects the MongoDB transaction manager.",
+          "It loads the user, saves the entry and saves the reference in the same transaction.",
+          "If a participating save fails with a runtime exception, the transaction rolls back its database writes.",
+          "This boundary groups writes. It does not by itself prevent every concurrent update conflict."
         ]
-      ],
-      "language": "Java"
+      }
     }
   ]
 }

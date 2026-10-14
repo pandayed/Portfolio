@@ -1,0 +1,172 @@
+{
+  "id": "spring-boot-jpa-fetching",
+  "sourceUrl": "https://docs.spring.io/spring-data/",
+  "title": "JPA Relationship Loading",
+  "summary": "Understand lazy and eager loading before choosing a fetch plan.",
+  "updatedOn": "2026-10-14",
+  "blocks": [
+    {
+      "id": "jpa-fetch-modes",
+      "type": "header",
+      "richText": [
+        [
+          "Lazy and eager loading"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetch-modes-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Fetch timing controls when related entity data is loaded."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetch-modes-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "LAZY requests deferred loading. The provider may load the relationship when application code accesses it."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetch-modes-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "EAGER requires the relationship to be loaded. It does not guarantee that all data arrives in one SQL query."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetch-modes-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPA defaults one-to-many and many-to-many relationships to LAZY. Many-to-one and one-to-one default to EAGER."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetch-modes-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose the data needed by the current operation. An eager relationship can load data that operation never uses."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-lazy-session",
+      "type": "header",
+      "richText": [
+        [
+          "Access within the persistence context"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-lazy-session-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A persistence context tracks managed entities during persistence work."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-lazy-session-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A deferred relationship may need an active persistence context to load its data. With Hibernate, accessing an uninitialized relationship after the context closes can throw LazyInitializationException."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-lazy-session-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Read required data inside the service transaction. Return a response object containing the needed values instead of relying on later loading during JSON serialization."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-n-plus-one",
+      "type": "header",
+      "richText": [
+        [
+          "Additional queries"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-n-plus-one-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The N+1 query problem occurs when one query loads N parent rows and accessing their relationships triggers additional queries for those rows."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-n-plus-one-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Inspect the SQL for the operation. Changing every relationship to EAGER does not guarantee the problem is solved."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-n-plus-one-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A JPQL fetch join loads the selected relationship as part of the query. An entity graph is another way to specify which relationships the operation needs."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-n-plus-one-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Fetching a collection can duplicate parent rows in SQL results. Collection fetch joins also require care when paginating."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetch-join",
+      "type": "example",
+      "example": {
+        "title": "Load posts with their authors",
+        "description": [
+          "Use Post and AppUser from the relationship mapping page.",
+          "This repository query loads the author needed for each returned post."
+        ],
+        "code": "import java.util.List;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\n\npublic interface PostRepository extends JpaRepository<Post, Long> {\n    @Query(\"select p from Post p join fetch p.author order by p.id\")\n    List<Post> findAllWithAuthors();\n}",
+        "language": "java",
+        "explanation": [
+          "join fetch p.author asks JPA to load authors with the selected posts.",
+          "This query fetches a many-to-one relationship, not a growing collection.",
+          "It returns all posts. Add a bounded query when the application needs only part of the table."
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "Jakarta Persistence 3.1 specification",
+      "url": "https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.html"
+    },
+    {
+      "title": "Spring Data JPA: query methods",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html"
+    }
+  ]
+}

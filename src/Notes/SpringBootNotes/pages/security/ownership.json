@@ -1,0 +1,96 @@
+{
+  "id": "spring-boot-security-ownership",
+  "title": "Record ownership",
+  "summary": "Check who owns a record after checking permission to call its endpoint.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Spring Security 6.5: method authorization",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authorization/method-security.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "ownership",
+      "type": "header",
+      "richText": [
+        [
+          "Check the requested record"
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A role controls access to a kind of operation. It does not tell Spring who owns a database record."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Two users can both have USER and still have different journal entries."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "authenticated() lets either user reach the endpoint. Your application must still check that the requested entry belongs to the current user."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Read the owner ID from the authenticated account. Do not accept the caller’s user ID as proof of ownership."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Query by both entry ID and owner ID, or compare the stored owner before using the record."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Apply this check when reading, updating and deleting records."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use an immutable account ID when usernames can change."
+        ]
+      ]
+    },
+    {
+      "id": "ownership-b7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An ownership failure may return 404 to avoid revealing whether another user’s record exists. Use this policy consistently."
+        ]
+      ]
+    }
+  ]
+}

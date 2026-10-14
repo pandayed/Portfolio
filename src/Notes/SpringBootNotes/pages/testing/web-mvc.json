@@ -1,0 +1,190 @@
+{
+  "id": "spring-boot-testing-web-mvc",
+  "title": "Controller tests with @WebMvcTest",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54807ba8f0c285d4dff46f",
+  "blocks": [
+    {
+      "id": "web-mvc-slice",
+      "type": "header",
+      "richText": [
+        [
+          "Load the web layer"
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-slice-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@WebMvcTest loads Spring MVC components for controller testing. It does not load the whole application."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-slice-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@WebMvcTest(EntryController.class) selects the controller to test."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-slice-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It can check request mapping, JSON binding, input validation and HTTP responses."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-slice-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Provide the controller’s service dependencies as mock beans or imported test configuration."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-requests",
+      "type": "header",
+      "richText": [
+        [
+          "Send a request with MockMvc"
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-requests-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "MockMvc sends a request through the configured Spring MVC infrastructure without opening a real network port."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-requests-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check the response status, headers and relevant body fields."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-requests-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Mock the service response when the test is about controller behavior. Test the real service separately."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-mocks",
+      "type": "header",
+      "richText": [
+        [
+          "Replace a Spring bean"
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-mocks-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For Spring Boot 3.4 and later, use @MockitoBean from Spring Framework to replace a collaborator in the test context."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-mocks-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Older Boot 3 examples use @MockBean. It was deprecated in Boot 3.4."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-mocks-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A plain Mockito @Mock field is not a replacement Spring bean."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-security",
+      "type": "header",
+      "richText": [
+        [
+          "Include the access rules being checked"
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-security-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Security is included when it is on the classpath. Import the application’s relevant security configuration when checking its rules."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-security-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Add spring-security-test for helpers such as @WithMockUser."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-security-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@WithMockUser supplies test authentication. It does not test password verification."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-security-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep security filters enabled when the requirement is an access rule."
+        ]
+      ]
+    },
+    {
+      "id": "web-mvc-security-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For protected POST, PUT or DELETE requests, supply the CSRF token when the application requires it."
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring Boot 3.5: testing",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/testing/spring-boot-applications.html"
+    },
+    {
+      "title": "Spring Security 6.5: MockMvc testing",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/test/mockmvc.html"
+    }
+  ],
+  "updatedOn": "2026-10-14",
+  "summary": "Check request mapping and responses without loading the full application."
+}

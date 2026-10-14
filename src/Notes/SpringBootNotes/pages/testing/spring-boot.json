@@ -1,0 +1,241 @@
+{
+  "id": "spring-boot-testing-spring-boot",
+  "title": "Application tests with @SpringBootTest",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54807ba8f0c285d4dff46f",
+  "blocks": [
+    {
+      "id": "spring-test-context",
+      "type": "header",
+      "richText": [
+        [
+          "Load the application context"
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-context-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@SpringBootTest loads the application context using Spring Boot’s configuration."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-context-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use it when the behavior depends on several real components or Spring configuration."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-context-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Supply isolated databases and other external dependencies so the test cannot change production data."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-server",
+      "type": "header",
+      "richText": [
+        [
+          "Choose the web environment"
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-server-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "spring-test-server-table-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Setting"
+              ]
+            ],
+            "1": [
+              [
+                "Behavior"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "spring-test-server-table-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "MOCK (default)"
+              ]
+            ],
+            "1": [
+              [
+                "Loads a web context when applicable. Does not start a real HTTP server."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "spring-test-server-table-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "RANDOM_PORT"
+              ]
+            ],
+            "1": [
+              [
+                "Starts a real server on an available port."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "spring-test-server-table-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "DEFINED_PORT"
+              ]
+            ],
+            "1": [
+              [
+                "Starts a real server using the configured port."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "spring-test-server-table-4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "NONE"
+              ]
+            ],
+            "1": [
+              [
+                "Loads a context without a web environment."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "spring-test-mockmvc-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @AutoConfigureMockMvc with the default mock environment to send requests without a network port."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-mockmvc-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use RANDOM_PORT when the check needs a real HTTP request to the running application."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-data",
+      "type": "header",
+      "richText": [
+        [
+          "Keep test data isolated"
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-data-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a dedicated test profile or explicit test properties for database settings."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-data-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A transaction around a test does not automatically roll back changes made by a real server handling an HTTP request on another thread."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-data-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Create and clean up data according to the test’s actual request and transaction boundaries."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-outcomes",
+      "type": "header",
+      "richText": [
+        [
+          "Check behavior after startup"
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-outcomes-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A contextLoads method checks that Spring can start the context."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-outcomes-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Check actual results to verify the requirement, such as saved data or an access-denied response."
+        ]
+      ]
+    },
+    {
+      "id": "spring-test-outcomes-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A local integration test does not prove that a deployed host has the same configuration or can reach an external service."
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring Boot 3.5: testing",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/testing/spring-boot-applications.html"
+    }
+  ],
+  "updatedOn": "2026-10-14",
+  "summary": "Load application wiring and choose whether to start a real HTTP server."
+}

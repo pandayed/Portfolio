@@ -1,0 +1,158 @@
+{
+  "id": "spring-boot-security-resource-server",
+  "title": "JWT resource servers",
+  "summary": "Let Spring Security validate incoming JWT access tokens and apply request permissions.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Spring Security 6.5: JWT resource server",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/resource-server/jwt.html"
+    },
+    {
+      "title": "Spring Boot 3.5: resource server configuration",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/web/spring-security.html"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "jwt-resource",
+      "type": "header",
+      "richText": [
+        [
+          "Receive and validate access tokens"
+        ]
+      ]
+    },
+    {
+      "id": "jwt-resource-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A resource server protects an API using access tokens issued by a trusted authorization server."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-resource-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It validates tokens. It does not create a password login endpoint or issue tokens."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-resource-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For Spring Boot 3, add spring-boot-starter-oauth2-resource-server."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-resource-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Configure issuer-uri so Spring can discover the provider’s public signing keys."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-resource-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JwtDecoder validates a JWT. Spring then creates authentication for the request and checks the request rules."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-scopes",
+      "type": "header",
+      "richText": [
+        [
+          "Map scopes to permissions"
+        ]
+      ]
+    },
+    {
+      "id": "jwt-scopes-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A scope names a granted permission."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-scopes-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "By default, Spring maps token scopes to authorities with the SCOPE_ prefix."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-scopes-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The scope journal.read becomes SCOPE_journal.read."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-scopes-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Role checks use a different prefix. Configure a JWT authority converter if the provider stores application roles in a separate claim."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-resource-code",
+      "type": "example",
+      "example": {
+        "title": "Protect journal reads with an access-token scope",
+        "description": [
+          "Use Spring Boot 3.5 with the resource-server starter.",
+          "Set ISSUER_URI to the trusted provider’s issuer URL and API_AUDIENCE to this API’s expected audience.",
+          "Put the properties in application.properties. Put the bean in a @Configuration class.",
+          "Import Bean, Customizer, HttpSecurity, SecurityFilterChain, HttpMethod and SessionCreationPolicy.",
+          "The application already has a GET endpoint under /journal/."
+        ],
+        "code": "# application.properties (Spring Boot 3.5)\nspring.security.oauth2.resourceserver.jwt.issuer-uri=${ISSUER_URI}\nspring.security.oauth2.resourceserver.jwt.audiences[0]=${API_AUDIENCE}\n\n// Bean in SecurityConfig.java\n@Bean\nSecurityFilterChain api(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(rules -> rules\n            .requestMatchers(HttpMethod.GET, \"/journal/**\")\n                .hasAuthority(\"SCOPE_journal.read\")\n            .anyRequest().denyAll())\n        .oauth2ResourceServer(oauth ->\n            oauth.jwt(Customizer.withDefaults()))\n        .sessionManagement(session -> session\n            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n        .build();\n}",
+        "language": "text",
+        "explanation": [
+          "issuer-uri identifies the trusted issuer and lets Spring discover its keys.",
+          "The Boot 3.5 audiences property checks that the token is intended for this API. Older Boot versions may require a custom audience validator.",
+          "A valid token without journal.read cannot read the journal endpoint.",
+          "HttpMethod.GET keeps the rule limited to reads. Other requests are denied.",
+          "STATELESS prevents Spring from persisting authentication in an HTTP session. It does not prevent database or cache access.",
+          "CSRF remains enabled. This GET request does not need a CSRF token.",
+          "The route permission still does not check ownership of each journal record."
+        ]
+      }
+    },
+    {
+      "id": "jwt-csrf-next",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Browser credentials and CSRF settings",
+          [
+            [
+              "a",
+              "/notes/spring-boot/security/browser-security"
+            ]
+          ]
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "id": "spring-boot-jpa-transactions",
+  "sourceUrl": "https://docs.spring.io/spring-data/",
+  "title": "JPA Transactions",
+  "summary": "Group repository operations within a service transaction.",
+  "updatedOn": "2026-10-14",
+  "blocks": [
+    {
+      "id": "jpa-transaction-rule",
+      "type": "header",
+      "richText": [
+        [
+          "Commit and rollback"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-rule-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A transaction groups database operations into one unit of work."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-rule-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Commit keeps the changes. Rollback discards the uncommitted changes when the work fails."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-rule-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a service transaction when several repository operations must succeed together."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-rule-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A database transaction does not undo an email or an external HTTP request."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-boundary",
+      "type": "header",
+      "richText": [
+        [
+          "The service boundary"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-boundary-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Transactional marks a method whose database work should use a transaction."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-boundary-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "With the usual Spring Boot JPA configuration, Boot configures a JPA transaction manager."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-boundary-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The default propagation joins an existing transaction or starts one when none exists."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-boundary-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Inherited repository write operations already have transaction settings. Separate repository calls are not automatically one service-level transaction."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-boundary-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A proxy is an object Spring puts around a bean to intercept method calls. Transaction handling uses this proxy by default."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-boundary-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Call the method through the injected Spring bean. A same-instance call to another annotated method bypasses the proxy and does not apply that method’s transaction settings."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-transaction-example",
+      "type": "example",
+      "example": {
+        "title": "Save two employees together",
+        "description": [
+          "Use Employee and EmployeeRepository from the earlier JPA pages.",
+          "Call addPair through the injected HiringService bean, for example from another service or a controller."
+        ],
+        "code": "import org.springframework.stereotype.Service;\nimport org.springframework.transaction.annotation.Transactional;\n\n@Service\npublic class HiringService {\n    private final EmployeeRepository repository;\n\n    public HiringService(EmployeeRepository repository) {\n        this.repository = repository;\n    }\n\n    @Transactional\n    public void addPair() {\n        repository.save(new Employee(\"Alice\", \"Engineering\"));\n        repository.save(new Employee(\"Bob\", \"Engineering\"));\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "The outer service transaction groups both saves.",
+          "If the work succeeds and commit succeeds, both changes are kept.",
+          "If a save throws a runtime exception that leaves the method, the transaction rolls back instead of keeping only the first employee."
+        ]
+      }
+    },
+    {
+      "id": "jpa-rollback-rules",
+      "type": "header",
+      "richText": [
+        [
+          "Rollback rules"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-rollback-rules-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "By default, RuntimeException and Error trigger rollback. Checked exceptions do not."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-rollback-rules-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Set rollbackFor when a checked exception must cause rollback."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-rollback-rules-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Catching a failure and returning normally can allow a commit. Let the failure reach the transaction boundary when it should roll back."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-read-only",
+      "type": "header",
+      "richText": [
+        [
+          "Read-only transactions"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-read-only-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Transactional(readOnly=true) tells transaction infrastructure that the operation intends to read data."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-read-only-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It is an optimization hint. It is not a permission check or a portable guarantee that writes are rejected."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-read-only-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A transaction keeps a persistence context available while the service reads required entity data."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-tx-fetching",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Understand relationship loading",
+          [
+            [
+              "a",
+              "/notes/spring-boot/jpa-fetching"
+            ]
+          ]
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring Framework: using @Transactional",
+      "url": "https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html"
+    },
+    {
+      "title": "Spring Data JPA: transactionality",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/jpa/transactions.html"
+    }
+  ]
+}

@@ -1,854 +1,324 @@
 {
   "id": "20924eb1-ed54-804e-8c3e-d28bc655cab3",
-  "title": "REST API Validation (JSR-380: @NotNull, @Size, etc. with @Valid)",
+  "title": "Request validation",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54804e8c3ed28bc655cab3",
   "blocks": [
     {
-      "id": "20924eb1-ed54-8081-b25d-db30bd37c3bc",
-      "type": "divider"
-    },
-    {
       "id": "20924eb1-ed54-8094-a9ba-d568b6cfc147",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "✅ 1. Core Concept"
+          "Declare input constraints"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80ac-bacb-dcec4380589f",
-      "type": "text",
+      "id": "validation-rules-b0",
+      "type": "bulleted_list",
       "richText": [
         [
-          "What is it?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Bean Validation checks Java data against declared rules called constraints."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80bd-ad5f-ee2d92ecf7af",
-      "type": "text",
+      "id": "validation-rules-b1",
+      "type": "bulleted_list",
       "richText": [
         [
-          "REST API validation ensures that the data a client (like a frontend app or another system) sends to your Spring Boot backend is valid and safe "
-        ],
-        [
-          "before",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " your logic processes it. JSR-380 (Java Specification Request) is a standard for Java Bean Validation — think of it as adding rules directly on your class fields (like saying a field "
-        ],
-        [
-          "must not be null",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ")."
+          "Put request constraints on a request DTO so they match the data the client can send."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80d7-a1f3-eb06809c70f9",
-      "type": "text",
+      "id": "validation-rules-b2",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Why does it exist?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Add spring-boot-starter-validation to supply the validation implementation."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8006-aec5-fe646a41dfb5",
-      "type": "text",
+      "id": "validation-rules-b3",
+      "type": "bulleted_list",
       "richText": [
         [
-          "To "
-        ],
-        [
-          "prevent bad data",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (like empty names, null emails, or too-short passwords) from causing errors or saving incorrect info into your database. It improves "
-        ],
-        [
-          "security, reliability, and user feedback",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
+          "Spring Boot 3 and later use jakarta.validation imports. Older Boot 2 examples use javax.validation."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-806a-94b5-e9f3ca9c4111",
-      "type": "divider"
+      "id": "validation-rules-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Validation checks the rules you declare. It does not check permissions or replace database constraints."
+        ]
+      ]
+    },
+    {
+      "id": "validation-constraints",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "validation-constraints-r0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Constraint"
+              ]
+            ],
+            "1": [
+              [
+                "Rule"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "validation-constraints-r1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@NotNull"
+              ]
+            ],
+            "1": [
+              [
+                "The value must not be null. An empty String still passes."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "validation-constraints-r2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@NotBlank"
+              ]
+            ],
+            "1": [
+              [
+                "A String must contain a non-whitespace character."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "validation-constraints-r3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@NotEmpty"
+              ]
+            ],
+            "1": [
+              [
+                "A String, collection, map or array must be non-null and non-empty."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "validation-constraints-r4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@Size(min, max)"
+              ]
+            ],
+            "1": [
+              [
+                "The length or size must be within the limits. Null passes."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "validation-constraints-r5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@Email"
+              ]
+            ],
+            "1": [
+              [
+                "A String must satisfy the validator’s email-format rule. Null passes."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "validation-constraints-r6",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@Min(value) / @Max(value)"
+              ]
+            ],
+            "1": [
+              [
+                "A supported numeric value must be within the limit."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "validation-types-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Combine constraints when needed. @Email alone does not require a value."
+        ]
+      ]
+    },
+    {
+      "id": "validation-types-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Choose a constraint for the field type. @NotEmpty does not apply to int; use a numeric constraint."
+        ]
+      ]
     },
     {
       "id": "20924eb1-ed54-80dc-bb54-f5bb6cdc615c",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "🎯 2. Key Interview Points"
+          "Run validation with @Valid"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8032-a90b-ff8637eabf06",
+      "id": "validation-run-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "What is Bean Validation (JSR-380)?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " And how does Spring Boot integrate it using annotations like "
-        ],
-        [
-          "@NotNull",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@Size",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", etc."
+          "@Valid on a @RequestBody argument checks the converted DTO before the handler runs."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80d7-a876-d75428056f98",
+      "id": "validation-run-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "How ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Valid",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " works",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " in REST Controllers — triggers validation before processing input."
+          "For this argument validation, failed constraints normally raise MethodArgumentNotValidException and produce HTTP 400."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-804b-a718-c509925fe7f6",
+      "id": "validation-run-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "Handling validation errors",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " using "
-        ],
-        [
-          "BindingResult",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@ExceptionHandler",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", or "
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "."
+          "The default response body depends on configuration. Do not assume it includes every constraint message."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80b2-9214-f82e4b3af65b",
+      "id": "validation-run-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "Custom validation",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": When built-in annotations aren’t enough, you can create your own validator with "
-        ],
-        [
-          "@Constraint",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8086-a407-f4126514adab",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80cc-9ca1-d77ea5ad1c87",
-      "type": "sub_header",
-      "richText": [
-        [
-          "👨‍💻 3. Code Example"
+          "@Valid on a nested DTO field also requests validation of that nested object."
         ]
       ]
     },
     {
       "id": "20924eb1-ed54-8088-96f1-c16aaec3ab2e",
-      "type": "code",
-      "richText": [
-        [
-          "// 1. DTO (Data Transfer Object) with validation annotations\npublic class UserRequest {\n    @NotNull(message = \"Username cannot be null\")\n    @Size(min = 3, max = 20, message = \"Username must be 3-20 characters\")\n    private String username;\n\n    @NotNull(message = \"Email is required\")\n    @Email(message = \"Email format is invalid\")\n    private String email;\n\n    // Getters and setters\n}\n\n// 2. REST Controller using @Valid\n@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n\n    @PostMapping\n    public ResponseEntity<String> createUser(@RequestBody @Valid UserRequest userRequest) {\n        // If validation passes, this code runs\n        return ResponseEntity.ok(\"User created successfully!\");\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-8058-b62e-e8e73b60aa8e",
-      "type": "text",
-      "richText": [
-        [
-          "🔎 If any validation fails, Spring Boot will automatically return a "
+      "type": "example",
+      "example": {
+        "title": "Reject a blank name or invalid email",
+        "description": [
+          "Use spring-boot-starter-validation and Java 17 or later in a Spring Boot 3+ MVC application.",
+          "Place these types in separate files. Send JSON to POST /users/check."
         ],
-        [
-          "400 Bad Request",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " with the error message unless you handle it manually."
+        "code": "// UserRequest.java\nimport jakarta.validation.constraints.Email;\nimport jakarta.validation.constraints.NotBlank;\nimport jakarta.validation.constraints.Size;\n\npublic record UserRequest(\n    @NotBlank(message = \"Username is required\")\n    @Size(min = 3, max = 20, message = \"Username must be 3–20 characters\")\n    String username,\n    @NotBlank(message = \"Email is required\")\n    @Email(message = \"Email format is invalid\")\n    String email\n) {}\n\n// UserController.java\nimport jakarta.validation.Valid;\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\npublic class UserController {\n    @PostMapping(\"/users/check\")\n    public UserRequest check(@Valid @RequestBody UserRequest request) {\n        return request;\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "@NotBlank rejects a missing, empty or whitespace-only username and email.",
+          "@Size restricts the username length. @Email checks the email format.",
+          "A body such as {\"username\":\"Alice\",\"email\":\"alice@example.com\"} reaches the method and is returned.",
+          "A body with username set to \"\" fails validation before check() runs. The default status is 400.",
+          "This endpoint checks and echoes data. It does not create a user."
         ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-805c-b29b-e77d30de9e2f",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80f8-bcbb-cbed35194639",
-      "type": "sub_header",
-      "richText": [
-        [
-          "❓ 4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ab-8f5f-fd5c6addecca",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is JSR-380 and how does Spring Boot support it?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-806e-86bd-d2f06f890233",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you validate incoming REST API data in Spring Boot?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8047-9cba-f1c544c4e623",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What does ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Valid",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " do in a controller method?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c4-8f83-d8ff28d78158",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you handle validation errors in a structured way (custom error response)?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a9-899e-c2cfd765d3d0",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "When would you create a custom validator? How?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8069-987c-fda0cb463b31",
-      "type": "divider"
+      }
     },
     {
       "id": "20924eb1-ed54-804f-803c-f01fcf56f685",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "✅ 5. Best Practices & Pitfalls"
+          "Handle validation errors"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8015-8093-e51a4e224216",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices:"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b4-80ab-df64f3c236cd",
+      "id": "validation-errors-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use "
-        ],
-        [
-          "meaningful error messages",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " inside annotations ("
-        ],
-        [
-          "message = \"\"",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ")."
+          "Use exception advice to translate validation errors into the API’s error response format."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8060-b8a6-d220ce145af3",
+      "id": "validation-errors-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Validate only "
-        ],
-        [
-          "DTOs",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", not entities (don’t mix DB logic with client input)."
+          "To handle errors inside the controller, place Errors or BindingResult immediately after the validated argument. Check it before processing the input."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-806c-ad32-d8ab9c8a4097",
+      "id": "validation-errors-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a "
-        ],
-        [
-          "global error handler",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " ("
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") to return consistent error formats."
+          "For a rule the built-in constraints cannot express, define a constraint annotation with @Constraint and a ConstraintValidator."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80fb-a388-f4afedc16de0",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "⚠️ Common Pitfalls:"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-805c-bf65-f1b8487209e3",
+      "id": "validation-errors-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Forgetting "
-        ],
-        [
-          "@Valid",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " in the controller parameter — no validation will run!"
+          "In Spring MVC 6.1 and later, direct constraints on handler parameters can use method validation and raise HandlerMethodValidationException. This differs from validating one request DTO."
         ]
       ]
+    }
+  ],
+  "summary": "Declare input rules, run them with @Valid and handle failures.",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Spring MVC: request body validation",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/requestbody.html"
     },
     {
-      "id": "20924eb1-ed54-8011-9108-d46ed5ddaa8d",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Applying constraints on the "
-        ],
-        [
-          "wrong type",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (e.g., "
-        ],
-        [
-          "@NotEmpty",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " on "
-        ],
-        [
-          "int",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " — use "
-        ],
-        [
-          "@Min",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or "
-        ],
-        [
-          "@NotNull",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ")."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8099-9cba-dcf57f56dd13",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Returning raw validation errors — it's better to return structured error responses."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8052-98bf-ed3516ef83e8",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8010-b415-d9e5fb4929c4",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔄 6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f6-a8fc-ceba38b53e9a",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "DTO (Data Transfer Object):",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Usually combined with validation to separate API models from DB models."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ea-b1b9-da9af031d00f",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Exception Handling:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Often used with validation to format errors ("
-        ],
-        [
-          "@ExceptionHandler",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ")."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8066-bf4a-fbdc43c358d3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Boot Starter Validation:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Provided via "
-        ],
-        [
-          "spring-boot-starter-validation",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " dependency (which uses Hibernate Validator under the hood)."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8018-ba1c-d5e8e34e2da9",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Bean Lifecycle:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Validation runs "
-        ],
-        [
-          "before",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " your controller logic, during request deserialization."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-801b-a983-c2904660e9b7",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8074-b206-f0f46b4f7a72",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🎤 7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a2-971d-f11e57b8d8f9",
-      "type": "quote",
-      "richText": [
-        [
-          "Q: How does Spring Boot validate REST API input?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8059-a9c9-c57cf89b5a94",
-      "type": "text",
-      "richText": [
-        [
-          "Spring Boot uses JSR-380 Bean Validation, which allows you to annotate fields in a DTO class with constraints like "
-        ],
-        [
-          "@NotNull",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@Size",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", or "
-        ],
-        [
-          "@Email",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ". When a REST controller method uses "
-        ],
-        [
-          "@Valid",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", Spring checks the incoming data against these rules before running the method. If validation fails, it returns a "
-        ],
-        [
-          "400 Bad Request",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " with the error. You can customize validation messages and handle errors globally for consistency."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8072-affd-fcbec169a284",
-      "type": "divider"
+      "title": "Spring MVC: validation",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html"
     }
   ]
 }

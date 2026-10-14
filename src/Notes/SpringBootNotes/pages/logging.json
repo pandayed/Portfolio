@@ -1,948 +1,285 @@
 {
   "id": "20924eb1-ed54-8027-97b1-e33d1ed3ca41",
-  "title": "Logging with Spring Boot (SLF4J, Logback, application logs)",
+  "title": "Application Logging",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54802797b1e33d1ed3ca41",
   "blocks": [
     {
-      "id": "20924eb1-ed54-806f-b20a-cc188efc92c1",
-      "type": "divider"
-    },
-    {
       "id": "20924eb1-ed54-8016-8f53-cfb0d381d748",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "1. "
-        ],
-        [
-          "Core Concept",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Record application events"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80a9-8cc0-df30502d11fb",
-      "type": "text",
+      "id": "20924eb1-ed54-8016-8f53-cfb0d381d748-b0",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Logging",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " is the process of recording information about your application’s behavior — like what it's doing, errors it encounters, or important events. In Spring Boot, logging helps developers "
-        ],
-        [
-          "understand what’s happening inside the application",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " at runtime. Spring Boot uses "
-        ],
-        [
-          "SLF4J",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (a logging façade) and "
-        ],
-        [
-          "Logback",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (a logging implementation) by default to make logging flexible and powerful."
+          "A log records an application event, warning, or failure."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8013-a4ca-cf6aca741e34",
-      "type": "divider"
+      "id": "20924eb1-ed54-8016-8f53-cfb0d381d748-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Your Java code calls the SLF4J logging API. A logging implementation writes those messages."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8016-8f53-cfb0d381d748-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot’s standard logging starter uses Logback as the default implementation."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8016-8f53-cfb0d381d748-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Logs go to the console by default. File logging requires configuration."
+        ]
+      ]
     },
     {
       "id": "20924eb1-ed54-80a0-b0db-d33948f01e60",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "2. "
-        ],
-        [
-          "Key Interview Points",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Choose a log level"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80d6-9bfa-cfa47ced3293",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "What is SLF4J and Logback?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
+      "id": "logging-level-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
       ],
+      "hasColumnHeader": true,
       "children": [
         {
-          "id": "20924eb1-ed54-80d6-893d-c8ca1de3e8c7",
-          "type": "text",
-          "richText": [
-            [
-              "SLF4J is like a “universal plug” for logging — it lets you use any logging backend (like Logback or Log4j) without changing your code. Logback is the default engine that actually writes the logs in Spring Boot."
+          "id": "logging-level-table-r0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Level"
+              ]
+            ],
+            "1": [
+              [
+                "Use"
+              ]
             ]
-          ]
+          }
+        },
+        {
+          "id": "logging-level-table-r1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "TRACE"
+              ]
+            ],
+            "1": [
+              [
+                "Detailed execution steps."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "logging-level-table-r2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "DEBUG"
+              ]
+            ],
+            "1": [
+              [
+                "Details useful while investigating behavior."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "logging-level-table-r3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "INFO"
+              ]
+            ],
+            "1": [
+              [
+                "Normal application events."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "logging-level-table-r4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "WARN"
+              ]
+            ],
+            "1": [
+              [
+                "An unexpected condition that the application can handle."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "logging-level-table-r5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "ERROR"
+              ]
+            ],
+            "1": [
+              [
+                "A failed operation that needs attention."
+              ]
+            ]
+          }
         }
       ]
     },
     {
-      "id": "20924eb1-ed54-8052-9b80-d2524e07f174",
+      "id": "logging-level-threshold",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "How does Spring Boot configure logging automatically?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "A logger’s configured level is a threshold. INFO allows INFO, WARN, and ERROR, while filtering DEBUG and TRACE."
         ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-806e-befa-cb39d472f006",
-          "type": "text",
-          "richText": [
-            [
-              "Spring Boot auto-configures Logback and sets up basic logging out of the box — no setup required unless you want to customize it."
-            ]
-          ]
-        }
       ]
-    },
-    {
-      "id": "20924eb1-ed54-804b-bfb3-e99ea9baae73",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "How to write logs in your code?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-809c-8ce7-cee01ff6df9b",
-          "type": "text",
-          "richText": [
-            [
-              "You use a logger instance (like "
-            ],
-            [
-              "logger.info(\"User logged in\")",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              ") to log messages at different levels: "
-            ],
-            [
-              "INFO",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              ", "
-            ],
-            [
-              "DEBUG",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              ", "
-            ],
-            [
-              "ERROR",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              ", etc."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a7-9e5a-dd90476336d8",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "Where do logs go?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-80b4-a688-e3d84fe92cfc",
-          "type": "text",
-          "richText": [
-            [
-              "By default: logs go to the console. You can configure them to also go into files, and format them using "
-            ],
-            [
-              "application.properties",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              "."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8001-9ccb-e4ef58ebf142",
-      "type": "divider"
     },
     {
       "id": "20924eb1-ed54-8058-ac63-d90061b5c653",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "3. "
-        ],
-        [
-          "Code Example",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-803b-baff-c6c09a028b8b",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Simple logging in a Spring Boot application:"
+          "Write messages with a logger"
         ]
       ]
     },
     {
       "id": "20924eb1-ed54-809a-94ec-c01b6b90628f",
-      "type": "code",
-      "richText": [
-        [
-          "import org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.boot.CommandLineRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class LoggingDemoApplication implements CommandLineRunner {\n\n    // Create a logger for this class\n    private static final Logger logger = LoggerFactory.getLogger(LoggingDemoApplication.class);\n\n    public static void main(String[] args) {\n        SpringApplication.run(LoggingDemoApplication.class, args);\n    }\n\n    @Override\n    public void run(String... args) {\n        logger.info(\"Application started successfully.\");\n        logger.debug(\"Debugging application startup.\");\n        logger.warn(\"This is a warning message.\");\n        logger.error(\"This is an error message.\");\n    }\n}\n"
+      "type": "example",
+      "example": {
+        "title": "Write startup messages at different levels",
+        "description": [
+          "Run this application with the default INFO logging level.",
+          "Boot also writes its own startup messages."
+        ],
+        "code": "import org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.boot.CommandLineRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class LoggingDemoApplication implements CommandLineRunner {\n\n    // Create a logger for this class\n    private static final Logger logger = LoggerFactory.getLogger(LoggingDemoApplication.class);\n\n    public static void main(String[] args) {\n        SpringApplication.run(LoggingDemoApplication.class, args);\n    }\n\n    @Override\n    public void run(String... args) {\n        logger.info(\"Application started successfully.\");\n        logger.debug(\"Debugging application startup.\");\n        logger.warn(\"This is a warning message.\");\n        logger.error(\"This is an error message.\");\n    }\n}\n",
+        "language": "java",
+        "explanation": [
+          "LoggerFactory creates a logger named for this class.",
+          "CommandLineRunner runs after Spring has started the application.",
+          "The INFO, WARN, and ERROR calls are written. The DEBUG call is filtered out.",
+          "Timestamps, thread names, and other prefixes depend on the logging format."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
-      "id": "20924eb1-ed54-8062-8552-ffffd281504d",
-      "type": "sub_sub_header",
+      "id": "logging-configuration",
+      "type": "header",
       "richText": [
         [
-          "application.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
+          "Configure levels and destinations"
+        ]
+      ]
+    },
+    {
+      "id": "logging-configuration-b0",
+      "type": "bulleted_list",
+      "richText": [
         [
-          " (optional customization):"
+          "logging.level.root sets the default level. logging.level followed by a package name sets that package’s level."
+        ]
+      ]
+    },
+    {
+      "id": "logging-configuration-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use package-level DEBUG when investigating one part of the application."
+        ]
+      ]
+    },
+    {
+      "id": "logging-configuration-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "logging.file.name adds a log file. Console logging continues."
+        ]
+      ]
+    },
+    {
+      "id": "logging-configuration-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "logging.pattern.console controls the console format."
+        ]
+      ]
+    },
+    {
+      "id": "logging-configuration-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use logback-spring.xml when you need Logback appenders, filters, or Boot-specific profile configuration. An appender chooses where messages are written."
         ]
       ]
     },
     {
       "id": "20924eb1-ed54-804e-851f-e982f013b618",
-      "type": "code",
-      "richText": [
-        [
-          "# Set log level for root\nlogging.level.root=INFO\n\n# Save logs to a file\nlogging.file.name=app.log\nlogging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %msg%n\n"
+      "type": "example",
+      "example": {
+        "title": "Set package logging and write to a file",
+        "description": [
+          "Put these settings in application.properties.",
+          "The application classes are in the com.example package."
+        ],
+        "code": "logging.level.root=INFO\nlogging.level.com.example=DEBUG\nlogging.file.name=app.log\nlogging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %msg%n",
+        "language": "text",
+        "explanation": [
+          "DEBUG is enabled for com.example while other packages keep INFO.",
+          "app.log is written relative to the application’s working directory.",
+          "The console pattern prints the timestamp and message.",
+          "Profile-specific configuration can choose different levels for development and production."
         ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20924eb1-ed54-80f1-a1ff-ca98cb1de304",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-801d-a0de-eacfaf59fdfc",
-      "type": "sub_header",
-      "richText": [
-        [
-          "4. "
-        ],
-        [
-          "Common Interview Questions",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8061-afb0-d542c1373a92",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the role of SLF4J in Spring Boot logging?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f2-8009-d6e85f3c6405",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How is Logback different from SLF4J?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8028-add8-edfd57d358b5",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How can you change the log level for a specific package?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809d-9bcc-f7dcb51bca13",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How would you configure logs to be written to a file?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809d-8375-f91fa6b8cdd3",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What's the difference between "
-        ],
-        [
-          "INFO",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "DEBUG",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "ERROR",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", and when should each be used?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-803a-8204-d8d571915d69",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8041-ad4e-c848e07fba9f",
-      "type": "sub_header",
-      "richText": [
-        [
-          "5. "
-        ],
-        [
-          "Best Practices & Pitfalls",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8059-89d8-de1b89f807d1",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8096-8598-cccf530eb1cc",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use appropriate "
-        ],
-        [
-          "log levels",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": "
-        ],
-        [
-          "DEBUG",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for internal info, "
-        ],
-        [
-          "INFO",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for general flow, "
-        ],
-        [
-          "WARN",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for potential issues, "
-        ],
-        [
-          "ERROR",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for failures."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-804e-b7b3-fa1b8620bd17",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Externalize logging config using "
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or "
-        ],
-        [
-          "logback-spring.xml",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for flexibility."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8023-b23a-fb73d09e3de0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use "
-        ],
-        [
-          "placeholders",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " ("
-        ],
-        [
-          "logger.info(\"User {} logged in\", username)",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") instead of string concatenation."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80fb-98aa-da6e9a23636f",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❌ Common Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8053-845c-e3e75968cc1e",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Logging "
-        ],
-        [
-          "sensitive data",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (e.g., passwords) — "
-        ],
-        [
-          "never log PII or secrets",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8003-913d-f93d4b2641f3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Using "
-        ],
-        [
-          "System.out.println()",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " instead of proper logging."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8080-9d0d-f601d51bf0a0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Logging "
-        ],
-        [
-          "too much at high levels",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (like "
-        ],
-        [
-          "DEBUG",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " in production), which can affect performance and clutter logs."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-804e-8f05-e466fe5e7b8b",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8079-a4d2-d75c6968ee73",
-      "type": "sub_header",
-      "richText": [
-        [
-          "6. "
-        ],
-        [
-          "Connection to Other Concepts",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8001-be53-c0e34272f15c",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Boot Autoconfiguration",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Automatically sets up Logback with default settings."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-801e-a18e-c1decb344236",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Profiles (dev/prod)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": You can have different logging levels for each profile (e.g., "
-        ],
-        [
-          "DEBUG",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " in dev, "
-        ],
-        [
-          "INFO",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " in prod)."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8046-83bf-c3c436b1db3f",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Actuator",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": You can expose and manage log levels at runtime using Spring Boot Actuator."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-804f-932d-f815fd6f397e",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8009-847b-f44fbb264de7",
-      "type": "sub_header",
-      "richText": [
-        [
-          "7. "
-        ],
-        [
-          "Quick Interview Answers",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8031-86b4-fc893e984f6e",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Q: "
-        ],
-        [
-          "What is SLF4J and how does Spring Boot use it for logging?",
-          [
-            [
-              "i"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c8-9c19-fe970c627215",
-      "type": "text",
-      "richText": [
-        [
-          "A:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " SLF4J is a logging façade — it lets you write logging code that works with multiple logging frameworks underneath. Spring Boot uses SLF4J with Logback as the default logging backend. It auto-configures basic logging so you can just use a logger in your code without extra setup."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f8-8abd-d4331bedccd0",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80fe-8c5f-fd0248f3641a",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Q: "
-        ],
-        [
-          "How can you configure different logging levels in Spring Boot?",
-          [
-            [
-              "i"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80e9-8d92-f284e6f9d9e7",
-      "type": "text",
-      "richText": [
-        [
-          "A:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " You can set logging levels in the "
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " file using "
-        ],
-        [
-          "logging.level.package-name=LEVEL",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ". For example, "
-        ],
-        [
-          "logging.level.com.example=DEBUG",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " sets DEBUG level for that package. You can also direct logs to a file and format the output."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c7-a303-e4557d2d1f40",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80c9-a089-e05190a652bc",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Q: "
-        ],
-        [
-          "What's the difference between SLF4J and Logback?",
-          [
-            [
-              "i"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8097-b285-ec38dd8c1c80",
-      "type": "text",
-      "richText": [
-        [
-          "A:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " SLF4J is the API you code against, and Logback is the actual implementation that processes and writes the logs. Think of SLF4J as the interface, and Logback as the engine."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80cd-83d1-fcc671db1301",
-      "type": "divider"
+      }
     },
     {
       "id": "ed-logging-operations",
       "type": "header",
       "richText": [
         [
-          "Useful logs and configuration"
+          "Make logs useful"
         ]
       ]
     },
@@ -951,7 +288,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use the SLF4J placeholder form, such as log.info(\"Saved journal {}\", id), so the log message and its arguments stay separate."
+          "Use SLF4J {} placeholders instead of building messages with string concatenation."
         ]
       ]
     },
@@ -960,7 +297,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Set levels for the package that owns the problem. Global DEBUG can produce too much output and expose sensitive values."
+          "Pass a caught exception as the throwable argument when its stack trace is needed."
         ]
       ]
     },
@@ -969,7 +306,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A logging configuration controls appenders, levels and formats. With Boot’s default Logback support, logback-spring.xml allows Boot-specific configuration such as profiles."
+          "Logging an exception does not propagate it to the caller."
         ]
       ]
     },
@@ -978,7 +315,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a correlation ID to connect related request and background-work messages. A nearby timestamp alone does not prove that messages describe the same operation."
+          "Use a correlation ID to connect messages from the same request or background operation."
         ]
       ]
     },
@@ -987,7 +324,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Log the operation and a safe identifier. Do not log passwords, tokens, complete personal journal text or secret-bearing URLs."
+          "Log the operation and a safe identifier. Keep passwords, tokens, and private message bodies out of logs."
         ]
       ]
     },
@@ -996,7 +333,16 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Log a caught exception with its throwable when its stack trace is needed. A log message alone does not propagate the failure to callers."
+          "Avoid global DEBUG during normal production operation. It produces extra output and can expose sensitive values."
+        ]
+      ]
+    },
+    {
+      "id": "ed-logging-operations-b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Actuator loggers endpoint can inspect and change levels at runtime. Restrict access to it."
         ]
       ]
     }
@@ -1013,7 +359,12 @@
     {
       "title": "SLF4J: parameterized logging",
       "url": "https://www.slf4j.org/faq.html#logging_performance"
+    },
+    {
+      "title": "Spring Boot 3.5 logging",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/logging.html"
     }
   ],
-  "updatedOn": "2026-10-13"
+  "updatedOn": "2026-10-14",
+  "summary": "Understand the logger, choose levels, and configure console and file output."
 }

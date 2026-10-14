@@ -1,21 +1,17 @@
 {
   "id": "spring-boot-testing-junit",
-  "title": "JUnit and Parameterized Tests",
-  "summary": "Use focused assertions, independent setup and parameterized input cases.",
+  "title": "JUnit basics",
+  "summary": "Write one test method, check its result, then understand setup and cleanup.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
-      "title": "Engineering Digest: JUnit Testing in Spring Boot | @Test @ParameterizedTest @CsvSource @ArgumentsSource @SpringBootTest",
-      "url": "https://www.youtube.com/watch?v=mILLHaIjGn4&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+      "title": "Spring Boot 3.5: testing",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/testing/spring-boot-applications.html"
     },
     {
-      "title": "JUnit 5.11: user guide",
-      "url": "https://junit.org/junit5/docs/5.11.0/user-guide/index.html"
-    },
-    {
-      "title": "Spring Boot 3.4: testing applications",
-      "url": "https://docs.spring.io/spring-boot/3.4/reference/testing/spring-boot-applications.html"
+      "title": "JUnit 5.12: user guide",
+      "url": "https://docs.junit.org/5.12.2/user-guide/"
     }
   ],
   "blocks": [
@@ -24,7 +20,7 @@
       "type": "header",
       "richText": [
         [
-          "JUnit Jupiter runs the test method"
+          "Test methods and assertions"
         ]
       ]
     },
@@ -33,7 +29,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "JUnit Jupiter is the JUnit 5 programming model. @Test marks a test method. Assertions compare the expected result with the actual result. A failed assertion fails the test."
+          "JUnit Jupiter is the JUnit 5 API used to write tests."
         ]
       ]
     },
@@ -42,7 +38,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use spring-boot-starter-test in test scope for the Boot-managed testing dependencies. A plain Jupiter test does not need @SpringBootTest."
+          "@Test marks a test method."
         ]
       ]
     },
@@ -51,7 +47,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Structure a test as arrange, act and assert. Prepare input, call the behavior, then check a result. Give the method a name that describes the rule being checked."
+          "Prepare the input, call the code, then assert the expected result."
         ]
       ]
     },
@@ -60,91 +56,227 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use assertEquals(expected, actual), assertTrue for a boolean rule, and assertThrows for an expected failure. A not-null assertion does not prove that fields or permissions are correct."
+          "An assertion failure fails the test. A method that runs without an assertion may miss an incorrect result."
         ]
       ]
     },
     {
-      "id": "junit-parameter",
-      "type": "header",
-      "richText": [
-        [
-          "Run one rule with several inputs"
-        ]
-      ]
-    },
-    {
-      "id": "junit-parameter-b0",
+      "id": "junit-basics-b4",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ParameterizedTest runs the same method once for each argument set. @CsvSource suits short rows containing simple values. Each row maps to the method parameters."
+          "A plain JUnit test does not need @SpringBootTest."
         ]
       ]
     },
     {
-      "id": "junit-parameter-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "This example checks a real input rule. Titles must contain at least one non-whitespace character. A row that only repeats the implementation would give weak evidence."
-        ]
-      ]
-    },
-    {
-      "id": "junit-parameter-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@ValueSource supplies one value per invocation. @ArgumentsSource delegates argument creation to an ArgumentsProvider. Use it for objects or reusable datasets that are awkward to express as CSV."
-        ]
-      ]
-    },
-    {
-      "id": "junit-parameter-code",
-      "type": "code",
-      "richText": [
-        [
-          "class TitleRules {\n    static boolean valid(String title) {\n        return title != null && !title.isBlank();\n    }\n}\n\nclass TitleRulesTest {\n    @ParameterizedTest\n    @CsvSource({\"Morning,true\", \"'   ',false\", \"'',false\"})\n    void titleNeedsVisibleText(String title, boolean expected) {\n        assertEquals(expected, TitleRules.valid(title));\n    }\n\n    @Test\n    void rejectsMissingTitle() {\n        assertFalse(TitleRules.valid(null));\n    }\n}"
-        ]
+      "id": "junit-assertions",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
       ],
-      "language": "Java"
-    },
-    {
-      "id": "junit-provider",
-      "type": "header",
-      "richText": [
-        [
-          "Provide structured arguments"
-        ]
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "junit-assertions-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Assertion"
+              ]
+            ],
+            "1": [
+              [
+                "Check"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-assertions-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "assertEquals(expected, actual)"
+              ]
+            ],
+            "1": [
+              [
+                "The actual value equals the expected value."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-assertions-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "assertTrue(value) / assertFalse(value)"
+              ]
+            ],
+            "1": [
+              [
+                "A boolean condition is true or false."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-assertions-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "assertThrows(type, action)"
+              ]
+            ],
+            "1": [
+              [
+                "The action throws the expected exception type."
+              ]
+            ]
+          }
+        }
       ]
     },
     {
-      "id": "junit-provider-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "ArgumentsProvider returns a stream of Arguments. JUnit calls the provider and invokes the test for each returned argument set. Use fresh mutable objects if the test changes its input."
+      "id": "junit-basic-code",
+      "type": "example",
+      "example": {
+        "title": "Reject a blank journal title",
+        "description": [
+          "Place this learning test under src/test/java in a project with spring-boot-starter-test.",
+          "A title is valid when it is not null and contains a non-whitespace character."
+        ],
+        "code": "import org.junit.jupiter.api.Test;\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\nclass TitleRules {\n    static boolean valid(String title) {\n        return title != null && !title.isBlank();\n    }\n}\n\nclass TitleRulesTest {\n    @Test\n    void acceptsVisibleText() {\n        assertTrue(TitleRules.valid(\"Morning\"));\n    }\n\n    @Test\n    void rejectsBlankTitle() {\n        assertFalse(TitleRules.valid(\"   \"));\n    }\n\n    @Test\n    void rejectsMissingTitle() {\n        assertFalse(TitleRules.valid(null));\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "The tests call TitleRules directly. No Spring application starts.",
+          "Each test checks one input case.",
+          "assertTrue checks the accepted title. assertFalse checks blank and missing titles.",
+          "The test runner reports passing or failing tests. This code does not print application output."
         ]
-      ]
-    },
-    {
-      "id": "junit-provider-code",
-      "type": "code",
-      "richText": [
-        [
-          "class MissingTitles implements ArgumentsProvider {\n    @Override\n    public Stream<? extends Arguments> provideArguments(\n            ExtensionContext context) {\n        return Stream.of(Arguments.of((Object) null),\n                         Arguments.of(\"\"), Arguments.of(\" \"));\n    }\n}\n\n@ParameterizedTest\n@ArgumentsSource(MissingTitles.class)\nvoid rejectsMissingOrBlankTitle(String title) {\n    assertFalse(TitleRules.valid(title));\n}"
-        ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "junit-lifecycle",
       "type": "header",
       "richText": [
         [
-          "Control setup and scope"
+          "Setup and cleanup"
         ]
+      ]
+    },
+    {
+      "id": "junit-lifecycle-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "junit-lifecycle-table-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Annotation"
+              ]
+            ],
+            "1": [
+              [
+                "When it runs"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-lifecycle-table-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@BeforeEach"
+              ]
+            ],
+            "1": [
+              [
+                "Before each test invocation."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-lifecycle-table-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@AfterEach"
+              ]
+            ],
+            "1": [
+              [
+                "After each test invocation."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-lifecycle-table-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@BeforeAll"
+              ]
+            ],
+            "1": [
+              [
+                "Once before tests in the class."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-lifecycle-table-4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@AfterAll"
+              ]
+            ],
+            "1": [
+              [
+                "Once after tests in the class."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "junit-lifecycle-table-5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@Disabled"
+              ]
+            ],
+            "1": [
+              [
+                "Skips the marked test or class."
+              ]
+            ]
+          }
+        }
       ]
     },
     {
@@ -152,7 +284,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "@BeforeEach runs before every invocation. Use it to prepare independent state. @AfterEach releases resources. @BeforeAll and @AfterAll handle class-level setup and cleanup."
+          "Use fresh state for each test so an earlier test does not change its result."
         ]
       ]
     },
@@ -161,7 +293,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "@Disabled skips a test. A skipped test proves no behavior. In the tutorial repository, several sample service tests are disabled. Their presence is not evidence that the application passes those checks."
+          "@BeforeAll and @AfterAll methods are static with JUnit’s default per-method lifecycle."
         ]
       ]
     },
@@ -170,16 +302,22 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @SpringBootTest only when Spring wiring is part of the requirement. An ordinary rule test should construct the class directly."
+          "A skipped test does not check any behavior."
         ]
       ]
     },
     {
-      "id": "junit-lifecycle-b3",
+      "id": "junit-parameter-next",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check boundary cases deliberately. For journal ownership, include the owner, another user and a missing entry. For title rules, include normal text, whitespace and null. These cases exercise different paths."
+          "Run one test with several inputs",
+          [
+            [
+              "a",
+              "/notes/spring-boot/testing/parameterized-tests"
+            ]
+          ]
         ]
       ]
     }

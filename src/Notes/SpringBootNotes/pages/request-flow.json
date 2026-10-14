@@ -1,0 +1,113 @@
+{
+  "id": "8a728460-71ee-435d-8be6-43de192181a2",
+  "sourceUrl": "https://docs.spring.io/spring-boot/3.5/reference/",
+  "title": "Controller, service and repository",
+  "blocks": [
+    {
+      "id": "request-flow-0",
+      "type": "header",
+      "richText": [
+        [
+          "Responsibilities"
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-0-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A controller reads HTTP input and chooses the HTTP response."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-0-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A service performs application operations and applies application rules."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-0-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A repository reads or writes stored data."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-0-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These are separate responsibilities. A simple endpoint does not need a service and repository if it has no application operation or stored data."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-1",
+      "type": "header",
+      "richText": [
+        [
+          "Request order"
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-1-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Servlet filters run before the controller. Spring Security uses filters when configured."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-1-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring MVC selects a controller method using the request mapping."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-1-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The controller calls the service. The service calls the repository when it needs stored data."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-1-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The result returns through the service to the controller. A message converter writes the response body."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-1-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Transaction boundaries belong around the operation that needs atomic database work, often a service method. The data-access lessons explain transactions."
+        ]
+      ]
+    }
+  ],
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Official reference: Controller, service and repository",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-servlet.html"
+    }
+  ]
+}

@@ -1,21 +1,13 @@
 {
   "id": "spring-boot-mongodb-queries",
-  "title": "MongoTemplate, Criteria and Query",
-  "summary": "Build explicit filters with validated values, bounded results and clear query choices.",
+  "title": "MongoTemplate Queries",
+  "summary": "Build conditions first, then limit, sort and select query results.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
-    {
-      "title": "Engineering Digest: Mastering MongoTemplate, Criteria, and Query in Spring Boot MongoDB",
-      "url": "https://www.youtube.com/watch?v=EL2ouT5P4Lc&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
-    },
     {
       "title": "Spring Data MongoDB: querying documents",
       "url": "https://docs.spring.io/spring-data/mongodb/reference/mongodb/template-query-operations.html"
-    },
-    {
-      "title": "MongoDB: regex query behavior",
-      "url": "https://www.mongodb.com/docs/manual/reference/operator/query/regex/"
     },
     {
       "title": "Java 17: Pattern.quote",
@@ -37,7 +29,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "MongoTemplate is Spring Data’s API for explicit MongoDB operations. Inject the bean configured by Spring Boot into a service or repository component."
+          "MongoTemplate provides explicit MongoDB operations. Spring Boot configures it as an injectable bean."
         ]
       ]
     },
@@ -46,7 +38,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Criteria describes a condition. Query contains conditions and options such as sorting, projection and result limits."
+          "Criteria describes a matching condition. Query holds conditions and options such as sorting and result limits."
         ]
       ]
     },
@@ -55,7 +47,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose MongoRepository methods for simple fixed searches. Choose MongoTemplate when filters depend on runtime choices or you need explicit update operations."
+          "is(value) checks equality. Conditions on different fields combine with AND."
         ]
       ]
     },
@@ -64,26 +56,34 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The course filters users by sentimentAnalysis and email. Build business conditions separately from request validation. An email pattern alone cannot prove an address can receive mail."
+          "Use repository methods for simple fixed searches. Use MongoTemplate when conditions depend on runtime choices or an update needs explicit operators."
         ]
       ]
     },
     {
       "id": "mongo-query-tools-code",
-      "type": "code",
-      "richText": [
-        [
-          "import org.springframework.data.mongodb.core.query.Criteria;\nimport org.springframework.data.mongodb.core.query.Query;\n\nQuery query = new Query(Criteria.where(\"sentimentAnalysis\").is(true));\nquery.addCriteria(Criteria.where(\"email\").exists(true).ne(null));\nquery.limit(100);\nList<User> users = mongoTemplate.find(query, User.class);"
+      "type": "example",
+      "example": {
+        "title": "Find entries with one title",
+        "description": [
+          "Use JournalEntry from the mapping page.",
+          "Run this code in a service with an injected MongoTemplate named mongoTemplate."
+        ],
+        "code": "import java.util.List;\nimport org.springframework.data.mongodb.core.query.Criteria;\nimport org.springframework.data.mongodb.core.query.Query;\n\nQuery query = new Query(Criteria.where(\"title\").is(\"Learning Spring\"));\nquery.limit(20);\nList<JournalEntry> entries = mongoTemplate.find(query, JournalEntry.class);",
+        "language": "java",
+        "explanation": [
+          "Criteria selects documents whose title matches Learning Spring.",
+          "limit caps the returned list at 20 documents.",
+          "find returns an empty list when there are no matches."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "mongo-query-values",
       "type": "header",
       "richText": [
         [
-          "Pass values, keep operators controlled"
+          "Text matching"
         ]
       ]
     },
@@ -92,7 +92,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "is(value) performs equality matching. Conditions on different fields in this query combine with AND."
+          "A regular expression is a pattern that matches text. Use equality when you need an exact value."
         ]
       ]
     },
@@ -101,7 +101,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep field names and operators under application control. Pass validated values through Criteria rather than concatenating user input into a raw JSON query."
+          "For a literal prefix search, quote the supplied prefix so regex symbols in it are treated as characters."
         ]
       ]
     },
@@ -110,35 +110,35 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Regex means regular expression, a pattern used to match text. Use equality for an exact username lookup."
-        ]
-      ]
-    },
-    {
-      "id": "mongo-query-values-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "If a feature needs a literal prefix search, bound the input length and quote the prefix. Pattern.quote prevents regex symbols in the input from becoming pattern instructions."
+          "Keep field names and operators under application control. Pass input values to Criteria instead of building raw query text from them."
         ]
       ]
     },
     {
       "id": "mongo-query-values-code",
-      "type": "code",
-      "richText": [
-        [
-          "import java.util.regex.Pattern;\n\nif (prefix == null || prefix.isBlank() || prefix.length() > 50) {\n    throw new IllegalArgumentException(\"Invalid username prefix\");\n}\nPattern literalPrefix = Pattern.compile(\"^\" + Pattern.quote(prefix));\nQuery query = new Query(Criteria.where(\"userName\").regex(literalPrefix));\nquery.limit(20);\nList<User> users = mongoTemplate.find(query, User.class);"
+      "type": "example",
+      "example": {
+        "title": "Search for a literal title prefix",
+        "description": [
+          "Run this code in a service method receiving a String prefix.",
+          "The service has an injected MongoTemplate named mongoTemplate."
+        ],
+        "code": "import java.util.List;\nimport java.util.regex.Pattern;\nimport org.springframework.data.mongodb.core.query.Criteria;\nimport org.springframework.data.mongodb.core.query.Query;\n\nif (prefix == null || prefix.isBlank() || prefix.length() > 50) {\n    throw new IllegalArgumentException(\"Invalid title prefix\");\n}\nPattern pattern = Pattern.compile(\"^\" + Pattern.quote(prefix));\nQuery query = new Query(Criteria.where(\"title\").regex(pattern));\nquery.limit(20);\nList<JournalEntry> entries = mongoTemplate.find(query, JournalEntry.class);",
+        "language": "java",
+        "explanation": [
+          "^ requires the match to start at the beginning of the title.",
+          "Pattern.quote makes characters such as . and * literal input.",
+          "The length check and result limit bound this search.",
+          "Index use depends on the pattern and query. Inspect query execution rather than assuming a regex uses an index efficiently."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "mongo-query-read",
       "type": "header",
       "richText": [
         [
-          "Bound results and inspect query work"
+          "Limit, sort and select fields"
         ]
       ]
     },
@@ -147,7 +147,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A limit caps one result set. It does not provide a full pagination design or guarantee stable ordering."
+          "A result limit caps one returned list. It does not define page order."
         ]
       ]
     },
@@ -156,7 +156,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose deterministic sorting when paging. For equal sort values, add a unique field such as _id to break ties."
+          "Use deterministic sorting for pagination. Include a unique field such as _id when other sort values can repeat."
         ]
       ]
     },
@@ -165,7 +165,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Projection selects only required fields. Use a response DTO, a separate object for API output, when partial data should not be treated as a complete persistent User."
+          "A projection selects only some fields. A partially loaded object is not a complete document replacement."
         ]
       ]
     },
@@ -174,7 +174,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "An index helps MongoDB locate matching documents. Check indexes and explain output for real query patterns. Do not assume any regex query will use an index efficiently."
+          "An index can help locate matching documents. Check query plans for the actual query."
         ]
       ]
     },
@@ -183,18 +183,27 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "find returns an empty list when nothing matches. Distinguish that result from authentication, connection or query failures."
+          "For private data, include the authenticated owner in the query condition. Matching an ID alone does not establish permission."
         ]
       ]
     },
     {
-      "id": "mongo-query-read-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A query filter is not authorization by itself. Include the authenticated owner’s ID when reading private journal data."
+      "id": "mongo-course-filter",
+      "type": "example",
+      "example": {
+        "title": "Filter users by two conditions",
+        "description": [
+          "This separate case assumes a User document with sentimentAnalysis and email fields.",
+          "Run the query in a service with an injected MongoTemplate named mongoTemplate."
+        ],
+        "code": "import java.util.List;\nimport org.springframework.data.mongodb.core.query.Criteria;\nimport org.springframework.data.mongodb.core.query.Query;\n\nQuery query = new Query(Criteria.where(\"sentimentAnalysis\").is(true));\nquery.addCriteria(Criteria.where(\"email\").exists(true).ne(null));\nquery.limit(100);\nList<User> users = mongoTemplate.find(query, User.class);",
+        "language": "java",
+        "explanation": [
+          "Both conditions must match: sentimentAnalysis is true and email exists with a non-null value.",
+          "This checks stored fields. It does not prove that the email address can receive mail.",
+          "The query returns at most 100 users."
         ]
-      ]
+      }
     }
   ]
 }

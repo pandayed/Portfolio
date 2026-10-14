@@ -1,0 +1,163 @@
+{
+  "id": "0a87c490-b7e0-4a4a-86c0-c60c4b0ab8a4",
+  "sourceUrl": "https://docs.spring.io/spring-boot/3.5/reference/",
+  "title": "Spring beans and component scanning",
+  "blocks": [
+    {
+      "id": "beans-0",
+      "type": "header",
+      "richText": [
+        [
+          "Beans and the application context"
+        ]
+      ]
+    },
+    {
+      "id": "beans-0-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A bean is an object managed by Spring."
+        ]
+      ]
+    },
+    {
+      "id": "beans-0-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application context creates beans, supplies their dependencies, and manages their lifecycle."
+        ]
+      ]
+    },
+    {
+      "id": "beans-0-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Component scanning searches selected packages for classes marked with component annotations. It registers bean definitions for those classes."
+        ]
+      ]
+    },
+    {
+      "id": "beans-0-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "By default, a bean has singleton scope: one instance per bean definition in an application context. Singleton scope does not make mutable fields thread-safe."
+        ]
+      ]
+    },
+    {
+      "id": "beans-1",
+      "type": "header",
+      "richText": [
+        [
+          "Register a class"
+        ]
+      ]
+    },
+    {
+      "id": "beans-1-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Component marks a general component. @Service marks a class containing application operations."
+        ]
+      ]
+    },
+    {
+      "id": "beans-1-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Repository marks a data-access component. It supports persistence-exception translation when that infrastructure is configured."
+        ]
+      ]
+    },
+    {
+      "id": "beans-1-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Service does not automatically start a transaction. These annotations do not require particular folder names."
+        ]
+      ]
+    },
+    {
+      "id": "beans-1-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application class\u2019s package and its subpackages are scanned by default. Classes elsewhere need explicit registration or a wider scan."
+        ]
+      ]
+    },
+    {
+      "id": "beans-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Register a greeting service",
+        "description": [
+          "Place this class in the application package or a subpackage."
+        ],
+        "code": "package com.example.demo;\n\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class GreetingService {\n    public String greet() {\n        return \"Hello\";\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "Spring discovers GreetingService during component scanning.",
+          "Spring creates a GreetingService bean. Registering it does not call greet()."
+        ]
+      }
+    },
+    {
+      "id": "beans-2",
+      "type": "header",
+      "richText": [
+        [
+          "Register an object from a method"
+        ]
+      ]
+    },
+    {
+      "id": "beans-2-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Configuration marks a class containing bean definitions."
+        ]
+      ]
+    },
+    {
+      "id": "beans-2-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Bean registers the object returned by a method. Use it when you need to construct an object explicitly, including a class from a library."
+        ]
+      ]
+    },
+    {
+      "id": "beans-2-example-0",
+      "type": "example",
+      "example": {
+        "title": "Register a Clock bean",
+        "description": [
+          "A Clock supplies the current time. This configuration registers a UTC Clock for injection."
+        ],
+        "code": "package com.example.demo;\n\nimport java.time.Clock;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\n\n@Configuration\npublic class TimeConfiguration {\n    @Bean\n    public Clock clock() {\n        return Clock.systemUTC();\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "Spring calls the bean method to obtain the Clock instance.",
+          "Another bean can request Clock as a constructor parameter."
+        ]
+      }
+    }
+  ],
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Official reference: Spring beans and component scanning",
+      "url": "https://docs.spring.io/spring-framework/reference/core/beans/classpath-scanning.html"
+    }
+  ]
+}

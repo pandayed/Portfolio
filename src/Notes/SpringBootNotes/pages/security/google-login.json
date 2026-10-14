@@ -1,0 +1,138 @@
+{
+  "id": "spring-boot-security-google-login",
+  "title": "Google login",
+  "summary": "Configure Google OpenID Connect login using Spring Security’s managed flow.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Engineering Digest: OAuth2 in Spring Boot | How to Add Google Login in Spring Boot | Complete Tutorial",
+      "url": "https://www.youtube.com/watch?v=cRiqZ0j1gEM&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+    },
+    {
+      "title": "Spring Security 6: OAuth2 login",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/login/core.html"
+    },
+    {
+      "title": "Google: OpenID Connect",
+      "url": "https://developers.google.com/identity/openid-connect/openid-connect"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "oauth-setup",
+      "type": "header",
+      "richText": [
+        [
+          "Register the application"
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use spring-boot-starter-oauth2-client in a Spring Boot 3 application."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Register the application as an OAuth client with Google. Google supplies a client ID and client secret."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Register the exact callback URL that Google will use to return to the application."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep the client secret on the server. Supply it through environment configuration or a secret manager."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-setup-code",
+      "type": "example",
+      "example": {
+        "title": "Configure Google and enable browser login",
+        "description": [
+          "Use a Spring Boot 3 servlet web application with the OAuth2 client starter.",
+          "Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in the application environment.",
+          "For local development on port 8080, register http://localhost:8080/login/oauth2/code/google with Google.",
+          "Put the properties in application.properties and the bean in a @Configuration class.",
+          "Import Bean, Customizer, HttpSecurity and SecurityFilterChain."
+        ],
+        "code": "# application.properties\nspring.security.oauth2.client.registration.google.client-id=${GOOGLE_CLIENT_ID}\nspring.security.oauth2.client.registration.google.client-secret=${GOOGLE_CLIENT_SECRET}\nspring.security.oauth2.client.registration.google.scope=openid,profile,email\n\n// Bean in SecurityConfig.java\n@Bean\nSecurityFilterChain browser(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(rules -> rules\n            .requestMatchers(\"/\", \"/login/**\", \"/oauth2/**\")\n                .permitAll()\n            .anyRequest().authenticated())\n        .oauth2Login(Customizer.withDefaults())\n        .build();\n}",
+        "language": "text",
+        "explanation": [
+          "The google registration name selects Spring’s built-in Google provider defaults.",
+          "openid requests OIDC login. profile and email request profile information.",
+          "Open /oauth2/authorization/google to start login.",
+          "Spring handles the callback, exchanges the code and validates the OIDC response.",
+          "After login, the application remembers authentication with a server session.",
+          "CSRF remains enabled because the browser sends the session cookie automatically.",
+          "For deployment, register the public HTTPS callback URL. A reverse proxy must preserve the correct public host and protocol."
+        ]
+      }
+    },
+    {
+      "id": "oauth-accounts",
+      "type": "header",
+      "richText": [
+        [
+          "Associate the external identity with an account"
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Identify an external account by its verified issuer and subject (sub)."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Email addresses can change. Do not use email alone as a permanent external account key."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Assign local roles through the application’s account rules. Google login does not automatically give an ADMIN role."
+        ]
+      ]
+    },
+    {
+      "id": "oauth-accounts-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep account-linking rules explicit before joining an external identity to an existing account."
+        ]
+      ]
+    }
+  ]
+}

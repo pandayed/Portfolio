@@ -1,843 +1,219 @@
 {
   "id": "20924eb1-ed54-8092-b7d5-d6529d830de8",
-  "title": "Entity Mapping with JPA Annotations (@Entity, @Id, @GeneratedValue, @OneToMany, etc.)",
+  "title": "JPA Entity Mapping",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed548092b7d5d6529d830de8",
   "blocks": [
     {
-      "id": "20924eb1-ed54-80c6-b416-d0e8bff9be8b",
-      "type": "divider"
-    },
-    {
       "id": "20924eb1-ed54-803c-b0ea-c2b217489492",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "✅ 1. Core Concept (2-3 sentences)"
+          "Entities and tables"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8094-b37c-cfa7025a7793",
-      "type": "text",
-      "richText": [
-        [
-          "Entity Mapping",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " in Spring Boot using "
-        ],
-        [
-          "JPA (Java Persistence API)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " lets you define how Java objects (like classes) are stored in a database. It bridges the gap between the "
-        ],
-        [
-          "object-oriented world (Java classes)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " and the "
-        ],
-        [
-          "relational world (database tables)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " by using annotations like "
-        ],
-        [
-          "@Entity",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@Id",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@OneToMany",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", etc. This allows you to treat your database tables like regular Java objects with properties and methods."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80bd-b9d0-ed1175fe10b8",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80a7-a99b-dedc6339b28b",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🎯 2. Key Interview Points"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80bc-8df6-edceb115cebe",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "What is an ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Entity",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " — A class annotated with "
-        ],
-        [
-          "@Entity",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " is a JPA-managed persistent object that maps to a database table."
+          "An entity is a Java class whose instances JPA stores in a relational database."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-806d-8321-f22c0f9e0701",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "How does ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Id",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@GeneratedValue",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " work?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " — These specify the primary key and how its value is generated (e.g., auto-increment)."
+          "JPA means Jakarta Persistence API. It defines mapping annotations and persistence operations. Hibernate is a common implementation."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8099-837b-ca71d8ece80b",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "How do you map relationships?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " — Use "
-        ],
-        [
-          "@OneToMany",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@ManyToOne",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", etc., to represent real-world relationships like “a user has many orders”."
+          "ORM means object-relational mapping. It describes how Java objects correspond to tables, rows and columns."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8046-a84f-fd189990efd3",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Lazy vs Eager loading",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " — Common performance topic around how related entities are fetched (all at once or when accessed)."
+          "@Entity marks an entity class. @Table chooses its table name."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8085-91e9-f2e97d658c77",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80ca-81e2-f762e1ad6420",
-      "type": "sub_header",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b4",
+      "type": "bulleted_list",
       "richText": [
         [
-          "💻 3. Code Example"
+          "Each entity needs a primary key. @Id marks the Java field or property holding that key."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8043-97f4-fc675b5bb569",
-      "type": "text",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b5",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Let's model a "
-        ],
+          "A JPA entity needs a public or protected no-argument constructor."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b6",
+      "type": "bulleted_list",
+      "richText": [
         [
-          "User",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
+          "Spring Boot 3 uses jakarta.persistence annotations. Older Spring Boot 2 projects use javax.persistence."
+        ]
+      ]
+    },
+    {
+      "id": "entity-fields",
+      "type": "header",
+      "richText": [
         [
-          " who can have "
-        ],
+          "Fields and columns"
+        ]
+      ]
+    },
+    {
+      "id": "entity-fields-b0",
+      "type": "bulleted_list",
+      "richText": [
         [
-          "multiple posts",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
+          "@Column can choose a column name and describe constraints such as nullability."
+        ]
+      ]
+    },
+    {
+      "id": "entity-fields-b1",
+      "type": "bulleted_list",
+      "richText": [
         [
-          " — a common blog application use case."
+          "When @Id is placed on a field, JPA reads and writes fields directly. Getters and setters are not required for that field access."
+        ]
+      ]
+    },
+    {
+      "id": "entity-fields-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Transient excludes a field from persistence."
+        ]
+      ]
+    },
+    {
+      "id": "entity-fields-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Database constraints protect stored data. They do not replace validation of incoming requests."
+        ]
+      ]
+    },
+    {
+      "id": "entity-generated-id",
+      "type": "header",
+      "richText": [
+        [
+          "Generated identifiers"
+        ]
+      ]
+    },
+    {
+      "id": "entity-generated-id-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@GeneratedValue asks the persistence provider to obtain an identifier using the selected generation strategy."
+        ]
+      ]
+    },
+    {
+      "id": "entity-generated-id-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "IDENTITY uses a database identity column. SEQUENCE uses a database sequence. AUTO lets the provider choose a strategy."
+        ]
+      ]
+    },
+    {
+      "id": "entity-generated-id-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Leave a generated identifier unset when creating a new entity."
         ]
       ]
     },
     {
       "id": "20924eb1-ed54-8068-a1ae-e618460af3dc",
-      "type": "code",
-      "richText": [
-        [
-          "import jakarta.persistence.*;\nimport java.util.List;\n\n@Entity\npublic class User {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;  // Primary key\n\n    private String name;\n\n    @OneToMany(mappedBy = \"user\", cascade = CascadeType.ALL)\n    private List<Post> posts;\n\n    // Getters and Setters\n}\n\n@Entity\npublic class Post {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;  // Primary key\n\n    private String title;\n\n    @ManyToOne\n    @JoinColumn(name = \"user_id\")\n    private User user;\n\n    // Getters and Setters\n}\n"
+      "type": "example",
+      "example": {
+        "title": "Map an employee to a table",
+        "description": [
+          "Use the relational connection from the previous page.",
+          "Place Employee.java under the application package so Spring Boot finds the entity.",
+          "For this disposable learning database, use ddl-auto=create to generate the table. For a persistent database, create the matching table with a migration."
+        ],
+        "code": "import jakarta.persistence.Column;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false)\n    private String name;\n    private String department;\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n}",
+        "language": "java",
+        "explanation": [
+          "Employee maps to employees. One saved Employee represents one row.",
+          "id maps to the primary key and receives its value from the identity column.",
+          "name is mapped as a required column.",
+          "The protected constructor lets JPA create an Employee when reading a row.",
+          "The public constructor lets application code create an employee without supplying an ID."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
-      "id": "20924eb1-ed54-8071-85d6-dcf2639563f2",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "What's happening here?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-801d-8585-c59dee853c09",
+      "id": "entity-next",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Entity",
+          "Save and read entities with a repository",
           [
             [
-              "c"
+              "a",
+              "/notes/spring-boot/spring-data-jpa"
             ]
           ]
-        ],
-        [
-          ": Both classes are mapped to database tables."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8001-a793-d1424b38bd60",
+      "id": "entity-relations-next",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Id",
+          "Map relationships after learning repositories",
           [
             [
-              "c"
+              "a",
+              "/notes/spring-boot/jpa-relationships"
             ]
           ]
-        ],
-        [
-          ": Marks the primary key."
         ]
       ]
-    },
+    }
+  ],
+  "summary": "Map one Java class, its fields and its primary key to a table.",
+  "updatedOn": "2026-10-14",
+  "sources": [
     {
-      "id": "20924eb1-ed54-8099-9d79-ecad0e47617f",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@GeneratedValue",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ": Auto-generates the ID value."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-808c-b2dc-f283618d29bf",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@OneToMany",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@ManyToOne",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ": Define the relationship — a user has many posts, but each post belongs to one user."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8088-a836-c0e943bdd53b",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "mappedBy = \"user\"",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ": Tells JPA the "
-        ],
-        [
-          "Post",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " side owns the relationship."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8028-bbf7-ec7c041e3efa",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8094-a2dc-e28d57def4e8",
-      "type": "sub_header",
-      "richText": [
-        [
-          "❓ 4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8003-993e-ddee5ab63f5a",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What does the "
-        ],
-        [
-          "@Entity",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " annotation do in Spring Boot?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8092-88a8-e3ddb52196c5",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you define a primary key in a JPA entity?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-806c-994c-fe7c365919ed",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the purpose of "
-        ],
-        [
-          "@GeneratedValue",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", and what strategies are available?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80aa-a56a-c70c1efe6af3",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you implement a one-to-many relationship in JPA?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80cf-a06f-e976b57685c6",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the difference between lazy and eager loading in JPA?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ee-a928-e7213419122b",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8042-b720-e0e2285414f4",
-      "type": "sub_header",
-      "richText": [
-        [
-          "👍 5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ff-8eb5-cfdd4e455582",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8020-a1c1-df23de718711",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Always define a primary key ("
-        ],
-        [
-          "@Id",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") for every entity."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-807d-ad96-dcb881eaea1d",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use "
-        ],
-        [
-          "cascade = CascadeType.ALL",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " cautiously — only if the child should always follow the parent's lifecycle (e.g., delete children when parent is deleted)."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b3-898d-f1c2c2480ba7",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Override "
-        ],
-        [
-          "toString()",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " carefully to avoid infinite loops (especially in bidirectional relationships)."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8014-98c2-e0779eee3729",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❌ Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8034-9ee6-cc4eb87d7609",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forgetting "
-        ],
-        [
-          "mappedBy",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " in bidirectional relationships — causes duplicate join tables."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80d4-a47f-f6e9e5a5629c",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Using "
-        ],
-        [
-          "EAGER",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " loading by default on large collections — can kill performance."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f5-a4a1-d3806289f111",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "No-arg constructor missing — JPA needs a public or protected default constructor."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-808b-9e3f-e989346ca64a",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80e2-815d-db0eea3b4e96",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔄 6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a8-9339-e43fd0d8b5ee",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Data JPA",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Once your entities are mapped, Spring Data JPA can auto-generate queries via "
-        ],
-        [
-          "JpaRepository",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8058-b431-de2eb77ce80e",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Service Layer",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Business logic calls repositories to save/fetch these entities."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b7-9c60-da3f8e849953",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Boot Auto-Configuration",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Automatically sets up JPA if it detects "
-        ],
-        [
-          "spring-boot-starter-data-jpa",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and a database driver in the classpath."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-807e-bf0a-cf4f451e9e23",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80f9-8a3b-c05c49b92138",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🗣️ 7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f1-a04e-dd16c656c86a",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Q: “Can you explain what "
-        ],
-        [
-          "@Entity",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@Id",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " do in JPA?”"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80fe-bff0-dbeda75a76d9",
-      "type": "quote",
-      "richText": [
-        [
-          "Sure! @Entity marks a class as a database-mapped object — meaning each instance will correspond to a row in a table. @Id defines the primary key field for that table, and without it, JPA can’t identify individual records."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8073-97bb-edb12a7c9df5",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Q: “How would you model a one-to-many relationship between two classes?”"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8084-bd68-fd94805c9025",
-      "type": "quote",
-      "richText": [
-        [
-          "I'd use @OneToMany on the parent side and @ManyToOne on the child. For example, a User can have many Posts, so in the User class, I’d have a list of posts with @OneToMany(mappedBy = \"user\"), and in Post, I’d have a User field annotated with @ManyToOne."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802e-a859-e18bdb9e92c2",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Q: “What's the difference between lazy and eager loading?”"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c6-81e1-cdffd0facf6d",
-      "type": "quote",
-      "richText": [
-        [
-          "Lazy loading fetches related data only when needed, which is good for performance. Eager loading retrieves everything up front, which might hurt performance if you don’t always need the related data."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ee-b06c-c43eeed7c184",
-      "type": "divider"
+      "title": "Jakarta Persistence 3.1 specification",
+      "url": "https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.html"
     }
   ]
 }

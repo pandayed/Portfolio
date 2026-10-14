@@ -1,0 +1,154 @@
+{
+  "id": "spring-boot-security-browser-security",
+  "title": "Browser sessions and CSRF",
+  "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480bf82c8d22225fd2135",
+  "blocks": [
+    {
+      "id": "browser-session",
+      "type": "header",
+      "richText": [
+        [
+          "Remember authentication with a session"
+        ]
+      ]
+    },
+    {
+      "id": "browser-session-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "After form login, the server can store authentication in an HTTP session."
+        ]
+      ]
+    },
+    {
+      "id": "browser-session-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The browser holds a session cookie and sends it with later requests. The server uses it to find the session."
+        ]
+      ]
+    },
+    {
+      "id": "browser-session-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Logging out ends the application login. Secure cookies and HTTPS protect the cookie during normal use."
+        ]
+      ]
+    },
+    {
+      "id": "csrf",
+      "type": "header",
+      "richText": [
+        [
+          "Protect requests that change data"
+        ]
+      ]
+    },
+    {
+      "id": "csrf-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Cross-site request forgery (CSRF) happens when another website causes the browser to send an unwanted request using credentials it sends automatically."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Session cookies are sent automatically. The unwanted request can therefore appear to come from a logged-in user."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Security enables CSRF protection by default. Requests that change data normally need a CSRF token."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application supplies this token in a form field or request header. Spring checks it before accepting the request."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "GET requests should read data rather than change it. They normally do not need a CSRF token."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-bearer",
+      "type": "header",
+      "richText": [
+        [
+          "Choose settings from how credentials are sent"
+        ]
+      ]
+    },
+    {
+      "id": "csrf-bearer-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A stateless session policy does not, by itself, remove CSRF risk."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-bearer-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An API that accepts only bearer tokens explicitly added to the Authorization header can have different CSRF settings from a cookie-based application."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-bearer-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Before disabling CSRF, ensure the application does not also authenticate through cookies or browser-cached Basic credentials."
+        ]
+      ]
+    },
+    {
+      "id": "csrf-bearer-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep CSRF protection when authenticated browser requests use a session cookie."
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring Security 6.5: CSRF",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/exploits/csrf.html"
+    },
+    {
+      "title": "Spring Security 6.5: session management",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authentication/session-management.html"
+    }
+  ],
+  "updatedOn": "2026-10-14",
+  "summary": "Understand session cookies before choosing CSRF settings."
+}

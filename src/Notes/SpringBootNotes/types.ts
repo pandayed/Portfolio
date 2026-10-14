@@ -1,4 +1,5 @@
 import type { SpringBootRoute } from '../../routing/routes';
+import type { LearningNoteExample } from '../LearningNotes/types';
 
 export type RichTextMark =
     | readonly ['b']
@@ -16,7 +17,8 @@ export interface SpringBootBlock {
     id: string;
     type: 'text' | 'header' | 'sub_header' | 'sub_sub_header' |
         'bulleted_list' | 'numbered_list' | 'code' | 'divider' |
-        'table' | 'table_row' | 'callout' | 'quote';
+        'table' | 'table_row' | 'callout' | 'quote' | 'example';
+    example?: LearningNoteExample;
     richText?: RichText;
     children?: readonly SpringBootBlock[];
     language?: string;

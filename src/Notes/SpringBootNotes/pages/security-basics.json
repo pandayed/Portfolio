@@ -1,764 +1,198 @@
 {
   "id": "20924eb1-ed54-80bf-82c8-d22225fd2135",
-  "title": "Spring Boot Security Basics (in-memory authentication, @EnableWebSecurity)",
+  "title": "Spring Security basics",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480bf82c8d22225fd2135",
   "blocks": [
     {
-      "id": "20924eb1-ed54-8011-9576-d8c573bb97ae",
-      "type": "divider"
-    },
-    {
       "id": "20924eb1-ed54-8061-a676-d213d1dc6762",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "✅ 1. Core Concept (What & Why)"
+          "Authentication and authorization"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-805d-b3ec-f5bb3b9cae0f",
-      "type": "text",
-      "richText": [
-        [
-          "Spring Security",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " is a framework that adds "
-        ],
-        [
-          "authentication (who are you?)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "authorization (are you allowed to do this?)",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " to Spring Boot applications. It protects web apps from unauthorized access — like a bouncer at the door."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c9-b17a-e0ace6143c71",
-      "type": "text",
-      "richText": [
-        [
-          "In-memory authentication",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " is a simple way to define users and passwords directly in the code — useful for testing or learning."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8007-9755-fc8f7ae09ef1",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80f4-8df8-c7135d85ea0c",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🎯 2. Key Interview Points"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f7-a1d7-ef149e05bc14",
+      "id": "security-meaning-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ What is "
-        ],
-        [
-          "Spring Security",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " and why is it needed?"
+          "Spring Security controls access to a Spring web application."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8084-b2a4-c6a1b20566d5",
+      "id": "security-meaning-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ How to "
-        ],
-        [
-          "set up in-memory authentication",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " in Spring Boot (especially using "
-        ],
-        [
-          "SecurityFilterChain",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or older "
-        ],
-        [
-          "WebSecurityConfigurerAdapter",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ")"
+          "Authentication checks who the user is. A password login is one way to authenticate."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-805f-ba95-e817fc55d97a",
+      "id": "security-meaning-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ Role of "
-        ],
-        [
-          "@EnableWebSecurity",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and how it activates security in a Spring Boot app"
+          "Authorization checks what that user is allowed to do."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-809e-a0b3-d97c00e466e1",
+      "id": "security-meaning-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ How to "
-        ],
-        [
-          "define roles and restrict access",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " to specific endpoints (like admin-only or user-only pages)"
+          "These examples use Spring Boot 3 and Spring Security 6. Boot 3 requires Java 17 or later."
         ]
       ]
-    },
-    {
-      "id": "20924eb1-ed54-8014-9dd5-f128a5ce65c5",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8056-af30-f4a9ecc31d03",
-      "type": "sub_header",
-      "richText": [
-        [
-          "💻 3. Code Example: In-Memory Authentication with "
-        ],
-        [
-          "@EnableWebSecurity",
-          [
-            [
-              "c"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b9-b4fd-edc0293754d0",
-      "type": "code",
-      "richText": [
-        [
-          "// File: SecurityConfig.java\npackage com.example.securitydemo;\n\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.web.SecurityFilterChain;\nimport org.springframework.security.core.userdetails.User;\nimport org.springframework.security.core.userdetails.UserDetails;\nimport org.springframework.security.provisioning.InMemoryUserDetailsManager;\nimport org.springframework.security.core.userdetails.UserDetailsService;\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\n\n@Configuration\n@EnableWebSecurity  // Enables Spring Security for the application\npublic class SecurityConfig {\n\n    // Define users in memory\n    @Bean\n    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {\n        UserDetails user = User\n                .withUsername(\"user\")\n                .password(passwordEncoder.encode(\"user123\"))\n                .roles(\"USER\")\n                .build();\n\n        UserDetails admin = User\n                .withUsername(\"admin\")\n                .password(passwordEncoder.encode(\"admin123\"))\n                .roles(\"ADMIN\")\n                .build();\n\n        return new InMemoryUserDetailsManager(user, admin);\n    }\n\n    // Configure security filter (who can access what)\n    @Bean\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n        http\n            .authorizeHttpRequests(auth -> auth\n                .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n                .requestMatchers(\"/user/**\").hasAnyRole(\"USER\", \"ADMIN\")\n                .anyRequest().authenticated()\n            )\n            .formLogin() // Enables login form\n            .and()\n            .httpBasic(); // Enables basic HTTP auth (optional)\n\n        return http.build();\n    }\n\n    // Password encoder (encrypts passwords)\n    @Bean\n    public PasswordEncoder passwordEncoder() {\n        return new BCryptPasswordEncoder();\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-8080-9001-c7621c6d9216",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Example Endpoints (optional controllers):"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8075-88c7-ef10b55e0e37",
-      "type": "code",
-      "richText": [
-        [
-          "@RestController\npublic class MyController {\n\n    @GetMapping(\"/user/home\")\n    public String userHome() {\n        return \"Welcome User!\";\n    }\n\n    @GetMapping(\"/admin/dashboard\")\n    public String adminHome() {\n        return \"Welcome Admin!\";\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-80f1-a8e1-f9fed4cbd358",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8070-841a-f7d372150d65",
-      "type": "sub_header",
-      "richText": [
-        [
-          "❓ 4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8063-9689-ee3400304250",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the purpose of "
-        ],
-        [
-          "@EnableWebSecurity",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " in Spring Boot?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a6-97f1-feadc3863b42",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you configure in-memory authentication in Spring Boot?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8064-884a-d5ba416c309b",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What's the difference between "
-        ],
-        [
-          "@PreAuthorize",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", role-based security, and endpoint security?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-801b-b8a6-cd5bfc482d06",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "Why do we use "
-        ],
-        [
-          "PasswordEncoder",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and which implementation is best?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80aa-86ad-fe6b60615c6a",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How would you protect specific endpoints (e.g., "
-        ],
-        [
-          "/admin",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") so only certain users can access them?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8008-8c25-e0e9ada787cd",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-806a-8866-c09ee444ea78",
-      "type": "sub_header",
-      "richText": [
-        [
-          "✅ 5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-807e-ab61-ce0714a73ef3",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8038-b23e-d8c78ba2b12b",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ Always "
-        ],
-        [
-          "encrypt passwords",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " using a "
-        ],
-        [
-          "PasswordEncoder",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " like "
-        ],
-        [
-          "BCryptPasswordEncoder",
-          [
-            [
-              "c"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809b-b2fe-df831897d905",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ Use "
-        ],
-        [
-          "roles",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " to manage access clearly ("
-        ],
-        [
-          "hasRole(\"ADMIN\")",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", etc.)"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c3-845f-e3f4d980ddc8",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "Externalize credentials",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " for production (in-memory is only for learning/testing)"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809a-b03b-ce11d6e9e6c4",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❌ Common Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8011-bdf1-ed077aaed1d1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "❌ Not encoding passwords → leads to login failures"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802d-8680-d81fa89325da",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "❌ Misusing roles (e.g., forgetting "
-        ],
-        [
-          "ROLE_",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " prefix internally)"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8030-af1b-f3149ed4c7ca",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "❌ Relying on in-memory users in production — it's "
-        ],
-        [
-          "not persistent or scalable",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809f-b44c-dbfbabaf4c46",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-807a-8c75-c47e3b41a040",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔗 6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8012-984c-d168c7ee602b",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Beans",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": All those "
-        ],
-        [
-          "@Bean",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " methods create objects (like "
-        ],
-        [
-          "UserDetailsService",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") that Spring manages — called \"beans\"."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802a-8779-e512b708bfdb",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring Boot Auto-Configuration",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": If you don't define custom security config, Spring Boot sets up a default secure login form automatically."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f9-aa02-ecedbdd769e1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Profiles",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": You can switch between in-memory and database-based auth using Spring profiles ("
-        ],
-        [
-          "application-dev.yml",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", etc.)."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-803c-b1f5-f2952113d72f",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Dependency Injection",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Spring injects beans like "
-        ],
-        [
-          "PasswordEncoder",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " where needed."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ea-ab80-e96c578fd34c",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8091-a415-c3d846b5ff5c",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🎤 7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c1-b17b-f687acf51c15",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❓ "
-        ],
-        [
-          "What is Spring Security and how does in-memory authentication work?",
-          [
-            [
-              "i"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8025-b97b-cba024755564",
-      "type": "text",
-      "richText": [
-        [
-          "\"Spring Security is a framework that helps protect applications by adding authentication and authorization. In-memory authentication is a simple way to define users and roles directly in the code, without using a database. It’s mainly used for testing or learning. I typically configure it with a "
-        ],
-        [
-          "UserDetailsService",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", define roles, and use "
-        ],
-        [
-          "BCryptPasswordEncoder",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " to securely store passwords.\""
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802a-a759-d2fdfa37c926",
-      "type": "divider"
     },
     {
       "id": "ed-security-version",
       "type": "header",
       "richText": [
         [
-          "Spring Boot 3 and Spring Security 6"
+          "Add Spring Security"
         ]
       ]
     },
     {
-      "id": "ed-security-version-b0",
+      "id": "security-defaults-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot 3 uses Spring Security 6 and requires Java 17 or later. Configure a SecurityFilterChain bean with authorizeHttpRequests and requestMatchers."
+          "Add spring-boot-starter-security to the project."
         ]
       ]
     },
     {
-      "id": "ed-security-version-b1",
+      "id": "security-defaults-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The Engineering Digest journal repository uses Spring Boot 2.7. Its WebSecurityConfigurerAdapter, antMatchers and javax.servlet imports belong to that older version. New servlet imports use jakarta.servlet."
+          "For a servlet web application, Boot protects requests and supplies a default login page when you have not supplied your own security configuration."
         ]
       ]
     },
     {
-      "id": "ed-security-version-b2",
+      "id": "security-defaults-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Authentication establishes the current user. Authorization checks permissions. Ownership checks whether that user may access a particular journal entry. These are separate checks."
+          "Boot creates a user named user with a generated password when no custom authentication setup replaces it. The startup log contains that password."
         ]
       ]
     },
     {
-      "id": "ed-security-version-b3",
+      "id": "security-defaults-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A role protects a group of operations. It does not prove that a user owns the requested record."
+          "Define a SecurityFilterChain bean to choose request rules and the login method."
         ]
       ]
     },
     {
-      "id": "ed-security-version-b4",
+      "id": "security-defaults-b4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep CSRF protection for browser sessions. A stateless session policy alone does not make an application safe from CSRF. Decide from how the browser sends credentials."
+          "Boot configures web security when the starter is present. You do not need @EnableWebSecurity solely to activate it in a Boot application."
         ]
       ]
+    },
+    {
+      "id": "security-defaults-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "WebSecurityConfigurerAdapter and antMatchers belong to older Spring Security code. Use SecurityFilterChain and requestMatchers in these notes."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8056-af30-f4a9ecc31d03",
+      "type": "header",
+      "richText": [
+        [
+          "Define users and passwords"
+        ]
+      ]
+    },
+    {
+      "id": "security-users-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "UserDetailsService loads the user account needed for password authentication."
+        ]
+      ]
+    },
+    {
+      "id": "security-users-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "InMemoryUserDetailsManager keeps user accounts in application memory. Restarting the application does not preserve changes to these accounts."
+        ]
+      ]
+    },
+    {
+      "id": "security-users-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "PasswordEncoder hashes a password and checks a submitted password against the stored hash. Hashing is not reversible encryption."
+        ]
+      ]
+    },
+    {
+      "id": "security-users-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Hash the password when creating or changing it. During login, use matches to compare the submitted password with its stored hash."
+        ]
+      ]
+    },
+    {
+      "id": "security-users-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use in-memory users for learning or isolated checks. Use persistent account storage when users must survive restarts."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-80b9-b4fd-edc0293754d0",
+      "type": "example",
+      "example": {
+        "title": "Add one in-memory user and form login",
+        "description": [
+          "Use a Spring Boot 3 servlet web project with spring-boot-starter-security.",
+          "Place SecurityConfig in the application package or a scanned child package.",
+          "Run the application and open an existing application endpoint in a browser."
+        ],
+        "code": "package com.example.demo;\n\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.core.userdetails.User;\nimport org.springframework.security.core.userdetails.UserDetailsService;\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.security.provisioning.InMemoryUserDetailsManager;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\npublic class SecurityConfig {\n    @Bean\n    PasswordEncoder passwordEncoder() {\n        return new BCryptPasswordEncoder();\n    }\n\n    @Bean\n    UserDetailsService users(PasswordEncoder encoder) {\n        return new InMemoryUserDetailsManager(\n            User.withUsername(\"user\")\n                .password(encoder.encode(\"user123\"))\n                .roles(\"USER\")\n                .build());\n    }\n\n    @Bean\n    SecurityFilterChain security(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(rules -> rules\n                .anyRequest().authenticated())\n            .formLogin(Customizer.withDefaults())\n            .build();\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "The PasswordEncoder bean creates BCrypt password hashes.",
+          "The users bean defines the learning account user with password user123. Keep real passwords out of source code.",
+          "roles(\"USER\") stores the authority ROLE_USER. The role is used in the next lesson.",
+          "anyRequest().authenticated() requires login for application requests.",
+          "formLogin supplies Spring’s login page. After successful login, Spring remembers authentication in the browser session.",
+          "CSRF protection remains enabled. Browser sessions and CSRF are explained on their own page."
+        ]
+      }
     },
     {
       "id": "ed-security-next",
       "type": "header",
       "richText": [
         [
-          "Focused security notes"
+          "Request permissions"
         ]
       ]
     },
@@ -767,7 +201,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Authentication, authorization and ownership",
+          "Authentication and authorization",
           [
             [
               "a",
@@ -776,68 +210,22 @@
           ]
         ]
       ]
-    },
-    {
-      "id": "ed-security-link-1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "JWT resource servers",
-          [
-            [
-              "a",
-              "/notes/spring-boot/security/jwt"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "ed-security-link-2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "OAuth2 and Google login",
-          [
-            [
-              "a",
-              "/notes/spring-boot/security/oauth2"
-            ]
-          ]
-        ]
-      ]
     }
   ],
   "sources": [
     {
-      "title": "Engineering Digest: Spring Security in Spring Boot in Hindi | @EnableWebSecurity Annotation",
-      "url": "https://www.youtube.com/watch?v=02WP1FbiNSQ&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+      "title": "Spring Boot 3.5: security defaults",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/web/spring-security.html"
     },
     {
-      "title": "Engineering Digest: Adding Authentication to Journal Endpoints",
-      "url": "https://www.youtube.com/watch?v=QrCVj8ek83k&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
+      "title": "Spring Security 6.5: Java configuration",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/configuration/java.html"
     },
     {
-      "title": "Engineering Digest: Role Based Authorization in Spring Boot Project",
-      "url": "https://www.youtube.com/watch?v=LndqWC4yIU4&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
-    },
-    {
-      "title": "Engineering Digest: Complete JWT Authentication and Authorisation in Spring Boot",
-      "url": "https://www.youtube.com/watch?v=qvAoUVXgpZg&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
-    },
-    {
-      "title": "Engineering Digest: OAuth2 in Spring Boot | How to Add Google Login in Spring Boot | Complete Tutorial",
-      "url": "https://www.youtube.com/watch?v=cRiqZ0j1gEM&list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue"
-    },
-    {
-      "title": "Spring Security 6: HTTP authorization",
-      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authorization/authorize-http-requests.html"
-    },
-    {
-      "title": "Spring Security: CSRF protection",
-      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/exploits/csrf.html"
+      "title": "Spring Security 6.5: password storage",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/features/authentication/password-storage.html"
     }
   ],
-  "updatedOn": "2026-10-13",
-  "summary": "Security basics, with focused notes on identity, permissions, JWT and Google login."
+  "updatedOn": "2026-10-14",
+  "summary": "Add password login with an in-memory user before defining access rules."
 }

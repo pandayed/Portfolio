@@ -3,6 +3,7 @@ import './SpringBootNote.css';
 import { Fragment, type ComponentProps, type ReactNode } from 'react';
 
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { SPRING_BOOT_NOTES_ROUTE, toHref, type SpringBootRoute } from '../../routing/routes';
 import NoteArticleLayout from '../NoteArticleLayout';
@@ -113,6 +114,8 @@ const renderTable = (block: SpringBootBlock) => (
 const renderBlock = (block: SpringBootBlock): ReactNode => {
     const children = block.children?.length ? renderBlocks(block.children) : null;
     switch (block.type) {
+        case 'example':
+            return block.example ? <LearningNoteExampleBlock key={block.id} example={block.example} /> : null;
         case 'text':
             return <Fragment key={block.id}>
                 {plainText(block.richText) && <p>{renderRichText(block.richText)}</p>}

@@ -1,0 +1,163 @@
+{
+  "id": "spring-boot-rest-request-parameters",
+  "sourceUrl": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller.html",
+  "title": "Path variables and request parameters",
+  "summary": "Read values from a URL path, query string or form.",
+  "updatedOn": "2026-10-14",
+  "blocks": [
+    {
+      "id": "request-parameters-path",
+      "type": "header",
+      "richText": [
+        [
+          "Read a value from the path"
+        ]
+      ]
+    },
+    {
+      "id": "request-path-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@PathVariable reads a value captured by a {name} segment in a mapped path."
+        ]
+      ]
+    },
+    {
+      "id": "request-path-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use it for a resource identifier."
+        ]
+      ]
+    },
+    {
+      "id": "request-path-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring converts the value to the Java parameter type. A value that cannot be converted normally produces a 400 response."
+        ]
+      ]
+    },
+    {
+      "id": "request-path-example",
+      "type": "example",
+      "example": {
+        "title": "Read a user ID from the URL",
+        "description": [
+          "Place this method in a @RestController. Send GET /users/123."
+        ],
+        "code": "@GetMapping(\"/users/{id}\")\npublic String find(@PathVariable(\"id\") int id) {\n    return \"User ID: \" + id;\n}",
+        "language": "java",
+        "explanation": [
+          "{id} captures 123. @PathVariable(\"id\") passes it to id as an int.",
+          "The method returns text identifying the requested ID. It does not look up a user."
+        ],
+        "result": "User ID: 123"
+      }
+    },
+    {
+      "id": "request-parameters-query",
+      "type": "header",
+      "richText": [
+        [
+          "Read query parameters"
+        ]
+      ]
+    },
+    {
+      "id": "request-query-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RequestParam reads a named query parameter or a form parameter."
+        ]
+      ]
+    },
+    {
+      "id": "request-query-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Query parameters follow ? in a URL. Use them for search, filtering or sorting."
+        ]
+      ]
+    },
+    {
+      "id": "request-query-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A @RequestParam is required by default. Use required = false or Optional for an optional value."
+        ]
+      ]
+    },
+    {
+      "id": "request-query-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "defaultValue supplies a value when the parameter is missing or empty. It also makes the parameter optional."
+        ]
+      ]
+    },
+    {
+      "id": "request-query-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An array or List can receive repeated values for the same parameter name."
+        ]
+      ]
+    },
+    {
+      "id": "request-query-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @RequestParam for form data. Use @RequestBody for a JSON body."
+        ]
+      ]
+    },
+    {
+      "id": "request-query-example",
+      "type": "example",
+      "example": {
+        "title": "Use a default search value",
+        "description": [
+          "Place this method in a @RestController. Send GET /users/search?name=Alice."
+        ],
+        "code": "@GetMapping(\"/users/search\")\npublic String search(@RequestParam(name = \"name\", defaultValue = \"all\") String name) {\n    return \"Search: \" + name;\n}",
+        "language": "java",
+        "explanation": [
+          "The query parameter name becomes the Java argument name.",
+          "For this request the method returns Search: Alice.",
+          "GET /users/search without a name value returns Search: all.",
+          "This method demonstrates reading input; it does not perform a database search."
+        ],
+        "result": "Search: Alice"
+      }
+    },
+    {
+      "id": "request-combine-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A handler can use both @PathVariable and @RequestParam. Each annotation identifies where its argument comes from."
+        ]
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Spring MVC: request mapping",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html"
+    },
+    {
+      "title": "Spring MVC: request parameters",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/requestparam.html"
+    }
+  ]
+}

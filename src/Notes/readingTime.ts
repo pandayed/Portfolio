@@ -42,6 +42,12 @@ const goBlockText = (blocks: readonly GoNoteBlock[]): string =>
 
 const springBootBlockText = (blocks: readonly SpringBootBlock[]): string =>
     blocks.map((block) => [
+        block.example?.title ?? '',
+        ...(block.example?.description ?? []),
+        block.example?.code ?? '',
+        block.example?.commands ?? '',
+        block.example?.result ?? '',
+        ...(block.example?.explanation ?? []),
         block.richText?.map(([text]) => text).join('') ?? '',
         ...Object.values(block.cells ?? {}).map((cell) => cell.map(([text]) => text).join('')),
         springBootBlockText(block.children ?? []),

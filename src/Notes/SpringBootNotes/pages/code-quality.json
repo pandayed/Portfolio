@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-code-quality",
-  "title": "SonarQube, SonarQube for IDE and quality gates",
-  "summary": "Use local analysis and CI quality gates, and interpret coverage without treating it as behavior proof.",
+  "title": "Static analysis and SonarQube",
+  "summary": "Understand analysis results, coverage reports and quality gates.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Master SonarQube, SonarLint, and SonarCloud: Ultimate Guide to Enhancing Your Code Quality",
@@ -28,7 +28,7 @@
       "type": "header",
       "richText": [
         [
-          "Choose the analysis surface"
+          "Static analysis"
         ]
       ]
     },
@@ -37,7 +37,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Static analysis reads source code without running the application. It can find risky patterns, duplicated code and maintainability problems."
+          "Static analysis examines source code without running the application."
         ]
       ]
     },
@@ -46,34 +46,116 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "SonarQube for IDE, formerly SonarLint, reports issues while editing. Connected mode can align its rules with the project on SonarQube."
+          "It reports patterns such as duplicated code, possible bugs and maintainability issues."
         ]
       ]
     },
     {
-      "id": "quality-tools-b2",
+      "id": "quality-tools-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "quality-tools-table-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Tool"
+              ]
+            ],
+            "1": [
+              [
+                "Purpose"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "quality-tools-table-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "SonarQube for IDE"
+              ]
+            ],
+            "1": [
+              [
+                "Reports issues while editing. Formerly named SonarLint."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "quality-tools-table-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "SonarQube Server"
+              ]
+            ],
+            "1": [
+              [
+                "Stores project analysis on a server you operate."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "quality-tools-table-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "SonarQube Cloud"
+              ]
+            ],
+            "1": [
+              [
+                "Provides hosted project analysis. Formerly named SonarCloud."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "quality-tools-table-4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Scanner"
+              ]
+            ],
+            "1": [
+              [
+                "Analyzes a project revision and sends its results to Server or Cloud."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "quality-connected-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "SonarQube Server stores analysis results on a server you operate. SonarQube Cloud, formerly SonarCloud, provides hosted project analysis."
+          "Connected mode aligns supported IDE rules and settings with a SonarQube project."
         ]
       ]
     },
     {
-      "id": "quality-tools-b3",
+      "id": "quality-connected-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A scanner analyzes the chosen project revision and sends results to the server or cloud service. The Maven scanner integrates this step with a Java build."
-        ]
-      ]
-    },
-    {
-      "id": "quality-tools-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use IDE feedback for a quick local fix. Use CI analysis for a shared result tied to the revision under review."
+          "The Maven scanner integrates project analysis with a Java build."
         ]
       ]
     },
@@ -82,7 +164,7 @@
       "type": "header",
       "richText": [
         [
-          "What a quality gate proves"
+          "Quality gates"
         ]
       ]
     },
@@ -91,7 +173,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A quality gate checks configured conditions on analysis results. It may include issues, duplication or coverage for new code."
+          "A quality gate checks configured conditions against the analysis results."
         ]
       ]
     },
@@ -100,7 +182,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A passing gate means those configured conditions passed. It does not prove that every API behavior, permission rule or deployment works."
+          "Conditions can cover issues, duplication and test coverage on new code."
         ]
       ]
     },
@@ -109,7 +191,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Coverage measures which code ran while tests executed. Sonar imports a report produced by a coverage tool such as JaCoCo; Sonar does not run the tests itself."
+          "A passing gate means those conditions passed. It does not mean every application behavior works."
         ]
       ]
     },
@@ -118,16 +200,52 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "High coverage can coexist with weak assertions. An effective check verifies meaningful outcomes such as an unauthorized record remaining inaccessible."
+          "When a release depends on the gate, configure CI to wait for its result. A completed upload is not the gate result."
         ]
       ]
     },
     {
-      "id": "quality-gates-b4",
+      "id": "quality-coverage",
+      "type": "header",
+      "richText": [
+        [
+          "Test coverage"
+        ]
+      ]
+    },
+    {
+      "id": "quality-coverage-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Make CI wait for the gate result when release policy depends on it. A scanner upload completing is not automatically a passing gate."
+          "Coverage measures which code ran during test execution."
+        ]
+      ]
+    },
+    {
+      "id": "quality-coverage-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A tool such as JaCoCo produces the coverage report. SonarQube imports that report."
+        ]
+      ]
+    },
+    {
+      "id": "quality-coverage-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "SonarQube does not run the tests to generate coverage."
+        ]
+      ]
+    },
+    {
+      "id": "quality-coverage-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "High coverage can still have weak assertions. Check meaningful results as well as execution."
         ]
       ]
     },
@@ -136,7 +254,7 @@
       "type": "header",
       "richText": [
         [
-          "Keep analysis useful"
+          "Project analysis in CI"
         ]
       ]
     },
@@ -145,7 +263,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Analyze the same revision that the build and review use. Keep the project key, source paths and coverage-report path explicit in CI configuration."
+          "Analyze the same application revision being built and reviewed."
         ]
       ]
     },
@@ -154,7 +272,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Provide the analysis token through a CI secret. Do not place the token in pom.xml, the command history or a public log."
+          "Configure the project key, source paths and coverage-report path."
         ]
       ]
     },
@@ -163,7 +281,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Review each finding in its actual context. Fix a real issue; record a justified suppression when a rule does not apply."
+          "Supply the analysis token through a CI secret."
         ]
       ]
     },
@@ -172,7 +290,16 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep generated code out of human-code analysis when the project policy allows it. Do not exclude difficult application code only to improve a score."
+          "Review findings in their code context. Fix a real issue or record a justified suppression."
+        ]
+      ]
+    },
+    {
+      "id": "quality-workflow-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Exclude generated code only when the project policy allows it. Do not exclude application code to hide a reported issue."
         ]
       ]
     }

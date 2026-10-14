@@ -1,1005 +1,112 @@
 {
   "id": "20924eb1-ed54-80da-b697-cb8704151ba9",
-  "title": "Spring Boot Profiles & Configuration Management (@Value, @ConfigurationProperties)",
+  "title": "Spring profiles",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480dab697cb8704151ba9",
   "blocks": [
     {
-      "id": "20924eb1-ed54-80e9-ba0c-ef7a3312a303",
-      "type": "divider"
-    },
-    {
       "id": "20924eb1-ed54-80ff-a37f-fcc683d2eba9",
-      "type": "sub_header",
-      "richText": [
-        [
-          "✅ 1. Core Concept (2–3 sentences)"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8053-92b4-cda845e2221a",
-      "type": "text",
-      "richText": [
-        [
-          "Spring Boot Profiles",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " allow you to separate configuration settings for different environments like "
-        ],
-        [
-          "development",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "testing",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", or "
-        ],
-        [
-          "production",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8084-8628-f55d854f183b",
-      "type": "text",
-      "richText": [
-        [
-          "Configuration Management",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " using annotations like "
-        ],
-        [
-          "@Value",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " helps you "
-        ],
-        [
-          "inject values from external sources",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (like "
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") into your Java code, making your application "
-        ],
-        [
-          "easier to configure, reuse, and deploy",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8042-9f1c-f54fcb6511f6",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-804c-8d62-dfc1000c5d16",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🎯 2. Key Interview Points"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80e0-a957-f8ddec787868",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "What are Spring Profiles?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-802d-a664-d192df75f0a9",
-          "type": "text",
-          "richText": [
-            [
-              "Profiles allow your application to load different configurations based on the environment it's running in (e.g., dev, test, prod)."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8086-9359-d890f7e3bd0b",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "How does Spring Boot load configuration?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-8048-82dd-d8c60dbf79e8",
-          "type": "text",
-          "richText": [
-            [
-              "Spring Boot automatically reads from "
-            ],
-            [
-              "application.properties",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " or "
-            ],
-            [
-              "application.yml",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " and can load profile-specific versions like "
-            ],
-            [
-              "application-dev.properties",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              "."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-806c-a2f1-db40ac8a7968",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "What is ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Value",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and how does it work?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-8082-93f0-c5a21d6cba57",
-          "type": "text",
-          "richText": [
-            [
-              "@Value",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " is used to inject a "
-            ],
-            [
-              "single",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              " configuration value (like a string or number) into a field from the properties file."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8000-857e-d824218e0e3d",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "✅ "
-        ],
-        [
-          "What is ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and when to use it?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20924eb1-ed54-80db-ab02-f76b2da2a107",
-          "type": "text",
-          "richText": [
-            [
-              "Use "
-            ],
-            [
-              "@ConfigurationProperties",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " when you need to "
-            ],
-            [
-              "bind a group of related configuration values",
-              [
-                [
-                  "b"
-                ]
-              ]
-            ],
-            [
-              " into a Java class (e.g., database settings, external API details)."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c8-8762-cd119dedf25f",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80f1-a8b8-ff25c155efe7",
-      "type": "sub_header",
-      "richText": [
-        [
-          "👨‍💻 3. Code Example"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-803f-a0dd-c7d5d187d7a6",
-      "type": "text",
-      "richText": [
-        [
-          "Let’s walk through a real-world example: managing database configuration using profiles."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-804d-aa68-e99fc413a34c",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Step 1: Define different property files"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-809a-a76d-ff932ac26f48",
-      "type": "text",
-      "richText": [
-        [
-          "application.properties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " (default file):"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80e3-95bb-c8f56cf7750b",
-      "type": "code",
-      "richText": [
-        [
-          "spring.profiles.active=dev\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20924eb1-ed54-8047-be77-ea66559c321a",
-      "type": "text",
-      "richText": [
-        [
-          "application-dev.properties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-805e-afde-dc407d5c3527",
-      "type": "code",
-      "richText": [
-        [
-          "app.name=MyApp-Dev\ndb.url=jdbc:mysql://localhost:3306/devdb\ndb.user=devuser\ndb.pass=devpass\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20924eb1-ed54-80db-91e7-da72283dabc5",
-      "type": "text",
-      "richText": [
-        [
-          "application-prod.properties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8011-bc1a-fc9f75d84458",
-      "type": "code",
-      "richText": [
-        [
-          "app.name=MyApp-Prod\ndb.url=jdbc:mysql://prodserver:3306/proddb\ndb.user=produser\ndb.pass=prodpass\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20924eb1-ed54-80ca-bb0d-f6bc78f676fa",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Step 2: Inject config using "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b7-855b-e50e5717d6ad",
-      "type": "code",
-      "richText": [
-        [
-          "// AppConfig.java\nimport org.springframework.boot.context.properties.ConfigurationProperties;\nimport org.springframework.context.annotation.Configuration;\n\n@Configuration\n@ConfigurationProperties(prefix = \"db\")\npublic class AppConfig {\n    private String url;\n    private String user;\n    private String pass;\n\n    // Getters and Setters\n    public String getUrl() { return url; }\n    public void setUrl(String url) { this.url = url; }\n\n    public String getUser() { return user; }\n    public void setUser(String user) { this.user = user; }\n\n    public String getPass() { return pass; }\n    public void setPass(String pass) { this.pass = pass; }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-80a6-b30f-ef8208e62427",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Step 3: Use it in a service"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8090-9c85-e0f37008078b",
-      "type": "code",
-      "richText": [
-        [
-          "// MyService.java\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class MyService {\n\n    @Autowired\n    private AppConfig config;\n\n    public void connect() {\n        System.out.println(\"Connecting to: \" + config.getUrl());\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-8078-af84-d863683e73e2",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Alternative: Use "
-        ],
-        [
-          "@Value",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for single values"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a3-b032-f2c855e60da2",
-      "type": "code",
-      "richText": [
-        [
-          "@Value(\"${app.name}\")\nprivate String appName;\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-805c-82cb-d485788cfae1",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8056-82de-d167041ac42c",
-      "type": "sub_header",
-      "richText": [
-        [
-          "❓ 4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b9-8826-e003d0f3816f",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the purpose of Spring Profiles?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80cb-ba8a-d4bb8ab5bc58",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do "
-        ],
-        [
-          "@Value",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " differ?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802c-b659-c81f117019c6",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you define and activate different environments in Spring Boot?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80fd-ae24-c678760811a3",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "When would you use "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " over "
-        ],
-        [
-          "@Value",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8097-a4ff-c7e9a0b652e9",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How can you switch between profiles when running your app?"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8069-8794-c25809b7ec7e",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80f4-81a8-c4ad5ca68cc4",
-      "type": "sub_header",
-      "richText": [
-        [
-          "💡 5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80d7-b786-c27d4438c53c",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8026-91b7-c8af1096927e",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for grouped and reusable configs."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-806d-9d95-f68ebbaa0fda",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Clearly separate environment configs ("
-        ],
-        [
-          "application-dev.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", etc.)."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f4-a4dd-e4b8c4cc4812",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep secrets (passwords, API keys) out of source control using external config servers or environment variables."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802e-902e-c0b4510787cb",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "❌ Common Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-800c-a0fa-e8a28e1fbd57",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forgetting to enable "
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " by annotating the class or using "
-        ],
-        [
-          "@EnableConfigurationProperties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8093-8499-f6853dac92be",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Hardcoding values instead of injecting them via configuration."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f4-916d-c1c26ed256ba",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Mixing profile-specific logic in the code instead of using separate config files."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80b2-9d16-d55ac77399d8",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80d7-a460-cebfa059bc0c",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔗 6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-807b-a9f0-d6de1b3b3dfb",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Closely tied to "
-        ],
-        [
-          "Dependency Injection",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": config values are injected into beans."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-806d-aee1-dc20ac2ce011",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Related to "
-        ],
-        [
-          "Spring Boot Auto-Configuration",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", which often depends on properties."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-805c-be43-dd2726496efc",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Useful with "
-        ],
-        [
-          "Spring Cloud Config",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " for centralized configuration management."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c0-b85a-d3c1152047f5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Helps with "
-        ],
-        [
-          "Testing",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " by allowing specific profiles for test scenarios."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-800d-a47c-ede9ab52143e",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80c7-900e-f6d593f45082",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🎤 7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-800a-8d86-d8341268aadb",
-      "type": "text",
-      "richText": [
-        [
-          "Q: Can you explain what Spring Profiles and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@ConfigurationProperties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " are used for?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8079-989a-d16dbf5f6e80",
-      "type": "quote",
-      "richText": [
-        [
-          "Sure! Spring Profiles let you load different configuration files depending on the environment—like dev, test, or prod—without changing code. @ConfigurationProperties allows you to map a group of related settings from your properties file into a single Java class. This keeps your configuration clean, organized, and easy to manage across environments."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-804a-8700-f52ac3408a65",
-      "type": "divider"
-    },
-    {
-      "id": "ed-profile-select",
       "type": "header",
       "richText": [
         [
-          "Profile selection and typed settings"
+          "Select environment-specific configuration"
         ]
       ]
     },
     {
-      "id": "ed-profile-select-b0",
+      "id": "profiles-configuration-management-0-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Activate dev with SPRING_PROFILES_ACTIVE=dev or --spring.profiles.active=dev. Keep dev-only values in application-dev.yml and production values outside the source tree."
+          "A profile is a named set of configuration that can be activated for an application run."
         ]
       ]
     },
     {
-      "id": "ed-profile-select-b1",
+      "id": "profiles-configuration-management-0-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not put spring.profiles.active inside a profile-specific document; profile activation belongs in a non-profile-specific source or a runtime override."
+          "Spring Boot loads shared application configuration and the files for active profiles."
         ]
       ]
     },
     {
-      "id": "ed-profile-select-b2",
+      "id": "profiles-configuration-management-0-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @Value for an isolated value. Use @ConfigurationProperties for related settings, especially when they need structured binding and validation."
+          "A profile-specific file overrides matching settings from the shared file. Settings not overridden keep their shared values."
         ]
       ]
     },
     {
-      "id": "ed-profile-select-b3",
+      "id": "profiles-configuration-management-0-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Binding a settings class is separate from registering it. Use @ConfigurationPropertiesScan or @EnableConfigurationProperties for the class."
+          "Use spring.profiles.active, SPRING_PROFILES_ACTIVE, or a command-line argument to select profiles."
         ]
       ]
     },
     {
-      "id": "ed-profile-select-b4",
+      "id": "profiles-configuration-management-0-example-0",
+      "type": "example",
+      "example": {
+        "title": "Activate the dev profile",
+        "description": [
+          "Create these files in src/main/resources. Run the application with the dev profile."
+        ],
+        "code": "# application.properties\nserver.port=8080\n\n# application-dev.properties\nserver.port=8081",
+        "language": "text",
+        "explanation": [
+          "With dev active, the server uses port 8081.",
+          "Without an active profile, Spring uses the default profile; it does not automatically select dev."
+        ],
+        "commands": "java -jar target/demo.jar --spring.profiles.active=dev"
+      }
+    },
+    {
+      "id": "20924eb1-ed54-804c-8d62-dfc1000c5d16",
+      "type": "header",
+      "richText": [
+        [
+          "Profile rules"
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-1-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Profile changes happen at application startup. Changing an environment variable does not automatically rebuild existing bean instances."
+          "Do not put spring.profiles.active inside a profile-specific file or an activated profile document. Select profiles from a non-profile-specific source."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-1-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Profile controls whether a bean definition or configuration class is registered for active profiles."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-1-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Profiles are selected during startup. Changing an environment variable does not automatically recreate existing beans."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-1-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A profile name does not enforce permissions or protect credentials."
         ]
       ]
     }
@@ -1020,7 +127,11 @@
     {
       "title": "Spring Boot: configuration binding",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html"
+    },
+    {
+      "title": "Official reference: Spring profiles",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/profiles.html"
     }
   ],
-  "updatedOn": "2026-10-13"
+  "updatedOn": "2026-10-14"
 }

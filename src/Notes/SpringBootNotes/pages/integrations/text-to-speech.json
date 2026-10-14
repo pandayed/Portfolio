@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-integrations-text-to-speech",
   "title": "Text to Speech with ElevenLabs",
-  "summary": "Generate audio through a server API client while preserving bytes, credentials, and response types.",
+  "summary": "Send text to the provider and return binary audio without corrupting it.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Ultimate Guide to Using Eleven Labs API: Transform Text to Lifelike Speech in Minutes!",
@@ -28,7 +28,7 @@
       "type": "header",
       "richText": [
         [
-          "Send text and receive audio"
+          "Convert text into audio"
         ]
       ]
     },
@@ -37,7 +37,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Text to speech converts text into an audio recording. Use it for a user-requested reading of an article or journal entry."
+          "Text to speech creates an audio recording from text."
         ]
       ]
     },
@@ -46,7 +46,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "ElevenLabs exposes POST /v1/text-to-speech/{voice_id}. The request body contains text and can select a supported model_id. The response is audio bytes."
+          "ElevenLabs provides an HTTP API for this conversion."
         ]
       ]
     },
@@ -55,7 +55,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The example requests mp3_44100_128 and uses eleven_multilingual_v2. Check the current provider documentation for available voices, models, formats, permissions, and account limits."
+          "POST /v1/text-to-speech/{voice_id} accepts text in a JSON request body."
         ]
       ]
     },
@@ -64,7 +64,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "POST is appropriate because generation performs an action and may consume paid quota. Do not make a GET endpoint automatically generate new audio."
+          "The voice ID selects the voice. model_id selects the model. output_format selects the audio format."
         ]
       ]
     },
@@ -73,7 +73,16 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "These examples use Spring Boot 3.2+, Spring Framework 6.1+, and Java 17. Configure the same connect and read timeouts explained on External GET and POST APIs."
+          "The response contains audio bytes. It is not a JSON object or a text string."
+        ]
+      ]
+    },
+    {
+      "id": "speech-contract-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use POST for an application endpoint that generates new audio. Generation performs an action and can consume paid quota."
         ]
       ]
     },
@@ -82,7 +91,7 @@
       "type": "header",
       "richText": [
         [
-          "Keep the API key on the server"
+          "Create the provider client"
         ]
       ]
     },
@@ -91,7 +100,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Set elevenlabs.api-key from ELEVENLABS_API_KEY in environment configuration. Inject that property into the server client. Never send the key to browser code."
+          "Keep the API key on the server. Send it in the provider’s xi-api-key header."
         ]
       ]
     },
@@ -100,7 +109,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Supply a voice ID the application allows. Read available IDs from the provider rather than treating any user string as a remote URL."
+          "Allow only voice IDs that your application supports."
         ]
       ]
     },
@@ -109,26 +118,35 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The snippet belongs in a configuration class. Its JDK request factory sets connection and read timeouts."
+          "Set connection and read timeouts for the provider call."
         ]
       ]
     },
     {
       "id": "speech-client-code",
-      "type": "code",
-      "richText": [
-        [
-          "@Bean\nRestClient speechClient(RestClient.Builder builder,\n        @Value(\"${elevenlabs.api-key}\") String apiKey) {\n    HttpClient http = HttpClient.newBuilder()\n            .connectTimeout(Duration.ofSeconds(3)).build();\n    var factory = new JdkClientHttpRequestFactory(http);\n    factory.setReadTimeout(Duration.ofSeconds(10));\n    return builder.baseUrl(\"https://api.elevenlabs.io\")\n            .requestFactory(factory)\n            .defaultHeader(\"xi-api-key\", apiKey).build();\n}"
+      "type": "example",
+      "example": {
+        "title": "Configure the ElevenLabs client",
+        "description": [
+          "Use Spring Boot 3.2+, Spring Framework 6.1+, and Java 17.",
+          "Put this bean method in a @Configuration class.",
+          "Set elevenlabs.api-key from the ELEVENLABS_API_KEY environment variable."
+        ],
+        "code": "@Bean\nRestClient speechClient(RestClient.Builder builder,\n        @Value(\"${elevenlabs.api-key}\") String apiKey) {\n    HttpClient http = HttpClient.newBuilder()\n            .connectTimeout(Duration.ofSeconds(3)).build();\n    var factory = new JdkClientHttpRequestFactory(http);\n    factory.setReadTimeout(Duration.ofSeconds(10));\n    return builder.baseUrl(\"https://api.elevenlabs.io\")\n            .requestFactory(factory)\n            .defaultHeader(\"xi-api-key\", apiKey).build();\n}",
+        "language": "java",
+        "explanation": [
+          "The client calls the fixed ElevenLabs API host.",
+          "The default xi-api-key header authenticates each request.",
+          "The connect timeout is three seconds. The read timeout is ten seconds."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "speech-response",
       "type": "header",
       "richText": [
         [
-          "Preserve binary data and its media type"
+          "Return the audio response"
         ]
       ]
     },
@@ -137,7 +155,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use byte[] instead of String. Decoding MP3 bytes as text damages the recording."
+          "Read audio into byte[] so the binary data remains intact."
         ]
       ]
     },
@@ -146,7 +164,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The provider Content-Type tells the browser which audio format it received. Preserve that value when sending the bytes from your own controller."
+          "Decoding audio bytes as a String can corrupt the recording."
         ]
       ]
     },
@@ -155,26 +173,36 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A successful result contains audio bytes and an audio Content-Type. The browser can play those bytes through an audio element or save them as a file."
+          "Content-Type describes the returned audio format. Preserve it when your controller returns the bytes."
         ]
       ]
     },
     {
       "id": "speech-response-code",
-      "type": "code",
-      "richText": [
-        [
-          "record SpeechRequest(String text, String model_id) {}\n\nResponseEntity<byte[]> upstream = speechClient.post()\n        .uri(\"/v1/text-to-speech/{voice}?output_format=mp3_44100_128\", voiceId)\n        .contentType(MediaType.APPLICATION_JSON)\n        .body(new SpeechRequest(text, \"eleven_multilingual_v2\"))\n        .retrieve().toEntity(byte[].class);\n\nMediaType type = upstream.getHeaders().getContentType();\nbyte[] audio = upstream.getBody();\nif (type == null || !\"audio\".equals(type.getType())\n        || audio == null || audio.length == 0) {\n    throw new IllegalStateException(\"Provider returned no audio\");\n}\nreturn ResponseEntity.ok().contentType(type).body(audio);"
+      "type": "example",
+      "example": {
+        "title": "Request MP3 audio and return its bytes",
+        "description": [
+          "This method body uses the configured speechClient and validated text and voiceId values.",
+          "It requests eleven_multilingual_v2 with mp3_44100_128 output. Verify that these choices are available to your account.",
+          "The containing controller method returns ResponseEntity<byte[]>."
+        ],
+        "code": "record SpeechRequest(String text, String model_id) {}\n\nResponseEntity<byte[]> upstream = speechClient.post()\n        .uri(\"/v1/text-to-speech/{voice}?output_format=mp3_44100_128\", voiceId)\n        .contentType(MediaType.APPLICATION_JSON)\n        .body(new SpeechRequest(text, \"eleven_multilingual_v2\"))\n        .retrieve().toEntity(byte[].class);\n\nMediaType type = upstream.getHeaders().getContentType();\nbyte[] audio = upstream.getBody();\nif (type == null || !\"audio\".equals(type.getType())\n        || audio == null || audio.length == 0) {\n    throw new IllegalStateException(\"Provider returned no audio\");\n}\nreturn ResponseEntity.ok().contentType(type).body(audio);",
+        "language": "java",
+        "explanation": [
+          "The request sends the text and model ID as JSON.",
+          "toEntity(byte[].class) reads the response headers and binary body.",
+          "The checks reject an empty body or a non-audio Content-Type.",
+          "The controller returns the same bytes and audio media type. A browser can play or download them."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "speech-limits",
       "type": "header",
       "richText": [
         [
-          "Bound requests and explain failures"
+          "Limit generation requests"
         ]
       ]
     },
@@ -183,7 +211,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Validate nonblank text and an application text-length limit before contacting the provider. For long recordings, use streaming or a background job instead of buffering the whole response."
+          "Reject blank text and text longer than your application allows before calling the provider."
         ]
       ]
     },
@@ -192,7 +220,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Handle provider authentication errors, rate limits, and timeouts as failures. A JSON error body must never be returned as an MP3."
+          "Require an explicit user action before sending private text to an external provider."
         ]
       ]
     },
@@ -201,7 +229,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Ask for an explicit generation action before sending private journal text to an external service. Avoid logging the text or audio."
+          "For long recordings, use streaming or a background job instead of holding the whole response in memory."
         ]
       ]
     },
@@ -210,7 +238,25 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A retry after a timeout can generate and charge twice. Use the provider duplicate-prevention contract if one exists. Do not assume that ordinary HTTP retries are safe."
+          "Treat authentication errors, rate limits, and timeouts as failures. Never return a JSON error body as audio."
+        ]
+      ]
+    },
+    {
+      "id": "speech-limits-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A timeout can happen after generation starts. A retry may generate and charge twice."
+        ]
+      ]
+    },
+    {
+      "id": "speech-limits-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use provider-supported duplicate handling when available. Keep private text, audio, and API keys out of logs."
         ]
       ]
     }

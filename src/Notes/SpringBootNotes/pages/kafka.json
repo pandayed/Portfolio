@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-kafka",
   "title": "Kafka Producers and Consumers",
-  "summary": "Publish and consume digest events with agreed serialization and explicit acknowledgment boundaries.",
+  "summary": "Understand topics and groups before configuring and writing a producer and a listener.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: What is Kafka ? How to use Confluent Kafka in Spring Boot Application ?",
@@ -32,7 +32,7 @@
       "type": "header",
       "richText": [
         [
-          "Separate event creation from processing"
+          "Publish and read records"
         ]
       ]
     },
@@ -41,7 +41,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Kafka stores records in topics. A producer writes records. A consumer reads records and performs work."
+          "Kafka stores records so other parts of an application can process them later."
         ]
       ]
     },
@@ -50,7 +50,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A topic is divided into partitions. Records have offsets that identify their position within a partition. Kafka ordering applies within a partition."
+          "A producer publishes records. A consumer reads and processes them."
         ]
       ]
     },
@@ -59,7 +59,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A consumer group shares partitions among its consumers. Another group can read the same topic independently for a different purpose."
+          "A topic is a named collection of records. A broker is a Kafka server that stores them."
         ]
       ]
     },
@@ -68,7 +68,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use Kafka when work can happen later, multiple services need the event, or a backlog must survive a temporarily unavailable consumer."
+          "A topic has partitions. Each partition stores records in order."
         ]
       ]
     },
@@ -77,7 +77,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A weekly digest producer can queue summaries while an email consumer sends them. Broker acknowledgment confirms the configured publish acknowledgment, not email delivery."
+          "An offset is a record’s position in its partition. Kafka guarantees ordering within a partition."
         ]
       ]
     },
@@ -86,7 +86,25 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The examples use Spring Boot 3, Spring Kafka 3+, and Java 17. Add spring-kafka and let Boot manage compatible library versions."
+          "A consumer group shares a topic’s partitions among its consumers. Each partition is assigned to one consumer in that group at a time."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-model-b6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A separate group can read the same topic independently."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-model-b7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use Kafka for delayed work, persistent backlogs, or events needed by multiple services."
         ]
       ]
     },
@@ -95,7 +113,7 @@
       "type": "header",
       "richText": [
         [
-          "Match producer and consumer formats"
+          "Configure the record format"
         ]
       ]
     },
@@ -104,7 +122,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A serializer converts a Java value to bytes. A deserializer converts received bytes back into a value. Both sides must agree on the format."
+          "Add spring-kafka and let Spring Boot manage its compatible version."
         ]
       ]
     },
@@ -113,7 +131,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "This example uses text JSON and StringSerializer/StringDeserializer. Define an event ID and a versioned JSON contract before adding more event fields."
+          "A serializer converts a Java value into bytes. A deserializer converts the received bytes into a Java value."
         ]
       ]
     },
@@ -122,26 +140,63 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "For a local broker, bootstrap servers can be localhost:9092. For Confluent Cloud, use its provided bootstrap address, SASL_SSL authentication, and generated client settings. Keep credentials in environment configuration."
+          "The producer and consumer must agree on the record format."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-config-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Define an event ID and a format version so consumers can identify repeated records and understand changed fields."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-config-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "bootstrap-servers gives the client initial broker addresses."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-config-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For Confluent Cloud, use the supplied addresses, credentials, and SASL_SSL settings. SASL authenticates the client and SSL encrypts the connection."
         ]
       ]
     },
     {
       "id": "kafka-config-code",
-      "type": "code",
-      "richText": [
-        [
-          "spring.kafka.bootstrap-servers=${KAFKA_BOOTSTRAP_SERVERS}\nspring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.enable-auto-commit=false\nspring.kafka.consumer.auto-offset-reset=earliest"
+      "type": "example",
+      "example": {
+        "title": "Configure string keys and JSON text values",
+        "description": [
+          "Use Spring Boot 3, Spring Kafka 3+, and Java 17.",
+          "Set KAFKA_BOOTSTRAP_SERVERS and add these settings to application.properties.",
+          "A local broker can use localhost:9092. A cloud broker also needs its provider authentication settings."
+        ],
+        "code": "spring.kafka.bootstrap-servers=${KAFKA_BOOTSTRAP_SERVERS}\nspring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.enable-auto-commit=false\nspring.kafka.consumer.auto-offset-reset=earliest",
+        "language": "java",
+        "explanation": [
+          "StringSerializer and StringDeserializer handle both keys and values as text.",
+          "The application puts JSON inside the value string. Kafka does not validate that JSON contract.",
+          "enable-auto-commit=false leaves offset commits to the listener container.",
+          "earliest applies when the group has no valid committed offset. It does not replay all records on every restart."
         ]
-      ],
-      "language": "Properties"
+      }
     },
     {
       "id": "kafka-producer",
       "type": "header",
       "richText": [
         [
-          "Wait for the publish result"
+          "Publish a record"
         ]
       ]
     },
@@ -150,7 +205,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The key user-42 normally keeps that user’s records in the same partition while the partitioning configuration stays unchanged."
+          "KafkaTemplate publishes records from Spring code."
         ]
       ]
     },
@@ -159,7 +214,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "send returns a CompletableFuture in Spring Kafka 3+. A return from send alone does not prove the broker acknowledged the record."
+          "A record key normally keeps related records in the same partition while the partition count and partitioning configuration remain unchanged."
         ]
       ]
     },
@@ -168,26 +223,54 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The example blocks up to five seconds. Its containing method must handle InterruptedException, ExecutionException, and TimeoutException. Alternatively, attach a completion callback and persist the outcome."
+          "In Spring Kafka 3+, send returns a CompletableFuture for the publish result."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-producer-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Calling send does not by itself mean that the broker acknowledged the record. Inspect the future or attach a completion callback."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-producer-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Broker acknowledgment confirms publication according to the producer settings. It does not mean that a consumer completed its work."
         ]
       ]
     },
     {
       "id": "kafka-producer-code",
-      "type": "code",
-      "richText": [
-        [
-          "String event = \"\"\"\n    {\"eventId\":\"digest-42-2026-W41\",\"userId\":\"user-42\",\"summary\":\"HAPPY\"}\n    \"\"\";\nSendResult<String, String> result = kafkaTemplate\n        .send(\"weekly-sentiments\", \"user-42\", event)\n        .get(5, TimeUnit.SECONDS);\nlong offset = result.getRecordMetadata().offset();"
+      "type": "example",
+      "example": {
+        "title": "Publish a weekly digest event",
+        "description": [
+          "The service has an injected KafkaTemplate<String, String> named kafkaTemplate.",
+          "The weekly-sentiments topic exists.",
+          "The containing method handles InterruptedException, ExecutionException, and TimeoutException."
+        ],
+        "code": "String event = \"\"\"\n    {\"version\":1,\"eventId\":\"digest-42-2026-W41\",\"userId\":\"user-42\",\"summary\":\"HAPPY\"}\n    \"\"\";\nSendResult<String, String> result = kafkaTemplate\n        .send(\"weekly-sentiments\", \"user-42\", event)\n        .get(5, TimeUnit.SECONDS);\nlong offset = result.getRecordMetadata().offset();",
+        "language": "java",
+        "explanation": [
+          "The record key is user-42. The JSON value identifies the event and contains its summary.",
+          "get waits up to five seconds for the send result.",
+          "The result provides the offset assigned by Kafka.",
+          "A timeout stops the wait. The publish may still complete afterward."
         ]
-      ],
-      "language": "Java"
+      }
     },
     {
       "id": "kafka-consumer",
       "type": "header",
       "richText": [
         [
-          "Read the event in a listener"
+          "Process records in a listener"
         ]
       ]
     },
@@ -196,7 +279,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Add the listener to a Spring bean. Here digestProcessor parses the JSON, checks its contract, and submits the digest email. Keep that application logic in a service."
+          "@KafkaListener registers a bean method that receives records from a topic."
         ]
       ]
     },
@@ -205,7 +288,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A successful listener return permits offset progress under the container acknowledgment policy. Let processing errors reach the container so retry and recovery can run."
+          "The group ID identifies the consumer group. Members of the same group share the work."
         ]
       ]
     },
@@ -214,7 +297,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "earliest applies when the group has no valid committed offset. It does not replay all records on every restart."
+          "After successful processing, the container can commit offsets according to its acknowledgment policy."
         ]
       ]
     },
@@ -223,19 +306,46 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A crash after submitting email but before offset commit can cause redelivery. Track event IDs and understand the mail provider’s duplicate handling."
+          "A committed offset records how far the group has progressed."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-consumer-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Let processing exceptions reach the listener container so its retry and recovery policy can run."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-consumer-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A crash after an external action but before offset commit can cause that action to run again after redelivery."
         ]
       ]
     },
     {
       "id": "kafka-consumer-code",
-      "type": "code",
-      "richText": [
-        [
-          "@KafkaListener(topics = \"weekly-sentiments\",\n        groupId = \"weekly-digest-mail\")\nvoid consume(String eventJson) {\n    digestProcessor.process(eventJson);\n}"
+      "type": "example",
+      "example": {
+        "title": "Pass a received digest to an application service",
+        "description": [
+          "Put this method in a Spring bean with an injected digestProcessor.",
+          "digestProcessor parses and validates the event, handles its event ID, and submits the email."
+        ],
+        "code": "@KafkaListener(topics = \"weekly-sentiments\",\n        groupId = \"weekly-digest-mail\")\nvoid consume(String eventJson) {\n    digestProcessor.process(eventJson);\n}",
+        "language": "java",
+        "explanation": [
+          "The listener receives JSON text from weekly-sentiments.",
+          "weekly-digest-mail identifies this consumer group.",
+          "The method delegates application work to digestProcessor.",
+          "Exceptions are allowed to escape so the container sees a processing failure."
         ]
-      ],
-      "language": "Java"
+      }
     }
   ]
 }

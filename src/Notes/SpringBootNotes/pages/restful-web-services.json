@@ -1,998 +1,183 @@
 {
   "id": "20824eb1-ed54-8062-97dd-fbe53495315a",
-  "title": "RESTful Web Services with @RestController and @RequestMapping",
+  "title": "REST controllers and request mapping",
   "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed54806297ddfbe53495315a",
   "blocks": [
     {
-      "id": "20824eb1-ed54-80cc-90e9-fc75afb70567",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-80f3-895f-cedd8bbf3ffd",
+      "id": "20824eb1-ed54-8012-a2f9-f462a8fef359",
       "type": "header",
       "richText": [
         [
-          "RESTful Web Services with @RestController and @RequestMapping"
+          "HTTP requests and controllers"
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8012-a2f9-f462a8fef359",
-      "type": "sub_header",
+      "id": "rest-controller-b0",
+      "type": "bulleted_list",
       "richText": [
         [
-          "1. Core Concept"
+          "A web API lets a client send an HTTP request and receive an HTTP response."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8076-8edd-fcf5ca4b84b2",
-      "type": "text",
+      "id": "rest-controller-b1",
+      "type": "bulleted_list",
       "richText": [
         [
-          "RESTful web services are a way to build web APIs that communicate over HTTP using standard HTTP methods like GET, POST, PUT, DELETE."
+          "An endpoint is a URL path and an HTTP method that the application handles."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8092-9f72-d03f983673e0",
-      "type": "text",
+      "id": "rest-controller-b2",
+      "type": "bulleted_list",
       "richText": [
         [
-          "In Spring Boot, "
-        ],
-        [
-          "@RestController",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " is a specialized class annotation that simplifies creating these APIs by automatically handling HTTP responses, and "
-        ],
-        [
-          "@RequestMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " (and its variants) maps specific URLs and HTTP methods to Java methods. This makes it easy to build web services that clients (like browsers or apps) can call to perform operations or get data."
+          "Spring MVC sends a matching request to a method in a controller class."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8030-b763-eb1fd5d4ec98",
-      "type": "divider"
+      "id": "rest-controller-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RestController marks a controller whose methods return response data."
+        ]
+      ]
+    },
+    {
+      "id": "rest-controller-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It combines @Controller with @ResponseBody. @Controller alone can also handle requests, but a returned String can name a view instead of being response text."
+        ]
+      ]
+    },
+    {
+      "id": "rest-controller-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring must discover the controller as a bean. Keep it in the application package or a package included in component scanning."
+        ]
+      ]
     },
     {
       "id": "20824eb1-ed54-80e8-a52c-f69f30d2308b",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "2. Key Interview Points"
+          "Map a request to a method"
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8046-9313-d0ed074af223",
+      "id": "rest-mapping-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "What is ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@RestController",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?",
-          [
-            [
-              "b"
-            ]
-          ]
+          "@RequestMapping on a class sets a shared path for its handler methods."
         ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-8021-82d6-c4cae58b13d9",
-          "type": "text",
-          "richText": [
-            [
-              "It’s a combination of "
-            ],
-            [
-              "@Controller",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " and "
-            ],
-            [
-              "@ResponseBody",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              ". It tells Spring that this class will handle HTTP requests and that the returned objects should be automatically converted to JSON or XML and sent as the HTTP response body."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20824eb1-ed54-805e-b328-e2b2b6e36896",
+      "id": "rest-mapping-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Role of ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@RequestMapping",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and its variants (",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@GetMapping",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@PostMapping",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", etc.)",
-          [
-            [
-              "b"
-            ]
-          ]
+          "@GetMapping on a method handles GET requests at its path."
         ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-806c-806b-e9b875dbec74",
-          "type": "text",
-          "richText": [
-            [
-              "These annotations map HTTP requests to specific handler methods based on URL paths and HTTP methods (GET, POST, etc.)."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20824eb1-ed54-80ed-a376-ea19d39e1de9",
+      "id": "rest-mapping-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "How Spring Boot converts Java objects to JSON/XML (Message Converters)",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Spring combines the class path with the method path."
         ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-80f7-a41b-e3b75a11b3b1",
-          "type": "text",
-          "richText": [
-            [
-              "When you return an object from a "
-            ],
-            [
-              "@RestController",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              ", Spring uses built-in converters (like Jackson for JSON) to serialize that object into the appropriate format automatically."
-            ]
-          ]
-        }
       ]
     },
     {
-      "id": "20824eb1-ed54-8056-8203-e8d0b76b3473",
+      "id": "rest-mapping-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Difference between ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Controller",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@RestController",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ]
-      ],
-      "children": [
-        {
-          "id": "20824eb1-ed54-800e-9335-cd61a5b86382",
-          "type": "text",
-          "richText": [
-            [
-              "@Controller",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " is used for MVC apps where the method returns views (like JSP pages), whereas "
-            ],
-            [
-              "@RestController",
-              [
-                [
-                  "c"
-                ]
-              ]
-            ],
-            [
-              " is used for REST APIs where the method returns data directly."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8070-9c65-c3722c209a98",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-80fa-ba21-d5197ace7f86",
-      "type": "sub_header",
-      "richText": [
-        [
-          "3. Code Example"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8078-9e81-e4d0eafd27d2",
-      "type": "text",
-      "richText": [
-        [
-          "Here’s a simple Spring Boot REST controller to manage “users”:"
+          "Use a mapping for a specific HTTP method. @RequestMapping without a method restriction can match different HTTP methods."
         ]
       ]
     },
     {
       "id": "20824eb1-ed54-804d-b9fb-ce2ed75676ad",
-      "type": "code",
-      "richText": [
-        [
-          "import org.springframework.web.bind.annotation.*;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\n@RestController\n@RequestMapping(\"/users\")  // Base URL for all endpoints in this controller\npublic class UserController {\n\n    private List<String> users = new ArrayList<>();\n\n    @GetMapping\n    public List<String> getAllUsers() {\n        return users;  // Return all users as JSON array\n    }\n\n    @PostMapping\n    public String addUser(@RequestBody String user) {\n        users.add(user);  // Add user sent in request body\n        return \"User added: \" + user;\n    }\n\n    @GetMapping(\"/{id}\")\n    public String getUserById(@PathVariable int id) {\n        if (id < 0 || id >= users.size()) {\n            return \"User not found\";\n        }\n        return users.get(id);\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20824eb1-ed54-8098-a9d3-cc46a3afdb18",
-      "type": "text",
-      "richText": [
-        [
-          "What’s happening here?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80c0-a122-cb5f51c862a2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@RestController",
-          [
-            [
-              "c"
-            ]
-          ]
+      "type": "example",
+      "example": {
+        "title": "Return a greeting from a GET endpoint",
+        "description": [
+          "Place this controller in a package scanned by a Spring Boot application with Spring MVC support.",
+          "Send GET /greetings/hello."
         ],
-        [
-          " marks the class as a REST API handler."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8056-ae40-c08f4261601b",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@RequestMapping(\"/users\")",
-          [
-            [
-              "c"
-            ]
-          ]
+        "code": "import org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/greetings\")\npublic class GreetingController {\n    @GetMapping(\"/hello\")\n    public String hello() {\n        return \"Hello\";\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "@RequestMapping contributes /greetings and @GetMapping contributes /hello.",
+          "Spring calls hello() for GET /greetings/hello.",
+          "@RestController makes the returned String the response body.",
+          "This endpoint returns text. @RestController does not make every return value JSON."
         ],
-        [
-          " sets a base path for all methods."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8063-b340-f27191adbe26",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@GetMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " handles HTTP GET to "
-        ],
-        [
-          "/users",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and returns the list of users as JSON."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8023-b7d3-ffbd9806a2a5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@PostMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " handles HTTP POST to "
-        ],
-        [
-          "/users",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and adds a new user from the request body."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80de-aeab-d506e252615c",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@GetMapping(\"/{id}\")",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " handles GET requests with a path variable to get a specific user."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8075-8897-fade6a5b5e98",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-80c7-8684-ef76e59176b3",
-      "type": "sub_header",
-      "richText": [
-        [
-          "4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-804f-b119-ed601362badf",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the difference between "
-        ],
-        [
-          "@Controller",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@RestController",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a2-90f7-da7fce472471",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How does Spring Boot handle JSON conversion in REST APIs?"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8007-b2ca-cc8feffe4b36",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is "
-        ],
-        [
-          "@RequestMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and how is it different from "
-        ],
-        [
-          "@GetMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or "
-        ],
-        [
-          "@PostMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a7-8f93-f1f9f8530a2f",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you extract parameters from the URL in Spring Boot REST controllers?"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-807c-90c9-e25ef9d434c3",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What are the HTTP methods commonly used in RESTful APIs, and how do you map them in Spring Boot?"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80d1-840f-d1586587d830",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-800c-a22d-e656b7fcf5b6",
-      "type": "sub_header",
-      "richText": [
-        [
-          "5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80ba-95ea-e17804a668c3",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Best Practices"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80cf-a686-e4b5a99341e2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use specific method-level annotations like "
-        ],
-        [
-          "@GetMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "@PostMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for clarity instead of generic "
-        ],
-        [
-          "@RequestMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8073-a57f-d87218782be7",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Return meaningful HTTP status codes using "
-        ],
-        [
-          "ResponseEntity",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " instead of just strings."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8006-b3c2-e8fccec80f38",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Validate request data and handle errors gracefully."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80db-a515-d412e777429c",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "Common Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8052-b656-ffc0cc27f558",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forgetting to use "
-        ],
-        [
-          "@RequestBody",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " for parsing JSON input in POST/PUT methods."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80fc-aee1-f32ca0c54f2a",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Returning plain strings instead of JSON objects when a JSON response is expected."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8090-a8c5-d56501bfff27",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Not handling invalid path variables or input errors, causing server exceptions."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8001-b172-d70971648f73",
-      "type": "divider"
+        "result": "Hello"
+      }
     },
     {
       "id": "20824eb1-ed54-809e-8a04-caa6d2f76f62",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "6. Connection to Other Concepts"
+          "Return data"
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-806b-8ef0-d2af7b76328a",
+      "id": "rest-return-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Beans & Dependency Injection:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Your controller class ("
-        ],
-        [
-          "@RestController",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") is managed as a Spring Bean, which means Spring creates and manages its lifecycle."
+          "A message converter writes a Java return value into the HTTP response body."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8000-8649-d6f0891336f6",
+      "id": "rest-return-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Auto-Configuration:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " Spring Boot auto-configures JSON converters (like Jackson) so you don’t have to manually set up JSON parsing."
+          "The available converters and the selected response content type determine the format."
         ]
       ]
     },
     {
-      "id": "20824eb1-ed54-8093-86a7-c1498c19a92e",
+      "id": "rest-return-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Exception Handling:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " You can connect REST controllers to Spring’s global exception handling ("
-        ],
-        [
-          "@ControllerAdvice",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") for cleaner error responses."
+          "JSON conversion, request bodies and response status codes are covered on their own pages."
         ]
       ]
+    }
+  ],
+  "summary": "Handle an HTTP request with a controller, then map a path to a Java method.",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Spring MVC: request mapping",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html"
     },
     {
-      "id": "20824eb1-ed54-8022-a53b-c4fa9da613a7",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Security:",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " REST endpoints can be secured using Spring Security."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8049-8058-c70b96b71b23",
-      "type": "divider"
-    },
-    {
-      "id": "20824eb1-ed54-8088-96d1-ccb9fa397af3",
-      "type": "sub_header",
-      "richText": [
-        [
-          "7. Quick Interview Answers"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-800f-a8f1-d1e875cca747",
-      "type": "text",
-      "richText": [
-        [
-          "Q: What is ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@RestController",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          "?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80eb-b8a6-ffe79187d184",
-      "type": "text",
-      "richText": [
-        [
-          "A: "
-        ],
-        [
-          "@RestController",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " is a Spring Boot annotation that marks a class as a controller where every method returns domain objects instead of views. The objects are automatically converted to JSON or XML and sent back as HTTP responses, making it ideal for building RESTful APIs."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80a3-8fc7-c93ab8cfc768",
-      "type": "text",
-      "richText": [
-        [
-          "Q: How do you map a REST API endpoint to a method?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-801b-b1e4-da9d7e9dfaaf",
-      "type": "text",
-      "richText": [
-        [
-          "A: Using "
-        ],
-        [
-          "@RequestMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or its shortcuts like "
-        ],
-        [
-          "@GetMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "@PostMapping",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", you define the URL path and HTTP method that should trigger a Java method in your controller."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-809b-a6c7-e52f4a7394d1",
-      "type": "text",
-      "richText": [
-        [
-          "Q: How does Spring Boot convert Java objects into JSON?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8001-afef-c604741af6bf",
-      "type": "text",
-      "richText": [
-        [
-          "A: Spring Boot includes a JSON converter (usually Jackson) that automatically serializes Java objects returned from REST controller methods into JSON format for HTTP responses."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8090-8ccc-dca92eeac2ed",
-      "type": "divider"
+      "title": "Spring MVC: response bodies",
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/responsebody.html"
     }
   ]
 }

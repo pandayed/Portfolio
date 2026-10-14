@@ -1,771 +1,240 @@
 {
   "id": "20924eb1-ed54-8044-9f34-ec7dca26258e",
-  "title": "Connecting to Relational Databases (H2, MySQL, PostgreSQL)",
+  "title": "Relational Database Connections",
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480449f34ec7dca26258e",
   "blocks": [
     {
-      "id": "20924eb1-ed54-80e3-a4af-e805e9812bb0",
-      "type": "divider"
-    },
-    {
       "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "✅ 1. Core Concept (What & Why)"
+          "Database connections"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8076-8927-de20b0361f56",
-      "type": "text",
-      "richText": [
-        [
-          "In Spring Boot, "
-        ],
-        [
-          "connecting to a relational database",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " means setting up your application to "
-        ],
-        [
-          "store, retrieve, and manipulate data in tables",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ", just like you would with SQL queries."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802d-8835-c492ab098e26",
-      "type": "text",
-      "richText": [
-        [
-          "Spring Boot simplifies this process by "
-        ],
-        [
-          "auto-configuring",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " the connection to databases like H2 (in-memory), MySQL, or PostgreSQL using minimal setup. It handles much of the boilerplate (repetitive) code so developers can focus on business logic."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8027-8284-f5bb07315d38",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80ec-90f0-cd171761cc44",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔑 2. Key Interview Points"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-805f-963d-d135b3e42886",
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "How to configure a database connection in Spring Boot",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " (application.properties/yml file)"
+          "A relational database stores data in tables. SQL reads and changes that data."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80bd-b7b5-e67361209bed",
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "Difference between embedded (H2) and external (MySQL/PostgreSQL) databases",
-          [
-            [
-              "b"
-            ]
-          ]
+          "JDBC is the Java API used to communicate with relational databases. Each database supplies a JDBC driver."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80ae-8f62-e81e1d00295a",
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "What Spring Data JPA is and how it simplifies database operations",
-          [
-            [
-              "b"
-            ]
-          ]
+          "A DataSource supplies database connections to application code. Spring Boot can configure it from dependencies and connection properties."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-809d-b865-d7af57a13e33",
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "✅ "
-        ],
-        [
-          "What is a ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "DataSource",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " and how does Spring Boot manage it",
-          [
-            [
-              "b"
-            ]
-          ]
+          "A connection pool reuses connections instead of opening a new connection for every operation. Spring Boot starters normally use HikariCP when it is available."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8002-b811-e384e27fbbce",
-      "type": "divider"
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Connection setup does not define table mappings or repository methods. Those are separate topics."
+        ]
+      ]
     },
     {
       "id": "20924eb1-ed54-80a2-b870-d916849a832e",
-      "type": "sub_header",
+      "type": "header",
       "richText": [
         [
-          "💻 3. Code Example (Connect to H2, then MySQL)"
+          "Connect to PostgreSQL"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8038-af85-e58da5eaab68",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Step-by-step for H2 (in-memory database)"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-802b-a927-d5efe487946f",
-      "type": "code",
-      "richText": [
-        [
-          "// src/main/java/com/example/demo/Customer.java\npackage com.example.demo;\n\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.Id;\n\n@Entity\npublic class Customer {\n    @Id\n    private Long id;\n    private String name;\n    private String email;\n\n    // Getters & setters\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-80ea-a07f-f2e80caa6e91",
-      "type": "code",
-      "richText": [
-        [
-          "// src/main/java/com/example/demo/CustomerRepository.java\npackage com.example.demo;\n\nimport org.springframework.data.jpa.repository.JpaRepository;\n\npublic interface CustomerRepository extends JpaRepository<Customer, Long> {\n    // Spring will auto-implement basic CRUD methods\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-8084-b3c5-c90a0cfbaa2d",
-      "type": "code",
-      "richText": [
-        [
-          "// src/main/java/com/example/demo/DemoApplication.java\npackage com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.boot.CommandLineRunner;\nimport org.springframework.context.annotation.Bean;\n\n@SpringBootApplication\npublic class DemoApplication {\n\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n\n    @Bean\n    public CommandLineRunner run(CustomerRepository repo) {\n        return args -> {\n            repo.save(new Customer(1L, \"Alice\", \"alice@example.com\"));\n            System.out.println(repo.findAll());\n        };\n    }\n}\n"
-        ]
-      ],
-      "language": "Java"
-    },
-    {
-      "id": "20924eb1-ed54-8097-9c25-f86a3092c79c",
-      "type": "code",
-      "richText": [
-        [
-          "# src/main/resources/application.properties\nspring.datasource.url=jdbc:h2:mem:testdb\nspring.datasource.driverClassName=org.h2.Driver\nspring.datasource.username=sa\nspring.datasource.password=\nspring.jpa.database-platform=org.hibernate.dialect.H2Dialect\nspring.h2.console.enabled=true\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20924eb1-ed54-8044-b889-e18821e01521",
-      "type": "text",
-      "richText": [
-        [
-          "🔁 To switch to MySQL:"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80f0-807a-ee8d8ea72265",
-      "type": "code",
-      "richText": [
-        [
-          "spring.datasource.url=jdbc:mysql://localhost:3306/testdb\nspring.datasource.username=root\nspring.datasource.password=yourpassword\nspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver\nspring.jpa.hibernate.ddl-auto=update\nspring.jpa.database-platform=org.hibernate.dialect.MySQLDialect\n"
-        ]
-      ],
-      "language": "Plain Text"
-    },
-    {
-      "id": "20924eb1-ed54-8091-bb7b-d7a8c0054569",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-80b8-a36a-ce4b5310ffb9",
-      "type": "sub_header",
-      "richText": [
-        [
-          "❓ 4. Common Interview Questions"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c5-82dc-c9f04cd7a194",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How do you connect Spring Boot to a relational database like MySQL or PostgreSQL?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-804c-887c-c00b8f6d476e",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is the role of ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "application.yml",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " in database configuration?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80d2-9a3b-f7fa93c560ac",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is H2, and why might you use it in development?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8018-b1c9-e93179682484",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "What is a ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "DataSource",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", and how does Spring Boot create one?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8048-908e-d6627013d27d",
-      "type": "numbered_list",
-      "richText": [
-        [
-          "How does Spring Data JPA help simplify database operations?",
-          [
-            [
-              "b"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80c4-9502-f295dbf40b5c",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-8030-9146-cce502bbc936",
-      "type": "sub_header",
-      "richText": [
-        [
-          "✅ 5. Best Practices & Pitfalls"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8094-9b12-df7f737dc5ae",
-      "type": "sub_sub_header",
-      "richText": [
-        [
-          "✅ Best Practices"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80eb-84d7-f021e815f0bd",
+      "id": "20924eb1-ed54-80a2-b870-d916849a832e-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use "
-        ],
-        [
-          "H2 for local development",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " and "
-        ],
-        [
-          "MySQL/PostgreSQL in production",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Add the PostgreSQL JDBC driver and a database-access starter. Use spring-boot-starter-data-jpa for the JPA lessons."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8089-bef3-e17ae22fa474",
+      "id": "20924eb1-ed54-80a2-b870-d916849a832e-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep "
-        ],
-        [
-          "credentials and URLs",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          " in "
-        ],
-        [
-          "application.properties",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " or better yet, in "
-        ],
-        [
-          "environment variables",
-          [
-            [
-              "b"
-            ]
-          ]
+          "Configure the database URL, username and password. Keep credentials outside committed source files."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80e6-b09f-de15ef90340b",
+      "id": "20924eb1-ed54-80a2-b870-d916849a832e-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use "
-        ],
-        [
-          "@Entity",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@Id",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", and ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "@GeneratedValue",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " properly in model classes"
+          "The database must be running and the configured user must have access to it. Spring Boot does not create a PostgreSQL server."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8058-baf6-ed07f345f332",
-      "type": "sub_sub_header",
+      "id": "postgres-connection",
+      "type": "example",
+      "example": {
+        "title": "Configure a PostgreSQL connection",
+        "description": [
+          "Use a Spring Boot 3 project with Java 17 or later.",
+          "Add org.springframework.boot:spring-boot-starter-data-jpa and org.postgresql:postgresql to pom.xml. Set the driver dependency scope to runtime.",
+          "Create a PostgreSQL database named notes. Set DB_USERNAME and DB_PASSWORD in the application environment.",
+          "Put these settings in src/main/resources/application.properties."
+        ],
+        "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate",
+        "language": "text",
+        "explanation": [
+          "The JDBC URL selects the PostgreSQL server and notes database.",
+          "Environment variables provide the credentials.",
+          "validate checks mapped tables when JPA starts. It does not create them.",
+          "With no entities yet, this configuration teaches the connection settings. Once entities are added, create their tables before starting with validate."
+        ]
+      }
+    },
+    {
+      "id": "database-schema",
+      "type": "header",
       "richText": [
         [
-          "⚠️ Common Pitfalls"
+          "Create and change the schema"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80d3-a00b-c2d2ac9464f0",
+      "id": "database-schema-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Forgetting to "
-        ],
-        [
-          "set ",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          "spring.jpa.hibernate.ddl-auto",
-          [
-            [
-              "b"
-            ],
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", causing schema issues"
+          "A schema describes database objects such as tables and columns."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8093-84bc-c165122877d1",
+      "id": "database-schema-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Using H2 "
-        ],
-        [
-          "accidentally in production",
-          [
-            [
-              "b"
-            ]
-          ]
+          "For a disposable learning database, ddl-auto=create or create-drop can generate tables from entity mappings. These settings can destroy existing data."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80e1-bf73-cd631c366bd2",
+      "id": "database-schema-b2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Hardcoding sensitive values (e.g., passwords) in source code"
+          "For a persistent database, use versioned migrations such as Flyway or Liquibase to change the schema. Use ddl-auto=validate to check mappings."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80b0-b3d5-dbd9e08402ee",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-802e-8234-cda247c107de",
-      "type": "sub_header",
-      "richText": [
-        [
-          "🔗 6. Connection to Other Concepts"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80e1-b938-fd3504b5bab0",
+      "id": "database-schema-b3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Data JPA",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Built on top of database connectivity, it automates common operations like save, update, delete."
+          "ddl-auto=update is not a substitute for reviewed, versioned migrations."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-803d-80f8-e82849272c29",
+      "id": "h2-database",
+      "type": "header",
+      "richText": [
+        [
+          "Use H2 for a separate local case"
+        ]
+      ]
+    },
+    {
+      "id": "h2-database-b0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot Auto-Configuration",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Automatically configures a "
-        ],
-        [
-          "DataSource",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          " based on properties."
+          "H2 can run inside the application process. An in-memory H2 database keeps its data in memory."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8007-8186-c397f9c96959",
+      "id": "h2-database-b1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Profiles",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ": Use Spring profiles ("
-        ],
-        [
-          "dev",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ", "
-        ],
-        [
-          "prod",
-          [
-            [
-              "c"
-            ]
-          ]
-        ],
-        [
-          ") to change database configurations per environment."
+          "An in-memory database loses its data when it closes. It is useful for short local experiments."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80cd-b5ab-fb534c84ae46",
-      "type": "divider"
-    },
-    {
-      "id": "20924eb1-ed54-802b-8294-c0103cdc120c",
-      "type": "sub_header",
+      "id": "h2-database-b2",
+      "type": "bulleted_list",
       "richText": [
         [
-          "🎤 7. Quick Interview Answers"
+          "H2 and PostgreSQL can behave differently. Use PostgreSQL when checking PostgreSQL-specific SQL or behavior."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8058-8a9c-f9112fd1a61a",
-      "type": "sub_sub_header",
+      "id": "h2-connection",
+      "type": "example",
+      "example": {
+        "title": "Configure an in-memory H2 database",
+        "description": [
+          "For this local case, add com.h2database:h2 with runtime scope instead of the PostgreSQL driver.",
+          "Use a separate local profile or project. Put these properties in its application.properties."
+        ],
+        "code": "spring.datasource.url=jdbc:h2:mem:notes\nspring.datasource.username=sa\nspring.datasource.password=\nspring.jpa.hibernate.ddl-auto=create-drop",
+        "language": "text",
+        "explanation": [
+          "jdbc:h2:mem:notes creates an in-memory database named notes.",
+          "create-drop creates mapped tables and drops them when the JPA application shuts down normally.",
+          "The empty password is for this isolated local example."
+        ]
+      }
+    },
+    {
+      "id": "database-next",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Q: "
-        ],
-        [
-          "\"How do you connect a Spring Boot app to a relational database like MySQL?\"",
+          "Map a Java class to a table",
           [
             [
-              "i"
+              "a",
+              "/notes/spring-boot/entity-mapping"
             ]
           ]
         ]
       ]
-    },
+    }
+  ],
+  "summary": "Connect Spring Boot to PostgreSQL before mapping or querying data.",
+  "updatedOn": "2026-10-14",
+  "sources": [
     {
-      "id": "20924eb1-ed54-8005-a7e2-d2f244962df0",
-      "type": "text",
-      "richText": [
-        [
-          "🗣️ "
-        ],
-        [
-          "Answer",
-          [
-            [
-              "b"
-            ]
-          ]
-        ],
-        [
-          ":"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80bf-ab14-e8f6ccd17953",
-      "type": "quote",
-      "richText": [
-        [
-          "In Spring Boot, you connect to a relational database by setting properties like spring.datasource.url, username, and password in the application.properties file. Spring Boot auto-configures the DataSource and uses it with JPA or JDBC to interact with the database. For example, I can use Spring Data JPA with MySQL to persist entities using simple interfaces like JpaRepository, without writing SQL manually."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-800d-9d12-d27712f2a983",
-      "type": "divider"
+      "title": "Spring Boot 3.5: SQL databases",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/data/sql.html"
     }
   ]
 }

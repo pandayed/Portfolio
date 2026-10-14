@@ -366,17 +366,17 @@ export const javaNotes: NoteGroup = {
 const springBootIntroPages: NotePage[] = [
     {
         type: 'page',
-        title: 'A first Spring Boot web application',
+        title: 'A first Spring Boot application',
         summary: 'Create and run a web project, then map an HTTP request.',
         route: SPRING_BOOT_FIRST_APPLICATION_ROUTE,
-        updatedOn: '2026-10-13',
+        updatedOn: '2026-10-14',
     },
     {
         type: 'page',
-        title: 'Common annotations at a glance',
+        title: 'Spring annotation reference',
         summary: 'Find common Spring Boot, Spring MVC, validation, and persistence annotations.',
         route: SPRING_BOOT_ANNOTATIONS_ROUTE,
-        updatedOn: '2026-10-01',
+        updatedOn: '2026-10-14',
     },
 ];
 

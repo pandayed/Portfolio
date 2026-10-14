@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-deployment-cloud",
-  "title": "Deploy a Spring Boot application on managed hosting",
-  "summary": "Match the Java runtime, assigned port, external configuration, storage and release checks to the host.",
+  "title": "Managed hosting",
+  "summary": "Configure the artifact, assigned port and external services before releasing the application.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-13",
+  "updatedOn": "2026-10-14",
   "sources": [
     {
       "title": "Engineering Digest: Deploy Spring Boot App on Heroku: Easy Guide for Beginners",
@@ -20,6 +20,10 @@
     {
       "title": "Spring Boot: cloud deployment",
       "url": "https://docs.spring.io/spring-boot/3.5/how-to/deployment/cloud.html"
+    },
+    {
+      "title": "Heroku: Procfile",
+      "url": "https://devcenter.heroku.com/articles/procfile"
     }
   ],
   "blocks": [
@@ -28,7 +32,7 @@
       "type": "header",
       "richText": [
         [
-          "Build, configuration and process"
+          "Run an application on managed hosting"
         ]
       ]
     },
@@ -37,7 +41,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Managed hosting provides an environment in which your application process runs. You still choose the artifact, runtime settings, database access and application checks."
+          "Managed hosting supplies an environment for the application process."
         ]
       ]
     },
@@ -46,7 +50,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Build the executable JAR with the project’s wrapper and declared Java version. Select a host runtime that supports that Java version."
+          "Choose a supported Java runtime and provide the packaged application."
         ]
       ]
     },
@@ -55,7 +59,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Bind to the port assigned by the platform. In the Heroku example, PORT is supplied at runtime and Spring can read it through a property placeholder."
+          "The host’s build and start commands must match the project and generated artifact."
         ]
       ]
     },
@@ -64,7 +68,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep database connections and external API credentials in the host’s configuration or secret system. Keep application defaults in the artifact."
+          "Bind the application to the port assigned by the platform."
         ]
       ]
     },
@@ -73,26 +77,36 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A Procfile tells the classic Heroku process model how to launch a web process. The JAR path must match the artifact your build actually produces."
+          "Store credentials in the host’s configuration or secret system."
         ]
       ]
     },
     {
       "id": "cloud-process-code",
-      "type": "code",
-      "richText": [
-        [
-          "# application.properties\nserver.port=${PORT:8080}\n\n# Procfile, with Maven finalName set to journal\nweb: java -jar target/journal.jar"
+      "type": "example",
+      "example": {
+        "title": "Start a JAR with a classic Heroku Procfile",
+        "description": [
+          "This example uses Heroku’s classic Procfile process model. Other platforms and Heroku runtime generations can use different deployment settings.",
+          "The Maven project generates target/journal.jar.",
+          "Put the server setting in application.properties and the web command in a file named Procfile at the project root."
+        ],
+        "code": "# application.properties\nserver.port=${PORT:8080}\n\n# Procfile\nweb: java -jar target/journal.jar",
+        "language": "text",
+        "explanation": [
+          "PORT is supplied by the host. The property falls back to 8080 locally.",
+          "web names the process that receives HTTP requests.",
+          "The JAR path must match the file produced by the build.",
+          "Use the current host documentation for its build and release procedure."
         ]
-      ],
-      "language": "Plain Text"
+      }
     },
     {
       "id": "cloud-storage",
       "type": "header",
       "richText": [
         [
-          "External services and readiness"
+          "Keep data outside a temporary application filesystem"
         ]
       ]
     },
@@ -101,7 +115,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "An application restart must not lose user data. Use an external database and persistent object storage when needed; do not depend on an ephemeral application filesystem."
+          "Some hosts replace or clear the application filesystem during restart or deployment."
         ]
       ]
     },
@@ -110,7 +124,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "For MongoDB Atlas, configure the database user and the network access rules needed by the host. A URI alone does not grant network access."
+          "Use a persistent database for application data. Use persistent object storage for uploaded files."
         ]
       ]
     },
@@ -119,7 +133,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Read the platform build log, process log and application startup log separately. A successful upload does not prove the process started."
+          "For MongoDB Atlas, create a database user and configure network access for the host."
         ]
       ]
     },
@@ -128,16 +142,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Confirm the app binds to the required port and answers a readiness request. Then check a representative authenticated API request and a database read/write."
-        ]
-      ]
-    },
-    {
-      "id": "cloud-storage-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Platform termination and restart are normal possibilities. Handle shutdown and make retried operations safe rather than assuming a process runs forever."
+          "A database URI provides connection information. It does not open firewall or network access."
         ]
       ]
     },
@@ -146,7 +151,7 @@
       "type": "header",
       "richText": [
         [
-          "A release and its limits"
+          "Check and operate a release"
         ]
       ]
     },
@@ -155,7 +160,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "The playlist’s Heroku lesson is a deployment topic. Follow the current instructions for the Heroku generation and runtime you use rather than treating old commands as a fixed contract."
+          "Record the application revision and configuration released to the host."
         ]
       ]
     },
@@ -164,7 +169,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Record which application revision and configuration were released. Diagnose a failing revision using its logs, not the last successful local build."
+          "Read build logs to check packaging. Read process and application logs to check startup."
         ]
       ]
     },
@@ -173,7 +178,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep the prior artifact available for rollback. A code rollback does not automatically reverse a database migration or restore deleted data."
+          "Confirm the process listens on the required port and the public endpoint responds."
         ]
       ]
     },
@@ -182,7 +187,25 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Use managed hosting when its supported runtime and operations model fit the application. Use a VPS when you need control of the machine and can maintain it."
+          "Check an authenticated API request and a database read/write using controlled data."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-release-b4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Expect the platform to restart or stop processes. Handle shutdown and avoid duplicate effects when work is retried."
+        ]
+      ]
+    },
+    {
+      "id": "cloud-release-b5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keep a prior artifact for rollback. Replacing the JAR does not reverse a database migration or restore deleted data."
         ]
       ]
     }

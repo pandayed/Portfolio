@@ -1,0 +1,146 @@
+{
+  "id": "spring-boot-testing-parameterized-tests",
+  "title": "Parameterized JUnit tests",
+  "summary": "Run the same check for several inputs with an argument source.",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Spring Boot 3.5: testing",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/testing/spring-boot-applications.html"
+    },
+    {
+      "title": "JUnit 5.12: user guide",
+      "url": "https://docs.junit.org/5.12.2/user-guide/"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "junit-parameter",
+      "type": "header",
+      "richText": [
+        [
+          "Run one test with several inputs"
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ParameterizedTest runs the same test method once for each supplied argument set."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An argument source supplies those inputs."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @ValueSource for a single value per invocation."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @CsvSource for short rows containing several simple values."
+        ]
+      ]
+    },
+    {
+      "id": "junit-parameter-code",
+      "type": "example",
+      "example": {
+        "title": "Check several title values with CSV rows",
+        "description": [
+          "Use spring-boot-starter-test in test scope.",
+          "The title rule accepts visible text and rejects blank text."
+        ],
+        "code": "import org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.CsvSource;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\nclass TitleRules {\n    static boolean valid(String title) {\n        return title != null && !title.isBlank();\n    }\n}\n\nclass TitleRulesTest {\n    @ParameterizedTest\n    @CsvSource({\"Morning,true\", \"'   ',false\", \"'',false\"})\n    void titleNeedsVisibleText(String title, boolean expected) {\n        assertEquals(expected, TitleRules.valid(title));\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "Each CSV row supplies title and expected to one test invocation.",
+          "Morning should be accepted. Three spaces and an empty string should be rejected.",
+          "assertEquals compares the expected boolean with the rule’s actual result.",
+          "The quoted empty value is an empty string. An unquoted empty CSV value is treated as null."
+        ]
+      }
+    },
+    {
+      "id": "junit-provider",
+      "type": "header",
+      "richText": [
+        [
+          "Provide arguments from Java"
+        ]
+      ]
+    },
+    {
+      "id": "junit-provider-b0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ArgumentsSource selects an ArgumentsProvider class."
+        ]
+      ]
+    },
+    {
+      "id": "junit-provider-b1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The provider returns a stream of Arguments. Each Arguments object supplies one argument set."
+        ]
+      ]
+    },
+    {
+      "id": "junit-provider-b2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use a provider for structured inputs or reusable datasets that are awkward to put in CSV."
+        ]
+      ]
+    },
+    {
+      "id": "junit-provider-b3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Return fresh mutable objects if a test changes its inputs."
+        ]
+      ]
+    },
+    {
+      "id": "junit-provider-code",
+      "type": "example",
+      "example": {
+        "title": "Supply null, empty and whitespace titles",
+        "description": [
+          "This alternative uses a Java argument provider for rejected title inputs.",
+          "Use it in a separate example file from the preceding TitleRulesTest."
+        ],
+        "code": "import java.util.stream.Stream;\nimport org.junit.jupiter.api.extension.ExtensionContext;\nimport org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.Arguments;\nimport org.junit.jupiter.params.provider.ArgumentsProvider;\nimport org.junit.jupiter.params.provider.ArgumentsSource;\nimport static org.junit.jupiter.api.Assertions.assertFalse;\n\nclass MissingTitles implements ArgumentsProvider {\n    @Override\n    public Stream<? extends Arguments> provideArguments(\n            ExtensionContext context) {\n        return Stream.of(Arguments.of((Object) null),\n                         Arguments.of(\"\"), Arguments.of(\" \"));\n    }\n}\n\nclass TitleRulesTest {\n    @ParameterizedTest\n    @ArgumentsSource(MissingTitles.class)\n    void rejectsMissingOrBlankTitle(String title) {\n        boolean valid = title != null && !title.isBlank();\n        assertFalse(valid);\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "The provider produces three invocations: null, an empty string and one space.",
+          "The Object cast passes null as one argument rather than as a null argument array.",
+          "The assertion checks that none of these inputs is valid."
+        ]
+      }
+    }
+  ]
+}

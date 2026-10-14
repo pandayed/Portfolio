@@ -1,0 +1,120 @@
+{
+  "id": "69b28f7f-e19d-4a17-8bac-662537f27d91",
+  "sourceUrl": "https://docs.spring.io/spring-boot/3.5/reference/",
+  "title": "Read configuration in Java",
+  "blocks": [
+    {
+      "id": "configuration-binding-0",
+      "type": "header",
+      "richText": [
+        [
+          "One value with @Value"
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-0-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Value can supply a configured value to a Spring bean."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-0-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The ${property.name} syntax reads a property. ${property.name:default} also supplies a default when the property is absent."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-0-example-0",
+      "type": "example",
+      "example": {
+        "title": "Inject an application name",
+        "description": [
+          "Set app.name=Journal in application.properties."
+        ],
+        "code": "package com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class ApplicationName {\n    private final String name;\n\n    public ApplicationName(@Value(\"${app.name}\") String name) {\n        this.name = name;\n    }\n\n    public String getName() {\n        return name;\n    }\n}",
+        "language": "java",
+        "explanation": [
+          "Spring resolves app.name and passes Journal to the constructor.",
+          "If the required property is absent, resolving it fails."
+        ]
+      }
+    },
+    {
+      "id": "configuration-binding-1",
+      "type": "header",
+      "richText": [
+        [
+          "Related values with @ConfigurationProperties"
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-1-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ConfigurationProperties binds a group of settings to a Java object."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-1-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The prefix selects the property group. Binding converts supported property values to the declared Java types."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-1-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Register the class with @ConfigurationPropertiesScan or @EnableConfigurationProperties. The binding annotation alone does not register it."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-1-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Use @Validated and validation constraints when invalid values should fail startup. This needs validation support."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Bind mail settings to a record",
+        "description": [
+          "Use Spring Boot 3 and Java 17. Set mail.host=localhost and mail.port=1025 in application.properties. Place each public type in its own file."
+        ],
+        "code": "package com.example.demo;\n\nimport org.springframework.boot.context.properties.ConfigurationProperties;\n\n@ConfigurationProperties(prefix = \"mail\")\npublic record MailSettings(String host, int port) {}\n\n// MailConfiguration.java\npackage com.example.demo;\n\nimport org.springframework.boot.context.properties.EnableConfigurationProperties;\nimport org.springframework.context.annotation.Configuration;\n\n@Configuration\n@EnableConfigurationProperties(MailSettings.class)\npublic class MailConfiguration {}",
+        "language": "java",
+        "explanation": [
+          "@EnableConfigurationProperties registers MailSettings for binding.",
+          "Spring binds mail.host to host and mail.port to port.",
+          "Another bean can request MailSettings through constructor injection.",
+          "This only binds custom settings. It does not create an SMTP connection or configure JavaMailSender."
+        ]
+      }
+    }
+  ],
+  "updatedOn": "2026-10-14",
+  "sources": [
+    {
+      "title": "Official reference: Read configuration in Java",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html"
+    }
+  ]
+}
