@@ -12,8 +12,8 @@ const note: LearningNote = {
             id: "components-describe-ui",
             title: "Write and use a component",
             bullets: [
-                "A component is a JavaScript function that returns the UI to display. UI means user interface.",
-                "JSX lets you write HTML-like markup inside JavaScript. A React project transforms JSX before the browser runs it.",
+                "A component is a JavaScript function that returns the UI to display.",
+                "JSX lets you write HTML-like markup inside JavaScript.",
                 "Component names start with a capital letter. Lowercase tags name browser elements.",
                 "Put component definitions at the top level of the file. Use a component with JSX so React controls its calls.",
                 "Use these examples as the main component in an existing React app. JavaScript modules and basic HTML are prerequisites."

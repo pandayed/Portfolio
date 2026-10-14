@@ -61,7 +61,7 @@ const learningNoteText = (note: LearningNote): string => [
         ...(section.paragraphs ?? []),
         ...(section.bullets ?? []),
         ...(section.table?.columns ?? []),
-        ...(section.table?.rows.flat() ?? []),
+        ...(section.table?.rows.flat().map((cell) => typeof cell === 'string' ? cell : cell.text) ?? []),
         ...(section.examples ?? []).flatMap((example) => [
             example.title ?? '',
             ...(example.description ?? []),

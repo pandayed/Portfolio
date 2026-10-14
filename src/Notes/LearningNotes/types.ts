@@ -35,7 +35,7 @@ export interface LearningNoteSection {
     bullets?: readonly string[];
     table?: {
         columns: readonly string[];
-        rows: readonly (readonly string[])[];
+        rows: readonly (readonly (string | { text: string; href: string })[])[];
     };
     examples?: readonly LearningNoteExample[];
     pitfalls?: readonly string[];

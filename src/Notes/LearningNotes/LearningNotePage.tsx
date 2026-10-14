@@ -91,9 +91,14 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                                 <tbody>
                                     {section.table.rows.map((row, rowIndex) => (
                                         <tr key={`${section.id}-row-${rowIndex}`}>
-                                            {row.map((cell, cellIndex) => cellIndex === 0 ? (
-                                                <th scope="row" key={cellIndex}>{cell}</th>
-                                            ) : <td key={cellIndex}>{cell}</td>)}
+                                            {row.map((cell, cellIndex) => {
+                                                const content = typeof cell === 'string' ? cell : (
+                                                    <a className="Link" href={cell.href}>{cell.text}</a>
+                                                );
+                                                return cellIndex === 0 ? (
+                                                    <th scope="row" key={cellIndex}>{content}</th>
+                                                ) : <td key={cellIndex}>{content}</td>;
+                                            })}
                                         </tr>
                                     ))}
                                 </tbody>

@@ -6,6 +6,7 @@ import effectsAndCleanup from './data/effects-and-cleanup';
 import eventsAndHandlers from './data/events-and-handlers';
 import formsAndControlledInputs from './data/forms-and-controlled-inputs';
 import hooksAndRules from './data/hooks-and-rules';
+import hooksAtAGlance from './data/hooks-at-a-glance';
 import objectsAndArraysInState from './data/objects-and-arrays-in-state';
 import customHooks from './data/performance-and-custom-hooks';
 import reactHooks from './data/react-hooks';
@@ -52,9 +53,9 @@ export const reactChapters: readonly LearningChapter[] = [
     },
     {
         id: 'hook-reference',
-        title: '6. Advanced Hook reference',
-        summary: 'Look up later APIs after the lessons. Each React 19 API states its version requirement.',
-        notes: [reactHooks],
+        title: '6. Hook reference',
+        summary: 'Find a Hook by its description, then read its detailed lesson. Later APIs state their version requirements.',
+        notes: [hooksAtAGlance, reactHooks],
     },
 ];
 
