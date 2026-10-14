@@ -1,358 +1,91 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'control-flow',
-    title: 'Control flow',
-    summary: 'See which branches and loops run, and which types TypeScript knows after a check.',
-    scope: 'javascript-typescript',
-    updatedOn: '2026-10-07',
+    slug: "control-flow",
+    title: "Conditions: if, else, and switch",
+    summary: "Choose the statements to run from a condition.",
+    scope: "javascript",
+    updatedOn: "2026-10-14",
+    pointwise: true,
+    exampleLayout: "grouped",
+    references: [
+        {
+            title: "MDN JavaScript guide",
+            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling"
+        }
+    ],
     sections: [
         {
-            id: 'if-and-truthiness',
-            title: 'if runs a branch when its condition is truthy',
+            id: "if-and-else",
+            title: "if and else choose a branch",
             bullets: [
-                'Control flow is the order in which statements run. A condition is an expression used to choose the next statements.',
-                'if converts its condition to a boolean. A true result runs the if block. A false result runs the else block, when one exists.',
-                'else if checks another condition when the earlier condition is false. Only the first matching branch runs.',
-                'false, 0, -0, 0n, an empty string, null, undefined, and NaN all convert to false. These values are called falsy.',
-                'Other ordinary values convert to true. These values are called truthy. Empty arrays and empty objects are truthy too.',
-                'A truthiness check cannot distinguish 0 or an empty string from a missing value: each is falsy. An explicit comparison can distinguish them.',
+                "if runs its block when the condition is truthy. else runs when it is falsy.",
+                "else if checks another condition after an earlier condition fails. The first matching branch wins."
             ],
-            examples: [{
-                title: 'Falsy and truthy values choose different branches',
-                language: 'javascript',
-                code: [
-                    'console.log(Boolean(0), Boolean(""), Boolean(undefined));',
-                    '// false false false',
-                    'console.log(Boolean([]), Boolean({}), Boolean("0"));',
-                    '// true true true',
-                    '',
-                    'const count = 0;',
-                    'if (count > 0) {',
-                    '    console.log("positive");',
-                    '} else if (count === 0) {',
-                    '    console.log("zero");',
-                    '} else {',
-                    '    console.log("negative");',
-                    '}',
-                    'if ([]) {',
-                    '    console.log("array branch");',
-                    '}',
-                ].join('\n'),
-                result: 'The first two calls print false false false and true true true. The selected branches print zero and array branch. An empty array is truthy even though it has no elements.',
-            }, {
-                title: 'Zero, empty text, and missing values can mean different things',
-                language: 'javascript',
-                code: [
-                    'const count = 0;',
-                    'const text = "";',
-                    'console.log(count === undefined); // false: count is present',
-                    'console.log(count === 0); // true: count is zero',
-                    'console.log(text === undefined); // false: text is present',
-                    'console.log(text === ""); // true: text is empty',
-                    'console.log(Boolean(count), Boolean(text)); // false false',
-                ].join('\n'),
-                result: 'The comparisons distinguish present values from undefined. if (count) and if (text) would both skip their blocks because zero and empty text are falsy.',
-
-            }],
+            examples: [
+                {
+                    title: "Describe a count",
+                    description: [
+                        "Use comparisons to distinguish positive, zero, and negative counts."
+                    ],
+                    language: "javascript",
+                    code: "const count = 0;\nif (count > 0) {\n    console.log(\"positive\");\n} else if (count === 0) {\n    console.log(\"zero\");\n} else {\n    console.log(\"negative\");\n}",
+                    result: "zero",
+                    explanation: [
+                        "The first condition fails.",
+                        "The second condition matches, so the final else does not run."
+                    ]
+                }
+            ]
         },
         {
-            id: 'conditional-expression',
-            title: 'A conditional expression chooses one value',
+            id: "conditional-expression",
+            title: "Choose one result with the conditional operator",
             bullets: [
-                'condition ? whenTrue : whenFalse chooses between two expressions. This is the conditional operator, also called the ternary operator.',
-                'Only the chosen expression runs. The result can be stored in a variable or returned from a function.',
-                'Use if and else when a branch needs several statements. Use this expression for a short choice between values.',
+                "condition ? whenTrue : whenFalse chooses one expression. This is also called the ternary operator.",
+                "Only the chosen expression runs.",
+                "Use if and else when a branch needs several statements."
             ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const count = 0;',
-                    'const label = count === 0 ? "empty" : "has items";',
-                    'console.log(label); // empty',
-                ].join('\n'),
-                result: 'count === 0 is true, so the expression returns "empty". The other expression is not evaluated.',
-            }],
+            examples: [
+                {
+                    title: "Choose a short label",
+                    description: [
+                        "Assign one of two labels from a boolean comparison."
+                    ],
+                    language: "javascript",
+                    code: "const count = 0;\nconst label = count === 0 ? \"empty\" : \"has items\";\nconsole.log(label);",
+                    result: "empty",
+                    explanation: [
+                        "The condition is true, so label receives \"empty\"."
+                    ]
+                }
+            ]
         },
         {
-            id: 'switch',
-            title: 'switch matches with strict equality and can continue into later cases',
+            id: "switch",
+            title: "switch matches with strict equality",
             bullets: [
-                'switch selects statements by comparing one input with case values. It uses strict equality. The number 1 does not match the string "1".',
-                'The examples define functions so the switch can run with several inputs. function show(value) defines the body, and show(1) runs it with value equal to 1.',
-                'When no case matches, execution starts at default.',
-                'break exits the switch. return exits the enclosing function, including its switch.',
-                'After a case matches, execution continues into later cases unless something stops it. This is called fallthrough. The later case value does not need to match.',
+                "switch compares its input with case values using strict equality.",
+                "default runs when no case matches.",
+                "break exits the switch. Without a stopping statement, execution continues into later cases. This is fallthrough."
             ],
-            examples: [{
-                title: 'Strict matching, default, and break',
-                language: 'javascript',
-                code: [
-                    'function show(value) {',
-                    '    switch (value) {',
-                    '        case 1:',
-                    '            console.log("number one");',
-                    '            break;',
-                    '        case "1":',
-                    '            console.log("text one");',
-                    '            break;',
-                    '        default:',
-                    '            console.log("no match");',
-                    '    }',
-                    '    console.log("after switch");',
-                    '}',
-                    'show(1); // number one, then after switch',
-                    'show("1"); // text one, then after switch',
-                    'show(2); // no match, then after switch',
-                ].join('\n'),
-                result: 'Each call prints its matching label and after switch. break leaves the switch while allowing the rest of the function to run.',
-            }, {
-                title: 'Fallthrough versus return',
-                language: 'javascript',
-                code: [
-                    'function showRole(role) {',
-                    '    switch (role) {',
-                    '        case "editor":',
-                    '            console.log("edit access");',
-                    '            // No break: execution continues into the next case.',
-                    '        case "reader":',
-                    '            console.log("read access");',
-                    '            return; // Ends this function call.',
-                    '    }',
-                    '    console.log("after switch");',
-                    '}',
-                    'showRole("editor");',
-                ].join('\n'),
-                result: 'The output is edit access and read access. "editor" does not match "reader", but fallthrough runs that case anyway. return prevents after switch from printing.',
-            }],
-        },
-        {
-            id: 'for-loop',
-            title: 'A for loop initializes, checks, runs, and updates',
-            bullets: [
-                'for (initialization; condition; update) repeats its block while the condition is truthy.',
-                'Initialization runs once. The condition runs before each iteration. The update runs after each completed iteration, including one that uses continue.',
-                'break exits before the next update. A let variable declared in the loop header is available only within the loop.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'for (let index = 0; index < 3; index += 1) {',
-                    '    console.log(index);',
-                    '}',
-                ].join('\n'),
-                result: 'The output is 0, 1, and 2. After the final update, index is 3. index < 3 is false, so the loop stops.',
-            }],
-        },
-        {
-            id: 'while-break-continue',
-            title: 'while repeats; break stops a loop; continue skips one iteration',
-            bullets: [
-                'while checks its condition before each run of the body. It stops when the condition becomes falsy. An initially falsy condition runs the body zero times.',
-                'An iteration is one run of the loop body. break ends that loop immediately.',
-                'continue skips the rest of the current iteration. In a while loop, the condition is checked again next.',
-                'Update the value used by a while condition so it can become false. A condition that always stays true can keep the loop running indefinitely.',
-                'In nested loops, an unlabeled break ends the inner loop. The outer loop can keep running.',
-                'The nested example uses for...of to read each value from an array. for (const group of ["A", "B"]) assigns A and then B to group. The next section explains this loop in detail.',
-            ],
-            examples: [{
-                title: 'Repeated checks, a skipped iteration, and a stopped loop',
-                language: 'javascript',
-                code: [
-                    'let number = 0;',
-                    'while (number < 5) {',
-                    '    number += 1;',
-                    '    if (number === 2) continue;',
-                    '    if (number === 4) break;',
-                    '    console.log(number); // 1, then 3',
-                    '}',
-                    'console.log(number); // 4',
-                    'while (false) {',
-                    '    console.log("never runs");',
-                    '}',
-                ].join('\n'),
-                result: 'The loop prints 1 and 3. continue skips the print for 2. break ends the loop at 4. The final while body never runs.',
-            }, {
-                title: 'break in the inner loop leaves the outer loop running',
-                language: 'javascript',
-                code: [
-                    'for (const group of ["A", "B"]) {',
-                    '    for (const number of [1, 2, 3]) {',
-                    '        if (number === 2) break;',
-                    '        console.log(group, number);',
-                    '    }',
-                    '}',
-                ].join('\n'),
-                result: 'The output is A 1 and B 1. Each inner loop ends at 2, but the outer loop still reaches both groups.',
-            }],
-        },
-        {
-            id: 'for-of-and-for-in',
-            title: 'for...of reads values; for...in reads property keys',
-            bullets: [
-                'A loop repeats a block of statements. for...of reads one value at a time from an iterable. Arrays and strings are iterables.',
-                'An iterable provides values in sequence. In for (const color of colors), each iteration gives color the next value.',
-                'for...in reads enumerable string property keys. An enumerable property is marked for inclusion in this kind of loop.',
-                'An inherited property belongs to another object, called the prototype. Property reads can find it through the current object.',
-                'for...in includes inherited enumerable properties. It skips non-enumerable properties and symbol keys.',
-                'The second example is a property-enumeration detail. Read it after Arrays and objects and the prototype-chain section in Classes, prototypes, and modules.',
-                'Array indexes read by for...in are string keys. They are not the array values.',
-            ],
-            examples: [{
-                title: 'Array values, string characters, and array keys',
-                language: 'javascript',
-                code: [
-                    'const colors = ["red", "blue"];',
-                    'for (const color of colors) {',
-                    '    console.log(color); // red, then blue',
-                    '}',
-                    'for (const character of "hi") {',
-                    '    console.log(character); // h, then i',
-                    '}',
-                    'for (const key in colors) {',
-                    '    console.log(key, typeof key); // 0 string, then 1 string',
-                    '}',
-                ].join('\n'),
-                result: 'for...of reads the two color values and the two string characters. for...in reads the array keys "0" and "1", both strings.',
-            }, {
-                title: 'Inherited and non-enumerable properties',
-                language: 'javascript',
-                code: [
-                    'const parent = { inherited: "from parent" };',
-                    'const item = Object.create(parent);',
-                    'item.own = "from item";',
-                    'const marker = Symbol("marker");',
-                    'item[marker] = "symbol value";',
-                    'Object.defineProperty(item, "hidden", {',
-                    '    value: "not enumerable",',
-                    '    enumerable: false,',
-                    '});',
-                    'for (const key in item) {',
-                    '    console.log(key); // own, then inherited',
-                    '}',
-                    'console.log(item.hidden); // not enumerable: the property still exists',
-                    'console.log(item[marker]); // symbol value: the symbol property still exists',
-                ].join('\n'),
-                result: 'The loop prints own and inherited. It skips hidden and the symbol key. The final two lines read those skipped properties and print not enumerable and symbol value.',
-            }],
-        },
-        {
-            id: 'typescript-narrowing',
-            title: 'TypeScript narrowing follows the checks that JavaScript runs',
-            bullets: [
-                'A union type permits more than one type. string | number permits a string or a number.',
-                'The example uses value: string | number as a function parameter annotation. It accepts a string or a number. The final : string requires a string result.',
-                'A typeof check identifies which type a value has. TypeScript uses the check to allow operations for that type inside the matching branch.',
-                'toFixed(2) returns a number as text with two decimal places. toUpperCase() returns uppercase text from a string.',
-                'When one branch returns, later code only handles the remaining possibilities. TypeScript uses this control flow too. This reduction in possible types is called narrowing.',
-                'Before a check proves the type, TypeScript rejects operations that are invalid for some members of the union.',
-            ],
-            examples: [{
-                language: 'typescript',
-                code: [
-                    'function format(value: string | number): string {',
-                    '    // value.toFixed(2); // Intentional type error: value might be string.',
-                    '    if (typeof value === "number") {',
-                    '        return value.toFixed(2); // value is number here.',
-                    '    }',
-                    '    return value.toUpperCase(); // Only string remains after the return.',
-                    '}',
-                    'console.log(format(3)); // 3.00',
-                    'console.log(format("ready")); // READY',
-                ].join('\n'),
-                result: 'With the marked error commented, the emitted JavaScript prints 3.00 and READY. JavaScript runs the same typeof check that TypeScript uses for its reasoning.',
-                typeCheck: 'The parameter accepts both calls. Before the check it is string | number. The if branch narrows it to number, and the code after that branch narrows it to string.',
-            }],
-        },
-        {
-            id: 'equality-instanceof-and-in',
-            title: 'Equality, instanceof, and in also narrow types',
-            bullets: [
-                'Read these examples after Narrowing and Classes, prototypes, and modules. They use object unions, class instances, and prototype methods.',
-                'type Shape = ... gives a name to a type. Each object type lists property names and their allowed types.',
-                'An equality check can identify a union member using a property with a fixed value, such as kind: "circle".',
-                'instanceof checks whether an object inherits from a constructor\'s prototype. TypeScript can narrow a union of class instances using that check.',
-                'in checks whether an object has a property, including an inherited property. The right operand must be an object.',
-                'TypeScript can narrow a union when only some members declare that property. A property type written () => string describes a function with no parameters that returns a string.',
-            ],
-            examples: [{
-                title: 'Equality identifies a shape',
-                language: 'typescript',
-                code: [
-                    'type Shape =',
-                    '    | { kind: "circle"; radius: number }',
-                    '    | { kind: "square"; side: number };',
-                    'function size(shape: Shape): number {',
-                    '    if (shape.kind === "circle") {',
-                    '        // shape.side; // Intentional type error: circle has no side.',
-                    '        return shape.radius; // circle member',
-                    '    }',
-                    '    return shape.side; // square member',
-                    '}',
-                    'console.log(size({ kind: "circle", radius: 2 })); // 2',
-                    'console.log(size({ kind: "square", side: 3 })); // 3',
-                ].join('\n'),
-                result: 'The emitted JavaScript prints 2 and 3.',
-                typeCheck: 'The equality check narrows to the circle member. After its return, the square member remains. Reading shape.side in the circle branch would be a type error.',
-            }, {
-                title: 'instanceof identifies a class instance',
-                language: 'typescript',
-                code: [
-                    'class Dog { bark() { return "woof"; } }',
-                    'class Cat { meow() { return "meow"; } }',
-                    'function sound(pet: Dog | Cat): string {',
-                    '    if (pet instanceof Dog) {',
-                    '        return pet.bark();',
-                    '    }',
-                    '    return pet.meow();',
-                    '}',
-                    'console.log(sound(new Dog())); // woof',
-                    'console.log(sound(new Cat())); // meow',
-                ].join('\n'),
-                result: 'The emitted JavaScript prints woof and meow. new Dog() inherits from Dog.prototype, so the instanceof check succeeds.',
-                typeCheck: 'The matching branch treats pet as Dog. After its return, pet is Cat.',
-            }, {
-                title: 'in checks a property and includes inherited properties',
-                language: 'typescript',
-                code: [
-                    'type Pet = { bark: () => string } | { meow: () => string };',
-                    'function sound(pet: Pet): string {',
-                    '    if ("bark" in pet) return pet.bark();',
-                    '    return pet.meow();',
-                    '}',
-                    'class Dog { bark() { return "woof"; } }',
-                    'const dog = new Dog();',
-                    'console.log("bark" in dog); // true: inherited from Dog.prototype',
-                    'console.log(sound(dog)); // woof',
-                    'console.log(sound({ meow: () => "meow" })); // meow',
-                ].join('\n'),
-                result: 'The emitted JavaScript prints true, woof, and meow. The inherited bark method satisfies the in check.',
-                typeCheck: 'Because bark and meow are required properties on separate union members, the check selects the bark member or leaves the meow member.',
-            }],
-        },
-        {
-            id: 'document-all-truthiness',
-            title: 'Browsers have one legacy falsy object: document.all',
-            bullets: [
-                'In a browser, document.all is an unusual object that converts to false. Ordinary objects convert to true.',
-                'This is legacy browser behavior. The example needs a browser document; a plain Node.js environment does not provide document.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    '// Run in a browser console.',
-                    'console.log(Boolean(document.all)); // false',
-                    'console.log(Boolean({})); // true',
-                    'if (document.all) {',
-                    '    console.log("truthy branch");',
-                    '} else {',
-                    '    console.log("falsy branch");',
-                    '}',
-                ].join('\n'),
-                result: 'In a browser, the lines print false, true, and falsy branch. Running the document.all line in plain Node.js instead throws a ReferenceError because document is absent.',
-            }],
-        },
-    ],
+            examples: [
+                {
+                    title: "Select a role",
+                    description: [
+                        "Use break after the matched case to stop fallthrough."
+                    ],
+                    language: "javascript",
+                    code: "const role = \"editor\";\nswitch (role) {\n    case \"editor\":\n        console.log(\"edit access\");\n        break;\n    case \"reader\":\n        console.log(\"read access\");\n        break;\n    default:\n        console.log(\"no access\");\n}\nconsole.log(\"after switch\");",
+                    result: "edit access\nafter switch",
+                    explanation: [
+                        "Removing the first break would also print read access.",
+                        "A numeric case 1 would not match the string \"1\"."
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 export default note;

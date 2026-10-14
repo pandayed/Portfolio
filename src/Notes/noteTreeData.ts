@@ -15,8 +15,7 @@ import {
     DOCKER_NOTES_ROUTE,
     GO_NOTES_ROUTE,
     SYSTEM_DESIGN_ROUTE,
-    JAVASCRIPT_ASYNC_ROUTE,
-    JAVASCRIPT_EVENT_LOOP_ROUTE,
+    getJavaScriptTypeScriptNoteRoute,
     JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     KUBERNETES_CLUSTER_ROUTE,
     KUBERNETES_CONFIG_ROUTE,
@@ -48,7 +47,6 @@ import {
     type JavaNoteRoute,
     type DBMSNoteRoute,
     type GoNoteRoute,
-    type JavaScriptTypeScriptNoteRoute,
     type PythonNoteRoute,
     type ReactNoteRoute,
     type SpringBootRoute,
@@ -274,43 +272,23 @@ export const pythonNotes: NoteGroup = {
     })),
 };
 
-const asynchronousJavaScriptPages: NotePage[] = [
-    {
-        type: 'page',
-        title: 'Asynchronous Programming in JavaScript',
-        summary: 'Read Promise results, handle failures, and choose when operations start.',
-        route: JAVASCRIPT_ASYNC_ROUTE,
-        updatedOn: '2026-10-07',
-    },
-    {
-        type: 'page',
-        title: 'JavaScript Event Loop and Task Queues',
-        summary: 'Follow the order of synchronous code, Promise handlers, timers, and browser or Node.js callbacks.',
-        route: JAVASCRIPT_EVENT_LOOP_ROUTE,
-        updatedOn: '2026-10-07',
-    },
-];
-
 export const javascriptTypeScriptNotes: NoteGroup = {
     type: 'group',
     title: 'JavaScript and TypeScript',
-    summary: 'Shared JavaScript runtime concepts, TypeScript checks, and TypeScript-only type-system topics.',
+    summary: 'Learn JavaScript in order, then add TypeScript checking and reusable types.',
     route: JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     children: javascriptTypeScriptChapters.map((chapter) => ({
         type: 'group',
         title: chapter.title,
         summary: chapter.summary,
-        route: `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${chapter.notes[0].slug}` as JavaScriptTypeScriptNoteRoute,
-        children: [
-            ...chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
-                type: 'page' as const,
-                title,
-                summary,
-                route: `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${slug}` as JavaScriptTypeScriptNoteRoute,
-                updatedOn,
-            })),
-            ...(chapter.id === 'browser-and-async' ? asynchronousJavaScriptPages : []),
-        ],
+        route: getJavaScriptTypeScriptNoteRoute(chapter.notes[0].slug),
+        children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+            type: 'page',
+            title,
+            summary,
+            route: getJavaScriptTypeScriptNoteRoute(slug),
+            updatedOn,
+        })),
     })),
 };
 
@@ -373,8 +351,8 @@ const springBootIntroPages: NotePage[] = [
     },
     {
         type: 'page',
-        title: 'Spring annotation reference',
-        summary: 'Find common Spring Boot, Spring MVC, validation, and persistence annotations.',
+        title: 'Annotations at a glance',
+        summary: 'Read annotations in learning order and open their detailed lessons.',
         route: SPRING_BOOT_ANNOTATIONS_ROUTE,
         updatedOn: '2026-10-14',
     },

@@ -1,489 +1,185 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'browser-dom-and-storage',
-    title: 'Browser DOM and storage',
-    summary: 'How elements, events, string storage, and browser lifetimes behave, with examples.',
-    scope: 'javascript-typescript',
-    updatedOn: '2026-10-07',
+    slug: "browser-dom-and-storage",
+    title: "The browser DOM",
+    summary: "Create, select, update, and remove page elements.",
+    scope: "javascript",
+    updatedOn: "2026-10-14",
+    pointwise: true,
+    exampleLayout: "grouped",
+    references: [
+        {
+            title: "MDN JavaScript guide",
+            href: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting"
+        }
+    ],
     sections: [
         {
-            id: 'browser-apis',
-            title: 'The browser supplies window and document',
+            id: "browser-apis",
+            title: "The browser supplies window and document",
             bullets: [
-                'window is the global object for a browser page. document represents the page loaded in that window.',
-                'The DOM (Document Object Model) represents elements and text as objects. Changing these objects changes the page.',
-                'location contains the page URL. localStorage is a browser storage API.',
-                'These are browser APIs. JavaScript itself does not create a page or these objects in every runtime.',
-                'TypeScript DOM declarations describe browser APIs for type checking. They do not install those APIs in a runtime.',
-                'Run the browser examples on a loaded HTML page with a body. The console is the browser developer-tool panel where you can run JavaScript and read console.log output.',
+                "window is the browser page’s global object. document represents the loaded page.",
+                "The DOM (Document Object Model) represents elements and text as objects. Changing those objects changes the page.",
+                "Browser APIs such as document are supplied by the browser. Plain Node.js does not supply a page DOM.",
+                "Run DOM examples in a browser after the HTML body has loaded.",
+                "In a classic browser script, a top-level var normally creates a window property. Top-level let and const do not. Modules keep their declarations in module scope."
             ],
             examples: [
                 {
-                    title: 'Run in the console of a loaded HTML page',
-                    language: 'javascript',
-                    code: [
-                        'console.log(window.document === document); // true',
-                        'console.log(document.title); // the text in this page’s <title> element',
-                        'console.log(document.body.tagName); // BODY',
-                    ].join('\n'),
-                    result: 'The lines print true, the current page title, and BODY. window.document and document refer to the same loaded page.',
-                },
-                {
-                    title: 'A DOM type declaration does not create a DOM',
-                    language: 'typescript',
-                    code: [
-                        '// TypeScript can accept this when its DOM library is included.',
-                        'console.log(document.title);',
-                        '',
-                        '// Emitted JavaScript still contains the same access:',
-                        '// console.log(document.title);',
-                        '// In a Node.js process with no DOM implementation:',
-                        '// ReferenceError: document is not defined',
-                    ].join('\n'),
-                    result: 'In the stated Node.js environment, reading document in console.log(document.title) throws ReferenceError because that name does not exist. Run it in a browser or supply a DOM implementation.',
-                },
-            ],
+                    title: "Run in the console of a loaded HTML page",
+                    language: "javascript",
+                    code: "console.log(window.document === document); // true\nconsole.log(document.title); // the text in this page’s <title> element\nconsole.log(document.body.tagName); // BODY",
+                    result: "true\n[current page title]\nBODY",
+                    possibleOutput: true,
+                    description: [
+                        "Inspect the document and title of the page currently loaded in the browser."
+                    ],
+                    explanation: [
+                        "window.document and document refer to the same page.",
+                        "The middle output is that page’s title, so it varies."
+                    ]
+                }
+            ]
         },
         {
-            id: 'create-and-update',
-            title: 'Create elements and insert text or HTML',
+            id: "create-and-update",
+            title: "Create elements and insert text or HTML",
             bullets: [
-                'createElement makes an element object. The element appears in the page only after code inserts it into the document.',
-                'append adds nodes or strings to a parent. A string passed to append becomes text.',
-                'textContent treats its value as text. innerHTML parses its value as HTML.',
-                'HTML uses tags to describe elements. <p> describes a paragraph. <strong>Hello</strong> creates a strong element containing Hello.',
-                'children contains an element’s child elements. children.length counts those elements. Text alone does not add a child element.',
-                'firstElementChild reads the first child element, or null when none exists. The examples read it after creating a known HTML child.',
-                'A node is one item in the DOM, such as an element or text. isConnected reports whether the node belongs to a document.',
-                'remove takes the node out of its parent. The examples use it to remove their demo elements.',
-                'createTextNode creates a text node directly. Node.TEXT_NODE is the browser constant identifying that node type.',
+                "createElement creates an element. Insert it into the document with append before it appears on the page.",
+                "append accepts nodes or strings. A string becomes a text node.",
+                "textContent treats its value as text. innerHTML parses its value as markup and can introduce active HTML behavior.",
+                "children contains child elements. Text nodes are not included. firstElementChild returns the first child element or null.",
+                "A node is an item in the DOM, such as an element or text. isConnected reports whether it belongs to a document.",
+                "createTextNode creates a text node. remove detaches a node from its parent."
             ],
             examples: [
                 {
-                    title: 'Creating, inserting, and interpreting content',
-                    language: 'javascript',
-                    code: [
-                        'const area = document.createElement(\'section\');',
-                        'const item = document.createElement(\'p\');',
-                        'console.log(item.isConnected); // false: not in the document',
-                        'item.textContent = \'<strong>Hello</strong>\';',
-                        'area.append(item, \' More text\');',
-                        'document.body.append(area);',
-                        'console.log(item.isConnected); // true',
-                        'console.log(item.children.length); // 0: no child element was created',
-                        'console.log(area.textContent);',
-                        '// <strong>Hello</strong> More text',
-                        '',
-                        'item.innerHTML = \'<strong>Hello</strong>\'; // constant trusted markup',
-                        'console.log(item.firstElementChild.textContent); // Hello',
-                        'area.remove();',
-                    ].join('\n'),
-                    result: 'The first value displays the angle brackets. innerHTML then creates a strong element.',
+                    title: "Creating, inserting, and interpreting content",
+                    language: "javascript",
+                    code: "const area = document.createElement('section');\nconst item = document.createElement('p');\nconsole.log(item.isConnected); // false: not in the document\nitem.textContent = '<strong>Hello</strong>';\narea.append(item, ' More text');\ndocument.body.append(area);\nconsole.log(item.isConnected); // true\nconsole.log(item.children.length); // 0: no child element was created\nconsole.log(area.textContent);\n// <strong>Hello</strong> More text\n\nitem.innerHTML = '<strong>Hello</strong>'; // constant trusted markup\nconsole.log(item.firstElementChild.textContent); // Hello\narea.remove();",
+                    result: "false\ntrue\n0\n<strong>Hello</strong> More text\nHello",
+                    description: [
+                        "Run in a browser console after the page’s HTML body has loaded.",
+                        "Insert the same trusted markup once as text and once as HTML."
+                    ],
+                    explanation: [
+                        "textContent displays the angle brackets as text and creates no strong child.",
+                        "innerHTML parses the fixed trusted markup and creates the child strong element.",
+                        "remove clears the demo area from the page."
+                    ]
                 },
                 {
-                    title: 'Create and remove a text node',
-                    language: 'javascript',
-                    code: [
-                        'const text = document.createTextNode(\'Hello\');',
-                        'document.body.append(text); // Hello appears on the page',
-                        'console.log(text.nodeType === Node.TEXT_NODE); // true',
-                        'text.remove(); // the appended text disappears',
-                    ].join('\n'),
-                    result: 'The page displays Hello until text.remove() runs. The console prints true because text is a text node.',
-                },
+                    title: "Create and remove a text node",
+                    language: "javascript",
+                    code: "const text = document.createTextNode('Hello');\ndocument.body.append(text); // Hello appears on the page\nconsole.log(text.nodeType === Node.TEXT_NODE); // true\ntext.remove(); // the appended text disappears",
+                    result: "true",
+                    description: [
+                        "Run in a browser console after the page’s HTML body has loaded.",
+                        "Show a text node on the page, then remove it."
+                    ],
+                    explanation: [
+                        "The page displays Hello after append and removes it in the same script.",
+                        "The console check identifies the node as text."
+                    ]
+                }
             ],
             pitfalls: [
-                'For plain text, assign textContent or append a string, as the first example does. Do not feed untrusted markup to innerHTML.',
-            ],
+                "For plain text, assign textContent or append a string, as the first example does. Do not feed untrusted markup to innerHTML."
+            ]
         },
         {
-            id: 'select-elements',
-            title: 'Selectors return matches or null',
+            id: "select-elements",
+            title: "Selectors return matches or null",
             bullets: [
-                'querySelector returns the first element matching a CSS selector. It returns null when nothing matches.',
-                'A CSS selector describes an element to find. h1 selects a tag, #title selects an id, and .missing selects a class.',
-                'querySelectorAll returns a static NodeList. Adding another matching element does not change that existing list.',
-                'A NodeList is a collection of nodes. Its length is the number of matches. Static means this collection keeps its original matches.',
-                'With strictNullChecks enabled, TypeScript includes null in the querySelector result type. Accessing a property before checking for null is a type error.',
-                'In querySelector<HTMLButtonElement>, the type argument in < > states the expected element type. It checks no actual element.',
-                'HTMLButtonElement is the browser class for button elements. instanceof HTMLButtonElement checks the actual element before using its button property disabled.',
-                'claimed?.tagName uses optional chaining. It returns undefined if claimed is null, instead of reading a property from null.',
+                "querySelector returns the first matching element, or null when nothing matches.",
+                "A CSS selector chooses elements: h1 by tag, #title by id, and .notice by class.",
+                "querySelectorAll returns a static NodeList. A NodeList is a collection of matching nodes.",
+                "Static means later additions do not change that existing list. Run another query for updated matches."
             ],
             examples: [
                 {
-                    title: 'A complete page fragment and selector results',
-                    language: 'javascript',
-                    code: [
-                        '// Run after the browser has loaded a body.',
-                        'const area = document.createElement(\'section\');',
-                        'area.innerHTML = \'<h1>First</h1><h1>Second</h1>\';',
-                        'document.body.append(area);',
-                        'console.log(area.querySelector(\'h1\').textContent); // First',
-                        'console.log(area.querySelector(\'.missing\')); // null',
-                        '',
-                        'const headings = area.querySelectorAll(\'h1\');',
-                        'const added = document.createElement(\'h1\');',
-                        'added.textContent = \'Third\';',
-                        'area.append(added);',
-                        'console.log(headings.length); // 2: list from before the append',
-                        'console.log(area.querySelectorAll(\'h1\').length); // 3: new query',
-                        'area.remove();',
-                    ].join('\n'),
-                    result: 'The first query selects First. The missing query returns null. The old list stays at 2; a new query finds 3.',
+                    title: "A complete page fragment and selector results",
+                    language: "javascript",
+                    code: "// Run after the browser has loaded a body.\nconst area = document.createElement('section');\narea.innerHTML = '<h1>First</h1><h1>Second</h1>';\ndocument.body.append(area);\nconsole.log(area.querySelector('h1').textContent); // First\nconsole.log(area.querySelector('.missing')); // null\n\nconst headings = area.querySelectorAll('h1');\nconst added = document.createElement('h1');\nadded.textContent = 'Third';\narea.append(added);\nconsole.log(headings.length); // 2: list from before the append\nconsole.log(area.querySelectorAll('h1').length); // 3: new query\narea.remove();",
+                    result: "First\nnull\n2\n3",
+                    description: [
+                        "Run in a browser console after the page’s HTML body has loaded.",
+                        "Select a heading, then compare an existing result list with a fresh query."
+                    ],
+                    explanation: [
+                        "The first selector reads First; the missing selector has no match.",
+                        "The earlier NodeList retains two elements after a third heading is added. A new query sees all three."
+                    ]
                 },
                 {
-                    title: 'Missing elements in TypeScript',
-                    language: 'typescript',
-                    code: [
-                        '// strictNullChecks: true',
-                        'const area = document.createElement(\'section\'); // empty section',
-                        'const title = area.querySelector(\'#title\');',
-                        '// title.textContent; // Intentional type error: title may be null.',
-                        '',
-                        'if (title === null) {',
-                        '  console.log(\'No title element\');',
-                        '} else {',
-                        '  console.log(title.textContent); // title has type Element here',
-                        '}',
-                    ].join('\n'),
-                    result: 'Without an element whose id is title, this prints No title element.',
-                    typeCheck: 'title.textContent is rejected with strictNullChecks because title may be null. On this empty section, running it anyway throws TypeError when reading textContent from null. The if check avoids that access. The else branch can read Element properties.',
-                },
-                {
-                    title: 'A declared element type and a runtime check',
-                    language: 'typescript',
-                    code: [
-                        'const area = document.createElement(\'section\');',
-                        'area.innerHTML = \'<div id="save">Save</div>\';',
-                        'document.body.append(area);',
-                        '',
-                        'const claimed = area.querySelector<HTMLButtonElement>(\'#save\');',
-                        'console.log(claimed?.tagName); // DIV despite the type argument',
-                        'console.log(claimed instanceof HTMLButtonElement); // false',
-                        '',
-                        'const actual = area.querySelector(\'#save\');',
-                        'if (actual instanceof HTMLButtonElement) {',
-                        '  console.log(actual.disabled); // TypeScript allows button properties here',
-                        '} else {',
-                        '  console.log(\'The match is not a button\');',
-                        '}',
-                        'area.remove();',
-                    ].join('\n'),
-                    result: 'This prints DIV, false, and The match is not a button.',
-                    typeCheck: 'claimed is HTMLButtonElement | null because of the supplied type argument. instanceof checks the actual object and narrows actual only when the check succeeds.',
-                },
+                    title: "Handle a missing element",
+                    description: [
+                        "Run in a browser console after the page’s HTML body has loaded.",
+                        "Query an empty section so no matching heading exists."
+                    ],
+                    language: "javascript",
+                    code: "const area = document.createElement(\"section\");\nconst heading = area.querySelector(\"h1\");\nif (heading === null) {\n    console.log(\"No heading\");\n} else {\n    heading.textContent = \"Updated\";\n}",
+                    result: "No heading",
+                    explanation: [
+                        "The explicit null check avoids reading a property from a missing element."
+                    ]
+                }
             ],
             pitfalls: [
-                'Check for a missing element before reading or changing it, as the TypeScript example does.',
-            ],
+                "Check for null before reading or changing a selected element."
+            ]
         },
         {
-            id: 'events',
-            title: 'An event has a target and a currentTarget',
+            id: "attributes-and-classes",
+            title: "Update attributes and classes",
             bullets: [
-                'addEventListener registers a function. Registering the function does not call it.',
-                'The listener receives an Event object when the target dispatches the event.',
-                'An event reports something that happened, such as a click. A listener is the registered function that handles that event.',
-                'In this button-and-span example, target is the element clicked. currentTarget is the element whose listener is running.',
-                'A bubbling event can reach a parent listener. The same registered listener can run for many events.',
-                'Bubbling means the event moves from the originating element through its parents. A click on the span reaches its containing button.',
-                'removeEventListener removes a listener with the same event type, function reference, and capture setting.',
-                'capture: true listens during the earlier capture phase, which runs towards the target. The default is false. Removal must use the same flag.',
-                'EventTarget is an object that supports event listeners. dispatchEvent sends an Event to its registered listeners. The update event below is created by the example.',
+                "setAttribute writes an HTML attribute. getAttribute reads its text or returns null when absent.",
+                "classList adds, removes, or toggles CSS classes.",
+                "Many HTML attributes also have JavaScript properties. Boolean properties such as disabled use true or false."
             ],
             examples: [
                 {
-                    title: 'A nested click and listener removal',
-                    language: 'javascript',
-                    code: [
-                        'const button = document.createElement(\'button\');',
-                        'const label = document.createElement(\'span\');',
-                        'label.textContent = \'Save\';',
-                        'button.append(label);',
-                        'document.body.append(button);',
-                        'function onClick(event) {',
-                        '  console.log(event.target.tagName, event.currentTarget.tagName);',
-                        '}',
-                        'button.addEventListener(\'click\', onClick); // no output yet',
-                        'label.click(); // SPAN BUTTON: click bubbles from the span',
-                        'label.click(); // SPAN BUTTON: listener runs again',
-                        'button.removeEventListener(\'click\', onClick);',
-                        'label.click(); // no listener output',
-                        'button.remove();',
-                    ].join('\n'),
-                    result: 'Two clicks produce SPAN BUTTON twice. After removal, the third click produces no listener output.',
-                },
-                {
-                    title: 'Listener removal must match the reference and capture flag',
-                    language: 'javascript',
-                    code: [
-                        'const target = new EventTarget();',
-                        'const listener = () => console.log(\'listener ran\');',
-                        'target.addEventListener(\'update\', listener, { capture: true });',
-                        '',
-                        '// A newly created function is a different reference:',
-                        'target.removeEventListener(\'update\', () => console.log(\'listener ran\'), true);',
-                        'target.dispatchEvent(new Event(\'update\')); // listener ran',
-                        '',
-                        '// The default capture flag is false, unlike the registration:',
-                        'target.removeEventListener(\'update\', listener);',
-                        'target.dispatchEvent(new Event(\'update\')); // listener ran',
-                        '',
-                        '// Matching the event type, function, and capture flag removes it:',
-                        'target.removeEventListener(\'update\', listener, true);',
-                        'target.dispatchEvent(new Event(\'update\')); // no listener output',
-                    ].join('\n'),
-                    result: 'The different function reference and the mismatched capture flag both leave the listener registered. It runs twice. The matching removal prevents the third dispatch from calling it.',
-                },
-            ],
+                    title: "Update a button",
+                    description: [
+                        "Run in a browser console after the page’s HTML body has loaded.",
+                        "Create the button before assigning its attributes and properties."
+                    ],
+                    language: "javascript",
+                    code: "const button = document.createElement(\"button\");\nbutton.textContent = \"Save\";\nbutton.setAttribute(\"data-action\", \"save\");\nbutton.classList.add(\"primary\");\nbutton.disabled = true;\ndocument.body.append(button);\nconsole.log(button.getAttribute(\"data-action\"));\nconsole.log(button.classList.contains(\"primary\"), button.disabled);\nbutton.remove();",
+                    result: "save\ntrue true",
+                    explanation: [
+                        "disabled is a boolean property.",
+                        "The cleanup removes the demo button after the checks."
+                    ]
+                }
+            ]
         },
         {
-            id: 'html-event-handlers',
-            title: 'HTML attributes can run event handlers',
+            id: "legacy-document-all",
+            title: "A legacy browser truthiness exception",
             bullets: [
-                'onclick is an HTML event-handler attribute. It contains JavaScript code that runs when the element receives a click.',
-                'click() triggers a click on the element. The example uses it to run the handler without a manual click.',
-                'innerHTML can create an element with this attribute. It can therefore introduce behavior as well as displayed content.',
-                'A script element inserted through innerHTML does not execute in this example. That does not prevent other HTML behavior such as onclick.',
-                'A Content Security Policy is a page security setting. It can block inline handlers such as the onclick attribute.',
-                'globalThis refers to the global object. The example uses one temporary property on it to check whether the inserted script ran.',
+                "Ordinary objects and arrays are truthy, including empty ones.",
+                "document.all is a legacy browser object with special behavior: it is falsy and typeof reports \"undefined\".",
+                "Use standard DOM selectors instead of document.all."
             ],
             examples: [
                 {
-                    title: 'Why an event attribute in HTML matters',
-                    language: 'javascript',
-                    code: [
-                        '// Controlled demonstration. This string is defined here, not user input.',
-                        'const button = document.createElement(\'button\');',
-                        'button.innerHTML = `<span onclick="console.log(\'handler ran\')">Click</span>`;',
-                        'document.body.append(button);',
-                        'button.firstElementChild.click(); // handler ran',
-                        '// A Content Security Policy that blocks inline handlers blocks this log.',
-                        '',
-                        'globalThis.notesScriptRan = false;',
-                        'button.innerHTML = \'<script>globalThis.notesScriptRan = true</script>\';',
-                        'console.log(globalThis.notesScriptRan); // false: this script did not execute',
-                        'button.remove();',
-                        'delete globalThis.notesScriptRan;',
-                    ].join('\n'),
-                    result: 'When inline handlers are allowed, clicking the span runs the handler embedded in the HTML. The script inserted through innerHTML does not execute. A page security policy may block the event handler.',
-                },
-            ],
-        },
-        {
-            id: 'web-storage',
-            title: 'Web Storage stores strings, not objects',
-            bullets: [
-                'setItem writes a string value under a string key. getItem returns that string or null when the key is absent.',
-                'JavaScript converts the number 3 to the string "3" in the first setItem call. TypeScript rejects passing 3 directly because its DOM declaration requires a string. Use String(3) in TypeScript.',
-                'JSON.stringify converts a plain object into JSON text. JSON.parse reads the text into a value.',
-                'JSON is a text format. Unlike an ordinary JavaScript object expression, JSON text requires double quotes around property names and string values.',
-                'JSON.parse throws for invalid JSON. Valid JSON can still contain the wrong property types.',
-                'Web Storage operations are synchronous. setItem finishes or throws before the next statement runs.',
-                'Browser policy can deny storage access. A write can also throw when the storage quota is exceeded.',
-            ],
-            examples: [
-                {
-                    title: 'String values and removal',
-                    language: 'javascript',
-                    code: [
-                        '// Run on an HTTP(S) page where storage is permitted.',
-                        'localStorage.setItem(\'notes-count\', 3);',
-                        'console.log(localStorage.getItem(\'notes-count\')); // "3"',
-                        'console.log(typeof localStorage.getItem(\'notes-count\')); // string',
-                        'localStorage.removeItem(\'notes-count\');',
-                        'console.log(localStorage.getItem(\'notes-count\')); // null',
-                        '',
-                        'const preferences = { theme: \'dark\', compact: true };',
-                        'localStorage.setItem(\'notes-preferences\', JSON.stringify(preferences));',
-                        'const saved = localStorage.getItem(\'notes-preferences\');',
-                        'if (saved !== null) {',
-                        '  console.log(JSON.parse(saved).theme); // dark',
-                        '}',
-                        'localStorage.removeItem(\'notes-preferences\');',
-                    ].join('\n'),
-                    result: 'When storage is available, the count is read as a string. JSON preserves the shown object properties when serialized and parsed.',
-                },
-                {
-                    title: 'Invalid JSON and valid JSON with the wrong shape',
-                    language: 'javascript',
-                    code: [
-                        'for (const saved of [\'not JSON\', \'{"theme":7}\', \'{"theme":"dark"}\']) {',
-                        '  try {',
-                        '    const parsed = JSON.parse(saved);',
-                        '    if (parsed !== null && typeof parsed === \'object\'',
-                        '        && typeof parsed.theme === \'string\') {',
-                        '      console.log(\'theme:\', parsed.theme);',
-                        '    } else {',
-                        '      console.log(\'wrong shape\');',
-                        '    }',
-                        '  } catch (error) {',
-                        '    console.log(error.name);',
-                        '  }',
-                        '}',
-                        '// SyntaxError',
-                        '// wrong shape',
-                        '// theme: dark',
-                    ].join('\n'),
-                    result: 'The lines print SyntaxError, wrong shape, and theme: dark. JSON.parse(saved) throws for "not JSON" because it is invalid JSON text. {"theme":7} parses successfully but fails typeof parsed.theme === "string". The final input passes both checks.',
-                },
-                {
-                    title: 'Storage completion and possible failure',
-                    language: 'javascript',
-                    code: [
-                        'try {',
-                        '  console.log(\'before write\');',
-                        '  localStorage.setItem(\'notes-probe\', \'ready\'); // possible failure here',
-                        '  console.log(localStorage.getItem(\'notes-probe\')); // ready',
-                        '  localStorage.removeItem(\'notes-probe\');',
-                        '} catch (error) {',
-                        '  console.log(\'storage failed:\', error.name);',
-                        '}',
-                        'console.log(\'after storage\');',
-                    ].join('\n'),
-                    result: 'With storage available: before write, ready, after storage. Accessing localStorage can throw SecurityError when browser policy denies access. The setItem call can throw QuotaExceededError when the write exceeds available storage. catch prints the error name, then execution continues at after storage. A failure stops the remaining statements inside try.',
-                },
-            ],
-            pitfalls: [
-                'Catch storage failures when saved state is optional. Check parsed values before using their properties, as the examples do.',
-            ],
-        },
-        {
-            id: 'storage-lifecycle',
-            title: 'Storage lifetime and access depend on the origin',
-            bullets: [
-                'An origin is the scheme, host, and port together. Different origins have separate Web Storage.',
-                'https is a scheme, example.com is a host, and 8443 is a port. The path /a does not form part of the origin.',
-                'new URL(text) reads a URL. Its origin property gives the origin as a string. HTTPS uses port 443 by default, so that default port is omitted from the origin string.',
-                'localStorage normally survives reloads and browser restarts. Other tabs with the same origin can read it.',
-                'sessionStorage survives reloads in the same tab. It belongs to that tab page session and normally ends when the tab closes.',
-                'A separately opened tab has its own sessionStorage. A tab opened by another tab can initially receive a copy, then the two stores change separately.',
-                'An opener is the window that opened another window or tab. window.open(location.href, "_blank") opens the current URL in a new browsing context when the browser permits it.',
-                'A JavaScript variable belongs to the current page execution. Reloading starts that code again.',
-                'Storage is held in that browser profile. It does not automatically appear on another device. The user or browser can clear it.',
-                'Scripts running in the page can read its accessible storage. Storage does not enforce separate permissions for different scripts in that page.',
-            ],
-            examples: [
-                {
-                    title: 'Same origin and different origins',
-                    language: 'javascript',
-                    code: [
-                        'console.log(new URL(\'https://example.com:443/a\').origin);',
-                        '// https://example.com',
-                        'console.log(new URL(\'https://example.com/b\').origin);',
-                        '// https://example.com: same origin despite different path',
-                        'console.log(new URL(\'http://example.com/a\').origin);',
-                        '// http://example.com: different scheme',
-                        'console.log(new URL(\'https://example.com:8443/a\').origin);',
-                        '// https://example.com:8443: different port',
-                    ].join('\n'),
-                    result: 'The first two URLs share storage. The last two identify different origins.',
-                },
-                {
-                    title: 'Run once, then reload and run the read step',
-                    language: 'javascript',
-                    code: [
-                        '// Step 1, on an HTTP(S) page where storage is available:',
-                        'globalThis.notesMemory = \'memory\';',
-                        'sessionStorage.setItem(\'notes-session\', \'draft\');',
-                        'localStorage.setItem(\'notes-local\', \'dark\');',
-                        '',
-                        '// Step 2: reload this same tab, then run these lines separately:',
-                        'console.log(globalThis.notesMemory); // undefined',
-                        'console.log(sessionStorage.getItem(\'notes-session\')); // draft',
-                        'console.log(localStorage.getItem(\'notes-local\')); // dark',
-                        '',
-                        '// A separately opened same-origin tab can read notes-local.',
-                        '// Its notes-session is null unless it received an opener copy.',
-                        '// If a copied tab changes notes-session, the original is unchanged.',
-                        '// In another browser profile or device, neither value is copied.',
-                        '',
-                        '// Clean up in each tab used for the demonstration:',
-                        'sessionStorage.removeItem(\'notes-session\');',
-                        'localStorage.removeItem(\'notes-local\');',
-                    ].join('\n'),
-                    result: 'Reloading loses the variable but keeps both stored entries. Local storage usually remains across a normal browser restart; session storage normally ends with the tab. Private browsing, session restoration, clearing data, and browser policy can change retention.',
-                },
-                {
-                    title: 'A tab opened by another tab receives a separate copy',
-                    language: 'javascript',
-                    code: [
-                        '// Original tab, same-origin HTTP(S) page; popup opening must be allowed:',
-                        'sessionStorage.setItem(\'notes-copy\', \'original\');',
-                        'window.open(location.href, \'_blank\'); // opens a tab with this tab as opener',
-                        '',
-                        '// In the new tab console, run these lines separately:',
-                        'console.log(sessionStorage.getItem(\'notes-copy\')); // original: initial copy',
-                        'sessionStorage.setItem(\'notes-copy\', \'child\');',
-                        'console.log(sessionStorage.getItem(\'notes-copy\')); // child',
-                        '',
-                        '// Back in the original tab console:',
-                        'console.log(sessionStorage.getItem(\'notes-copy\')); // original: unchanged',
-                        'sessionStorage.removeItem(\'notes-copy\');',
-                        '// Also remove notes-copy in the child tab after the demonstration.',
-                        '// A tab opened without an opener does not receive this copy.',
-                    ].join('\n'),
-                    result: 'With storage and popups allowed, the new tab initially reads original. Changing the new tab value to child does not change the original tab value.',
-                },
-                {
-                    title: 'Another script in the page can read the same value',
-                    language: 'javascript',
-                    code: [
-                        '// Script A:',
-                        'localStorage.setItem(\'notes-demo-theme\', \'dark\');',
-                        '',
-                        '// Script B, executing in this same page:',
-                        'console.log(localStorage.getItem(\'notes-demo-theme\')); // dark',
-                        'localStorage.removeItem(\'notes-demo-theme\');',
-                    ].join('\n'),
-                    result: 'Storage does not distinguish script A from script B when both execute in this page.',
-                },
-            ],
-            pitfalls: [
-                'Use variables for temporary page state, sessionStorage for a tab draft, and localStorage for small preferences. The reload example shows their different lifetimes.',
-                'Any script running in the page can read the shown preference. Web Storage does not restrict access to only the script that wrote it.',
-            ],
-        },
-        {
-            id: 'storage-service',
-            title: 'A server stores shared data separately from browser storage',
-            bullets: [
-                'Calling fetch sends a request. It does not copy localStorage unless the application explicitly includes stored data in that request.',
-                'fetch returns a promise. await waits for it inside an async function. response.ok is true for a successful HTTP status from 200 through 299.',
-                'response.json() returns a promise for the value parsed from the response body. .then receives a successful value; .catch handles a rejected promise.',
-                'HTTP is the browser-to-server request protocol. /api/preferences is a server endpoint, meaning a URL that the server handles.',
-                'A server can authorize access, query a database, and maintain backups. Those behaviors depend on the server implementation.',
-                'A non-success status reaches throw new Error("HTTP " + response.status). A network failure rejects fetch. Invalid JSON rejects response.json(). The final .catch prints the failure message.',
-            ],
-            examples: [
-                {
-                    title: 'An explicit service request',
-                    language: 'javascript',
-                    code: [
-                        '// Browser example. Requires an same-origin service.',
-                        '// Contract: GET /api/preferences returns {"theme":"dark"} as JSON.',
-                        'async function loadSharedPreferences() {',
-                        '  const response = await fetch(\'/api/preferences\');',
-                        '  if (!response.ok) throw new Error(\'HTTP \' + response.status);',
-                        '  return response.json();',
-                        '}',
-                        'loadSharedPreferences()',
-                        '  .then((preferences) => console.log(preferences.theme)) // dark',
-                        '  .catch((error) => console.log(error.message));',
-                        '',
-                        '// A second device gets dark only if the service returns the same',
-                        '// preference data there. Database queries and backups happen',
-                        '// on the service, not because this browser called fetch.',
-                    ].join('\n'),
-                    result: 'With the stated service response, this prints dark. Without that endpoint, the request may fail. Database queries and backups are not implemented by this browser snippet.',
-                },
-            ],
-            pitfalls: [
-                'Use an application service when data must be shared across devices. Authorization, backup, and database queries depend on that service contract, as the example states.',
-            ],
-        },
-    ],
+                    title: "Recognize the browser-only exception",
+                    description: [
+                        "Run in a browser console after the page’s HTML body has loaded.",
+                        "Run in a browser page, where document exists."
+                    ],
+                    language: "javascript",
+                    code: "console.log(Boolean({}), Boolean([]));\nconsole.log(Boolean(document.all), typeof document.all);",
+                    result: "true true\nfalse undefined",
+                    explanation: [
+                        "The legacy object is an exception to the ordinary object truthiness rule."
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 export default note;

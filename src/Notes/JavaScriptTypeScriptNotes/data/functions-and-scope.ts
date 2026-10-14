@@ -1,377 +1,115 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'functions-and-scope',
-    title: 'Functions and scope',
-    summary: 'See what calls return, which variables functions can read, and how this behaves.',
-    scope: 'javascript-typescript',
-    updatedOn: '2026-10-07',
+    slug: "functions-and-scope",
+    title: "Functions: parameters and return",
+    summary: "Define a function, call it with arguments, and return a result.",
+    scope: "javascript",
+    updatedOn: "2026-10-14",
+    pointwise: true,
+    exampleLayout: "grouped",
+    references: [
+        {
+            title: "MDN JavaScript guide",
+            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions"
+        }
+    ],
     sections: [
         {
-            id: 'declarations-and-return',
-            title: 'A function call receives arguments and returns a result',
+            id: "declarations-and-calls",
+            title: "Define and call a function",
             bullets: [
-                'A function groups statements to run when called. A declaration such as function add(left, right) { ... } gives the function a name.',
-                'Calling add(2, 3) runs the body between its braces. Each call starts a new execution of that body.',
-                'Parameters are the names in the definition. Arguments are the values supplied by a call.',
-                'return ends the current call immediately and gives its value to the caller.',
-                'A function that reaches the end without return produces undefined. A return with no value also produces undefined.',
-                'JavaScript permits fewer or more arguments than named parameters. A missing argument gives its parameter the value undefined.',
-                'A regular function has an arguments object containing the passed values. arguments[0] reads the first, arguments[1] reads the second, and arguments.length gives the count.',
-                'Extra arguments are still passed even if no parameter name receives them. The second example reads an extra argument through arguments.',
+                "A function groups statements to run when called.",
+                "Parameters are names in its definition. Arguments are values supplied by a call.",
+                "Every call starts a new execution of the body.",
+                "return ends the current call and gives a value to the caller."
             ],
-            examples: [{
-                title: 'Repeated calls, an early return, and a missing argument',
-                language: 'javascript',
-                code: [
-                    'function add(left, right) { // left and right are parameters.',
-                    '    return left + right;',
-                    '    // Nothing after return runs in this call.',
-                    '}',
-                    'console.log(add(2, 3)); // 5: 2 and 3 are arguments.',
-                    'console.log(add(4, 6)); // 10: the body runs again.',
-                    'console.log(add(2)); // NaN: right is undefined.',
-                    '',
-                    'function stop() {',
-                    '    console.log("before return");',
-                    '    return;',
-                    '    console.log("after return"); // Never runs.',
-                    '}',
-                    'function noReturn() {}',
-                    'console.log(stop()); // Prints before return, then undefined.',
-                    'console.log(noReturn()); // undefined',
-                ].join('\n'),
-                result: 'The output is 5, 10, NaN, before return, undefined, and undefined. Adding 2 and undefined produces NaN, meaning Not-a-Number. after return never prints.',
-            }, {
-                title: 'Extra arguments still reach a regular function',
-                language: 'javascript',
-                code: [
-                    'function inspect(first) {',
-                    '    console.log(first);',
-                    '    console.log(arguments.length);',
-                    '    console.log(arguments[1]);',
-                    '}',
-                    'inspect("A", "B");',
-                ].join('\n'),
-                result: 'The output is A, 2, and B. Only the first argument has a named parameter. arguments still contains both values.',
-            }],
+            examples: [
+                {
+                    title: "Calculate two totals",
+                    description: [
+                        "Define one function and call it with different arguments."
+                    ],
+                    language: "javascript",
+                    code: "function add(left, right) {\n    return left + right;\n}\nconsole.log(add(2, 3));\nconsole.log(add(4, 6));",
+                    result: "5\n10",
+                    explanation: [
+                        "left and right receive new argument values for each call.",
+                        "The caller prints the returned result."
+                    ]
+                }
+            ]
         },
         {
-            id: 'functions-as-values',
-            title: 'Functions can be stored, passed, and returned',
+            id: "return-and-missing-values",
+            title: "Return early or return no value",
             bullets: [
-                'A function is a value. A variable or an object property can hold it.',
-                'A function expression creates a function as a value, such as const double = function(value) { return value * 2; }. Call it with double(3).',
-                'A function can receive another function as an argument and call it. The passed function is called a callback.',
-                'A function can return another function. The caller receives that function value and can call it later.',
-                'An arrow function is written with =>. An expression after => becomes its return value. A body inside braces needs return to produce a value.',
-                'An object property holding a function can be called with object.property(...). This is a method call. In { double }, the shorthand property means { double: double }.',
+                "A bare return ends the call and produces undefined.",
+                "Reaching the end without return also produces undefined.",
+                "A missing argument gives its parameter undefined. JavaScript also permits extra arguments."
             ],
-            examples: [{
-                title: 'Store a function and pass it as a callback',
-                language: 'javascript',
-                code: [
-                    'const double = (value) => value * 2; // Expression returns its result.',
-                    'const tools = { double }; // The property holds the same function.',
-                    'console.log(tools.double(3)); // 6',
-                    'double.label = "multiply by two"; // Functions are objects too.',
-                    'console.log(double.label); // multiply by two',
-                    '',
-                    'function apply(value, callback) {',
-                    '    return callback(value);',
-                    '}',
-                    'console.log(apply(4, double)); // 8',
-                    '',
-                    'const triple = function(value) { return value * 3; };',
-                    'console.log(apply(4, triple)); // 12',
-                ].join('\n'),
-                result: 'The output is 6, multiply by two, 8, and 12. apply(4, double) passes the function itself. callback(value) inside apply calls that function with 4.',
-            }, {
-                title: 'Return a function, then call it',
-                language: 'javascript',
-                code: [
-                    'function createFormatter() {',
-                    '    return (value) => {',
-                    '        return `Value: ${value}`; // Braces require an explicit return.',
-                    '    };',
-                    '}',
-                    'const format = createFormatter();',
-                    'console.log(format(3)); // Value: 3',
-                    '',
-                    'const noReturn = (value) => { value * 2; };',
-                    'console.log(noReturn(3)); // undefined: expression result is discarded.',
-                ].join('\n'),
-                result: 'createFormatter returns an arrow function. Calling that returned function prints Value: 3. The arrow with braces and no return produces undefined.',
-            }],
+            examples: [
+                {
+                    title: "Stop after a condition",
+                    description: [
+                        "Skip the message for an empty name and observe a missing argument."
+                    ],
+                    language: "javascript",
+                    code: "function greet(name) {\n    if (name === \"\") return;\n    console.log(`Hello ${name}`);\n}\nconsole.log(greet(\"\"));\nconsole.log(greet(\"Mia\"));\nfunction read(value) { return value; }\nconsole.log(read());",
+                    result: "undefined\nHello Mia\nundefined\nundefined",
+                    explanation: [
+                        "The empty-name call stops before its console.log.",
+                        "The Mia call reaches the end without returning a value.",
+                        "read() has no argument, so value is undefined."
+                    ]
+                }
+            ]
         },
         {
-            id: 'parameters',
-            title: 'Default parameters replace undefined; rest parameters collect arguments',
+            id: "default-parameters",
+            title: "A default replaces a missing or undefined argument",
             bullets: [
-                'A default parameter uses its default when the argument is missing or explicitly undefined.',
-                'Other values, including 0 and null, are passed through. They do not trigger the default.',
-                'An array is a list written with square brackets. Index 0 reads its first element, and length gives its length. A rest parameter collects the remaining arguments into an array.',
-                '...prices in a parameter list collects values. With no remaining arguments, prices is the empty array [].',
-                'A rest parameter must be last. Putting another parameter after it is a syntax error.',
+                "Write parameter = defaultValue to supply a default.",
+                "The default applies when the argument is missing or undefined.",
+                "null, zero, false, and empty text do not trigger the default."
             ],
-            examples: [{
-                title: 'Only missing and undefined arguments trigger the default',
-                language: 'javascript',
-                code: [
-                    'function show(value = "default") {',
-                    '    console.log(value);',
-                    '}',
-                    'show(); // default',
-                    'show(undefined); // default',
-                    'show(0); // 0',
-                    'show(null); // null',
-                ].join('\n'),
-                result: 'The output is default, default, 0, and null.',
-            }, {
-                title: 'The rest array contains only the remaining arguments',
-                language: 'javascript',
-                code: [
-                    'function total(discount = 0, ...prices) {',
-                    '    console.log(prices);',
-                    '    let sum = 0;',
-                    '    for (const price of prices) {',
-                    '        sum += price;',
-                    '    }',
-                    '    return sum - discount;',
-                    '}',
-                    'console.log(total(2, 10, 5)); // prices is [10, 5]; result is 13.',
-                    'console.log(total(undefined, 10, 5)); // prices is [10, 5]; result is 15.',
-                    'console.log(total()); // prices is []; result is 0.',
-                    '// function invalid(...prices, discount) {}',
-                    '// Intentional syntax error: discount cannot follow a rest parameter.',
-                ].join('\n'),
-                result: 'Each call prints its prices array, then its total: [10, 5] and 13, [10, 5] and 15, then [] and 0. The loop adds each price to sum. Uncommenting function invalid(...prices, discount) {} causes a SyntaxError at the parameter after ...prices before the file runs.',
-            }],
+            examples: [
+                {
+                    title: "Use a default greeting",
+                    description: [
+                        "Compare missing, undefined, and explicit empty values."
+                    ],
+                    language: "javascript",
+                    code: "function show(value = \"default\") { console.log(value); }\nshow();\nshow(undefined);\nshow(0);\nshow(null);",
+                    result: "default\ndefault\n0\nnull",
+                    explanation: [
+                        "Only the first two calls use the default."
+                    ]
+                }
+            ]
         },
         {
-            id: 'block-and-function-scope',
-            title: 'Scope determines which declaration a name refers to',
+            id: "switch-return",
+            title: "return exits a function containing switch",
             bullets: [
-                'Scope is the part of the program where code can use a name. let and const belong to their nearest enclosing block.',
-                'Function parameters and local variables are available inside that function. They are not available to code outside it.',
-                'Code can read names from outer scopes. A closer declaration with the same name takes priority. This is called shadowing.',
+                "A return inside switch ends the whole function call. break ends only the switch."
             ],
-            examples: [{
-                title: 'Inner names hide outer names while their scope is active',
-                language: 'javascript',
-                code: [
-                    'const label = "outer";',
-                    'const suffix = "!";',
-                    'function showLabel(prefix) {',
-                    '    const label = "function";',
-                    '    let local = "local";',
-                    '    if (true) {',
-                    '        const label = "block";',
-                    '        let count = 1;',
-                    '        console.log(prefix, label + suffix, count); // hello block! 1',
-                    '    }',
-                    '    console.log(label, local); // function local',
-                    '    try {',
-                    '        console.log(count); // Intentional ReferenceError: block ended.',
-                    '    } catch (error) {',
-                    '        console.log(error.name); // ReferenceError',
-                    '    }',
-                    '}',
-                    'showLabel("hello");',
-                    'console.log(label); // outer',
-                ].join('\n'),
-                result: 'The output is hello block! 1, function local, ReferenceError, and outer. The read of count in console.log(count) throws because count belongs to the if block, which has ended. prefix and suffix are available from enclosing scopes.',
-            }, {
-                title: 'A function parameter and a local variable stay inside the function',
-                language: 'javascript',
-                code: [
-                    'function read(input) {',
-                    '    const local = input;',
-                    '    return local;',
-                    '}',
-                    'console.log(read("inside")); // inside',
-                    'try {',
-                    '    console.log(input); // Intentional ReferenceError: function parameter.',
-                    '} catch (error) {',
-                    '    console.log(error.name); // ReferenceError',
-                    '}',
-                    'try {',
-                    '    console.log(local); // Intentional ReferenceError: function local.',
-                    '} catch (error) {',
-                    '    console.log(error.name); // ReferenceError',
-                    '}',
-                ].join('\n'),
-                result: 'The output is inside, ReferenceError, and ReferenceError. The reads in console.log(input) and console.log(local) throw because both names belong to read, not its caller. Returning a value does not expose its local variable name.',
-            }],
-        },
-        {
-            id: 'closures',
-            title: 'A closure keeps access to the variables where it was created',
-            bullets: [
-                'A closure is a function that keeps access to its outer variables, even after the outer function returns.',
-                'Those variables come from where the function was defined in the source. This is lexical scope. Variables in the calling function do not replace them.',
-                'Repeated calls can read and update the same outer variable. The closure does not receive a fresh copy of that variable on each call.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'function createCounter() {',
-                    '    let count = 0;',
-                    '    return () => {',
-                    '        count += 1;',
-                    '        return count;',
-                    '    };',
-                    '}',
-                    'const next = createCounter(); // createCounter finishes here.',
-                    'console.log(next()); // 1: the returned function still reads count.',
-                    'console.log(next()); // 2: it updates that same count.',
-                    '',
-                    'function callCounter(callback) {',
-                    '    const count = 100; // This belongs to callCounter, not createCounter.',
-                    '    console.log(callback()); // 3: callback still uses its original count.',
-                    '    console.log(count); // 100: this separate variable is unchanged.',
-                    '}',
-                    'callCounter(next);',
-                ].join('\n'),
-                result: 'The output is 1, 2, 3, and 100. Calling next from another function does not change which count it uses.',
-            }],
-        },
-        {
-            id: 'this-and-call-site',
-            title: 'Regular functions receive this from the call; arrows keep outer this',
-            bullets: [
-                'this is a value available inside a function. For a regular function, the way it is called determines that value.',
-                'showName() { return this.name; } inside an object defines a method. In object.method(), a regular method receives object as this.',
-                'Calling the same function through a different object gives it that other object as this. That object is called the receiver.',
-                'A plain call such as detached() supplies no object receiver. In strict mode, this is undefined.',
-                '"use strict" at the start of the example enables strict mode. Modules and class bodies use strict mode automatically.',
-                'const detached = user.showName copies the function value. It does not keep user as the receiver for a later plain call.',
-                'An arrow reads this from where it was created. Calling the arrow through another object or with call(...) does not replace its this.',
-                'call(receiver) supplies this for one regular-function call. bind(receiver) returns a function that keeps that receiver for later calls.',
-            ],
-            examples: [{
-                title: 'The same regular function can receive different objects',
-                language: 'javascript',
-                code: [
-                    '"use strict";',
-                    'const user = {',
-                    '    name: "Mia",',
-                    '    showName() { return this.name; },',
-                    '};',
-                    'const other = { name: "Ava", showName: user.showName };',
-                    'console.log(user.showName()); // Mia',
-                    'console.log(other.showName()); // Ava',
-                    'const detached = user.showName;',
-                    'try {',
-                    '    console.log(detached()); // Intentional TypeError: this is undefined.',
-                    '} catch (error) {',
-                    '    console.log(error.name); // TypeError',
-                    '}',
-                    'console.log(detached.call(other)); // Ava',
-                    'const bound = detached.bind(user);',
-                    'console.log(bound()); // Mia',
-                ].join('\n'),
-                result: 'The output is Mia, Ava, TypeError, Ava, and Mia. Reading this.name throws during the plain strict-mode call because this is undefined.',
-            }, {
-                title: 'An arrow callback keeps the method receiver',
-                language: 'javascript',
-                code: [
-                    'const user = {',
-                    '    name: "Mia",',
-                    '    showName() { return this.name; },',
-                    '    makeLabel() {',
-                    '        return () => this.name.toUpperCase();',
-                    '    },',
-                    '};',
-                    'const label = user.makeLabel(); // The method receives user as this.',
-                    'const other = { name: "Ava", label };',
-                    'console.log(label()); // MIA',
-                    'console.log(other.label()); // MIA: object call does not change arrow this.',
-                    'console.log(label.call(other)); // MIA: call does not change arrow this.',
-                    '',
-                    'function invoke(callback) { return callback(); }',
-                    'console.log(invoke(() => user.showName())); // Mia: calls the method on user.',
-                    'console.log(invoke(user.makeLabel())); // MIA: callback keeps outer this.',
-                    'console.log(invoke(user.showName.bind(user))); // Mia: bound regular method.',
-                ].join('\n'),
-                result: 'Every label call prints MIA because the arrow keeps the this from user.makeLabel(). The callbacks that call or bind showName print Mia.',
-            }],
-            pitfalls: [
-                'When passing a method to code that calls it as a plain function, use bind to keep its object, as shown by bound(). A callback that explicitly calls user.showName() also keeps the object method call.',
-                'Use an arrow for a callback that should keep an enclosing method\'s this. Use a regular function when calls should supply different receivers, as user.showName() and other.showName() do.',
-            ],
-        },
-        {
-            id: 'typescript-functions',
-            title: 'TypeScript checks parameter types and return types',
-            bullets: [
-                'Parameter annotations restrict the values a caller may pass. A return annotation restricts the value the function may return.',
-                'type Formatter = ... gives a name to a type. (value: number) => string describes a function that accepts a number and returns a string.',
-                'This is a function type. The => here describes a type, whereas => in the assigned expression creates an arrow function.',
-                'TypeScript checks the function assigned to a variable against that function type. value.toFixed(2) returns a number as text with two decimal places.',
-                'These checks happen before JavaScript runs. The types do not convert arguments or return values.',
-            ],
-            examples: [{
-                language: 'typescript',
-                code: [
-                    'function label(value: number): string {',
-                    '    return `Value: ${value}`;',
-                    '    // return value; // Intentional type error if used instead: returns number.',
-                    '}',
-                    'type Formatter = (value: number) => string;',
-                    'const formatPrice: Formatter = (value) => `$${value.toFixed(2)}`;',
-                    '// const wrong: Formatter = (value) => value;',
-                    '// Intentional type error: the function returns number instead of string.',
-                    '// formatPrice("4"); // Intentional type error: string argument.',
-                    '',
-                    'console.log(label(4)); // Value: 4',
-                    'console.log(formatPrice(4)); // $4.00',
-                    'console.log(formatPrice(Number("4"))); // $4.00: explicit conversion.',
-                ].join('\n'),
-                result: 'With the marked errors commented, the emitted JavaScript prints Value: 4, $4.00, and $4.00. Number("4") performs conversion; the Formatter type does not.',
-                typeCheck: 'The number argument and string return satisfy Formatter. The marked assignments and call are rejected if uncommented. value inside formatPrice receives its number type from Formatter.',
-            }],
-        },
-        {
-            id: 'typescript-optional-default-and-undefined',
-            title: 'An optional argument and an undefined value are different rules',
-            bullets: [
-                'A parameter written with ? permits the caller to omit that argument. With strictNullChecks enabled, its value inside the function can be undefined.',
-                'A default parameter also permits omission. In the example, TypeScript knows the default produces a number, so the function body receives a number.',
-                'A parameter typed number | undefined accepts an undefined value, but remains a required argument. The caller must supply that argument position.',
-                'With strictNullChecks enabled, calling a number method on a possibly undefined parameter is a type error. A check can narrow it to number.',
-            ],
-            examples: [{
-                language: 'typescript',
-                code: [
-                    '// Type checking assumes strictNullChecks: true.',
-                    'function optional(value?: number): string {',
-                    '    // value.toFixed(2); // Intentional type error: value may be undefined.',
-                    '    if (value === undefined) return "missing";',
-                    '    return value.toFixed(2); // Checked: value is number here.',
-                    '}',
-                    'function defaulted(value = 0): string {',
-                    '    return value.toFixed(2); // Default guarantees number in this example.',
-                    '}',
-                    'function required(value: number | undefined): string {',
-                    '    if (value === undefined) return "missing";',
-                    '    return value.toFixed(2);',
-                    '}',
-                    'console.log(optional()); // missing',
-                    'console.log(optional(undefined)); // missing',
-                    'console.log(optional(2)); // 2.00',
-                    'console.log(defaulted()); // 0.00',
-                    'console.log(defaulted(undefined)); // 0.00',
-                    'console.log(defaulted(2)); // 2.00',
-                    'console.log(required(undefined)); // missing',
-                    'console.log(required(2)); // 2.00',
-                    '// required(); // Intentional type error: one argument is required.',
-                ].join('\n'),
-                result: 'The emitted JavaScript produces the results beside each call. Omission and explicit undefined trigger the default. The required function handles undefined because its body checks for it.',
-                typeCheck: 'With strictNullChecks enabled, the unchecked method call is rejected. required() is rejected for its missing argument even though required(undefined) is accepted. If forced to run as JavaScript, required() would receive undefined; the required-argument rule belongs to TypeScript.',
-            }],
-        },
-    ],
+            examples: [
+                {
+                    title: "Return a role’s permission",
+                    description: [
+                        "Use a return in each case instead of assigning a temporary result."
+                    ],
+                    language: "javascript",
+                    code: "function permission(role) {\n    switch (role) {\n        case \"editor\": return \"edit\";\n        case \"reader\": return \"read\";\n        default: return \"none\";\n    }\n}\nconsole.log(permission(\"editor\"));\nconsole.log(permission(\"guest\"));",
+                    result: "edit\nnone",
+                    explanation: [
+                        "Each return supplies the result and ends its call."
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 export default note;

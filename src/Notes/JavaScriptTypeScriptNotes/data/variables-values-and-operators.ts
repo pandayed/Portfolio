@@ -1,375 +1,127 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'variables-values-and-operators',
-    title: 'Variables, values, and operators',
-    summary: 'See how declarations, arithmetic, comparisons, and type checks behave.',
-    scope: 'javascript-typescript',
-    updatedOn: '2026-10-07',
+    slug: "variables-values-and-operators",
+    title: "var, let, and const",
+    summary: "Declare names, assign values, and choose the right declaration.",
+    scope: "javascript",
+    updatedOn: "2026-10-14",
+    pointwise: true,
+    exampleLayout: "grouped",
+    references: [
+        {
+            title: "MDN JavaScript guide",
+            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types"
+        },
+        {
+            title: "MDN: var",
+            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var"
+        }
+    ],
     sections: [
         {
-            id: 'const-and-let',
-            title: 'const prevents reassignment; let allows it',
+            id: "declare-and-assign",
+            title: "Declare and assign a variable",
             bullets: [
-                'A declaration creates a variable name. Initialization gives it its first value. Assignment gives it a value with =.',
-                'const rate = 0.1 declares and initializes rate. A standalone const declaration requires an initial value.',
-                'Assigning a new value to a const variable throws a TypeError when JavaScript runs.',
-                'A let variable can receive another value. Without an initial value, it starts as undefined.',
-                'const prevents replacing the value in the variable. Properties of an object stored in that variable can still change.',
-                'The error examples use try and catch. try runs the code inside it. If an operation throws an exception, catch receives that exception in error.',
-                'An exception interrupts normal execution. error.name identifies its kind. TypeError means an operation is invalid for that value. ReferenceError means a name is unavailable for that read.',
+                "A variable is a name used to read a stored value.",
+                "A declaration introduces the name. Initialization supplies its first value.",
+                "= assigns a value. It does not compare values.",
+                "Names are case-sensitive. userName and username are different names."
             ],
-            examples: [{
-                title: 'Reassignment and object changes are different operations',
-                language: 'javascript',
-                code: [
-                    'const rate = 0.1;',
-                    '// const missing; // Intentional syntax error: an initial value is required.',
-                    'try {',
-                    '    rate = 0.2; // Intentional runtime error: reassigning const.',
-                    '} catch (error) {',
-                    '    console.log(error.name); // TypeError',
-                    '}',
-                    '',
-                    'let quantity;',
-                    'console.log(quantity); // undefined',
-                    'quantity = 2;',
-                    'quantity = 3;',
-                    'console.log(quantity); // 3',
-                    '',
-                    'const user = { name: "Mia" };',
-                    'user.name = "Ava"; // Changes the object. Does not reassign user.',
-                    'console.log(user.name); // Ava',
-                ].join('\n'),
-                result: 'The running lines print TypeError, undefined, 3, and Ava. rate = 0.2 throws because rate is const. Uncommenting const missing produces a SyntaxError before any line runs, because the declaration has no initial value.',
-            }],
-            pitfalls: [
-                'For declarations like these, use const when the variable will keep its value. Use let when the variable will receive another value.',
-            ],
+            examples: [
+                {
+                    title: "Change a quantity",
+                    description: [
+                        "Keep the changing quantity in a let variable."
+                    ],
+                    language: "javascript",
+                    code: "let quantity = 2;\nconsole.log(quantity);\nquantity = 3;\nconsole.log(quantity);",
+                    result: "2\n3",
+                    explanation: [
+                        "The declaration gives quantity its initial value.",
+                        "The later assignment replaces it."
+                    ]
+                }
+            ]
         },
         {
-            id: 'block-scope',
-            title: 'let and const belong to their block',
+            id: "declaration-choice",
+            title: "Choose const or let",
             bullets: [
-                'A block groups statements inside braces, such as { console.log(1); }. let and const belong to their enclosing block.',
-                'Nested blocks can read outer block variables. Code outside a block cannot read variables declared inside it.',
+                "const requires an initial value and prevents reassignment.",
+                "let permits reassignment. Without an initial value, it contains undefined.",
+                "Use const when a name will keep the same value. Use let when it needs another value."
             ],
-            examples: [{
-                title: 'A variable belongs to its block',
-                language: 'javascript',
-                code: [
-                    '{',
-                    '    const label = "inside";',
-                    '    let count = 2;',
-                    '    {',
-                    '        console.log(label, count); // inside 2',
-                    '    }',
-                    '}',
-                    'try {',
-                    '    console.log(label); // Intentional runtime error: outside its block.',
-                    '} catch (error) {',
-                    '    console.log(error.name); // ReferenceError',
-                    '}',
-                ].join('\n'),
-                result: 'The nested block prints inside 2. Reading label in the final console.log(label) throws a ReferenceError because that block has ended. catch prints the error name and allows the example to finish.',
-            }],
+            examples: [
+                {
+                    title: "Keep a fixed name and change a status",
+                    description: [
+                        "Read the initial value of a declaration without an initializer."
+                    ],
+                    language: "javascript",
+                    code: "const userName = \"Mia\";\nlet status;\nconsole.log(userName, status);\nstatus = \"ready\";\nconsole.log(status);\n// userName = \"Ava\"; // Reassignment would fail.\n// const missing; // Invalid: const needs an initial value.",
+                    result: "Mia undefined\nready",
+                    explanation: [
+                        "The let declaration starts without an assigned value.",
+                        "The commented const lines would fail: one attempts reassignment and the other lacks an initializer."
+                    ]
+                }
+            ]
         },
         {
-            id: 'var-and-hoisting',
-            title: 'var has function scope and different behavior before declaration',
+            id: "block-scope",
+            title: "let and const stay inside their block",
             bullets: [
-                'A function groups code to run when called. function show() { ... } defines show, and show() runs its body.',
-                'if (true) { ... } runs its block because the condition is true. Control flow explains conditional branches.',
-                'var belongs to its enclosing function. An if block does not limit its scope.',
-                'Reading var before its declaration returns undefined. Its initialization happens only when execution reaches the assignment.',
-                'Reading let or const before its declaration throws a ReferenceError. This period is called the temporal dead zone.',
-                'Hoisting describes these declaration rules. It does not mean that JavaScript executes assignments early.',
+                "A block groups statements between { and }.",
+                "Scope is the part of the program where a name is available.",
+                "let and const belong to their enclosing block. Nested blocks can read names from outside."
             ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'function show() {',
-                    '    console.log(count); // undefined: var exists, but 2 is not assigned yet.',
-                    '    if (true) {',
-                    '        var count = 2;',
-                    '    }',
-                    '    console.log(count); // 2: the if block did not limit var.',
-                    '',
-                    '    try {',
-                    '        console.log(label); // Intentional ReferenceError before let.',
-                    '    } catch (error) {',
-                    '        console.log(error.name); // ReferenceError',
-                    '    }',
-                    '    let label = "ready";',
-                    '',
-                    '    try {',
-                    '        console.log(limit); // Intentional ReferenceError before const.',
-                    '    } catch (error) {',
-                    '        console.log(error.name); // ReferenceError',
-                    '    }',
-                    '    const limit = 3;',
-                    '    console.log(label, limit); // ready 3',
-                    '}',
-                    'show();',
-                ].join('\n'),
-                result: 'The output is undefined, 2, ReferenceError, ReferenceError, and ready 3. The reads of label and limit in their first console.log calls throw because those declarations have not initialized the variables yet. The count assignment runs only when execution reaches var count = 2.',
-            }],
-            pitfalls: ['Use let and const when a variable should belong to a block. Existing code may use var, whose scope follows the function instead.'],
+            examples: [
+                {
+                    title: "Read names inside and outside a block",
+                    description: [
+                        "Use distinct names so the block boundary is visible."
+                    ],
+                    language: "javascript",
+                    code: "const outer = \"outside\";\n{\n    let inner = \"inside\";\n    console.log(outer, inner);\n}\nconsole.log(outer);\n// console.log(inner); // This name is unavailable here.",
+                    result: "outside inside\noutside",
+                    explanation: [
+                        "inner is available only inside the braces.",
+                        "outer is declared outside that block, so both reads can use it."
+                    ]
+                }
+            ]
         },
         {
-            id: 'arithmetic',
-            title: 'Arithmetic operators calculate values; + also joins strings',
+            id: "var",
+            title: "var is supported, but generally avoided",
             bullets: [
-                'For number operands, + adds, - subtracts, * multiplies, and / divides. An operand is a value given to an operator.',
-                '% returns the remainder after division. ** raises the left value to the power on the right.',
-                'When + receives a string and a number, it converts the number to a string and joins them.',
-                '-, *, and / convert numeric strings to numbers. A string that cannot become a number produces NaN, meaning Not-a-Number.',
+                "var permits reassignment. Without an initializer, its value is undefined.",
+                "Ordinary { ... } blocks do not limit var. Its name remains available after the block ends.",
+                "Inside a function, var belongs to that function. Code outside the function cannot read that local name.",
+                "Repeated var declarations in the same scope refer to the same variable. let and const reject repeated declarations in the same scope.",
+                "A var variable starts as undefined before the statements run. Its initializer runs only when execution reaches it.",
+                "var is not deprecated. It remains a supported part of JavaScript.",
+                "Generally avoid var in new code. Its wider scope and permitted redeclarations can accidentally change a variable used elsewhere. let and const keep block boundaries and reject duplicate declarations."
             ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'console.log(10 + 3); // 13',
-                    'console.log(10 - 3); // 7',
-                    'console.log(10 * 3); // 30',
-                    'console.log(10 / 4); // 2.5',
-                    'console.log(10 % 3); // 1',
-                    'console.log(2 ** 4); // 16',
-                    '',
-                    'console.log("10" + 3); // "103", a string',
-                    'console.log("Total: " + 13); // Total: 13',
-                    'console.log("10" - 3); // 7, a number',
-                    'console.log("10" * 3); // 30',
-                    'console.log("10" / 4); // 2.5',
-                    'console.log("hello" - 3); // NaN',
-                ].join('\n'),
-                result: 'The comments show every result. The + line with "10" joins text; the subtraction line with "10" calculates a number.',
-            }],
-        },
-        {
-            id: 'comparisons-and-updates',
-            title: 'Comparisons return booleans; updates change a variable',
-            bullets: [
-                '< and > compare whether one number is smaller or larger than another. <= and >= include equality.',
-                '! converts its operand to a boolean and reverses it. !true is false, and !false is true.',
-                'count += 1 means count = count + 1. count -= 1 subtracts and assigns the result. These operations require a variable that permits reassignment.',
-                'Parentheses choose which calculation happens first. Without parentheses, multiplication and division run before addition and subtraction.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'console.log(3 < 5, 3 > 5); // true false',
-                    'console.log(3 <= 3, 3 >= 4); // true false',
-                    'console.log(!true, !0); // false true',
-                    'let count = 2;',
-                    'count += 3;',
-                    'console.log(count); // 5',
-                    'count -= 1;',
-                    'console.log(count); // 4',
-                    'console.log(4 + 6 / 2); // 7',
-                    'console.log((4 + 6) / 2); // 5',
-                ].join('\n'),
-                result: 'The comparison results are booleans. The updates change count from 2 to 5 to 4. Parentheses make the final calculation add before dividing.',
-            }],
-        },
-        {
-            id: 'number-and-bigint',
-            title: 'number has limited precision; bigint stores integers',
-            bullets: [
-                'number stores values with a limited number of binary digits. This representation is called binary floating point.',
-                'Some decimal fractions cannot be stored exactly in those digits. A calculation can therefore include a small rounding difference.',
-                'An integer has no fractional part. Number.MAX_SAFE_INTEGER is 9007199254740991.',
-                'number represents every integer exactly from -9007199254740991 through 9007199254740991. Beyond that range, distinct integer values can become the same number.',
-                'A bigint literal ends with n. bigint can represent integers beyond that safe range without losing integer precision.',
-                'Arithmetic that mixes bigint and number throws a TypeError. BigInt(...) can convert an integer number before the calculation.',
-                'bigint division returns an integer. It discards the fractional part.',
-            ],
-            examples: [{
-                title: 'Decimal rounding and large integers',
-                language: 'javascript',
-                code: [
-                    'console.log(25 * (1 + 0.1)); // 27.500000000000004',
-                    'console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991',
-                    'console.log(Number.isSafeInteger(-9007199254740991)); // true',
-                    'console.log(Number.isSafeInteger(9007199254740991)); // true',
-                    'console.log(9007199254740992 === 9007199254740993); // true: precision lost',
-                    'console.log(9007199254740992n === 9007199254740993n); // false',
-                    'console.log(9007199254740993n + 1n); // 9007199254740994n',
-                    'console.log(BigInt("9007199254740993")); // 9007199254740993n',
-                ].join('\n'),
-                result: 'number loses the distinction between the two large integer literals. bigint keeps them distinct. The decimal calculation also shows number rounding.',
-            }, {
-                title: 'Both arithmetic operands must use the same numeric kind',
-                language: 'javascript',
-                code: [
-                    'try {',
-                    '    console.log(10n + 3); // Intentional runtime error: bigint + number.',
-                    '} catch (error) {',
-                    '    console.log(error.name); // TypeError',
-                    '}',
-                    'console.log(10n + BigInt(3)); // 13n',
-                    'console.log(10n / 4n); // 2n, not 2.5',
-                ].join('\n'),
-                result: 'The output is TypeError, 13n, and 2n. Evaluating 10n + 3 throws at + because one operand is bigint and the other is number. BigInt(3) makes both operands bigint.',
-            }],
-            pitfalls: ['Use bigint when integer values must remain exact beyond the safe range of number. Convert from an exact integer string or bigint literal when a number would already have lost precision, as the large literals above show.'],
-        },
-        {
-            id: 'strict-equality',
-            title: 'Strict equality does not convert types',
-            bullets: [
-                '=== compares without converting types. !== returns the opposite comparison result.',
-                '== and != can convert values before comparison. For example, == converts a numeric string when comparing it with a number.',
-                'Objects compare by identity: both values must refer to the same object. Equal property values do not make separate objects equal.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'console.log(5 === "5"); // false',
-                    'console.log(5 !== "5"); // true',
-                    'console.log(5 == "5"); // true',
-                    'console.log(5 != "5"); // false',
-                    '',
-                    'const item = { value: 1 };',
-                    'const sameItem = item;',
-                    'const separateItem = { value: 1 };',
-                    'console.log(item === sameItem); // true',
-                    'console.log(item === separateItem); // false',
-                    'console.log(item == separateItem); // false',
-                ].join('\n'),
-                result: 'The comments show each boolean result. The last comparison shows that loose equality also compares these objects by identity.',
-            }],
-        },
-        {
-            id: 'logical-and-nullish',
-            title: '&&, ||, and ?? return values and can skip work',
-            bullets: [
-                'Boolean(value) converts a value to true or false. A falsy value converts to false. A truthy value converts to true.',
-                'false, 0, -0, 0n, "", null, undefined, and NaN are falsy. Ordinary objects and arrays are truthy.',
-                '&& returns the first falsy operand. If all operands are truthy, it returns the last operand.',
-                '|| returns the first truthy operand. If all operands are falsy, it returns the last operand.',
-                '?? returns the right operand only when the left operand is null or undefined. It keeps 0, false, and an empty string.',
-                'These operators evaluate the right operand only when they need it. This is called short-circuit evaluation.',
-            ],
-            examples: [{
-                title: 'The returned value is not always a boolean',
-                language: 'javascript',
-                code: [
-                    'console.log(Boolean(0), Boolean("ready")); // false true',
-                    'console.log(0 && "next"); // 0: first falsy operand',
-                    'console.log("ready" && 7); // 7: last operand',
-                    'console.log("ready" || 7); // ready: first truthy operand',
-                    'console.log(0 || ""); // "": last operand when both are falsy',
-                    'console.log(0 || 10); // 10',
-                    'console.log(0 ?? 10); // 0',
-                    'console.log(false ?? true); // false',
-                    'console.log("" ?? "missing"); // ""',
-                    'console.log(null ?? "missing"); // missing',
-                    'console.log(undefined ?? "missing"); // missing',
-                ].join('\n'),
-                result: 'The comments show the results, including empty strings. &&, ||, and ?? return an operand value; they do not always return true or false.',
-            }, {
-                title: 'A skipped operand never calls the function',
-                language: 'javascript',
-                code: [
-                    'function next() {',
-                    '    console.log("next called");',
-                    '    return "next value";',
-                    '}',
-                    'false && next(); // Skipped: the left operand is falsy.',
-                    'true || next(); // Skipped: the left operand is truthy.',
-                    '0 ?? next(); // Skipped: 0 is neither null nor undefined.',
-                    'true && next(); // Called.',
-                    'false || next(); // Called.',
-                    'null ?? next(); // Called.',
-                ].join('\n'),
-                result: 'The output is next called three times. Only the final three lines call next.',
-            }],
-        },
-        {
-            id: 'strings',
-            title: 'Strings are immutable; template literals insert expressions',
-            bullets: [
-                'Single quotes and double quotes create strings. Backticks create template literals.',
-                'A template literal inserts the result of each ${...} expression into the string. ${score + 2} first calculates the addition and then inserts its result.',
-                'Strings are immutable: their characters cannot be changed in place. A string method, such as name.toUpperCase(), returns a result without changing name.',
-                'name[0] reads the first character. Assigning to it cannot change the string. In a script beginning with "use strict", that assignment throws a TypeError.',
-                'Strict mode applies additional JavaScript rules. Modules use it automatically. A script can enable it with "use strict" before other statements.',
-                'A let variable containing a string can still receive a different string.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    '"use strict";',
-                    'console.log(\'Mia\' === "Mia"); // true',
-                    'const score = 8;',
-                    'console.log(`Mia scored ${score + 2}`); // Mia scored 10',
-                    '',
-                    'let name = "Mia";',
-                    'console.log(name.toUpperCase()); // MIA: a new string',
-                    'console.log(name); // Mia: original unchanged',
-                    'try {',
-                    '    name[0] = "L"; // Intentional TypeError in strict mode.',
-                    '} catch (error) {',
-                    '    console.log(error.name); // TypeError',
-                    '}',
-                    'name = "Lia"; // Reassigns the variable, rather than changing "Mia".',
-                    'console.log(name); // Lia',
-                ].join('\n'),
-                result: 'The output is true, Mia scored 10, MIA, Mia, TypeError, and Lia. name[0] = "L" throws because strict mode rejects assignment to a string character. Outside strict mode that assignment is ignored. name = "Lia" replaces the value in the let variable.',
-            }],
-        },
-        {
-            id: 'typescript-annotations',
-            title: 'TypeScript checks types; annotations do not convert values',
-            bullets: [
-                'TypeScript uses declared types or inference to check assignments and operators. Inference means the checker determines a type from the code.',
-                'quantity += 3 means quantity = quantity + 3. It calculates a new value and assigns it back to quantity.',
-                'An annotation describes which values are allowed. It does not turn a string into a number when JavaScript runs.',
-                'The lowercase names string, number, boolean, bigint, and symbol describe primitive values.',
-                'String and Number describe wrapper object types. A wrapper is an object that contains a primitive value.',
-                'new Number(4) creates a wrapper object. Number("4") converts the string to a number primitive. These are different operations.',
-                'new asks a constructor to create an object. Classes, prototypes, and modules explains constructors. Ordinary numeric annotations should use lowercase number.',
-            ],
-            examples: [{
-                title: 'Allowed values and rejected operations',
-                language: 'typescript',
-                code: [
-                    'let quantity: number = 2;',
-                    'quantity += 3;',
-                    'const label: string = `Quantity: ${quantity}`;',
-                    'const ready: boolean = true;',
-                    'const large: bigint = 10n;',
-                    'const key: symbol = Symbol("key");',
-                    'const inferred = 3; // TypeScript infers a numeric type.',
-                    '',
-                    '// quantity = "five"; // Intentional type error: string is not number.',
-                    '// const bad = inferred - "2"; // Intentional type error: string operand.',
-                    '// const wrong: number = "4"; // Intentional type error; no conversion.',
-                    'const converted: number = Number("4"); // Explicit JavaScript conversion.',
-                    '',
-                    'console.log(label); // Quantity: 5',
-                    'console.log(ready, large, typeof key, converted); // true 10n symbol 4',
-                ].join('\n'),
-                result: 'With the intentional errors commented, the emitted JavaScript prints Quantity: 5 and true 10n symbol 4. Number("4") performs the conversion.',
-                typeCheck: 'The primitive annotations accept the shown values. Uncommenting the three marked lines produces type errors. This example needs an ES2020 or later target for bigint literals.',
-            }, {
-                title: 'A wrapper object is different from a primitive',
-                language: 'typescript',
-                code: [
-                    'const primitive: number = 4;',
-                    'const wrapper: Number = new Number(4);',
-                    'const textWrapper: String = new String("Mia");',
-                    '// const wrong: number = wrapper; // Intentional type error.',
-                    'console.log(typeof primitive); // number',
-                    'console.log(typeof wrapper); // object',
-                    'console.log(typeof textWrapper); // object',
-                    'console.log(wrapper.valueOf()); // 4',
-                ].join('\n'),
-                result: 'The emitted JavaScript prints number, object, object, and 4. valueOf() reads the primitive number held by the wrapper.',
-                typeCheck: 'Number describes the wrapper. It cannot be assigned to a variable annotated number. The marked assignment is intentionally commented.',
-            }],
-        },
-    ],
+            examples: [
+                {
+                    title: "A var declaration inside a block changes the outer variable",
+                    description: [
+                        "Read a variable before initialization, then declare it again inside and outside a block."
+                    ],
+                    language: "javascript",
+                    code: "console.log(count);\nvar count = 1;\n{\n    var count = 2;\n}\nconsole.log(count);\nvar count = 3;\nconsole.log(count);",
+                    result: "undefined\n2\n3",
+                    explanation: [
+                        "The first read happens before count receives 1.",
+                        "The block does not create a separate count. Its declaration changes the outer variable to 2.",
+                        "The final declaration reuses that same variable and assigns 3."
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 export default note;

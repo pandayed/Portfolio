@@ -18,7 +18,7 @@ const scopeLabels: Record<LearningNoteScope, string> = {
     'javascript-typescript': 'JavaScript runtime behavior with TypeScript checks',
     javascript: 'JavaScript',
     typescript: 'TypeScript',
-    react: 'React with TypeScript examples',
+    react: 'React',
 };
 
 const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePageProps) => {

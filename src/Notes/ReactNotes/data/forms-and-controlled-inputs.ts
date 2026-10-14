@@ -1,244 +1,166 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'forms-and-controlled-inputs',
-    title: 'Forms and controlled inputs',
-    summary: 'Trace an edit from the input event into state, submit a form without navigation, and distinguish current values from defaults.',
-    scope: 'react',
-    updatedOn: '2026-10-07',
+    slug: "forms-and-controlled-inputs",
+    title: "Forms and controlled inputs",
+    summary: "Connect form fields to state and handle submission without leaving the page.",
+    scope: "react",
+    updatedOn: "2026-10-14",
+    exampleLayout: "grouped",
     sections: [
         {
-            id: 'controlled-text-input',
-            title: 'Control a text input with state',
+            id: "controlled-text-input",
+            title: "Control text with value and onChange",
             bullets: [
-                'A controlled text input receives its displayed value from React state through value.',
-                'When the user edits the field, React calls onChange with an event object containing information about the edit.',
-                'event.target is the input where this change happened. event.target.value is its new text.',
-                'The handler passes that text to the setter. React renders again and gives the input the updated value.',
-                'Read State and events first for useState, setters, and arrow functions.',
+                "A controlled input receives its current value from state. onChange stores the edited value.",
+                "Update the value synchronously during the change handler so typing appears normally.",
+                "Initialize text state to a string. Do not switch between undefined and a string during the input’s lifetime."
             ],
             examples: [
                 {
-                    title: 'Keep the field and displayed text in sync',
-                    language: 'tsx',
+                    title: "Show the current field value",
+                    description: [
+                        "Keep a labeled name field and its preview in sync."
+                    ],
+                    language: "jsx",
                     code: `import { useState } from 'react';
 
 export default function NameField() {
-    const [name, setName] = useState("");
-
-    return (
-        <>
-            <label>
-                Name
-                <input
-                    value={name}
-                    onChange={event => setName(event.target.value)}
-                />
-            </label>
-            <p>Current value: {name === "" ? "Empty" : name}</p>
-        </>
-    );
+    const [name, setName] = useState('');
+    return <>
+        <label>Name <input value={name}
+            onChange={event => setName(event.target.value)} /></label>
+        <p>Preview: {name}</p>
+    </>;
 }`,
-                    result: 'The empty field starts with “Current value: Empty” below it. Typing Ada makes state and the input contain “Ada”, and the paragraph shows “Current value: Ada”.',
-                    typeCheck: 'TypeScript infers the event type from input onChange. name is a string because its initial value is "".',
-                },
-            ],
-            pitfalls: [
-                '<input value={name} /> without onChange or readOnly produces a React warning. The field cannot retain edits because React keeps supplying the same value. Add the onChange handler shown above. Use readOnly only when editing should be disabled.',
-            ],
+                    result: "Typing Mira shows Mira in the field and Preview: Mira below it.",
+                    explanation: [
+                        "The event reads the edited string. The setter requests a render using that string."
+                    ]
+                }
+            ]
         },
         {
-            id: 'controlled-checkbox',
-            title: 'Use checked for checkboxes',
+            id: "controlled-checkbox",
+            title: "Use checked for a checkbox",
             bullets: [
-                'A checkbox is either selected or cleared. Its controlled property is checked, which receives true or false.',
-                'event.target.checked is the new selection state. It differs from event.target.value, which is text.',
-                'A checkbox’s value supplies its submitted form value. It does not determine whether the checkbox is selected.',
+                "Control a checkbox with checked and read event.target.checked. This is a boolean.",
+                "A select uses value on the select element. Give each option its own value.",
+                "A number input still reports text through event.target.value. Convert and validate it when your state needs a number."
             ],
             examples: [
                 {
-                    title: 'Track checkbox selection',
-                    language: 'tsx',
+                    title: "Control a checkbox and select",
+                    description: [
+                        "Store notification preference and delivery method."
+                    ],
+                    language: "jsx",
                     code: `import { useState } from 'react';
 
 export default function Preferences() {
-    const [emailUpdates, setEmailUpdates] = useState(false);
-
-    return (
-        <label>
-            <input
-                type="checkbox"
-                checked={emailUpdates}
-                onChange={event => setEmailUpdates(event.target.checked)}
-            />
-            Email updates: {emailUpdates ? "On" : "Off"}
-        </label>
-    );
+    const [notify, setNotify] = useState(false);
+    const [delivery, setDelivery] = useState('email');
+    return <>
+        <label><input type="checkbox" checked={notify}
+            onChange={event => setNotify(event.target.checked)} />Notify me</label>
+        <label>Delivery <select value={delivery}
+            onChange={event => setDelivery(event.target.value)}>
+            <option value="email">Email</option>
+            <option value="sms">SMS</option>
+        </select></label>
+        <p>{notify ? 'Notifications on' : 'Notifications off'}: {delivery}</p>
+    </>;
 }`,
-                    result: 'The checkbox starts cleared with “Email updates: Off”. Selecting it shows “On”. Clearing it shows “Off”.',
-                    typeCheck: 'Changing the setter call to setEmailUpdates(event.target.value) fails at the value argument. It is a string, but this state expects a boolean. Read event.target.checked instead.',
-                },
-            ],
+                    result: "Selecting the checkbox and SMS shows Notifications on: sms.",
+                    explanation: [
+                        "checked controls selection. value controls the selected option."
+                    ]
+                }
+            ]
         },
         {
-            id: 'submit-a-form',
-            title: 'Handle form submission',
+            id: "submit-a-form",
+            title: "Handle the form’s submit event",
             bullets: [
-                'A form groups fields for submission. Handle its submit event with onSubmit.',
-                'A button with type="submit" requests submission. Pressing Enter in a suitable form field can also submit the form.',
-                'The browser normally submits a form by navigating. event.preventDefault() stops that default action for this event.',
-                'This example handles submission on the current page. It copies the current query into submittedQuery. It sends no server request.',
-                'FormEvent is a TypeScript type for a React form event. import type supplies that type for checking.',
-                'FormEvent<HTMLFormElement> specifies a browser form as event.currentTarget, the element whose handler is running. The angle brackets supply the element type.',
+                "Handle onSubmit on the form so both a submit button and Enter follow the same action.",
+                "Call preventDefault when the handler should replace normal form navigation.",
+                "Give non-submit buttons type=\"button\" inside a form. Their default type would submit it."
             ],
             examples: [
                 {
-                    title: 'Display the submitted text without leaving the page',
-                    language: 'tsx',
+                    title: "Display submitted text",
+                    description: [
+                        "Store a submitted name separately from the current draft."
+                    ],
+                    language: "jsx",
                     code: `import { useState } from 'react';
-import type { FormEvent } from 'react';
 
-export default function SearchForm() {
-    const [query, setQuery] = useState("");
-    const [submittedQuery, setSubmittedQuery] = useState("");
-
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+export default function NameForm() {
+    const [draft, setDraft] = useState('');
+    const [submitted, setSubmitted] = useState('');
+    function submit(event) {
         event.preventDefault();
-        setSubmittedQuery(query);
+        setSubmitted(draft.trim());
     }
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Search
-                <input value={query} onChange={event => setQuery(event.target.value)} />
-            </label>
-            <button type="submit">Search</button>
-            {submittedQuery !== "" && <p>Searching for: {submittedQuery}</p>}
-        </form>
-    );
+    return <form onSubmit={submit}>
+        <label>Name <input required value={draft}
+            onChange={event => setDraft(event.target.value)} /></label>
+        <button type="submit">Save</button>
+        <p>Saved name: {submitted}</p>
+    </form>;
 }`,
-                    result: 'Type React and press Search. The page stays open and shows “Searching for: React”. Editing the field afterward changes query but leaves that submitted message unchanged until the next submission.',
-                },
-            ],
-            pitfalls: [
-                'Without event.preventDefault() in handleSubmit, the browser’s default submission may navigate or reload the page. Keep that call before the state update.',
-                '<button>Clear</button> inside this form submits by default. Set type="button" on a button that performs another action. This is browser behavior, not an exception.',
-            ],
+                    result: "Submitting Mira shows Saved name: Mira without leaving the page.",
+                    explanation: [
+                        "The current draft and last submitted name have different jobs, so each has its own state. This example changes local state only."
+                    ]
+                }
+            ]
         },
         {
-            id: 'controlled-select',
-            title: 'Control a select element',
+            id: "uncontrolled-inputs",
+            title: "Let the browser own an input when appropriate",
             bullets: [
-                'A select displays the option matching its value. Set each option’s value on the option element.',
-                'Use onChange to read the newly selected text and update state.',
-                'Theme = "light" | "dark" is a union type that permits only those two strings.',
-                'useState<Theme>("light") supplies Theme as the state type. The <Theme> type argument limits future setter values.',
-                'event.target.value has type string. TypeScript cannot assume it is one of the permitted theme values.',
-                'The equality checks narrow that string to "light" or "dark" before the setter receives it. Narrowing means checking a value to establish a more specific type.',
+                "An uncontrolled input uses defaultValue or defaultChecked for its initial value. The browser manages later edits.",
+                "Changing defaultValue does not control the input’s current value.",
+                "Read submitted uncontrolled fields with FormData. Refs for direct DOM access come in the refs lesson.",
+                "Choose controlled state when other UI must react to each edit."
             ],
             examples: [
                 {
-                    title: 'Check a selected value before storing it',
-                    language: 'tsx',
-                    code: `import { useState } from 'react';
-
-type Theme = "light" | "dark";
-
-export default function ThemePicker() {
-    const [theme, setTheme] = useState<Theme>("light");
-
-    return (
-        <label>
-            Theme
-            <select
-                value={theme}
-                onChange={event => {
-                    const nextTheme = event.target.value;
-                    if (nextTheme === "light" || nextTheme === "dark") {
-                        setTheme(nextTheme);
-                    }
-                }}
-            >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-            </select>
-            <span>Selected: {theme}</span>
-        </label>
-    );
+                    title: "Read an uncontrolled form at submission",
+                    description: [
+                        "Read the browser-managed email field when the form is submitted."
+                    ],
+                    language: "jsx",
+                    code: `export default function EmailForm() {
+    function submit(event) {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        alert('Email: ' + data.get('email'));
+    }
+    return <form onSubmit={submit}>
+        <label>Email <input name="email" type="email" defaultValue="" required /></label>
+        <button type="submit">Send</button>
+    </form>;
 }`,
-                    result: 'The select starts on Light and the text shows “Selected: light”. Selecting Dark changes state to "dark" and shows “Selected: dark”. || means either equality check may be true.',
-                    typeCheck: 'Moving setTheme(nextTheme) outside the if makes its argument type string. TypeScript rejects that argument because Theme accepts only "light" or "dark". Keep the check before the setter.',
-                },
-            ],
-        },
-        {
-            id: 'controlled-and-uncontrolled',
-            title: 'Choose controlled or uncontrolled inputs',
-            bullets: [
-                'A controlled text input uses value for its current text. A controlled checkbox uses checked for its current selection.',
-                'An uncontrolled input lets the browser keep the user’s edits. Use defaultValue or defaultChecked to set its initial value.',
-                'A default initializes the field. Updating the default later does not control the displayed current value.',
-                'The name attribute identifies the field when the browser creates submitted form data.',
-            ],
-            examples: [
-                {
-                    title: 'Let the browser keep an edited value',
-                    language: 'jsx',
-                    code: `export default function NicknameField() {
-    return (
-        <label>
-            Nickname
-            <input name="nickname" defaultValue="Ada" />
-        </label>
-    );
-}`,
-                    result: 'The field starts at “Ada”. Editing it to “Grace” leaves “Grace” in the field without React state or an onChange handler.',
-                },
-            ],
-            pitfalls: [
-                'If value={name} first receives undefined and later receives "Ada", React warns that the input changed from uncontrolled to controlled. Keep a controlled text value as a string throughout its lifetime. Initialize useState("") instead.',
-                'Likewise, changing checked from undefined to true changes a checkbox from uncontrolled to controlled. Initialize controlled checkbox state to false.',
-                'Do not supply both value and defaultValue, or both checked and defaultChecked, to the same input. Choose current-state control or a browser-managed default.',
-            ],
-        },
-        {
-            id: 'keep-form-state-minimal',
-            title: 'Calculate validation from current fields',
-            bullets: [
-                'Validation checks whether a value meets a rule. This example requires at least three characters.',
-                'Store the editable username in state. Calculate its validation message from that value during rendering.',
-                'username.length is the number of characters counted by JavaScript. >= 3 checks that this count is at least three.',
-                'The message changes when state changes. It does not need a separate setter.',
-                'This example displays feedback. It does not submit a form or validate data on a server.',
-            ],
-            examples: [
-                {
-                    title: 'Show feedback while typing',
-                    language: 'tsx',
-                    code: `import { useState } from 'react';
-
-export default function UsernameField() {
-    const [username, setUsername] = useState("");
-    const message = username.length >= 3
-        ? "Username is long enough"
-        : "Use at least 3 characters";
-
-    return (
-        <>
-            <label>
-                Username
-                <input value={username} onChange={event => setUsername(event.target.value)} />
-            </label>
-            <p>{message}</p>
-        </>
-    );
-}`,
-                    result: 'The empty field shows “Use at least 3 characters”. Typing Ada changes it to “Username is long enough”. Deleting one character changes it back.',
-                },
-            ],
-        },
+                    result: "Submitting a valid email displays that email in an alert.",
+                    explanation: [
+                        "The name attribute lets FormData identify the field. No React state controls the current value."
+                    ]
+                }
+            ]
+        }
     ],
+    references: [
+        {
+            title: "React: Input",
+            href: "https://react.dev/reference/react-dom/components/input"
+        },
+        {
+            title: "React: Select",
+            href: "https://react.dev/reference/react-dom/components/select"
+        }
+    ]
 };
 
 export default note;

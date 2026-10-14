@@ -1,471 +1,167 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'errors-and-debugging',
-    title: 'Errors and debugging',
-    summary: 'Distinguish compiler failures from runtime failures. Follow throw, catch, and finally with concrete examples.',
-    scope: 'javascript-typescript',
-    updatedOn: '2026-10-07',
+    slug: "errors-and-debugging",
+    title: "Errors and error handling",
+    summary: "Identify failures and follow throw, catch, and finally.",
+    scope: "javascript",
+    updatedOn: "2026-10-14",
+    pointwise: true,
+    exampleLayout: "grouped",
+    references: [
+        {
+            title: "MDN JavaScript guide",
+            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling"
+        }
+    ],
     sections: [
         {
-            id: 'error-kinds',
-            title: 'Syntax, type, runtime, and logic errors are different',
+            id: "error-kinds",
+            title: "Syntax, runtime, and logic errors",
             bullets: [
-                'Parsing means reading source code and checking its syntax. A syntax error means the source cannot be parsed as valid code. That file does not start running.',
-                'A TypeScript type error means the source violates a rule known to the checker. It is a compiler diagnostic.',
-                'An exception is a thrown value that interrupts the current execution path. A runtime error happens when a JavaScript operation throws while running.',
-                'Type checking can succeed even though an operation later throws. SyntaxError is an error kind, but it can arise either while parsing source or from JSON.parse during execution.',
-                'A logic error means the calculation or behavior is wrong for the intended result. JavaScript may still run without throwing.',
+                "A syntax error means a source file cannot be parsed. That file does not start running.",
+                "An exception is a thrown value that interrupts the current execution path. A runtime error throws while the code executes.",
+                "SyntaxError can also occur during execution, such as when JSON.parse receives invalid text.",
+                "A logic error gives the wrong intended result even when the program runs without throwing.",
+                "TypeError commonly indicates an invalid operation for a value. ReferenceError indicates an unavailable name or binding."
             ],
-            examples: [{
-                title: 'Syntax error: the source cannot be parsed',
-                language: 'javascript',
-                code: [
-                    '// Intentionally invalid syntax. This file cannot run.',
-                    'console.log("starting");',
-                    'const total = ;',
-                ].join('\n'),
-                result: 'Line 3, const total = ;, causes a SyntaxError because = has no value expression after it. The file does not print starting. JavaScript must parse the entire file before executing its first statement.',
-            }, {
-                title: 'Type error: the TypeScript checker rejects the assignment',
-                language: 'typescript',
-                code: [
-                    'const count: number = 3;',
-                    '// const wrong: number = "three"; // Intentional compiler error.',
-                    'console.log(count); // 3',
-                ].join('\n'),
-                typeCheck: 'The commented assignment fails because a string is not assignable to number. A compiler diagnostic is not a JavaScript exception.',
-            }, {
-                title: 'Runtime error: run this failing example separately',
-                language: 'javascript',
-                code: [
-                    'const text = "not JSON";',
-                    'console.log("before parse");',
-                    'JSON.parse(text); // Throws a SyntaxError at this call.',
-                    'console.log("after parse"); // Not reached.',
-                ].join('\n'),
-                result: 'The output starts with before parse. Line 3, JSON.parse(text), throws a SyntaxError because "not JSON" is invalid JSON text. The source code itself is valid. There is no catch, so execution leaves this call and after parse is not printed.',
-            }, {
-                title: 'Logic error: the program runs but the calculation is wrong',
-                language: 'javascript',
-                code: [
-                    'function average(left, right) {',
-                    '    return left + right / 2; // Wrong grouping for an average.',
-                    '}',
-                    'console.log(average(4, 6)); // 7; the expected average is 5.',
-                    'console.log(10 / 0);        // Infinity; no exception is thrown.',
-                ].join('\n'),
-                result: 'return left + right / 2 calculates 4 + (6 / 2), producing 7. Correct the expression to (left + right) / 2 to produce 5. The 10 / 0 expression produces Infinity rather than throwing.',
-            }],
+            examples: [
+                {
+                    title: "Syntax error: the source cannot be parsed",
+                    language: "javascript",
+                    code: "// Intentionally invalid syntax. This file cannot run.\nconsole.log(\"starting\");\nconst total = ;",
+                    result: "SyntaxError",
+                    description: [
+                        "Treat this as a separate, intentionally invalid script."
+                    ],
+                    explanation: [
+                        "The missing expression after = prevents the whole file from parsing.",
+                        "Even the first console.log does not run. The diagnostic message varies by runtime."
+                    ]
+                },
+                {
+                    title: "Runtime error: run this failing example separately",
+                    language: "javascript",
+                    code: "const text = \"not JSON\";\nconsole.log(\"before parse\");\nJSON.parse(text); // Throws a SyntaxError at this call.\nconsole.log(\"after parse\"); // Not reached.",
+                    result: "before parse\nSyntaxError",
+                    description: [
+                        "Run this valid source with invalid JSON input. The parse call intentionally throws."
+                    ],
+                    explanation: [
+                        "The source is valid, so before parse prints.",
+                        "JSON.parse throws during execution because its argument is not valid JSON.",
+                        "Without a catch, the after parse statement is not reached. The diagnostic message varies."
+                    ]
+                },
+                {
+                    title: "Logic error: the program runs but the calculation is wrong",
+                    language: "javascript",
+                    code: "function average(left, right) {\n    return left + right / 2; // Wrong grouping for an average.\n}\nconsole.log(average(4, 6)); // 7; the expected average is 5.\nconsole.log(10 / 0);        // Infinity; no exception is thrown.",
+                    result: "7\nInfinity",
+                    description: [
+                        "Calculate an average with incorrect grouping, then inspect division by zero."
+                    ],
+                    explanation: [
+                        "Division runs before addition, so the average expression calculates 4 + (6 / 2).",
+                        "Use (left + right) / 2 to compute the intended average of 5.",
+                        "Division by zero produces Infinity rather than throwing."
+                    ]
+                }
+            ]
         },
         {
-            id: 'try-catch-finally',
-            title: 'catch handles a throw; finally runs before leaving the statement',
+            id: "try-catch-finally",
+            title: "catch handles a throw; finally runs before leaving the statement",
             bullets: [
-                'try runs its block. If an operation throws, catch (error) receives that thrown value and runs its block. If no operation throws, catch is skipped.',
-                'For the JSON.parse errors below, error is an error object. error.name gives its kind, and error.message gives its description.',
-                'throw new Error("failed") creates and throws an error object. A later section traces that throw through several function calls.',
-                'If try or a function called from try throws, catch receives that thrown value.',
-                'finally runs when execution leaves try or catch, including when a return or throw is pending.',
-                'If there is no catch for the thrown value, finally runs and the error continues to the caller.',
+                "try runs its block. If that block or a function called from it throws, catch receives the thrown value.",
+                "If nothing throws, catch is skipped. Statements after the whole try/catch continue when the handler completes normally.",
+                "An Error object has a name and message.",
+                "finally runs before leaving try or catch, including when a return or throw is pending.",
+                "With no catch, finally runs and the error continues to the caller."
             ],
-            examples: [{
-                title: 'Success and failure take different paths',
-                language: 'javascript',
-                code: [
-                    'function read(text) {',
-                    '    try {',
-                    '        console.log(JSON.parse(text));',
-                    '    } catch (error) {',
-                    '        console.log("caught", error.name);',
-                    '    } finally {',
-                    '        console.log("finished");',
-                    '    }',
-                    '}',
-                    'read("42");      // 42, then "finished". No catch output.',
-                    'read("invalid"); // "caught SyntaxError", then "finished".',
-                ].join('\n'),
-                result: 'read("42") prints 42, then finished. read("invalid") fails at JSON.parse(text) inside the console.log argument, so that console.log never prints a parsed value. catch prints caught SyntaxError, then finally prints finished.',
-            }, {
-                title: 'A return waits for finally; an uncaught throw passes through it',
-                language: 'javascript',
-                code: [
-                    'function succeed() {',
-                    '    try { return "result"; }',
-                    '    finally { console.log("success cleanup"); }',
-                    '}',
-                    'function fail() {',
-                    '    try { throw new Error("failed"); }',
-                    '    finally { console.log("failure cleanup"); }',
-                    '}',
-                    'console.log(succeed()); // "success cleanup", then "result".',
-                    'try { fail(); }',
-                    'catch (error) { console.log(error.message); }',
-                    '// "failure cleanup", then "failed".',
-                ].join('\n'),
-                result: 'succeed() prints success cleanup before its caller prints result. fail() throws at throw new Error("failed"), prints failure cleanup in finally, then the caller’s catch prints failed. A finally block does not handle that error by itself.',
-            }],
+            examples: [
+                {
+                    title: "Success and failure take different paths",
+                    language: "javascript",
+                    code: "function read(text) {\n    try {\n        console.log(JSON.parse(text));\n    } catch (error) {\n        console.log(\"caught\", error.name);\n    } finally {\n        console.log(\"finished\");\n    }\n}\nread(\"42\");      // 42, then \"finished\". No catch output.\nread(\"invalid\"); // \"caught SyntaxError\", then \"finished\".",
+                    result: "42\nfinished\ncaught SyntaxError\nfinished",
+                    description: [
+                        "Parse one valid input and one invalid input through the same handler."
+                    ],
+                    explanation: [
+                        "The valid input skips catch.",
+                        "The invalid input throws while evaluating the console.log argument. catch handles it; finally runs for both calls."
+                    ]
+                },
+                {
+                    title: "A return waits for finally; an uncaught throw passes through it",
+                    language: "javascript",
+                    code: "function succeed() {\n    try { return \"result\"; }\n    finally { console.log(\"success cleanup\"); }\n}\nfunction fail() {\n    try { throw new Error(\"failed\"); }\n    finally { console.log(\"failure cleanup\"); }\n}\nconsole.log(succeed()); // \"success cleanup\", then \"result\".\ntry { fail(); }\ncatch (error) { console.log(error.message); }\n// \"failure cleanup\", then \"failed\".",
+                    result: "success cleanup\nresult\nfailure cleanup\nfailed",
+                    description: [
+                        "Run cleanup once during a return and once during a propagated failure."
+                    ],
+                    explanation: [
+                        "finally runs before the return reaches succeed’s caller.",
+                        "fail’s finally performs cleanup but does not catch the pending error. The caller’s handler receives it."
+                    ]
+                }
+            ]
         },
         {
-            id: 'throw-error',
-            title: 'throw stops the current path and looks for a catch',
+            id: "throw-error",
+            title: "throw stops the current path and looks for a catch",
             bullets: [
-                'throw stops normal execution at that statement. Later statements on that path do not run.',
-                'JavaScript looks for a surrounding catch. A throw inside a called function can reach a catch in its caller.',
-                'The call stack is the sequence of function calls that have started but have not returned. A thrown error can pass through these calls.',
-                'new Error("failed") creates an error object with name equal to Error and message equal to failed. Creating it does not throw; throw sends it out of the current path.',
-                'RangeError is an Error subclass used for a value outside an accepted range. The example deliberately rejects zero, since division by zero does not throw by itself.',
-                'Major JavaScript engines also provide error.stack. Its text and exact formatting vary between engines.',
+                "throw stops the current execution path. Later statements on that path do not run.",
+                "A surrounding catch can receive a throw from a function called within its try block.",
+                "The call stack contains calls that have started but have not returned. An error can pass through these calls to a handler.",
+                "new Error(message) creates an error object. throw sends that value out of the current path.",
+                "RangeError is an Error subclass for a value outside an accepted range.",
+                "Major engines also expose error.stack. Its formatting varies."
             ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'function divide(left, right) {',
-                    '    if (right === 0) {',
-                    '        throw new RangeError("right must not be zero");',
-                    '    }',
-                    '    return left / right;',
-                    '}',
-                    'function calculate() {',
-                    '    const result = divide(10, 0);',
-                    '    console.log("after divide"); // Not reached.',
-                    '    return result;',
-                    '}',
-                    'console.log(divide(10, 2)); // 5',
-                    'try {',
-                    '    calculate();',
-                    '    console.log("after calculate"); // Not reached.',
-                    '} catch (error) {',
-                    '    console.log(error.name);    // "RangeError"',
-                    '    console.log(error.message); // "right must not be zero"',
-                    '    console.log(error.stack);   // Engine-dependent stack text.',
-                    '}',
-                    'console.log("continued"); // Runs after the catch.',
-                ].join('\n'),
-                result: 'The first output is 5. Calling calculate() reaches divide(10, 0), which throws at throw new RangeError("right must not be zero"). The catch prints RangeError, right must not be zero, and runtime-dependent stack text. The final output is continued. Neither after-divide nor after-calculate message runs.',
-            }],
+            examples: [
+                {
+                    language: "javascript",
+                    code: "function divide(left, right) {\n    if (right === 0) {\n        throw new RangeError(\"right must not be zero\");\n    }\n    return left / right;\n}\nfunction calculate() {\n    const result = divide(10, 0);\n    console.log(\"after divide\"); // Not reached.\n    return result;\n}\nconsole.log(divide(10, 2)); // 5\ntry {\n    calculate();\n    console.log(\"after calculate\"); // Not reached.\n} catch (error) {\n    console.log(error.name);    // \"RangeError\"\n    console.log(error.message); // \"right must not be zero\"\n    console.log(error.stack);   // Engine-dependent stack text.\n}\nconsole.log(\"continued\"); // Runs after the catch.",
+                    result: "5\nRangeError\nright must not be zero\n[stack trace varies by runtime]\ncontinued",
+                    title: "throw stops the current path and looks for a catch",
+                    description: [
+                        "Reject a zero divisor and catch the error in the caller."
+                    ],
+                    explanation: [
+                        "The explicit RangeError rejects zero; JavaScript division itself would produce Infinity.",
+                        "The error passes through calculate into its caller’s catch. Neither later statement inside those calls runs.",
+                        "error.stack formatting varies by engine; the result shows its position rather than an exact stack."
+                    ],
+                    possibleOutput: true
+                }
+            ]
         },
         {
-            id: 'compiler-errors-and-runtime',
-            title: 'The runtime executes JavaScript, not compiler diagnostics',
+            id: "caught-values",
+            title: "A thrown value need not be an Error",
             bullets: [
-                'Type annotations and compiler diagnostics do not run in JavaScript. The runtime executes the emitted code.',
-                'If JavaScript is emitted despite a type error, it may still run. noEmitOnError set to true prevents TypeScript from emitting files when it reports errors.',
+                "JavaScript permits throw with any value. catch receives that value unchanged.",
+                "Prefer Error objects for meaningful messages and stack information.",
+                "Check instanceof Error before using Error properties on an arbitrary caught value."
             ],
-            examples: [{
-                title: 'A rejected TypeScript assignment and its JavaScript form',
-                language: 'text',
-                code: [
-                    'TypeScript source:',
-                    'const count: number = "three"; // Intentional compiler error.',
-                    'console.log(count);',
-                    '',
-                    'JavaScript if emission is allowed:',
-                    'const count = "three";',
-                    'console.log(count); // Prints "three".',
-                    '',
-                    'Compiler setting:',
-                    '{ "compilerOptions": { "noEmitOnError": true } }',
-                    '// With this setting, the error prevents new output files.',
-                ].join('\n'),
-                result: 'The assignment is legal JavaScript after the annotation is removed. A compiler error does not automatically become a thrown JavaScript error.',
-            }],
-        },
-        {
-            id: 'finally-control-flow',
-            title: 'Control flow in finally can replace a pending return or error',
-            bullets: [
-                'A return in finally replaces a return or thrown error from try or catch.',
-                'A throw in finally replaces a pending return or earlier error.',
-                'A break or continue in finally can also replace a pending error when the statement is inside a loop.',
-            ],
-            examples: [{
-                title: 'return and throw replace the earlier result',
-                language: 'javascript',
-                code: [
-                    'function replacedReturn() {',
-                    '    try { return "try result"; }',
-                    '    finally { return "finally result"; }',
-                    '}',
-                    'function hiddenError() {',
-                    '    try { throw new Error("original failure"); }',
-                    '    finally { return "success"; }',
-                    '}',
-                    'function replacedError() {',
-                    '    try { throw new Error("original failure"); }',
-                    '    finally { throw new Error("cleanup failure"); }',
-                    '}',
-                    'function replacedReturnWithError() {',
-                    '    try { return "try result"; }',
-                    '    finally { throw new Error("return replaced"); }',
-                    '}',
-                    'console.log(replacedReturn()); // "finally result"',
-                    'console.log(hiddenError());    // "success"; error is suppressed.',
-                    'try { replacedError(); }',
-                    'catch (error) { console.log(error.message); } // "cleanup failure"',
-                    'try { replacedReturnWithError(); }',
-                    'catch (error) { console.log(error.message); } // "return replaced"',
-                ].join('\n'),
-                result: 'Each finally block changes the result the caller receives. These functions intentionally show the problem.',
-            }, {
-                title: 'break and continue can suppress a throw too',
-                language: 'javascript',
-                code: [
-                    'for (let index = 0; index < 2; index += 1) {',
-                    '    try { throw new Error("failure"); }',
-                    '    finally { break; } // Exits the loop instead of propagating error.',
-                    '}',
-                    'console.log("after break"); // Runs.',
-                    '',
-                    'for (let index = 0; index < 2; index += 1) {',
-                    '    try { throw new Error("failure"); }',
-                    '    finally {',
-                    '        console.log(index);',
-                    '        continue; // Moves to the next iteration; error is suppressed.',
-                    '    }',
-                    '}',
-                    '// Prints 0 and 1 without throwing to the caller.',
-                ].join('\n'),
-                result: 'The loop control statement replaces the pending error. This can hide a failure from surrounding code.',
-            }],
-            pitfalls: [
-                'Keep finally for cleanup that completes normally. Avoid return, throw, break, and continue there unless replacing the earlier result is intentional.',
-            ],
-        },
-        {
-            id: 'error-context-and-rethrow',
-            title: 'A handler can recover, rethrow, or add context',
-            bullets: [
-                'A catch that finishes normally treats the error as handled. The caller does not receive the original error.',
-                'throw error sends the same error to the caller.',
-                'Throwing a new Error with { cause: error } adds a message while keeping the original thrown value in the cause property.',
-                'The cause option requires a runtime with Error cause support, standardized in ES2022. catch without (error), as in recover, handles a throw without binding its value to a variable.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'function recover(text) {',
-                    '    try { return JSON.parse(text); }',
-                    '    catch { return null; } // Defines null as the failure result.',
-                    '}',
-                    'function rethrow(text) {',
-                    '    try { return JSON.parse(text); }',
-                    '    catch (error) { throw error; }',
-                    '}',
-                    'function withContext(text) {',
-                    '    try { return JSON.parse(text); }',
-                    '    catch (error) {',
-                    '        throw new Error("Could not read settings", { cause: error });',
-                    '    }',
-                    '}',
-                    'console.log(recover("invalid")); // null',
-                    'try { rethrow("invalid"); }',
-                    'catch (error) { console.log(error.name); } // "SyntaxError"',
-                    'try { withContext("invalid"); }',
-                    'catch (error) {',
-                    '    console.log(error.message);    // "Could not read settings"',
-                    '    console.log(error.cause.name); // "SyntaxError"',
-                    '}',
-                ].join('\n'),
-                result: 'Each JSON.parse(text) call throws for "invalid". recover returns null instead. rethrow throws the same caught error, so its caller prints SyntaxError. withContext creates an error at new Error("Could not read settings", { cause: error }) and throws it at the throw statement. cause keeps the JSON parser’s original SyntaxError.',
-            }],
-            pitfalls: [
-                'Use a fallback such as null only if the caller understands that result. Otherwise preserve the failure by rethrowing or adding context.',
-                'State the failed operation in the message, as with Could not read settings. Avoid including the raw settings text, which could contain private data.',
-            ],
-        },
-        {
-            id: 'typescript-caught-values',
-            title: 'A caught value can be an Error, string, or any other value',
-            bullets: [
-                'JavaScript allows throw with any value. catch receives that value unchanged.',
-                'unknown accepts a value of any type but requires checks before code can use its properties.',
-                'useUnknownInCatchVariables is a TypeScript compiler setting. It makes an unannotated catch variable unknown. The strict setting enables this option unless overridden.',
-                'TypeScript rejects property access on unknown until a check proves the property is available.',
-                'instanceof Error checks whether the caught object inherits from Error.prototype. It narrows the value to Error inside that branch, where message is a string.',
-                'String(error) converts any other thrown value to text. Reading error.message directly would be unsafe for values such as null.',
-            ],
-            examples: [{
-                language: 'typescript',
-                code: [
-                    '// Compiler setting: useUnknownInCatchVariables: true',
-                    'function showThrown(value: unknown) {',
-                    '    try {',
-                    '        throw value;',
-                    '    } catch (error) {',
-                    '        // console.log(error.message); // Intentional compiler error.',
-                    '        if (error instanceof Error) {',
-                    '            console.log(error.message);',
-                    '        } else {',
-                    '            console.log(String(error));',
-                    '        }',
-                    '    }',
-                    '}',
-                    'showThrown(new Error("failed")); // "failed"',
-                    'showThrown("stopped");           // "stopped"',
-                    'showThrown(42);                  // "42"',
-                ].join('\n'),
-                result: 'The catch receives three different kinds of value. Only the Error branch reads message; the other branch converts the value to a string.',
-                typeCheck: 'The commented access fails because error is unknown. The instanceof check changes the type known to the checker within the branch.',
-            }],
-        },
-        {
-            id: 'debug-with-evidence',
-            title: 'Logs show values; breakpoints pause execution',
-            bullets: [
-                'console.log records information at the call. Logging a primitive value such as quantity shows that value at that moment.',
-                'console.error records an error message. console.table displays structured rows. Their presentation depends on the console.',
-                'In a browser console, console.assert reports a failed condition when its first argument is falsy. A passing assertion produces no message.',
-                'console.assert logs a failure. It does not throw an exception or stop the next statement from running.',
-                'A debugger is a tool for inspecting a running program. A breakpoint pauses execution at a chosen line.',
-                'The debugger statement requests a pause when a debugger is active. While paused, inspect variables and run the next statement one step at a time.',
-                'The debugger call stack lists active calls. Each stack frame represents one call and its current location.',
-                'The corrected example uses Number(rawQuantity) to convert text into a number. Number.isFinite accepts a number other than NaN, Infinity, or -Infinity. ! reverses that check to select invalid values.',
-            ],
-            examples: [{
-                title: 'A small browser example with a wrong total',
-                language: 'javascript',
-                code: [
-                    'function total(price, quantity) {',
-                    '    console.log("quantity", quantity, typeof quantity);',
-                    '    console.assert(typeof quantity === "number", "quantity must be a number");',
-                    '    debugger; // Pauses here when a debugger is active.',
-                    '    return price + quantity; // Intentional bug: total should multiply.',
-                    '}',
-                    'function checkout() {',
-                    '    const rows = [{ price: 10, quantity: "2" }];',
-                    '    console.table(rows);',
-                    '    const result = total(rows[0].price, rows[0].quantity);',
-                    '    console.error("Unexpected total", result);',
-                    '}',
-                    'checkout();',
-                ].join('\n'),
-                result: 'The table shows price 10 and quantity "2". The quantity log reports 2 and string, and the assertion reports failure. return price + quantity joins number 10 with string "2", producing string "102". console.error logs Unexpected total 102 without throwing. At debugger, the active calls include total and checkout.',
-            }, {
-                title: 'The corrected calculation with the same input',
-                language: 'javascript',
-                code: [
-                    'function total(price, rawQuantity) {',
-                    '    const quantity = Number(rawQuantity);',
-                    '    if (!Number.isFinite(quantity)) {',
-                    '        throw new Error("quantity must be a finite number");',
-                    '    }',
-                    '    return price * quantity;',
-                    '}',
-                    'console.log(total(10, "2")); // 20',
-                    '// total(10, "two"); // Would throw the Error created in the guard.',
-                    'console.assert(total(10, "2") === 20, "wrong total");',
-                    '// The assertion passes, so it logs nothing.',
-                ].join('\n'),
-                result: 'The output is 20, and the assertion logs nothing. Uncommenting total(10, "two") makes Number return NaN. The condition becomes true, and throw new Error("quantity must be a finite number") throws at that statement before multiplication.',
-            }],
-            pitfalls: [
-                'For the failing example, reproduce checkout with quantity equal to "2". Inspect that value and its runtime type before changing the calculation.',
-                'Start with a stack frame from the application, such as total. Step over its return to see which value reaches checkout.',
-                'Keep a small reproduction such as total(10, "2") when investigating. Remove temporary logs and breakpoints after confirming the cause, as in the corrected version.',
-            ],
-        },
-        {
-            id: 'type-checking-limits',
-            title: 'A type assertion does not validate external data',
-            bullets: [
-                'A type assertion is written as value as Type. It tells TypeScript to treat the value as that type. It does not inspect or change the value in JavaScript.',
-                'type User = { name: string } names an object type requiring a string property called name. JSON.parse creates the actual object from JSON text.',
-                'The parsed JSON below contains a numeric name even though the declared User type requires a string.',
-                'A runtime check executes ordinary JavaScript conditions. It can reject a value whose properties have the wrong types.',
-                'A type predicate is a function return annotation such as value is User. The function returns a boolean. When it returns true, TypeScript treats that value as User.',
-                'TypeScript trusts the declared predicate. It does not prove that the function checked every property required by User.',
-            ],
-            examples: [{
-                title: 'An assertion accepts the shape without checking it',
-                language: 'typescript',
-                code: [
-                    'type User = { name: string };',
-                    'const user = JSON.parse(\'{"name":42}\') as User;',
-                    'try {',
-                    '    console.log(user.name.toUpperCase()); // Accepted by checker.',
-                    '} catch (error) {',
-                    '    if (error instanceof Error) {',
-                    '        console.log(error.name); // "TypeError"',
-                    '    }',
-                    '}',
-                ].join('\n'),
-                result: 'The output is TypeError. The call user.name.toUpperCase() throws because name is the number 42 and has no callable toUpperCase method. The as User assertion did not inspect or change name.',
-            }, {
-                title: 'An incorrect predicate can pass checking and cause a runtime error',
-                language: 'typescript',
-                code: [
-                    'type User = { name: string };',
-                    'function claimsUser(value: unknown): value is User {',
-                    '    return true; // Accepted by TypeScript, but checks nothing.',
-                    '}',
-                    'const input: unknown = { name: 42 };',
-                    'if (claimsUser(input)) {',
-                    '    try {',
-                    '        console.log(input.name.toUpperCase());',
-                    '    } catch (error) {',
-                    '        if (error instanceof Error) console.log(error.name);',
-                    '    }',
-                    '}',
-                ].join('\n'),
-                result: 'The output is TypeError. claimsUser(input) returns true without checking. The branch reaches input.name.toUpperCase(), which throws at that method call because input.name is 42.',
-                typeCheck: 'TypeScript accepts the predicate and the string method call. Returning true is not a runtime validation of User.',
-            }, {
-                title: 'A runtime check accepts and rejects concrete cases',
-                language: 'typescript',
-                code: [
-                    'type User = { name: string };',
-                    'function isUser(value: unknown): value is User {',
-                    '    return typeof value === "object"',
-                    '        && value !== null',
-                    '        && "name" in value',
-                    '        && typeof value.name === "string";',
-                    '}',
-                    'function showName(input: unknown) {',
-                    '    if (isUser(input)) {',
-                    '        console.log(input.name.toUpperCase());',
-                    '    } else {',
-                    '        console.log("invalid user");',
-                    '    }',
-                    '}',
-                    'showName({ name: "Mia" }); // "MIA"',
-                    'showName({ name: 42 });    // "invalid user"',
-                    'showName({});              // "invalid user"',
-                    'showName(null);            // "invalid user"',
-                    'showName("Mia");          // "invalid user"',
-                ].join('\n'),
-                result: 'The output is MIA followed by invalid user four times. The checks run in order: an object, not null, a name property, and a string name. && skips the next check when an earlier check is false, so "name" in value never runs on null or a primitive. Only the valid object reaches toUpperCase.',
-                typeCheck: 'Inside the true branch, the type predicate narrows input from unknown to User. These conditions also run in the emitted JavaScript.',
-            }],
-        },
-        {
-            id: 'declaration-file-limits',
-            title: 'A declaration file describes types without implementing them',
-            bullets: [
-                'A declaration file ends in .d.ts. It tells the checker which values a module provides and which types they have. It does not supply JavaScript implementation code.',
-                'The example keeps dependency.d.ts, dependency.js, and main.ts in separate files. For this JavaScript module, TypeScript can read the matching declaration file while the runtime reads dependency.js.',
-                'The checker trusts the declared return type. An inaccurate declaration can hide a mismatch until execution.',
-            ],
-            examples: [{
-                title: 'An inaccurate declaration for a JavaScript dependency',
-                language: 'text',
-                code: [
-                    '// dependency.d.ts: information for TypeScript only.',
-                    'export function getName(): string;',
-                    '',
-                    '// dependency.js: the actual runtime implementation.',
-                    'export function getName() { return 42; }',
-                    '',
-                    '// main.ts',
-                    'import { getName } from "./dependency.js";',
-                    'console.log(getName().toUpperCase());',
-                    '// Checker accepts the call using dependency.d.ts.',
-                    '// Runtime throws TypeError because the actual value is 42.',
-                ].join('\n'),
-                result: 'The declaration promises string, but dependency.js returns 42. getName().toUpperCase() in main.ts throws at the method call on that numeric result. TypeScript reads the declaration rather than executing the dependency to verify its promise.',
-            }],
-        },
-    ],
+            examples: [
+                {
+                    title: "Handle an Error and a plain thrown value",
+                    description: [
+                        "Catch two different values without assuming both have a message."
+                    ],
+                    language: "javascript",
+                    code: "function showThrown(value) {\n    try { throw value; }\n    catch (error) {\n        console.log(error instanceof Error ? error.message : String(error));\n    }\n}\nshowThrown(new Error(\"failed\"));\nshowThrown(\"stopped\");\nshowThrown(null);",
+                    result: "failed\nstopped\nnull",
+                    explanation: [
+                        "The null case cannot support error.message.",
+                        "String handles the non-Error values without that property read."
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 export default note;

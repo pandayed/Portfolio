@@ -16,7 +16,7 @@ const SpringBootNotesIndex = () => (
         <p className="Notes__intro">
             Read the chapters in order: application foundations, configuration, REST APIs,
             data access, security, development tools, testing, integrations, and deployment.
-            Use the annotation reference when you need to look up an annotation. The topic selection follows{' '}
+            Use Annotations at a glance to look up an annotation and open its lesson. The topic selection follows{' '}
             <a className="Link" href="https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue">
                 Engineering Digest’s Spring Boot playlist
             </a>.

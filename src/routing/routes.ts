@@ -87,6 +87,13 @@ export type PythonNoteRoute = `${typeof PYTHON_NOTES_ROUTE}/${string}`;
 export type ReactNoteRoute = `${typeof REACT_NOTES_ROUTE}/${string}`;
 export type SpringBootRoute = `${typeof SPRING_BOOT_NOTES_ROUTE}/${string}`;
 
+export const getJavaScriptTypeScriptNoteRoute = (slug: string):
+    JavaScriptTypeScriptNoteRoute | typeof JAVASCRIPT_ASYNC_ROUTE | typeof JAVASCRIPT_EVENT_LOOP_ROUTE => {
+    if (slug === 'promises') return JAVASCRIPT_ASYNC_ROUTE;
+    if (slug === 'event-loop') return JAVASCRIPT_EVENT_LOOP_ROUTE;
+    return `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${slug}`;
+};
+
 export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
@@ -177,9 +184,9 @@ const pythonNoteRoutes: PythonNoteRoute[] = pythonNotes.map(
     ({ slug }) => `${PYTHON_NOTES_ROUTE}/${slug}` as PythonNoteRoute,
 );
 
-const javascriptTypeScriptNoteRoutes: JavaScriptTypeScriptNoteRoute[] = javascriptTypeScriptNotes.map(
-    ({ slug }) => `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${slug}` as JavaScriptTypeScriptNoteRoute,
-);
+const javascriptTypeScriptNoteRoutes: JavaScriptTypeScriptNoteRoute[] = javascriptTypeScriptNotes
+    .filter(({ slug }) => slug !== 'promises' && slug !== 'event-loop')
+    .map(({ slug }) => `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${slug}` as JavaScriptTypeScriptNoteRoute);
 
 const reactNoteRoutes: ReactNoteRoute[] = reactNotes.map(
     ({ slug }) => `${REACT_NOTES_ROUTE}/${slug}` as ReactNoteRoute,

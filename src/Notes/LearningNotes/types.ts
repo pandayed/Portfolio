@@ -20,6 +20,7 @@ export interface LearningNoteExample {
     description?: readonly string[];
     language: LearningCodeLanguage;
     code: string;
+    runnable?: boolean;
     commands?: string;
     result?: string;
     possibleOutput?: boolean;

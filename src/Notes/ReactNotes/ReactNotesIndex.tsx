@@ -15,20 +15,27 @@ const ReactNotesIndex = () => (
         </a>
         <ul className="Article__notes">
             <li>
-                Start with <a href={toHref(`${REACT_NOTES_ROUTE}/react-rendering-and-jsx`)} className="Link">React rendering and JSX</a>.
-                Read groups 1–4 in order. Group 5 is a Hook reference.
+                Start with <a href={toHref(`${REACT_NOTES_ROUTE}/react-rendering-and-jsx`)} className="Link">Components and JSX</a>.
+                Read the lessons in order. The final group is an advanced Hook reference.
             </li>
             <li>
-                Before React, learn <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/functions-and-scope`)} className="Link">functions and scope</a>,
-                <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/arrays-and-objects`)} className="Link"> arrays and objects</a>,
-                and <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/classes-prototypes-and-modules`)} className="Link">imports and exports</a>.
+                Before React, learn JavaScript <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/functions-and-scope`)} className="Link">functions</a>,
+                <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/function-values-and-callbacks`)} className="Link"> callbacks</a>,
+                <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/arrays-and-objects`)} className="Link"> arrays</a>,
+                <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/objects`)} className="Link"> objects</a>,
+                <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/destructuring-and-spread`)} className="Link"> destructuring</a>,
+                and <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/modules`)} className="Link"> modules</a>.
+                Basic HTML is also required.
             </li>
             <li>
-                Typed examples use the TypeScript Basics sequence, starting with <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/inference-unions-and-narrowing`)} className="Link">Annotations and inference</a>.
-                It covers named types, narrowing, object shapes, interfaces, and generics before you use them in React.
+                The core lessons use JavaScript and JSX in an existing React app.
+                Read JavaScript promises and async/await before the data-fetching lesson.
             </li>
-            <li>Component examples run inside an existing React app. JSX describes the elements to display. TSX is JSX in a TypeScript file.</li>
-            <li>The main lessons use React 18 APIs. The reference marks APIs that require React 19.</li>
+            <li>
+                TypeScript comes after the core sequence in <a href={toHref(`${REACT_NOTES_ROUTE}/react-with-typescript`)} className="Link">React with TypeScript</a>.
+                Read the TypeScript object-type, union, and generic lessons before that page.
+            </li>
+            <li>The core examples support React 18 and later. Advanced APIs state their React 19 version requirements.</li>
         </ul>
         <NoteTree nodes={reactNotes.children} />
     </Page>

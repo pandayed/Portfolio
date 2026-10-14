@@ -1,4 +1,5 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import JavaScriptRunner from '../JavaScriptRunner/JavaScriptRunner';
 import type { LearningNoteExample } from './types';
 import './LearningNoteExampleBlock.css';
 
@@ -25,7 +26,9 @@ const LearningNoteExampleBlock = ({ example }: LearningNoteExampleBlockProps) =>
                 </div>
             )}
             <section className="LearningNoteExampleBlock__section LearningNoteExampleBlock__section--code" aria-label="Code">
-                <CodeBlock language={example.language}>{example.code}</CodeBlock>
+                {example.runnable && example.language === 'javascript' ? (
+                    <JavaScriptRunner>{example.code}</JavaScriptRunner>
+                ) : <CodeBlock language={example.language}>{example.code}</CodeBlock>}
             </section>
             {example.commands && (
                 <section className="LearningNoteExampleBlock__section LearningNoteExampleBlock__section--code" aria-label="Commands">

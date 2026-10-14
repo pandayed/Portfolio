@@ -1,164 +1,71 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'runtime-and-types',
-    title: 'Runtime and types',
-    summary: 'What JavaScript does when it runs and what TypeScript checks before it runs.',
-    scope: 'javascript-typescript',
-    updatedOn: '2026-10-07',
+    slug: "runtime-and-types",
+    title: "Running JavaScript, comments, and console",
+    summary: "Run a first script and read its output.",
+    scope: "javascript",
+    updatedOn: "2026-10-14",
+    pointwise: true,
+    exampleLayout: "grouped",
+    references: [
+        {
+            title: "MDN JavaScript guide",
+            href: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/What_is_JavaScript"
+        }
+    ],
     sections: [
         {
-            id: 'javascript-runs',
-            title: 'JavaScript runs; TypeScript checks types',
+            id: "javascript-runs",
+            title: "Run JavaScript",
             bullets: [
-                'A runtime is the software that executes code. A browser and Node.js can both execute JavaScript.',
-                'A value is data, such as 2 or a string. An expression calculates a value. The expression 2 + 3 calculates 5.',
-                'const total = 2 + 3 creates a variable named total and gives it the value 5. console.log(total) prints that value.',
-                'Text after // on a line is a comment. JavaScript does not execute it.',
-                'A type describes the kind of value, such as number or string. TypeScript checks types before JavaScript runs.',
-                'The annotation : number says that total must contain a number. A compiler is a tool that checks TypeScript and produces JavaScript.',
-                'The compiler removes : number when it produces JavaScript. The addition and console.log remain.',
+                "A runtime executes code. A browser and Node.js are JavaScript runtimes.",
+                "Open a browser’s developer tools and select Console to run a short script.",
+                "For a file, save JavaScript with the .js extension. Node.js can run that file.",
+                "JavaScript runs the statements in a simple script from top to bottom."
             ],
-            examples: [{
-                title: 'TypeScript source',
-                language: 'typescript',
-                code: [
-                    'const total: number = 2 + 3;',
-                    '// Error: a string cannot be assigned to number.',
-                    '// const wrongTotal: number = "five";',
-                    'console.log(total);',
-                ].join('\n'),
-                result: '5',
-                typeCheck: 'Uncommenting const wrongTotal: number = "five" produces a compiler error on that declaration. "five" is a string, but wrongTotal requires a number. The valid lines print 5.',
-            }, {
-                title: 'JavaScript produced from the valid lines',
-                language: 'javascript',
-                code: [
-                    'const total = 2 + 3;',
-                    'console.log(total);',
-                ].join('\n'),
-                result: '5 in a browser console or a Node.js script.',
-            }],
+            examples: [
+                {
+                    title: "Print two messages",
+                    description: [
+                        "Paste these lines into the browser console, or save them in hello.js.",
+                        "With Node.js installed, run node hello.js."
+                    ],
+                    language: "javascript",
+                    code: "console.log(\"Hello\");\nconsole.log(\"Ready\");",
+                    result: "Hello\nReady",
+                    explanation: [
+                        "console.log(...) displays the supplied messages in the console.",
+                        "The second message appears after the first."
+                    ]
+                }
+            ]
         },
         {
-            id: 'primitive-and-object-values',
-            title: 'Primitive values cannot be changed; objects can',
+            id: "comments",
+            title: "Comments explain code",
             bullets: [
-                'A primitive is a value that has no changeable properties of its own. The seven primitive types are string, number, bigint, boolean, undefined, symbol, and null.',
-                'A string holds text. A number holds a numeric value. A bigint holds an integer and its literal ends in n. A boolean is true or false.',
-                'undefined is the value of a variable with no assigned value. null is an explicit empty value. Symbol("id") creates a unique value that can be used as a property key.',
-                'An object groups named values called properties. In { name: "Mia" }, name is the property key and "Mia" is its value.',
-                'A primitive value cannot be changed internally. A string operation can return a new string, and a variable can then hold that new value.',
-                'An object can have writable properties. A const variable allows changing those properties. It does not allow replacing the object held by the variable.',
-                'Arrays and functions are objects too. An array holds elements, and a function can be called. Both can also have properties.',
+                "// starts a comment that ends at the end of the line.",
+                "/* and */ surround a comment that can span several lines.",
+                "JavaScript does not execute comments."
             ],
-            examples: [{
-                title: 'A value of each primitive type',
-                language: 'javascript',
-                code: [
-                    'console.log("hello"); // string: hello',
-                    'console.log(42); // number: 42',
-                    'console.log(1n); // bigint: 1n',
-                    'console.log(true); // boolean: true',
-                    'console.log(undefined); // undefined',
-                    'console.log(Symbol("id")); // symbol, often displayed as Symbol(id)',
-                    'console.log(null); // null',
-                ].join('\n'),
-                result: 'Each line prints one primitive value. The exact display of a symbol depends on the console.',
-            }, {
-                title: 'A new string and a changed object property',
-                language: 'javascript',
-                code: [
-                    'const word = "hi";',
-                    'const uppercase = word.toUpperCase();',
-                    'console.log(word, uppercase); // hi HI',
-                    '',
-                    'const profile = { name: "Mia" };',
-                    'profile.name = "Noah";',
-                    'console.log(profile.name); // Noah',
-                    '// profile = { name: "Ava" }; // Would throw a TypeError.',
-                ].join('\n'),
-                result: 'toUpperCase() is a string method: a function called through a string value. It returns a new string. profile.name = "Noah" changes the existing object. Uncommenting profile = { name: "Ava" } throws because profile was declared with const.',
-            }],
-        },
-        {
-            id: 'typeof',
-            title: 'typeof inspects JavaScript values',
-            bullets: [
-                'typeof returns a string. It reports string, number, bigint, boolean, undefined, or symbol for the corresponding primitive values.',
-                'typeof null returns object. This result does not mean null is an object.',
-                'An array is an ordered list written with square brackets, such as [1, 2]. A function is code you can call with parentheses to run it.',
-                'typeof returns object for ordinary objects and arrays. It returns function for functions.',
-                'Array.isArray returns true for an array and false for an ordinary object or null.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'console.log(typeof "hi"); // string',
-                    'console.log(typeof 42); // number',
-                    'console.log(typeof 1n); // bigint',
-                    'console.log(typeof true); // boolean',
-                    'console.log(typeof undefined); // undefined',
-                    'console.log(typeof Symbol("id")); // symbol',
-                    'console.log(typeof null); // object: the historical exception',
-                    'console.log(typeof {}); // object',
-                    'console.log(typeof []); // object',
-                    'console.log(typeof console.log); // function',
-                    'console.log(Array.isArray([])); // true',
-                    'console.log(Array.isArray({})); // false',
-                    'console.log(Array.isArray(null)); // false',
-                ].join('\n'),
-                result: 'The comments show the strings returned by typeof and the booleans returned by Array.isArray. typeof alone cannot distinguish null, an ordinary object, and an array.',
-            }],
-        },
-        {
-            id: 'missing-values',
-            title: 'undefined and null are different values',
-            bullets: [
-                'A variable declared with let and no initial value contains undefined. Reading a property that does not exist also produces undefined.',
-                'A function call can produce a result with return. A function with no returned value produces undefined. Functions and scope explains return in detail.',
-                'null is a value that code assigns explicitly. It is different from undefined.',
-                '=== compares two values without type conversion and returns true or false. selectedUser === undefined is false when selectedUser is null.',
-                'function noResult() {} defines an empty function. noResult() calls it. It returns undefined because its body has no return statement.',
-                'TypeScript can check whether a value might be null or undefined. Group 5 teaches how to allow these values in a type and check them before an operation.',
-            ],
-            examples: [{
-                title: 'Where undefined comes from',
-                language: 'javascript',
-                code: [
-                    'let value;',
-                    'const user = { name: "Mia" };',
-                    'function noResult() {}',
-                    'console.log(value, user.nickname, noResult());',
-                    'const selectedUser = null;',
-                    'console.log(selectedUser, selectedUser === undefined);',
-                ].join('\n'),
-                result: 'The first line prints undefined undefined undefined. The second prints null false.',
-            }],
-        },
-        {
-            id: 'runtime-data-checks',
-            title: 'A type annotation does not validate data',
-            bullets: [
-                'JSON is a text format for values such as objects, arrays, numbers, and strings. JSON.parse converts valid JSON text into JavaScript values.',
-                'The inline annotation { name: string } describes an expected object with a string property named name. The type and interface chapters explain how to name object shapes.',
-                'TypeScript gives JSON.parse the return type any. any allows operations without checking whether they are valid for the actual value.',
-                'The object annotation does not inspect the parsed name. It disappears from the generated JavaScript.',
-                'A runtime check executes JavaScript to inspect the value. Errors and debugging shows a full object check after functions, conditions, and object properties have been explained.',
-            ],
-            examples: [{
-                title: 'The declared type and the actual value can disagree',
-                language: 'typescript',
-                code: [
-                    'const user: { name: string } = JSON.parse(\'{"name":7}\');',
-                    'console.log(typeof user.name); // number',
-                    '// user.name.toUpperCase(); // Would throw a TypeError.',
-                ].join('\n'),
-                result: 'The output is number. Uncommenting user.name.toUpperCase() throws a TypeError at that method call. user.name is 7, which has no callable toUpperCase method.',
-                typeCheck: 'The assignment and the commented method call pass checking because any bypasses the assignment check. The annotation does not convert the numeric name into a string.',
-            }],
-        },
-    ],
+            examples: [
+                {
+                    title: "Leave a note beside a message",
+                    description: [
+                        "Run the script with both comment forms."
+                    ],
+                    language: "javascript",
+                    code: "// This message marks the start.\nconsole.log(\"Starting\");\n/* This comment spans\n   more than one line. */\nconsole.log(\"Finished\");",
+                    result: "Starting\nFinished",
+                    explanation: [
+                        "Only the two console.log calls produce output.",
+                        "The comments do not add a message or change the order."
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 export default note;

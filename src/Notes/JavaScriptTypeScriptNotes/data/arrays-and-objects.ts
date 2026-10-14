@@ -1,365 +1,108 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'arrays-and-objects',
-    title: 'Arrays and objects',
-    summary: 'Read, change, and copy collections. See what JavaScript does and what TypeScript checks.',
-    scope: 'javascript-typescript',
-    updatedOn: '2026-10-07',
+    slug: "arrays-and-objects",
+    title: "Arrays",
+    summary: "Store a sequence, read its indexes, and add or remove elements.",
+    scope: "javascript",
+    updatedOn: "2026-10-14",
+    pointwise: true,
+    exampleLayout: "grouped",
+    references: [
+        {
+            title: "MDN JavaScript guide",
+            href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+        }
+    ],
     sections: [
         {
-            id: 'arrays',
-            title: 'Arrays store values at numbered indexes',
+            id: "array-indexes",
+            title: "Read elements by index",
             bullets: [
-                'An array stores an ordered list of elements. An element is one value in the list. An index is the number used to read or replace an element.',
-                'An array is an object. Its first element has index 0, its second has index 1, and so on.',
-                'For an array with no empty slots, length gives the number of elements. The empty array [] has length 0.',
-                'An empty slot is an index with no stored element. length includes these positions too. The empty-slots section below shows how that can happen.',
-                'push adds an element at the end and changes the original array.',
-                'Reading an index that has no element returns undefined.',
+                "An array stores an ordered sequence in square brackets.",
+                "Indexes start at zero. length gives the array’s length.",
+                "Reading an index with no element returns undefined.",
+                "Array.isArray checks whether a value is an array. typeof reports \"object\" for arrays."
             ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const colors = ["red", "blue"];',
-                    'console.log(typeof colors); // "object"',
-                    'console.log(colors[0]);     // "red"',
-                    'console.log(colors[1]);     // "blue"',
-                    'colors[1] = "yellow"; // Replace the element at index 1.',
-                    'console.log(colors.length); // 2',
-                    'colors.push("green");',
-                    'console.log(colors);        // ["red", "yellow", "green"]',
-                    'console.log(colors.length); // 3',
-                    'console.log(colors[3]);     // undefined',
-                    'console.log([].length);     // 0',
-                    'colors.label = "palette"; // Arrays can also have named properties.',
-                    'console.log(colors.label, colors.length); // palette 3',
-                ].join('\n'),
-                result: 'The comments show each output. colors[1] = "yellow" replaces blue. push adds green to colors itself. Index 3 has no element. The label property is not an indexed element, so it does not change length.',
-            }],
+            examples: [
+                {
+                    title: "Read two names",
+                    description: [
+                        "Create an array and inspect its first element and length."
+                    ],
+                    language: "javascript",
+                    code: "const names = [\"Mia\", \"Noah\"];\nconsole.log(names[0], names.length);\nconsole.log(names[2]);\nconsole.log(Array.isArray(names), typeof names);",
+                    result: "Mia 2\nundefined\ntrue object",
+                    explanation: [
+                        "names[2] is beyond the stored elements.",
+                        "Use Array.isArray instead of typeof to identify an array."
+                    ]
+                }
+            ]
         },
         {
-            id: 'objects',
-            title: 'Objects store values under property keys',
+            id: "array-updates",
+            title: "Change an existing array",
             bullets: [
-                'An object groups properties written as key: value. In { name: "Mia" }, name is the key and "Mia" is the value.',
-                'Property keys are strings or symbols. Symbol("token") creates a unique symbol. [token]: 7 uses that symbol as a key.',
-                'Dot notation reads a fixed name. user.name reads the property named name.',
-                'Bracket notation evaluates an expression to get the key. user[key] reads the property whose name is stored in key.',
-                'Destructuring reads properties into variables. const { name } = user creates a variable name with the value of user.name.',
-                'An own property belongs directly to an object. An enumerable property is marked for listing or copying.',
-                'In const { name, ...details } = user, object rest copies the other own enumerable properties into a new object. The next section shows which properties it skips.',
+                "An index assignment replaces that element.",
+                "push adds to the end. pop removes and returns the last element.",
+                "unshift adds at the beginning. shift removes and returns the first element.",
+                "splice changes a selected range. slice returns a new array without changing that range in the original.",
+                "A const array can change its elements. const prevents assigning a different array to the name."
             ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const token = Symbol("token");',
-                    'const user = { name: "Mia", role: "editor", [token]: 7 };',
-                    'const key = "role";',
-                    'console.log(user.name);   // "Mia"',
-                    'console.log(user[key]);   // "editor"',
-                    'console.log(user[token]); // 7',
-                    '',
-                    'const { name, ...details } = user;',
-                    'console.log(name);             // "Mia"',
-                    'console.log(details.role);     // "editor"',
-                    'console.log(details[token]);   // 7',
-                    'console.log("name" in details); // false',
-                    'console.log(details === user); // false',
-                ].join('\n'),
-                result: 'Destructuring reads name into a variable. details is a new object containing the other copied string and symbol properties.',
-            }],
+            examples: [
+                {
+                    title: "Add, replace, and remove names",
+                    description: [
+                        "Apply changes to the same array."
+                    ],
+                    language: "javascript",
+                    code: "const names = [\"Mia\", \"Noah\"];\nnames[0] = \"Ava\";\nnames.push(\"Lia\");\nconsole.log(names.join(\", \"));\nconsole.log(names.pop());\nnames.unshift(\"Pip\");\nconsole.log(names.shift());\nnames.splice(1, 1, \"Leo\");\nconsole.log(names.join(\", \"));\nconsole.log(names.slice(0, 1).join(\", \"));",
+                    result: "Ava, Noah, Lia\nLia\nPip\nAva, Leo\nAva",
+                    explanation: [
+                        "join returns text with the chosen separator between elements.",
+                        "splice replaces Noah in the original array. slice selects Ava into a new array."
+                    ]
+                }
+            ]
         },
         {
-            id: 'own-enumerable-properties',
-            title: 'Object rest copies own enumerable properties',
+            id: "iterate-values",
+            title: "for...of reads each value",
             bullets: [
-                'An own property belongs directly to an object. An inherited property belongs to its prototype, another object used when JavaScript looks up missing properties.',
-                'Object.create(parent) creates an object whose prototype is parent. Object.hasOwn(user, "name") checks whether name belongs directly to user.',
-                'Enumerable means a property is marked for inclusion when JavaScript lists or copies properties. Ordinary properties created with key: value or assignment are enumerable.',
-                'Object.defineProperty can configure a property. The example sets enumerable to false, so internalId exists but is skipped by Object.keys and object rest.',
-                'Object.keys returns an array of own enumerable string keys. Object rest can also copy enumerable symbol keys, as token in the preceding example shows.',
-                'Object rest copies the remaining own enumerable properties. It skips inherited properties and non-enumerable properties.',
+                "An iterable provides values in sequence. Arrays and strings are iterable.",
+                "for...of gives its variable the next value on each iteration.",
+                "Use a numbered for loop when the index itself is needed."
             ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const user = Object.create({ role: "reader" });',
-                    'user.name = "Mia";',
-                    'user.active = true;',
-                    'Object.defineProperty(user, "internalId", {',
-                    '    value: 42,',
-                    '    enumerable: false,',
-                    '});',
-                    '',
-                    'console.log(user.role);                   // "reader"',
-                    'console.log(Object.hasOwn(user, "role")); // false',
-                    'console.log(Object.hasOwn(user, "name")); // true',
-                    'console.log(user.internalId);             // 42',
-                    'console.log(Object.keys(user));           // ["name", "active"]',
-                    '',
-                    'const { name, ...rest } = user;',
-                    'console.log(rest);                 // { active: true }',
-                    'console.log("role" in rest);       // false',
-                    'console.log("internalId" in rest); // false',
-                ].join('\n'),
-                result: 'role is readable through the prototype, and internalId is readable directly. Neither is copied into rest. name is excluded by destructuring, so rest contains only active.',
-            }],
-        },
-        {
-            id: 'references-and-spread',
-            title: 'Assignment shares an object; spread makes a shallow copy',
-            bullets: [
-                'A reference lets code access a particular object. Assigning an object or array to another variable copies the reference, rather than making a new object.',
-                'Both variables then refer to the same object. Changing that object through either variable changes what both variables read.',
-                'Object spread, { ...original }, copies own enumerable properties into a new object. Array spread, [...original], reads elements into a new array.',
-                'When properties appear after a spread, they replace earlier properties with the same key. { ...user, name: "Ava" } keeps other copied properties and sets a new name.',
-                'These copies are shallow: nested objects still refer to the original nested objects.',
-                'Changing an outer property in a copy leaves the original outer property unchanged. Changing a shared nested object affects both.',
-            ],
-            examples: [{
-                title: 'Object assignment and object spread',
-                language: 'javascript',
-                code: [
-                    'const original = { name: "Mia", settings: { theme: "dark" } };',
-                    'const same = original;',
-                    'console.log(same === original); // true',
-                    'same.name = "Ava";',
-                    'console.log(original.name);     // "Ava"',
-                    '',
-                    'const copy = { ...original };',
-                    'console.log(copy === original); // false',
-                    'copy.name = "Noah";',
-                    'copy.settings.theme = "light";',
-                    'console.log(original.name);           // "Ava"',
-                    'console.log(original.settings.theme); // "light"',
-                ].join('\n'),
-                result: 'same shares the entire object. copy has its own name property but shares the settings object with original.',
-            }, {
-                title: 'Array assignment and array spread',
-                language: 'javascript',
-                code: [
-                    'const original = [{ name: "Mia" }];',
-                    'const same = original;',
-                    'same.push({ name: "Ava" });',
-                    'console.log(original.length); // 2',
-                    '',
-                    'const copy = [...original];',
-                    'copy.push({ name: "Noah" });',
-                    'copy[0].name = "Changed";',
-                    'console.log(copy.length);      // 3',
-                    'console.log(original.length);  // 2',
-                    'console.log(original[0].name); // "Changed"',
-                ].join('\n'),
-                result: 'Adding to same adds to original. Adding to copy changes only the new array. Both arrays still share their first user object.',
-            }],
-        },
-        {
-            id: 'array-transformations',
-            title: 'map, filter, and reduce return calculated results',
-            bullets: [
-                'A callback is a function passed to another function. Read Functions and scope for callback and arrow-function syntax.',
-                'map and filter call the callback with an element, its index, and the array. The example uses only the element.',
-                'map returns a new array containing the result of the callback for each existing element.',
-                'filter returns a new array containing elements for which the callback returns a truthy value.',
-                'reduce passes an accumulated result and the next element to its callback. Its second argument supplies the starting result.',
-                'In reduce((sum, number) => sum + number, 0), sum starts at 0. Each returned value becomes the next sum. The final sum is the result of reduce.',
-                'The calculations below leave the source array unchanged.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const numbers = [1, 2, 3, 4];',
-                    'const squares = numbers.map((number) => number ** 2);',
-                    'const evens = numbers.filter((number) => number % 2 === 0);',
-                    'const total = numbers.reduce((sum, number) => sum + number, 0);',
-                    '',
-                    'console.log(squares); // [1, 4, 9, 16]',
-                    'console.log(evens);   // [2, 4]',
-                    'console.log(total);   // 10',
-                    'console.log(numbers); // [1, 2, 3, 4]',
-                    'console.log(squares === numbers); // false',
-                ].join('\n'),
-                result: 'reduce starts sum at 0. Successive sums are 1, 3, 6, and 10. map and filter each return a new array.',
-            }],
-        },
-        {
-            id: 'array-callback-mutation',
-            title: 'An array callback can still change a shared object',
-            bullets: [
-                'A new array does not automatically contain new objects. filter copies references to the selected objects.',
-                'A callback can assign to an object property. That changes the shared object in the source array too.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const users = [{ name: "Mia", active: true }];',
-                    'const activeUsers = users.filter((user) => user.active);',
-                    'console.log(activeUsers === users);       // false',
-                    'console.log(activeUsers[0] === users[0]); // true',
-                    '',
-                    'const names = activeUsers.map((user) => {',
-                    '    user.name = "Noah";',
-                    '    return user.name;',
-                    '});',
-                    'console.log(names);         // ["Noah"]',
-                    'console.log(users[0].name); // "Noah"',
-                    '',
-                    'const renamed = users.map((user) => ({ ...user, name: "Ava" }));',
-                    'console.log(renamed[0].name); // "Ava"',
-                    'console.log(users[0].name);   // "Noah": original is unchanged.',
-                ].join('\n'),
-                result: 'The arrays are different, but their first element refers to the same user object. The assignment inside map changes that object. The final map instead returns new objects and leaves users unchanged.',
-            }],
-        },
-        {
-            id: 'empty-array-slots',
-            title: 'An empty slot is different from an undefined element',
-            bullets: [
-                'Assigning beyond the end increases length and leaves empty slots between the existing elements and the new element.',
-                'Assigning a larger length also creates empty slots at the end. It does not create values for those slots.',
-                'An empty slot has no property at that index. An element set to undefined has a property whose value is undefined.',
-                'Both read as undefined. The in operator distinguishes them by checking whether the index exists.',
-                'An array containing empty slots is called a sparse array. For the ordinary array in this example, map calls its callback for an undefined element but skips an empty slot.',
-                'map gives its callback the element value and index. String(value) converts that element to text. visited records which indexes the callback receives.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const values = [undefined];',
-                    'values[2] = "last"; // Index 1 is now an empty slot.',
-                    'console.log(values.length); // 3',
-                    'console.log(values[0]);     // undefined',
-                    'console.log(values[1]);     // undefined',
-                    'console.log(0 in values);   // true',
-                    'console.log(1 in values);   // false',
-                    '',
-                    'const visited = [];',
-                    'const mapped = values.map((value, index) => {',
-                    '    visited.push(index);',
-                    '    return String(value);',
-                    '});',
-                    'console.log(visited);       // [0, 2]',
-                    'console.log(mapped[0]);     // "undefined" (a string)',
-                    'console.log(1 in mapped);   // false',
-                    '',
-                    'values.length = 5;',
-                    'console.log(values.length); // 5: the last stored element is still at index 2',
-                    'console.log(4 in values);    // false: an empty trailing slot',
-                ].join('\n'),
-                result: 'Index 0 exists even though its value is undefined. Index 1 does not exist. map visits only indexes 0 and 2. Setting length to 5 adds empty trailing slots without adding values.',
-            }],
-        },
-        {
-            id: 'map-and-set',
-            title: 'Map stores key-value pairs; Set stores unique values',
-            bullets: [
-                'Map is a built-in collection of key-value entries. new Map(...) creates one. Each inner [key, value] array below supplies one entry.',
-                'Map accepts keys of any type, including objects. Two separate objects are different keys even if their properties match.',
-                'set(key, value) writes an entry. get(key) reads its value or returns undefined if the key is absent. size gives the number of entries.',
-                'Setting an existing Map key replaces its value. It does not add another entry.',
-                'Set is a built-in collection of distinct values. new Set(...) creates one. add(value) inserts a value. size gives the number of values.',
-                'Adding the same value again does not add another entry. For Map keys and Set values, NaN counts as the same value as NaN, and 0 counts as the same value as -0.',
-                'Map and Set iteration follows insertion order. Updating an existing entry does not move it to the end.',
-                'scores.values() provides Map values in that order. [...scores.values()] collects them into an array. [...tags] does the same for Set values.',
-            ],
-            examples: [{
-                language: 'javascript',
-                code: [
-                    'const mia = { name: "Mia" };',
-                    'const scores = new Map([[mia, 9], ["Noah", 8]]);',
-                    'scores.set(mia, 10);',
-                    'console.log(scores.get(mia));           // 10',
-                    'console.log(scores.get({ name: "Mia" })); // undefined',
-                    'console.log(scores.size);               // 2',
-                    'console.log([...scores.values()]);      // [10, 8]',
-                    '',
-                    'const tags = new Set(["js", "ts", "js"]);',
-                    'tags.add("js");',
-                    'console.log(tags.size); // 2',
-                    'console.log([...tags]); // ["js", "ts"]',
-                ].join('\n'),
-                result: 'The object used as the first Map key must be that same object when reading the value. Repeated js values produce only one Set entry.',
-            }],
-            pitfalls: [
-                'A plain object such as { name: "Mia", role: "editor" } fits fixed named fields. A Map fits data keyed by values such as the mia object in this example.',
-            ],
-        },
-        {
-            id: 'typescript-collection-types',
-            title: 'TypeScript checks array elements and object properties',
-            bullets: [
-                'These are TypeScript follow-up examples. Read Object shapes and interface first. The earlier sections on this page teach JavaScript.',
-                'number[] describes an array of numbers. User[] describes an array of User objects. Array<User> is another way to write User[].',
-                'interface User { ... } names an object type. type UserShape = { ... } is a type alias: another way to name an object type.',
-                'The checker rejects a missing required property or a property with the wrong value type.',
-                'A property followed by ? may be absent. With strictNullChecks enabled, reading it produces its stated type or undefined.',
-            ],
-            examples: [{
-                language: 'typescript',
-                code: [
-                    'interface User {',
-                    '    name: string;',
-                    '    nickname?: string;',
-                    '}',
-                    'type UserShape = { name: string; nickname?: string };',
-                    '',
-                    'const users: User[] = [{ name: "Mia" }];',
-                    'const sameElementType: Array<User> = users;',
-                    'const named: UserShape = { name: "Noah", nickname: "N" };',
-                    'console.log(sameElementType[0].name); // "Mia"',
-                    'console.log(named.nickname);          // "N"',
-                    '',
-                    '// Intentional compiler errors if uncommented:',
-                    '// users.push({ name: 12 }); // name must be a string.',
-                    '// const missing: User = {}; // Required name is absent.',
-                    '',
-                    'function nicknameLength(user: User): number {',
-                    '    // With strictNullChecks: nickname might be undefined.',
-                    '    // return user.nickname.length; // Compiler error.',
-                    '    return user.nickname === undefined ? 0 : user.nickname.length;',
-                    '}',
-                    'console.log(nicknameLength({ name: "Mia" })); // 0',
-                    'console.log(nicknameLength(named));            // 1',
-                ].join('\n'),
-                result: 'The optional property is absent from Mia and present on Noah. The function checks for undefined before reading length.',
-                typeCheck: 'The commented lines demonstrate compiler errors. Both array syntaxes and both object declarations accept the same matching values.',
-            }],
-        },
-        {
-            id: 'readonly-collection-properties',
-            title: 'readonly rejects assignment through the declared type',
-            bullets: [
-                'A readonly property cannot be assigned through a value declared with that TypeScript type.',
-                'readonly does not make nested properties readonly. A nested object can still change unless its own properties forbid assignment.',
-                'readonly adds no JavaScript freeze operation. A second reference with a writable type can still change the same object.',
-                'Object.isFrozen checks whether JavaScript has frozen an object. Frozen objects cannot add or remove properties or replace existing data-property values. This example never freezes its object.',
-            ],
-            examples: [{
-                language: 'typescript',
-                code: [
-                    'interface User {',
-                    '    readonly id: number;',
-                    '    readonly settings: { theme: string };',
-                    '}',
-                    'const writable = { id: 1, settings: { theme: "dark" } };',
-                    'const user: User = writable;',
-                    '',
-                    '// Intentional compiler errors if uncommented:',
-                    '// user.id = 2;',
-                    '// user.settings = { theme: "light" };',
-                    '',
-                    'user.settings.theme = "light"; // Allowed: theme is writable.',
-                    'writable.id = 2;               // Allowed through writable.',
-                    'console.log(user.id);             // 2',
-                    'console.log(user.settings.theme); // "light"',
-                    'console.log(Object.isFrozen(user)); // false',
-                ].join('\n'),
-                result: 'user.settings cannot be replaced through user, but its theme can change. writable and user refer to the same object, which has not been frozen.',
-                typeCheck: 'The assignment restriction comes from the type of the reference used for the assignment. It does not freeze the shared JavaScript object.',
-            }],
-        },
-    ],
+            examples: [
+                {
+                    title: "Read array values and string characters",
+                    description: [
+                        "Iterate over a small array, then a short string."
+                    ],
+                    language: "javascript",
+                    code: "const colors = [\"red\", \"blue\"];\nfor (const color of colors) console.log(color);\nfor (const character of \"hi\") console.log(character);",
+                    result: "red\nblue\nh\ni",
+                    explanation: [
+                        "The array loop reads elements, not index keys.",
+                        "The string loop reads Unicode code points, which can differ from indexed UTF-16 code units."
+                    ]
+                },
+                {
+                    title: "Stop only the inner loop",
+                    description: [
+                        "Run a fresh inner loop for each outer value."
+                    ],
+                    language: "javascript",
+                    code: "for (const group of [\"A\", \"B\"]) {\n    for (const number of [1, 2, 3]) {\n        if (number === 2) break;\n        console.log(group, number);\n    }\n}",
+                    result: "A 1\nB 1",
+                    explanation: [
+                        "The inner break does not stop the outer loop."
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 export default note;

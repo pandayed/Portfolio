@@ -15,17 +15,20 @@ const JavaScriptTypeScriptNotesIndex = () => (
         </a>
         <ul className="Article__notes">
             <li>
-                Start with <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/runtime-and-types`)} className="Link">Runtime and types</a>.
-                Read the JavaScript sections in groups 1–4 in order. Their TypeScript follow-up examples can wait until you finish group 5.
+                Start with <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/runtime-and-types`)} className="Link">Running JavaScript, comments, and console</a>.
+                Follow the lessons in the displayed order. Each page’s Next link opens the following lesson.
             </li>
-            <li>JavaScript examples show what runs. TypeScript examples show what the checker accepts or rejects.</li>
             <li>
-                After JavaScript, start group 5 with <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/inference-unions-and-narrowing`)} className="Link">Annotations and inference</a>.
-                Follow the displayed order: name types, narrow values, learn shared object rules, define interfaces, compare the declarations, then use generics.
+                <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/variables-values-and-operators`)} className="Link">var, let, and const</a> have one dedicated lesson.
+                Operators, functions, arrays, and objects each follow on their own pages.
             </li>
-            <li>Group 6 uses the types taught in group 5. Read it after those basics.</li>
             <li>
-                The <a href={toHref(REACT_NOTES_ROUTE)} className="Link">React notes</a> use functions, arrays, objects, modules, and TypeScript object types from this collection.
+                After the JavaScript lessons, start TypeScript with <a href={toHref(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/inference-unions-and-narrowing`)} className="Link">Type annotations and inference</a>.
+                TypeScript adds checks to the JavaScript you have already learned.
+            </li>
+            <li>
+                The <a href={toHref(REACT_NOTES_ROUTE)} className="Link">React lessons</a> use JavaScript first.
+                Their TypeScript lesson follows the core React topics.
             </li>
         </ul>
         <NoteTree nodes={javascriptTypeScriptNotes.children} />

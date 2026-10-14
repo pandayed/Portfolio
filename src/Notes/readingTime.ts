@@ -4,7 +4,7 @@ import {
     JAVA_NOTES_ROUTE,
     DBMS_NOTES_ROUTE,
     GO_NOTES_ROUTE,
-    JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
+    getJavaScriptTypeScriptNoteRoute,
     PYTHON_NOTES_ROUTE,
     REACT_NOTES_ROUTE,
     type Route,
@@ -98,7 +98,7 @@ for (const note of goNotes) {
 
 for (const note of javascriptTypeScriptNotes) {
     pageWordCounts.set(
-        `${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${note.slug}`,
+        getJavaScriptTypeScriptNoteRoute(note.slug),
         countWords(learningNoteText(note)),
     );
 }

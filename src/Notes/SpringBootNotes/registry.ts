@@ -265,8 +265,8 @@ export const springBootChapters: readonly SpringBootChapter[] = [
         ]
     },
     {
-        "title": "10. Annotation reference",
-        "summary": "Look up annotations after reading the lessons that introduce them.",
+        "title": "10. Annotations at a glance",
+        "summary": "Follow annotations in learning order and open their detailed lessons.",
         "children": [
             {
                 "slug": "annotations"

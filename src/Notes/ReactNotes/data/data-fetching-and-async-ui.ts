@@ -1,222 +1,142 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
-    slug: 'data-fetching-and-async-ui',
-    title: 'Data fetching and async UI',
-    summary: 'Represent each request state in the UI and prevent old responses from replacing newer data.',
-    scope: 'react',
-    updatedOn: '2026-10-07',
+    slug: "data-fetching-and-async-ui",
+    title: "Data fetching and async UI",
+    summary: "Represent request states and prevent old responses from replacing current data.",
+    scope: "react",
+    updatedOn: "2026-10-14",
+    exampleLayout: "grouped",
     sections: [
         {
-            id: 'request-state',
-            title: 'Async work has more than a data value',
+            id: "request-state",
+            title: "Represent waiting, success, and failure",
             bullets: [
-                "A request needs a status so the component can display loading, data, or failure.",
-                "Async work finishes later. A JavaScript Promise represents its eventual value or failure.",
-                "An async function returns a Promise. await waits inside that function while other JavaScript can continue.",
-                "Read Effects and cleanup and Asynchronous Programming in JavaScript first. The TypeScript chapters type and Narrowing explain the state shapes and checks used here.",
-                "The UsersState union below lists three allowed object shapes. The | symbol means one of those shapes.",
-                "The status property identifies each shape. Loading has no users, success has users, and error has a message.",
-                "Checking status narrows the type. After the loading and error returns, TypeScript knows state has users.",
-                "This request starts immediately, so it has no idle state. An empty users array is a successful response with no matches.",
-            ],
-            pitfalls: [
-                "Reading state.users before checking state.status fails TypeScript checking because the loading and error shapes have no users property.",
-                "At runtime, reading state.users.length while users is undefined throws a TypeError at that expression. Return the loading and error views before reading users.",
-            ],
-            examples: [{
-                title: 'Describe request state with a union',
-                language: 'tsx',
-                code: `type User = { id: string; name: string };
-
-type UsersState =
-    | { status: 'loading' }
-    | { status: 'success'; users: User[] }
-    | { status: 'error'; message: string };
-
-export function UsersView({ state }: { state: UsersState }) {
-    if (state.status === 'loading') return <p>Loading users…</p>;
-    if (state.status === 'error') return <p role="alert">{state.message}</p>;
-    if (state.users.length === 0) return <p>No users found.</p>;
-
-    return <ul>{state.users.map((user) => <li key={user.id}>{user.name}</li>)}</ul>;
-}`,
-                result: 'The user sees one clear view: a loading message, an error, an empty message, or a list of names.',
-            }],
+                "A request can be idle, loading, successful, or failed. Represent each state so the UI can choose clear content.",
+                "Use async and await inside an async function. An Effect callback itself must return cleanup rather than a Promise.",
+                "Check response.ok before reading a fetch response. HTTP failure statuses do not automatically reject fetch.",
+                "Validate response data before using it. JSON parsing does not verify the shape of the returned object."
+            ]
         },
         {
-            id: 'fetch-in-effect',
-            title: 'Fetch in an Effect when rendering requires external data',
+            id: "fetch-in-effect",
+            title: "Fetch data for the current component input",
             bullets: [
-                "useEffect starts a request when UserSearch first appears and whenever query changes.",
-                "fetch is a browser function that makes a network request. By default it uses GET, which reads data.",
-                "The example expects an API at /api/users?q=... that returns JSON such as [{ \"id\": \"1\", \"name\": \"Mira\" }]. It needs that API to run.",
-                "JSON is a text format for values such as objects and arrays. response.json() reads that text and turns it into JavaScript values.",
-                "encodeURIComponent(query) encodes query text so spaces, & and other characters do not change the URL structure.",
-                "readUsers checks the parsed value before storing it. unknown means the value must be checked before its properties are used.",
-                "void loadUsers() starts that function without using its returned Promise. The try/catch inside loadUsers handles request failures.",
-                "Array.isArray(value) checks that the response is an array. map runs the item check for each item and returns a new array.",
-                "The item check first requires a non-null object. The in operator checks that each required property exists, and typeof checks its string value.",
-                "If an item fails, throw new Error(...) exits the helper. The request catch displays that error instead of storing invalid data.",
-                "The Effect callback stays synchronous so it can return cleanup. Only the nested loadUsers function is async.",
-                "Each setup has its own ignore flag. It starts as false and cleanup changes it to true.",
-                "LoadState stores the query alongside the response. currentState hides a previous query's data before the new Effect has run.",
-                "A framework data API or client cache may already load and reuse responses. Prefer the existing data layer when a project provides one.",
+                "An Effect can request data that depends on a prop. Its cleanup marks the old request inactive and can abort it.",
+                "An earlier response can arrive after a later response. Ignore inactive results so they cannot replace the current data.",
+                "Aborting requests avoids unnecessary client work. It does not guarantee that the server stopped its work."
             ],
-            pitfalls: [
-                "await fetch(...) can reject on a network failure. A 404 or 500 response normally resolves, so it needs a separate status check.",
-                "The exact line if (!response.ok) throw new Error('Could not load users.') creates the example's error for a failed HTTP status.",
-                "await response.json() can reject if the body is not valid JSON. That error also reaches catch.",
-                "readUsers throws Expected a users array. at its first check if the parsed body is null or an object rather than an array.",
-                "The throw new Error('Expected each user to have a string id and name.') line rejects malformed items. Valid items are copied into the returned array.",
-                "error instanceof Error checks whether the caught value is an Error object before reading error.message. JavaScript can throw other values too.",
-                "Writing const users: User[] = await response.json() without a runtime check does not verify the body. If it is null, users.length later throws a TypeError during rendering. Keep readUsers before setState to catch malformed data during loading.",
-            ],
-            examples: [{
-                title: 'Load matching users',
-                language: 'tsx',
-                code: `import { useEffect, useState } from 'react';
+            examples: [
+                {
+                    title: "Load users for the current query",
+                    description: [
+                        "Provide /api/users?q=... returning an array of objects with string id and name properties. The component receives query from its parent."
+                    ],
+                    language: "jsx",
+                    code: `import { useEffect, useState } from 'react';
 
-type User = { id: string; name: string };
-type LoadState =
-    | { query: string; status: 'loading' }
-    | { query: string; status: 'success'; users: User[] }
-    | { query: string; status: 'error'; message: string };
-
-function readUsers(value: unknown): User[] {
-    if (!Array.isArray(value)) throw new Error('Expected a users array.');
-
-    return value.map((item: unknown) => {
-        if (
-            typeof item !== 'object' || item === null ||
-            !('id' in item) || typeof item.id !== 'string' ||
-            !('name' in item) || typeof item.name !== 'string'
-        ) {
-            throw new Error('Expected each user to have a string id and name.');
-        }
-        return { id: item.id, name: item.name };
+export default function Users({ query }) {
+    const [request, setRequest] = useState({
+        query, status: 'loading', users: [], error: '',
     });
-}
-
-export function UserSearch({ query }: { query: string }) {
-    const [state, setState] = useState<LoadState>({ query, status: 'loading' });
-
     useEffect(() => {
-        let ignore = false;
-        setState({ query, status: 'loading' });
-
-        async function loadUsers() {
+        let active = true;
+        const controller = new AbortController();
+        setRequest({ query, status: 'loading', users: [], error: '' });
+        async function load() {
             try {
-                const response = await fetch('/api/users?q=' + encodeURIComponent(query));
-                if (!response.ok) throw new Error('Could not load users.');
-
-                const users = readUsers(await response.json());
-                if (!ignore) setState({ query, status: 'success', users });
+                const response = await fetch('/api/users?q=' + encodeURIComponent(query), {
+                    signal: controller.signal,
+                });
+                if (!response.ok) throw new Error('Request failed');
+                const users = await response.json();
+                if (!Array.isArray(users) || !users.every(user =>
+                    user !== null && typeof user === 'object' &&
+                    typeof user.id === 'string' && typeof user.name === 'string'
+                )) throw new Error('Unexpected response');
+                if (active) setRequest({ query, status: 'success', users, error: '' });
             } catch (error) {
-                if (!ignore) {
-                    const message = error instanceof Error ? error.message : 'Unknown error.';
-                    setState({ query, status: 'error', message });
-                }
+                if (active) setRequest({
+                    query, status: 'error', users: [],
+                    error: error instanceof Error ? error.message : 'Request failed',
+                });
             }
         }
-
-        void loadUsers();
-        return () => {
-            ignore = true;
-        };
+        load();
+        return () => { active = false; controller.abort(); };
     }, [query]);
 
-    const currentState: LoadState = state.query === query
-        ? state
-        : { query, status: 'loading' };
-
-    if (currentState.status === 'loading') return <p>Loading users…</p>;
-    if (currentState.status === 'error') return <p role="alert">{currentState.message}</p>;
-    if (currentState.users.length === 0) return <p>No users found.</p>;
-
-    return <ul>{currentState.users.map((user) => <li key={user.id}>{user.name}</li>)}</ul>;
+    if (request.query !== query || request.status === 'loading') return <p>Loading users...</p>;
+    if (request.status === 'error') return <p role="alert">{request.error}</p>;
+    if (request.users.length === 0) return <p>No users found.</p>;
+    return <ul>{request.users.map(user => <li key={user.id}>{user.name}</li>)}</ul>;
 }`,
-                result: 'Changing the query shows “Loading users…”. The view then shows names, “No users found.”, or an error message for the latest query.',
-            }],
+                    result: "The component shows loading, an error, an empty result, or matching users. A result for an old query cannot replace the current one.",
+                    explanation: [
+                        "Cleanup marks that request inactive before aborting it. Both success and failure check active before storing state. The query check prevents old data flashing before the new Effect sets loading."
+                    ]
+                }
+            ]
         },
         {
-            id: 'stale-results',
-            title: 'Cleanup prevents stale results',
+            id: "event-requests",
+            title: "Start action-specific requests in a handler",
             bullets: [
-                "A race happens when the result depends on which request finishes first.",
-                "Type mi, then mira. The mi request may finish after the mira request.",
-                "Before setup for mira, React runs cleanup for mi. That cleanup sets the mi setup's own ignore variable to true.",
-                "if (!ignore) setState(...) prevents mi from replacing mira, even when mi finishes last.",
-                "The same check guards catch, so an old failed request cannot replace a newer success with an error.",
-                "The request still runs. An ignore flag only prevents state updates.",
-                "AbortController is a browser object that can cancel a supported request. Pass its signal to fetch and call abort() in cleanup.",
-                "Cancellation can reject the fetch Promise with an AbortError. An ignored or cancelled request should not become a visible failure for the new query.",
+                "A save triggered by a submit belongs in the submit handler. It is not synchronization with the displayed component.",
+                "Track pending and error state. Disable repeated submission while pending. Catch failures and clear pending in finally.",
+                "For a full application, use the framework’s data loader or an appropriate client cache when available. Manual Effects do not provide caching, preloading, or shared request handling."
             ],
-        },
-        {
-            id: 'event-requests',
-            title: 'User actions start event-specific requests',
-            bullets: [
-                "A request caused by Save belongs in the button handler. It should not repeat because the component renders again.",
-                "saving controls the button label and disabled state. message stores the result.",
-                "This example assumes /api/settings accepts a POST with no body and saves the current server settings. A real form must send the values its API requires.",
-                "POST asks a server to process a change. GET, used in the search example, reads data.",
-                "The try block sends the request. catch handles its failure. finally runs after either path to clear saving.",
-                "aria-live=\"polite\" asks assistive technology to announce message changes when it can do so without interrupting the user.",
-            ],
-            pitfalls: [
-                "The line if (!response.ok) throw new Error('Save failed.') throws after the server returns a failed status. catch then stores Save failed.",
-                "A network failure rejects await fetch(...). catch stores that failure message too.",
-                "Without setSaving(false) in finally, a failure can leave the button disabled. Cleanup here is a JavaScript finally block, not an Effect cleanup.",
-            ],
-            examples: [{
-                title: 'Show progress while saving',
-                language: 'tsx',
-                code: `import { useState } from 'react';
+            examples: [
+                {
+                    title: "Save a display name",
+                    description: [
+                        "Provide saveName as a callback that returns a Promise. This example uses local state to report its outcome."
+                    ],
+                    language: "jsx",
+                    code: `import { useState } from 'react';
 
-export function SaveButton() {
-    const [saving, setSaving] = useState(false);
+export default function NameForm({ saveName }) {
+    const [name, setName] = useState('');
+    const [pending, setPending] = useState(false);
     const [message, setMessage] = useState('');
-
-    async function handleSave() {
-        setSaving(true);
+    async function submit(event) {
+        event.preventDefault();
+        if (pending) return;
+        setPending(true);
         setMessage('');
-
         try {
-            const response = await fetch('/api/settings', { method: 'POST' });
-            if (!response.ok) throw new Error('Save failed.');
-            setMessage('Saved.');
-        } catch (error) {
-            setMessage(error instanceof Error ? error.message : 'Save failed.');
+            await saveName(name);
+            setMessage('Name saved.');
+        } catch {
+            setMessage('Could not save. Try again.');
         } finally {
-            setSaving(false);
+            setPending(false);
         }
     }
-
-    return (
-        <>
-            <button disabled={saving} onClick={() => void handleSave()}>
-                {saving ? 'Saving…' : 'Save'}
-            </button>
-            <p aria-live="polite">{message}</p>
-        </>
-    );
+    return <form onSubmit={submit}>
+        <label>Name <input value={name} onChange={event => setName(event.target.value)} /></label>
+        <button disabled={pending}>{pending ? 'Saving...' : 'Save'}</button>
+        <p role="status">{message}</p>
+    </form>;
 }`,
-                result: 'Clicking “Save” disables the button and changes its label to “Saving…”. The live message then shows “Saved.” or the caught failure message.',
-            }],
+                    result: "The button shows Saving... while the callback is pending. The form then shows success or failure.",
+                    explanation: [
+                        "saveName performs the save. The component controls its pending and message UI."
+                    ]
+                }
+            ]
+        }
+    ],
+    references: [
+        {
+            title: "React: Fetching data in Effects",
+            href: "https://react.dev/learn/synchronizing-with-effects"
         },
         {
-            id: 'react-versus-promises',
-            title: 'Promises and React have separate jobs',
-            bullets: [
-                "JavaScript runs fetch, awaits Promises, and catches thrown errors.",
-                "TypeScript checks the state shapes in source code. It cannot prove the shape of server JSON.",
-                "React rerenders after setState and displays the selected request state.",
-                "React does not cancel a Promise. The component must ignore outdated work or use cancellation supplied by the request API.",
-                "An Effect handles changing render inputs. An event handler handles the user action that caused a save.",
-            ],
-        },
-    ],
+            title: "React: Event work and data fetching",
+            href: "https://react.dev/learn/you-might-not-need-an-effect"
+        }
+    ]
 };
 
 export default note;
