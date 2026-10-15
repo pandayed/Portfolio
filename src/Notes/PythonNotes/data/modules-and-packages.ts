@@ -1,235 +1,156 @@
 import type { PythonNote } from '../types';
 
 const note: PythonNote = {
-    slug: 'modules-and-packages',
-    title: 'Modules and packages',
-    summary: 'Understand modules, packages, import forms, and installable distributions.',
-    updatedOn: '2026-10-01',
-    sections: [
+    "slug": "modules-and-packages",
+    "title": "Modules and packages",
+    "summary": "Split code into modules, choose import forms, and organize related modules in packages.",
+    "updatedOn": "2026-10-15",
+    "exampleLayout": "grouped",
+    "sections": [
         {
-            id: 'module',
-            title: 'Use a Python file as a module',
-            paragraphs: [
-                'A .py file can be imported as a module. Put related functions or values in one file, then import that module where you need it.',
-                'Save these two files in the same folder. Run the command from that folder.',
+            "id": "module",
+            "title": "Use a Python file as a module",
+            "bullets": [
+                "A module contains definitions and statements. A .py file is the usual way to write one.",
+                "Each module has its own namespace: its collection of names. Importing lets another module use those names.",
+                "Python searches for modules through its import machinery. The script’s folder and installed libraries are common search locations. Avoid local names such as json.py that hide standard library modules."
             ],
-            examples: [{
-                title: 'prices.py',
-                code: [
-                    'TAX_RATE = 0.10',
-                    '',
-                    'def price_with_tax(price):',
-                    '    return price * (1 + TAX_RATE)',
-                ].join('\n'),
-            }, {
-                title: 'main.py',
-                code: [
-                    'import prices',
-                    '',
-                    'print(prices.price_with_tax(20))  # 22.0',
-                ].join('\n'),
-            }, {
-                title: 'Run the program',
-                language: 'text',
-                code: 'python3 main.py',
-                result: 'The output is 22.0.',
-            }],
-            bullets: [
-                'import prices gives you the module name prices. Use prices.price_with_tax to get a name from it.',
-                'from prices import price_with_tax imports that name directly. You can then call price_with_tax(20).',
-                'Python finds modules through its import search path. The script’s folder and installed libraries are common places on that path.',
-            ],
+            "examples": [
+                {
+                    "title": "Import a function from another file",
+                    "description": [
+                        "Save both files in the same folder. Run python3 main.py from that folder."
+                    ],
+                    "code": "# prices.py\ndef price_with_tax(price):\n    return price * 1.10\n\n# main.py\nimport prices\nprint(prices.price_with_tax(20))",
+                    "result": "22.0",
+                    "explanation": [
+                        "The comments mark separate files. import prices binds the module name; prices.price_with_tax accesses its function."
+                    ]
+                }
+            ]
         },
         {
-            id: 'import-forms',
-            title: 'Choose an import form',
-            paragraphs: [
-                'Each form below uses the same prices.py file. Import the module when you want its name to show where a function came from. Import a name directly when that shorter call is clear.',
+            "id": "import-forms",
+            "title": "Choose an import form",
+            "bullets": [
+                "import module keeps the module name in each use. from module import name binds the selected name directly.",
+                "as gives an imported module or name a local alias.",
+                "Avoid from module import *. It makes name origins unclear and can replace existing bindings."
             ],
-            examples: [{
-                title: 'main.py',
-                code: [
-                    'import prices',
-                    'print(prices.price_with_tax(20))  # 22.0',
-                    '',
-                    'from prices import price_with_tax',
-                    'print(price_with_tax(20))  # 22.0',
-                    '',
-                    'import prices as costs',
-                    'print(costs.price_with_tax(20))  # 22.0',
-                    '',
-                    'from prices import price_with_tax as add_tax',
-                    'print(add_tax(20))  # 22.0',
-                ].join('\n'),
-                result: 'All four calls print 22.0. as gives the imported module or name a local alias.',
-            }],
-            bullets: [
-                'By itself, from prices import price_with_tax creates only the local name price_with_tax, not prices.',
-                'Avoid from prices import *. It is harder to see which names came from prices and may replace an existing name.',
-            ],
+            "examples": [
+                {
+                    "title": "Four import forms",
+                    "description": [
+                        "These forms use the standard library math module, so no extra file or installation is needed."
+                    ],
+                    "code": "import math\nprint(math.sqrt(25))\n\nfrom math import sqrt\nprint(sqrt(25))\n\nimport math as numbers\nprint(numbers.sqrt(25))\n\nfrom math import sqrt as square_root\nprint(square_root(25))",
+                    "result": "5.0\n5.0\n5.0\n5.0",
+                    "explanation": [
+                        "from math import sqrt binds sqrt directly. That statement alone does not bind math."
+                    ]
+                }
+            ]
         },
         {
-            id: 'import-execution',
-            title: 'Importing runs the module',
-            paragraphs: [
-                'On the first import, Python executes the module’s top-level statements and makes its names available. It normally keeps the loaded module in memory, so a later import in the same process does not run those statements again.',
-                'Keep reusable work inside functions. Use a main guard for work that should run when a file is started as a program.',
+            "id": "import-execution",
+            "title": "Separate importable code from script work",
+            "bullets": [
+                "The first import normally executes a module’s top-level statements. Later imports in the same process normally reuse the loaded module.",
+                "Use the __name__ guard for work that should run only when the module is started as the program.",
+                "For a directly started script, __name__ is \"__main__\". For an imported module, it is the module’s import name."
             ],
-            examples: [{
-                title: 'greetings.py',
-                code: [
-                    'def greet(name):',
-                    '    return f"Hello, {name}"',
-                    '',
-                    'if __name__ == "__main__":',
-                    '    print(greet("Lal"))  # Hello, Lal',
-                ].join('\n'),
-                result: 'python3 greetings.py prints Hello, Lal. import greetings defines greet without calling print.',
-            }],
-            bullets: [
-                'Python sets __name__ to "__main__" for the file started as the program.',
-                'When another file imports greetings, its __name__ is "greetings". The guarded lines do not run.',
-            ],
+            "examples": [
+                {
+                    "title": "Guard a script entry point",
+                    "description": [
+                        "Save this file as greetings.py. Run python3 greetings.py, or import greetings from another file."
+                    ],
+                    "code": "def greet(name):\n    return f\"Hello, {name}\"\n\nif __name__ == \"__main__\":\n    print(greet(\"Mia\"))",
+                    "result": "Hello, Mia",
+                    "explanation": [
+                        "The displayed output is from running the script. Importing greetings defines greet without running the guarded print."
+                    ]
+                }
+            ]
         },
         {
-            id: 'package',
-            title: 'A package groups modules',
-            paragraphs: [
-                'A regular package is a folder of Python modules with an __init__.py file. The file can be empty. Its presence marks the folder as a package and lets it hold package setup code when needed.',
-                'Use a package when several modules belong together. This example has a shop package and one module inside it.',
+            "id": "package",
+            "title": "Group modules in a package",
+            "bullets": [
+                "A package is a module that can contain submodules and subpackages. A regular package uses a folder with __init__.py. That file can be empty.",
+                "A subpackage is another package inside a package. Its import name includes its parents, such as shop.reports.monthly.",
+                "Namespace packages can omit __init__.py and span multiple folders. Use a regular package for these examples."
             ],
-            examples: [{
-                title: 'Project files',
-                language: 'text',
-                code: [
-                    'project/',
-                    '├── main.py',
-                    '└── shop/',
-                    '    ├── __init__.py',
-                    '    └── pricing.py',
-                ].join('\n'),
-            }, {
-                title: 'shop/pricing.py',
-                code: [
-                    'def total(price, shipping):',
-                    '    return price + shipping',
-                ].join('\n'),
-            }, {
-                title: 'main.py',
-                code: [
-                    'from shop.pricing import total',
-                    '',
-                    'print(total(10, 2))  # 12',
-                ].join('\n'),
-                result: 'From project/, python3 main.py prints 12.',
-            }],
-            bullets: [
-                'shop is the package. shop.pricing is a module inside it. total is a function in that module.',
-                'Python also supports namespace packages without __init__.py. Start with a regular package while learning.',
-            ],
+            "examples": [
+                {
+                    "title": "Import from a regular package",
+                    "description": [
+                        "Create shop/ beside main.py. Create an empty shop/__init__.py. Save the other two files below, then run python3 main.py."
+                    ],
+                    "code": "# shop/pricing.py\ndef total(price, shipping):\n    return price + shipping\n\n# main.py\nimport shop.pricing\nprint(shop.pricing.total(10, 2))\n\nfrom shop import pricing\nprint(pricing.total(10, 2))\n\nfrom shop.pricing import total\nprint(total(10, 2))",
+                    "result": "12\n12\n12",
+                    "explanation": [
+                        "shop is the package, shop.pricing is its module, and total is a function inside that module."
+                    ]
+                }
+            ]
         },
         {
-            id: 'module-versus-package',
-            title: 'Module versus package',
-            paragraphs: [
-                'A module is a unit of code Python can import. A package is a special kind of module that can contain other modules and packages. The common layout is one .py file for a module and one folder for a regular package.',
+            "id": "imports-inside-packages",
+            "title": "Import between modules in a package",
+            "bullets": [
+                "An absolute import starts with the package name, such as from shop.pricing import total.",
+                "A relative import starts from the current package. One dot means the current package; two dots mean its parent.",
+                "Relative imports need package context. The -m option finds and runs a module by its import name."
             ],
-            bullets: [
-                'prices.py is a module. import prices loads that module.',
-                'shop/ with __init__.py is a regular package. shop/pricing.py is the module shop.pricing.',
-                'A folder inside shop/ with its own __init__.py is a subpackage. Its modules use longer names such as shop.reports.monthly.',
-                'A namespace package can span more than one folder and does not need __init__.py. It is useful when separate distributions contribute to the same package name.',
-            ],
+            "examples": [
+                {
+                    "title": "Run a package module with -m",
+                    "description": [
+                        "Create a shop/ folder with an empty __init__.py and the two files below. From the folder containing shop/, run python3 -m shop.main."
+                    ],
+                    "code": "# shop/pricing.py\ndef total(price, shipping):\n    return price + shipping\n\n# shop/main.py\nfrom .pricing import total\n\nif __name__ == \"__main__\":\n    print(total(10, 2))",
+                    "result": "12",
+                    "explanation": [
+                        "Running python3 shop/main.py directly does not supply the package context needed by this relative import."
+                    ]
+                }
+            ]
         },
         {
-            id: 'package-import-forms',
-            title: 'Import names from a package',
-            paragraphs: [
-                'These imports use the shop/ and pricing.py files shown above. A dotted name identifies the module inside its package.',
+            "id": "installed-packages",
+            "title": "Import names and installation names",
+            "bullets": [
+                "The standard library includes modules such as math, json, and pathlib. They need no separate installation.",
+                "An import package is code used by an import statement. A distribution package is something a package manager installs. One distribution can provide multiple modules and packages.",
+                "Installation names and import names can differ. The Pillow distribution provides the PIL import package.",
+                "A source distribution contains source code. A wheel is a built distribution used for installation. These formats do not change import syntax."
             ],
-            examples: [{
-                title: 'main.py',
-                code: [
-                    'import shop.pricing',
-                    'print(shop.pricing.total(10, 2))  # 12',
-                    '',
-                    'from shop import pricing',
-                    'print(pricing.total(10, 2))  # 12',
-                    '',
-                    'from shop.pricing import total',
-                    'print(total(10, 2))  # 12',
-                ].join('\n'),
-                result: 'From project/, python3 main.py prints 12 three times.',
-            }],
-        },
-        {
-            id: 'imports-inside-packages',
-            title: 'Import between modules in a package',
-            paragraphs: [
-                'An absolute import starts with the package name: from shop.pricing import total. A relative import starts from the current package: from .pricing import total. The single dot means the current package.',
-                'Relative imports need package context. Run a package module with -m from the folder above the package. The -m option asks Python to find and run the module by its import name.',
-            ],
-            examples: [{
-                title: 'Package files',
-                language: 'text',
-                code: [
-                    'project/',
-                    '└── shop/',
-                    '    ├── __init__.py',
-                    '    ├── pricing.py',
-                    '    └── main.py',
-                ].join('\n'),
-            }, {
-                title: 'shop/main.py',
-                code: [
-                    'from .pricing import total',
-                    '',
-                    'if __name__ == "__main__":',
-                    '    print(total(10, 2))  # 12',
-                ].join('\n'),
-            }, {
-                title: 'Run from project/',
-                language: 'text',
-                code: 'python3 -m shop.main',
-                result: 'The output is 12. Running python3 shop/main.py directly gives this relative import no package context.',
-            }],
-        },
-        {
-            id: 'installed-packages',
-            title: 'Import packages and installed distributions',
-            examples: [{
-                title: 'Create a virtual environment and install a library (macOS/Linux)',
-                language: 'text',
-                code: [
-                    'python3 -m venv .venv',
-                    'source .venv/bin/activate',
-                    'python -m pip install pydantic',
-                ].join('\n'),
-                result: 'The active virtual environment receives the installed distribution. Its Python can then import pydantic.',
-            }],
-            bullets: [
-                'Keep .venv out of version control. Each developer can create it again for the project.',
-                'python -m pip uses pip from the selected Python interpreter.',
-            ],
-            paragraphs: [
-                'The Python standard library includes modules such as json and pathlib. You can import them without installing a separate library. Other projects publish libraries that you install with a package manager such as pip.',
-                'The word package has two related uses: an import package is code you import, such as shop; a distribution package is something you install. A distribution can provide modules and import packages. Its install name and import name do not always match: pip install Pillow provides the PIL import package.',
-                'To share a project for installation, package its code and project metadata into a distribution. A source distribution contains the source; a wheel is a built distribution for installation. Neither changes the import syntax used by the code.',
-                'A virtual environment gives a project its own installed packages. After creating one, use its Python interpreter to install and run dependencies.',
+            "paragraphs": [
                 [
-                    'Read the ',
-                    { text: 'Python modules tutorial', href: 'https://docs.python.org/3/tutorial/modules.html' },
-                    ', the ',
-                    { text: 'installation guide', href: 'https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/' },
-                    ', and the ',
-                    { text: 'distribution and import package guide', href: 'https://packaging.python.org/en/latest/discussions/distribution-package-vs-import-package/' },
-                    '. See ',
-                    { text: 'package formats', href: 'https://packaging.python.org/en/latest/discussions/package-formats/' },
-                    ' for source distributions and wheels.',
+                    "Installation and project isolation belong in ",
+                    {
+                        "text": "Virtual environments and pip",
+                        "href": "#/notes/python/virtual-environments"
+                    },
+                    "."
                 ],
-            ],
-        },
-    ],
+                [
+                    "References: ",
+                    {
+                        "text": "Python tutorial: modules and packages",
+                        "href": "https://docs.python.org/3/tutorial/modules.html"
+                    },
+                    " and ",
+                    {
+                        "text": "distribution packages versus import packages",
+                        "href": "https://packaging.python.org/en/latest/discussions/distribution-package-vs-import-package/"
+                    },
+                    "."
+                ]
+            ]
+        }
+    ]
 };
 
 export default note;

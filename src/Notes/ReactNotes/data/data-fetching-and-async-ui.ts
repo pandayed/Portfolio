@@ -13,9 +13,7 @@ const note: LearningNote = {
             title: "Represent waiting, success, and failure",
             bullets: [
                 "A request can be idle, loading, successful, or failed. Represent each state so the UI can choose clear content.",
-                "Use async and await inside an async function. An Effect callback itself must return cleanup rather than a Promise.",
-                "Check response.ok before reading a fetch response. HTTP failure statuses do not automatically reject fetch.",
-                "Validate response data before using it. JSON parsing does not verify the shape of the returned object."
+                "An Effect’s setup function cannot be async because an async function returns a Promise. React expects a cleanup function or no return value. Put the async request in a separate function and call it from setup."
             ]
         },
         {
@@ -73,18 +71,18 @@ export default function Users({ query }) {
 }`,
                     result: "The component shows loading, an error, an empty result, or matching users. A result for an old query cannot replace the current one.",
                     explanation: [
-                        "Cleanup marks that request inactive before aborting it. Both success and failure check active before storing state. The query check prevents old data flashing before the new Effect sets loading."
+                        "[query] starts a new request when query changes. Cleanup marks the old request inactive and asks the browser to cancel it.",
+                        "Both success and failure check active before updating state. The query check shows Loading users... if the stored result belongs to an older query.",
+                        "response.ok detects HTTP errors. The array and property checks reject data that does not match the expected user format."
                     ]
                 }
             ]
         },
         {
             id: "event-requests",
-            title: "Start action-specific requests in a handler",
+            title: "Save form data in the submit handler",
             bullets: [
-                "A save triggered by a submit belongs in the submit handler. It is not synchronization with the displayed component.",
-                "Track pending and error state. Disable repeated submission while pending. Catch failures and clear pending in finally.",
-                "For a full application, use the framework’s data loader or an appropriate client cache when available. Manual Effects do not provide caching, preloading, or shared request handling."
+                "Submitting a form should start the save in its submit handler. An Effect is not needed to detect that submission."
             ],
             examples: [
                 {
@@ -121,7 +119,8 @@ export default function NameForm({ saveName }) {
 }`,
                     result: "The button shows Saving... while the callback is pending. The form then shows success or failure.",
                     explanation: [
-                        "saveName performs the save. The component controls its pending and message UI."
+                        "saveName performs the save. pending disables the button while it runs, and message displays success or failure.",
+                        "finally clears pending after either outcome, so the button becomes available again."
                     ]
                 }
             ]

@@ -10,12 +10,11 @@ const note: LearningNote = {
     sections: [
         {
             id: "custom-hooks",
-            title: "Name reusable Hook logic by its purpose",
+            title: "Create a custom Hook",
             bullets: [
                 "A custom Hook is a function that calls Hooks. Its name starts with use followed by a capital letter.",
-                "Extract repeated stateful behavior after it works in a component. A function that only calculates data can stay a regular helper.",
-                "Each call has independent state. Sharing a Hook does not share one state value across callers.",
-                "Custom Hooks follow the same top-level call rules as the Hooks they call."
+                "A custom Hook lets components reuse state and Effect logic. A function that only calculates data does not need to be a Hook.",
+                "Call custom Hooks at the top level of a component or another Hook, before any early return. Do not call them inside loops, conditions, or event handlers."
             ],
             examples: [
                 {
@@ -53,12 +52,10 @@ export default function SearchPreview() {
         },
         {
             id: "custom-hook-boundaries",
-            title: "Keep the Hook’s purpose visible",
+            title: "Each Hook call has its own state",
             bullets: [
-                "Accept the inputs that control the behavior and return the values the caller needs.",
-                "Keep cleanup and dependency lists inside the Hook that owns the external synchronization.",
-                "Avoid generic lifecycle wrappers such as useMount that hide dependency requirements.",
-                "Use context or lift state when callers need one shared value. Extracting a custom Hook alone does not provide that sharing."
+                "State created with useState or useReducer inside a custom Hook belongs to each call. Two components calling that Hook do not share those state values.",
+                "To share one state value, keep it in a common parent and pass it to both components through props or context."
             ]
         }
     ],

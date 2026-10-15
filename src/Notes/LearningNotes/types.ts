@@ -7,6 +7,7 @@ export type LearningNoteScope =
     | 'react';
 
 export type LearningCodeLanguage =
+    | 'python'
     | 'sql'
     | 'java'
     | 'javascript'

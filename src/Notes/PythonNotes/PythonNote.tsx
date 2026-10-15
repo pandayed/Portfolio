@@ -11,6 +11,7 @@ import { pythonNotes } from './pythonNotes';
 import type { PythonInlineContent } from './types';
 import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
 import PythonRunSequence from './PythonRunSequence';
+import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
 
 interface PythonNoteProps {
     route: PythonNoteRoute;
@@ -85,7 +86,12 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                     )}
 
                     {section.examples?.map((example, index) => (
-                        <div className="Article__section" key={`${section.id}-example-${index}`}>
+                        note.exampleLayout === 'grouped' ? (
+                            <LearningNoteExampleBlock
+                                key={`${section.id}-example-${index}`}
+                                example={{ ...example, language: example.language ?? 'python' }}
+                            />
+                        ) : <div className="Article__section" key={`${section.id}-example-${index}`}>
                             {example.title && (
                                 <h3 className="Article__subTitle">{example.title}</h3>
                             )}

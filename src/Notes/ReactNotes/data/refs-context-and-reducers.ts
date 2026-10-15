@@ -3,23 +3,23 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "refs-context-and-reducers",
     title: "Refs and DOM access",
-    summary: "Keep values outside rendering and access browser elements through refs.",
+    summary: "Store values with useRef without re-rendering, or use a ref to access a page element.",
     scope: "react",
     updatedOn: "2026-10-14",
     exampleLayout: "grouped",
     sections: [
         {
             id: "refs",
-            title: "Keep a value in a ref",
+            title: "Store a value with useRef",
             bullets: [
-                "useRef(initialValue) returns a stable object with a current property. The same object persists across renders.",
-                "Changing current does not request a render. Use state for values that must change visible JSX.",
-                "Read or write refs in handlers. Avoid reading or writing them during rendering, except predictable initialization.",
-                "For an expensive initial object, start the ref at null and create it only when current is null. This render-time initialization is allowed only when the result is predictable and the same on repeated calls."
+                "useRef(initialValue) returns an object with a current property. React keeps the same object between renders.",
+                "Read or update the stored value through ref.current. Changing it does not re-render the component. Use state when a change should update the screen.",
+                "Read or update refs in event handlers or Effects. Do not read or update current during rendering, except when setting its initial value as described below.",
+                "If creating the initial object is expensive, start the ref at null. During rendering, create and assign the object only while current is null. This is allowed when creating it always produces the same result."
             ],
             examples: [
                 {
-                    title: "Count handler calls without rendering them",
+                    title: "Count clicks without re-rendering",
                     description: [
                         "Track clicks separately from the displayed UI."
                     ],
@@ -43,10 +43,10 @@ export default function ClickTracker() {
         },
         {
             id: "dom-refs",
-            title: "Access a DOM element after it is attached",
+            title: "Access a page element with a ref",
             bullets: [
-                "Pass a ref to a browser element with its ref property. React puts the attached DOM node in current.",
-                "current is null before attachment and after removal. Check it before calling browser methods.",
+                "Pass a ref to an element with its ref prop. After React adds the element to the page, current holds its browser DOM node, such as an input element.",
+                "current is null before React adds the element to the page and after React removes it. Check it before calling methods such as focus().",
                 "Use refs for focus, scrolling, or measurement. Let React manage the content and structure it renders."
             ],
             examples: [
@@ -67,14 +67,14 @@ export default function MessageField() {
 }`,
                     result: "Clicking Edit moves keyboard focus to the input.",
                     explanation: [
-                        "The optional call handles a null current value. The click happens after React has attached the input."
+                        "The ?. checks that current is not null before calling focus(). The input is already on the page when the user clicks Edit."
                     ]
                 }
             ]
         },
         {
             id: "choosing-tool",
-            title: "Choose state or a ref by the update needed",
+            title: "When to use state, a ref, or a local variable",
             bullets: [],
             table: {
                 columns: [

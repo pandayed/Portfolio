@@ -1,13 +1,18 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import JavaScriptRunner from '../JavaScriptRunner/JavaScriptRunner';
+import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
 import type { LearningNoteExample } from './types';
 import './LearningNoteExampleBlock.css';
 
 interface LearningNoteExampleBlockProps {
     example: LearningNoteExample;
+    termContext?: 'react';
 }
 
-const LearningNoteExampleBlock = ({ example }: LearningNoteExampleBlockProps) => {
+const LearningNoteExampleBlock = ({ example, termContext }: LearningNoteExampleBlockProps) => {
+    const renderProse = (text: string, key: string) => termContext
+        ? renderProgrammingTerms(text, key, termContext)
+        : text;
     return (
         <details className="LearningNoteExampleBlock">
             <summary className="LearningNoteExampleBlock__summary">
@@ -21,7 +26,7 @@ const LearningNoteExampleBlock = ({ example }: LearningNoteExampleBlockProps) =>
             {example.description && (
                 <div className="LearningNoteExampleBlock__section">
                     <ul className="Article__notes">
-                        {example.description.map((point, index) => <li key={index}>{point}</li>)}
+                        {example.description.map((point, index) => <li key={index}>{renderProse(point, `description-${index}`)}</li>)}
                     </ul>
                 </div>
             )}
@@ -46,7 +51,7 @@ const LearningNoteExampleBlock = ({ example }: LearningNoteExampleBlockProps) =>
             {!!example.explanation?.length && (
                 <section className="LearningNoteExampleBlock__section" aria-label="Explanation">
                     <ul className="Article__notes">
-                        {example.explanation.map((point, index) => <li key={index}>{point}</li>)}
+                        {example.explanation.map((point, index) => <li key={index}>{renderProse(point, `explanation-${index}`)}</li>)}
                     </ul>
                 </section>
             )}

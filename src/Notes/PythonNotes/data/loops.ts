@@ -1,78 +1,107 @@
 import type { PythonNote } from '../types';
 
 const note: PythonNote = {
-    slug: 'loops-and-range',
-    title: 'Loops and range',
-    summary: 'Repeat work with for and while loops, range, and break.',
-    updatedOn: '2026-09-20',
-    sections: [
+    "slug": "loops-and-range",
+    "title": "Loops and range",
+    "summary": "Repeat work with for and while, control repetition, and detect a completed search.",
+    "exampleLayout": "grouped",
+    "updatedOn": "2026-10-15",
+    "sections": [
         {
-            id: 'for-loop',
-            title: 'for loops',
-            paragraphs: ['A for loop asks an iterable for values one at a time. Strings, lists, tuples, dictionaries, sets, files, and generators are iterable.'],
-            examples: [{
-                code: [
-                    'for letter in "Python":',
-                    '    print(letter)  # P, y, t, h, o, n (one letter per line)',
-                    '',
-                    'for number in [10, 20, 30]:',
-                    '    print(number)  # 10, 20, 30 (one number per line)',
-                ].join('\n'),
-            }],
-        },
-        {
-            id: 'range',
-            title: 'range',
-            bullets: [
-                'range(stop) starts at 0.',
-                'range(start, stop) starts at start.',
-                'range(start, stop, step) moves by step.',
-                'The stop value is excluded.',
-                'range is a compact iterable object. It does not build a list of every number.',
+            "id": "for-loop",
+            "title": "for loops",
+            "bullets": [
+                "A for loop takes values from an iterable one at a time. An iterable is an object that can supply values to a loop.",
+                "Strings supply characters. Collection types introduced next can also supply their items.",
+                "The loop variable receives each value before the indented block runs."
             ],
-            examples: [{
-                code: [
-                    'for x in range(5):       # 0 through 4',
-                    '    print(x)  # 0, 1, 2, 3, 4 (one number per line)',
-                    '',
-                    'for x in range(2, 10, 2):  # 2, 4, 6, 8',
-                    '    print(x)  # 2, 4, 6, 8 (one number per line)',
-                ].join('\n'),
-            }],
+            "examples": [
+                {
+                    "title": "Visit each character",
+                    "code": "for letter in \"Go\":\n    print(letter)",
+                    "result": "G\no"
+                }
+            ]
         },
         {
-            id: 'loop-else',
-            title: 'break and loop else',
-            paragraphs: ['The else clause runs when the loop finishes without break. It is useful for search code.'],
-            examples: [{
-                code: [
-                    'names = ["lal", "vishal"]',
-                    '',
-                    'for name in names:',
-                    '    if name.startswith("P"):',
-                    '        print("Found")  # Found (if a name starts with "P")',
-                    '        break',
-                    'else:',
-                    '    print("Not found")  # Not found (no name starts with "P" in this list)',
-                ].join('\n'),
-            }],
-            bullets: ['The else belongs to the loop. It runs only when the loop ends without break.'],
+            "id": "range",
+            "title": "range",
+            "bullets": [
+                "range(stop) supplies integers from 0 up to, but excluding, stop.",
+                "range(start, stop, step) selects the starting value and step. The default step is 1.",
+                "A negative step counts downward. Step cannot be zero. A range is empty when its direction cannot reach the stop bound.",
+                "range is a compact sequence object. It does not build a list containing every number."
+            ],
+            "examples": [
+                {
+                    "title": "Count up and down",
+                    "code": "for number in range(2, 7, 2):\n    print(number)\nfor number in range(3, 0, -1):\n    print(number)",
+                    "result": "2\n4\n6\n3\n2\n1"
+                }
+            ]
         },
         {
-            id: 'while-loop',
-            title: 'while loops',
-            examples: [{
-                code: [
-                    'count = 0',
-                    'while count < 5:',
-                    '    count += 1',
-                    '    print(count)  # 1, 2, 3, 4, 5 (one number per line)',
-                    'else:',
-                    '    print("Loop was not broken")  # Loop was not broken',
-                ].join('\n'),
-            }],
+            "id": "while-loop",
+            "title": "while loops",
+            "bullets": [
+                "while repeats its block while its condition remains truthy. It checks before each repetition.",
+                "Update the state used by the condition when the loop should eventually finish. Otherwise it may repeat forever."
+            ],
+            "examples": [
+                {
+                    "title": "Repeat until a counter reaches its limit",
+                    "code": "count = 0\nwhile count < 3:\n    print(count)\n    count += 1",
+                    "result": "0\n1\n2"
+                }
+            ]
         },
-    ],
+        {
+            "id": "break-continue",
+            "title": "break and continue",
+            "bullets": [
+                "break exits the nearest enclosing loop. continue skips the rest of the current repetition and starts the next one.",
+                "In nested loops, each inner loop runs within an outer repetition. break in the inner loop does not exit the outer loop."
+            ],
+            "examples": [
+                {
+                    "title": "Skip one value and stop early",
+                    "code": "for number in range(6):\n    if number == 1:\n        continue\n    if number == 4:\n        break\n    print(number)",
+                    "result": "0\n2\n3"
+                }
+            ]
+        },
+        {
+            "id": "loop-else",
+            "title": "Loop else",
+            "bullets": [
+                "A for or while loop can have an else block. It runs when the loop finishes normally, without break.",
+                "For a for loop, finishing normally means exhausting its values. For a while loop, it means the condition became falsy.",
+                "The else block also runs when the loop has zero repetitions. An exception or return that exits the loop bypasses else."
+            ],
+            "examples": [
+                {
+                    "title": "Detect an unsuccessful search",
+                    "code": "for letter in \"Ada\":\n    if letter == \"z\":\n        print(\"Found\")\n        break\nelse:\n    print(\"Not found\")",
+                    "result": "Not found",
+                    "explanation": [
+                        "The loop visits every character without reaching break."
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "references",
+            "title": "References",
+            "bullets": [
+                [
+                    {
+                        "text": "Python tutorial: for statements and loop control",
+                        "href": "https://docs.python.org/3/tutorial/controlflow.html#for-statements"
+                    }
+                ]
+            ]
+        }
+    ]
 };
 
 export default note;

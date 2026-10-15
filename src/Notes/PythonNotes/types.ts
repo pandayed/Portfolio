@@ -1,5 +1,8 @@
 export interface PythonExample {
     title?: string;
+    description?: readonly string[];
+    explanation?: readonly string[];
+    possibleOutput?: boolean;
     language?: 'python' | 'text';
     code: string;
     result?: string;
@@ -28,6 +31,7 @@ export interface PythonInlineStrong {
 export type PythonInlineContent = string | readonly (string | PythonInlineLink | PythonInlineStrong)[];
 
 export interface PythonNote {
+    exampleLayout?: 'grouped';
     slug: string;
     title: string;
     summary: string;

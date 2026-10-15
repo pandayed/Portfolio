@@ -3,19 +3,18 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "context-and-providers",
     title: "Context and providers",
-    summary: "Provide data to distant descendants and read the closest provider.",
+    summary: "Read shared data with useContext without passing props through every component.",
     scope: "react",
     updatedOn: "2026-10-14",
     exampleLayout: "grouped",
     sections: [
         {
             id: "context",
-            title: "Provide a value without intermediate props",
+            title: "Read shared data with useContext",
             bullets: [
-                "Context supplies a value to descendants without passing it through every intermediate component.",
-                "createContext(defaultValue) creates a context object. Its default is a fixed fallback when there is no matching provider.",
-                "useContext reads the closest matching provider above the calling component.",
-                "Use props for nearby data. Try passing children before adding context just to avoid a few intermediate props."
+                "Context lets a component read data from a parent higher in the component tree, without passing that data through every component in between.",
+                "createContext(defaultValue) creates a context object. A provider supplies its value to the components inside it.",
+                "useContext(Context) reads the value from the closest provider for that context above the component. If there is no provider, it returns the default value."
             ],
             examples: [
                 {
@@ -52,12 +51,12 @@ export default function Settings() {
         },
         {
             id: "provider-position",
-            title: "Place the provider above the reader",
+            title: "Provider placement and value changes",
             bullets: [
-                "A provider returned by a component does not affect useContext calls in that same component. It is below those calls.",
+                "useContext cannot read a provider returned by the same component. The provider must wrap the component that calls useContext.",
                 "Changing the provided value re-renders components that read it. React compares values with Object.is.",
-                "A newly created object value has a new identity even if its properties match. Measure before optimizing provider values.",
-                "Context can supply reducer state and dispatch. The reducer still owns transitions; context supplies access.",
+                "If the provider receives a new object, components reading the context re-render even when the object contains the same values.",
+                "A provider can also supply state and dispatch from useReducer. Nested components can read the state and dispatch actions through context.",
                 "React 19 also supports <ThemeContext value={theme}>. Use .Provider when supporting React 18."
             ]
         }

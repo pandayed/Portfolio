@@ -97,19 +97,27 @@ const ProgrammingTerm = ({ term, text }: { term: TermEntry; text: string }) => {
     );
 };
 
-const aliases = programmingTerms.flatMap((term) => (
-    [term.term, ...(term.aliases ?? [])].map((text) => ({ text, term }))
-)).sort((first, second) => second.text.length - first.text.length);
-
-const termsByAlias = new Map(aliases.map(({ text, term }) => [text.toLowerCase(), term]));
 const escapePattern = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const termPattern = new RegExp(
-    `(?<![\\p{L}\\p{N}_])(${aliases.map(({ text }) => escapePattern(text)).join('|')})(?![\\p{L}\\p{N}_])`,
-    'giu',
-);
+const createTermMatcher = (terms: readonly TermEntry[]) => {
+    const aliases = terms.flatMap((term) => (
+        [term.term, ...(term.aliases ?? [])].map((text) => ({ text, term }))
+    )).sort((first, second) => second.text.length - first.text.length);
+
+    return {
+        termsByAlias: new Map(aliases.map(({ text, term }) => [text.toLowerCase(), term])),
+        termPattern: new RegExp(
+            `(?<![\\p{L}\\p{N}_])(${aliases.map(({ text }) => escapePattern(text)).join('|')})(?![\\p{L}\\p{N}_])`,
+            'giu',
+        ),
+    };
+};
+
+const defaultMatcher = createTermMatcher(programmingTerms.filter(({ category }) => category !== 'React terms'));
+const reactMatcher = createTermMatcher(programmingTerms);
 
 // Only prose passes through this renderer. Code blocks and existing links stay intact.
-export const renderProgrammingTerms = (text: string, keyPrefix: string) => {
+export const renderProgrammingTerms = (text: string, keyPrefix: string, context?: 'react') => {
+    const { termPattern, termsByAlias } = context === 'react' ? reactMatcher : defaultMatcher;
     const parts = [];
     let cursor = 0;
     for (const match of text.matchAll(termPattern)) {

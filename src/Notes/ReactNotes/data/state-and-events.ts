@@ -3,20 +3,20 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "state-and-events",
     title: "State and queued updates",
-    summary: "Keep UI data between renders and trace snapshots and queued updates.",
+    summary: "Store component data with useState and update it after user actions.",
     scope: "react",
     updatedOn: "2026-10-14",
     exampleLayout: "grouped",
     sections: [
         {
             id: "state-keeps-ui-data",
-            title: "Keep changing UI data in state",
+            title: "Store component data with useState",
             bullets: [
                 "State is data React keeps for a component between renders. A regular local variable does not provide that storage.",
-                "useState is a Hook: a React function called during rendering to access a React feature.",
+                "useState is a Hook that adds state to a function component.",
                 "useState(initialValue) returns the current value and a setter. The setter requests another render with the new value.",
                 "Call useState at the top level of the component, before conditional returns. Do not call it in handlers, loops, conditions, or nested helpers.",
-                "Each component instance has its own state. Call the setter in a handler when an action should change the UI."
+                "Each copy of a component has its own state."
             ],
             examples: [
                 {
@@ -42,11 +42,11 @@ export default function Counter() {
         },
         {
             id: "state-is-a-render-snapshot",
-            title: "A handler reads its render’s snapshot",
+            title: "State stays the same while a handler runs",
             bullets: [
-                "A snapshot is the state value supplied to one render. Calling a setter does not change that render’s variables.",
-                "Handlers and timers created by that render keep reading its snapshot.",
-                "React batches updates from an event. It processes the queued updates before updating the screen."
+                "Each render receives its own state values. Calling a setter does not change the values in a handler that is already running.",
+                "A timer created by a handler also reads the state from the render that created that handler.",
+                "React groups state updates made in an event handler. After the handler finishes, React processes them and renders the component again."
             ],
             examples: [
                 {
@@ -74,11 +74,11 @@ export default function Counter() {
         },
         {
             id: "update-from-previous-state",
-            title: "Queue updates based on previous state",
+            title: "Update state from its previous value",
             bullets: [
                 "Pass an updater function when the next value depends on the previous value.",
-                "React passes the queued value to each updater in order. Keep updaters pure: calculate and return the next state without outside changes.",
-                "Repeated setCount(count + 1) calls in one handler all read the same snapshot. They queue the same replacement value."
+                "React runs the updater functions in order. The first receives the current state. Each later updater receives the result of the previous one.",
+                "An updater must only calculate and return the next state. React may call it twice in development Strict Mode to check for mistakes."
             ],
             examples: [
                 {

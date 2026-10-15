@@ -1,68 +1,113 @@
 import type { PythonNote } from '../types';
 
 const note: PythonNote = {
-    slug: 'conditionals',
-    title: 'Conditionals',
-    summary: 'Choose branches with if, elif, and else, combine conditions, and select values with conditional expressions.',
-    updatedOn: '2026-09-20',
-    sections: [
+    "slug": "conditionals",
+    "title": "Conditionals",
+    "summary": "Compare values, understand truth values, and choose which block runs.",
+    "exampleLayout": "grouped",
+    "updatedOn": "2026-10-15",
+    "sections": [
         {
-            id: 'if-elif-else',
-            title: 'if, elif, and else',
-            paragraphs: ['Python checks branches from top to bottom and runs the first matching branch. Order conditions so a specific condition is checked before a broader one.'],
-            examples: [{
-                code: [
-                    'age = 46',
-                    '',
-                    'if age >= 45:',
-                    '    print("45 or older")  # 45 or older (for age = 46)',
-                    'elif age >= 18:',
-                    '    print("Adult")  # Adult (when age is from 18 through 44)',
-                    'else:',
-                    '    print("Under 18")  # Under 18 (when age is below 18)',
-                ].join('\n'),
-            }],
-        },
-        {
-            id: 'indentation-pass',
-            title: 'Indentation and pass',
-            bullets: [
-                'Indentation defines a block.',
-                'Use one consistent indentation style. Four spaces is the standard style.',
-                'pass is a statement that does nothing. It can keep a block syntactically valid while it is empty.',
+            "id": "comparisons",
+            "title": "Comparisons",
+            "bullets": [
+                "== compares values. != means not equal. <, <=, >, and >= compare ordering where the types support it.",
+                "A comparison usually produces True or False. Do not confuse assignment = with comparison ==.",
+                "Chain comparisons to state a range, such as 10 < score < 20.",
+                "Use is None and is not None for absence checks. is checks object identity, rather than value equality."
             ],
+            "examples": [
+                {
+                    "title": "Compare values",
+                    "code": "score = 15\nprint(score == 15)\nprint(10 < score < 20)\nprint(\"15\" == 15)",
+                    "result": "True\nTrue\nFalse",
+                    "explanation": [
+                        "A string and an integer are different values."
+                    ]
+                }
+            ]
         },
         {
-            id: 'boolean-operators',
-            title: 'Boolean and comparison operators',
-            examples: [{
-                code: [
-                    'x = 15',
-                    'y = 20',
-                    '',
-                    'if x < y and x > 10:',
-                    '    print("Both are true")  # Both are true (for x = 15 and y = 20)',
-                    '',
-                    'if 10 < x < 20:',
-                    '    print("x is between 10 and 20")  # x is between 10 and 20 (for x = 15)',
-                    '',
-                    'if not x > y:',
-                    '    print("x is not greater than y")  # x is not greater than y (for x = 15 and y = 20)',
-                ].join('\n'),
-            }],
+            "id": "truthiness",
+            "title": "Truthy and falsy values",
+            "bullets": [
+                "Conditions do not need an explicit comparison. Python checks the truth value of the supplied object.",
+                "False, None, numeric zero, empty strings, and empty collections are falsy. Most other values are truthy.",
+                "bool(value) returns the Boolean truth value. A non-empty string is truthy even if its text is \"False\" or \"0\".",
+                "Custom classes can define truth behavior. Their methods are covered in the object-model chapter."
+            ],
+            "examples": [
+                {
+                    "title": "Check whether text is present",
+                    "code": "name = \"\"\nif name:\n    print(\"Name supplied\")\nelse:\n    print(\"Name missing\")\nprint(bool(\"False\"))",
+                    "result": "Name missing\nTrue"
+                }
+            ]
         },
         {
-            id: 'conditional-expression',
-            title: 'Conditional expression (if-else expression)',
-            paragraphs: ['A conditional expression chooses one of two values. Use it for a short choice; use an if statement when each branch needs multiple steps.'],
-            examples: [{
-                code: [
-                    'age = 20',
-                    'message = "Eligible" if age >= 18 else "Not eligible"',
-                ].join('\n'),
-            }],
+            "id": "if-elif-else",
+            "title": "if, elif, and else",
+            "bullets": [
+                "if runs its block when a condition is truthy. elif checks another condition when earlier branches did not match.",
+                "else runs when no earlier condition matches. elif and else are optional.",
+                "Python runs only the first matching branch in one if/elif/else chain. Put a more specific condition before a broader one.",
+                "End a branch header with a colon. Indent its block by four spaces. pass can serve as a statement that does nothing when a block needs a placeholder."
+            ],
+            "examples": [
+                {
+                    "title": "Choose one age group",
+                    "code": "age = 46\nif age >= 45:\n    print(\"45 or older\")\nelif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Under 18\")",
+                    "result": "45 or older",
+                    "explanation": [
+                        "The first condition matches, so the later branches are skipped."
+                    ]
+                }
+            ]
         },
-    ],
+        {
+            "id": "boolean-operators",
+            "title": "Combine conditions",
+            "bullets": [
+                "and evaluates its right operand only if the left operand is truthy. or evaluates its right operand only if the left operand is falsy. This is short-circuit evaluation.",
+                "not returns the opposite Boolean truth value.",
+                "and and or return an operand, which may not be a Boolean. Use parentheses to make mixed conditions clear."
+            ],
+            "examples": [
+                {
+                    "title": "Combine checks and choose a fallback",
+                    "code": "age = 20\nhas_ticket = True\nprint(age >= 18 and has_ticket)\nprint(not has_ticket)\nname = \"\"\nprint(name or \"Guest\")",
+                    "result": "True\nFalse\nGuest"
+                }
+            ]
+        },
+        {
+            "id": "conditional-expression",
+            "title": "Choose between two values",
+            "bullets": [
+                "value_if_true if condition else value_if_false evaluates one of two expressions.",
+                "Use an if statement when a branch needs multiple steps."
+            ],
+            "examples": [
+                {
+                    "title": "Store a selected message",
+                    "code": "age = 20\nmessage = \"Eligible\" if age >= 18 else \"Not eligible\"\nprint(message)",
+                    "result": "Eligible"
+                }
+            ]
+        },
+        {
+            "id": "references",
+            "title": "References",
+            "bullets": [
+                [
+                    {
+                        "text": "Python tutorial: if statements",
+                        "href": "https://docs.python.org/3/tutorial/controlflow.html#if-statements"
+                    }
+                ]
+            ]
+        }
+    ]
 };
 
 export default note;

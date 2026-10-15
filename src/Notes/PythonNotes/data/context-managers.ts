@@ -1,85 +1,71 @@
 import type { PythonNote } from '../types';
 
 const note: PythonNote = {
-    slug: 'context-managers',
-    title: 'Context managers and with',
-    summary: 'Use with to set up and clean up resources, and implement __enter__ and __exit__.',
-    updatedOn: '2026-10-01',
-    sections: [
+    "slug": "context-managers",
+    "title": "Context managers and with",
+    "summary": "Follow the context manager protocol and define setup and cleanup for a block.",
+    "updatedOn": "2026-10-15",
+    "exampleLayout": "grouped",
+    "sections": [
         {
-            id: 'with-file',
-            title: 'Close a file with with',
-            paragraphs: [
-                'A context manager sets up a resource before a block and cleans it up when the block exits. The Python with statement calls that setup and cleanup for you.',
-                'open returns a file object that is a context manager. Its exit step closes the file even if reading the file raises an exception.',
+            "id": "with-file",
+            "title": "with defines a managed block",
+            "bullets": [
+                "A context manager provides setup before a block and cleanup when the block exits. The with statement calls these operations.",
+                "A file object is a context manager. Its cleanup closes the file even when the block raises an exception."
             ],
-            examples: [{
-                title: 'Write and read a file',
-                code: [
-                    'with open("file.txt", "w", encoding="utf-8") as file:',
-                    '    file.write("Hello")',
-                    '',
-                    'with open("file.txt", "r", encoding="utf-8") as file:',
-                    '    data = file.read()',
-                    '',
-                    'print(data)  # Hello',
-                    'print(file.closed)  # True',
-                ].join('\n'),
-                result: 'The first block creates file.txt. The second reads Hello. The file is closed after its with block.',
-            }],
+            "paragraphs": [
+                [
+                    "For opening, reading, and writing files, see ",
+                    {
+                        "text": "Files and JSON",
+                        "href": "#/notes/python/files-and-json"
+                    },
+                    ". The protocol below explains how that cleanup works."
+                ]
+            ]
         },
         {
-            id: 'protocol',
-            title: 'What with calls',
-            bullets: [
-                'Python evaluates the expression after with to obtain a context manager.',
-                'It calls the manager’s __enter__() method. The value returned by __enter__() is assigned to the name after as.',
-                'If __enter__() raises an exception, the block does not start and Python does not call that manager’s __exit__().',
-                'It runs the body, then calls __exit__(exc_type, exc_value, traceback) when the body leaves. This happens on normal completion, return, or an exception.',
-                'On normal completion, all three exception arguments are None. On an exception, they describe that exception.',
-                'If __exit__ returns a true value for an exception, with suppresses it. Returning False or None lets the exception propagate.',
-            ],
-            paragraphs: [[
-                'The ',
-                { text: 'with statement reference', href: 'https://docs.python.org/3/reference/compound_stmts.html#the-with-statement' },
-                ' specifies the execution order and exception behavior.',
-            ]],
+            "id": "protocol",
+            "title": "What with calls",
+            "bullets": [
+                "Python evaluates the expression after with to obtain a context manager.",
+                "It calls __enter__(). The returned value is assigned to the name after as. It need not be the manager itself.",
+                "If __enter__() raises, the block does not start and Python does not call that manager’s __exit__().",
+                "After the body starts, Python calls __exit__(exc_type, exc_value, traceback) when the body leaves, including on return or an exception.",
+                "On normal completion, the three exception arguments are None. On an exception, they describe the error.",
+                "A true return value from __exit__ suppresses an exception from the body. False or None lets it propagate."
+            ]
         },
         {
-            id: 'custom',
-            title: 'Write a context manager',
-            paragraphs: [
-                'Define __enter__ for setup and __exit__ for cleanup. This example records when a block starts and ends. It returns False so an exception in the block remains visible to the caller.',
+            "id": "custom",
+            "title": "Define setup and cleanup",
+            "examples": [
+                {
+                    "title": "Run cleanup on success and failure",
+                    "description": [
+                        "Define a manager and exercise both paths in one program."
+                    ],
+                    "code": "class Session:\n    def __enter__(self):\n        print(\"start\")\n        return self\n\n    def __exit__(self, exc_type, exc_value, traceback):\n        print(\"finish\")\n        return False\n\nwith Session() as session:\n    print(isinstance(session, Session))\n\ntry:\n    with Session():\n        raise ValueError(\"bad value\")\nexcept ValueError as error:\n    print(error)",
+                    "result": "start\nTrue\nfinish\nstart\nfinish\nbad value",
+                    "explanation": [
+                        "__enter__ returns the Session instance for the as binding.",
+                        "__exit__ runs in both paths. Returning False lets ValueError reach the except block."
+                    ]
+                }
             ],
-            examples: [{
-                title: 'A small custom manager',
-                code: [
-                    'class Session:',
-                    '    def __enter__(self):',
-                    '        print("start")  # start',
-                    '        return self',
-                    '',
-                    '    def __exit__(self, exc_type, exc_value, traceback):',
-                    '        print("finish")  # finish',
-                    '        return False',
-                    '',
-                    'with Session() as session:',
-                    '    print(isinstance(session, Session))  # True',
-                ].join('\n'),
-                result: 'The lines print in this order: start, True, finish. __exit__ runs after the block.',
-            }, {
-                title: 'Cleanup also runs when the block fails',
-                code: [
-                    'try:',
-                    '    with Session():',
-                    '        raise ValueError("bad value")',
-                    'except ValueError as error:',
-                    '    print(error)  # bad value',
-                ].join('\n'),
-                result: 'With the Session class above, the lines print in this order: start, finish, bad value. False from __exit__ allows ValueError to reach except.',
-            }],
-        },
-    ],
+            "paragraphs": [
+                [
+                    "Reference: ",
+                    {
+                        "text": "Python with statement reference",
+                        "href": "https://docs.python.org/3/reference/compound_stmts.html#the-with-statement"
+                    },
+                    "."
+                ]
+            ]
+        }
+    ]
 };
 
 export default note;

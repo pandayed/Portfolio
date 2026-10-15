@@ -1,146 +1,120 @@
 import type { PythonNote } from '../types';
 
 const note: PythonNote = {
-    slug: 'lists',
-    title: 'Lists',
-    summary: 'Create, change, copy, search, sort, transform, and combine lists.',
-    updatedOn: '2026-10-01',
-    sections: [
+    "slug": "lists",
+    "title": "Lists",
+    "summary": "Store an ordered collection, change items, search and sort, and understand shared references.",
+    "exampleLayout": "grouped",
+    "updatedOn": "2026-10-15",
+    "sections": [
         {
-            id: 'create-access',
-            title: 'Create and access lists',
-            examples: [{
-                code: [
-                    'names = ["lal", "bihari", "pandey"]',
-                    'matrix = [[1, 2, 4], [3], [4, 5]]',
-                    'zeros = [0] * 5',
-                    'numbers = list(range(2, 10))',
-                    'characters = list("Python")',
-                    '',
-                    'print(characters[0], characters[-1])  # P n',
-                    'print(characters[1:4])  # [\'y\', \'t\', \'h\']',
-                    'print(characters[::-1])  # [\'n\', \'o\', \'h\', \'t\', \'y\', \'P\']',
-                ].join('\n'),
-            }],
-            bullets: ['Repeating an inner list repeats the same list reference. Use a comprehension when each nested list must be independent.'],
-        },
-        {
-            id: 'unpacking-enumerate',
-            title: 'Unpacking and enumerate',
-            examples: [{
-                code: [
-                    'numbers = [1, 2, 3, 4]',
-                    'first, second, *remaining = numbers',
-                    'first, *between, last = numbers',
-                    '',
-                    'for index, name in enumerate(["Lal", "Ayushi"]):',
-                    '    print(index, name)  # 0 Lal, then 1 Ayushi (one pair per line)',
-                ].join('\n'),
-            }],
-            bullets: ['Without a starred target, unpacking needs one target for each value.'],
-        },
-        {
-            id: 'modify',
-            title: 'Add and remove items',
-            bullets: [
-                'append adds one item at the end.',
-                'insert adds one item at an index.',
-                'pop removes and returns an item. The default index is -1.',
-                'remove deletes the first matching value.',
-                'del removes an item or slice by position.',
-                'clear removes every item.',
+            "id": "create-access",
+            "title": "Create and access lists",
+            "bullets": [
+                "A list is a mutable sequence. It keeps insertion order and allows duplicate values.",
+                "Use square brackets for literals and list(iterable) to collect values. len returns the number of items.",
+                "Indexing and slicing follow the same start-inclusive, stop-exclusive rules as strings. An invalid single index raises IndexError.",
+                "range(3) supplies the integers 0, 1, and 2. The Loops and range note explains its bounds and step."
             ],
-            examples: [{
-                code: [
-                    'fruits = ["apple", "banana"]',
-                    'fruits.append("guava")',
-                    'fruits.insert(0, "grapes")',
-                    'last = fruits.pop()',
-                    'fruits.remove("banana")',
-                ].join('\n'),
-            }],
+            "examples": [
+                {
+                    "title": "Create and read a list",
+                    "code": "names = [\"Ada\", \"Grace\", \"Ada\"]\nprint(names[0], names[-1])\nprint(names[1:])\nprint(list(range(3)))\nprint(len(names))",
+                    "result": "Ada Ada\n['Grace', 'Ada']\n[0, 1, 2]\n3"
+                }
+            ]
         },
         {
-            id: 'search-sort',
-            title: 'Search and sort',
-            examples: [{
-                code: [
-                    'fruits = ["apple", "banana", "apple"]',
-                    'print(fruits.index("apple"))  # 0',
-                    'print(fruits.count("apple"))  # 2',
-                    '',
-                    'items = [("item3", 3), ("item1", 1)]',
-                    'items.sort(key=lambda item: item[1])',
-                    'copy = sorted(items, reverse=True)',
-                ].join('\n'),
-            }],
-            bullets: [
-                'index returns the first matching position. Check membership first when a value may be absent.',
-                'sort changes the list and returns None. sorted returns a new list.',
+            "id": "modify",
+            "title": "Change, add, and remove items",
+            "bullets": [
+                "Assign to an index to replace an item. Assign to a slice to replace a range of items.",
+                "append adds one item. extend adds each value from an iterable. insert adds one item at a position.",
+                "pop removes and returns an item, using the last position by default. An invalid position raises IndexError.",
+                "remove deletes the first equal value and raises ValueError if absent. del removes an item or slice. clear empties the list.",
+                "Methods that only change a list, such as append, return None. Do not assign their result back to the list name."
             ],
+            "examples": [
+                {
+                    "title": "Update a task list",
+                    "code": "tasks = [\"read\", \"write\"]\ntasks[0] = \"study\"\ntasks.append(\"review\")\ntasks.extend([\"save\", \"close\"])\nlast = tasks.pop()\ntasks.remove(\"write\")\nprint(tasks)\nprint(last)",
+                    "result": "['study', 'review', 'save']\nclose"
+                }
+            ]
         },
         {
-            id: 'shared-reference',
-            title: 'Assignment and a shared list',
-            paragraphs: [
-                'Assigning a list to another name does not copy it. Both names refer to the same list. A change through either name is visible through both names.',
-                'If the statements below are pasted without line breaks or other separators, they raise SyntaxError before anything prints. Written as separate statements, they produce the result shown here.',
+            "id": "search-sort",
+            "title": "Search and sort",
+            "bullets": [
+                "in checks membership. index returns the first matching position and raises ValueError if absent. count returns the number of equal items.",
+                "sort changes a list in place and returns None. sorted(iterable) returns a new sorted list.",
+                "reverse=True sorts in descending order. Compared values must support ordering. Custom sorting keys are covered after functions."
             ],
-            examples: [{
-                code: [
-                    'a = [1, 2, 3]',
-                    'b = a',
-                    'b.append(4)',
-                    'print(a)',
-                    'print(b)',
-                ].join('\n'),
-                result: 'Both lines print [1, 2, 3, 4]. append changes the shared list.',
-            }],
+            "examples": [
+                {
+                    "title": "Find items and sort without losing the original order",
+                    "code": "numbers = [3, 1, 3, 2]\nprint(3 in numbers, numbers.index(3), numbers.count(3))\nordered = sorted(numbers)\nprint(numbers)\nprint(ordered)\nnumbers.sort(reverse=True)\nprint(numbers)",
+                    "result": "True 0 2\n[3, 1, 3, 2]\n[1, 2, 3, 3]\n[3, 3, 2, 1]"
+                }
+            ]
         },
         {
-            id: 'shallow-deep-copy',
-            title: 'Shallow copy versus deep copy',
-            paragraphs: [
-                'Assignment makes another name for the same object; it does not copy. A shallow copy makes a new outer collection but keeps references to the original nested objects. A deep copy also copies nested mutable objects, so changing one of those copies does not change the original nested object.',
-                'For a list, list.copy() and copy.copy(list_value) both make a shallow copy. Use copy.deepcopy when you need independent nested mutable values.',
+            "id": "shared-reference",
+            "title": "Assignment shares a list",
+            "bullets": [
+                "Assigning a list to another name does not copy it. Both names refer to the same list.",
+                "A shallow copy makes a new outer list, while keeping references to its items. Use items.copy(), items[:], or list(items).",
+                [
+                    "For nested objects and deep copying, read ",
+                    {
+                        "text": "Objects and mutability",
+                        "href": "#/notes/python/objects-and-mutability"
+                    },
+                    "."
+                ]
             ],
-            examples: [{
-                code: [
-                    'import copy',
-                    '',
-                    'original = [[1, 2], [3]]',
-                    'shallow = copy.copy(original)',
-                    'deep = copy.deepcopy(original)',
-                    '',
-                    'print(original is shallow)     # False: new outer list',
-                    'print(original[0] is shallow[0])  # True: shared inner list',
-                    'print(original[0] is deep[0])     # False: copied inner list',
-                    '',
-                    'original[0].append(4)',
-                    'print(original)  # [[1, 2, 4], [3]]',
-                    'print(shallow)   # [[1, 2, 4], [3]]',
-                    'print(deep)      # [[1, 2], [3]]',
-                ].join('\n'),
-                result: 'The identity checks print False, True, False. After append, original and shallow show 4 in their shared inner list; deep does not.',
-            }],
+            "examples": [
+                {
+                    "title": "Compare a shared reference and a shallow copy",
+                    "code": "original = [1, 2]\nshared = original\ncopied = original.copy()\nshared.append(3)\nprint(original)\nprint(copied)",
+                    "result": "[1, 2, 3]\n[1, 2]",
+                    "explanation": [
+                        "Changing shared also changes the list seen through original. copied has a different outer list."
+                    ]
+                }
+            ]
         },
         {
-            id: 'transform-filter-zip',
-            title: 'Transform, filter, and zip',
-            examples: [{
-                code: [
-                    'items = [("item3", 3), ("item2", 2), ("item1", 1)]',
-                    '',
-                    'numbers = [item[1] for item in items]',
-                    'large = [item[1] for item in items if item[1] > 1]',
-                    '',
-                    'pairs = list(zip([1, 2, 3], [10, 20]))',
-                    'print(pairs)  # [(1, 10), (2, 20)]',
-                ].join('\n'),
-            }],
-            bullets: ['zip stops when the shortest iterable ends. map and filter produce iterators; use list(...) if you need a list.'],
+            "id": "repeat",
+            "title": "Repeated nested references",
+            "bullets": [
+                "Multiplying a list repeats references to its items. It does not copy nested lists.",
+                "Use a comprehension to create an independent inner list for each row. Comprehensions have a separate note after dictionaries and sets."
+            ],
+            "examples": [
+                {
+                    "title": "Observe repeated references",
+                    "code": "rows = [[0]] * 2\nrows[0].append(1)\nprint(rows)",
+                    "result": "[[0, 1], [0, 1]]",
+                    "explanation": [
+                        "Both positions refer to the same inner list."
+                    ]
+                }
+            ]
         },
-    ],
+        {
+            "id": "references",
+            "title": "References",
+            "bullets": [
+                [
+                    {
+                        "text": "Python tutorial: lists",
+                        "href": "https://docs.python.org/3/tutorial/datastructures.html#more-on-lists"
+                    }
+                ]
+            ]
+        }
+    ]
 };
 
 export default note;

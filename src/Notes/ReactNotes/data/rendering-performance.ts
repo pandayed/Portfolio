@@ -3,34 +3,33 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "rendering-performance",
     title: "Rendering performance",
-    summary: "Measure slow rendering before caching values, functions, or component output.",
+    summary: "Use useMemo and useCallback to reuse calculations and functions between renders.",
     scope: "react",
     updatedOn: "2026-10-14",
     exampleLayout: "grouped",
     sections: [
         {
             id: "render-first",
-            title: "Measure the work that is slow",
+            title: "When caching helps",
             bullets: [
-                "React renders a component to calculate its next UI. Keep that calculation pure and correct before optimizing it.",
-                "Use React DevTools Profiler to identify expensive renders. Measure representative interactions with realistic data.",
-                "Keep state near the components that use it. Avoid unnecessary Effects that trigger extra state updates.",
-                "React can discard caches. Correct behavior must not depend on memoization."
+                "Use the React DevTools Profiler to find components that take a long time to render before adding memoization.",
+                "React can discard cached values. The component must still work correctly when React calculates them again."
             ]
         },
         {
             id: "use-memo",
-            title: "Cache a measured expensive calculation",
+            title: "useMemo: reuse a calculated value",
             bullets: [
                 "useMemo calculates a value during rendering and reuses it while its dependencies stay unchanged.",
-                "Include every reactive value read by the calculation. React compares dependencies with Object.is.",
-                "A cache does not speed up the first calculation. New dependency identities cause another calculation."
+                "List every prop, state value, and variable or function declared in the component that the calculation reads as a dependency.",
+                "React compares each dependency with its previous value using Object.is. A newly created object, array, or function counts as changed.",
+                "useMemo does not speed up the first calculation. React runs the calculation again when a dependency changes."
             ],
             examples: [
                 {
                     title: "Reuse a filtered list while editing unrelated text",
                     description: [
-                        "Assume products is a large, stable array whose items have id and name. Profile the real list before choosing this optimization."
+                        "products is an array of items with id and name. Reuse the filtered array when only the Note field changes."
                     ],
                     language: "jsx",
                     code: `import { useMemo, useState } from 'react';
@@ -56,17 +55,18 @@ export default function ProductList({ products }) {
         },
         {
             id: "stable-props",
-            title: "Keep a callback stable when a consumer benefits",
+            title: "useCallback: reuse a function",
             bullets: [
-                "memo can skip a parent-triggered child render when its props compare equal. Child state or context updates can still render it.",
-                "useCallback reuses a function identity while dependencies stay unchanged. It does not call the function or cache its result.",
-                "A stable callback helps a memoized child only when its other props also stay equal."
+                "useCallback returns the same function between renders while its dependencies stay unchanged. It does not call the function or cache its result.",
+                "List the component’s props, state values, variables, and functions that the callback reads as dependencies.",
+                "memo wraps a component so React can skip rendering it when its parent renders and its props have not changed.",
+                "Passing the same function helps memo skip that render. The other props must also stay unchanged. Updates to the child’s own state or context can still make it render."
             ],
             examples: [
                 {
                     title: "Pass a stable selection callback",
                     description: [
-                        "Use this pattern only if profiling shows an expensive picker. The short button here demonstrates the prop relationship."
+                        "Keep the onSelect function unchanged when editing Note so React can skip rendering Picker."
                     ],
                     language: "jsx",
                     code: `import { memo, useCallback, useState } from 'react';
@@ -87,7 +87,8 @@ export default function Booking() {
 }`,
                     result: "Choosing the time updates the label. Editing Note supplies the same callback to Picker.",
                     explanation: [
-                        "The stable state setter requires no changing dependency here. memo can skip the picker’s parent-triggered render. This small example alone does not justify optimization."
+                        "React returns the same setTime function on every render, so it does not need to be listed as a dependency. The empty dependency list lets useCallback return the same select function.",
+                        "Picker receives the same onSelect prop when Note changes. memo lets React skip rendering Picker for that update."
                     ]
                 }
             ]

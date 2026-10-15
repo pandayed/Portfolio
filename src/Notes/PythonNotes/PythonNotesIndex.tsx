@@ -14,15 +14,16 @@ const PythonNotesIndex = () => (
             Back to notes
         </a>
         <p className="Notes__intro">
-            Short notes adapted from the{' '}
-            <a
-                href="https://github.com/pandayed/PythonNotes"
-                className="Link"
-                target="_blank"
-                rel="noreferrer"
-            >
+            Follow the chapters in order: syntax, variables and data types, collections, control flow,
+            functions, modules, files and errors, classes, then advanced topics. The learning order
+            follows the{' '}
+            <a href="https://docs.python.org/3/tutorial/" className="Link" target="_blank" rel="noreferrer">
+                official Python Tutorial
+            </a>, with advanced runtime, networking, and FastAPI notes after the core language.
+            Original examples and topic coverage also draw on the{' '}
+            <a href="https://github.com/pandayed/PythonNotes" className="Link" target="_blank" rel="noreferrer">
                 PythonNotes reference repository
-            </a>. The notes are grouped into chapters and use short examples to explain each topic.
+            </a>.
         </p>
         <p className="Notes__intro">
             Find term definitions in the{' '}

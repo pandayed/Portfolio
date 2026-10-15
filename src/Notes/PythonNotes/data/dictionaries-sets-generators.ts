@@ -1,116 +1,105 @@
 import type { PythonNote } from '../types';
 
 const note: PythonNote = {
-    slug: 'dictionaries-sets-and-generators',
-    title: 'Dictionaries, sets, comprehensions, and generators',
-    summary: 'Use dictionaries and sets, compare comprehensions with loops, and produce values with generators.',
-    updatedOn: '2026-10-01',
-    sections: [
+    "slug": "dictionaries-sets-and-generators",
+    "title": "Dictionaries",
+    "summary": "Map keys to values, handle absent keys, update records, and iterate over entries.",
+    "exampleLayout": "grouped",
+    "updatedOn": "2026-10-15",
+    "sections": [
         {
-            id: 'dictionaries',
-            title: 'Dictionaries',
-            paragraphs: ['A dictionary maps unique hashable keys to values. It preserves insertion order, but lookup uses keys rather than numeric positions.'],
-            examples: [{
-                code: [
-                    'point = {"x": 1, "y": 2}',
-                    'point["z"] = 10',
-                    '',
-                    'print(point["x"])  # 1',
-                    'print(point.get("missing"))       # None',
-                    'print(point.get("missing", -100)) # -100',
-                    '',
-                    'for key, value in point.items():',
-                    '    print(key, value)  # x 1, then y 2, then z 10 (one pair per line)',
-                ].join('\n'),
-            }],
-            bullets: [
-                'Use square brackets when the key is expected to exist. A missing key raises KeyError.',
-                'Use get when a key may be absent. It returns None by default or the fallback value you provide.',
-                'Dictionary keys must be hashable. A list cannot be a key.',
+            "id": "dictionaries",
+            "title": "Create and read dictionaries",
+            "bullets": [
+                "A dictionary maps unique keys to values. Use {} for an empty dictionary.",
+                "Keys must be hashable: their hash value must remain stable, and equality must agree with hashing. Strings and integers are common keys. Lists cannot be keys.",
+                "A tuple can be a key only when all its items are hashable. The equality and hashing note explains the full contract.",
+                "A dictionary preserves insertion order. Lookup uses a key, not an item position. Values may repeat."
             ],
+            "examples": [
+                {
+                    "title": "Read a named value",
+                    "code": "point = {\"x\": 1, \"y\": 2}\nprint(point[\"x\"])\nprint(len(point))",
+                    "result": "1\n2"
+                }
+            ]
         },
         {
-            id: 'sets',
-            title: 'Sets',
-            paragraphs: ['A set stores unique hashable values. Use it for membership checks and set operations.'],
-            examples: [{
-                code: [
-                    'first = {1, 2, 3}',
-                    'second = {3, 4, 5}',
-                    '',
-                    'print(first | second)  # {1, 2, 3, 4, 5} (order may vary)',
-                    'print(first & second)  # {3}',
-                    'print(first - second)  # {1, 2} (order may vary)',
-                    'print(first ^ second)  # {1, 2, 4, 5} (order may vary)',
-                ].join('\n'),
-            }],
-            bullets: [
-                'Sets support membership checks and set operations. They do not support indexing.',
-                'Set iteration order is not guaranteed. Do not rely on it.',
-                'Use set() to create an empty set. {} creates an empty dictionary.',
-                'discard does nothing when a value is absent. remove raises KeyError.',
+            "id": "missing-keys",
+            "title": "Missing keys and membership",
+            "bullets": [
+                "dictionary[key] raises KeyError if the key is absent. Use it when a missing key is an error.",
+                "get(key, fallback) returns a fallback when the key is absent. The default fallback is None.",
+                "key in dictionary checks keys, not values."
             ],
+            "examples": [
+                {
+                    "title": "Handle an optional field",
+                    "code": "profile = {\"name\": \"Ada\"}\nprint(profile.get(\"city\"))\nprint(profile.get(\"city\", \"Unknown\"))\nprint(\"name\" in profile)",
+                    "result": "None\nUnknown\nTrue"
+                }
+            ]
         },
         {
-            id: 'list-comprehension-vs-loop',
-            title: 'List comprehension versus a for loop',
-            paragraphs: [
-                'Both forms visit the input values one at a time. A list comprehension builds and returns a new list in one expression. A for loop runs a block of statements; it builds a list only if you create one and add values to it.',
-                'Use a comprehension for a short transformation or filter that produces a list. Use a for loop when the work needs several steps, branches, or an action such as printing instead of building a list.',
+            "id": "modify",
+            "title": "Add, replace, and remove entries",
+            "bullets": [
+                "Assigning a new key adds an entry. Assigning an existing key replaces its value without moving the key.",
+                "update copies entries from another mapping or key/value pairs. Later values replace earlier values for matching keys.",
+                "pop removes a key and returns its value. Supply a default to handle absence. del removes a key and raises KeyError if absent. clear empties the dictionary."
             ],
-            examples: [{
-                title: 'The same result with both forms',
-                code: [
-                    'numbers = [1, 2, 3, 4]',
-                    '',
-                    'with_loop = []',
-                    'for number in numbers:',
-                    '    if number % 2 == 0:',
-                    '        with_loop.append(number * number)',
-                    '',
-                    'with_comprehension = [number * number for number in numbers if number % 2 == 0]',
-                    'print(with_loop)',
-                    'print(with_comprehension)',
-                ].join('\n'),
-                result: 'Both lines print [4, 16]. The if clause keeps only even numbers; the expression before for squares each one.',
-            }],
+            "examples": [
+                {
+                    "title": "Update a record",
+                    "code": "profile = {\"name\": \"Ada\", \"city\": \"London\"}\nprofile[\"city\"] = \"Paris\"\nprofile.update({\"active\": True})\ncity = profile.pop(\"city\")\nprint(profile)\nprint(city)",
+                    "result": "{'name': 'Ada', 'active': True}\nParis"
+                }
+            ]
         },
         {
-            id: 'comprehensions',
-            title: 'List, set, and dictionary comprehensions',
-            paragraphs: ['A comprehension builds a collection from an iterable. The expression before for gives each output value. Add if to include only values that match a condition.'],
-            examples: [{
-                title: 'List comprehension',
-                code: [
-                    'values = [x * 2 for x in range(5)]',
-                    'even_squares = [x * x for x in range(6) if x % 2 == 0]',
-                ].join('\n'),
-                result: 'values is [0, 2, 4, 6, 8]. even_squares is [0, 4, 16].',
-            }, {
-                title: 'Set comprehension',
-                code: 'unique_doubles = {x * 2 for x in [1, 1, 2]}',
-                result: 'unique_doubles contains 2 and 4. A set keeps each value once; its display order is not guaranteed.',
-            }, {
-                title: 'Dictionary comprehension',
-                code: 'squares = {x: x * x for x in range(4)}',
-                result: 'squares is {0: 0, 1: 1, 2: 4, 3: 9}.',
-            }],
+            "id": "iteration",
+            "title": "Iterate over keys and values",
+            "bullets": [
+                "Iterating directly over a dictionary supplies keys. values() supplies values. items() supplies key/value pairs.",
+                "keys(), values(), and items() return views that reflect later dictionary changes.",
+                "Do not add or delete keys while iterating over the dictionary. Iterate over a copy when the key set must change."
+            ],
+            "examples": [
+                {
+                    "title": "Unpack each key/value pair",
+                    "code": "scores = {\"Ada\": 90, \"Grace\": 95}\nfor name, score in scores.items():\n    print(name, score)",
+                    "result": "Ada 90\nGrace 95"
+                }
+            ]
         },
         {
-            id: 'generators',
-            title: 'Generator expressions',
-            paragraphs: ['Parentheses around a comprehension-like expression create a generator expression. It produces values on demand instead of storing every result at once.'],
-            examples: [{
-                code: [
-                    'values = (x * 2 for x in range(10_000))',
-                    '',
-                    'for value in values:',
-                    '    print(value)  # 0, 2, 4, 6, 8, ... (one value per line)',
-                ].join('\n'),
-            }],
-            bullets: ['A generator expression produces values on demand. It does not support indexing or len, and it is exhausted after one pass.'],
+            "id": "merge",
+            "title": "Merge dictionaries",
+            "bullets": [
+                "{**first, **second} builds a new dictionary by expanding each mapping. Later values win for duplicate keys.",
+                "On Python 3.9 and later, first | second also merges dictionaries. first |= second updates the first dictionary."
+            ],
+            "examples": [
+                {
+                    "title": "Override a default value",
+                    "code": "defaults = {\"color\": \"blue\", \"size\": 10}\noverrides = {\"size\": 20}\ncombined = {**defaults, **overrides}\nprint(combined)",
+                    "result": "{'color': 'blue', 'size': 20}"
+                }
+            ]
         },
-    ],
+        {
+            "id": "references",
+            "title": "References",
+            "bullets": [
+                [
+                    {
+                        "text": "Python tutorial: dictionaries",
+                        "href": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries"
+                    }
+                ]
+            ]
+        }
+    ]
 };
 
 export default note;

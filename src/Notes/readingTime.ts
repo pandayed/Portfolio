@@ -83,7 +83,8 @@ for (const note of pythonNotes) {
         ...(section.paragraphs ?? []).map(inlineText),
         ...(section.bullets ?? []).map(inlineText),
         ...(section.examples ?? []).flatMap((example) => [
-            example.title ?? '', example.code, example.result ?? '',
+            example.title ?? '', ...(example.description ?? []), example.code,
+            example.result ?? '', ...(example.explanation ?? []),
         ]),
         ...(section.exceptions ?? []),
     ])].join(' ');

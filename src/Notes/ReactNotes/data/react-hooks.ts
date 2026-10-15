@@ -3,19 +3,17 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "react-hooks",
     title: "Advanced Hooks reference",
-    summary: "Look up advanced Hooks after the core sequence; React 19 APIs have version requirements.",
+    summary: "IDs, transitions, external data, form submissions, and other advanced Hook uses.",
     scope: "react",
     updatedOn: "2026-10-14",
     exampleLayout: "grouped",
     sections: [
         {
             id: "learning-order",
-            title: "Use the focused lessons for core Hooks",
+            title: "Core Hook lessons and version requirements",
             bullets: [
-                "The ordered lessons explain core Hooks once. This page is a lookup for later APIs.",
-                "Read React with TypeScript before the typed examples below. Core lessons use JavaScript JSX.",
-                "APIs marked React 19+ or React 19.2+ require those versions and matching React DOM and type packages. The site itself uses React 18.",
-                "Conventional Hooks follow the call-order rules. The React 19 use API has a documented exception."
+                "The table below lists the separate lessons for core Hooks. The examples on this page use TypeScript.",
+                "Version labels show the minimum React version. Use matching React DOM and TypeScript type packages."
             ],
             table: {
                 columns: [
@@ -56,11 +54,11 @@ const note: LearningNote = {
         },
         {
             id: "use-id",
-            title: "useId: accessible IDs for repeated components",
+            title: "useId: connect an input to its label",
             bullets: [
                 "useId creates an ID for connections between elements, such as an input and its label.",
-                "Use data IDs for list keys. Do not use useId for keys or persistent record IDs.",
-                "Server-rendered and browser-rendered component trees must match for generated IDs to match."
+                "useId is for element connections. List keys and saved record IDs must come from your data.",
+                "When a server produces the initial HTML, render the same component tree in the browser so the IDs match."
             ],
             examples: [
                 {
@@ -93,12 +91,13 @@ export function EmailField() {
         },
         {
             id: "use-transition",
-            title: "useTransition: let urgent updates go first",
+            title: "useTransition: update a view without delaying typing or clicks",
             bullets: [
-                "A transition is a state update React can interrupt for an urgent update, such as typing.",
-                "useTransition returns a pending flag and a function that marks updates as transitions.",
-                "Keep controlled input updates urgent. A transition does not move computation to another thread.",
-                "startTransition calls its callback immediately. A long synchronous calculation inside it still blocks JavaScript."
+                "A transition is a state update whose rendering React can pause to handle typing or clicks first.",
+                "useTransition returns isPending and startTransition. isPending is true while the transition is running.",
+                "Pass a function to startTransition to mark its state updates as transitions.",
+                "Update the state that controls an input directly. Mark the slower view update as a transition.",
+                "startTransition calls its function immediately. It does not run JavaScript on another thread, so a long calculation inside that function still blocks the page."
             ],
             examples: [
                 {
@@ -131,28 +130,28 @@ export function Analytics({ rows }: { rows: Record<View, Row[]> }) {
         </div>
     );
 }`,
-                    result: "Choosing Returns selects that button immediately. While a large list update is pending, the old view can remain visible with “Updating view...”. A fast update may finish before the indicator is noticeable.",
+                    result: "Choosing Returns selects that button immediately. The old list can remain visible with “Updating view...” until the new list is ready.",
                     description: [
-                        "Select an analytics view immediately while a large list render can remain pending. Supply stable sales and returns row arrays."
+                        "Update the selected button immediately and let React prepare a large list separately. The sales and returns arrays should keep the same references until their data changes."
                     ],
                     explanation: [
-                        "choose updates selected immediately and marks the view update as a transition. AnalyticsRows uses memo so the urgent render can reuse the old rows.",
-                        "The row arrays must stay stable until their data changes. Creating a new array prevents the unchanged-props check from skipping work.",
-                        "The callback is synchronous, so this example supports React 18. A fast list render may finish before the pending indicator is noticeable."
+                        "choose updates selected directly and wraps setView in startTransition. React can show the selected button before finishing the new list.",
+                        "memo lets AnalyticsRows skip rendering when it receives the same rows array.",
+                        "This example works in React 18. A fast list update may finish before the pending indicator is visible."
                     ]
                 }
             ]
         },
         {
             id: "use-deferred-value",
-            title: "useDeferredValue: let a slow view use an older value",
+            title: "useDeferredValue: update a slow view after an input",
             bullets: [
-                "useDeferredValue lets a slower part of the UI use an older value while React prepares its next render.",
-                "It does not add a fixed delay or debounce requests. Use memoization when the slow child must skip renders with unchanged inputs."
+                "useDeferredValue returns a value that can lag behind its input. A slow result list can keep showing the previous query while the input shows the latest text.",
+                "There is no fixed delay. This Hook does not reduce the number of network requests."
             ],
             examples: [
                 {
-                    title: "Keep search typing separate from a large result list",
+                    title: "Keep a search input responsive while updating its results",
                     language: "tsx",
                     code: `import { memo, useDeferredValue, useState } from 'react';
 
@@ -178,14 +177,14 @@ export function Catalog({ products }: { products: Product[] }) {
         </div>
     );
 }`,
-                    result: "The input shows the latest typed text. Results can briefly match the previous text, then update to the latest query. memo lets Results skip the urgent render when its props are unchanged.",
+                    result: "The input shows the latest typed text. Results can briefly match the previous text, then update to the latest query.",
                     description: [
-                        "Keep typing responsive while a large memoized results list renders the search text. Supply a stable products array."
+                        "Show typed text immediately while React prepares a large result list. Keep the same products array until the product data changes."
                     ],
                     explanation: [
                         "query controls the input immediately. Results receives deferredQuery, so it can keep showing the previous list while React prepares the next one.",
                         "query !== deferredQuery sets stale and displays Updating results.",
-                        "The products array must stay stable between data changes for memo to skip the urgent render."
+                        "memo lets Results skip rendering while products and deferredQuery are unchanged."
                     ]
                 }
             ]
@@ -194,10 +193,11 @@ export function Catalog({ products }: { products: Product[] }) {
             id: "use-sync-external-store",
             title: "useSyncExternalStore: subscribe to data outside React",
             bullets: [
-                "useSyncExternalStore reads a snapshot from data stored outside React.",
-                "Supply subscribe to register a listener and getSnapshot to read the current value. Subscribe must return cleanup.",
-                "Return a stable snapshot while the data is unchanged. Server rendering also needs a matching getServerSnapshot.",
-                "Keep subscribe stable between renders to avoid unnecessary resubscription. Hydration connects React to HTML already produced by a server; its initial snapshot must match the server snapshot."
+                "useSyncExternalStore reads data stored outside React and updates the component when that data changes. A snapshot is the current value of that data.",
+                "Pass subscribe to register a change listener. It must return a function that removes the listener. Pass getSnapshot to read the current value.",
+                "getSnapshot must return the same value while the data is unchanged. If it returns an object, reuse that object until the data changes.",
+                "Keep the same subscribe function between renders to avoid removing and adding the listener again.",
+                "For server rendering, pass getServerSnapshot. It must return the same initial value on the server and when React first connects to that HTML in the browser."
             ],
             examples: [
                 {
@@ -227,22 +227,22 @@ export function ConnectionStatus() {
                     explanation: [
                         "subscribe registers notify for online and offline events. Cleanup removes those exact listeners.",
                         "getSnapshot reads navigator.onLine. This browser report does not prove that the application’s API is reachable.",
-                        "getServerSnapshot returns true without accessing browser globals. The first browser hydration uses this same fallback, then React checks the browser snapshot."
+                        "getServerSnapshot returns true on the server and when React first connects to the server HTML in the browser. React then checks navigator.onLine for the browser’s actual value."
                     ]
                 }
             ]
         },
         {
             id: "use-layout-effect",
-            title: "useLayoutEffect: measure before the browser paints",
+            title: "useLayoutEffect: measure before the browser displays the page",
             bullets: [
-                "useLayoutEffect runs after DOM updates and before browser paint.",
-                "Use it only when measurement or positioning must finish before the user sees the frame. It blocks painting.",
-                "It follows Effect dependencies and cleanup rules and does not run on the server."
+                "useLayoutEffect runs after React updates the page’s HTML elements, but before the browser displays that update.",
+                "A measurement and state update inside it can correct an element’s position before the user sees it. The browser waits for this work before displaying the update.",
+                "It uses the same dependency and cleanup rules as useEffect. It does not run on the server."
             ],
             examples: [
                 {
-                    title: "Measure a notice before showing its adjacent message",
+                    title: "Position a message below a measured notice",
                     language: "tsx",
                     code: `import { useLayoutEffect, useRef, useState } from 'react';
 
@@ -263,25 +263,24 @@ export function DeliveryNotice({ text }: { text: string }) {
         </div>
     );
 }`,
-                    result: "The message is positioned below the measured notice before the client-rendered component paints. Changing text causes another measurement.",
+                    result: "The browser shows the message below the notice. Changing text causes another measurement before the browser displays the update.",
                     description: [
-                        "Measure an attached notice before choosing the position of adjacent text."
+                        "Measure the notice’s height and use it to position the support message."
                     ],
                     explanation: [
-                        "getBoundingClientRect().height measures the attached notice in pixels. The state update sets top for the adjacent message before paint.",
+                        "getBoundingClientRect().height reads the notice’s height in pixels. setHeight updates the support message’s top position before the browser displays it.",
                         "The dependency list remeasures when text changes. Resize or font changes need additional observation if they can change the height.",
-                        "Normal CSS layout is sufficient for this simple arrangement. The measurement pattern applies when positioning depends on measured geometry.",
-                        "Use this measurement-dependent component on the client or provide a suitable server fallback."
+                        "Server rendering cannot measure the notice. Render this component in the browser or show a server version that does not need measurements."
                     ]
                 }
             ]
         },
         {
             id: "use-imperative-handle",
-            title: "useImperativeHandle: expose a small ref API",
+            title: "useImperativeHandle: let a parent call a child’s methods",
             bullets: [
                 "useImperativeHandle controls the methods exposed through a component ref.",
-                "Prefer props for ordinary data flow. Expose a small imperative API only when needed, such as focus.",
+                "The parent receives the methods you return, such as focus, instead of the child’s full HTML element.",
                 "React 18 passes refs to function components through forwardRef. React 19 also supports ref as a prop."
             ],
             examples: [
@@ -317,7 +316,7 @@ export function AddressForm() {
                     explanation: [
                         "forwardRef’s first type argument is AddressHandle and its second describes the label prop. The parent’s ref receives only the focus method.",
                         "The child retains its DOM node in inputRef. The exposed method calls focus on that node when it is attached.",
-                        "The handle captures only a stable ref, so its dependency list is empty."
+                        "The returned focus method uses only inputRef, whose object stays the same between renders. No changing prop or state value is used, so the dependency array is empty."
                     ]
                 }
             ]
@@ -326,8 +325,7 @@ export function AddressForm() {
             id: "use-debug-value",
             title: "useDebugValue: label a custom Hook in DevTools",
             bullets: [
-                "useDebugValue labels a custom Hook in React DevTools. It does not change the visible UI.",
-                "Keep sensitive values out of the label. This does not hide underlying state from developer inspection."
+                "useDebugValue adds a label to a custom Hook in React DevTools, the browser tool for inspecting React components. It does not change the page."
             ],
             examples: [
                 {
@@ -346,7 +344,7 @@ export function PasswordField() {
     return <label>Password <input type="password" value={password}
         onChange={(e) => setPassword(e.target.value)} /></label>;
 }`,
-                    result: "The page displays a password input. Inspecting its custom Hook in React DevTools shows Empty or Filled. The debug label does not contain the password.",
+                    result: "The page displays a password input. React DevTools shows Empty or Filled beside its custom Hook.",
                     description: [
                         "Label a password-field Hook as Empty or Filled without using the password as a debug label."
                     ],
@@ -358,16 +356,15 @@ export function PasswordField() {
         },
         {
             id: "use-insertion-effect",
-            title: "useInsertionEffect: inject CSS before layout Effects",
+            title: "useInsertionEffect: insert CSS before useLayoutEffect runs",
             bullets: [
-                "useInsertionEffect is for CSS-in-JS library authors who insert styles before layout Effects run.",
-                "Use stylesheets or the project’s styling tools for ordinary application styles.",
-                "Do not update state or measure attached refs here. DOM timing is not guaranteed and refs are not attached yet.",
+                "CSS-in-JS libraries generate CSS from JavaScript. They use useInsertionEffect to insert CSS before components measure layout in useLayoutEffect.",
+                "You cannot update state here. Element refs are not attached yet, and React may run this Hook before or after updating the HTML elements.",
                 "This Hook does not run on the server."
             ],
             examples: [
                 {
-                    title: "A library-owned dynamic CSS rule",
+                    title: "Insert and remove a widget’s CSS rule",
                     language: "tsx",
                     code: `import { useInsertionEffect } from 'react';
 
@@ -384,27 +381,26 @@ export function CompactWidget() {
     useWidgetRule('.compact-widget { padding: 8px; }');
     return <div className="compact-widget">Delivery details</div>;
 }`,
-                    result: "The widget’s rule is available before layout Effects run. Unmounting removes this example’s style element.",
+                    result: "The widget’s CSS is available before useLayoutEffect runs. Removing the widget removes its style element.",
                     description: [
-                        "Demonstrate one library-owned style rule and remove it when its owner unmounts."
+                        "Insert a style element for the widget and remove it when the widget is removed."
                     ],
                     explanation: [
                         "The Hook creates a style element with the supplied rule and appends it to document.head. Cleanup removes that same element.",
-                        "This example owns one style element per Hook call. A complete library also needs shared-rule management and a server-rendering strategy."
+                        "Each call creates a separate style element. This example does not share rules between widgets or generate CSS on the server."
                     ]
                 }
             ]
         },
         {
             id: "use-action-state",
-            title: "useActionState: state from a submitted Action (React 19+)",
+            title: "useActionState: display a form submission result (React 19+)",
             bullets: [
-                "React 19+ is required. Matching React DOM and type packages are also required.",
-                "An Action is a function used by React for a transition or form submission. It may perform async work.",
-                "useActionState returns the last result, an Action dispatcher, and a pending flag.",
+                "An Action is a function React runs as part of a transition or form submission. It can wait for a request to finish.",
+                "useActionState returns the latest result, a function that starts the Action, and a boolean that is true while the Action is running.",
                 "The Action receives previous state first and its submitted argument second.",
-                "A form action supplies the React Action context. A manual dispatch from a handler needs a startTransition wrapper.",
-                "React resets uncontrolled form inputs after a form Action fulfills. Returning a failure message still fulfills the Action if it does not throw."
+                "Pass the returned function to a form’s action prop. To call it yourself from an event handler, wrap the call in startTransition.",
+                "After a form Action finishes without throwing, React resets inputs whose values are not controlled by state. This also happens when the Action returns an error message."
             ],
             examples: [
                 {
@@ -442,21 +438,21 @@ export function Newsletter({ subscribeEmail }: Props) {
                         "Submit a newsletter email and display the result. Supply subscribeEmail as an async operation that saves the email or rejects."
                     ],
                     explanation: [
-                        "The form’s action uses submitAction. data.get(\"email\") reads the field identified by name=\"email\". _previous keeps the required first parameter without using its value.",
-                        "subscribeEmail performs the save. Awaiting it completes before the Action returns the success message; rejection reaches catch.",
-                        "The email input is uncontrolled. catch returns a retry message instead of throwing, so this Action fulfills and the field can reset even after a failed save."
+                        "submitAction receives the form’s fields as FormData. data.get(\"email\") reads the email field. _previous is the required first parameter, which this example does not use.",
+                        "await subscribeEmail(email) waits for the save. The Action returns a success message when it finishes, or a retry message if it throws.",
+                        "The email field has no value prop, so React resets it when the Action finishes without throwing. catch returns a message, so a failed save can also reset the field."
                     ]
                 }
             ]
         },
         {
             id: "use-form-status",
-            title: "useFormStatus: pending state of a parent form (React 19+)",
+            title: "useFormStatus: show whether a form is submitting (React 19+)",
             bullets: [
-                "React 19+ is required. Read the preceding Action lesson first.",
                 "Import useFormStatus from react-dom. It reads the submission state of the nearest parent form.",
                 "The component calling it must be inside that form. It cannot observe a form returned by the same component.",
-                "The other returned fields are data, method, and action. They describe the parent form’s submission."
+                "pending is true while the form submits.",
+                "data contains the submitted FormData, or null when no submission is running. method is the submission method. action is the function passed to the form’s action prop, or null when that prop is not a function."
             ],
             examples: [
                 {
@@ -502,7 +498,7 @@ export function DisplayNameForm({ saveName }: {
                     explanation: [
                         "SaveButton is rendered inside the form, so pending tracks that form’s Action and disables its submit button.",
                         "useActionState stores the returned message in DisplayNameForm. SaveButton reads submission progress without a pending prop.",
-                        "The uncontrolled name field can reset after failure because catch returns a message and lets the Action fulfill."
+                        "The name field has no value prop. It can reset after a failed save because catch returns a message instead of throwing."
                     ]
                 }
             ]
@@ -511,14 +507,13 @@ export function DisplayNameForm({ saveName }: {
             id: "use-optimistic",
             title: "useOptimistic: temporary UI while saving (React 19+)",
             bullets: [
-                "React 19+ is required. Read Actions and transitions first.",
                 "Optimistic UI shows an expected result while the actual operation is pending.",
-                "useOptimistic supplies temporary state during an Action. Update the confirmed base state when the operation succeeds.",
+                "useOptimistic returns a temporary version of the supplied state and a function to update it during an Action. Save the confirmed result in the original state when the request succeeds.",
                 "The Hook does not send a request or retry failures."
             ],
             examples: [
                 {
-                    title: "Complete a task before the server responds",
+                    title: "Show a task as complete while the server saves it",
                     language: "tsx",
                     code: `import { startTransition, useOptimistic, useState, useTransition } from 'react';
 
@@ -560,19 +555,18 @@ export function TaskRow({ saveCompleted }: {
                     explanation: [
                         "completed is confirmed state. markOptimistic(true) runs inside runAction and temporarily displays Completed while saveCompleted is pending.",
                         "The update function uses the requested boolean directly. The async Action wraps setCompleted in another startTransition after await.",
-                        "If saving resolves, setCompleted stores the confirmed result. If it rejects, completed remains false; the row returns to Open and displays the error."
+                        "If saving succeeds, setCompleted stores the confirmed result. If it fails, completed remains false. The row returns to Open and displays the error."
                     ]
                 }
             ]
         },
         {
             id: "use-effect-event",
-            title: "useEffectEvent: read latest values inside an Effect (React 19.2+)",
+            title: "useEffectEvent: read updated values without restarting an Effect (React 19.2+)",
             bullets: [
-                "React 19.2+ is required. Read Effect dependencies and cleanup first.",
-                "An Effect Event reads current committed props and state without making those values restart an Effect.",
-                "Use it only for work called from Effects. It does not replace real synchronization dependencies.",
-                "Do not use an Effect Event as a button handler or pass it to another component or Hook. Exclude the Effect Event itself from the dependency array."
+                "useEffectEvent creates a function called an Effect Event. It reads the latest committed props and state.",
+                "Use it for a function called from an Effect, such as a timer callback, that needs updated values without restarting the Effect. Keep values that should restart the Effect in its dependency array.",
+                "Do not use an Effect Event as a button handler or pass it to another component or Hook. Do not include the Effect Event function in the dependency array."
             ],
             examples: [
                 {
@@ -600,7 +594,7 @@ export function ReportingSession({ currency, intervalMs }: {
                         "Keep a timer running while each tick reports the latest currency. intervalMs is measured in milliseconds."
                     ],
                     explanation: [
-                        "onHeartbeat reads the latest committed currency when the interval calls it. Changing currency therefore changes the next report without replacing the timer.",
+                        "onHeartbeat reads the latest committed currency. Changing currency changes the next report without replacing the timer.",
                         "intervalMs controls the timer period and remains in the dependency array. Cleanup clears the previous interval before a new period starts.",
                         "If changing currency should restart the external process instead, read it in the Effect and include it as a dependency."
                     ]
@@ -609,13 +603,13 @@ export function ReportingSession({ currency, intervalMs }: {
         },
         {
             id: "use-api",
-            title: "Related API: use reads a resource (React 19+)",
+            title: "use: read a Promise result or context value (React 19+)",
             bullets: [
-                "React 19+ is required. use reads a Promise or context value during rendering.",
-                "A pending Promise suspends the component. A Suspense boundary displays its fallback while waiting.",
-                "A rejected Promise reaches an Error Boundary. Suspense itself does not handle that error.",
-                "Supply a stable Promise from an appropriate loader or cache. Unlike conventional Hooks, use can appear in conditions and loops.",
-                "An Error Boundary is a parent component that displays fallback UI when a child fails during rendering. Do not wrap use in try/catch."
+                "use reads a Promise result or context value during rendering.",
+                "If the Promise is still waiting, React pauses rendering this component. A surrounding Suspense component displays its fallback until the result is ready.",
+                "If the Promise fails, an Error Boundary can display an error message. Suspense only handles waiting, not errors.",
+                "Pass the same Promise between renders, for example from a data loader or cache. Unlike other Hooks, use can be called inside conditions and loops.",
+                "An Error Boundary is a parent component that displays alternative content when a child fails during rendering. Do not wrap use in try/catch."
             ],
             examples: [
                 {
@@ -643,7 +637,7 @@ export function AccountPage({ profilePromise }: { profilePromise: Promise<Profil
                     ],
                     explanation: [
                         "ProfileCard reads the supplied profilePromise and displays profile.displayName after it resolves. AccountPage’s Suspense fallback supplies the loading text.",
-                        "The caller must keep profilePromise stable and place an Error Boundary above AccountPage. Creating a fresh fetch Promise in ProfileCard on every render can keep restarting suspension."
+                        "Pass the same profilePromise until the requested profile changes. Creating a new fetch Promise each time ProfileCard renders can make React keep waiting on a new request."
                     ]
                 }
             ]

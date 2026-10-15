@@ -1,3 +1,9 @@
+import sets from './data/sets';
+import comprehensions from './data/comprehensions';
+import objectsAndMutability from './data/objects-and-mutability';
+import functionArguments from './data/function-arguments';
+import scopeAndClosures from './data/scope-and-closures';
+import filesAndJson from './data/files-and-json';
 import runtime from './data/runtime';
 import languageFundamentals from './data/language-fundamentals';
 import virtualEnvironments from './data/virtual-environments';
@@ -41,88 +47,70 @@ import type { PythonChapter } from './types';
 
 export const pythonChapters: readonly PythonChapter[] = [
     {
-        title: '1. Getting started with Python',
-        summary: 'How Python runs a file, virtual environments, basic syntax, values, text, decisions, and iteration.',
-        notes: [
-            runtime,
-            languageFundamentals,
-            virtualEnvironments,
-            variablesAndTypes,
-            numbersAndConversion,
-            strings,
-            conditionals,
-            loops,
-        ],
+        title: '1. First steps',
+        summary: 'Read Python syntax, comments, expressions, calls, and indentation.',
+        notes: [languageFundamentals],
     },
     {
-        title: '2. Collections and data handling',
-        summary: 'Lists, tuples, mappings, sets, generators, stacks, queues, and arrays.',
-        notes: [
-            collectionsComparison,
-            lists,
-            tuplesAndUnpacking,
-            dictionariesSetsGenerators,
-            iterationAndGenerators,
-            stacksQueuesArrays,
-        ],
+        title: '2. Variables and basic data types',
+        summary: 'Names, assignment, numbers, conversion, strings, Booleans, and None.',
+        notes: [variablesAndTypes, numbersAndConversion, strings],
     },
     {
-        title: '3. Program structure',
-        summary: 'Functions, scope, exceptions, context managers, modules, and imports.',
-        notes: [
-            functionsAndScope,
-            exceptions,
-            contextManagers,
-            modulesAndPackages,
-            importSystem,
-        ],
+        title: '3. Collections',
+        summary: 'Lists, tuples, dictionaries, sets, shared references, and choosing a collection.',
+        notes: [lists, tuplesAndUnpacking, dictionariesSetsGenerators, sets, objectsAndMutability, collectionsComparison],
     },
     {
-        title: '4. Classes and object model',
-        summary: 'Instances, methods, inheritance, hashing, descriptors, and metaclasses.',
-        notes: [
-            classesAndObjects,
-            methodsAndAttributes,
-            inheritanceAndMro,
-            equalityAndHashing,
-            descriptorsAndProperties,
-            classAndInstanceCreation,
-        ],
+        title: '4. Conditions and loops',
+        summary: 'Truth values, comparisons, branches, iteration, and comprehensions.',
+        notes: [conditionals, loops, comprehensions],
     },
     {
-        title: '5. Runtime and concurrency',
-        summary: 'CPython memory, the GIL, threads, processes, and asyncio.',
-        notes: [
-            cpythonMemoryManagement,
-            concurrencyAndAsyncio,
-        ],
+        title: '5. Functions',
+        summary: 'Definitions, return values, arguments, scope, closures, and decorators.',
+        notes: [functionsAndScope, functionArguments, scopeAndClosures],
     },
     {
-        title: '6. Networking examples',
-        summary: 'TCP client-server flow, message boundaries, and the rail fence exercise.',
-        notes: [
-            socketProgramming,
-            railFenceClientServer,
-        ],
+        title: '6. Modules and environments',
+        summary: 'Organize code into modules and packages, then isolate installed dependencies.',
+        notes: [modulesAndPackages, virtualEnvironments],
     },
     {
-        title: '7. FastAPI',
-        summary: 'Build HTTP APIs with path operations, Pydantic models, dependencies, and routers.',
-        notes: [
-            fastapiFirstApp,
-            fastapiPathAndQuery,
-            pydantic,
-            fastapiRequestBodies,
-            fastapiResponsesAndErrors,
-            fastapiDependencies,
-            fastapiAsyncOperations,
-            fastapiRouters,
-            fastapiBackendService,
-        ],
+        title: '7. Files and errors',
+        summary: 'Read and write files, save JSON, and handle exceptions.',
+        notes: [filesAndJson, exceptions],
     },
     {
-        title: '8. Tools and libraries',
-        summary: 'Common Python tools, libraries, and frameworks in one line each.',
+        title: '8. Classes and objects',
+        summary: 'Instances, attributes, method forms, inheritance, and value comparison.',
+        notes: [classesAndObjects, methodsAndAttributes, inheritanceAndMro, equalityAndHashing],
+    },
+    {
+        title: '9. Iterators and resource management',
+        summary: 'Lazy iteration, generator functions, context manager protocols, stacks, and queues.',
+        notes: [iterationAndGenerators, contextManagers, stacksQueuesArrays],
+    },
+    {
+        title: '10. Advanced object and runtime reference',
+        summary: 'Properties, descriptors, class creation, imports, execution, and CPython memory.',
+        notes: [descriptorsAndProperties, classAndInstanceCreation, importSystem, runtime, cpythonMemoryManagement],
+    },
+    {
+        title: '11. Concurrency and networking',
+        summary: 'Threads, processes, asyncio, TCP connections, and a client-server exercise.',
+        notes: [concurrencyAndAsyncio, socketProgramming, railFenceClientServer],
+    },
+    {
+        title: '12. FastAPI',
+        summary: 'Apply Python to HTTP APIs with validation, dependencies, async operations, and routers.',
+        notes: [fastapiFirstApp, fastapiPathAndQuery, pydantic, fastapiRequestBodies,
+            fastapiResponsesAndErrors, fastapiDependencies, fastapiAsyncOperations,
+            fastapiRouters, fastapiBackendService],
+    },
+    {
+        title: '13. Tools and libraries reference',
+        summary: 'Look up common tools, libraries, and frameworks after learning the language.',
         notes: [toolsAndLibraries],
     },
 ];

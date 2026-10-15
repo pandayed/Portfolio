@@ -2,6 +2,7 @@ import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import type { Route } from '../../routing/routes';
 import NoteArticleLayout from '../NoteArticleLayout';
+import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
 import LearningNoteExampleBlock from './LearningNoteExampleBlock';
 import type { LearningNote, LearningNoteScope } from './types';
 
@@ -23,6 +24,9 @@ const scopeLabels: Record<LearningNoteScope, string> = {
 
 const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePageProps) => {
     const useBulletExplanations = note.scope !== 'java' || note.pointwise === true;
+    const renderProse = (text: string, key: string) => note.scope === 'react'
+        ? renderProgrammingTerms(text, key, 'react')
+        : text;
     const sectionId = (id: string) => `learning-note-${note.slug}-${id}`;
     const sections: TocEntry[] = note.sections.map(({ id, title }) => ({
         id: sectionId(id),
@@ -67,13 +71,13 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                     </h2>
 
                     {section.paragraphs?.map((paragraph, index) => (
-                        <p key={`${section.id}-paragraph-${index}`}>{paragraph}</p>
+                        <p key={`${section.id}-paragraph-${index}`}>{renderProse(paragraph, `${section.id}-paragraph-${index}`)}</p>
                     ))}
 
                     {section.bullets && (
                         <ul className="Article__notes">
                             {section.bullets.map((bullet, index) => (
-                                <li key={`${section.id}-bullet-${index}`}>{bullet}</li>
+                                <li key={`${section.id}-bullet-${index}`}>{renderProse(bullet, `${section.id}-bullet-${index}`)}</li>
                             ))}
                         </ul>
                     )}
@@ -92,7 +96,7 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                                     {section.table.rows.map((row, rowIndex) => (
                                         <tr key={`${section.id}-row-${rowIndex}`}>
                                             {row.map((cell, cellIndex) => {
-                                                const content = typeof cell === 'string' ? cell : (
+                                                const content = typeof cell === 'string' ? renderProse(cell, `${section.id}-cell-${rowIndex}-${cellIndex}`) : (
                                                     <a className="Link" href={cell.href}>{cell.text}</a>
                                                 );
                                                 return cellIndex === 0 ? (
@@ -109,6 +113,7 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                     {section.examples?.map((example, index) => note.exampleLayout === 'grouped' ? (
                         <LearningNoteExampleBlock
                             example={example}
+                            termContext={note.scope === 'react' ? 'react' : undefined}
                             key={`${section.id}-example-${index}`}
                         />
                     ) : (
@@ -122,8 +127,8 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                                             <strong>Expected output:</strong>
                                             <CodeBlock language="text">{example.result}</CodeBlock>
                                         </li>
-                                    ) : <li><strong>Result:</strong> {example.result}</li>)}
-                                    {example.typeCheck && <li><strong>TypeScript check:</strong> {example.typeCheck}</li>}
+                                    ) : <li><strong>Result:</strong> {renderProse(example.result, `${section.id}-result-${index}`)}</li>)}
+                                    {example.typeCheck && <li><strong>TypeScript check:</strong> {renderProse(example.typeCheck, `${section.id}-typecheck-${index}`)}</li>}
                                 </ul>
                             ) : (
                                 <>
@@ -132,8 +137,8 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                                             <p><strong>Expected output:</strong></p>
                                             <CodeBlock language="text">{example.result}</CodeBlock>
                                         </>
-                                    ) : <p><strong>Result:</strong> {example.result}</p>)}
-                                    {example.typeCheck && <p><strong>TypeScript check:</strong> {example.typeCheck}</p>}
+                                    ) : <p><strong>Result:</strong> {renderProse(example.result, `${section.id}-result-${index}`)}</p>)}
+                                    {example.typeCheck && <p><strong>TypeScript check:</strong> {renderProse(example.typeCheck, `${section.id}-typecheck-${index}`)}</p>}
                                 </>
                             )}
                         </div>
@@ -144,7 +149,7 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                             <h3 className="Article__subTitle">Common mistakes</h3>
                             <ul className="Article__notes">
                                 {section.pitfalls.map((pitfall, index) => (
-                                    <li key={`${section.id}-pitfall-${index}`}>{pitfall}</li>
+                                    <li key={`${section.id}-pitfall-${index}`}>{renderProse(pitfall, `${section.id}-pitfall-${index}`)}</li>
                                 ))}
                             </ul>
                         </>

@@ -1,123 +1,103 @@
 import type { PythonNote } from '../types';
 
 const note: PythonNote = {
-    slug: 'variables-and-types',
-    title: 'Variables and types',
-    summary: 'Bind names to objects, compare equality and identity, and understand mutability and type hints.',
-    updatedOn: '2026-10-01',
-    sections: [
+    "slug": "variables-and-types",
+    "title": "Variables and types",
+    "summary": "Assign names, inspect built-in types, and distinguish rebinding from changing an object.",
+    "exampleLayout": "grouped",
+    "updatedOn": "2026-10-15",
+    "sections": [
         {
-            id: 'bindings',
-            title: 'Names and values',
-            paragraphs: [
-                'A Python variable is a name bound to an object. The same name can later be bound to an object of another type.',
+            "id": "bindings",
+            "title": "Names and assignment",
+            "bullets": [
+                "A variable is a name bound to an object. An object is a value Python keeps in memory.",
+                "Assignment evaluates the right side, then binds the name on the left. It does not copy the object.",
+                "Use descriptive snake_case names. Names are case-sensitive, cannot start with a digit, and cannot be reserved keywords."
             ],
-            examples: [{
-                code: [
-                    'students_count = 10',
-                    'rating = 4.9',
-                    'is_it_raining = False',
-                    'name = "Lal Bihari Pandey"',
-                    '',
-                    'x, y, z = 1, 2, 3',
-                    'a = b = 1',
-                ].join('\n'),
-            }],
+            "examples": [
+                {
+                    "title": "Assign and reassign a name",
+                    "code": "score = 10\nscore = score + 5\nprint(score)",
+                    "result": "15",
+                    "explanation": [
+                        "The second assignment reads the old value before binding score to the result."
+                    ]
+                }
+            ]
         },
         {
-            id: 'equality-identity',
-            title: 'Equality versus identity: == and is',
-            paragraphs: [
-                '== asks whether two objects have equal values. For lists, it compares their items. is asks whether two names refer to the exact same object.',
-                'Use == to compare values. Use is for identity checks, most often x is None or x is not None. Do not use is to compare strings or numbers: Python may reuse some objects, so identity is not a reliable value comparison.',
+            "id": "dynamic-typing",
+            "title": "Objects have types",
+            "bullets": [
+                "A type determines which operations a value supports. type(value) returns its type.",
+                "Python is dynamically typed: a name can later refer to an object of another type.",
+                "Common scalar types are int, float, complex, bool, and str. None represents an absent value and has type NoneType.",
+                "Collections group values. Lists, tuples, sets, and dictionaries have separate notes after control flow."
             ],
-            examples: [{
-                code: [
-                    'a = [1, 2]',
-                    'b = [1, 2]',
-                    'same_list = a',
-                    'print(a == b)        # True: equal items',
-                    'print(a is b)        # False: two list objects',
-                    'print(a is same_list)  # True: one list object',
-                    '',
-                    'missing = None',
-                    'print(missing is None)  # True',
-                ].join('\n'),
-                result: 'The four lines print True, False, True, and True, in that order.',
-            }],
-            bullets: [
-                'A class can define what == means for its objects. is always checks object identity.',
-                'id returns an identity value that is unique while an object exists. It is not a permanent memory address; its meaning depends on the Python implementation.',
-            ],
+            "examples": [
+                {
+                    "title": "Inspect the current value",
+                    "code": "value = 10\nprint(type(value))\nvalue = \"ten\"\nprint(type(value))",
+                    "result": "<class 'int'>\n<class 'str'>"
+                }
+            ]
         },
         {
-            id: 'dynamic-typing',
-            title: 'Dynamic typing',
-            bullets: [
-                'Python determines an object type at runtime.',
-                'type returns the type of an object.',
-                'A name does not keep one fixed type for its full lifetime.',
+            "id": "multiple-assignment",
+            "title": "Assign several names",
+            "bullets": [
+                "Chained assignment binds each name to the same object. It does not create separate copies.",
+                "Multiple assignment can give different values to several names. Detailed unpacking belongs in Tuples and unpacking."
             ],
-            examples: [{
-                code: [
-                    'value = 10',
-                    'print(type(value))       # <class \'int\'>',
-                    '',
-                    'value = "Hey"',
-                    'print(type(value))       # <class \'str\'>',
-                ].join('\n'),
-            }],
+            "examples": [
+                {
+                    "title": "Two assignment forms",
+                    "code": "left = right = 0\nx, y = 10, 20\nprint(left, right, x, y)",
+                    "result": "0 0 10 20"
+                }
+            ]
         },
         {
-            id: 'type-hints',
-            title: 'Type hints',
-            paragraphs: [
-                'A type hint documents an expected type and helps static type checkers. Python does not enforce the hint by itself at runtime.',
-            ],
-            examples: [{
-                code: [
-                    'age: int = 20',
-                    'age = "twenty"  # Runs unless another tool checks it.',
-                ].join('\n'),
-            }],
+            "id": "identity-mutability",
+            "title": "Rebinding and mutability",
+            "bullets": [
+                "Rebinding changes which object a name refers to. Mutating changes an existing object.",
+                "Numbers, strings, and tuples are immutable: their own contents cannot change. Lists, dictionaries, and sets are mutable.",
+                "Assigning another name to a mutable object shares that object. The Lists note shows changes and copying.",
+                "Use == for equal values. is checks whether two references point to the same object. Use value is None for an absence check. Detailed identity and hashing belong in the object-model notes."
+            ]
         },
         {
-            id: 'identity-mutability',
-            title: 'Mutable and immutable objects',
-            paragraphs: [
-                'A mutable object can change in place after it is created. An immutable object cannot change in place. A name can still be assigned to a different object; that is rebinding the name, not changing the old object.',
+            "id": "type-hints",
+            "title": "Type hints",
+            "bullets": [
+                "A type hint records an expected type for editors and static type checkers. Python does not enforce it by itself."
             ],
-            bullets: [
-                'Mutable examples: list, dictionary, and set. Their contents can change through methods or item assignment.',
-                'Immutable examples: int, float, bool, str, tuple, and frozenset. An operation that appears to change one produces or reuses another object instead.',
-                'A tuple cannot replace its items. If an item is a mutable object, such as a list, that object can still change.',
-            ],
-            examples: [{
-                title: 'Changing an object versus rebinding a name',
-                code: [
-                    'items = [1, 2]',
-                    'other_name = items',
-                    'items.append(3)',
-                    'print(other_name)  # [1, 2, 3]',
-                    '',
-                    'text = "hi"',
-                    'old_text = text',
-                    'text += "!"',
-                    'print(old_text)  # hi',
-                    'print(text)      # hi!',
-                ].join('\n'),
-                result: 'The list changed in place, so other_name sees [1, 2, 3]. text now names a new string, while old_text still names "hi".',
-            }, {
-                title: 'An immutable tuple with a mutable item',
-                code: [
-                    'record = (["a"], 1)',
-                    'record[0].append("b")',
-                    'print(record)  # ([\'a\', \'b\'], 1)',
-                ].join('\n'),
-                result: 'The tuple still contains the same list object. The list inside it now contains "a" and "b".',
-            }],
+            "examples": [
+                {
+                    "title": "Annotate an assignment",
+                    "code": "age: int = 20\nage = \"twenty\"\nprint(age)",
+                    "result": "twenty",
+                    "explanation": [
+                        "Python executes the assignment. A static type checker can report the incompatible type."
+                    ]
+                }
+            ]
         },
-    ],
+        {
+            "id": "references",
+            "title": "References",
+            "bullets": [
+                [
+                    {
+                        "text": "Python tutorial: an informal introduction",
+                        "href": "https://docs.python.org/3/tutorial/introduction.html"
+                    }
+                ]
+            ]
+        }
+    ]
 };
 
 export default note;

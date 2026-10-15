@@ -2,8 +2,8 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: "hooks-and-rules",
-    title: "Hook call order",
-    summary: "Place Hook calls consistently and distinguish Hook calls from setter calls.",
+    title: "Rules of Hooks",
+    summary: "Call Hooks at the top level of components or custom Hooks, in the same order on every render.",
     scope: "react",
     updatedOn: "2026-10-14",
     exampleLayout: "grouped",
@@ -12,10 +12,11 @@ const note: LearningNote = {
             id: "top-level-only",
             title: "Keep Hook calls in the same order",
             bullets: [
-                "React associates conventional Hook calls with their position in the component’s calls. Keep the same order on every render.",
-                "Place Hook calls before conditional returns. Put conditions inside the Hook’s work or after the call.",
-                "Call Hooks only from components or custom Hooks. Custom Hooks are introduced after the state and Effect lessons.",
-                "A setter returned by useState is an ordinary function. Calling it in a handler does not violate the Hook call rule."
+                "React remembers each Hook’s state by the order in which the component calls its Hooks.",
+                "Call Hooks at the top level, before any early return. Do not call them inside conditions, loops, or event handlers.",
+                "Call Hooks only from React components or custom Hooks. A custom Hook is a function whose name starts with use and that calls other Hooks.",
+                "These rules apply to Hook calls such as useState(). The returned setter, such as setCount, can be called in an event handler.",
+                "The React 19 use API is an exception: it can be called in conditions and loops."
             ],
             examples: [
                 {
@@ -35,18 +36,9 @@ export default function Greeting({ signedIn }) {
 }`,
                     result: "A signed-in user sees the counter. Otherwise the component shows Please sign in.",
                     explanation: [
-                        "useState runs in both branches. Moving it below the early return would change the call order across renders."
+                        "useState runs whether signedIn is true or false. If it came after the early return, React would skip it when signedIn is false."
                     ]
                 }
-            ]
-        },
-        {
-            id: "lint-and-types",
-            title: "Use Hook lint rules",
-            bullets: [
-                "The rules-of-hooks lint rule reports invalid Hook placement. A passing type check does not prove correct Hook call order.",
-                "The exhaustive-deps rule checks values read by Effect and memo callbacks. The Effects lesson explains dependencies.",
-                "Do not silence these rules to preserve an invalid pattern. Fix the placement or dependency relationship."
             ]
         }
     ],

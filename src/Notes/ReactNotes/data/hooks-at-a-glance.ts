@@ -42,7 +42,7 @@ const note: LearningNote = {
                     [advancedHook('useInsertionEffect'), 'Lets CSS libraries insert styles before layout Effects run.'],
                     [advancedHook('useActionState'), 'Stores the result of an Action and tracks whether it is pending. Requires React 19 or later.'],
                     [advancedHook('useOptimistic'), 'Shows temporary state while an Action is pending, such as a task marked complete before saving finishes. Requires React 19 or later.'],
-                    [advancedHook('useEffectEvent'), 'Reads the latest committed props and state in work called from an Effect without making those values restart it. Requires React 19.2 or later.'],
+                    [advancedHook('useEffectEvent'), 'Creates a function called from Effects that reads the latest committed props and state. Changes to those values do not restart the Effect. Requires React 19.2 or later.'],
                 ],
             },
         },
