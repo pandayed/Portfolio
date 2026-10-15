@@ -18,7 +18,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Find the nearest name",
+                    "title": "Finding the nearest name",
                     "code": "x = 10\n\ndef outer():\n    x = 20\n    def inner():\n        x = 30\n        print(x)\n    inner()\n\nouter()",
                     "result": "30",
                     "explanation": [
@@ -29,7 +29,7 @@ const note: PythonNote = {
         },
         {
             "id": "global-nonlocal",
-            "title": "Reassign names outside the current function",
+            "title": "Reassigning names outside the current function",
             "bullets": [
                 "Use global to assign to a module-level name. Use nonlocal to assign to a name in an enclosing function.",
                 "Reading an outer name does not require either declaration.",
@@ -37,7 +37,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Update a module-level counter",
+                    "title": "Updating a module-level counter",
                     "code": "count = 0\n\ndef increment():\n    global count\n    count += 1\n\nincrement()\nprint(count)",
                     "result": "1"
                 }
@@ -53,7 +53,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Pass a function as an argument",
+                    "title": "Passing a function as an argument",
                     "code": "def apply_twice(function, value):\n    return function(function(value))\n\ndef double(number):\n    return number * 2\n\nprint(apply_twice(double, 3))\nprint(apply_twice(lambda number: number + 1, 3))",
                     "result": "12\n5"
                 }
@@ -61,26 +61,32 @@ const note: PythonNote = {
         },
         {
             "id": "closures",
-            "title": "Keep enclosing state in a closure",
+            "title": "Keeping enclosing state in a closure",
             "bullets": [
-                "A closure is a function together with the enclosing bindings it keeps. A binding connects a name to an object.",
-                "The inner function that uses those bindings is called a closure. The outer function creates it. The whole outer-and-inner block is not one closure.",
-                "A free variable is a name used from an enclosing function rather than a local variable or parameter of the inner function.",
+                "A closure is an inner function that keeps access to variables from the outer function where it was defined, even after that outer function returns.",
+                "An enclosing function is an outer function that contains the inner function definition.",
+                "A binding connects a variable name to an object. An enclosing binding is that connection for a variable defined in an outer function.",
+                "A free variable is a variable the inner function uses from an enclosing function. It is not a parameter or a local variable of the inner function.",
                 "A closure works while the outer call is active and after it returns. Returning the inner function is a common way to keep it.",
                 "A nested function that uses no enclosing function names has no captured closure cells. Nesting alone does not create a state-retaining closure in this sense.",
                 "Use nonlocal when the closure needs to reassign an enclosing name."
             ],
             "examples": [
                 {
-                    "title": "Keep a separate counter for each closure",
+                    "title": "Keeping a separate counter for each closure",
                     "code": "def make_counter():\n    count = 0\n    def increment():\n        nonlocal count\n        count += 1\n        return count\n    return increment\n\ncounter = make_counter()\nprint(counter())\nprint(counter())\nother_counter = make_counter()\nprint(other_counter())",
                     "result": "1\n2\n1",
                     "description": [
-                        "Keep a count between calls without a module-level variable."
+                        "Create a counter that keeps its count between calls. Identify the enclosing function, enclosing binding, and free variable."
                     ],
                     "explanation": [
-                        "increment is the closure. make_counter creates it.",
-                        "Calls through counter share one count binding. A separate make_counter call creates a separate binding for other_counter."
+                        "make_counter is the enclosing function because increment is defined inside it.",
+                        "count = 0 creates a local variable in make_counter. Its name count initially refers to the integer object 0. This name-to-object connection is the enclosing binding used by increment.",
+                        "count is a free variable in increment: it comes from make_counter, rather than from a parameter or local variable of increment.",
+                        "nonlocal count tells Python that count += 1 must update the count from make_counter. Without nonlocal, assignment would make count local to increment, and reading it before assignment would raise UnboundLocalError.",
+                        "return increment returns the function without calling it. counter refers to this returned closure, which keeps access to count after make_counter returns.",
+                        "The first counter() call changes its count from 0 to 1. The second changes the same count from 1 to 2.",
+                        "The second make_counter() call creates another closure with a separate count starting at 0, so other_counter() returns 1."
                     ]
                 }
             ]
@@ -98,7 +104,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Keep a prefix without capturing an unused list",
+                    "title": "Keeping a prefix without capturing an unused list",
                     "description": [
                         "Create a text formatter and inspect which enclosing name it captures."
                     ],
@@ -126,7 +132,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Read two enclosing levels after both calls return",
+                    "title": "Reading two enclosing levels after both calls return",
                     "description": [
                         "Keep one binding from an outer function and one from a middle function."
                     ],
@@ -152,7 +158,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Create a logging callback for each service",
+                    "title": "Creating a logging callback for each service",
                     "description": [
                         "Configure a logger once. Later calls provide only a message."
                     ],
@@ -174,7 +180,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Compare late lookup with a captured default",
+                    "title": "Comparing late lookup with a captured default",
                     "code": "def make_functions():\n    late = []\n    captured = []\n    for i in range(3):\n        late.append(lambda: i)\n        captured.append(lambda i=i: i)\n    return late, captured\n\nlate, captured = make_functions()\nprint([function() for function in late])\nprint([function() for function in captured])",
                     "result": "[2, 2, 2]\n[0, 1, 2]",
                     "explanation": [
@@ -186,7 +192,7 @@ const note: PythonNote = {
         },
         {
             "id": "decorators",
-            "title": "Wrap a function with a decorator",
+            "title": "Wrapping a function with a decorator",
             "bullets": [
                 "A decorator receives a function and returns the value that replaces its name. A wrapper function is a common replacement.",
                 "@decorate above a definition applies decorate when Python defines the function. It has the effect of assigning hello = decorate(hello) after the definition.",
@@ -194,7 +200,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Run behavior before and after a function call",
+                    "title": "Running behavior before and after a function call",
                     "code": "from functools import wraps\n\ndef decorate(function):\n    @wraps(function)\n    def wrapper(*args, **kwargs):\n        print(\"Before\")\n        result = function(*args, **kwargs)\n        print(\"After\")\n        return result\n    return wrapper\n\n@decorate\ndef hello():\n    print(\"Hello\")\n\nhello()",
                     "result": "Before\nHello\nAfter",
                     "explanation": [

@@ -12,7 +12,7 @@ const note: PythonNote = {
             title: 'Defining equality without a hash',
             paragraphs: ['Sets and dictionary keys require hashable objects. When a class defines __eq__ but does not define __hash__, Python sets __hash__ to None. Its instances therefore cannot be inserted into a set or used as dictionary keys.'],
             examples: [{
-                title: 'Reject an unhashable class instance',
+                title: 'Rejecting an unhashable class instance',
                 description: ['Define value equality without defining a hash. Then try to insert an instance into a set.'],
                 code: [
                     'class User:',
@@ -43,7 +43,7 @@ const note: PythonNote = {
             title: 'A safely hashable User',
             paragraphs: ['Use immutable fields for value equality. A frozen dataclass generates matching equality and hash behavior for these string fields. Frozen prevents normal field reassignment, and strings themselves are immutable.'],
             examples: [{
-                title: 'Use a frozen dataclass as a value key',
+                title: 'Using a frozen dataclass as a value key',
                 code: [
                     'from dataclasses import dataclass',
                     '',

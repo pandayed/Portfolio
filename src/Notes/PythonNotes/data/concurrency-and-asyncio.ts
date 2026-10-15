@@ -7,13 +7,6 @@ const note: PythonNote = {
     updatedOn: '2026-10-01',
     sections: [
         {
-            id: 'concurrency-and-parallelism',
-            title: 'Concurrency versus parallelism',
-            paragraphs: [
-                'Concurrency means making progress on more than one task during the same period. A task can pause while another runs. Parallelism means two tasks actually run at the same instant, for example on different CPU cores. Concurrent work does not always run in parallel.',
-            ],
-        },
-        {
             id: 'gil',
             title: 'The GIL in CPython',
             paragraphs: [
@@ -31,7 +24,7 @@ const note: PythonNote = {
         },
         {
             id: 'choose-concurrency',
-            title: 'Choose threads, processes, or asyncio',
+            title: 'Choosing threads, processes, or asyncio',
             bullets: [
                 'Multithreading: threads share one process and its memory. Choose it for several blocking I/O calls, such as downloading files with a synchronous network library. While one call waits, another thread can run. Protect shared mutable data with a lock or a thread-safe queue.',
                 'Multiprocessing: separate processes have separate Python memory and can run CPU-heavy Python code on different cores in a usual GIL-enabled CPython build. Choose it for independent image transformations or numerical calculations. Passing data between processes costs time and memory.',
@@ -102,7 +95,7 @@ const note: PythonNote = {
                 ].join('\n'),
                 result: 'If two threads call increment(), 200000 is the intended total, but this code does not guarantee that result. A particular run that prints 200000 does not prove the update is safe.',
             }, {
-                title: 'Guard the update with one lock',
+                title: 'Guarding the update with one lock',
                 code: [
                     'from threading import Lock, Thread',
                     '',

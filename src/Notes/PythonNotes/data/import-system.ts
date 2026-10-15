@@ -27,7 +27,7 @@ const note: PythonNote = {
                 'Its first entry depends on how Python starts. For a file run as a script, that entry is normally the script’s folder. In an interactive session or with python -m, it normally points to the current folder. Environment and startup settings can change the path.',
             ],
             examples: [{
-                title: 'Inspect the search path',
+                title: 'Inspecting the search path',
                 code: [
                     'import sys',
                     '',

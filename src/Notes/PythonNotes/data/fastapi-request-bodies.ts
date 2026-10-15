@@ -8,7 +8,7 @@ const note: PythonNote = {
     sections: [
         {
             id: 'model-shape',
-            title: 'Describe the expected JSON',
+            title: 'Describing the expected JSON',
             paragraphs: [
                 [
                     'A request body carries data from a client to an API. For JSON input, define a ',
@@ -53,7 +53,7 @@ const note: PythonNote = {
         },
         {
             id: 'path-query-body',
-            title: 'Combine path, query, and body values',
+            title: 'Combining path, query, and body values',
             paragraphs: [
                 [
                     'One operation can receive values from several places. FastAPI uses the route name for path values, a ',

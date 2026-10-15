@@ -56,7 +56,7 @@ const note: PythonNote = {
                 'The collector supplements reference counting. Disabling automatic cyclic collection does not disable reference counting. Most programs should leave automatic collection enabled.',
             ],
             examples: [{
-                title: 'Check and request collection',
+                title: 'Checking and requesting collection',
                 code: [
                     'import gc',
                     '',

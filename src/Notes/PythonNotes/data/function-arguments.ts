@@ -18,7 +18,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Choose how to pass arguments",
+                    "title": "Choosing how to pass arguments",
                     "code": "def full_name(first, last=\"Pandey\"):\n    return f\"{first} {last}\"\n\nprint(full_name(\"Lal\"))\nprint(full_name(last=\"George\", first=\"Ayushi\"))",
                     "result": "Lal Pandey\nAyushi George"
                 }
@@ -34,7 +34,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Make call requirements explicit",
+                    "title": "Making call requirements explicit",
                     "code": "def describe(name, /, greeting=\"Hello\", *, punctuation=\"!\"):\n    return f\"{greeting}, {name}{punctuation}\"\n\nprint(describe(\"Ava\", greeting=\"Hi\", punctuation=\".\"))",
                     "result": "Hi, Ava.",
                     "explanation": [
@@ -59,7 +59,7 @@ const note: PythonNote = {
                     "result": "[1]\n[1, 1]"
                 },
                 {
-                    "title": "Create a fresh list when the argument is omitted",
+                    "title": "Creating a fresh list when the argument is omitted",
                     "code": "def collect(items=None):\n    if items is None:\n        items = []\n    items.append(1)\n    return items\n\nprint(collect())\nprint(collect())",
                     "result": "[1]\n[1]",
                     "explanation": [
@@ -70,7 +70,7 @@ const note: PythonNote = {
         },
         {
             "id": "args-kwargs",
-            "title": "Collect and unpack arguments",
+            "title": "args and kwargs",
             "bullets": [
                 "In a definition, *args collects extra positional arguments into a tuple. **kwargs collects extra keyword arguments into a dictionary.",
                 "args and kwargs are conventional names. The * and ** determine the behavior.",
@@ -78,14 +78,9 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Collect extra arguments",
+                    "title": "Collecting extra arguments",
                     "code": "def add(*numbers):\n    return sum(numbers)\n\ndef print_name(**parts):\n    print(parts[\"first\"], parts[\"last\"])\n\nprint(add(1, 2, 3, 4))\nprint_name(first=\"Lal\", last=\"Pandey\")",
                     "result": "10\nLal Pandey"
-                },
-                {
-                    "title": "Forward a call",
-                    "code": "def describe(first, second, *, punctuation=\"!\"):\n    return f\"{first} {second}{punctuation}\"\n\ndef forward(*args, **kwargs):\n    return describe(*args, **kwargs)\n\nprint(forward(\"Hello\", \"Ava\", punctuation=\".\"))",
-                    "result": "Hello Ava."
                 }
             ]
         },

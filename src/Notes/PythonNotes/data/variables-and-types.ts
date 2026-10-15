@@ -17,7 +17,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Assign and reassign a name",
+                    "title": "Assigning and reassigning a name",
                     "code": "score = 10\nscore = score + 5\nprint(score)",
                     "result": "15",
                     "explanation": [
@@ -36,7 +36,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Inspect the current value",
+                    "title": "Inspecting the current value",
                     "code": "value = 10\nprint(type(value))\nvalue = \"ten\"\nprint(type(value))",
                     "result": "<class 'int'>\n<class 'str'>"
                 }
@@ -60,7 +60,7 @@ const note: PythonNote = {
             },
             "examples": [
                 {
-                    "title": "Write and display numeric values",
+                    "title": "Writing and displaying numeric values",
                     "code": "count = 1_000\nbinary = 0b101\nhexadecimal = 0x12C\nnumber = 1 + 2j\nprint(count, binary, hexadecimal, number)\nprint(bin(10), hex(10))",
                     "result": "1000 5 300 (1+2j)\n0b1010 0xa"
                 }
@@ -68,7 +68,7 @@ const note: PythonNote = {
         },
         {
             "id": "multiple-assignment",
-            "title": "Assign several names",
+            "title": "Assigning several names",
             "bullets": [
                 "Chained assignment binds each name to the same object. It does not create separate copies.",
                 "Multiple assignment can give different values to several names. Detailed unpacking belongs in Tuples and unpacking."
@@ -99,7 +99,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Annotate an assignment",
+                    "title": "Annotating an assignment",
                     "code": "age: int = 20\nage = \"twenty\"\nprint(age)",
                     "result": "twenty",
                     "explanation": [

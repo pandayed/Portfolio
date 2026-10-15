@@ -9,15 +9,17 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "module",
-            "title": "Use a Python file as a module",
+            "title": "Using a Python file as a module",
             "bullets": [
-                "A module contains definitions and statements. A .py file is the usual way to write one.",
+                "A module is usually one .py file containing Python code, such as functions, classes, and variables.",
+                "A package groups related modules and can also contain smaller packages called subpackages. In this hierarchy, the package is the larger container. A module can also exist on its own, outside a package.",
+                "For example, shop/pricing.py is the pricing module inside the shop package. A total function defined in pricing.py belongs to that module.",
                 "Each module has its own namespace: its collection of names. Importing lets another module use those names.",
                 "Python searches for modules through its import machinery. The script’s folder and installed libraries are common search locations. Avoid local names such as json.py that hide standard library modules."
             ],
             "examples": [
                 {
-                    "title": "Import a function from another file",
+                    "title": "Importing a function from another file",
                     "description": [
                         "Save both files in the same folder. Run python3 main.py from that folder."
                     ],
@@ -31,7 +33,7 @@ const note: PythonNote = {
         },
         {
             "id": "import-forms",
-            "title": "Choose an import form",
+            "title": "Choosing an import form",
             "bullets": [
                 "import module keeps the module name in each use. from module import name binds the selected name directly.",
                 "as gives an imported module or name a local alias.",
@@ -53,7 +55,7 @@ const note: PythonNote = {
         },
         {
             "id": "import-execution",
-            "title": "Separate importable code from script work",
+            "title": "Separating importable code from script work",
             "bullets": [
                 "The first import normally executes a module’s top-level statements. Later imports in the same process normally reuse the loaded module.",
                 "Use the __name__ guard for work that should run only when the module is started as the program.",
@@ -61,7 +63,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Guard a script entry point",
+                    "title": "Guarding a script entry point",
                     "description": [
                         "Save this file as greetings.py. Run python3 greetings.py, or import greetings from another file."
                     ],
@@ -75,29 +77,32 @@ const note: PythonNote = {
         },
         {
             "id": "package",
-            "title": "Group modules in a package",
+            "title": "Grouping modules in a package",
             "bullets": [
-                "A package is a module that can contain submodules and subpackages. A regular package uses a folder with __init__.py. That file can be empty.",
+                "A regular package is a folder containing an __init__.py file and usually other Python files. Each of those other .py files is a module in the package. __init__.py can be empty.",
+                "Technically, a package is a special kind of module that can contain other modules. An ordinary module such as pricing.py does not contain submodules just because it imports them.",
                 "A subpackage is another package inside a package. Its import name includes its parents, such as shop.reports.monthly.",
                 "Namespace packages can omit __init__.py and span multiple folders. Use a regular package for these examples."
             ],
             "examples": [
                 {
-                    "title": "Import from a regular package",
+                    "title": "Importing from a regular package",
                     "description": [
-                        "Create shop/ beside main.py. Create an empty shop/__init__.py. Save the other two files below, then run python3 main.py."
+                        "Create shop/ beside main.py. Create an empty shop/__init__.py. Save the other two files below, then run python3 main.py.",
+                        "The project folder contains main.py and the shop package folder. The shop folder contains __init__.py and the pricing.py module."
                     ],
                     "code": "# shop/pricing.py\ndef total(price, shipping):\n    return price + shipping\n\n# main.py\nimport shop.pricing\nprint(shop.pricing.total(10, 2))\n\nfrom shop import pricing\nprint(pricing.total(10, 2))\n\nfrom shop.pricing import total\nprint(total(10, 2))",
                     "result": "12\n12\n12",
                     "explanation": [
-                        "shop is the package, shop.pricing is its module, and total is a function inside that module."
+                        "The containment order is shop package → pricing module → total function. main.py is a separate module beside the shop package.",
+                        "In shop.pricing.total, each dot selects the next name: pricing within shop, then total within pricing."
                     ]
                 }
             ]
         },
         {
             "id": "imports-inside-packages",
-            "title": "Import between modules in a package",
+            "title": "Importing between modules in a package",
             "bullets": [
                 "An absolute import starts with the package name, such as from shop.pricing import total.",
                 "A relative import starts from the current package. One dot means the current package; two dots mean its parent.",
@@ -105,7 +110,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Run a package module with -m",
+                    "title": "Running a package module with -m",
                     "description": [
                         "Create a shop/ folder with an empty __init__.py and the two files below. From the folder containing shop/, run python3 -m shop.main."
                     ],

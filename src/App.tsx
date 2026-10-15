@@ -1,3 +1,4 @@
+import McpServers from './Notes/McpServers';
 import './App.css';
 import './CommonClasses/CommonClasses.css';
 
@@ -52,6 +53,7 @@ import ComplexityCases from './Blogs/ComplexityCases/ComplexityCases';
 import SqlVsMySql from './Blogs/SqlVsMySql/SqlVsMySql';
 import SslTls from './Blogs/SslTls/SslTls';
 import AiObedience from './Blogs/AiObedience/AiObedience';
+import McpServer from './Blogs/McpServer/McpServer';
 import SieveOfEratosthenes from './Blogs/SieveOfEratosthenes/SieveOfEratosthenes';
 import ConsistentHashing from './Notes/SystemDesign/ConsistentHashing/ConsistentHashing';
 import WhyReact from './Blogs/WhyReact/WhyReact';
@@ -78,10 +80,12 @@ import About from './About/About';
 import Footer from './Footer/Footer';
 
 import {
+    MCP_SERVERS_ROUTE,
     ABOUT_ROUTE,
     AWS_SERVICES_ROUTE,
     API_COMMUNICATION_ROUTE,
     AI_OBEDIENCE_ROUTE,
+    MCP_SERVER_BLOG_ROUTE,
     ARCHIVE_ROUTE,
     BLOGS_ROUTE,
     CICD_NOTES_ROUTE,
@@ -175,6 +179,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [JENKINS_ROUTE]: Jenkins,
     [GITLAB_CICD_ROUTE]: GitLabCICD,
     [ARGO_CD_ROUTE]: ArgoCD,
+    [MCP_SERVERS_ROUTE]: McpServers,
     [DOCKER_NOTES_ROUTE]: DockerNotesIndex,
     [DOCKER_CONTAINERS_ROUTE]: DockerContainers,
     [DOCKER_BUILD_RUN_ROUTE]: DockerBuildRun,
@@ -198,6 +203,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [SQL_VS_MYSQL_ROUTE]: SqlVsMySql,
     [SSL_TLS_ROUTE]: SslTls,
     [AI_OBEDIENCE_ROUTE]: AiObedience,
+    [MCP_SERVER_BLOG_ROUTE]: McpServer,
     [SIEVE_OF_ERATOSTHENES_ROUTE]: SieveOfEratosthenes,
     [WHY_REACT_ROUTE]: WhyReact,
     [CHAIN_OF_THOUGHT_ROUTE]: ChainOfThought,

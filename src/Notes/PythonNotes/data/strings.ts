@@ -9,7 +9,7 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "literals-escapes",
-            "title": "Create strings",
+            "title": "Creating strings",
             "bullets": [
                 "Single and double quotes create strings. Use the other quote style or an escape to include a quote.",
                 "\\n represents a newline. \\t represents a tab. \\\\ represents one backslash.",
@@ -34,7 +34,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Read parts of a string",
+                    "title": "Reading parts of a string",
                     "code": "word = \"Python\"\nprint(word[0], word[-1])\nprint(word[1:4])\nprint(word[::2])\nprint(word[::-1])",
                     "result": "P n\nyth\nPto\nnohtyP"
                 }
@@ -42,14 +42,14 @@ const note: PythonNote = {
         },
         {
             "id": "operations",
-            "title": "Combine and search text",
+            "title": "Combining and searching text",
             "bullets": [
                 "+ joins strings. * repeats a string. in checks whether text occurs within another string.",
                 "Strings cannot replace a character by index. Build a new string instead."
             ],
             "examples": [
                 {
-                    "title": "Build a new string",
+                    "title": "Building a new string",
                     "code": "word = \"Python\"\nchanged = \"J\" + word[1:]\nprint(changed, word)\nprint(\"Py\" in word)",
                     "result": "Jython Python\nTrue",
                     "explanation": [
@@ -66,7 +66,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Insert values and format decimals",
+                    "title": "Inserting values and formatting decimals",
                     "code": "name = \"Ada\"\nprice = 12.5\nprint(f\"{name}: {price:.2f}\")\nprint(f\"2 + 3 = {2 + 3}\")",
                     "result": "Ada: 12.50\n2 + 3 = 5"
                 }
@@ -189,7 +189,7 @@ const note: PythonNote = {
             },
             "examples": [
                 {
-                    "title": "Clean and search text",
+                    "title": "Cleaning and searching text",
                     "code": "name = \"  Ada Lovelace  \"\nclean = name.strip()\nprint(clean.upper())\nprint(clean.find(\"Love\"))\nprint(clean.replace(\"Ada\", \"A.\"))",
                     "result": "ADA LOVELACE\n4\nA. Lovelace"
                 }

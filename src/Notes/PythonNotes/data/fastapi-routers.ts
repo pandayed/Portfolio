@@ -2,13 +2,13 @@ import type { PythonNote } from '../types';
 
 const note: PythonNote = {
     slug: 'fastapi-routers',
-    title: 'Split an application with APIRouter',
+    title: 'Splitting an application with APIRouter',
     summary: 'Group related path operations in separate modules and include them in the main app.',
     updatedOn: '2026-09-30',
     sections: [
         {
             id: 'why-routers',
-            title: 'Group related operations',
+            title: 'Grouping related operations',
             paragraphs: [
                 'A small example can keep its routes in main.py. As an API grows, place related path operations in separate Python modules. APIRouter lets each module declare routes that become part of the main FastAPI application.',
             ],
@@ -32,7 +32,7 @@ const note: PythonNote = {
         },
         {
             id: 'include-router',
-            title: 'Include the router in the application',
+            title: 'Including the router in the application',
             paragraphs: [
                 'Import the router module and pass its router to app.include_router(). FastAPI adds those operations to the application and its OpenAPI documentation.',
             ],

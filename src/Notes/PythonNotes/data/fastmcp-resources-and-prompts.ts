@@ -9,23 +9,22 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "resource",
-            "title": "Read content by URI",
+            "title": "Reading content by URI",
             "bullets": [
                 "Register readable content with @mcp.resource and a unique URI. FastMCP calls the function when a client reads that URI.",
-                "A URI is an identifier. A custom URI scheme does not automatically read a file or perform an HTTP request.",
                 "A template such as study://topics/{topic} passes the URI parameter to the function. Keep its name aligned with the function parameter."
             ]
         },
         {
             "id": "prompt",
-            "title": "Generate reusable messages",
+            "title": "Generating reusable messages",
             "bullets": [
                 "Register a prompt with @mcp.prompt. The function name identifies the prompt; arguments customize its messages.",
                 "Returning a string creates a user message. The host decides how to use that message with a model."
             ],
             "examples": [
                 {
-                    "title": "Provide a guide, topic notes, and a revision prompt",
+                    "title": "Providing a guide, topic notes, and a revision prompt",
                     "description": [
                         "Save as content_server.py beside server.py from the previous note. This is a separate server."
                     ],

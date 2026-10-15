@@ -9,7 +9,7 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "dictionaries",
-            "title": "Create and read dictionaries",
+            "title": "Creating and reading dictionaries",
             "bullets": [
                 "A dictionary maps unique keys to values. Use {} for an empty dictionary.",
                 "Keys must be hashable: their hash value must remain stable, and equality must agree with hashing. Strings and integers are common keys. Lists cannot be keys.",
@@ -18,7 +18,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Read a named value",
+                    "title": "Reading a named value",
                     "code": "point = {\"x\": 1, \"y\": 2}\nprint(point[\"x\"])\nprint(len(point))",
                     "result": "1\n2"
                 }
@@ -34,7 +34,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Handle an optional field",
+                    "title": "Handling an optional field",
                     "code": "profile = {\"name\": \"Ada\"}\nprint(profile.get(\"city\"))\nprint(profile.get(\"city\", \"Unknown\"))\nprint(\"name\" in profile)",
                     "result": "None\nUnknown\nTrue"
                 }
@@ -42,7 +42,7 @@ const note: PythonNote = {
         },
         {
             "id": "modify",
-            "title": "Add, replace, and remove entries",
+            "title": "Adding, replacing, and removing entries",
             "bullets": [
                 "Assigning a new key adds an entry. Assigning an existing key replaces its value without moving the key.",
                 "update copies entries from another mapping or key/value pairs. Later values replace earlier values for matching keys.",
@@ -50,7 +50,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Update a record",
+                    "title": "Updating a record",
                     "code": "profile = {\"name\": \"Ada\", \"city\": \"London\"}\nprofile[\"city\"] = \"Paris\"\nprofile.update({\"active\": True})\ncity = profile.pop(\"city\")\nprint(profile)\nprint(city)",
                     "result": "{'name': 'Ada', 'active': True}\nParis"
                 }
@@ -58,7 +58,7 @@ const note: PythonNote = {
         },
         {
             "id": "iteration",
-            "title": "Iterate over keys and values",
+            "title": "Iterating over keys and values",
             "bullets": [
                 "Iterating directly over a dictionary supplies keys. values() supplies values. items() supplies key/value pairs.",
                 "keys(), values(), and items() return views that reflect later dictionary changes.",
@@ -66,7 +66,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Unpack each key/value pair",
+                    "title": "Unpacking each key/value pair",
                     "code": "scores = {\"Ada\": 90, \"Grace\": 95}\nfor name, score in scores.items():\n    print(name, score)",
                     "result": "Ada 90\nGrace 95"
                 }
@@ -74,14 +74,14 @@ const note: PythonNote = {
         },
         {
             "id": "merge",
-            "title": "Merge dictionaries",
+            "title": "Merging dictionaries",
             "bullets": [
                 "{**first, **second} builds a new dictionary by expanding each mapping. Later values win for duplicate keys.",
                 "On Python 3.9 and later, first | second also merges dictionaries. first |= second updates the first dictionary."
             ],
             "examples": [
                 {
-                    "title": "Override a default value",
+                    "title": "Overriding a default value",
                     "code": "defaults = {\"color\": \"blue\", \"size\": 10}\noverrides = {\"size\": 20}\ncombined = {**defaults, **overrides}\nprint(combined)",
                     "result": "{'color': 'blue', 'size': 20}"
                 }

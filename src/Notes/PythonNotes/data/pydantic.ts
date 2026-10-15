@@ -8,12 +8,12 @@ const note: PythonNote = {
     sections: [
         {
             id: 'model-fields',
-            title: 'Define a model with fields',
+            title: 'Defining a model with fields',
             paragraphs: [
                 'Pydantic is a Python library for validating data. A model is a class that inherits from BaseModel. Its annotated attributes describe the fields and the values each field accepts. You can use a Pydantic model in ordinary Python code without FastAPI.',
             ],
             examples: [{
-                title: 'Create and read a model',
+                title: 'Creating and reading a model',
                 code: [
                     'from pydantic import BaseModel',
                     '',
@@ -30,12 +30,12 @@ const note: PythonNote = {
         },
         {
             id: 'validation-and-conversion',
-            title: 'Validate and convert input',
+            title: 'Validating and converting input',
             paragraphs: [
                 'Creating a model validates the supplied values. Pydantic can convert compatible input, such as a numeric string to a float. An annotation alone does not validate an ordinary Python variable. Validation happens when Pydantic creates or validates a model.',
             ],
             examples: [{
-                title: 'Build a model from a dictionary',
+                title: 'Building a model from a dictionary',
                 code: [
                     'from pydantic import BaseModel',
                     '',
@@ -75,7 +75,7 @@ const note: PythonNote = {
         },
         {
             id: 'nested-models',
-            title: 'Use models inside models',
+            title: 'Using models inside models',
             paragraphs: [
                 'A field can use another Pydantic model as its type. Pydantic validates the nested dictionary and creates a nested model instance.',
             ],
@@ -99,7 +99,7 @@ const note: PythonNote = {
         },
         {
             id: 'validation-errors',
-            title: 'Read a validation error',
+            title: 'Reading a validation error',
             paragraphs: [
                 'Pydantic raises ValidationError when an input cannot produce a valid model. Each error identifies a field and a problem. Catch the error when your program needs to handle invalid input.',
             ],
@@ -122,7 +122,7 @@ const note: PythonNote = {
         },
         {
             id: 'model-dump',
-            title: 'Get a dictionary from a model',
+            title: 'Getting a dictionary from a model',
             paragraphs: [
                 'model_dump() returns a Python dictionary. Nested models become nested dictionaries. Use model_dump_json() when you need a JSON string instead.',
             ],

@@ -2,7 +2,7 @@ import type { PythonNote } from '../types';
 
 const note: PythonNote = {
     slug: 'fastapi-backend-service',
-    title: 'Build a database-backed FastAPI service',
+    title: 'Building a database-backed FastAPI service',
     summary: 'Connect FastAPI to PostgreSQL, manage a session per request, and add schema migrations.',
     updatedOn: '2026-10-01',
     sections: [
@@ -26,7 +26,7 @@ const note: PythonNote = {
         },
         {
             id: 'install',
-            title: 'Install packages and set the database URL',
+            title: 'Installing packages and setting the database URL',
             paragraphs: [
                 [
                     'Start with the project from ',
@@ -36,7 +36,7 @@ const note: PythonNote = {
                 'Keep the real password out of source files and version control. The URL explicitly names the psycopg driver, so it does not depend on SQLAlchemy choosing a default PostgreSQL driver.',
             ],
             examples: [{
-                title: 'Install the packages',
+                title: 'Installing the packages',
                 language: 'text',
                 code: [
                     'uv add sqlalchemy "psycopg[binary]" alembic pydantic-settings',
@@ -47,7 +47,7 @@ const note: PythonNote = {
         },
         {
             id: 'connection',
-            title: 'Create the engine, model, and session dependency',
+            title: 'Creating the engine, model, and session dependency',
             paragraphs: [
                 'The Engine manages access to database connections. The Session tracks queries and changes for one request. The dependency closes the Session after the request; it does not commit a write automatically.',
             ],
@@ -88,7 +88,7 @@ const note: PythonNote = {
         },
         {
             id: 'routes',
-            title: 'Create and read a task',
+            title: 'Creating and reading a task',
             paragraphs: [
                 'TaskCreate describes incoming JSON. TaskRead describes the response and reads fields from the SQLAlchemy object. FastAPI supplies a Session through Depends for each request.',
             ],
@@ -139,12 +139,12 @@ const note: PythonNote = {
         },
         {
             id: 'migrations',
-            title: 'Create the table with Alembic',
+            title: 'Creating the table with Alembic',
             paragraphs: [
                 'Alembic compares SQLAlchemy model metadata with the database and generates a migration draft. In the generated migrations/env.py, replace target_metadata = None with the lines below, after Alembic defines config. Keep the rest of that generated file. Escaping percent signs lets Alembic read a URL that contains an encoded password.',
             ],
             examples: [{
-                title: 'Initialize Alembic',
+                title: 'Initializing Alembic',
                 language: 'text',
                 code: 'uv run alembic init migrations',
                 result: 'Alembic creates alembic.ini and migrations/env.py.',
@@ -159,7 +159,7 @@ const note: PythonNote = {
                     'target_metadata = Base.metadata',
                 ].join('\n'),
             }, {
-                title: 'Generate, review, and apply the migration',
+                title: 'Generating, reviewing, and applying the migration',
                 language: 'text',
                 code: [
                     'uv run alembic revision --autogenerate -m "create tasks"',
@@ -172,7 +172,7 @@ const note: PythonNote = {
         },
         {
             id: 'try-it',
-            title: 'Send a request and read the result',
+            title: 'Sending a request and reading the result',
             paragraphs: [
                 'Run these commands in another terminal while the server is running. The first generated ID may differ if the table already contains tasks. Use the ID returned by POST in the GET URL.',
             ],
@@ -192,7 +192,7 @@ const note: PythonNote = {
         },
         {
             id: 'other-pieces',
-            title: 'Add other libraries when the service needs them',
+            title: 'Adding other libraries when the service needs them',
             bullets: [
                 [
                     'Login managed by this service: FastAPI security helpers with ',

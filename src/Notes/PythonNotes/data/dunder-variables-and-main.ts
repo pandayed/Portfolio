@@ -29,7 +29,7 @@ const note: PythonNote = {
             ],
             examples: [
                 {
-                    title: 'Read metadata from an imported module',
+                    title: 'Reading metadata from an imported module',
                     description: [
                         'Save these as two separate files in the same folder. Run python3 inspect_module.py.',
                     ],
@@ -51,7 +51,7 @@ const note: PythonNote = {
             ],
             examples: [
                 {
-                    title: 'Compare running and importing the same file',
+                    title: 'Comparing running and importing the same file',
                     description: [
                         'Save the files below in the same folder. Run each command in a separate process.',
                     ],
@@ -65,7 +65,7 @@ const note: PythonNote = {
         },
         {
             id: 'main-function',
-            title: 'Use a main() function',
+            title: 'Using a main() function',
             bullets: [
                 'Python does not require a main function as C++ does. It starts by executing the entry module’s top-level statements.',
                 'main is an ordinary function name, chosen by convention. Defining main() does not call it automatically.',
@@ -74,7 +74,7 @@ const note: PythonNote = {
             ],
             examples: [
                 {
-                    title: 'Keep a reusable function separate from startup',
+                    title: 'Keeping a reusable function separate from startup',
                     description: ['Save this file as app.py and run python3 app.py.'],
                     code: 'def greet(name):\n    return f"Hello, {name}"\n\ndef main():\n    name = "Ada"\n    print(greet(name))\n\nif __name__ == "__main__":\n    main()',
                     result: 'Hello, Ada',
@@ -88,7 +88,7 @@ const note: PythonNote = {
         },
         {
             id: 'package-entry',
-            title: 'Run a package with __main__.py',
+            title: 'Running a package with __main__.py',
             bullets: [
                 'The string "__main__", a function named main(), and a file named __main__.py have different roles.',
                 'python3 -m package_name runs that package’s __main__.py. This file commonly delegates startup to a function in another module.',
@@ -96,7 +96,7 @@ const note: PythonNote = {
             ],
             examples: [
                 {
-                    title: 'Create a package entry point',
+                    title: 'Creating a package entry point',
                     description: [
                         'Create a hello_app folder with an empty __init__.py and the two files below. Run python3 -m hello_app from the folder containing hello_app.',
                     ],

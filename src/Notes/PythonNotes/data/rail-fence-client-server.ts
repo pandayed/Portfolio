@@ -18,7 +18,7 @@ const note: PythonNote = {
         },
         {
             id: 'separate-concerns',
-            title: 'Separate transport from transformation',
+            title: 'Separating transport from transformation',
             paragraphs: ['Keep encode, decode, send, receive, and connection handling as separate functions. Each function then has one contract and can be checked independently.'],
             examples: [{
                 code: [
@@ -31,7 +31,7 @@ const note: PythonNote = {
         },
         {
             id: 'validation',
-            title: 'Validate the key and connection',
+            title: 'Validating the key and connection',
             bullets: [
                 'Reject keys below 2 before running the rail fence logic.',
                 'Handle an empty message explicitly.',

@@ -1,5 +1,6 @@
 import {
     AI_OBEDIENCE_ROUTE,
+    MCP_SERVER_BLOG_ROUTE,
     CHAIN_OF_THOUGHT_ROUTE,
     COMPLEXITY_CASES_ROUTE,
     CPP_COMPLEXITY_ROUTE,
@@ -26,6 +27,14 @@ export interface Post {
 }
 
 const entries: Post[] = [
+    {
+        title: 'Understanding MCP servers',
+        summary: 'From asking ChatGPT about a Jira issue to fetching and updating it through Atlassian’s MCP server, with the backend request flow explained along the way.',
+        startedOn: '2026-10-15',
+        updatedOn: '2026-10-15',
+        route: MCP_SERVER_BLOG_ROUTE,
+        status: 'draft',
+    },
     {
         title: 'Average and amortised are not the same thing',
         summary: 'One averages over inputs, the other over a sequence of calls, and only one of them is a guarantee.',

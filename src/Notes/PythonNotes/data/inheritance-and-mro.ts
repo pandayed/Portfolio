@@ -9,14 +9,14 @@ const note: PythonNote = {
     sections: [
         {
             id: 'inheritance',
-            title: 'Inherit and override a method',
+            title: 'Inheriting and overriding a method',
             bullets: [
                 'class Child(Parent) defines Child as a subclass of Parent. It can use methods inherited from Parent.',
                 'Define a method with the same name to override inherited behavior.',
                 'Use super() to call the next implementation in the inheritance order. This lets a subclass extend inherited behavior.',
             ],
             examples: [{
-                title: 'Extend a greeting from a parent class',
+                title: 'Extending a greeting from a parent class',
                 description: ['Initialize the shared name in Person, then extend its greeting in Student.'],
                 code: 'class Person:\n    def __init__(self, name):\n        self.name = name\n\n    def greet(self):\n        return f"Hello, {self.name}"\n\nclass Student(Person):\n    def greet(self):\n        return super().greet() + " (student)"\n\nstudent = Student("Ada")\nprint(student.greet())\nprint(isinstance(student, Person))',
                 result: 'Hello, Ada (student)\nTrue',
@@ -33,7 +33,7 @@ const note: PythonNote = {
             id: 'diamond-example',
             title: 'The D(B, C) example',
             examples: [{
-                title: 'Inspect the inheritance order of a diamond',
+                title: 'Inspecting the inheritance order of a diamond',
                 code: [
                     'class A:',
                     '    pass',

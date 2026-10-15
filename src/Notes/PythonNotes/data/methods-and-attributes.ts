@@ -17,7 +17,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Choose the method receiver",
+                    "title": "Choosing the method receiver",
                     "description": [
                         "Create a user from text, then call a method that reads that user’s name."
                     ],
@@ -31,7 +31,7 @@ const note: PythonNote = {
         },
         {
             "id": "attribute-lookup",
-            "title": "Follow ordinary attribute lookup",
+            "title": "Following ordinary attribute lookup",
             "bullets": [
                 "For an ordinary data attribute, Python checks the instance, then its class and base classes. An instance value can hide a class value.",
                 "A method found on a class binds to the instance when accessed through that instance. This binding supplies self.",

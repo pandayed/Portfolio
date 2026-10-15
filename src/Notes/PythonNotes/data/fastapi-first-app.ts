@@ -8,7 +8,7 @@ const note: PythonNote = {
     sections: [
         {
             id: 'install-and-run',
-            title: 'Install and run the application',
+            title: 'Installing and running the application',
             paragraphs: [
                 [
                     'FastAPI is a Python framework for building HTTP APIs. It uses Python type annotations to describe request data and create API documentation. FastAPI is built on ',
@@ -20,7 +20,7 @@ const note: PythonNote = {
                 'The commands below use uv to manage a project and its packages. Run them in a new project folder. The development command starts a local server and watches files for changes.',
             ],
             examples: [{
-                title: 'Create a project and install FastAPI',
+                title: 'Creating a project and installing FastAPI',
                 language: 'text',
                 code: [
                     'uv init fastapi-notes --bare',
@@ -29,7 +29,7 @@ const note: PythonNote = {
                 ].join('\n'),
                 result: 'uv records FastAPI and its dependencies in the project files.',
             }, {
-                title: 'Start the development server',
+                title: 'Starting the development server',
                 language: 'text',
                 code: 'uv run fastapi dev main.py',
                 result: 'The server prints a local address, usually http://127.0.0.1:8000.',
@@ -37,7 +37,7 @@ const note: PythonNote = {
         },
         {
             id: 'first-operation',
-            title: 'Declare a path operation',
+            title: 'Declaring a path operation',
             paragraphs: [
                 'Create main.py and define a FastAPI app. The decorator connects an HTTP method and URL path to a Python function. FastAPI calls that function when a matching request arrives.',
             ],
@@ -63,7 +63,7 @@ const note: PythonNote = {
         },
         {
             id: 'automatic-docs',
-            title: 'Open the generated API docs',
+            title: 'Opening the generated API docs',
             paragraphs: [
                 'While the development server is running, open /docs on its local address. FastAPI builds an interactive page from the application routes and their type annotations. The OpenAPI schema describes those operations in a format other tools can read.',
             ],

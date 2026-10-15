@@ -16,7 +16,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Separate comments from text",
+                    "title": "Separating comments from text",
                     "code": "# Display a greeting.\nprint(\"Hello\")  # A comment after code.\nprint(\"# is text here\")",
                     "result": "Hello\n# is text here"
                 }
@@ -33,7 +33,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Read an indented block",
+                    "title": "Reading an indented block",
                     "code": "if True:\n    print(\"Inside the block\")\n    print(\"Still inside\")\n\nprint(\"After the block\")",
                     "result": "Inside the block\nStill inside\nAfter the block",
                     "explanation": [
@@ -44,61 +44,20 @@ const note: PythonNote = {
         },
         {
             "id": "continued-lines",
-            "title": "Continue an expression across lines",
+            "title": "Continuing an expression across lines",
             "bullets": [
                 "Inside parentheses, brackets, or braces, an expression can continue onto another physical line.",
                 "Indentation within those delimiters helps readability. It does not by itself create a new block."
             ],
             "examples": [
                 {
-                    "title": "Split a call across lines",
+                    "title": "Splitting a call across lines",
                     "code": "print(\n    \"Total:\",\n    2 + 3,\n)",
                     "result": "Total: 5",
                     "explanation": [
                         "The closing parenthesis ends the one print call. The final comma is allowed."
                     ]
                 }
-            ]
-        },
-        {
-            "id": "next-notes",
-            "title": "Continue with values and control flow",
-            "bullets": [
-                [
-                    {
-                        "text": "Variables and types",
-                        "href": "#/notes/python/variables-and-types"
-                    },
-                    ": names, assignment, and type information."
-                ],
-                [
-                    {
-                        "text": "Numbers and conversion",
-                        "href": "#/notes/python/numbers-and-conversion"
-                    },
-                    ": arithmetic and numeric input."
-                ],
-                [
-                    {
-                        "text": "Strings",
-                        "href": "#/notes/python/strings"
-                    },
-                    ": text values and operations."
-                ],
-                [
-                    {
-                        "text": "Conditionals",
-                        "href": "#/notes/python/conditionals"
-                    },
-                    ": comparisons and branch selection."
-                ],
-                [
-                    {
-                        "text": "Loops and range",
-                        "href": "#/notes/python/loops-and-range"
-                    },
-                    ": repeated work."
-                ]
             ]
         },
         {

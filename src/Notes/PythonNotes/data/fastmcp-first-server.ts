@@ -9,14 +9,14 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "install",
-            "title": "Install in a project",
+            "title": "Installing in a project",
             "bullets": [
                 "FastMCP requires Python 3.10 or newer. Use a project environment to keep dependencies separate.",
                 "The installation commands use uv, as in the FastAPI notes."
             ],
             "examples": [
                 {
-                    "title": "Create a FastMCP project",
+                    "title": "Creating a FastMCP project",
                     "description": [
                         "Run these commands in a terminal with uv installed."
                     ],
@@ -30,7 +30,7 @@ const note: PythonNote = {
         },
         {
             "id": "tool",
-            "title": "Register a typed function",
+            "title": "Registering a typed function",
             "bullets": [
                 "Create a FastMCP instance, then register a function with @mcp.tool.",
                 "Parameter annotations describe inputs. A return annotation describes the result. The docstring explains the operation to callers.",
@@ -38,7 +38,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Expose a word-count tool",
+                    "title": "Exposing a word-count tool",
                     "description": [
                         "Save this as server.py in the project directory. Run uv run python server.py to start it with the default stdio transport."
                     ],
@@ -53,7 +53,7 @@ const note: PythonNote = {
         },
         {
             "id": "validation",
-            "title": "Validate inputs and keep errors useful",
+            "title": "Validating inputs and keeping errors useful",
             "bullets": [
                 "FastMCP validates incoming tool arguments against the generated schema. Type annotations alone do not validate ordinary direct Python function calls.",
                 "Business rules still belong in your code. A valid string can be empty; an integer can be outside your allowed range.",

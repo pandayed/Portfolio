@@ -39,10 +39,10 @@ const note: PythonNote = {
         },
         {
             "id": "custom",
-            "title": "Define setup and cleanup",
+            "title": "Defining setup and cleanup",
             "examples": [
                 {
-                    "title": "Run cleanup on success and failure",
+                    "title": "Running cleanup on success and failure",
                     "description": [
                         "Define a manager and exercise both paths in one program."
                     ],

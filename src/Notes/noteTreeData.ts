@@ -1,4 +1,5 @@
 import {
+    MCP_SERVERS_ROUTE,
     API_COMMUNICATION_ROUTE,
     AWS_SERVICES_ROUTE,
     CICD_NOTES_ROUTE,
@@ -529,6 +530,13 @@ export const noteTree: NoteNode[] = [
         summary: 'Each layer exists for a specific reason, solves a specific problem, and has a clear boundary.',
         route: API_COMMUNICATION_ROUTE,
         updatedOn: '2026-09-20',
+    },
+    {
+        type: 'page',
+        title: 'MCP servers',
+        summary: 'Server components, LLM tool flow, information visibility, permissions, and credential management.',
+        route: MCP_SERVERS_ROUTE,
+        updatedOn: '2026-10-15',
     },
     javascriptTypeScriptNotes,
     reactNotes,

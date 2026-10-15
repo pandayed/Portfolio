@@ -16,7 +16,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Compare equal lists and shared references",
+                    "title": "Comparing equal lists and shared references",
                     "description": [
                         "Compare two separate lists with two names for the same list."
                     ],
@@ -69,7 +69,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Compare shallow and deep copies",
+                    "title": "Comparing shallow and deep copies",
                     "code": "import copy\n\noriginal = [[1, 2], [3]]\nshallow = original.copy()\ndeep = copy.deepcopy(original)\noriginal[0].append(4)\nprint(shallow)\nprint(deep)",
                     "result": "[[1, 2, 4], [3]]\n[[1, 2], [3]]"
                 }

@@ -18,7 +18,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Compare values",
+                    "title": "Comparing values",
                     "code": "score = 15\nprint(score == 15)\nprint(10 < score < 20)\nprint(\"15\" == 15)",
                     "result": "True\nTrue\nFalse",
                     "explanation": [
@@ -38,7 +38,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Check whether text is present",
+                    "title": "Checking whether text is present",
                     "code": "name = \"\"\nif name:\n    print(\"Name supplied\")\nelse:\n    print(\"Name missing\")\nprint(bool(\"False\"))",
                     "result": "Name missing\nTrue"
                 }
@@ -55,7 +55,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Choose one age group",
+                    "title": "Choosing one age group",
                     "code": "age = 46\nif age >= 45:\n    print(\"45 or older\")\nelif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Under 18\")",
                     "result": "45 or older",
                     "explanation": [
@@ -66,7 +66,7 @@ const note: PythonNote = {
         },
         {
             "id": "boolean-operators",
-            "title": "Combine conditions",
+            "title": "Combining conditions",
             "bullets": [
                 "and evaluates its right operand only if the left operand is truthy. or evaluates its right operand only if the left operand is falsy. This is short-circuit evaluation.",
                 "not returns the opposite Boolean truth value.",
@@ -74,7 +74,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Combine checks and choose a fallback",
+                    "title": "Combining checks and choosing a fallback",
                     "code": "age = 20\nhas_ticket = True\nprint(age >= 18 and has_ticket)\nprint(not has_ticket)\nname = \"\"\nprint(name or \"Guest\")",
                     "result": "True\nFalse\nGuest"
                 }
@@ -82,14 +82,14 @@ const note: PythonNote = {
         },
         {
             "id": "conditional-expression",
-            "title": "Choose between two values",
+            "title": "Choosing between two values",
             "bullets": [
                 "value_if_true if condition else value_if_false evaluates one of two expressions.",
                 "Use an if statement when a branch needs multiple steps."
             ],
             "examples": [
                 {
-                    "title": "Store a selected message",
+                    "title": "Storing a selected message",
                     "code": "age = 20\nmessage = \"Eligible\" if age >= 18 else \"Not eligible\"\nprint(message)",
                     "result": "Eligible"
                 }

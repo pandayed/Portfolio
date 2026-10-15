@@ -9,7 +9,7 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "iterables-and-iterators",
-            "title": "Get an iterator from an iterable",
+            "title": "Getting an iterator from an iterable",
             "bullets": [
                 "An iterable can provide an iterator. Lists, strings, dictionaries, and range objects are iterables.",
                 "An iterator keeps its position and supplies the next value on request. Every iterator is iterable, but a list is not itself an iterator.",
@@ -19,7 +19,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Read values one at a time",
+                    "title": "Reading values one at a time",
                     "description": [
                         "Read values one at a time."
                     ],
@@ -48,7 +48,7 @@ const note: PythonNote = {
         },
         {
             "id": "generator-functions",
-            "title": "Produce values with a generator function",
+            "title": "Producing values with a generator function",
             "bullets": [
                 "A function containing yield is a generator function. Calling it returns a generator iterator without running its body yet.",
                 "Each next() resumes the function until it yields a value. The generator keeps local variables and its execution position between yields.",
@@ -57,7 +57,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Pause and resume at yield",
+                    "title": "Pausing and resuming at yield",
                     "description": [
                         "Pause and resume at yield."
                     ],
@@ -72,7 +72,7 @@ const note: PythonNote = {
         },
         {
             "id": "list-versus-generator-expression",
-            "title": "Choose a generator expression or a list",
+            "title": "Choosing a generator expression or a list",
             "bullets": [
                 "A generator expression uses parentheses and computes results as its iterator advances.",
                 "A list comprehension computes and stores all its results immediately. Its syntax is covered with collection operations.",
@@ -81,7 +81,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Consume a generator expression once",
+                    "title": "Consuming a generator expression once",
                     "description": [
                         "Consume a generator expression once."
                     ],

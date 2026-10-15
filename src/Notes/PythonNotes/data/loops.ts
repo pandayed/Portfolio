@@ -17,7 +17,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Visit each character",
+                    "title": "Visiting each character",
                     "code": "for letter in \"Go\":\n    print(letter)",
                     "result": "G\no"
                 }
@@ -34,7 +34,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Count up and down",
+                    "title": "Counting up and down",
                     "code": "for number in range(2, 7, 2):\n    print(number)\nfor number in range(3, 0, -1):\n    print(number)",
                     "result": "2\n4\n6\n3\n2\n1"
                 }
@@ -49,7 +49,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Repeat until a counter reaches its limit",
+                    "title": "Repeating until a counter reaches its limit",
                     "code": "count = 0\nwhile count < 3:\n    print(count)\n    count += 1",
                     "result": "0\n1\n2"
                 }
@@ -64,7 +64,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Skip one value and stop early",
+                    "title": "Skipping one value and stopping early",
                     "code": "for number in range(6):\n    if number == 1:\n        continue\n    if number == 4:\n        break\n    print(number)",
                     "result": "0\n2\n3"
                 }
@@ -80,7 +80,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Detect an unsuccessful search",
+                    "title": "Detecting an unsuccessful search",
                     "code": "for letter in \"Ada\":\n    if letter == \"z\":\n        print(\"Found\")\n        break\nelse:\n    print(\"Not found\")",
                     "result": "Not found",
                     "explanation": [

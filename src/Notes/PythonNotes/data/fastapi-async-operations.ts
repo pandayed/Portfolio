@@ -8,7 +8,7 @@ const note: PythonNote = {
     sections: [
         {
             id: 'awaitable-library',
-            title: 'Use async def with awaitable libraries',
+            title: 'Using async def with awaitable libraries',
             paragraphs: [
                 'Use async def when the code awaits an asynchronous library call. While that call waits for I/O, such as a network response, the event loop can work on other tasks. You can write await only inside an async def function.',
             ],
@@ -24,7 +24,7 @@ const note: PythonNote = {
         },
         {
             id: 'blocking-library',
-            title: 'Use def with synchronous I/O libraries',
+            title: 'Using def with synchronous I/O libraries',
             paragraphs: [
                 'If a library performs blocking I/O and has no asynchronous interface, a normal def path operation is a suitable choice. FastAPI runs normal path operation functions in an external thread pool.',
             ],
@@ -40,7 +40,7 @@ const note: PythonNote = {
         },
         {
             id: 'avoid-blocking-async',
-            title: 'Do not block inside async def',
+            title: 'Avoiding blocking inside async def',
             paragraphs: [
                 'A blocking call inside async def stops the event loop while it runs. That can delay other requests handled by the same worker. Choose a library with async support, or put synchronous work in a normal FastAPI path operation or dependency where appropriate.',
             ],

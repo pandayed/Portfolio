@@ -1,4 +1,3 @@
-import fastmcpBasics from './data/fastmcp-basics';
 import fastmcpFirstServer from './data/fastmcp-first-server';
 import fastmcpResourcesAndPrompts from './data/fastmcp-resources-and-prompts';
 import fastmcpClientsAndTransports from './data/fastmcp-clients-and-transports';
@@ -16,7 +15,6 @@ import numbersAndConversion from './data/numbers-and-conversion';
 import strings from './data/strings';
 import conditionals from './data/conditionals';
 import loops from './data/loops';
-import collectionsComparison from './data/collections-comparison';
 import lists from './data/lists';
 import tuplesAndUnpacking from './data/tuples-and-unpacking';
 import dictionariesSetsGenerators from './data/dictionaries-sets-generators';
@@ -63,8 +61,8 @@ export const pythonChapters: readonly PythonChapter[] = [
     },
     {
         title: '3. Collections',
-        summary: 'Lists, tuples, dictionaries, sets, shared references, and choosing a collection.',
-        notes: [lists, tuplesAndUnpacking, dictionariesSetsGenerators, sets, objectsAndMutability, collectionsComparison],
+        summary: 'Lists, tuples, dictionaries, sets, stacks, queues, typed arrays, and shared references.',
+        notes: [lists, tuplesAndUnpacking, dictionariesSetsGenerators, sets, stacksQueuesArrays, objectsAndMutability],
     },
     {
         title: '4. Conditions and loops',
@@ -93,8 +91,8 @@ export const pythonChapters: readonly PythonChapter[] = [
     },
     {
         title: '9. Iterators and resource management',
-        summary: 'Lazy iteration, generator functions, context manager protocols, stacks, and queues.',
-        notes: [iterationAndGenerators, contextManagers, stacksQueuesArrays],
+        summary: 'Lazy iteration, generator functions, and context manager protocols.',
+        notes: [iterationAndGenerators, contextManagers],
     },
     {
         title: '10. Advanced object and runtime reference',
@@ -116,7 +114,7 @@ export const pythonChapters: readonly PythonChapter[] = [
     {
         title: '13. FastMCP',
         summary: 'MCP concepts, tool servers, resources, prompts, clients, and transports.',
-        notes: [fastmcpBasics, fastmcpFirstServer, fastmcpResourcesAndPrompts, fastmcpClientsAndTransports],
+        notes: [fastmcpFirstServer, fastmcpResourcesAndPrompts, fastmcpClientsAndTransports],
     },
     {
         title: '14. Tools and libraries reference',

@@ -9,7 +9,7 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "client",
-            "title": "Call a tool from Python",
+            "title": "Calling a tool from Python",
             "bullets": [
                 "FastMCP Client operations are asynchronous. Use async with to open and close the connection.",
                 "Pass a FastMCP instance for an in-memory connection. This needs no separate server process or listening port.",
@@ -17,7 +17,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Call the word-count tool in memory",
+                    "title": "Calling the word-count tool in memory",
                     "description": [
                         "Save as client.py beside server.py from the first server note. Run uv run python client.py."
                     ],
@@ -31,14 +31,14 @@ const note: PythonNote = {
         },
         {
             "id": "read",
-            "title": "Read resources and retrieve prompts",
+            "title": "Reading resources and retrieving prompts",
             "bullets": [
                 "read_resource returns content items. Text items expose text; binary items expose blob.",
                 "get_prompt returns messages. Inspect each message content rather than treating the response as a tool result."
             ],
             "examples": [
                 {
-                    "title": "Read study content and build a prompt",
+                    "title": "Reading study content and building a prompt",
                     "description": [
                         "Save as content_client.py beside content_server.py from the resources note. Run uv run python content_client.py."
                     ],
@@ -52,7 +52,7 @@ const note: PythonNote = {
         },
         {
             "id": "transports",
-            "title": "Choose how the client connects",
+            "title": "Choosing how the client connects",
             "bullets": [
                 "stdio connects local processes through standard input and output. The client launches the server subprocess.",
                 "Keep stdout for protocol messages in a stdio server. Send diagnostic logs to stderr.",
@@ -60,7 +60,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Connect through a local subprocess",
+                    "title": "Connecting through a local subprocess",
                     "description": [
                         "Use the same project environment and server.py from the first server note. Save as subprocess_client.py and run uv run python subprocess_client.py."
                     ],
@@ -71,7 +71,7 @@ const note: PythonNote = {
                     ]
                 },
                 {
-                    "title": "Connect to a local HTTP server",
+                    "title": "Connecting to a local HTTP server",
                     "description": [
                         "In the first terminal, run uv run fastmcp run server.py:mcp --transport http --host 127.0.0.1 --port 8000.",
                         "Save the Python code as http_client.py. In a second terminal, run uv run python http_client.py from the same project."

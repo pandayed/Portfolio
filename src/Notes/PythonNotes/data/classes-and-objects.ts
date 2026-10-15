@@ -16,7 +16,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Create two independent instances",
+                    "title": "Creating two independent instances",
                     "description": [
                         "Each call creates a new Person object."
                     ],
@@ -27,7 +27,7 @@ const note: PythonNote = {
         },
         {
             "id": "init-self",
-            "title": "Initialize state with __init__",
+            "title": "Initializing state with __init__",
             "bullets": [
                 "Python calls __init__ after creating the instance. Its arguments supply the initial state.",
                 "self refers to the instance receiving the method call. Python passes it automatically in person.introduce().",
@@ -35,7 +35,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Initialize and use a Person",
+                    "title": "Initializing and using a Person",
                     "description": [
                         "Keep the attributes needed by a method in the same class definition."
                     ],
@@ -57,7 +57,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Keep separate lists for separate people",
+                    "title": "Keeping separate lists for separate people",
                     "description": [
                         "Use a class attribute for a shared default and an instance attribute for each person’s skills."
                     ],
@@ -76,7 +76,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Remove an instance override",
+                    "title": "Removing an instance override",
                     "description": [
                         "Deleting the override makes the class value visible again."
                     ],

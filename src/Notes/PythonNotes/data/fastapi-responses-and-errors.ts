@@ -8,7 +8,7 @@ const note: PythonNote = {
     sections: [
         {
             id: 'response-model',
-            title: 'Describe the response',
+            title: 'Describing the response',
             paragraphs: [
                 'An output model documents the response shape and checks the data your function returns. It can also filter fields that are not part of the public response model.',
             ],
@@ -28,7 +28,7 @@ const note: PythonNote = {
         },
         {
             id: 'status-codes',
-            title: 'Choose a response status code',
+            title: 'Choosing a response status code',
             paragraphs: [
                 'FastAPI uses 200 OK by default for a successful operation. Set status_code on the route decorator when the operation has a different success status, such as 201 Created after creating a resource.',
             ],
@@ -45,7 +45,7 @@ const note: PythonNote = {
         },
         {
             id: 'expected-errors',
-            title: 'Raise an HTTPException for an expected error',
+            title: 'Raising an HTTPException for an expected error',
             paragraphs: [
                 'Raise HTTPException when the request is valid but the requested action cannot be completed. For example, return 404 when an item does not exist. Raising the exception stops the operation and sends an HTTP error response.',
             ],

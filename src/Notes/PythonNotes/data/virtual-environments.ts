@@ -8,7 +8,7 @@ const note: PythonNote = {
     sections: [
         {
             id: 'project-packages',
-            title: 'Give each project its own packages',
+            title: 'Giving each project its own packages',
             paragraphs: [
                 'A virtual environment is a folder with a Python interpreter entry point and its own installed third-party packages. It is based on a Python installation already on your computer. The built-in venv module creates this folder.',
                 'Suppose one project needs version 1 of a library and another needs version 2. Installing both into one Python environment can cause a conflict. With a separate environment for each project, each project can use its required version.',
@@ -22,7 +22,7 @@ const note: PythonNote = {
         },
         {
             id: 'create',
-            title: 'Create the environment',
+            title: 'Creating the environment',
             paragraphs: [
                 'Install Python 3 first. Open a terminal and run one of the command blocks below. Both create a project folder named weather-app and an environment inside it named .venv. If you already have a project, open its folder and run only the venv command.',
                 'The -m option runs a module using the selected Python interpreter. In python3 -m venv .venv, venv is the module and .venv is the destination folder. The name .venv is a convention, not a requirement.',
@@ -54,7 +54,7 @@ const note: PythonNote = {
         },
         {
             id: 'folder',
-            title: 'Keep source files outside .venv',
+            title: 'Keeping source files outside .venv',
             paragraphs: [
                 'Save your own code beside .venv. The environment is generated content that you can recreate. The layout below shows a macOS/Linux environment with some files omitted.',
             ],
@@ -83,7 +83,7 @@ const note: PythonNote = {
         },
         {
             id: 'activate',
-            title: 'Activate it in the current terminal',
+            title: 'Activating it in the current terminal',
             paragraphs: [
                 'Activation puts the environment’s bin or Scripts folder at the start of PATH. PATH is the list of folders the shell searches for commands. After activation, the python command normally selects the environment’s interpreter.',
                 'Run the command for your shell from weather-app/. Choose one command, not all three. Your prompt may show (.venv), depending on your shell settings.',
@@ -110,12 +110,12 @@ const note: PythonNote = {
         },
         {
             id: 'check-interpreter',
-            title: 'Check which Python and pip you are using',
+            title: 'Checking which Python and pip you are using',
             paragraphs: [
                 'The prompt alone does not prove which interpreter will run your code. sys.executable shows the running interpreter’s path. sys.prefix points to its environment, while sys.base_prefix points to the base Python installation.',
             ],
             examples: [{
-                title: 'Run after activation',
+                title: 'Running after activation',
                 language: 'text',
                 code: [
                     'python -c "import sys; print(sys.executable); print(sys.prefix != sys.base_prefix)"',
@@ -130,13 +130,13 @@ const note: PythonNote = {
         },
         {
             id: 'install-and-run',
-            title: 'Install a package and run your code',
+            title: 'Installing a package and running your code',
             paragraphs: [
                 'With the environment active, install Requests, a third-party HTTP library. pip normally downloads packages from the Python Package Index (PyPI), so this step needs internet access. It also installs the package’s required dependencies.',
                 'Save main.py in weather-app/. This example imports Requests without making a network request.',
             ],
             examples: [{
-                title: 'Install into the active environment',
+                title: 'Installing into the active environment',
                 language: 'text',
                 code: 'python -m pip install requests',
                 result: 'Installation messages and selected versions vary. After a successful install, this environment’s Python can import requests.',
@@ -148,7 +148,7 @@ const note: PythonNote = {
                     'print(requests.__name__)  # requests',
                 ].join('\n'),
             }, {
-                title: 'Run from weather-app/',
+                title: 'Running from weather-app/',
                 language: 'text',
                 code: 'python main.py',
                 result: 'The output is requests.',
@@ -161,7 +161,7 @@ const note: PythonNote = {
         },
         {
             id: 'without-activation',
-            title: 'Use the environment without activation',
+            title: 'Using the environment without activation',
             paragraphs: [
                 'You can select the interpreter by its path. This works from a terminal without activation and is useful in scripts or when PowerShell blocks activation. Run these commands from weather-app/.',
             ],
@@ -185,17 +185,17 @@ const note: PythonNote = {
         },
         {
             id: 'save-dependencies',
-            title: 'Save dependencies and recreate the environment',
+            title: 'Saving dependencies and recreating the environment',
             paragraphs: [
                 'A requirements.txt file lists packages to install. After installing the packages for this example, use pip freeze to save the installed versions. The shell’s > operator writes the output to a file and replaces any existing contents of that file.',
             ],
             examples: [{
-                title: 'Save from the active project environment',
+                title: 'Saving from the active project environment',
                 language: 'text',
                 code: 'python -m pip freeze > requirements.txt',
                 result: 'requirements.txt contains Requests and its installed dependencies, normally as name==version lines. Exact versions depend on what was installed.',
             }, {
-                title: 'Restore in a fresh project checkout (macOS/Linux)',
+                title: 'Restoring in a fresh project checkout (macOS/Linux)',
                 language: 'text',
                 code: [
                     'python3 -m venv .venv',
@@ -204,7 +204,7 @@ const note: PythonNote = {
                 ].join('\n'),
                 result: 'pip reads the file and installs its listed packages into the new environment.',
             }, {
-                title: 'Restore in a fresh project checkout (Windows PowerShell)',
+                title: 'Restoring in a fresh project checkout (Windows PowerShell)',
                 language: 'text',
                 code: [
                     'python -m venv .venv',
@@ -220,16 +220,16 @@ const note: PythonNote = {
         },
         {
             id: 'leave-and-recreate',
-            title: 'Deactivate, ignore, and recreate .venv',
+            title: 'Deactivating, ignoring, and recreating .venv',
             paragraphs: [
                 'deactivate restores the shell settings changed by activation. It does not delete the environment or uninstall its packages. You can activate the same folder again later.',
             ],
             examples: [{
-                title: 'Leave an activated environment',
+                title: 'Leaving an activated environment',
                 language: 'text',
                 code: 'deactivate',
             }, {
-                title: 'Add this line to the project’s .gitignore',
+                title: 'Adding this line to the project’s .gitignore',
                 language: 'text',
                 code: '.venv/',
                 result: 'Git ignores the generated environment folder. Keep main.py, requirements.txt, and .gitignore in version control.',
@@ -242,7 +242,7 @@ const note: PythonNote = {
         },
         {
             id: 'common-errors',
-            title: 'Find the cause of common errors',
+            title: 'Finding the cause of common errors',
             bullets: [
                 'ModuleNotFoundError after installation: the program may use a different interpreter, the install may have failed, or the import name may differ from the install name. Check sys.executable and python -m pip show before installing again.',
                 'Packages install globally: check python -m pip --version and use the explicit .venv interpreter path to target the project environment.',

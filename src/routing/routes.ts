@@ -17,6 +17,7 @@ export type { SystemDesignEntryRoute };
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
+export const MCP_SERVERS_ROUTE = '/notes/mcp-servers';
 export const AWS_SERVICES_ROUTE = '/notes/aws-services';
 export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
 export const DBMS_NOTES_ROUTE = '/notes/dbms';
@@ -54,6 +55,7 @@ export const COMPLEXITY_CASES_ROUTE = '/blogs/complexity-cases';
 export const SQL_VS_MYSQL_ROUTE = '/blogs/sql-vs-mysql';
 export const SSL_TLS_ROUTE = '/blogs/ssl-tls';
 export const AI_OBEDIENCE_ROUTE = '/blogs/ai-obedience';
+export const MCP_SERVER_BLOG_ROUTE = '/blogs/understanding-mcp-servers';
 export const SIEVE_OF_ERATOSTHENES_ROUTE = '/blogs/sieve-of-eratosthenes';
 export const CONSISTENT_HASHING_ROUTE = '/blogs/consistent-hashing';
 export const CONSISTENT_HASHING_NOTE_ROUTE = '/notes/system-design/consistent-hashing-32e24eb1';
@@ -97,6 +99,7 @@ export const getJavaScriptTypeScriptNoteRoute = (slug: string):
 export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
+    | typeof MCP_SERVERS_ROUTE
     | typeof NOTES_ROUTE
     | typeof AWS_SERVICES_ROUTE
     | typeof PROGRAMMING_DICTIONARY_ROUTE
@@ -144,6 +147,7 @@ export type Route =
     | typeof SQL_VS_MYSQL_ROUTE
     | typeof SSL_TLS_ROUTE
     | typeof AI_OBEDIENCE_ROUTE
+    | typeof MCP_SERVER_BLOG_ROUTE
     | typeof SIEVE_OF_ERATOSTHENES_ROUTE
     | typeof CONSISTENT_HASHING_ROUTE
     | typeof WHY_REACT_ROUTE
@@ -195,6 +199,7 @@ const reactNoteRoutes: ReactNoteRoute[] = reactNotes.map(
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
+    MCP_SERVERS_ROUTE,
     AWS_SERVICES_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     DBMS_NOTES_ROUTE,
@@ -241,6 +246,7 @@ const routes: Route[] = [
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
     AI_OBEDIENCE_ROUTE,
+    MCP_SERVER_BLOG_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     CONSISTENT_HASHING_ROUTE,
     WHY_REACT_ROUTE,

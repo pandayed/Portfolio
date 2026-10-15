@@ -8,7 +8,7 @@ const note: PythonNote = {
     sections: [
         {
             id: 'path-parameters',
-            title: 'Read a value from the path',
+            title: 'Path Param',
             paragraphs: [
                 'A path parameter is a named part of the URL path. Put its name in braces in the route, then declare a function parameter with the same name. A Python type annotation tells FastAPI how to parse and validate the value.',
             ],
@@ -27,7 +27,7 @@ const note: PythonNote = {
         },
         {
             id: 'query-parameters',
-            title: 'Read values from the query string',
+            title: 'Query Param',
             paragraphs: [
                 'Query parameters come after ? in a URL. Separate multiple parameters with &. A function parameter that is not part of the path is treated as a query parameter by default.',
             ],
@@ -48,7 +48,7 @@ const note: PythonNote = {
         },
         {
             id: 'where-values-come-from',
-            title: 'How FastAPI identifies input values',
+            title: 'How FastAPI identifies request body',
             bullets: [
                 'A parameter whose name appears in the route comes from the path.',
                 'A simple value such as int or str that is not in the route comes from the query string.',

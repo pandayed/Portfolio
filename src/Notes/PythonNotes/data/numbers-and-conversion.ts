@@ -19,7 +19,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Compare division and grouping",
+                    "title": "Comparing division and grouping",
                     "code": "print(10 / 4)\nprint(10 // 3, -10 // 3)\nprint(10 % 3, 2 ** 3)\nprint((2 + 3) * 4)",
                     "result": "2.5\n3 -4\n1 8\n20"
                 }
@@ -35,7 +35,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Round in different directions",
+                    "title": "Rounding in different directions",
                     "code": "import math\n\nprint(abs(-10))\nprint(round(2.5), round(3.5))\nprint(math.floor(-3.2), math.ceil(-3.2))",
                     "result": "10\n2 4\n-4 -3"
                 }
@@ -52,7 +52,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Convert a typed number",
+                    "title": "Converting a typed number",
                     "code": "raw = input(\"Quantity: \")\nquantity = int(raw)\nprint(quantity + 1)",
                     "explanation": [
                         "For input 4, the final line displays 5. A non-integer input raises ValueError."

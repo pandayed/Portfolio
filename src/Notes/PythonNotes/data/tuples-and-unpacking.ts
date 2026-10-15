@@ -17,7 +17,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Create a tuple and access its items",
+                    "title": "Creating a tuple and accessing its items",
                     "code": "point = (10, 20)\nsingle = (10,)\nprint(point[0], point[-1])\nprint(point + (30,))\nprint(single * 2)",
                     "result": "10 20\n(10, 20, 30)\n(10, 10)"
                 }
@@ -32,7 +32,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Change a list held by a tuple",
+                    "title": "Changing a list held by a tuple",
                     "code": "record = ([\"a\"], 1)\nrecord[0].append(\"b\")\nprint(record)",
                     "result": "(['a', 'b'], 1)",
                     "explanation": [
@@ -51,7 +51,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Unpack a pair and swap names",
+                    "title": "Unpacking a pair and swapping names",
                     "code": "point = 10, 20\nx, y = point\nx, y = y, x\nprint(x, y)",
                     "result": "20 10"
                 }
@@ -59,14 +59,14 @@ const note: PythonNote = {
         },
         {
             "id": "star-target",
-            "title": "Collect remaining items",
+            "title": "Collecting remaining items",
             "bullets": [
                 "One starred assignment target collects remaining values into a list. Other targets still require their own values.",
                 "Unpacking works with any iterable, including lists and strings. It is not limited to tuples."
             ],
             "examples": [
                 {
-                    "title": "Keep the first and last values",
+                    "title": "Keeping the first and last values",
                     "code": "first, *middle, last = [1, 2, 3, 4]\nprint(first, middle, last)",
                     "result": "1 [2, 3] 4"
                 }
@@ -74,14 +74,14 @@ const note: PythonNote = {
         },
         {
             "id": "star-unpacking",
-            "title": "Expand values into a call or collection",
+            "title": "Expanding values into a call or collection",
             "bullets": [
                 "In a call, * expands iterable values into positional arguments. This differs from a starred assignment target, which collects values.",
                 "In a list or tuple display, * expands items into the new collection. Dictionary merging is covered in Dictionaries."
             ],
             "examples": [
                 {
-                    "title": "Expand existing sequences",
+                    "title": "Expanding existing sequences",
                     "code": "numbers = [1, 2, 3]\nprint(*numbers)\ncombined = [0, *numbers, 4]\nprint(combined)",
                     "result": "1 2 3\n[0, 1, 2, 3, 4]"
                 }

@@ -9,7 +9,7 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "create-access",
-            "title": "Create and access lists",
+            "title": "Creating and accessing lists",
             "bullets": [
                 "A list is a mutable sequence. It keeps insertion order and allows duplicate values.",
                 "Use square brackets for literals and list(iterable) to collect values. len returns the number of items.",
@@ -18,7 +18,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Create and read a list",
+                    "title": "Creating and reading a list",
                     "code": "names = [\"Ada\", \"Grace\", \"Ada\"]\nprint(names[0], names[-1])\nprint(names[1:])\nprint(list(range(3)))\nprint(len(names))",
                     "result": "Ada Ada\n['Grace', 'Ada']\n[0, 1, 2]\n3"
                 }
@@ -26,7 +26,7 @@ const note: PythonNote = {
         },
         {
             "id": "modify",
-            "title": "Change, add, and remove items",
+            "title": "Changing, adding, and removing items",
             "bullets": [
                 "Assign to an index to replace an item. Assign to a slice to replace a range of items.",
                 "append adds one item. extend adds each value from an iterable. insert adds one item at a position.",
@@ -36,7 +36,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Update a task list",
+                    "title": "Updating a task list",
                     "code": "tasks = [\"read\", \"write\"]\ntasks[0] = \"study\"\ntasks.append(\"review\")\ntasks.extend([\"save\", \"close\"])\nlast = tasks.pop()\ntasks.remove(\"write\")\nprint(tasks)\nprint(last)",
                     "result": "['study', 'review', 'save']\nclose"
                 }
@@ -44,7 +44,7 @@ const note: PythonNote = {
         },
         {
             "id": "search-sort",
-            "title": "Search and sort",
+            "title": "Searching and sorting",
             "bullets": [
                 "in checks membership. index returns the first matching position and raises ValueError if absent. count returns the number of equal items.",
                 "sort changes a list in place and returns None. sorted(iterable) returns a new sorted list.",
@@ -52,7 +52,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Find items and sort without losing the original order",
+                    "title": "Finding items and sorting without losing the original order",
                     "code": "numbers = [3, 1, 3, 2]\nprint(3 in numbers, numbers.index(3), numbers.count(3))\nordered = sorted(numbers)\nprint(numbers)\nprint(ordered)\nnumbers.sort(reverse=True)\nprint(numbers)",
                     "result": "True 0 2\n[3, 1, 3, 2]\n[1, 2, 3, 3]\n[3, 3, 2, 1]"
                 }
@@ -63,7 +63,7 @@ const note: PythonNote = {
             "title": "Assignment shares a list",
             "bullets": [
                 "Assigning a list to another name does not copy it. Both names refer to the same list.",
-                "A shallow copy makes a new outer list, while keeping references to its items. Use items.copy(), items[:], or list(items).",
+                "A shallow copy makes a new outer list, while keeping references to its items. To create a shallow copy of a list named items, use items.copy(), items[:], or list(items).",
                 [
                     "For nested objects and deep copying, read ",
                     {
@@ -75,7 +75,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Compare a shared reference and a shallow copy",
+                    "title": "Comparing a shared reference and a shallow copy",
                     "code": "original = [1, 2]\nshared = original\ncopied = original.copy()\nshared.append(3)\nprint(original)\nprint(copied)",
                     "result": "[1, 2, 3]\n[1, 2]",
                     "explanation": [
@@ -93,7 +93,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Observe repeated references",
+                    "title": "Observing repeated references",
                     "code": "rows = [[0]] * 2\nrows[0].append(1)\nprint(rows)",
                     "result": "[[0, 1], [0, 1]]",
                     "explanation": [

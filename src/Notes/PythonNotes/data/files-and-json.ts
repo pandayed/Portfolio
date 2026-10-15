@@ -9,7 +9,7 @@ const note: PythonNote = {
     sections: [
         {
             id: 'text-files',
-            title: 'Read and write text files',
+            title: 'Reading and writing text files',
             bullets: [
                 'open returns a file object. A relative path starts from the current working directory.',
                 'Use mode "r" to read, "w" to write, and "a" to append. Mode "w" creates a file or replaces its existing contents.',
@@ -18,7 +18,7 @@ const note: PythonNote = {
                 'read() returns the remaining text. Iterating over a text file reads it line by line.',
             ],
             examples: [{
-                title: 'Write two lines, then read them',
+                title: 'Writing two lines, then reading them',
                 description: ['Run in a directory where you can create names.txt. This replaces an existing file with that name.'],
                 code: 'with open("names.txt", "w", encoding="utf-8") as file:\n    file.write("Ada\\nLin\\n")\n\nwith open("names.txt", "r", encoding="utf-8") as file:\n    for line in file:\n        print(line.rstrip("\\n"))',
                 result: 'Ada\nLin',
@@ -27,7 +27,7 @@ const note: PythonNote = {
         },
         {
             id: 'json',
-            title: 'Save structured data as JSON',
+            title: 'Saving structured data as JSON',
             bullets: [
                 'JSON is a text format for exchanging structured data. Import json from the standard library.',
                 'json.dump writes a value to a file. json.load reads a value from a file.',
@@ -36,7 +36,7 @@ const note: PythonNote = {
                 'Use string dictionary keys for JSON objects. Tuples become JSON arrays and load back as lists. Sets and arbitrary class instances need explicit conversion.',
             ],
             examples: [{
-                title: 'Save and load a settings dictionary',
+                title: 'Saving and loading a settings dictionary',
                 description: ['Run in a directory where you can create settings.json. This replaces an existing file with that name.'],
                 code: 'import json\n\nsettings = {"theme": "dark", "enabled": True}\nwith open("settings.json", "w", encoding="utf-8") as file:\n    json.dump(settings, file, indent=2)\n\nwith open("settings.json", encoding="utf-8") as file:\n    loaded = json.load(file)\n\nprint(loaded["theme"])\nprint(loaded["enabled"])',
                 result: 'dark\nTrue',
@@ -45,7 +45,7 @@ const note: PythonNote = {
         },
         {
             id: 'failures',
-            title: 'Handle failures at the caller',
+            title: 'Handling failures at the caller',
             bullets: [
                 'Reading a missing file raises FileNotFoundError. Other file operations can raise OSError subclasses.',
                 'Invalid JSON raises json.JSONDecodeError. Handle the errors you can recover from rather than hiding every exception.',

@@ -9,7 +9,7 @@ const note: PythonNote = {
     "sections": [
         {
             "id": "sets",
-            "title": "Create sets",
+            "title": "Creating sets",
             "bullets": [
                 "A set stores distinct hashable values. Repeated equal values become one member.",
                 "Use {value, ...} for a non-empty set and set() for an empty set. {} creates a dictionary.",
@@ -18,7 +18,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Remove duplicates and check membership",
+                    "title": "Removing duplicates and checking membership",
                     "code": "tags = {\"python\", \"notes\", \"python\"}\nprint(sorted(tags))\nprint(\"python\" in tags)",
                     "result": "['notes', 'python']\nTrue"
                 }
@@ -26,7 +26,7 @@ const note: PythonNote = {
         },
         {
             "id": "modify",
-            "title": "Add and remove members",
+            "title": "Adding and removing members",
             "bullets": [
                 "add inserts one value. update adds values from an iterable.",
                 "discard removes a value if present. remove raises KeyError when absent.",
@@ -34,7 +34,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Update membership",
+                    "title": "Updating membership",
                     "code": "numbers = {1, 2}\nnumbers.add(3)\nnumbers.update([3, 4])\nnumbers.discard(9)\nnumbers.remove(1)\nprint(sorted(numbers))",
                     "result": "[2, 3, 4]"
                 }
@@ -51,7 +51,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Compare two groups",
+                    "title": "Comparing two groups",
                     "code": "first = {1, 2, 3}\nsecond = {3, 4, 5}\nprint(sorted(first | second))\nprint(sorted(first & second))\nprint(sorted(first - second))\nprint(sorted(first ^ second))\nprint({1, 2} <= first)",
                     "result": "[1, 2, 3, 4, 5]\n[3]\n[1, 2]\n[1, 2, 4, 5]\nTrue"
                 }
@@ -66,7 +66,7 @@ const note: PythonNote = {
             ],
             "examples": [
                 {
-                    "title": "Use a set of values as a dictionary key",
+                    "title": "Using a set of values as a dictionary key",
                     "code": "pair = frozenset([\"read\", \"write\"])\npermissions = {pair: \"editor\"}\nprint(permissions[frozenset([\"write\", \"read\"])])",
                     "result": "editor",
                     "explanation": [

@@ -12,7 +12,7 @@ const note: PythonNote = {
             title: 'A metaclass creates a class',
             paragraphs: ['A class is itself an object. Its metaclass controls how that class object is created. Python normally uses type. In class MyClass(metaclass=MyMeta), MyMeta creates MyClass when Python executes the class definition; calling MyClass() later creates an ordinary instance of MyClass.'],
             examples: [{
-                title: 'Observe a metaclass creating a class',
+                title: 'Observing a metaclass creating a class',
                 code: [
                     'class MyMeta(type):',
                     '    def __new__(mcls, name, bases, namespace):',
@@ -35,7 +35,7 @@ const note: PythonNote = {
             title: '__new__ creates an instance; __init__ initializes it',
             paragraphs: ['When you call a class, __new__ receives the class and creates or chooses the instance. If it returns an instance of that class, Python then calls __init__ on that instance with the constructor arguments. __init__ sets initial state and must return None.'],
             examples: [{
-                title: 'Observe instance creation before initialization',
+                title: 'Observing instance creation before initialization',
                 code: [
                     'class A:',
                     '    def __new__(cls):',
