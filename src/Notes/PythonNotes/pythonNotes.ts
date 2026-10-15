@@ -1,3 +1,7 @@
+import fastmcpBasics from './data/fastmcp-basics';
+import fastmcpFirstServer from './data/fastmcp-first-server';
+import fastmcpResourcesAndPrompts from './data/fastmcp-resources-and-prompts';
+import fastmcpClientsAndTransports from './data/fastmcp-clients-and-transports';
 import sets from './data/sets';
 import comprehensions from './data/comprehensions';
 import objectsAndMutability from './data/objects-and-mutability';
@@ -109,7 +113,12 @@ export const pythonChapters: readonly PythonChapter[] = [
             fastapiRouters, fastapiBackendService],
     },
     {
-        title: '13. Tools and libraries reference',
+        title: '13. FastMCP',
+        summary: 'MCP concepts, tool servers, resources, prompts, clients, and transports.',
+        notes: [fastmcpBasics, fastmcpFirstServer, fastmcpResourcesAndPrompts, fastmcpClientsAndTransports],
+    },
+    {
+        title: '14. Tools and libraries reference',
         summary: 'Look up common tools, libraries, and frameworks after learning the language.',
         notes: [toolsAndLibraries],
     },

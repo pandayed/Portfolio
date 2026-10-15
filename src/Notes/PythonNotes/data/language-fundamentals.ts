@@ -8,26 +8,6 @@ const note: PythonNote = {
     "updatedOn": "2026-10-15",
     "sections": [
         {
-            "id": "first-lines",
-            "title": "Statements and expressions",
-            "bullets": [
-                "An expression produces a value. A statement gives Python an instruction, such as assigning an expression result to a name.",
-                "In a simple sequence, Python runs statements from top to bottom. Write one statement per line. A trailing semicolon is not required.",
-                "A literal writes a value directly, such as 10, 3.5, \"Ada\", True, False, or None.",
-                "Quoted text is a string. An unquoted name asks Python to look up the value assigned to that name."
-            ],
-            "examples": [
-                {
-                    "title": "Assign a value and display it",
-                    "code": "name = \"Ada\"\nprint(name)\nprint(\"name\")\nprint(2 + 3)",
-                    "result": "Ada\nname\n5",
-                    "explanation": [
-                        "The first call reads the value of name. The second displays literal text. The last displays the expression result."
-                    ]
-                }
-            ]
-        },
-        {
             "id": "comments",
             "title": "Comments start with #",
             "bullets": [
@@ -39,23 +19,6 @@ const note: PythonNote = {
                     "title": "Separate comments from text",
                     "code": "# Display a greeting.\nprint(\"Hello\")  # A comment after code.\nprint(\"# is text here\")",
                     "result": "Hello\n# is text here"
-                }
-            ]
-        },
-        {
-            "id": "print",
-            "title": "Function calls and print",
-            "bullets": [
-                "A function performs an operation. A call writes its name followed by parentheses. Arguments inside the parentheses supply inputs.",
-                "print displays its arguments. By default it separates them with spaces and ends with a newline.",
-                "An expression alone does not display its value in a .py file. Use print when you need output.",
-                "Close each opening quote and parenthesis. A missing closing delimiter can raise SyntaxError."
-            ],
-            "examples": [
-                {
-                    "title": "Pass several arguments",
-                    "code": "print(\"Total:\", 2 + 3)\nprint(\"Finished\")",
-                    "result": "Total: 5\nFinished"
                 }
             ]
         },

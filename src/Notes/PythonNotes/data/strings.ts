@@ -14,7 +14,7 @@ const note: PythonNote = {
                 "Single and double quotes create strings. Use the other quote style or an escape to include a quote.",
                 "\\n represents a newline. \\t represents a tab. \\\\ represents one backslash.",
                 "Triple quotes allow text across multiple lines. They create strings, not comments.",
-                "A string is an immutable sequence of Unicode characters. len returns its length."
+                "A string is an immutable sequence of Unicode characters."
             ],
             "examples": [
                 {
@@ -50,8 +50,8 @@ const note: PythonNote = {
             "examples": [
                 {
                     "title": "Build a new string",
-                    "code": "word = \"Python\"\nchanged = \"J\" + word[1:]\nprint(changed, word)\nprint(\"Py\" in word, len(word))",
-                    "result": "Jython Python\nTrue 6",
+                    "code": "word = \"Python\"\nchanged = \"J\" + word[1:]\nprint(changed, word)\nprint(\"Py\" in word)",
+                    "result": "Jython Python\nTrue",
                     "explanation": [
                         "word still refers to the original string."
                     ]
@@ -74,13 +74,119 @@ const note: PythonNote = {
         },
         {
             "id": "methods",
-            "title": "String methods",
+            "title": "Commonly used string methods",
             "bullets": [
                 "A method is an operation called through a value, such as text.upper().",
-                "upper, lower, and title return transformed strings. strip removes leading and trailing whitespace by default. replace returns text with replacements.",
-                "find returns the first matching index, or -1 when absent. index raises ValueError when absent.",
-                "split returns a list of parts. separator.join(parts) combines strings from a collection. Read Lists for collection operations."
+                "String methods do not change the original string. Methods that transform text return a new string value.",
+                "len(text) is a built-in function, called without a dot. It counts Unicode code points: len(\"Python\") returns 6. A visible character can contain several code points.",
+                "split returns a list. join accepts strings from a collection. Read Lists for collection operations."
             ],
+            "table": {
+                "columns": [
+                    "Method",
+                    "Purpose",
+                    "Example",
+                    "Result"
+                ],
+                "rows": [
+                    [
+                        "upper()",
+                        "Convert letters to uppercase.",
+                        "\"Ada\".upper()",
+                        "\"ADA\""
+                    ],
+                    [
+                        "lower()",
+                        "Convert letters to lowercase.",
+                        "\"Ada\".lower()",
+                        "\"ada\""
+                    ],
+                    [
+                        "title()",
+                        "Capitalize words and lowercase their remaining letters.",
+                        "\"ada lovelace\".title()",
+                        "\"Ada Lovelace\""
+                    ],
+                    [
+                        "strip()",
+                        "Remove leading and trailing whitespace.",
+                        "\"  Ada  \".strip()",
+                        "\"Ada\""
+                    ],
+                    [
+                        "lstrip() / rstrip()",
+                        "Remove whitespace from the left / right end.",
+                        "\"  Ada  \".lstrip()",
+                        "\"Ada  \""
+                    ],
+                    [
+                        "replace(old, new)",
+                        "Replace all occurrences by default.",
+                        "\"banana\".replace(\"a\", \"o\")",
+                        "\"bonono\""
+                    ],
+                    [
+                        "find(text)",
+                        "Return the first matching index, or -1 if absent.",
+                        "\"Python\".find(\"th\")",
+                        "2"
+                    ],
+                    [
+                        "index(text)",
+                        "Return the first matching index; raise ValueError if absent.",
+                        "\"Python\".index(\"th\")",
+                        "2"
+                    ],
+                    [
+                        "count(text)",
+                        "Count non-overlapping occurrences.",
+                        "\"banana\".count(\"an\")",
+                        "2"
+                    ],
+                    [
+                        "startswith(text)",
+                        "Check whether the string starts with text.",
+                        "\"Python\".startswith(\"Py\")",
+                        "True"
+                    ],
+                    [
+                        "endswith(text)",
+                        "Check whether the string ends with text.",
+                        "\"notes.py\".endswith(\".py\")",
+                        "True"
+                    ],
+                    [
+                        "split(separator)",
+                        "Split into a list. With no separator, split on whitespace.",
+                        "\"a,b,c\".split(\",\")",
+                        "[\"a\", \"b\", \"c\"]"
+                    ],
+                    [
+                        "separator.join(parts)",
+                        "Join strings using a separator.",
+                        "\"-\".join([\"a\", \"b\"])",
+                        "\"a-b\""
+                    ],
+                    [
+                        "isalpha()",
+                        "Check for non-empty text containing only letters.",
+                        "\"Ada\".isalpha()",
+                        "True"
+                    ],
+                    [
+                        "isdigit()",
+                        "Check for non-empty text containing only digit characters.",
+                        "\"123\".isdigit()",
+                        "True"
+                    ],
+                    [
+                        "isalnum()",
+                        "Check for non-empty text containing only letters or numeric characters.",
+                        "\"Ada123\".isalnum()",
+                        "True"
+                    ]
+                ]
+            },
             "examples": [
                 {
                     "title": "Clean and search text",

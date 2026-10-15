@@ -8,23 +8,6 @@ const note: PythonNote = {
     "updatedOn": "2026-10-15",
     "sections": [
         {
-            "id": "numeric-literals",
-            "title": "Numeric types and literals",
-            "bullets": [
-                "int stores whole numbers. Its size grows as needed, subject to available memory.",
-                "float stores approximate binary floating-point values. Many decimal fractions are not exact.",
-                "complex stores real and imaginary parts. Write the imaginary part with j.",
-                "Use 0b for binary, 0o for octal, and 0x for hexadecimal integer literals. Underscores can separate digits."
-            ],
-            "examples": [
-                {
-                    "title": "Write and display numeric values",
-                    "code": "count = 1_000\nbinary = 0b101\nhexadecimal = 0x12C\nnumber = 1 + 2j\nprint(count, binary, hexadecimal, number)\nprint(bin(10), hex(10))",
-                    "result": "1000 5 300 (1+2j)\n0b1010 0xa"
-                }
-            ]
-        },
-        {
             "id": "operators",
             "title": "Arithmetic operators",
             "bullets": [

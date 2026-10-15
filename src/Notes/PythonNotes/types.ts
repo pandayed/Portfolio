@@ -14,6 +14,10 @@ export interface PythonNoteSection {
     diagram?: 'python-run-sequence';
     paragraphs?: readonly PythonInlineContent[];
     bullets?: readonly PythonInlineContent[];
+    table?: {
+        columns: readonly string[];
+        rows: readonly (readonly string[])[];
+    };
     examples?: readonly PythonExample[];
     exceptions?: readonly string[];
 }

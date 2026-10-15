@@ -85,6 +85,31 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                         </ul>
                     )}
 
+                    {section.table && (
+                        <div className="Article__tableWrap">
+                            <table className="Article__table">
+                                <thead>
+                                    <tr>
+                                        {section.table.columns.map((column) => (
+                                            <th scope="col" key={column}>{column}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {section.table.rows.map((row, rowIndex) => (
+                                        <tr key={`${section.id}-row-${rowIndex}`}>
+                                            {row.map((cell, cellIndex) => (
+                                                cellIndex === 0 ? (
+                                                    <th scope="row" key={cellIndex}>{cell}</th>
+                                                ) : <td key={cellIndex}>{cell}</td>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+
                     {section.examples?.map((example, index) => (
                         note.exampleLayout === 'grouped' ? (
                             <LearningNoteExampleBlock

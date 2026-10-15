@@ -32,14 +32,37 @@ const note: PythonNote = {
             "bullets": [
                 "A type determines which operations a value supports. type(value) returns its type.",
                 "Python is dynamically typed: a name can later refer to an object of another type.",
-                "Common scalar types are int, float, complex, bool, and str. None represents an absent value and has type NoneType.",
-                "Collections group values. Lists, tuples, sets, and dictionaries have separate notes after control flow."
+                "Common scalar types are int, float, complex, bool, and str. None represents an absent value and has type NoneType."
             ],
             "examples": [
                 {
                     "title": "Inspect the current value",
                     "code": "value = 10\nprint(type(value))\nvalue = \"ten\"\nprint(type(value))",
                     "result": "<class 'int'>\n<class 'str'>"
+                }
+            ]
+        },
+        {
+            "id": "numeric-literals",
+            "title": "Numeric types and literals",
+            "bullets": [
+                "float stores approximate binary floating-point values. Many decimal fractions are not exact.",
+                "Write the imaginary part of a complex number with j.",
+                "Use 0b for binary, 0o for octal, and 0x for hexadecimal integer literals. Underscores can separate digits."
+            ],
+            "table": {
+                "columns": ["Type", "Values", "Examples", "Range"],
+                "rows": [
+                    ["int", "Whole numbers", "-10, 0, 1_000, 0b101, 0o17, 0x12C", "No fixed minimum or maximum; limited by available memory."],
+                    ["float", "Approximate real numbers", "-3.5, 0.0, 2.5, 1e3", "Usually about -1.8 × 10^308 to +1.8 × 10^308 for finite values. Also supports infinity and NaN (not a number)."],
+                    ["complex", "Real and imaginary parts, each stored as a float", "1 + 2j, -3j", "Each part has the same range and precision limits as float."]
+                ]
+            },
+            "examples": [
+                {
+                    "title": "Write and display numeric values",
+                    "code": "count = 1_000\nbinary = 0b101\nhexadecimal = 0x12C\nnumber = 1 + 2j\nprint(count, binary, hexadecimal, number)\nprint(bin(10), hex(10))",
+                    "result": "1000 5 300 (1+2j)\n0b1010 0xa"
                 }
             ]
         },
