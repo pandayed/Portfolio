@@ -32,6 +32,7 @@ import equalityAndHashing from './data/equality-and-hashing';
 import descriptorsAndProperties from './data/descriptors-and-properties';
 import classAndInstanceCreation from './data/class-and-instance-creation';
 import modulesAndPackages from './data/modules-and-packages';
+import dunderVariablesAndMain from './data/dunder-variables-and-main';
 import importSystem from './data/import-system';
 import cpythonMemoryManagement from './data/cpython-memory-management';
 import concurrencyAndAsyncio from './data/concurrency-and-asyncio';
@@ -78,7 +79,7 @@ export const pythonChapters: readonly PythonChapter[] = [
     {
         title: '6. Modules and environments',
         summary: 'Organize code into modules and packages, then isolate installed dependencies.',
-        notes: [modulesAndPackages, virtualEnvironments],
+        notes: [modulesAndPackages, dunderVariablesAndMain, virtualEnvironments],
     },
     {
         title: '7. Files and errors',

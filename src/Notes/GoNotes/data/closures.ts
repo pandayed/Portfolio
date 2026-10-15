@@ -4,14 +4,32 @@ const note = {
     "notionId": "24124eb1-ed54-8099-9df4-e4e544ae459d",
     "slug": "closures",
     "title": "Closures",
-    "updatedOn": "2026-10-05",
+    "updatedOn": "2026-10-15",
     "blocks": [
         {
             "id": "03542633-e952-5bab-9c8e-c78896dbb44c",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A function literal can use variables from the scope around it."
+                    "A closure is a function value together with access to variables from its surrounding lexical scope. Lexical scope means where the function is written in the source code."
+                ]
+            ]
+        },
+        {
+            "id": "closure-name",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "In Go, function literals are closures, including literals that capture no outer variables. When a literal is inside another function, the inner function value is the closure. The outer function creates it."
+                ]
+            ]
+        },
+        {
+            "id": "closure-no-return-required",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A closure does not need to be returned. It can be called immediately, stored, or passed to another function."
                 ]
             ]
         },
@@ -48,6 +66,69 @@ const note = {
                             "#/notes/go/anonymous-inline-functions"
                         ]
                     ]
+                ]
+            ]
+        },
+        {
+            "id": "closure-access-heading",
+            "type": "sub_header",
+            "richText": [
+                [
+                    "Nesting and variable access"
+                ]
+            ]
+        },
+        {
+            "id": "closure-nesting",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Function literals can contain more function literals. Closures have no special one-level or two-level nesting limit. Compiler and resource limits still apply."
+                ]
+            ]
+        },
+        {
+            "id": "closure-ancestor-access",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "An inner function can refer to parameters and local variables from any enclosing function or block, where their declarations are in scope. An intermediate function does not need to read a variable for a deeper function to use it."
+                ]
+            ]
+        },
+        {
+            "id": "closure-local-scope",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "A local variable must already be in scope where the inner function is written. A variable declared later in the outer block is not available there."
+                ]
+            ]
+        },
+        {
+            "id": "closure-shadowing",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Shadowing means declaring the same name in an inner scope. That name refers to the nearest declaration in scope."
+                ]
+            ]
+        },
+        {
+            "id": "closure-access-direction",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "The outer function cannot directly access an inner function’s local variables. One sibling function cannot directly access another sibling’s locals. Siblings can share variables declared in their common outer scope."
+                ]
+            ]
+        },
+        {
+            "id": "closure-caller-scope",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Calling a closure from another function does not give it access to that caller’s local variables."
                 ]
             ]
         },
@@ -154,6 +235,33 @@ const note = {
             "richText": [
                 [
                     "Common uses"
+                ]
+            ]
+        },
+        {
+            "id": "closure-recommended",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Closures are a normal, idiomatic Go feature. They are not deprecated or generally avoided."
+                ]
+            ]
+        },
+        {
+            "id": "closure-handler-use",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Real use case: create an HTTP handler that uses a database connection supplied during application startup. The returned handler keeps access to that connection for later requests. Each handler can receive its own connection without using a package-level global."
+                ]
+            ]
+        },
+        {
+            "id": "closure-alternatives",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Use a closure when a callback needs a small amount of surrounding state. Consider a struct with methods when that state needs several operations or a public API. Avoid unnecessary nesting that makes variable ownership hard to follow."
                 ]
             ]
         },
@@ -480,7 +588,43 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "It keeps the captured variables it needs in memory."
+                    "Captured variables remain available after the outer call returns, for as long as the program can still access them through a closure. The outer call itself does not keep running."
+                ]
+            ]
+        },
+        {
+            "id": "closure-unused-access",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Access and retention are different. A variable can be in scope without being used by the inner function. That variable does not need to be retained just because it was declared in the same outer function."
+                ]
+            ]
+        },
+        {
+            "id": "closure-unused-runtime",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Do not assume the closure saves every local variable or the whole outer call. Exact allocations and garbage-collection timing are implementation details."
+                ]
+            ]
+        },
+        {
+            "id": "closure-indirect-retention",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "Captured pointers, slices, and other references can keep their referenced data reachable. A closure that uses one field through a captured pointer can therefore keep the whole pointed-to object reachable."
+                ]
+            ]
+        },
+        {
+            "id": "closure-release",
+            "type": "bulleted_list",
+            "richText": [
+                [
+                    "When neither the closure nor anything else keeps captured data reachable, that data can be reclaimed. Reclamation need not happen immediately."
                 ]
             ]
         },
@@ -506,6 +650,36 @@ const note = {
                         [
                             "a",
                             "https://go.dev/ref/spec#Function_literals"
+                        ]
+                    ]
+                ]
+            ]
+        },
+        {
+            "id": "closure-scope-source",
+            "type": "text",
+            "richText": [
+                [
+                    "Scope rules: "
+                ],
+                [
+                    "Go declarations and scope",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/spec#Declarations_and_scope"
+                        ]
+                    ]
+                ],
+                [
+                    ". Idiomatic usage: "
+                ],
+                [
+                    "Effective Go: goroutines and closures",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/doc/effective_go#goroutines"
                         ]
                     ]
                 ]
