@@ -34,10 +34,11 @@ const DockerContainers = () => (
         backLabel="Back to Docker notes"
     >
         <section className="Article__section">
-            <p>
-                An image is an immutable package. A container is a running or stopped instance of
-                that image. A registry stores images so other machines can pull them.
-            </p>
+            <ul className="Article__notes">
+                <li>An image is an immutable package.</li>
+                <li>A container is a running or stopped instance of that image.</li>
+                <li>A registry stores images so other machines can pull them.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="docker-container">
@@ -112,10 +113,6 @@ const DockerContainers = () => (
             <p>
                 Avoid depending on a moving <code>latest</code> tag for a repeatable deployment.
                 Use a release tag, and use a digest where one exact artifact is required.
-            </p>
-            <p>
-                References: <a className="Link" href="https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/" target="_blank" rel="noreferrer">What is a container?</a> and{' '}
-                <a className="Link" href="https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/" target="_blank" rel="noreferrer">What is an image?</a> in the official Docker documentation.
             </p>
         </section>
     </ArticleLayout>

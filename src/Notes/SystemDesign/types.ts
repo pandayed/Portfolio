@@ -1,3 +1,5 @@
+import type { InfrastructureDiagramKind } from './InfrastructureDiagram';
+
 export interface SystemDesignLink {
     text: string;
     href: string;
@@ -19,6 +21,7 @@ export interface SystemDesignBlock {
     src?: string;
     alt?: string;
     localImage?: string;
+    diagram?: InfrastructureDiagramKind;
     rows?: SystemDesignTableCell[][];
     pageIds?: string[];
     title?: string;

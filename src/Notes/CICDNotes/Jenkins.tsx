@@ -2,6 +2,7 @@ import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { CICD_NOTES_ROUTE, JENKINS_ROUTE } from '../../routing/routes';
 import ArticleLayout from '../NoteArticleLayout';
+import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
 
 const sections: TocEntry[] = [
     { id: 'jenkins-parts', title: 'Controller, agent, and build' },
@@ -78,7 +79,7 @@ const Jenkins = () => (
             <ul className="Article__notes">
                 <li>Declarative Pipeline uses a <code>pipeline</code> block. A <code>stage</code> names a phase. Its <code>steps</code> list the commands.</li>
                 <li>With the SCM setup above, Declarative Pipeline checks out the source into the agent's workspace automatically.</li>
-                <li><code>npm ci</code> installs dependencies from the lockfile. <code>npm run build</code> runs the application's build script.</li>
+                <li><code>npm ci</code> installs dependencies from the {renderProgrammingTerms('lockfile', 'jenkins-lockfile-1')}. <code>npm run build</code> runs the application's build script.</li>
                 <li>Expected result: successful Install and Build stages, archived <code>dist</code> files on the build page, and a “Pipeline finished” message. Archiving saves files for retrieval. It does not deploy them.</li>
             </ul>
         </section>

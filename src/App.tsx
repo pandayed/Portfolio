@@ -8,6 +8,7 @@ import Header from './Header/Header';
 import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
 import Notes from './Notes/Notes';
+import FrontendNotes from './Notes/FrontendNotes';
 import AwsServices from './Notes/AwsServices/AwsServices';
 import PostgreSQLNotes from './Notes/PostgreSQLNotes';
 import DBMSNotesIndex from './Notes/DBMSNotes/DBMSNotesIndex';
@@ -107,6 +108,7 @@ import {
     DOCKER_NETWORK_STORAGE_ROUTE,
     DOCKER_NOTES_ROUTE,
     GO_NOTES_ROUTE,
+    FRONTEND_NOTES_ROUTE,
     SYSTEM_DESIGN_ROUTE,
     PYTHON_NOTES_ROUTE,
     PROGRAMMING_DICTIONARY_ROUTE,
@@ -171,6 +173,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [GO_NOTES_ROUTE]: GoNotes,
     [SYSTEM_DESIGN_ROUTE]: SystemDesignNotes,
     [PYTHON_NOTES_ROUTE]: PythonNotes,
+    [FRONTEND_NOTES_ROUTE]: FrontendNotes,
     [JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE]: JavaScriptTypeScriptNotesIndex,
     [REACT_NOTES_ROUTE]: ReactNotesIndex,
     [CICD_NOTES_ROUTE]: CICDNotesIndex,

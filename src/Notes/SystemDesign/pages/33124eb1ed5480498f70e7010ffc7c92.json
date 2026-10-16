@@ -37,8 +37,8 @@
       "id": "33124eb1ed54804badb0c1cdc30642ec",
       "type": "bulleted_list",
       "parent": "33124eb1ed54801bb4f4c01ed0d07932",
-      "html": "Noisy Neighbour Problem: Activity of one tenant affects the another tenant as the resources when the resources are shared",
-      "text": "Noisy Neighbour Problem: Activity of one tenant affects the another tenant as the resources when the resources are shared"
+      "html": "Noisy neighbour problem: One tenant uses shared resources, such as CPU, memory, or disk, heavily enough to slow down another tenant.",
+      "text": "Noisy neighbour problem: One tenant uses shared resources, such as CPU, memory, or disk, heavily enough to slow down another tenant."
     },
     {
       "id": "33124eb1ed5480559019f870adb142cc",
@@ -63,15 +63,13 @@
     {
       "id": "33124eb1ed5480259a5bffd5cd8be39a",
       "type": "bulleted_list",
-      "html": "Full Control, tweak everything, and if you have the understanding, squeezer every ounce of performance.",
-      "text": "Full Control, tweak everything, and if you have the understanding, squeezer every ounce of performance."
+      "html": "Full Control, tweak everything, and if you have the understanding, squeeze every ounce of performance.",
+      "text": "Full Control, tweak everything, and if you have the understanding, squeeze every ounce of performance."
     },
     {
       "id": "33224eb1ed5480b096f7cbdbcf36b289",
-      "type": "image",
-      "src": "/image/attachment%3A7c4d1378-1e43-4e71-9fb2-5e7b18902d51%3Aimage.png?table=block&id=33224eb1-ed54-80b0-96f7-cbdbcf36b289&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=540&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
-      "alt": "",
-      "localImage": "33224eb1-ed54-80b0-96f7-cbdbcf36b289.webp"
+      "type": "diagram",
+      "diagram": "bare-metal"
     },
     {
       "id": "33124eb1ed54806caebef039777166ae",
@@ -117,23 +115,19 @@
     },
     {
       "id": "33224eb1ed54806697ebfbe811d5013a",
-      "type": "image",
-      "src": "/image/attachment%3Ac688fcd1-e780-4f6a-861a-22dcedc60a8c%3Aimage.png?table=block&id=33224eb1-ed54-8066-97eb-fbe811d5013a&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=540&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
-      "alt": "",
-      "localImage": "33224eb1-ed54-8066-97eb-fbe811d5013a.webp"
+      "type": "diagram",
+      "diagram": "virtual-machines"
     },
     {
       "id": "33224eb1ed548020a033dcb0326a3dd0",
       "type": "bulleted_list",
-      "html": "There is a concept called bare metal hypervisor. In the hypervisor does not need the host OS. This gives the hypervisor full control over the hardware and hence provides better performance. However, the hardware that supports the bare metal hypervisor is more expensive.",
-      "text": "There is a concept called bare metal hypervisor. In the hypervisor does not need the host OS. This gives the hypervisor full control over the hardware and hence provides better performance. However, the hardware that supports the bare metal hypervisor is more expensive."
+      "html": "A bare metal (Type 1) hypervisor runs directly on the hardware without a separate host OS beneath it. It manages hardware resources for the virtual machines. This can reduce overhead compared with a hosted hypervisor, but performance depends on the workload and configuration.",
+      "text": "A bare metal (Type 1) hypervisor runs directly on the hardware without a separate host OS beneath it. It manages hardware resources for the virtual machines. This can reduce overhead compared with a hosted hypervisor, but performance depends on the workload and configuration."
     },
     {
       "id": "33224eb1ed548054b7a4e8cbb0af6a0a",
-      "type": "image",
-      "src": "/image/attachment%3A0d98261d-07cd-406d-b5ca-76ef62181f6b%3Aimage.png?table=block&id=33224eb1-ed54-8054-b7a4-e8cbb0af6a0a&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=2000&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
-      "alt": "",
-      "localImage": "33224eb1-ed54-8054-b7a4-e8cbb0af6a0a.webp"
+      "type": "diagram",
+      "diagram": "hypervisor-comparison"
     },
     {
       "id": "33224eb1ed54802eb5d3eb227a6f868c",
@@ -216,10 +210,8 @@
     },
     {
       "id": "33224eb1ed54805d8ffef6310e8779ae",
-      "type": "image",
-      "src": "/image/attachment%3A8cfb8b1e-f0ba-4eb4-bd7f-dd5b03fa6379%3Aimage.png?table=block&id=33224eb1-ed54-805d-8ffe-f6310e8779ae&spaceId=9c6d3907-2244-4252-8c01-af72c79a41f5&width=1020&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl",
-      "alt": "",
-      "localImage": "33224eb1-ed54-805d-8ffe-f6310e8779ae.webp"
+      "type": "diagram",
+      "diagram": "containers"
     },
     {
       "id": "33224eb1ed5480eba17ef8e97db6f0ea",

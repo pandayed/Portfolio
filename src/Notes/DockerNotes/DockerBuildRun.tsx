@@ -122,10 +122,6 @@ const DockerBuildRun = () => (
                 <li>Use multi-stage builds when build tools are not needed in the runtime image.</li>
                 <li>Keep the runtime image focused. Debugging tools can be supplied separately when needed.</li>
             </ul>
-            <p>
-                References: <a className="Link" href="https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/" target="_blank" rel="noreferrer">Writing a Dockerfile</a> and{' '}
-                <a className="Link" href="https://docs.docker.com/get-started/docker-concepts/building-images/using-the-build-cache/" target="_blank" rel="noreferrer">Using the build cache</a> in the official Docker documentation.
-            </p>
         </section>
     </ArticleLayout>
 );

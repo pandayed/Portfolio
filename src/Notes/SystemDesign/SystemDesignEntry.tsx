@@ -7,9 +7,9 @@ import ArticleLayout from '../NoteArticleLayout';
 import NoteTree from '../NoteTree';
 import NoteReadingTime from '../NoteReadingTime';
 import { getNodeReadingMinutes } from '../readingTime';
-import { systemDesignNotes, type NoteGroup, type NoteNode } from '../noteTreeData';
+import { cicdNotes, systemDesignNotes, type NoteGroup, type NoteNode } from '../noteTreeData';
 import Page from '../../Page/Page';
-import { SYSTEM_DESIGN_ROUTE, toHref, type SystemDesignEntryRoute } from '../../routing/routes';
+import { CICD_NOTES_ROUTE, SYSTEM_DESIGN_ROUTE, toHref, type SystemDesignEntryRoute } from '../../routing/routes';
 import SystemDesignContent, { systemDesignSections } from './SystemDesignContent';
 import { systemDesignPagesById, systemDesignPagesByRoute, systemDesignViewsByRoute } from './registry';
 import type { SystemDesignDocument } from './types';
@@ -45,13 +45,14 @@ const SystemDesignEntry = ({ route }: Props) => {
     }, [page]);
 
     if (page) {
+        const isCicdNote = cicdNotes.children.some((node) => node.route === route);
         return (
             <ArticleLayout
                 title={page.title}
                 route={route}
                 sections={source ? systemDesignSections(source) : []}
-                backRoute={SYSTEM_DESIGN_ROUTE}
-                backLabel="Back to System Design notes"
+                backRoute={isCicdNote ? CICD_NOTES_ROUTE : SYSTEM_DESIGN_ROUTE}
+                backLabel={isCicdNote ? 'Back to CI/CD notes' : 'Back to System Design notes'}
             >
                 {source ? <SystemDesignContent document={source} />
                     : <p>{loadFailed ? 'Could not load this note.' : 'Loading note…'}</p>}

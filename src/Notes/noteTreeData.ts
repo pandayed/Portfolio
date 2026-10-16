@@ -15,6 +15,7 @@ import {
     DOCKER_NETWORK_STORAGE_ROUTE,
     DOCKER_NOTES_ROUTE,
     GO_NOTES_ROUTE,
+    FRONTEND_NOTES_ROUTE,
     SYSTEM_DESIGN_ROUTE,
     getJavaScriptTypeScriptNoteRoute,
     JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
@@ -246,11 +247,16 @@ const systemDesignPageNode = (page: SystemDesignPageData): NoteNode => {
     };
 };
 
+const bareMetalsPage = systemDesignPagesById.get('33124eb1ed5480498f70e7010ffc7c92');
+if (!bareMetalsPage) throw new Error('Missing Bare Metals, Virtual Machines & Containers note');
+
 export const systemDesignNotes: NoteGroup = {
     type: 'group',
     title: 'System Design',
     route: SYSTEM_DESIGN_ROUTE,
-    children: systemDesignRootPages.map(systemDesignPageNode),
+    children: systemDesignRootPages
+        .filter((page) => page.id !== bareMetalsPage.id)
+        .map(systemDesignPageNode),
 };
 
 export const pythonNotes: NoteGroup = {
@@ -298,19 +304,28 @@ export const reactNotes: NoteGroup = {
     title: 'React',
     summary: 'Components, rendering, state, Effects, application state, data, and performance.',
     route: REACT_NOTES_ROUTE,
-    children: reactChapters.map((chapter) => ({
-        type: 'group',
-        title: chapter.title,
-        summary: chapter.summary,
-        route: `${REACT_NOTES_ROUTE}/${chapter.notes[0].slug}` as ReactNoteRoute,
-        children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
-            type: 'page',
-            title,
-            summary,
-            route: `${REACT_NOTES_ROUTE}/${slug}` as ReactNoteRoute,
-            updatedOn,
+    children: [
+        ...reactChapters.map((chapter): NoteGroup => ({
+            type: 'group',
+            title: chapter.title,
+            summary: chapter.summary,
+            route: `${REACT_NOTES_ROUTE}/${chapter.notes[0].slug}` as ReactNoteRoute,
+            children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+                type: 'page',
+                title,
+                summary,
+                route: `${REACT_NOTES_ROUTE}/${slug}` as ReactNoteRoute,
+                updatedOn,
+            })),
         })),
-    })),
+        {
+            type: 'page',
+            title: 'The Anatomy of API Communication in a React Application',
+            summary: 'Each layer exists for a specific reason, solves a specific problem, and has a clear boundary.',
+            route: API_COMMUNICATION_ROUTE,
+            updatedOn: '2026-09-20',
+        },
+    ],
 };
 
 export const javaNotes: NoteGroup = {
@@ -396,50 +411,6 @@ export const springBootNotes: NoteGroup = {
     ],
 };
 
-export const cicdNotes: NoteGroup = {
-    type: 'group',
-    title: 'CI/CD',
-    summary: 'Release fundamentals and one practical page each for GitHub Actions, Jenkins, GitLab CI/CD, and Argo CD.',
-    route: CICD_NOTES_ROUTE,
-    children: [
-        {
-            type: 'page',
-            title: 'CI/CD fundamentals',
-            summary: 'Integration, delivery, deployment, pipelines, artifacts, release controls, and rollback.',
-            route: CICD_BASICS_ROUTE,
-            updatedOn: '2026-10-10',
-        },
-        {
-            type: 'page',
-            title: 'GitHub Actions',
-            summary: 'Events, workflows, jobs, runners, a Node build, permissions, and logs.',
-            route: GITHUB_ACTIONS_ROUTE,
-            updatedOn: '2026-10-10',
-        },
-        {
-            type: 'page',
-            title: 'Jenkins',
-            summary: 'Controllers, agents, Jenkinsfiles, stages, credentials, and build results.',
-            route: JENKINS_ROUTE,
-            updatedOn: '2026-10-10',
-        },
-        {
-            type: 'page',
-            title: 'GitLab CI/CD',
-            summary: 'Runners, YAML jobs, rules, artifact handoff, manual releases, and variables.',
-            route: GITLAB_CICD_ROUTE,
-            updatedOn: '2026-10-10',
-        },
-        {
-            type: 'page',
-            title: 'Argo CD',
-            summary: 'GitOps delivery, Applications, sync policies, health, and recovery.',
-            route: ARGO_CD_ROUTE,
-            updatedOn: '2026-10-10',
-        },
-    ],
-};
-
 export const dockerNotes: NoteGroup = {
     type: 'group',
     title: 'Docker',
@@ -514,6 +485,63 @@ export const kubernetesNotes: NoteGroup = {
     ],
 };
 
+export const cicdNotes: NoteGroup = {
+    type: 'group',
+    title: 'CI/CD',
+    summary: 'Release fundamentals and one practical page each for GitHub Actions, Jenkins, GitLab CI/CD, and Argo CD.',
+    route: CICD_NOTES_ROUTE,
+    children: [
+        {
+            type: 'page',
+            title: 'CI/CD fundamentals',
+            summary: 'Integration, delivery, deployment, pipelines, artifacts, release controls, and rollback.',
+            route: CICD_BASICS_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'GitHub Actions',
+            summary: 'Events, workflows, jobs, runners, a Node build, permissions, and logs.',
+            route: GITHUB_ACTIONS_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'Jenkins',
+            summary: 'Controllers, agents, Jenkinsfiles, stages, credentials, and build results.',
+            route: JENKINS_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'GitLab CI/CD',
+            summary: 'Runners, YAML jobs, rules, artifact handoff, manual releases, and variables.',
+            route: GITLAB_CICD_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'Argo CD',
+            summary: 'GitOps delivery, Applications, sync policies, health, and recovery.',
+            route: ARGO_CD_ROUTE,
+            updatedOn: '2026-10-10',
+        },
+        systemDesignPageNode(bareMetalsPage),
+        dockerNotes,
+        kubernetesNotes,
+    ],
+};
+
+export const frontendNotes: NoteGroup = {
+    type: 'group',
+    title: 'Frontend',
+    route: FRONTEND_NOTES_ROUTE,
+    children: [
+        javascriptTypeScriptNotes,
+        reactNotes,
+    ],
+};
+
 /* Groups can contain pages or more groups. Add another NoteGroup inside
    children when a subject needs another level. */
 export const noteTree: NoteNode[] = [
@@ -526,23 +554,13 @@ export const noteTree: NoteNode[] = [
     },
     {
         type: 'page',
-        title: 'The Anatomy of API Communication in a React Application',
-        summary: 'Each layer exists for a specific reason, solves a specific problem, and has a clear boundary.',
-        route: API_COMMUNICATION_ROUTE,
-        updatedOn: '2026-09-20',
-    },
-    {
-        type: 'page',
         title: 'MCP servers',
         summary: 'Server components, LLM tool flow, information visibility, permissions, and credential management.',
         route: MCP_SERVERS_ROUTE,
         updatedOn: '2026-10-15',
     },
-    javascriptTypeScriptNotes,
-    reactNotes,
+    frontendNotes,
     cicdNotes,
-    dockerNotes,
-    kubernetesNotes,
     {
         type: 'page',
         title: 'AWS services',

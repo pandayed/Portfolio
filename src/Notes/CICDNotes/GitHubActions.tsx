@@ -2,6 +2,7 @@ import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { CICD_NOTES_ROUTE, GITHUB_ACTIONS_ROUTE } from '../../routing/routes';
 import ArticleLayout from '../NoteArticleLayout';
+import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
 
 const sections: TocEntry[] = [
     { id: 'actions-parts', title: 'Workflow parts' },
@@ -82,7 +83,7 @@ const GitHubActions = () => (
             <CodeBlock language="text">{nodeWorkflow}</CodeBlock>
             <ul className="Article__notes">
                 <li>A push to <code>main</code> or a pull request update starts the build job.</li>
-                <li><a className="Link" href="https://docs.npmjs.com/cli/v11/commands/npm-ci/" target="_blank" rel="noreferrer"><code>npm ci</code></a> installs from the lockfile. It fails when the lockfile and package manifest disagree.</li>
+                <li><a className="Link" href="https://docs.npmjs.com/cli/v11/commands/npm-ci/" target="_blank" rel="noreferrer"><code>npm ci</code></a> installs from the {renderProgrammingTerms('lockfile', 'githubactions-lockfile-1')}. It fails when the {renderProgrammingTerms('lockfile', 'githubactions-lockfile-2')} and package manifest disagree.</li>
                 <li>Add <code>run: npm test</code> before Build only when the project defines a suitable test script.</li>
                 <li>Expected result: the job passes when installation and the build succeed. This example does not publish or deploy the output.</li>
                 <li>The actions use verified release commit IDs. A full commit SHA fixes the action code to that commit. Review and update these pins for later fixes.</li>
@@ -120,7 +121,7 @@ const GitHubActions = () => (
                 <li>Open the repository's Actions tab. Select the run, job, and first failing step.</li>
                 <li>Check the triggering event, commit, command, and exit code before changing the workflow.</li>
                 <li>A queued job is waiting to run. A skipped job may have a false condition or a failed dependency. Neither proves the checks passed.</li>
-                <li>Compare the runner's Node.js version, working directory, environment, and lockfile with your local setup.</li>
+                <li>Compare the runner's Node.js version, working directory, environment, and {renderProgrammingTerms('lockfile', 'githubactions-lockfile-3')} with your local setup.</li>
                 <li>A green build proves the configured build completed. It does not prove tests ran or a deployment is healthy.</li>
             </ul>
         </section>

@@ -8,14 +8,19 @@ const ATLASSIAN_TOOLS = 'https://developer.atlassian.com/cloud/rovo-mcp/guides/s
 const ATLASSIAN_AUTH = 'https://developer.atlassian.com/cloud/rovo-mcp/guides/authentication-and-authorization/';
 const MCP_ARCHITECTURE = 'https://modelcontextprotocol.io/docs/learn/architecture';
 const MCP_TOOLS = 'https://modelcontextprotocol.io/specification/2026-07-28/server/tools';
+const MCP_RESOURCES = 'https://modelcontextprotocol.io/specification/2026-07-28/server/resources';
+const MCP_SERVER_FEATURES = 'https://modelcontextprotocol.io/docs/learn/server-concepts';
 const OPENAI_MCP_TOOLS = 'https://developers.openai.com/api/docs/guides/tools-connectors-mcp#defer-loading-tools-in-an-mcp-server';
 
 const sections: TocEntry[] = [
     { id: 'connecting-to-jira', title: 'Giving ChatGPT access to Jira' },
     { id: 'discovering-tools', title: 'How ChatGPT knows what it can do' },
     { id: 'fetching-an-issue', title: 'Fetching the Jira issue' },
-    { id: 'updating-an-issue', title: 'Updating the same issue' },
+    { id: 'resources', title: 'Adding context through resources' },
+    { id: 'prompts', title: 'Reusing instructions through prompts' },
+    { id: 'using-them-together', title: 'How the three work together' },
     { id: 'mcp-and-apis', title: 'Where the Jira API fits' },
+    { id: 'inside-the-server', title: 'What runs inside the server' },
     { id: 'building-a-server', title: 'Thinking about your own service' },
 ];
 
@@ -30,6 +35,8 @@ const McpServer = () => (
             { title: 'Atlassian authentication and authorization', href: ATLASSIAN_AUTH },
             { title: 'MCP architecture', href: MCP_ARCHITECTURE },
             { title: 'MCP tool definitions and calls', href: MCP_TOOLS },
+            { title: 'MCP resources and resource templates', href: MCP_RESOURCES },
+            { title: 'MCP tools, resources, and prompts', href: MCP_SERVER_FEATURES },
             { title: 'OpenAI MCP server descriptions and deferred tool loading', href: OPENAI_MCP_TOOLS },
         ]}
     >
@@ -69,13 +76,13 @@ const McpServer = () => (
                 Atlassian provides a cloud-hosted service called the{' '}
                 <a href={ATLASSIAN_OVERVIEW} className="Link">Atlassian Rovo MCP Server</a>.
                 It connects compatible AI applications to Atlassian Cloud APIs.
-                Its documented capabilities include reading and updating Jira issues.
+                We will use it to understand how an application fetches a Jira issue.
             </p>
             <p>
                 Assume that you have connected ChatGPT to Atlassian&apos;s MCP server.
                 As part of this connection, you sign in through Atlassian and
                 authorize ChatGPT to do certain things on your behalf in Jira,
-                such as fetching and updating issues. The application manages
+                such as fetching an issue. The application manages
                 the connection credentials; you do not paste your Jira password
                 into the conversation.
             </p>
@@ -91,8 +98,8 @@ const McpServer = () => (
                 An MCP server exposes methods that an AI application such as
                 ChatGPT can call. These methods are called <strong>tools</strong>.
                 Like other methods, they accept inputs and return results.
-                A tool could fetch a Jira issue using its identifier, or update
-                its summary using the identifier and a new summary.
+                A tool could fetch a Jira issue using its identifier. Tools can
+                also change data, but we will keep this example focused on reading.
             </p>
             <p>
                 Here, the model is the part of ChatGPT that interprets your request
@@ -108,7 +115,7 @@ const McpServer = () => (
             </p>
             <p>
                 Let us say Atlassian&apos;s server exposes <code>getJiraIssue</code>{' '}
-                for fetching an issue and <code>editJiraIssue</code> for updating it.
+                for fetching an issue.
             </p>
             <LearningNoteExampleBlock example={{
                 title: 'A simplified definition of the fetch tool',
@@ -260,77 +267,142 @@ const McpServer = () => (
                 The task details came from Jira. The explanation is generated
                 by the model using those details.
             </p>
+        </section>
+
+        <section className="Article__section" aria-labelledby="resources">
+            <h2 id="resources" className="SectionTitle">Adding context through resources</h2>
             <p>
-                The issue does not give it access to your backend service&apos;s
-                source code. It can discuss a possible approach, but explaining
-                which methods in your repository need changing requires that
-                code as additional context.
+                The Jira task tells you what needs changing. But your team may
+                also have a guide describing how backend services should return
+                errors. The model needs that guide to explain the task using
+                your team&apos;s conventions.
+            </p>
+            <p>
+                An MCP server can expose this kind of content as a{' '}
+                <a href={MCP_RESOURCES} className="Link">resource</a>. A resource
+                gives the application information it can include in the model&apos;s
+                context. It could contain a document, an API specification, or
+                a database schema.
+            </p>
+            <p>
+                Let us assume a server exposes your team&apos;s error-handling
+                guide as a resource. This resource and the prompt in the next
+                section are imagined examples of MCP features. We are not
+                claiming Atlassian exposes these particular items. Assume the
+                application we use supports resources and prompts.
+            </p>
+            <p>
+                The resource has a name and a URI, such as{' '}
+                <code>team://guides/backend-errors</code>. A URI identifies the
+                content to read. It does not have to be a web page that you can
+                open in a browser.
+            </p>
+            <p>
+                The application asks for <code>resources/list</code> to discover
+                available resources and their metadata. Listing the guide does
+                not load its contents. To get those, the application sends{' '}
+                <code>resources/read</code> with the guide&apos;s URI.
+            </p>
+            <p>
+                Suppose you select the guide to include with your question.
+                The application reads it and supplies the relevant content to
+                the model. The model can now use both the Jira task and the
+                team&apos;s rules when explaining the change. An application can
+                also select resources automatically. The host decides which
+                content reaches the model; connecting a server does not put
+                every resource into every conversation.
+            </p>
+            <p>
+                A server can also offer resource templates for content whose
+                identifier varies. For example, assume{' '}
+                <code>{'team://guides/{topic}'}</code> identifies different team
+                guides. The application discovers this pattern through{' '}
+                <code>resources/templates/list</code>, fills in a topic, and
+                reads the resulting URI. A resource template describes how to
+                identify content.
+            </p>
+            <p>
+                Fetching data through a tool and reading a resource can return
+                similar information. The distinction is how the server exposes
+                it: a tool is a method with arguments, while a resource is
+                content identified by a URI. A read-only operation can still
+                be a tool, as our Jira fetch demonstrates.
             </p>
         </section>
 
-        <section className="Article__section" aria-labelledby="updating-an-issue">
-            <h2 id="updating-an-issue" className="SectionTitle">Updating the same issue</h2>
+        <section className="Article__section" aria-labelledby="prompts">
+            <h2 id="prompts" className="SectionTitle">Reusing instructions through prompts</h2>
             <p>
-                After discussing the task, you decide its title should describe
-                the intended change more clearly. You ask:
+                You may want the same kind of explanation for every backend task:
+                what the task asks for, what behaviour should change, which team
+                conventions apply, and what remains unclear. You could type those
+                instructions each time. An MCP server can also provide them as
+                a reusable{' '}
+                <a href={`${MCP_SERVER_FEATURES}#prompts`} className="Link">prompt</a>.
+            </p>
+            <p>
+                Here, “prompt” means a server-provided message template, not just
+                any message you type into ChatGPT. Let us say the server offers
+                a prompt called “Explain a backend task”, with an issue key as
+                its input.
+            </p>
+            <p>
+                The application discovers prompts through <code>prompts/list</code>.
+                Assume it offers a menu where you select this prompt and enter{' '}
+                <code>TASK-123</code>. It then sends <code>prompts/get</code> with
+                the prompt&apos;s name and that argument. The server returns
+                prepared messages, which might contain this instruction:
             </p>
             <blockquote>
                 <p>
-                    Change only the summary of TASK-123 to “Return a clear error
-                    message when a backend request times out”.
+                    Read Jira issue TASK-123. Explain the requested behaviour
+                    using the team&apos;s error-handling guide. Identify any
+                    missing details before suggesting an implementation.
                 </p>
             </blockquote>
             <p>
-                This time, fetching the issue cannot complete the task. The model
-                needs an editing tool. It selects the available operation and
-                prepares the issue identifier and the new summary.
-            </p>
-            <LearningNoteExampleBlock example={{
-                title: 'A simplified request to change the summary',
-                description: [
-                    'Assume the user can edit TASK-123 and the connection permits writes. For illustration, assume the editing tool accepts issueKey and summary directly.',
-                    'These are hypothetical inputs, not Atlassian’s complete schema. The application must use the actual discovered definition. The protocol envelope and connection details are omitted.',
-                ],
-                language: 'text',
-                code: `{
-  "name": "editJiraIssue",
-  "arguments": {
-    "issueKey": "TASK-123",
-    "summary": "Return a clear error message when a backend request times out"
-  }
-}`,
-                explanation: [
-                    'The proposed change contains only the summary. It does not request a description, assignee, or status change.',
-                    'Preparing these arguments has no effect on Jira until the application sends an authorized tool call and the server successfully performs it.',
-                ],
-            }} />
-            <p>
-                Assume the application shows you the proposed edit and asks for
-                confirmation. You approve it, and the client sends the call.
-                This confirmation is part of our assumed application workflow.
-                MCP itself does not prescribe one confirmation screen for every
-                application and operation.
+                Retrieving the prompt returns messages for the application to
+                use. It does not itself fetch the issue or generate the model&apos;s
+                answer. The application supplies those messages to the model,
+                makes the relevant tools available, and includes resource
+                content as needed.
             </p>
             <p>
-                When the operation succeeds, the summary changes in Jira. This
-                is a saved change that your teammates can see. Writing a suggested
-                title in the chat would only give you text to copy; executing the
-                editing tool performs the change.
+                Prompts are designed for the user to select. The menu is only
+                our assumed interface; MCP does not require a particular menu
+                or slash command. A resource template fills values into a URI.
+                A prompt fills values into messages intended for the model.
+            </p>
+        </section>
+
+        <section className="Article__section" aria-labelledby="using-them-together">
+            <h2 id="using-them-together" className="SectionTitle">How the three work together</h2>
+            <p>
+                We now have three different contributions to the same task:
+            </p>
+            <div className="Article__tableWrap">
+                <table className="Article__table">
+                    <thead><tr><th>Feature</th><th>Contribution</th><th>How it is used</th></tr></thead>
+                    <tbody>
+                        <tr><td>Tool</td><td>Fetches TASK-123.</td><td>The model requests a call; the application manages execution.</td></tr>
+                        <tr><td>Resource</td><td>Provides the team&apos;s error-handling guide.</td><td>The application reads and includes relevant context.</td></tr>
+                        <tr><td>Prompt</td><td>Provides the instructions for explaining a task.</td><td>The user selects it; the application retrieves the messages.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                Assume you select the prompt and the guide. The application gets
+                the prepared messages and reads the resource. It supplies those
+                to the model along with the fetch tool&apos;s definition. The model
+                requests the Jira issue, the application executes the call, and
+                the result returns to the model. The model then explains the task
+                using the instructions, the guide, and the fetched details.
             </p>
             <p>
-                The reply should depend on the operation&apos;s result. If the
-                server rejects the edit because you lack permission, the model
-                should report that failure. A sentence saying “Updated” is not
-                evidence by itself. Fetching the issue again can check the saved
-                value. If the write times out, checking the current value also
-                helps establish whether the change went through before retrying.
-            </p>
-            <p>
-                A request to move the task to “In Progress” would involve Jira&apos;s
-                workflow rules. Atlassian documents a separate{' '}
-                <code>transitionJiraIssue</code> tool for status changes. Knowing
-                the desired outcome does not remove the need to use the correct
-                operation.
+                A server declares which capabilities it supports. It may expose
+                tools, resources, prompts, or a combination. The application
+                also needs to support the features you want to use. A server
+                does not have to implement all three to be an MCP server.
             </p>
         </section>
 
@@ -351,7 +423,7 @@ const McpServer = () => (
             <p>
                 The common part is discovering and calling capabilities. The
                 Jira-specific part still belongs to the server: what an issue
-                identifier means, which fields can be edited, and which service
+                identifier means, which fields can be returned, and which service
                 operation handles the request. MCP does not define a universal
                 Jira schema or make every backend endpoint available automatically.
             </p>
@@ -360,6 +432,31 @@ const McpServer = () => (
                 server without separately implementing the Jira integration.
                 It still needs to support the relevant MCP capabilities,
                 authentication, and its own execution policy.
+            </p>
+        </section>
+
+        <section className="Article__section" aria-labelledby="inside-the-server">
+            <h2 id="inside-the-server" className="SectionTitle">What runs inside the server</h2>
+            <p>
+                Tools, resources, and prompts describe what the server exposes.
+                Behind them is code that receives requests and produces responses.
+                A remote server can receive MCP messages over HTTP. A local server
+                can communicate with an application through standard input and
+                output, called <code>stdio</code>.
+            </p>
+            <p>
+                The protocol layer understands requests such as{' '}
+                <code>tools/list</code> and <code>resources/read</code> and sends
+                them to the appropriate handlers. A handler implements the work:
+                calling an API, reading a permitted document, or preparing prompt
+                messages. An MCP SDK can handle the protocol details while you
+                write these handlers.
+            </p>
+            <p>
+                The server also validates inputs and enforces access to the
+                underlying data. Its tools and resource definitions describe
+                what is available; the handlers and access checks determine
+                what an actual request can do.
             </p>
         </section>
 
@@ -379,10 +476,10 @@ const McpServer = () => (
                 your server remains responsible for enforcing its contract.
             </p>
             <p>
-                We have used tools throughout this example. MCP also supports
-                resources, which expose context data, and prompts, which provide
-                reusable message templates. You do not need to implement all
-                three to provide a useful server.
+                If the application also needs your service&apos;s API documentation,
+                you could expose it as a resource. If users repeatedly ask for
+                the same kind of task analysis, you could offer a prompt for
+                that workflow. Choose the features that serve the actual request.
             </p>
             <p>
                 Start with the specific operation you want to make available.

@@ -8,6 +8,7 @@ import { SYSTEM_DESIGN_ROUTE } from './path';
 import { systemDesignPagesById, systemDesignViews } from './registry';
 import sharedCallout from './shared/29e24eb1ed548009bd08cdb34353d01a.json';
 import type { SystemDesignBlock, SystemDesignDocument } from './types';
+import InfrastructureDiagram from './InfrastructureDiagram';
 
 const imageSources = import.meta.glob('./assets/*.webp', {
     query: '?url',
@@ -128,6 +129,8 @@ const renderBlock = (node: BlockNode, sections: TocEntry[]): ReactNode => {
                     : <td key={cellIndex} dangerouslySetInnerHTML={{ __html: inlineHtml(cell.html) }} />,
             )}</tr>)}
         </tbody></table></div>;
+    case 'diagram':
+        return node.diagram ? <InfrastructureDiagram kind={node.diagram} /> : null;
     case 'image': {
         const src = node.localImage
             ? imageSources[`./assets/${node.localImage}`]

@@ -24,6 +24,7 @@ export const DBMS_NOTES_ROUTE = '/notes/dbms';
 export const POSTGRESQL_ONE_SHOT_SQL_ROUTE = '/notes/postgresql/one-shot-sql';
 export const GO_NOTES_ROUTE = '/notes/go';
 export const PYTHON_NOTES_ROUTE = '/notes/python';
+export const FRONTEND_NOTES_ROUTE = '/notes/frontend';
 export const JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE = '/notes/javascript-typescript';
 export const REACT_NOTES_ROUTE = '/notes/react';
 export const CICD_NOTES_ROUTE = '/notes/ci-cd';
@@ -113,6 +114,7 @@ export type Route =
     | SystemDesignEntryRoute
     | typeof PYTHON_NOTES_ROUTE
     | PythonNoteRoute
+    | typeof FRONTEND_NOTES_ROUTE
     | typeof JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE
     | JavaScriptTypeScriptNoteRoute
     | typeof REACT_NOTES_ROUTE
@@ -212,6 +214,7 @@ const routes: Route[] = [
     PYTHON_NOTES_ROUTE,
     PROGRAMMING_DICTIONARY_ROUTE,
     ...pythonNoteRoutes,
+    FRONTEND_NOTES_ROUTE,
     JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     ...javascriptTypeScriptNoteRoutes,
     REACT_NOTES_ROUTE,

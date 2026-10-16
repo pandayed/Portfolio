@@ -29,7 +29,7 @@ export interface Post {
 const entries: Post[] = [
     {
         title: 'Understanding MCP servers',
-        summary: 'From asking ChatGPT about a Jira issue to fetching and updating it through Atlassian’s MCP server, with the backend request flow explained along the way.',
+        summary: 'From fetching a Jira issue to adding resources and reusable prompts: how an AI application discovers and uses an MCP server’s capabilities.',
         startedOn: '2026-10-15',
         updatedOn: '2026-10-15',
         route: MCP_SERVER_BLOG_ROUTE,
