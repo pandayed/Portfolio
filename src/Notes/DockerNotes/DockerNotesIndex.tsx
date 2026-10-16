@@ -13,11 +13,13 @@ const DockerNotesIndex = () => (
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>
-        <p className="Notes__intro">
-            Read these four chapters in order. First run a container, then build a small website
-            image, connect a client, and keep files outside disposable containers. Finally, save
-            the same setup in Docker Compose. Each chapter uses what the previous one created.
-        </p>
+        <ul className="Notes__intro Article__notes">
+            <li>The four chapters form one connected sequence.</li>
+            <li>The sequence begins with a container and a small website image.</li>
+            <li>Networking and storage add a client and files outside disposable containers.</li>
+            <li>Docker Compose stores the same setup in a configuration file.</li>
+            <li>Each chapter uses what the previous one created.</li>
+        </ul>
         <NoteTree nodes={dockerNotes.children} />
     </Page>
 );

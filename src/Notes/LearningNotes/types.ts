@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export type LearningNoteScope =
     | 'dbms'
     | 'java'
@@ -18,14 +20,14 @@ export type LearningCodeLanguage =
 
 export interface LearningNoteExample {
     title?: string;
-    description?: readonly string[];
+    description?: readonly ReactNode[];
     language: LearningCodeLanguage;
     code: string;
     runnable?: boolean;
     commands?: string;
     result?: string;
     possibleOutput?: boolean;
-    explanation?: readonly string[];
+    explanation?: readonly ReactNode[];
     typeCheck?: string;
 }
 

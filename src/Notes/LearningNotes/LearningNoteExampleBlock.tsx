@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import JavaScriptRunner from '../JavaScriptRunner/JavaScriptRunner';
 import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
@@ -10,7 +12,7 @@ interface LearningNoteExampleBlockProps {
 }
 
 const LearningNoteExampleBlock = ({ example, termContext }: LearningNoteExampleBlockProps) => {
-    const renderProse = (text: string, key: string) => termContext
+    const renderProse = (text: ReactNode, key: string) => termContext && typeof text === 'string'
         ? renderProgrammingTerms(text, key, termContext)
         : text;
     return (

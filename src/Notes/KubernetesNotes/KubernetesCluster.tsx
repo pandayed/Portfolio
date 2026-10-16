@@ -26,7 +26,7 @@ const KubernetesSystemDiagram = () => (<figure className="KubernetesSystemDiagra
                 </div>
                 <div className="KubernetesSystemDiagram__part">
                     <strong>Controllers</strong>
-                    <span>Keep actual state close to desired state</span>
+                    <span>Controllers keep actual state close to desired state</span>
                 </div>
                 <div className="KubernetesSystemDiagram__part">
                     <strong>Cluster data</strong>
@@ -118,66 +118,77 @@ const KubernetesSystemDiagram = () => (<figure className="KubernetesSystemDiagra
             </div>
         </section>
     </div>
-    <p className="KubernetesSystemDiagram__note">
-        A real cluster can have many worker nodes and several control plane machines. A small
-        learning cluster may place both roles on one machine. Each worker node still has its
-        own operating system, kernel, runtime, and resources.
-    </p>
+    <ul className="KubernetesSystemDiagram__note">
+            <li>A real cluster can have many worker nodes and several control plane machines.</li>
+            <li>A small learning cluster may place both roles on one machine.</li>
+            <li>Each worker node still has its own operating system, kernel, runtime, and resources.</li>
+        </ul>
 </figure>);
 const sections: TocEntry[] = [
-    { id: "kubernetes-cluster", title: "Start with the work Kubernetes does" },
+    { id: "kubernetes-cluster", title: "Kubernetes maintains the requested application state" },
     { id: "kubernetes-pod", title: "The unit Kubernetes starts is a Pod" },
-    { id: "kubernetes-running-system", title: "Follow the request from your terminal to a node" },
-    { id: "kubernetes-controllers", title: "Describe the state you want to keep" },
-    { id: "kubernetes-kubectl", title: "Prepare the cluster before creating an application" }
+    { id: "kubernetes-running-system", title: "A request travels from kubectl to a node" },
+    { id: "kubernetes-controllers", title: "Objects describe the desired state" },
+    { id: "kubernetes-kubectl", title: "The local cluster and lesson namespace" }
 ];
 
 
 
 const KubernetesCluster = () => (<ArticleLayout title="1. From containers to a Kubernetes cluster" route={KUBERNETES_CLUSTER_ROUTE} sections={sections} backRoute={KUBERNETES_NOTES_ROUTE} backLabel="Back to Kubernetes lessons">
     <section className="Article__section">
-        <p>You can already run a container from an image. Kubernetes adds a way to describe how that application should keep running across machines. Start here after the <a className="Link" href={toHref(DOCKER_NOTES_ROUTE)}>Docker lessons</a>. The image and container concepts carry over.
-        </p>
+        <ul className="Article__notes">
+            <li>An image supplies the files used to create a container.</li>
+            <li>Kubernetes describes how an application should keep running across machines.</li>
+            <li>The prerequisites are covered in the <a className="Link" href={toHref(DOCKER_NOTES_ROUTE)}>Docker lessons</a>.</li>
+            <li>The image and container concepts carry over.</li>
+        </ul>
     </section>
     <section className="Article__section" aria-labelledby="kubernetes-cluster">
-        <h2 id="kubernetes-cluster" className="SectionTitle">Start with the work Kubernetes does</h2>
-        <p>
-            Suppose a website needs two running copies. Starting two containers solves the immediate
-            task. Keeping two copies available after failures, replacing them during updates, and
-            finding their current network addresses are further tasks. Kubernetes stores the
-            requested state and repeatedly works toward it.
-        </p>
-        <p>
-            A cluster is a group of machines managed together. Each machine is a node. The control
-            plane manages cluster state. Nodes run application containers. A local learning cluster
-            can put both roles on one machine.
-        </p>
+        <h2 id="kubernetes-cluster" className="SectionTitle">Kubernetes maintains the requested application state</h2>
+        <ul className="Article__notes">
+            <li>A website may need two running copies.</li>
+            <li>Starting two containers solves the immediate task.</li>
+            <li>Those copies may need replacement after failures or during updates.</li>
+            <li>Their network addresses can change when they are replaced.</li>
+            <li>Kubernetes stores the requested state and repeatedly works toward it.</li>
+        </ul>
+        <ul className="Article__notes">
+            <li>A cluster is a group of machines managed together.</li>
+            <li>Each machine is a node.</li>
+            <li>The control plane manages cluster state.</li>
+            <li>Nodes run application containers.</li>
+            <li>A local learning cluster can put both roles on one machine.</li>
+        </ul>
     </section>
     <section className="Article__section" aria-labelledby="kubernetes-pod">
         <h2 id="kubernetes-pod" className="SectionTitle">The unit Kubernetes starts is a Pod</h2>
-        <p>
-            A Pod is a group of one or more containers scheduled together on one node. Begin with
-            one application container per Pod. Two copies of an application normally mean two Pods,
-            rather than two application containers inside one Pod.
-        </p>
         <ul className="Article__notes">
-            <li>Containers in one Pod share its network address and port space. They can reach each other through localhost. They share files only through volumes mounted into both containers.
-            </li>
-            <li>Different Pods normally have different IP addresses. A replacement Pod can receive a new name, address, and node.
-            </li>
-            <li>On a Linux node, container isolation still uses the node kernel. A Pod does not give each container a separate operating system.
-            </li>
-            <li>A sidecar is a helper container that belongs with an application container. The diagram includes sidecars to show sharing; the exercises use one container per Pod.
-            </li>
+            <li>A Pod is a group of one or more containers scheduled together on one node.</li>
+            <li>These lessons use one application container per Pod.</li>
+            <li>Two copies of an application normally mean two Pods, rather than two application containers inside one Pod.</li>
+        </ul>
+        <ul className="Article__notes">
+            <li>Containers in one Pod share its network address and port space.</li>
+            <li>They can reach each other through localhost.</li>
+            <li>They share files only through volumes mounted into both containers.</li>
+            <li>Different Pods normally have different IP addresses.</li>
+            <li>A replacement Pod can receive a new name, address, and node.</li>
+            <li>On a Linux node, container isolation still uses the node kernel.</li>
+            <li>A Pod does not give each container a separate operating system.</li>
+            <li>A sidecar is a helper container that belongs with an application container.</li>
+            <li>The diagram includes sidecars to show sharing.</li>
+            <li>The exercises use one container per Pod.</li>
         </ul>
     </section>
     <section className="Article__section" aria-labelledby="kubernetes-running-system">
-        <h2 id="kubernetes-running-system" className="SectionTitle">Follow the request from your terminal to a node</h2>
-        <p>
-            You send a request through kubectl. The API server accepts it and stores the object. A
-            controller notices work to do. The scheduler assigns a new Pod to a suitable node. The
-            node starts its containers.
-        </p>
+        <h2 id="kubernetes-running-system" className="SectionTitle">A request travels from kubectl to a node</h2>
+        <ul className="Article__notes">
+            <li>kubectl sends requests to the cluster.</li>
+            <li>The API server accepts a valid request and stores the object.</li>
+            <li>A controller notices work to do.</li>
+            <li>The scheduler assigns a new Pod to a suitable node.</li>
+            <li>The node starts its containers.</li>
+        </ul>
         <KubernetesSystemDiagram />
         <div className="Article__tableWrap">
             <table className="Article__table">
@@ -205,7 +216,7 @@ const KubernetesCluster = () => (<ArticleLayout title="1. From containers to a K
                     <tr>
                         <td>Controllers
                         </td>
-                        <td>Compare requested and observed state and act on differences.
+                        <td>Controllers compare requested and observed state and act on differences.
                         </td>
                     </tr>
                     <tr>
@@ -229,45 +240,53 @@ const KubernetesCluster = () => (<ArticleLayout title="1. From containers to a K
                 </tbody>
             </table>
         </div>
-        <p>
-            The diagram’s Linux namespaces isolate operating-system views. A Kubernetes namespace,
-            introduced below, groups API objects. They are different concepts.
-        </p>
-        <p>
-            Normal application traffic travels through the application network. It does not go
-            through the scheduler or controller manager. The control plane manages the application;
-            it does not serve the application’s web pages.
-        </p>
+        <ul className="Article__notes">
+            <li>The diagram’s Linux namespaces isolate operating-system views.</li>
+            <li>A Kubernetes namespace, introduced below, groups API objects.</li>
+            <li>They are different concepts.</li>
+        </ul>
+        <ul className="Article__notes">
+            <li>Normal application traffic travels through the application network.</li>
+            <li>It does not go through the scheduler or controller manager.</li>
+            <li>The control plane manages the application.</li>
+            <li>It does not serve the application’s web pages.</li>
+        </ul>
     </section>
     <section className="Article__section" aria-labelledby="kubernetes-controllers">
-        <h2 id="kubernetes-controllers" className="SectionTitle">Describe the state you want to keep</h2>
-        <p>
-            A Kubernetes object is a stored record with a type, a name, and configuration. A
-            Deployment is an object for managing replaceable application Pods. Its desired state can
-            request two copies. A controller keeps checking whether the requested copies exist. This
-            repeated comparison and action is called reconciliation.
-        </p>
-        <p>
-            A Deployment manages ReplicaSets, and each ReplicaSet maintains a count of Pods. If a
-            managed Pod disappears, a replacement can be created. A container restart within an
-            existing Pod is different from creating a replacement Pod. Kubernetes does not move a
-            running Pod to another node.
-        </p>
-        <p>
-            Use a Deployment for the website in these lessons. Other workload types solve other
-            needs: a Job runs work to completion, a CronJob schedules Jobs, a DaemonSet places a Pod
-            on selected nodes, and a StatefulSet gives Pods stable identities. These are later
-            topics.
-        </p>
+        <h2 id="kubernetes-controllers" className="SectionTitle">Objects describe the desired state</h2>
+        <ul className="Article__notes">
+            <li>A Kubernetes object is a stored record with a type, a name, and configuration.</li>
+            <li>A Deployment is an object for managing replaceable application Pods.</li>
+            <li>Its desired state can request two copies.</li>
+            <li>A controller keeps checking whether the requested copies exist.</li>
+            <li>This repeated comparison and action is called reconciliation.</li>
+        </ul>
+        <ul className="Article__notes">
+            <li>A Deployment manages ReplicaSets, and each ReplicaSet maintains a count of Pods.</li>
+            <li>If a managed Pod disappears, a replacement can be created.</li>
+            <li>A container restart within an existing Pod is different from creating a replacement Pod.</li>
+            <li>Kubernetes does not move a running Pod to another node.</li>
+        </ul>
+        <ul className="Article__notes">
+            <li>The website in these lessons uses a Deployment.</li>
+            <li>A Job runs work to completion.</li>
+            <li>A CronJob schedules Jobs.</li>
+            <li>A DaemonSet places a Pod on selected nodes.</li>
+            <li>A StatefulSet gives Pods stable identities.</li>
+            <li>These are later topics.</li>
+        </ul>
     </section>
     <section className="Article__section" aria-labelledby="kubernetes-kubectl">
-        <h2 id="kubernetes-kubectl" className="SectionTitle">Prepare the cluster before creating an application</h2>
+        <h2 id="kubernetes-kubectl" className="SectionTitle">The local cluster and lesson namespace</h2>
         <LearningNoteExampleBlock example={{
-            title: "Start a local cluster and create a lesson namespace",
+            title: "A local cluster with a lesson namespace",
             description: [
-                "Install Docker Engine or Docker Desktop, kubectl, and minikube using their official installation instructions. Start Docker before running these commands.",
-                "Use a machine with at least 2 CPUs, 2 GB of free memory, 20 GB of free disk space, and internet access. Allow additional memory for Docker Desktop and your operating system.",
-                "Run these commands in a terminal. Use a fresh local learning cluster rather than a shared cluster."
+                "The example requires Docker Engine or Docker Desktop, kubectl, and minikube, installed through their official instructions.",
+                "Docker must be running before these commands.",
+                "The machine requires at least 2 CPUs, 2 GB of free memory, 20 GB of free disk space, and internet access.",
+                "Docker Desktop and the operating system require additional memory.",
+                "The commands run in a terminal against a fresh local learning cluster.",
+                "They are intended for a dedicated learning cluster, not a shared cluster."
             ],
             language: "text",
             code: `minikube start --driver=docker
@@ -276,12 +295,21 @@ kubectl get nodes
 kubectl create namespace lessons
 kubectl get pods -n lessons`,
             explanation: [
-                "minikube creates a local cluster. With the Docker driver, the node runs inside a Docker container.",
-                "kubectl is the command-line client. Its context selects the cluster and credentials to use. The current context should be minikube. Stop if it points elsewhere.",
-                "Wait until the node reports Ready. Your computer now runs both the control plane and the node role for this exercise.",
-                "A namespace groups API objects within a cluster. The lessons namespace keeps these exercises together. It is not a security boundary by itself.",
-                "Every later kubectl command uses -n lessons explicitly. Keep this cluster and namespace for all four chapters.",
-                "If the namespace already exists from an earlier attempt, inspect it before reusing it. The empty namespace should report no resources found."
+                "minikube creates a local cluster.",
+                "With the Docker driver, the node runs inside a Docker container.",
+                "kubectl is the command-line client.",
+                "Its context selects the cluster and credentials to use.",
+                "The required context is minikube.",
+                "A different context means these commands could affect another cluster and must not continue.",
+                "The node must report Ready before the next chapter.",
+                "The computer runs both the control plane and the node role for this exercise.",
+                "A namespace groups API objects within a cluster.",
+                "The lessons namespace keeps these exercises together.",
+                "It is not a security boundary by itself.",
+                "Every later kubectl command uses -n lessons explicitly.",
+                "All four chapters use this same cluster and namespace.",
+                "An existing lessons namespace requires inspection before reuse.",
+                "An empty namespace reports no resources found."
             ],
             result: `minikube
 NAME       STATUS   ROLES           AGE   VERSION
@@ -290,12 +318,15 @@ namespace/lessons created
 No resources found in lessons namespace.`,
             possibleOutput: true
         }} />
-        <p>Read alongside: <a className="Link" href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noreferrer">minikube setup</a>, <a className="Link" href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" target="_blank" rel="noreferrer">Kubernetes Basics tutorial</a>, <a className="Link" href="https://kubernetes.io/docs/concepts/overview/components/" target="_blank" rel="noreferrer">cluster components</a>.
-        </p>
+        <ul className="Article__notes">
+            <li>Related documentation: <a className="Link" href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noreferrer">minikube setup</a>, <a className="Link" href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" target="_blank" rel="noreferrer">Kubernetes Basics tutorial</a>, <a className="Link" href="https://kubernetes.io/docs/concepts/overview/components/" target="_blank" rel="noreferrer">cluster components</a>.</li>
+        </ul>
     </section>
     <section className="Article__section">
-        <p>The cluster is ready, but it has no lesson application yet. Continue with <a className="Link" href={toHref(KUBERNETES_DEPLOY_ROUTE)}>chapter 2: deploy a website and reach it</a>.
-        </p>
+        <ul className="Article__notes">
+            <li>The cluster is ready, but it has no lesson application yet.</li>
+            <li>The next topic is <a className="Link" href={toHref(KUBERNETES_DEPLOY_ROUTE)}>chapter 2: Deployments, Services, and local access</a>.</li>
+        </ul>
     </section>
 </ArticleLayout>);
 export default KubernetesCluster;

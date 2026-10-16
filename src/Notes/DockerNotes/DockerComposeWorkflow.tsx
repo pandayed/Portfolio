@@ -4,46 +4,46 @@ import ArticleLayout from '../NoteArticleLayout';
 import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
 
 const sections: TocEntry[] = [
-    { id: 'compose-model', title: 'Move commands into configuration' },
-    { id: 'compose-file', title: 'Define the services' },
-    { id: 'compose-commands', title: 'Run and change the project' },
-    { id: 'compose-debugging', title: 'Check failures in order' },
-    { id: 'compose-cleanup', title: 'Stop and remove the project' },
+    { id: 'compose-model', title: 'Configuration in Compose' },
+    { id: 'compose-file', title: 'Services in compose.yaml' },
+    { id: 'compose-commands', title: 'Project startup and updates' },
+    { id: 'compose-debugging', title: 'Failures at different layers' },
+    { id: 'compose-cleanup', title: 'Project cleanup and retained data' },
 ];
 
 const DockerComposeWorkflow = () => (
-    <ArticleLayout title="4. Run the project with Docker Compose" route={DOCKER_COMPOSE_ROUTE} sections={sections}
+    <ArticleLayout title="4. Project configuration with Docker Compose" route={DOCKER_COMPOSE_ROUTE} sections={sections}
         backRoute={DOCKER_NOTES_ROUTE} backLabel="Back to Docker lessons">
         <section className="Article__section" aria-labelledby="compose-model">
-            <h2 id="compose-model" className="SectionTitle">1. Save the configuration instead of retyping commands</h2>
-            <p>
-                Chapter 3 connected our website to a client and mounted local files. Those options become
-                difficult to remember as an application grows. Docker Compose stores the desired service
-                configuration in a YAML file and creates the containers and networks from it.
-            </p>
-            <p>
-                A service describes how to run one application component. An image supplies its files. A
-                container is one instance running with that configuration. Compose can manage one service or
-                several related services together.
-            </p>
-            <p>
-                The Dockerfile still builds our image. Compose adds the runtime choices: which port to publish,
-                which directory to mount, and which services share a network. It does not replace the
-                Dockerfile.
-            </p>
+            <h2 id="compose-model" className="SectionTitle">1. Compose stores service configuration</h2>
+            <ul className="Article__notes">
+                <li>Chapter 3 connected our website to a client and mounted local files.</li>
+                <li>Those options become difficult to remember as an application grows.</li>
+                <li>Docker Compose stores the desired service configuration in a YAML file and creates the containers and networks from it.</li>
+                <li>A service describes how to run one application component.</li>
+                <li>An image supplies its files.</li>
+                <li>A container is one instance running with that configuration.</li>
+                <li>Compose can manage one service or several related services together.</li>
+                <li>The Dockerfile still builds our image.</li>
+                <li>Compose adds the runtime choices: which port to publish, which directory to mount, and which services share a network.</li>
+                <li>It does not replace the Dockerfile.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="compose-file">
-            <h2 id="compose-file" className="SectionTitle">2. Describe our website and a request client</h2>
-            <p>
-                YAML uses indentation to group settings. Use spaces rather than tabs. Compose gives services a
-                shared default network, and services can use each other's service names on it.
-            </p>
+            <h2 id="compose-file" className="SectionTitle">2. Services describe the website and client</h2>
+            <ul className="Article__notes">
+                <li>Compose gives services a shared default network, and services can use each other's service names on it.</li>
+            </ul>
             <LearningNoteExampleBlock example={{
-                title: "Create compose.yaml in the existing project",
+                title: "compose.yaml in the existing project",
                 description: [
-                    "Continue in docker-lessons with the Dockerfile and site directory from Chapters 2 and 3. Save the following file as compose.yaml beside Dockerfile.",
-                    "Docker Compose must be installed. Docker Desktop includes it; an Engine-only Linux installation may need the Compose plugin. docker compose version should report its version.",
+                    <>The example uses <code>docker-lessons</code> with the <code>Dockerfile</code> and <code>site</code> directory from Chapters 2 and 3.</>,
+                    <>The file below is <code>compose.yaml</code> beside <code>Dockerfile</code>.</>,
+                    "Docker Compose must be installed.",
+                    "Docker Desktop includes it.",
+                    "An Engine-only Linux installation may need the Compose plugin.",
+                    <><code>docker compose version</code> should report its version.</>,
                 ],
                 language: "text",
                 code: [
@@ -68,27 +68,37 @@ const DockerComposeWorkflow = () => (
                     "",
                 ].join('\n'),
                 explanation: [
-                    "site uses build: . to build our Dockerfile. Its port and read-only bind mount reproduce the earlier docker run setup.",
-                    "The relative source ./site is resolved from the Compose file directory. The mounted host file currently says Edited on the host if you followed Chapter 3.",
-                    "client requests http://site:8000/ on the shared network. It needs no published port.",
-                    "profiles: [tools] keeps the client out of a normal startup. A profile groups optional services. We will explicitly run client only when we want one request.",
-                    "The client has no depends_on because we run it after checking that the server is ready. Container startup alone would not prove application readiness.",
+                    <><code>site</code> uses <code>build: .</code> to build our <code>Dockerfile</code>.</>,
+                    <>Its port and read-only bind mount reproduce the earlier <code>docker run</code> setup.</>,
+                    <>The relative source <code>./site</code> is resolved from the Compose file directory.</>,
+                    "The Chapter 3 bind-mount example leaves Edited on the host in the mounted host file.",
+                    <><code>client</code> requests <code>http://site:8000/</code> on the shared network.</>,
+                    "It needs no published port.",
+                    <><code>profiles: [tools]</code> keeps the <code>client</code> out of a normal startup.</>,
+                    "A profile groups optional services.",
+                    <>An explicit <code>client</code> run performs one request.</>,
+                    <>The <code>client</code> has no <code>depends_on</code>.</>,
+                    "Its command follows a successful server request.",
+                    "Container startup alone would not prove application readiness.",
                 ],
             }} />
 
         </section>
 
         <section className="Article__section" aria-labelledby="compose-commands">
-            <h2 id="compose-commands" className="SectionTitle">3. Start, inspect, and change the website</h2>
-            <p>
-                Compose groups resources into a project. The directory name normally supplies the project name.
-                Use commands from the same project directory so Compose reads the intended file.
-            </p>
+            <h2 id="compose-commands" className="SectionTitle">3. Compose manages the website lifecycle</h2>
+            <ul className="Article__notes">
+                <li>Compose groups resources into a project.</li>
+                <li>The directory name normally supplies the project name.</li>
+                <li>Commands from the same project directory read the intended Compose file.</li>
+            </ul>
             <LearningNoteExampleBlock example={{
-                title: "Run the saved configuration and make one change",
+                title: "Saved configuration and a website update",
                 description: [
-                    "Run from docker-lessons after saving compose.yaml. Stop any earlier container using host port 8080 before starting.",
-                    "If the server is still starting, retry curl until it succeeds before running client.",
+                    <>The working directory is <code>docker-lessons</code> containing <code>compose.yaml</code>.</>,
+                    "Startup requires host port 8080 to be free.",
+                    <>The <code>client</code> command follows a successful <code>curl</code> request.</>,
+                    "A request during server startup may need another attempt.",
                 ],
                 language: "text",
                 code: [
@@ -103,20 +113,27 @@ const DockerComposeWorkflow = () => (
                     "curl http://127.0.0.1:8080/",
                 ].join('\n'),
                 explanation: [
-                    "config parses and prints the resolved Compose configuration without creating containers. Inspect it before startup.",
-                    "up --detach --build site builds the website image and starts its service in the background. Compose manages the container name, so do not rely on a fixed generated name.",
-                    "Both the host request and the client should return the current HTML. run --rm starts one disposable instance of client and removes it after the request.",
-                    "logs site shows the server messages. Add --follow to stream later messages; press Ctrl+C to stop following without stopping the detached service.",
-                    "The last edit is visible on the next request because site has a bind mount. A Dockerfile change instead needs another up --detach --build site. restart alone does not apply an edited Compose configuration.",
+                    <><code>config</code> parses and prints the resolved Compose configuration without creating containers.</>,
+                    "Its output allows configuration review before startup.",
+                    <><code>up --detach --build site</code> builds the website image and starts its service in the background.</>,
+                    "Compose manages the generated container name.",
+                    <>Both the host request and the <code>client</code> should return the current HTML.</>,
+                    <><code>run --rm</code> starts one disposable instance of <code>client</code> and removes it after the request.</>,
+                    <><code>logs site</code> shows the server messages.</>,
+                    <><code>--follow</code> streams later messages.</>,
+                    <><code>Ctrl+C</code> stops following without stopping the detached service.</>,
+                    <>The last edit is visible on the next request because <code>site</code> has a bind mount.</>,
+                    <>A <code>Dockerfile</code> change instead needs another <code>up --detach --build site</code>.</>,
+                    <><code>restart</code> alone does not apply an edited Compose configuration.</>,
                 ],
             }} />
 
         </section>
 
         <section className="Article__section" aria-labelledby="compose-debugging">
-            <h2 id="compose-debugging" className="SectionTitle">4. Check the failed layer before changing configuration</h2>
+            <h2 id="compose-debugging" className="SectionTitle">4. Different failures require different evidence</h2>
             <div className="Article__tableWrap"><table className="Article__table">
-                <thead><tr><th>What you observe</th><th>What to inspect next</th><th>What it can establish</th></tr></thead>
+                <thead><tr><th>Observed symptom</th><th>Relevant evidence</th><th>What it can establish</th></tr></thead>
                 <tbody>
                     <tr><td>Compose rejects the file</td><td><code>docker compose config</code></td><td>YAML and resolved configuration problems</td></tr>
                     <tr><td>Website does not respond</td><td><code>docker compose ps --all</code>, then <code>docker compose logs site</code></td><td>Whether the container exited and what the process reported</td></tr>
@@ -125,19 +142,20 @@ const DockerComposeWorkflow = () => (
                     <tr><td>Old HTML is displayed</td><td>Mount source and actual host file</td><td>Whether mounted content is hiding image files</td></tr>
                 </tbody>
             </table></div>
-            <p>
-                A running container only confirms that its main process is alive. An HTTP response confirms
-                more, but still does not prove every application feature works. Larger applications need
-                readiness checks and retry handling for dependencies.
-            </p>
+            <ul className="Article__notes">
+                <li>A running container only confirms that its main process is alive.</li>
+                <li>An HTTP response confirms more, but still does not prove every application feature works.</li>
+                <li>Larger applications need readiness checks and retry handling for dependencies.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="compose-cleanup">
-            <h2 id="compose-cleanup" className="SectionTitle">5. Stop this project and decide what to keep</h2>
+            <h2 id="compose-cleanup" className="SectionTitle">5. Stopping and removing project resources</h2>
             <LearningNoteExampleBlock example={{
-                title: "Remove the practice services without deleting project files",
+                title: "Service removal and retained project files",
                 description: [
-                    "Run these commands from docker-lessons. The optional stop and start pair demonstrates keeping the same containers.",
+                    <>The working directory is <code>docker-lessons</code>.</>,
+                    <>The optional <code>stop</code> and <code>start</code> pair retains the same containers.</>,
                 ],
                 language: "text",
                 code: [
@@ -146,28 +164,23 @@ const DockerComposeWorkflow = () => (
                     "docker compose down",
                 ].join('\n'),
                 explanation: [
-                    "stop ends processes while retaining their containers. start resumes existing containers; it does not rebuild them.",
-                    "down removes this project's service containers and default network. Your Dockerfile, compose.yaml, and bind-mounted site directory remain on your host.",
-                    "The earlier lesson-content named volume, if retained, is outside this Compose file and is not removed by down.",
-                    "For future projects declaring named volumes, normal down retains those volumes. down --volumes also deletes the project's declared named volumes and attached anonymous volumes. Use it only when that data may be deleted.",
-                    "The built images remain available. Broad system prune commands are unnecessary for this exercise and can affect unrelated projects.",
+                    <><code>stop</code> ends processes while retaining their containers.</>,
+                    <><code>start</code> resumes existing containers.</>,
+                    "It does not rebuild them.",
+                    <><code>down</code> removes this project's service containers and default network.</>,
+                    <>Your <code>Dockerfile</code>, <code>compose.yaml</code>, and bind-mounted <code>site</code> directory remain on your host.</>,
+                    <>The earlier <code>lesson-content</code> named volume, if retained, is outside this Compose file and is not removed by <code>down</code>.</>,
+                    <>For future projects declaring named volumes, normal <code>down</code> retains those volumes.</>,
+                    <><code>down --volumes</code> also deletes the project's declared named volumes and attached anonymous volumes.</>,
+                    "This option is appropriate only when that data may be deleted.",
+                    "The built images remain available.",
+                    "Broad system prune commands are unnecessary for this exercise and can affect unrelated projects.",
                 ],
             }} />
-            <p>
-                You can now build a website image, run it, connect a client, choose storage, and reproduce the
-                setup from a file. Kubernetes builds on these concepts when containers need to be managed as
-                workloads across a cluster of machines.
-            </p>
-            <p>
-                Read alongside the official{' '}
-                <a className="Link" href="https://docs.docker.com/compose/gettingstarted/" target="_blank" rel="noreferrer">Compose
-                quickstart</a>.
-            </p>
-            <p>
-                Further details: <a className="Link" href="https://docs.docker.com/compose/intro/compose-application-model/" target="_blank" rel="noreferrer">Compose's application model</a>,{' '}
-                <a className="Link" href="https://docs.docker.com/reference/compose-file/profiles/" target="_blank" rel="noreferrer">optional service profiles</a>, and{' '}
-                <a className="Link" href="https://docs.docker.com/reference/cli/docker/compose/down/" target="_blank" rel="noreferrer">down and volume removal</a>.
-            </p>
+            <ul className="Article__notes">
+                <li>Further explanation appears in the official{' '} <a className="Link" href="https://docs.docker.com/compose/gettingstarted/" target="_blank" rel="noreferrer">Compose quickstart</a>.</li>
+                <li>Further details: <a className="Link" href="https://docs.docker.com/compose/intro/compose-application-model/" target="_blank" rel="noreferrer">Compose's application model</a>,{' '} <a className="Link" href="https://docs.docker.com/reference/compose-file/profiles/" target="_blank" rel="noreferrer">optional service profiles</a>, and{' '} <a className="Link" href="https://docs.docker.com/reference/cli/docker/compose/down/" target="_blank" rel="noreferrer">down and volume removal</a>.</li>
+            </ul>
         </section>
 
     </ArticleLayout>

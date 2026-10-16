@@ -20,7 +20,7 @@ Write like a person taking notes. Do not write like a book.
 9. Use active voice. Say who does what.
 10. Repeat the same word for the same thing. Do not switch to a synonym to sound varied.
 11. It is fine to use more words if that makes the meaning clearer. Extra words that add no meaning are padding. Remove them.
-12. State facts. If something is uncertain, say it is uncertain.
+12. State facts. If something is uncertain, say it is uncertain. In learning notes, describe what something is or does instead of telling the reader what to do.
 13. Say each thing once. Do not restate a point in new words later in the text.
 14. The goal is to teach, not to sell. Do not persuade the reader that the topic matters. Explain it.
 
@@ -35,7 +35,10 @@ Write like a person taking notes. Do not write like a book.
 ## Learning notes on any topic
 
 - Write for someone learning the topic, including a tired reader or a reader with weak English.
-- Use short bullets. Keep one main idea in each bullet. Use a short paragraph only when it makes an explanation easier to follow.
+- Write learning explanations as short bullet points, not prose paragraphs. Keep one main idea in each bullet. Split conditions, consequences, and exceptions into separate bullets. Tables and code examples can keep their own format.
+- Use factual headings and example titles. For example, "An image supplies container files" or "Images and containers", rather than "Use an image to start a container".
+- Describe example setup and actions as facts: "The example requires Docker" and "The command creates a container", rather than "Install Docker" and "Create a container". Shell commands remain commands. Keep required filenames, command order, expected results, and safety conditions explicit.
+- Preserve flow through topic order and short factual connections. Do not replace a paragraph with one equally dense bullet.
 - Start with the actual topic, rule, or example. Do not add an introduction about what the notes will cover.
 - Keep technical terms. Explain a new term in common words near its first use. Simple English must not remove the vocabulary the reader needs to learn.
 - State what happens and when it happens. Avoid dense sentences that combine a rule, several conditions, and an exception.
@@ -44,7 +47,7 @@ Write like a person taking notes. Do not write like a book.
 - Use tables when the reader needs to compare things. Keep table cells short and direct.
 - Explain a shared concept in one main place. Link to that explanation from related topics. Keep a brief reminder when the reader needs it for the current example or question.
 - Remove copied chat replies such as "Yes, you are correct," praise, offers to continue, and references to the conversation.
-- Remove obvious instructions and labels such as "replace the placeholders," "Complete Program," and repeated notices about snippets or imports. Keep setup instructions when they explain a real requirement the reader needs.
+- Remove obvious instructions and labels such as "replace the placeholders," "Complete Program," and repeated notices about snippets or imports. Keep setup requirements and execution order when they are needed to understand or reproduce an example. State them as facts.
 
 ### When refining existing notes
 
@@ -62,7 +65,7 @@ Simple:
 
 - Go stops the switch after running the matched case.
 - You do not need `break` at the end of that case.
-- Use `fallthrough` to run the next case without checking its condition.
+- `fallthrough` runs the next case without checking its condition.
 
 Use the same approach for other topics: keep the technical term and explain what it does in plain words.
 
@@ -106,12 +109,14 @@ Good: "The build failed three times. The cause was a missing environment variabl
 
 Bad: "In this article we will explore caching. Caching is a huge topic and every engineer should understand it. Let's begin."
 
-Good: "A cache stores the API response for five minutes. Here is how to add one."
+Good: "A cache stores the API response for five minutes."
 
 ## Check before you finish
 
 - Can a tired reader understand each sentence on the first read?
-- For notes, did I use short bullets and preserve the existing simple style?
+- For notes, are explanations short bullets rather than paragraphs or dense paragraph-sized bullets?
+- Do headings and explanations state facts rather than address the reader with instructions?
+- Do examples still contain the prerequisites, file names, command order, and conditions needed to understand them?
 - Are technical terms explained without losing conditions, exceptions, or useful examples?
 - Did I remove chat residue and unnecessary snippet or placeholder labels?
 - Did I use any idiom or metaphor? Remove it.
