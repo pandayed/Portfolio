@@ -26,6 +26,7 @@ import {
     KUBERNETES_DEPLOY_ROUTE,
     KUBERNETES_NOTES_ROUTE,
     KUBERNETES_OPERATIONS_ROUTE,
+    KUBERNETES_COMMANDS_ROUTE,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
@@ -491,6 +492,12 @@ export const kubernetesNotes: NoteGroup = {
             summary: 'Probes, resource settings, rollouts, and diagnostic evidence describe workload behavior.',
             route: KUBERNETES_OPERATIONS_ROUTE,
             updatedOn: '2026-10-16',
+        },
+        {
+            type: 'page',
+            title: 'Kubernetes commands',
+            route: KUBERNETES_COMMANDS_ROUTE,
+            updatedOn: '2026-10-17',
         },
     ],
 };

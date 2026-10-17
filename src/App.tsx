@@ -41,6 +41,7 @@ import KubernetesCluster from './Notes/KubernetesNotes/KubernetesCluster';
 import KubernetesDeploymentsServices from './Notes/KubernetesNotes/KubernetesDeploymentsServices';
 import KubernetesConfigurationStorage from './Notes/KubernetesNotes/KubernetesConfigurationStorage';
 import KubernetesOperations from './Notes/KubernetesNotes/KubernetesOperations';
+import KubernetesCommands from './Notes/KubernetesNotes/KubernetesCommands';
 import ProgrammingDictionary from './Notes/ProgrammingDictionary/ProgrammingDictionaryPage';
 import JavaNote from './Notes/JavaNotes/JavaNote';
 import JavaNotesIndex from './Notes/JavaNotes/JavaNotesIndex';
@@ -132,6 +133,7 @@ import {
     KUBERNETES_DEPLOY_ROUTE,
     KUBERNETES_NOTES_ROUTE,
     KUBERNETES_OPERATIONS_ROUTE,
+    KUBERNETES_COMMANDS_ROUTE,
     POSTGRESQL_GROUP_BY_ROUTE,
     POSTGRESQL_JOINS_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
@@ -199,6 +201,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [KUBERNETES_DEPLOY_ROUTE]: KubernetesDeploymentsServices,
     [KUBERNETES_CONFIG_ROUTE]: KubernetesConfigurationStorage,
     [KUBERNETES_OPERATIONS_ROUTE]: KubernetesOperations,
+    [KUBERNETES_COMMANDS_ROUTE]: KubernetesCommands,
     [PROGRAMMING_DICTIONARY_ROUTE]: ProgrammingDictionary,
     [JAVA_NOTES_ROUTE]: JavaNotesIndex,
     [JAVA_PROGRAM_EXECUTION_ROUTE]: JavaProgramExecution,

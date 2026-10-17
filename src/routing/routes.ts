@@ -45,6 +45,7 @@ export const KUBERNETES_CLUSTER_ROUTE = '/notes/kubernetes/cluster-nodes-and-pod
 export const KUBERNETES_DEPLOY_ROUTE = '/notes/kubernetes/deployments-and-services';
 export const KUBERNETES_CONFIG_ROUTE = '/notes/kubernetes/configuration-and-storage';
 export const KUBERNETES_OPERATIONS_ROUTE = '/notes/kubernetes/health-rollouts-and-debugging';
+export const KUBERNETES_COMMANDS_ROUTE = '/notes/kubernetes/commands';
 export const PROGRAMMING_DICTIONARY_ROUTE = '/notes/programming-dictionary';
 export const JAVA_NOTES_ROUTE = '/notes/java';
 export const JAVA_PROGRAM_EXECUTION_ROUTE = '/notes/java/program-execution';
@@ -139,6 +140,7 @@ export type Route =
     | typeof KUBERNETES_DEPLOY_ROUTE
     | typeof KUBERNETES_CONFIG_ROUTE
     | typeof KUBERNETES_OPERATIONS_ROUTE
+    | typeof KUBERNETES_COMMANDS_ROUTE
     | typeof JAVA_NOTES_ROUTE
     | JavaNoteRoute
     | typeof JAVA_PROGRAM_EXECUTION_ROUTE
@@ -241,6 +243,7 @@ const routes: Route[] = [
     KUBERNETES_DEPLOY_ROUTE,
     KUBERNETES_CONFIG_ROUTE,
     KUBERNETES_OPERATIONS_ROUTE,
+    KUBERNETES_COMMANDS_ROUTE,
     JAVA_NOTES_ROUTE,
     JAVA_PROGRAM_EXECUTION_ROUTE,
     ...javaNoteRoutes,
