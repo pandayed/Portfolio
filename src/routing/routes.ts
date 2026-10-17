@@ -38,6 +38,8 @@ export const DOCKER_CONTAINERS_ROUTE = '/notes/docker/containers-images-and-regi
 export const DOCKER_BUILD_RUN_ROUTE = '/notes/docker/build-and-run';
 export const DOCKER_NETWORK_STORAGE_ROUTE = '/notes/docker/networking-and-storage';
 export const DOCKER_COMPOSE_ROUTE = '/notes/docker/compose-and-workflow';
+export const DOCKER_COMMANDS_ROUTE = '/notes/docker/commands';
+export const DOCKER_INSTRUCTIONS_ROUTE = '/notes/docker/dockerfile-instructions';
 export const KUBERNETES_NOTES_ROUTE = '/notes/kubernetes';
 export const KUBERNETES_CLUSTER_ROUTE = '/notes/kubernetes/cluster-nodes-and-pods';
 export const KUBERNETES_DEPLOY_ROUTE = '/notes/kubernetes/deployments-and-services';
@@ -130,6 +132,8 @@ export type Route =
     | typeof DOCKER_BUILD_RUN_ROUTE
     | typeof DOCKER_NETWORK_STORAGE_ROUTE
     | typeof DOCKER_COMPOSE_ROUTE
+    | typeof DOCKER_COMMANDS_ROUTE
+    | typeof DOCKER_INSTRUCTIONS_ROUTE
     | typeof KUBERNETES_NOTES_ROUTE
     | typeof KUBERNETES_CLUSTER_ROUTE
     | typeof KUBERNETES_DEPLOY_ROUTE
@@ -230,6 +234,8 @@ const routes: Route[] = [
     DOCKER_BUILD_RUN_ROUTE,
     DOCKER_NETWORK_STORAGE_ROUTE,
     DOCKER_COMPOSE_ROUTE,
+    DOCKER_COMMANDS_ROUTE,
+    DOCKER_INSTRUCTIONS_ROUTE,
     KUBERNETES_NOTES_ROUTE,
     KUBERNETES_CLUSTER_ROUTE,
     KUBERNETES_DEPLOY_ROUTE,

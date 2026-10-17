@@ -34,6 +34,8 @@ import DockerContainers from './Notes/DockerNotes/DockerContainers';
 import DockerBuildRun from './Notes/DockerNotes/DockerBuildRun';
 import DockerNetworkStorage from './Notes/DockerNotes/DockerNetworkStorage';
 import DockerComposeWorkflow from './Notes/DockerNotes/DockerComposeWorkflow';
+import DockerCommands from './Notes/DockerNotes/DockerCommands';
+import DockerInstructions from './Notes/DockerNotes/DockerInstructions';
 import KubernetesNotesIndex from './Notes/KubernetesNotes/KubernetesNotesIndex';
 import KubernetesCluster from './Notes/KubernetesNotes/KubernetesCluster';
 import KubernetesDeploymentsServices from './Notes/KubernetesNotes/KubernetesDeploymentsServices';
@@ -104,6 +106,8 @@ import {
     DBMS_NOTES_ROUTE,
     DOCKER_BUILD_RUN_ROUTE,
     DOCKER_COMPOSE_ROUTE,
+    DOCKER_COMMANDS_ROUTE,
+    DOCKER_INSTRUCTIONS_ROUTE,
     DOCKER_CONTAINERS_ROUTE,
     DOCKER_NETWORK_STORAGE_ROUTE,
     DOCKER_NOTES_ROUTE,
@@ -188,6 +192,8 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [DOCKER_BUILD_RUN_ROUTE]: DockerBuildRun,
     [DOCKER_NETWORK_STORAGE_ROUTE]: DockerNetworkStorage,
     [DOCKER_COMPOSE_ROUTE]: DockerComposeWorkflow,
+    [DOCKER_COMMANDS_ROUTE]: DockerCommands,
+    [DOCKER_INSTRUCTIONS_ROUTE]: DockerInstructions,
     [KUBERNETES_NOTES_ROUTE]: KubernetesNotesIndex,
     [KUBERNETES_CLUSTER_ROUTE]: KubernetesCluster,
     [KUBERNETES_DEPLOY_ROUTE]: KubernetesDeploymentsServices,

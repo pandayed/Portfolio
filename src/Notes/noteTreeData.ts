@@ -11,6 +11,8 @@ import {
     DBMS_NOTES_ROUTE,
     DOCKER_BUILD_RUN_ROUTE,
     DOCKER_COMPOSE_ROUTE,
+    DOCKER_COMMANDS_ROUTE,
+    DOCKER_INSTRUCTIONS_ROUTE,
     DOCKER_CONTAINERS_ROUTE,
     DOCKER_NETWORK_STORAGE_ROUTE,
     DOCKER_NOTES_ROUTE,
@@ -440,6 +442,18 @@ export const dockerNotes: NoteGroup = {
             title: '4. Project configuration with Docker Compose',
             route: DOCKER_COMPOSE_ROUTE,
             updatedOn: '2026-10-16',
+        },
+        {
+            type: 'page',
+            title: 'Docker commands',
+            route: DOCKER_COMMANDS_ROUTE,
+            updatedOn: '2026-10-17',
+        },
+        {
+            type: 'page',
+            title: 'Dockerfile instructions',
+            route: DOCKER_INSTRUCTIONS_ROUTE,
+            updatedOn: '2026-10-17',
         },
     ],
 };
