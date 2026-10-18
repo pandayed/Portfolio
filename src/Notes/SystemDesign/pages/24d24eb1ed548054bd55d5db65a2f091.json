@@ -963,30 +963,6 @@
       "text": "SQL vs NoSQL – Comprehensive Comparison"
     },
     {
-      "id": "27a24eb1ed548015b137f9100d9c7c9e",
-      "type": "bulleted_list",
-      "html": "<a href=\"https://www.notion.so/Core-Design-Principles-RDBs-27924eb1ed54805581a2df14f110034c?pvs=21\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-27a24eb1-ed54-8015-b137-f9100d9c7c9e--750816550\">Core Design Principles: RDBs</span></a>",
-      "text": "Core Design Principles: RDBs",
-      "links": [
-        {
-          "href": "https://www.notion.so/Core-Design-Principles-RDBs-27924eb1ed54805581a2df14f110034c?pvs=21",
-          "text": "Core Design Principles: RDBs"
-        }
-      ]
-    },
-    {
-      "id": "27a24eb1ed5480928d42d7593b411fae",
-      "type": "bulleted_list",
-      "html": "<a href=\"https://www.notion.so/Core-Design-Principles-NRDBs-27924eb1ed548033af46eeb778bd45e8?pvs=21\" style=\"cursor:pointer;color:inherit;word-wrap:break-word;text-decoration:inherit\" class=\"notion-link-token notion-focusable-token notion-enable-hover\" rel=\"noopener noreferrer\" data-token-index=\"0\" tabindex=\"0\"><span style=\"text-decoration:underline;text-decoration-thickness:0.05em;text-decoration-color:var(--ca-opaLinDecCol);text-underline-offset:10%;opacity:0.7\" class=\"link-annotation-27a24eb1-ed54-8092-8d42-d7593b411fae-401444182\">Core Design Principles: NRDBs</span></a>",
-      "text": "Core Design Principles: NRDBs",
-      "links": [
-        {
-          "href": "https://www.notion.so/Core-Design-Principles-NRDBs-27924eb1ed548033af46eeb778bd45e8?pvs=21",
-          "text": "Core Design Principles: NRDBs"
-        }
-      ]
-    },
-    {
       "id": "27a24eb1ed5480f0bc8be972fe266087",
       "type": "sub_header",
       "html": "Scaling",

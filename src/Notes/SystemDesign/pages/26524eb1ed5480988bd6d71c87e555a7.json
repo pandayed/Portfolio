@@ -302,14 +302,14 @@
     {
       "id": "2e824eb1ed5480bd85ccc2edc1351c34",
       "type": "sub_header",
-      "html": "Event vs normal data (important)",
-      "text": "Event vs normal data (important)"
+      "html": "Event vs current state",
+      "text": "Event vs current state"
     },
     {
       "id": "2e824eb1ed5480a6bbe0da0fc9614251",
       "type": "bulleted_list",
-      "html": "Normal data:",
-      "text": "Normal data:"
+      "html": "Current state:",
+      "text": "Current state:"
     },
     {
       "id": "2e824eb1ed548021956ae5e98aff7462",
@@ -395,65 +395,44 @@
     {
       "id": "2e824eb1ed548048b2d9e07d4827e6f9",
       "type": "bulleted_list",
-      "html": "Kafka stores <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">events only</span>",
-      "text": "Kafka stores events only"
+      "html": "Kafka stores records, also called messages. A record does not have to describe an event.",
+      "text": "Kafka stores records, also called messages. A record does not have to describe an event."
     },
     {
-      "id": "2e824eb1ed548008aaebd5ef07fbadc6",
+      "id": "kafka-record-content",
       "type": "bulleted_list",
-      "html": "Each event is:",
-      "text": "Each event is:"
+      "html": "A record can carry an event, a command, a log entry, a measurement, or current-state data.",
+      "text": "A record can carry an event, a command, a log entry, a measurement, or current-state data."
     },
     {
-      "id": "2e824eb1ed548010abb5f0424f261cd0",
+      "id": "kafka-record-examples",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed548008aaebd5ef07fbadc6",
-      "html": "Appended",
-      "text": "Appended"
+      "html": "For example: “Order placed” is an event; “Generate an invoice” is a command; “Stock available: 25” describes current state.",
+      "text": "For example: “Order placed” is an event; “Generate an invoice” is a command; “Stock available: 25” describes current state."
     },
     {
-      "id": "2e824eb1ed5480b98e7bdcc37f21686c",
+      "id": "kafka-record-meaning",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed548008aaebd5ef07fbadc6",
-      "html": "Never updated",
-      "text": "Never updated"
+      "html": "The producer and consumer agree on what the data means. Kafka stores and delivers it without deciding its business meaning.",
+      "text": "The producer and consumer agree on what the data means. Kafka stores and delivers it without deciding its business meaning."
     },
     {
-      "id": "2e824eb1ed548090983ce374ca89b8c7",
+      "id": "kafka-record-format",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed548008aaebd5ef07fbadc6",
-      "html": "Never edited",
-      "text": "Never edited"
+      "html": "A record has a value, an optional key, a timestamp, and optional headers. The application data is encoded as bytes for storage and transport.",
+      "text": "A record has a value, an optional key, a timestamp, and optional headers. The application data is encoded as bytes for storage and transport."
     },
     {
-      "id": "2e824eb1ed54809d82e0c50760f02e37",
-      "type": "text",
-      "html": "Kafka behaves like:",
-      "text": "Kafka behaves like:"
-    },
-    {
-      "id": "2e824eb1ed548000ab1ad0a3e2a044d2",
+      "id": "kafka-record-append",
       "type": "bulleted_list",
-      "html": "A notebook",
-      "text": "A notebook"
+      "html": "Records are appended to a partition. A later change is written as another record rather than editing an earlier record in place.",
+      "text": "Records are appended to a partition. A later change is written as another record rather than editing an earlier record in place."
     },
     {
-      "id": "2e824eb1ed548042b3d6d5e0a74c56dc",
+      "id": "kafka-event-terminology",
       "type": "bulleted_list",
-      "html": "You only <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">append lines (events)</span>",
-      "text": "You only append lines (events)"
-    },
-    {
-      "id": "2e824eb1ed5480bbbd54c020af55ca37",
-      "type": "bulleted_list",
-      "html": "You never erase immediately",
-      "text": "You never erase immediately"
-    },
-    {
-      "id": "2e824eb1ed5480858554e2e465c34102",
-      "type": "bulleted_list",
-      "html": "Anyone can read from any line",
-      "text": "Anyone can read from any line"
+      "html": "These notes mainly use events as examples. The partition, offset, and reading explanations also apply to other records.",
+      "text": "These notes mainly use events as examples. The partition, offset, and reading explanations also apply to other records."
     },
     {
       "id": "2e824eb1ed5480f49ff0f53e5fe3cb28",
@@ -474,22 +453,8 @@
     {
       "id": "2e824eb1ed548000b040ec1696c7f75d",
       "type": "bulleted_list",
-      "html": "Think of it as:",
-      "text": "Think of it as:"
-    },
-    {
-      "id": "2e824eb1ed54809d9d00f3044b1c690c",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed548000b040ec1696c7f75d",
-      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">category</span>",
-      "text": "A category"
-    },
-    {
-      "id": "2e824eb1ed548037974cef9798cb0588",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed548000b040ec1696c7f75d",
-      "html": "Or a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">log file with a name</span>",
-      "text": "Or a log file with a name"
+      "html": "Think of it as a category/type of event.",
+      "text": "Think of it as a category/type of event."
     },
     {
       "id": "2e824eb1ed5480ef914af461e464fd29",
@@ -585,62 +550,6 @@
       "text": "History is trustworthy"
     },
     {
-      "id": "2e824eb1ed54804787a3cbbe460016cc",
-      "type": "sub_header",
-      "html": "What retention means (brief)",
-      "text": "What retention means (brief)"
-    },
-    {
-      "id": "2e824eb1ed5480d8a0b9c6a5626f49be",
-      "type": "bulleted_list",
-      "html": "For topics using cleanup.policy=delete, retention removes old log segments based on:",
-      "text": "For topics using cleanup.policy=delete, retention removes old log segments based on:"
-    },
-    {
-      "id": "2e824eb1ed548072a44bfdfc8dd4eb15",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
-      "html": "A configured time limit, or",
-      "text": "A configured time limit, or"
-    },
-    {
-      "id": "2e824eb1ed5480ccb97ee5439c0b28ac",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
-      "html": "A configured size limit per partition",
-      "text": "A configured size limit per partition"
-    },
-    {
-      "id": "2e824eb1ed54805c816ec80a483bfeda",
-      "type": "bulleted_list",
-      "html": "Cleanup runs automatically, but not necessarily immediately at the limit.",
-      "text": "Cleanup runs automatically, but not necessarily immediately at the limit."
-    },
-    {
-      "id": "2e824eb1ed54805c816ec80a483bfeda-point-2",
-      "type": "bulleted_list",
-      "text": "Administrators can also delete records before an offset.",
-      "html": "Administrators can also delete records before an offset."
-    },
-    {
-      "id": "kafka-compaction",
-      "type": "bulleted_list",
-      "text": "cleanup.policy=compact: remove older values for a key and retain its latest value.",
-      "html": "cleanup.policy=compact: remove older values for a key and retain its latest value."
-    },
-    {
-      "id": "kafka-compaction-point-2",
-      "type": "bulleted_list",
-      "text": "Tombstone: a record with a key and null value marks that key for removal.",
-      "html": "Tombstone: a record with a key and null value marks that key for removal."
-    },
-    {
-      "id": "kafka-compaction-point-3",
-      "type": "bulleted_list",
-      "text": "A topic can enable both delete and compact.",
-      "html": "A topic can enable both delete and compact."
-    },
-    {
       "id": "2e824eb1ed5480cd85b4cc4687c31a9f",
       "type": "divider"
     },
@@ -705,101 +614,102 @@
     {
       "id": "2e824eb1ed54805f9879def23902bbdd",
       "type": "sub_header",
-      "html": "Partition",
-      "text": "Partition"
+      "text": "What a partition is",
+      "html": "What a partition is"
     },
     {
-      "id": "2e824eb1ed5480b08b04d0b41819300c",
+      "id": "kafka-partition-intro-0",
       "type": "bulleted_list",
-      "html": "A partition is:",
-      "text": "A partition is:"
+      "text": "A topic has one or more partitions.",
+      "html": "A topic has one or more partitions."
     },
     {
-      "id": "2e824eb1ed5480909791d1818fa5675b",
+      "id": "kafka-partition-intro-1",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed5480b08b04d0b41819300c",
-      "html": "A <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">physical append-only log</span>",
-      "text": "A physical append-only log"
+      "text": "Each partition stores some of the topic’s events in a sequence.",
+      "html": "Each partition stores some of the topic’s events in a sequence."
     },
     {
-      "id": "2e824eb1ed5480cc97dfe2efd59f0e77",
+      "id": "kafka-partition-intro-2",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed5480b08b04d0b41819300c",
-      "html": "Each partition copy is stored on a broker.",
-      "text": "Each partition copy is stored on a broker."
+      "text": "When an event is written to a topic, it goes into one of that topic’s partitions.",
+      "html": "When an event is written to a topic, it goes into one of that topic’s partitions."
     },
     {
-      "id": "2e824eb1ed5480cc97dfe2efd59f0e77-point-2",
+      "id": "kafka-partition-example-intro",
+      "type": "text",
+      "text": "Let us say the orders topic has two partitions:",
+      "html": "Let us say the orders topic has two partitions:"
+    },
+    {
+      "id": "kafka-partition-example",
+      "type": "code",
+      "text": "Topic: orders\n\nPartition 0: [Order A] → [Order C]\nPartition 1: [Order B] → [Order D]"
+    },
+    {
+      "id": "kafka-partition-example-0",
       "type": "bulleted_list",
-      "text": "Replication can keep copies on other brokers. Their roles are explained below.",
-      "html": "Replication can keep copies on other brokers. Their roles are explained below.",
-      "parent": "2e824eb1ed5480b08b04d0b41819300c"
+      "text": "Both partitions belong to the same orders topic.",
+      "html": "Both partitions belong to the same orders topic."
     },
     {
-      "id": "2e824eb1ed5480bcaf16c292394c4df8",
+      "id": "kafka-partition-example-1",
       "type": "bulleted_list",
-      "html": "Each partition is:",
-      "text": "Each partition is:"
+      "text": "Each partition contains its own sequence of events.",
+      "html": "Each partition contains its own sequence of events."
     },
     {
-      "id": "2e824eb1ed5480349035f88d8f3126b0",
+      "id": "kafka-partition-example-2",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed5480bcaf16c292394c4df8",
-      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Independently readable</span>",
-      "text": "Independently readable"
+      "text": "The events shown in different partitions are different events, rather than copies.",
+      "html": "The events shown in different partitions are different events, rather than copies."
     },
     {
-      "id": "2e824eb1ed5480fdaab0f238943bdd40",
+      "id": "kafka-partition-append-heading",
+      "type": "sub_sub_header",
+      "text": "What append-only means",
+      "html": "What append-only means"
+    },
+    {
+      "id": "kafka-partition-append-intro",
+      "type": "text",
+      "text": "Assume the next event goes into partition 0:",
+      "html": "Assume the next event goes into partition 0:"
+    },
+    {
+      "id": "kafka-partition-append-diagram",
+      "type": "code",
+      "text": "Before: [Order A] → [Order C]\nAfter:  [Order A] → [Order C] → [Order E]"
+    },
+    {
+      "id": "kafka-partition-append-0",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed5480bcaf16c292394c4df8",
-      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">Independently writable</span>",
-      "text": "Independently writable"
+      "text": "Kafka adds the new event at the end.",
+      "html": "Kafka adds the new event at the end."
     },
     {
-      "id": "2e824eb1ed54806db6ccce5a6906c5e9",
-      "type": "sub_header",
-      "html": "Topic vs partition (clear separation)",
-      "text": "Topic vs partition (clear separation)"
-    },
-    {
-      "id": "2e824eb1ed548033a490e3dc010b8d9f",
+      "id": "kafka-partition-append-1",
       "type": "bulleted_list",
-      "html": "Topic:",
-      "text": "Topic:"
+      "text": "Writing a new event does not insert it between existing events or overwrite an earlier event.",
+      "html": "Writing a new event does not insert it between existing events or overwrite an earlier event."
     },
     {
-      "id": "2e824eb1ed5480829822d00013b18c31",
+      "id": "kafka-partition-append-2",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed548033a490e3dc010b8d9f",
-      "html": "Logical name",
-      "text": "Logical name"
+      "text": "This way of writing is called append-only.",
+      "html": "This way of writing is called append-only."
     },
     {
-      "id": "2e824eb1ed5480a0bc4ceabbd00185cc",
+      "id": "kafka-partition-append-3",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed548033a490e3dc010b8d9f",
-      "html": "Groups related events",
-      "text": "Groups related events"
+      "text": "A log means this stored sequence of records. Here, it contains application events, such as orders.",
+      "html": "A log means this stored sequence of records. Here, it contains application events, such as orders."
     },
     {
-      "id": "2e824eb1ed5480f6a266ffa5b7f59eec",
+      "id": "kafka-partition-append-4",
       "type": "bulleted_list",
-      "html": "Partition:",
-      "text": "Partition:"
-    },
-    {
-      "id": "2e824eb1ed548018bb4bf37a099c2953",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480f6a266ffa5b7f59eec",
-      "html": "Physical storage",
-      "text": "Physical storage"
-    },
-    {
-      "id": "2e824eb1ed548098a674f6845c33f69d",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480f6a266ffa5b7f59eec",
-      "html": "Where events actually live",
-      "text": "Where events actually live"
+      "text": "Physical storage means Kafka stores the event data in files on a broker’s disk.",
+      "html": "Physical storage means Kafka stores the event data in files on a broker’s disk."
     },
     {
       "id": "2e824eb1ed5480dcb402d27b77aada55",
@@ -870,50 +780,20 @@
     {
       "id": "2e824eb1ed54804d8ecbf0f8cea18bf3",
       "type": "bulleted_list",
-      "html": "Producer: an application that writes records.",
-      "text": "Producer: an application that writes records."
+      "html": "The application writes events using a Kafka producer client.",
+      "text": "The application writes events using a Kafka producer client."
     },
     {
-      "id": "2e824eb1ed54804d8ecbf0f8cea18bf3-point-2",
+      "id": "kafka-partition-selection-application",
       "type": "bulleted_list",
-      "text": "Its client selects the partition unless the application explicitly supplies one.",
-      "html": "Its client selects the partition unless the application explicitly supplies one."
+      "html": "The application can choose a partition directly or define a custom selection rule.",
+      "text": "The application can choose a partition directly or define a custom selection rule."
     },
     {
-      "id": "2e824eb1ed5480f8b904cb954475249e",
+      "id": "kafka-partition-selection-default",
       "type": "bulleted_list",
-      "html": "Default Java producer: hash the serialized key to select a partition.",
-      "text": "Default Java producer: hash the serialized key to select a partition."
-    },
-    {
-      "id": "2e824eb1ed5480f8b904cb954475249e-point-2",
-      "type": "bulleted_list",
-      "text": "Same key maps to the same partition while the partition count stays unchanged.",
-      "html": "Same key maps to the same partition while the partition count stays unchanged."
-    },
-    {
-      "id": "2e824eb1ed5480f8b904cb954475249e-point-3",
-      "type": "bulleted_list",
-      "text": "An explicit partition or custom partitioner can override this rule.",
-      "html": "An explicit partition or custom partitioner can override this rule."
-    },
-    {
-      "id": "2e824eb1ed5480c0941acfb37409624e",
-      "type": "bulleted_list",
-      "html": "Java producer in Kafka 4.x, without a key or explicit partition: use sticky batching.",
-      "text": "Java producer in Kafka 4.x, without a key or explicit partition: use sticky batching."
-    },
-    {
-      "id": "2e824eb1ed5480c0941acfb37409624e-point-2",
-      "type": "bulleted_list",
-      "text": "Keep one partition until at least batch.size bytes are produced, then switch.",
-      "html": "Keep one partition until at least batch.size bytes are produced, then switch."
-    },
-    {
-      "id": "2e824eb1ed5480c0941acfb37409624e-point-3",
-      "type": "bulleted_list",
-      "text": "This is not per-record round-robin. Other clients or partitioners may differ.",
-      "html": "This is not per-record round-robin. Other clients or partitioners may differ."
+      "html": "Otherwise, the producer client chooses a partition using its default selection rules.",
+      "text": "Otherwise, the producer client chooses a partition using its default selection rules."
     },
     {
       "id": "2e824eb1ed5480799857d92c2dff0e92",
@@ -921,157 +801,225 @@
     },
     {
       "id": "2e824eb1ed548067b716df7bf120c25d",
-      "type": "sub_sub_header",
-      "html": "What an offset is",
-      "text": "What an offset is"
+      "type": "sub_header",
+      "text": "Offset",
+      "html": "Offset"
     },
     {
-      "id": "2e824eb1ed54800eb942f3fdb65c9a8d",
+      "id": "kafka-offset-definition-0",
       "type": "bulleted_list",
-      "html": "Offset is a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">number</span>",
-      "text": "Offset is a number"
+      "text": "An offset is a number that identifies an event’s position within one partition.",
+      "html": "An offset is a number that identifies an event’s position within one partition."
     },
     {
-      "id": "2e824eb1ed5480d0bab3ff0ba24bf6ad",
+      "id": "kafka-offset-definition-1",
       "type": "bulleted_list",
-      "html": "An offset identifies a record’s position within one partition.",
-      "text": "An offset identifies a record’s position within one partition."
+      "text": "Kafka assigns offsets as events are appended. Later events in that partition have larger offsets.",
+      "html": "Kafka assigns offsets as events are appended. Later events in that partition have larger offsets."
     },
     {
-      "id": "2e824eb1ed5480d0bab3ff0ba24bf6ad-point-2",
+      "id": "kafka-offset-definition-2",
       "type": "bulleted_list",
-      "text": "It is not an index into the currently retained records.",
-      "html": "It is not an index into the currently retained records."
+      "text": "Each partition has its own offsets. The topic, partition, and offset together identify a record.",
+      "html": "Each partition has its own offsets. The topic, partition, and offset together identify a record."
     },
     {
-      "id": "2e824eb1ed54807ab547c1adb86fd81a",
-      "type": "bulleted_list",
-      "html": "Offsets:",
-      "text": "Offsets:"
-    },
-    {
-      "id": "2e824eb1ed5480d6a626d54a2766de4d",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed54807ab547c1adb86fd81a",
-      "html": "Start at 0",
-      "text": "Start at 0"
-    },
-    {
-      "id": "2e824eb1ed5480d086dedf5e9c7064ae",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed54807ab547c1adb86fd81a",
-      "html": "Increase monotonically",
-      "text": "Increase monotonically"
-    },
-    {
-      "id": "2e824eb1ed5480d0af49e52516cdade0",
-      "type": "bulleted_list",
-      "html": "Offset is <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">not a global event number</span>",
-      "text": "Offset is not a global event number"
-    },
-    {
-      "id": "2e824eb1ed5480ac9642f370108b89ab",
-      "type": "sub_sub_header",
-      "html": "Original offsets and retained records",
-      "text": "Original offsets and retained records"
-    },
-    {
-      "id": "2e824eb1ed548001bfcef003783e908e",
-      "type": "bulleted_list",
-      "html": "Offset 0 marks the original log’s start. It may no longer be available.",
-      "text": "Offset 0 marks the original log’s start. It may no longer be available."
-    },
-    {
-      "id": "2e824eb1ed5480498f74f2946120432f",
-      "type": "bulleted_list",
-      "html": "Retention and compaction remove records without renumbering offsets.",
-      "text": "Retention and compaction remove records without renumbering offsets."
-    },
-    {
-      "id": "2e824eb1ed5480498f74f2946120432f-point-2",
-      "type": "bulleted_list",
-      "text": "Earliest available offset may exceed 0. Retained offsets may have gaps.",
-      "html": "Earliest available offset may exceed 0. Retained offsets may have gaps."
-    },
-    {
-      "id": "2e824eb1ed5480459dbac6646093124f",
+      "id": "kafka-offset-example-intro",
       "type": "text",
-      "html": "Example:",
-      "text": "Example:"
-    },
-    {
-      "id": "2e824eb1ed5480aa93b2ce39bd65229d",
-      "type": "bulleted_list",
-      "html": "Partition 0:",
-      "text": "Partition 0:"
-    },
-    {
-      "id": "2e824eb1ed548018a982ca62f69bbfb7",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480aa93b2ce39bd65229d",
-      "html": "Offset 0 → first event",
-      "text": "Offset 0 → first event"
-    },
-    {
-      "id": "2e824eb1ed5480d29920e9f965dcd2b7",
-      "type": "bulleted_list",
-      "parent": "2e824eb1ed5480aa93b2ce39bd65229d",
-      "html": "Offset 1 → second event",
-      "text": "Offset 1 → second event"
-    },
-    {
-      "id": "kafka-partition-offset-diagram-title",
-      "type": "text",
-      "text": "One topic, separate partition logs (arrows show append order):",
-      "html": "One topic, separate partition logs (arrows show append order):"
+      "text": "Let us say the orders topic has these events:",
+      "html": "Let us say the orders topic has these events:"
     },
     {
       "id": "kafka-partition-offset-diagram",
       "type": "code",
-      "text": "Topic: orders\n┌──────────────────────────────────────────────────┐\n│ Partition 0: [offset 0: A] → [1: B] → [2: C] → … │\n│ Partition 1: [offset 0: D] → [1: E] → [2: F] → … │\n│ Partition 2: [offset 0: G] → [1: H] → [2: I] → … │\n└──────────────────────────────────────────────────┘"
+      "text": "Topic: orders\n\nPartition 0: [offset 0: Order A] → [1: Order C] → [2: Order E]\nPartition 1: [offset 0: Order B] → [1: Order D]"
     },
     {
-      "id": "kafka-partition-offset-diagram-caption",
+      "id": "kafka-offset-example-caption",
       "type": "bulleted_list",
-      "text": "A–I label records in a new topic.",
-      "html": "A–I label records in a new topic."
-    },
-    {
-      "id": "kafka-partition-offset-diagram-caption-point-2",
-      "type": "bulleted_list",
-      "text": "Partition 0 offset 0 and partition 1 offset 0 identify different records.",
-      "html": "Partition 0 offset 0 and partition 1 offset 0 identify different records."
-    },
-    {
-      "id": "kafka-partition-offset-diagram-caption-point-3",
-      "type": "bulleted_list",
-      "text": "Each row has its own order. There is no shared order across rows.",
-      "html": "Each row has its own order. There is no shared order across rows."
+      "text": "Partition 0 offset 0 identifies Order A. Partition 1 offset 0 identifies Order B.",
+      "html": "Partition 0 offset 0 identifies Order A. Partition 1 offset 0 identifies Order B."
     },
     {
       "id": "2e824eb1ed54808caebec276ca8751f8",
-      "type": "sub_header",
-      "html": "Why offset matters",
-      "text": "Why offset matters"
+      "type": "sub_sub_header",
+      "text": "Why offsets are needed",
+      "html": "Why offsets are needed"
     },
     {
-      "id": "2e824eb1ed548063a26cc88c308b514e",
+      "id": "kafka-offset-purpose-0",
       "type": "bulleted_list",
-      "html": "Consumers track offsets",
-      "text": "Consumers track offsets"
+      "text": "A consumer is an application that reads events from Kafka.",
+      "html": "A consumer is an application that reads events from Kafka."
     },
     {
-      "id": "2e824eb1ed548082ac69c947607bacde",
+      "id": "kafka-offset-purpose-1",
       "type": "bulleted_list",
-      "html": "Replay means:",
-      "text": "Replay means:"
+      "text": "Offsets let a consumer specify where to start reading and track where to continue.",
+      "html": "Offsets let a consumer specify where to start reading and track where to continue."
     },
     {
-      "id": "2e824eb1ed5480a19e35db1503ac7a8d",
+      "id": "kafka-offset-purpose-2",
       "type": "bulleted_list",
-      "parent": "2e824eb1ed548082ac69c947607bacde",
-      "html": "Reading from an earlier available offset. Removed records cannot be replayed from Kafka.",
-      "text": "Reading from an earlier available offset. Removed records cannot be replayed from Kafka."
+      "text": "Saving that progress lets it resume after a restart instead of starting from the beginning.",
+      "html": "Saving that progress lets it resume after a restart instead of starting from the beginning."
+    },
+    {
+      "id": "kafka-offset-purpose-3",
+      "type": "bulleted_list",
+      "text": "A consumer can also return to an earlier available offset to read events again. This is called replay.",
+      "html": "A consumer can also return to an earlier available offset to read events again. This is called replay."
+    },
+    {
+      "id": "kafka-offset-reading",
+      "type": "sub_sub_header",
+      "text": "How reading uses offsets",
+      "html": "How reading uses offsets"
+    },
+    {
+      "id": "kafka-offset-reading-0",
+      "type": "bulleted_list",
+      "text": "Assume a consumer starts reading partition 0 at offset 1 in the example above.",
+      "html": "Assume a consumer starts reading partition 0 at offset 1 in the example above."
+    },
+    {
+      "id": "kafka-offset-reading-1",
+      "type": "bulleted_list",
+      "text": "Its client requests records from that position. Kafka can return several records in one batch.",
+      "html": "Its client requests records from that position. Kafka can return several records in one batch."
+    },
+    {
+      "id": "kafka-offset-reading-2",
+      "type": "bulleted_list",
+      "text": "The consumer receives Order C at offset 1 and Order E at offset 2, in partition order.",
+      "html": "The consumer receives Order C at offset 1 and Order E at offset 2, in partition order."
+    },
+    {
+      "id": "kafka-offset-reading-3",
+      "type": "bulleted_list",
+      "text": "The client’s next reading position is now 3. Reading position advances when records are returned, even if the application has not finished processing them.",
+      "html": "The client’s next reading position is now 3. Reading position advances when records are returned, even if the application has not finished processing them."
+    },
+    {
+      "id": "kafka-offset-reading-4",
+      "type": "bulleted_list",
+      "text": "After successfully processing both events, the application can save offset 3 as the position to resume from. Saving this position in Kafka is called committing an offset.",
+      "html": "After successfully processing both events, the application can save offset 3 as the position to resume from. Saving this position in Kafka is called committing an offset."
+    },
+    {
+      "id": "kafka-offset-reading-5",
+      "type": "bulleted_list",
+      "text": "After a restart, a consumer resuming from that committed offset starts at 3, provided the saved position is still valid.",
+      "html": "After a restart, a consumer resuming from that committed offset starts at 3, provided the saved position is still valid."
+    },
+    {
+      "id": "kafka-offset-reading-6",
+      "type": "bulleted_list",
+      "text": "Each partition needs its own reading position. Reading events does not delete them.",
+      "html": "Each partition needs its own reading position. Reading events does not delete them."
+    },
+    {
+      "id": "kafka-offset-position-diagram",
+      "type": "code",
+      "text": "Partition 0: [0: Order A] → [1: Order C] → [2: Order E]\n                           ↑ start reading\n\nAfter processing Order C and Order E:\nSaved next position: 3 → resume here when more events arrive"
+    },
+    {
+      "id": "2e824eb1ed54804787a3cbbe460016cc",
+      "type": "sub_sub_header",
+      "html": "Retention and compaction",
+      "text": "Retention and compaction"
+    },
+    {
+      "id": "kafka-retention-definition",
+      "type": "bulleted_list",
+      "html": "Retention is the policy that limits how long or how much data Kafka keeps in a partition.",
+      "text": "Retention is the policy that limits how long or how much data Kafka keeps in a partition."
+    },
+    {
+      "id": "kafka-log-segment-definition",
+      "type": "bulleted_list",
+      "html": "Kafka stores a partition’s log in files called log segments.",
+      "text": "Kafka stores a partition’s log in files called log segments."
+    },
+    {
+      "id": "2e824eb1ed5480d8a0b9c6a5626f49be",
+      "type": "bulleted_list",
+      "html": "For topics using cleanup.policy=delete, retention removes old log segments based on:",
+      "text": "For topics using cleanup.policy=delete, retention removes old log segments based on:"
+    },
+    {
+      "id": "2e824eb1ed548072a44bfdfc8dd4eb15",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
+      "html": "A configured time limit, or",
+      "text": "A configured time limit, or"
+    },
+    {
+      "id": "2e824eb1ed5480ccb97ee5439c0b28ac",
+      "type": "bulleted_list",
+      "parent": "2e824eb1ed5480d8a0b9c6a5626f49be",
+      "html": "A configured size limit per partition",
+      "text": "A configured size limit per partition"
+    },
+    {
+      "id": "2e824eb1ed54805c816ec80a483bfeda",
+      "type": "bulleted_list",
+      "html": "Cleanup runs automatically, but not necessarily immediately at the limit.",
+      "text": "Cleanup runs automatically, but not necessarily immediately at the limit."
+    },
+    {
+      "id": "2e824eb1ed54805c816ec80a483bfeda-point-2",
+      "type": "bulleted_list",
+      "text": "Administrators can also delete records before an offset.",
+      "html": "Administrators can also delete records before an offset."
+    },
+    {
+      "id": "kafka-compaction",
+      "type": "bulleted_list",
+      "text": "cleanup.policy=compact: remove older values for a key and retain its latest value.",
+      "html": "cleanup.policy=compact: remove older values for a key and retain its latest value."
+    },
+    {
+      "id": "kafka-compaction-point-2",
+      "type": "bulleted_list",
+      "text": "Tombstone: a record with a key and null value marks that key for removal.",
+      "html": "Tombstone: a record with a key and null value marks that key for removal."
+    },
+    {
+      "id": "kafka-compaction-point-3",
+      "type": "bulleted_list",
+      "text": "A topic can enable both delete and compact.",
+      "html": "A topic can enable both delete and compact."
+    },
+    {
+      "id": "2e824eb1ed5480ac9642f370108b89ab",
+      "type": "sub_sub_header",
+      "text": "How cleanup affects offsets",
+      "html": "How cleanup affects offsets"
+    },
+    {
+      "id": "kafka-offset-cleanup-0",
+      "type": "bulleted_list",
+      "text": "A new partition’s offsets start at 0. After cleanup, offset 0 may no longer be available.",
+      "html": "A new partition’s offsets start at 0. After cleanup, offset 0 may no longer be available."
+    },
+    {
+      "id": "kafka-offset-cleanup-1",
+      "type": "bulleted_list",
+      "text": "Retention and compaction remove records without renumbering the remaining offsets.",
+      "html": "Retention and compaction remove records without renumbering the remaining offsets."
+    },
+    {
+      "id": "kafka-offset-cleanup-2",
+      "type": "bulleted_list",
+      "text": "The earliest available offset can exceed 0, and the remaining offsets can have gaps. An offset is not an index into a list of currently stored events.",
+      "html": "The earliest available offset can exceed 0, and the remaining offsets can have gaps. An offset is not an index into a list of currently stored events."
+    },
+    {
+      "id": "kafka-offset-cleanup-3",
+      "type": "bulleted_list",
+      "text": "Replay can read only records that are still available. A saved offset cannot recover a deleted event.",
+      "html": "Replay can read only records that are still available. A saved offset cannot recover a deleted event."
     },
     {
       "id": "2e824eb1ed548025aacef1e7721ef3b4",
@@ -1216,42 +1164,6 @@
       "type": "bulleted_list",
       "html": "Commits offsets",
       "text": "Commits offsets"
-    },
-    {
-      "id": "kafka-offset-commit-example",
-      "type": "sub_sub_header",
-      "text": "Example: process offset 7, commit offset 8",
-      "html": "Example: process offset 7, commit offset 8"
-    },
-    {
-      "id": "kafka-offset-commit-text",
-      "type": "bulleted_list",
-      "text": "Process every available record through offset 7 in partition 0.",
-      "html": "Process every available record through offset 7 in partition 0."
-    },
-    {
-      "id": "kafka-offset-commit-text-point-2",
-      "type": "bulleted_list",
-      "text": "Commit offset 8: the next position to read, not the last processed record.",
-      "html": "Commit offset 8: the next position to read, not the last processed record."
-    },
-    {
-      "id": "kafka-offset-commit-text-point-3",
-      "type": "bulleted_list",
-      "text": "After restart, resume from 8.",
-      "html": "After restart, resume from 8."
-    },
-    {
-      "id": "kafka-offset-commit-failure",
-      "type": "bulleted_list",
-      "text": "Email sent, crash before committing 8: offset 7 can be read again.",
-      "html": "Email sent, crash before committing 8: offset 7 can be read again."
-    },
-    {
-      "id": "kafka-offset-commit-failure-point-2",
-      "type": "bulleted_list",
-      "text": "Handle retries safely, for example with an idempotency key supported by the email provider.",
-      "html": "Handle retries safely, for example with an idempotency key supported by the email provider."
     },
     {
       "id": "2e924eb1ed5480d59fcad4487516209a",
@@ -1549,10 +1461,6 @@
       "text": "Working together as one system"
     },
     {
-      "id": "2e924eb1ed5480a3a809e39b8c063fb5",
-      "type": "divider"
-    },
-    {
       "id": "2e924eb1ed548071ab81d45b7b1b8b8d",
       "type": "sub_header",
       "html": "Why multiple brokers are needed",
@@ -1561,8 +1469,8 @@
     {
       "id": "2e924eb1ed54804eb7aceafa55bbccdd",
       "type": "sub_sub_header",
-      "html": "Reason 1: Distribution",
-      "text": "Reason 1: Distribution"
+      "html": "Distribution",
+      "text": "Distribution"
     },
     {
       "id": "2e924eb1ed5480218a4cfd27230d74a5",
@@ -1577,14 +1485,10 @@
       "text": "Load is shared"
     },
     {
-      "id": "2e924eb1ed548002a8c9f4a6cf1a1698",
-      "type": "divider"
-    },
-    {
       "id": "2e924eb1ed54808ca376d46c6eb5f792",
       "type": "sub_sub_header",
-      "html": "Reason 2: Fault tolerance",
-      "text": "Reason 2: Fault tolerance"
+      "html": "Fault tolerance",
+      "text": "Fault tolerance"
     },
     {
       "id": "2e924eb1ed5480939c01cd60301a3d0c",
@@ -1621,55 +1525,88 @@
       "text": "Partition replicas: leader and followers"
     },
     {
-      "id": "2e924eb1ed5480d19149c4ad715df838",
+      "id": "kafka-replica-definition-0",
       "type": "bulleted_list",
-      "html": "An available partition has:",
-      "text": "An available partition has:"
+      "html": "A replica is a stored copy of a partition. Kafka can keep copies of the same partition on different brokers.",
+      "text": "A replica is a stored copy of a partition. Kafka can keep copies of the same partition on different brokers."
     },
     {
-      "id": "2e924eb1ed5480909db9dfed22f87593",
+      "id": "kafka-replica-definition-1",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed5480d19149c4ad715df838",
-      "html": "One leader replica whose broker accepts writes",
-      "text": "One leader replica whose broker accepts writes"
+      "html": "The replication factor specifies the total number of copies, including the copy that acts as leader.",
+      "text": "The replication factor specifies the total number of copies, including the copy that acts as leader."
     },
     {
-      "id": "2e924eb1ed54807e8dd9d61a41961cb1",
+      "id": "kafka-replica-definition-2",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed5480d19149c4ad715df838",
-      "html": "Zero or more follower replicas on other brokers.",
-      "text": "Zero or more follower replicas on other brokers."
+      "html": "During normal operation, one replica acts as the leader. The broker storing that replica handles producer writes for the partition.",
+      "text": "During normal operation, one replica acts as the leader. The broker storing that replica handles producer writes for the partition."
     },
     {
-      "id": "2e924eb1ed54807e8dd9d61a41961cb1-point-2",
+      "id": "kafka-replica-definition-3",
       "type": "bulleted_list",
-      "text": "Replication factor 1: one leader, no followers.",
-      "html": "Replication factor 1: one leader, no followers.",
-      "parent": "2e924eb1ed5480d19149c4ad715df838"
+      "html": "Any other replicas of that partition act as followers. They fetch records from the leader to keep their copies up to date.",
+      "text": "Any other replicas of that partition act as followers. They fetch records from the leader to keep their copies up to date."
     },
     {
-      "id": "2e924eb1ed5480208abdfd2028dff76f",
+      "id": "kafka-replica-definition-4",
       "type": "bulleted_list",
-      "html": "Writes go to the leader",
-      "text": "Writes go to the leader"
+      "html": "Leader and follower describe the roles of the copies. They are not additional partitions.",
+      "text": "Leader and follower describe the roles of the copies. They are not additional partitions."
     },
     {
-      "id": "2e924eb1ed548042a09ffd0102dc230d",
+      "id": "kafka-replica-definition-5",
       "type": "bulleted_list",
-      "html": "Followers copy data",
-      "text": "Followers copy data"
+      "html": "With replication factor 1, there is one copy acting as leader and no follower copies.",
+      "text": "With replication factor 1, there is one copy acting as leader and no follower copies."
     },
     {
-      "id": "kafka-replication-example",
-      "type": "bulleted_list",
-      "text": "Replication factor 3 for partition 0: leader on Broker 1, followers on Brokers 2 and 3.",
-      "html": "Replication factor 3 for partition 0: leader on Broker 1, followers on Brokers 2 and 3."
+      "id": "kafka-replication-example-heading",
+      "type": "sub_sub_header",
+      "html": "Example: three copies of one partition",
+      "text": "Example: three copies of one partition"
     },
     {
-      "id": "kafka-replication-example-point-2",
+      "id": "kafka-replication-example-intro",
+      "type": "text",
+      "html": "Assume partition 0 of the orders topic has replication factor 3:",
+      "text": "Assume partition 0 of the orders topic has replication factor 3:"
+    },
+    {
+      "id": "kafka-replication-example-0",
       "type": "bulleted_list",
-      "text": "These are copies of one partition, not three different partitions.",
-      "html": "These are copies of one partition, not three different partitions."
+      "html": "Broker 1 stores a copy of partition 0 acting as leader.",
+      "text": "Broker 1 stores a copy of partition 0 acting as leader."
+    },
+    {
+      "id": "kafka-replication-example-1",
+      "type": "bulleted_list",
+      "html": "Broker 2 stores a copy of partition 0 acting as a follower.",
+      "text": "Broker 2 stores a copy of partition 0 acting as a follower."
+    },
+    {
+      "id": "kafka-replication-example-2",
+      "type": "bulleted_list",
+      "html": "Broker 3 stores another copy of partition 0 acting as a follower.",
+      "text": "Broker 3 stores another copy of partition 0 acting as a follower."
+    },
+    {
+      "id": "kafka-replication-example-3",
+      "type": "bulleted_list",
+      "html": "The producer writes to Broker 1. The followers on Brokers 2 and 3 fetch those records; they can briefly lag behind.",
+      "text": "The producer writes to Broker 1. The followers on Brokers 2 and 3 fetch those records; they can briefly lag behind."
+    },
+    {
+      "id": "kafka-replication-example-4",
+      "type": "bulleted_list",
+      "html": "There are three copies of partition 0. The topic has not gained two new partitions.",
+      "text": "There are three copies of partition 0. The topic has not gained two new partitions."
+    },
+    {
+      "id": "kafka-replication-example-5",
+      "type": "bulleted_list",
+      "html": "If the leader’s broker fails, an eligible surviving replica can become the new leader. If none is eligible, the partition remains unavailable until recovery.",
+      "text": "If the leader’s broker fails, an eligible surviving replica can become the new leader. If none is eligible, the partition remains unavailable until recovery."
     },
     {
       "id": "2e924eb1ed5480f6b6ebcf76aad034b0",
@@ -1746,360 +1683,174 @@
     {
       "id": "2e924eb1ed54806c967ae1364b3e1794",
       "type": "sub_header",
-      "html": "What delivery guarantee means",
-      "text": "What delivery guarantee means"
+      "html": "Deliver Guarantee",
+      "text": "Deliver Guarantee"
     },
     {
-      "id": "2e924eb1ed5480e6b405fe686e1fcdef",
+      "id": "kafka-guarantee-intro-0",
       "type": "bulleted_list",
-      "html": "It describes <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">how many times</span> an event may be processed",
-      "text": "It describes how many times an event may be processed"
+      "html": "A delivery guarantee describes what can happen to an event when failures and retries occur.",
+      "text": "A delivery guarantee describes what can happen to an event when failures and retries occur."
     },
     {
-      "id": "2e924eb1ed548064a538d71b585c9c4e",
+      "id": "kafka-guarantee-intro-1",
       "type": "bulleted_list",
-      "html": "Concerns <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">failures</span>:",
-      "text": "Concerns failures:"
+      "html": "An event may be missed, processed again, or have its result recorded exactly once, depending on how the system handles failures.",
+      "text": "An event may be missed, processed again, or have its result recorded exactly once, depending on how the system handles failures."
     },
     {
-      "id": "2e924eb1ed5480a8a6b4c21a5bd1e827",
+      "id": "kafka-guarantee-intro-2",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed548064a538d71b585c9c4e",
-      "html": "Crashes",
-      "text": "Crashes"
+      "html": "The examples below focus on a consumer processing records already stored in Kafka. Reliable publication and storage also depend on producer and broker settings.",
+      "text": "The examples below focus on a consumer processing records already stored in Kafka. Reliable publication and storage also depend on producer and broker settings."
     },
     {
-      "id": "2e924eb1ed54801bb6d6c419d51acabd",
+      "id": "kafka-guarantee-intro-3",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed548064a538d71b585c9c4e",
-      "html": "Retries",
-      "text": "Retries"
-    },
-    {
-      "id": "2e924eb1ed548006bcf4f7bca06e0e85",
-      "type": "bulleted_list",
-      "parent": "2e924eb1ed548064a538d71b585c9c4e",
-      "html": "Network issues",
-      "text": "Network issues"
-    },
-    {
-      "id": "2e924eb1ed5480188306fd66ff809aa1",
-      "type": "sub_header",
-      "html": "Three delivery guarantees in Kafka",
-      "text": "Three delivery guarantees in Kafka"
+      "html": "Processing an event and saving the next offset are separate actions unless they are coordinated. A crash between them creates the main problem.",
+      "text": "Processing an event and saving the next offset are separate actions unless they are coordinated. A crash between them creates the main problem."
     },
     {
       "id": "2e924eb1ed5480c2ac32fdaa010d44a3",
-      "type": "sub_header",
+      "type": "sub_sub_header",
       "html": "At-most-once",
       "text": "At-most-once"
     },
     {
-      "id": "2e924eb1ed5480648ab2e9779330d1ab",
+      "id": "kafka-at-most-0",
       "type": "bulleted_list",
-      "html": "Event is processed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">zero or one time</span>",
-      "text": "Event is processed zero or one time"
+      "html": "A record is processed zero or one time. It can be skipped after a failure.",
+      "text": "A record is processed zero or one time. It can be skipped after a failure."
     },
     {
-      "id": "2e924eb1ed5480fa897bcf9b9b26f750",
+      "id": "kafka-at-most-1",
       "type": "bulleted_list",
-      "html": "Data <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">may be lost</span>",
-      "text": "Data may be lost"
+      "html": "Assume a consumer saves the next offset before processing the current record.",
+      "text": "Assume a consumer saves the next offset before processing the current record."
     },
     {
-      "id": "2e924eb1ed5480308caaefa1cdacdf6a",
+      "id": "kafka-at-most-2",
       "type": "bulleted_list",
-      "html": "Consumer does not retry records after committing past them.",
-      "text": "Consumer does not retry records after committing past them."
+      "html": "If it crashes before processing, it resumes after that record. The work is missed even though the record may still exist in Kafka.",
+      "text": "If it crashes before processing, it resumes after that record. The work is missed even though the record may still exist in Kafka."
     },
     {
-      "id": "2e924eb1ed5480308caaefa1cdacdf6a-point-2",
+      "id": "kafka-at-most-3",
       "type": "bulleted_list",
-      "text": "Duplicates already published upstream can still exist.",
-      "html": "Duplicates already published upstream can still exist."
-    },
-    {
-      "id": "2e924eb1ed5480b89f21dbb07ea5b34f",
-      "type": "sub_sub_header",
-      "html": "How this happens",
-      "text": "How this happens"
-    },
-    {
-      "id": "2e924eb1ed548023a72ed619511924f5",
-      "type": "bulleted_list",
-      "html": "Offset committed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">before</span> processing",
-      "text": "Offset committed before processing"
-    },
-    {
-      "id": "2e924eb1ed548092a22be1a45eff0bea",
-      "type": "bulleted_list",
-      "html": "Crash happens",
-      "text": "Crash happens"
-    },
-    {
-      "id": "2e924eb1ed54802d902ac50e829651d0",
-      "type": "bulleted_list",
-      "html": "Event is skipped",
-      "text": "Event is skipped"
+      "html": "This avoids retrying that record, but does not remove duplicate business events that were already published.",
+      "text": "This avoids retrying that record, but does not remove duplicate business events that were already published."
     },
     {
       "id": "2e924eb1ed5480c1809ccf12842989ef",
-      "type": "sub_header",
+      "type": "sub_sub_header",
       "html": "At-least-once",
       "text": "At-least-once"
     },
     {
-      "id": "2e924eb1ed5480b19debd70aa6dbf03d",
+      "id": "kafka-at-least-0",
       "type": "bulleted_list",
-      "html": "Event is processed <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">one or more times</span>",
-      "text": "Event is processed one or more times"
+      "html": "A record is processed one or more times. Retries can repeat the work.",
+      "text": "A record is processed one or more times. Retries can repeat the work."
     },
     {
-      "id": "2e924eb1ed5480bf8b83ceec907ee6e4",
+      "id": "kafka-at-least-1",
       "type": "bulleted_list",
-      "html": "Commit after successful processing to retry unfinished work.",
-      "text": "Commit after successful processing to retry unfinished work."
+      "html": "The consumer processes a record first, then saves the next offset.",
+      "text": "The consumer processes a record first, then saves the next offset."
     },
     {
-      "id": "2e924eb1ed5480bf8b83ceec907ee6e4-point-2",
+      "id": "kafka-at-least-2",
       "type": "bulleted_list",
-      "text": "Requires available input records and suitable producer/broker durability settings.",
-      "html": "Requires available input records and suitable producer/broker durability settings."
+      "html": "If processing succeeds but the consumer crashes before saving progress, it reads the record again after restarting.",
+      "text": "If processing succeeds but the consumer crashes before saving progress, it reads the record again after restarting."
     },
     {
-      "id": "2e924eb1ed548025b97cca01738c4053",
+      "id": "kafka-at-least-3",
       "type": "bulleted_list",
-      "html": "Duplicates <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">may occur</span>",
-      "text": "Duplicates may occur"
+      "html": "Let us say processing sends an email. The first email may already have been sent, so retrying can send it again.",
+      "text": "Let us say processing sends an email. The first email may already have been sent, so retrying can send it again."
     },
     {
-      "id": "2e924eb1ed548020ab43c331e1ec905a",
-      "type": "sub_sub_header",
-      "html": "How this happens",
-      "text": "How this happens"
-    },
-    {
-      "id": "2e924eb1ed5480629f42d27b2ff3aac4",
+      "id": "kafka-at-least-4",
       "type": "bulleted_list",
-      "html": "Process event",
-      "text": "Process event"
-    },
-    {
-      "id": "2e924eb1ed548010b122c77584db1e5f",
-      "type": "bulleted_list",
-      "html": "Crash <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">before</span> offset commit",
-      "text": "Crash before offset commit"
-    },
-    {
-      "id": "2e924eb1ed54808aa04efc9fc70f1b9d",
-      "type": "bulleted_list",
-      "html": "Event is processed again",
-      "text": "Event is processed again"
+      "html": "This requires retrying unfinished work while the input records remain available, along with suitable publication and storage settings.",
+      "text": "This requires retrying unfinished work while the input records remain available, along with suitable publication and storage settings."
     },
     {
       "id": "2e924eb1ed54803dafbcfe9cffa70acd",
-      "type": "sub_header",
-      "text": "Exactly-once: define the boundary",
-      "html": "Exactly-once: define the boundary"
-    },
-    {
-      "id": "2e924eb1ed5480fe9681fde2e313f65a",
-      "type": "bulleted_list",
-      "text": "Kafka-to-Kafka exactly-once: each input contributes committed output once.",
-      "html": "Kafka-to-Kafka exactly-once: each input contributes committed output once."
-    },
-    {
-      "id": "2e924eb1ed5480fe9681fde2e313f65a-point-2",
-      "type": "bulleted_list",
-      "text": "Processing may run again after a crash. Its retry must not add extra committed output.",
-      "html": "Processing may run again after a crash. Its retry must not add extra committed output."
-    },
-    {
-      "id": "2e924eb1ed548004b204fc0528c00d67",
-      "type": "bulleted_list",
-      "text": "Example: analytics reads OrderPlaced and writes a derived record to another Kafka topic.",
-      "html": "Example: analytics reads OrderPlaced and writes a derived record to another Kafka topic."
-    },
-    {
-      "id": "kafka-transaction-settings",
-      "type": "bulleted_list",
-      "text": "transactional.id: stable for a logical producer, distinct for concurrent producers.",
-      "html": "transactional.id: stable for a logical producer, distinct for concurrent producers."
-    },
-    {
-      "id": "kafka-transaction-settings-point-2",
-      "type": "bulleted_list",
-      "text": "Input consumer: enable.auto.commit=false.",
-      "html": "Input consumer: enable.auto.commit=false."
-    },
-    {
-      "id": "kafka-transaction-settings-point-3",
-      "type": "bulleted_list",
-      "text": "Transactional input: isolation.level=read_committed.",
-      "html": "Transactional input: isolation.level=read_committed."
-    },
-    {
-      "id": "2e924eb1ed548038be9eeb3eb5f98eba",
-      "type": "numbered_list",
-      "text": "Initialize with initTransactions. Begin a transaction for each batch and write the output records.",
-      "html": "Initialize with initTransactions. Begin a transaction for each batch and write the output records."
-    },
-    {
-      "id": "2e924eb1ed548073b932e9c8778420ce",
-      "type": "numbered_list",
-      "text": "Add consumed offsets with sendOffsetsToTransaction. Do not commit them separately.",
-      "html": "Add consumed offsets with sendOffsetsToTransaction. Do not commit them separately."
-    },
-    {
-      "id": "2e924eb1ed54804a95e1c8258b3dc1e8",
-      "type": "numbered_list",
-      "text": "Commit the transaction. Downstream consumers use isolation.level=read_committed.",
-      "html": "Commit the transaction. Downstream consumers use isolation.level=read_committed."
-    },
-    {
-      "id": "kafka-exactly-once-abort",
-      "type": "bulleted_list",
-      "text": "Output records and input offsets commit together.",
-      "html": "Output records and input offsets commit together."
-    },
-    {
-      "id": "kafka-exactly-once-abort-point-2",
-      "type": "bulleted_list",
-      "text": "Abort: read_committed consumers cannot see the output; committed input offsets do not advance.",
-      "html": "Abort: read_committed consumers cannot see the output; committed input offsets do not advance."
-    },
-    {
-      "id": "kafka-transaction-abort-step",
-      "type": "bulleted_list",
-      "text": "If a failed transaction can be safely aborted, abort it before resetting and retrying.",
-      "html": "If a failed transaction can be safely aborted, abort it before resetting and retrying."
-    },
-    {
-      "id": "kafka-exactly-once-abort-point-3",
-      "type": "bulleted_list",
-      "text": "Polling may already have advanced the consumer’s in-memory position.",
-      "html": "Polling may already have advanced the consumer’s in-memory position."
-    },
-    {
-      "id": "kafka-exactly-once-abort-point-4",
-      "type": "bulleted_list",
-      "text": "Before retrying, reset to committed offsets or recreate the consumer. Abort does not rewind it.",
-      "html": "Before retrying, reset to committed offsets or recreate the consumer. Abort does not rewind it."
-    },
-    {
-      "id": "kafka-exactly-once-abort-point-5",
-      "type": "bulleted_list",
-      "text": "Stop processing if recovery is unsafe.",
-      "html": "Stop processing if recovery is unsafe."
-    },
-    {
-      "id": "kafka-idempotence-boundary",
-      "type": "bulleted_list",
-      "text": "Producer idempotence prevents duplicate log entries from supported send retries.",
-      "html": "Producer idempotence prevents duplicate log entries from supported send retries."
-    },
-    {
-      "id": "kafka-idempotence-boundary-point-2",
-      "type": "bulleted_list",
-      "text": "It does not deduplicate every new send of the same business event.",
-      "html": "It does not deduplicate every new send of the same business event."
-    },
-    {
-      "id": "kafka-idempotence-boundary-point-3",
-      "type": "bulleted_list",
-      "text": "Transactions include idempotence. Idempotence alone does not make consumer processing exactly-once.",
-      "html": "Transactions include idempotence. Idempotence alone does not make consumer processing exactly-once."
-    },
-    {
-      "id": "kafka-external-effects",
       "type": "sub_sub_header",
-      "text": "External effects need their own coordination",
-      "html": "External effects need their own coordination"
+      "html": "Exactly-once",
+      "text": "Exactly-once"
     },
     {
-      "id": "kafka-external-effects-text",
+      "id": "kafka-exactly-0",
       "type": "bulleted_list",
-      "text": "Ordinary email calls, payments, and external database writes are outside a Kafka transaction.",
-      "html": "Ordinary email calls, payments, and external database writes are outside a Kafka transaction."
+      "html": "The intended result is recorded once, even if processing is attempted again after a failure.",
+      "text": "The intended result is recorded once, even if processing is attempted again after a failure."
     },
     {
-      "id": "kafka-external-effects-text-point-2",
+      "id": "kafka-exactly-1",
       "type": "bulleted_list",
-      "text": "Action succeeds, crash before progress is saved: a retry may repeat the action.",
-      "html": "Action succeeds, crash before progress is saved: a retry may repeat the action."
+      "html": "For an application that reads from Kafka and writes results back to Kafka, a Kafka transaction can save the output records and the next input offsets together.",
+      "text": "For an application that reads from Kafka and writes results back to Kafka, a Kafka transaction can save the output records and the next input offsets together."
     },
     {
-      "id": "kafka-external-effects-text-point-3",
+      "id": "kafka-exactly-2",
       "type": "bulleted_list",
-      "text": "Use destination-supported idempotency keys, or one database transaction for the result and processed event ID.",
-      "html": "Use destination-supported idempotency keys, or one database transaction for the result and processed event ID."
+      "html": "A transaction makes these changes succeed together or leaves neither committed.",
+      "text": "A transaction makes these changes succeed together or leaves neither committed."
+    },
+    {
+      "id": "kafka-exactly-3",
+      "type": "bulleted_list",
+      "html": "If it commits, the output and saved progress are both recorded. If it aborts, the application can retry from the saved input position.",
+      "text": "If it commits, the output and saved progress are both recorded. If it aborts, the application can retry from the saved input position."
+    },
+    {
+      "id": "kafka-exactly-4",
+      "type": "bulleted_list",
+      "html": "Downstream consumers must be configured to read committed transactional records. Correct transaction and recovery settings are required.",
+      "text": "Downstream consumers must be configured to read committed transactional records. Correct transaction and recovery settings are required."
+    },
+    {
+      "id": "kafka-exactly-5",
+      "type": "bulleted_list",
+      "html": "This does not automatically cover an email, payment, or update in an external database. Those actions need coordination with the destination system.",
+      "text": "This does not automatically cover an email, payment, or update in an external database. Those actions need coordination with the destination system."
     },
     {
       "id": "2e924eb1ed5480b295fdedd10f2697f3",
-      "type": "sub_header",
-      "html": "At-least-once with safe retries",
-      "text": "At-least-once with safe retries"
+      "type": "sub_sub_header",
+      "html": "Making retries safe",
+      "text": "Making retries safe"
     },
     {
-      "id": "2e924eb1ed548091a6ded777b43994f2",
+      "id": "kafka-safe-retries-0",
       "type": "bulleted_list",
-      "html": "<span style=\"font-weight:600\" data-token-index=\"0\" class=\"notion-enable-hover\">At-least-once</span>",
-      "text": "At-least-once"
+      "html": "An idempotent operation produces the same intended result when the same request is repeated.",
+      "text": "An idempotent operation produces the same intended result when the same request is repeated."
     },
     {
-      "id": "2e924eb1ed5480728da6c71670c7c99c",
+      "id": "kafka-safe-retries-1",
       "type": "bulleted_list",
-      "html": "Because:",
-      "text": "Because:"
+      "html": "For a database update, the application can save a unique event ID and the update in one database transaction. On retry, it checks the ID and avoids applying the update again.",
+      "text": "For a database update, the application can save a unique event ID and the update in one database transaction. On retry, it checks the ID and avoids applying the update again."
     },
     {
-      "id": "2e924eb1ed54806ba3aec97c3eb45a39",
+      "id": "kafka-safe-retries-2",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed5480728da6c71670c7c99c",
-      "html": "Data loss is worse than duplicates",
-      "text": "Data loss is worse than duplicates"
+      "html": "For an email or payment API, safe retries may use an idempotency key if the provider supports it. The same key identifies retries of the same operation.",
+      "text": "For an email or payment API, safe retries may use an idempotency key if the provider supports it. The same key identifies retries of the same operation."
     },
     {
-      "id": "2e924eb1ed548002b562f1677d24b268",
+      "id": "kafka-safe-retries-3",
       "type": "bulleted_list",
-      "parent": "2e924eb1ed5480728da6c71670c7c99c",
-      "html": "Database example: save the event ID and its update in one transaction.",
-      "text": "Database example: save the event ID and its update in one transaction."
-    },
-    {
-      "id": "2e924eb1ed548002b562f1677d24b268-point-2",
-      "type": "bulleted_list",
-      "text": "Check the ID on retries to prevent applying the update twice.",
-      "html": "Check the ID on retries to prevent applying the update twice.",
-      "parent": "2e924eb1ed5480728da6c71670c7c99c"
+      "html": "Kafka producer idempotence prevents duplicate records from supported producer send retries. It does not by itself prevent repeated consumer actions or duplicate business events sent as new requests.",
+      "text": "Kafka producer idempotence prevents duplicate records from supported producer send retries. It does not by itself prevent repeated consumer actions or duplicate business events sent as new requests."
     },
     {
       "id": "2e924eb1ed5480c8a5bdddb164059a6f",
       "type": "divider"
-    },
-    {
-      "id": "2e924eb1ed548062a920e49fb7c15569",
-      "type": "sub_header",
-      "html": "Lock-in check (answer in points)",
-      "text": "Lock-in check (answer in points)"
-    },
-    {
-      "id": "2e924eb1ed54803290e3ef6237c0e576",
-      "type": "bulleted_list",
-      "html": "Which guarantee can cause duplicates?",
-      "text": "Which guarantee can cause duplicates?"
-    },
-    {
-      "id": "2e924eb1ed5480bab42efbfb5b469129",
-      "type": "bulleted_list",
-      "html": "Which guarantee can cause data loss?",
-      "text": "Which guarantee can cause data loss?"
-    },
-    {
-      "id": "2e924eb1ed548071bfacde7ad98b90ff",
-      "type": "text",
-      "html": "After this, we will do a <span style=\"font-weight:600\" data-token-index=\"1\" class=\"notion-enable-hover\">Kafka vs RabbitMQ</span> comparison for system design.",
-      "text": "After this, we will do a Kafka vs RabbitMQ comparison for system design."
     },
     {
       "id": "kafka-sources",
