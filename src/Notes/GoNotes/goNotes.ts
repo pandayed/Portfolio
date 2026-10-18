@@ -45,6 +45,7 @@ import goNote41 from './data/defined-type-and-type-alias';
 import goNote42 from './data/go-by-questions';
 import goroutinesChannelsWaitGroup from './data/goroutines-channels-waitgroup';
 import tests from './data/tests';
+import gin from './data/gin';
 
 export const goChapters: readonly GoChapter[] = [
     {
@@ -76,6 +77,11 @@ export const goChapters: readonly GoChapter[] = [
         title: '6. Reference and revision',
         summary: 'Date and time, C++ comparisons, and questions for reviewing Go concepts.',
         notes: [goNote38, goNote3, goNote42],
+    },
+    {
+        title: '7. Web development',
+        summary: 'HTTP routing, request handling, validation, and middleware with Gin.',
+        notes: [gin],
     },
 ];
 

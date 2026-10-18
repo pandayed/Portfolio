@@ -4,6 +4,7 @@ import { Fragment, type ComponentProps, type ReactNode } from 'react';
 
 import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     GO_NOTES_ROUTE,
@@ -134,6 +135,8 @@ const renderTable = (block: GoNoteBlock) => {
 
 const renderBlock = (block: GoNoteBlock): ReactNode => {
     switch (block.type) {
+        case 'example':
+            return block.example ? <LearningNoteExampleBlock key={block.id} example={block.example} /> : null;
         case 'text':
             return plainText(block.richText) ? (
                 <p key={block.id}>{renderRichText(block.richText)}</p>

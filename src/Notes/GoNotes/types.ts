@@ -1,3 +1,5 @@
+import type { LearningNoteExample } from '../LearningNotes/types';
+
 export type RichTextMark =
     | readonly ['b']
     | readonly ['i']
@@ -18,6 +20,7 @@ export type GoNoteBlockType =
     | 'bulleted_list'
     | 'numbered_list'
     | 'code'
+    | 'example'
     | 'divider'
     | 'table'
     | 'table_row'
@@ -30,6 +33,7 @@ export interface GoNoteBlock {
     richText?: RichText;
     children?: readonly GoNoteBlock[];
     language?: string;
+    example?: LearningNoteExample;
     columnOrder?: readonly string[];
     hasColumnHeader?: boolean;
     hasRowHeader?: boolean;
