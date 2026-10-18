@@ -46,6 +46,9 @@ import goNote42 from './data/go-by-questions';
 import goroutinesChannelsWaitGroup from './data/goroutines-channels-waitgroup';
 import tests from './data/tests';
 import gin from './data/gin';
+import encodingJson from './data/encoding-json';
+import bufio from './data/bufio';
+import gorm from './data/gorm';
 
 export const goChapters: readonly GoChapter[] = [
     {
@@ -82,6 +85,16 @@ export const goChapters: readonly GoChapter[] = [
         title: '7. Web development',
         summary: 'HTTP routing, request handling, validation, and middleware with Gin.',
         notes: [gin],
+    },
+    {
+        title: '8. Standard library: data and I/O',
+        summary: 'JSON conversion and buffered reading and writing.',
+        notes: [encodingJson, bufio],
+    },
+    {
+        title: '9. Databases',
+        summary: 'Models, queries, updates, and transactions with GORM.',
+        notes: [gorm],
     },
 ];
 
