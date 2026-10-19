@@ -46,6 +46,14 @@ import goNote42 from './data/go-by-questions';
 import goroutinesChannelsWaitGroup from './data/goroutines-channels-waitgroup';
 import tests from './data/tests';
 import gin from './data/gin';
+import ginRouting from './data/gin-routing';
+import ginBinding from './data/gin-binding';
+import ginResponses from './data/gin-responses';
+import ginMiddleware from './data/gin-middleware';
+import ginContext from './data/gin-context';
+import ginFiles from './data/gin-files';
+import ginAuth from './data/gin-auth';
+import ginServer from './data/gin-server';
 import encodingJson from './data/encoding-json';
 import bufio from './data/bufio';
 import gorm from './data/gorm';
@@ -82,9 +90,9 @@ export const goChapters: readonly GoChapter[] = [
         notes: [goNote38, goNote3, goNote42],
     },
     {
-        title: '7. Web development',
-        summary: 'HTTP routing, request handling, validation, and middleware with Gin.',
-        notes: [gin],
+        title: '7. Gin',
+        summary: 'HTTP applications, routing, validation, responses, middleware, concurrency, files, authentication, and server configuration.',
+        notes: [gin, ginRouting, ginBinding, ginResponses, ginMiddleware, ginContext, ginFiles, ginAuth, ginServer],
     },
     {
         title: '8. Standard library: data and I/O',

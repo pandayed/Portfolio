@@ -36,11 +36,11 @@ Write like a person taking notes. Do not write like a book.
 
 - Write for someone learning the topic, including a tired reader or a reader with weak English.
 - Write learning explanations as short bullet points, not prose paragraphs. Keep one main idea in each bullet. Split conditions, consequences, and exceptions into separate bullets. Tables and code examples can keep their own format.
-- Use factual headings and example titles. For example, "An image supplies container files" or "Images and containers", rather than "Use an image to start a container".
+- Use subject headings, such as "Engine", "Handler", or "Images and containers". Put facts about that subject in the bullets below, rather than using a fact such as "The engine holds route registrations" as the heading. Example titles name the operation or case the example demonstrates.
 - Describe example setup and actions as facts: "The example requires Docker" and "The command creates a container", rather than "Install Docker" and "Create a container". Shell commands remain commands. Keep required filenames, command order, expected results, and safety conditions explicit.
 - Preserve flow through topic order and short factual connections. Do not replace a paragraph with one equally dense bullet.
 - Start with the actual topic, rule, or example. Do not add an introduction about what the notes will cover.
-- Keep technical terms. Explain a new term in common words near its first use. Simple English must not remove the vocabulary the reader needs to learn.
+- Keep technical terms. Explain a new term in common words near its first use. Start the section with what the subject is and its concrete role. An unfamiliar label such as "router type" is not an explanation. Where needed, connect it to the example: where it is created or supplied, how it is used, and when it runs. Simple English must not remove the vocabulary the reader needs to learn.
 - State what happens and when it happens. Avoid dense sentences that combine a rule, several conditions, and an exception.
 - Keep conditions, exceptions, version limits, and other details that change the meaning. Give them separate bullets when needed.
 - Place an example near the point it teaches. Keep meaningful outputs and explanations of what the example shows.
@@ -115,9 +115,9 @@ Good: "A cache stores the API response for five minutes."
 
 - Can a tired reader understand each sentence on the first read?
 - For notes, are explanations short bullets rather than paragraphs or dense paragraph-sized bullets?
-- Do headings and explanations state facts rather than address the reader with instructions?
+- Do section headings name their subjects, with facts in the bullets below? Do example titles identify the operation or case?
 - Do examples still contain the prerequisites, file names, command order, and conditions needed to understand them?
-- Are technical terms explained without losing conditions, exceptions, or useful examples?
+- Are unfamiliar terms explained through concrete roles and the nearby example, without relying on another unexplained label or losing conditions and exceptions?
 - Did I remove chat residue and unnecessary snippet or placeholder labels?
 - Did I use any idiom or metaphor? Remove it.
 - Did I use a fancy word where a plain word works? Replace it.
