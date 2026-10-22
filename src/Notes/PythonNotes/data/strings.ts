@@ -11,16 +11,24 @@ const note: PythonNote = {
             "id": "literals-escapes",
             "title": "Creating strings",
             "bullets": [
-                "Single and double quotes create strings. Use the other quote style or an escape to include a quote.",
-                "\\n represents a newline. \\t represents a tab. \\\\ represents one backslash.",
-                "Triple quotes allow text across multiple lines. They create strings, not comments.",
+                "Single and double quotes create strings.",
+                "Use the other quote style or an escape to include a quote.",
+                "\\n represents a newline.",
+                "\\t represents a tab.",
+                "\\\\ represents one backslash.",
+                "Triple quotes allow text across multiple lines.",
+                "They create strings, not comments.",
                 "A string is an immutable sequence of Unicode characters."
             ],
             "examples": [
                 {
                     "title": "Quotes, escapes, and multiple lines",
                     "code": "message = 'Python is \"cool\"'\npath = \"C:\\\\notes\"\nlines = \"\"\"Line one\nLine two\"\"\"\nprint(message)\nprint(path)\nprint(lines)",
-                    "result": "Python is \"cool\"\nC:\\notes\nLine one\nLine two"
+                    "result": "Python is \"cool\"\nC:\\notes\nLine one\nLine two",
+                    "language": "python",
+                    "description": [
+                        "The strings contain quotation marks, a backslash, and multiple lines."
+                    ]
                 }
             ]
         },
@@ -28,15 +36,24 @@ const note: PythonNote = {
             "id": "indexing-slicing",
             "title": "Indexing and slicing",
             "bullets": [
-                "An index selects one character. Index 0 is first; -1 is last. An out-of-range index raises IndexError.",
-                "text[start:stop] includes start and excludes stop. Omitted bounds use the beginning or end.",
-                "A slice may include a step. Negative steps move backward. Slice bounds are clipped to the available text."
+                "An index selects one character.",
+                "Index 0 is first; -1 is last.",
+                "An out-of-range index raises `IndexError`.",
+                "`text[start:stop]` includes start and excludes stop.",
+                "Omitted bounds use the beginning or end.",
+                "A slice may include a step.",
+                "Negative steps move backward.",
+                "Slice bounds are clipped to the available text."
             ],
             "examples": [
                 {
                     "title": "Reading parts of a string",
                     "code": "word = \"Python\"\nprint(word[0], word[-1])\nprint(word[1:4])\nprint(word[::2])\nprint(word[::-1])",
-                    "result": "P n\nyth\nPto\nnohtyP"
+                    "result": "P n\nyth\nPto\nnohtyP",
+                    "language": "python",
+                    "description": [
+                        "Indexes select individual characters, and slices select parts of the text."
+                    ]
                 }
             ]
         },
@@ -44,8 +61,11 @@ const note: PythonNote = {
             "id": "operations",
             "title": "Combining and searching text",
             "bullets": [
-                "+ joins strings. * repeats a string. in checks whether text occurs within another string.",
-                "Strings cannot replace a character by index. Build a new string instead."
+                "`+` joins strings.",
+                "`*` repeats a string.",
+                "in checks whether text occurs within another string.",
+                "Strings cannot replace a character by index.",
+                "Build a new string instead."
             ],
             "examples": [
                 {
@@ -54,6 +74,10 @@ const note: PythonNote = {
                     "result": "Jython Python\nTrue",
                     "explanation": [
                         "word still refers to the original string."
+                    ],
+                    "language": "python",
+                    "description": [
+                        "A new prefix combines with a slice of the original string."
                     ]
                 }
             ]
@@ -62,13 +86,18 @@ const note: PythonNote = {
             "id": "formatted-strings",
             "title": "Formatted strings",
             "bullets": [
-                "Prefix a string with f to evaluate expressions inside braces. A format after : controls how a value appears."
+                "Prefix a string with `f` to evaluate expressions inside braces.",
+                "A format after : controls how a value appears."
             ],
             "examples": [
                 {
                     "title": "Inserting values and formatting decimals",
                     "code": "name = \"Ada\"\nprice = 12.5\nprint(f\"{name}: {price:.2f}\")\nprint(f\"2 + 3 = {2 + 3}\")",
-                    "result": "Ada: 12.50\n2 + 3 = 5"
+                    "result": "Ada: 12.50\n2 + 3 = 5",
+                    "language": "python",
+                    "description": [
+                        "The formatted strings insert values and limit a price to two decimal places."
+                    ]
                 }
             ]
         },
@@ -76,10 +105,15 @@ const note: PythonNote = {
             "id": "methods",
             "title": "Commonly used string methods",
             "bullets": [
-                "A method is an operation called through a value, such as text.upper().",
-                "String methods do not change the original string. Methods that transform text return a new string value.",
-                "len(text) is a built-in function, called without a dot. It counts Unicode code points: len(\"Python\") returns 6. A visible character can contain several code points.",
-                "split returns a list. join accepts strings from a collection. Read Lists for collection operations."
+                "A method is an operation called through a value, such as `text.upper()`.",
+                "String methods do not change the original string.",
+                "Methods that transform text return a new string value.",
+                "`len`(text) is a built-in function, called without a dot.",
+                "It counts Unicode code points: `len`(\"Python\") returns 6.",
+                "A visible character can contain several code points.",
+                "`split` returns a list.",
+                "join accepts strings from a collection.",
+                "Read Lists for collection operations."
             ],
             "table": {
                 "columns": [
@@ -90,100 +124,100 @@ const note: PythonNote = {
                 ],
                 "rows": [
                     [
-                        "upper()",
+                        "`upper()`",
                         "Convert letters to uppercase.",
-                        "\"Ada\".upper()",
-                        "\"ADA\""
+                        "`\"Ada\".upper()`",
+                        "`\"ADA\"`"
                     ],
                     [
-                        "lower()",
+                        "`lower()`",
                         "Convert letters to lowercase.",
-                        "\"Ada\".lower()",
-                        "\"ada\""
+                        "`\"Ada\".lower()`",
+                        "`\"ada\"`"
                     ],
                     [
-                        "title()",
+                        "`title()`",
                         "Capitalize words and lowercase their remaining letters.",
-                        "\"ada lovelace\".title()",
-                        "\"Ada Lovelace\""
+                        "`\"ada lovelace\".title()`",
+                        "`\"Ada Lovelace\"`"
                     ],
                     [
-                        "strip()",
+                        "`strip()`",
                         "Remove leading and trailing whitespace.",
-                        "\"  Ada  \".strip()",
-                        "\"Ada\""
+                        "`\"  Ada  \".strip()`",
+                        "`\"Ada\"`"
                     ],
                     [
-                        "lstrip() / rstrip()",
-                        "Remove whitespace from the left / right end.",
-                        "\"  Ada  \".lstrip()",
-                        "\"Ada  \""
+                        "`lstrip() / rstrip()`",
+                        "Remove whitespace from the left `/` right end.",
+                        "`\"  Ada  \".lstrip()`",
+                        "`\"Ada  \"`"
                     ],
                     [
-                        "replace(old, new)",
+                        "`replace(old, new)`",
                         "Replace all occurrences by default.",
-                        "\"banana\".replace(\"a\", \"o\")",
-                        "\"bonono\""
+                        "`\"banana\".replace(\"a\", \"o\")`",
+                        "`\"bonono\"`"
                     ],
                     [
-                        "find(text)",
+                        "`find(text)`",
                         "Return the first matching index, or -1 if absent.",
-                        "\"Python\".find(\"th\")",
-                        "2"
+                        "`\"Python\".find(\"th\")`",
+                        "`2`"
                     ],
                     [
-                        "index(text)",
-                        "Return the first matching index; raise ValueError if absent.",
-                        "\"Python\".index(\"th\")",
-                        "2"
+                        "`index(text)`",
+                        "Return the first matching index; raise `ValueError` if absent.",
+                        "`\"Python\".index(\"th\")`",
+                        "`2`"
                     ],
                     [
-                        "count(text)",
+                        "`count(text)`",
                         "Count non-overlapping occurrences.",
-                        "\"banana\".count(\"an\")",
-                        "2"
+                        "`\"banana\".count(\"an\")`",
+                        "`2`"
                     ],
                     [
-                        "startswith(text)",
+                        "`startswith(text)`",
                         "Check whether the string starts with text.",
-                        "\"Python\".startswith(\"Py\")",
-                        "True"
+                        "`\"Python\".startswith(\"Py\")`",
+                        "`True`"
                     ],
                     [
-                        "endswith(text)",
+                        "`endswith(text)`",
                         "Check whether the string ends with text.",
-                        "\"notes.py\".endswith(\".py\")",
-                        "True"
+                        "`\"notes.py\".endswith(\".py\")`",
+                        "`True`"
                     ],
                     [
-                        "split(separator)",
+                        "`split(separator)`",
                         "Split into a list. With no separator, split on whitespace.",
-                        "\"a,b,c\".split(\",\")",
-                        "[\"a\", \"b\", \"c\"]"
+                        "`\"a,b,c\".split(\",\")`",
+                        "`[\"a\", \"b\", \"c\"]`"
                     ],
                     [
-                        "separator.join(parts)",
+                        "`separator.join(parts)`",
                         "Join strings using a separator.",
-                        "\"-\".join([\"a\", \"b\"])",
-                        "\"a-b\""
+                        "`\"-\".join([\"a\", \"b\"])`",
+                        "`\"a-b\"`"
                     ],
                     [
-                        "isalpha()",
+                        "`isalpha()`",
                         "Check for non-empty text containing only letters.",
-                        "\"Ada\".isalpha()",
-                        "True"
+                        "`\"Ada\".isalpha()`",
+                        "`True`"
                     ],
                     [
-                        "isdigit()",
+                        "`isdigit()`",
                         "Check for non-empty text containing only digit characters.",
-                        "\"123\".isdigit()",
-                        "True"
+                        "`\"123\".isdigit()`",
+                        "`True`"
                     ],
                     [
-                        "isalnum()",
+                        "`isalnum()`",
                         "Check for non-empty text containing only letters or numeric characters.",
-                        "\"Ada123\".isalnum()",
-                        "True"
+                        "`\"Ada123\".isalnum()`",
+                        "`True`"
                     ]
                 ]
             },
@@ -191,7 +225,11 @@ const note: PythonNote = {
                 {
                     "title": "Cleaning and searching text",
                     "code": "name = \"  Ada Lovelace  \"\nclean = name.strip()\nprint(clean.upper())\nprint(clean.find(\"Love\"))\nprint(clean.replace(\"Ada\", \"A.\"))",
-                    "result": "ADA LOVELACE\n4\nA. Lovelace"
+                    "result": "ADA LOVELACE\n4\nA. Lovelace",
+                    "language": "python",
+                    "description": [
+                        "The calls trim whitespace, change letter case, find text, and replace text."
+                    ]
                 }
             ]
         },

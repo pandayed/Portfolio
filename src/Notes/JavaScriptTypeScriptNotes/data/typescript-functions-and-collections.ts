@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'typescript-functions-and-collections',
     title: 'Typed functions, arrays and tuples',
-    summary: 'Apply annotations to function inputs and results, callbacks, lists, and fixed positions.',
+    summary: 'Annotations describe function inputs, results, callbacks, arrays and tuple positions.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Everyday types',
@@ -24,18 +25,20 @@ const note: LearningNote = {
     sections: [
         {
             id: 'function-inputs-and-results',
-            title: 'Type function parameters and results',
+            title: 'Function parameters and results',
             bullets: [
                 'A parameter annotation checks the arguments passed to a function.',
-                'A return annotation follows the parameter list. It checks values returned by the function.',
-                'TypeScript can infer a result type from return statements. A default parameter can also supply its parameter type.',
-                'void means the caller should not use a returned value.',
+                'A return annotation follows the parameter list.',
+                'It checks values returned by the function.',
+                'TypeScript can infer a result type from return statements.',
+                'A default parameter can also supply its parameter type.',
+                '`void` means the caller should not use a returned value.',
             ],
             examples: [
                 {
-                    title: 'Check both sides of a function call',
+                    title: 'Parameter and return types',
                     description: [
-                        'Accept a numeric price and return a formatted string.',
+                        'The example accepts a numeric price and returns a formatted `string`.',
                     ],
                     language: 'typescript',
                     code: [
@@ -50,25 +53,29 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: '12.00',
                     explanation: [
-                        'priceLabel requires a number argument and a string result.',
-                        'report prints the message and has no return statement.',
+                        '`priceLabel` requires a `number` argument and a `string` result.',
+                        '`report` prints the message and has no return statement.',
                     ],
                 },
             ],
         },
         {
             id: 'optional-and-default-parameters',
-            title: 'Allow a trailing argument to be omitted',
+            title: 'Optional and default parameters',
             bullets: [
-                'A ? after a parameter name permits the caller to omit that argument. The parameter can be undefined inside the function.',
-                'A trailing default parameter can also be omitted. JavaScript uses its default for omission or an explicit undefined argument.',
-                'An optional parameter must follow required parameters. Do not mark a parameter optional merely because one callback does not use it.',
+                'A `?` after a parameter name permits the caller to omit that argument.',
+                'The parameter can be `undefined` inside the function.',
+                'A trailing default parameter can also be omitted.',
+                'JavaScript uses its default for omission or an explicit `undefined` argument.',
+                'An optional parameter must follow required parameters.',
+                'An unused callback parameter does not make the caller’s argument optional.',
             ],
             examples: [
                 {
-                    title: 'Compare omission with a default value',
+                    title: 'Omitted and default arguments',
                     description: [
-                        'Allow an optional label and supply a numeric default when its argument is missing.',
+                        'The example allows an optional label.',
+                        'A missing numeric argument uses its default value.',
                     ],
                     language: 'typescript',
                     code: [
@@ -84,24 +91,27 @@ const note: LearningNote = {
                     result: 'Guest Mia\n4 4 6',
                     explanation: [
                         'The optional label is allowed to be absent.',
-                        'The numeric default supplies both the runtime fallback and the inferred number type.',
+                        'The numeric default supplies both the runtime fallback and the inferred `number` type.',
                     ],
                 },
             ],
         },
         {
             id: 'function-types',
-            title: 'Describe a function value',
+            title: 'Function types',
             bullets: [
-                'A function type uses (parameters) => ResultType. It describes a callable value without creating a function body.',
-                'The expected function type can supply parameter types to an assigned callback. This is contextual typing.',
-                'A function returning a value can be assigned to a callback type returning void. That callback type tells its caller to ignore the result.',
+                'A function type uses `(parameters) => ResultType`.',
+                'It describes a callable value without creating a function body.',
+                'The expected function type can supply parameter types to an assigned callback.',
+                'Contextual typing means the expected type supplies information about the assigned value.',
+                'A function returning a value can be assigned to a callback type returning `void`.',
+                'That callback type tells its caller to ignore the result.',
             ],
             examples: [
                 {
-                    title: 'Use one callback requirement',
+                    title: 'Callback types',
                     description: [
-                        'Store a formatter whose input and result must both be strings.',
+                        'The example stores a formatter whose input and result must both be strings.',
                     ],
                     language: 'typescript',
                     code: [
@@ -111,25 +121,27 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'MIA',
                     explanation: [
-                        'The expected function type gives name the type string.',
-                        'The commented callback is rejected because it returns a number.',
+                        'The expected function type gives `name` the type `string`.',
+                        'The commented callback is rejected because it returns a `number`.',
                     ],
                 },
             ],
         },
         {
             id: 'arrays',
-            title: 'Describe the element type of an array',
+            title: 'Array element types',
             bullets: [
-                'number[] describes a list of numbers. string[] describes a list of strings.',
+                '`number[]` describes a list of numbers.',
+                '`string[]` describes a list of strings.',
                 'Array methods use the element type to infer callback parameter types.',
-                'readonly string[] prevents writes through that array type. It does not freeze the JavaScript array.',
+                '`readonly string[]` prevents writes through that array type.',
+                'It does not freeze the JavaScript array.',
             ],
             examples: [
                 {
-                    title: 'Infer the callback parameter from the list',
+                    title: 'Inferred callback types',
                     description: [
-                        'Double numeric scores without annotating each callback parameter.',
+                        'The example doubles numeric `scores` without annotating each callback parameter.',
                     ],
                     language: 'typescript',
                     code: [
@@ -140,25 +152,28 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: '20, 40',
                     explanation: [
-                        'score is inferred as number from scores.',
-                        'doubled is inferred as number[].',
+                        '`score` is inferred as `number` from `scores`.',
+                        '`doubled` is inferred as `number[]`.',
                     ],
                 },
             ],
         },
         {
             id: 'tuples',
-            title: 'Describe positions with a tuple',
+            title: 'Tuples',
             bullets: [
-                'A tuple describes the type at each position. [string, number] requires a string followed by a number.',
-                'Use an array for a list of similar items. Use a tuple when positions have separate meanings.',
-                'A tuple can be readonly to prevent changes through that type. Its declaration does not add runtime length checks.',
+                'A tuple describes the type at each position.',
+                '`[string, number]` requires a `string` followed by a `number`.',
+                'An array describes a list of similar items.',
+                'A tuple describes positions with separate meanings.',
+                'A tuple can be `readonly` to prevent changes through that type.',
+                'Its declaration does not add runtime length checks.',
             ],
             examples: [
                 {
-                    title: 'Keep a label beside its score',
+                    title: 'Label and score tuple',
                     description: [
-                        'Require exactly the declared two positions when assigning a tuple.',
+                        'The example requires exactly the declared two positions when assigning a tuple.',
                     ],
                     language: 'typescript',
                     code: [
@@ -170,7 +185,8 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Mia 20',
                     explanation: [
-                        'The first position supplies a string and the second supplies a number.',
+                        'The first position supplies a `string`.',
+                        'The second position supplies a `number`.',
                         'The reversed assignment is rejected during checking.',
                     ],
                 },

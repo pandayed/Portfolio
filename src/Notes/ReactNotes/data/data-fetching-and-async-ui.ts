@@ -3,32 +3,40 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "data-fetching-and-async-ui",
     title: "Data fetching and async UI",
-    summary: "Represent request states and prevent old responses from replacing current data.",
+    summary: "Request states, data fetching, and old responses.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "request-state",
-            title: "Represent waiting, success, and failure",
+            title: "Request states",
             bullets: [
-                "A request can be idle, loading, successful, or failed. Represent each state so the UI can choose clear content.",
-                "An Effect’s setup function cannot be async because an async function returns a Promise. React expects a cleanup function or no return value. Put the async request in a separate function and call it from setup."
+                "A request can be idle, loading, successful, or failed.",
+                "Each state determines what the UI displays.",
+                "An `async` function returns a `Promise`.",
+                "An Effect’s setup function must return a cleanup function or no value.",
+                "The `async` request runs in a separate function called from setup."
             ]
         },
         {
             id: "fetch-in-effect",
-            title: "Fetch data for the current component input",
+            title: "Requests in Effects",
             bullets: [
-                "An Effect can request data that depends on a prop. Its cleanup marks the old request inactive and can abort it.",
-                "An earlier response can arrive after a later response. Ignore inactive results so they cannot replace the current data.",
-                "Aborting requests avoids unnecessary client work. It does not guarantee that the server stopped its work."
+                "An Effect can request data that depends on a prop.",
+                "Its cleanup marks the old request inactive and can abort it.",
+                "An earlier response can arrive after a later response.",
+                "Ignoring inactive results prevents them from replacing the current data.",
+                "Aborting requests avoids unnecessary client work.",
+                "It does not guarantee that the server stopped its work."
             ],
             examples: [
                 {
-                    title: "Load users for the current query",
+                    title: "Users for the current query",
                     description: [
-                        "Provide /api/users?q=... returning an array of objects with string id and name properties. The component receives query from its parent."
+                        "The example requires `/api/users?q=...` to return an array of objects with string `id` and `name` properties.",
+                        "The component receives `query` from its parent."
                     ],
                     language: "jsx",
                     code: `import { useEffect, useState } from 'react';
@@ -71,24 +79,29 @@ export default function Users({ query }) {
 }`,
                     result: "The component shows loading, an error, an empty result, or matching users. A result for an old query cannot replace the current one.",
                     explanation: [
-                        "[query] starts a new request when query changes. Cleanup marks the old request inactive and asks the browser to cancel it.",
-                        "Both success and failure check active before updating state. The query check shows Loading users... if the stored result belongs to an older query.",
-                        "response.ok detects HTTP errors. The array and property checks reject data that does not match the expected user format."
+                        "`[query]` starts a new request when `query` changes.",
+                        "Cleanup marks the old request inactive and asks the browser to cancel it.",
+                        "Both success and failure check `active` before updating state.",
+                        "The `query` check shows Loading users... if the stored result belongs to an older `query`.",
+                        "`response.ok` detects HTTP errors.",
+                        "The array and property checks reject data that does not match the expected user format."
                     ]
                 }
             ]
         },
         {
             id: "event-requests",
-            title: "Save form data in the submit handler",
+            title: "Requests in submit handlers",
             bullets: [
-                "Submitting a form should start the save in its submit handler. An Effect is not needed to detect that submission."
+                "Submitting a form should start the save in its submit handler.",
+                "An Effect is not needed to detect that submission."
             ],
             examples: [
                 {
-                    title: "Save a display name",
+                    title: "Display name submission",
                     description: [
-                        "Provide saveName as a callback that returns a Promise. This example uses local state to report its outcome."
+                        "The example requires a `saveName` callback that returns a `Promise`.",
+                        "Local state reports the outcome."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -119,8 +132,9 @@ export default function NameForm({ saveName }) {
 }`,
                     result: "The button shows Saving... while the callback is pending. The form then shows success or failure.",
                     explanation: [
-                        "saveName performs the save. pending disables the button while it runs, and message displays success or failure.",
-                        "finally clears pending after either outcome, so the button becomes available again."
+                        "`saveName` performs the save.",
+                        "`pending` disables the button while it runs, and `message` displays success or failure.",
+                        "`finally` clears `pending` after either outcome, so the button becomes available again."
                     ]
                 }
             ]

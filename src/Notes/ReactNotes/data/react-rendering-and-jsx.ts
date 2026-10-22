@@ -3,26 +3,29 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "react-rendering-and-jsx",
     title: "Components and JSX",
-    summary: "Write a component, use JSX markup, and display JavaScript data.",
+    summary: "Components, JSX markup, and JavaScript expressions.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "components-describe-ui",
-            title: "Write and use a component",
+            title: "Components",
             bullets: [
                 "A component is a JavaScript function that returns the UI to display.",
                 "JSX lets you write HTML-like markup inside JavaScript.",
-                "Component names start with a capital letter. Lowercase tags name browser elements.",
-                "Put component definitions at the top level of the file. Use a component with JSX so React controls its calls.",
-                "Use these examples as the main component in an existing React app. JavaScript modules and basic HTML are prerequisites."
+                "Component names start with a capital letter.",
+                "Lowercase tags name browser elements.",
+                "Component definitions belong at the top level of the file.",
+                "JSX lets React control component calls.",
+                "The examples require an existing React app, JavaScript modules, and basic HTML."
             ],
             examples: [
                 {
-                    title: "Display a heading component",
+                    title: "Heading component",
                     description: [
-                        "Display a heading inside a page."
+                        "The page contains a heading component."
                     ],
                     language: "jsx",
                     code: `function Welcome() {
@@ -34,25 +37,29 @@ export default function App() {
 }`,
                     result: "The page shows the heading “React lessons”.",
                     explanation: [
-                        "App includes Welcome as a child. React calls Welcome to get its markup."
+                        "`App` includes `Welcome` as a child.",
+                        "React calls `Welcome` to get its markup."
                     ]
                 }
             ]
         },
         {
             id: "jsx-rules",
-            title: "Follow JSX markup rules",
+            title: "JSX markup rules",
             bullets: [
-                "Close every tag, including empty tags such as <br />.",
-                "Wrap adjacent tags in a parent element or <>...</>. This empty wrapper is a Fragment. It adds no browser element.",
-                "Use className for CSS classes. Most element properties use camelCase, such as tabIndex.",
-                "Keep aria-* and data-* attributes in their dashed form."
+                "Every tag needs a closing tag or a self-closing form, such as `<br />`.",
+                "Adjacent tags need a parent element or `<>...</>`.",
+                "This empty wrapper is a Fragment.",
+                "It adds no browser element.",
+                "`className` sets CSS classes.",
+                "Most element properties use `camelCase`, such as `tabIndex`.",
+                "`aria-*` and `data-*` attributes keep their dashed form."
             ],
             examples: [
                 {
-                    title: "Return adjacent elements",
+                    title: "Adjacent elements",
                     description: [
-                        "Display a heading and paragraph without adding a wrapper element."
+                        "The heading and paragraph share a Fragment without an extra browser element."
                     ],
                     language: "jsx",
                     code: `export default function Profile() {
@@ -65,24 +72,28 @@ export default function App() {
 }`,
                     result: "A heading and paragraph appear.",
                     explanation: [
-                        "The Fragment groups both tags into one return expression. The CSS class applies styling only if the project defines it."
+                        "The Fragment groups both tags into one return expression.",
+                        "The CSS class applies styling only if the project defines it."
                     ]
                 }
             ]
         },
         {
             id: "javascript-expressions",
-            title: "Display data with braces",
+            title: "JavaScript expressions in JSX",
             bullets: [
-                "Place JavaScript inside braces in JSX text or an attribute. Use quotes for a literal string attribute.",
-                "React displays strings and numbers as text. It displays no text for null, undefined, or booleans.",
-                "For an object, display a property or turn its data into elements. A plain object cannot be a JSX child."
+                "Braces contain JavaScript expressions in JSX text or attributes.",
+                "Quotes contain a literal string attribute.",
+                "React displays strings and numbers as text.",
+                "It displays no text for `null`, `undefined`, or booleans.",
+                "JSX can display an object property or elements built from its data.",
+                "A plain object cannot be a JSX child."
             ],
             examples: [
                 {
-                    title: "Display a course title",
+                    title: "Course title",
                     description: [
-                        "Use an object already stored in JavaScript."
+                        "The example reads an existing JavaScript object."
                     ],
                     language: "jsx",
                     code: `const course = { title: 'React basics', completed: 3 };
@@ -94,7 +105,8 @@ export default function CourseStatus() {
 }`,
                     result: "React basics: 3 lessons complete",
                     explanation: [
-                        "The braces read properties from course. Quoting title=\"course.title\" would pass those literal characters."
+                        "The braces read properties from `course`.",
+                        "Quoting `title=\"course.title\"` would pass those literal characters."
                     ]
                 }
             ]

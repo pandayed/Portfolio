@@ -13,23 +13,22 @@ const PythonNotesIndex = () => (
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>
-        <p className="Notes__intro">
-            Follow the chapters in order: syntax, variables and data types, collections, control flow,
-            functions, modules, files and errors, classes, then advanced topics. The learning order
-            follows the{' '}
-            <a href="https://docs.python.org/3/tutorial/" className="Link" target="_blank" rel="noreferrer">
-                official Python Tutorial
-            </a>, with advanced runtime, networking, and FastAPI notes after the core language.
-            Original examples and topic coverage also draw on the{' '}
-            <a href="https://github.com/pandayed/PythonNotes" className="Link" target="_blank" rel="noreferrer">
-                PythonNotes reference repository
-            </a>.
-        </p>
+        <section className="Article__section" aria-labelledby="python-index-prerequisites">
+            <h2 id="python-index-prerequisites" className="SectionTitle">Prerequisites</h2>
+            <p>No prior notes required.</p>
+        </section>
         <p className="Notes__intro">
             Find term definitions in the{' '}
             <a className="Link" href={toHref(PROGRAMMING_DICTIONARY_ROUTE)}>programming dictionary</a>.
         </p>
         <NoteTree nodes={pythonNotes.children} />
+        <section className="Article__section" aria-labelledby="python-index-references">
+            <h2 id="python-index-references" className="SectionTitle">References</h2>
+            <ul className="Article__notes">
+                <li><a href="https://docs.python.org/3/tutorial/" className="Link">Official Python Tutorial</a></li>
+                <li><a href="https://github.com/pandayed/PythonNotes" className="Link">PythonNotes reference repository</a></li>
+            </ul>
+        </section>
     </Page>
 );
 

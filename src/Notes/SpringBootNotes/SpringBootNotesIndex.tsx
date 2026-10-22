@@ -13,14 +13,12 @@ const SpringBootNotesIndex = () => (
         <a href={toHref(NOTES_ROUTE)} className="Link Link--standalone Notes__back">
             Back to notes
         </a>
-        <p className="Notes__intro">
-            Read the chapters in order: application foundations, configuration, REST APIs,
-            data access, security, development tools, testing, integrations, and deployment.
-            Use Annotations at a glance to look up an annotation and open its lesson. The topic selection follows{' '}
-            <a className="Link" href="https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue">
-                Engineering Digest’s Spring Boot playlist
-            </a>.
-        </p>
+        <ul className="Article__notes">
+            <li>Java and general web concepts are prerequisites. The application lessons start with no Spring knowledge.</li>
+            <li>The data-access lessons use PostgreSQL and Spring Data JPA.</li>
+            <li>Integrations and deployment follow the core application lessons. Annotations at a glance is a lookup page.</li>
+            <li>The sources include the <a className="Link" href="https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue">Engineering Digest playlist</a> and the official Spring guides linked within each lesson.</li>
+        </ul>
         <NoteTree nodes={springBootNotes.children} />
     </Page>
 );

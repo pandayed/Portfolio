@@ -3,24 +3,28 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "events-and-handlers",
     title: "Events and handlers",
-    summary: "Respond to clicks, pass callback props, and control event behavior.",
+    summary: "Click handlers, callback props, and event behavior.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "event-handlers",
-            title: "Pass a function as a handler",
+            title: "Event handlers",
             bullets: [
-                "An event handler runs after a user action, such as a click. Attach it with a property such as onClick.",
-                "Pass the function without calling it. Use an arrow function when the handler needs an argument.",
-                "Keep rendering as a calculation of JSX. Perform user actions in handlers instead of during rendering."
+                "An event handler runs after a user action, such as a click.",
+                "A property such as `onClick` attaches the handler.",
+                "The handler prop receives a function without calling it.",
+                "An arrow function can supply an argument when the event occurs.",
+                "Rendering calculates JSX.",
+                "User actions belong in handlers instead of rendering."
             ],
             examples: [
                 {
-                    title: "Run code after a click",
+                    title: "Click handler",
                     description: [
-                        "Change the browser tab title when the user clicks Save."
+                        "The browser tab title changes when the user clicks Save."
                     ],
                     language: "jsx",
                     code: `export default function SaveButton() {
@@ -31,23 +35,27 @@ const note: LearningNote = {
 }`,
                     result: "Clicking Save changes the tab title to “Profile saved”.",
                     explanation: [
-                        "onClick={handleSave} passes the function. onClick={handleSave()} would call it while rendering."
+                        "`onClick={handleSave}` passes the function.",
+                        "`onClick={handleSave()}` would call it while rendering."
                     ]
                 }
             ]
         },
         {
             id: "callback-props",
-            title: "Let a parent handle a child’s action",
+            title: "Callback props",
             bullets: [
-                "A callback prop is a function passed to a child. The child calls it to report an action.",
-                "Name callbacks for their purpose, such as onSave. The parent chooses what that action does."
+                "A callback prop is a function passed to a child.",
+                "The child calls it to report an action.",
+                "Callback names describe their purpose, such as `onSave`.",
+                "The parent chooses what that action does."
             ],
             examples: [
                 {
-                    title: "Report the selected task",
+                    title: "Task selection callback",
                     description: [
-                        "Keep the action in the parent and the button in the child."
+                        "The parent defines the action.",
+                        "The child contains the button."
                     ],
                     language: "jsx",
                     code: `function TaskButton({ taskId, onSelect }) {
@@ -62,25 +70,29 @@ export default function Toolbar() {
 }`,
                     result: "Clicking the button changes the tab title to “Selected: react”.",
                     explanation: [
-                        "The child supplies its task ID. It does not assign to a prop."
+                        "The child supplies its task ID.",
+                        "It does not assign to a prop."
                     ]
                 }
             ]
         },
         {
             id: "event-object",
-            title: "Control default behavior and propagation",
+            title: "Default actions and event propagation",
             bullets: [
-                "React passes an event object to the handler. It contains the event details and methods.",
-                "preventDefault stops the browser’s default action, such as following a link or submitting a form.",
-                "stopPropagation prevents the event from reaching parent handlers. It does not cancel the default browser action.",
-                "Most React events bubble from a child to its ancestors. onScroll is an exception."
+                "React passes an event object to the handler.",
+                "It contains the event details and methods.",
+                "`preventDefault` stops the browser’s default action, such as following a link or submitting a form.",
+                "`stopPropagation` prevents the event from reaching parent handlers.",
+                "It does not cancel the default browser action.",
+                "Most React events bubble from a child to its ancestors.",
+                "`onScroll` is an exception."
             ],
             examples: [
                 {
-                    title: "Keep a child click separate",
+                    title: "Child click propagation",
                     description: [
-                        "Allow the button action without running its parent’s click handler."
+                        "The button action runs without its parent’s click handler."
                     ],
                     language: "jsx",
                     code: `export default function Toolbar() {
@@ -93,7 +105,7 @@ export default function Toolbar() {
 }`,
                     result: "Clicking Open shows only “Button clicked”.",
                     explanation: [
-                        "stopPropagation prevents the div handler from running for this click."
+                        "`stopPropagation` prevents the `div` handler from running for this click."
                     ]
                 }
             ]

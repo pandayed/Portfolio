@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-project-structure",
   "title": "Project files and packages",
-  "summary": "Understand source folders, component scanning, and the controller \u2192 service \u2192 repository flow.",
+  "summary": "Locate generated files and choose the package Spring searches.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Structure of Spring Boot Application | What's Inside Your Spring Boot App?",
@@ -33,74 +33,246 @@
       ]
     },
     {
-      "id": "project-structure-0-point-0",
+      "id": "structure-layout-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "pom.xml declares Maven dependencies and build plugins. A Gradle project uses build.gradle or build.gradle.kts."
+          "The generated project already contains the application class and its build configuration."
         ]
       ]
     },
     {
-      "id": "project-structure-0-point-1",
+      "id": "structure-layout-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The wrapper runs the build tool version selected by the project. Java must still be installed."
+          "The lessons add Java classes below "
+        ],
+        [
+          "src/main/java/com/example/demo",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "project-structure-0-point-2",
+      "id": "structure-layout-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "src/main/java contains Java source files. src/main/resources contains configuration and packaged resources."
+          "Application settings belong in "
+        ],
+        [
+          "src/main/resources/application.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "project-structure-0-point-3",
+      "id": "structure-layout-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "src/test/java contains test code. Maven writes build output to target; Gradle normally uses build."
+          "Maven reads "
+        ],
+        [
+          "pom.xml",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". The Gradle alternative reads "
+        ],
+        [
+          "build.gradle",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "build.gradle.kts",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "structure-request",
+      "id": "structure-layout-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The generated wrapper runs the build tool version selected by the project."
+        ]
+      ]
+    },
+    {
+      "id": "structure-layout-example-0",
+      "type": "example",
+      "example": {
+        "title": "Locate the application files",
+        "language": "text",
+        "description": [
+          "This directory tree shows the layout of a generated Maven Spring Boot project."
+        ],
+        "code": "demo/\n  pom.xml\n  mvnw\n  mvnw.cmd\n  src/main/java/com/example/demo/DemoApplication.java\n  src/main/resources/application.properties\n  src/test/java/com/example/demo/DemoApplicationTests.java",
+        "explanation": [
+          "`DemoApplication.java` remains in `com.example.demo` throughout the foundation lessons.",
+          "A new class with `package com.example.demo;` belongs beside that file.",
+          "`application.properties` starts empty if the application has no custom settings.",
+          "The generated test file is not part of application startup. The testing chapter explains Spring test support."
+        ]
+      }
+    },
+    {
+      "id": "project-structure-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Application packages"
+          "Application package"
         ]
       ]
     },
     {
-      "id": "project-structure-1-point-0",
+      "id": "project-structure-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A package groups Java classes under a name such as com.example.demo."
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " uses the application class\u2019s package as the default starting package for several Spring searches."
         ]
       ]
     },
     {
-      "id": "project-structure-1-point-1",
+      "id": "project-structure-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Put the application class in that package and application components in its subpackages. Spring scans this package tree by default."
+          "With "
+        ],
+        [
+          "DemoApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in "
+        ],
+        [
+          "com.example.demo",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", application classes belong in that package or below it."
         ]
       ]
     },
     {
-      "id": "project-structure-1-point-2",
+      "id": "project-structure-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A folder name does not make a class a Spring bean. The class must be registered with Spring."
+          "For example, "
+        ],
+        [
+          "com.example.demo.greeting",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is below the starting package. "
+        ],
+        [
+          "com.example.other",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is not."
+        ]
+      ]
+    },
+    {
+      "id": "project-structure-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "This package placement lets Spring find application classes without an extra scan setting."
+        ]
+      ]
+    },
+    {
+      "id": "project-structure-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The beans lesson explains which classes Spring finds and what it does with them."
+        ]
+      ]
+    },
+    {
+      "id": "project-structure-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A folder named "
+        ],
+        [
+          "service",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " has no Spring behavior by itself."
         ]
       ]
     }

@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-security-jwt",
   "title": "JWT access tokens",
-  "summary": "Understand the contents and checks of a signed JWT before configuring an API.",
+  "summary": "Connect familiar JWTs to Spring's decoder, principal, authorities, and revocation limits.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Complete JWT Authentication and Authorisation in Spring Boot",
@@ -28,52 +28,156 @@
       "type": "header",
       "richText": [
         [
-          "A signed JWT carries claims"
+          "JWT authentication in Spring Security"
         ]
       ]
     },
     {
-      "id": "jwt-meaning-b0",
+      "id": "security-jwt-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "JSON Web Token (JWT) is a token format."
+          "Spring Security's resource-server support authenticates an incoming JWT access token."
         ]
       ]
     },
     {
-      "id": "jwt-meaning-b1",
+      "id": "security-jwt-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A signed JWT has three parts: header, payload and signature."
+          "It replaces the password check for that API request."
         ]
       ]
     },
     {
-      "id": "jwt-meaning-b2",
+      "id": "security-jwt-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The header names the signing algorithm. The payload contains claims, which are named values about the token."
+          "The password-login lessons used "
+        ],
+        [
+          "UserDetails",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " as the principal."
         ]
       ]
     },
     {
-      "id": "jwt-meaning-b3",
+      "id": "security-jwt-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "The signature lets the receiver check whether the signed contents were changed and whether a trusted key signed them."
+          "JWT resource-server authentication uses a "
+        ],
+        [
+          "Jwt",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " principal by default."
         ]
       ]
     },
     {
-      "id": "jwt-meaning-b4",
+      "id": "security-jwt-lesson-0-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "The payload of a signed JWT is encoded, not hidden. Do not put passwords or private application content in it."
+          "It does not call "
+        ],
+        [
+          "UserDetailsService",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to load a password account for each token."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-validation",
+      "type": "header",
+      "richText": [
+        [
+          "Token validation"
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JwtDecoder",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks the signed token before Spring trusts its claims."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The decoder needs trusted issuer settings and trusted signing keys."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application must require the audience intended for its API."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring's issuer-based configuration validates the signature, issuer, and applicable expiry and not-before timestamps."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Audience validation is an additional requirement configured in the resource-server lesson."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Decoding a payload in a browser does not perform Spring Security's server-side validation."
         ]
       ]
     },
@@ -82,12 +186,126 @@
       "type": "header",
       "richText": [
         [
-          "Claims used when checking access"
+          "Claims and Spring authentication"
         ]
       ]
     },
     {
-      "id": "jwt-claims-table",
+      "id": "security-jwt-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JwtAuthenticationToken",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is the authenticated "
+        ],
+        [
+          "Authentication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " produced for a valid JWT."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Its principal is the validated "
+        ],
+        [
+          "Jwt",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Authentication.getName()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " uses the token's "
+        ],
+        [
+          "sub",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " claim by default."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Token scopes become granted authorities through "
+        ],
+        [
+          "JwtAuthenticationConverter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A valid signature does not give the token permission to call every endpoint."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The request rules still check the resulting authorities."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-2-table-0",
       "type": "table",
       "columnOrder": [
         "0",
@@ -96,97 +314,177 @@
       "hasColumnHeader": true,
       "children": [
         {
-          "id": "jwt-claims-table-0",
+          "id": "security-jwt-lesson-2-table-0-row-0",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "Claim"
+                "Token field"
               ]
             ],
             "1": [
               [
-                "Meaning"
+                "Spring configuration or access"
               ]
             ]
           }
         },
         {
-          "id": "jwt-claims-table-1",
+          "id": "security-jwt-lesson-2-table-0-row-1",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "iss"
+                "iss",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Issuer: who issued the token."
+                "The configured "
+              ],
+              [
+                "issuer-uri",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " identifies the trusted issuer."
               ]
             ]
           }
         },
         {
-          "id": "jwt-claims-table-2",
+          "id": "security-jwt-lesson-2-table-0-row-2",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "sub"
+                "aud",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Subject: the identity described by the token."
+                "The configured "
+              ],
+              [
+                "audiences",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " requires the intended API audience."
               ]
             ]
           }
         },
         {
-          "id": "jwt-claims-table-3",
+          "id": "security-jwt-lesson-2-table-0-row-3",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "aud"
+                "sub",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Audience: the recipient the token is intended for."
+                "The default authenticated name comes from this subject."
               ]
             ]
           }
         },
         {
-          "id": "jwt-claims-table-4",
+          "id": "security-jwt-lesson-2-table-0-row-4",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "exp"
+                "exp",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " and "
+              ],
+              [
+                "nbf",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Expiration: the time after which the token must not be accepted."
+                "Timestamp validators check token validity times."
               ]
             ]
           }
         },
         {
-          "id": "jwt-claims-table-5",
+          "id": "security-jwt-lesson-2-table-0-row-5",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "nbf"
+                "scope",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " or "
+              ],
+              [
+                "scp",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Not before: the time before which the token must not be accepted."
+                "The default converter creates "
+              ],
+              [
+                "SCOPE_",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " authorities."
               ]
             ]
           }
@@ -198,88 +496,76 @@
       "type": "header",
       "richText": [
         [
-          "Send an access token"
+          "Principal access"
         ]
       ]
     },
     {
-      "id": "jwt-bearer-b0",
+      "id": "security-jwt-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An authorization server issues access tokens."
+          "@AuthenticationPrincipal Jwt jwt",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the validated JWT to a controller parameter."
         ]
       ]
     },
     {
-      "id": "jwt-bearer-b1",
+      "id": "security-jwt-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A resource server is an API that accepts tokens and checks access to its resources."
+          "jwt.getSubject()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads its subject."
         ]
       ]
     },
     {
-      "id": "jwt-bearer-b2",
+      "id": "security-jwt-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A bearer token grants access to whoever holds it. Send it over HTTPS in the Authorization header with the Bearer prefix."
+          "jwt.getClaimAsString(\"email\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads an email claim if the issuer includes it."
         ]
       ]
     },
     {
-      "id": "jwt-bearer-b3",
+      "id": "security-jwt-lesson-3-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not put token values in URLs or logs."
+          "A claim used for authorization needs a documented meaning from the trusted issuer."
         ]
       ]
     },
     {
-      "id": "jwt-validation",
-      "type": "header",
-      "richText": [
-        [
-          "Validate before trusting claims"
-        ]
-      ]
-    },
-    {
-      "id": "jwt-validation-b0",
+      "id": "security-jwt-lesson-3-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check the signature using trusted keys and allowed signing algorithms."
-        ]
-      ]
-    },
-    {
-      "id": "jwt-validation-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Check the expected issuer and audience. Check expiration and not-before time when present."
-        ]
-      ]
-    },
-    {
-      "id": "jwt-validation-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Decoding the payload only reads its contents. It does not validate the token."
-        ]
-      ]
-    },
-    {
-      "id": "jwt-validation-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "After validation, apply the permissions required by the operation."
+          "The ownership check still needs the subject mapped to the correct local account."
         ]
       ]
     },
@@ -288,58 +574,61 @@
       "type": "header",
       "richText": [
         [
-          "Expiration and revocation"
+          "Expiration and logout"
         ]
       ]
     },
     {
-      "id": "jwt-lifecycle-b0",
+      "id": "security-jwt-lesson-4-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A stolen token can remain valid until it expires unless the application has a way to reject it sooner."
+          "The resource server normally validates each JWT locally using trusted public keys."
         ]
       ]
     },
     {
-      "id": "jwt-lifecycle-b1",
+      "id": "security-jwt-lesson-4-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a defined expiration policy for access tokens."
+          "It does not automatically ask the issuer whether the user logged out or a token was revoked."
         ]
       ]
     },
     {
-      "id": "jwt-lifecycle-b2",
+      "id": "security-jwt-lesson-4-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A refresh token can obtain a new access token. It needs its own storage, expiration and revocation rules."
+          "Ending a browser session does not invalidate an already issued JWT access token."
         ]
       ]
     },
     {
-      "id": "jwt-lifecycle-b3",
+      "id": "security-jwt-lesson-4-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "For centrally checked token validity, an API can use opaque tokens and introspection. Introspection asks the authorization server whether a token is still active."
+          "Immediate revocation needs an additional design, such as a server-side revocation check or token introspection."
         ]
       ]
     },
     {
-      "id": "jwt-resource-next",
+      "id": "security-jwt-lesson-4-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Configure a JWT resource server",
-          [
-            [
-              "a",
-              "/notes/spring-boot/security/resource-server"
-            ]
-          ]
+          "The next OAuth2 lesson places the issuer, client, and resource server in the same flow."
+        ]
+      ]
+    },
+    {
+      "id": "security-jwt-lesson-4-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The resource-server lesson then configures the decoder and permissions."
         ]
       ]
     }

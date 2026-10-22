@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'type-operators',
     title: 'Keys and property types',
-    summary: 'Derive type information from existing objects before constructing more complex types.',
+    summary: 'Type operators derive type information from existing objects before constructing more complex types.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: keyof',
@@ -24,16 +25,16 @@ const note: LearningNote = {
     sections: [
         {
             id: 'keyof',
-            title: 'Read property names with keyof',
+            title: 'Property keys',
             bullets: [
-                'keyof produces the union of known property names from an object type.',
-                'For a string index signature, keyof can include string and number because numeric property keys are converted to strings.',
+                '`keyof` produces the union of known property names from an object type.',
+                'For a `string` index signature, `keyof` can include `string` and `number` because numeric property keys are converted to strings.',
             ],
             examples: [
                 {
-                    title: 'Allow only declared property names',
+                    title: 'User property keys',
                     description: [
-                        'Restrict a selected key to the names in one object type.',
+                        'The example restricts a selected key to the names in one object type.',
                     ],
                     language: 'typescript',
                     code: [
@@ -45,25 +46,26 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'name',
                     explanation: [
-                        'UserKey is "id" | "name".',
-                        'This derives names from User without copying their list.',
+                        '`UserKey` is `"id" | "name"`.',
+                        'This derives names from `User` without copying their list.',
                     ],
                 },
             ],
         },
         {
             id: 'indexed-access',
-            title: 'Read a property type with an indexed access type',
+            title: 'Indexed access types',
             bullets: [
-                'Type[Key] selects the type of a property. The brackets are used in a type expression here.',
+                '`Type[Key]` selects the type of a property.',
+                'The brackets are used in a type expression here.',
                 'A union of keys produces a union of their property types.',
-                'Using number as the index of an array type selects its element type.',
+                'Using `number` as the index of an array type selects its element type.',
             ],
             examples: [
                 {
-                    title: 'Reuse a property’s declared type',
+                    title: 'User property types',
                     description: [
-                        'Derive the name type from User instead of repeating string.',
+                        'The example derives the `name` type from `User` instead of repeating `string`.',
                     ],
                     language: 'typescript',
                     code: [
@@ -76,25 +78,25 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Mia 7',
                     explanation: [
-                        'UserName is string.',
-                        'UserValue is number | string because it selects both properties.',
+                        '`UserName` is `string`.',
+                        '`UserValue` is `number | string` because it selects both properties.',
                     ],
                 },
             ],
         },
         {
             id: 'type-space-typeof',
-            title: 'Get a checked type from an existing value',
+            title: 'Type queries',
             bullets: [
-                'In a type expression, typeof obtains the checked type of a named value.',
-                'This differs from JavaScript’s runtime typeof expression, which produces a string.',
-                'Use the type operator when an existing value already defines the shape you want to reuse.',
+                'In a type expression, `typeof` obtains the checked type of a named value.',
+                'JavaScript’s runtime `typeof` expression produces a string.',
+                'The type operator reuses the inferred type of an existing value.',
             ],
             examples: [
                 {
-                    title: 'Derive a settings shape from a value',
+                    title: 'Inferred settings type',
                     description: [
-                        'Check another settings object against the inferred type of the original.',
+                        'The example checks another settings object against the inferred type of the original.',
                     ],
                     language: 'typescript',
                     code: [
@@ -105,24 +107,24 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'dark boolean',
                     explanation: [
-                        'typeof defaults appears in a type declaration and describes the object shape.',
-                        'typeof chosen.compact appears in a JavaScript expression and reports a runtime type string.',
+                        '`typeof defaults` appears in a type declaration and describes the object shape.',
+                        '`typeof chosen.compact` appears in a JavaScript expression and reports the runtime type as a string.',
                     ],
                 },
             ],
         },
         {
             id: 'keyof-constraints',
-            title: 'Connect an object, key and result',
+            title: 'Key constraints',
             bullets: [
-                'A key type parameter can be constrained to keyof another type parameter.',
+                'A key type parameter can be constrained to `keyof` another type parameter.',
                 'Using that key in an indexed access result keeps the returned type connected to the selected property.',
             ],
             examples: [
                 {
-                    title: 'Return the type of the selected property',
+                    title: 'Selected property types',
                     description: [
-                        'Allow only existing keys and preserve each property’s result type.',
+                        'The example allows only existing keys and preserves each property’s result type.',
                     ],
                     language: 'typescript',
                     code: [
@@ -136,8 +138,9 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'MIA\n7.0',
                     explanation: [
-                        'Selecting name returns string.',
-                        'Selecting id returns number. The constraint rejects email.',
+                        'Selecting `name` returns `string`.',
+                        'Selecting `id` returns `number`.',
+                        'The constraint rejects `email`.',
                     ],
                 },
             ],

@@ -3,24 +3,28 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "context-and-providers",
     title: "Context and providers",
-    summary: "Read shared data with useContext without passing props through every component.",
+    summary: "Shared data and context providers.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "context",
-            title: "Read shared data with useContext",
+            title: "Shared context",
             bullets: [
                 "Context lets a component read data from a parent higher in the component tree, without passing that data through every component in between.",
-                "createContext(defaultValue) creates a context object. A provider supplies its value to the components inside it.",
-                "useContext(Context) reads the value from the closest provider for that context above the component. If there is no provider, it returns the default value."
+                "`createContext(defaultValue)` creates a context object.",
+                "A provider supplies its value to the components inside it.",
+                "`useContext(Context)` reads the value from the closest provider for that context above the component.",
+                "If there is no provider, it returns the default value."
             ],
             examples: [
                 {
-                    title: "Provide a selected theme",
+                    title: "Theme provider",
                     description: [
-                        "Let a nested component read a theme without Toolbar passing it as a prop. This provider syntax works in React 18 and later."
+                        "A nested component reads a theme without `Toolbar` passing it as a prop.",
+                        "This provider syntax works in React 18 and later."
                     ],
                     language: "jsx",
                     code: `import { createContext, useContext, useState } from 'react';
@@ -44,7 +48,9 @@ export default function Settings() {
 }`,
                     result: "Clicking Change theme switches Theme: light and Theme: dark.",
                     explanation: [
-                        "Settings owns the state. The provider supplies it. useContext in ThemeLabel reads that provider."
+                        "`Settings` owns the state.",
+                        "The provider supplies it.",
+                        "`useContext` in `ThemeLabel` reads that provider."
                     ]
                 }
             ]
@@ -53,11 +59,15 @@ export default function Settings() {
             id: "provider-position",
             title: "Provider placement and value changes",
             bullets: [
-                "useContext cannot read a provider returned by the same component. The provider must wrap the component that calls useContext.",
-                "Changing the provided value re-renders components that read it. React compares values with Object.is.",
+                "`useContext` cannot read a provider returned by the same component.",
+                "The provider must wrap the component that calls `useContext`.",
+                "Changing the provided value re-renders components that read it.",
+                "React compares values with `Object.is`.",
                 "If the provider receives a new object, components reading the context re-render even when the object contains the same values.",
-                "A provider can also supply state and dispatch from useReducer. Nested components can read the state and dispatch actions through context.",
-                "React 19 also supports <ThemeContext value={theme}>. Use .Provider when supporting React 18."
+                "A provider can also supply state and `dispatch` from `useReducer`.",
+                "Nested components can read the state and dispatch actions through context.",
+                "React 19 also supports `<ThemeContext value={theme}>`.",
+                "`.Provider` also supports React 18."
             ]
         }
     ],

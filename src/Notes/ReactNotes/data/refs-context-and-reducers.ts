@@ -3,25 +3,32 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "refs-context-and-reducers",
     title: "Refs and DOM access",
-    summary: "Store values with useRef without re-rendering, or use a ref to access a page element.",
+    summary: "Values kept between renders and direct access to page elements.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "refs",
-            title: "Store a value with useRef",
+            title: "Ref values",
             bullets: [
-                "useRef(initialValue) returns an object with a current property. React keeps the same object between renders.",
-                "Read or update the stored value through ref.current. Changing it does not re-render the component. Use state when a change should update the screen.",
-                "Read or update refs in event handlers or Effects. Do not read or update current during rendering, except when setting its initial value as described below.",
-                "If creating the initial object is expensive, start the ref at null. During rendering, create and assign the object only while current is null. This is allowed when creating it always produces the same result."
+                "`useRef(initialValue)` returns an object with a `current` property.",
+                "React keeps the same object between renders.",
+                "`ref.current` reads or updates the stored value.",
+                "Changing it does not re-render the component.",
+                "State changes can update the screen.",
+                "Event handlers and Effects can read or update refs.",
+                "Rendering must not read or update `current`, except for the initial-value case below.",
+                "A ref can start at `null` when creating its initial object is expensive.",
+                "Rendering can create and assign that object only while `current` is `null`.",
+                "This is allowed when creating it always produces the same result."
             ],
             examples: [
                 {
-                    title: "Count clicks without re-rendering",
+                    title: "Click count in a ref",
                     description: [
-                        "Track clicks separately from the displayed UI."
+                        "A ref tracks clicks separately from the displayed UI."
                     ],
                     language: "jsx",
                     code: `import { useRef } from 'react';
@@ -36,24 +43,28 @@ export default function ClickTracker() {
 }`,
                     result: "Each click reports a larger count. The button text stays Record click.",
                     explanation: [
-                        "The handler changes current. It does not update JSX or request another render."
+                        "The handler changes `current`.",
+                        "It does not update JSX or request another render."
                     ]
                 }
             ]
         },
         {
             id: "dom-refs",
-            title: "Access a page element with a ref",
+            title: "DOM refs",
             bullets: [
-                "Pass a ref to an element with its ref prop. After React adds the element to the page, current holds its browser DOM node, such as an input element.",
-                "current is null before React adds the element to the page and after React removes it. Check it before calling methods such as focus().",
-                "Use refs for focus, scrolling, or measurement. Let React manage the content and structure it renders."
+                "The `ref` prop passes a ref to an element.",
+                "After React adds the element to the page, `current` holds its browser DOM node, such as an input element.",
+                "`current` is `null` before React adds the element to the page and after React removes it.",
+                "Methods such as `focus()` need a `null` check first.",
+                "Refs provide direct access for focus, scrolling, or measurement.",
+                "React manages the content and structure it renders."
             ],
             examples: [
                 {
-                    title: "Focus a message field",
+                    title: "Input focus",
                     description: [
-                        "Focus the input when the user clicks Edit."
+                        "Clicking Edit focuses the input."
                     ],
                     language: "jsx",
                     code: `import { useRef } from 'react';
@@ -67,14 +78,15 @@ export default function MessageField() {
 }`,
                     result: "Clicking Edit moves keyboard focus to the input.",
                     explanation: [
-                        "The ?. checks that current is not null before calling focus(). The input is already on the page when the user clicks Edit."
+                        "The `?.` checks that `current` is not `null` before calling `focus()`.",
+                        "The input is already on the page when the user clicks Edit."
                     ]
                 }
             ]
         },
         {
             id: "choosing-tool",
-            title: "When to use state, a ref, or a local variable",
+            title: "State, refs, and local variables",
             bullets: [],
             table: {
                 columns: [

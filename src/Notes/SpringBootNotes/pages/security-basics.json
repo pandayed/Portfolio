@@ -8,43 +8,51 @@
       "type": "header",
       "richText": [
         [
-          "Authentication and authorization"
+          "Spring Security in a Boot application"
         ]
       ]
     },
     {
-      "id": "security-meaning-b0",
+      "id": "security-basics-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Security controls access to a Spring web application."
+          "Spring Security runs security checks before Spring MVC calls a controller."
         ]
       ]
     },
     {
-      "id": "security-meaning-b1",
+      "id": "security-basics-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Authentication checks who the user is. A password login is one way to authenticate."
+          "These notes use servlet applications with Spring Boot 3.5 and Spring Security 6.5."
         ]
       ]
     },
     {
-      "id": "security-meaning-b2",
+      "id": "security-basics-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Authorization checks what that user is allowed to do."
+          "spring-boot-starter-security",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds the security libraries."
         ]
       ]
     },
     {
-      "id": "security-meaning-b3",
+      "id": "security-basics-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "These examples use Spring Boot 3 and Spring Security 6. Boot 3 requires Java 17 or later."
+          "Boot registers the security infrastructure when those libraries are present."
         ]
       ]
     },
@@ -53,61 +61,72 @@
       "type": "header",
       "richText": [
         [
-          "Add Spring Security"
+          "Default security"
         ]
       ]
     },
     {
-      "id": "security-defaults-b0",
+      "id": "security-basics-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Add spring-boot-starter-security to the project."
+          "Without custom security configuration, Boot protects application requests."
         ]
       ]
     },
     {
-      "id": "security-defaults-b1",
+      "id": "security-basics-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "For a servlet web application, Boot protects requests and supplies a default login page when you have not supplied your own security configuration."
+          "Browser requests can show Spring Security's generated login page."
         ]
       ]
     },
     {
-      "id": "security-defaults-b2",
+      "id": "security-basics-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Boot creates a user named user with a generated password when no custom authentication setup replaces it. The startup log contains that password."
+          "Boot also enables HTTP Basic authentication in its default web configuration."
         ]
       ]
     },
     {
-      "id": "security-defaults-b3",
+      "id": "security-basics-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Define a SecurityFilterChain bean to choose request rules and the login method."
+          "Without a custom account configuration, Boot creates an in-memory account named "
+        ],
+        [
+          "user",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "security-defaults-b4",
+      "id": "security-basics-lesson-1-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Boot configures web security when the starter is present. You do not need @EnableWebSecurity solely to activate it in a Boot application."
+          "The startup log contains that account's generated password."
         ]
       ]
     },
     {
-      "id": "security-defaults-b5",
+      "id": "security-basics-lesson-1-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "WebSecurityConfigurerAdapter and antMatchers belong to older Spring Security code. Use SecurityFilterChain and requestMatchers in these notes."
+          "The generated account is for development. The next authentication-and-authorization lesson replaces it with an explicit account."
         ]
       ]
     },
@@ -116,52 +135,305 @@
       "type": "header",
       "richText": [
         [
-          "Define users and passwords"
+          "Security filters"
         ]
       ]
     },
     {
-      "id": "security-users-b0",
+      "id": "security-basics-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "UserDetailsService loads the user account needed for password authentication."
+          "A servlet "
+        ],
+        [
+          "Filter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " runs before the request reaches Spring MVC's "
+        ],
+        [
+          "DispatcherServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "security-users-b1",
+      "id": "security-basics-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "InMemoryUserDetailsManager keeps user accounts in application memory. Restarting the application does not preserve changes to these accounts."
+          "Spring Security supplies filters for login, stored authentication, CSRF checks, and request permissions."
         ]
       ]
     },
     {
-      "id": "security-users-b2",
+      "id": "security-basics-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "PasswordEncoder hashes a password and checks a submitted password against the stored hash. Hashing is not reversible encryption."
+          "A filter can reject a request before the controller runs."
         ]
       ]
     },
     {
-      "id": "security-users-b3",
+      "id": "security-basics-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Hash the password when creating or changing it. During login, use matches to compare the submitted password with its stored hash."
+          "SecurityFilterChain",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " holds a request matcher and the ordered security filters for matching requests."
         ]
       ]
     },
     {
-      "id": "security-users-b4",
+      "id": "security-basics-lesson-2-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use in-memory users for learning or isolated checks. Use persistent account storage when users must survive restarts."
+          "FilterChainProxy",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects the first matching "
+        ],
+        [
+          "SecurityFilterChain",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for each request."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "HttpSecurity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is the builder that configures those filters."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "http.build()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " creates the "
+        ],
+        [
+          "SecurityFilterChain",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean from that configuration."
+        ]
+      ]
+    },
+    {
+      "id": "ed-security-next",
+      "type": "header",
+      "richText": [
+        [
+          "A custom filter chain"
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A "
+        ],
+        [
+          "SecurityFilterChain",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean replaces Boot's default web security rules."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not, by itself, replace Boot's generated account."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "authorizeHttpRequests",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " defines the request permission checks."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "authenticated()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requires a successfully authenticated user."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-3-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "formLogin",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds Spring Security's form-login handling and generated login page."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-3-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot applications do not need "
+        ],
+        [
+          "@EnableWebSecurity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " just to activate the starter."
+        ]
+      ]
+    },
+    {
+      "id": "security-basics-lesson-3-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "WebSecurityConfigurerAdapter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "antMatchers",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " belong to older configurations. These notes use "
+        ],
+        [
+          "SecurityFilterChain",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "requestMatchers",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
@@ -169,47 +441,48 @@
       "id": "20924eb1-ed54-80b9-b4fd-edc0293754d0",
       "type": "example",
       "example": {
-        "title": "Add one in-memory user and form login",
-        "description": [
-          "Use a Spring Boot 3 servlet web project with spring-boot-starter-security.",
-          "Place SecurityConfig in the application package or a scanned child package.",
-          "Run the application and open an existing application endpoint in a browser."
-        ],
-        "code": "package com.example.demo;\n\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.core.userdetails.User;\nimport org.springframework.security.core.userdetails.UserDetailsService;\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.security.provisioning.InMemoryUserDetailsManager;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\npublic class SecurityConfig {\n    @Bean\n    PasswordEncoder passwordEncoder() {\n        return new BCryptPasswordEncoder();\n    }\n\n    @Bean\n    UserDetailsService users(PasswordEncoder encoder) {\n        return new InMemoryUserDetailsManager(\n            User.withUsername(\"user\")\n                .password(encoder.encode(\"user123\"))\n                .roles(\"USER\")\n                .build());\n    }\n\n    @Bean\n    SecurityFilterChain security(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(rules -> rules\n                .anyRequest().authenticated())\n            .formLogin(Customizer.withDefaults())\n            .build();\n    }\n}",
+        "title": "Protect existing controllers with form login",
         "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "`SecurityConfig.java` belongs in `com.example.demo` beneath the application's component scan.",
+          "Opening `/employees` in a browser redirects to the generated login page.",
+          "The development account is `user` with the generated password from the startup log."
+        ],
+        "code": "",
         "explanation": [
-          "The PasswordEncoder bean creates BCrypt password hashes.",
-          "The users bean defines the learning account user with password user123. Keep real passwords out of source code.",
-          "roles(\"USER\") stores the authority ROLE_USER. The role is used in the next lesson.",
-          "anyRequest().authenticated() requires login for application requests.",
-          "formLogin supplies Spring’s login page. After successful login, Spring remembers authentication in the browser session.",
-          "CSRF protection remains enabled. Browser sessions and CSRF are explained on their own page."
-        ]
+          "Spring calls `security` while creating beans at startup.",
+          "The resulting filters run for requests. Spring does not call this bean method once per request.",
+          "`anyRequest()` makes the authentication rule cover every request handled by this chain.",
+          "The login filters handle the login page and form submission.",
+          "A successful login allows Spring MVC to handle the protected endpoint.",
+          "CSRF protection remains enabled.",
+          "The next lesson explains the account lookup and password check. The browser-security lesson explains the saved login and CSRF token."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/SecurityConfig.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\npublic class SecurityConfig {\n    @Bean\n    SecurityFilterChain security(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(rules -> rules\n                .anyRequest().authenticated())\n            .formLogin(Customizer.withDefaults())\n            .build();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/PageController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class PageController {\n    @GetMapping(\"/\") public String home() { return \"Home\"; }\n    @GetMapping(\"/public/info\") public String info() { return \"Public information\"; }\n    @GetMapping(\"/admin/report\") public String admin() { return \"Admin report\"; }\n    @GetMapping(\"/employees\") public String employees() { return \"Employee list\"; }\n    @PostMapping(\"/employees\") public String create() { return \"Employee created\"; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-security</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
       }
-    },
-    {
-      "id": "ed-security-next",
-      "type": "header",
-      "richText": [
-        [
-          "Request permissions"
-        ]
-      ]
-    },
-    {
-      "id": "ed-security-link-0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Authentication and authorization",
-          [
-            [
-              "a",
-              "/notes/spring-boot/security/authentication-authorization"
-            ]
-          ]
-        ]
-      ]
     }
   ],
   "sources": [
@@ -224,8 +497,12 @@
     {
       "title": "Spring Security 6.5: password storage",
       "url": "https://docs.spring.io/spring-security/reference/6.5/features/authentication/password-storage.html"
+    },
+    {
+      "title": "Spring Security 6.5: servlet filter architecture",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/architecture.html"
     }
   ],
-  "updatedOn": "2026-10-14",
-  "summary": "Add password login with an in-memory user before defining access rules."
+  "updatedOn": "2026-10-20",
+  "summary": "Follow a request through Spring Security filters, then define the application's first security chain."
 }

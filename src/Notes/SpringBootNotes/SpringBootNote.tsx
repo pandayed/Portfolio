@@ -8,6 +8,7 @@ import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import { SPRING_BOOT_NOTES_ROUTE, toHref, type SpringBootRoute } from '../../routing/routes';
 import NoteArticleLayout from '../NoteArticleLayout';
 import { getSpringBootBlocks, springBootPages, springBootPagesByRoute } from './registry';
+import { renderExampleText } from './renderExampleText';
 import type { RichText, RichTextMark, SpringBootBlock } from './types';
 
 interface SpringBootNoteProps {
@@ -115,7 +116,7 @@ const renderBlock = (block: SpringBootBlock): ReactNode => {
     const children = block.children?.length ? renderBlocks(block.children) : null;
     switch (block.type) {
         case 'example':
-            return block.example ? <LearningNoteExampleBlock key={block.id} example={block.example} /> : null;
+            return block.example ? <LearningNoteExampleBlock key={block.id} example={block.example} renderText={renderExampleText} /> : null;
         case 'text':
             return <Fragment key={block.id}>
                 {plainText(block.richText) && <p>{renderRichText(block.richText)}</p>}

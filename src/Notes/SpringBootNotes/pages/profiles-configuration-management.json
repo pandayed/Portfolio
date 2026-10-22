@@ -4,109 +4,402 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480dab697cb8704151ba9",
   "blocks": [
     {
-      "id": "20924eb1-ed54-80ff-a37f-fcc683d2eba9",
+      "id": "profiles-configuration-management-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Select environment-specific configuration"
+          "Profile-specific settings"
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-0-point-0",
+      "id": "profiles-configuration-management-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A profile is a named set of configuration that can be activated for an application run."
+          "A Spring profile is a name that selects additional configuration for an application run."
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-0-point-1",
+      "id": "profiles-configuration-management-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot loads shared application configuration and the files for active profiles."
+          "The shared "
+        ],
+        [
+          "application.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies settings for every run."
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-0-point-2",
+      "id": "profiles-configuration-management-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A profile-specific file overrides matching settings from the shared file. Settings not overridden keep their shared values."
+          "application-dev.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies additional settings when the "
+        ],
+        [
+          "dev",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " profile is active."
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-0-point-3",
+      "id": "profiles-configuration-management-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use spring.profiles.active, SPRING_PROFILES_ACTIVE, or a command-line argument to select profiles."
+          "An active profile file overrides matching settings in the shared file at the same location."
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-0-example-0",
+      "id": "profiles-configuration-management-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Settings absent from the profile file keep their shared values."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.profiles.active",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects the active profiles."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-0-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The environment variable "
+        ],
+        [
+          "SPRING_PROFILES_ACTIVE",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and the application argument "
+        ],
+        [
+          "--spring.profiles.active=dev",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " set the same property."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-0-example-0",
       "type": "example",
       "example": {
-        "title": "Activate the dev profile",
-        "description": [
-          "Create these files in src/main/resources. Run the application with the dev profile."
-        ],
-        "code": "# application.properties\nserver.port=8080\n\n# application-dev.properties\nserver.port=8081",
+        "title": "Run with development settings",
         "language": "text",
-        "explanation": [
-          "With dev active, the server uses port 8081.",
-          "Without an active profile, Spring uses the default profile; it does not automatically select dev."
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The tabs contain the complete Maven application and both profile configuration files.",
+          "The command runs from the directory containing `pom.xml`.",
+          "The `dev` profile selects port `8081` and sets `greeting.prefix` to `Hi`."
         ],
-        "commands": "java -jar target/demo.jar --spring.profiles.active=dev"
+        "code": "",
+        "explanation": [
+          "The Maven plugin passes `dev` to the application as an active profile.",
+          "Spring Boot loads the shared file and then the development settings.",
+          "The server listens on `8081`.",
+          "The resolved `greeting.prefix` is `Hi`.",
+          "`spring.application.name` remains `greeting-app` because the development file does not replace it."
+        ],
+        "commands": "mvn spring-boot:run -Dspring-boot.run.profiles=dev",
+        "files": [
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.application.name=greeting-app\nserver.port=8080\ngreeting.prefix=Hello\n"
+          },
+          {
+            "name": "src/main/resources/application-dev.properties",
+            "language": "text",
+            "code": "server.port=8081\ngreeting.prefix=Hi\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/greetings\")\n    public String greet() { return \"Hello, Ada\"; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ]
       }
     },
     {
-      "id": "20924eb1-ed54-804c-8d62-dfc1000c5d16",
+      "id": "profiles-configuration-management-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Profile rules"
+          "Profile-specific beans"
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-1-point-0",
+      "id": "profiles-configuration-management-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not put spring.profiles.active inside a profile-specific file or an activated profile document. Select profiles from a non-profile-specific source."
+          "@Profile(\"dev\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a component class registers that bean only when "
+        ],
+        [
+          "dev",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is active."
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-1-point-1",
+      "id": "profiles-configuration-management-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Profile controls whether a bean definition or configuration class is registered for active profiles."
+          "@Profile",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can also restrict a "
+        ],
+        [
+          "@Configuration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " class or an individual "
+        ],
+        [
+          "@Bean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " method."
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-1-point-2",
+      "id": "profiles-configuration-management-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Profiles are selected during startup. Changing an environment variable does not automatically recreate existing beans."
+          "A bean that requires a profile-specific dependency cannot be created if that dependency is absent."
         ]
       ]
     },
     {
-      "id": "profiles-configuration-management-1-point-3",
+      "id": "profiles-configuration-management-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A profile name does not enforce permissions or protect credentials."
+          "A profile chooses bean definitions during startup. It does not switch a bean's implementation on each request."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Activation rules"
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.profiles.active",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " belongs in shared configuration or another non-profile-specific source."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It cannot appear in "
+        ],
+        [
+          "application-dev.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or a configuration document activated by "
+        ],
+        [
+          "spring.config.activate.on-profile",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Several profiles can be active, such as "
+        ],
+        [
+          "--spring.profiles.active=dev,local",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For conflicting settings from profile files in the same location, the later profile wins."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "When no profile is explicitly active, Spring uses the "
+        ],
+        [
+          "default",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " profile."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Profile files follow the property-source precedence from Application properties and overrides."
+        ]
+      ]
+    },
+    {
+      "id": "profiles-configuration-management-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A profile name does not protect credentials or enforce access rules."
         ]
       ]
     }
@@ -131,7 +424,12 @@
     {
       "title": "Official reference: Spring profiles",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/features/profiles.html"
+    },
+    {
+      "title": "Spring Boot 3.5: profile-specific files",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html#features.external-config.files.profile-specific"
     }
   ],
-  "updatedOn": "2026-10-14"
+  "updatedOn": "2026-10-20",
+  "summary": "Apply shared settings, activate profile overrides, and register beans only for selected profiles."
 }

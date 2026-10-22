@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "functions-and-scope",
     title: "Functions: parameters and return",
-    summary: "Define a function, call it with arguments, and return a result.",
+    summary: "Function calls, parameters, arguments, and return values.",
     scope: "javascript",
     updatedOn: "2026-10-14",
     pointwise: true,
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -17,24 +18,25 @@ const note: LearningNote = {
     sections: [
         {
             id: "declarations-and-calls",
-            title: "Define and call a function",
+            title: "Functions and calls",
             bullets: [
                 "A function groups statements to run when called.",
-                "Parameters are names in its definition. Arguments are values supplied by a call.",
+                "Parameters are names in its definition.",
+                "Arguments are values supplied by a call.",
                 "Every call starts a new execution of the body.",
-                "return ends the current call and gives a value to the caller."
+                "`return` ends the current call and gives a value to the caller."
             ],
             examples: [
                 {
-                    title: "Calculate two totals",
+                    title: "Totals with different arguments",
                     description: [
-                        "Define one function and call it with different arguments."
+                        "The example defines one function and calls it with different arguments."
                     ],
                     language: "javascript",
                     code: "function add(left, right) {\n    return left + right;\n}\nconsole.log(add(2, 3));\nconsole.log(add(4, 6));",
                     result: "5\n10",
                     explanation: [
-                        "left and right receive new argument values for each call.",
+                        "`left` and `right` receive new argument values for each call.",
                         "The caller prints the returned result."
                     ]
                 }
@@ -42,42 +44,43 @@ const note: LearningNote = {
         },
         {
             id: "return-and-missing-values",
-            title: "Return early or return no value",
+            title: "Return values and early returns",
             bullets: [
-                "A bare return ends the call and produces undefined.",
-                "Reaching the end without return also produces undefined.",
-                "A missing argument gives its parameter undefined. JavaScript also permits extra arguments."
+                "A bare `return` ends the call and produces `undefined`.",
+                "Reaching the end without `return` also produces `undefined`.",
+                "A missing argument gives its `parameter` `undefined`.",
+                "JavaScript also permits extra arguments."
             ],
             examples: [
                 {
-                    title: "Stop after a condition",
+                    title: "Conditional returns",
                     description: [
-                        "Skip the message for an empty name and observe a missing argument."
+                        "The example skips the message for an empty name and observes a missing argument."
                     ],
                     language: "javascript",
                     code: "function greet(name) {\n    if (name === \"\") return;\n    console.log(`Hello ${name}`);\n}\nconsole.log(greet(\"\"));\nconsole.log(greet(\"Mia\"));\nfunction read(value) { return value; }\nconsole.log(read());",
                     result: "undefined\nHello Mia\nundefined\nundefined",
                     explanation: [
-                        "The empty-name call stops before its console.log.",
+                        "The empty-name call stops before its `console.log`.",
                         "The Mia call reaches the end without returning a value.",
-                        "read() has no argument, so value is undefined."
+                        "`read()` has no argument, so `value` is `undefined`."
                     ]
                 }
             ]
         },
         {
             id: "default-parameters",
-            title: "A default replaces a missing or undefined argument",
+            title: "Default parameters",
             bullets: [
-                "Write parameter = defaultValue to supply a default.",
-                "The default applies when the argument is missing or undefined.",
-                "null, zero, false, and empty text do not trigger the default."
+                "The syntax `parameter = defaultValue` supplies a default.",
+                "The default applies when the argument is missing or `undefined`.",
+                "`null`, zero, `false`, and empty text do not trigger the default."
             ],
             examples: [
                 {
-                    title: "Use a default greeting",
+                    title: "Default greeting",
                     description: [
-                        "Compare missing, undefined, and explicit empty values."
+                        "The example compares missing, `undefined`, and explicit empty values."
                     ],
                     language: "javascript",
                     code: "function show(value = \"default\") { console.log(value); }\nshow();\nshow(undefined);\nshow(0);\nshow(null);",
@@ -90,21 +93,22 @@ const note: LearningNote = {
         },
         {
             id: "switch-return",
-            title: "return exits a function containing switch",
+            title: "Returns inside switch statements",
             bullets: [
-                "A return inside switch ends the whole function call. break ends only the switch."
+                "A `return` inside `switch` ends the whole function call.",
+                "`break` ends only the `switch`."
             ],
             examples: [
                 {
-                    title: "Return a role’s permission",
+                    title: "Role permissions",
                     description: [
-                        "Use a return in each case instead of assigning a temporary result."
+                        "Each case returns its result directly."
                     ],
                     language: "javascript",
                     code: "function permission(role) {\n    switch (role) {\n        case \"editor\": return \"edit\";\n        case \"reader\": return \"read\";\n        default: return \"none\";\n    }\n}\nconsole.log(permission(\"editor\"));\nconsole.log(permission(\"guest\"));",
                     result: "edit\nnone",
                     explanation: [
-                        "Each return supplies the result and ends its call."
+                        "Each `return` supplies the result and ends its call."
                     ]
                 }
             ]

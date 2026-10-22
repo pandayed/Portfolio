@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "control-flow",
     title: "Conditions: if, else, and switch",
-    summary: "Choose the statements to run from a condition.",
+    summary: "Conditions select which statements run.",
     scope: "javascript",
     updatedOn: "2026-10-14",
     pointwise: true,
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -17,70 +18,75 @@ const note: LearningNote = {
     sections: [
         {
             id: "if-and-else",
-            title: "if and else choose a branch",
+            title: "Conditional branches",
             bullets: [
-                "if runs its block when the condition is truthy. else runs when it is falsy.",
-                "else if checks another condition after an earlier condition fails. The first matching branch wins."
+                "`if` runs its block when the condition is truthy.",
+                "`else` runs when it is falsy.",
+                "`else if` checks another condition after an earlier condition fails.",
+                "The first matching branch wins."
             ],
             examples: [
                 {
-                    title: "Describe a count",
+                    title: "Counter conditions",
                     description: [
-                        "Use comparisons to distinguish positive, zero, and negative counts."
+                        "The comparisons distinguish positive, zero, and negative counts."
                     ],
                     language: "javascript",
                     code: "const count = 0;\nif (count > 0) {\n    console.log(\"positive\");\n} else if (count === 0) {\n    console.log(\"zero\");\n} else {\n    console.log(\"negative\");\n}",
                     result: "zero",
                     explanation: [
                         "The first condition fails.",
-                        "The second condition matches, so the final else does not run."
+                        "The second condition matches, so the final `else` does not run."
                     ]
                 }
             ]
         },
         {
             id: "conditional-expression",
-            title: "Choose one result with the conditional operator",
+            title: "Conditional operator",
             bullets: [
-                "condition ? whenTrue : whenFalse chooses one expression. This is also called the ternary operator.",
+                "`condition ? whenTrue : whenFalse` chooses one expression.",
+                "This is also called the ternary operator.",
                 "Only the chosen expression runs.",
-                "Use if and else when a branch needs several statements."
+                "`if` and `else` allow several statements in a branch."
             ],
             examples: [
                 {
-                    title: "Choose a short label",
+                    title: "Conditional labels",
                     description: [
-                        "Assign one of two labels from a boolean comparison."
+                        "The boolean comparison selects one of two labels."
                     ],
                     language: "javascript",
                     code: "const count = 0;\nconst label = count === 0 ? \"empty\" : \"has items\";\nconsole.log(label);",
                     result: "empty",
                     explanation: [
-                        "The condition is true, so label receives \"empty\"."
+                        "The condition is `true`, so label receives \"empty\"."
                     ]
                 }
             ]
         },
         {
             id: "switch",
-            title: "switch matches with strict equality",
+            title: "Switch cases and fallthrough",
             bullets: [
-                "switch compares its input with case values using strict equality.",
-                "default runs when no case matches.",
-                "break exits the switch. Without a stopping statement, execution continues into later cases. This is fallthrough."
+                "`switch` compares its input with `case` values using strict equality.",
+                "`default` runs when no `case` matches.",
+                "`break` exits the `switch`.",
+                "Without a stopping statement, execution continues into later cases.",
+                "This is fallthrough."
             ],
             examples: [
                 {
-                    title: "Select a role",
+                    title: "Role cases",
                     description: [
-                        "Use break after the matched case to stop fallthrough."
+                        "The `break` after the matched `case` stops fallthrough."
                     ],
                     language: "javascript",
                     code: "const role = \"editor\";\nswitch (role) {\n    case \"editor\":\n        console.log(\"edit access\");\n        break;\n    case \"reader\":\n        console.log(\"read access\");\n        break;\n    default:\n        console.log(\"no access\");\n}\nconsole.log(\"after switch\");",
                     result: "edit access\nafter switch",
                     explanation: [
-                        "Removing the first break would also print read access.",
-                        "A numeric case 1 would not match the string \"1\"."
+                        "Removing the first `break` would also print read access.",
+                        "A numeric `case` 1 would not match the string \"1\"."
                     ]
                 }
             ]

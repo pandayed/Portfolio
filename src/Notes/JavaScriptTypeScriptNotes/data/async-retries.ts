@@ -2,10 +2,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: "async-retries",
-    title: "Retrying asynchronous operations",
-    summary: "Start another attempt only when the operation and failure policy allow it.",
+    title: "Asynchronous retries",
+    summary: "A retry policy defines when another attempt can start.",
     scope: "javascript",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -24,19 +25,24 @@ const note: LearningNote = {
     sections: [
         {
             id: "attempts",
-            title: "Call the operation again",
+            title: "Retry attempts",
             bullets: [
-                "A retry starts a new attempt after failure. Awaiting the same rejected Promise again does not start new work.",
-                "Pass a function that starts the operation. Calling that function again creates the next attempt.",
-                "Limit attempts and decide which failures can be retried. JavaScript does not classify failures as temporary.",
-                "Stop for a permanent failure or when the attempt limit is reached. Preserve the final failure for the caller."
+                "A retry starts a new attempt after failure.",
+                "Awaiting the same rejected `Promise` again does not start new work.",
+                "The retry helper receives a function that starts the operation.",
+                "Calling that function again creates the next attempt.",
+                "A retry policy defines the attempt limit and the failures eligible for retry.",
+                "JavaScript does not classify failures as temporary.",
+                "Retries stop after a permanent failure or at the attempt limit.",
+                "The final failure reaches the caller."
             ],
             examples: [
                 {
-                    title: "Retry temporary failures with a limit",
+                    title: "Bounded retries for temporary failures",
                     description: [
-                        "The application adds temporary: true to errors it allows this helper to retry.",
-                        "The helper uses three attempts and increasing delays. It also demonstrates permanent and exhausted failures."
+                        "The application adds temporary: `true` to errors it allows this helper to retry.",
+                        "The helper uses three attempts and increasing delays.",
+                        "It also demonstrates permanent and exhausted failures."
                     ],
                     language: "javascript",
                     code: `const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -85,7 +91,8 @@ inspectRetries();
                     result: "attempt 1\nretry after 10\nattempt 2\nretry after 20\nattempt 3\nready\npermanent 1\nretry after 10\nretry after 20\nstill temporary 3",
                     explanation: [
                         "The operation is called again for each attempt.",
-                        "A permanent failure stops after one call. Three temporary failures exhaust the attempt limit.",
+                        "A permanent failure stops after one call.",
+                        "Three temporary failures exhaust the attempt limit.",
                         "The sample policy and delays are application choices rather than language rules."
                     ],
                     runnable: true
@@ -94,18 +101,22 @@ inspectRetries();
         },
         {
             id: "backoff",
-            title: "Choose retry timing from a policy",
+            title: "Retry timing policies",
             bullets: [
-                "Backoff increases the delay between attempts. Exponential backoff multiplies the delay by a growing power.",
+                "Backoff increases the delay between attempts.",
+                "Exponential backoff multiplies the delay by a growing power.",
                 "Jitter adds a random delay so clients do not all retry at the same time.",
-                "A Retry-After response header can supply a wait in seconds or as an HTTP date. A client can account for that instruction in its retry policy.",
-                "A policy may retry 429 or selected temporary server failures. An unchanged invalid request or missing authentication usually needs correction first."
+                "A Retry-After response header can supply a wait in seconds or as an HTTP date.",
+                "A client can account for that instruction in its retry policy.",
+                "A policy may retry 429 or selected temporary server failures.",
+                "An unchanged invalid request or missing authentication usually needs correction first."
             ],
             examples: [
                 {
-                    title: "Read server timing and add jitter",
+                    title: "Server timing and jitter",
                     description: [
-                        "This sample policy selects statuses 429, 502, 503, and 504. A different operation may require a different policy."
+                        "This sample policy selects statuses 429, 502, 503, and 504.",
+                        "A different operation may require a different policy."
                     ],
                     language: "javascript",
                     code: `// This is an application policy, not a JavaScript rule.
@@ -130,8 +141,11 @@ const jitter = Math.floor(Math.random() * 100); // integer from 0 through 99
 console.log(exponentialDelay + jitter); // 500 through 599, variable`,
                     result: "true\nfalse\nfalse\n2000\n2000\nA number from 500 through 599",
                     explanation: [
-                        "/^\\d+$/ is a regular expression. It checks that the whole header contains only digits. Date.parse handles the date form.",
-                        "The deterministic waits are 2000 ms. The final random addition makes its exact output variable."
+                        "`/`^\\d+$`/` is a regular expression.",
+                        "It checks that the whole header contains only digits.",
+                        "`Date.parse` handles the date form.",
+                        "The deterministic waits are 2000 ms.",
+                        "The final random addition makes its exact output variable."
                     ],
                     possibleOutput: true,
                     runnable: true
@@ -140,19 +154,22 @@ console.log(exponentialDelay + jitter); // 500 through 599, variable`,
         },
         {
             id: "writes",
-            title: "Make repeated writes safe through a service contract",
+            title: "Repeated writes and service contracts",
             bullets: [
-                "A write may succeed even when its response is lost. Retrying can then create duplicate data.",
+                "A write may succeed even when its response is lost.",
+                "Retrying can then create duplicate data.",
                 "An idempotent operation has the same intended effect when repeated.",
-                "An idempotency key works only when the service records and honors it. Reuse one key for every attempt at the same logical write."
+                "An idempotency key works only when the service records and honors it.",
+                "Reuse one key for every attempt at the same logical write."
             ],
             examples: [
                 {
-                    title: "Reuse one order key",
+                    title: "Shared order keys",
                     description: [
-                        "Browser setup: HTTPS or localhost supplies crypto.randomUUID.",
-                        "Service setup: POST /api/orders accepts an Idempotency-Key, records the first successful order for it, and returns that same order for repeats.",
-                        "This contract must be implemented by the service. The two calls deliberately repeat one logical order."
+                        "Browser setup: HTTPS or localhost supplies `crypto.randomUUID`.",
+                        "Service setup: `POST /api/orders` accepts an `Idempotency-Key`, records the first successful order for it, and returns that same order for repeats.",
+                        "This contract must be implemented by the service.",
+                        "The two calls deliberately repeat one logical order."
                     ],
                     language: "javascript",
                     code: `const key = crypto.randomUUID(); // create once for this logical order
@@ -174,25 +191,29 @@ compare().catch((error) => console.log(error.message));
 `,
                     result: "true under the stated service contract.",
                     explanation: [
-                        "The same random key is reused for both calls. A service that ignores it may create two orders.",
-                        "The HTTP status checks still handle unsuccessful responses. A lost first response is why retrying a write needs this contract."
+                        "The same random key is reused for both calls.",
+                        "A service that ignores it may create two orders.",
+                        "The HTTP status checks still handle unsuccessful responses.",
+                        "A lost first response is why retrying a write needs this contract."
                     ]
                 }
             ]
         },
         {
             id: "abortable-waits",
-            title: "Stop the retry wait as well as the request",
+            title: "Retry wait cancellation",
             bullets: [
-                "A retry delay is another pending operation. Cancelling a request does not automatically clear that delay.",
+                "A retry delay is another pending operation.",
+                "Cancelling a request does not automatically clear that delay.",
                 "An abortable delay listens to the same signal, clears its timer, and rejects with the signal’s reason.",
-                "Pass the signal through both request attempts and waits. An aborted wait then prevents the next attempt from starting."
+                "The same signal controls request attempts and waits.",
+                "An aborted wait then prevents the next attempt from starting."
             ],
             examples: [
                 {
-                    title: "Cancel a pending delay",
+                    title: "Pending delay cancellation",
                     description: [
-                        "Call sleep with an AbortSignal and abort it before its timer fires."
+                        "The example calls sleep with an `AbortSignal` and aborts it before the timer fires."
                     ],
                     language: "javascript",
                     code: `function sleep(ms, signal) {
@@ -215,8 +236,9 @@ controller.abort(); // AbortError, not delay finished
 // signal to fetch. The caller can then stop both the delay and request.`,
                     result: "AbortError",
                     explanation: [
-                        "The abort listener clears the timer and rejects the pending Promise.",
-                        "Normal timer completion removes the abort listener. The same helper can be awaited between retry attempts."
+                        "The abort listener clears the timer and rejects the pending `Promise`.",
+                        "Normal timer completion removes the abort listener.",
+                        "The same helper can be awaited between retry attempts."
                     ],
                     runnable: true
                 }

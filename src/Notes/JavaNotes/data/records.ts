@@ -6,45 +6,70 @@ const note: LearningNote = {
     summary: 'Declare value components with generated methods, validate construction, and protect mutable component data.',
     scope: 'java',
     pointwise: true,
+    inlineCode: true,
     exampleLayout: 'grouped',
-    updatedOn: '2026-10-13',
+    updatedOn: '2026-10-21',
     sections: [
         {
             id: 'record-basics',
-            title: 'A record declares a fixed set of value components',
+            title: 'Record declarations',
             bullets: [
+                '`record` is Java syntax. It does not require Spring, Spring Boot, Lombok, or an import.',
                 'A record defines a class from named values called components.',
+                'In `public record GreetingRequest(String name) {}`, `GreetingRequest` is the class name.',
+                '`String name` declares one component named `name` with type `String`.',
+                '`public` makes the record accessible outside its package.',
+                'The empty body `{}` declares no extra members. Java still generates the record members.',
                 'Records became a standard language feature in Java 16.',
-                'Java generates a private final field and an accessor for each component.',
-                'An accessor uses the component name, such as quantity(), rather than getQuantity().',
+                'Java generates a `private final` field and a public accessor for each component.',
+                'The accessor for `name` is `name()`, not `getName()`.',
                 'Java generates a canonical constructor that accepts one argument per component.',
-                'Java also generates equals, hashCode, and toString. A record can declare allowed replacements.',
-                'Generated equals compares the record type and every component.',
+                'Java also generates `equals`, `hashCode`, and `toString`. A record can declare allowed replacements.',
+                'Generated `equals` compares the record type and every component.',
                 'Array components use array identity in generated equality. Array contents are not compared deeply.',
-                'A record is final. It can implement interfaces but cannot extend another class.',
+                'A record is `final`. It can implement interfaces but cannot extend another class.',
                 'A record cannot declare additional instance fields.',
             ],
             examples: [{
-                title: 'Create a record and read its components',
+                title: 'Create and read a greeting request',
                 description: [
-                    'Create a Coordinate with x = 2 and y = 3, then print its components and generated text.',
+                    'The two tabs contain all Java source files for this example.',
+                    'Both files belong in the same directory. The example requires JDK 17 or later.',
+                    'This program uses only Java. It has no Spring dependencies.',
                 ],
                 language: 'java',
-                code: `record Coordinate(int x, int y) {}
-
-public class Main {
+                code: '',
+                files: [
+                    {
+                        name: 'GreetingRequest.java',
+                        language: 'java',
+                        code: `public record GreetingRequest(String name) {}`,
+                    },
+                    {
+                        name: 'Main.java',
+                        language: 'java',
+                        code: `public class Main {
     public static void main(String[] args) {
-        Coordinate position = new Coordinate(2, 3);
-        System.out.println(position.x());
-        System.out.println(position.y());
-        System.out.println(position);
+        GreetingRequest request = new GreetingRequest("Ada");
+        GreetingRequest sameValue = new GreetingRequest("Ada");
+
+        System.out.println(request.name());
+        System.out.println(request.equals(sameValue));
+        System.out.println(request);
     }
 }`,
-                result: '2\n3\nCoordinate[x=2, y=3]',
+                    },
+                ],
+                commands: 'javac GreetingRequest.java Main.java\njava Main',
+                result: 'Ada\ntrue\nGreetingRequest[name=Ada]',
                 explanation: [
-                    'The generated constructor stores 2 and 3 in the component fields.',
-                    'x() and y() return those values.',
-                    'The generated toString prints Coordinate[x=2, y=3].',
+                    'Java generates the constructor `GreetingRequest(String name)`.',
+                    '`new GreetingRequest("Ada")` stores `Ada` in the generated field.',
+                    '`request.name()` reads that field through the generated accessor.',
+                    'The objects are different instances, but generated `equals` considers their components equal.',
+                    'Printing the record calls generated `toString`.',
+                    'Java does not generate `setName`. A different name requires a new record object.',
+                    'A name such as `GreetingRequest` does not make the record an HTTP request handler or a Spring bean.',
                 ],
             }],
         },
@@ -52,7 +77,7 @@ public class Main {
             id: 'record-validation',
             title: 'Validate record components',
             bullets: [
-                'Generated constructors accept null and invalid numbers unless the record declares validation.',
+                'Generated constructors accept `null` and invalid numbers unless the record declares validation.',
                 'A compact constructor uses the record name without a parameter list.',
                 'Its body can validate or normalize the component parameters.',
                 'After the body finishes, Java assigns those parameters to the component fields.',
@@ -154,6 +179,7 @@ public class Main {
             }],
         },
     ],
+    references: [{ title: 'Java 17: record classes', href: 'https://docs.oracle.com/en/java/javase/17/language/records.html' }],
 };
 
 export default note;

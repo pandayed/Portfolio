@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-deployment-vps",
   "title": "Run the application on a VPS",
-  "summary": "Manage the Java process with a dedicated user, configuration and systemd.",
+  "summary": "Supply Boot configuration to a dedicated Java process and let systemd manage its lifecycle.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: How to Host Spring Boot on VPS: Production Guide (2026)",
@@ -12,227 +12,275 @@
     {
       "title": "systemd: service units",
       "url": "https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html"
+    },
+    {
+      "title": "Spring Boot 3.5: installing applications",
+      "url": "https://docs.spring.io/spring-boot/3.5/how-to/deployment/installing.html"
+    },
+    {
+      "title": "Spring Boot 3.5: graceful shutdown",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/web/graceful-shutdown.html"
     }
   ],
   "blocks": [
     {
-      "id": "vps-components",
+      "id": "deployment-vps-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Prepare the application host"
+          "A Boot process on a VPS"
         ]
       ]
     },
     {
-      "id": "vps-components-b0",
+      "id": "deployment-vps-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A virtual private server (VPS) provides a machine that you manage."
+          "A VPS runs the same executable JAR described in the packaging lesson."
         ]
       ]
     },
     {
-      "id": "vps-components-b1",
+      "id": "deployment-vps-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Install a Java runtime compatible with the application’s Boot release and compiled classes."
+          "The installed Java runtime must support the application\u2019s compiled Java version."
         ]
       ]
     },
     {
-      "id": "vps-components-b2",
+      "id": "deployment-vps-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Build the JAR from a known application revision and copy that artifact to the server."
+          "External properties provide database connections, credentials, profiles, and server settings."
         ]
       ]
     },
     {
-      "id": "vps-components-b3",
+      "id": "deployment-vps-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a dedicated operating-system user with access to the application’s required files."
+          "A dedicated operating-system account runs the application. It needs access to its JAR and required files, rather than administrative privileges."
         ]
       ]
     },
     {
-      "id": "vps-components-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Supply database settings and other credentials through restricted configuration."
-        ]
-      ]
-    },
-    {
-      "id": "vps-process",
+      "id": "deployment-vps-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Let systemd manage the process"
+          "Process management"
         ]
       ]
     },
     {
-      "id": "vps-process-b0",
+      "id": "deployment-vps-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "systemd is a Linux service manager."
+          "On a Linux host using systemd, a service unit defines how the Boot process starts and stops."
         ]
       ]
     },
     {
-      "id": "vps-process-b1",
+      "id": "deployment-vps-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A service unit describes the command to run and how to start or restart it."
+          "systemd can start that process at boot and restart it after failure."
         ]
       ]
     },
     {
-      "id": "vps-process-b2",
+      "id": "deployment-vps-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "It can start the application during boot and restart it after failure."
+          "The Java process writes normal console logs to the service demo unless other logging is configured."
         ]
       ]
     },
     {
-      "id": "vps-process-b3",
+      "id": "deployment-vps-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Starting Java in an interactive terminal does not provide these service settings."
+          "A service start can succeed before Boot finishes starting. An application request checks readiness after startup."
         ]
       ]
     },
     {
-      "id": "vps-components-code",
+      "id": "deployment-vps-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "A systemd service"
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Create a service for the journal JAR",
-        "description": [
-          "The server has systemd and Java installed at /usr/bin/java.",
-          "Create the journal user, /opt/journal directory and /etc/journal.env before starting this unit.",
-          "Copy journal.jar into /opt/journal and let the journal user read it.",
-          "Place the unit below in /etc/systemd/system/journal.service.",
-          "For the next reverse-proxy lesson, put SERVER_ADDRESS=127.0.0.1 and SERVER_PORT=8080 in /etc/journal.env.",
-          "Add required database settings to that file and restrict access because it can contain credentials."
-        ],
-        "code": "# /etc/systemd/system/journal.service\n[Unit]\nDescription=Journal application\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nUser=journal\nWorkingDirectory=/opt/journal\nEnvironmentFile=/etc/journal.env\nExecStart=/usr/bin/java -jar /opt/journal/journal.jar\nRestart=on-failure\nRestartSec=5\n\n[Install]\nWantedBy=multi-user.target",
+        "title": "Run the demo JAR as a managed service",
         "language": "text",
-        "explanation": [
-          "User selects the operating-system account that runs Java.",
-          "EnvironmentFile supplies environment variables to the process.",
-          "ExecStart starts the deployed JAR.",
-          "Restart=on-failure restarts a failed process after five seconds.",
-          "daemon-reload makes systemd reread the unit. enable --now starts it and enables boot-time startup.",
-          "status and journalctl show whether the process started and what it logged."
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "The Linux host uses systemd and Java `17` at `/usr/bin/java`. The `demo` account and group already exist.",
+          "The commands run on the host from the project root. `/opt/demo` already exists. The service account can read its JAR but cannot replace it.",
+          "The root-owned `/etc/demo.env` file has restricted permissions. The two absolute-path tabs show host configuration files.",
+          "Each host configuration tab is saved at its displayed absolute path before the service commands run."
         ],
-        "commands": "sudo systemctl daemon-reload\nsudo systemctl enable --now journal.service\nsystemctl status journal.service\njournalctl -u journal.service"
+        "code": "",
+        "explanation": [
+          "`EnvironmentFile` passes its environment variables to Java. Boot maps the server variables to `server.address` and `server.port`.",
+          "`WorkingDirectory` also determines the base for relative application file paths.",
+          "`ExecStart` runs the executable JAR as the `demo` account.",
+          "`Restart=on-failure` retries a failed process after five seconds.",
+          "`TimeoutStopSec` gives the process time to stop before systemd forces termination.",
+          "`daemon-reload` reads the changed unit. `enable --now` starts it and enables startup at boot.",
+          "`journalctl` shows the application\u2019s console logs. Startup failures appear there."
+        ],
+        "commands": "mvn clean package\nsudo install -o root -g demo -m 640 target/demo.jar /opt/demo/demo.jar\nsudo systemctl daemon-reload\nsudo systemctl enable --now demo.service\nsudo systemctl restart demo.service\nsystemctl status demo.service\njournalctl -u demo.service -n 100 --no-pager\ncurl -i http://127.0.0.1:8080/",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/\")\n    public String hello() { return \"Hello, Spring Boot\"; }\n}\n"
+          },
+          {
+            "name": "/etc/systemd/system/demo.service",
+            "language": "text",
+            "code": "# /etc/systemd/system/demo.service\n[Unit]\nDescription=Demo application\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nUser=demo\nGroup=demo\nWorkingDirectory=/opt/demo\nEnvironmentFile=/etc/demo.env\nExecStart=/usr/bin/java -jar /opt/demo/demo.jar\nRestart=on-failure\nRestartSec=5\nTimeoutStopSec=60\nNoNewPrivileges=true\n\n[Install]\nWantedBy=multi-user.target\n"
+          },
+          {
+            "name": "/etc/demo.env",
+            "language": "text",
+            "code": "SERVER_ADDRESS=127.0.0.1\nSERVER_PORT=8080\nSERVER_FORWARD_HEADERS_STRATEGY=NATIVE\nSPRING_LIFECYCLE_TIMEOUT_PER_SHUTDOWN_PHASE=30s\n"
+          }
+        ]
       }
     },
     {
-      "id": "vps-environment",
+      "id": "deployment-vps-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Diagnose startup failures"
+          "Startup and shutdown"
         ]
       ]
     },
     {
-      "id": "vps-environment-b0",
+      "id": "deployment-vps-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "If the process repeatedly restarts, read its logs before changing the restart settings."
+          "A repeated restart can mean a missing property, an incompatible Java runtime, a port conflict, or an unavailable dependency. The application log identifies the actual failure."
         ]
       ]
     },
     {
-      "id": "vps-environment-b1",
+      "id": "deployment-vps-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check the Java version, required settings and database availability."
-        ]
-      ]
-    },
-    {
-      "id": "vps-environment-b2",
-      "type": "bulleted_list",
-      "richText": [
+          "Boot "
+        ],
         [
-          "Keep application logs available and configure their retention."
-        ]
-      ]
-    },
-    {
-      "id": "vps-environment-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "After a controlled restart or reboot, confirm the service starts again."
-        ]
-      ]
-    },
-    {
-      "id": "vps-checks",
-      "type": "header",
-      "richText": [
-        [
-          "Update the deployed artifact"
-        ]
-      ]
-    },
-    {
-      "id": "vps-checks-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep the current artifact available before replacing it."
-        ]
-      ]
-    },
-    {
-      "id": "vps-checks-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Restart the service after installing a new JAR. Check startup and an application request."
-        ]
-      ]
-    },
-    {
-      "id": "vps-checks-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Plan database migrations and backups separately from JAR replacement."
-        ]
-      ]
-    },
-    {
-      "id": "vps-proxy-next",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Expose the application through Nginx and HTTPS",
+          "3.5",
           [
             [
-              "a",
-              "/notes/spring-boot/deployment/nginx-https"
+              "c"
             ]
           ]
+        ],
+        [
+          " enables graceful shutdown for its embedded servers by default."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.lifecycle.timeout-per-shutdown-phase",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " sets the grace period. The service manager\u2019s stop timeout must allow that work to finish."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A service restart after installing a new JAR starts new application classes. Replacing the file alone does not update the running process."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-4",
+      "type": "header",
+      "richText": [
+        [
+          "Releases"
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-4-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The deployed JAR needs an identifiable application revision and a retained prior artifact for rollback."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-4-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "After a restart, startup logs and a controlled application request check the new release."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-4-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Database migrations and backups need their own plan. Rolling back the JAR does not roll back database changes."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-vps-lesson-4-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The next lesson adds the public HTTPS route to the local Boot port."
         ]
       ]
     }

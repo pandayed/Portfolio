@@ -4,190 +4,399 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480e4be00c1bf8a7f3b5a",
   "blocks": [
     {
-      "id": "ed-jpa-boundaries",
+      "id": "spring-data-jpa-lesson-0",
       "type": "header",
       "richText": [
         [
-          "JPA and repository support"
+          "Repository beans"
         ]
       ]
     },
     {
-      "id": "ed-jpa-boundaries-b0",
+      "id": "spring-data-jpa-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "JPA maps entities to relational tables. Hibernate implements the JPA operations in a typical Spring Boot JPA application."
+          "A Spring Data repository is an interface whose database implementation Spring creates at startup."
         ]
       ]
     },
     {
-      "id": "ed-jpa-boundaries-b1",
+      "id": "spring-data-jpa-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Data JPA adds repository interfaces on top of JPA. A repository provides methods for storing and retrieving entities."
+          "The generated bean is a proxy: an object that receives interface calls and forwards them to repository code or generated queries."
         ]
       ]
     },
     {
-      "id": "ed-jpa-boundaries-b2",
+      "id": "spring-data-jpa-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring creates an implementation of a declared repository interface. Application code injects that repository as a bean."
+          "The application injects this bean through its constructor."
         ]
       ]
     },
     {
-      "id": "ed-jpa-boundaries-b3",
+      "id": "spring-data-jpa-lesson-0-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "MongoRepository is a separate Spring Data MongoDB interface. It does not use JPA or Hibernate to store MongoDB documents."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ed-aa39-cffa1f296c55",
-      "type": "header",
-      "richText": [
-        [
-          "Choose a repository interface"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ed-aa39-cffa1f296c55-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "CrudRepository provides create, read, update and delete methods such as save, findById and deleteById."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ed-aa39-cffa1f296c55-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "JpaRepository includes these operations and adds JPA-specific operations such as flush and batch deletion. It also supports paging and sorting."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ed-aa39-cffa1f296c55-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The first type argument is the entity class. The second is its ID type."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80ed-aa39-cffa1f296c55-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep business rules in the service. Use the repository for persistence operations."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8036-a114-c3797797b91f",
-      "type": "example",
-      "example": {
-        "title": "Declare an employee repository",
-        "description": [
-          "Use Employee from the entity mapping page.",
-          "Place this interface under the application package. Spring Boot scans that package for repositories."
+          "It does not create the repository with "
         ],
-        "code": "import org.springframework.data.jpa.repository.JpaRepository;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n}",
-        "language": "java",
-        "explanation": [
-          "Employee is the entity type. Long matches Employee.id.",
-          "No implementation class is needed for the inherited repository methods."
-        ]
-      }
-    },
-    {
-      "id": "jpa-save-read",
-      "type": "header",
-      "richText": [
         [
-          "Save, read and delete"
-        ]
-      ]
-    },
-    {
-      "id": "jpa-save-read-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "save stores a new entity or merges an existing entity according to JPA entity-state rules. Use the returned entity."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-save-read-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "findById returns Optional because the ID may not match any row."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-save-read-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "findAll returns all matching rows. For a growing table, read a page instead of loading the entire table."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-save-read-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "flush sends pending changes to the database. It is different from committing the transaction."
-        ]
-      ]
-    },
-    {
-      "id": "employee-service",
-      "type": "example",
-      "example": {
-        "title": "Save an employee through a service",
-        "description": [
-          "Use Employee and EmployeeRepository from the preceding examples.",
-          "Place this service under the application package."
-        ],
-        "code": "import java.util.Optional;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class EmployeeService {\n    private final EmployeeRepository repository;\n\n    public EmployeeService(EmployeeRepository repository) {\n        this.repository = repository;\n    }\n\n    public Employee add(String name, String department) {\n        return repository.save(new Employee(name, department));\n    }\n\n    public Optional<Employee> find(Long id) {\n        return repository.findById(id);\n    }\n}",
-        "language": "java",
-        "explanation": [
-          "Spring supplies the repository through the constructor.",
-          "add creates an Employee without an ID and saves it.",
-          "find preserves the distinction between a found employee and a missing row.",
-          "A controller can decide how a missing employee appears in an HTTP response."
-        ]
-      }
-    },
-    {
-      "id": "jpa-query-next",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Search using repository queries",
+          "new",
           [
             [
-              "a",
-              "/notes/spring-boot/jpa-queries"
+              "c"
             ]
           ]
+        ],
+        [
+          "."
         ]
       ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JpaRepository<Employee, Long>",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects the entity class and its identifier type."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JpaRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " inherits common storage methods and adds JPA operations such as "
+        ],
+        [
+          "flush",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "CrudRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " exposes the basic storage methods when the extra JPA operations are not needed."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-0-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Repository discovery normally uses the main application class\u2019s package and its subpackages."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-0-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@EnableJpaRepositories",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies a different repository location when needed."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-0-note-7-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The normal Boot package layout does not require it."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1",
+      "type": "header",
+      "richText": [
+        [
+          "Repository operations"
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "save",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " asks JPA to persist a new entity or merge an existing entity\u2019s state."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "With a generated ID and no version field, Spring Data normally treats a "
+        ],
+        [
+          "null",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " ID as new."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The saved return value can be a different object."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Application code uses the returned value."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "findById",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " returns "
+        ],
+        [
+          "Optional<Employee>",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A missing row produces an empty "
+        ],
+        [
+          "Optional",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "deleteById",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " removes a row by identifier."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "findAll",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can load every row."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-5-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bounded queries are introduced on the query page."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "flush",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " sends pending SQL changes to the database."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-note-6-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not commit the transaction."
+        ]
+      ]
+    },
+    {
+      "id": "spring-data-jpa-lesson-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Save an employee through a repository bean",
+        "language": "java",
+        "description": [
+          "The tabs contain all application files for this separate Maven project.",
+          "The example requires Java 17 or later, Maven and PostgreSQL with an existing `employee_notes` database.",
+          "The environment supplies `DB_USERNAME` and `DB_PASSWORD`.",
+          "`database/schema.sql` creates the tables in an empty database before `mvn spring-boot:run`.",
+          "Hibernate validates the supplied schema. It does not create the tables."
+        ],
+        "code": "",
+        "explanation": [
+          "Spring supplies the generated `EmployeeRepository` bean to the service constructor.",
+          "`save` uses the mapping to insert the employee and return an entity with its assigned ID.",
+          "The service contains the application operation.",
+          "The repository handles persistence.",
+          "Each inherited repository write method has transaction settings.",
+          "A transaction spanning several calls is explained after queries."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeRepository.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport org.springframework.data.jpa.repository.JpaRepository;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeService.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport java.util.Optional;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class EmployeeService {\n    private final EmployeeRepository employees;\n\n    public EmployeeService(EmployeeRepository employees) {\n        this.employees = employees;\n    }\n\n    public Employee create(String name, String department) {\n        return employees.save(new Employee(name, department));\n    }\n\n    public Optional<Employee> find(Long id) {\n        return employees.findById(id);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/Employee.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport jakarta.persistence.Column;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false, length = 100)\n    private String name;\n\n    @Column(nullable = false, length = 100)\n    private String department;\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n    public void rename(String name) { this.name = name; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.postgresql</groupId>\n            <artifactId>postgresql</artifactId>\n            <scope>runtime</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/employee_notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate\nspring.jpa.open-in-view=false\n"
+          },
+          {
+            "name": "database/schema.sql",
+            "language": "sql",
+            "code": "CREATE TABLE employees (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(100) NOT NULL\n);\n"
+          }
+        ]
+      }
     }
   ],
   "sources": [
@@ -198,8 +407,20 @@
     {
       "title": "Spring Boot 3.5: SQL databases",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/data/sql.html"
+    },
+    {
+      "title": "Spring Data JPA 3.5: saving entities",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/3.5/jpa/entity-persistence.html"
+    },
+    {
+      "title": "Spring Data JPA 3.5: transactionality",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/3.5/jpa/transactions.html"
+    },
+    {
+      "title": "Spring Data Commons 3.5: repository interfaces",
+      "url": "https://docs.spring.io/spring-data/commons/reference/3.5/repositories/core-concepts.html"
     }
   ],
-  "updatedOn": "2026-10-14",
-  "summary": "Declare a repository and use its basic save, find and delete operations."
+  "updatedOn": "2026-10-20",
+  "summary": "Declare a repository interface and use its generated Spring bean to save and find Employee rows."
 }

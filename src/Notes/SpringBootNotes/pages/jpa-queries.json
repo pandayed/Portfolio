@@ -2,20 +2,20 @@
   "id": "spring-boot-jpa-queries",
   "sourceUrl": "https://docs.spring.io/spring-data/",
   "title": "JPA Repository Queries",
-  "summary": "Add derived queries, declared JPQL queries and bounded results.",
-  "updatedOn": "2026-10-14",
+  "summary": "Build queries from entity properties, then add declared queries and bounded results.",
+  "updatedOn": "2026-10-20",
   "blocks": [
     {
-      "id": "jpa-derived",
+      "id": "jpa-queries-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Queries from method names"
+          "Derived queries"
         ]
       ]
     },
     {
-      "id": "jpa-derived-b0",
+      "id": "jpa-queries-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
@@ -24,48 +24,118 @@
       ]
     },
     {
-      "id": "jpa-derived-b1",
+      "id": "jpa-queries-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The method names use entity property names, not database column names."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-derived-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "findByDepartment searches the department property. And and Or combine conditions."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-derived-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A misspelled property can prevent the repository from being created."
-        ]
-      ]
-    },
-    {
-      "id": "department-query",
-      "type": "example",
-      "example": {
-        "title": "Find employees by department",
-        "description": [
-          "Use the Employee entity and database connection from the preceding lessons."
+          "The part after "
         ],
-        "code": "import java.util.List;\nimport org.springframework.data.jpa.repository.JpaRepository;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    List<Employee> findByDepartment(String department);\n}",
-        "language": "java",
-        "explanation": [
-          "Spring Data derives a query for the department property.",
-          "Calling findByDepartment(\"Engineering\") returns employees whose department matches Engineering.",
-          "A query returning List returns an empty list when no rows match."
+        [
+          "By",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " names entity properties."
         ]
-      }
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-0-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not name SQL columns."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-0-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "findByDepartment",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " filters the "
+        ],
+        [
+          "department",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " property."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "And",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "Or",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " combine conditions."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-0-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Supported suffixes such as "
+        ],
+        [
+          "Containing",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " select other comparisons."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An unknown property can stop repository creation at startup."
+        ]
+      ]
     },
     {
       "id": "jpa-declared",
@@ -77,125 +147,327 @@
       ]
     },
     {
-      "id": "jpa-declared-b0",
+      "id": "jpa-declared-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @Query when the query is clearer than a long method name."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-declared-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "JPQL is the JPA query language. It uses entity names and properties."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-declared-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Native SQL uses database tables and columns. Set nativeQuery=true when using SQL with @Query."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-declared-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Bind user-supplied values as parameters. Do not construct a query by joining raw input into its text."
-        ]
-      ]
-    },
-    {
-      "id": "jpql-query",
-      "type": "example",
-      "example": {
-        "title": "Write the same search with JPQL",
-        "description": [
-          "This is an alternative EmployeeRepository declaration. Use it instead of the derived-query declaration above."
+          "@Query",
+          [
+            [
+              "c"
+            ]
+          ]
         ],
-        "code": "import java.util.List;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    @Query(\"select e from Employee e where e.department = :department\")\n    List<Employee> findInDepartment(@Param(\"department\") String department);\n}",
-        "language": "java",
-        "explanation": [
-          "Employee is the entity name. department is its Java property.",
-          "The named parameter receives the method argument.",
-          "The persistence provider translates JPQL into SQL for the configured database."
+        [
+          " supplies the query when a method name would be unclear or insufficient."
         ]
-      }
+      ]
     },
     {
-      "id": "jpa-paging",
+      "id": "jpa-declared-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The default query language is JPQL."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPQL uses entity names and Java property names."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Param",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " connects a method argument to a named query parameter."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Query(nativeQuery = true)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " uses SQL tables and column names instead."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bound parameters keep values separate from query text."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-declared-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Raw input concatenated into query text can allow SQL injection."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Read one page"
+          "Pages and sorting"
         ]
       ]
     },
     {
-      "id": "jpa-paging-b0",
+      "id": "jpa-queries-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Pageable supplies a page number, page size and sort order. Page numbers start at zero."
+          "Pageable",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " carries a zero-based page number, a page size and sorting."
         ]
       ]
     },
     {
-      "id": "jpa-paging-b1",
+      "id": "jpa-queries-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Page includes the rows and total-count information. Calculating the total can require a separate count query."
+          "Page",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " contains the selected results and total-count information."
         ]
       ]
     },
     {
-      "id": "jpa-paging-b2",
+      "id": "jpa-queries-lesson-2-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Slice reports whether another slice exists without requiring the same total-count calculation."
+          "Spring Data may run another query to count rows."
         ]
       ]
     },
     {
-      "id": "jpa-paging-b3",
+      "id": "jpa-queries-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a stable sort. Add a unique property such as id when other sort values can repeat."
+          "Slice",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reports whether more results exist without requiring a total count."
         ]
       ]
     },
     {
-      "id": "jpa-page-example",
+      "id": "jpa-queries-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A unique sort property such as "
+        ],
+        [
+          "id",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " makes the order deterministic when other sort values repeat."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Read the first page of employees",
-        "description": [
-          "Run this code inside a service method with an injected EmployeeRepository named repository."
-        ],
-        "code": "import org.springframework.data.domain.Page;\nimport org.springframework.data.domain.PageRequest;\nimport org.springframework.data.domain.Sort;\n\nPage<Employee> page = repository.findAll(\n    PageRequest.of(0, 20, Sort.by(\"id\"))\n);",
+        "title": "Query employees by department",
         "language": "java",
+        "description": [
+          "The tabs contain all application files for this separate Maven project.",
+          "The example requires Java 17 or later, Maven and PostgreSQL with an existing `employee_notes` database.",
+          "The environment supplies `DB_USERNAME` and `DB_PASSWORD`.",
+          "`database/schema.sql` creates the tables in an empty database before `mvn spring-boot:run`.",
+          "Hibernate validates the supplied schema. It does not create the tables."
+        ],
+        "code": "",
         "explanation": [
-          "Page 0 is the first page. Its size is at most 20 employees.",
-          "Sorting by the unique id gives a defined order.",
-          "page.getContent() returns the employees in this page."
+          "`findByDepartment` demonstrates a fixed query derived from the property name.",
+          "`searchDepartment` expresses the same condition in JPQL and limits the result to one page.",
+          "`Employee` and `department` refer to the Java mapping.",
+          "The query does not use the SQL table name `employees`.",
+          "`PageRequest.of(0, 20, ...)` requests at most 20 rows from the first page."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeRepository.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport java.util.List;\nimport org.springframework.data.domain.Page;\nimport org.springframework.data.domain.Pageable;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\nimport org.springframework.data.repository.query.Param;\n\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    List<Employee> findByDepartment(String department);\n\n    @Query(\"select e from Employee e where e.department = :department\")\n    Page<Employee> searchDepartment(\n        @Param(\"department\") String department, Pageable pageable);\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeSearch.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\nimport org.springframework.data.domain.Page;\nimport org.springframework.data.domain.PageRequest;\nimport org.springframework.data.domain.Sort;\nimport org.springframework.stereotype.Service;\n@Service\npublic class EmployeeSearch {\n    private final EmployeeRepository employees;\n    public EmployeeSearch(EmployeeRepository employees) { this.employees = employees; }\n    public Page<Employee> engineering() {\n        return employees.searchDepartment(\"Engineering\", PageRequest.of(0, 20, Sort.by(\"id\")));\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/Employee.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport jakarta.persistence.Column;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false, length = 100)\n    private String name;\n\n    @Column(nullable = false, length = 100)\n    private String department;\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n    public void rename(String name) { this.name = name; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.postgresql</groupId>\n            <artifactId>postgresql</artifactId>\n            <scope>runtime</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/employee_notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate\nspring.jpa.open-in-view=false\n"
+          },
+          {
+            "name": "database/schema.sql",
+            "language": "sql",
+            "code": "CREATE TABLE employees (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(100) NOT NULL\n);\n"
+          }
         ]
       }
+    },
+    {
+      "id": "jpa-queries-lesson-3",
+      "type": "header",
+      "richText": [
+        [
+          "Update and delete queries"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Modifying",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " identifies an "
+        ],
+        [
+          "@Query",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " method that executes an update or delete instead of a select."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A modifying query needs a write transaction."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-3-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The next page explains where that transaction belongs."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Bulk update and delete queries bypass changes to individual managed objects."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-queries-lesson-3-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Already loaded entities can then contain stale values."
+        ]
+      ]
     }
   ],
   "sources": [
     {
       "title": "Spring Data JPA: query methods",
       "url": "https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html"
+    },
+    {
+      "title": "Spring Data JPA 3.5: query methods",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/3.5/jpa/query-methods.html"
+    },
+    {
+      "title": "Spring Data JPA 3.5: transactionality",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/3.5/jpa/transactions.html"
     }
   ]
 }

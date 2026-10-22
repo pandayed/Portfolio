@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-testing-parameterized-tests",
   "title": "Parameterized JUnit tests",
-  "summary": "Run the same check for several inputs with an argument source.",
+  "summary": "Use JUnit argument sources to check several inputs without copying the same test method.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring Boot 3.5: testing",
@@ -12,135 +12,393 @@
     {
       "title": "JUnit 5.12: user guide",
       "url": "https://docs.junit.org/5.12.2/user-guide/"
+    },
+    {
+      "title": "JUnit 5.12.2: parameterized tests",
+      "url": "https://docs.junit.org/5.12.2/user-guide/#writing-tests-parameterized-tests"
     }
   ],
   "blocks": [
     {
-      "id": "junit-parameter",
+      "id": "testing-parameterized-tests-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Run one test with several inputs"
+          "Parameterized JUnit methods"
         ]
       ]
     },
     {
-      "id": "junit-parameter-b0",
+      "id": "testing-parameterized-tests-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ParameterizedTest runs the same test method once for each supplied argument set."
+          "@ParameterizedTest",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " runs one test method several times with supplied arguments."
         ]
       ]
     },
     {
-      "id": "junit-parameter-b1",
+      "id": "testing-parameterized-tests-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "An argument source supplies those inputs."
+          "An argument source provides the values for each invocation. It belongs on the same method."
         ]
       ]
     },
     {
-      "id": "junit-parameter-b2",
+      "id": "testing-parameterized-tests-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @ValueSource for a single value per invocation."
+          "This is JUnit support from the test starter. It does not require Spring startup."
         ]
       ]
     },
     {
-      "id": "junit-parameter-b3",
-      "type": "bulleted_list",
+      "id": "testing-parameterized-tests-lesson-0-table-0",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "testing-parameterized-tests-lesson-0-table-0-row-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Source"
+              ]
+            ],
+            "1": [
+              [
+                "Arguments supplied"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "testing-parameterized-tests-lesson-0-table-0-row-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@ValueSource",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "1": [
+              [
+                "One simple value per invocation."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "testing-parameterized-tests-lesson-0-table-0-row-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@NullSource",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "1": [
+              [
+                "One "
+              ],
+              [
+                "null",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " argument."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "testing-parameterized-tests-lesson-0-table-0-row-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@EmptySource",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "1": [
+              [
+                "An empty value, where the parameter type supports it."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "testing-parameterized-tests-lesson-0-table-0-row-4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@CsvSource",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "1": [
+              [
+                "Rows with several simple arguments."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "testing-parameterized-tests-lesson-0-table-0-row-5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@MethodSource",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "1": [
+              [
+                "Arguments returned by a Java method."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "testing-parameterized-tests-lesson-0-table-0-row-6",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@ArgumentsSource",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "1": [
+              [
+                "Arguments returned by a reusable provider class."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "testing-parameterized-tests-lesson-1",
+      "type": "header",
       "richText": [
         [
-          "Use @CsvSource for short rows containing several simple values."
+          "Several inputs for one rule"
         ]
       ]
     },
     {
-      "id": "junit-parameter-code",
+      "id": "testing-parameterized-tests-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Check several title values with CSV rows",
-        "description": [
-          "Use spring-boot-starter-test in test scope.",
-          "The title rule accepts visible text and rejects blank text."
-        ],
-        "code": "import org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.CsvSource;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\nclass TitleRules {\n    static boolean valid(String title) {\n        return title != null && !title.isBlank();\n    }\n}\n\nclass TitleRulesTest {\n    @ParameterizedTest\n    @CsvSource({\"Morning,true\", \"'   ',false\", \"'',false\"})\n    void titleNeedsVisibleText(String title, boolean expected) {\n        assertEquals(expected, TitleRules.valid(title));\n    }\n}",
+        "title": "Reject null, empty, and whitespace titles",
         "language": "java",
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "`@NullAndEmptySource` combines the null and empty argument sources."
+        ],
+        "code": "",
         "explanation": [
-          "Each CSV row supplies title and expected to one test invocation.",
-          "Morning should be accepted. Three spaces and an empty string should be rejected.",
-          "assertEquals compares the expected boolean with the rule’s actual result.",
-          "The quoted empty value is an empty string. An unquoted empty CSV value is treated as null."
+          "JUnit runs the method five times: once for `null`, once for the empty string, and once for each listed whitespace value.",
+          "Each invocation receives one argument in `title`.",
+          "A failure identifies the invocation whose input did not produce the expected exception."
+        ],
+        "commands": "mvn -Dtest=TitlePolicyTest test",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/TitlePolicy.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\npublic class TitlePolicy {\n    public String normalize(String title) {\n        if (title == null || title.isBlank()) {\n            throw new IllegalArgumentException(\"Title is required\");\n        }\n        return title.strip();\n    }\n}\n"
+          },
+          {
+            "name": "src/test/java/com/example/demo/TitlePolicyTest.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.NullAndEmptySource;\nimport org.junit.jupiter.params.provider.ValueSource;\nimport static org.junit.jupiter.api.Assertions.assertThrows;\n\nclass TitlePolicyTest {\n    private final TitlePolicy policy = new TitlePolicy();\n\n    @ParameterizedTest\n    @NullAndEmptySource\n    @ValueSource(strings = {\" \", \"   \", \"\\t\"})\n    void rejectsMissingTitle(String title) {\n        assertThrows(IllegalArgumentException.class,\n                () -> policy.normalize(title));\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "junit-provider",
+      "id": "testing-parameterized-tests-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Provide arguments from Java"
+          "Structured argument sources"
         ]
       ]
     },
     {
-      "id": "junit-provider-b0",
+      "id": "testing-parameterized-tests-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ArgumentsSource selects an ArgumentsProvider class."
-        ]
-      ]
-    },
-    {
-      "id": "junit-provider-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The provider returns a stream of Arguments. Each Arguments object supplies one argument set."
-        ]
-      ]
-    },
-    {
-      "id": "junit-provider-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use a provider for structured inputs or reusable datasets that are awkward to put in CSV."
-        ]
-      ]
-    },
-    {
-      "id": "junit-provider-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Return fresh mutable objects if a test changes its inputs."
-        ]
-      ]
-    },
-    {
-      "id": "junit-provider-code",
-      "type": "example",
-      "example": {
-        "title": "Supply null, empty and whitespace titles",
-        "description": [
-          "This alternative uses a Java argument provider for rejected title inputs.",
-          "Use it in a separate example file from the preceding TitleRulesTest."
+          "@MethodSource",
+          [
+            [
+              "c"
+            ]
+          ]
         ],
-        "code": "import java.util.stream.Stream;\nimport org.junit.jupiter.api.extension.ExtensionContext;\nimport org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.Arguments;\nimport org.junit.jupiter.params.provider.ArgumentsProvider;\nimport org.junit.jupiter.params.provider.ArgumentsSource;\nimport static org.junit.jupiter.api.Assertions.assertFalse;\n\nclass MissingTitles implements ArgumentsProvider {\n    @Override\n    public Stream<? extends Arguments> provideArguments(\n            ExtensionContext context) {\n        return Stream.of(Arguments.of((Object) null),\n                         Arguments.of(\"\"), Arguments.of(\" \"));\n    }\n}\n\nclass TitleRulesTest {\n    @ParameterizedTest\n    @ArgumentsSource(MissingTitles.class)\n    void rejectsMissingOrBlankTitle(String title) {\n        boolean valid = title != null && !title.isBlank();\n        assertFalse(valid);\n    }\n}",
-        "language": "java",
-        "explanation": [
-          "The provider produces three invocations: null, an empty string and one space.",
-          "The Object cast passes null as one argument rather than as a null argument array.",
-          "The assertion checks that none of these inputs is valid."
+        [
+          " selects a method that returns argument values, commonly a "
+        ],
+        [
+          "Stream<Arguments>",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
-      }
+      ]
+    },
+    {
+      "id": "testing-parameterized-tests-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Each "
+        ],
+        [
+          "Arguments.of(...)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the arguments for one invocation."
+        ]
+      ]
+    },
+    {
+      "id": "testing-parameterized-tests-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A local source method is normally "
+        ],
+        [
+          "static",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with the default JUnit lifecycle."
+        ]
+      ]
+    },
+    {
+      "id": "testing-parameterized-tests-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ArgumentsSource",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects a class implementing "
+        ],
+        [
+          "ArgumentsProvider",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". That class returns the argument stream."
+        ]
+      ]
+    },
+    {
+      "id": "testing-parameterized-tests-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A provider is useful when several tests share structured inputs. Separate tests still need independent mutable objects."
+        ]
+      ]
+    },
+    {
+      "id": "testing-parameterized-tests-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Mockito lesson next supplies controlled dependency behavior instead of only varying method arguments."
+        ]
+      ]
     }
   ]
 }

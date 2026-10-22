@@ -1,13 +1,17 @@
 {
   "id": "spring-boot-security-ownership",
   "title": "Record ownership",
-  "summary": "Check who owns a record after checking permission to call its endpoint.",
+  "summary": "Restrict repository access with the identity already established by Spring Security.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring Security 6.5: method authorization",
       "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authorization/method-security.html"
+    },
+    {
+      "title": "Spring Security 6.5: security context",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authentication/architecture.html"
     }
   ],
   "blocks": [
@@ -16,81 +20,215 @@
       "type": "header",
       "richText": [
         [
-          "Check the requested record"
+          "Record permissions"
         ]
       ]
     },
     {
-      "id": "ownership-b0",
+      "id": "security-ownership-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A role controls access to a kind of operation. It does not tell Spring who owns a database record."
+          "Spring Security checks authorities. It does not infer ownership from a JPA entity."
         ]
       ]
     },
     {
-      "id": "ownership-b1",
+      "id": "security-ownership-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Two users can both have USER and still have different journal entries."
+          "hasRole(\"USER\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can allow two users to call the same endpoint."
         ]
       ]
     },
     {
-      "id": "ownership-b2",
+      "id": "security-ownership-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "authenticated() lets either user reach the endpoint. Your application must still check that the requested entry belongs to the current user."
+          "The service still needs to restrict each user to records that account owns."
         ]
       ]
     },
     {
-      "id": "ownership-b3",
+      "id": "security-ownership-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Read the owner ID from the authenticated account. Do not accept the caller’s user ID as proof of ownership."
+          "Spring provides the trusted identity through the authenticated principal."
         ]
       ]
     },
     {
-      "id": "ownership-b4",
+      "id": "security-ownership-lesson-0-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Query by both entry ID and owner ID, or compare the stored owner before using the record."
+          "A request path or body cannot establish who the current user is."
         ]
       ]
     },
     {
-      "id": "ownership-b5",
-      "type": "bulleted_list",
+      "id": "security-ownership-lesson-1",
+      "type": "header",
       "richText": [
         [
-          "Apply this check when reading, updating and deleting records."
+          "Owner-scoped repository access"
         ]
       ]
     },
     {
-      "id": "ownership-b6",
+      "id": "security-ownership-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use an immutable account ID when usernames can change."
+          "A repository query can include both the requested record ID and the authenticated owner ID."
         ]
       ]
     },
     {
-      "id": "ownership-b7",
+      "id": "security-ownership-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "An ownership failure may return 404 to avoid revealing whether another user’s record exists. Use this policy consistently."
+          "This returns a record only when both values match."
         ]
       ]
+    },
+    {
+      "id": "security-ownership-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Read, update, and delete operations all need the same ownership boundary."
+        ]
+      ]
+    },
+    {
+      "id": "security-ownership-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The service checks ownership before changing a record."
+        ]
+      ]
+    },
+    {
+      "id": "security-ownership-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A missing record and a record owned by another user can both return "
+        ],
+        [
+          "404",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-ownership-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An immutable account ID is a better ownership key when usernames can change."
+        ]
+      ]
+    },
+    {
+      "id": "security-ownership-lesson-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Restrict JPA employees to their creating account",
+        "language": "text",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The example uses an in-memory H2 database. Restarting the application clears its records.",
+          "The environment supplies `DEMO_USER_PASSWORD` before startup.",
+          "The generated form login authenticates the `reader` account.",
+          "After login, `GET /csrf` returns the session CSRF token. A state-changing request sends that token under the returned header name with the session cookie.",
+          "The account creating an employee owns that record.",
+          "Usernames cannot change in this example. A system with renameable usernames needs an immutable account ID instead.",
+          "`EmployeeController` calls the injected `OwnedEmployeeService` through its Spring proxy.",
+          "For an existing production database, the ownership column and real owner values require a migration before enforcing a non-null constraint."
+        ],
+        "code": "",
+        "explanation": [
+          "`@PreAuthorize` rejects an anonymous caller before either service operation runs.",
+          "`create` obtains the owner from Spring Security rather than accepting it in the request.",
+          "The additional constructor stores that owner with the new employee.",
+          "`updatable = false` excludes the owner column from ordinary JPA updates.",
+          "`read` obtains the same authenticated username.",
+          "Spring Data derives a query that matches both `id` and `ownerUsername`.",
+          "No matching record produces `404`, including when another user owns the ID.",
+          "Update and delete paths need the same owner-scoped lookup before changing a record.",
+          "The password username used here is not automatically the same identity as a JWT subject. A JWT application needs an explicit local-account mapping."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/employee/OwnedEmployeeService.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport org.springframework.security.access.prepost.PreAuthorize;\nimport org.springframework.security.core.context.SecurityContextHolder;\nimport org.springframework.stereotype.Service;\nimport org.springframework.web.server.ResponseStatusException;\nimport static org.springframework.http.HttpStatus.NOT_FOUND;\n\n@Service\npublic class OwnedEmployeeService {\n    private final EmployeeRepository employees;\n\n    public OwnedEmployeeService(EmployeeRepository employees) {\n        this.employees = employees;\n    }\n\n    @PreAuthorize(\"isAuthenticated()\")\n    public Employee create(String name, String department) {\n        return employees.save(\n            new Employee(name, department, currentUsername()));\n    }\n\n    @PreAuthorize(\"isAuthenticated()\")\n    public Employee read(Long id) {\n        return employees.findByIdAndOwnerUsername(id, currentUsername())\n            .orElseThrow(() ->\n                new ResponseStatusException(NOT_FOUND));\n    }\n\n    private String currentUsername() {\n        return SecurityContextHolder.getContext()\n            .getAuthentication().getName();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/Employee.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\nimport jakarta.persistence.Column;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\n@Entity\npublic class Employee {\n    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    @Column(nullable = false) private String name;\n    @Column(nullable = false) private String department;\n    @Column(name = \"owner_username\", nullable = false, updatable = false, length = 100)\n    private String ownerUsername;\n    protected Employee() {}\n    public Employee(String name, String department, String ownerUsername) {\n        this.name = name;\n        this.department = department;\n        this.ownerUsername = ownerUsername;\n    }\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeRepository.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\nimport java.util.Optional;\nimport org.springframework.data.jpa.repository.JpaRepository;\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    Optional<Employee> findByIdAndOwnerUsername(Long id, String ownerUsername);\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeController.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\nimport org.springframework.web.bind.annotation.*;\n@RestController\n@RequestMapping(\"/employees\")\npublic class EmployeeController {\n    private final OwnedEmployeeService service;\n    public EmployeeController(OwnedEmployeeService service) { this.service = service; }\n    public record EmployeeRequest(String name, String department) {}\n    @PostMapping\n    public Employee create(@RequestBody EmployeeRequest request) {\n        return service.create(request.name(), request.department());\n    }\n    @GetMapping(\"/{id}\")\n    public Employee read(@PathVariable(\"id\") Long id) { return service.read(id); }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/CsrfController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.security.web.csrf.CsrfToken;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\npublic class CsrfController {\n    @GetMapping(\"/csrf\")\n    CsrfResponse csrf(CsrfToken token) {\n        return new CsrfResponse(\n            token.getHeaderName(), token.getToken());\n    }\n\n    record CsrfResponse(String headerName, String token) {}\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/SecurityConfig.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.core.userdetails.User;\nimport org.springframework.security.core.userdetails.UserDetailsService;\nimport org.springframework.security.crypto.factory.PasswordEncoderFactories;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.security.provisioning.InMemoryUserDetailsManager;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\n@org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity\npublic class SecurityConfig {\n    @Bean\n    PasswordEncoder passwordEncoder() {\n        return PasswordEncoderFactories.createDelegatingPasswordEncoder();\n    }\n\n    @Bean\n    UserDetailsService users(\n            PasswordEncoder encoder,\n            @Value(\"${DEMO_USER_PASSWORD}\") String password) {\n        return new InMemoryUserDetailsManager(\n            User.withUsername(\"reader\")\n                .password(encoder.encode(password))\n                .roles(\"USER\")\n                .build());\n    }\n\n    @Bean\n    SecurityFilterChain security(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(rules -> rules\n                .requestMatchers(\"/csrf\").authenticated()\n                .requestMatchers(\"/public/**\").permitAll()\n                .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n                .requestMatchers(\"/employees/**\").hasRole(\"USER\")\n                .anyRequest().denyAll())\n            .formLogin(Customizer.withDefaults())\n            .build();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.datasource.url=jdbc:h2:mem:ownership\nspring.jpa.hibernate.ddl-auto=create-drop\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-security</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>com.h2database</groupId>\n            <artifactId>h2</artifactId>\n            <scope>runtime</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
+      }
     }
   ]
 }

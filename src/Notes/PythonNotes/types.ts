@@ -1,7 +1,7 @@
 export interface PythonExample {
     title?: string;
-    description?: readonly string[];
-    explanation?: readonly string[];
+    description?: readonly PythonInlineContent[];
+    explanation?: readonly PythonInlineContent[];
     possibleOutput?: boolean;
     language?: 'python' | 'text';
     code: string;

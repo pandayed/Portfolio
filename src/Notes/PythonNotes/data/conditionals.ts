@@ -11,10 +11,14 @@ const note: PythonNote = {
             "id": "comparisons",
             "title": "Comparisons",
             "bullets": [
-                "== compares values. != means not equal. <, <=, >, and >= compare ordering where the types support it.",
-                "A comparison usually produces True or False. Do not confuse assignment = with comparison ==.",
-                "Chain comparisons to state a range, such as 10 < score < 20.",
-                "Use is None and is not None for absence checks. is checks object identity, rather than value equality."
+                "`==` compares values.",
+                "`!=` means not equal.",
+                "`<`, `<=`, `>`, and `>=` compare ordering where the types support it.",
+                "A comparison usually produces `True` or `False`.",
+                "Do not confuse assignment `=` with comparison `==`.",
+                "Chain comparisons to state a range, such as `10 < score < 20`.",
+                "Use `is None` and `is not None` for absence checks.",
+                "`is` checks object identity, rather than value equality."
             ],
             "examples": [
                 {
@@ -23,6 +27,10 @@ const note: PythonNote = {
                     "result": "True\nTrue\nFalse",
                     "explanation": [
                         "A string and an integer are different values."
+                    ],
+                    "language": "python",
+                    "description": [
+                        "The checks compare equal numbers, a numeric range, and different value types."
                     ]
                 }
             ]
@@ -31,16 +39,24 @@ const note: PythonNote = {
             "id": "truthiness",
             "title": "Truthy and falsy values",
             "bullets": [
-                "Conditions do not need an explicit comparison. Python checks the truth value of the supplied object.",
-                "False, None, numeric zero, empty strings, and empty collections are falsy. Most other values are truthy.",
-                "bool(value) returns the Boolean truth value. A non-empty string is truthy even if its text is \"False\" or \"0\".",
-                "Custom classes can define truth behavior. Their methods are covered in the object-model chapter."
+                "Conditions do not need an explicit comparison.",
+                "Python checks the truth value of the supplied object.",
+                "`False`, `None`, numeric zero, empty strings, and empty collections are falsy.",
+                "Most other values are truthy.",
+                "`bool`(value) returns the Boolean truth value.",
+                "A non-empty string is truthy even if its text is \"`False`\" or \"0\".",
+                "Custom classes can define truth behavior.",
+                "Their methods are covered in the object-model chapter."
             ],
             "examples": [
                 {
                     "title": "Checking whether text is present",
                     "code": "name = \"\"\nif name:\n    print(\"Name supplied\")\nelse:\n    print(\"Name missing\")\nprint(bool(\"False\"))",
-                    "result": "Name missing\nTrue"
+                    "result": "Name missing\nTrue",
+                    "language": "python",
+                    "description": [
+                        "An empty string selects the missing-name branch."
+                    ]
                 }
             ]
         },
@@ -48,10 +64,15 @@ const note: PythonNote = {
             "id": "if-elif-else",
             "title": "if, elif, and else",
             "bullets": [
-                "if runs its block when a condition is truthy. elif checks another condition when earlier branches did not match.",
-                "else runs when no earlier condition matches. elif and else are optional.",
-                "Python runs only the first matching branch in one if/elif/else chain. Put a more specific condition before a broader one.",
-                "End a branch header with a colon. Indent its block by four spaces. pass can serve as a statement that does nothing when a block needs a placeholder."
+                "`if` runs its block when a condition is truthy.",
+                "`elif` checks another condition when earlier branches did not match.",
+                "`else` runs when no earlier condition matches.",
+                "elif and else are optional.",
+                "Python runs only the first matching branch in one `if/elif/else` chain.",
+                "Put a more specific condition before a broader one.",
+                "End a branch header with a colon.",
+                "Indent its block by four spaces.",
+                "`pass` can serve as a statement that does nothing when a block needs a placeholder."
             ],
             "examples": [
                 {
@@ -60,6 +81,10 @@ const note: PythonNote = {
                     "result": "45 or older",
                     "explanation": [
                         "The first condition matches, so the later branches are skipped."
+                    ],
+                    "language": "python",
+                    "description": [
+                        "The first matching condition selects the age group."
                     ]
                 }
             ]
@@ -68,30 +93,41 @@ const note: PythonNote = {
             "id": "boolean-operators",
             "title": "Combining conditions",
             "bullets": [
-                "and evaluates its right operand only if the left operand is truthy. or evaluates its right operand only if the left operand is falsy. This is short-circuit evaluation.",
-                "not returns the opposite Boolean truth value.",
-                "and and or return an operand, which may not be a Boolean. Use parentheses to make mixed conditions clear."
+                "`and` evaluates its right operand only if the left operand is truthy.",
+                "`or` evaluates its right operand only if the left operand is falsy.",
+                "This is short-circuit evaluation.",
+                "`not` returns the opposite Boolean truth value.",
+                "and and or return an operand, which may not be a Boolean.",
+                "Use parentheses to make mixed conditions `clear`."
             ],
             "examples": [
                 {
                     "title": "Combining checks and choosing a fallback",
                     "code": "age = 20\nhas_ticket = True\nprint(age >= 18 and has_ticket)\nprint(not has_ticket)\nname = \"\"\nprint(name or \"Guest\")",
-                    "result": "True\nFalse\nGuest"
+                    "result": "True\nFalse\nGuest",
+                    "language": "python",
+                    "description": [
+                        "The expressions combine checks, reverse a truth value, and select a fallback."
+                    ]
                 }
             ]
         },
         {
             "id": "conditional-expression",
-            "title": "Choosing between two values",
+            "title": "Conditional expressions",
             "bullets": [
-                "value_if_true if condition else value_if_false evaluates one of two expressions.",
+                "`value_if_true if condition else value_if_false` evaluates one of two expressions.",
                 "Use an if statement when a branch needs multiple steps."
             ],
             "examples": [
                 {
                     "title": "Storing a selected message",
                     "code": "age = 20\nmessage = \"Eligible\" if age >= 18 else \"Not eligible\"\nprint(message)",
-                    "result": "Eligible"
+                    "result": "Eligible",
+                    "language": "python",
+                    "description": [
+                        "A conditional expression selects one message."
+                    ]
                 }
             ]
         },

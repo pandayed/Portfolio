@@ -1,9 +1,11 @@
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
+import References, { REFERENCES_ID } from '../../Blogs/ArticleLayout/References';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import type { Route } from '../../routing/routes';
 import NoteArticleLayout from '../NoteArticleLayout';
 import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
 import LearningNoteExampleBlock from './LearningNoteExampleBlock';
+import { renderInlineCode } from './renderInlineCode';
 import type { LearningNote, LearningNoteScope } from './types';
 
 interface LearningNotePageProps {
@@ -20,18 +22,26 @@ const scopeLabels: Record<LearningNoteScope, string> = {
     javascript: 'JavaScript',
     typescript: 'TypeScript',
     react: 'React',
+    nodejs: 'Node.js',
 };
 
 const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePageProps) => {
+    const usesEndReferences = ['javascript-typescript', 'javascript', 'typescript', 'react', 'nodejs'].includes(note.scope);
     const useBulletExplanations = note.scope !== 'java' || note.pointwise === true;
-    const renderProse = (text: string, key: string) => note.scope === 'react'
+    const renderPlainText = (text: string, key: string) => note.scope === 'react'
         ? renderProgrammingTerms(text, key, 'react')
         : text;
+    const renderProse = (text: string, key: string) => note.inlineCode
+        ? renderInlineCode(text, key, renderPlainText)
+        : renderPlainText(text, key);
     const sectionId = (id: string) => `learning-note-${note.slug}-${id}`;
     const sections: TocEntry[] = note.sections.map(({ id, title }) => ({
         id: sectionId(id),
         title,
     }));
+    if (usesEndReferences && note.references?.length) {
+        sections.push({ id: REFERENCES_ID, title: 'References' });
+    }
 
     return (
         <NoteArticleLayout
@@ -41,7 +51,7 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
             backRoute={backRoute}
             backLabel={backLabel}
         >
-            <section className="Article__section">
+            {!usesEndReferences && <section className="Article__section">
                 {useBulletExplanations ? (
                     <ul className="Article__notes">
                         <li><strong>Scope:</strong> {scopeLabels[note.scope]}.</li>
@@ -58,7 +68,7 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                         ))}
                     </ul>
                 )}
-            </section>
+            </section>}
 
             {note.sections.map((section) => (
                 <section
@@ -97,7 +107,9 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                                         <tr key={`${section.id}-row-${rowIndex}`}>
                                             {row.map((cell, cellIndex) => {
                                                 const content = typeof cell === 'string' ? renderProse(cell, `${section.id}-cell-${rowIndex}-${cellIndex}`) : (
-                                                    <a className="Link" href={cell.href}>{cell.text}</a>
+                                                    <a className="Link" href={cell.href}>
+                                                        {note.inlineCode ? renderInlineCode(cell.text, `${section.id}-link-${rowIndex}-${cellIndex}`) : cell.text}
+                                                    </a>
                                                 );
                                                 return cellIndex === 0 ? (
                                                     <th scope="row" key={cellIndex}>{content}</th>
@@ -114,6 +126,7 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                         <LearningNoteExampleBlock
                             example={example}
                             termContext={note.scope === 'react' ? 'react' : undefined}
+                            renderText={note.inlineCode ? (text, key) => typeof text === 'string' ? renderProse(text, key) : text : undefined}
                             key={`${section.id}-example-${index}`}
                         />
                     ) : (
@@ -156,6 +169,7 @@ const LearningNotePage = ({ backLabel, backRoute, note, route }: LearningNotePag
                     )}
                 </section>
             ))}
+            {usesEndReferences && <References references={[...(note.references ?? [])]} />}
         </NoteArticleLayout>
     );
 };

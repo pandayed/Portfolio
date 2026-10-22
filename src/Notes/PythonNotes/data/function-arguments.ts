@@ -11,7 +11,8 @@ const note: PythonNote = {
             "id": "arguments",
             "title": "Positional, keyword, and default arguments",
             "bullets": [
-                "Python matches positional arguments by position. A keyword argument names its parameter.",
+                "Python matches positional arguments by position.",
+                "A keyword argument names its parameter.",
                 "A default supplies a value when the caller omits that argument.",
                 "A required positional parameter cannot follow a positional parameter with a default.",
                 "An argument cannot supply the same parameter twice."
@@ -20,7 +21,11 @@ const note: PythonNote = {
                 {
                     "title": "Choosing how to pass arguments",
                     "code": "def full_name(first, last=\"Pandey\"):\n    return f\"{first} {last}\"\n\nprint(full_name(\"Lal\"))\nprint(full_name(last=\"George\", first=\"Ayushi\"))",
-                    "result": "Lal Pandey\nAyushi George"
+                    "result": "Lal Pandey\nAyushi George",
+                    "language": "python",
+                    "description": [
+                        "One call uses a default surname, while another names both arguments."
+                    ]
                 }
             ]
         },
@@ -28,9 +33,11 @@ const note: PythonNote = {
             "id": "parameter-kinds",
             "title": "Positional-only and keyword-only parameters",
             "bullets": [
-                "Parameters before / are positional-only. Callers must supply them by position.",
-                "Parameters after * are keyword-only. Callers must name them.",
-                "Parameters between / and * accept either form."
+                "Parameters before `/` are positional-only.",
+                "Callers must supply them by position.",
+                "Parameters after `*` are keyword-only.",
+                "Callers must name them.",
+                "Parameters between `/` and `*` accept either form."
             ],
             "examples": [
                 {
@@ -40,53 +47,73 @@ const note: PythonNote = {
                     "explanation": [
                         "name must be positional. punctuation must be named.",
                         "greeting accepts either a positional or a keyword argument."
+                    ],
+                    "language": "python",
+                    "description": [
+                        "The definition requires one positional argument and one named argument."
                     ]
                 }
             ]
         },
         {
             "id": "mutable-default-arguments",
-            "title": "Defaults are evaluated once",
+            "title": "Default evaluation",
             "bullets": [
                 "Python evaluates a default when it executes the function definition.",
-                "Calls that omit the argument reuse that same object. Mutable defaults can retain changes across calls.",
-                "Use None as the default when an omitted argument should create a fresh collection."
+                "Calls that omit the argument reuse that same object.",
+                "Mutable defaults can retain changes across calls.",
+                "Use `None` as the default when an omitted argument should create a fresh collection."
             ],
             "examples": [
                 {
                     "title": "A default list keeps earlier changes",
                     "code": "def collect(items=[]):\n    items.append(1)\n    return items\n\nprint(collect())\nprint(collect())",
-                    "result": "[1]\n[1, 1]"
+                    "result": "[1]\n[1, 1]",
+                    "language": "python",
+                    "description": [
+                        "Calls without an argument reuse the same default list."
+                    ]
                 },
                 {
                     "title": "Creating a fresh list when the argument is omitted",
                     "code": "def collect(items=None):\n    if items is None:\n        items = []\n    items.append(1)\n    return items\n\nprint(collect())\nprint(collect())",
                     "result": "[1]\n[1]",
                     "explanation": [
-                        "A caller that passes a list still has that list changed by append()."
+                        "A caller that passes a list still has that list changed by `append`()."
+                    ],
+                    "language": "python",
+                    "description": [
+                        "An omitted argument creates a fresh list inside the function."
                     ]
                 }
             ]
         },
         {
             "id": "args-kwargs",
-            "title": "args and kwargs",
+            "title": "`args` and `kwargs`",
             "bullets": [
-                "In a definition, *args collects extra positional arguments into a tuple. **kwargs collects extra keyword arguments into a dictionary.",
-                "args and kwargs are conventional names. The * and ** determine the behavior.",
-                "In a call, * unpacks an iterable into positional arguments. ** unpacks a mapping into keyword arguments."
+                "In a definition, `*args` collects extra positional arguments into a tuple.",
+                "`**kwargs` collects extra keyword arguments into a dictionary.",
+                "`args` and `kwargs` are conventional names.",
+                "The `*` and `**` determine the behavior.",
+                "In a call, `*` unpacks an iterable into positional arguments.",
+                "`**` unpacks a mapping into keyword arguments."
             ],
             "examples": [
                 {
                     "title": "Collecting extra arguments",
                     "code": "def add(*numbers):\n    return sum(numbers)\n\ndef print_name(**parts):\n    print(parts[\"first\"], parts[\"last\"])\n\nprint(add(1, 2, 3, 4))\nprint_name(first=\"Lal\", last=\"Pandey\")",
-                    "result": "10\nLal Pandey"
+                    "result": "10\nLal Pandey",
+                    "language": "python",
+                    "description": [
+                        "One function collects positional numbers, while another collects named parts."
+                    ]
                 }
             ]
         },
         {
             "id": "references",
-            "title": "Tutorial reference",
+            "title": "References",
             "bullets": [
                 [
                     {

@@ -4,128 +4,212 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480f984a5fd65e9263256",
   "blocks": [
     {
-      "id": "20924eb1-ed54-8038-a8b6-f10b900556ea",
+      "id": "executable-jars-deployment-lesson-0",
       "type": "header",
       "richText": [
         [
-          "What an executable JAR contains"
+          "Spring Boot executable archives"
         ]
       ]
     },
     {
-      "id": "jar-meaning-b0",
+      "id": "executable-jars-deployment-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A JAR is a Java archive. It packages compiled classes and related files."
+          "The Boot build plugin packages application classes and runtime dependencies into an executable JAR."
         ]
       ]
     },
     {
-      "id": "jar-meaning-b1",
+      "id": "executable-jars-deployment-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A Spring Boot executable JAR also contains runtime dependencies and a launcher."
+          "A Boot launcher inside the archive loads those classes and dependencies when "
+        ],
+        [
+          "java -jar",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " starts it."
         ]
       ]
     },
     {
-      "id": "jar-meaning-b2",
+      "id": "executable-jars-deployment-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A servlet web application usually includes an embedded server such as Tomcat. It does not need a separately installed servlet container."
+          "A servlet application with the standard web starter also includes its embedded Tomcat server."
         ]
       ]
     },
     {
-      "id": "jar-meaning-b3",
+      "id": "executable-jars-deployment-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "The machine still needs a compatible Java runtime. The JAR does not include Java itself."
+          "The host still needs a compatible Java runtime. The archive does not contain Java itself."
         ]
       ]
     },
     {
-      "id": "jar-meaning-b4",
+      "id": "executable-jars-deployment-lesson-0-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Database servers, credentials and other external services are not supplied by the JAR."
+          "A database server, credentials, and uploaded application data are separate from the archive."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8022-b39b-e991034a9799",
+      "id": "executable-jars-deployment-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Build and run the application"
+          "Build plugins"
         ]
       ]
     },
     {
-      "id": "jar-build-b0",
+      "id": "executable-jars-deployment-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "The Spring Boot Maven plugin repackages the application into an executable archive."
+          "spring-boot-maven-plugin",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " repackages Maven\u2019s normal JAR into the Boot executable format."
         ]
       ]
     },
     {
-      "id": "jar-build-b1",
+      "id": "executable-jars-deployment-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The Spring Boot Gradle plugin supplies the bootJar task."
+          "The Boot parent supplies the "
+        ],
+        [
+          "repackage",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " execution when that plugin is declared."
         ]
       ]
     },
     {
-      "id": "jar-build-b2",
+      "id": "executable-jars-deployment-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use the project’s wrapper and declared Java version. Keep plugin versions aligned with the application’s Spring Boot version."
+          "The Boot Gradle plugin provides the equivalent executable JAR task, "
+        ],
+        [
+          "bootJar",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80ec-9a8e-e2295bf95de7",
+      "id": "executable-jars-deployment-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The build runtime and the deployment runtime must both support the project\u2019s Java version."
+        ]
+      ]
+    },
+    {
+      "id": "executable-jars-deployment-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "A packaged application"
+        ]
+      ]
+    },
+    {
+      "id": "executable-jars-deployment-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Build and run a Maven executable JAR",
-        "description": [
-          "Use an existing Boot Maven application with the spring-boot-starter-parent and spring-boot-maven-plugin.",
-          "Put this plugin declaration inside the existing build/plugins section of pom.xml.",
-          "This example sets Maven finalName to journal so the generated file is target/journal.jar.",
-          "Run the commands from the project directory."
-        ],
-        "code": "<!-- In the existing pom.xml -->\n<build>\n    <finalName>journal</finalName>\n    <plugins>\n        <plugin>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-maven-plugin</artifactId>\n        </plugin>\n    </plugins>\n</build>",
+        "title": "Build and run the Maven JAR",
         "language": "text",
-        "explanation": [
-          "The Boot parent configures the plugin’s repackage execution. A project without that parent must configure the repackage goal explicitly.",
-          "package produces the executable JAR in target.",
-          "java -jar starts the packaged application. Use a Java runtime compatible with its compiled classes and Boot release.",
-          "The same artifact can run with different external settings. Pass --spring.profiles.active=prod when the application has a production profile."
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "The commands run from the project directory. The second runs after the build succeeds."
         ],
-        "commands": "./mvnw clean package\njava -jar target/journal.jar"
+        "code": "",
+        "explanation": [
+          "`package` compiles the application and creates `target/demo.jar`.",
+          "The plugin repackages that JAR so `java -jar` can load its nested dependencies.",
+          "`--server.port=9090` is an application argument read by Boot\u2019s external configuration.",
+          "A web application starts its embedded server on port `9090`.",
+          "The original non-executable archive may also remain with an `.original` suffix. That file is not the deployable Boot JAR."
+        ],
+        "commands": "mvn clean package\njava -jar target/demo.jar --server.port=9090",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/\")\n    public String hello() { return \"Hello, Spring Boot\"; }\n}\n"
+          }
+        ]
       }
     },
     {
-      "id": "jar-war",
+      "id": "executable-jars-deployment-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Executable JAR and WAR"
+          "JAR and WAR packaging"
         ]
       ]
     },
     {
-      "id": "jar-war-table",
+      "id": "executable-jars-deployment-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A traditional WAR deployment also needs servlet-container setup and compatible container versions. Changing the extension is not enough."
+        ]
+      ]
+    },
+    {
+      "id": "executable-jars-deployment-lesson-3-table-0",
       "type": "table",
       "columnOrder": [
         "0",
@@ -134,39 +218,39 @@
       "hasColumnHeader": true,
       "children": [
         {
-          "id": "jar-war-table-0",
+          "id": "executable-jars-deployment-lesson-3-table-0-row-0",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "Package"
+                "Archive"
               ]
             ],
             "1": [
               [
-                "Typical use"
+                "Typical deployment"
               ]
             ]
           }
         },
         {
-          "id": "jar-war-table-1",
+          "id": "executable-jars-deployment-lesson-3-table-0-row-1",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "Executable JAR"
+                "Executable Boot JAR"
               ]
             ],
             "1": [
               [
-                "Run the application directly with java -jar and an embedded server."
+                "A Java process with its embedded server."
               ]
             ]
           }
         },
         {
-          "id": "jar-war-table-2",
+          "id": "executable-jars-deployment-lesson-3-table-0-row-2",
           "type": "table_row",
           "cells": {
             "0": [
@@ -176,7 +260,7 @@
             ],
             "1": [
               [
-                "Deploy a servlet web application to an external servlet container. A Boot WAR can also be executable when configured for it."
+                "An application deployed to a separately managed servlet container."
               ]
             ]
           }
@@ -184,77 +268,47 @@
       ]
     },
     {
-      "id": "ed-deployment-paths",
+      "id": "executable-jars-deployment-lesson-4",
       "type": "header",
       "richText": [
         [
-          "Choose where the application runs"
+          "Runtime configuration"
         ]
       ]
     },
     {
-      "id": "ed-deployment-paths-b0",
+      "id": "executable-jars-deployment-lesson-4-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Managed hosting runs the application process and handles parts of the hosting environment."
+          "The same JAR can use different profiles and external properties on different hosts."
         ]
       ]
     },
     {
-      "id": "ed-deployment-paths-b1",
+      "id": "executable-jars-deployment-lesson-4-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A virtual private server (VPS) gives you a machine to maintain yourself."
+          "Credentials belong in the host\u2019s secret or configuration system, rather than in the packaged source files."
         ]
       ]
     },
     {
-      "id": "ed-deployment-paths-b2",
+      "id": "executable-jars-deployment-lesson-4-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep environment-specific configuration and credentials outside the artifact."
+          "A successful build proves packaging completed. Startup logs and application requests check the running release."
         ]
       ]
     },
     {
-      "id": "ed-deployment-paths-b3",
+      "id": "executable-jars-deployment-lesson-4-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A successful build only proves packaging succeeded. Check startup and the deployed application’s behavior separately."
-        ]
-      ]
-    },
-    {
-      "id": "ed-cloud-link",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Deploy on managed hosting",
-          [
-            [
-              "a",
-              "/notes/spring-boot/deployment/cloud"
-            ]
-          ]
-        ]
-      ]
-    },
-    {
-      "id": "ed-vps-link",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Run the application on a VPS",
-          [
-            [
-              "a",
-              "/notes/spring-boot/deployment/vps"
-            ]
-          ]
+          "The next lessons cover the Boot settings needed for managed hosting, a VPS process, and an HTTPS proxy."
         ]
       ]
     }
@@ -271,8 +325,12 @@
     {
       "title": "Spring Boot 3.5: traditional deployment",
       "url": "https://docs.spring.io/spring-boot/3.5/how-to/deployment/traditional-deployment.html"
+    },
+    {
+      "title": "Spring Boot 3.5: executable JAR specification",
+      "url": "https://docs.spring.io/spring-boot/3.5/specification/executable-jar/index.html"
     }
   ],
-  "updatedOn": "2026-10-14",
-  "summary": "Package the application and its dependencies, then run the same artifact on a host."
+  "updatedOn": "2026-10-20",
+  "summary": "Package the application and its libraries once, then supply host-specific configuration when Java starts it."
 }

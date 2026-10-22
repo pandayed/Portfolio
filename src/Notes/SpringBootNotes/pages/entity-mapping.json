@@ -13,207 +13,399 @@
       ]
     },
     {
-      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b0",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An entity is a Java class whose instances JPA stores in a relational database."
+          "@Entity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " tells JPA that a class has a persistent mapping."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b1",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "JPA means Jakarta Persistence API. It defines mapping annotations and persistence operations. Hibernate is a common implementation."
+          "Hibernate creates entity objects when it reads rows."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b2",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "ORM means object-relational mapping. It describes how Java objects correspond to tables, rows and columns."
+          "An entity is not a Spring service bean."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b3",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Entity marks an entity class. @Table chooses its table name."
+          "@Table",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " names the table."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b4",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Each entity needs a primary key. @Id marks the Java field or property holding that key."
+          "@Column",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " names a mapped column or describes its constraints."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b5",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A JPA entity needs a public or protected no-argument constructor."
+          "@Id",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " identifies the field holding the primary key."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-b6",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot 3 uses jakarta.persistence annotations. Older Spring Boot 2 projects use javax.persistence."
+          "A public or protected no-argument constructor lets Hibernate create an entity before filling its fields."
         ]
       ]
     },
     {
-      "id": "entity-fields",
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot 3 uses annotations from "
+        ],
+        [
+          "jakarta.persistence",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-803c-b0ea-c2b217489492-note-5-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The older "
+        ],
+        [
+          "javax.persistence",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " imports do not belong in these examples."
+        ]
+      ]
+    },
+    {
+      "id": "entity-mapping-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Fields and columns"
+          "Fields and generated identifiers"
         ]
       ]
     },
     {
-      "id": "entity-fields-b0",
+      "id": "entity-mapping-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Column can choose a column name and describe constraints such as nullability."
+          "Placing "
+        ],
+        [
+          "@Id",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a field selects field access."
         ]
       ]
     },
     {
-      "id": "entity-fields-b1",
+      "id": "entity-mapping-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "When @Id is placed on a field, JPA reads and writes fields directly. Getters and setters are not required for that field access."
+          "Hibernate reads and writes mapped fields directly."
         ]
       ]
     },
     {
-      "id": "entity-fields-b2",
+      "id": "entity-mapping-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Transient excludes a field from persistence."
+          "@GeneratedValue",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " delegates identifier generation to the configured strategy."
         ]
       ]
     },
     {
-      "id": "entity-fields-b3",
+      "id": "entity-mapping-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Database constraints protect stored data. They do not replace validation of incoming requests."
-        ]
-      ]
-    },
-    {
-      "id": "entity-generated-id",
-      "type": "header",
-      "richText": [
+          "GenerationType.IDENTITY",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
         [
-          "Generated identifiers"
+          " uses a database identity column."
         ]
       ]
     },
     {
-      "id": "entity-generated-id-b0",
+      "id": "entity-mapping-lesson-1-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@GeneratedValue asks the persistence provider to obtain an identifier using the selected generation strategy."
+          "SEQUENCE",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " uses a database sequence."
         ]
       ]
     },
     {
-      "id": "entity-generated-id-b1",
+      "id": "entity-mapping-lesson-1-note-2-part-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "IDENTITY uses a database identity column. SEQUENCE uses a database sequence. AUTO lets the provider choose a strategy."
+          "AUTO",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " lets the provider choose."
         ]
       ]
     },
     {
-      "id": "entity-generated-id-b2",
+      "id": "entity-mapping-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Leave a generated identifier unset when creating a new entity."
+          "A new object leaves its generated ID unset."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8068-a1ae-e618460af3dc",
+      "id": "entity-mapping-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Transient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " excludes a field from persistence."
+        ]
+      ]
+    },
+    {
+      "id": "entity-mapping-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A mapped database constraint applies when the database writes a row."
+        ]
+      ]
+    },
+    {
+      "id": "entity-mapping-lesson-1-note-5-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not validate an incoming HTTP request."
+        ]
+      ]
+    },
+    {
+      "id": "entity-mapping-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Map an employee to a table",
+        "title": "Map an employee row",
+        "language": "text",
         "description": [
-          "Use the relational connection from the previous page.",
-          "Place Employee.java under the application package so Spring Boot finds the entity.",
-          "For this disposable learning database, use ddl-auto=create to generate the table. For a persistent database, create the matching table with a migration."
+          "The tabs contain all application files for this separate Maven project.",
+          "The example requires Java 17 or later, Maven and PostgreSQL with an existing `employee_notes` database.",
+          "The environment supplies `DB_USERNAME` and `DB_PASSWORD`.",
+          "`database/schema.sql` creates the tables in an empty database before `mvn spring-boot:run`.",
+          "Hibernate validates the supplied schema. It does not create the tables."
         ],
-        "code": "import jakarta.persistence.Column;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false)\n    private String name;\n    private String department;\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n}",
-        "language": "java",
+        "code": "",
         "explanation": [
-          "Employee maps to employees. One saved Employee represents one row.",
-          "id maps to the primary key and receives its value from the identity column.",
-          "name is mapped as a required column.",
-          "The protected constructor lets JPA create an Employee when reading a row.",
-          "The public constructor lets application code create an employee without supplying an ID."
+          "`Employee` maps to `employees`.",
+          "Its three mapped fields match the table columns.",
+          "`Long` lets `id` start as `null` before the database assigns it.",
+          "The protected constructor supports JPA.",
+          "The public constructor creates a new employee in application code.",
+          "`rename` changes the Java object.",
+          "Saving and tracking that change are explained in the repository and transaction pages.",
+          "The class defines a mapping.",
+          "It does not insert a row by itself."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/employee/Employee.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport jakarta.persistence.Column;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false, length = 100)\n    private String name;\n\n    @Column(nullable = false, length = 100)\n    private String department;\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n    public void rename(String name) { this.name = name; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.postgresql</groupId>\n            <artifactId>postgresql</artifactId>\n            <scope>runtime</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/employee_notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate\nspring.jpa.open-in-view=false\n"
+          },
+          {
+            "name": "database/schema.sql",
+            "language": "sql",
+            "code": "CREATE TABLE employees (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(100) NOT NULL\n);\n"
+          }
         ]
       }
     },
     {
-      "id": "entity-next",
-      "type": "bulleted_list",
+      "id": "entity-mapping-lesson-2",
+      "type": "header",
       "richText": [
         [
-          "Save and read entities with a repository",
-          [
-            [
-              "a",
-              "/notes/spring-boot/spring-data-jpa"
-            ]
-          ]
+          "Entity discovery"
         ]
       ]
     },
     {
-      "id": "entity-relations-next",
+      "id": "entity-mapping-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Map relationships after learning repositories",
+          "Boot normally searches for entity classes under the main application class\u2019s package."
+        ]
+      ]
+    },
+    {
+      "id": "entity-mapping-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@EntityScan",
           [
             [
-              "a",
-              "/notes/spring-boot/jpa-relationships"
+              "c"
             ]
           ]
+        ],
+        [
+          " supplies other entity packages when the classes live elsewhere."
+        ]
+      ]
+    },
+    {
+      "id": "entity-mapping-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The next page introduces the repository bean that uses the entity mapping."
         ]
       ]
     }
   ],
-  "summary": "Map one Java class, its fields and its primary key to a table.",
-  "updatedOn": "2026-10-14",
+  "summary": "Map Employee to one table before introducing repository operations.",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Jakarta Persistence 3.1 specification",
       "url": "https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.html"
+    },
+    {
+      "title": "Spring Boot 3.5: SQL databases",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/data/sql.html"
     }
   ]
 }

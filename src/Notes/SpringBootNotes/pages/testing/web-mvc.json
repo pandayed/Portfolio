@@ -4,173 +4,412 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54807ba8f0c285d4dff46f",
   "blocks": [
     {
-      "id": "web-mvc-slice",
+      "id": "testing-web-mvc-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Load the web layer"
+          "The MVC test slice"
         ]
       ]
     },
     {
-      "id": "web-mvc-slice-b0",
+      "id": "testing-web-mvc-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@WebMvcTest loads Spring MVC components for controller testing. It does not load the whole application."
+          "@WebMvcTest",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " creates a Spring test context containing MVC infrastructure and selected web components."
         ]
       ]
     },
     {
-      "id": "web-mvc-slice-b1",
+      "id": "testing-web-mvc-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@WebMvcTest(EntryController.class) selects the controller to test."
+          "It can test controller mappings, request conversion, validation, exception handling, and responses together."
         ]
       ]
     },
     {
-      "id": "web-mvc-slice-b2",
+      "id": "testing-web-mvc-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "It can check request mapping, JSON binding, input validation and HTTP responses."
+          "@WebMvcTest(EntryController.class)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects one controller. It does not load the normal application service and repository beans."
         ]
       ]
     },
     {
-      "id": "web-mvc-slice-b3",
+      "id": "testing-web-mvc-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Provide the controller’s service dependencies as mock beans or imported test configuration."
+          "The controller still needs its dependencies. A test can provide them with "
+        ],
+        [
+          "@MockitoBean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or an imported test configuration."
         ]
       ]
     },
     {
-      "id": "web-mvc-requests",
+      "id": "testing-web-mvc-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Send a request with MockMvc"
+          "MockMvc and mock beans"
         ]
       ]
     },
     {
-      "id": "web-mvc-requests-b0",
+      "id": "testing-web-mvc-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "MockMvc sends a request through the configured Spring MVC infrastructure without opening a real network port."
+          "MockMvc",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " sends a test request through Spring MVC without opening a network port."
         ]
       ]
     },
     {
-      "id": "web-mvc-requests-b1",
+      "id": "testing-web-mvc-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check the response status, headers and relevant body fields."
+          "perform(...)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " runs the request. "
+        ],
+        [
+          "andExpect(...)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks its response."
         ]
       ]
     },
     {
-      "id": "web-mvc-requests-b2",
+      "id": "testing-web-mvc-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Mock the service response when the test is about controller behavior. Test the real service separately."
+          "@MockitoBean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " registers or replaces a bean with a Mockito mock in the Spring test context."
         ]
       ]
     },
     {
-      "id": "web-mvc-mocks",
+      "id": "testing-web-mvc-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The test configures that mock with the Mockito methods explained in the preceding lesson."
+        ]
+      ]
+    },
+    {
+      "id": "testing-web-mvc-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A plain "
+        ],
+        [
+          "@Mock",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " field does not add a bean to the context."
+        ]
+      ]
+    },
+    {
+      "id": "testing-web-mvc-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These notes use Boot "
+        ],
+        [
+          "3.5",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and Spring Framework "
+        ],
+        [
+          "6.2",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". Older examples use Boot\u2019s "
+        ],
+        [
+          "@MockBean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", deprecated since Boot "
+        ],
+        [
+          "3.4",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in favor of "
+        ],
+        [
+          "@MockitoBean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "testing-web-mvc-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Replace a Spring bean"
+          "A controller test"
         ]
       ]
     },
     {
-      "id": "web-mvc-mocks-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "For Spring Boot 3.4 and later, use @MockitoBean from Spring Framework to replace a collaborator in the test context."
+      "id": "testing-web-mvc-lesson-2-example-0",
+      "type": "example",
+      "example": {
+        "title": "Check the controller response through Spring MVC",
+        "language": "java",
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "This focused application does not include Spring Security. Security-enabled projects need the setup described below."
+        ],
+        "code": "",
+        "explanation": [
+          "Spring creates the controller and injects the `EntryService` mock bean.",
+          "`@Autowired` supplies the auto-configured `MockMvc` instance to the test.",
+          "The request passes through mapping, path conversion, the controller method, and JSON conversion.",
+          "`jsonPath(\"$.title\")` selects the response field being checked.",
+          "This checks the controller response. The mocked service does not check persistence or real service decisions."
+        ],
+        "commands": "mvn -Dtest=EntryControllerTest test",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/EntryController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.util.Map;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PathVariable;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\npublic class EntryController {\n    private final EntryService service;\n\n    public EntryController(EntryService service) {\n        this.service = service;\n    }\n\n    @GetMapping(\"/entries/{id}\")\n    public Map<String, String> entry(@PathVariable(\"id\") long id) {\n        return Map.of(\"title\", service.title(id));\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/EntryService.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\npublic interface EntryService {\n    String title(long id);\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DefaultEntryService.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.stereotype.Service;\n@Service\npublic class DefaultEntryService implements EntryService {\n    public String title(long id) { return \"First entry\"; }\n}\n"
+          },
+          {
+            "name": "src/test/java/com/example/demo/EntryControllerTest.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.junit.jupiter.api.Test;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;\nimport org.springframework.test.context.bean.override.mockito.MockitoBean;\nimport org.springframework.test.web.servlet.MockMvc;\nimport static org.mockito.Mockito.when;\nimport static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;\n\n@WebMvcTest(EntryController.class)\nclass EntryControllerTest {\n    @Autowired\n    private MockMvc mvc;\n\n    @MockitoBean\n    private EntryService service;\n\n    @Test\n    void returnsEntryTitle() throws Exception {\n        when(service.title(7L)).thenReturn(\"First entry\");\n\n        mvc.perform(get(\"/entries/7\"))\n                .andExpect(status().isOk())\n                .andExpect(jsonPath(\"$.title\").value(\"First entry\"));\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
-      ]
+      }
     },
     {
-      "id": "web-mvc-mocks-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Older Boot 3 examples use @MockBean. It was deprecated in Boot 3.4."
-        ]
-      ]
-    },
-    {
-      "id": "web-mvc-mocks-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A plain Mockito @Mock field is not a replacement Spring bean."
-        ]
-      ]
-    },
-    {
-      "id": "web-mvc-security",
+      "id": "testing-web-mvc-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Include the access rules being checked"
+          "Spring Security in MVC tests"
         ]
       ]
     },
     {
-      "id": "web-mvc-security-b0",
+      "id": "testing-web-mvc-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Security is included when it is on the classpath. Import the application’s relevant security configuration when checking its rules."
+          "When Spring Security is on the classpath, the MVC slice configures security support too."
         ]
       ]
     },
     {
-      "id": "web-mvc-security-b1",
+      "id": "testing-web-mvc-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Add spring-security-test for helpers such as @WithMockUser."
+          "An application\u2019s custom security rules may need an explicit "
+        ],
+        [
+          "@Import",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " of their configuration into the slice."
         ]
       ]
     },
     {
-      "id": "web-mvc-security-b2",
+      "id": "testing-web-mvc-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "@WithMockUser supplies test authentication. It does not test password verification."
+          "spring-security-test",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies "
+        ],
+        [
+          "@WithMockUser",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and security request helpers."
         ]
       ]
     },
     {
-      "id": "web-mvc-security-b3",
+      "id": "testing-web-mvc-lesson-3-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep security filters enabled when the requirement is an access rule."
+          "@WithMockUser",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " puts a test identity in the security context. It does not verify a real password or token."
         ]
       ]
     },
     {
-      "id": "web-mvc-security-b4",
+      "id": "testing-web-mvc-lesson-3-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "For protected POST, PUT or DELETE requests, supply the CSRF token when the application requires it."
+          "The "
+        ],
+        [
+          "csrf()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " request helper adds a CSRF token when a protected state-changing request requires one."
+        ]
+      ]
+    },
+    {
+      "id": "testing-web-mvc-lesson-3-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Disabling filters removes their checks from the test. A test of access rules needs the relevant security filters enabled."
         ]
       ]
     }
@@ -183,8 +422,20 @@
     {
       "title": "Spring Security 6.5: MockMvc testing",
       "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/test/mockmvc.html"
+    },
+    {
+      "title": "Spring Boot 3.5: MVC tests",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/testing/spring-boot-applications.html#testing.spring-boot-applications.spring-mvc-tests"
+    },
+    {
+      "title": "Spring Framework 6.2: MockitoBean",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/testing/annotations/integration-spring/annotation-mockitobean.html"
+    },
+    {
+      "title": "Spring Security 6.5: MockMvc testing",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/test/mockmvc/index.html"
     }
   ],
-  "updatedOn": "2026-10-14",
-  "summary": "Check request mapping and responses without loading the full application."
+  "updatedOn": "2026-10-20",
+  "summary": "Test controller behavior through Spring MVC while replacing service dependencies with Spring-managed mocks."
 }

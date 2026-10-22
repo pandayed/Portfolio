@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-deployment-nginx-https",
   "title": "Nginx and HTTPS",
-  "summary": "Forward public requests to a private Spring Boot process, then configure HTTPS.",
+  "summary": "Keep the Boot listener local, forward trusted public request details, and serve HTTPS through Nginx.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Nginx: proxy module",
@@ -12,200 +12,246 @@
     {
       "title": "Spring Boot: traditional deployment and proxy configuration",
       "url": "https://docs.spring.io/spring-boot/3.5/how-to/webserver.html"
+    },
+    {
+      "title": "Nginx: HTTPS configuration",
+      "url": "https://nginx.org/en/docs/http/configuring_https_servers.html"
     }
   ],
   "blocks": [
     {
-      "id": "vps-proxy",
+      "id": "deployment-nginx-https-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Use Nginx as a reverse proxy"
+          "Boot behind the HTTPS proxy"
         ]
       ]
     },
     {
-      "id": "vps-proxy-b0",
+      "id": "deployment-nginx-https-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A reverse proxy receives a client request and forwards it to another server."
+          "Nginx can forward public requests to the Boot process from the preceding VPS lesson."
         ]
       ]
     },
     {
-      "id": "vps-proxy-b1",
+      "id": "deployment-nginx-https-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Nginx can accept public requests and forward them to the Spring Boot process on the same VPS."
+          "Boot\u2019s "
+        ],
+        [
+          "server.address=127.0.0.1",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " keeps its HTTP listener local to that VPS."
         ]
       ]
     },
     {
-      "id": "vps-proxy-b2",
+      "id": "deployment-nginx-https-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Bind Spring Boot to 127.0.0.1 so its HTTP port accepts only local connections."
+          "Nginx accepts public HTTPS and forwards to "
+        ],
+        [
+          "127.0.0.1:8080",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "vps-proxy-b3",
+      "id": "deployment-nginx-https-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Expose the public web ports through Nginx."
+          "The application sees the proxy connection unless the server uses trusted forwarded headers. This matters for generated redirects and external callback URLs."
         ]
       ]
     },
     {
-      "id": "nginx-proxy-code",
+      "id": "deployment-nginx-https-lesson-1",
+      "type": "header",
+      "richText": [
+        [
+          "Forwarded headers in Boot"
+        ]
+      ]
+    },
+    {
+      "id": "deployment-nginx-https-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "server.forward-headers-strategy=NATIVE",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " enables the embedded server\u2019s forwarded-header handling."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-nginx-https-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "With Tomcat, this uses its remote-IP support. The trusted proxy configuration must match the actual proxy network."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-nginx-https-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Forwarded headers are trusted input only when an approved proxy sets them and direct public access to the application is blocked."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-nginx-https-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "In this single-proxy arrangement, Nginx replaces forwarded values with the public request information."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-nginx-https-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Nginx and application configuration"
+        ]
+      ]
+    },
+    {
+      "id": "deployment-nginx-https-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Forward HTTP requests to the local application",
-        "description": [
-          "The Spring Boot process listens at 127.0.0.1:8080.",
-          "Use a domain you control in server_name. This example uses journal.example.com.",
-          "Place this server block in the Nginx configuration location used by your Linux distribution.",
-          "This is the HTTP proxy step. Add the HTTPS configuration described below before exposing authenticated application traffic."
-        ],
-        "code": "server {\n    listen 80;\n    server_name journal.example.com;\n\n    location / {\n        proxy_pass http://127.0.0.1:8080;\n        proxy_set_header Host $host;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n    }\n}",
+        "title": "Forward HTTPS to the local Boot server",
         "language": "text",
-        "explanation": [
-          "proxy_pass selects the local application server.",
-          "Host preserves the requested domain. X-Forwarded-Proto identifies the original request protocol.",
-          "Only trust forwarded headers from the controlled proxy. Restrict direct access to the application.",
-          "If Spring must use forwarded headers for redirects, configure its forwarded-header handling for this proxy arrangement.",
-          "Validate the Nginx configuration before reloading it."
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "The Linux host uses systemd and Java `17` at `/usr/bin/java`. The `demo` account and group already exist.",
+          "The commands run on the host from the project root. `/opt/demo` already exists. The service account can read its JAR but cannot replace it.",
+          "The root-owned `/etc/demo.env` file has restricted permissions. The two absolute-path tabs show host configuration files.",
+          "`demo.example.com` represents a domain controlled by the application owner. Its DNS points to the VPS.",
+          "A valid certificate and matching private key for that domain already exist at the displayed paths.",
+          "The Nginx process can read the required certificate files. Private-key permissions restrict other access.",
+          "The application restarts after those environment changes. Network rules allow public HTTPS but keep port `8080` private.",
+          "This example uses TLS `1.3`. The installed Nginx and its TLS library must support it.",
+          "Each host configuration tab is saved at its displayed absolute path before the service commands run."
         ],
-        "commands": "sudo nginx -t\nsudo systemctl reload nginx"
+        "code": "",
+        "explanation": [
+          "The HTTP block redirects to the fixed HTTPS domain.",
+          "`proxy_pass` selects the local Boot listener.",
+          "Nginx supplies the public scheme, port, fixed host, and client address. It discards a caller-supplied `Forwarded` header.",
+          "The Actuator prefix is blocked on this public route. Local monitoring can still use its separately controlled access path.",
+          "`nginx -t` checks the configuration and readable certificate files before the reload command runs.",
+          "The final request checks TLS and the public proxy route. Its status depends on the application mappings and access rules."
+        ],
+        "commands": "mvn clean package\nsudo install -o root -g demo -m 640 target/demo.jar /opt/demo/demo.jar\nsudo systemctl daemon-reload\nsudo systemctl enable --now demo.service\nsudo systemctl restart demo.service\nsystemctl status demo.service\njournalctl -u demo.service -n 100 --no-pager\ncurl -i http://127.0.0.1:8080/\nsudo nginx -t\nsudo systemctl reload nginx\ncurl -i https://demo.example.com/",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/\")\n    public String hello() { return \"Hello, Spring Boot\"; }\n}\n"
+          },
+          {
+            "name": "/etc/systemd/system/demo.service",
+            "language": "text",
+            "code": "# /etc/systemd/system/demo.service\n[Unit]\nDescription=Demo application\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nUser=demo\nGroup=demo\nWorkingDirectory=/opt/demo\nEnvironmentFile=/etc/demo.env\nExecStart=/usr/bin/java -jar /opt/demo/demo.jar\nRestart=on-failure\nRestartSec=5\nTimeoutStopSec=60\nNoNewPrivileges=true\n\n[Install]\nWantedBy=multi-user.target\n"
+          },
+          {
+            "name": "/etc/demo.env",
+            "language": "text",
+            "code": "SERVER_ADDRESS=127.0.0.1\nSERVER_PORT=8080\nSERVER_FORWARD_HEADERS_STRATEGY=NATIVE\nSPRING_LIFECYCLE_TIMEOUT_PER_SHUTDOWN_PHASE=30s\n"
+          },
+          {
+            "name": "/etc/nginx/conf.d/demo.conf",
+            "language": "text",
+            "code": "server {\n    listen 80;\n    server_name demo.example.com;\n    return 301 https://demo.example.com$request_uri;\n}\n\nserver {\n    listen 443 ssl;\n    server_name demo.example.com;\n\n    ssl_certificate /etc/letsencrypt/live/demo.example.com/fullchain.pem;\n    ssl_certificate_key /etc/letsencrypt/live/demo.example.com/privkey.pem;\n    ssl_protocols TLSv1.3;\n\n    location = /actuator {\n        deny all;\n    }\n\n    location /actuator/ {\n        deny all;\n    }\n\n    location / {\n        proxy_pass http://127.0.0.1:8080;\n        proxy_set_header Host demo.example.com;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_set_header X-Forwarded-Port $server_port;\n        proxy_set_header X-Forwarded-For $remote_addr;\n        proxy_set_header Forwarded \"\";\n    }\n}\n"
+          }
+        ]
       }
     },
     {
-      "id": "https",
+      "id": "deployment-nginx-https-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Enable HTTPS"
+          "Certificates and connection behavior"
         ]
       ]
     },
     {
-      "id": "https-b0",
+      "id": "deployment-nginx-https-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Point the domain’s DNS record to the VPS."
+          "The served certificate must match the public domain and remain valid. Certificate renewal must also reload the renewed certificate into Nginx."
         ]
       ]
     },
     {
-      "id": "https-b1",
+      "id": "deployment-nginx-https-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Install a TLS certificate for that domain and configure Nginx to serve HTTPS on port 443."
+          "Request-size limits and proxy timeouts must match the application\u2019s supported requests."
         ]
       ]
     },
     {
-      "id": "https-b2",
+      "id": "deployment-nginx-https-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "TLS encrypts traffic between the browser and the public server."
+          "A local Boot response, a public HTTPS response, and an authenticated database operation check different parts of the release."
         ]
       ]
     },
     {
-      "id": "https-b3",
+      "id": "deployment-nginx-https-lesson-3-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Redirect public HTTP traffic to HTTPS once HTTPS works."
-        ]
-      ]
-    },
-    {
-      "id": "https-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep automatic certificate renewal configured and check that renewed certificates are loaded."
-        ]
-      ]
-    },
-    {
-      "id": "https-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Forward the public HTTPS protocol correctly so generated URLs and OAuth callback URLs use HTTPS."
-        ]
-      ]
-    },
-    {
-      "id": "proxy-network",
-      "type": "header",
-      "richText": [
-        [
-          "Network rules and checks"
-        ]
-      ]
-    },
-    {
-      "id": "proxy-network-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Allow required SSH and public web ports. Keep the application port private."
-        ]
-      ]
-    },
-    {
-      "id": "proxy-network-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Preserve working SSH access when changing remote firewall rules."
-        ]
-      ]
-    },
-    {
-      "id": "proxy-network-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Choose proxy timeouts and request-size limits for the application’s endpoints."
-        ]
-      ]
-    },
-    {
-      "id": "proxy-network-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Rate limiting can reduce repeated abusive requests. It does not prevent every denial-of-service attack."
-        ]
-      ]
-    },
-    {
-      "id": "proxy-network-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Check the local application, public HTTPS endpoint and certificate independently."
-        ]
-      ]
-    },
-    {
-      "id": "proxy-network-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Then check an authenticated operation that reads or writes the database."
+          "An HTTPS response alone does not prove that the application can reach its database or apply its access rules."
         ]
       ]
     }

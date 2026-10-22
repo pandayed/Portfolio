@@ -8,7 +8,7 @@
       "type": "header",
       "richText": [
         [
-          "Conditional configuration"
+          "Auto-configuration"
         ]
       ]
     },
@@ -17,7 +17,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Auto-configuration provides Spring configuration when stated conditions match."
+          "Auto-configuration is Boot\u2019s built-in configuration code for setting up framework objects your application needs."
         ]
       ]
     },
@@ -26,7 +26,7 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "Conditions can check available classes, existing beans, properties, and the application type."
+          "For example, Boot can create the objects that start Tomcat and connect incoming requests to Spring MVC."
         ]
       ]
     },
@@ -35,7 +35,18 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "A library being present does not guarantee that every related feature will be configured. Required properties and other conditions must also match."
+          "Your application does not need to declare each of those framework objects with its own "
+        ],
+        [
+          "@Bean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " method."
         ]
       ]
     },
@@ -44,77 +55,682 @@
       "type": "bulleted_list",
       "richText": [
         [
-          "@SpringBootApplication enables auto-configuration through @EnableAutoConfiguration."
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " enables this mechanism through its included "
+        ],
+        [
+          "@EnableAutoConfiguration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " annotation."
         ]
       ]
     },
     {
-      "id": "auto-configuration-1",
+      "id": "auto-configuration-0-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot applies this configuration during startup. It does not generate Java files in your project."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-web-case",
       "type": "header",
       "richText": [
         [
-          "Change a default"
+          "Spring Web case"
         ]
       ]
     },
     {
-      "id": "auto-configuration-1-point-0",
+      "id": "auto-configuration-web-case-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Many auto-configured settings can be changed through application properties."
+          "spring-boot-starter-web",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " brings in Spring MVC and embedded Tomcat libraries in this Boot version."
         ]
       ]
     },
     {
-      "id": "auto-configuration-1-point-1",
+      "id": "auto-configuration-web-case-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Many auto-configurations back off when you define the corresponding bean yourself. The exact condition depends on the configuration."
+          "The dependency makes those libraries available. Auto-configuration decides how to register and configure their framework objects."
         ]
       ]
     },
     {
-      "id": "auto-configuration-1-point-2",
+      "id": "auto-configuration-web-case-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Excluding an auto-configuration disables that configuration. It does not remove its library dependency."
+          "A "
+        ],
+        [
+          "ServletWebServerFactory",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is a bean that creates the embedded servlet server. Boot supplies a Tomcat implementation for this project."
         ]
       ]
     },
     {
-      "id": "auto-configuration-1-point-3",
+      "id": "auto-configuration-web-case-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Start with --debug to see the condition evaluation report. It shows which configurations matched and which did not."
+          "DispatcherServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is Spring MVC\u2019s central request dispatcher. It sends requests to the matching MVC handlers."
         ]
       ]
     },
     {
-      "id": "auto-configuration-1-example-0",
+      "id": "auto-configuration-web-case-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot registers that dispatcher and the supporting MVC configuration."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-web-case-point-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot does not write application controllers or business methods. A running server can therefore have no application endpoint."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions",
+      "type": "header",
+      "richText": [
+        [
+          "Conditions"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An auto-configuration has checks called conditions. It applies only when its required checks pass."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A class condition checks whether a required library class is available."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A bean condition checks whether the application has already supplied a particular kind of bean."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A property condition checks an application setting."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A web-application condition checks whether the application uses the required web environment."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions-point-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For the Tomcat case, the relevant server libraries must be available and the application must be a servlet web application."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-conditions-point-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The default server-factory configuration also requires that the application has not already provided a "
+        ],
+        [
+          "ServletWebServerFactory",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-condition-annotations",
+      "type": "header",
+      "richText": [
+        [
+          "Condition annotations"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-condition-annotations-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot expresses many checks with annotations on its configuration classes or bean methods."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-condition-annotations-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ConditionalOnClass",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requires the specified classes to be available."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-condition-annotations-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ConditionalOnMissingBean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requires the specified bean to be absent before the default is registered."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-condition-annotations-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ConditionalOnProperty",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks a named property against the condition\u2019s declared rule."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-condition-annotations-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These annotations describe how Boot\u2019s defaults are selected. Ordinary application classes do not need them to receive auto-configuration."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-1",
+      "type": "header",
+      "richText": [
+        [
+          "Application overrides"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-1-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Where Boot checks for a missing bean, declaring your own matching bean makes Boot skip that particular default."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-1-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For example, a "
+        ],
+        [
+          "@Bean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " method returning a "
+        ],
+        [
+          "ServletWebServerFactory",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the server factory explicitly."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-1-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot\u2019s missing-bean check then prevents its default factory from being registered."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-1-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "This selects the application\u2019s factory instead of creating two factories and choosing one with "
+        ],
+        [
+          "@Primary",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-1-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Other auto-configuration can still apply. Replacing one default does not disable the entire feature."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-1-point-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The replacement must satisfy that feature\u2019s requirements. An unrelated bean does not replace it."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-source-comparison",
+      "type": "header",
+      "richText": [
+        [
+          "Starters, scanning, and auto-configuration"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-source-table",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "auto-configuration-source-row-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Mechanism"
+              ]
+            ],
+            "1": [
+              [
+                "Concrete role"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "auto-configuration-source-row-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Starter"
+              ]
+            ],
+            "1": [
+              [
+                "Adds libraries to the build."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "auto-configuration-source-row-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Component scanning"
+              ]
+            ],
+            "1": [
+              [
+                "Finds application components such as an annotated service."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "auto-configuration-source-row-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Auto-configuration"
+              ]
+            ],
+            "1": [
+              [
+                "Registers framework defaults when their conditions match."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Condition report"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-2-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "--debug",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds the condition evaluation report to the startup log."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-2-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Positive matches list configurations whose conditions passed."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-2-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Negative matches identify configurations or bean methods that did not meet their conditions."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-2-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A negative match is often normal. For example, the application may not include the library for that feature."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-2-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The report gives the reason for each recorded decision. It is more specific than assuming every starter always enables every related feature."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Inspect auto-configuration decisions",
-        "description": [
-          "Run a packaged application with debug reporting enabled. Use the actual JAR name produced by the build."
-        ],
-        "code": "java -jar target/demo.jar --debug",
+        "title": "Inspect the framework beans Boot supplies",
         "language": "text",
+        "description": [
+          "The two tabs contain the complete Maven build and application source.",
+          "Java 17 or later and Maven must be installed.",
+          "The command runs from the directory containing `pom.xml`.",
+          "Port `8080` must be available.",
+          "The application declares no server factory, dispatcher, or controller bean of its own."
+        ],
+        "code": "",
         "explanation": [
-          "Read the condition evaluation report in the startup logs.",
-          "The report describes configuration conditions. It does not prove that a database or external service is reachable."
-        ]
+          "`pom.xml` supplies the Spring Web starter, which provides the MVC and Tomcat libraries.",
+          "`SpringApplication.run` creates the application context and applies matching auto-configuration.",
+          "`getBeansOfType` returns the managed beans implementing the requested type. The example prints their counts.",
+          "The displayed lines are the expected counts for this application. Boot also writes startup logs and the condition report.",
+          "The server-factory and dispatcher beans come from framework configuration, not from application `@Bean` methods.",
+          "In the report, `ServletWebServerFactoryAutoConfiguration` relates to embedded-server setup.",
+          "`WebMvcAutoConfiguration` relates to the MVC defaults.",
+          "Each report entry explains the conditions that matched or prevented a particular configuration.",
+          "The counts demonstrate registered framework objects. They do not demonstrate a working business endpoint.",
+          "If the web starter is removed, the application no longer has the MVC types imported by this example and does not compile unchanged."
+        ],
+        "commands": "mvn spring-boot:run -Dspring-boot.run.arguments=--debug",
+        "files": [
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.boot.web.servlet.server.ServletWebServerFactory;\nimport org.springframework.web.servlet.DispatcherServlet;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        var context = SpringApplication.run(DemoApplication.class, args);\n\n        System.out.println(\"Server factory beans: \"\n                + context.getBeansOfType(ServletWebServerFactory.class).size());\n        System.out.println(\"MVC dispatcher beans: \"\n                + context.getBeansOfType(DispatcherServlet.class).size());\n    }\n}\n"
+          }
+        ],
+        "result": "Server factory beans: 1\nMVC dispatcher beans: 1",
+        "possibleOutput": true
       }
+    },
+    {
+      "id": "auto-configuration-exclusions",
+      "type": "header",
+      "richText": [
+        [
+          "Exclusions"
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-exclusions-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An exclusion tells Boot not to apply a particular auto-configuration class."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-exclusions-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The "
+        ],
+        [
+          "exclude",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " attribute on "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " accepts auto-configuration class names as class literals."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-exclusions-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.autoconfigure.exclude",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is the configuration-property alternative."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-exclusions-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An exclusion disables that configuration, not the library dependency."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-exclusions-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Excluding configuration needed by the application can prevent startup or remove feature support."
+        ]
+      ]
+    },
+    {
+      "id": "auto-configuration-exclusions-point-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The condition report identifies the applicable configuration before an exclusion is considered."
+        ]
+      ]
     }
   ],
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Official reference: Auto-configuration",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/using/auto-configuration.html"
+    },
+    {
+      "title": "Spring Boot 3.5: auto-configuration conditions",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/developing-auto-configuration.html"
+    },
+    {
+      "title": "Spring Boot 3.5: servlet web configuration",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/web/servlet.html"
     }
-  ]
+  ],
+  "summary": "Follow the Spring Web case from dependencies through conditions to registered framework beans and the condition report."
 }

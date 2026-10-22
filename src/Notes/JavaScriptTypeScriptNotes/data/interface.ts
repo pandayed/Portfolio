@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'interface',
     title: 'Interfaces',
-    summary: 'Name an object contract, extend its requirements, and understand declaration merging.',
+    summary: 'Interfaces name object types and support extension and declaration merging.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Everyday types',
@@ -20,17 +21,18 @@ const note: LearningNote = {
     sections: [
         {
             id: 'object-contract',
-            title: 'Name an object contract with interface',
+            title: 'Object contracts',
             bullets: [
-                'An interface names an object type. Its body uses the property rules from Object types.',
-                'Use the interface name in variable and parameter annotations.',
+                'An interface names an object type.',
+                'Its body uses the property rules from Object types.',
+                'Variable and parameter annotations can use the interface name.',
                 'An interface can describe methods as well as data properties.',
             ],
             examples: [
                 {
-                    title: 'Describe data and a method together',
+                    title: 'Properties and methods',
                     description: [
-                        'Require a greeter object with a name and a method returning a string.',
+                        'The example requires a greeter object with a `name` and a method returning a `string`.',
                     ],
                     language: 'typescript',
                     code: [
@@ -46,7 +48,7 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Hello, Mia',
                     explanation: [
-                        'The interface checks the name property and greet method.',
+                        'The interface checks the `name` property and `greet` method.',
                         'The object supplies the method implementation.',
                     ],
                 },
@@ -54,7 +56,7 @@ const note: LearningNote = {
         },
         {
             id: 'extending-contracts',
-            title: 'Add requirements with extends',
+            title: 'Interface extension',
             bullets: [
                 'An interface can extend an existing object type and add more members.',
                 'The new interface requires the inherited members as well as its own members.',
@@ -62,9 +64,9 @@ const note: LearningNote = {
             ],
             examples: [
                 {
-                    title: 'Extend a base user contract',
+                    title: 'User and contact interfaces',
                     description: [
-                        'Add email to an existing user requirement.',
+                        'The example adds `email` to an existing user requirement.',
                     ],
                     language: 'typescript',
                     code: [
@@ -77,24 +79,25 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Mia mia@example.com',
                     explanation: [
-                        'Contact requires id and name from User.',
-                        'It also requires its own email property.',
+                        '`Contact` requires `id` and `name` from `User`.',
+                        'It also requires its own `email` property.',
                     ],
                 },
             ],
         },
         {
             id: 'call-signatures',
-            title: 'Describe an object that can be called',
+            title: 'Call signatures',
             bullets: [
-                'A call signature describes calling the value itself. A method signature describes calling a property of that value.',
+                'A call signature describes calling the value itself.',
+                'A method signature describes calling a property of that value.',
                 'A callable interface can also require properties on the function object.',
             ],
             examples: [
                 {
-                    title: 'Use a callable interface',
+                    title: 'Formatter interface',
                     description: [
-                        'Require a formatter function with a string input and result.',
+                        'The example requires a formatter function with a `string` input and result.',
                     ],
                     language: 'typescript',
                     code: [
@@ -104,7 +107,7 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'MIA',
                     explanation: [
-                        'The call signature checks format itself.',
+                        'The call signature checks `format` itself.',
                         'No named method property is required by this interface.',
                     ],
                 },
@@ -112,17 +115,19 @@ const note: LearningNote = {
         },
         {
             id: 'declaration-merging',
-            title: 'Repeated interface declarations can merge',
+            title: 'Declaration merging',
             bullets: [
                 'Interfaces with the same name in the same declaration scope can contribute members to one interface.',
-                'This is called declaration merging. Non-function members declared more than once must have compatible declarations.',
-                'Merging is useful when extending an existing declaration. It also means a repeated name can change requirements elsewhere in that scope.',
+                'This is called declaration merging.',
+                'Non-function members declared more than once must have compatible declarations.',
+                'Merging is useful when extending an existing declaration.',
+                'It also means a repeated name can change requirements elsewhere in that scope.',
             ],
             examples: [
                 {
-                    title: 'Combine two declarations of one interface',
+                    title: 'Merged user interface',
                     description: [
-                        'Observe that both declarations contribute required properties.',
+                        'The example shows that both declarations contribute required properties.',
                     ],
                     language: 'typescript',
                     code: [
@@ -136,7 +141,7 @@ const note: LearningNote = {
                     result: 'Mia mia@example.com',
                     explanation: [
                         'Both declarations refer to one merged interface.',
-                        'export {} makes this file a module and keeps the declarations out of the global script scope.',
+                        '`export {}` makes this file a module and keeps the declarations out of the global script scope.',
                     ],
                 },
             ],

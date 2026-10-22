@@ -43,6 +43,7 @@ import {
     NOTES_ROUTE,
     PYTHON_NOTES_ROUTE,
     REACT_NOTES_ROUTE,
+    NODE_NOTES_ROUTE,
     PROGRAMMING_DICTIONARY_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     POSTGRESQL_QUERY_RESULTS_ROUTE,
@@ -54,6 +55,7 @@ import {
     type GoNoteRoute,
     type PythonNoteRoute,
     type ReactNoteRoute,
+    type NodeNoteRoute,
     type SpringBootRoute,
     type SystemDesignEntryRoute,
     type Route,
@@ -64,6 +66,7 @@ import { goChapters } from './GoNotes/goNotes';
 import { javascriptTypeScriptChapters } from './JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonChapters } from './PythonNotes/pythonNotes';
 import { reactChapters } from './ReactNotes/reactNotes';
+import { nodeChapters } from './NodeNotes/nodeNotes';
 import { springBootChapters, springBootPagesByRoute } from './SpringBootNotes/registry';
 import type { SpringBootOutlineNode } from './SpringBootNotes/types';
 import {
@@ -285,7 +288,7 @@ export const pythonNotes: NoteGroup = {
 export const javascriptTypeScriptNotes: NoteGroup = {
     type: 'group',
     title: 'JavaScript and TypeScript',
-    summary: 'Learn JavaScript in order, then add TypeScript checking and reusable types.',
+    summary: 'JavaScript basics, asynchronous work, TypeScript checks, and reusable types.',
     route: JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE,
     children: javascriptTypeScriptChapters.map((chapter) => ({
         type: 'group',
@@ -323,12 +326,32 @@ export const reactNotes: NoteGroup = {
         })),
         {
             type: 'page',
-            title: 'The Anatomy of API Communication in a React Application',
-            summary: 'Each layer exists for a specific reason, solves a specific problem, and has a clear boundary.',
+            title: 'API communication in React',
+            summary: 'HTTP clients, service functions, data fetching, and React components.',
             route: API_COMMUNICATION_ROUTE,
             updatedOn: '2026-09-20',
         },
     ],
+};
+
+export const nodeNotes: NoteGroup = {
+    type: 'group',
+    title: 'Node.js',
+    summary: 'Runtime basics, modules, npm, files, process settings, and a local HTTP server.',
+    route: NODE_NOTES_ROUTE,
+    children: nodeChapters.map((chapter): NoteGroup => ({
+        type: 'group',
+        title: chapter.title,
+        summary: chapter.summary,
+        route: `${NODE_NOTES_ROUTE}/${chapter.notes[0].slug}` as NodeNoteRoute,
+        children: chapter.notes.map(({ slug, title, summary, updatedOn }) => ({
+            type: 'page',
+            title,
+            summary,
+            updatedOn,
+            route: `${NODE_NOTES_ROUTE}/${slug}` as NodeNoteRoute,
+        })),
+    })),
 };
 
 export const javaNotes: NoteGroup = {
@@ -364,14 +387,14 @@ const springBootIntroPages: NotePage[] = [
     {
         type: 'page',
         title: 'A first Spring Boot application',
-        summary: 'Create and run a web project, then map an HTTP request.',
+        summary: 'Generate the project and start its embedded server before adding application components.',
         route: SPRING_BOOT_FIRST_APPLICATION_ROUTE,
         updatedOn: '2026-10-14',
     },
     {
         type: 'page',
         title: 'Annotations at a glance',
-        summary: 'Read annotations in learning order and open their detailed lessons.',
+        summary: 'Look up each annotation and open the lesson that explains it.',
         route: SPRING_BOOT_ANNOTATIONS_ROUTE,
         updatedOn: '2026-10-14',
     },
@@ -577,6 +600,7 @@ export const noteTree: NoteNode[] = [
         updatedOn: '2026-10-15',
     },
     frontendNotes,
+    nodeNotes,
     cicdNotes,
     {
         type: 'page',

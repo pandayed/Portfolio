@@ -11,14 +11,16 @@ const note: PythonNote = {
             "id": "class-object",
             "title": "Classes and instances",
             "bullets": [
-                "A class defines a kind of object. Calling the class creates an instance.",
-                "An attribute is a name accessed with a dot, such as person.name. A method is a function attached to a class."
+                "A class defines a kind of object.",
+                "Calling the class creates an instance.",
+                "An attribute is a name accessed with a dot, such as `person.name`.",
+                "A method is a function attached to a class."
             ],
             "examples": [
                 {
                     "title": "Creating two independent instances",
                     "description": [
-                        "Each call creates a new Person object."
+                        "Each call creates a new `Person` object."
                     ],
                     "code": "class Person:\n    pass\n\nfirst = Person()\nsecond = Person()\nfirst.name = \"Mia\"\nsecond.name = \"Leo\"\nprint(first.name, second.name)\nprint(first is second)",
                     "result": "Mia Leo\nFalse"
@@ -29,9 +31,12 @@ const note: PythonNote = {
             "id": "init-self",
             "title": "Initializing state with __init__",
             "bullets": [
-                "Python calls __init__ after creating the instance. Its arguments supply the initial state.",
-                "self refers to the instance receiving the method call. Python passes it automatically in person.introduce().",
-                "__init__ initializes an object. It must not return a value other than None."
+                "Python calls `__init__` after creating the instance.",
+                "Its arguments supply the initial state.",
+                "`self` refers to the instance receiving the method call.",
+                "Python passes it automatically in `person.introduce()`.",
+                "`__init__` initializes an object.",
+                "It must not return a value other than `None`."
             ],
             "examples": [
                 {
@@ -42,7 +47,8 @@ const note: PythonNote = {
                     "code": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def introduce(self):\n        return f\"Hi, I am {self.name}\"\n\nperson = Person(\"Mia\", 20)\nprint(person.name, person.age)\nprint(person.introduce())",
                     "result": "Mia 20\nHi, I am Mia",
                     "explanation": [
-                        "self.name stores state on this instance. Each Person can have a different name and age."
+                        "`self.name` stores state on this instance.",
+                        "Each `Person` can have a different name and age."
                     ]
                 }
             ]
@@ -51,9 +57,12 @@ const note: PythonNote = {
             "id": "class-instance-attributes",
             "title": "Class and instance attributes",
             "bullets": [
-                "A class attribute is stored on the class. Instances can read it when they do not have an attribute with the same name.",
-                "An instance attribute belongs to one instance. Assigning person.species creates an instance attribute; it does not change Person.species.",
-                "Put per-instance mutable data, such as lists and dictionaries, inside __init__. A mutable class attribute is shared by instances."
+                "A class attribute is stored on the class.",
+                "Instances can read it when they do not have an attribute with the same name.",
+                "An instance attribute belongs to one instance.",
+                "Assigning `person.species` creates an instance attribute; it does not change `Person.species`.",
+                "Put per-instance mutable data, such as lists and dictionaries, inside `__init__`.",
+                "A mutable class attribute is shared by instances."
             ],
             "examples": [
                 {
@@ -70,9 +79,22 @@ const note: PythonNote = {
             "id": "deletion-access",
             "title": "Attribute deletion and access conventions",
             "bullets": [
-                "del object.attribute removes an attribute. Later access raises AttributeError unless lookup finds another value on the class or its bases.",
-                "del person removes the name binding. It does not directly destroy the object. Other references can still keep it alive.",
-                "A leading underscore marks a non-public name by convention. A double leading underscore triggers name mangling to reduce accidental clashes in subclasses. It is not access control."
+                [
+                    "Related note: ",
+                    {
+                        "text": "Methods and attribute lookup",
+                        "href": "#/notes/python/methods-and-attributes"
+                    },
+                    "."
+                ],
+                "del `object.attribute` removes an attribute.",
+                "Later access raises `AttributeError` unless lookup finds another value on the class or its bases.",
+                "del person removes the name binding.",
+                "It does not directly destroy the object.",
+                "Other references can still keep it alive.",
+                "A leading underscore marks a non-public name by convention.",
+                "A double leading underscore triggers name mangling to reduce accidental clashes in subclasses.",
+                "It is not access control."
             ],
             "examples": [
                 {
@@ -83,20 +105,17 @@ const note: PythonNote = {
                     "code": "class Person:\n    species = \"Human\"\n\nperson = Person()\nperson.species = \"Custom label\"\ndel person.species\nprint(person.species)",
                     "result": "Human"
                 }
-            ],
-            "paragraphs": [
+            ]
+        },
+        {
+            "id": "references",
+            "title": "References",
+            "bullets": [
                 [
-                    "Continue with ",
-                    {
-                        "text": "Methods and attribute lookup",
-                        "href": "#/notes/python/methods-and-attributes"
-                    },
-                    ". Reference: ",
                     {
                         "text": "Python tutorial: classes",
                         "href": "https://docs.python.org/3/tutorial/classes.html"
-                    },
-                    "."
+                    }
                 ]
             ]
         }

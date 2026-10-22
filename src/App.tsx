@@ -23,6 +23,8 @@ import JavaScriptTypeScriptNotesIndex from './Notes/JavaScriptTypeScriptNotes/Ja
 import JavaScriptTypeScriptNote from './Notes/JavaScriptTypeScriptNotes/JavaScriptTypeScriptNote';
 import ReactNotesIndex from './Notes/ReactNotes/ReactNotesIndex';
 import ReactNote from './Notes/ReactNotes/ReactNote';
+import NodeNotesIndex from './Notes/NodeNotes/NodeNotesIndex';
+import NodeNote from './Notes/NodeNotes/NodeNote';
 import CICDNotesIndex from './Notes/CICDNotes/CICDNotesIndex';
 import CICDBasics from './Notes/CICDNotes/CICDBasics';
 import GitHubActions from './Notes/CICDNotes/GitHubActions';
@@ -149,6 +151,7 @@ import {
     NOTES_ROUTE,
     PROJECTS_ROUTE,
     REACT_NOTES_ROUTE,
+    NODE_NOTES_ROUTE,
     SCALAR_IN_POSTGRESQL_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     SQL_VS_MYSQL_ROUTE,
@@ -162,6 +165,7 @@ import {
     type SystemDesignEntryRoute,
     type PythonNoteRoute,
     type ReactNoteRoute,
+    type NodeNoteRoute,
     type Route,
 } from './routing/routes';
 import { useRoute } from './routing/useRoute';
@@ -182,6 +186,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [FRONTEND_NOTES_ROUTE]: FrontendNotes,
     [JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE]: JavaScriptTypeScriptNotesIndex,
     [REACT_NOTES_ROUTE]: ReactNotesIndex,
+    [NODE_NOTES_ROUTE]: NodeNotesIndex,
     [CICD_NOTES_ROUTE]: CICDNotesIndex,
     [CICD_BASICS_ROUTE]: CICDBasics,
     [GITHUB_ACTIONS_ROUTE]: GitHubActions,
@@ -249,6 +254,7 @@ function App() {
     const isJavaScriptTypeScriptNote = route.startsWith(`${JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/`);
     const isJavaNote = route.startsWith(`${JAVA_NOTES_ROUTE}/`) && route !== JAVA_PROGRAM_EXECUTION_ROUTE;
     const isReactNote = route.startsWith(`${REACT_NOTES_ROUTE}/`);
+    const isNodeNote = route.startsWith(`${NODE_NOTES_ROUTE}/`);
     const isDBMSNote = route.startsWith(`${DBMS_NOTES_ROUTE}/`);
 
     return (
@@ -270,6 +276,8 @@ function App() {
                     <JavaScriptTypeScriptNote route={route as JavaScriptTypeScriptNoteRoute} />
                 ) : isReactNote ? (
                     <ReactNote route={route as ReactNoteRoute} />
+                ) : isNodeNote ? (
+                    <NodeNote route={route as NodeNoteRoute} />
                 ) : isDBMSNote ? (
                     <DBMSNote route={route as DBMSNoteRoute} />
                 ) : isJavaNote ? (

@@ -2,194 +2,393 @@
   "id": "spring-boot-jpa-relationships",
   "sourceUrl": "https://docs.spring.io/spring-data/",
   "title": "JPA Relationships",
-  "summary": "Map related entities and keep relationship ownership separate from cascading.",
-  "updatedOn": "2026-10-14",
+  "summary": "Map Employee and Department relationships, then identify ownership and cascading behavior.",
+  "updatedOn": "2026-10-20",
   "blocks": [
     {
-      "id": "jpa-relationship-types",
+      "id": "jpa-relationships-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Related entities"
+          "Related entity mappings"
         ]
       ]
     },
     {
-      "id": "jpa-relationship-types-b0",
+      "id": "jpa-relationships-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A relationship maps a reference from one entity to another entity."
+          "A relationship maps an entity field to another entity or to a collection of entities."
         ]
       ]
     },
     {
-      "id": "jpa-relationship-types-b1",
+      "id": "jpa-relationships-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ManyToOne means many source entities can refer to one target entity. @OneToMany represents the reverse collection."
+          "@ManyToOne",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " maps many source rows to one target row."
         ]
       ]
     },
     {
-      "id": "jpa-relationship-types-b2",
+      "id": "jpa-relationships-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@OneToOne represents a single related entity on each side. @ManyToMany represents collections on both sides."
+          "@OneToMany",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " maps the reverse collection."
         ]
       ]
     },
     {
-      "id": "jpa-relationship-types-b3",
+      "id": "jpa-relationships-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A foreign key is a database column that refers to a row in another table."
+          "@OneToOne",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " maps one related object on each side."
         ]
       ]
     },
     {
-      "id": "jpa-relationship-owner",
+      "id": "jpa-relationships-lesson-0-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ManyToMany",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " maps collections on both sides, usually through a join table."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A unidirectional relationship has a Java reference on one side."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-0-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A bidirectional relationship has references on both sides."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-1",
       "type": "header",
       "richText": [
         [
-          "The owning side"
+          "Owning and inverse sides"
         ]
       ]
     },
     {
-      "id": "jpa-relationship-owner-b0",
+      "id": "jpa-relationships-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "The owning side controls the stored relationship. For a bidirectional one-to-many mapping, the many-to-one side owns the foreign key."
+          "The owning side supplies the relationship value JPA writes to the database."
         ]
       ]
     },
     {
-      "id": "jpa-relationship-owner-b1",
+      "id": "jpa-relationships-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@JoinColumn chooses the foreign-key column."
+          "For a bidirectional one-to-many relationship, the many-to-one field owns the foreign key."
         ]
       ]
     },
     {
-      "id": "jpa-relationship-owner-b2",
+      "id": "jpa-relationships-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "mappedBy names the Java property on the owning side. It does not name a database column."
+          "@JoinColumn",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " chooses that foreign-key column."
         ]
       ]
     },
     {
-      "id": "jpa-relationship-owner-b3",
+      "id": "jpa-relationships-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "In a bidirectional relationship, update both Java sides so the in-memory objects agree. Changing only the inverse collection does not set the owning foreign-key reference."
+          "mappedBy",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " marks the inverse side."
         ]
       ]
     },
     {
-      "id": "user-post-relationship",
+      "id": "jpa-relationships-lesson-1-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Its value is the owning Java field name, not a SQL column name."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Both Java references need to agree."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-1-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Changing only the inverse collection does not update the owning foreign-key value."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Map one user to many posts",
+        "title": "Map employees to a department",
+        "language": "text",
         "description": [
-          "Use these as AppUser.java and Post.java under the application package.",
-          "The relationship is bidirectional: AppUser holds posts and Post holds its author.",
-          "Create the tables through a migration, or use ddl-auto=create only for a disposable learning database."
+          "The tabs contain all application files for this separate Maven project.",
+          "The example requires Java 17 or later, Maven and PostgreSQL with an existing `employee_notes` database.",
+          "The environment supplies `DB_USERNAME` and `DB_PASSWORD`.",
+          "`database/schema.sql` creates the tables in an empty database before `mvn spring-boot:run`.",
+          "Hibernate validates the supplied schema. It does not create the tables."
         ],
-        "code": "// AppUser.java\nimport jakarta.persistence.*;\nimport java.util.ArrayList;\nimport java.util.List;\n\n@Entity\n@Table(name = \"app_users\")\npublic class AppUser {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String name;\n\n    @OneToMany(mappedBy = \"author\")\n    private List<Post> posts = new ArrayList<>();\n\n    protected AppUser() {}\n    public AppUser(String name) { this.name = name; }\n\n    public void addPost(Post post) {\n        posts.add(post);\n        post.setAuthor(this);\n    }\n}\n\n// Post.java\nimport jakarta.persistence.*;\n\n@Entity\n@Table(name = \"posts\")\npublic class Post {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String title;\n\n    @ManyToOne(fetch = FetchType.LAZY)\n    @JoinColumn(name = \"author_id\", nullable = false)\n    private AppUser author;\n\n    protected Post() {}\n    public Post(String title) { this.title = title; }\n    public void setAuthor(AppUser author) { this.author = author; }\n}",
-        "language": "java",
+        "code": "",
         "explanation": [
-          "Post.author owns the relationship. The posts table stores author_id.",
-          "AppUser.posts uses mappedBy=\"author\" to refer to the same relationship.",
-          "addPost updates both objects. Save the user and post explicitly because this mapping has no cascade.",
-          "LAZY defers loading the author when supported by the provider. Fetching is covered separately."
+          "`Employee.departmentEntity` owns `employees.department_id`.",
+          "`Department.employees` uses `mappedBy` to name that field.",
+          "`addEmployee` updates both in-memory references.",
+          "No cascade is configured.",
+          "A new department must be persisted before an employee refers to it.",
+          "`FetchType.LAZY` requests deferred relationship loading."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/employee/Department.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport java.util.ArrayList;\nimport java.util.List;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.OneToMany;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"departments\")\npublic class Department {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String name;\n\n    @OneToMany(mappedBy = \"departmentEntity\")\n    private List<Employee> employees = new ArrayList<>();\n\n    protected Department() {}\n    public Department(String name) { this.name = name; }\n    public String getName() { return name; }\n\n    public void addEmployee(Employee employee) {\n        employees.add(employee);\n        employee.assignDepartment(this);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/Employee.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport jakarta.persistence.Column;\nimport jakarta.persistence.FetchType;\nimport jakarta.persistence.JoinColumn;\nimport jakarta.persistence.ManyToOne;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false, length = 100)\n    private String name;\n\n    @Column(nullable = false, length = 100)\n    private String department;\n\n    @ManyToOne(fetch = FetchType.LAZY)\n    @JoinColumn(name = \"department_id\")\n    private Department departmentEntity;\n\n    public void assignDepartment(Department department) { this.departmentEntity = department; }\n    public Department getDepartmentEntity() { return departmentEntity; }\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n    public void rename(String name) { this.name = name; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.postgresql</groupId>\n            <artifactId>postgresql</artifactId>\n            <scope>runtime</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/employee_notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate\nspring.jpa.open-in-view=false\n"
+          },
+          {
+            "name": "database/schema.sql",
+            "language": "sql",
+            "code": "CREATE TABLE departments (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(255)\n);\nCREATE TABLE employees (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(100) NOT NULL,\n    department_id BIGINT REFERENCES departments(id)\n);\n"
+          }
         ]
       }
     },
     {
-      "id": "jpa-cascade",
+      "id": "jpa-relationships-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Cascade and deletion"
+          "Cascades and removal"
         ]
       ]
     },
     {
-      "id": "jpa-cascade-b0",
+      "id": "jpa-relationships-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A cascade applies a persistence operation on one entity to its related entities."
+          "A cascade passes a JPA operation from one entity to related entities."
         ]
       ]
     },
     {
-      "id": "jpa-cascade-b1",
+      "id": "jpa-relationships-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "CascadeType.PERSIST propagates persist. MERGE propagates merge. REMOVE propagates remove."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-cascade-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "CascadeType.ALL includes all cascade operations, including removal. Use it only when every propagated operation fits the relationship."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-cascade-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "orphanRemoval=true removes a child when it is removed from an owned one-to-many collection or one-to-one relationship."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-cascade-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Cascading, orphan removal and database foreign-key constraints are different mechanisms."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-cascade-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Avoid including both sides of a bidirectional relationship in toString or generated JSON output. Following both sides can cause repeated traversal."
-        ]
-      ]
-    },
-    {
-      "id": "jpa-loading-next",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Read related entities with a fetch plan",
+          "CascadeType.PERSIST",
           [
             [
-              "a",
-              "/notes/spring-boot/jpa-fetching"
+              "c"
             ]
           ]
+        ],
+        [
+          " passes persistence of new entities."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "MERGE",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " passes merging of state."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-1-part-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "REMOVE",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " passes removal."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "CascadeType.ALL",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " includes all cascade operations, including removal."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "orphanRemoval = true",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " removes an owned child when it leaves a one-to-many collection or a one-to-one relationship."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPA cascades and database foreign-key actions are separate mechanisms."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Removing a shared target with a cascade can remove data other entities still need."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Serializing both sides directly to JSON can follow the same relationship repeatedly."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-relationships-lesson-2-note-6-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Response objects can expose only the required values."
         ]
       ]
     }
@@ -198,6 +397,10 @@
     {
       "title": "Jakarta Persistence 3.1 specification",
       "url": "https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.html"
+    },
+    {
+      "title": "Hibernate ORM 6.6: associations",
+      "url": "https://docs.hibernate.org/orm/6.6/userguide/html_single/#associations"
     }
   ]
 }

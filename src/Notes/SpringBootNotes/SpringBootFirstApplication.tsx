@@ -1,13 +1,14 @@
+import { renderExampleText } from './renderExampleText';
 import ArticleLayout from '../NoteArticleLayout';
 import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
-import { SPRING_BOOT_FIRST_APPLICATION_ROUTE } from '../../routing/routes';
+import { SPRING_BOOT_FIRST_APPLICATION_ROUTE, toHref } from '../../routing/routes';
 
 const sections: TocEntry[] = [
     { id: 'spring-and-boot', title: 'Spring and Spring Boot' },
-    { id: 'create-and-run', title: 'Create a project' },
-    { id: 'application-entry-point', title: 'Start the application' },
-    { id: 'http-endpoint', title: 'Handle a GET request' },
+    { id: 'create-and-run', title: 'Project setup' },
+    { id: 'application-entry-point', title: 'Application startup' },
+    { id: 'http-endpoint', title: 'Running application' },
 ];
 
 const SpringBootFirstApplication = () => (
@@ -16,78 +17,74 @@ const SpringBootFirstApplication = () => (
         <section className="Article__section" aria-labelledby="spring-and-boot">
             <h2 id="spring-and-boot" className="SectionTitle">Spring and Spring Boot</h2>
             <ul className="Article__notes">
-                <li>Spring is a Java framework. It can create application objects, supply the objects they depend on, and handle web requests.</li>
-                <li>Spring Boot adds dependency bundles, conditional configuration, and tools for running Spring applications.</li>
-                <li>A web application receives HTTP requests and sends HTTP responses. An endpoint is a request method and path that the application handles.</li>
-                <li>These notes use Spring Boot 3 and Java 17 or later. Examples using RestClient require Boot 3.2 or later.</li>
-                <li>The linked course uses Boot 2.7 and Java 8. Its older APIs and javax imports are not the baseline for these examples.</li>
+                <li>Spring Framework manages application objects and supplies the objects they depend on.</li>
+                <li>It also provides modules for web handling, database access, and other application work.</li>
+                <li>Spring Boot configures a Spring application from its libraries and settings.</li>
+                <li>Boot also supplies dependency management and build support for running the application.</li>
+                <li>The examples use Spring Boot 3.5, Spring Framework 6.2, and Java 17 or later.</li>
+                <li>Java, build-tool basics, databases, and general web concepts are prerequisites.</li>
             </ul>
         </section>
         <section className="Article__section" aria-labelledby="create-and-run">
-            <h2 id="create-and-run" className="SectionTitle">Create a project</h2>
-            <ol className="Article__steps">
-                <li>Install a JDK compatible with the selected Spring Boot version.</li>
-                <li>Open <a className="Link" href="https://start.spring.io/">Spring Initializr</a>. Select Java, Maven, a Spring Boot 3 release, and Spring Web.</li>
-                <li>Generate and extract the project. Open pom.xml as a project in the IDE.</li>
-                <li>Keep the generated Maven wrapper and dependency management. Configure the IDE to use the selected JDK.</li>
-            </ol>
+            <h2 id="create-and-run" className="SectionTitle">Project setup</h2>
             <ul className="Article__notes">
-                <li>pom.xml declares libraries and build plugins. src/main/java contains Java source. src/main/resources contains configuration files.</li>
-                <li>Spring Web supplies the libraries for handling HTTP requests. For Boot 3, it includes an embedded Tomcat server by default.</li>
+                <li><a className="Link" href="https://start.spring.io/">Spring Initializr</a> generates a project with a build file, wrapper, and application class.</li>
+                <li>This course uses a Java Maven project with group <code>com.example</code>, artifact <code>demo</code>, and package <code>com.example.demo</code>.</li>
+                <li>The project uses a Spring Boot <code>3.5.x</code> release and the Spring Web dependency.</li>
+                <li>The generated build file contains the selected concrete Boot version. The examples keep its dependency management.</li>
+                <li>Spring Web includes Spring MVC for request handling and embedded Tomcat in this Boot version.</li>
+                <li>The project’s JDK and the IDE’s configured JDK must match the selected Java version.</li>
+                <li>The project files lesson explains the generated folders. The starters lesson explains the Spring Web dependency.</li>
             </ul>
         </section>
         <section className="Article__section" aria-labelledby="application-entry-point">
-            <h2 id="application-entry-point" className="SectionTitle">Start the application</h2>
+            <h2 id="application-entry-point" className="SectionTitle">Application startup</h2>
             <ul className="Article__notes">
-                <li>The Java runtime calls main. SpringApplication.run starts the Spring application.</li>
-                <li>@SpringBootApplication enables application configuration, component scanning, and auto-configuration. Later lessons explain each one separately.</li>
+                <li><code>SpringApplication.run</code> starts the application using the supplied application class.</li>
+                <li><code>@SpringBootApplication</code> marks that class as the application’s starting configuration.</li>
+                <li>For this project, startup also starts the embedded web server.</li>
+                <li>The beans and dependency injection lessons explain the objects Spring creates during startup.</li>
+                <li>The application startup lesson then explains the configuration annotations inside <code>@SpringBootApplication</code>.</li>
             </ul>
-            <LearningNoteExampleBlock example={{
-                title: 'Run the generated application', language: 'java',
-                description: ['Use this application class in src/main/java/com/example/demo/DemoApplication.java.', 'Run the command from the generated project directory.'],
-                code: `package com.example.demo;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class DemoApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+            <LearningNoteExampleBlock renderText={renderExampleText} example={{
+                title: 'Start the generated application', language: 'java',
+                description: [
+                    'The tabs contain all application source and the complete Maven build file.',
+                    'The application file is `src/main/java/com/example/demo/DemoApplication.java`.',
+                    'Java 17 or later and Maven must be installed.',
+                    'The command runs from the directory containing `pom.xml`.',
+                ],
+                code: '',
+                files: [
+    {
+        "name": "src/main/java/com/example/demo/DemoApplication.java",
+        "language": "java",
+        "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+    },
+    {
+        "name": "pom.xml",
+        "language": "text",
+        "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
     }
-}`,
-                commands: './mvnw spring-boot:run',
-                explanation: ['On Windows, use mvnw.cmd spring-boot:run.', 'Spring initializes the application and starts its embedded web server.', 'The default HTTP port is 8080. Startup fails if another process already uses that port.', 'No /hello endpoint exists until the controller in the next example is added.'],
+],
+                commands: 'mvn spring-boot:run',
+                explanation: [
+                    'Maven starts the application through the Spring Boot plugin.',
+                    'The default server port is `8080`.',
+                    'Startup fails if another process already uses that port.',
+                    'A successful startup leaves the application running until it stops.',
+                    'No application controller exists yet. A request to `/hello` therefore has no application handler.',
+                ],
             }} />
         </section>
         <section className="Article__section" aria-labelledby="http-endpoint">
-            <h2 id="http-endpoint" className="SectionTitle">Handle a GET request</h2>
+            <h2 id="http-endpoint" className="SectionTitle">Running application</h2>
             <ul className="Article__notes">
-                <li>A controller contains methods that handle web requests.</li>
-                <li>@RestController tells Spring to write the methods’ return values to the response body.</li>
-                <li>@GetMapping selects the method to call for a GET request to the specified path.</li>
-            </ul>
-            <LearningNoteExampleBlock example={{
-                title: 'Return a greeting from /hello', language: 'java',
-                description: ['Create HelloController.java in the same package as DemoApplication.', 'Restart the application after adding the controller.'],
-                code: `package com.example.demo;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class HelloController {
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello, Spring Boot";
-    }
-}`,
-                commands: 'curl http://localhost:8080/hello', result: 'Hello, Spring Boot',
-                explanation: ['Spring discovers the controller in the application package.', 'GET /hello calls hello().', 'The returned string becomes the HTTP response body. The successful response has status 200.', 'This response is text. Returning a Java object can produce JSON when a suitable message converter is configured.'],
-            }} />
-            <ul className="Article__notes">
-                <li><a className="Link" href="https://docs.spring.io/spring-boot/3.5/tutorial/first-application/">Spring Boot 3: first application</a></li>
-                <li><a className="Link" href="https://docs.spring.io/spring-boot/3.5/system-requirements.html">Spring Boot 3: system requirements</a></li>
+                <li>A running server does not mean an application request mapping has been registered.</li>
+                <li>The <a className="Link" href={toHref('/notes/spring-boot/restful-web-services')}>controllers lesson</a> adds the first greeting endpoint after bean registration and injection are explained.</li>
+                <li>This keeps server startup separate from controller discovery and request handling.</li>
+                <li><a className="Link" href="https://docs.spring.io/spring-boot/3.5/tutorial/first-application/">Spring Boot 3.5: first application tutorial</a></li>
+                <li><a className="Link" href="https://docs.spring.io/spring-boot/3.5/system-requirements.html">Spring Boot 3.5: system requirements</a></li>
             </ul>
         </section>
     </ArticleLayout>

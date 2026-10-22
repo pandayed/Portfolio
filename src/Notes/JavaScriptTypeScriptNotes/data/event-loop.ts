@@ -3,11 +3,16 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "event-loop",
     title: "The JavaScript event loop",
-    summary: "Trace synchronous calls, queued microtasks, host tasks, and Node.js scheduling.",
+    summary: "Synchronous calls, microtasks, host tasks, and Node.js scheduling.",
     scope: "javascript",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
+        {
+            title: "MDN: tasks and microtasks",
+            href: "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide"
+        },
         {
             title: "HTML specification: event loops",
             href: "https://html.spec.whatwg.org/multipage/webappapis.html#event-loops"
@@ -23,19 +28,107 @@ const note: LearningNote = {
     ],
     sections: [
         {
-            id: "call-stack",
-            title: "Finish synchronous calls first",
+            id: "event-loop",
+            title: "Event loop",
             bullets: [
-                "The call stack records function calls that have started and have not returned. A nested call finishes before its caller resumes.",
-                "One JavaScript thread runs one piece of JavaScript at a time. A queued callback cannot interrupt the current synchronous work.",
-                "The host is the environment running JavaScript, such as a browser or Node.js. It supplies timers and input/output APIs.",
-                "The host can track a timer or network operation while JavaScript runs. Its completion callback still needs a turn to run JavaScript."
+                "The event loop is the host’s mechanism for scheduling queued work after currently running JavaScript finishes.",
+                "Its scheduling cycle repeats as more work becomes ready.",
+                "The host is the environment running JavaScript, such as a browser or Node.js.",
+                "A callback is a function supplied to another function or API for it to call.",
+                "The host supplies APIs for timers, network requests, and other operations.",
+                "It can track those operations while JavaScript runs. Their callbacks still need a turn to run JavaScript.",
+                "In a browser, the event loop coordinates tasks, microtasks, and opportunities to update the screen.",
+                "Tasks and microtasks are two kinds of scheduled work with different waiting rules. Neither interrupts the JavaScript already running."
+            ]
+        },
+        {
+            id: "call-stack",
+            title: "Synchronous calls",
+            bullets: [
+                "The call stack records function calls that have started and have not returned.",
+                "A nested call finishes before its caller resumes.",
+                "One JavaScript thread runs one piece of JavaScript at a time.",
+                "An ordinary function call runs immediately on this stack. It does not create a task or microtask.",
+                "The called function may separately use an API that schedules later work."
+            ]
+        },
+        {
+            id: "task-sources",
+            title: "Browser tasks",
+            bullets: [
+                "A task is a unit of work scheduled by the host, such as running a timer callback or delivering user input.",
+                "Calling a timer API registers the timer. The host queues its callback as task work when the timer becomes eligible.",
+                "A `0` delay does not make a timer callback run immediately. Current JavaScript and queued microtasks can delay it.",
+                "A callback is not automatically a task. The API and how it invokes the callback determine the scheduling."
+            ],
+            table: {
+                columns: ["Source", "Scheduled work"],
+                rows: [
+                    ["`setTimeout(callback, delay)`", "A timer callback after the delay has elapsed and the host can run it."],
+                    ["`setInterval(callback, delay)`", "Repeated timer callbacks when their timer becomes eligible."],
+                    ["A real user click or key press", "Browser input processing that dispatches the event to its listeners."]
+                ]
+            }
+        },
+        {
+            id: "microtask-sources",
+            title: "Browser microtasks",
+            bullets: [
+                "A microtask is queued work processed at a microtask checkpoint, before the browser takes another task.",
+                "A checkpoint is the point where the host runs queued microtasks until the queue is empty.",
+                "A Promise reaction is queued work that processes fulfillment or rejection and calls the matching handler.",
+                "These APIs schedule callbacks or resumed code as microtasks. The whole asynchronous operation is not a microtask.",
+                "For a pending Promise, registering a handler does not run it yet. Its reaction is queued when the Promise settles.",
+                "For an already settled Promise, registering a handler queues the reaction without running the handler inline."
+            ],
+            table: {
+                columns: ["Source", "Microtask work"],
+                rows: [
+                    ["`queueMicrotask(callback)`", "The supplied callback is added directly to the microtask queue."],
+                    ["Promise `.then`, `.catch`, and `.finally`", "Promise reactions that run the matching handlers after fulfillment or rejection."],
+                    ["`await`", "The code that resumes an async function after the awaited value fulfills or rejects."],
+                    ["`fetch(url).then(handler)`", "The Promise handler after the request Promise fulfills. The network request itself is not a microtask."]
+                ]
+            },
+            examples: [
+                {
+                    title: "Promise executor and handler",
+                    description: [
+                        "The example separates immediate Promise construction from its queued handler."
+                    ],
+                    language: "javascript",
+                    code: "console.log('script start');\n\nconst promise = new Promise((resolve) => {\n  console.log('executor');\n  resolve('ready');\n});\n\npromise.then((value) => console.log('handler', value));\nconsole.log('script end');",
+                    result: "script start\nexecutor\nscript end\nhandler ready",
+                    explanation: [
+                        "The executor passed to `new Promise` runs synchronously. It is not queued as a microtask.",
+                        "`resolve` fulfills this Promise with `\"ready\"`.",
+                        "Registering `.then` on that fulfilled Promise queues its handler reaction.",
+                        "The handler runs after the current synchronous script finishes."
+                    ],
+                    runnable: true
+                }
+            ]
+        },
+        {
+            id: "queues",
+            title: "Browser execution order",
+            bullets: [
+                "The current task runs its synchronous JavaScript first.",
+                "After the task finishes, the browser performs a microtask checkpoint.",
+                "At a checkpoint, queued microtasks run in their queue order.",
+                "A microtask added by another microtask joins the queue being drained.",
+                "The browser drains that queue before taking another task.",
+                "Microtask checkpoints also occur after script callbacks when the JavaScript execution stack becomes empty.",
+                "The browser can update rendering at rendering opportunities. It does not paint after every task.",
+                "A chain’s next handler is queued when its preceding Promise becomes settled.",
+                "Different host task sources are not one universal priority list.",
+                "Input events do not always run before timers."
             ],
             examples: [
                 {
-                    title: "Trace nested calls before a timer",
+                    title: "Nested calls and a timer",
                     description: [
-                        "Record when each function enters and leaves its caller."
+                        "The example records when each function enters and leaves its caller."
                     ],
                     language: "javascript",
                     code: `function inner() { console.log('inner'); }
@@ -50,13 +143,13 @@ console.log('script end');
 // outer start, inner, outer end, script end, timer`,
                     result: "outer start\ninner\nouter end\nscript end\ntimer",
                     explanation: [
-                        "inner returns before outer prints outer end.",
+                        "`inner` returns before `outer` prints `outer end`.",
                         "The timer callback waits until the synchronous script finishes."
                     ],
                     runnable: true
                 },
                 {
-                    title: "Delay a callback with synchronous work",
+                    title: "Synchronous work and callback delays",
                     description: [
                         "The example intentionally keeps the thread busy for about 30 ms."
                     ],
@@ -74,24 +167,11 @@ console.log('calculation finished');
                         "Its JavaScript callback cannot interrupt the running calculation."
                     ],
                     runnable: true
-                }
-            ]
-        },
-        {
-            id: "queues",
-            title: "Run microtasks before the next task",
-            bullets: [
-                "A task is a unit of host-scheduled work, such as an eligible timer callback. Browser user input also reaches JavaScript through host tasks.",
-                "A microtask is work processed at a microtask checkpoint. Promise handlers and queueMicrotask callbacks use microtasks.",
-                "At a checkpoint, queued microtasks run in their queue order. A microtask added by another microtask joins the queue being drained.",
-                "The browser drains that queue before taking the next task. A chain’s next handler is queued when its preceding Promise becomes settled.",
-                "Different host task sources are not one universal priority list. Do not assume every input event always runs before every timer."
-            ],
-            examples: [
+                },
                 {
-                    title: "Compare synchronous work, microtasks, and a timer",
+                    title: "Synchronous work, microtasks, and timers",
                     description: [
-                        "Run this as browser script code."
+                        "The example runs as a browser script."
                     ],
                     language: "javascript",
                     code: `console.log('script start');
@@ -103,14 +183,15 @@ console.log('script end');
                     result: "script start\nscript end\npromise\nmicrotask\ntimeout",
                     explanation: [
                         "The two synchronous logs finish first.",
-                        "The Promise handler was queued before queueMicrotask. Both run before the timer task."
+                        "The Promise handler was queued before `queueMicrotask`.",
+                        "Both run before the timer task."
                     ],
                     runnable: true
                 },
                 {
-                    title: "Add a microtask during the checkpoint",
+                    title: "Nested microtasks",
                     description: [
-                        "Queue another callback from the first Promise handler."
+                        "The example queues another callback from the first Promise handler."
                     ],
                     language: "javascript",
                     code: `setTimeout(() => console.log('task'), 0);
@@ -128,9 +209,9 @@ queueMicrotask(() => console.log('microtask 2'));
                     runnable: true
                 },
                 {
-                    title: "Queue a chain one step at a time",
+                    title: "Promise chains and timer microtasks",
                     description: [
-                        "Trace a Promise chain and a microtask created inside a timer."
+                        "The example traces a Promise chain and a microtask created inside a timer."
                     ],
                     language: "javascript",
                     code: `console.log('1');
@@ -154,16 +235,18 @@ console.log('2');
         },
         {
             id: "await-continuation",
-            title: "Schedule code after await",
+            title: "Continuation after await",
             bullets: [
-                "The continuation is the code that resumes an async function after await. It resumes through Promise microtask scheduling.",
-                "An available fulfillment value does not make await continue inline. The caller’s current synchronous work finishes first."
+                "The continuation is the code that resumes an `async` function after `await`.",
+                "It resumes through Promise microtask scheduling.",
+                "An available fulfillment value does not make `await` continue inline.",
+                "The caller’s current synchronous work finishes first."
             ],
             examples: [
                 {
-                    title: "Resume after the caller continues",
+                    title: "Caller and continuation order",
                     description: [
-                        "Await an already available string and inspect the caller’s order."
+                        "The example awaits an already available string and inspects the caller’s order."
                     ],
                     language: "javascript",
                     code: `async function run() {
@@ -180,8 +263,9 @@ pending.then(() => console.log('function completed'));
 // inside 2 available, function completed`,
                     result: "outside 1\ninside 1\ntrue\noutside 2\ninside 2 available\nfunction completed",
                     explanation: [
-                        "run executes through inside 1 before suspending.",
-                        "The continuation logs inside 2. Completing run then queues its final handler."
+                        "`run` executes through `inside 1` before suspending.",
+                        "The continuation logs `inside 2`.",
+                        "Completing `run` then queues its final handler."
                     ],
                     runnable: true
                 }
@@ -189,21 +273,26 @@ pending.then(() => console.log('function completed'));
         },
         {
             id: "node-phases",
-            title: "Node.js uses phases for host work",
+            title: "Node.js event-loop phases",
             bullets: [
-                "Node.js has no browser paint cycle. Its event loop handles timers, input/output, and other callbacks through phases.",
-                "Selected phases include timers for eligible timers, poll for input/output, check for setImmediate, and close callbacks for selected close events.",
+                "Node.js has no browser paint cycle.",
+                "Its event loop handles timers, input/output, and other callbacks through phases.",
+                "Selected phases include timers for eligible timers, poll for input/output, check for `setImmediate`, and close callbacks for selected close events.",
                 "Starting with Node.js 20 and libuv 1.45, timers run after poll. libuv is the library Node.js uses for its event loop and many input/output operations.",
-                "Selected APIs use a worker pool, a set of host-managed threads: file-system operations, dns.lookup, selected crypto operations, and compression.",
-                "Their completion callbacks run JavaScript on the event-loop thread. Network operations and other DNS APIs do not all use that pool.",
-                "The following examples use .cjs files, Node.js’s CommonJS module form. __filename is the current file’s path.",
-                "A try/catch around an input/output registration cannot catch a throw from its later callback. Handle the callback’s error there."
+                "Selected APIs use a worker pool, a set of host-managed threads: file-system operations, `dns.lookup`, selected crypto operations, and compression.",
+                "Their completion callbacks run JavaScript on the event-loop thread.",
+                "Network operations and other DNS APIs do not all use that pool.",
+                "The following examples use `.cjs` files, Node.js’s CommonJS module form.",
+                "`__filename` is the current file’s path.",
+                "A `try`/`catch` around an input/output registration cannot `catch` a `throw` from its later callback.",
+                "The callback handles its own error."
             ],
             examples: [
                 {
-                    title: "Observe file completion and the check phase",
+                    title: "File completion and the check phase",
                     description: [
-                        "Save as phases.cjs and run with Node.js. The file reads itself."
+                        "The example runs as `phases.cjs` in Node.js.",
+                        "The file reads itself."
                     ],
                     language: "javascript",
                     code: `// Node.js CommonJS file: phases.cjs. Run with node phases.cjs.
@@ -220,14 +309,15 @@ fs.readFile(__filename, (error) => {
 // callbacks still run on the event-loop thread.`,
                     result: "script\nfile callback\ncheck callback\ntimer callback",
                     explanation: [
-                        "setImmediate uses the check phase after this input/output callback.",
-                        "The zero-delay timer registered in that same callback runs later. A file-read failure is handled by the callback’s error check."
+                        "`setImmediate` uses the check phase after this input/output callback.",
+                        "The zero-delay timer registered in that same callback runs later.",
+                        "A file-read failure is handled by the callback’s error check."
                     ]
                 },
                 {
-                    title: "Compare top-level registration with I/O registration",
+                    title: "Top-level and I/O callbacks",
                     description: [
-                        "Save as immediate.cjs and run with Node.js."
+                        "The example runs as `immediate.cjs` in Node.js."
                     ],
                     language: "javascript",
                     code: `// Node.js CommonJS file; top-level order is not guaranteed.
@@ -255,19 +345,23 @@ fs.readFile(__filename, (error) => {
         },
         {
             id: "node-next-tick",
-            title: "Account for Node.js nextTick context",
+            title: "Node.js next-tick scheduling",
             bullets: [
-                "process.nextTick uses a separate Node.js queue. It is not a browser API or an event-loop phase.",
+                "`process.nextTick` uses a separate Node.js queue.",
+                "It is not a browser API or an event-loop phase.",
                 "After ordinary callback work, Node.js drains next-tick callbacks before Promise microtasks.",
-                "ES-module top-level evaluation already runs through asynchronous scheduling. Its queued microtasks can precede its top-level nextTick callbacks.",
-                "A nextTick added while microtasks are draining waits for that drain to finish. It does not interrupt the microtask queue.",
-                "Use queueMicrotask for the shared browser and Node.js API. Use nextTick only when the Node.js ordering is required."
+                "ES-module top-level evaluation already runs through asynchronous scheduling.",
+                "Its queued microtasks can precede its top-level `nextTick` callbacks.",
+                "A `nextTick` added while microtasks are draining waits for that drain to finish.",
+                "It does not interrupt the microtask queue.",
+                "The `queueMicrotask` API is available in browsers and Node.js.",
+                "The `nextTick` API provides the Node.js ordering described here."
             ],
             examples: [
                 {
-                    title: "Compare CommonJS and ES-module top level",
+                    title: "CommonJS and ES-module scheduling",
                     description: [
-                        "Save the statements as order.cjs, then as order.mjs, and run each with Node.js."
+                        "The same statements run as `order.cjs` and as `order.mjs` in Node.js."
                     ],
                     language: "javascript",
                     code: `// Save as order.cjs and run with node order.cjs.
@@ -285,13 +379,13 @@ console.log('end');
                     result: "CommonJS: start, end, nextTick, microtask, promise\nES module: start, end, microtask, promise, nextTick",
                     explanation: [
                         "The file extension selects a different module context.",
-                        "The nextTick callback’s order depends on where it was scheduled."
+                        "The `nextTick` callback’s order depends on where it was scheduled."
                     ]
                 },
                 {
-                    title: "Add nextTick inside a microtask",
+                    title: "Next-tick callbacks inside microtasks",
                     description: [
-                        "Run in a Node.js file."
+                        "The example runs in a Node.js file."
                     ],
                     language: "javascript",
                     code: `// Node.js. This order also holds when written inside a .cjs file.
@@ -306,25 +400,27 @@ queueMicrotask(() => console.log('existing microtask'));
 // microtask queue that Node is currently draining.`,
                     result: "promise\nexisting microtask\nnested microtask\nnextTick from promise",
                     explanation: [
-                        "The added nextTick waits until existing and nested microtasks finish."
+                        "The added `nextTick` waits until existing and nested microtasks finish."
                     ]
                 }
             ]
         },
         {
             id: "starvation",
-            title: "Keep queues finite",
+            title: "Queue starvation",
             bullets: [
                 "Starvation means work keeps waiting because other work continues to run first.",
-                "A microtask can add another microtask. A queue that never empties postpones later tasks and browser rendering opportunities.",
-                "A recursive nextTick can similarly postpone Promise handlers, timers, and input/output in Node.js.",
-                "Schedule long work in separate tasks when it can be split. Use a worker thread for suitable calculations that need another thread."
+                "A microtask can add another microtask.",
+                "A queue that never empties postpones later tasks and browser rendering opportunities.",
+                "A recursive `nextTick` can similarly postpone Promise handlers, timers, and input/output in Node.js.",
+                "The example schedules long work in separate tasks when it can be split.",
+                "A worker thread runs calculations on another thread."
             ],
             examples: [
                 {
-                    title: "Drain a finite microtask chain",
+                    title: "Finite microtask chains",
                     description: [
-                        "Keep the limit so the example finishes."
+                        "The limit lets the example finish."
                     ],
                     language: "javascript",
                     code: `setTimeout(() => console.log('task'), 0);
@@ -345,9 +441,10 @@ queueMicrotask(again);
                     runnable: true
                 },
                 {
-                    title: "Drain a finite Node.js next-tick chain",
+                    title: "Finite next-tick chains",
                     description: [
-                        "Run this as a .cjs file in Node.js. Keep the limit."
+                        "The example runs as a `.cjs` file in Node.js.",
+                        "The limit keeps the queue finite."
                     ],
                     language: "javascript",
                     code: `// Finite Node.js demonstration. Read as a .cjs file.
@@ -369,9 +466,9 @@ setTimeout(() => console.log('timer'), 0);
                     ]
                 },
                 {
-                    title: "Split work across tasks",
+                    title: "Work across separate tasks",
                     description: [
-                        "Use timer callbacks for later parts of a finite operation."
+                        "Timer callbacks run later parts of this finite operation."
                     ],
                     language: "javascript",
                     code: `let part = 0;
@@ -392,10 +489,11 @@ workInParts();
                     runnable: true
                 },
                 {
-                    title: "Use a Node.js worker thread",
+                    title: "Node.js worker threads",
                     description: [
-                        "Save as worker.cjs and run with Node.js. The same file selects its main-thread or worker branch.",
-                        "Worker from node:worker_threads starts another JavaScript thread, separate from the host input/output worker pool."
+                        "The example runs as `worker.cjs` in Node.js.",
+                        "The same file selects its main-thread or worker branch.",
+                        "Worker from `node:worker_threads` starts another JavaScript thread, separate from the host input/output worker pool."
                     ],
                     language: "javascript",
                     code: `// Node.js CommonJS file worker.cjs; no browser APIs.
@@ -415,8 +513,9 @@ if (isMainThread) {
 // runs on the main event-loop thread.`,
                     result: "main code continues\nworker result 500000500000",
                     explanation: [
-                        "The worker branch performs the calculation and sends its result through parentPort.",
-                        "The worker exits when its work is complete. The main-thread message callback runs through the main event loop."
+                        "The worker branch performs the calculation and sends its result through `parentPort`.",
+                        "The worker exits when its work is complete.",
+                        "The main-thread message callback runs through the main event loop."
                     ]
                 }
             ]

@@ -32,6 +32,14 @@ Write like a person taking notes. Do not write like a book.
 - Use headings when the text has more than one topic.
 - Put the conclusion first, then the details.
 
+## Code styling
+
+- Code keywords, annotations, class and method names, variables, configuration keys and literal values, package names, dependency names, filenames, paths, and commands must use code styling wherever they appear in explanations, including inline text, tables, and example descriptions.
+- In Markdown, use backticks for inline code: `SpringApplication.run` starts the Spring application. Use fenced code blocks for multiline code.
+- In JSX, use `<code>SpringApplication.run</code>`. In structured content, use the renderer's existing inline-code marks. Confirm that the rendered text shows code styling rather than literal backticks.
+- Keep surrounding sentences and ordinary concepts or product names in normal text. Style only the code token or expression, not the whole sentence.
+- Preserve the exact spelling and case of code identifiers. Code styling must not change commands, URLs, example code, or outputs.
+
 ## Learning notes on any topic
 
 - Write for someone learning the topic, including a tired reader or a reader with weak English.
@@ -113,6 +121,7 @@ Good: "A cache stores the API response for five minutes."
 
 ## Check before you finish
 
+- Do code keywords, annotations, identifiers, settings, filenames, paths, and commands use code styling even when inline?
 - Can a tired reader understand each sentence on the first read?
 - For notes, are explanations short bullets rather than paragraphs or dense paragraph-sized bullets?
 - Do section headings name their subjects, with facts in the bullets below? Do example titles identify the operation or case?

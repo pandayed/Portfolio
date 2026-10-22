@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-integrations-external-apis",
   "title": "Call External APIs",
-  "summary": "Choose an HTTP client, configure it, and send GET and POST requests.",
+  "summary": "Build one Spring HTTP client, send requests, and convert provider responses.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Master External API Integration in Spring Boot: A Step-by-Step Guide",
@@ -24,249 +24,591 @@
     {
       "title": "Engineering Digest journalApp source",
       "url": "https://github.com/EngineeringDigest/journalApp"
+    },
+    {
+      "title": "Spring Boot 3.5 HTTP clients",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/io/rest-client.html"
+    },
+    {
+      "title": "JSONPlaceholder guide",
+      "url": "https://jsonplaceholder.typicode.com/guide/"
     }
   ],
   "blocks": [
     {
-      "id": "api-contract",
+      "id": "integrations-external-apis-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Call another service"
+          "Spring HTTP clients"
         ]
       ]
     },
     {
-      "id": "api-contract-b0",
+      "id": "integrations-external-apis-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An external API is an API provided by another service. Your application calls it over HTTP."
+          "RestClient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is Spring\u2019s blocking HTTP client."
         ]
       ]
     },
     {
-      "id": "api-contract-b1",
+      "id": "integrations-external-apis-lesson-0-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The provider documentation defines the URL, HTTP method, headers, request body, and response."
+          "The calling thread waits for the response."
         ]
       ]
     },
     {
-      "id": "api-contract-b2",
+      "id": "integrations-external-apis-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use GET to read a resource. Use POST when the provider requires it for an action or a request body."
+          "Spring Boot 3.5 supplies a "
+        ],
+        [
+          "RestClient.Builder",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean."
         ]
       ]
     },
     {
-      "id": "api-contract-b3",
+      "id": "integrations-external-apis-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A data transfer object (DTO) holds the fields sent or received through the API. Keep provider DTOs separate from database entities."
+          "A service receives the builder through constructor injection and builds a client with its provider settings."
         ]
       ]
     },
     {
-      "id": "api-contract-b4",
+      "id": "integrations-external-apis-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Put provider calls in a service. Your controller calls that service."
+          "The builder includes Spring\u2019s message converters."
         ]
       ]
     },
     {
-      "id": "api-client",
+      "id": "integrations-external-apis-lesson-0-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A message converter writes a Java object as JSON or reads response JSON into a Java object."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "RestTemplate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is the older blocking client used in some linked tutorials."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-0-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "WebClient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " serves reactive applications and streaming."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-0-note-3-part-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These notes use "
+        ],
+        [
+          "RestClient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Choose and configure an HTTP client"
+          "Request and response conversion"
         ]
       ]
     },
     {
-      "id": "api-client-b0",
+      "id": "integrations-external-apis-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "RestClient sends an HTTP request and waits for the response. It is available from Spring Framework 6.1."
+          "get",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "post",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " select the request method."
         ]
       ]
     },
     {
-      "id": "api-client-b1",
+      "id": "integrations-external-apis-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot 3.2 includes Spring Framework 6.1. Older course examples use RestTemplate."
+          "uri",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the provider path and path variables."
         ]
       ]
     },
     {
-      "id": "api-client-b2",
+      "id": "integrations-external-apis-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "WebClient supports nonblocking calls and streaming in reactive applications."
+          "body(requestObject)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the outgoing object."
         ]
       ]
     },
     {
-      "id": "api-client-b3",
+      "id": "integrations-external-apis-lesson-1-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A connect timeout limits how long connection setup can take. A read timeout limits waiting for a response."
+          "contentType",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects its media type."
         ]
       ]
     },
     {
-      "id": "api-client-b4",
+      "id": "integrations-external-apis-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep API keys in server configuration. Use the authentication header required by the provider."
+          "retrieve().body(ResponseType.class)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " performs the request and converts the response body."
         ]
       ]
     },
     {
-      "id": "api-client-b5",
+      "id": "integrations-external-apis-lesson-1-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a fixed provider URL. Accepting arbitrary target URLs from users can let them call private services."
+          "retrieve",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " alone does not send it."
         ]
       ]
     },
     {
-      "id": "api-client-code",
+      "id": "integrations-external-apis-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "toEntity(ResponseType.class)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " also returns response headers and status."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-1-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "toBodilessEntity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " handles a response whose body is not needed."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "One client per provider"
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The provider client belongs in a service."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-note-0-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Controllers call that service instead of repeating provider settings."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JdkClientHttpRequestFactory",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " connects "
+        ],
+        [
+          "RestClient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to Java\u2019s "
+        ],
+        [
+          "HttpClient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Connection and read timeouts limit different parts of a call."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Provider request and response records describe the remote contract."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Database entities describe stored data."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-note-2-part-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keeping them separate prevents a storage change from changing the provider payload."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Configure a reusable RestClient",
-        "description": [
-          "Use Spring Boot 3.2+, Spring Framework 6.1+, and Java 17.",
-          "Place this bean method in a @Configuration class. Set api.base-url to the provider URL."
-        ],
-        "code": "@Bean\nRestClient providerClient(RestClient.Builder builder,\n        @Value(\"${api.base-url}\") String baseUrl) {\n    HttpClient http = HttpClient.newBuilder()\n            .connectTimeout(Duration.ofSeconds(3)).build();\n    var factory = new JdkClientHttpRequestFactory(http);\n    factory.setReadTimeout(Duration.ofSeconds(5));\n    return builder.baseUrl(baseUrl).requestFactory(factory).build();\n}",
+        "title": "Read and create a provider post",
         "language": "java",
+        "description": [
+          "Each tab names a file relative to the project root. Java `17` and Maven are required. `mvn spring-boot:run` starts this example after its external requirements are configured.",
+          "The project uses Java 17+, Spring Boot 3.5, and `spring-boot-starter-web`.",
+          "`PostApiClient.java` belongs in `src/main/java/com/example/demo`, below the application\u2019s scanned package.",
+          "JSONPlaceholder is a public demonstration provider.",
+          "It simulates writes and does not save a created post permanently.",
+          "An injected `PostApiClient` can call `read(1)` or `create(new PostApiClient.NewPost(1, \"A title\", \"A body\"))`.",
+          "The example uses demonstration text only."
+        ],
+        "code": "",
         "explanation": [
-          "Boot supplies RestClient.Builder. The method creates a client bean for services to inject.",
-          "The JDK HTTP client has a three-second connect timeout.",
-          "The request factory has a five-second read timeout."
+          "Spring supplies the builder once when it creates the service.",
+          "Building the client does not send a request.",
+          "`read` fills the `{id}` path variable and reads the response into `Post`.",
+          "`create` writes `NewPost` as JSON and reads the returned JSON into `Post`.",
+          "The JSON field names match the record component names.",
+          "The provider assigns the response `id`.",
+          "Both methods reject an empty response before the caller reads its fields.",
+          "The methods return provider records.",
+          "They do not create an application endpoint."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/PostApiClient.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.net.http.HttpClient;\nimport java.time.Duration;\nimport org.springframework.http.MediaType;\nimport org.springframework.http.client.JdkClientHttpRequestFactory;\nimport org.springframework.stereotype.Service;\nimport org.springframework.web.client.RestClient;\n\n@Service\npublic class PostApiClient {\n    private final RestClient client;\n\n    public PostApiClient(RestClient.Builder builder) {\n        HttpClient http = HttpClient.newBuilder()\n                .connectTimeout(Duration.ofSeconds(3)).build();\n        var factory = new JdkClientHttpRequestFactory(http);\n        factory.setReadTimeout(Duration.ofSeconds(5));\n        this.client = builder.baseUrl(\"https://jsonplaceholder.typicode.com\")\n                .requestFactory(factory).build();\n    }\n\n    public Post read(long id) {\n        if (id < 1) throw new IllegalArgumentException(\"Positive id required\");\n        Post post = client.get().uri(\"/posts/{id}\", id)\n                .retrieve().body(Post.class);\n        if (post == null) throw new IllegalStateException(\"Empty post response\");\n        return post;\n    }\n\n    public Post create(NewPost input) {\n        Post post = client.post().uri(\"/posts\")\n                .contentType(MediaType.APPLICATION_JSON).body(input)\n                .retrieve().body(Post.class);\n        if (post == null) throw new IllegalStateException(\"Empty post response\");\n        return post;\n    }\n\n    public record NewPost(long userId, String title, String body) {}\n    public record Post(long userId, long id, String title, String body) {}\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "api-requests",
+      "id": "integrations-external-apis-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Send GET and POST requests"
+          "Provider failures"
         ]
       ]
     },
     {
-      "id": "api-get-code",
-      "type": "example",
-      "example": {
-        "title": "Read weather with GET",
-        "description": [
-          "Assume the provider accepts GET /weather?city=Pune and returns {\"city\":\"Pune\",\"temperatureC\":26.0}.",
-          "The service has an injected RestClient named providerClient."
+      "id": "integrations-external-apis-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "RestClient",
+          [
+            [
+              "c"
+            ]
+          ]
         ],
-        "code": "record Weather(String city, double temperatureC) {}\n\nWeather weather = providerClient.get()\n        .uri(b -> b.path(\"/weather\").queryParam(\"city\", \"Pune\").build())\n        .retrieve().body(Weather.class);",
-        "language": "java",
-        "explanation": [
-          "queryParam adds the city parameter to the request URL.",
-          "body(Weather.class) reads the JSON response into a Weather record.",
-          "This call returns the record. It does not print anything."
-        ]
-      }
-    },
-    {
-      "id": "api-requests-code",
-      "type": "example",
-      "example": {
-        "title": "Submit text with POST",
-        "description": [
-          "Assume POST /analyses accepts {\"text\":\"Today went well.\"} and returns {\"label\":\"POSITIVE\"}.",
-          "The service uses the same injected providerClient."
+        [
+          " throws for response statuses in the "
         ],
-        "code": "record AnalysisRequest(String text) {}\nrecord AnalysisResult(String label) {}\n\nAnalysisResult result = providerClient.post().uri(\"/analyses\")\n        .contentType(MediaType.APPLICATION_JSON)\n        .body(new AnalysisRequest(\"Today went well.\"))\n        .retrieve().body(AnalysisResult.class);",
-        "language": "java",
-        "explanation": [
-          "contentType declares that the sent body is JSON.",
-          "body serializes AnalysisRequest into the request body.",
-          "The final body call reads the response into AnalysisResult."
-        ]
-      }
-    },
-    {
-      "id": "api-failures",
-      "type": "header",
-      "richText": [
         [
-          "Handle a failed call"
-        ]
-      ]
-    },
-    {
-      "id": "api-failures-b0",
-      "type": "bulleted_list",
-      "richText": [
+          "4xx",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
         [
-          "RestClient throws for HTTP 4xx and 5xx responses by default."
+          " and "
+        ],
+        [
+          "5xx",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " ranges by default."
         ]
       ]
     },
     {
-      "id": "api-failures-b1",
+      "id": "integrations-external-apis-lesson-3-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check for an empty response body before reading DTO fields."
+          "onStatus",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can map selected statuses to application exceptions."
         ]
       ]
     },
     {
-      "id": "api-failures-b2",
+      "id": "integrations-external-apis-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use toEntity when you also need the response status or headers."
+          "A timeout can occur after the provider completes an action."
         ]
       ]
     },
     {
-      "id": "api-failures-b3",
+      "id": "integrations-external-apis-lesson-3-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A timeout does not prove that the provider rejected the request. The provider may already have completed it."
+          "Retrying a write can repeat that action."
         ]
       ]
     },
     {
-      "id": "api-failures-b4",
+      "id": "integrations-external-apis-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Retry an action only when the provider supports safe duplicate handling, such as an idempotency key. An idempotency key identifies repeated requests as the same operation."
+          "A provider-supported idempotency key identifies repeat submissions as the same operation."
         ]
       ]
     },
     {
-      "id": "api-failures-b5",
+      "id": "integrations-external-apis-lesson-3-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep credentials and private request bodies out of logs."
+          "A client must follow that provider\u2019s exact contract."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Provider hosts come from trusted application settings."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-3-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Arbitrary caller-supplied URLs can reach private services."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-3-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "API credentials stay in server configuration."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-external-apis-lesson-3-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Request bodies and credentials stay out of ordinary logs."
         ]
       ]
     }

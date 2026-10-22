@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-openapi",
   "title": "OpenAPI and Swagger UI",
-  "summary": "Describe an API, generate its documentation and inspect it in Swagger UI.",
+  "summary": "Generate an API description from Spring controllers and distinguish documentation from runtime behavior.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: How to Integrate Swagger in Spring Boot | Step-by-Step Tutorial",
@@ -16,221 +16,305 @@
     {
       "title": "OpenAPI specification",
       "url": "https://spec.openapis.org/oas/latest.html"
+    },
+    {
+      "title": "springdoc: getting started",
+      "url": "https://springdoc.org/#getting-started"
+    },
+    {
+      "title": "springdoc: Spring Boot compatibility matrix",
+      "url": "https://springdoc.org/#what-is-the-compatibility-matrix-of-springdoc-openapi-with-spring-boot"
+    },
+    {
+      "title": "springdoc: properties",
+      "url": "https://springdoc.org/properties.html"
+    },
+    {
+      "title": "springdoc v2: getting started",
+      "url": "https://springdoc.org/v2/#getting-started"
+    },
+    {
+      "title": "springdoc v2: Spring Boot compatibility matrix",
+      "url": "https://springdoc.org/v2/#what-is-the-compatibility-matrix-of-springdoc-openapi-with-spring-boot"
+    },
+    {
+      "title": "springdoc 2.8.17 release",
+      "url": "https://github.com/springdoc/springdoc-openapi/releases/tag/v2.8.17"
     }
   ],
   "blocks": [
     {
-      "id": "openapi-purpose",
+      "id": "openapi-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Describe the API"
+          "Spring controller documentation"
         ]
       ]
     },
     {
-      "id": "openapi-definition-b0",
+      "id": "openapi-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "OpenAPI is a machine-readable description of an HTTP API."
+          "springdoc-openapi",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads Spring controller mappings and Java types to generate an OpenAPI document."
         ]
       ]
     },
     {
-      "id": "openapi-definition-b1",
+      "id": "openapi-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "It lists paths, HTTP methods, inputs, responses and authentication requirements."
+          "The document describes paths, request fields, response fields, and declared response rules."
         ]
       ]
     },
     {
-      "id": "openapi-definition-b2",
+      "id": "openapi-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A schema describes a data structure, including its fields and types."
+          "Swagger UI displays that document and can send requests to the running application."
         ]
       ]
     },
     {
-      "id": "openapi-definition-b3",
+      "id": "openapi-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Swagger UI displays an OpenAPI description in a browser and can send requests to the API."
+          "These features come from an added dependency. Spring Boot's web starter does not include them."
         ]
       ]
     },
     {
-      "id": "openapi-setup",
+      "id": "openapi-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Generate the description with springdoc"
+          "Version compatibility"
         ]
       ]
     },
     {
-      "id": "openapi-library-b0",
+      "id": "openapi-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "springdoc-openapi generates a description from Spring controllers, data types and annotations."
+          "springdoc-openapi-starter-webmvc-ui",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds the document endpoint and Swagger UI for a Spring MVC application."
         ]
       ]
     },
     {
-      "id": "openapi-library-b1",
+      "id": "openapi-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "For a Spring MVC application with Swagger UI, use springdoc-openapi-starter-webmvc-ui."
+          "Spring Boot 3 uses the "
+        ],
+        [
+          "springdoc-openapi",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " 2.x line. The exact supported release depends on the Boot minor version."
         ]
       ]
     },
     {
-      "id": "openapi-library-b2",
+      "id": "openapi-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose a springdoc release compatible with the project’s Spring Boot version. Boot 3 uses springdoc 2.x; Boot 4 uses springdoc 3.x."
+          "Spring Boot 3.5 uses the 2.8.x line in the official compatibility matrix."
         ]
       ]
     },
     {
-      "id": "openapi-library-b3",
+      "id": "openapi-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check the compatibility matrix for the exact Boot release. Older Boot 2 examples use a different springdoc dependency line."
+          "Spring Boot 4 uses a different dependency line. Its examples do not apply unchanged to this Boot 3 course."
         ]
       ]
     },
     {
-      "id": "openapi-paths",
-      "type": "header",
-      "richText": [
-        [
-          "Open the generated documentation"
-        ]
-      ]
-    },
-    {
-      "id": "openapi-access-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The default OpenAPI JSON path is /v3/api-docs."
-        ]
-      ]
-    },
-    {
-      "id": "openapi-access-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The default Swagger UI entry path is /swagger-ui.html. It can redirect to the UI resources."
-        ]
-      ]
-    },
-    {
-      "id": "openapi-access-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Add the application’s context path if one is configured."
-        ]
-      ]
-    },
-    {
-      "id": "openapi-access-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Security rules can restrict these paths. Allow access only to the documentation routes you intend to expose."
-        ]
-      ]
-    },
-    {
-      "id": "openapi-paths-code",
+      "id": "openapi-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Enable API documentation in application.properties",
-        "description": [
-          "Use this configuration in an application with a compatible springdoc UI starter."
-        ],
-        "code": "springdoc.api-docs.enabled=true\nspringdoc.swagger-ui.enabled=true",
+        "title": "Add generated documentation to the greeting application",
         "language": "text",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "`pom.xml` pins springdoc to `2.8.17`.",
+          "The commands assume port `8080` and no custom context path or security configuration.",
+          "`mvn spring-boot:run` starts the application from the directory containing `pom.xml`. Requests run in a second terminal."
+        ],
+        "code": "",
         "explanation": [
-          "api-docs.enabled controls the generated API description endpoint.",
-          "swagger-ui.enabled controls the browser UI.",
-          "These properties enable documentation. They do not make protected endpoints public."
+          "The first URL returns the generated OpenAPI JSON.",
+          "`/swagger-ui.html` is the UI entry path and can redirect to its UI resources.",
+          "The UI reads the generated document and lists the detected greeting operations.",
+          "The selected controller version determines the operations shown.",
+          "No configuration property is required to enable these default endpoints.",
+          "`springdoc.api-docs.enabled=false` disables the document endpoint. `springdoc.swagger-ui.enabled=false` disables the UI."
+        ],
+        "commands": "curl http://localhost:8080/v3/api-docs\n# Browser URL: http://localhost:8080/swagger-ui.html",
+        "files": [
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springdoc</groupId>\n            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>\n            <version>2.8.17</version>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/greetings\")\n    public String greet() { return \"Hello, Ada\"; }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
         ]
       }
     },
     {
-      "id": "openapi-review",
+      "id": "openapi-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Keep the description accurate"
+          "Descriptions and limits"
         ]
       ]
     },
     {
-      "id": "openapi-contract-b0",
+      "id": "openapi-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check the described request fields, response fields and statuses against each controller."
+          "@Operation",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " from "
+        ],
+        [
+          "io.swagger.v3.oas.annotations",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds an operation summary or description to a handler."
         ]
       ]
     },
     {
-      "id": "openapi-contract-b1",
+      "id": "openapi-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Document failure responses as well as successful responses."
+          "@ApiResponse",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " declares a documented response, including a status that may come from exception advice."
         ]
       ]
     },
     {
-      "id": "openapi-contract-b2",
+      "id": "openapi-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use DTOs to describe the fields clients can send or receive."
+          "Documentation annotations describe behavior. They do not change the handler's status or enforce validation."
         ]
       ]
     },
     {
-      "id": "openapi-contract-b3",
+      "id": "openapi-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "An OpenAPI security scheme describes how a client supplies credentials. Spring Security enforces access separately."
+          "The generated document may need explicit error-response descriptions when errors come from shared advice."
         ]
       ]
     },
     {
-      "id": "openapi-contract-b4",
+      "id": "openapi-lesson-2-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Update the controller annotations or data types that generate the description. Manual changes to generated JSON disappear when it is generated again."
+          "Manual edits to generated JSON disappear when the document is generated again."
         ]
       ]
     },
     {
-      "id": "openapi-contract-b5",
+      "id": "openapi-lesson-2-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "Sending a request from Swagger UI exercises that request. It does not prove that every documented behavior works."
+          "An OpenAPI security scheme describes credentials to the client. Spring Security enforces access separately."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A configured servlet context path also prefixes the documentation endpoints."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-lesson-2-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Security rules can restrict the document and UI paths. Adding documentation does not make protected endpoints public."
+        ]
+      ]
+    },
+    {
+      "id": "openapi-lesson-2-note-8",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Sending one request through Swagger UI exercises that request. It does not verify every documented response."
         ]
       ]
     }

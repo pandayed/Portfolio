@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-redis",
   "title": "Redis Caching",
-  "summary": "Connect to Redis, choose keys and expiration, and read through a cache.",
+  "summary": "Inject a Redis template and add an explicit cache around a learned provider client.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: How to Use Redis in Your Spring Boot Project: Step-by-Step Tutorial",
@@ -28,245 +28,467 @@
     {
       "title": "Engineering Digest journalApp source",
       "url": "https://github.com/EngineeringDigest/journalApp"
+    },
+    {
+      "title": "Spring Boot 3.5 Redis integration",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/data/nosql.html#data.nosql.redis"
+    },
+    {
+      "title": "Spring Data Redis 3.5 templates",
+      "url": "https://docs.spring.io/spring-data/redis/reference/3.5/redis/template.html"
     }
   ],
   "blocks": [
     {
-      "id": "redis-model",
+      "id": "redis-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Use Redis as a cache"
+          "Spring Data Redis templates"
         ]
       ]
     },
     {
-      "id": "redis-model-b0",
+      "id": "redis-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Redis stores values under keys. It can hold text and other data structures."
+          "spring-boot-starter-data-redis",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the Redis connection library and Spring\u2019s Redis support."
         ]
       ]
     },
     {
-      "id": "redis-model-b1",
+      "id": "redis-lesson-0-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A cache stores a reusable copy of a value from a database or an external API."
+          "Boot uses "
+        ],
+        [
+          "spring.data.redis",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " settings to configure the connection."
         ]
       ]
     },
     {
-      "id": "redis-model-b2",
+      "id": "redis-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A cache hit means the requested key has a value. A cache miss means no value is available."
+          "Boot also supplies "
+        ],
+        [
+          "StringRedisTemplate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "redis-model-b3",
+      "id": "redis-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "On a miss, read the original source and store the result in the cache."
+          "A service injects it to send operations through the configured connection."
         ]
       ]
     },
     {
-      "id": "redis-model-b4",
+      "id": "redis-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Time to live (TTL) is how long a key remains before Redis expires it."
+          "opsForValue",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects string-value operations."
         ]
       ]
     },
     {
-      "id": "redis-model-b5",
+      "id": "redis-lesson-0-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a cache when repeated reads are expensive and briefly old data is acceptable. Keep important data in its original storage."
+          "get",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads a value."
         ]
       ]
     },
     {
-      "id": "redis-cloud",
+      "id": "redis-lesson-0-note-2-part-1-clause-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "set",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " writes one with an optional expiry."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "StringRedisTemplate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " stores string keys and values."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-0-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Boot-managed "
+        ],
+        [
+          "ObjectMapper",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can convert an application record to a JSON string and read it back."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A general "
+        ],
+        [
+          "RedisTemplate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " also needs serializers."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-0-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Its Java generic type alone does not select JSON."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Connect Spring Boot to Redis"
+          "Read-through cache operation"
         ]
       ]
     },
     {
-      "id": "redis-cloud-b0",
+      "id": "redis-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Add spring-boot-starter-data-redis. Boot configures Redis connections and templates from your settings."
+          "The service first asks Redis for the key."
         ]
       ]
     },
     {
-      "id": "redis-cloud-b1",
+      "id": "redis-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Boot 3 uses spring.data.redis properties. Older examples may use spring.redis."
+          "A missing key causes a call to the original source."
         ]
       ]
     },
     {
-      "id": "redis-cloud-b2",
+      "id": "redis-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Your Redis provider supplies the host, port, username, and password."
+          "The service stores the source result with a time to live, or TTL."
         ]
       ]
     },
     {
-      "id": "redis-cloud-b3",
+      "id": "redis-lesson-1-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "TLS encrypts traffic between your application and Redis. Keep certificate validation enabled."
+          "Redis removes the cached value after that duration."
         ]
       ]
     },
     {
-      "id": "redis-cloud-code",
+      "id": "redis-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The cache key includes every input that changes the result."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-1-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "User-specific results also need the user or tenant identity in the key."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Configure a Redis Cloud connection",
-        "description": [
-          "Add these settings to application.properties in a Spring Boot 3 application.",
-          "Set the REDIS_* environment variables from your provider’s connection details.",
-          "This endpoint supports TLS."
-        ],
-        "code": "spring.data.redis.host=${REDIS_HOST}\nspring.data.redis.port=${REDIS_PORT}\nspring.data.redis.username=${REDIS_USERNAME}\nspring.data.redis.password=${REDIS_PASSWORD}\nspring.data.redis.ssl.enabled=true\nspring.data.redis.connect-timeout=2s\nspring.data.redis.timeout=2s",
+        "title": "Cache a provider post for five minutes",
         "language": "java",
+        "description": [
+          "Each tab names a file relative to the project root. Java `17` and Maven are required. `mvn spring-boot:run` starts this example after its external requirements are configured.",
+          "`PostApiClient.java`, the cache service, Redis settings, application class, and build file appear in these tabs.",
+          "The Spring Boot 3.5 project adds `org.springframework.boot:spring-boot-starter-data-redis` with the Boot-managed version.",
+          "The web starter supplies Jackson and the managed `ObjectMapper`.",
+          "The Redis provider supplies the `REDIS_HOST`, `REDIS_PORT`, `REDIS_USERNAME`, and `REDIS_PASSWORD` environment values.",
+          "This endpoint supports TLS.",
+          "A caller invokes the injected `CachedPostService.read(1)` twice within five minutes.",
+          "A reachable Redis endpoint and provider are required."
+        ],
+        "code": "",
         "explanation": [
-          "ssl.enabled enables TLS for the connection.",
-          "connect-timeout limits connection setup to two seconds.",
-          "timeout limits Redis operations to two seconds."
+          "Boot creates the connection and string template from the properties.",
+          "TLS certificate validation must remain enabled.",
+          "The key `post:v1:1` combines the record identity and a cache-format version.",
+          "On the first miss, `provider.read` retrieves the post.",
+          "`writeValueAsString` converts it to JSON before storage.",
+          "A later hit reads that JSON into the same response record.",
+          "No provider request occurs on that branch.",
+          "`set` supplies the value and expiry together.",
+          "After five minutes, the next read can fetch a fresh post.",
+          "The method propagates Redis and JSON failures.",
+          "This example does not silently turn a broken cache into a miss."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/CachedPostService.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.time.Duration;\nimport com.fasterxml.jackson.core.JsonProcessingException;\nimport com.fasterxml.jackson.databind.ObjectMapper;\nimport org.springframework.data.redis.core.StringRedisTemplate;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class CachedPostService {\n    private final StringRedisTemplate redis;\n    private final ObjectMapper mapper;\n    private final PostApiClient provider;\n\n    public CachedPostService(StringRedisTemplate redis, ObjectMapper mapper,\n            PostApiClient provider) {\n        this.redis = redis;\n        this.mapper = mapper;\n        this.provider = provider;\n    }\n\n    public PostApiClient.Post read(long id) throws JsonProcessingException {\n        if (id < 1) throw new IllegalArgumentException(\"Positive id required\");\n        String key = \"post:v1:\" + id;\n        String cached = redis.opsForValue().get(key);\n        if (cached != null) {\n            return mapper.readValue(cached, PostApiClient.Post.class);\n        }\n        PostApiClient.Post fresh = provider.read(id);\n        redis.opsForValue().set(key, mapper.writeValueAsString(fresh),\n                Duration.ofMinutes(5));\n        return fresh;\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/PostApiClient.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.net.http.HttpClient;\nimport java.time.Duration;\nimport org.springframework.http.MediaType;\nimport org.springframework.http.client.JdkClientHttpRequestFactory;\nimport org.springframework.stereotype.Service;\nimport org.springframework.web.client.RestClient;\n\n@Service\npublic class PostApiClient {\n    private final RestClient client;\n\n    public PostApiClient(RestClient.Builder builder) {\n        HttpClient http = HttpClient.newBuilder()\n                .connectTimeout(Duration.ofSeconds(3)).build();\n        var factory = new JdkClientHttpRequestFactory(http);\n        factory.setReadTimeout(Duration.ofSeconds(5));\n        this.client = builder.baseUrl(\"https://jsonplaceholder.typicode.com\")\n                .requestFactory(factory).build();\n    }\n\n    public Post read(long id) {\n        if (id < 1) throw new IllegalArgumentException(\"Positive id required\");\n        Post post = client.get().uri(\"/posts/{id}\", id)\n                .retrieve().body(Post.class);\n        if (post == null) throw new IllegalStateException(\"Empty post response\");\n        return post;\n    }\n\n    public Post create(NewPost input) {\n        Post post = client.post().uri(\"/posts\")\n                .contentType(MediaType.APPLICATION_JSON).body(input)\n                .retrieve().body(Post.class);\n        if (post == null) throw new IllegalStateException(\"Empty post response\");\n        return post;\n    }\n\n    public record NewPost(long userId, String title, String body) {}\n    public record Post(long userId, long id, String title, String body) {}\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.data.redis.host=${REDIS_HOST}\nspring.data.redis.port=${REDIS_PORT}\nspring.data.redis.username=${REDIS_USERNAME}\nspring.data.redis.password=${REDIS_PASSWORD}\nspring.data.redis.ssl.enabled=true\nspring.data.redis.connect-timeout=2s\nspring.data.redis.timeout=2s\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-redis</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "redis-code",
+      "id": "redis-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Read and write cached values"
+          "Cache changes and failures"
         ]
       ]
     },
     {
-      "id": "redis-code-b0",
+      "id": "redis-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "StringRedisTemplate reads and writes string keys and string values."
+          "A cached value can remain old until expiry."
         ]
       ]
     },
     {
-      "id": "redis-code-b1",
+      "id": "redis-lesson-2-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "ObjectMapper converts Java objects into JSON strings and back. Reuse the Boot-managed mapper."
+          "A source update can delete or replace its corresponding cache key sooner."
         ]
       ]
     },
     {
-      "id": "redis-code-b2",
+      "id": "redis-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose serialization explicitly. Declaring RedisTemplate does not by itself select JSON."
+          "A Redis connection failure is different from a missing key."
         ]
       ]
     },
     {
-      "id": "redis-code-b3",
+      "id": "redis-lesson-2-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Include every input that changes the result in the key. For private data, include the user or tenant identity."
+          "An optional-cache policy can catch the relevant connection or decoding failures and use the original source."
         ]
       ]
     },
     {
-      "id": "redis-code-code",
-      "type": "example",
-      "example": {
-        "title": "Cache weather for five minutes",
-        "description": [
-          "Put this method in a service with injected StringRedisTemplate redis, ObjectMapper mapper, and WeatherProvider provider.",
-          "WeatherProvider.fetch(city) reads the original weather source.",
-          "Use Spring Boot 3, Spring Framework 6, and Java 17."
+      "id": "redis-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A fallback needs recorded failures so a broken cache remains visible."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-2-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It must not hide failures from the original source."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Two simultaneous misses can both call the provider."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-2-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Expensive or rate-limited providers may need coordination."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "String inputs in keys need a defined normalization rule."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-2-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Changing case is appropriate only when the underlying source treats those inputs as equivalent."
+        ]
+      ]
+    },
+    {
+      "id": "redis-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Older Boot examples may use "
         ],
-        "code": "record Weather(String city, double temperatureC) {}\n\nWeather weather(String city) throws JsonProcessingException {\n    String key = \"weather:v1:\" + city.toLowerCase(Locale.ROOT);\n    String cached = redis.opsForValue().get(key);\n    if (cached != null) {\n        return mapper.readValue(cached, Weather.class);\n    }\n    Weather fresh = provider.fetch(city);\n    if (fresh == null) {\n        throw new IllegalStateException(\"Weather response is empty\");\n    }\n    redis.opsForValue().set(key, mapper.writeValueAsString(fresh),\n            Duration.ofSeconds(300));\n    return fresh;\n}",
-        "language": "java",
-        "explanation": [
-          "The key includes a normalized city name and a format version.",
-          "If Redis returns a string, the mapper reads it into Weather and the method returns it.",
-          "On a miss, the method calls the provider and rejects an empty result.",
-          "The fresh result is stored as JSON with a 300-second TTL.",
-          "Calls before expiration can reuse that result. Calls after expiration fetch a new result.",
-          "The method propagates Redis and JSON errors to its caller."
-        ]
-      }
-    },
-    {
-      "id": "redis-limits",
-      "type": "header",
-      "richText": [
         [
-          "Handle changes and failures"
+          "spring.redis",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "redis-limits-b0",
+      "id": "redis-lesson-2-note-5-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A TTL permits old values until the key expires. Delete or update the key after source changes when that delay is unacceptable."
-        ]
-      ]
-    },
-    {
-      "id": "redis-limits-b1",
-      "type": "bulleted_list",
-      "richText": [
+          "These Boot 3.5 settings use "
+        ],
         [
-          "A failed Redis connection is different from a cache miss."
-        ]
-      ]
-    },
-    {
-      "id": "redis-limits-b2",
-      "type": "bulleted_list",
-      "richText": [
+          "spring.data.redis",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
         [
-          "For an optional cache, handle connection or decoding failures and fall back to the original source. Record the failure so it remains visible."
-        ]
-      ]
-    },
-    {
-      "id": "redis-limits-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Two simultaneous misses can both call the original source. Add coordination when duplicate calls would exceed provider limits."
+          "."
         ]
       ]
     }

@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-bean-lifecycle",
   "title": "Bean initialization and shutdown",
-  "summary": "Initialization order, Jakarta imports, startup hooks, and shutdown boundaries.",
+  "summary": "Follow construction, injection, initialization, startup hooks, and shutdown in order.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Mastering @PostConstruct in Spring Boot: Complete Guide for Developers",
@@ -20,6 +20,14 @@
     {
       "title": "Official reference: Bean initialization and shutdown",
       "url": "https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/postconstruct-and-predestroy-annotations.html"
+    },
+    {
+      "title": "Spring Framework 6.2: lifecycle annotations",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/core/beans/annotation-config/postconstruct-and-predestroy-annotations.html"
+    },
+    {
+      "title": "Spring Framework 6.2: bean scopes",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/core/beans/factory-scopes.html"
     }
   ],
   "blocks": [
@@ -33,136 +41,326 @@
       ]
     },
     {
-      "id": "bean-lifecycle-0-point-0",
+      "id": "lifecycle-order-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "For a normal bean, Spring constructs the object, supplies its dependencies, then calls its initialization callbacks."
+          "A managed bean passes through construction, dependency injection, and initialization."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-0-point-1",
+      "id": "lifecycle-order-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Constructor-injected dependencies are available in the constructor. Field-injected dependencies are supplied afterward."
+          "Constructor-injected dependencies are available during construction."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-0-point-2",
+      "id": "lifecycle-order-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PostConstruct marks a method to call after dependency injection. Use jakarta.annotation.PostConstruct with Spring Boot 3."
+          "Field and setter injection happens after construction."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-0-point-3",
+      "id": "lifecycle-order-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Initialization runs when that bean instance is initialized. It does not run for every HTTP request."
+          "@PostConstruct",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " marks an initialization method that Spring calls after injection."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-0-example-0",
+      "id": "lifecycle-order-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "In Boot 3, this annotation comes from "
+        ],
+        [
+          "jakarta.annotation",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "lifecycle-order-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The method runs when the bean instance initializes, not on every request."
+        ]
+      ]
+    },
+    {
+      "id": "lifecycle-order-example-0",
       "type": "example",
       "example": {
-        "title": "Initialize a bean after dependency injection",
-        "description": [
-          "This bean uses an injected Clock to record when initialization occurs."
-        ],
-        "code": "package com.example.demo;\n\nimport java.time.Clock;\nimport java.time.Instant;\nimport jakarta.annotation.PostConstruct;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class StartupTime {\n    private final Clock clock;\n    private Instant initializedAt;\n\n    public StartupTime(Clock clock) {\n        this.clock = clock;\n    }\n\n    @PostConstruct\n    void initialize() {\n        initializedAt = clock.instant();\n    }\n\n    public Instant getInitializedAt() {\n        return initializedAt;\n    }\n}",
+        "title": "Record when a managed bean initializes",
         "language": "java",
+        "description": [
+          "`StartupRecord.java` uses the `Clock` bean declared in the included `AppConfig.java`.",
+          "The tabs contain every application source file and the Maven build.",
+          "The project requires Java 17 or later and Maven."
+        ],
+        "code": "",
         "explanation": [
-          "Register the Clock bean shown in the beans lesson.",
-          "Spring supplies Clock before calling initialize().",
-          "The stored time belongs to this bean instance; getInitializedAt() does not refresh it."
+          "Spring supplies `Clock` to the constructor.",
+          "Spring calls `initialize` after dependency injection.",
+          "`initializedAt()` returns the stored initialization time. It does not read the clock again.",
+          "During normal context shutdown, Spring calls `close`.",
+          "The shutdown message is an example of a callback, not a guarantee after forced termination."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/StartupRecord.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.time.Clock;\nimport java.time.Instant;\nimport jakarta.annotation.PostConstruct;\nimport jakarta.annotation.PreDestroy;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class StartupRecord {\n    private final Clock clock;\n    private Instant initializedAt;\n\n    public StartupRecord(Clock clock) {\n        this.clock = clock;\n    }\n\n    @PostConstruct\n    public void initialize() {\n        initializedAt = clock.instant();\n    }\n\n    public Instant initializedAt() {\n        return initializedAt;\n    }\n\n    @PreDestroy\n    public void close() {\n        System.out.println(\"StartupRecord stopped\");\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/AppConfig.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.time.Clock;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\n\n@Configuration\npublic class AppConfig {\n    @Bean\n    public Clock clock() {\n        return Clock.systemUTC();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "lifecycle-choice",
+      "id": "bean-lifecycle-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Application startup callbacks"
+          "Application startup hooks"
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-1-point-0",
+      "id": "bean-lifecycle-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "CommandLineRunner and ApplicationRunner run after the application context has been initialized. They receive application arguments in different forms."
+          "@PostConstruct",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " belongs to a particular bean\u2019s initialization."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-1-point-1",
+      "id": "bean-lifecycle-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "ApplicationReadyEvent is published after the startup runners complete. It is a startup event, not a recurring timer."
+          "CommandLineRunner",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "ApplicationRunner",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " are Boot interfaces for work after the application context has initialized."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-1-point-2",
+      "id": "bean-lifecycle-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PostConstruct is not a transaction boundary. Transactional proxy behavior may not be available during initialization."
+          "Boot calls registered runner beans near the end of startup."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-1-point-3",
+      "id": "bean-lifecycle-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A remote operation during initialization delays startup. Give it a timeout if startup depends on it."
+          "CommandLineRunner",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " receives the raw argument array. "
+        ],
+        [
+          "ApplicationRunner",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " receives parsed "
+        ],
+        [
+          "ApplicationArguments",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-2",
+      "id": "bean-lifecycle-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "ApplicationReadyEvent",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is published after the runners finish."
+        ]
+      ]
+    },
+    {
+      "id": "bean-lifecycle-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These are startup hooks. The scheduling lesson introduces recurring work separately."
+        ]
+      ]
+    },
+    {
+      "id": "bean-lifecycle-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Long operations in an initialization method or runner delay startup."
+        ]
+      ]
+    },
+    {
+      "id": "bean-lifecycle-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Shutdown cleanup"
+          "Shutdown and scope"
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-2-point-0",
+      "id": "bean-lifecycle-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PreDestroy marks a cleanup method called when Spring destroys a managed bean during normal context shutdown."
+          "@PreDestroy",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " marks a method that Spring calls during normal destruction of a managed bean."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-2-point-1",
+      "id": "bean-lifecycle-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Abrupt termination can prevent cleanup callbacks from running or completing."
+          "Forced process termination can prevent that method from running."
         ]
       ]
     },
     {
-      "id": "bean-lifecycle-2-point-2",
+      "id": "bean-lifecycle-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring does not automatically call destruction callbacks for prototype-scoped beans after handing them to the caller."
+          "The default singleton bean lives until its application context closes."
+        ]
+      ]
+    },
+    {
+      "id": "bean-lifecycle-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A prototype-scoped bean is created for each request to the container for that bean."
+        ]
+      ]
+    },
+    {
+      "id": "bean-lifecycle-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring does not automatically run a prototype bean\u2019s destruction callback after returning it to its caller."
+        ]
+      ]
+    },
+    {
+      "id": "bean-lifecycle-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The transaction chapter explains why transaction interception should not be assumed inside initialization callbacks."
         ]
       ]
     }

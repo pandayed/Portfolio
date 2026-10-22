@@ -2,10 +2,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: "async-cleanup",
-    title: "Owning asynchronous work",
-    summary: "Record request outcomes, prevent overlapping refreshes, and release owned resources.",
+    title: "Asynchronous work and cleanup",
+    summary: "Application code records request outcomes and releases timers, listeners, and requests.",
     scope: "javascript",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -24,18 +25,21 @@ const note: LearningNote = {
     sections: [
         {
             id: "outcomes",
-            title: "Record the application’s request state",
+            title: "Application request states",
             bullets: [
                 "An application can store one status for idle, loading, success, empty, error, or cancelled.",
-                "These statuses are application data. A Promise does not automatically update the screen’s state.",
-                "Record loading before starting work and its outcome after settlement. A user-facing error message can differ from internal failure details."
+                "These statuses are application data.",
+                "A `Promise` does not automatically update the screen’s state.",
+                "The application records `loading` before starting work and records the outcome after settlement.",
+                "A user-facing error message can differ from internal failure details."
             ],
             examples: [
                 {
-                    title: "Record success, empty data, failure, and cancellation",
+                    title: "Request outcomes",
                     description: [
-                        "The operation parameter supplies each simulated result. No service is required.",
-                        "DOMException supplies the AbortError used for the cancellation case."
+                        "The operation parameter supplies each simulated result.",
+                        "No service is required.",
+                        "`DOMException` supplies the `AbortError` used for the cancellation case."
                     ],
                     language: "javascript",
                     code: `let state = { status: 'idle' };
@@ -63,7 +67,8 @@ inspect();
                     result: "success\nempty\nerror\ncancelled",
                     explanation: [
                         "Each call records loading during its wait.",
-                        "The error state stores an application message. The internal server-detail message is not displayed."
+                        "The error state stores an application message.",
+                        "The internal server-detail message is not displayed."
                     ],
                     runnable: true
                 }
@@ -71,17 +76,19 @@ inspect();
         },
         {
             id: "periodic-work",
-            title: "Wait before scheduling the next refresh",
+            title: "Refresh scheduling",
             bullets: [
-                "setInterval does not wait for a Promise returned by its callback. A later tick can start while the previous async callback is awaiting work.",
+                "`setInterval` does not wait for a `Promise` returned by its callback.",
+                "A later tick can start while the previous `async` callback is awaiting work.",
                 "A recursive timeout can schedule the next delay only after the current operation finishes.",
                 "Stopping future timer callbacks and cancelling a pending operation are separate actions."
             ],
             examples: [
                 {
-                    title: "Observe overlapping async interval callbacks",
+                    title: "Overlapping interval callbacks",
                     description: [
-                        "Save each pending callback’s completion function. The second tick supplies both completions."
+                        "The example stores each pending callback’s completion function.",
+                        "The second tick supplies both completions."
                     ],
                     language: "javascript",
                     code: `let tick = 0;
@@ -102,15 +109,17 @@ const intervalId = setInterval(async () => {
 // JavaScript callbacks did not execute simultaneously.`,
                     result: "start 1\nstart 2\nfinish 1\nfinish 2",
                     explanation: [
-                        "The second tick starts before the first await completes.",
-                        "clearInterval prevents another tick. It does not settle either pending Promise."
+                        "The second tick starts before the first `await` completes.",
+                        "`clearInterval` prevents another tick.",
+                        "It does not settle either pending `Promise`."
                     ],
                     runnable: true
                 },
                 {
-                    title: "Schedule the next refresh after completion",
+                    title: "Refreshes after completion",
                     description: [
-                        "Run two refreshes and stop. Each timer-started refresh handles its returned Promise’s rejection."
+                        "The example runs two refreshes and stops.",
+                        "Each timer-started refresh handles its returned `Promise`’s rejection."
                     ],
                     language: "javascript",
                     code: `let run = 0;
@@ -132,7 +141,8 @@ refresh().catch(console.error);
                     result: "start 1\nfinish 1\nstart 2\nfinish 2",
                     explanation: [
                         "The second delay begins only after the first operation finishes.",
-                        "An external owner can set stopped and clear timeoutId during cleanup. It must separately cancel an operation already waiting."
+                        "An external owner can set `stopped` and clear `timeoutId` during cleanup.",
+                        "It must separately cancel an operation already waiting."
                     ],
                     runnable: true
                 }
@@ -140,18 +150,21 @@ refresh().catch(console.error);
         },
         {
             id: "owner",
-            title: "Return one cleanup function for owned resources",
+            title: "Resource cleanup",
             bullets: [
-                "The owner starts work and decides when it is no longer needed. It can return a cleanup function for that work.",
-                "Cleanup can clear timers, remove listeners, and abort requests. Each resource requires its corresponding API call.",
-                "Settling a Promise does not release every resource owned by the surrounding feature."
+                "The owner starts work and decides when it is no longer needed.",
+                "It can return a cleanup function for that work.",
+                "Cleanup can clear timers, remove listeners, and abort requests.",
+                "Each resource requires its corresponding API call.",
+                "Settling a `Promise` does not release every resource owned by the surrounding feature."
             ],
             examples: [
                 {
-                    title: "Release a timer, listener, and request together",
+                    title: "Timer, listener, and request cleanup",
                     description: [
-                        "Browser setup: /api/updates returns JSON.",
-                        "startUpdates registers a timer and online listener and starts a request. Call its returned cleanup function when that feature closes."
+                        "Browser setup: `/api/updates` returns JSON.",
+                        "`startUpdates` registers a timer and online listener and starts a request.",
+                        "Call its returned cleanup function when that feature closes."
                     ],
                     language: "javascript",
                     code: `function startUpdates() {
@@ -174,8 +187,8 @@ const cleanup = startUpdates();
 cleanup();`,
                     result: "No refresh due or online-event logs from these removed resources. Expected request cancellation is handled without an error log.",
                     explanation: [
-                        "cleanup clears the pending timer, removes the same listener reference, and aborts the controller.",
-                        "The request’s catch handles cancellation and reports other request failures."
+                        "`cleanup` clears the pending timer, removes the same listener reference, and aborts the controller.",
+                        "The request’s `catch` handles cancellation and reports other request failures."
                     ]
                 }
             ]

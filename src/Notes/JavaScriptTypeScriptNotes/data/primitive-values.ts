@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "primitive-values",
     title: "Primitive types and missing values",
-    summary: "Identify primitive types with typeof and distinguish null from undefined.",
+    summary: "Primitive types, type checks, and missing values.",
     scope: "javascript",
     updatedOn: "2026-10-14",
     pointwise: true,
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -37,27 +38,27 @@ const note: LearningNote = {
                     ],
                     [
                         "boolean",
-                        "true, false",
+                        "`true`, `false`",
                         "Conditions"
                     ],
                     [
-                        "bigint",
+                        "`bigint`",
                         "42n",
                         "Exact integers"
                     ],
                     [
-                        "undefined",
-                        "undefined",
+                        "`undefined`",
+                        "`undefined`",
                         "Missing value"
                     ],
                     [
-                        "null",
-                        "null",
+                        "`null`",
+                        "`null`",
                         "Explicit empty value"
                     ],
                     [
-                        "symbol",
-                        "Symbol(\"id\")",
+                        "`symbol`",
+                        "`Symbol(\"id\")`",
                         "Unique values"
                     ]
                 ]
@@ -65,69 +66,77 @@ const note: LearningNote = {
         },
         {
             id: "primitive-types",
-            title: "Reassignment is allowed",
+            title: "Primitive reassignment",
             bullets: [
-                "Immutable describes a primitive value, not the variable holding it. The number 10 cannot itself be edited into 20.",
-                "Reassignment makes a variable hold another value. A let variable can hold 10 first and 20 later."
+                "Immutable describes a primitive value, not the variable holding it.",
+                "The number 10 cannot itself be edited into 20.",
+                "Reassignment makes a variable hold another value.",
+                "A `let` variable can hold 10 first and 20 later."
             ],
             examples: [
                 {
-                    title: "Assign another number to a let variable",
+                    title: "Number reassignment",
                     description: [
-                        "Run two assignments to the same variable. Both are allowed."
+                        "The example assigns two values to the same variable.",
+                        "Both are allowed."
                     ],
                     language: "javascript",
                     code: "let a = 10;\nconsole.log(a);\na = 20;\nconsole.log(a);",
                     result: "10\n20",
                     explanation: [
-                        "a initially holds 10. The later assignment makes it hold 20 instead.",
-                        "a = 20 is valid reassignment. It does not edit the number 10."
+                        "a initially holds 10.",
+                        "The later assignment makes it hold 20 instead.",
+                        "a = 20 is valid reassignment.",
+                        "It does not edit the number 10."
                     ]
                 }
             ]
         },
         {
             id: "typeof",
-            title: "typeof reports the type of a value",
+            title: "Type checks",
             bullets: [
-                "typeof returns a string describing a JavaScript value’s type.",
-                "For null, typeof returns the text \"object\" instead of \"null\". This is a long-standing JavaScript bug. null remains a primitive value."
+                "`typeof` returns a string describing a JavaScript value’s type.",
+                "For `null`, `typeof` returns the text \"object\" instead of \"`null`\".",
+                "This is a long-standing JavaScript bug.",
+                "`null` remains a primitive value."
             ],
             examples: [
                 {
-                    title: "Inspect primitive values",
+                    title: "Primitive type results",
                     description: [
-                        "Run one typeof check for each primitive type."
+                        "The example includes one `typeof` check for each primitive type."
                     ],
                     language: "javascript",
                     code: "console.log(typeof \"Mia\");\nconsole.log(typeof 42);\nconsole.log(typeof true);\nconsole.log(typeof 42n);\nconsole.log(typeof undefined);\nconsole.log(typeof Symbol(\"id\"));\nconsole.log(typeof null);",
                     result: "string\nnumber\nboolean\nbigint\nundefined\nsymbol\nobject",
                     explanation: [
                         "Each result is text.",
-                        "The final line prints \"object\" because it checks null. That output is the incorrect type label described above."
+                        "The final line prints \"object\" because it checks `null`.",
+                        "That output is the incorrect type label described above."
                     ]
                 }
             ]
         },
         {
             id: "missing-values",
-            title: "undefined and null have different meanings",
+            title: "Missing values",
             bullets: [
-                "A let declaration without an initializer starts with undefined.",
-                "Assign null when the program needs an explicit empty value."
+                "A `let` declaration without an initializer starts with `undefined`.",
+                "The value `null` represents an explicit empty value."
             ],
             examples: [
                 {
                     title: "An unassigned name and an explicit empty value",
                     description: [
-                        "Compare what the two declarations contain."
+                        "The example compares what the two declarations contain."
                     ],
                     language: "javascript",
                     code: "let pending;\nconst selection = null;\nconsole.log(pending);\nconsole.log(selection);",
                     result: "undefined\nnull",
                     explanation: [
                         "pending has not received a value.",
-                        "selection received null explicitly."
+                        "selection received `null` explicitly."
                     ]
                 }
             ]

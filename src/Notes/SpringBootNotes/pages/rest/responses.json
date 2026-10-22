@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-rest-responses",
   "title": "ResponseEntity and HTTP status codes",
-  "summary": "Set a response status, headers and optional body.",
+  "summary": "Choose response status, headers, and body from the result of one operation.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: ResponseEntity in Spring Boot in Hindi | Handling HttpStatus while creating REST API",
@@ -16,298 +16,366 @@
     {
       "title": "HTTP semantics: RFC 9110",
       "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+    },
+    {
+      "title": "Spring MVC 6.2: ResponseEntity",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-methods/responseentity.html"
+    },
+    {
+      "title": "Spring Framework 6.2: ResponseStatus API",
+      "url": "https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html"
     }
   ],
   "blocks": [
     {
-      "id": "responses-control",
+      "id": "rest-responses-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Set the HTTP response"
+          "ResponseEntity"
         ]
       ]
     },
     {
-      "id": "responses-basics-b0",
+      "id": "rest-responses-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An HTTP response has a status code, headers and an optional body."
+          "ResponseEntity<T>",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " lets a handler return a status, headers, and a body together."
         ]
       ]
     },
     {
-      "id": "responses-basics-b1",
+      "id": "rest-responses-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "ResponseEntity<T> lets a controller choose all three. T is the body’s Java type."
+          "T",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is the Java type of the response body."
         ]
       ]
     },
     {
-      "id": "responses-basics-b2",
+      "id": "rest-responses-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "ResponseEntity does not convert the body itself. Spring’s message converters still write the response format."
+          "Spring MVC still uses a message converter to write that body."
         ]
       ]
     },
     {
-      "id": "responses-statuses",
-      "type": "table",
-      "columnOrder": [
-        "0",
-        "1"
-      ],
-      "hasColumnHeader": true,
-      "children": [
-        {
-          "id": "responses-statuses-r0",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "Status"
-              ]
-            ],
-            "1": [
-              [
-                "Meaning"
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r1",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "200 OK"
-              ]
-            ],
-            "1": [
-              [
-                "The request succeeded. A body can contain the result."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r2",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "201 Created"
-              ]
-            ],
-            "1": [
-              [
-                "The request created a resource. Location can identify its URL."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r3",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "204 No Content"
-              ]
-            ],
-            "1": [
-              [
-                "The request succeeded with no response body."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r4",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "400 Bad Request"
-              ]
-            ],
-            "1": [
-              [
-                "The request is invalid."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r5",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "401 Unauthorized"
-              ]
-            ],
-            "1": [
-              [
-                "The request lacks valid authentication credentials."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r6",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "403 Forbidden"
-              ]
-            ],
-            "1": [
-              [
-                "The server refuses the requested operation."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r7",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "404 Not Found"
-              ]
-            ],
-            "1": [
-              [
-                "The resource was not found or the server does not reveal it."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r8",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "409 Conflict"
-              ]
-            ],
-            "1": [
-              [
-                "The request conflicts with the current resource state."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "responses-statuses-r9",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "500 Internal Server Error"
-              ]
-            ],
-            "1": [
-              [
-                "An unexpected server failure prevented completion."
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "responses-status-rule-b0",
+      "id": "rest-responses-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PostMapping does not set 201 automatically. Choose a status from the operation’s result."
+          "ResponseEntity.ok(body)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " returns "
+        ],
+        [
+          "200",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with the supplied body."
         ]
       ]
     },
     {
-      "id": "responses-status-rule-b1",
+      "id": "rest-responses-lesson-0-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not attach a response body to 204."
+          "ResponseEntity.created(location).body(body)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " returns "
+        ],
+        [
+          "201",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with a "
+        ],
+        [
+          "Location",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " header and the supplied body."
         ]
       ]
     },
     {
-      "id": "responses-status-rule-b2",
+      "id": "rest-responses-lesson-0-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not return 200 with an error message when the request failed."
+          "ResponseEntity.notFound().build()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " returns "
+        ],
+        [
+          "404",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " without a body."
         ]
       ]
     },
     {
-      "id": "responses-control-code",
+      "id": "rest-responses-lesson-0-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "ResponseEntity.noContent().build()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " returns "
+        ],
+        [
+          "204",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " without a body."
+        ]
+      ]
+    },
+    {
+      "id": "rest-responses-lesson-0-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@PostMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " alone does not select "
+        ],
+        [
+          "201",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". The handler chooses the status from the result."
+        ]
+      ]
+    },
+    {
+      "id": "rest-responses-lesson-1",
+      "type": "header",
+      "richText": [
+        [
+          "Responses from operation results"
+        ]
+      ]
+    },
+    {
+      "id": "rest-responses-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A handler can return different "
+        ],
+        [
+          "ResponseEntity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " values for different results."
+        ]
+      ]
+    },
+    {
+      "id": "rest-responses-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A response DTO exposes the fields intended for the caller. It need not expose the stored object directly."
+        ]
+      ]
+    },
+    {
+      "id": "rest-responses-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Return a found resource or create a new one",
-        "description": [
-          "These methods belong in a @RestController mapped to /journal.",
-          "journalService is an injected service. JournalResponse and CreateJournalRequest are application DTOs.",
-          "findVisible returns Optional<JournalResponse>. create returns the saved DTO with an ID safe to use as a path segment.",
-          "The service applies ownership rules and performs persistence; those implementations are not shown."
-        ],
-        "code": "@GetMapping(\"/{id}\")\npublic ResponseEntity<JournalResponse> find(@PathVariable(\"id\") String id) {\n    return journalService.findVisible(id)\n        .map(ResponseEntity::ok)\n        .orElseGet(() -> ResponseEntity.notFound().build());\n}\n\n@PostMapping\npublic ResponseEntity<JournalResponse> create(\n        @RequestBody CreateJournalRequest request) {\n    JournalResponse saved = journalService.create(request);\n    java.net.URI location = java.net.URI.create(\"/journal/\" + saved.id());\n    return ResponseEntity.created(location).body(saved);\n}",
+        "title": "Create, read, and delete an in-memory greeting",
         "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The map is an in-memory store for this example. Restarting the application clears it.",
+          "The commands run in order after a fresh start so the created ID is `1`.",
+          "Request validation is added in the next lesson. This example sends a valid name.",
+          "`mvn spring-boot:run` starts the application from the directory containing `pom.xml`. Requests run in a second terminal."
+        ],
+        "code": "",
         "explanation": [
-          "A found result produces 200 and the JournalResponse body.",
-          "An empty Optional produces 404 without a body.",
-          "created(location) produces 201 and a Location header. body(saved) adds the saved DTO.",
-          "If the saved ID is 42, Location is /journal/42.",
-          "This code chooses HTTP responses; request validation is covered separately."
+          "The `POST` stores the response DTO and returns `201` with `Location: /greetings/1`.",
+          "The first `GET` returns `200` and the stored DTO.",
+          "The `DELETE` returns `204` with no body.",
+          "The final `GET` returns `404` because the map no longer contains ID `1`.",
+          "`ResponseEntity<Void>` declares that the delete response has no body.",
+          "The map keeps this example focused on responses. Database-backed repositories are introduced in the data lessons."
+        ],
+        "commands": "curl -i -X POST http://localhost:8080/greetings \\\n  -H 'Content-Type: application/json' -d '{\"name\":\"Ada\"}'\ncurl -i http://localhost:8080/greetings/1\ncurl -i -X DELETE http://localhost:8080/greetings/1\ncurl -i http://localhost:8080/greetings/1",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.net.URI;\nimport java.util.Map;\nimport java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.atomic.AtomicLong;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.DeleteMapping;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PathVariable;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/greetings\")\npublic class GreetingController {\n    public record GreetingRequest(String name) {}\n    public record GreetingResponse(long id, String message) {}\n\n    private final Map<Long, GreetingResponse> greetings = new ConcurrentHashMap<>();\n    private final AtomicLong ids = new AtomicLong();\n\n    @PostMapping\n    public ResponseEntity<GreetingResponse> create(@RequestBody GreetingRequest request) {\n        long id = ids.incrementAndGet();\n        GreetingResponse greeting = new GreetingResponse(id, \"Hello, \" + request.name());\n        greetings.put(id, greeting);\n        return ResponseEntity.created(URI.create(\"/greetings/\" + id)).body(greeting);\n    }\n\n    @GetMapping(\"/{id}\")\n    public ResponseEntity<GreetingResponse> find(@PathVariable(\"id\") long id) {\n        GreetingResponse greeting = greetings.get(id);\n        if (greeting == null) {\n            return ResponseEntity.notFound().build();\n        }\n        return ResponseEntity.ok(greeting);\n    }\n\n    @DeleteMapping(\"/{id}\")\n    public ResponseEntity<Void> delete(@PathVariable(\"id\") long id) {\n        greetings.remove(id);\n        return ResponseEntity.noContent().build();\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
         ]
       }
     },
     {
-      "id": "responses-contract",
+      "id": "rest-responses-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Keep response data separate from stored data"
+          "Fixed statuses"
         ]
       ]
     },
     {
-      "id": "responses-dto-b0",
+      "id": "rest-responses-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A response DTO declares the fields the API returns."
+          "@ResponseStatus",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a handler declares a fixed status when the method completes normally."
         ]
       ]
     },
     {
-      "id": "responses-dto-b1",
+      "id": "rest-responses-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Return only fields the caller should receive. Database entities can contain internal data that the API should not expose."
+          "@ResponseStatus(HttpStatus.CREATED)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is suitable when every successful return from that handler means creation."
         ]
       ]
     },
     {
-      "id": "responses-dto-b2",
+      "id": "rest-responses-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep shared error response rules in exception advice rather than repeating them in each handler."
+          "ResponseEntity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is useful when the status or headers depend on the operation's result."
+        ]
+      ]
+    },
+    {
+      "id": "rest-responses-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Controller exception handling explains shared error responses after the validation lesson."
         ]
       ]
     }

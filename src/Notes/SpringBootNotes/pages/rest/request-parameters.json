@@ -2,150 +2,371 @@
   "id": "spring-boot-rest-request-parameters",
   "sourceUrl": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller.html",
   "title": "Path variables and request parameters",
-  "summary": "Read values from a URL path, query string or form.",
-  "updatedOn": "2026-10-14",
+  "summary": "Bind URL values to typed handler parameters, with explicit names and clear missing-value rules.",
+  "updatedOn": "2026-10-20",
   "blocks": [
     {
-      "id": "request-parameters-path",
+      "id": "rest-request-parameters-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Read a value from the path"
+          "Path variables"
         ]
       ]
     },
     {
-      "id": "request-path-b0",
+      "id": "rest-request-parameters-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PathVariable reads a value captured by a {name} segment in a mapped path."
-        ]
-      ]
-    },
-    {
-      "id": "request-path-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use it for a resource identifier."
-        ]
-      ]
-    },
-    {
-      "id": "request-path-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Spring converts the value to the Java parameter type. A value that cannot be converted normally produces a 400 response."
-        ]
-      ]
-    },
-    {
-      "id": "request-path-example",
-      "type": "example",
-      "example": {
-        "title": "Read a user ID from the URL",
-        "description": [
-          "Place this method in a @RestController. Send GET /users/123."
+          "@PathVariable",
+          [
+            [
+              "c"
+            ]
+          ]
         ],
-        "code": "@GetMapping(\"/users/{id}\")\npublic String find(@PathVariable(\"id\") int id) {\n    return \"User ID: \" + id;\n}",
-        "language": "java",
-        "explanation": [
-          "{id} captures 123. @PathVariable(\"id\") passes it to id as an int.",
-          "The method returns text identifying the requested ID. It does not look up a user."
-        ],
-        "result": "User ID: 123"
-      }
+        [
+          " copies a captured path value into a handler parameter."
+        ]
+      ]
     },
     {
-      "id": "request-parameters-query",
+      "id": "rest-request-parameters-lesson-0-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The mapping "
+        ],
+        [
+          "/greetings/{name}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " captures one path segment as "
+        ],
+        [
+          "name",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-0-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@PathVariable(\"name\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " names the captured value explicitly."
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring converts the captured text to the declared Java type before calling the handler."
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A value that cannot convert to the declared type normally produces "
+        ],
+        [
+          "400 Bad Request",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Read query parameters"
+          "Request parameters"
         ]
       ]
     },
     {
-      "id": "request-query-b0",
+      "id": "rest-request-parameters-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@RequestParam reads a named query parameter or a form parameter."
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads a named request parameter into a handler parameter."
         ]
       ]
     },
     {
-      "id": "request-query-b1",
+      "id": "rest-request-parameters-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Query parameters follow ? in a URL. Use them for search, filtering or sorting."
+          "In Spring MVC, request parameters include query parameters and form parameters."
         ]
       ]
     },
     {
-      "id": "request-query-b2",
+      "id": "rest-request-parameters-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A @RequestParam is required by default. Use required = false or Optional for an optional value."
+          "A parameter is required by default. A missing required parameter normally produces "
+        ],
+        [
+          "400 Bad Request",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "request-query-b3",
+      "id": "rest-request-parameters-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "defaultValue supplies a value when the parameter is missing or empty. It also makes the parameter optional."
+          "defaultValue",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies a value when the parameter is absent or empty. It also makes the parameter optional."
         ]
       ]
     },
     {
-      "id": "request-query-b4",
+      "id": "rest-request-parameters-lesson-1-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "An array or List can receive repeated values for the same parameter name."
+          "required = false",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or an "
+        ],
+        [
+          "Optional",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " parameter allows an absent value without a default."
         ]
       ]
     },
     {
-      "id": "request-query-b5",
+      "id": "rest-request-parameters-lesson-1-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @RequestParam for form data. Use @RequestBody for a JSON body."
+          "A "
+        ],
+        [
+          "List",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or array parameter can collect repeated values with the same name."
         ]
       ]
     },
     {
-      "id": "request-query-example",
+      "id": "rest-request-parameters-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Use a default search value",
-        "description": [
-          "Place this method in a @RestController. Send GET /users/search?name=Alice."
-        ],
-        "code": "@GetMapping(\"/users/search\")\npublic String search(@RequestParam(name = \"name\", defaultValue = \"all\") String name) {\n    return \"Search: \" + name;\n}",
+        "title": "Read a path value and an optional query parameter",
         "language": "java",
-        "explanation": [
-          "The query parameter name becomes the Java argument name.",
-          "For this request the method returns Search: Alice.",
-          "GET /users/search without a name value returns Search: all.",
-          "This method demonstrates reading input; it does not perform a database search."
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The commands run after the application restarts and assume port `8080`.",
+          "`mvn spring-boot:run` starts the application from the directory containing `pom.xml`. Requests run in a second terminal."
         ],
-        "result": "Search: Alice"
+        "code": "",
+        "explanation": [
+          "`{name}` captures `Ada` and `@PathVariable(\"name\")` supplies it to the Java parameter.",
+          "The first request omits `punctuation`, so Spring supplies `!`.",
+          "The second request supplies `punctuation=.` and replaces the default.",
+          "Spring resolves both arguments before it calls `greet()`.",
+          "The explicit annotation names keep binding independent of Java parameter-name metadata."
+        ],
+        "commands": "curl http://localhost:8080/greetings/Ada\ncurl 'http://localhost:8080/greetings/Ada?punctuation=.'",
+        "result": "Hello, Ada!\nHello, Ada.",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PathVariable;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RequestParam;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/greetings\")\npublic class GreetingController {\n    @GetMapping(\"/{name}\")\n    public String greet(\n            @PathVariable(\"name\") String name,\n            @RequestParam(name = \"punctuation\", defaultValue = \"!\") String punctuation) {\n        return \"Hello, \" + name + punctuation;\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ]
       }
     },
     {
-      "id": "request-combine-b0",
+      "id": "rest-request-parameters-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Other request inputs"
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A handler can use both @PathVariable and @RequestParam. Each annotation identifies where its argument comes from."
+          "@RequestHeader(\"X-Request-Id\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads the named header into a handler parameter."
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@CookieValue(\"theme\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads the named cookie into a handler parameter."
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Headers and cookies can also declare "
+        ],
+        [
+          "required = false",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or a "
+        ],
+        [
+          "defaultValue",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "rest-request-parameters-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@RequestParam",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " does not deserialize a JSON object. The next lesson uses "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for that."
         ]
       ]
     }
@@ -158,6 +379,22 @@
     {
       "title": "Spring MVC: request parameters",
       "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/requestparam.html"
+    },
+    {
+      "title": "Spring MVC 6.2: URI variables",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-requestmapping.html"
+    },
+    {
+      "title": "Spring MVC 6.2: request parameters",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-methods/requestparam.html"
+    },
+    {
+      "title": "Spring MVC 6.2: request headers",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-methods/requestheader.html"
+    },
+    {
+      "title": "Spring MVC 6.2: cookies",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-methods/cookievalue.html"
     }
   ]
 }

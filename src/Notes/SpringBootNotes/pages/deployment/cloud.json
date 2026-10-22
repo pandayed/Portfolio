@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-deployment-cloud",
   "title": "Managed hosting",
-  "summary": "Configure the artifact, assigned port and external services before releasing the application.",
+  "summary": "Map a managed platform\u2019s process, assigned port, and external configuration to the Boot application.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Deploy Spring Boot App on Heroku: Easy Guide for Beginners",
@@ -24,188 +24,274 @@
     {
       "title": "Heroku: Procfile",
       "url": "https://devcenter.heroku.com/articles/procfile"
+    },
+    {
+      "title": "Heroku: Java application port",
+      "url": "https://devcenter.heroku.com/articles/setting-the-http-port-for-java-applications"
+    },
+    {
+      "title": "Spring Boot 3.5: graceful shutdown",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/web/graceful-shutdown.html"
     }
   ],
   "blocks": [
     {
-      "id": "cloud-process",
+      "id": "deployment-cloud-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Run an application on managed hosting"
+          "The application process on managed hosting"
         ]
       ]
     },
     {
-      "id": "cloud-process-b0",
+      "id": "deployment-cloud-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Managed hosting supplies an environment for the application process."
+          "A managed host starts the Boot JAR as a Java process. The JAR still starts its embedded server."
         ]
       ]
     },
     {
-      "id": "cloud-process-b1",
+      "id": "deployment-cloud-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose a supported Java runtime and provide the packaged application."
+          "The platform\u2019s Java version must support the compiled application."
         ]
       ]
     },
     {
-      "id": "cloud-process-b2",
+      "id": "deployment-cloud-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The host’s build and start commands must match the project and generated artifact."
+          "The platform may build the project from source or accept an artifact. Its start command must point to the generated executable JAR."
         ]
       ]
     },
     {
-      "id": "cloud-process-b3",
+      "id": "deployment-cloud-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Bind the application to the port assigned by the platform."
+          "Some platforms use a buildpack to select a runtime and prepare the start process. The host\u2019s Java support determines the available runtime."
         ]
       ]
     },
     {
-      "id": "cloud-process-b4",
+      "id": "deployment-cloud-lesson-1",
+      "type": "header",
+      "richText": [
+        [
+          "The assigned port"
+        ]
+      ]
+    },
+    {
+      "id": "deployment-cloud-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Store credentials in the host’s configuration or secret system."
+          "A platform may assign its HTTP port through an environment variable such as "
+        ],
+        [
+          "PORT",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "cloud-process-code",
+      "id": "deployment-cloud-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot\u2019s server property is "
+        ],
+        [
+          "server.port",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". A platform-specific variable must be mapped to that property unless the platform does it for the application."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-cloud-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A production profile can contain this mapping. Other external settings work as described in the configuration lessons."
+        ]
+      ]
+    },
+    {
+      "id": "deployment-cloud-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "A platform start command"
+        ]
+      ]
+    },
+    {
+      "id": "deployment-cloud-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Start a JAR with a classic Heroku Procfile",
-        "description": [
-          "This example uses Heroku’s classic Procfile process model. Other platforms and Heroku runtime generations can use different deployment settings.",
-          "The Maven project generates target/journal.jar.",
-          "Put the server setting in application.properties and the web command in a file named Procfile at the project root."
-        ],
-        "code": "# application.properties\nserver.port=${PORT:8080}\n\n# Procfile\nweb: java -jar target/journal.jar",
+        "title": "Start the executable JAR with Heroku\u2019s assigned port",
         "language": "text",
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "This example uses Heroku\u2019s classic process model. The platform supplies `PORT` and a Java `17` runtime.",
+          "`mvn clean package` creates `target/demo.jar`. `Procfile` supplies the platform start command."
+        ],
+        "code": "",
         "explanation": [
-          "PORT is supplied by the host. The property falls back to 8080 locally.",
-          "web names the process that receives HTTP requests.",
-          "The JAR path must match the file produced by the build.",
-          "Use the current host documentation for its build and release procedure."
+          "`web` identifies the public web process in this platform\u2019s process model.",
+          "The platform expands `$PORT` before Java starts.",
+          "`-Dserver.port` is a JVM system property, so it appears before `-jar`.",
+          "Boot reads this property and starts its embedded server on that assigned port.",
+          "The command describes the start process. It does not create databases or publish a working release by itself."
+        ],
+        "commands": "mvn clean package",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/\")\n    public String hello() { return \"Hello, Spring Boot\"; }\n}\n"
+          },
+          {
+            "name": "Procfile",
+            "language": "text",
+            "code": "web: java -Dserver.port=$PORT -jar target/demo.jar\n"
+          },
+          {
+            "name": "system.properties",
+            "language": "text",
+            "code": "java.runtime.version=17\n"
+          }
         ]
       }
     },
     {
-      "id": "cloud-storage",
+      "id": "deployment-cloud-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Keep data outside a temporary application filesystem"
+          "External connections and storage"
         ]
       ]
     },
     {
-      "id": "cloud-storage-b0",
+      "id": "deployment-cloud-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Some hosts replace or clear the application filesystem during restart or deployment."
+          "The platform\u2019s secret system supplies database credentials and other sensitive configuration."
         ]
       ]
     },
     {
-      "id": "cloud-storage-b1",
+      "id": "deployment-cloud-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a persistent database for application data. Use persistent object storage for uploaded files."
+          "A correct database URI does not grant network access. The database must also permit connections from the deployed application."
         ]
       ]
     },
     {
-      "id": "cloud-storage-b2",
+      "id": "deployment-cloud-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "For MongoDB Atlas, create a database user and configure network access for the host."
+          "Some application filesystems are temporary. A persistent database stores records outside the application process."
         ]
       ]
     },
     {
-      "id": "cloud-storage-b3",
+      "id": "deployment-cloud-lesson-3-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A database URI provides connection information. It does not open firewall or network access."
+          "Uploaded files need persistent storage too. They are not made durable by including a JAR in the deployment."
         ]
       ]
     },
     {
-      "id": "cloud-release",
+      "id": "deployment-cloud-lesson-4",
       "type": "header",
       "richText": [
         [
-          "Check and operate a release"
+          "Release behavior"
         ]
       ]
     },
     {
-      "id": "cloud-release-b0",
+      "id": "deployment-cloud-lesson-4-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Record the application revision and configuration released to the host."
+          "Startup logs show whether the context and embedded server started. A public request checks whether the platform routes to them."
         ]
       ]
     },
     {
-      "id": "cloud-release-b1",
+      "id": "deployment-cloud-lesson-4-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Read build logs to check packaging. Read process and application logs to check startup."
+          "A health route can use the Actuator support explained earlier. A healthy route alone does not check every business operation."
         ]
       ]
     },
     {
-      "id": "cloud-release-b2",
+      "id": "deployment-cloud-lesson-4-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Confirm the process listens on the required port and the public endpoint responds."
+          "A controlled authenticated request and data operation check the application\u2019s actual configured dependencies."
         ]
       ]
     },
     {
-      "id": "cloud-release-b3",
+      "id": "deployment-cloud-lesson-4-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check an authenticated API request and a database read/write using controlled data."
+          "The platform can stop and restart processes. Its stop timeout must allow Boot\u2019s graceful shutdown to finish."
         ]
       ]
     },
     {
-      "id": "cloud-release-b4",
+      "id": "deployment-cloud-lesson-4-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Expect the platform to restart or stop processes. Handle shutdown and avoid duplicate effects when work is retried."
-        ]
-      ]
-    },
-    {
-      "id": "cloud-release-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Keep a prior artifact for rollback. Replacing the JAR does not reverse a database migration or restore deleted data."
+          "A previous JAR can restore previous application code. It does not undo a database migration or recover deleted records."
         ]
       ]
     }

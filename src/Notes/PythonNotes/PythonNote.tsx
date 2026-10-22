@@ -11,6 +11,7 @@ import { pythonNotes } from './pythonNotes';
 import type { PythonInlineContent } from './types';
 import { renderProgrammingTerms } from '../ProgrammingDictionary/ProgrammingTerm';
 import PythonRunSequence from './PythonRunSequence';
+import { renderInlineCode } from '../LearningNotes/renderInlineCode';
 import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
 
 interface PythonNoteProps {
@@ -21,18 +22,18 @@ const sectionId = (id: string) => `python-note-${id}`;
 
 const renderInlineContent = (content: PythonInlineContent, keyPrefix: string) => (
     typeof content === 'string'
-        ? renderProgrammingTerms(content, keyPrefix)
+        ? renderInlineCode(content, keyPrefix, renderProgrammingTerms)
         : content.map((part, index) => (
             typeof part === 'string'
-                ? renderProgrammingTerms(part, `${keyPrefix}-part-${index}`)
+                ? renderInlineCode(part, `${keyPrefix}-part-${index}`, renderProgrammingTerms)
                 : 'strong' in part ? (
                     <strong key={`${keyPrefix}-strong-${index}`}>
-                        {renderProgrammingTerms(part.text, `${keyPrefix}-strong-${index}`)}
+                        {renderInlineCode(part.text, `${keyPrefix}-strong-${index}`, renderProgrammingTerms)}
                     </strong>
                 )
                 : (
                     <a className="Link" href={part.href} key={`${keyPrefix}-link-${index}`}>
-                        {part.text}
+                        {renderInlineCode(part.text, `${keyPrefix}-link-text-${index}`)}
                     </a>
                 )
         ))
@@ -44,7 +45,9 @@ const PythonNote = ({ route }: PythonNoteProps) => {
 
     if (!note) return null;
 
-    const toc: TocEntry[] = note.sections.map(({ id, title }) => ({
+    const orderedSections = [...note.sections.filter((section) => !/^(?:Python )?references$/i.test(section.title)),
+        ...note.sections.filter((section) => /^(?:Python )?references$/i.test(section.title))];
+    const toc: TocEntry[] = orderedSections.map(({ id, title }) => ({
         id: sectionId(id),
         title,
     }));
@@ -57,7 +60,7 @@ const PythonNote = ({ route }: PythonNoteProps) => {
             backRoute={PYTHON_NOTES_ROUTE}
             backLabel="Back to Python notes"
         >
-            {note.sections.map((section) => (
+            {orderedSections.map((section) => (
                 <section
                     className="Article__section"
                     aria-labelledby={sectionId(section.id)}
@@ -100,8 +103,8 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                                         <tr key={`${section.id}-row-${rowIndex}`}>
                                             {row.map((cell, cellIndex) => (
                                                 cellIndex === 0 ? (
-                                                    <th scope="row" key={cellIndex}>{cell}</th>
-                                                ) : <td key={cellIndex}>{cell}</td>
+                                                    <th scope="row" key={cellIndex}>{renderInlineCode(cell, `${section.id}-cell-${rowIndex}-${cellIndex}`)}</th>
+                                                ) : <td key={cellIndex}>{renderInlineCode(cell, `${section.id}-cell-${rowIndex}-${cellIndex}`)}</td>
                                             ))}
                                         </tr>
                                     ))}
@@ -114,7 +117,13 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                         note.exampleLayout === 'grouped' ? (
                             <LearningNoteExampleBlock
                                 key={`${section.id}-example-${index}`}
-                                example={{ ...example, language: example.language ?? 'python' }}
+                                example={{
+                                    ...example,
+                                    language: example.language ?? 'python',
+                                    description: example.description?.map((text, point) => renderInlineContent(text, `${section.id}-${index}-description-${point}`)),
+                                    explanation: example.explanation?.map((text, point) => renderInlineContent(text, `${section.id}-${index}-explanation-${point}`)),
+                                }}
+                                renderText={(text, key) => renderInlineCode(text, key, renderProgrammingTerms)}
                             />
                         ) : <div className="Article__section" key={`${section.id}-example-${index}`}>
                             {example.title && (
@@ -132,7 +141,7 @@ const PythonNote = ({ route }: PythonNoteProps) => {
                     {section.exceptions?.map((exception) => (
                         <aside className="PythonNote__exception" key={exception}>
                             <strong>Exception or common mistake:</strong>{' '}
-                            {renderProgrammingTerms(exception, `${section.id}-exception-${exception}`)}
+                            {renderInlineCode(exception, `${section.id}-exception-${exception}`, renderProgrammingTerms)}
                         </aside>
                     ))}
                 </section>

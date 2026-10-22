@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-security-resource-server",
   "title": "JWT resource servers",
-  "summary": "Let Spring Security validate incoming JWT access tokens and apply request permissions.",
+  "summary": "Configure issuer and audience validation, then authorize incoming JWT requests by scope.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring Security 6.5: JWT resource server",
@@ -12,6 +12,10 @@
     {
       "title": "Spring Boot 3.5: resource server configuration",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/web/spring-security.html"
+    },
+    {
+      "title": "Spring Security 6.5: multiple security chains",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/configuration/java.html"
     }
   ],
   "blocks": [
@@ -20,52 +24,277 @@
       "type": "header",
       "richText": [
         [
-          "Receive and validate access tokens"
+          "Resource-server configuration"
         ]
       ]
     },
     {
-      "id": "jwt-resource-b0",
+      "id": "security-resource-server-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A resource server protects an API using access tokens issued by a trusted authorization server."
+          "spring-boot-starter-oauth2-resource-server",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies Spring's bearer-token authentication support."
         ]
       ]
     },
     {
-      "id": "jwt-resource-b1",
+      "id": "security-resource-server-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "It validates tokens. It does not create a password login endpoint or issue tokens."
+          "oauth2ResourceServer(oauth2 -> oauth2.jwt(...))",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds JWT bearer authentication to the chain."
         ]
       ]
     },
     {
-      "id": "jwt-resource-b2",
+      "id": "security-resource-server-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "For Spring Boot 3, add spring-boot-starter-oauth2-resource-server."
+          "The bearer-token filter extracts the token from the "
+        ],
+        [
+          "Authorization",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " header."
         ]
       ]
     },
     {
-      "id": "jwt-resource-b3",
+      "id": "security-resource-server-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Configure issuer-uri so Spring can discover the provider’s public signing keys."
+          "It delegates authentication to Spring's JWT authentication provider."
         ]
       ]
     },
     {
-      "id": "jwt-resource-b4",
+      "id": "security-resource-server-lesson-0-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "JwtDecoder validates a JWT. Spring then creates authentication for the request and checks the request rules."
+          "The provider uses "
+        ],
+        [
+          "JwtDecoder",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to validate the token."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Successful validation creates the "
+        ],
+        [
+          "JwtAuthenticationToken",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " described in the JWT lesson."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-issuer-audience",
+      "type": "header",
+      "richText": [
+        [
+          "Issuer and audience"
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.security.oauth2.resourceserver.jwt.issuer-uri",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects the trusted issuer."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring discovers the issuer's metadata and public signing-key location."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The metadata endpoint must be reachable for issuer discovery."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.security.oauth2.resourceserver.jwt.audiences",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requires the token to name this API as an audience."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The configured issuer and audience must match the authorization server's contract."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An explicit "
+        ],
+        [
+          "jwk-set-uri",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can supply the trusted public-key endpoint directly."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Keeping "
+        ],
+        [
+          "issuer-uri",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with that explicit key endpoint retains issuer validation."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-1-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A custom "
+        ],
+        [
+          "JwtDecoder",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean replaces Boot's default decoder. The custom decoder must retain the required validators."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-trusted-algorithm-default",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The default decoder trusts the signing algorithm "
+        ],
+        [
+          "RS256",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "jwt-trusted-algorithm-config",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.security.oauth2.resourceserver.jwt.jws-algorithms",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects other trusted signing algorithms when the provider requires them."
         ]
       ]
     },
@@ -74,43 +303,137 @@
       "type": "header",
       "richText": [
         [
-          "Map scopes to permissions"
+          "Scope permissions"
         ]
       ]
     },
     {
-      "id": "jwt-scopes-b0",
+      "id": "security-resource-server-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A scope names a granted permission."
+          "Spring maps the "
+        ],
+        [
+          "scope",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "scp",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " claim to authorities with the "
+        ],
+        [
+          "SCOPE_",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " prefix by default."
         ]
       ]
     },
     {
-      "id": "jwt-scopes-b1",
+      "id": "security-resource-server-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "By default, Spring maps token scopes to authorities with the SCOPE_ prefix."
+          "The scope "
+        ],
+        [
+          "employee.read",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " becomes "
+        ],
+        [
+          "SCOPE_employee.read",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "jwt-scopes-b2",
+      "id": "security-resource-server-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The scope journal.read becomes SCOPE_journal.read."
+          "hasAuthority(\"SCOPE_employee.read\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks that exact authority."
         ]
       ]
     },
     {
-      "id": "jwt-scopes-b3",
+      "id": "security-resource-server-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Role checks use a different prefix. Configure a JWT authority converter if the provider stores application roles in a separate claim."
+          "A provider-specific role claim needs an explicit "
+        ],
+        [
+          "JwtAuthenticationConverter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " mapping."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A token role does not gain the "
+        ],
+        [
+          "ROLE_",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " prefix unless the configured converter adds it."
         ]
       ]
     },
@@ -118,39 +441,154 @@
       "id": "jwt-resource-code",
       "type": "example",
       "example": {
-        "title": "Protect journal reads with an access-token scope",
-        "description": [
-          "Use Spring Boot 3.5 with the resource-server starter.",
-          "Set ISSUER_URI to the trusted provider’s issuer URL and API_AUDIENCE to this API’s expected audience.",
-          "Put the properties in application.properties. Put the bean in a @Configuration class.",
-          "Import Bean, Customizer, HttpSecurity, SecurityFilterChain, HttpMethod and SessionCreationPolicy.",
-          "The application already has a GET endpoint under /journal/."
-        ],
-        "code": "# application.properties (Spring Boot 3.5)\nspring.security.oauth2.resourceserver.jwt.issuer-uri=${ISSUER_URI}\nspring.security.oauth2.resourceserver.jwt.audiences[0]=${API_AUDIENCE}\n\n// Bean in SecurityConfig.java\n@Bean\nSecurityFilterChain api(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(rules -> rules\n            .requestMatchers(HttpMethod.GET, \"/journal/**\")\n                .hasAuthority(\"SCOPE_journal.read\")\n            .anyRequest().denyAll())\n        .oauth2ResourceServer(oauth ->\n            oauth.jwt(Customizer.withDefaults()))\n        .sessionManagement(session -> session\n            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n        .build();\n}",
+        "title": "Protect a bearer-only employee API",
         "language": "text",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The project has `spring-boot-starter-web` and `spring-boot-starter-oauth2-resource-server`.",
+          "The environment supplies `JWT_ISSUER_URI` and `JWT_AUDIENCE` from a trusted authorization-server setup.",
+          "The authorization server issues an `RS256`-signed JWT access token for that audience with the scope `employee.read`.",
+          "This API accepts bearer credentials only through the `Authorization` header. It does not support session-cookie, form-login, or HTTP Basic authentication.",
+          "Requests use HTTPS outside local development."
+        ],
+        "code": "",
         "explanation": [
-          "issuer-uri identifies the trusted issuer and lets Spring discover its keys.",
-          "The Boot 3.5 audiences property checks that the token is intended for this API. Older Boot versions may require a custom audience validator.",
-          "A valid token without journal.read cannot read the journal endpoint.",
-          "HttpMethod.GET keeps the rule limited to reads. Other requests are denied.",
-          "STATELESS prevents Spring from persisting authentication in an HTTP session. It does not prevent database or cache access.",
-          "CSRF remains enabled. This GET request does not need a CSRF token.",
-          "The route permission still does not check ownership of each journal record."
-        ]
+          "The client sends `Authorization: Bearer <access-token>` with its API request.",
+          "The decoder checks signature, issuer, timestamps, and the configured audience.",
+          "The scope becomes `SCOPE_employee.read`, which satisfies the GET permission rule.",
+          "Other methods and paths are denied.",
+          "`STATELESS` prevents Spring Security from using a session to obtain authentication.",
+          "CSRF is disabled only because this configuration has no automatically attached browser credentials.",
+          "A missing or invalid token normally produces `401`.",
+          "A valid token without the required scope produces `403`.",
+          "Password-account ownership can use local usernames. A JWT API must first map the trusted issuer and subject to its local account before applying that ownership rule."
+        ],
+        "files": [
+          {
+            "name": "src/main/resources/application.yml",
+            "language": "text",
+            "code": "spring:\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          issuer-uri: ${JWT_ISSUER_URI}\n          audiences:\n            - ${JWT_AUDIENCE}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/ApiSecurityConfig.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.http.HttpMethod;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.config.http.SessionCreationPolicy;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\npublic class ApiSecurityConfig {\n    @Bean\n    SecurityFilterChain apiSecurity(HttpSecurity http) throws Exception {\n        return http\n            .sessionManagement(session -> session\n                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n            .csrf(csrf -> csrf.disable())\n            .authorizeHttpRequests(rules -> rules\n                .requestMatchers(HttpMethod.GET, \"/employees/**\")\n                    .hasAuthority(\"SCOPE_employee.read\")\n                .anyRequest().denyAll())\n            .oauth2ResourceServer(oauth2 -> oauth2\n                .jwt(Customizer.withDefaults()))\n            .build();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/PageController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class PageController {\n    @GetMapping(\"/\") public String home() { return \"Home\"; }\n    @GetMapping(\"/public/info\") public String info() { return \"Public information\"; }\n    @GetMapping(\"/admin/report\") public String admin() { return \"Admin report\"; }\n    @GetMapping(\"/employees\") public String employees() { return \"Employee list\"; }\n    @PostMapping(\"/employees\") public String create() { return \"Employee created\"; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
       }
     },
     {
-      "id": "jwt-csrf-next",
+      "id": "jwt-separate-chains",
+      "type": "header",
+      "richText": [
+        [
+          "Separate security chains"
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Browser credentials and CSRF settings",
+          "An application serving both browser pages and a bearer API can define separate "
+        ],
+        [
+          "SecurityFilterChain",
           [
             [
-              "a",
-              "/notes/spring-boot/security/browser-security"
+              "c"
             ]
           ]
+        ],
+        [
+          " beans."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "securityMatcher(\"/api/**\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " limits a chain to those requests."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Order",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " determines which chain Spring considers first."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Only the first matching chain runs."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-3-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A browser chain can keep form login, sessions, and CSRF protection."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-3-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A final catch-all chain is needed to protect paths that no narrower chain matches."
+        ]
+      ]
+    },
+    {
+      "id": "security-resource-server-lesson-3-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A request that matches no security chain receives no protection from those chains."
         ]
       ]
     }

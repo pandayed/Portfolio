@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'utility-mapped-and-conditional-types',
     title: 'Utility types',
-    summary: 'Use built-in generic helpers to derive property, union and function types.',
+    summary: 'Utility types derive property, union and function types from existing types.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Utility types',
@@ -16,17 +17,19 @@ const note: LearningNote = {
     sections: [
         {
             id: 'property-modifiers',
-            title: 'Change property modifiers',
+            title: 'Property modifiers',
             bullets: [
-                'Partial<Type> makes properties optional. Required<Type> makes them required.',
-                'Readonly<Type> marks properties readonly through the resulting type.',
-                'These changes are shallow. Nested object properties keep their own types and modifiers.',
+                '`Partial<Type>` makes properties optional.',
+                '`Required<Type>` makes them required.',
+                '`Readonly<Type>` marks properties `readonly` through the resulting type.',
+                'These changes affect only the properties of the current object type.',
+                'Nested object properties keep their own types and modifiers.',
             ],
             examples: [
                 {
-                    title: 'Describe a partial update',
+                    title: 'Partial updates',
                     description: [
-                        'Allow an update containing only the supplied fields.',
+                        'The example allows an update containing only the supplied fields.',
                     ],
                     language: 'typescript',
                     code: [
@@ -39,14 +42,15 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'false',
                     explanation: [
-                        'Partial<User> permits the omitted id and name properties.',
-                        'Object spread performs the update. The utility type does not change the object.',
+                        '`Partial<User>` permits the omitted `id` and `name` properties.',
+                        'Object spread performs the update.',
+                        'The utility type does not change the object.',
                     ],
                 },
                 {
-                    title: 'Require a completed draft',
+                    title: 'Required draft properties',
                     description: [
-                        'Reject a missing body when converting an optional draft shape to a complete shape.',
+                        'The example rejects a missing `body` when converting an optional draft shape to a complete shape.',
                     ],
                     language: 'typescript',
                     code: [
@@ -57,25 +61,26 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Ready',
                     explanation: [
-                        'Required makes both declared properties required.',
-                        'The commented object is rejected because body is absent.',
+                        '`Required` makes both declared properties required.',
+                        'The commented object is rejected because `body` is absent.',
                     ],
                 },
             ],
         },
         {
             id: 'pick-omit-record',
-            title: 'Select keys or describe a dictionary',
+            title: 'Property selection and dictionaries',
             bullets: [
-                'Pick<Type, Keys> keeps selected properties. Omit<Type, Keys> removes selected properties from the checked shape.',
-                'Record<Keys, Value> describes properties with the selected key type and value type.',
-                'With a finite union of keys, Record requires every listed key.',
+                '`Pick<Type, Keys>` keeps selected properties.',
+                '`Omit<Type, Keys>` removes selected properties from the checked shape.',
+                '`Record<Keys, Value>` describes properties with the selected key type and value type.',
+                'With a finite union of keys, `Record` requires every listed key.',
             ],
             examples: [
                 {
-                    title: 'Derive a product label and its translations',
+                    title: 'Product types and translations',
                     description: [
-                        'Reuse product fields while requiring a translation for each supported language.',
+                        'The example reuses product fields while requiring a translation for each supported language.',
                     ],
                     language: 'typescript',
                     code: [
@@ -89,25 +94,25 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Pen 2 Kalam',
                     explanation: [
-                        'Pick and Omit derive requirements from Product.',
-                        'Record requires both en and hi with string values.',
+                        '`Pick` and `Omit` derive requirements from `Product`.',
+                        '`Record` requires both `en` and `hi` with `string` values.',
                     ],
                 },
             ],
         },
         {
             id: 'union-utilities',
-            title: 'Select union members',
+            title: 'Union utilities',
             bullets: [
-                'Exclude<Union, Members> removes union members assignable to Members.',
-                'Extract<Union, Members> keeps union members assignable to Members.',
-                'NonNullable<Type> removes null and undefined.',
+                '`Exclude<Union, Members>` removes union members assignable to `Members`.',
+                '`Extract<Union, Members>` keeps union members assignable to `Members`.',
+                '`NonNullable<Type>` removes `null` and `undefined`.',
             ],
             examples: [
                 {
-                    title: 'Keep the usable members of existing unions',
+                    title: 'Narrower unions',
                     description: [
-                        'Derive narrower unions without rewriting their alternatives.',
+                        'The example derives narrower unions without rewriting their alternatives.',
                     ],
                     language: 'typescript',
                     code: [
@@ -122,25 +127,26 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'idle done Mia',
                     explanation: [
-                        'Settled is "idle" | "done".',
-                        'Done is "done", and Name is string.',
+                        '`Settled` is `"idle" | "done"`.',
+                        '`Done` is `"done"`.',
+                        '`Name` is `string`.',
                     ],
                 },
             ],
         },
         {
             id: 'function-utilities',
-            title: 'Derive function inputs and results',
+            title: 'Function utilities',
             bullets: [
-                'Parameters<FunctionType> gives a tuple of the parameter types.',
-                'ReturnType<FunctionType> gives the returned type.',
-                'Awaited<Type> describes the value obtained by awaiting a promise and unwraps nested promises.',
+                '`Parameters<FunctionType>` gives a tuple of the parameter types.',
+                '`ReturnType<FunctionType>` gives the returned type.',
+                '`Awaited<Type>` describes the value obtained by awaiting a promise and unwraps nested promises.',
             ],
             examples: [
                 {
-                    title: 'Reuse an existing function signature',
+                    title: 'Function parameter and result types',
                     description: [
-                        'Derive argument and result types from a function already defined.',
+                        'The example derives argument and result types from a function already defined.',
                     ],
                     language: 'typescript',
                     code: [
@@ -155,24 +161,26 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Mia: 20',
                     explanation: [
-                        'Parameters produces [name: string, score: number].',
-                        'ReturnType produces string. The function implementation still supplies the behavior.',
+                        '`Parameters` produces `[name: string, score: number]`.',
+                        '`ReturnType` produces `string`.',
+                        'The function implementation still supplies the behavior.',
                     ],
                 },
             ],
         },
         {
             id: 'types-do-not-transform-values',
-            title: 'Derived types do not edit existing values',
+            title: 'Derived types and runtime values',
             bullets: [
-                'A derived type changes checked requirements. It does not remove properties, freeze objects or run data conversions.',
-                'Use JavaScript operations when the actual value needs to change.',
+                'A derived type changes checked requirements.',
+                'It does not remove properties, freeze objects or run data conversions.',
+                'JavaScript operations change the actual value.',
             ],
             examples: [
                 {
-                    title: 'Compare an omitted type with an omitted value',
+                    title: 'Omitted properties and runtime objects',
                     description: [
-                        'Observe that assigning a wider object does not remove its id property.',
+                        'The example shows that assigning a wider object does not remove its `id` property.',
                     ],
                     language: 'typescript',
                     code: [
@@ -185,8 +193,8 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'true\nfalse',
                     explanation: [
-                        'The Omit annotation leaves original unchanged.',
-                        'Object rest creates a new object without id.',
+                        'The `Omit` annotation leaves `original` unchanged.',
+                        'Object rest creates a new object without `id`.',
                     ],
                 },
             ],

@@ -4,172 +4,351 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed548013a67ffbcfd74cb27f",
   "blocks": [
     {
-      "id": "20924eb1-ed54-80a9-8cec-eab2a1503ab1",
+      "id": "exception-handling-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Handle an exception from a controller"
+          "Exception handlers"
         ]
       ]
     },
     {
-      "id": "exception-intro-b0",
+      "id": "exception-handling-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A controller or a service it calls can throw an exception while processing a request."
+          "@ExceptionHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " marks a method that Spring MVC calls when request processing raises a matching exception."
         ]
       ]
     },
     {
-      "id": "exception-intro-b1",
+      "id": "exception-handling-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ExceptionHandler marks a method that handles a matching exception and returns the HTTP response."
+          "The handler receives the exception and returns the error response."
         ]
       ]
     },
     {
-      "id": "exception-intro-b2",
+      "id": "exception-handling-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Place a handler in a controller for errors handled only by that controller."
+          "An exception handler inside a controller applies to failures handled by that controller."
         ]
       ]
     },
     {
-      "id": "exception-intro-b3",
+      "id": "exception-handling-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A handler can list several exception classes when they need the same response."
+          "@RestControllerAdvice",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " registers shared exception handlers for controllers."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8099-8a79-f514721b827e",
+      "id": "exception-handling-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It combines "
+        ],
+        [
+          "@ControllerAdvice",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with "
+        ],
+        [
+          "@ResponseBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", so returned objects become response data."
+        ]
+      ]
+    },
+    {
+      "id": "exception-handling-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Advice classes are discovered through component scanning."
+        ]
+      ]
+    },
+    {
+      "id": "exception-handling-lesson-0-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An exception from a service called by a controller can reach the same MVC exception-handling mechanism."
+        ]
+      ]
+    },
+    {
+      "id": "exception-handling-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Share handlers across controllers"
+          "Error bodies with "
+        ],
+        [
+          "ProblemDetail",
+          [
+            [
+              "c"
+            ]
+          ]
         ]
       ]
     },
     {
-      "id": "exception-advice-b0",
+      "id": "exception-handling-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ControllerAdvice makes its handlers available to controllers across the application."
+          "ProblemDetail",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is Spring's type for a standard problem-details response body."
         ]
       ]
     },
     {
-      "id": "exception-advice-b1",
+      "id": "exception-handling-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Advice can also be restricted to selected controller types or packages."
+          "ProblemDetail.forStatusAndDetail(status, detail)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " creates an error with the chosen HTTP status and a description."
         ]
       ]
     },
     {
-      "id": "exception-advice-b2",
+      "id": "exception-handling-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "@RestControllerAdvice combines @ControllerAdvice with @ResponseBody for response data."
+          "Spring MVC writes a returned "
+        ],
+        [
+          "ProblemDetail",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with its status and a JSON problem body."
         ]
       ]
     },
     {
-      "id": "exception-advice-b3",
+      "id": "exception-handling-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A ResponseEntity return value sets the status, headers and body explicitly."
+          "Application code can add a title or additional fields."
         ]
       ]
     },
     {
-      "id": "exception-advice-b4",
+      "id": "exception-handling-lesson-1-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Controller advice handles errors in Spring MVC request processing. It does not handle every error in the application, such as an exception in an independent background task."
+          "The description contains information safe for the caller. It does not include a stack trace or secret values."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8024-801d-db90e6d389b9",
+      "id": "exception-handling-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Return 404 when a user cannot be found",
-        "description": [
-          "Place these public types in separate files in a scanned package.",
-          "The controller simulates one existing user with ID 1. Send GET /users/2 with Accept: application/json."
-        ],
-        "code": "// UserNotFoundException.java\npublic class UserNotFoundException extends RuntimeException {\n    public UserNotFoundException(long id) {\n        super(\"User with ID \" + id + \" not found\");\n    }\n}\n\n// UserController.java\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\n@RequestMapping(\"/users\")\npublic class UserController {\n    @GetMapping(\"/{id}\")\n    public String find(@PathVariable(\"id\") long id) {\n        if (id != 1) {\n            throw new UserNotFoundException(id);\n        }\n        return \"User Found!\";\n    }\n}\n\n// ApiExceptionHandler.java\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.*;\n\n@RestControllerAdvice\npublic class ApiExceptionHandler {\n    public record ApiError(String message) {}\n\n    @ExceptionHandler(UserNotFoundException.class)\n    public ResponseEntity<ApiError> notFound(UserNotFoundException exception) {\n        return ResponseEntity.status(404)\n            .body(new ApiError(exception.getMessage()));\n    }\n}",
+        "title": "Return shared errors for a missing greeting and invalid input",
         "language": "java",
-        "explanation": [
-          "ID 2 causes find() to throw UserNotFoundException.",
-          "Spring selects the matching advice method.",
-          "ResponseEntity sets 404. ApiError becomes the JSON response body.",
-          "The error message is written by this exception class. Do not expose arbitrary internal exception messages to clients."
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "Both named files belong in `src/main/java/com/example/demo/` beside `DemoApplication`.",
+          "The package-private `GreetingNotFoundException` belongs in the same file as the controller.",
+          "The example has one fixed greeting with ID `1`. It does not depend on an unshown database or service.",
+          "The commands run after the application restarts and assume port `8080`.",
+          "`mvn spring-boot:run` starts the application from the directory containing `pom.xml`. Requests run in a second terminal."
         ],
-        "result": "HTTP status: 404 Not Found\nBody: {\"message\":\"User with ID 2 not found\"}"
+        "code": "",
+        "explanation": [
+          "The first request raises `GreetingNotFoundException` and the advice returns `404`.",
+          "Its problem body includes `detail` with `Greeting was not found`.",
+          "The second request fails `@NotBlank` before the controller runs.",
+          "The validation handler returns `400` with a `fields` array containing `name`.",
+          "Only field names are included. The response does not copy rejected values.",
+          "The same advice can handle matching failures from other controllers."
+        ],
+        "commands": "curl -i http://localhost:8080/greetings/99\ncurl -i -X POST http://localhost:8080/greetings \\\n  -H 'Content-Type: application/json' -d '{\"name\":\" \"}'",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport jakarta.validation.Valid;\nimport jakarta.validation.constraints.NotBlank;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PathVariable;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/greetings\")\npublic class GreetingController {\n    public record GreetingRequest(@NotBlank String name) {}\n    public record GreetingResponse(String message) {}\n\n    @PostMapping\n    public GreetingResponse greet(@Valid @RequestBody GreetingRequest request) {\n        return new GreetingResponse(\"Hello, \" + request.name());\n    }\n\n    @GetMapping(\"/{id}\")\n    public GreetingResponse find(@PathVariable(\"id\") long id) {\n        if (id != 1) {\n            throw new GreetingNotFoundException();\n        }\n        return new GreetingResponse(\"Hello, Ada\");\n    }\n}\n\nclass GreetingNotFoundException extends RuntimeException {}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingErrors.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ProblemDetail;\nimport org.springframework.web.bind.MethodArgumentNotValidException;\nimport org.springframework.web.bind.annotation.ExceptionHandler;\nimport org.springframework.web.bind.annotation.RestControllerAdvice;\n\n@RestControllerAdvice\npublic class GreetingErrors {\n    @ExceptionHandler(GreetingNotFoundException.class)\n    public ProblemDetail missing(GreetingNotFoundException exception) {\n        return ProblemDetail.forStatusAndDetail(\n            HttpStatus.NOT_FOUND, \"Greeting was not found\");\n    }\n\n    @ExceptionHandler(MethodArgumentNotValidException.class)\n    public ProblemDetail invalid(MethodArgumentNotValidException exception) {\n        ProblemDetail problem = ProblemDetail.forStatusAndDetail(\n            HttpStatus.BAD_REQUEST, \"Request fields failed validation\");\n        problem.setProperty(\"fields\", exception.getBindingResult().getFieldErrors()\n            .stream().map(error -> error.getField()).distinct().toList());\n        return problem;\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-validation</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ]
       }
     },
     {
-      "id": "20924eb1-ed54-804a-9221-f8e39033ac05",
+      "id": "exception-handling-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Choose the error response"
+          "Handler scope"
         ]
       ]
     },
     {
-      "id": "exception-contract-b0",
+      "id": "exception-handling-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a status that matches the failure. A missing resource can produce 404; an unexpected server failure normally produces 500."
+          "An advice class applies broadly by default. Its annotation can restrict it to selected controller packages or types."
         ]
       ]
     },
     {
-      "id": "exception-contract-b1",
+      "id": "exception-handling-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a consistent error body so clients can read it."
+          "One "
+        ],
+        [
+          "@ExceptionHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can list several exception classes when they share a response rule."
         ]
       ]
     },
     {
-      "id": "exception-contract-b2",
+      "id": "exception-handling-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep stack traces and internal details in server logs. Send a safe message to the client."
+          "A missing application resource can map to "
+        ],
+        [
+          "404",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". An unexpected application failure normally maps to "
+        ],
+        [
+          "500",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "exception-contract-b3",
+      "id": "exception-handling-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Authentication and access failures that occur in Spring Security before controller processing need Spring Security error handlers."
+          "Controller advice does not catch every failure in the process."
+        ]
+      ]
+    },
+    {
+      "id": "exception-handling-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An independent background task runs outside this MVC request-handling scope."
+        ]
+      ]
+    },
+    {
+      "id": "exception-handling-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Failures in security filters before controller processing use Spring Security error handlers. Security lessons explain those handlers separately."
         ]
       ]
     }
   ],
-  "summary": "Map controller exceptions to an HTTP status and a response body.",
-  "updatedOn": "2026-10-14",
+  "summary": "Turn controller-processing exceptions into consistent responses through shared advice.",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring MVC: exception handlers",
@@ -178,6 +357,18 @@
     {
       "title": "Spring MVC: controller advice",
       "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-advice.html"
+    },
+    {
+      "title": "Spring MVC 6.2: exception handlers",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-exceptionhandler.html"
+    },
+    {
+      "title": "Spring MVC 6.2: problem details",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-ann-rest-exceptions.html"
+    },
+    {
+      "title": "Spring MVC 6.2: controller advice",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-advice.html"
     }
   ]
 }

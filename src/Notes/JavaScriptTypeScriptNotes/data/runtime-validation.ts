@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'runtime-validation',
     title: 'Unknown, assertions and runtime validation',
-    summary: 'Validate external values before using an object contract, and keep assertions separate from checks.',
+    summary: 'Runtime validation checks external values. Assertions state assumptions without checking them.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Narrowing',
@@ -20,17 +21,18 @@ const note: LearningNote = {
     sections: [
         {
             id: 'unknown-and-any',
-            title: 'Use unknown for unchecked input',
+            title: 'Unchecked input',
             bullets: [
-                'unknown accepts any incoming value but requires narrowing before member-specific operations.',
-                'any allows property reads, calls and assignments without checking their safety.',
-                'JSON.parse is typed as returning any. Store its result as unknown when its shape has not been checked.',
+                '`unknown` accepts any incoming value but requires narrowing before operations that need a specific type.',
+                '`any` allows property reads, calls and assignments without checking their safety.',
+                '`JSON.parse` is typed as returning `any`.',
+                'An `unknown` annotation requires checks before using the parsed value.',
             ],
             examples: [
                 {
-                    title: 'Check a message before using it',
+                    title: 'Message validation',
                     description: [
-                        'Accept arbitrary input while using a string method only for a string.',
+                        'The example accepts arbitrary input while using a `string` method only for a `string`.',
                     ],
                     language: 'typescript',
                     code: [
@@ -43,25 +45,27 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Hello\nNo message',
                     explanation: [
-                        'unknown prevents calling trim before the check.',
-                        'The number takes the fallback branch.',
+                        '`unknown` prevents calling `trim` before the check.',
+                        'The `number` takes the fallback branch.',
                     ],
                 },
             ],
         },
         {
             id: 'assertions',
-            title: 'An assertion states an assumption',
+            title: 'Type assertions',
             bullets: [
-                'value as SomeType tells TypeScript to treat the value as that type.',
-                'An assertion makes no runtime check and converts no values. A non-null assertion using ! also makes no runtime check.',
-                'Type annotations, aliases and interfaces disappear from emitted JavaScript. They cannot inspect external data.',
+                '`value as SomeType` tells TypeScript to treat the value as that type.',
+                'An assertion makes no runtime check and converts no values.',
+                'A non-null assertion using `!` also makes no runtime check.',
+                'Type annotations, aliases and interfaces disappear from emitted JavaScript.',
+                'They cannot inspect external data.',
             ],
             examples: [
                 {
-                    title: 'Observe that an assertion leaves the value unchanged',
+                    title: 'Asserted and actual property types',
                     description: [
-                        'Compare an asserted object contract with the actual parsed property.',
+                        'The example compares an asserted object contract with the actual parsed property.',
                     ],
                     language: 'typescript',
                     code: [
@@ -74,25 +78,28 @@ const note: LearningNote = {
                     result: 'number',
                     explanation: [
                         'The assertion permits the property access during checking.',
-                        'The string requirement does not change the numeric data.',
+                        'The `string` requirement does not change the numeric data.',
                     ],
                 },
             ],
         },
         {
             id: 'validate-object',
-            title: 'Check the properties used by the program',
+            title: 'Runtime validation',
             bullets: [
                 'Runtime validation executes JavaScript checks on actual values.',
-                'A type predicate has a result such as value is User. A successful check lets TypeScript narrow the caller’s value.',
-                'The checker trusts a predicate declaration. Its implementation must check every requirement it promises.',
-                'Validation for one object contract does not prove unrelated business rules. Check constraints such as positive ids separately when required.',
+                'A type predicate has a result such as `value is User`.',
+                'A successful check lets TypeScript narrow the caller’s value.',
+                'The checker trusts a predicate declaration.',
+                'Its implementation must check every requirement it promises.',
+                'Validation for one object contract does not prove unrelated business rules.',
+                'Constraints such as positive ids require separate checks.',
             ],
             examples: [
                 {
-                    title: 'Validate parsed user data',
+                    title: 'User data validation',
                     description: [
-                        'Accept a parsed value only when it has a numeric id and a string name.',
+                        'The example accepts a parsed value only when it has a numeric `id` and a `string` `name`.',
                     ],
                     language: 'typescript',
                     code: [
@@ -112,15 +119,15 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'MIA\nfalse',
                     explanation: [
-                        'The object and null checks make property checks safe.',
+                        'The object and `null` checks make property checks safe.',
                         'The predicate permits the uppercase operation only after successful validation.',
-                        'The second value fails because name is numeric.',
+                        'The second value fails because `name` is numeric.',
                     ],
                 },
                 {
-                    title: 'Handle malformed JSON separately',
+                    title: 'Malformed JSON',
                     description: [
-                        'Distinguish a parsing failure from a valid JSON value with the wrong shape.',
+                        'A parsing failure differs from a valid JSON value with the wrong shape.',
                     ],
                     language: 'typescript',
                     code: [
@@ -134,8 +141,9 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Invalid JSON text',
                     explanation: [
-                        'JSON.parse can throw before shape validation begins.',
-                        'The SyntaxError check handles this parsing failure. Other failures are rethrown.',
+                        '`JSON.parse` can throw before shape validation begins.',
+                        'The `SyntaxError` check handles this parsing failure.',
+                        'Other failures are rethrown.',
                     ],
                 },
             ],

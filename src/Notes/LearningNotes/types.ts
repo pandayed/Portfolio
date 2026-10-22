@@ -6,6 +6,7 @@ export type LearningNoteScope =
     | 'javascript-typescript'
     | 'javascript'
     | 'typescript'
+    | 'nodejs'
     | 'react';
 
 export type LearningCodeLanguage =
@@ -24,6 +25,7 @@ export interface LearningNoteExample {
     description?: readonly ReactNode[];
     language: LearningCodeLanguage;
     code: string;
+    files?: readonly { name: string; language: LearningCodeLanguage; code: string }[];
     runnable?: boolean;
     commands?: string;
     result?: string;
@@ -52,6 +54,7 @@ export interface LearningNote {
     scope: LearningNoteScope;
     updatedOn: string;
     pointwise?: boolean;
+    inlineCode?: boolean;
     exampleLayout?: 'grouped';
     references?: readonly { title: string; href: string }[];
     sections: readonly LearningNoteSection[];

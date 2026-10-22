@@ -2,161 +2,406 @@
   "id": "spring-boot-jpa-fetching",
   "sourceUrl": "https://docs.spring.io/spring-data/",
   "title": "JPA Relationship Loading",
-  "summary": "Understand lazy and eager loading before choosing a fetch plan.",
-  "updatedOn": "2026-10-14",
+  "summary": "Load only the relationships an operation needs and copy response values before the transaction ends.",
+  "updatedOn": "2026-10-20",
   "blocks": [
     {
-      "id": "jpa-fetch-modes",
+      "id": "jpa-fetching-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Lazy and eager loading"
+          "Relationship loading"
         ]
       ]
     },
     {
-      "id": "jpa-fetch-modes-b0",
+      "id": "jpa-fetching-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Fetch timing controls when related entity data is loaded."
+          "A fetch setting controls when Hibernate obtains a related entity or collection."
         ]
       ]
     },
     {
-      "id": "jpa-fetch-modes-b1",
+      "id": "jpa-fetching-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "LAZY requests deferred loading. The provider may load the relationship when application code accesses it."
+          "FetchType.LAZY",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requests deferred loading."
         ]
       ]
     },
     {
-      "id": "jpa-fetch-modes-b2",
+      "id": "jpa-fetching-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "EAGER requires the relationship to be loaded. It does not guarantee that all data arrives in one SQL query."
+          "Accessing the relationship can trigger another SQL query."
         ]
       ]
     },
     {
-      "id": "jpa-fetch-modes-b3",
+      "id": "jpa-fetching-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "JPA defaults one-to-many and many-to-many relationships to LAZY. Many-to-one and one-to-one default to EAGER."
+          "FetchType.EAGER",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requires the relationship to be loaded."
         ]
       ]
     },
     {
-      "id": "jpa-fetch-modes-b4",
+      "id": "jpa-fetching-lesson-0-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose the data needed by the current operation. An eager relationship can load data that operation never uses."
+          "It does not require a single SQL query."
         ]
       ]
     },
     {
-      "id": "jpa-lazy-session",
+      "id": "jpa-fetching-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPA defaults to "
+        ],
+        [
+          "LAZY",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for one-to-many and many-to-many relationships."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JPA defaults to "
+        ],
+        [
+          "EAGER",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for many-to-one and one-to-one relationships."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Access within the persistence context"
+          "Persistence context lifetime"
         ]
       ]
     },
     {
-      "id": "jpa-lazy-session-b0",
+      "id": "jpa-fetching-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A persistence context tracks managed entities during persistence work."
+          "A deferred load needs the entity\u2019s persistence context to remain available."
         ]
       ]
     },
     {
-      "id": "jpa-lazy-session-b1",
+      "id": "jpa-fetching-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A deferred relationship may need an active persistence context to load its data. With Hibernate, accessing an uninitialized relationship after the context closes can throw LazyInitializationException."
+          "With Hibernate, accessing an uninitialized relationship after that context closes can throw "
+        ],
+        [
+          "LazyInitializationException",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "jpa-lazy-session-b2",
+      "id": "jpa-fetching-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Read required data inside the service transaction. Return a response object containing the needed values instead of relying on later loading during JSON serialization."
+          "A service can load the needed values within its transaction and return a response object containing those values."
         ]
       ]
     },
     {
-      "id": "jpa-n-plus-one",
+      "id": "jpa-fetching-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "With "
+        ],
+        [
+          "spring.jpa.open-in-view=false",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", web response rendering does not keep a separate opportunity to load relationships."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot enables open-in-view by default for a JPA web application."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-1-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The connection setup disabled it explicitly."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Additional queries"
+          "Fetch plans and additional queries"
         ]
       ]
     },
     {
-      "id": "jpa-n-plus-one-b0",
+      "id": "jpa-fetching-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "The N+1 query problem occurs when one query loads N parent rows and accessing their relationships triggers additional queries for those rows."
+          "The N+1 problem occurs when one query loads a list and reading its relationships causes additional queries for the rows."
         ]
       ]
     },
     {
-      "id": "jpa-n-plus-one-b1",
+      "id": "jpa-fetching-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Inspect the SQL for the operation. Changing every relationship to EAGER does not guarantee the problem is solved."
+          "A fetch plan states which relationships one operation needs."
         ]
       ]
     },
     {
-      "id": "jpa-n-plus-one-b2",
+      "id": "jpa-fetching-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A JPQL fetch join loads the selected relationship as part of the query. An entity graph is another way to specify which relationships the operation needs."
+          "A JPQL "
+        ],
+        [
+          "join fetch",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " loads the named relationship with the selected entities."
         ]
       ]
     },
     {
-      "id": "jpa-n-plus-one-b3",
+      "id": "jpa-fetching-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Fetching a collection can duplicate parent rows in SQL results. Collection fetch joins also require care when paginating."
+          "@EntityGraph",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is a Spring Data alternative for requesting relationships on a repository method."
         ]
       ]
     },
     {
-      "id": "jpa-fetch-join",
+      "id": "jpa-fetching-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Changing every mapping to "
+        ],
+        [
+          "EAGER",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " does not guarantee fewer queries."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-2-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The executed SQL determines the query count."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Load posts with their authors",
-        "description": [
-          "Use Post and AppUser from the relationship mapping page.",
-          "This repository query loads the author needed for each returned post."
-        ],
-        "code": "import java.util.List;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\n\npublic interface PostRepository extends JpaRepository<Post, Long> {\n    @Query(\"select p from Post p join fetch p.author order by p.id\")\n    List<Post> findAllWithAuthors();\n}",
+        "title": "Load employee names and their departments",
         "language": "java",
+        "description": [
+          "The tabs contain all application files for this separate Maven project.",
+          "The example requires Java 17 or later, Maven and PostgreSQL with an existing `employee_notes` database.",
+          "The environment supplies `DB_USERNAME` and `DB_PASSWORD`.",
+          "`database/schema.sql` creates the tables in an empty database before `mvn spring-boot:run`.",
+          "Hibernate validates the supplied schema. It does not create the tables.",
+          "The directory operation loads all employees. A large directory needs a bounded query."
+        ],
+        "code": "",
         "explanation": [
-          "join fetch p.author asks JPA to load authors with the selected posts.",
-          "This query fetches a many-to-one relationship, not a growing collection.",
-          "It returns all posts. Add a bounded query when the application needs only part of the table."
+          "`left join fetch` loads the optional department while keeping employees with no department.",
+          "The service copies each name inside the read transaction.",
+          "`EmployeeSummary` contains ordinary values.",
+          "Returning it does not expose a lazy entity relationship."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeDirectory.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport java.util.List;\nimport org.springframework.stereotype.Service;\nimport org.springframework.transaction.annotation.Transactional;\n\n@Service\npublic class EmployeeDirectory {\n    private final EmployeeRepository employees;\n\n    public EmployeeDirectory(EmployeeRepository employees) {\n        this.employees = employees;\n    }\n\n    public record EmployeeSummary(String name, String department) {}\n\n    @Transactional(readOnly = true)\n    public List<EmployeeSummary> list() {\n        return employees.findWithDepartments().stream()\n            .map(employee -> new EmployeeSummary(\n                employee.getName(),\n                employee.getDepartmentEntity() == null ? null\n                    : employee.getDepartmentEntity().getName()))\n            .toList();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/EmployeeRepository.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\nimport java.util.List;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.jpa.repository.Query;\npublic interface EmployeeRepository extends JpaRepository<Employee, Long> {\n    @Query(\"select e from Employee e left join fetch e.departmentEntity order by e.id\")\n    List<Employee> findWithDepartments();\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/Employee.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport jakarta.persistence.Column;\nimport jakarta.persistence.FetchType;\nimport jakarta.persistence.JoinColumn;\nimport jakarta.persistence.ManyToOne;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false, length = 100)\n    private String name;\n\n    @Column(nullable = false, length = 100)\n    private String department;\n\n    @ManyToOne(fetch = FetchType.LAZY)\n    @JoinColumn(name = \"department_id\")\n    private Department departmentEntity;\n\n    public void assignDepartment(Department department) { this.departmentEntity = department; }\n    public Department getDepartmentEntity() { return departmentEntity; }\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n    public void rename(String name) { this.name = name; }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/Department.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport java.util.ArrayList;\nimport java.util.List;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.OneToMany;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"departments\")\npublic class Department {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String name;\n\n    @OneToMany(mappedBy = \"departmentEntity\")\n    private List<Employee> employees = new ArrayList<>();\n\n    protected Department() {}\n    public Department(String name) { this.name = name; }\n    public String getName() { return name; }\n\n    public void addEmployee(Employee employee) {\n        employees.add(employee);\n        employee.assignDepartment(this);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.postgresql</groupId>\n            <artifactId>postgresql</artifactId>\n            <scope>runtime</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/employee_notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate\nspring.jpa.open-in-view=false\n"
+          },
+          {
+            "name": "database/schema.sql",
+            "language": "sql",
+            "code": "CREATE TABLE departments (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(255)\n);\nCREATE TABLE employees (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(100) NOT NULL,\n    department_id BIGINT REFERENCES departments(id)\n);\n"
+          }
         ]
       }
+    },
+    {
+      "id": "jpa-fetching-lesson-3",
+      "type": "header",
+      "richText": [
+        [
+          "Collections and paging"
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Fetching a collection can repeat the parent row in SQL results."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A collection fetch join with pagination can produce incorrect limits or force Hibernate to apply limits in memory."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A bounded ID query followed by a relationship query is one option for that distinct case."
+        ]
+      ]
+    },
+    {
+      "id": "jpa-fetching-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A fetch join to one related department does not multiply rows the way a collection fetch does."
+        ]
+      ]
     }
   ],
   "sources": [
@@ -167,6 +412,18 @@
     {
       "title": "Spring Data JPA: query methods",
       "url": "https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html"
+    },
+    {
+      "title": "Spring Data JPA 3.5: query methods",
+      "url": "https://docs.spring.io/spring-data/jpa/reference/3.5/jpa/query-methods.html"
+    },
+    {
+      "title": "Spring Boot 3.5: SQL databases",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/data/sql.html"
+    },
+    {
+      "title": "Hibernate ORM 6.6: fetching",
+      "url": "https://docs.hibernate.org/orm/6.6/userguide/html_single/#fetching"
     }
   ]
 }

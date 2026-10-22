@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-integrations-sentiment-summary",
   "title": "Journal Sentiment Summary",
-  "summary": "Count stored journal labels within a defined reporting period.",
+  "summary": "Combine entry selection, ordinary Java counting, and the learned mail service.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Ultimate Guide to Scheduling Tasks with Cron Jobs in Spring Boot",
@@ -20,150 +20,354 @@
     {
       "title": "Engineering Digest journalApp source",
       "url": "https://github.com/EngineeringDigest/journalApp"
+    },
+    {
+      "title": "Spring Framework 6.2 scheduling",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/integration/scheduling.html"
+    },
+    {
+      "title": "Spring Framework 6.2 mail support",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/integration/email.html"
     }
   ],
   "blocks": [
     {
-      "id": "schedule-sentiment",
+      "id": "integrations-sentiment-summary-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Summarize stored sentiment labels"
+          "Digest operation"
         ]
       ]
     },
     {
-      "id": "schedule-sentiment-b0",
+      "id": "integrations-sentiment-summary-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A sentiment label describes the tone recorded for an entry, such as HAPPY, SAD, or ANGRY."
+          "A journal digest counts sentiment labels already stored with entries."
         ]
       ]
     },
     {
-      "id": "schedule-sentiment-b1",
+      "id": "integrations-sentiment-summary-lesson-0-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "This summary counts stored labels. It does not analyze the entry text."
+          "It does not infer a sentiment from entry text."
         ]
       ]
     },
     {
-      "id": "schedule-sentiment-b2",
+      "id": "integrations-sentiment-summary-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Select entries for one user and one reporting interval."
+          "A Spring service coordinates the operation: select one user\u2019s entries, count their labels, then call the mail service."
         ]
       ]
     },
     {
-      "id": "schedule-sentiment-b3",
+      "id": "integrations-sentiment-summary-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Exclude entries with no label. Count the remaining entries for each label."
+          "The scheduled method controls when the service runs."
         ]
       ]
     },
     {
-      "id": "schedule-sentiment-b4",
+      "id": "integrations-sentiment-summary-lesson-0-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "For HAPPY, SAD, HAPPY, the counts are HAPPY=2 and SAD=1. HAPPY is the most frequent label."
+          "The mail service controls submission."
         ]
       ]
     },
     {
-      "id": "sentiment-period",
+      "id": "integrations-sentiment-summary-lesson-0-note-2-part-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The count itself is ordinary Java."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A separate HTTP sentiment provider could assign labels when an entry is created."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-0-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "That would use the client pattern from the external API lesson."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Define the reporting interval"
+          "Reporting period and result"
         ]
       ]
     },
     {
-      "id": "sentiment-period-b0",
+      "id": "integrations-sentiment-summary-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Choose either the previous seven days or a calendar week. These intervals can include different entries."
+          "The query includes the user identity and one start-inclusive, end-exclusive interval."
         ]
       ]
     },
     {
-      "id": "sentiment-period-b1",
+      "id": "integrations-sentiment-summary-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "For a calendar week, choose a timezone and a consistent week boundary."
+          "Adjacent reporting periods then do not overlap."
         ]
       ]
     },
     {
-      "id": "sentiment-period-b2",
+      "id": "integrations-sentiment-summary-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use the same start and end instants throughout a run."
+          "A rolling seven-day interval and a calendar week are different choices."
         ]
       ]
     },
     {
-      "id": "sentiment-period-b3",
+      "id": "integrations-sentiment-summary-lesson-1-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a start-inclusive, end-exclusive interval so adjacent periods do not count the same entry twice."
+          "A calendar week also needs a timezone and week boundary."
         ]
       ]
     },
     {
-      "id": "sentiment-results",
+      "id": "integrations-sentiment-summary-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "One run calculates its boundaries once."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-1-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Every entry selection in that run uses the same boundaries."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Entries without a label do not count."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-1-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Equal counts remain a tie unless the application defines a different rule."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Only users who opted in receive a digest."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-1-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An empty result reports that no labeled entries were found."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Count one period and submit its digest",
+        "language": "java",
+        "description": [
+          "Each tab names a file relative to the project root. Java `17` and Maven are required. `mvn spring-boot:run` starts this example after its external requirements are configured.",
+          "The tabs include `SentimentDigestService`, `DigestMailService`, SMTP settings, the application class, and the complete build file.",
+          "An SMTP provider with authenticated STARTTLS on port `587` must supply `MAIL_HOST`, `MAIL_USERNAME`, `MAIL_PASSWORD`, and an authorized `MAIL_FROM`.",
+          "The caller supplies entries, an authorized recipient, and the user\u2019s stored consent.",
+          "The service is not exposed as a public endpoint.",
+          "For `user-42`, the input entries have labels `HAPPY`, `SAD`, and `HAPPY` inside the interval.",
+          "Entries from another user or outside the interval are ignored.",
+          "The caller supplies `start = Instant.parse(\"2026-10-05T00:00:00Z\")` and `end = Instant.parse(\"2026-10-12T00:00:00Z\")`.",
+          "This example receives entries as a `List<Entry>` argument."
+        ],
+        "code": "",
+        "explanation": [
+          "Spring injects the mail service shown in the `DigestMailService.java` tab.",
+          "The application owns selection and counting.",
+          "Spring does not calculate sentiment.",
+          "The interval checks include the start and exclude the end.",
+          "A missing label is skipped.",
+          "`EnumMap` retains enum declaration order.",
+          "The result reports every count, so a tie does not depend on map iteration order.",
+          "Mail submission happens only after counting.",
+          "A `MailException` propagates to the caller.",
+          "The returned summary for the described input is shown below.",
+          "It is returned only if mail submission succeeds."
+        ],
+        "result": "{HAPPY=2, SAD=1}",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/SentimentDigestService.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.time.Instant;\nimport java.util.EnumMap;\nimport java.util.List;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class SentimentDigestService {\n    private final DigestMailService mail;\n\n    public SentimentDigestService(DigestMailService mail) {\n        this.mail = mail;\n    }\n\n    public String send(String userId, String recipient, boolean optedIn,\n            List<Entry> entries, Instant start, Instant end) {\n        if (!start.isBefore(end)) {\n            throw new IllegalArgumentException(\"Start must precede end\");\n        }\n        if (!optedIn) return \"Digest disabled\";\n\n        var counts = new EnumMap<Sentiment, Long>(Sentiment.class);\n        for (Entry entry : entries) {\n            if (userId.equals(entry.userId())\n                    && !entry.createdAt().isBefore(start)\n                    && entry.createdAt().isBefore(end)\n                    && entry.sentiment() != null) {\n                counts.merge(entry.sentiment(), 1L, Long::sum);\n            }\n        }\n        String summary = counts.isEmpty()\n                ? \"No labeled entries found\"\n                : counts.toString();\n        mail.send(recipient, summary);\n        return summary;\n    }\n\n    public enum Sentiment { HAPPY, SAD, ANGRY }\n    public record Entry(String userId, Instant createdAt, Sentiment sentiment) {}\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DigestMailService.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.mail.SimpleMailMessage;\nimport org.springframework.mail.javamail.JavaMailSender;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class DigestMailService {\n    private final JavaMailSender sender;\n    private final String from;\n\n    public DigestMailService(JavaMailSender sender,\n            @Value(\"${app.mail.from}\") String from) {\n        this.sender = sender;\n        this.from = from;\n    }\n\n    public void send(String recipient, String summary) {\n        var message = new SimpleMailMessage();\n        message.setFrom(from);\n        message.setTo(recipient);\n        message.setSubject(\"Your weekly journal summary\");\n        message.setText(summary);\n        sender.send(message);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.mail.host=${MAIL_HOST}\nspring.mail.port=587\nspring.mail.username=${MAIL_USERNAME}\nspring.mail.password=${MAIL_PASSWORD}\nspring.mail.properties[mail.smtp.auth]=true\nspring.mail.properties[mail.smtp.starttls.enable]=true\nspring.mail.properties[mail.smtp.starttls.required]=true\nspring.mail.properties[mail.smtp.connectiontimeout]=5000\nspring.mail.properties[mail.smtp.timeout]=5000\nspring.mail.properties[mail.smtp.writetimeout]=5000\napp.mail.from=${MAIL_FROM}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-mail</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Handle ties and missing entries"
+          "A scheduled digest run"
         ]
       ]
     },
     {
-      "id": "sentiment-results-b0",
+      "id": "integrations-sentiment-summary-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "For HAPPY=1 and SAD=1, report a tie or apply an explicit tie rule."
+          "A real scheduled run first loads opted-in users."
         ]
       ]
     },
     {
-      "id": "sentiment-results-b1",
+      "id": "integrations-sentiment-summary-lesson-2-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not let map iteration order decide a tie."
+          "It then loads each user\u2019s entries for the fixed interval and calls the digest service."
         ]
       ]
     },
     {
-      "id": "sentiment-results-b2",
+      "id": "integrations-sentiment-summary-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "When no entries have a label, report that no labeled entries were found."
+          "The schedule from the previous lesson can trigger this work."
         ]
       ]
     },
     {
-      "id": "sentiment-results-b3",
+      "id": "integrations-sentiment-summary-lesson-2-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Send a digest only for users who have opted in. Calculate the summary before submitting it for email delivery."
+          "Persistence supplies the entries."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-2-note-1-part-1-clause-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "No new Spring annotation is needed for counting."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A job-and-user-and-period identifier can track pending, submitted, and failed digests."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-2-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "In-memory completion state disappears on restart."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A submitted digest can still fail later delivery."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-2-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The mail lesson explains submission limits."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-sentiment-summary-lesson-2-note-3-part-1-clause-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Kafka failure handling later explains durable publication and duplicate work."
         ]
       ]
     }

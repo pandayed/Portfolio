@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'type',
     title: 'Type aliases and unions',
-    summary: 'Name a type once and describe alternative allowed values.',
+    summary: 'Type aliases name types. Unions describe alternative allowed values.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Everyday types',
@@ -16,17 +17,18 @@ const note: LearningNote = {
     sections: [
         {
             id: 'type-alias',
-            title: 'Give a type a reusable name',
+            title: 'Type aliases',
             bullets: [
-                'A type alias gives a name to a type expression. Write type Name = Expression.',
-                'Use the name in annotations instead of repeating the expression.',
-                'Two aliases of string accept the same values. Different names alone do not make incompatible types.',
+                'A type alias gives a name to a type expression, such as `type Name = Expression`.',
+                'Annotations can use the alias name instead of repeating the expression.',
+                'Two aliases of `string` accept the same values.',
+                'Different names alone do not make incompatible types.',
             ],
             examples: [
                 {
-                    title: 'Reuse the same requirement',
+                    title: 'Named string type',
                     description: [
-                        'Use a named string type for a function input and a variable.',
+                        'The example uses a named `string` type for a function input and a variable.',
                     ],
                     language: 'typescript',
                     code: [
@@ -39,25 +41,28 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Hello, Mia',
                     explanation: [
-                        'UserName accepts exactly the values accepted by string.',
-                        'The alias names a type. It does not create a JavaScript variable.',
+                        '`UserName` accepts exactly the values accepted by `string`.',
+                        'The alias names a type.',
+                        'It does not create a JavaScript variable.',
                     ],
                 },
             ],
         },
         {
             id: 'unions',
-            title: 'Allow one of several types',
+            title: 'Unions',
             bullets: [
-                'The | operator forms a union. A value can match any of its members.',
-                'string | number accepts either a string or a number.',
-                'An operation must work for every member still possible at that point. Narrowing later selects member-specific operations.',
+                'The `|` operator forms a union.',
+                'A value can match any of its members.',
+                '`string | number` accepts either a `string` or a `number`.',
+                'An operation must work for every member still possible at that point.',
+                'Narrowing reduces the possible types before an operation that needs a specific type.',
             ],
             examples: [
                 {
-                    title: 'Accept text and numeric identifiers',
+                    title: 'Text and numeric identifiers',
                     description: [
-                        'Allow two identifier representations without accepting booleans.',
+                        'The example allows two identifier representations without accepting booleans.',
                     ],
                     language: 'typescript',
                     code: [
@@ -72,23 +77,23 @@ const note: LearningNote = {
                     result: 'ID: u-7\nID: 7',
                     explanation: [
                         'Both members can be included in a template string.',
-                        'A string-only method would need a check before use.',
+                        'A `string`-only method would need a check before use.',
                     ],
                 },
             ],
         },
         {
             id: 'literal-unions',
-            title: 'List exact allowed values',
+            title: 'Literal unions',
             bullets: [
                 'A union of literal types allows only the listed values.',
                 'Literal unions describe choices such as status names without introducing runtime objects.',
             ],
             examples: [
                 {
-                    title: 'Restrict a status to two strings',
+                    title: 'Status values',
                     description: [
-                        'Accept only the states that the program handles.',
+                        'The example accepts only the states that the program handles.',
                     ],
                     language: 'typescript',
                     code: [
@@ -108,17 +113,18 @@ const note: LearningNote = {
         },
         {
             id: 'missing-values',
-            title: 'Allow null and undefined explicitly',
+            title: 'Nullable types',
             bullets: [
-                'With strictNullChecks enabled, string excludes null and undefined.',
-                'Add them to a union when they are valid inputs or possible results.',
-                'Allowing undefined in a parameter’s union does not make the argument optional. The caller must still supply that argument position.',
+                'With `strictNullChecks` enabled, `string` excludes `null` and `undefined`.',
+                'A union can include `null` and `undefined` as valid inputs or possible results.',
+                'Allowing `undefined` in a parameter’s union does not make the argument optional.',
+                'The caller must still supply that argument position.',
             ],
             examples: [
                 {
-                    title: 'Describe a possibly missing nickname',
+                    title: 'Optional nickname values',
                     description: [
-                        'Keep missing values in the checked type until they can be handled.',
+                        'The example keeps missing values in the checked type until they can be handled.',
                     ],
                     language: 'typescript',
                     code: [
@@ -132,13 +138,13 @@ const note: LearningNote = {
                     result: 'Mia\nundefined',
                     explanation: [
                         'Each assignment matches one union member.',
-                        'The narrowing lesson shows how to exclude missing values before a string operation.',
+                        'The narrowing lesson shows how to exclude missing values before a `string` operation.',
                     ],
                 },
                 {
-                    title: 'Require an argument that can contain undefined',
+                    title: 'Required arguments with missing values',
                     description: [
-                        'Distinguish an allowed value from permission to omit the argument.',
+                        'An allowed value does not make an argument optional.',
                     ],
                     language: 'typescript',
                     code: [
@@ -150,7 +156,7 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Guest Mia',
                     explanation: [
-                        'The union accepts an explicit undefined value.',
+                        'The union accepts an explicit `undefined` value.',
                         'The required-argument rule still rejects omission.',
                     ],
                 },

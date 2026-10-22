@@ -3,9 +3,10 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "async-await",
     title: "async and await",
-    summary: "Write dependent Promise work in statement order and handle its failures.",
+    summary: "Async functions use Promises for results and failures.",
     scope: "javascript",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -20,17 +21,20 @@ const note: LearningNote = {
     sections: [
         {
             id: "async-functions",
-            title: "Return a Promise from an async function",
+            title: "Async function results",
             bullets: [
-                "An async function always returns a Promise. A returned value fulfills it. A throw rejects it.",
-                "Returning another Promise makes the returned Promise follow its outcome.",
-                "An async function starts running when called. Adding async does not move synchronous calculations to another thread."
+                "An `async` function always returns a `Promise`.",
+                "A returned value fulfills it.",
+                "A `throw` rejects it.",
+                "Returning another `Promise` makes the returned `Promise` follow its outcome.",
+                "An `async` function starts running when called.",
+                "Adding `async` does not move synchronous calculations to another thread."
             ],
             examples: [
                 {
-                    title: "Return a value and a failure",
+                    title: "Fulfilled and rejected results",
                     description: [
-                        "Call two async functions and inspect their returned outcomes."
+                        "The two `async` functions return different `Promise` outcomes."
                     ],
                     language: "javascript",
                     code: `async function answer() { return 42; }
@@ -42,8 +46,8 @@ fail().catch((error) => console.log(error.message)); // failed, later
 // true, 42, failed`,
                     result: "true\n42\nfailed",
                     explanation: [
-                        "answer returns a Promise fulfilled with 42.",
-                        "fail returns a rejected Promise rather than throwing to its caller synchronously."
+                        "`answer` returns a `Promise` fulfilled with 42.",
+                        "`fail` returns a rejected `Promise` rather than throwing to its caller synchronously."
                     ],
                     runnable: true
                 }
@@ -51,57 +55,64 @@ fail().catch((error) => console.log(error.message)); // failed, later
         },
         {
             id: "await-results",
-            title: "Wait inside this function",
+            title: "Awaited results",
             bullets: [
-                "await reads a Promise’s fulfillment value. A rejection throws its reason at the await expression.",
-                "While this function waits, the caller can continue. Code after await resumes later, even for an available value.",
-                "await is allowed inside an async function and at the top level of a module.",
-                "A classic script cannot use top-level await. Put the work inside an async function or load the file as a module."
+                "`await` reads a `Promise`’s fulfillment value.",
+                "A rejection throws its reason at the `await` expression.",
+                "While this function waits, the caller can continue.",
+                "Code after `await` resumes later, even for an available value.",
+                "`await` is allowed inside an `async` function and at the top level of a module.",
+                "A classic script cannot use top-level `await`.",
+                "An `async` function or a module allows `await`."
             ],
             examples: [
                 {
-                    title: "Use one result in the next step",
+                    title: "Dependent operations",
                     description: [
-                        "Read a user before looking up that user’s orders."
+                        "The user lookup finishes before the order lookup starts."
                     ],
                     language: "javascript",
                     code: "const getUser = () => Promise.resolve({ id: 7 });\nconst getOrders = (id) => Promise.resolve(['order for ' + id]);\nasync function load() {\n  const user = await getUser();\n  const orders = await getOrders(user.id);\n  console.log(orders[0]);\n}\nload().catch((error) => console.log(error.message));",
                     result: "order for 7",
                     explanation: [
-                        "The second call requires the first call’s id.",
-                        "The final catch handles rejection from the returned load Promise."
+                        "The second call requires the first call’s `id`.",
+                        "The final `catch` handles rejection from the returned `load` `Promise`."
                     ],
                     runnable: true
                 },
                 {
-                    title: "Use await at module top level",
+                    title: "Top-level await",
                     description: [
-                        "Save this as answer.js and load it with <script type=\"module\" src=\"answer.js\"></script>."
+                        "The file is `answer.js`.",
+                        "The HTML page loads it with `<script type=\"module\" src=\"answer.js\"></script>`."
                     ],
                     language: "javascript",
                     code: "const answer = await Promise.resolve(42);\nconsole.log(answer);",
                     result: "42",
                     explanation: [
-                        "Module loading allows await outside a function.",
-                        "The same source in a classic script causes a SyntaxError before execution."
+                        "Module loading allows `await` outside a function.",
+                        "The same source in a classic script causes a `SyntaxError` before execution."
                     ]
                 }
             ]
         },
         {
             id: "rejections",
-            title: "Handle the rejection where it is awaited",
+            title: "Awaited rejections",
             bullets: [
-                "try/catch catches an awaited rejection inside the function. Calling a Promise-returning function without awaiting it does not catch that rejection.",
-                "Catch where the code can recover or add useful context. Otherwise let the function’s returned Promise reject for its caller.",
-                "Every started Promise needs an owner: await it, return it, or attach a rejection handler for background work.",
+                "`try`/`catch` catches an awaited rejection inside the function.",
+                "Calling a `Promise`-returning function without awaiting it does not catch that rejection.",
+                "A rejection handler can recover or add useful context.",
+                "Without a local handler, the function’s returned `Promise` rejects for its caller.",
+                "Every started `Promise` needs an owner.",
+                "The owner awaits it, returns it, or attaches a rejection handler for background work.",
                 "An unhandled rejection is reported according to the browser or Node.js policy."
             ],
             examples: [
                 {
-                    title: "Catch the awaited failure",
+                    title: "Local rejection handling",
                     description: [
-                        "Observe where a rejected Promise interrupts the function."
+                        "The rejected `Promise` interrupts the function at `await`."
                     ],
                     language: "javascript",
                     code: `async function inspect() {
@@ -115,21 +126,21 @@ fail().catch((error) => console.log(error.message)); // failed, later
 inspect();`,
                     result: "request failed",
                     explanation: [
-                        "await throws the rejection reason to catch.",
-                        "The statement after the rejected await is skipped."
+                        "`await` throws the rejection reason to `catch`.",
+                        "The statement after the rejected `await` is skipped."
                     ],
                     runnable: true
                 },
                 {
-                    title: "Handle an intentional background operation",
+                    title: "Background operation failures",
                     description: [
-                        "Start work that the current function does not need to wait for."
+                        "The current function starts background work without waiting for it."
                     ],
                     language: "javascript",
                     code: "const save = () => Promise.reject(new Error('save failed'));\nsave().catch((error) => console.log('background:', error.message));",
                     result: "background: save failed",
                     explanation: [
-                        "The attached catch handles rejection from save.",
+                        "The attached `catch` handles rejection from `save`.",
                         "The caller continues without awaiting this handled background operation."
                     ],
                     runnable: true
@@ -138,17 +149,19 @@ inspect();`,
         },
         {
             id: "cleanup",
-            title: "Add failure context and final cleanup",
+            title: "Failure context and cleanup",
             bullets: [
-                "finally runs when the function leaves its try/catch after success or failure.",
-                "Keep cleanup from returning a different result unless replacing the result is intended.",
-                "Use return await inside try when local catch or finally must cover settlement of the returned operation. A plain return passes its Promise onward immediately."
+                "`finally` runs when the function leaves its `try`/`catch` after success or failure.",
+                "Returning a different result from cleanup replaces the earlier result.",
+                "`return await` inside `try` keeps the operation’s settlement inside the local `catch` or `finally`.",
+                "A plain `return` passes its `Promise` onward immediately."
             ],
             examples: [
                 {
-                    title: "Keep the original error as the cause",
+                    title: "Original error causes",
                     description: [
-                        "Load two dependent results. Simulate the first result failing on the second call."
+                        "The example loads two dependent results.",
+                        "The first lookup fails on the second call."
                     ],
                     language: "javascript",
                     code: `async function loadDashboard(fails = false) {
@@ -176,8 +189,9 @@ inspectDashboard();
 // loading, cleanup, Could not load dashboard user offline`,
                     result: "loading\ncleanup\n7 book\nloading\ncleanup\nCould not load dashboard user offline",
                     explanation: [
-                        "The cause property keeps the original user offline error.",
-                        "The orders step is skipped after the user failure. finally runs for both calls."
+                        "The `cause` property keeps the original `user offline` error.",
+                        "The orders step is skipped after the user failure.",
+                        "`finally` runs for both calls."
                     ],
                     runnable: true
                 }
@@ -185,24 +199,29 @@ inspectDashboard();
         },
         {
             id: "executor",
-            title: "Keep async work out of Promise executors",
+            title: "Async Promise executors",
             bullets: [
-                "An async executor returns a separate Promise. The Promise constructor ignores that return value.",
-                "A rejection of that separate Promise does not reject the outer Promise. The outer Promise may stay pending.",
-                "Use an ordinary executor for callback conversion. Use an async function directly for Promise-based work."
+                "An `async` executor returns a separate `Promise`.",
+                "The `Promise` constructor ignores that return value.",
+                "A rejection of that separate `Promise` does not reject the outer `Promise`.",
+                "The outer `Promise` may stay pending.",
+                "An ordinary executor can convert a callback API to a `Promise`.",
+                "An `async` function can use `Promise`-based work directly."
             ],
             examples: [
                 {
-                    title: "Return an async failure directly",
+                    title: "Direct async failures",
                     description: [
-                        "The commented construction is an incorrect pattern. Run the direct async function instead."
+                        "The commented construction is an incorrect pattern.",
+                        "The example calls the direct `async` function."
                     ],
                     language: "javascript",
                     code: "// Incorrect: the executor's rejected Promise is ignored.\n// const outer = new Promise(async (resolve) => {\n//   throw new Error('executor failed');\n// });\nasync function load() {\n  throw new Error('load failed');\n}\nload().catch((error) => console.log(error.message));",
                     result: "load failed",
                     explanation: [
-                        "In the commented pattern neither resolve nor reject settles outer. Its catch would not handle the executor’s separate rejection.",
-                        "The direct async function returns its own rejected Promise to the caller."
+                        "In the commented pattern neither `resolve` nor `reject` settles `outer`.",
+                        "Its `catch` would not handle the executor’s separate rejection.",
+                        "The direct `async` function returns its own rejected `Promise` to the caller."
                     ],
                     runnable: true
                 }

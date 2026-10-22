@@ -3,9 +3,10 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "request-cancellation",
     title: "Cancellation and request races",
-    summary: "Stop supported operations and prevent stale results from replacing current data.",
+    summary: "Cancellation signals, request timeouts, and stale results.",
     scope: "javascript",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -20,19 +21,25 @@ const note: LearningNote = {
     sections: [
         {
             id: "signals",
-            title: "Pass cancellation to the operation",
+            title: "Cancellation signals",
             bullets: [
-                "A Promise has no general cancel method. Cancellation must be supported by the operation that produces its result.",
-                "AbortController provides a signal. Pass that signal to fetch or another API that supports it.",
-                "abort marks the signal as aborted and supplies an abort reason. The default reason is a DOMException named AbortError.",
-                "A signal stays aborted. Create a new controller for a new operation that may need cancellation.",
-                "Aborting a request can stop the request or its body read. It does not guarantee the server undoes a write already performed."
+                "A Promise has no general `cancel` method.",
+                "Cancellation must be supported by the operation that produces its result.",
+                "`AbortController` provides a `signal`.",
+                "The operation receives that `signal` through `fetch` or another API that supports it.",
+                "`abort` marks the `signal` as aborted and supplies an `abort` reason.",
+                "The default reason is a `DOMException` named `AbortError`.",
+                "A `signal` stays aborted.",
+                "A new operation needs a new controller if it may need cancellation.",
+                "Aborting a request can stop the request or its body read.",
+                "It does not guarantee the server undoes a write already performed."
             ],
             examples: [
                 {
-                    title: "Reject with an already-aborted signal",
+                    title: "Already-aborted signal",
                     description: [
-                        "Use fetch in a browser or a Node.js version that provides it. The signal is aborted before the request call."
+                        "The example requires a browser or a Node.js version that provides `fetch`.",
+                        "The `signal` is aborted before the request call."
                     ],
                     language: "javascript",
                     code: `async function inspect() {
@@ -48,25 +55,28 @@ const note: LearningNote = {
 inspect();`,
                     result: "true\nAbortError\nundefined",
                     explanation: [
-                        "The request observes the already-aborted signal. It does not start a new network request.",
-                        "The final log confirms that an ordinary Promise has no cancel method."
+                        "The request observes the already-aborted `signal`.",
+                        "It does not start a new network request.",
+                        "The final log confirms that an ordinary Promise has no `cancel` method."
                     ]
                 }
             ]
         },
         {
             id: "timeouts",
-            title: "Abort a request after a timer",
+            title: "Request timeouts",
             bullets: [
-                "A timer can request cancellation if an operation takes too long. It runs when the event loop gives that callback a turn.",
+                "A timer can request cancellation if an operation takes too long.",
+                "It runs when the event loop gives that callback a turn.",
                 "Clear the timer when the owned operation settles, including its body read.",
-                "Treat expected cancellation separately from a failed operation when the application records an outcome."
+                "Expected cancellation and failed operations are separate outcomes."
             ],
             examples: [
                 {
-                    title: "Cancel a slow request",
+                    title: "Slow request cancellation",
                     description: [
-                        "Browser setup: GET /api/slow returns JSON, but takes more than five seconds. Earlier service or network failure is also possible."
+                        "Browser setup: GET /api/slow returns JSON, but takes more than five seconds.",
+                        "Earlier service or network failure is also possible."
                     ],
                     language: "javascript",
                     code: `// Browser setup: /api/slow takes longer than 5 seconds to respond.
@@ -86,7 +96,8 @@ loadSlow().catch((error) => console.log(error.name));
 // can happen sooner. The timeout is a timer delay, not an exact deadline.`,
                     result: "AbortError when the cancellation timer runs before the request and body finish.",
                     explanation: [
-                        "return await keeps body reading inside the try until it settles. finally then clears the timer.",
+                        "`return await` keeps body reading inside the `try` until it settles.",
+                        "`finally` then clears the timer.",
                         "The timeout is a requested timer delay, not a guarantee that cancellation runs at an exact clock time."
                     ],
                     possibleOutput: true
@@ -95,17 +106,20 @@ loadSlow().catch((error) => console.log(error.name));
         },
         {
             id: "stale-results",
-            title: "Keep only the latest request result",
+            title: "Request races",
             bullets: [
-                "Requests can finish in a different order from their start order. An older result can overwrite a newer result.",
-                "Assign each request an increasing identifier. Before changing displayed state, check whether its identifier is still the latest.",
-                "Aborting the previous request and checking its identifier solve different parts of this problem. Use the identifier check for both success and failure updates."
+                "Requests can finish in a different order from their start order.",
+                "An older result can overwrite a newer result.",
+                "Each request receives an increasing identifier.",
+                "The displayed state changes only if that identifier is still the latest.",
+                "Aborting the previous request and checking its identifier solve different parts of this problem.",
+                "The identifier check applies to both success and failure updates."
             ],
             examples: [
                 {
-                    title: "Ignore a late older result",
+                    title: "Stale result checks",
                     description: [
-                        "Control the two completions explicitly so the newer request finishes first."
+                        "The example controls the two completions explicitly so the newer request finishes first."
                     ],
                     language: "javascript",
                     code: `let newest = 0;
@@ -132,15 +146,16 @@ async function inspect() {
 inspect();`,
                     result: "old result\nnew result",
                     explanation: [
-                        "unguarded is replaced by the older completion.",
-                        "shown retains the newer result because requestId must match newest."
+                        "`unguarded` is replaced by the older completion.",
+                        "`shown` retains the newer result because `requestId` must match `newest`."
                     ],
                     runnable: true
                 },
                 {
-                    title: "Abort the earlier search and guard updates",
+                    title: "Search cancellation and result checks",
                     description: [
-                        "Browser setup: /api/search?q=... returns JSON search results. Calling search again cancels the previous request."
+                        "Browser setup: /api/search?q=... returns JSON search results.",
+                        "Calling search again cancels the previous request."
                     ],
                     language: "javascript",
                     code: `// Browser setup: /api/search?q=... returns JSON search results.
@@ -170,8 +185,9 @@ search('ava');
 // is printed. Aborting does not guarantee the server undoes work.`,
                     result: "latest results: followed by the JSON data for ava, if that latest request succeeds.",
                     explanation: [
-                        "encodeURIComponent puts the query in the URL as data.",
-                        "The identifier check prevents stale success and error messages. finally clears the active controller only if it still belongs to that request.",
+                        "`encodeURIComponent` puts the query in the URL as data.",
+                        "The identifier check prevents stale success and error messages.",
+                        "`finally` clears the active controller only if it still belongs to that request.",
                         "A failure of the latest request prints Search failed."
                     ],
                     possibleOutput: true

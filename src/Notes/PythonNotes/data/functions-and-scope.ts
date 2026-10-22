@@ -11,10 +11,13 @@ const note: PythonNote = {
             "id": "define-return",
             "title": "Defining and calling a function",
             "bullets": [
-                "Use def, a function name, and parentheses to define a function. Indent its body.",
-                "A parameter is a name in the definition. An argument is a value supplied in a call.",
-                "Defining a function does not run its body. Calling it runs the body.",
-                "Use return to send a result to the caller and end the current call."
+                "Use `def`, a function name, and parentheses to define a function.",
+                "Indent its body.",
+                "A parameter is a name in the definition.",
+                "An argument is a value supplied in a call.",
+                "Defining a function does not run its body.",
+                "Calling it runs the body.",
+                "Use `return` to send a result to the caller and end the current call."
             ],
             "examples": [
                 {
@@ -23,24 +26,35 @@ const note: PythonNote = {
                     "result": "Hello, Ava",
                     "explanation": [
                         "name is the parameter. \"Ava\" is the argument.",
-                        "The call returns a string. print() displays that string."
+                        "The call returns a string. `print()` displays that string."
+                    ],
+                    "language": "python",
+                    "description": [
+                        "The function receives a name and returns greeting text."
                     ]
                 }
             ]
         },
         {
             "id": "return-values",
-            "title": "Return values and None",
+            "title": "Return values and `None`",
             "bullets": [
-                "A function returns None if it reaches the end without returning a value. A bare return also returns None.",
-                "Printing displays a value. Returning makes a value available to the caller.",
-                "Returning comma-separated values creates a tuple. The caller can unpack it."
+                "A function returns `None` if it reaches the end without returning a value.",
+                "A bare `return` also returns `None`.",
+                "Printing displays a value.",
+                "Returning makes a value available to the caller.",
+                "Returning comma-separated values creates a tuple.",
+                "The caller can unpack it."
             ],
             "examples": [
                 {
                     "title": "Returning two related values",
                     "code": "def divide(number, divisor):\n    return number // divisor, number % divisor\n\nquotient, remainder = divide(17, 5)\nprint(quotient, remainder)",
-                    "result": "3 2"
+                    "result": "3 2",
+                    "language": "python",
+                    "description": [
+                        "The function returns a quotient and remainder for unpacking."
+                    ]
                 }
             ]
         },
@@ -48,14 +62,19 @@ const note: PythonNote = {
             "id": "docstrings",
             "title": "Documenting a function",
             "bullets": [
-                "A docstring is a string placed first in a function body. It describes what the function does.",
-                "help() and documentation tools can read the docstring."
+                "A docstring is a string placed first in a function body.",
+                "It describes what the function does.",
+                "`help`() and documentation tools can read the docstring."
             ],
             "examples": [
                 {
                     "title": "Describing the return value",
                     "code": "def square(number):\n    \"\"\"Return number multiplied by itself.\"\"\"\n    return number * number\n\nprint(square(4))",
-                    "result": "16"
+                    "result": "16",
+                    "language": "python",
+                    "description": [
+                        "The first string in the function documents its result."
+                    ]
                 }
             ]
         },
@@ -63,20 +82,25 @@ const note: PythonNote = {
             "id": "annotations",
             "title": "Function type annotations",
             "bullets": [
-                "Annotations describe expected parameter and return types. Python does not enforce these types by itself.",
+                "Annotations describe expected parameter and return types.",
+                "Python does not enforce these types by itself.",
                 "A type checker can check annotated calls before the program runs."
             ],
             "examples": [
                 {
                     "title": "Annotating parameters and the return value",
                     "code": "def pair(number: int, label: str) -> tuple[int, str]:\n    return number, label\n\nprint(pair(3, \"ready\"))",
-                    "result": "(3, 'ready')"
+                    "result": "(3, 'ready')",
+                    "language": "python",
+                    "description": [
+                        "The annotations describe the input types and the returned tuple."
+                    ]
                 }
             ]
         },
         {
             "id": "references",
-            "title": "Tutorial reference",
+            "title": "References",
             "bullets": [
                 [
                     {

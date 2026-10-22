@@ -3,24 +3,26 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "reducers-and-actions",
     title: "Reducers and actions",
-    summary: "Use useReducer to keep related state updates in one function.",
+    summary: "Reducer functions, actions, and related state updates.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "reducers",
-            title: "Update state with useReducer",
+            title: "Reducer state",
             bullets: [
                 "A reducer is a function that receives the current state and an action, then returns the next state.",
                 "An action is an object that describes what happened, such as a guest being added.",
-                "useReducer(reducer, initialState) returns the current state and a dispatch function. Call dispatch(action) to request an update using the reducer."
+                "`useReducer(reducer, initialState)` returns the current state and a `dispatch` function.",
+                "`dispatch(action)` requests an update using the reducer."
             ],
             examples: [
                 {
-                    title: "Group booking updates",
+                    title: "Booking reducer",
                     description: [
-                        "Keep related guest-count and reset rules in one reducer."
+                        "One reducer contains the guest-count and reset rules."
                     ],
                     language: "jsx",
                     code: `import { useReducer } from 'react';
@@ -45,7 +47,8 @@ export default function Booking() {
 }`,
                     result: "Add guest increases the count. Remove guest keeps at least one guest. Reset returns to one.",
                     explanation: [
-                        "Each button sends an action to the reducer. The reducer calculates the guest count and returns a new state object."
+                        "Each button sends an action to the reducer.",
+                        "The reducer calculates the guest count and returns a new state object."
                     ]
                 }
             ]
@@ -54,10 +57,14 @@ export default function Booking() {
             id: "pure-reducers",
             title: "Rules for reducer functions",
             bullets: [
-                "Return a new state object instead of changing the current one. Do not send requests, start timers, or change page elements in a reducer.",
-                "A reducer must return the same result for the same state and action. React may call it twice in development Strict Mode to check for mistakes.",
-                "Dispatch does not change variables in the current render. The next render receives the updated state.",
-                "Each call to useReducer keeps its own state. Using the same reducer function in two components does not share their state."
+                "A reducer returns a new state object instead of changing the current one.",
+                "Requests, timers, and page changes do not belong in a reducer.",
+                "A reducer must return the same result for the same state and action.",
+                "React may call it twice in development Strict Mode to check for mistakes.",
+                "Dispatch does not change variables in the current render.",
+                "The next render receives the updated state.",
+                "Each call to `useReducer` keeps its own state.",
+                "Using the same reducer function in two components does not share their state."
             ]
         }
     ],

@@ -3,24 +3,27 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "objects-and-arrays-in-state",
     title: "Objects and arrays in state",
-    summary: "Replace state objects and arrays without changing previous snapshots.",
+    summary: "Object and array updates that preserve previous state.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "replace-objects",
-            title: "Copy the changed object path",
+            title: "Nested state objects",
             bullets: [
-                "Treat objects stored in state as read-only. Return a new object when updating a property.",
-                "Spread syntax copies one level. Copy each changed level for a nested property.",
+                "Objects stored in state are read-only.",
+                "A property update requires a new object.",
+                "Spread syntax copies one level.",
+                "A nested property update requires a copy of each changed level.",
                 "Assigning to an existing state object changes past snapshots and may leave React with the same object identity."
             ],
             examples: [
                 {
-                    title: "Update a nested city",
+                    title: "Nested city update",
                     description: [
-                        "Change the city while preserving the other profile properties."
+                        "The city changes while the other `profile` properties stay the same."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -42,24 +45,28 @@ export default function Profile() {
 }`,
                     result: "The city changes from Pune to Delhi. The name and country stay the same.",
                     explanation: [
-                        "Both profile and its address are new objects. The old objects are not changed."
+                        "Both `profile` and its `address` are new objects.",
+                        "The old objects are not changed."
                     ]
                 }
             ]
         },
         {
             id: "replace-arrays",
-            title: "Return a new array",
+            title: "State arrays",
             bullets: [
-                "Use spread to add items, filter to remove them, and map to replace selected items.",
-                "Avoid push, splice, and assignment to an array index on existing state.",
-                "Copy an array before sort or reverse. Copying the array alone does not copy the objects inside it."
+                "Spread syntax adds items to a new array.",
+                "`filter` removes items from the returned array.",
+                "`map` replaces selected items in the returned array.",
+                "`push`, `splice`, and assignment to an array index change the existing state array.",
+                "`sort` and `reverse` change the array, so state updates require a copy first.",
+                "Copying the array alone does not copy the objects inside it."
             ],
             examples: [
                 {
-                    title: "Replace a task and remove it",
+                    title: "Task updates and removal",
                     description: [
-                        "Change one task without mutating the stored array or task object."
+                        "One task changes without mutating the stored array or task object."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -84,7 +91,8 @@ export default function TaskList() {
 }`,
                     result: "Complete changes Open to Done. Remove removes the row.",
                     explanation: [
-                        "map returns a new array and a new object for the matched task. filter returns the remaining tasks."
+                        "`map` returns a new array and a new object for the matched task.",
+                        "`filter` returns the remaining tasks."
                     ]
                 }
             ]

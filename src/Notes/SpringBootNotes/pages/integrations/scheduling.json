@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-integrations-scheduling",
   "title": "Scheduled Tasks",
-  "summary": "Enable scheduling, choose a time rule, and handle restarts and multiple instances.",
+  "summary": "Register a scheduled bean method and understand its timing and execution limits.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Ultimate Guide to Scheduling Tasks with Cron Jobs in Spring Boot",
@@ -20,196 +20,438 @@
     {
       "title": "Engineering Digest journalApp source",
       "url": "https://github.com/EngineeringDigest/journalApp"
+    },
+    {
+      "title": "Spring Framework 6.2 scheduling",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/integration/scheduling.html"
+    },
+    {
+      "title": "Spring Boot 3.5 scheduling",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/task-execution-and-scheduling.html"
     }
   ],
   "blocks": [
     {
-      "id": "schedule-basics",
+      "id": "integrations-scheduling-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Run a method on a schedule"
+          "Scheduled bean methods"
         ]
       ]
     },
     {
-      "id": "schedule-basics-b0",
+      "id": "integrations-scheduling-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Scheduled asks Spring to call a bean method according to a time rule."
+          "@EnableScheduling",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " enables Spring\u2019s processing of "
+        ],
+        [
+          "@Scheduled",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " methods."
         ]
       ]
     },
     {
-      "id": "schedule-basics-b1",
+      "id": "integrations-scheduling-lesson-0-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Add @EnableScheduling to a configuration class to enable scheduled methods."
+          "It belongs on a scanned configuration class."
         ]
       ]
     },
     {
-      "id": "schedule-basics-b2",
+      "id": "integrations-scheduling-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A normal scheduled method takes no arguments. Spring does not use its return value."
+          "@Scheduled",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the timing rule on a bean method."
         ]
       ]
     },
     {
-      "id": "schedule-basics-b3",
+      "id": "integrations-scheduling-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The application must be running when the scheduled time arrives."
+          "Spring registers the method with a scheduler when it creates the application context."
         ]
       ]
     },
     {
-      "id": "schedule-time-rules",
+      "id": "integrations-scheduling-lesson-0-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A regular scheduled method takes no arguments."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-0-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring calls it without a controller request and ignores its return value."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The method must belong to a Spring bean."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-0-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Creating the class with "
+        ],
+        [
+          "new",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " does not register its scheduled methods."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Choose a time rule"
+          "Timing rules"
         ]
       ]
     },
     {
-      "id": "schedule-time-rules-b0",
+      "id": "integrations-scheduling-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "fixedDelay waits for the previous execution to finish, then waits for the configured delay."
+          "fixedDelay",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " waits after the previous run finishes."
         ]
       ]
     },
     {
-      "id": "schedule-time-rules-b1",
+      "id": "integrations-scheduling-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "fixedRate uses a fixed interval between scheduled start times. A busy scheduler can start work later."
+          "fixedRate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " schedules starts at a fixed interval."
         ]
       ]
     },
     {
-      "id": "schedule-time-rules-b2",
+      "id": "integrations-scheduling-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "cron uses a calendar rule, such as every Sunday at 09:00."
+          "A busy scheduler can start work late."
         ]
       ]
     },
     {
-      "id": "schedule-time-rules-b3",
+      "id": "integrations-scheduling-lesson-1-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring cron has six fields in this order: second, minute, hour, day of month, month, day of week."
+          "fixedRate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " does not promise parallel executions of a single periodic task."
         ]
       ]
     },
     {
-      "id": "schedule-time-rules-b4",
+      "id": "integrations-scheduling-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The zone attribute selects the timezone used for the cron expression."
+          "cron",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " expresses a calendar rule."
         ]
       ]
     },
     {
-      "id": "schedule-code",
-      "type": "header",
+      "id": "integrations-scheduling-lesson-1-note-2-part-1",
+      "type": "bulleted_list",
       "richText": [
         [
-          "Schedule a weekly job"
+          "Spring uses six fields: second, minute, hour, day of month, month, day of week."
         ]
       ]
     },
     {
-      "id": "schedule-code-code",
+      "id": "integrations-scheduling-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "zone",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects the timezone for a cron rule."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-1-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Without it, the scheduler\u2019s timezone applies."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Queue a weekly digest on Sunday",
-        "description": [
-          "Use Spring Boot 3, Spring Framework 6, and Java 17.",
-          "WeeklyDigestService is an application service that calculates and queues summaries. Its implementation is separate from the timing rule."
-        ],
-        "code": "@Configuration\n@EnableScheduling\nclass SchedulingConfiguration {}\n\n@Component\nclass WeeklyDigestJob {\n    private final WeeklyDigestService digests;\n\n    WeeklyDigestJob(WeeklyDigestService digests) {\n        this.digests = digests;\n    }\n\n    @Scheduled(cron = \"0 0 9 * * SUN\", zone = \"Asia/Kolkata\")\n    void queueDigests() {\n        digests.aggregateAndQueue();\n    }\n}",
+        "title": "Run a weekly method",
         "language": "java",
+        "description": [
+          "Each tab names a file relative to the project root. Java `17` and Maven are required. `mvn spring-boot:run` starts this example after its external requirements are configured.",
+          "The project uses Spring Boot 3.5 and `spring-boot-starter`.",
+          "The web starter already includes that base starter.",
+          "`WeeklyJob.java` belongs in `src/main/java/com/example/demo`, in the scanned package.",
+          "The application stays running until Sunday at `09:00` in `Asia/Kolkata`.",
+          "The method does not run immediately on startup.",
+          "The example logs one line to make scheduling visible.",
+          "The next lesson supplies a concrete digest operation."
+        ],
+        "code": "",
         "explanation": [
-          "@EnableScheduling enables processing of @Scheduled.",
-          "0 0 9 * * SUN selects Sunday at 09:00:00 in Asia/Kolkata.",
-          "Spring calls queueDigests, which delegates to aggregateAndQueue.",
-          "The annotation cannot run while the application is stopped."
+          "`@EnableScheduling` activates registration.",
+          "`@Component` makes `WeeklyJob` eligible for that registration.",
+          "The cron fields `0 0 9 * * SUN` select Sunday at `09:00:00`.",
+          "Spring calls `run` at that time.",
+          "The method itself does not calculate the next run.",
+          "For an interval case, `@Scheduled(fixedDelay = 60000)` instead waits `60000` milliseconds after completion.",
+          "It replaces the cron annotation."
+        ],
+        "result": "Weekly job started",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/WeeklyJob.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.scheduling.annotation.EnableScheduling;\nimport org.springframework.scheduling.annotation.Scheduled;\nimport org.springframework.stereotype.Component;\n\n@Component\nclass WeeklyJob {\n    private static final Logger log = LoggerFactory.getLogger(WeeklyJob.class);\n\n    @Scheduled(cron = \"0 0 9 * * SUN\", zone = \"Asia/Kolkata\")\n    void run() {\n        log.info(\"Weekly job started\");\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/SchedulingConfiguration.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.scheduling.annotation.EnableScheduling;\nimport org.springframework.scheduling.annotation.Scheduled;\nimport org.springframework.stereotype.Component;\n\n@Configuration\n@EnableScheduling\nclass SchedulingConfiguration {}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "schedule-reliability",
+      "id": "integrations-scheduling-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Restarts and multiple application instances"
+          "Execution and restart limits"
         ]
       ]
     },
     {
-      "id": "schedule-reliability-b0",
+      "id": "integrations-scheduling-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Scheduled does not save job history or replay missed executions automatically."
+          "Ordinary Boot scheduling uses one scheduler thread by default when virtual-thread scheduling is not enabled."
         ]
       ]
     },
     {
-      "id": "schedule-reliability-b1",
+      "id": "integrations-scheduling-lesson-2-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Store pending work in a database if it must survive restarts."
+          "A long task can delay other scheduled tasks."
         ]
       ]
     },
     {
-      "id": "schedule-reliability-b2",
+      "id": "integrations-scheduling-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Each application instance has its own scheduler. Two instances can start the same job."
+          "spring.task.scheduling.pool.size",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can enlarge a pooled scheduler."
         ]
       ]
     },
     {
-      "id": "schedule-reliability-b3",
+      "id": "integrations-scheduling-lesson-2-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a shared lock or a dedicated scheduler when only one instance should start a job."
+          "Thread count does not coordinate separate application instances."
         ]
       ]
     },
     {
-      "id": "schedule-reliability-b4",
+      "id": "integrations-scheduling-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A unique job-and-period record can prevent duplicate work for the same reporting period."
+          "Each application instance registers its own scheduled methods."
         ]
       ]
     },
     {
-      "id": "schedule-reliability-b5",
+      "id": "integrations-scheduling-lesson-2-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Set timeouts for database and network work. Record which items failed so they can be retried separately."
+          "Two instances can perform the same weekly work."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A shared lock or a dedicated scheduler can limit concurrent startup."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-2-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A unique job-and-period record can identify duplicate work."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Scheduled",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " does not save job history or replay missed runs."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-2-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Durable pending work and retry state need separate storage."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A failure in one recurring run does not by itself create a durable retry."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-scheduling-lesson-2-note-5-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Database and provider calls still need timeouts and recorded failure handling."
         ]
       ]
     }

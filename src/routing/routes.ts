@@ -7,6 +7,7 @@ import { goNotes } from '../Notes/GoNotes/goNotes';
 import { javascriptTypeScriptNotes } from '../Notes/JavaScriptTypeScriptNotes/javascriptTypeScriptNotes';
 import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
 import { reactNotes } from '../Notes/ReactNotes/reactNotes';
+import { nodeLearningNotes } from '../Notes/NodeNotes/nodeNotes';
 import { springBootRoutes } from '../Notes/SpringBootNotes/registry';
 import { systemDesignEntryRoutes } from '../Notes/SystemDesign/registry';
 import { SYSTEM_DESIGN_ROUTE, type SystemDesignEntryRoute } from '../Notes/SystemDesign/path';
@@ -27,6 +28,7 @@ export const PYTHON_NOTES_ROUTE = '/notes/python';
 export const FRONTEND_NOTES_ROUTE = '/notes/frontend';
 export const JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE = '/notes/javascript-typescript';
 export const REACT_NOTES_ROUTE = '/notes/react';
+export const NODE_NOTES_ROUTE = '/notes/nodejs';
 export const CICD_NOTES_ROUTE = '/notes/ci-cd';
 export const CICD_BASICS_ROUTE = '/notes/ci-cd/fundamentals';
 export const GITHUB_ACTIONS_ROUTE = '/notes/ci-cd/github-actions';
@@ -91,6 +93,7 @@ export type GoNoteRoute = `${typeof GO_NOTES_ROUTE}/${string}`;
 export type JavaScriptTypeScriptNoteRoute = `${typeof JAVASCRIPT_TYPESCRIPT_NOTES_ROUTE}/${string}`;
 export type PythonNoteRoute = `${typeof PYTHON_NOTES_ROUTE}/${string}`;
 export type ReactNoteRoute = `${typeof REACT_NOTES_ROUTE}/${string}`;
+export type NodeNoteRoute = `${typeof NODE_NOTES_ROUTE}/${string}`;
 export type SpringBootRoute = `${typeof SPRING_BOOT_NOTES_ROUTE}/${string}`;
 
 export const getJavaScriptTypeScriptNoteRoute = (slug: string):
@@ -122,6 +125,8 @@ export type Route =
     | JavaScriptTypeScriptNoteRoute
     | typeof REACT_NOTES_ROUTE
     | ReactNoteRoute
+    | typeof NODE_NOTES_ROUTE
+    | NodeNoteRoute
     | typeof CICD_NOTES_ROUTE
     | typeof CICD_BASICS_ROUTE
     | typeof GITHUB_ACTIONS_ROUTE
@@ -204,6 +209,10 @@ const reactNoteRoutes: ReactNoteRoute[] = reactNotes.map(
     ({ slug }) => `${REACT_NOTES_ROUTE}/${slug}` as ReactNoteRoute,
 );
 
+const nodeNoteRoutes: NodeNoteRoute[] = nodeLearningNotes.map(
+    ({ slug }) => `${NODE_NOTES_ROUTE}/${slug}` as NodeNoteRoute,
+);
+
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
@@ -225,6 +234,8 @@ const routes: Route[] = [
     ...javascriptTypeScriptNoteRoutes,
     REACT_NOTES_ROUTE,
     ...reactNoteRoutes,
+    NODE_NOTES_ROUTE,
+    ...nodeNoteRoutes,
     CICD_NOTES_ROUTE,
     CICD_BASICS_ROUTE,
     GITHUB_ACTIONS_ROUTE,

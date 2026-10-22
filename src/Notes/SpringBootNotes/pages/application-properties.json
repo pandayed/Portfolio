@@ -13,127 +13,461 @@
       ]
     },
     {
-      "id": "application-properties-0-point-0",
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Configuration values control application settings without changing Java source."
+          "Spring Boot reads configuration before it creates the application beans."
         ]
       ]
     },
     {
-      "id": "application-properties-0-point-1",
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot loads application.properties or application.yml from standard locations, including the classpath root and external configuration locations."
-        ]
-      ]
-    },
-    {
-      "id": "application-properties-0-point-2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "In the project, src/main/resources is the usual location for a packaged configuration file."
-        ]
-      ]
-    },
-    {
-      "id": "application-properties-0-point-3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Properties files use key=value lines. YAML uses indentation for nested values."
-        ]
-      ]
-    },
-    {
-      "id": "application-properties-0-point-4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "At the same location, application.properties takes precedence over YAML if both exist."
-        ]
-      ]
-    },
-    {
-      "id": "application-properties-0-example-0",
-      "type": "example",
-      "example": {
-        "title": "Set the server port",
-        "description": [
-          "Use one of these equivalent configurations in src/main/resources."
+          "The Spring "
         ],
-        "code": "# application.properties\nserver.port=8081\n\n# Equivalent application.yml\nserver:\n  port: 8081",
-        "language": "text",
-        "explanation": [
-          "Choose one file format for this setting.",
-          "A servlet web application reads server.port during startup and listens on port 8081 unless another source overrides it."
+        [
+          "Environment",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " holds the available settings and resolves their values."
         ]
-      }
+      ]
     },
     {
-      "id": "20824eb1-ed54-8091-94f9-e3ffc5b794e7",
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "application.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " contains named settings such as "
+        ],
+        [
+          "server.port=8081",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "server.port",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is a built-in setting that Spring Boot uses to configure the embedded web server."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A custom setting such as "
+        ],
+        [
+          "greeting.prefix",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " has no effect until application code reads it."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A project normally stores its packaged settings in "
+        ],
+        [
+          "src/main/resources/application.properties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "YAML is an alternative format in "
+        ],
+        [
+          "application.yaml",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "application.yml",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "20824eb1-ed54-807a-a4f4-fb5724c7fdbb-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "If properties and YAML files exist in the same location, the properties file takes precedence."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Runtime overrides"
+          "Overrides"
         ]
       ]
     },
     {
-      "id": "application-properties-1-point-0",
+      "id": "application-properties-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "For ordinary runtime settings, environment variables override configuration files, and command-line arguments override environment variables. Other property sources also exist."
+          "Spring Boot can read the same setting from a file, an environment variable, a JVM system property, or an application argument."
         ]
       ]
     },
     {
-      "id": "application-properties-1-point-1",
+      "id": "application-properties-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "SERVER_PORT is the environment-variable form of server.port."
+          "The source with higher precedence supplies the value when several sources define the same key."
         ]
       ]
     },
     {
-      "id": "application-properties-1-point-2",
+      "id": "application-properties-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "JVM options go before -jar. Application arguments go after the JAR name."
+          "The table shows the order for these common sources. Spring Boot supports additional sources."
         ]
       ]
     },
     {
-      "id": "application-properties-1-point-3",
+      "id": "application-properties-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Store credentials outside committed configuration files. A profile-specific file does not hide its contents."
+          "A packaged file travels inside the JAR. An external configuration file can supply different values for a run."
         ]
       ]
     },
     {
-      "id": "application-properties-1-example-0",
+      "id": "application-properties-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "By default, Spring Boot also looks in the working directory, its "
+        ],
+        [
+          "config/",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " directory, and immediate child directories of "
+        ],
+        [
+          "config/",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "External files override packaged files in the normal configuration search."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Credentials belong in a secret source rather than a committed configuration file."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Override the server port at startup",
-        "description": [
-          "Assume the packaged file sets server.port=8081 and the JAR is target/demo.jar."
-        ],
-        "code": "SERVER_PORT=9090 java -Xmx512m -jar target/demo.jar --server.port=9091",
+        "title": "Set and override the server port",
         "language": "text",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The commands run from the directory containing `pom.xml` in a Unix shell.",
+          "The packaged JAR is `target/demo.jar`. The command-line property selects port `9091`."
+        ],
+        "code": "",
         "explanation": [
-          "This is a Unix shell command.",
-          "The command-line value 9091 overrides both the environment value 9090 and the file value 8081.",
-          "-Xmx512m sets the JVM\u2019s maximum heap size. It is not a Spring property."
+          "The file supplies `8081` as the port when no higher-priority source sets it.",
+          "`SERVER_PORT` is the environment-variable form of `server.port`.",
+          "The application argument selects `9091`, so this run listens on port `9091`.",
+          "`spring.application.name` names the application. It does not change an endpoint path.",
+          "`greeting.prefix` is available to application code. Reading it is covered in Read configuration in Java."
+        ],
+        "commands": "mvn package -DskipTests\nSERVER_PORT=9090 java -jar target/demo.jar --server.port=9091",
+        "files": [
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "server.port=8081\nspring.application.name=greeting-app\ngreeting.prefix=Hello\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/greetings\")\n    public String greet() { return \"Hello, Ada\"; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
         ]
       }
+    },
+    {
+      "id": "application-properties-lesson-1-table-0",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "application-properties-lesson-1-table-0-row-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Source, from lower to higher precedence"
+              ]
+            ],
+            "1": [
+              [
+                "Example"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "application-properties-lesson-1-table-0-row-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Configuration file"
+              ]
+            ],
+            "1": [
+              [
+                "server.port=8081",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "application-properties-lesson-1-table-0-row-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Environment variable"
+              ]
+            ],
+            "1": [
+              [
+                "SERVER_PORT=9090",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "application-properties-lesson-1-table-0-row-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "JVM system property"
+              ]
+            ],
+            "1": [
+              [
+                "-Dserver.port=9091",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "application-properties-lesson-1-table-0-row-4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Application argument"
+              ]
+            ],
+            "1": [
+              [
+                "--server.port=9092",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "application-properties-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Configuration changes"
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Ordinary configuration binding happens during startup."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Editing a file does not automatically update existing bean fields."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A restart loads the changed values unless the application has separate refresh support."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Read configuration in Java explains how a bean receives custom settings."
+        ]
+      ]
+    },
+    {
+      "id": "application-properties-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring profiles follows that lesson and groups configuration for different runs."
+        ]
+      ]
     }
   ],
   "sources": [
@@ -150,5 +484,6 @@
       "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html"
     }
   ],
-  "updatedOn": "2026-10-14"
+  "updatedOn": "2026-10-20",
+  "summary": "Load settings from files, resolve overrides, and distinguish built-in settings from custom settings."
 }

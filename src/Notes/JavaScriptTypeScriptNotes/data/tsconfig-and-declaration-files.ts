@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'tsconfig-and-declaration-files',
     title: 'Compiler configuration and declaration files',
-    summary: 'Select project inputs, checking rules, JavaScript output and declarations for consumers.',
+    summary: 'Compiler settings select project inputs, checking rules, JavaScript output and declarations for consumers.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript TSConfig reference',
@@ -24,18 +25,22 @@ const note: LearningNote = {
     sections: [
         {
             id: 'project-config',
-            title: 'Choose the project inputs',
+            title: 'Project inputs',
             bullets: [
-                'tsconfig.json describes a TypeScript project’s files and compiler options.',
-                'Run tsc -p tsconfig.json to use that project configuration. Passing source file names directly bypasses the project file.',
-                'files lists specific starting files. include selects starting files by patterns. Imported dependencies can enter the project even when excluded from an include search.',
-                'allowJs includes JavaScript files. checkJs also checks them for errors.',
+                '`tsconfig.json` describes a TypeScript project’s files and compiler options.',
+                'The command `tsc -p tsconfig.json` uses that project configuration.',
+                'Passing source file names directly bypasses the project file.',
+                '`files` lists specific starting files.',
+                '`include` selects starting files by patterns.',
+                'Imported dependencies can enter the project even when excluded from an `include` search.',
+                '`allowJs` includes JavaScript files.',
+                '`checkJs` also checks them for errors.',
             ],
             examples: [
                 {
-                    title: 'Configure one source folder',
+                    title: 'Source folder configuration',
                     description: [
-                        'Check source files with strict rules while a separate build tool produces JavaScript.',
+                        'The example checks source files with `strict` rules while a separate build tool produces JavaScript.',
                     ],
                     language: 'text',
                     code: [
@@ -51,28 +56,34 @@ const note: LearningNote = {
                         '}',
                     ].join('\n'),
                     explanation: [
-                        'Save this as tsconfig.json and run tsc -p tsconfig.json with TypeScript installed.',
-                        'Bundler module resolution fits a project whose bundler resolves imports. A Node.js project needs settings matching its module system.',
-                        'noEmit means the TypeScript compiler writes no JavaScript files.',
+                        'This example requires TypeScript.',
+                        'The configuration file is `tsconfig.json`.',
+                        'The command is `tsc -p tsconfig.json`.',
+                        'Bundler module resolution fits a project whose bundler resolves imports.',
+                        'A Node.js project needs settings matching its module system.',
+                        '`noEmit` means the TypeScript compiler writes no JavaScript files.',
                     ],
                 },
             ],
         },
         {
             id: 'strict-checking',
-            title: 'Set checking rules deliberately',
+            title: 'Checking rules',
             bullets: [
-                'strict enables a group of checks, including noImplicitAny and strictNullChecks.',
-                'noImplicitAny reports places where a type would otherwise become an implicit any.',
-                'strictNullChecks keeps null and undefined separate from other types. Strict catch variables are unknown and need checks before property access.',
-                'noUncheckedIndexedAccess and exactOptionalPropertyTypes are separate options. They are not enabled by strict.',
-                'The strict group can gain checks in a newer compiler version. Keep the project compiler version controlled.',
+                '`strict` enables a group of checks, including `noImplicitAny` and `strictNullChecks`.',
+                '`noImplicitAny` reports places where a type would otherwise become an implicit `any`.',
+                '`strictNullChecks` keeps `null` and `undefined` separate from other types.',
+                'Strict catch variables are `unknown` and need checks before property access.',
+                '`noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` are separate options.',
+                'They are not enabled by `strict`.',
+                'The `strict` group can gain checks in a newer compiler version.',
+                'A fixed project compiler version keeps these checks consistent.',
             ],
             examples: [
                 {
-                    title: 'Add stricter indexed and optional-property checks',
+                    title: 'Indexed and optional-property checks',
                     description: [
-                        'Record two checking choices that go beyond strict.',
+                        'The example records two checking choices that go beyond `strict`.',
                     ],
                     language: 'text',
                     code: [
@@ -87,27 +98,32 @@ const note: LearningNote = {
                         '}',
                     ].join('\n'),
                     explanation: [
-                        'An unchecked indexed read may be undefined under noUncheckedIndexedAccess.',
-                        'An optional property cannot explicitly receive undefined under exactOptionalPropertyTypes unless its declared value type includes undefined.',
+                        'An unchecked indexed read may be `undefined` under `noUncheckedIndexedAccess`.',
+                        'With `exactOptionalPropertyTypes` enabled, an optional property can explicitly receive `undefined` only when its value type includes `undefined`.',
                     ],
                 },
             ],
         },
         {
             id: 'emit-options',
-            title: 'Configure output for the environment',
+            title: 'JavaScript output settings',
             bullets: [
-                'target controls how JavaScript syntax is emitted. It does not install missing runtime APIs or polyfills.',
-                'module controls the output module format. moduleResolution controls how the checker finds imported modules.',
-                'lib selects built-in type declarations, such as browser DOM APIs. Declaring an API available does not provide it at runtime.',
-                'rootDir and outDir control source layout and output placement. sourceMap can link JavaScript positions back to TypeScript source.',
-                'noEmitOnError prevents output when checking reports errors. Without it, tsc can emit JavaScript despite type errors.',
+                '`target` controls how JavaScript syntax is emitted.',
+                'It does not install missing runtime APIs or polyfills.',
+                '`module` controls the output module format.',
+                '`moduleResolution` controls how the checker finds imported modules.',
+                '`lib` selects built-in type declarations, such as browser DOM APIs.',
+                'Declaring an API available does not provide it at runtime.',
+                '`rootDir` and `outDir` control source layout and output placement.',
+                '`sourceMap` can link JavaScript positions back to TypeScript source.',
+                '`noEmitOnError` prevents output when checking reports errors.',
+                'Without it, `tsc` can emit JavaScript despite type errors.',
             ],
             examples: [
                 {
-                    title: 'Emit JavaScript from source files',
+                    title: 'JavaScript output',
                     description: [
-                        'Produce JavaScript files for a bundler or another tool that supports ES modules.',
+                        'The example produces JavaScript files for a bundler or another tool that supports ES modules.',
                     ],
                     language: 'text',
                     code: [
@@ -126,14 +142,16 @@ const note: LearningNote = {
                         '}',
                     ].join('\n'),
                     explanation: [
-                        'tsc -p tsconfig.json emits files under dist when checking succeeds.',
-                        'This configuration preserves ES modules. It does not by itself configure a browser or Node.js to run them.',
+                        '`tsc -p tsconfig.json` emits files under `dist` when checking succeeds.',
+                        'This configuration preserves ES modules.',
+                        'It does not by itself configure a browser or Node.js to run them.',
                     ],
                 },
                 {
-                    title: 'Configure Node.js ES modules',
+                    title: 'Node.js ES module settings',
                     description: [
-                        'Compile relative .js imports against TypeScript source and keep them usable in Node.js output.',
+                        'The compiler checks relative `.js` imports against TypeScript source.',
+                        'The emitted imports remain usable in Node.js.',
                     ],
                     language: 'text',
                     code: [
@@ -155,27 +173,30 @@ const note: LearningNote = {
                         '}',
                     ].join('\n'),
                     explanation: [
-                        'Keep the package settings and compiler settings in separate files.',
-                        'tsc -p tsconfig.json writes JavaScript under dist when checking succeeds.',
-                        'With the preceding module example present, node dist/main.js prints Mia. These settings fit direct Node.js ESM execution rather than a bundler project.',
+                        'The example keeps the package settings and compiler settings in separate files.',
+                        '`tsc -p tsconfig.json` writes JavaScript under `dist` when checking succeeds.',
+                        'With the preceding module example present, `node dist/main.js` prints Mia.',
+                        'These settings fit direct Node.js ESM execution rather than a bundler project.',
                     ],
                 },
             ],
         },
         {
             id: 'declaration-files',
-            title: 'Describe JavaScript that exists elsewhere',
+            title: 'Declaration files',
             bullets: [
-                'A .d.ts declaration file describes types without supplying the JavaScript implementation.',
-                'A package may ship declarations beside its JavaScript. Some packages receive declarations through an @types package.',
+                'A `.d.ts` declaration file describes types without supplying the JavaScript implementation.',
+                'A package may include declarations beside its JavaScript.',
+                'Some packages receive declarations through an `@types` package.',
                 'declare describes an existing name. import type and export type mark names used only for checking.',
-                'A declaration can be inaccurate. It cannot validate the JavaScript implementation or provide a missing runtime dependency.',
+                'A declaration can be inaccurate.',
+                'It cannot validate the JavaScript implementation or provide a missing runtime dependency.',
             ],
             examples: [
                 {
-                    title: 'Describe a nearby JavaScript module',
+                    title: 'JavaScript module declarations',
                     description: [
-                        'Give a JavaScript function a declaration that TypeScript callers can use.',
+                        'The example gives a JavaScript function a declaration that TypeScript callers can use.',
                     ],
                     language: 'typescript',
                     code: [
@@ -192,26 +213,29 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: '8 when the module files are available in an ES-module environment.',
                     explanation: [
-                        'Keep the three parts in separate files beside each other.',
-                        'The .d.ts file checks the call. legacy-math.js supplies the executable function.',
-                        'The runtime must still receive legacy-math.js. Emitting app.ts alone does not necessarily copy that dependency.',
+                        'The three parts belong in separate files in the same folder.',
+                        'The `.d.ts` file checks the call.',
+                        '`legacy-math.js` supplies the executable function.',
+                        'The runtime must still receive `legacy-math.js`.',
+                        'Emitting `app.ts` alone does not necessarily copy that dependency.',
                     ],
                 },
             ],
         },
         {
             id: 'generate-declarations',
-            title: 'Generate declarations for exported names',
+            title: 'Declaration output settings',
             bullets: [
-                'declaration emits .d.ts files for exported types and values.',
-                'emitDeclarationOnly writes declarations without JavaScript. Another tool must supply JavaScript when consumers need it.',
-                'declarationMap writes maps that help editors connect declarations to source files.',
+                '`declaration` emits `.d.ts` files for exported types and values.',
+                '`emitDeclarationOnly` writes declarations without JavaScript.',
+                'Another tool must supply JavaScript when consumers need it.',
+                '`declarationMap` writes maps that help editors connect declarations to source files.',
             ],
             examples: [
                 {
-                    title: 'Emit declarations for a library',
+                    title: 'Library declarations',
                     description: [
-                        'Configure output containing declarations while another tool produces the implementation.',
+                        'The example configures output containing declarations while another tool produces the implementation.',
                     ],
                     language: 'text',
                     code: [
@@ -228,25 +252,27 @@ const note: LearningNote = {
                         '}',
                     ].join('\n'),
                     explanation: [
-                        'tsc -p tsconfig.json writes .d.ts files and declaration maps under dist.',
-                        'Do not combine this with noEmit, which prevents writing those files.',
+                        '`tsc -p tsconfig.json` writes `.d.ts` files and declaration maps under `dist`.',
+                        'The `noEmit` option prevents writing these files and cannot be combined with this output setup.',
                     ],
                 },
             ],
         },
         {
             id: 'features-that-emit-code',
-            title: 'Inspect constructs that emit JavaScript',
+            title: 'TypeScript runtime constructs',
             bullets: [
                 'Type-only declarations are removed, but some TypeScript constructs emit JavaScript.',
-                'A normal enum emits an object whose members are available at runtime. Parameter properties emit property initialization.',
-                'Inspect emitted JavaScript when a construct’s runtime behavior matters. A string literal union remains a type-only alternative for a fixed set of strings.',
+                'A normal `enum` emits an object whose members are available at runtime.',
+                'Parameter properties emit property initialization.',
+                'Emitted JavaScript shows a construct’s runtime behavior.',
+                'A `string` literal union remains a type-only alternative for a fixed set of strings.',
             ],
             examples: [
                 {
-                    title: 'Read a normal enum at runtime',
+                    title: 'Runtime enum values',
                     description: [
-                        'Observe that an enum supplies a runtime object as well as a checked type.',
+                        'The example shows that an `enum` supplies a runtime object as well as a checked type.',
                     ],
                     language: 'typescript',
                     code: [
@@ -255,8 +281,8 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'ready object',
                     explanation: [
-                        'A normal enum emits JavaScript that initializes its members.',
-                        'The status value can be read at runtime because this declaration produces an object.',
+                        'A normal `enum` emits JavaScript that initializes its members.',
+                        '`Status.Ready` can be read at runtime because the declaration produces an object.',
                     ],
                 },
             ],

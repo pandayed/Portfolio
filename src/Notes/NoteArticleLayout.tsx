@@ -7,6 +7,9 @@ import { PYTHON_NOTES_ROUTE, toHref } from '../routing/routes';
 import { notePages, noteTree, type NoteGroup, type NoteNode, type NotePage } from './noteTreeData';
 import NoteReadingTime from './NoteReadingTime';
 import { getNodeReadingMinutes, getPageReadingMinutes, getPageWordCount } from './readingTime';
+import { pythonPrerequisites } from './PythonNotes/prerequisites';
+import { frontendPrerequisites } from './frontendPrerequisites';
+import { nodePrerequisites } from './NodeNotes/nodePrerequisites';
 
 type NoteArticleLayoutProps = ComponentProps<typeof ArticleLayout>;
 
@@ -46,14 +49,16 @@ const NoteControl = ({
     );
 };
 
-const NoteArticleLayout = ({ route, children, ...props }: NoteArticleLayoutProps) => {
+const NoteArticleLayout = ({ route, children, sections, ...props }: NoteArticleLayoutProps) => {
     const index = notePages.findIndex((note) => note.route === route);
     const group = findGroupForRoute(noteTree, route);
+    const prerequisites = frontendPrerequisites.get(route) ?? nodePrerequisites.get(route) ?? pythonPrerequisites.get(route);
 
     return (
         <ArticleLayout
             {...props}
             route={route}
+            sections={prerequisites ? [{ id: 'note-prerequisites', title: 'Prerequisites' }, ...sections] : sections}
             headerMeta={(
                 <div className="NoteReadingTime__metadata">
                     <NoteReadingTime minutes={getPageReadingMinutes(route)} wordCount={getPageWordCount(route)} />
@@ -66,6 +71,20 @@ const NoteArticleLayout = ({ route, children, ...props }: NoteArticleLayoutProps
                 </div>
             )}
         >
+            {prerequisites && (
+                <section className="Article__section" aria-labelledby="note-prerequisites">
+                    <h2 id="note-prerequisites" className="SectionTitle">Prerequisites</h2>
+                    {prerequisites.length > 0 ? (
+                        <ul className="Article__notes">
+                            {prerequisites.map((note) => (
+                                <li key={note.route}>
+                                    <a href={toHref(note.route)} className="Link Link--standalone">{note.title}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : <p>No prior notes required.</p>}
+                </section>
+            )}
             {children}
             {index >= 0 && (
                 <nav className="NoteNavigation" aria-label="Previous and next notes">

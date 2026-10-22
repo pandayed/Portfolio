@@ -8,13 +8,16 @@ const documents = import.meta.glob<SpringBootDocument>('./pages/**/*.json', {
 export const springBootChapters: readonly SpringBootChapter[] = [
     {
         "title": "1. Application foundations",
-        "summary": "Create a project, then learn beans, dependencies, and startup.",
+        "summary": "Run the project, register objects with Spring, then follow injection and startup.",
         "children": [
             {
                 "slug": "first-application"
             },
             {
                 "slug": "project-structure"
+            },
+            {
+                "slug": "starter-projects-auto-configuration"
             },
             {
                 "slug": "maven-gradle"
@@ -29,9 +32,6 @@ export const springBootChapters: readonly SpringBootChapter[] = [
                 "slug": "spring-boot-application"
             },
             {
-                "slug": "starter-projects-auto-configuration"
-            },
-            {
                 "slug": "auto-configuration"
             },
             {
@@ -41,22 +41,22 @@ export const springBootChapters: readonly SpringBootChapter[] = [
     },
     {
         "title": "2. Configuration",
-        "summary": "Set values, select profiles, then read settings in Java.",
+        "summary": "Read configuration values in Java, then select environment-specific settings.",
         "children": [
             {
                 "slug": "application-properties"
             },
             {
-                "slug": "profiles-configuration-management"
+                "slug": "configuration-binding"
             },
             {
-                "slug": "configuration-binding"
+                "slug": "profiles-configuration-management"
             }
         ]
     },
     {
         "title": "3. REST APIs",
-        "summary": "Handle a request, read its input, then control responses and failures.",
+        "summary": "Add controller mappings, bind inputs, and handle responses and failures.",
         "children": [
             {
                 "slug": "restful-web-services"
@@ -71,9 +71,6 @@ export const springBootChapters: readonly SpringBootChapter[] = [
                 "slug": "request-response-body"
             },
             {
-                "slug": "request-flow"
-            },
-            {
                 "slug": "rest/responses"
             },
             {
@@ -83,13 +80,16 @@ export const springBootChapters: readonly SpringBootChapter[] = [
                 "slug": "exception-handling"
             },
             {
+                "slug": "request-flow"
+            },
+            {
                 "slug": "openapi"
             }
         ]
     },
     {
         "title": "4. Data access",
-        "summary": "Connect to a database before mapping records and writing queries.",
+        "summary": "Learn persistence with PostgreSQL and Spring Data JPA.",
         "children": [
             {
                 "slug": "relational-databases"
@@ -111,39 +111,12 @@ export const springBootChapters: readonly SpringBootChapter[] = [
             },
             {
                 "slug": "jpa-fetching"
-            },
-            {
-                "title": "MongoDB",
-                "slug": "mongodb",
-                "children": [
-                    {
-                        "slug": "mongodb"
-                    },
-                    {
-                        "slug": "mongodb/documents"
-                    },
-                    {
-                        "slug": "mongodb/repositories"
-                    },
-                    {
-                        "slug": "mongodb/queries"
-                    },
-                    {
-                        "slug": "mongodb/indexes"
-                    },
-                    {
-                        "slug": "mongodb/relationships"
-                    },
-                    {
-                        "slug": "mongodb/transactions"
-                    }
-                ]
             }
         ]
     },
     {
         "title": "5. Security",
-        "summary": "Identify users, apply access rules, then configure token or browser login.",
+        "summary": "Configure the security chain before adding users, access rules, and token or browser login.",
         "children": [
             {
                 "slug": "security-basics"
@@ -152,19 +125,19 @@ export const springBootChapters: readonly SpringBootChapter[] = [
                 "slug": "security/authentication-authorization"
             },
             {
-                "slug": "security/ownership"
+                "slug": "security/browser-security"
             },
             {
-                "slug": "security/browser-security"
+                "slug": "security/ownership"
             },
             {
                 "slug": "security/jwt"
             },
             {
-                "slug": "security/resource-server"
+                "slug": "security/oauth2"
             },
             {
-                "slug": "security/oauth2"
+                "slug": "security/resource-server"
             },
             {
                 "slug": "security/google-login"
@@ -173,7 +146,7 @@ export const springBootChapters: readonly SpringBootChapter[] = [
     },
     {
         "title": "6. Development and diagnostics",
-        "summary": "Use logging, development tools, monitoring, and generated methods.",
+        "summary": "Configure diagnostics and development tools after the application behavior is understood.",
         "children": [
             {
                 "slug": "logging"
@@ -191,7 +164,7 @@ export const springBootChapters: readonly SpringBootChapter[] = [
     },
     {
         "title": "7. Testing and code quality",
-        "summary": "Test Java behavior before adding Spring context and HTTP checks.",
+        "summary": "Move from plain Java tests to MVC slices and a full Spring application context.",
         "children": [
             {
                 "slug": "test-framework"
@@ -218,7 +191,7 @@ export const springBootChapters: readonly SpringBootChapter[] = [
     },
     {
         "title": "8. Integrations and background work",
-        "summary": "Call services, schedule operations, cache data, and process events.",
+        "summary": "Add separate integrations after the core application. Each lesson names its setup.",
         "children": [
             {
                 "slug": "integrations/external-apis"
@@ -248,7 +221,7 @@ export const springBootChapters: readonly SpringBootChapter[] = [
     },
     {
         "title": "9. Packaging and deployment",
-        "summary": "Package a runnable application, then choose and configure its host.",
+        "summary": "Build one executable artifact, then supply the settings and host it needs.",
         "children": [
             {
                 "slug": "executable-jars-deployment"
@@ -266,7 +239,7 @@ export const springBootChapters: readonly SpringBootChapter[] = [
     },
     {
         "title": "10. Annotations at a glance",
-        "summary": "Follow annotations in learning order and open their detailed lessons.",
+        "summary": "Look up annotations after reading their main lessons.",
         "children": [
             {
                 "slug": "annotations"

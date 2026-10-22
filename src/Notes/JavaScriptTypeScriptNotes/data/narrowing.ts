@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'narrowing',
     title: 'Narrowing',
-    summary: 'Use conditions to select the remaining possible types before member-specific operations.',
+    summary: 'Conditions reduce the possible types before operations that require a specific type.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Narrowing',
@@ -16,17 +17,17 @@ const note: LearningNote = {
     sections: [
         {
             id: 'control-flow-narrowing',
-            title: 'Narrow with a condition and return',
+            title: 'Control flow narrowing',
             bullets: [
                 'Narrowing reduces the possible types at a particular point in the code.',
-                'A typeof condition identifies a primitive member of a union.',
+                'A `typeof` condition identifies a primitive member of a union.',
                 'After a branch returns, TypeScript can exclude that branch from the remaining code.',
             ],
             examples: [
                 {
-                    title: 'Format a string or a number',
+                    title: 'String and number formatting',
                     description: [
-                        'Select the operation appropriate to the received union member.',
+                        'The example selects the operation appropriate to the received union member.',
                     ],
                     language: 'typescript',
                     code: [
@@ -41,24 +42,25 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'READY\n3.00',
                     explanation: [
-                        'The matching branch knows value is a string.',
-                        'Only a number reaches the final return.',
+                        'The matching branch knows `value` is a `string`.',
+                        'Only a `number` reaches the final return.',
                     ],
                 },
             ],
         },
         {
             id: 'nullable-values',
-            title: 'Exclude missing values explicitly',
+            title: 'Missing values',
             bullets: [
-                'A null or undefined check allows operations on the remaining union members.',
-                'A truthiness check also excludes valid falsy values such as an empty string or zero. Use explicit missing-value checks when these values should remain valid.',
+                'A `null` or `undefined` check allows operations on the remaining union members.',
+                'A truthiness check also excludes valid falsy values such as an empty `string` or zero.',
+                'Explicit missing-value checks preserve these values.',
             ],
             examples: [
                 {
-                    title: 'Preserve a valid empty string',
+                    title: 'Empty and missing strings',
                     description: [
-                        'Handle missing nicknames without treating an empty nickname as missing.',
+                        'The example handles missing nicknames without treating an empty `nickname` as missing.',
                     ],
                     language: 'typescript',
                     code: [
@@ -72,25 +74,26 @@ const note: LearningNote = {
                     result: 'Missing READY\ntrue',
                     explanation: [
                         'The early return excludes both missing values.',
-                        'The empty string reaches the string operation and stays empty.',
+                        'The empty `string` reaches the `string` operation and stays empty.',
                     ],
                 },
             ],
         },
         {
             id: 'array-equality-and-in-checks',
-            title: 'Check arrays and object properties',
+            title: 'Array and property checks',
             bullets: [
-                'Array.isArray distinguishes an array from other members of a union.',
-                'The in operator checks for a property. Members with that required property remain in the matching branch.',
-                'A member with an optional property can remain possible in both branches of an in check.',
-                'instanceof narrows values to instances of a constructor, such as Error.',
+                '`Array.isArray` distinguishes an array from other members of a union.',
+                'The `in` operator checks for a property.',
+                'Members with that required property remain in the matching branch.',
+                'A member with an optional property can remain possible in both branches of an `in` check.',
+                '`instanceof` narrows values to instances of a constructor, such as `Error`.',
             ],
             examples: [
                 {
-                    title: 'Select one contact property',
+                    title: 'Contact properties',
                     description: [
-                        'Read the field required by the matching object union member.',
+                        'The example reads the field required by the matching object union member.',
                     ],
                     language: 'typescript',
                     code: [
@@ -104,14 +107,14 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'mia@example.com\n123',
                     explanation: [
-                        'email is required in only the first declared union member.',
-                        'The remaining branch has the required phone property.',
+                        '`email` is required in only the first declared union member.',
+                        'The remaining branch has the required `phone` property.',
                     ],
                 },
                 {
-                    title: 'Select an array operation',
+                    title: 'Arrays and individual strings',
                     description: [
-                        'Join a list while returning an individual string unchanged.',
+                        'The example joins a list while returning an individual `string` unchanged.',
                     ],
                     language: 'typescript',
                     code: [
@@ -123,24 +126,24 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Mia, Noah',
                     explanation: [
-                        'The array check narrows value to string[] before join.',
-                        'The other branch receives a string.',
+                        'The array check narrows `value` to `string[]` before `join`.',
+                        'The other branch receives a `string`.',
                     ],
                 },
             ],
         },
         {
             id: 'discriminated-unions',
-            title: 'Use one property to identify a state',
+            title: 'Discriminated unions',
             bullets: [
                 'A discriminated union shares a property whose literal value distinguishes its members.',
                 'Checking that property narrows the whole object and selects the fields available in that state.',
             ],
             examples: [
                 {
-                    title: 'Read the fields of the selected state',
+                    title: 'Success and error states',
                     description: [
-                        'Represent success and failure without making every field optional.',
+                        'The example represents success and failure without making every field optional.',
                     ],
                     language: 'typescript',
                     code: [
@@ -156,25 +159,26 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Saved\nFailed',
                     explanation: [
-                        'The success member requires data and the error member requires message.',
-                        'The status check selects the matching requirement.',
+                        'The success member requires `data`.',
+                        'The error member requires `message`.',
+                        'The `status` check selects the matching requirement.',
                     ],
                 },
             ],
         },
         {
             id: 'exhaustive-union-checks',
-            title: 'Detect an unhandled member with never',
+            title: 'Exhaustive union checks',
             bullets: [
-                'never describes a value that cannot occur.',
-                'After handling every union member, the remaining value can be assigned to never.',
+                '`never` describes a value that cannot occur.',
+                'After handling every union member, the remaining value can be assigned to `never`.',
                 'Adding an unhandled member makes that assignment fail during checking.',
             ],
             examples: [
                 {
-                    title: 'Check that every direction is handled',
+                    title: 'Direction cases',
                     description: [
-                        'Make a future added direction produce a checking error until it has a case.',
+                        'An added direction produces a type error until it has a matching case.',
                     ],
                     language: 'typescript',
                     code: [
@@ -193,8 +197,8 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: '1 -1',
                     explanation: [
-                        'Both current members return before default.',
-                        'Adding "east" to Direction without a case makes the never assignment fail.',
+                        'Both current members return before `default`.',
+                        'Adding `"east"` to `Direction` without a case makes the `never` assignment fail.',
                     ],
                 },
             ],

@@ -1,113 +1,864 @@
 {
   "id": "8a728460-71ee-435d-8be6-43de192181a2",
   "sourceUrl": "https://docs.spring.io/spring-boot/3.5/reference/",
-  "title": "Controller, service and repository",
+  "title": "Spring MVC request flow",
   "blocks": [
     {
-      "id": "request-flow-0",
+      "id": "request-flow-servlets",
       "type": "header",
       "richText": [
         [
-          "Responsibilities"
+          "Servlets"
         ]
       ]
     },
     {
-      "id": "request-flow-0-point-0",
+      "id": "request-flow-servlets-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A controller reads HTTP input and chooses the HTTP response."
+          "A servlet is a Java object that a servlet container calls to process a request and produce a response."
         ]
       ]
     },
     {
-      "id": "request-flow-0-point-1",
+      "id": "request-flow-servlets-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A service performs application operations and applies application rules."
+          "The servlet contract belongs to Jakarta Servlet, a Java web API."
         ]
       ]
     },
     {
-      "id": "request-flow-0-point-2",
+      "id": "request-flow-servlets-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A repository reads or writes stored data."
+          "It is not a Java language feature or part of the core JDK. It is not specific to Spring."
         ]
       ]
     },
     {
-      "id": "request-flow-0-point-3",
+      "id": "request-flow-servlets-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "These are separate responsibilities. A simple endpoint does not need a service and repository if it has no application operation or stored data."
+          "jakarta.servlet.Servlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " defines the servlet interface."
         ]
       ]
     },
     {
-      "id": "request-flow-1",
+      "id": "request-flow-servlets-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "jakarta.servlet.http.HttpServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is a base class for HTTP servlets."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-servlets-point-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "HttpServlet.service",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " dispatches HTTP requests to methods such as "
+        ],
+        [
+          "doGet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "doPost",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-servlets-point-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Older Java web tutorials use "
+        ],
+        [
+          "javax.servlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". Spring Boot 3 uses "
+        ],
+        [
+          "jakarta.servlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-container",
       "type": "header",
       "richText": [
         [
-          "Request order"
+          "Servlet container"
         ]
       ]
     },
     {
-      "id": "request-flow-1-point-0",
+      "id": "request-flow-container-point-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Servlet filters run before the controller. Spring Security uses filters when configured."
+          "A servlet container runs servlets and connects them to incoming requests."
         ]
       ]
     },
     {
-      "id": "request-flow-1-point-1",
+      "id": "request-flow-container-point-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring MVC selects a controller method using the request mapping."
+          "Tomcat includes a servlet container. The Spring Web starter includes embedded Tomcat by default in these Boot 3.5 examples."
         ]
       ]
     },
     {
-      "id": "request-flow-1-point-2",
+      "id": "request-flow-container-point-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The controller calls the service. The service calls the repository when it needs stored data."
+          "Embedded means Tomcat runs inside the application process. A separate Tomcat installation is not required for the executable JAR."
         ]
       ]
     },
     {
-      "id": "request-flow-1-point-3",
+      "id": "request-flow-container-point-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "The result returns through the service to the controller. A message converter writes the response body."
+          "The container uses servlet mappings to select the servlet for a request."
         ]
       ]
     },
     {
-      "id": "request-flow-1-point-4",
+      "id": "request-flow-container-point-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Transaction boundaries belong around the operation that needs atomic database work, often a service method. The data-access lessons explain transactions."
+          "It calls "
+        ],
+        [
+          "init",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " before serving requests, "
+        ],
+        [
+          "service",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for request processing, and "
+        ],
+        [
+          "destroy",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " when taking the servlet out of service."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-container-point-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The same servlet instance can serve requests on multiple threads. Its mutable fields are not request-local storage."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-dispatcher",
+      "type": "header",
+      "richText": [
+        [
+          "Spring\u2019s DispatcherServlet"
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-dispatcher-point-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "DispatcherServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is Spring MVC\u2019s servlet implementation."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-dispatcher-point-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The servlet container calls it. Spring MVC then finds and invokes the matching controller method."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-dispatcher-point-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A "
+        ],
+        [
+          "@RestController",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " class is a Spring controller bean, not a servlet class."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-dispatcher-point-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot configures and registers "
+        ],
+        [
+          "DispatcherServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for the standard Spring MVC application."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-dispatcher-point-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Application endpoints normally use controllers. They do not each need a custom "
+        ],
+        [
+          "HttpServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " subclass."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-0",
+      "type": "header",
+      "richText": [
+        [
+          "Request path through Tomcat and Spring MVC"
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-servlet-path",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For a normal synchronous MVC request, Tomcat runs the filter chain, calls "
+        ],
+        [
+          "DispatcherServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and Spring MVC invokes the controller."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-0-table-0",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "request-flow-lesson-0-table-0-row-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Stage"
+              ]
+            ],
+            "1": [
+              [
+                "What runs"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Servlet filters"
+              ]
+            ],
+            "1": [
+              [
+                "The servlet container runs the filter chain before the request reaches "
+              ],
+              [
+                "DispatcherServlet",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                "."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Handler lookup"
+              ]
+            ],
+            "1": [
+              [
+                "Spring MVC finds a controller method from its registered request mappings."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Argument resolution"
+              ]
+            ],
+            "1": [
+              [
+                "Spring supplies path, query, header, and other method arguments."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-4",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Body conversion"
+              ]
+            ],
+            "1": [
+              [
+                "A message converter reads an argument marked with "
+              ],
+              [
+                "@RequestBody",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                "."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-5",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Validation"
+              ]
+            ],
+            "1": [
+              [
+                "Validation checks applicable constraints before a successful handler call."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-6",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Controller call"
+              ]
+            ],
+            "1": [
+              [
+                "The controller calls application code and returns its result."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-7",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Response handling"
+              ]
+            ],
+            "1": [
+              [
+                "Spring handles the return type and writes the response through a suitable converter."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "request-flow-lesson-0-table-0-row-8",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Filter return"
+              ]
+            ],
+            "1": [
+              [
+                "Control returns through the filters after downstream processing."
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1",
+      "type": "header",
+      "richText": [
+        [
+          "Application calls"
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The framework calls the controller method. The controller's own Java code decides which service methods to call."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A service calls a repository only when the operation needs stored data."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring does not connect a controller, service, and repository merely because their class names use those words."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Constructor injection supplies their dependencies. Ordinary method calls perform the operation."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The greeting controller called its injected service in the controller lesson."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The response lesson used an in-memory map, so it did not need a database repository."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The relational data lessons introduce actual repository interfaces and database transactions."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Failure paths"
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Argument conversion or validation can stop processing before the handler method runs."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An exception from the handler or the service can enter MVC exception resolution."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A matching controller exception handler or advice can return the error response."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A filter can stop the request before "
+        ],
+        [
+          "DispatcherServlet",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", so controller advice is not a handler for every filter failure."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Spring Security lessons explain its filters and their authentication and access error responses."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3",
+      "type": "header",
+      "richText": [
+        [
+          "Interceptors"
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A Spring MVC "
+        ],
+        [
+          "HandlerInterceptor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can run around a mapped handler inside MVC processing."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "preHandle",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " runs before the handler. Returning "
+        ],
+        [
+          "false",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " stops that handler invocation."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "postHandle",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " runs after a successful handler call, before MVC finishes rendering the response."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "afterCompletion",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " runs when request processing completes for an interceptor whose "
+        ],
+        [
+          "preHandle",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " succeeded."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A "
+        ],
+        [
+          "WebMvcConfigurer",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean registers MVC interceptors through "
+        ],
+        [
+          "addInterceptors",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Filters operate at the servlet-container boundary. Interceptors participate inside Spring MVC."
+        ]
+      ]
+    },
+    {
+      "id": "request-flow-lesson-3-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Security supplies dedicated security filters. MVC interceptors are not a replacement for that security configuration."
         ]
       ]
     }
   ],
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-21",
   "sources": [
     {
       "title": "Official reference: Controller, service and repository",
       "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-servlet.html"
+    },
+    {
+      "title": "Spring MVC 6.2: DispatcherServlet",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-servlet.html"
+    },
+    {
+      "title": "Spring MVC 6.2: processing sequence",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-servlet/sequence.html"
+    },
+    {
+      "title": "Spring MVC 6.2: interceptors",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-config/interceptors.html"
+    },
+    {
+      "title": "Spring MVC 6.2: filters",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/filters.html"
+    },
+    {
+      "title": "Jakarta Servlet 6: Servlet contract and lifecycle",
+      "url": "https://jakarta.ee/specifications/servlet/6.0/apidocs/jakarta.servlet/jakarta/servlet/Servlet.html"
+    },
+    {
+      "title": "Jakarta Servlet 6: HttpServlet",
+      "url": "https://jakarta.ee/specifications/servlet/6.0/apidocs/jakarta.servlet/jakarta/servlet/http/HttpServlet.html"
     }
-  ]
+  ],
+  "summary": "Connect controller lessons into the actual servlet, MVC, application, and response sequence."
 }

@@ -228,68 +228,54 @@ export const useUsers = () => {
 
 const ApiCommunication = () => (
     <ArticleLayout
-        title="The Anatomy of API Communication in a React Application"
+        title="API communication in React"
         route={API_COMMUNICATION_ROUTE}
         sections={sections}
         backRoute={NOTES_ROUTE}
         backLabel="Back to notes"
     >
         <section className="Article__section">
-            <p>Not for beginners. Must have a little experience in JS and web applications.</p>
-            <p>
-                Every modern web application needs to talk to a server. A user clicks a button,
-                the application sends a request, the server responds, and the interface updates.
-                This sounds simple, but the code that makes it happen can become tangled and
-                fragile if not structured deliberately.
-            </p>
-            <p>
-                This document walks through the layered architecture that has become the standard
-                approach for handling API communication in React applications. Each layer exists
-                for a specific reason, solves a specific problem, and has a clear boundary. By the
-                end, you will understand not just what each layer does, but why it must exist as a
-                separate concern.
-            </p>
+            <ul className="Article__notes">
+                <li>The notes assume basic JavaScript and web application experience.</li>
+                <li>An API request sends data to a server or reads data from it.</li>
+                <li>This structure separates HTTP configuration, endpoint calls, server state, and rendering.</li>
+                <li>The layers are project choices. React does not require this structure.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="browser-runtime">
             <h2 id="browser-runtime" className="SectionTitle">
-                The Browser Runtime – Where It All Begins
+                Browser runtime
             </h2>
-            <p>
-                Before any library or framework enters the picture, the browser provides two
-                built-in mechanisms for making HTTP requests:
-            </p>
             <ul className="Article__notes">
-                <li><code>XMLHttpRequest</code> – the older API, available since the early 2000s</li>
-                <li><code>fetch</code> – the modern API, standardized by WHATWG and available in all current browsers</li>
+                <li>The browser provides APIs for HTTP requests.</li>
+
+                <li><code>XMLHttpRequest</code> is the older browser request API.</li>
+                <li><code>fetch</code> is a browser request API standardized by WHATWG.</li>
+
+                <li>These Web APIs are provided by the browser runtime.</li>
+                <li>JavaScript code calls them to send requests.</li>
+
+                <li>This <code>fetch</code> call includes headers, credentials, status checking, and JSON parsing.</li>
             </ul>
-            <p>
-                These are not JavaScript features. They are Web APIs – capabilities provided by
-                the browser’s runtime environment and exposed to JavaScript code running inside it.
-                JavaScript is the language you use to invoke them, but the networking capability
-                belongs to the browser engine.
-            </p>
-            <p>A raw <code>fetch</code> call looks like this:</p>
             <CodeBlock language="typescript">{rawFetchExample}</CodeBlock>
-            <p>
-                This works. But imagine writing this for every API call in an application with
-                fifty endpoints. You would repeat the headers, the credentials setting, the error
-                checking, and the JSON parsing fifty times. If the authentication scheme changes,
-                you edit fifty files.
-            </p>
-            <p>This is the problem the first layer solves.</p>
+            <ul className="Article__notes">
+                <li>Repeated request code can duplicate headers, credential settings, error checks, and JSON parsing.</li>
+                <li>A shared API client keeps common request settings in one place.</li>
+            </ul>
+
         </section>
 
         <section className="Article__section" aria-labelledby="http-client-library">
             <h2 id="http-client-library" className="SectionTitle">
-                The HTTP Client Library – Taming the Transport
+                HTTP client library
             </h2>
-            <p>
-                An HTTP client library wraps the browser’s raw APIs and provides a more convenient
-                interface. Axios is the most widely used choice in React applications. ky, wretch,
-                and redaxios are some more.
-            </p>
-            <p>What a library like Axios gives you over raw <code>fetch</code>:</p>
+            <ul className="Article__notes">
+                <li>An HTTP client library provides an interface to the browser’s request APIs.</li>
+                <li>Axios, <code>ky</code>, <code>wretch</code>, and <code>redaxios</code> are examples.</li>
+
+                <li>The table compares <code>fetch</code> and Axios.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead><tr><th scope="col">Concern</th><th scope="col">Raw <code>fetch</code></th><th scope="col">Axios</th></tr></thead>
@@ -303,69 +289,65 @@ const ApiCommunication = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                But installing Axios alone does not solve the duplication problem. You need to
-                configure an instance – and that configured instance becomes your API client.
-            </p>
+            <ul className="Article__notes">
+                <li>A configured Axios instance shares request settings across API calls.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="api-client">
-            <h2 id="api-client" className="SectionTitle">The API Client – One Place for Transport Configuration</h2>
-            <p>
-                The API client is a configured HTTP instance that encapsulates every decision
-                about how to communicate with the server. It knows nothing about what data to
-                request. It only knows the mechanics of transport.
-            </p>
+            <h2 id="api-client" className="SectionTitle">API client</h2>
+            <ul className="Article__notes">
+                <li>An API client is a configured HTTP client instance.</li>
+                <li>It handles common request settings such as headers, credentials, and timeouts.</li>
+                <li>Service functions choose which endpoint to call.</li>
+            </ul>
             <CodeBlock language="typescript">{apiClientExample}</CodeBlock>
-            <p>What belongs in this layer:</p>
+
             <ul className="Article__notes">
                 <li>Base URL configuration</li><li>Timeout settings</li><li>Authentication header injection</li>
                 <li>Credential handling (cookies, tokens)</li><li>Global error interception (e.g., redirect on 401)</li>
                 <li>Request/response logging</li><li>Retry logic for transient failures</li>
+
+                <li>Endpoint paths, operation-specific parameters, data transformations, and business rules belong in service functions in this structure.</li>
             </ul>
-            <p>What does NOT belong here:</p>
-            <ul className="Article__notes">
-                <li>Endpoint URLs</li><li>Request parameters for specific API calls</li>
-                <li>Response data transformation</li><li>Business logic of any kind</li>
-            </ul>
-            <h3 className="Article__subTitle">When would this layer change?</h3>
+            <h3 className="Article__subTitle">Change triggers</h3>
             <ul className="Article__notes">
                 <li>The server moves to a different domain</li><li>The authentication mechanism changes</li>
-                <li>You need to add request logging or telemetry</li><li>Timeout requirements change</li>
-                <li>You switch from Axios to <code>fetch</code> or another library</li>
+                <li>Request logging or telemetry requirements change</li><li>Timeout requirements change</li>
+                <li>The project switches from Axios to <code>fetch</code> or another library</li>
             </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="service-functions">
-            <h2 id="service-functions" className="SectionTitle">Service Functions – Encoding API Knowledge</h2>
-            <p>
-                A service function knows what to ask the server for. It maps a business operation
-                to a specific HTTP request: which endpoint, which HTTP method, which parameters,
-                and what the response looks like.
-            </p>
+            <h2 id="service-functions" className="SectionTitle">Service functions</h2>
+            <ul className="Article__notes">
+                <li>A service function maps an application operation to an HTTP request.</li>
+                <li>It defines the endpoint, method, parameters, request body, and response type.</li>
+            </ul>
             <CodeBlock language="typescript">{serviceExample}</CodeBlock>
-            <p>Does:</p>
+
             <ul className="Article__notes">
                 <li>Maps business operations to endpoints (<code>getAll</code> –&gt; <code>GET /users</code>)</li>
                 <li>Defines TypeScript types for requests and responses</li>
                 <li>Constructs query parameters and request bodies</li>
-                <li>Provides a clean, typed interface for the rest of the application</li>
+                <li>Provides typed request functions for other application code</li>
+
+                <li>The API client sets shared headers and authentication.</li>
+                <li>Hooks manage loading, error state, and cached responses.</li>
+                <li>Components render the interface.</li>
             </ul>
-            <p>Does not:</p>
+            <h3 className="Article__subTitle">Service function reuse</h3>
             <ul className="Article__notes">
-                <li>Set headers or authentication (that is the API client’s job)</li>
-                <li>Manage loading or error states (that is the hook’s job)</li>
-                <li>Cache responses (that is the hook’s job)</li>
-                <li>Render anything (that is the component’s job)</li>
+                <li>Small projects can keep endpoint calls in hooks.</li>
+                <li>Separate service functions help when multiple callers need the same request.</li>
+
+                <li>Multiple hooks can share one service function.</li>
+                <li><code>useUser</code> and <code>useUserProfile</code> can both call <code>getById</code>.</li>
+                <li>Plain service functions can also run outside React, including in utility code, Web Workers, and test setup.</li>
+                <li>Hooks run inside React function components or other hooks.</li>
+                <li>A shared service function keeps an endpoint path and its parameters in one place.</li>
             </ul>
-            <h3 className="Article__subTitle">Why not put this logic directly in hooks?</h3>
-            <p>You could. Many small projects do. But consider these scenarios:</p>
-            <ol className="Article__steps">
-                <li>Multiple hooks need the same API call. A <code>useUser</code> hook and a <code>useUserProfile</code> hook might both call <code>getById</code>. Without a service function, you duplicate the endpoint URL and parameter logic.</li>
-                <li>You need to call an API outside of React. A utility function, a Web Worker, or a test setup might need to fetch users. Service functions are plain functions – they work anywhere. Hooks only work inside React components.</li>
-                <li>The endpoint changes. With a service layer, you change one file. Without it, you grep through every hook that hardcodes that URL.</li>
-            </ol>
-            <h3 className="Article__subTitle">When would this layer change?</h3>
+            <h3 className="Article__subTitle">Change triggers</h3>
             <ul className="Article__notes">
                 <li>An endpoint URL changes</li><li>Request or response shape changes</li>
                 <li>A new API endpoint is added</li><li>Query parameter requirements change</li>
@@ -373,29 +355,32 @@ const ApiCommunication = () => (
         </section>
 
         <section className="Article__section" aria-labelledby="hooks">
-            <h2 id="hooks" className="SectionTitle">Hooks – Bridging Server State and React</h2>
-            <p>
-                React components need more than raw data. They need to know: Is the data loading?
-                Did the request fail? Is the data stale? Should it be refetched? What happens when
-                the user navigates away and comes back?
-            </p>
-            <p>
-                This is server state management, and it is a fundamentally different problem from
-                making HTTP requests. Libraries like TanStack Query (formerly React Query) and SWR
-                solve this problem.
-            </p>
-            <p>A hook wraps a service function and adds all the behavior that React components need.</p>
+            <h2 id="hooks" className="SectionTitle">Hooks and server state</h2>
+            <ul className="Article__notes">
+                <li>Server state is data managed by a server and read by the application.</li>
+                <li>Components also need loading, error, and freshness information.</li>
+                <li>They may need to refresh data when the user returns to a page.</li>
+
+                <li>TanStack Query, formerly React Query, and SWR manage server state.</li>
+                <li>Server state management includes caching and refetching as well as sending requests.</li>
+
+                <li>A custom hook connects a service function to React state and query settings.</li>
+            </ul>
             <CodeBlock language="typescript">{hooksExample}</CodeBlock>
-            <h3 className="Article__subTitle">What TanStack Query handles that you would otherwise build manually</h3>
-            <p>Without TanStack Query, a component that fetches a user list looks like this:</p>
+            <h3 className="Article__subTitle">Manual fetching and query hooks</h3>
+            <ul className="Article__notes">
+                <li>This component manages loading, results, errors, and cleanup with <code>useEffect</code>.</li>
+            </ul>
             <CodeBlock language="typescript">{manualFetchingExample}</CodeBlock>
-            <p>
-                You write this boilerplate for every data-fetching component. And you still have no
-                caching, no deduplication, no background refetching, no retry logic.
-            </p>
-            <p>With TanStack Query:</p>
+            <ul className="Article__notes">
+                <li>The manual example does not provide caching, shared requests, background refetching, or retries.</li>
+
+                <li>The query hook supplies the request state to the component.</li>
+            </ul>
             <CodeBlock language="typescript">{queryFetchingExample}</CodeBlock>
-            <p>One line. And you get all of the following for free:</p>
+            <ul className="Article__notes">
+                <li>TanStack Query supports the features below. Their behavior depends on query settings.</li>
+            </ul>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead><tr><th scope="col">Feature</th><th scope="col">Description</th></tr></thead>
@@ -411,28 +396,24 @@ const ApiCommunication = () => (
                     </tbody>
                 </table>
             </div>
-            <h3 className="Article__subTitle">When would this layer change?</h3>
+            <h3 className="Article__subTitle">Change triggers</h3>
             <ul className="Article__notes">
                 <li>Cache duration requirements change</li><li>Retry policy changes</li>
-                <li>You need to add optimistic updates to a mutation</li>
+                <li>A mutation needs optimistic updates</li>
                 <li>Query invalidation relationships change</li>
                 <li>Polling or real-time refetch behavior is added</li>
             </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="components">
-            <h2 id="components" className="SectionTitle">Components – Pure Rendering</h2>
-            <p>
-                The component is the final consumer. It calls a hook, receives data and state, and
-                renders UI. It knows nothing about HTTP, endpoints, caching, or Axios.
-            </p>
+            <h2 id="components" className="SectionTitle">Components</h2>
+            <ul className="Article__notes">
+                <li>The component calls hooks and renders their data and request state.</li>
+                <li>In this structure, hooks and service functions handle requests and caching.</li>
+            </ul>
             <CodeBlock language="typescript">{componentExample}</CodeBlock>
-            <p>
-                The component’s only job is to translate data into pixels. If you can look at a
-                component and immediately understand what it renders without needing to understand
-                HTTP or caching, the architecture is working.
-            </p>
-            <h3 className="Article__subTitle">When would this layer change?</h3>
+
+            <h3 className="Article__subTitle">Change triggers</h3>
             <ul className="Article__notes">
                 <li>The UI design changes</li><li>User interaction behavior changes</li>
                 <li>A new piece of data needs to be displayed</li><li>Layout or styling changes</li>
@@ -440,55 +421,64 @@ const ApiCommunication = () => (
         </section>
 
         <section className="Article__section" aria-labelledby="complete-picture">
-            <h2 id="complete-picture" className="SectionTitle">The Complete Picture</h2>
-            <p>Here is the full stack, from the lowest level to the highest, with the library or provider responsible for each:</p>
+            <h2 id="complete-picture" className="SectionTitle">Layer dependencies</h2>
+            <ul className="Article__notes">
+                <li>The diagram lists the layers from the component to the browser request API.</li>
+            </ul>
             <CodeBlock language="typescript">{completePicture}</CodeBlock>
-            <p>Each layer depends only on the one directly below it. A change in any layer does not ripple upward or downward.</p>
+            <ul className="Article__notes">
+                <li>Each layer calls the layer directly below it.</li>
+                <li>Stable interfaces can limit changes in callers.</li>
+                <li>A changed response type or request contract can still require changes across layers.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="skip-a-layer">
-            <h2 id="skip-a-layer" className="SectionTitle">When to Skip a Layer</h2>
-            <p>This architecture is not dogma. Smaller projects can reasonably collapse layers:</p>
-            <h3 className="Article__subTitle">Skip the service function layer when:</h3>
+            <h2 id="skip-a-layer" className="SectionTitle">Optional layers</h2>
+            <ul className="Article__notes">
+                <li>Small projects can combine layers when separate files do not add useful separation.</li>
+            </ul>
+            <h3 className="Article__subTitle">Projects without separate service functions</h3>
             <ul className="Article__notes">
                 <li>The project has fewer than ten endpoints</li><li>Each API call is used by exactly one hook</li>
                 <li>There is no need to call APIs outside of React components</li>
             </ul>
-            <h3 className="Article__subTitle">Skip TanStack Query when:</h3>
+            <h3 className="Article__subTitle">Projects without a server state library</h3>
             <ul className="Article__notes">
                 <li>The application makes very few API calls</li>
                 <li>There is no need for caching, deduplication, or background refetching</li>
                 <li>The data is write-heavy with minimal read operations</li>
             </ul>
-            <h3 className="Article__subTitle">Skip Axios when:</h3>
+            <h3 className="Article__subTitle">Projects without an HTTP client library</h3>
             <ul className="Article__notes">
-                <li>You do not need interceptors, timeout configuration, or upload progress</li>
-                <li>The native <code>fetch</code> API meets all your requirements</li>
-                <li>You want to minimize bundle size</li>
+                <li>The application does not need interceptors, timeout configuration, or upload progress</li>
+                <li>The native <code>fetch</code> API meets the application’s requirements</li>
+                <li>Bundle size is a project constraint</li>
+
+                <li>Separate layers are useful when request code, server state rules, or callers become harder to manage.</li>
             </ul>
-            <p>
-                The layers exist to manage complexity. If the complexity is not there, the layers
-                add overhead without benefit. But as an application grows, the absence of these
-                layers becomes painful quickly – and retrofitting them is far harder than having
-                them from the start.
-            </p>
         </section>
 
         <section className="Article__section" aria-labelledby="mixing-layers">
-            <h2 id="mixing-layers" className="SectionTitle">A Common Mistake – Mixing Layers</h2>
-            <p>The most frequent antipattern is combining service functions and hooks into the same file:</p>
-            <CodeBlock language="typescript">{antipatternExample}</CodeBlock>
-            <p>This appears harmless and even convenient. The problem surfaces when:</p>
+            <h2 id="mixing-layers" className="SectionTitle">Mixed responsibilities</h2>
             <ul className="Article__notes">
-                <li>You need <code>getUsers</code> in a non-React context (a test helper, a script, a Web Worker) but importing the file pulls in React and TanStack Query dependencies.</li>
-                <li>The file grows to contain dozens of service functions and dozens of hooks, becoming difficult to navigate.</li>
-                <li>A developer modifying cache behavior accidentally changes the API call, or vice versa, because both concerns live in the same place.</li>
+                <li>This file contains a service function and a query hook.</li>
             </ul>
-            <p>The fix is straightforward: service functions in one directory, hooks in another. Each file stays small, focused, and independently testable.</p>
+            <CodeBlock language="typescript">{antipatternExample}</CodeBlock>
+            <ul className="Article__notes">
+                <li>Combining the two responsibilities can cause these problems:</li>
+
+                <li>Non-React code may need <code>getUsers</code>.</li>
+                <li>Importing the shared file also imports its React and TanStack Query dependencies.</li>
+                <li>A file with many service functions and hooks becomes harder to read.</li>
+                <li>Editing cache behavior and endpoint code in one file can lead to changes in the wrong responsibility.</li>
+
+                <li>Separate service files and hook files keep endpoint code independent of React and TanStack Query.</li>
+            </ul>
         </section>
 
         <section className="Article__section" aria-labelledby="summary">
-            <h2 id="summary" className="SectionTitle">Summary</h2>
+            <h2 id="summary" className="SectionTitle">Layer responsibilities</h2>
             <div className="Article__tableWrap">
                 <table className="Article__table">
                     <thead><tr><th scope="col">Layer</th><th scope="col">Provided By</th><th scope="col">Responsibility</th><th scope="col">Changes When</th></tr></thead>
@@ -502,13 +492,7 @@ const ApiCommunication = () => (
                     </tbody>
                 </table>
             </div>
-            <p>
-                The value of this architecture is not in any individual layer. It is in the
-                boundaries between them. Each boundary is a contract: “I give you this, you give me
-                that, and neither of us cares how the other works internally.” When those contracts
-                are respected, a fifty-endpoint application is no harder to maintain than a
-                five-endpoint one.
-            </p>
+
         </section>
     </ArticleLayout>
 );

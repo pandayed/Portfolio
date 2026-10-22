@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-integrations-text-to-speech",
   "title": "Text to Speech with ElevenLabs",
-  "summary": "Send text to the provider and return binary audio without corrupting it.",
+  "summary": "Use the learned HTTP client with an audio response instead of a JSON record.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Ultimate Guide to Using Eleven Labs API: Transform Text to Lifelike Speech in Minutes!",
@@ -20,243 +20,363 @@
     {
       "title": "JDK request factory timeouts",
       "url": "https://docs.spring.io/spring-framework/docs/6.1.21/javadoc-api/org/springframework/http/client/JdkClientHttpRequestFactory.html"
+    },
+    {
+      "title": "Spring Framework 6.2 REST clients",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/integration/rest-clients.html"
     }
   ],
   "blocks": [
     {
-      "id": "speech-contract",
+      "id": "integrations-text-to-speech-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Convert text into audio"
+          "Binary response conversion"
         ]
       ]
     },
     {
-      "id": "speech-contract-b0",
+      "id": "integrations-text-to-speech-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Text to speech creates an audio recording from text."
+          "The HTTP client lesson used JSON records."
         ]
       ]
     },
     {
-      "id": "speech-contract-b1",
+      "id": "integrations-text-to-speech-lesson-0-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "ElevenLabs provides an HTTP API for this conversion."
+          "A speech provider returns audio bytes instead."
         ]
       ]
     },
     {
-      "id": "speech-contract-b2",
+      "id": "integrations-text-to-speech-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "POST /v1/text-to-speech/{voice_id} accepts text in a JSON request body."
+          "RestClient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " reads that response with "
+        ],
+        [
+          "byte[].class",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "speech-contract-b3",
+      "id": "integrations-text-to-speech-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The voice ID selects the voice. model_id selects the model. output_format selects the audio format."
+          "Converting audio through "
+        ],
+        [
+          "String",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can corrupt the bytes."
         ]
       ]
     },
     {
-      "id": "speech-contract-b4",
+      "id": "integrations-text-to-speech-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The response contains audio bytes. It is not a JSON object or a text string."
+          "toEntity(byte[].class)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " keeps the response headers with those bytes."
         ]
       ]
     },
     {
-      "id": "speech-contract-b5",
+      "id": "integrations-text-to-speech-lesson-0-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use POST for an application endpoint that generates new audio. Generation performs an action and can consume paid quota."
+          "The controller can check the media type before returning audio."
         ]
       ]
     },
     {
-      "id": "speech-client",
+      "id": "integrations-text-to-speech-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Create the provider client"
+          "ElevenLabs request settings"
         ]
       ]
     },
     {
-      "id": "speech-client-b0",
+      "id": "integrations-text-to-speech-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep the API key on the server. Send it in the provider’s xi-api-key header."
+          "ElevenLabs accepts a JSON body at "
+        ],
+        [
+          "POST /v1/text-to-speech/{voice_id}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "speech-client-b1",
+      "id": "integrations-text-to-speech-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Allow only voice IDs that your application supports."
+          "The "
+        ],
+        [
+          "xi-api-key",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " header authenticates the server."
         ]
       ]
     },
     {
-      "id": "speech-client-b2",
+      "id": "integrations-text-to-speech-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Set connection and read timeouts for the provider call."
+          "voice_id",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects a voice."
         ]
       ]
     },
     {
-      "id": "speech-client-code",
+      "id": "integrations-text-to-speech-lesson-1-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "model_id",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects a model."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-text-to-speech-lesson-1-note-1-part-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "output_format",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects the audio format."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-text-to-speech-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The API key and the allowed voice come from server configuration."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-text-to-speech-lesson-1-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A caller supplies text, not a provider host or API key."
+        ]
+      ]
+    },
+    {
+      "id": "integrations-text-to-speech-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Configure the ElevenLabs client",
-        "description": [
-          "Use Spring Boot 3.2+, Spring Framework 6.1+, and Java 17.",
-          "Put this bean method in a @Configuration class.",
-          "Set elevenlabs.api-key from the ELEVENLABS_API_KEY environment variable."
-        ],
-        "code": "@Bean\nRestClient speechClient(RestClient.Builder builder,\n        @Value(\"${elevenlabs.api-key}\") String apiKey) {\n    HttpClient http = HttpClient.newBuilder()\n            .connectTimeout(Duration.ofSeconds(3)).build();\n    var factory = new JdkClientHttpRequestFactory(http);\n    factory.setReadTimeout(Duration.ofSeconds(10));\n    return builder.baseUrl(\"https://api.elevenlabs.io\")\n            .requestFactory(factory)\n            .defaultHeader(\"xi-api-key\", apiKey).build();\n}",
+        "title": "Return a short MP3 recording",
         "language": "java",
+        "description": [
+          "Each tab names a file relative to the project root. Java `17` and Maven are required. `mvn spring-boot:run` starts this example after its external requirements are configured.",
+          "The project uses Spring Boot 3.5, Java 17+, and `spring-boot-starter-web`.",
+          "`ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID` come from an ElevenLabs account.",
+          "The account must support the requested model and format.",
+          "The endpoint belongs behind the application\u2019s authenticated security rules.",
+          "Generation uses paid quota and requires an explicit user action.",
+          "The command saves the binary response to `speech.mp3`.",
+          "A failed response may instead contain an application error.",
+          "The command fails on an error status."
+        ],
+        "code": "",
         "explanation": [
-          "The client calls the fixed ElevenLabs API host.",
-          "The default xi-api-key header authenticates each request.",
-          "The connect timeout is three seconds. The read timeout is ten seconds."
+          "The constructor applies provider authentication and timeout settings to one client.",
+          "`Speech` matches the provider JSON fields.",
+          "`Text` matches the application\u2019s input.",
+          "`toEntity(byte[].class)` receives the binary body and its media type.",
+          "The checks reject an empty body or a non-audio response.",
+          "Successful responses contain the original audio bytes.",
+          "The application limits text to `500` characters for this short recording case.",
+          "The limit is an application choice, not a statement of provider limits."
+        ],
+        "commands": "curl --fail-with-body -X POST http://localhost:8080/speech \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"text\":\"Hello from Spring Boot\"}' --output speech.mp3",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/SpeechController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.net.http.HttpClient;\nimport java.time.Duration;\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.http.MediaType;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.http.client.JdkClientHttpRequestFactory;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RestController;\nimport org.springframework.web.client.RestClient;\nimport org.springframework.web.server.ResponseStatusException;\nimport static org.springframework.http.HttpStatus.BAD_GATEWAY;\nimport static org.springframework.http.HttpStatus.BAD_REQUEST;\n\n@RestController\npublic class SpeechController {\n    private final RestClient client;\n    private final String voice;\n\n    public SpeechController(RestClient.Builder builder,\n            @Value(\"${elevenlabs.api-key}\") String key,\n            @Value(\"${elevenlabs.voice-id}\") String voice) {\n        var http = HttpClient.newBuilder()\n                .connectTimeout(Duration.ofSeconds(3)).build();\n        var factory = new JdkClientHttpRequestFactory(http);\n        factory.setReadTimeout(Duration.ofSeconds(10));\n        this.client = builder.baseUrl(\"https://api.elevenlabs.io\")\n                .defaultHeader(\"xi-api-key\", key)\n                .requestFactory(factory).build();\n        this.voice = voice;\n    }\n\n    @PostMapping(\"/speech\")\n    public ResponseEntity<byte[]> speak(@RequestBody Text input) {\n        if (input.text() == null || input.text().isBlank()\n                || input.text().length() > 500) {\n            throw new ResponseStatusException(BAD_REQUEST,\n                    \"Text must contain 1 to 500 characters\");\n        }\n        var response = client.post()\n                .uri(\"/v1/text-to-speech/{voice}?output_format=mp3_44100_128\", voice)\n                .contentType(MediaType.APPLICATION_JSON)\n                .body(new Speech(input.text(), \"eleven_multilingual_v2\"))\n                .retrieve().toEntity(byte[].class);\n        byte[] audio = response.getBody();\n        MediaType type = response.getHeaders().getContentType();\n        if (audio == null || audio.length == 0 || type == null\n                || !\"audio\".equals(type.getType())) {\n            throw new ResponseStatusException(BAD_GATEWAY, \"No audio received\");\n        }\n        return ResponseEntity.ok().contentType(type).body(audio);\n    }\n\n    public record Text(String text) {}\n    public record Speech(String text, String model_id) {}\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "elevenlabs.api-key=${ELEVENLABS_API_KEY}\nelevenlabs.voice-id=${ELEVENLABS_VOICE_ID}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "speech-response",
+      "id": "integrations-text-to-speech-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Return the audio response"
+          "Generation failures and limits"
         ]
       ]
     },
     {
-      "id": "speech-response-b0",
+      "id": "integrations-text-to-speech-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Read audio into byte[] so the binary data remains intact."
+          "Provider authentication errors and rate limits cause HTTP failures."
         ]
       ]
     },
     {
-      "id": "speech-response-b1",
+      "id": "integrations-text-to-speech-lesson-2-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Decoding audio bytes as a String can corrupt the recording."
+          "They must not become successful audio responses."
         ]
       ]
     },
     {
-      "id": "speech-response-b2",
+      "id": "integrations-text-to-speech-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Content-Type describes the returned audio format. Preserve it when your controller returns the bytes."
+          "A timeout can occur after generation starts."
         ]
       ]
     },
     {
-      "id": "speech-response-code",
-      "type": "example",
-      "example": {
-        "title": "Request MP3 audio and return its bytes",
-        "description": [
-          "This method body uses the configured speechClient and validated text and voiceId values.",
-          "It requests eleven_multilingual_v2 with mp3_44100_128 output. Verify that these choices are available to your account.",
-          "The containing controller method returns ResponseEntity<byte[]>."
-        ],
-        "code": "record SpeechRequest(String text, String model_id) {}\n\nResponseEntity<byte[]> upstream = speechClient.post()\n        .uri(\"/v1/text-to-speech/{voice}?output_format=mp3_44100_128\", voiceId)\n        .contentType(MediaType.APPLICATION_JSON)\n        .body(new SpeechRequest(text, \"eleven_multilingual_v2\"))\n        .retrieve().toEntity(byte[].class);\n\nMediaType type = upstream.getHeaders().getContentType();\nbyte[] audio = upstream.getBody();\nif (type == null || !\"audio\".equals(type.getType())\n        || audio == null || audio.length == 0) {\n    throw new IllegalStateException(\"Provider returned no audio\");\n}\nreturn ResponseEntity.ok().contentType(type).body(audio);",
-        "language": "java",
-        "explanation": [
-          "The request sends the text and model ID as JSON.",
-          "toEntity(byte[].class) reads the response headers and binary body.",
-          "The checks reject an empty body or a non-audio Content-Type.",
-          "The controller returns the same bytes and audio media type. A browser can play or download them."
-        ]
-      }
-    },
-    {
-      "id": "speech-limits",
-      "type": "header",
-      "richText": [
-        [
-          "Limit generation requests"
-        ]
-      ]
-    },
-    {
-      "id": "speech-limits-b0",
+      "id": "integrations-text-to-speech-lesson-2-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Reject blank text and text longer than your application allows before calling the provider."
+          "A retry can generate and charge twice."
         ]
       ]
     },
     {
-      "id": "speech-limits-b1",
+      "id": "integrations-text-to-speech-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Require an explicit user action before sending private text to an external provider."
+          "A byte-array approach holds the recording in memory."
         ]
       ]
     },
     {
-      "id": "speech-limits-b2",
+      "id": "integrations-text-to-speech-lesson-2-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "For long recordings, use streaming or a background job instead of holding the whole response in memory."
+          "Long recordings need a bounded streaming or background design."
         ]
       ]
     },
     {
-      "id": "speech-limits-b3",
+      "id": "integrations-text-to-speech-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Treat authentication errors, rate limits, and timeouts as failures. Never return a JSON error body as audio."
+          "Private text needs user consent before submission to an external provider."
         ]
       ]
     },
     {
-      "id": "speech-limits-b4",
+      "id": "integrations-text-to-speech-lesson-2-note-3-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A timeout can happen after generation starts. A retry may generate and charge twice."
-        ]
-      ]
-    },
-    {
-      "id": "speech-limits-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use provider-supported duplicate handling when available. Keep private text, audio, and API keys out of logs."
+          "API keys, private text, and audio stay out of logs."
         ]
       ]
     }

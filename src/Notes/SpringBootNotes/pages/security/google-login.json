@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-security-google-login",
   "title": "Google login",
-  "summary": "Configure Google OpenID Connect login using Spring Security’s managed flow.",
+  "summary": "Apply Spring OAuth2 login to Google, then associate the validated external identity with a local account.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: OAuth2 in Spring Boot | How to Add Google Login in Spring Boot | Complete Tutorial",
@@ -16,6 +16,10 @@
     {
       "title": "Google: OpenID Connect",
       "url": "https://developers.google.com/identity/openid-connect/openid-connect"
+    },
+    {
+      "title": "Spring Security 6.5: advanced login configuration",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/login/advanced.html"
     }
   ],
   "blocks": [
@@ -24,43 +28,178 @@
       "type": "header",
       "richText": [
         [
-          "Register the application"
+          "Google registration"
         ]
       ]
     },
     {
-      "id": "oauth-setup-b0",
+      "id": "security-google-login-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use spring-boot-starter-oauth2-client in a Spring Boot 3 application."
+          "Google login uses the OAuth2 client capability described in the OAuth2 lesson."
         ]
       ]
     },
     {
-      "id": "oauth-setup-b1",
+      "id": "security-google-login-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Register the application as an OAuth client with Google. Google supplies a client ID and client secret."
+          "The Spring application is the login client."
         ]
       ]
     },
     {
-      "id": "oauth-setup-b2",
+      "id": "security-google-login-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Register the exact callback URL that Google will use to return to the application."
+          "A Google OAuth client registration supplies the client ID and client secret."
         ]
       ]
     },
     {
-      "id": "oauth-setup-b3",
+      "id": "security-google-login-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep the client secret on the server. Supply it through environment configuration or a secret manager."
+          "The registration's allowed redirect URI must match Spring's callback URI exactly."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "For a local application on port "
+        ],
+        [
+          "8080",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", the default callback is "
+        ],
+        [
+          "http://localhost:8080/login/oauth2/code/google",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A deployed application uses its externally reachable HTTPS callback URI."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-0-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The registration ID "
+        ],
+        [
+          "google",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " lets Boot supply Google's standard provider endpoints."
+        ]
+      ]
+    },
+    {
+      "id": "google-openid-login",
+      "type": "header",
+      "richText": [
+        [
+          "OpenID Connect login"
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The "
+        ],
+        [
+          "openid",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " scope selects OpenID Connect login."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring validates the login response and creates an "
+        ],
+        [
+          "OidcUser",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " principal."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "oauth2Login",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " then stores the browser's authentication in the session."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application still needs its own permission and account policies."
         ]
       ]
     },
@@ -68,25 +207,55 @@
       "id": "oauth-setup-code",
       "type": "example",
       "example": {
-        "title": "Configure Google and enable browser login",
-        "description": [
-          "Use a Spring Boot 3 servlet web application with the OAuth2 client starter.",
-          "Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in the application environment.",
-          "For local development on port 8080, register http://localhost:8080/login/oauth2/code/google with Google.",
-          "Put the properties in application.properties and the bean in a @Configuration class.",
-          "Import Bean, Customizer, HttpSecurity and SecurityFilterChain."
-        ],
-        "code": "# application.properties\nspring.security.oauth2.client.registration.google.client-id=${GOOGLE_CLIENT_ID}\nspring.security.oauth2.client.registration.google.client-secret=${GOOGLE_CLIENT_SECRET}\nspring.security.oauth2.client.registration.google.scope=openid,profile,email\n\n// Bean in SecurityConfig.java\n@Bean\nSecurityFilterChain browser(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(rules -> rules\n            .requestMatchers(\"/\", \"/login/**\", \"/oauth2/**\")\n                .permitAll()\n            .anyRequest().authenticated())\n        .oauth2Login(Customizer.withDefaults())\n        .build();\n}",
+        "title": "Configure Google login for browser sessions",
         "language": "text",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "This browser-login project has `spring-boot-starter-web` and `spring-boot-starter-oauth2-client`.",
+          "The process environment supplies `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.",
+          "The Google registration includes the exact callback URI for the application.",
+          "The browser starts login at `/oauth2/authorization/google`.",
+          "The default local callback assumes the application runs on port `8080`."
+        ],
+        "code": "",
         "explanation": [
-          "The google registration name selects Spring’s built-in Google provider defaults.",
-          "openid requests OIDC login. profile and email request profile information.",
-          "Open /oauth2/authorization/google to start login.",
-          "Spring handles the callback, exchanges the code and validates the OIDC response.",
-          "After login, the application remembers authentication with a server session.",
-          "CSRF remains enabled because the browser sends the session cookie automatically.",
-          "For deployment, register the public HTTPS callback URL. A reverse proxy must preserve the correct public host and protocol."
-        ]
+          "Spring redirects the browser to Google and saves the authorization request.",
+          "Google returns an authorization code to `/login/oauth2/code/google`.",
+          "Spring checks the returned state and exchanges the code for tokens.",
+          "The `openid` scope makes Spring validate an ID token and create an `OidcUser`.",
+          "Successful login establishes a session for later application requests.",
+          "CSRF protection remains enabled for state-changing requests.",
+          "A controller can obtain the logged-in principal with `@AuthenticationPrincipal OidcUser user`.",
+          "The provider client secret stays on the server."
+        ],
+        "files": [
+          {
+            "name": "src/main/resources/application.yml",
+            "language": "text",
+            "code": "spring:\n  security:\n    oauth2:\n      client:\n        registration:\n          google:\n            client-id: ${GOOGLE_CLIENT_ID}\n            client-secret: ${GOOGLE_CLIENT_SECRET}\n            scope:\n              - openid\n              - profile\n              - email\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GoogleSecurityConfig.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\npublic class GoogleSecurityConfig {\n    @Bean\n    SecurityFilterChain security(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(rules -> rules\n                .requestMatchers(\"/\", \"/error\").permitAll()\n                .anyRequest().authenticated())\n            .oauth2Login(Customizer.withDefaults())\n            .build();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/PageController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class PageController {\n    @GetMapping(\"/\") public String home() { return \"Home\"; }\n    @GetMapping(\"/public/info\") public String info() { return \"Public information\"; }\n    @GetMapping(\"/admin/report\") public String admin() { return \"Admin report\"; }\n    @GetMapping(\"/employees\") public String employees() { return \"Employee list\"; }\n    @PostMapping(\"/employees\") public String create() { return \"Employee created\"; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-oauth2-client</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
       }
     },
     {
@@ -94,43 +263,180 @@
       "type": "header",
       "richText": [
         [
-          "Associate the external identity with an account"
+          "Local account association"
         ]
       ]
     },
     {
-      "id": "oauth-accounts-b0",
+      "id": "security-google-login-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Identify an external account by its verified issuer and subject (sub)."
+          "OidcUser.getSubject()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " identifies the account within the issuer."
         ]
       ]
     },
     {
-      "id": "oauth-accounts-b1",
+      "id": "security-google-login-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Email addresses can change. Do not use email alone as a permanent external account key."
+          "OidcUser.getIssuer()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " identifies that issuer."
         ]
       ]
     },
     {
-      "id": "oauth-accounts-b2",
+      "id": "security-google-login-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Assign local roles through the application’s account rules. Google login does not automatically give an ADMIN role."
+          "The pair of issuer and subject identifies the external account for local account association."
         ]
       ]
     },
     {
-      "id": "oauth-accounts-b3",
+      "id": "security-google-login-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep account-linking rules explicit before joining an external identity to an existing account."
+          "An email address alone is not a stable external-account key."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Google login does not automatically load the application's local roles."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An account-association service can look up the local account and supply the application's authorities."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A "
+        ],
+        [
+          "GrantedAuthoritiesMapper",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can map login authorities when the mapping needs no additional user-loading behavior."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-2-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A custom "
+        ],
+        [
+          "OidcUserService",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can delegate to Spring's user loading and then apply account lookup and authority mapping."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-2-note-8",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application must define how an existing local account can be linked to an external identity."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-2-note-9",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Record ownership uses the associated local account ID rather than a caller-supplied account ID."
+        ]
+      ]
+    },
+    {
+      "id": "google-token-logout",
+      "type": "header",
+      "richText": [
+        [
+          "Provider tokens and logout"
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The Google access token is for Google APIs permitted by its scopes."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It is not automatically an access token for this application's separate resource server."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Local Spring logout ends the application session."
+        ]
+      ]
+    },
+    {
+      "id": "security-google-login-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not automatically sign the user out of Google or revoke Google tokens."
         ]
       ]
     }

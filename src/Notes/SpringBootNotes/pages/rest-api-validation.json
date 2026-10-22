@@ -4,61 +4,91 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54804e8c3ed28bc655cab3",
   "blocks": [
     {
-      "id": "20924eb1-ed54-8094-a9ba-d568b6cfc147",
+      "id": "rest-api-validation-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Declare input constraints"
+          "Validation constraints"
         ]
       ]
     },
     {
-      "id": "validation-rules-b0",
+      "id": "rest-api-validation-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Bean Validation checks Java data against declared rules called constraints."
+          "Bean Validation checks a Java object against rules declared with constraint annotations."
         ]
       ]
     },
     {
-      "id": "validation-rules-b1",
+      "id": "rest-api-validation-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Put request constraints on a request DTO so they match the data the client can send."
+          "spring-boot-starter-validation",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the validation implementation for a Spring Boot application."
         ]
       ]
     },
     {
-      "id": "validation-rules-b2",
+      "id": "rest-api-validation-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Add spring-boot-starter-validation to supply the validation implementation."
+          "Spring Boot 3 uses "
+        ],
+        [
+          "jakarta.validation",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " imports. Older Boot 2 tutorials use "
+        ],
+        [
+          "javax.validation",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "validation-rules-b3",
+      "id": "rest-api-validation-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot 3 and later use jakarta.validation imports. Older Boot 2 examples use javax.validation."
+          "A request DTO keeps input constraints beside the fields they apply to."
         ]
       ]
     },
     {
-      "id": "validation-rules-b4",
+      "id": "rest-api-validation-lesson-0-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Validation checks the rules you declare. It does not check permissions or replace database constraints."
+          "A constraint only checks its declared rule. It does not check permissions or whether a database record exists."
         ]
       ]
     },
     {
-      "id": "validation-constraints",
+      "id": "rest-api-validation-lesson-0-table-0",
       "type": "table",
       "columnOrder": [
         "0",
@@ -67,7 +97,7 @@
       "hasColumnHeader": true,
       "children": [
         {
-          "id": "validation-constraints-r0",
+          "id": "rest-api-validation-lesson-0-table-0-row-0",
           "type": "table_row",
           "cells": {
             "0": [
@@ -83,97 +113,214 @@
           }
         },
         {
-          "id": "validation-constraints-r1",
+          "id": "rest-api-validation-lesson-0-table-0-row-1",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@NotNull"
+                "@NotNull",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "The value must not be null. An empty String still passes."
+                "The value is not "
+              ],
+              [
+                "null",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                "."
               ]
             ]
           }
         },
         {
-          "id": "validation-constraints-r2",
+          "id": "rest-api-validation-lesson-0-table-0-row-2",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@NotBlank"
+                "@NotBlank",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A String must contain a non-whitespace character."
+                "The string is not "
+              ],
+              [
+                "null",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " and contains a non-whitespace character."
               ]
             ]
           }
         },
         {
-          "id": "validation-constraints-r3",
+          "id": "rest-api-validation-lesson-0-table-0-row-3",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@NotEmpty"
+                "@NotEmpty",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A String, collection, map or array must be non-null and non-empty."
+                "The string, collection, map, or array is not "
+              ],
+              [
+                "null",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " or empty."
               ]
             ]
           }
         },
         {
-          "id": "validation-constraints-r4",
+          "id": "rest-api-validation-lesson-0-table-0-row-4",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@Size(min, max)"
+                "@Size(max = 40)",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "The length or size must be within the limits. Null passes."
+                "The supported value has at most "
+              ],
+              [
+                "40",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " characters or elements."
               ]
             ]
           }
         },
         {
-          "id": "validation-constraints-r5",
+          "id": "rest-api-validation-lesson-0-table-0-row-5",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@Email"
+                "@Min(1)",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A String must satisfy the validator’s email-format rule. Null passes."
+                "The supported numeric value is at least "
+              ],
+              [
+                "1",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                "."
               ]
             ]
           }
         },
         {
-          "id": "validation-constraints-r6",
+          "id": "rest-api-validation-lesson-0-table-0-row-6",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@Min(value) / @Max(value)"
+                "@Max(100)",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A supported numeric value must be within the limit."
+                "The supported numeric value is at most "
+              ],
+              [
+                "100",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                "."
+              ]
+            ]
+          }
+        },
+        {
+          "id": "rest-api-validation-lesson-0-table-0-row-7",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "@Email",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "1": [
+              [
+                "A non-null string has an accepted email format."
               ]
             ]
           }
@@ -181,136 +328,353 @@
       ]
     },
     {
-      "id": "validation-types-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Combine constraints when needed. @Email alone does not require a value."
-        ]
-      ]
-    },
-    {
-      "id": "validation-types-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Choose a constraint for the field type. @NotEmpty does not apply to int; use a numeric constraint."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80dc-bb54-f5bb6cdc615c",
+      "id": "rest-api-validation-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Run validation with @Valid"
+          "Request validation with "
+        ],
+        [
+          "@Valid",
+          [
+            [
+              "c"
+            ]
+          ]
         ]
       ]
     },
     {
-      "id": "validation-run-b0",
+      "id": "rest-api-validation-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Valid on a @RequestBody argument checks the converted DTO before the handler runs."
+          "@Valid",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a "
+        ],
+        [
+          "@RequestBody",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " argument asks Spring MVC to validate the converted DTO."
         ]
       ]
     },
     {
-      "id": "validation-run-b1",
+      "id": "rest-api-validation-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "For this argument validation, failed constraints normally raise MethodArgumentNotValidException and produce HTTP 400."
+          "JSON conversion runs first. Validation checks the resulting Java object."
         ]
       ]
     },
     {
-      "id": "validation-run-b2",
+      "id": "rest-api-validation-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The default response body depends on configuration. Do not assume it includes every constraint message."
+          "For this argument validation, a failed constraint prevents the handler method from running."
         ]
       ]
     },
     {
-      "id": "validation-run-b3",
+      "id": "rest-api-validation-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Valid on a nested DTO field also requests validation of that nested object."
+          "Spring raises "
+        ],
+        [
+          "MethodArgumentNotValidException",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and normally responds with "
+        ],
+        [
+          "400 Bad Request",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8088-96f1-c16aaec3ab2e",
+      "id": "rest-api-validation-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A successful conversion does not imply successful validation."
+        ]
+      ]
+    },
+    {
+      "id": "rest-api-validation-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A constraint such as "
+        ],
+        [
+          "@Size",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or "
+        ],
+        [
+          "@Email",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can allow "
+        ],
+        [
+          "null",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". A required field also needs a suitable required-value constraint."
+        ]
+      ]
+    },
+    {
+      "id": "rest-api-validation-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Reject a blank name or invalid email",
-        "description": [
-          "Use spring-boot-starter-validation and Java 17 or later in a Spring Boot 3+ MVC application.",
-          "Place these types in separate files. Send JSON to POST /users/check."
-        ],
-        "code": "// UserRequest.java\nimport jakarta.validation.constraints.Email;\nimport jakarta.validation.constraints.NotBlank;\nimport jakarta.validation.constraints.Size;\n\npublic record UserRequest(\n    @NotBlank(message = \"Username is required\")\n    @Size(min = 3, max = 20, message = \"Username must be 3–20 characters\")\n    String username,\n    @NotBlank(message = \"Email is required\")\n    @Email(message = \"Email format is invalid\")\n    String email\n) {}\n\n// UserController.java\nimport jakarta.validation.Valid;\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\npublic class UserController {\n    @PostMapping(\"/users/check\")\n    public UserRequest check(@Valid @RequestBody UserRequest request) {\n        return request;\n    }\n}",
+        "title": "Reject a blank or overlong greeting name",
         "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The validation starter uses the Spring Boot dependency version managed by the project.",
+          "The commands run after the application restarts and assume port `8080`.",
+          "`mvn spring-boot:run` starts the application from the directory containing `pom.xml`. Requests run in a second terminal."
+        ],
+        "code": "",
         "explanation": [
-          "@NotBlank rejects a missing, empty or whitespace-only username and email.",
-          "@Size restricts the username length. @Email checks the email format.",
-          "A body such as {\"username\":\"Alice\",\"email\":\"alice@example.com\"} reaches the method and is returned.",
-          "A body with username set to \"\" fails validation before check() runs. The default status is 400.",
-          "This endpoint checks and echoes data. It does not create a user."
+          "The first request passes both constraints and returns `200` with a greeting.",
+          "The second request fails `@NotBlank` and returns `400` before `greet()` runs.",
+          "`@Size` rejects names longer than `40` characters.",
+          "The default error body may omit the declared messages.",
+          "The next lesson, Controller exception handling, gives validation failures a chosen error body."
+        ],
+        "commands": "curl -i -X POST http://localhost:8080/greetings \\\n  -H 'Content-Type: application/json' -d '{\"name\":\"Ada\"}'\ncurl -i -X POST http://localhost:8080/greetings \\\n  -H 'Content-Type: application/json' -d '{\"name\":\" \"}'",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport jakarta.validation.Valid;\nimport jakarta.validation.constraints.NotBlank;\nimport jakarta.validation.constraints.Size;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestBody;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/greetings\")\npublic class GreetingController {\n    public record GreetingRequest(\n        @NotBlank(message = \"Name is required\")\n        @Size(max = 40, message = \"Name must have at most 40 characters\")\n        String name\n    ) {}\n\n    public record GreetingResponse(String message) {}\n\n    @PostMapping\n    public GreetingResponse greet(@Valid @RequestBody GreetingRequest request) {\n        return new GreetingResponse(\"Hello, \" + request.name());\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-validation</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
         ]
       }
     },
     {
-      "id": "20924eb1-ed54-804f-803c-f01fcf56f685",
+      "id": "rest-api-validation-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Handle validation errors"
+          "Nested objects and other validation paths"
         ]
       ]
     },
     {
-      "id": "validation-errors-b0",
+      "id": "rest-api-validation-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use exception advice to translate validation errors into the API’s error response format."
+          "@Valid",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a nested DTO field also validates that object's constraints."
         ]
       ]
     },
     {
-      "id": "validation-errors-b1",
+      "id": "rest-api-validation-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "To handle errors inside the controller, place Errors or BindingResult immediately after the validated argument. Check it before processing the input."
+          "A required nested object also needs "
+        ],
+        [
+          "@NotNull",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". Cascaded validation does not reject an absent object by itself."
         ]
       ]
     },
     {
-      "id": "validation-errors-b2",
+      "id": "rest-api-validation-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "For a rule the built-in constraints cannot express, define a constraint annotation with @Constraint and a ConstraintValidator."
+          "BindingResult",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " immediately after a validated argument lets the handler inspect that argument's errors instead of relying on the usual exception."
         ]
       ]
     },
     {
-      "id": "validation-errors-b3",
+      "id": "rest-api-validation-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "In Spring MVC 6.1 and later, direct constraints on handler parameters can use method validation and raise HandlerMethodValidationException. This differs from validating one request DTO."
+          "That handler must check the errors before processing the input."
+        ]
+      ]
+    },
+    {
+      "id": "rest-api-validation-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring MVC 6.1 and later can validate constraints directly on handler parameters, such as "
+        ],
+        [
+          "@Min(1)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a numeric parameter."
+        ]
+      ]
+    },
+    {
+      "id": "rest-api-validation-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "That method-validation path can raise "
+        ],
+        [
+          "HandlerMethodValidationException",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", which differs from request DTO validation."
+        ]
+      ]
+    },
+    {
+      "id": "rest-api-validation-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Validated",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a configuration properties type runs its constraints during startup. Invalid configuration fails startup rather than returning an HTTP response."
+        ]
+      ]
+    },
+    {
+      "id": "rest-api-validation-lesson-2-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An application-specific validation annotation uses "
+        ],
+        [
+          "@Constraint",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and a "
+        ],
+        [
+          "ConstraintValidator",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " implementation. The built-in constraints cover the rules in this lesson."
         ]
       ]
     }
   ],
-  "summary": "Declare input rules, run them with @Valid and handle failures.",
-  "updatedOn": "2026-10-14",
+  "summary": "Declare request DTO constraints and run them after conversion, before the controller method.",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring MVC: request body validation",
@@ -319,6 +683,18 @@
     {
       "title": "Spring MVC: validation",
       "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html"
+    },
+    {
+      "title": "Spring MVC 6.2: request validation",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-validation.html"
+    },
+    {
+      "title": "Spring MVC 6.2: validated request bodies",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-methods/requestbody.html"
+    },
+    {
+      "title": "Spring Boot 3.5: validation",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/io/validation.html"
     }
   ]
 }

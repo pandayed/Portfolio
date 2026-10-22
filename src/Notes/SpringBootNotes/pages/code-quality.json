@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-code-quality",
   "title": "Static analysis and SonarQube",
-  "summary": "Understand analysis results, coverage reports and quality gates.",
+  "summary": "Place source analysis and imported coverage after the build, then interpret the quality gate within its limits.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Master SonarQube, SonarLint, and SonarCloud: Ultimate Guide to Enhancing Your Code Quality",
@@ -20,142 +20,108 @@
     {
       "title": "SonarQube: Java coverage reports",
       "url": "https://docs.sonarsource.com/sonarqube-server/analyzing-source-code/test-coverage/java-test-coverage/"
+    },
+    {
+      "title": "SonarQube: quality gates",
+      "url": "https://docs.sonarsource.com/sonarqube-server/quality-standards-administration/managing-quality-gates/introduction-to-quality-gates/"
+    },
+    {
+      "title": "SonarScanner for Maven",
+      "url": "https://docs.sonarsource.com/sonarqube-server/analyzing-source-code/scanners/sonarscanner-for-maven/"
+    },
+    {
+      "title": "JaCoCo: Maven plugin",
+      "url": "https://www.jacoco.org/jacoco/trunk/doc/maven.html"
     }
   ],
   "blocks": [
     {
-      "id": "quality-tools",
+      "id": "code-quality-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Static analysis"
+          "Analysis in a Spring Boot build"
         ]
       ]
     },
     {
-      "id": "quality-tools-b0",
+      "id": "code-quality-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Static analysis examines source code without running the application."
+          "A Boot project can use SonarQube alongside its test tools. Spring Boot does not configure SonarQube automatically."
         ]
       ]
     },
     {
-      "id": "quality-tools-b1",
+      "id": "code-quality-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "It reports patterns such as duplicated code, possible bugs and maintainability issues."
+          "SonarQube analyzes source code and reports findings such as suspected bugs, security issues, and duplication."
         ]
       ]
     },
     {
-      "id": "quality-tools-table",
-      "type": "table",
-      "columnOrder": [
-        "0",
-        "1"
-      ],
-      "hasColumnHeader": true,
-      "children": [
-        {
-          "id": "quality-tools-table-0",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "Tool"
-              ]
-            ],
-            "1": [
-              [
-                "Purpose"
-              ]
-            ]
-          }
-        },
-        {
-          "id": "quality-tools-table-1",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "SonarQube for IDE"
-              ]
-            ],
-            "1": [
-              [
-                "Reports issues while editing. Formerly named SonarLint."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "quality-tools-table-2",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "SonarQube Server"
-              ]
-            ],
-            "1": [
-              [
-                "Stores project analysis on a server you operate."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "quality-tools-table-3",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "SonarQube Cloud"
-              ]
-            ],
-            "1": [
-              [
-                "Provides hosted project analysis. Formerly named SonarCloud."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "quality-tools-table-4",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "Scanner"
-              ]
-            ],
-            "1": [
-              [
-                "Analyzes a project revision and sends its results to Server or Cloud."
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "quality-connected-b0",
+      "id": "code-quality-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Connected mode aligns supported IDE rules and settings with a SonarQube project."
+          "SonarScanner for Maven sends project analysis to a SonarQube server."
         ]
       ]
     },
     {
-      "id": "quality-connected-b1",
+      "id": "code-quality-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "The Maven scanner integrates project analysis with a Java build."
+          "SonarQube for IDE reports supported rules while editing. Connected mode shares supported project settings from the server."
+        ]
+      ]
+    },
+    {
+      "id": "code-quality-lesson-1",
+      "type": "header",
+      "richText": [
+        [
+          "Coverage reports"
+        ]
+      ]
+    },
+    {
+      "id": "code-quality-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "JaCoCo records which application code executes during tests and produces a coverage report."
+        ]
+      ]
+    },
+    {
+      "id": "code-quality-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "SonarQube imports the JaCoCo XML report. It does not run the tests or generate that coverage itself."
+        ]
+      ]
+    },
+    {
+      "id": "code-quality-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The build must produce the report before the scanner imports it."
+        ]
+      ]
+    },
+    {
+      "id": "code-quality-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Coverage says which code ran. It does not say that assertions checked every result."
         ]
       ]
     },
@@ -169,137 +135,145 @@
       ]
     },
     {
-      "id": "quality-gates-b0",
+      "id": "quality-gates-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A quality gate checks configured conditions against the analysis results."
+          "A quality gate applies configured pass or fail conditions to an analysis."
         ]
       ]
     },
     {
-      "id": "quality-gates-b1",
+      "id": "quality-gates-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Conditions can cover issues, duplication and test coverage on new code."
+          "Conditions can include new-code findings, duplication, and coverage."
         ]
       ]
     },
     {
-      "id": "quality-gates-b2",
+      "id": "quality-gates-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A passing gate means those conditions passed. It does not mean every application behavior works."
+          "An uploaded analysis is processed by the server before its quality gate result is available."
         ]
       ]
     },
     {
-      "id": "quality-gates-b3",
+      "id": "quality-gates-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "When a release depends on the gate, configure CI to wait for its result. A completed upload is not the gate result."
+          "sonar.qualitygate.wait=true",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " makes a scanner invocation wait for the result and fail if the gate fails."
         ]
       ]
     },
     {
-      "id": "quality-coverage",
+      "id": "code-quality-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Test coverage"
+          "A Maven analysis"
         ]
       ]
     },
     {
-      "id": "quality-coverage-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Coverage measures which code ran during test execution."
+      "id": "code-quality-lesson-3-example-0",
+      "type": "example",
+      "example": {
+        "title": "Analyze the built project and wait for its gate",
+        "language": "text",
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "The SonarQube server already has a project with key `journal`.",
+          "The CI secret store supplies `SONAR_TOKEN`. `SONAR_HOST_URL` supplies the server URL.",
+          "The selected scanner version is compatible with the server and the CI runtime.",
+          "The commands run in order on the same project revision. The second command runs only if the first succeeds."
+        ],
+        "code": "",
+        "explanation": [
+          "`verify` builds the project, runs its configured checks, and produces the configured coverage report.",
+          "The scanner reads the compiled project and the report, then sends the analysis.",
+          "The token comes from CI configuration. It does not appear in the command or repository.",
+          "The invocation waits for the server\u2019s gate result. Network failure or a gate timeout can also fail the invocation."
+        ],
+        "commands": "mvn clean verify\nmvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.8.0.7211:sonar \\\n  -Dsonar.projectKey=journal \\\n  -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \\\n  -Dsonar.qualitygate.wait=true",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/TitlePolicy.java",
+            "language": "java",
+            "code": "package com.example.demo;\npublic class TitlePolicy {\n    public String normalize(String title) { return title.strip(); }\n}\n"
+          },
+          {
+            "name": "src/test/java/com/example/demo/TitlePolicyTest.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.junit.jupiter.api.Test;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nclass TitlePolicyTest {\n    @Test\n    void removesOuterWhitespace() {\n        assertEquals(\"First entry\", new TitlePolicy().normalize(\"  First entry  \"));\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n            <plugin>\n                <groupId>org.jacoco</groupId>\n                <artifactId>jacoco-maven-plugin</artifactId>\n                <version>0.8.13</version>\n                <executions>\n                    <execution><goals><goal>prepare-agent</goal></goals></execution>\n                    <execution><id>report</id><phase>verify</phase><goals><goal>report</goal></goals></execution>\n                </executions>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
-      ]
+      }
     },
     {
-      "id": "quality-coverage-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A tool such as JaCoCo produces the coverage report. SonarQube imports that report."
-        ]
-      ]
-    },
-    {
-      "id": "quality-coverage-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "SonarQube does not run the tests to generate coverage."
-        ]
-      ]
-    },
-    {
-      "id": "quality-coverage-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "High coverage can still have weak assertions. Check meaningful results as well as execution."
-        ]
-      ]
-    },
-    {
-      "id": "quality-workflow",
+      "id": "code-quality-lesson-4",
       "type": "header",
       "richText": [
         [
-          "Project analysis in CI"
+          "Interpreting results"
         ]
       ]
     },
     {
-      "id": "quality-workflow-b0",
+      "id": "code-quality-lesson-4-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Analyze the same application revision being built and reviewed."
+          "A passing gate means the configured conditions passed. It does not prove every application behavior."
         ]
       ]
     },
     {
-      "id": "quality-workflow-b1",
+      "id": "code-quality-lesson-4-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Configure the project key, source paths and coverage-report path."
+          "A finding may require a code change or a documented suppression after review."
         ]
       ]
     },
     {
-      "id": "quality-workflow-b2",
+      "id": "code-quality-lesson-4-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Supply the analysis token through a CI secret."
+          "Generated-code exclusions follow project policy. Excluding application code hides its results too."
         ]
       ]
     },
     {
-      "id": "quality-workflow-b3",
+      "id": "code-quality-lesson-4-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Review findings in their code context. Fix a real issue or record a justified suppression."
-        ]
-      ]
-    },
-    {
-      "id": "quality-workflow-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Exclude generated code only when the project policy allows it. Do not exclude application code to hide a reported issue."
+          "The deployment lessons next use the built artifact. Analysis and tests do not verify the target host configuration."
         ]
       ]
     }

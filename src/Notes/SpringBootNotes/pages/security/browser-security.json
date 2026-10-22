@@ -8,34 +8,179 @@
       "type": "header",
       "richText": [
         [
-          "Remember authentication with a session"
+          "Session authentication"
         ]
       ]
     },
     {
-      "id": "browser-session-b0",
+      "id": "security-browser-security-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "After form login, the server can store authentication in an HTTP session."
+          "With form login, Spring Security saves successful authentication in the HTTP session."
         ]
       ]
     },
     {
-      "id": "browser-session-b1",
+      "id": "security-browser-security-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The browser holds a session cookie and sends it with later requests. The server uses it to find the session."
+          "The browser sends the session cookie on later requests."
         ]
       ]
     },
     {
-      "id": "browser-session-b2",
+      "id": "security-browser-security-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Logging out ends the application login. Secure cookies and HTTPS protect the cookie during normal use."
+          "Spring loads the saved security context before checking those requests."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring changes the session ID during login to protect against session fixation."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The default logout endpoint is "
+        ],
+        [
+          "/logout",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "With CSRF protection enabled, "
+        ],
+        [
+          "POST /logout",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requires a CSRF token."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-0-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Logout invalidates the session and clears its authentication."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-0-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Production session cookies need "
+        ],
+        [
+          "Secure",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "HttpOnly",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " settings."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-0-note-8",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "server.servlet.session.cookie.secure",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "server.servlet.session.cookie.http-only",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " control those Boot settings."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-0-note-9",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "server.servlet.session.cookie.same-site",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " controls the session cookie's "
+        ],
+        [
+          "SameSite",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " attribute. Its value must suit the application's browser flow."
         ]
       ]
     },
@@ -44,52 +189,253 @@
       "type": "header",
       "richText": [
         [
-          "Protect requests that change data"
+          "Spring CSRF support"
         ]
       ]
     },
     {
-      "id": "csrf-b0",
+      "id": "security-browser-security-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Cross-site request forgery (CSRF) happens when another website causes the browser to send an unwanted request using credentials it sends automatically."
+          "Spring Security enables CSRF protection by default for servlet applications."
         ]
       ]
     },
     {
-      "id": "csrf-b1",
+      "id": "security-browser-security-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Session cookies are sent automatically. The unwanted request can therefore appear to come from a logged-in user."
+          "CsrfFilter",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks state-changing requests before the controller runs."
         ]
       ]
     },
     {
-      "id": "csrf-b2",
+      "id": "security-browser-security-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Security enables CSRF protection by default. Requests that change data normally need a CSRF token."
+          "The default token repository stores the expected token in the HTTP session."
         ]
       ]
     },
     {
-      "id": "csrf-b3",
+      "id": "security-browser-security-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "The application supplies this token in a form field or request header. Spring checks it before accepting the request."
+          "A request supplies the token as the "
+        ],
+        [
+          "_csrf",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " form field or the "
+        ],
+        [
+          "X-CSRF-TOKEN",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " header by default."
         ]
       ]
     },
     {
-      "id": "csrf-b4",
+      "id": "security-browser-security-lesson-1-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "GET requests should read data rather than change it. They normally do not need a CSRF token."
+          "CsrfToken",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " provides the token value and its expected header and parameter names."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The generated login form includes the token."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A separate JavaScript client needs a way to obtain the token before sending a state-changing request."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-1-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Login and logout clear the previous CSRF token. The client needs a current token afterwards."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-1-example-0",
+      "type": "example",
+      "example": {
+        "title": "Expose the current CSRF token to a signed-in client",
+        "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "`CsrfController.java` belongs in the scanned application package.",
+          "The browser has already signed in through Spring's generated login form.",
+          "The client requests `GET /csrf` with that session cookie.",
+          "The client sends the returned token under the returned header name when calling a protected state-changing endpoint.",
+          "The environment supplies `DEMO_USER_PASSWORD` before startup.",
+          "The tabs contain the account configuration and protected controller endpoints."
+        ],
+        "code": "",
+        "explanation": [
+          "Spring resolves the `CsrfToken` method parameter from the request.",
+          "Reading `getToken()` obtains the current token, including when Spring deferred its creation.",
+          "The response token belongs to this browser session.",
+          "The token value varies, so the example does not use a fixed token.",
+          "An untrusted origin must not be allowed to read this credentialed response through CORS.",
+          "This endpoint supports a client that is already logged in. A custom login page also needs a token before submitting credentials."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/CsrfController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.security.web.csrf.CsrfToken;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\npublic class CsrfController {\n    @GetMapping(\"/csrf\")\n    CsrfResponse csrf(CsrfToken token) {\n        return new CsrfResponse(\n            token.getHeaderName(), token.getToken());\n    }\n\n    record CsrfResponse(String headerName, String token) {}\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/SecurityConfig.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.core.userdetails.User;\nimport org.springframework.security.core.userdetails.UserDetailsService;\nimport org.springframework.security.crypto.factory.PasswordEncoderFactories;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.security.provisioning.InMemoryUserDetailsManager;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\npublic class SecurityConfig {\n    @Bean\n    PasswordEncoder passwordEncoder() {\n        return PasswordEncoderFactories.createDelegatingPasswordEncoder();\n    }\n\n    @Bean\n    UserDetailsService users(\n            PasswordEncoder encoder,\n            @Value(\"${DEMO_USER_PASSWORD}\") String password) {\n        return new InMemoryUserDetailsManager(\n            User.withUsername(\"reader\")\n                .password(encoder.encode(password))\n                .roles(\"USER\")\n                .build());\n    }\n\n    @Bean\n    SecurityFilterChain security(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(rules -> rules\n                .requestMatchers(\"/csrf\").authenticated()\n                .requestMatchers(\"/public/**\").permitAll()\n                .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n                .requestMatchers(\"/employees/**\").hasRole(\"USER\")\n                .anyRequest().denyAll())\n            .formLogin(Customizer.withDefaults())\n            .build();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/PageController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class PageController {\n    @GetMapping(\"/\") public String home() { return \"Home\"; }\n    @GetMapping(\"/public/info\") public String info() { return \"Public information\"; }\n    @GetMapping(\"/admin/report\") public String admin() { return \"Admin report\"; }\n    @GetMapping(\"/employees\") public String employees() { return \"Employee list\"; }\n    @PostMapping(\"/employees\") public String create() { return \"Employee created\"; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-security</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
+      }
+    },
+    {
+      "id": "security-browser-cors",
+      "type": "header",
+      "richText": [
+        [
+          "Spring CORS integration"
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "http.cors(Customizer.withDefaults())",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " integrates CORS handling with the security filter chain."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "CORS processing must run before authentication checks because a preflight request normally has no session cookie."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A "
+        ],
+        [
+          "CorsConfigurationSource",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean supplies allowed origins, methods, headers, and credential settings."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Without a separate source, Spring Security can use the Spring MVC CORS configuration when MVC is present."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Credentialed cross-origin requests require explicit allowed origins."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "CORS permissions do not replace request permissions or CSRF checks."
         ]
       ]
     },
@@ -98,43 +444,80 @@
       "type": "header",
       "richText": [
         [
-          "Choose settings from how credentials are sent"
+          "Session and bearer-token boundaries"
         ]
       ]
     },
     {
-      "id": "csrf-bearer-b0",
+      "id": "security-browser-security-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A stateless session policy does not, by itself, remove CSRF risk."
+          "SessionCreationPolicy.STATELESS",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " tells Spring Security not to create a session or use a session to obtain authentication."
         ]
       ]
     },
     {
-      "id": "csrf-bearer-b1",
+      "id": "security-browser-security-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "An API that accepts only bearer tokens explicitly added to the Authorization header can have different CSRF settings from a cookie-based application."
+          "That setting alone does not make every authentication method safe from CSRF."
         ]
       ]
     },
     {
-      "id": "csrf-bearer-b2",
+      "id": "security-browser-security-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Before disabling CSRF, ensure the application does not also authenticate through cookies or browser-cached Basic credentials."
+          "A bearer-only API can disable CSRF when it accepts credentials only through an explicitly supplied "
+        ],
+        [
+          "Authorization",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " header."
         ]
       ]
     },
     {
-      "id": "csrf-bearer-b3",
+      "id": "security-browser-security-lesson-3-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Keep CSRF protection when authenticated browser requests use a session cookie."
+          "That choice also requires the API to reject session-cookie and other automatically attached browser credentials."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-3-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A JWT stored in an automatically sent cookie still needs CSRF protection."
+        ]
+      ]
+    },
+    {
+      "id": "security-browser-security-lesson-3-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The resource-server lesson applies the bearer-only configuration to a separate API."
         ]
       ]
     }
@@ -147,8 +530,12 @@
     {
       "title": "Spring Security 6.5: session management",
       "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authentication/session-management.html"
+    },
+    {
+      "title": "Spring Security 6.5: CORS integration",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/integrations/cors.html"
     }
   ],
-  "updatedOn": "2026-10-14",
-  "summary": "Understand session cookies before choosing CSRF settings."
+  "updatedOn": "2026-10-20",
+  "summary": "Configure the Spring mechanisms that preserve browser login and validate CSRF tokens."
 }

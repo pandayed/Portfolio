@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-security-oauth2",
   "title": "OAuth2 and OpenID Connect",
-  "summary": "Separate delegated API access from login identity.",
+  "summary": "Choose Spring's OAuth2 capability from the application's role, then follow browser login in order.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring Security 6.5: OAuth2 login",
@@ -12,6 +12,14 @@
     {
       "title": "Google: OpenID Connect",
       "url": "https://developers.google.com/identity/openid-connect/openid-connect"
+    },
+    {
+      "title": "Spring Security 6.5: OAuth2 support",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/index.html"
+    },
+    {
+      "title": "Spring Security 6.5: OAuth2 client core",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/client/core.html"
     }
   ],
   "blocks": [
@@ -20,62 +28,156 @@
       "type": "header",
       "richText": [
         [
-          "OAuth2 grants access"
+          "Spring OAuth2 capabilities"
         ]
       ]
     },
     {
-      "id": "oauth-concepts-b0",
+      "id": "security-oauth2-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "OAuth2 lets an application request access to resources on behalf of a user."
+          "Spring Security configures OAuth2 client behavior separately from resource-server behavior."
         ]
       ]
     },
     {
-      "id": "oauth-concepts-b1",
+      "id": "security-oauth2-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The client is the application requesting access."
+          "An application can use either capability or both."
         ]
       ]
     },
     {
-      "id": "oauth-concepts-b2",
+      "id": "security-oauth2-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The authorization server obtains permission and issues an access token."
+          "Each capability performs a different part of the token flow."
         ]
       ]
     },
     {
-      "id": "oauth-concepts-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The resource server accepts the access token and serves the protected API."
-        ]
-      ]
-    },
-    {
-      "id": "oauth-concepts-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A scope names the access requested or granted."
-        ]
-      ]
-    },
-    {
-      "id": "oauth-concepts-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The application does not need the user’s password for the provider."
-        ]
+      "id": "security-oauth2-lesson-0-table-0",
+      "type": "table",
+      "columnOrder": [
+        "0",
+        "1",
+        "2"
+      ],
+      "hasColumnHeader": true,
+      "children": [
+        {
+          "id": "security-oauth2-lesson-0-table-0-row-0",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Application responsibility"
+              ]
+            ],
+            "1": [
+              [
+                "Spring support"
+              ]
+            ],
+            "2": [
+              [
+                "Dependency"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "security-oauth2-lesson-0-table-0-row-1",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Sign a browser user in through an external provider"
+              ]
+            ],
+            "1": [
+              [
+                "oauth2Login",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "2": [
+              [
+                "spring-boot-starter-oauth2-client",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "security-oauth2-lesson-0-table-0-row-2",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Obtain tokens to call another API"
+              ]
+            ],
+            "1": [
+              [
+                "OAuth2 Client support"
+              ]
+            ],
+            "2": [
+              [
+                "spring-boot-starter-oauth2-client",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "id": "security-oauth2-lesson-0-table-0-row-3",
+          "type": "table_row",
+          "cells": {
+            "0": [
+              [
+                "Validate tokens presented to this API"
+              ]
+            ],
+            "1": [
+              [
+                "oauth2ResourceServer",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ],
+            "2": [
+              [
+                "spring-boot-starter-oauth2-resource-server",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ]
+            ]
+          }
+        }
       ]
     },
     {
@@ -83,43 +185,99 @@
       "type": "header",
       "richText": [
         [
-          "OpenID Connect adds login"
+          "Provider registration"
         ]
       ]
     },
     {
-      "id": "oidc-b0",
+      "id": "security-oauth2-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "OpenID Connect (OIDC) adds user authentication to OAuth2."
+          "ClientRegistration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " describes this application's registration with an OAuth2 provider."
         ]
       ]
     },
     {
-      "id": "oidc-b1",
+      "id": "security-oauth2-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The openid scope requests OIDC login."
+          "It contains the client ID, authentication method, requested scopes, and redirect URI."
         ]
       ]
     },
     {
-      "id": "oidc-b2",
+      "id": "security-oauth2-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "An ID token describes the authenticated user for the client. An access token is used to call an API."
+          "ClientRegistrationRepository",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies these registrations to Spring Security."
         ]
       ]
     },
     {
-      "id": "oidc-b3",
+      "id": "security-oauth2-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "An ID token is not automatically an access token for your own API."
+          "Boot builds the repository from "
+        ],
+        [
+          "spring.security.oauth2.client.registration",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " properties."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A registration ID, such as "
+        ],
+        [
+          "google",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", names one registration inside the application."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A registration ID is not the provider-issued client ID."
         ]
       ]
     },
@@ -128,61 +286,160 @@
       "type": "header",
       "richText": [
         [
-          "Authorization-code flow"
+          "Browser login flow"
         ]
       ]
     },
     {
-      "id": "oauth-flow-b0",
+      "id": "security-oauth2-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "The client redirects the browser to the provider."
+          "oauth2Login",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds filters that perform the authorization-code login flow."
         ]
       ]
     },
     {
-      "id": "oauth-flow-b1",
+      "id": "security-oauth2-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The user signs in and grants the requested access when required."
+          "The browser starts at "
+        ],
+        [
+          "/oauth2/authorization/{registrationId}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "oauth-flow-b2",
+      "id": "security-oauth2-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The provider redirects to the registered callback with an authorization code."
+          "Spring saves the authorization request and redirects the browser to the provider."
         ]
       ]
     },
     {
-      "id": "oauth-flow-b3",
+      "id": "security-oauth2-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "The client exchanges that code for tokens."
+          "The provider returns the browser to "
+        ],
+        [
+          "/login/oauth2/code/{registrationId}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " by default."
         ]
       ]
     },
     {
-      "id": "oauth-flow-b4",
+      "id": "security-oauth2-lesson-2-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "The client validates the login response before creating an application session."
+          "Spring checks the returned state against the saved authorization request."
         ]
       ]
     },
     {
-      "id": "oauth-flow-b5",
+      "id": "security-oauth2-lesson-2-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "The state parameter ties the response to the original login attempt."
+          "Spring exchanges the authorization code for tokens using the provider's token endpoint."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "When the requested scopes include "
+        ],
+        [
+          "openid",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", Spring uses OpenID Connect login."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-2-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It validates the ID token and creates an "
+        ],
+        [
+          "OidcUser",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " principal."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-2-note-8",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Without OpenID Connect, OAuth2 login normally obtains an "
+        ],
+        [
+          "OAuth2User",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " through the provider's user-info endpoint."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-2-note-9",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A successful login establishes Spring Security authentication for the browser session."
         ]
       ]
     },
@@ -191,81 +448,109 @@
       "type": "header",
       "richText": [
         [
-          "Choose the Spring configuration"
+          "Login and API access"
         ]
       ]
     },
     {
-      "id": "oauth-approaches-table",
-      "type": "table",
-      "columnOrder": [
-        "0",
-        "1"
-      ],
-      "hasColumnHeader": true,
-      "children": [
-        {
-          "id": "oauth-approaches-table-0",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "Application need"
-              ]
-            ],
-            "1": [
-              [
-                "Spring configuration"
-              ]
-            ]
-          }
-        },
-        {
-          "id": "oauth-approaches-table-1",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "Browser login through an external provider"
-              ]
-            ],
-            "1": [
-              [
-                "oauth2Login. The application can remember login with a server session."
-              ]
-            ]
-          }
-        },
-        {
-          "id": "oauth-approaches-table-2",
-          "type": "table_row",
-          "cells": {
-            "0": [
-              [
-                "API that receives access tokens"
-              ]
-            ],
-            "1": [
-              [
-                "oauth2ResourceServer. The API validates tokens on incoming requests."
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "oauth-google-next",
+      "id": "security-oauth2-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Configure Google login",
+          "The browser session created by "
+        ],
+        [
+          "oauth2Login",
           [
             [
-              "a",
-              "/notes/spring-boot/security/google-login"
+              "c"
             ]
           ]
+        ],
+        [
+          " lets that browser access the Spring application."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not automatically create the application's own JWT access token."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An ID token is used by the login client. It is not an access token for an unrelated API."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The provider's access token permits calls to APIs for its granted scopes."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-3-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An "
+        ],
+        [
+          "OAuth2AuthorizedClient",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " associates the authorized client registration, principal, and provider tokens."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-3-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "OAuth2AuthorizedClientManager",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " manages client authorization and token renewal when the application calls another API."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-3-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A resource server only accepts access tokens issued for that resource server."
+        ]
+      ]
+    },
+    {
+      "id": "security-oauth2-lesson-3-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The next lesson configures that incoming-token case. Google login then applies the browser-login case."
         ]
       ]
     }

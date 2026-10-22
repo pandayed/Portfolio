@@ -1,14 +1,18 @@
 import type { LearningNote } from '../../LearningNotes/types';
 
-const hook = (text: string, slug: string) => ({ text, href: `#/notes/react/${slug}` });
+const hook = (text: string, slug: string) => ({
+    text: text === 'Custom Hooks' ? text : `\`${text}\``,
+    href: `#/notes/react/${slug}`,
+});
 const advancedHook = (text: string) => hook(text, 'react-hooks');
 
 const note: LearningNote = {
     slug: 'hooks-at-a-glance',
-    title: 'Hooks at a glance',
+    title: 'Hook overview',
     summary: 'Brief descriptions of React Hooks, with links to their detailed lessons.',
     scope: 'react',
     updatedOn: '2026-10-14',
+    inlineCode: true,
     sections: [
         {
             id: 'core-hooks',
@@ -52,7 +56,7 @@ const note: LearningNote = {
             table: {
                 columns: ['Hook', 'Description'],
                 rows: [
-                    [advancedHook('useFormStatus'), 'Reads the submission status of a parent form, including whether it is pending. Imported from react-dom. Requires React 19 or later.'],
+                    [advancedHook('useFormStatus'), 'Reads the submission status of a parent form, including whether it is pending. Imported from `react-dom`. Requires React 19 or later.'],
                 ],
             },
         },
@@ -63,7 +67,7 @@ const note: LearningNote = {
                 columns: ['Name', 'Description'],
                 rows: [
                     [advancedHook('use'), 'Reads a Promise or context during rendering. Unlike conventional Hooks, it can be called in conditions and loops. Requires React 19 or later.'],
-                    [hook('Custom Hooks', 'performance-and-custom-hooks'), 'Your own functions that combine Hooks to reuse stateful logic between components. Their names start with use.'],
+                    [hook('Custom Hooks', 'performance-and-custom-hooks'), 'Functions that combine Hooks to reuse stateful logic between components. Their names start with `use`.'],
                 ],
             },
         },

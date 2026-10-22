@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-kafka",
   "title": "Kafka Producers and Consumers",
-  "summary": "Understand topics and groups before configuring and writing a producer and a listener.",
+  "summary": "Connect Boot\u2019s Kafka template and listener container to one explicit record contract.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: What is Kafka ? How to use Confluent Kafka in Spring Boot Application ?",
@@ -24,328 +24,512 @@
     {
       "title": "Engineering Digest journalApp source",
       "url": "https://github.com/EngineeringDigest/journalApp"
+    },
+    {
+      "title": "Spring Boot 3.5 Kafka integration",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/messaging/kafka.html"
+    },
+    {
+      "title": "Spring Kafka 3.3 sending",
+      "url": "https://docs.spring.io/spring-kafka/reference/3.3/kafka/sending-messages.html"
+    },
+    {
+      "title": "Spring Kafka 3.3 listeners",
+      "url": "https://docs.spring.io/spring-kafka/reference/3.3/kafka/receiving-messages/listener-annotation.html"
     }
   ],
   "blocks": [
     {
-      "id": "kafka-model",
+      "id": "kafka-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Publish and read records"
+          "Spring Kafka components"
         ]
       ]
     },
     {
-      "id": "kafka-model-b0",
+      "id": "kafka-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Kafka stores records so other parts of an application can process them later."
+          "org.springframework.kafka:spring-kafka",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies Spring\u2019s Kafka integration."
         ]
       ]
     },
     {
-      "id": "kafka-model-b1",
+      "id": "kafka-lesson-0-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A producer publishes records. A consumer reads and processes them."
+          "Boot manages its compatible version and configures the client factories from "
+        ],
+        [
+          "spring.kafka",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " settings."
         ]
       ]
     },
     {
-      "id": "kafka-model-b2",
+      "id": "kafka-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A topic is a named collection of records. A broker is a Kafka server that stores them."
+          "KafkaTemplate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " sends records through the producer factory."
         ]
       ]
     },
     {
-      "id": "kafka-model-b3",
+      "id": "kafka-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A topic has partitions. Each partition stores records in order."
+          "A bean injects the template instead of managing a Kafka producer directly."
         ]
       ]
     },
     {
-      "id": "kafka-model-b4",
+      "id": "kafka-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "An offset is a record’s position in its partition. Kafka guarantees ordering within a partition."
+          "@KafkaListener",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " registers a bean method with a listener container."
         ]
       ]
     },
     {
-      "id": "kafka-model-b5",
+      "id": "kafka-lesson-0-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A consumer group shares a topic’s partitions among its consumers. Each partition is assigned to one consumer in that group at a time."
+          "The container polls Kafka and calls that method with each received value."
         ]
       ]
     },
     {
-      "id": "kafka-model-b6",
+      "id": "kafka-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "A separate group can read the same topic independently."
+          "Boot configures the default listener container factory."
         ]
       ]
     },
     {
-      "id": "kafka-model-b7",
+      "id": "kafka-lesson-0-note-3-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use Kafka for delayed work, persistent backlogs, or events needed by multiple services."
+          "A Boot application does not need "
+        ],
+        [
+          "@EnableKafka",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for the ordinary auto-configured listener case."
         ]
       ]
     },
     {
-      "id": "kafka-config",
+      "id": "kafka-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Configure the record format"
+          "Record and group settings"
         ]
       ]
     },
     {
-      "id": "kafka-config-b0",
+      "id": "kafka-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Add spring-kafka and let Spring Boot manage its compatible version."
+          "The producer serializer and consumer deserializer must agree on the record format."
         ]
       ]
     },
     {
-      "id": "kafka-config-b1",
+      "id": "kafka-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A serializer converts a Java value into bytes. A deserializer converts the received bytes into a Java value."
+          "A string value can contain JSON, but Kafka does not validate that JSON."
         ]
       ]
     },
     {
-      "id": "kafka-config-b2",
+      "id": "kafka-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The producer and consumer must agree on the record format."
+          "A topic has partitions."
         ]
       ]
     },
     {
-      "id": "kafka-config-b3",
+      "id": "kafka-lesson-1-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Define an event ID and a format version so consumers can identify repeated records and understand changed fields."
+          "Records have offsets within their partition."
         ]
       ]
     },
     {
-      "id": "kafka-config-b4",
+      "id": "kafka-lesson-1-note-1-part-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "bootstrap-servers gives the client initial broker addresses."
+          "A record key normally keeps related records in one partition while the partition count and partitioning settings remain unchanged."
         ]
       ]
     },
     {
-      "id": "kafka-config-b5",
+      "id": "kafka-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "For Confluent Cloud, use the supplied addresses, credentials, and SASL_SSL settings. SASL authenticates the client and SSL encrypts the connection."
+          "The listener\u2019s group ID identifies its consumer group."
         ]
       ]
     },
     {
-      "id": "kafka-config-code",
+      "id": "kafka-lesson-1-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Group members share partitions."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-1-note-2-part-1-clause-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A different group reads the topic independently."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The container commits offsets after processing according to its acknowledgment policy."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-1-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A committed offset records the group\u2019s progress."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "auto-offset-reset=earliest",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " applies when the group has no valid committed offset."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-1-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not replay everything on every restart."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Publication and listener execution"
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "In Spring Kafka 3, "
+        ],
+        [
+          "KafkaTemplate.send",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " returns a "
+        ],
+        [
+          "CompletableFuture",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2-note-0-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A successful call to "
+        ],
+        [
+          "send",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " alone does not prove broker acknowledgment."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The future supplies the send result or publication failure."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Broker acknowledgment still does not prove listener completion."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The listener lets processing exceptions escape."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The container then applies its failure policy, explained on the next page."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Configure string keys and JSON text values",
-        "description": [
-          "Use Spring Boot 3, Spring Kafka 3+, and Java 17.",
-          "Set KAFKA_BOOTSTRAP_SERVERS and add these settings to application.properties.",
-          "A local broker can use localhost:9092. A cloud broker also needs its provider authentication settings."
-        ],
-        "code": "spring.kafka.bootstrap-servers=${KAFKA_BOOTSTRAP_SERVERS}\nspring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.enable-auto-commit=false\nspring.kafka.consumer.auto-offset-reset=earliest",
+        "title": "Publish and receive a digest record",
         "language": "java",
+        "description": [
+          "Each tab names a file relative to the project root. Java `17` and Maven are required. `mvn spring-boot:run` starts this example after its external requirements are configured.",
+          "A `NewTopic` bean describes the topic that Boot\u2019s Kafka administrator requests at startup.",
+          "Boot calls each `ApplicationRunner` bean after the application context initializes.",
+          "The example runner supplies the publication operation.",
+          "The listener supplies record handling.",
+          "The Spring Boot 3.5 project uses `spring-kafka` and `spring-boot-starter-web`.",
+          "The web starter supplies the managed JSON mapper.",
+          "`DigestKafkaConfiguration.java` belongs in the scanned `com.example.demo` package.",
+          "This local demonstration requires a broker reachable through `KAFKA_BOOTSTRAP_SERVERS` and permission to create `weekly-sentiments`.",
+          "One partition and one replica suit a one-broker demonstration only.",
+          "The application runner publishes the fixed demonstration event once per application startup.",
+          "It does not run for every request.",
+          "The listener validates and logs receipt.",
+          "It deliberately performs no email submission.",
+          "A production mail processor must first load the authorized recipient and handle repeated event IDs."
+        ],
+        "code": "",
         "explanation": [
-          "StringSerializer and StringDeserializer handle both keys and values as text.",
-          "The application puts JSON inside the value string. Kafka does not validate that JSON contract.",
-          "enable-auto-commit=false leaves offset commits to the listener container.",
-          "earliest applies when the group has no valid committed offset. It does not replay all records on every restart."
+          "Boot\u2019s Kafka administrator uses the `NewTopic` bean to request the topic.",
+          "The declaration cannot bypass broker permissions.",
+          "`StringSerializer` writes both the key and JSON value as text.",
+          "`StringDeserializer` reads them back.",
+          "`get(5, TimeUnit.SECONDS)` waits for publication for up to five seconds.",
+          "Failure propagates out of the runner.",
+          "Timeout does not prove publication failed.",
+          "The container supplies the value string to `receive`.",
+          "Jackson converts it into `Digest`.",
+          "Validation rejects the unsupported version or missing required fields.",
+          "With record acknowledgment mode, successful handling lets the container commit that record\u2019s offset.",
+          "The group can receive a record again after a crash before commit.",
+          "This listener only logs.",
+          "An external action would need duplicate handling."
+        ],
+        "result": "Validated digest record",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/DigestKafkaConfiguration.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.util.concurrent.TimeUnit;\nimport org.apache.kafka.clients.admin.NewTopic;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.boot.ApplicationRunner;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.kafka.annotation.KafkaListener;\nimport org.springframework.kafka.config.TopicBuilder;\nimport org.springframework.kafka.core.KafkaTemplate;\nimport org.springframework.stereotype.Component;\nimport com.fasterxml.jackson.databind.ObjectMapper;\n\n@Configuration\nclass DigestKafkaConfiguration {\n    @Bean\n    NewTopic digestTopic() {\n        return TopicBuilder.name(\"weekly-sentiments\")\n                .partitions(1).replicas(1).build();\n    }\n\n    @Bean\n    ApplicationRunner publishDigest(KafkaTemplate<String, String> kafka) {\n        return args -> {\n            String json = \"\"\"\n                {\"version\":1,\"eventId\":\"digest-42-2026-W41\",\"userId\":\"user-42\",\"summary\":\"HAPPY=2, SAD=1\"}\n                \"\"\";\n            kafka.send(\"weekly-sentiments\", \"user-42\", json)\n                    .get(5, TimeUnit.SECONDS);\n        };\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DigestListener.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.util.concurrent.TimeUnit;\nimport org.apache.kafka.clients.admin.NewTopic;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.boot.ApplicationRunner;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.kafka.annotation.KafkaListener;\nimport org.springframework.kafka.config.TopicBuilder;\nimport org.springframework.kafka.core.KafkaTemplate;\nimport org.springframework.stereotype.Component;\nimport com.fasterxml.jackson.databind.ObjectMapper;\n\n@Component\nclass DigestListener {\n    private static final Logger log = LoggerFactory.getLogger(DigestListener.class);\n    private final ObjectMapper mapper;\n\n    DigestListener(ObjectMapper mapper) {\n        this.mapper = mapper;\n    }\n\n    @KafkaListener(topics = \"weekly-sentiments\", groupId = \"weekly-digest-mail\")\n    void receive(String json) throws Exception {\n        Digest event = mapper.readValue(json, Digest.class);\n        if (event.version() != 1 || event.eventId() == null\n                || event.eventId().isBlank() || event.userId() == null\n                || event.summary() == null) {\n            throw new IllegalArgumentException(\"Invalid digest event\");\n        }\n        log.info(\"Validated digest record\");\n    }\n\n    record Digest(int version, String eventId, String userId, String summary) {}\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.kafka.bootstrap-servers=${KAFKA_BOOTSTRAP_SERVERS}\nspring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.enable-auto-commit=false\nspring.kafka.consumer.auto-offset-reset=earliest\nspring.kafka.listener.ack-mode=record\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.kafka</groupId>\n            <artifactId>spring-kafka</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "kafka-producer",
+      "id": "kafka-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Publish a record"
+          "Hosted Kafka configuration"
         ]
       ]
     },
     {
-      "id": "kafka-producer-b0",
+      "id": "kafka-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "KafkaTemplate publishes records from Spring code."
+          "A hosted provider supplies broker addresses, authentication, and certificate requirements."
         ]
       ]
     },
     {
-      "id": "kafka-producer-b1",
+      "id": "kafka-lesson-3-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A record key normally keeps related records in the same partition while the partition count and partitioning configuration remain unchanged."
+          "These are additional client settings, not replacements for the serializers."
         ]
       ]
     },
     {
-      "id": "kafka-producer-b2",
+      "id": "kafka-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "In Spring Kafka 3+, send returns a CompletableFuture for the publish result."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-producer-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Calling send does not by itself mean that the broker acknowledged the record. Inspect the future or attach a completion callback."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-producer-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Broker acknowledgment confirms publication according to the producer settings. It does not mean that a consumer completed its work."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-producer-code",
-      "type": "example",
-      "example": {
-        "title": "Publish a weekly digest event",
-        "description": [
-          "The service has an injected KafkaTemplate<String, String> named kafkaTemplate.",
-          "The weekly-sentiments topic exists.",
-          "The containing method handles InterruptedException, ExecutionException, and TimeoutException."
+          "For Confluent Cloud, the provider\u2019s configuration uses "
         ],
-        "code": "String event = \"\"\"\n    {\"version\":1,\"eventId\":\"digest-42-2026-W41\",\"userId\":\"user-42\",\"summary\":\"HAPPY\"}\n    \"\"\";\nSendResult<String, String> result = kafkaTemplate\n        .send(\"weekly-sentiments\", \"user-42\", event)\n        .get(5, TimeUnit.SECONDS);\nlong offset = result.getRecordMetadata().offset();",
-        "language": "java",
-        "explanation": [
-          "The record key is user-42. The JSON value identifies the event and contains its summary.",
-          "get waits up to five seconds for the send result.",
-          "The result provides the offset assigned by Kafka.",
-          "A timeout stops the wait. The publish may still complete afterward."
-        ]
-      }
-    },
-    {
-      "id": "kafka-consumer",
-      "type": "header",
-      "richText": [
         [
-          "Process records in a listener"
-        ]
-      ]
-    },
-    {
-      "id": "kafka-consumer-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "@KafkaListener registers a bean method that receives records from a topic."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-consumer-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The group ID identifies the consumer group. Members of the same group share the work."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-consumer-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "After successful processing, the container can commit offsets according to its acknowledgment policy."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-consumer-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A committed offset records how far the group has progressed."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-consumer-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Let processing exceptions reach the listener container so its retry and recovery policy can run."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-consumer-b5",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A crash after an external action but before offset commit can cause that action to run again after redelivery."
-        ]
-      ]
-    },
-    {
-      "id": "kafka-consumer-code",
-      "type": "example",
-      "example": {
-        "title": "Pass a received digest to an application service",
-        "description": [
-          "Put this method in a Spring bean with an injected digestProcessor.",
-          "digestProcessor parses and validates the event, handles its event ID, and submits the email."
+          "SASL_SSL",
+          [
+            [
+              "c"
+            ]
+          ]
         ],
-        "code": "@KafkaListener(topics = \"weekly-sentiments\",\n        groupId = \"weekly-digest-mail\")\nvoid consume(String eventJson) {\n    digestProcessor.process(eventJson);\n}",
-        "language": "java",
-        "explanation": [
-          "The listener receives JSON text from weekly-sentiments.",
-          "weekly-digest-mail identifies this consumer group.",
-          "The method delegates application work to digestProcessor.",
-          "Exceptions are allowed to escape so the container sees a processing failure."
+        [
+          ", the selected SASL mechanism, and account credentials."
         ]
-      }
+      ]
+    },
+    {
+      "id": "kafka-lesson-3-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Credentials belong in secret-backed configuration."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "TLS certificate validation must remain enabled."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-lesson-3-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A successful local connection does not prove that hosted credentials or permissions work."
+        ]
+      ]
     }
   ]
 }

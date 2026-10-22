@@ -4,164 +4,248 @@
   "sourceUrl": "https://xpandeyed.notion.site/20824eb1ed5480e2adefe2fa4afe046d",
   "blocks": [
     {
-      "id": "20824eb1-ed54-804c-a738-e5aac950ffc1",
+      "id": "http-methods-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Choose the HTTP method"
+          "Method-specific mappings"
         ]
       ]
     },
     {
-      "id": "http-intro-b0",
+      "id": "http-methods-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An HTTP method states what the client asks the server to do with a resource."
+          "Spring MVC uses both the path and the HTTP method to choose a handler."
         ]
       ]
     },
     {
-      "id": "http-intro-b1",
+      "id": "http-methods-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A resource is something the API identifies with a URL, such as a user or an order."
+          "Different handlers can use the same path when their HTTP methods differ."
         ]
       ]
     },
     {
-      "id": "http-method-table",
+      "id": "http-methods-lesson-0-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The mapping annotation selects a handler. Its Java code performs the operation."
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@PostMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " does not save data automatically."
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@PutMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", "
+        ],
+        [
+          "@PatchMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", and "
+        ],
+        [
+          "@DeleteMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " do not implement replacement, partial updates, or deletion automatically."
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-0-table-0",
       "type": "table",
       "columnOrder": [
         "0",
-        "1",
-        "2"
+        "1"
       ],
       "hasColumnHeader": true,
       "children": [
         {
-          "id": "http-method-table-r0",
+          "id": "http-methods-lesson-0-table-0-row-0",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "Method"
+                "Mapping annotation"
               ]
             ],
             "1": [
               [
-                "Use"
-              ]
-            ],
-            "2": [
-              [
-                "Spring annotation"
+                "Matched method"
               ]
             ]
           }
         },
         {
-          "id": "http-method-table-r1",
+          "id": "http-methods-lesson-0-table-0-row-1",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "GET"
+                "@GetMapping",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Read a resource."
-              ]
-            ],
-            "2": [
-              [
-                "@GetMapping"
+                "GET",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ]
           }
         },
         {
-          "id": "http-method-table-r2",
+          "id": "http-methods-lesson-0-table-0-row-2",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "POST"
+                "@PostMapping",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Submit data for processing, often to create a resource."
-              ]
-            ],
-            "2": [
-              [
-                "@PostMapping"
+                "POST",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ]
           }
         },
         {
-          "id": "http-method-table-r3",
+          "id": "http-methods-lesson-0-table-0-row-3",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "PUT"
+                "@PutMapping",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Create or replace the state at a known resource URL."
-              ]
-            ],
-            "2": [
-              [
-                "@PutMapping"
+                "PUT",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ]
           }
         },
         {
-          "id": "http-method-table-r4",
+          "id": "http-methods-lesson-0-table-0-row-4",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "PATCH"
+                "@PatchMapping",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Apply a partial change."
-              ]
-            ],
-            "2": [
-              [
-                "@PatchMapping"
+                "PATCH",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ]
           }
         },
         {
-          "id": "http-method-table-r5",
+          "id": "http-methods-lesson-0-table-0-row-5",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "DELETE"
+                "@DeleteMapping",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Remove the resource at a URL."
-              ]
-            ],
-            "2": [
-              [
-                "@DeleteMapping"
+                "DELETE",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ]
           }
@@ -169,110 +253,241 @@
       ]
     },
     {
-      "id": "http-mapping-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The mapping annotation selects the handler. It does not save, replace or delete data itself."
-        ]
-      ]
-    },
-    {
-      "id": "http-mapping-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Do not use GET for an operation whose purpose is to change data."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-801f-b25e-dfc324609092",
+      "id": "http-methods-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Safe and idempotent methods"
+          "One path with two handlers"
         ]
       ]
     },
     {
-      "id": "http-semantics-b0",
+      "id": "http-methods-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A safe method asks for no change to the resource. GET is safe; server logging can still happen."
+          "@RequestMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can declare a method explicitly, such as "
+        ],
+        [
+          "method = RequestMethod.POST",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "http-semantics-b1",
+      "id": "http-methods-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "An idempotent method has the same intended effect when the same request is repeated."
+          "The shorter "
+        ],
+        [
+          "@PostMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " expresses the same method restriction."
         ]
       ]
     },
     {
-      "id": "http-semantics-b2",
+      "id": "http-methods-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "GET, PUT and DELETE are idempotent by HTTP semantics. Implement handlers to follow those semantics."
+          "@RequestMapping",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " without a method restriction can match multiple HTTP methods."
         ]
       ]
     },
     {
-      "id": "http-semantics-b3",
+      "id": "http-methods-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Deleting an already deleted resource does not delete something extra. Its response status can differ from the first response."
+          "Separate mapping annotations do not belong on the same method. Each handler declares one mapping."
         ]
       ]
     },
     {
-      "id": "http-semantics-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "POST and PATCH do not guarantee idempotency. A particular API can define repeat-safe behavior for them."
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-80be-9863-db45269d1963",
-      "type": "header",
-      "richText": [
-        [
-          "Map the same path to different methods"
-        ]
-      ]
-    },
-    {
-      "id": "20824eb1-ed54-8097-93ac-cb9c1546e977",
+      "id": "http-methods-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Give each user operation its own HTTP mapping",
-        "description": [
-          "These methods belong in a @RestController mapped to /users.",
-          "userService is an injected application service. UserResponse and SaveUserRequest are application data classes.",
-          "This shows routing only. The service must implement lookup, creation, replacement and deletion."
-        ],
-        "code": "@GetMapping(\"/{id}\")\npublic UserResponse find(@PathVariable(\"id\") long id) {\n    return userService.find(id);\n}\n\n@PostMapping\npublic UserResponse create(@RequestBody SaveUserRequest request) {\n    return userService.create(request);\n}\n\n@PutMapping(\"/{id}\")\npublic UserResponse replace(@PathVariable(\"id\") long id,\n                            @RequestBody SaveUserRequest request) {\n    return userService.replace(id, request);\n}\n\n@DeleteMapping(\"/{id}\")\npublic void delete(@PathVariable(\"id\") long id) {\n    userService.delete(id);\n}",
+        "title": "Handle `GET` and `POST` at the same path",
         "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The example demonstrates method selection. It does not store greetings.",
+          "The commands run after the application restarts and assume port `8080`.",
+          "`mvn spring-boot:run` starts the application from the directory containing `pom.xml`. Requests run in a second terminal."
+        ],
+        "code": "",
         "explanation": [
-          "GET /users/5 calls find. PUT /users/5 calls replace. DELETE /users/5 calls delete.",
-          "POST /users calls create.",
-          "@PathVariable reads the identifier from the path. @RequestBody reads the request body.",
-          "A POST mapping does not automatically return 201 Created. Choose the status separately with ResponseEntity or @ResponseStatus.",
-          "Error responses and explicit success statuses are covered on the ResponseEntity and exception handling pages."
+          "Both methods inherit the class path `/greetings`.",
+          "`GET /greetings` calls `readGreeting()`.",
+          "`POST /greetings` calls `generateGreeting()`.",
+          "The Java method name does not select the HTTP method. The mapping annotation does.",
+          "Request and response bodies explains how a `POST` handler receives JSON later."
+        ],
+        "commands": "curl http://localhost:8080/greetings\ncurl -X POST http://localhost:8080/greetings",
+        "result": "Hello\nA greeting generated for this request",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/greetings\")\npublic class GreetingController {\n    @GetMapping\n    public String readGreeting() {\n        return \"Hello\";\n    }\n\n    @PostMapping\n    public String generateGreeting() {\n        return \"A greeting generated for this request\";\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
         ]
       }
+    },
+    {
+      "id": "http-methods-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Mapping outcomes"
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A request using an unsupported method for a mapped path normally receives "
+        ],
+        [
+          "405 Method Not Allowed",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Two handler methods with the same mapping can cause an ambiguous-mapping error at startup."
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring MVC normally supports "
+        ],
+        [
+          "HEAD",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " through an existing "
+        ],
+        [
+          "GET",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " mapping."
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring MVC can answer "
+        ],
+        [
+          "OPTIONS",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with an "
+        ],
+        [
+          "Allow",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " header based on the registered mappings."
+        ]
+      ]
+    },
+    {
+      "id": "http-methods-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "These mapping features do not enforce the intended data changes or idempotency of application code."
+        ]
+      ]
     }
   ],
-  "summary": "Choose a request method, then understand safe and idempotent operations.",
-  "updatedOn": "2026-10-14",
+  "summary": "Select handlers by HTTP method without confusing mapping annotations with application operations.",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring MVC: request mapping",
@@ -281,6 +496,10 @@
     {
       "title": "HTTP semantics: RFC 9110",
       "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+    },
+    {
+      "title": "Spring MVC 6.2: method restrictions and HEAD/OPTIONS",
+      "url": "https://docs.spring.io/spring-framework/reference/6.2/web/webmvc/mvc-controller/ann-requestmapping.html"
     }
   ]
 }

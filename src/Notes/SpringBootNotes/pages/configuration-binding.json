@@ -4,117 +4,454 @@
   "title": "Read configuration in Java",
   "blocks": [
     {
-      "id": "configuration-binding-0",
+      "id": "configuration-binding-lesson-0",
       "type": "header",
       "richText": [
         [
-          "One value with @Value"
+          "One value with "
+        ],
+        [
+          "@Value",
+          [
+            [
+              "c"
+            ]
+          ]
         ]
       ]
     },
     {
-      "id": "configuration-binding-0-point-0",
+      "id": "configuration-binding-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Value can supply a configured value to a Spring bean."
+          "@Value",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies a value while Spring creates a bean."
         ]
       ]
     },
     {
-      "id": "configuration-binding-0-point-1",
+      "id": "configuration-binding-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The ${property.name} syntax reads a property. ${property.name:default} also supplies a default when the property is absent."
+          "The placeholder "
+        ],
+        [
+          "${greeting.prefix}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " asks the "
+        ],
+        [
+          "Environment",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for the resolved value of "
+        ],
+        [
+          "greeting.prefix",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "configuration-binding-0-example-0",
+      "id": "configuration-binding-lesson-0-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The placeholder "
+        ],
+        [
+          "${greeting.prefix:Hello}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " uses "
+        ],
+        [
+          "Hello",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " if the setting is missing."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A missing setting without a default normally prevents that bean from being created."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring can convert a property string to the constructor parameter's type, such as "
+        ],
+        [
+          "int",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-0-example-0",
       "type": "example",
       "example": {
-        "title": "Inject an application name",
-        "description": [
-          "Set app.name=Journal in application.properties."
-        ],
-        "code": "package com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class ApplicationName {\n    private final String name;\n\n    public ApplicationName(@Value(\"${app.name}\") String name) {\n        this.name = name;\n    }\n\n    public String getName() {\n        return name;\n    }\n}",
+        "title": "Read a greeting prefix in a bean",
         "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The Java files belong in `com.example.demo`, where `DemoApplication` scans for components.",
+          "The properties file supplies the values used by the configuration bean."
+        ],
+        "code": "",
         "explanation": [
-          "Spring resolves app.name and passes Journal to the constructor.",
-          "If the required property is absent, resolving it fails."
-        ]
+          "Spring discovers `GreetingPrefix` through `@Component`.",
+          "Spring resolves the placeholder before calling the constructor.",
+          "The constructor receives `Welcome` because the setting exists.",
+          "If the setting is absent, the constructor receives the declared default `Hello`.",
+          "Other beans can receive `GreetingPrefix` through constructor injection and call `value()`."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/GreetingPrefix.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class GreetingPrefix {\n    private final String value;\n\n    public GreetingPrefix(@Value(\"${greeting.prefix:Hello}\") String value) {\n        this.value = value;\n    }\n\n    public String value() {\n        return value;\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "greeting.prefix=Welcome\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
       }
     },
     {
-      "id": "configuration-binding-1",
+      "id": "configuration-binding-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Related values with @ConfigurationProperties"
+          "Related values with "
+        ],
+        [
+          "@ConfigurationProperties",
+          [
+            [
+              "c"
+            ]
+          ]
         ]
       ]
     },
     {
-      "id": "configuration-binding-1-point-0",
+      "id": "configuration-binding-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ConfigurationProperties binds a group of settings to a Java object."
+          "@ConfigurationProperties",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " binds settings with a shared prefix to one Java object."
         ]
       ]
     },
     {
-      "id": "configuration-binding-1-point-1",
+      "id": "configuration-binding-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The prefix selects the property group. Binding converts supported property values to the declared Java types."
+          "Binding matches property names to fields or constructor parameters and converts the values to their Java types."
         ]
       ]
     },
     {
-      "id": "configuration-binding-1-point-2",
+      "id": "configuration-binding-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Register the class with @ConfigurationPropertiesScan or @EnableConfigurationProperties. The binding annotation alone does not register it."
+          "A Java record can receive bound values through its constructor in Spring Boot 3."
         ]
       ]
     },
     {
-      "id": "configuration-binding-1-point-3",
+      "id": "configuration-binding-lesson-1-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @Validated and validation constraints when invalid values should fail startup. This needs validation support."
+          "The annotation declares the prefix. It does not register the object as a bean by itself."
         ]
       ]
     },
     {
-      "id": "configuration-binding-1-example-0",
+      "id": "configuration-binding-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@EnableConfigurationProperties(Settings.class)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " registers a particular settings type for binding."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ConfigurationPropertiesScan",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is an alternative that discovers settings types in scanned packages."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Constructor injection supplies the resulting settings bean to code that needs it."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-1-example-0",
       "type": "example",
       "example": {
-        "title": "Bind mail settings to a record",
-        "description": [
-          "Use Spring Boot 3 and Java 17. Set mail.host=localhost and mail.port=1025 in application.properties. Place each public type in its own file."
-        ],
-        "code": "package com.example.demo;\n\nimport org.springframework.boot.context.properties.ConfigurationProperties;\n\n@ConfigurationProperties(prefix = \"mail\")\npublic record MailSettings(String host, int port) {}\n\n// MailConfiguration.java\npackage com.example.demo;\n\nimport org.springframework.boot.context.properties.EnableConfigurationProperties;\nimport org.springframework.context.annotation.Configuration;\n\n@Configuration\n@EnableConfigurationProperties(MailSettings.class)\npublic class MailConfiguration {}",
+        "title": "Bind greeting settings to one record",
         "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The Java files belong in `com.example.demo`, where `DemoApplication` scans for components.",
+          "The properties file supplies the values used by the configuration bean."
+        ],
+        "code": "",
         "explanation": [
-          "@EnableConfigurationProperties registers MailSettings for binding.",
-          "Spring binds mail.host to host and mail.port to port.",
-          "Another bean can request MailSettings through constructor injection.",
-          "This only binds custom settings. It does not create an SMTP connection or configure JavaMailSender."
-        ]
+          "`@EnableConfigurationProperties` registers a `GreetingSettings` bean.",
+          "The prefix selects `greeting.prefix` and `greeting.max-length`.",
+          "Binding converts `40` to `int` and passes both values to the record constructor.",
+          "Relaxed binding matches the property name `max-length` to the Java name `maxLength`.",
+          "Spring injects the bound object into `GreetingPolicy`.",
+          "`accepts()` reads the configured length limit. The configuration object does not apply that rule automatically."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/GreetingSettings.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.context.properties.ConfigurationProperties;\n\n@ConfigurationProperties(prefix = \"greeting\")\npublic record GreetingSettings(String prefix, int maxLength) {}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingConfiguration.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.context.properties.EnableConfigurationProperties;\nimport org.springframework.context.annotation.Configuration;\n\n@Configuration\n@EnableConfigurationProperties(GreetingSettings.class)\npublic class GreetingConfiguration {}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingPolicy.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class GreetingPolicy {\n    private final GreetingSettings settings;\n\n    public GreetingPolicy(GreetingSettings settings) {\n        this.settings = settings;\n    }\n\n    public boolean accepts(String name) {\n        return name.length() <= settings.maxLength();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "greeting.prefix=Hello\ngreeting.max-length=40\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
       }
+    },
+    {
+      "id": "configuration-binding-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Binding failures and validation"
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A value such as "
+        ],
+        [
+          "greeting.max-length=abc",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " cannot bind to an "
+        ],
+        [
+          "int",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and normally fails startup."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A missing value may become "
+        ],
+        [
+          "null",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or a Java default value if the binding type allows it."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Binding does not check every application rule automatically."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@Validated",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a configuration properties type enables checks for declared validation constraints when validation support is installed."
+        ]
+      ]
+    },
+    {
+      "id": "configuration-binding-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Request validation explains constraint annotations and the validation starter later. Those details are not required for the binding example."
+        ]
+      ]
     }
   ],
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Official reference: Read configuration in Java",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html"
+    },
+    {
+      "title": "Spring Boot 3.5: type-safe configuration properties",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/features/external-config.html#features.external-config.typesafe-configuration-properties"
+    },
+    {
+      "title": "Spring Boot 3.5: ConfigurationProperties API",
+      "url": "https://docs.spring.io/spring-boot/3.5/api/java/org/springframework/boot/context/properties/ConfigurationProperties.html"
     }
-  ]
+  ],
+  "summary": "Read an individual setting, then bind related values to an injectable settings object."
 }

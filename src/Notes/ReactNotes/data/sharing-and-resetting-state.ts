@@ -2,25 +2,28 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: "sharing-and-resetting-state",
-    title: "Sharing and resetting state",
-    summary: "Move shared state to a common parent and use identity to control resets.",
+    title: "Shared state and state resets",
+    summary: "Shared state ownership, component identity, and state resets.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "single-owner",
-            title: "Lift shared state to a common parent",
+            title: "Shared state",
             bullets: [
-                "When two components must stay in sync, keep their shared value in their closest common parent.",
-                "The parent passes the value and an update callback through props. Each value has one owner.",
-                "Calculate derived values while rendering. Do not store a second copy that must be kept in sync."
+                "The closest common parent owns the shared value when two components must stay in sync.",
+                "The parent passes the value and an update callback through props.",
+                "Each value has one owner.",
+                "Derived values can be calculated while rendering.",
+                "A second stored copy would need to be kept in sync."
             ],
             examples: [
                 {
-                    title: "Use one filter across two fields",
+                    title: "Shared search text",
                     description: [
-                        "Let either field edit the same search text."
+                        "Either field edits the same search text."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -41,25 +44,28 @@ export default function SearchPage() {
 }`,
                     result: "Editing either field changes both fields and the preview.",
                     explanation: [
-                        "SearchPage owns query. hasQuery is calculated from query instead of stored separately."
+                        "`SearchPage` owns `query`.",
+                        "`hasQuery` is calculated from `query` instead of stored separately."
                     ]
                 }
             ]
         },
         {
             id: "state-is-local",
-            title: "Preserve or reset a component’s state",
+            title: "Component identity and state resets",
             bullets: [
-                "React preserves state when the same component type stays at the same position with the same key.",
-                "Removing that component or changing its type or key resets its state.",
-                "Use a key when changing the selected record should start a fresh form. The key is part of the component’s identity.",
-                "Keep component definitions outside other components. A new component function changes its type identity."
+                "React preserves state when the same component type stays at the same position with the same `key`.",
+                "Removing that component or changing its type or `key` resets its state.",
+                "A different `key` starts a fresh form for the selected record.",
+                "The `key` is part of the component’s identity.",
+                "Component definitions belong outside other components.",
+                "A new component function changes its type identity."
             ],
             examples: [
                 {
-                    title: "Reset a draft when switching recipients",
+                    title: "Draft resets by recipient",
                     description: [
-                        "Start a new draft for each selected recipient."
+                        "Each selected recipient starts with a new draft."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -80,7 +86,9 @@ export default function Mailbox() {
 }`,
                     result: "Switching from Ada to Grace clears the draft. Switching back starts an empty Ada draft too.",
                     explanation: [
-                        "The changed key creates a fresh Draft instance. This pattern resets drafts; it does not save one draft per recipient."
+                        "The changed `key` creates a fresh `Draft` instance.",
+                        "This pattern resets drafts.",
+                        "It does not save one draft per recipient."
                     ]
                 }
             ]

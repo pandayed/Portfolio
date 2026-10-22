@@ -5,12 +5,16 @@ const note: PythonNote = {
     title: 'Stacks, queues, and typed arrays',
     summary: 'Choose a list, deque, or typed array for simple linear storage.',
     updatedOn: '2026-09-20',
+    exampleLayout: 'grouped',
     sections: [
         {
             id: 'stack',
             title: 'Stack with a list',
-            paragraphs: ['A stack uses last in, first out order. append pushes at the end and pop removes from the end.'],
+            bullets: ['A stack uses last in, first out order.', '`append` pushes at the end.', '`pop` removes from the end.'],
             examples: [{
+                title: 'Pushing, reading, and removing the top item',
+                description: ['The list stores the most recently added item at the end.'],
+                language: 'python',
                 code: [
                     'stack = [1, 2, 3]',
                     'stack.append(5)',
@@ -18,13 +22,16 @@ const note: PythonNote = {
                     'removed = stack.pop()',
                 ].join('\n'),
             }],
-            exceptions: ['Reading stack[-1] or calling pop on an empty list raises IndexError.'],
+            exceptions: ['Reading `stack[-1]` or calling `pop` on an empty list raises `IndexError`.'],
         },
         {
             id: 'queue',
-            title: 'Queue with deque',
-            paragraphs: ['A queue normally uses first in, first out order. collections.deque supports efficient work at both ends.'],
+            title: 'Queue with `deque`',
+            bullets: ['A queue normally uses first in, first out order.', '`collections.deque` supports efficient work at both ends.', 'Removing the first item from a list shifts the remaining items.'],
             examples: [{
+                title: 'Adding at the back and removing from the front',
+                description: ['The queue appends a new item and removes the oldest item.'],
+                language: 'python',
                 code: [
                     'from collections import deque',
                     '',
@@ -33,13 +40,16 @@ const note: PythonNote = {
                     'first = queue.popleft()',
                 ].join('\n'),
             }],
-            bullets: ['Use deque for a queue that removes items from the front often. Removing the first item from a list shifts the remaining items.'],
+
         },
         {
             id: 'typed-array',
-            title: 'Typed arrays with array.array',
-            paragraphs: ['array.array stores values of one C-compatible type. The first argument is a type code.'],
+            title: 'Typed arrays with `array.array`',
+            bullets: ['`array.array` stores values of one C-compatible type.', 'The first argument is a type code.', 'A typed array can use less memory than a list.', 'It is not faster for every operation. Performance depends on the workload.', 'NumPy is a separate library for numerical computing.'],
             examples: [{
+                title: 'Changing an integer array',
+                description: ['The `i` type code selects C-compatible signed integers.'],
+                language: 'python',
                 code: [
                     'from array import array',
                     '',
@@ -49,7 +59,7 @@ const note: PythonNote = {
                     'numbers.pop()',
                 ].join('\n'),
             }],
-            bullets: ['A typed array can use less memory than a list, but it is not faster for every operation. Measure the workload. NumPy is a separate library for numerical computing.'],
+
         },
     ],
 };

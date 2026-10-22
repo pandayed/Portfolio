@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-testing-mockito",
   "title": "Mockito unit tests",
-  "summary": "Control a dependency’s response while checking a real service.",
+  "summary": "Check real service decisions with controlled Mockito dependencies, without loading Spring.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Mockito Spring Boot Tutorial | @Mock @InjectMocks",
@@ -24,215 +24,352 @@
     {
       "title": "Spring Boot 3.4: testing applications",
       "url": "https://docs.spring.io/spring-boot/3.4/reference/testing/spring-boot-applications.html"
+    },
+    {
+      "title": "Mockito 5.17 API",
+      "url": "https://javadoc.io/doc/org.mockito/mockito-core/5.17.0/org/mockito/Mockito.html"
+    },
+    {
+      "title": "Mockito 5.17 API",
+      "url": "https://javadoc.io/static/org.mockito/mockito-core/5.17.0/org.mockito/org/mockito/Mockito.html"
     }
   ],
   "blocks": [
     {
-      "id": "mockito-scope",
+      "id": "testing-mockito-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Replace a dependency with a mock"
+          "Mockito and Spring beans"
         ]
       ]
     },
     {
-      "id": "mockito-scope-b0",
+      "id": "testing-mockito-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A mock is a replacement object controlled by the test."
+          "Mockito can supply a stand-in for one dependency while the class under test stays real."
         ]
       ]
     },
     {
-      "id": "mockito-scope-b1",
+      "id": "testing-mockito-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use a mock for a dependency such as a repository when checking a service’s decisions."
+          "A mock repository answers configured method calls. It does not query a database."
         ]
       ]
     },
     {
-      "id": "mockito-scope-b2",
+      "id": "testing-mockito-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "The service under test stays real. A mock repository does not connect to the database."
+          "@ExtendWith(MockitoExtension.class)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " initializes Mockito support for a JUnit Jupiter test."
         ]
       ]
     },
     {
-      "id": "mockito-scope-b3",
+      "id": "testing-mockito-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "@Mock creates a mock field."
+          "@Mock",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " marks a field that Mockito creates as a mock."
         ]
       ]
     },
     {
-      "id": "mockito-scope-b4",
+      "id": "testing-mockito-lesson-0-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "@InjectMocks creates the object under test and attempts to inject its mock dependencies."
+          "@InjectMocks",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " asks Mockito to create the tested object and inject available mocks. Explicit constructor calls are also valid."
         ]
       ]
     },
     {
-      "id": "mockito-scope-b5",
+      "id": "testing-mockito-lesson-0-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "@ExtendWith(MockitoExtension.class) prepares Mockito for JUnit Jupiter."
+          "These Mockito annotations do not start Spring. They do not apply transactions, bean configuration, or Spring Security."
         ]
       ]
     },
     {
-      "id": "mockito-example",
+      "id": "testing-mockito-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Set responses and check results"
+          "Configured responses and calls"
         ]
       ]
     },
     {
-      "id": "mockito-example-b0",
+      "id": "testing-mockito-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Stubbing sets the response a mock should return. Use when(...).thenReturn(...)."
+          "when(...).thenReturn(...)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " sets the value returned for a matching mock call. This setup is called stubbing."
         ]
       ]
     },
     {
-      "id": "mockito-example-b1",
+      "id": "testing-mockito-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "An assertion checks the service’s result or exception."
+          "verify(...)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks that a call occurred. It does not call the real dependency."
         ]
       ]
     },
     {
-      "id": "mockito-example-b2",
+      "id": "testing-mockito-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "verify(...) checks whether a particular call was made to the mock."
+          "A method without a matching stub returns a Mockito default value, such as "
+        ],
+        [
+          "null",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " or an empty supported container."
         ]
       ]
     },
     {
-      "id": "mockito-example-code",
+      "id": "testing-mockito-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "A service with a mock repository"
+        ]
+      ]
+    },
+    {
+      "id": "testing-mockito-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Return a stored title or report a missing entry",
-        "description": [
-          "Use spring-boot-starter-test in test scope.",
-          "The Titles dependency returns an Optional containing a title, or an empty Optional for a missing entry."
-        ],
-        "code": "import java.util.Optional;\nimport org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.extension.ExtendWith;\nimport org.mockito.InjectMocks;\nimport org.mockito.Mock;\nimport org.mockito.junit.jupiter.MockitoExtension;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertThrows;\nimport static org.mockito.Mockito.verify;\nimport static org.mockito.Mockito.when;\n\ninterface Titles {\n    Optional<String> findById(String id);\n}\n\nclass TitleService {\n    private final Titles titles;\n    TitleService(Titles titles) { this.titles = titles; }\n\n    String title(String id) {\n        return titles.findById(id)\n            .orElseThrow(() -> new IllegalArgumentException(\"Missing entry\"));\n    }\n}\n\n@ExtendWith(MockitoExtension.class)\nclass TitleServiceTest {\n    @Mock Titles titles;\n    @InjectMocks TitleService service;\n\n    @Test\n    void returnsStoredTitle() {\n        when(titles.findById(\"entry-1\"))\n            .thenReturn(Optional.of(\"Morning\"));\n        assertEquals(\"Morning\", service.title(\"entry-1\"));\n        verify(titles).findById(\"entry-1\");\n    }\n\n    @Test\n    void reportsMissingEntry() {\n        when(titles.findById(\"missing\")).thenReturn(Optional.empty());\n        assertThrows(IllegalArgumentException.class,\n            () -> service.title(\"missing\"));\n    }\n}",
+        "title": "Read a title without a database",
         "language": "java",
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "`TitleRepository` is an ordinary Java interface for this example. It has no database implementation."
+        ],
+        "code": "",
         "explanation": [
-          "Mockito creates the Titles mock and injects it into TitleService.",
-          "The first test makes the repository return Morning for entry-1.",
-          "assertEquals checks the returned title. verify checks the requested entry ID.",
-          "The second test returns an empty Optional and checks that the service throws IllegalArgumentException.",
-          "Neither test starts Spring or calls a database."
+          "Mockito creates the repository mock before each test.",
+          "`@InjectMocks` calls the service constructor with that mock.",
+          "The first stub supplies a stored title. The second stub supplies an empty result.",
+          "The tests check the real service decisions for both cases.",
+          "The verification checks the requested ID. It does not prove a database query works."
+        ],
+        "commands": "mvn -Dtest=EntryServiceTest test",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/TitleRepository.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.util.Optional;\n\npublic interface TitleRepository {\n    Optional<String> findTitle(long id);\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/EntryService.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\npublic class EntryService {\n    private final TitleRepository repository;\n\n    public EntryService(TitleRepository repository) {\n        this.repository = repository;\n    }\n\n    public String title(long id) {\n        return repository.findTitle(id)\n                .orElseThrow(() -> new IllegalArgumentException(\"Entry missing\"));\n    }\n}\n"
+          },
+          {
+            "name": "src/test/java/com/example/demo/EntryServiceTest.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.util.Optional;\nimport org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.extension.ExtendWith;\nimport org.mockito.InjectMocks;\nimport org.mockito.Mock;\nimport org.mockito.junit.jupiter.MockitoExtension;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertThrows;\nimport static org.mockito.Mockito.verify;\nimport static org.mockito.Mockito.when;\n\n@ExtendWith(MockitoExtension.class)\nclass EntryServiceTest {\n    @Mock\n    private TitleRepository repository;\n\n    @InjectMocks\n    private EntryService service;\n\n    @Test\n    void returnsStoredTitle() {\n        when(repository.findTitle(7L)).thenReturn(Optional.of(\"First entry\"));\n\n        assertEquals(\"First entry\", service.title(7L));\n        verify(repository).findTitle(7L);\n    }\n\n    @Test\n    void rejectsMissingEntry() {\n        when(repository.findTitle(8L)).thenReturn(Optional.empty());\n\n        assertThrows(IllegalArgumentException.class, () -> service.title(8L));\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "mockito-choices",
+      "id": "testing-mockito-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Arguments and failures"
+          "Arguments and failure cases"
         ]
       ]
     },
     {
-      "id": "mockito-choices-b0",
+      "id": "testing-mockito-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use exact arguments when the value is part of the behavior being checked."
+          "Exact argument values make the expected dependency call explicit."
         ]
       ]
     },
     {
-      "id": "mockito-choices-b1",
+      "id": "testing-mockito-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A matcher such as anyString() accepts many values. Use it only when the exact value does not matter."
+          "anyString()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " matches any non-null string. "
+        ],
+        [
+          "eq(value)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " matches a specific value."
         ]
       ]
     },
     {
-      "id": "mockito-choices-b2",
+      "id": "testing-mockito-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "If one argument uses a matcher, use matchers for every argument in that call. eq(value) matches a specific value."
+          "If one argument uses a matcher, every argument in that call must use a matcher."
         ]
       ]
     },
     {
-      "id": "mockito-choices-b3",
+      "id": "testing-mockito-lesson-3-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "ArgumentCaptor records an argument passed to the mock so the test can check its fields."
+          "ArgumentCaptor",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " records a passed argument for later assertions, such as fields of a saved object."
         ]
       ]
     },
     {
-      "id": "mockito-choices-b4",
+      "id": "testing-mockito-lesson-3-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use doThrow(...).when(mock).operation(...) to simulate an exception from a void method."
-        ]
-      ]
-    },
-    {
-      "id": "mockito-limits",
-      "type": "header",
-      "richText": [
+          "doThrow(...).when(mock).operation(...)",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
         [
-          "What a Mockito test does not load"
+          " configures a failure from a "
+        ],
+        [
+          "void",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " method."
         ]
       ]
     },
     {
-      "id": "mockito-limits-b0",
+      "id": "testing-mockito-lesson-3-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "@InjectMocks does not apply Spring transactions, security filters or configuration."
-        ]
-      ]
-    },
-    {
-      "id": "mockito-limits-b1",
-      "type": "bulleted_list",
-      "richText": [
+          "A plain "
+        ],
         [
-          "A plain @Mock field does not replace a bean in a Spring application context."
-        ]
-      ]
-    },
-    {
-      "id": "mockito-limits-b2",
-      "type": "bulleted_list",
-      "richText": [
+          "@Mock",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
         [
-          "Use a database integration test to check real queries or transaction rollback."
+          " field does not replace a Spring bean. The MVC-test lesson next introduces the separate "
+        ],
+        [
+          "@MockitoBean",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " annotation for a Spring test context."
         ]
       ]
     }

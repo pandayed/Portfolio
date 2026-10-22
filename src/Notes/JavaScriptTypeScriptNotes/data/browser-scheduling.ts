@@ -3,9 +3,10 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "browser-scheduling",
     title: "Browser rendering and workers",
-    summary: "Schedule visual updates and move suitable calculations to another thread.",
+    summary: "Browser callbacks schedule visual updates. Workers run calculations on another thread.",
     scope: "javascript",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -20,17 +21,22 @@ const note: LearningNote = {
     sections: [
         {
             id: "rendering",
-            title: "A DOM update is not a paint",
+            title: "DOM updates and painting",
             bullets: [
-                "Rendering calculates a visual update. Painting draws its pixels. Changing the DOM does not prove the user has seen that change.",
-                "The browser drains microtasks before the next rendering opportunity. Long synchronous work or microtasks can delay rendering.",
-                "The browser can skip a rendering update. It does not promise to paint after every task."
+                "Rendering calculates a visual update.",
+                "Painting draws its pixels.",
+                "Changing the DOM does not prove the user has seen that change.",
+                "The browser drains microtasks before the next rendering opportunity.",
+                "Long synchronous work or microtasks can delay rendering.",
+                "The browser can skip a rendering update.",
+                "It does not promise to paint after every task."
             ],
             examples: [
                 {
-                    title: "Change text before the next rendering opportunity",
+                    title: "Text changes before rendering",
                     description: [
-                        "Run on a visible browser page with a loaded body. The short busy loop demonstrates blocking."
+                        "The example requires a visible browser page with a loaded body.",
+                        "The short busy loop demonstrates blocking."
                     ],
                     language: "javascript",
                     code: `// Browser setup: run on a visible page with a loaded body.
@@ -57,17 +63,20 @@ queueMicrotask(() => {
         },
         {
             id: "animation-frames",
-            title: "Use requestAnimationFrame for visual updates",
+            title: "Animation frame callbacks",
             bullets: [
-                "requestAnimationFrame requests a callback before a future repaint. Its callback can change the DOM for that visual update.",
-                "Request another callback for the next animation update. A single call does not schedule a repeating animation.",
-                "Hidden tabs can pause these callbacks. A callback does not prove that an earlier DOM value was already painted."
+                "`requestAnimationFrame` requests a callback before a future repaint.",
+                "Its callback can change the DOM for that visual update.",
+                "Request another callback for the next animation update.",
+                "A single call does not schedule a repeating animation.",
+                "Hidden tabs can pause these callbacks.",
+                "A callback does not prove that an earlier DOM value was already painted."
             ],
             examples: [
                 {
-                    title: "Update three animation frames",
+                    title: "Three animation frames",
                     description: [
-                        "Run on a visible browser page with a loaded body."
+                        "The example requires a visible browser page with a loaded body."
                     ],
                     language: "javascript",
                     code: `// Browser setup: a visible page with a body; background tabs may pause rAF.
@@ -86,25 +95,30 @@ requestAnimationFrame(update);
                     result: "animation callback 1\nanimation callback 2\nanimation callback 3",
                     explanation: [
                         "Each callback requests the next one until frame 3.",
-                        "The page displays the changing counter. Timing depends on the display and browser."
+                        "The page displays the changing counter.",
+                        "Timing depends on the display and browser."
                     ]
                 }
             ]
         },
         {
             id: "browser-workers",
-            title: "Send a calculation to a browser worker",
+            title: "Browser workers",
             bullets: [
-                "A browser worker runs JavaScript in a separate execution environment on another thread. It cannot use the page’s DOM.",
-                "postMessage sends data. A receiving message listener reads that data from the event’s data property.",
-                "Update the page from the page’s message callback. Stop an owned worker with terminate when its work is no longer needed."
+                "A browser worker runs JavaScript in a separate execution environment on another thread.",
+                "It cannot use the page’s DOM.",
+                "`postMessage` sends data.",
+                "A receiving message listener reads that data from the event’s data property.",
+                "The page’s message callback updates the page.",
+                "`terminate` stops a worker when its owner no longer needs the work."
             ],
             examples: [
                 {
-                    title: "Calculate a sum away from the page thread",
+                    title: "Worker calculations",
                     description: [
-                        "Run on a browser page whose Content Security Policy permits Blob workers.",
-                        "Blob holds the worker source text. URL.createObjectURL provides a temporary URL for that source."
+                        "The example requires a browser page whose Content Security Policy permits `Blob` workers.",
+                        "`Blob` holds the worker source text.",
+                        "`URL.createObjectURL` provides a temporary URL for that source."
                     ],
                     language: "javascript",
                     code: `// Browser setup: a page whose policy permits Blob workers.

@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-security-authentication-authorization",
   "title": "Authentication and authorization",
-  "summary": "Read the authenticated identity, then define roles and request permissions.",
+  "summary": "Connect password login to account loading, the security context, and ordered permission checks.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring Boot 3.5: security defaults",
@@ -24,6 +24,14 @@
     {
       "title": "Spring Security 6.5: method security",
       "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authorization/method-security.html"
+    },
+    {
+      "title": "Spring Security 6.5: authentication architecture",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authentication/architecture.html"
+    },
+    {
+      "title": "Spring Security 6.5: password authentication provider",
+      "url": "https://docs.spring.io/spring-security/reference/6.5/servlet/authentication/passwords/dao-authentication-provider.html"
     }
   ],
   "blocks": [
@@ -32,43 +40,452 @@
       "type": "header",
       "richText": [
         [
-          "The authenticated user"
+          "Authentication objects"
         ]
       ]
     },
     {
-      "id": "identity-b0",
+      "id": "security-authentication-authorization-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "After authentication, Spring stores an Authentication object in the SecurityContext."
+          "Authentication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " represents an authentication request or an authenticated identity in Spring Security."
         ]
       ]
     },
     {
-      "id": "identity-b1",
+      "id": "security-authentication-authorization-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The principal is the authenticated identity. Granted authorities are the permissions attached to that identity."
+          "Before a password check, it can hold the submitted username and credentials."
         ]
       ]
     },
     {
-      "id": "identity-b2",
+      "id": "security-authentication-authorization-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "For password login, UserDetailsService loads the user and stored password hash. The authentication provider checks the password with PasswordEncoder."
+          "After a successful password check, it holds the authenticated principal and authorities."
         ]
       ]
     },
     {
-      "id": "identity-b3",
+      "id": "security-authentication-authorization-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Controllers can receive the authenticated Principal as a method parameter. Read identity from this server-controlled authentication, rather than a user ID supplied by the caller."
+          "The principal is the account represented by the login."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "SecurityContext",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " holds the current "
+        ],
+        [
+          "Authentication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "SecurityContextHolder",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " provides access to that context for the current execution thread."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-0-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring MVC can supply "
+        ],
+        [
+          "Authentication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " as a controller method parameter."
+        ]
+      ]
+    },
+    {
+      "id": "security-auth-password-authentication",
+      "type": "header",
+      "richText": [
+        [
+          "Password authentication"
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The form-login filter reads the submitted username and password."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It passes an authentication request to "
+        ],
+        [
+          "AuthenticationManager",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "ProviderManager",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is the usual "
+        ],
+        [
+          "AuthenticationManager",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " implementation."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It delegates the authentication request to an "
+        ],
+        [
+          "AuthenticationProvider",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " that supports that request type."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "DaoAuthenticationProvider",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " handles username-and-password authentication."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It calls "
+        ],
+        [
+          "UserDetailsService.loadUserByUsername",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " to load the account."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "UserDetails",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies the stored password hash, authorities, and account status."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-7",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "PasswordEncoder.matches",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks the submitted password against that hash."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-1-note-8",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The login filter places the successful "
+        ],
+        [
+          "Authentication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " in the security context."
+        ]
+      ]
+    },
+    {
+      "id": "security-auth-account-storage",
+      "type": "header",
+      "richText": [
+        [
+          "Account storage and password hashes"
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "UserDetailsService",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " loads an account. It does not perform the password comparison."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "InMemoryUserDetailsManager",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " implements "
+        ],
+        [
+          "UserDetailsService",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " with accounts held in application memory."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A database-backed implementation loads the account through a repository and returns "
+        ],
+        [
+          "UserDetails",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "PasswordEncoder.encode",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " produces the hash when a password is created or changed."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A salted password hash can change each time "
+        ],
+        [
+          "encode",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " runs. Password checks use "
+        ],
+        [
+          "matches",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ", not equality between two new hashes."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-2-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "PasswordEncoderFactories.createDelegatingPasswordEncoder()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " supplies an encoder that records the encoding identifier with the hash."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-2-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A stored value beginning with "
+        ],
+        [
+          "{bcrypt}",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects BCrypt when checking the password."
         ]
       ]
     },
@@ -82,47 +499,140 @@
       ]
     },
     {
-      "id": "permission-terms-b0",
+      "id": "permissions-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An authority is a permission name, such as journal:read."
+          "GrantedAuthority",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " represents a permission string attached to "
+        ],
+        [
+          "Authentication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "permission-terms-b1",
+      "id": "permissions-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A role groups users, such as USER or ADMIN. Spring represents roles as authorities with the ROLE_ prefix by default."
+          "hasAuthority(\"employee:read\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks for that exact string."
         ]
       ]
     },
     {
-      "id": "permission-terms-b2",
+      "id": "permissions-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "roles(\"ADMIN\") adds ROLE_ADMIN to the user. hasRole(\"ADMIN\") checks that authority."
+          "hasRole(\"ADMIN\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks for "
+        ],
+        [
+          "ROLE_ADMIN",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "permission-terms-b3",
+      "id": "permissions-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "hasAuthority(\"journal:read\") checks the exact permission name."
+          "roles(\"ADMIN\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on the "
+        ],
+        [
+          "User",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " builder adds the "
+        ],
+        [
+          "ROLE_",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " prefix."
         ]
       ]
     },
     {
-      "id": "permission-terms-b4",
+      "id": "permissions-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "A username such as admin does not automatically give the ADMIN role."
+          "authorities(\"employee:read\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " stores the exact authority supplied."
+        ]
+      ]
+    },
+    {
+      "id": "permissions-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The application defines what its authority strings mean."
         ]
       ]
     },
@@ -131,52 +641,112 @@
       "type": "header",
       "richText": [
         [
-          "Rules for HTTP requests"
+          "Request permissions"
         ]
       ]
     },
     {
-      "id": "request-rules-b0",
+      "id": "security-authentication-authorization-lesson-4-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "permitAll() allows a request without login."
+          "requestMatchers",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " selects requests inside "
+        ],
+        [
+          "authorizeHttpRequests",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
         ]
       ]
     },
     {
-      "id": "request-rules-b1",
+      "id": "security-authentication-authorization-lesson-4-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "authenticated() requires authentication."
+          "Spring checks these rules in declaration order and uses the first matching rule."
         ]
       ]
     },
     {
-      "id": "request-rules-b2",
+      "id": "security-authentication-authorization-lesson-4-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "hasRole(...) and hasAuthority(...) require the named permission."
+          "permitAll()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " allows the request without requiring login."
         ]
       ]
     },
     {
-      "id": "request-rules-b3",
+      "id": "security-authentication-authorization-lesson-4-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "denyAll() rejects the request."
+          "authenticated()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " requires login but does not require a particular role."
         ]
       ]
     },
     {
-      "id": "request-rules-b4",
+      "id": "security-authentication-authorization-lesson-4-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring applies the first matching request rule. Put specific paths before a broad fallback."
+          "denyAll()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " rejects requests that reach that rule."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-4-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "permitAll()",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " leaves the other security filters active. A public state-changing endpoint can still require a CSRF token."
         ]
       ]
     },
@@ -184,22 +754,48 @@
       "id": "permissions-code",
       "type": "example",
       "example": {
-        "title": "Allow public routes and restrict admin routes",
-        "description": [
-          "Add this bean to a @Configuration class in a Spring Boot 3 application.",
-          "Import Bean, HttpSecurity, SecurityFilterChain and Customizer.",
-          "Configure UserDetailsService and PasswordEncoder as shown in the security basics lesson.",
-          "The existing application has public, admin and journal endpoints."
-        ],
-        "code": "@Bean\nSecurityFilterChain security(HttpSecurity http) throws Exception {\n    return http\n        .authorizeHttpRequests(rules -> rules\n            .requestMatchers(\"/public/**\", \"/login\").permitAll()\n            .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n            .requestMatchers(\"/journal/**\").authenticated()\n            .anyRequest().denyAll())\n        .formLogin(Customizer.withDefaults())\n        .build();\n}",
+        "title": "Define an account and ordered request permissions",
         "language": "java",
+        "description": [
+          "Each example is a separate project. All required application files appear in the tabs.",
+          "The process environment supplies `DEMO_USER_PASSWORD` before startup.",
+          "The account is held in memory for this learning example."
+        ],
+        "code": "",
         "explanation": [
-          "The /public/** rule allows visitors who have not logged in.",
-          "The /admin/** rule requires ROLE_ADMIN. A user with only ROLE_USER is denied.",
-          "The /journal/** rule accepts any authenticated user. It does not check which journal entry that user owns.",
-          "The final rule denies paths not covered above.",
-          "The filter chain checks access before the controller runs."
-        ]
+          "The `UserDetailsService` bean replaces Boot's generated account.",
+          "Spring connects this account loader and the `PasswordEncoder` to password authentication.",
+          "`reader` receives the authority `ROLE_USER`.",
+          "An anonymous request can reach an existing `/public/**` endpoint.",
+          "After login, `reader` can reach `/employees/**`.",
+          "`reader` cannot reach `/admin/**` because it lacks `ROLE_ADMIN`.",
+          "Other application routes are denied by the final rule.",
+          "The built-in login filters handle their own login requests.",
+          "Changing the in-memory account does not persist account changes across restarts."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/SecurityConfig.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.security.config.Customizer;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.core.userdetails.User;\nimport org.springframework.security.core.userdetails.UserDetailsService;\nimport org.springframework.security.crypto.factory.PasswordEncoderFactories;\nimport org.springframework.security.crypto.password.PasswordEncoder;\nimport org.springframework.security.provisioning.InMemoryUserDetailsManager;\nimport org.springframework.security.web.SecurityFilterChain;\n\n@Configuration\npublic class SecurityConfig {\n    @Bean\n    PasswordEncoder passwordEncoder() {\n        return PasswordEncoderFactories.createDelegatingPasswordEncoder();\n    }\n\n    @Bean\n    UserDetailsService users(\n            PasswordEncoder encoder,\n            @Value(\"${DEMO_USER_PASSWORD}\") String password) {\n        return new InMemoryUserDetailsManager(\n            User.withUsername(\"reader\")\n                .password(encoder.encode(password))\n                .roles(\"USER\")\n                .build());\n    }\n\n    @Bean\n    SecurityFilterChain security(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(rules -> rules\n                .requestMatchers(\"/public/**\").permitAll()\n                .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n                .requestMatchers(\"/employees/**\").hasRole(\"USER\")\n                .anyRequest().denyAll())\n            .formLogin(Customizer.withDefaults())\n            .build();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/PageController.java",
+            "language": "java",
+            "code": "package com.example.demo;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RestController;\n@RestController\npublic class PageController {\n    @GetMapping(\"/\") public String home() { return \"Home\"; }\n    @GetMapping(\"/public/info\") public String info() { return \"Public information\"; }\n    @GetMapping(\"/admin/report\") public String admin() { return \"Admin report\"; }\n    @GetMapping(\"/employees\") public String employees() { return \"Employee list\"; }\n    @PostMapping(\"/employees\") public String create() { return \"Employee created\"; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-security</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          }
+        ],
+        "commands": "mvn spring-boot:run"
       }
     },
     {
@@ -207,43 +803,86 @@
       "type": "header",
       "richText": [
         [
-          "Rules for service methods"
+          "Method permissions"
         ]
       ]
     },
     {
-      "id": "method-permissions-b0",
+      "id": "security-authentication-authorization-lesson-5-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use @EnableMethodSecurity on a configuration class to enable method authorization."
+          "@EnableMethodSecurity",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a configuration class activates method-level permission checks."
         ]
       ]
     },
     {
-      "id": "method-permissions-b1",
+      "id": "security-authentication-authorization-lesson-5-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PreAuthorize checks a rule before a method runs."
+          "@PreAuthorize(\"hasRole('ADMIN')\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on a service method checks the caller before that method runs."
         ]
       ]
     },
     {
-      "id": "method-permissions-b2",
+      "id": "security-authentication-authorization-lesson-5-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "@PreAuthorize(\"hasRole('ADMIN')\") requires ADMIN for calls through the Spring-managed proxy."
+          "Spring applies the check through the bean's proxy."
         ]
       ]
     },
     {
-      "id": "method-permissions-b3",
+      "id": "security-authentication-authorization-lesson-5-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Calling a secured method directly from another method in the same object bypasses this proxy check."
+          "A call from another Spring bean through that proxy receives the check."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-5-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A method calling another method on the same object bypasses the proxy check."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-5-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Unannotated methods do not acquire a permission rule automatically."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-5-note-6",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Request rules control access to endpoints. Method rules protect service operations reached through other callers."
         ]
       ]
     },
@@ -252,49 +891,116 @@
       "type": "header",
       "richText": [
         [
-          "Responses when access fails"
+          "Access failures"
         ]
       ]
     },
     {
-      "id": "access-response-b0",
+      "id": "security-authentication-authorization-lesson-6-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An API normally returns 401 for missing or invalid authentication."
+          "For form login, an unauthenticated request normally redirects to the login page."
         ]
       ]
     },
     {
-      "id": "access-response-b1",
+      "id": "security-authentication-authorization-lesson-6-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "An authenticated user without the required permission normally receives 403."
-        ]
-      ]
-    },
-    {
-      "id": "access-response-b2",
-      "type": "bulleted_list",
-      "richText": [
+          "An authenticated user who lacks a required authority normally receives "
+        ],
         [
-          "Browser form login can redirect an unauthenticated request to the login page."
-        ]
-      ]
-    },
-    {
-      "id": "ownership-next",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Check ownership of individual records",
+          "403",
           [
             [
-              "a",
-              "/notes/spring-boot/security/ownership"
+              "c"
             ]
           ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-6-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A bearer-token API normally returns "
+        ],
+        [
+          "401",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " for missing or invalid authentication."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-6-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An "
+        ],
+        [
+          "AuthenticationEntryPoint",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " defines how Spring starts authentication or reports that it is needed."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-6-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An "
+        ],
+        [
+          "AccessDeniedHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " defines the response when an authenticated caller lacks permission."
+        ]
+      ]
+    },
+    {
+      "id": "security-authentication-authorization-lesson-6-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A CSRF failure can also produce "
+        ],
+        [
+          "403",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " before a controller runs."
         ]
       ]
     }

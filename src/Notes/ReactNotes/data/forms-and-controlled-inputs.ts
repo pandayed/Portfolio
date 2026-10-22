@@ -3,24 +3,27 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "forms-and-controlled-inputs",
     title: "Forms and controlled inputs",
-    summary: "Connect form fields to state and handle submission without leaving the page.",
+    summary: "Controlled fields, uncontrolled fields, and form submission.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "controlled-text-input",
-            title: "Control text with value and onChange",
+            title: "Controlled text inputs",
             bullets: [
-                "A controlled input receives its current value from state. onChange stores the edited value.",
-                "Update the value synchronously during the change handler so typing appears normally.",
-                "Initialize text state to a string. Do not switch between undefined and a string during the input’s lifetime."
+                "A controlled input receives its current value from state.",
+                "`onChange` stores the edited value.",
+                "The change handler must update the value synchronously so typing appears normally.",
+                "Text state starts as a string.",
+                "Switching between `undefined` and a string changes whether the input is controlled."
             ],
             examples: [
                 {
-                    title: "Show the current field value",
+                    title: "Field value and preview",
                     description: [
-                        "Keep a labeled name field and its preview in sync."
+                        "The labeled name field and its preview show the same state."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -35,24 +38,28 @@ export default function NameField() {
 }`,
                     result: "Typing Mira shows Mira in the field and Preview: Mira below it.",
                     explanation: [
-                        "The event reads the edited string. The setter requests a render using that string."
+                        "The event reads the edited string.",
+                        "The setter requests a render using that string."
                     ]
                 }
             ]
         },
         {
             id: "controlled-checkbox",
-            title: "Use checked for a checkbox",
+            title: "Checkboxes and select elements",
             bullets: [
-                "Control a checkbox with checked and read event.target.checked. This is a boolean.",
-                "A select uses value on the select element. Give each option its own value.",
-                "A number input still reports text through event.target.value. Convert and validate it when your state needs a number."
+                "`checked` controls a checkbox.",
+                "`event.target.checked` reports the edited boolean.",
+                "A `select` uses `value` on the `select` element.",
+                "Each `option` has its own `value`.",
+                "A number input still reports text through `event.target.value`.",
+                "Numeric state requires conversion and validation."
             ],
             examples: [
                 {
-                    title: "Control a checkbox and select",
+                    title: "Notification preferences",
                     description: [
-                        "Store notification preference and delivery method."
+                        "State stores the notification preference and delivery method."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -73,24 +80,26 @@ export default function Preferences() {
 }`,
                     result: "Selecting the checkbox and SMS shows Notifications on: sms.",
                     explanation: [
-                        "checked controls selection. value controls the selected option."
+                        "`checked` controls selection.",
+                        "`value` controls the selected option."
                     ]
                 }
             ]
         },
         {
             id: "submit-a-form",
-            title: "Handle the form’s submit event",
+            title: "Form submission",
             bullets: [
-                "Handle onSubmit on the form so both a submit button and Enter follow the same action.",
-                "Call preventDefault when the handler should replace normal form navigation.",
-                "Give non-submit buttons type=\"button\" inside a form. Their default type would submit it."
+                "`onSubmit` on the form handles both a submit button and Enter.",
+                "`preventDefault` stops normal form navigation when the handler replaces it.",
+                "A non-submit button inside a form needs `type=\"button\"`.",
+                "The default type submits the form."
             ],
             examples: [
                 {
-                    title: "Display submitted text",
+                    title: "Submitted text",
                     description: [
-                        "Store a submitted name separately from the current draft."
+                        "State stores the submitted name separately from the current draft."
                     ],
                     language: "jsx",
                     code: `import { useState } from 'react';
@@ -111,25 +120,28 @@ export default function NameForm() {
 }`,
                     result: "Submitting Mira shows Saved name: Mira without leaving the page.",
                     explanation: [
-                        "The current draft and last submitted name have different jobs, so each has its own state. This example changes local state only."
+                        "The current draft and last submitted name have different jobs, so each has its own state.",
+                        "This example changes local state only."
                     ]
                 }
             ]
         },
         {
             id: "uncontrolled-inputs",
-            title: "Let the browser own an input when appropriate",
+            title: "Uncontrolled inputs",
             bullets: [
-                "An uncontrolled input uses defaultValue or defaultChecked for its initial value. The browser manages later edits.",
-                "Changing defaultValue does not control the input’s current value.",
-                "Read submitted uncontrolled fields with FormData. Refs for direct DOM access come in the refs lesson.",
-                "Choose controlled state when other UI must react to each edit."
+                "An uncontrolled input uses `defaultValue` or `defaultChecked` for its initial value.",
+                "The browser manages later edits.",
+                "Changing `defaultValue` does not control the input’s current value.",
+                "`FormData` reads submitted uncontrolled fields.",
+                "The refs lesson covers direct DOM access.",
+                "Controlled state lets other UI react to each edit."
             ],
             examples: [
                 {
-                    title: "Read an uncontrolled form at submission",
+                    title: "Uncontrolled form submission",
                     description: [
-                        "Read the browser-managed email field when the form is submitted."
+                        "The submission handler reads the browser-managed email field."
                     ],
                     language: "jsx",
                     code: `export default function EmailForm() {
@@ -145,7 +157,8 @@ export default function NameForm() {
 }`,
                     result: "Submitting a valid email displays that email in an alert.",
                     explanation: [
-                        "The name attribute lets FormData identify the field. No React state controls the current value."
+                        "The `name` attribute lets `FormData` identify the field.",
+                        "No React state controls the current value."
                     ]
                 }
             ]

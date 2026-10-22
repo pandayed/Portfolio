@@ -7,6 +7,7 @@ import {
     getJavaScriptTypeScriptNoteRoute,
     PYTHON_NOTES_ROUTE,
     REACT_NOTES_ROUTE,
+    NODE_NOTES_ROUTE,
     type Route,
 } from '../routing/routes';
 import { javaLearningNotes } from './JavaNotes/javaNotes';
@@ -18,6 +19,7 @@ import type { LearningNote } from './LearningNotes/types';
 import { pythonNotes } from './PythonNotes/pythonNotes';
 import type { PythonInlineContent } from './PythonNotes/types';
 import { reactNotes } from './ReactNotes/reactNotes';
+import { nodeLearningNotes } from './NodeNotes/nodeNotes';
 import { getSpringBootBlocks, springBootPages } from './SpringBootNotes/registry';
 import type { SpringBootBlock } from './SpringBootNotes/types';
 import { systemDesignPages } from './SystemDesign/registry';
@@ -45,6 +47,7 @@ const springBootBlockText = (blocks: readonly SpringBootBlock[]): string =>
         block.example?.title ?? '',
         ...(block.example?.description ?? []),
         block.example?.code ?? '',
+        ...(block.example?.files ?? []).map((file) => file.code),
         block.example?.commands ?? '',
         block.example?.result ?? '',
         ...(block.example?.explanation ?? []),
@@ -66,6 +69,7 @@ const learningNoteText = (note: LearningNote): string => [
             example.title ?? '',
             ...(example.description ?? []),
             example.code,
+            ...(example.files ?? []).map((file) => file.code),
             example.commands ?? '',
             example.result ?? '',
             example.typeCheck ?? '',
@@ -114,6 +118,10 @@ for (const note of dbmsLearningNotes) {
 
 for (const note of reactNotes) {
     pageWordCounts.set(`${REACT_NOTES_ROUTE}/${note.slug}`, countWords(learningNoteText(note)));
+}
+
+for (const note of nodeLearningNotes) {
+    pageWordCounts.set(`${NODE_NOTES_ROUTE}/${note.slug}`, countWords(learningNoteText(note)));
 }
 
 for (const page of springBootPages) {

@@ -3,24 +3,29 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: "conditional-rendering-lists-and-keys",
     title: "Conditions, lists, and keys",
-    summary: "Choose content with conditions and identify array items with stable keys.",
+    summary: "Conditional content, array items, and stable keys.",
     scope: "react",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     sections: [
         {
             id: "branch-before-jsx",
-            title: "Choose content with a condition",
+            title: "Conditional content",
             bullets: [
-                "Use JavaScript if statements to return different content. Return null when the component should display nothing.",
-                "Inside JSX, use a ternary for two choices or && to include content only when a condition is true.",
-                "Put a boolean on the left of &&. A number such as 0 can become visible text."
+                "JavaScript `if` statements can return different content.",
+                "Returning `null` displays nothing.",
+                "Inside JSX, a ternary expression selects between two choices.",
+                "`&&` includes content only when its left side is truthy.",
+                "A truthy value counts as true in a condition.",
+                "The left side of `&&` should be a boolean.",
+                "A number such as `0` can become visible text."
             ],
             examples: [
                 {
-                    title: "Show a completion message",
+                    title: "Completion message",
                     description: [
-                        "Choose a label and optionally display extra information."
+                        "The condition selects a label and controls the extra information."
                     ],
                     language: "jsx",
                     code: `function Task({ done, remaining }) {
@@ -37,25 +42,30 @@ export default function App() {
                     result: `More steps left
 Remaining: 2`,
                     explanation: [
-                        "remaining > 0 is boolean. remaining && <p>...</p> would display 0 when remaining is zero."
+                        "`remaining > 0` is boolean.",
+                        "`remaining && <p>...</p>` would display `0` when `remaining` is zero."
                     ]
                 }
             ]
         },
         {
             id: "render-arrays",
-            title: "Render an array with map",
+            title: "Lists and keys",
             bullets: [
-                "Use map to create an element for each array item. Use filter before map when only some items belong in the list.",
-                "Give the outer element returned for each item a key. The key identifies that item among its siblings.",
-                "Use a stable ID from the data. Avoid random keys and array positions for lists that can change order.",
-                "key is used by React. Pass the ID as a separate prop when a child needs to read it."
+                "`map` creates an element for each array item.",
+                "`filter` before `map` selects which items appear in the list.",
+                "The outer element returned for each item needs a `key`.",
+                "The `key` identifies that item among its siblings.",
+                "A stable ID from the data identifies the same item after reordering.",
+                "Random keys and array positions do not reliably identify items in lists that change order.",
+                "React uses `key` internally.",
+                "A child needs a separate prop to read the ID."
             ],
             examples: [
                 {
-                    title: "Display unfinished tasks",
+                    title: "Unfinished tasks",
                     description: [
-                        "Keep stable identities while filtering the list."
+                        "The filtered list keeps stable item identities."
                     ],
                     language: "jsx",
                     code: `const tasks = [
@@ -74,7 +84,8 @@ export default function TaskList() {
 }`,
                     result: "One list item appears: Practice state.",
                     explanation: [
-                        "The key stays state even if another task is inserted before it. taskId separately supplies the ID to TaskRow."
+                        "The `key` stays `state` even if another task is inserted before it.",
+                        "`taskId` separately supplies the ID to `TaskRow`."
                     ]
                 }
             ]

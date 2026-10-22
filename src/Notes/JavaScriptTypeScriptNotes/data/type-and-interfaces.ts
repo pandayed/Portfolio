@@ -2,11 +2,12 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: 'type-and-interfaces',
-    title: 'Choosing type or interface',
-    summary: 'Choose between already learned declarations based on the shape and extension behavior you need.',
+    title: 'Type aliases and interfaces',
+    summary: 'Type aliases and interfaces differ in the types they can name and how they combine declarations.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Everyday types',
@@ -20,37 +21,39 @@ const note: LearningNote = {
     sections: [
         {
             id: 'choosing-a-declaration',
-            title: 'Choose for the requirement',
+            title: 'Declaration choices',
             bullets: [
-                'Both declarations can name ordinary object shapes. Required, optional and readonly properties work in both.',
-                'Use a type alias when naming a primitive, union, tuple, function expression, or other type expression.',
-                'Use an interface when its extension or declaration-merging behavior is useful. Follow the project convention for ordinary object shapes.',
+                'Both declarations can name ordinary object shapes.',
+                'Required, optional and `readonly` properties work in both.',
+                'A type alias can name a primitive, union, tuple, function expression, or other type expression.',
+                'Interfaces support extension and declaration merging.',
+                'Project conventions can guide the choice for ordinary object shapes.',
             ],
             examples: [],
             table: {
                 columns: [
                     'Requirement',
-                    'type',
-                    'interface',
+                    '`type`',
+                    '`interface`',
                 ],
                 rows: [
                     [
-                        'Name an ordinary object shape',
+                        'Ordinary object shape',
                         'Supported',
                         'Supported',
                     ],
                     [
-                        'Name a union or primitive',
+                        'Union or primitive',
                         'Supported',
                         'Cannot directly alias it',
                     ],
                     [
-                        'Combine object requirements',
-                        'Use an intersection',
-                        'Use extends',
+                        'Combined object requirements',
+                        'Intersection',
+                        '`extends`',
                     ],
                     [
-                        'Reopen a name with another declaration',
+                        'Repeated declarations',
                         'Duplicate alias is an error',
                         'Compatible declarations can merge',
                     ],
@@ -59,17 +62,18 @@ const note: LearningNote = {
         },
         {
             id: 'extension-conflicts',
-            title: 'Extension conflicts fail at different places',
+            title: 'Extension conflicts',
             bullets: [
                 'An interface reports an incompatible inherited member at the extending declaration.',
-                'An intersection combines the property types. Intersecting string and number produces never for that property.',
+                'An intersection combines the property types.',
+                'Intersecting `string` and `number` produces `never` for that property.',
                 'This distinction matters when combining types that might define the same property differently.',
             ],
             examples: [
                 {
-                    title: 'Compare conflicting object requirements',
+                    title: 'Conflicting property types',
                     description: [
-                        'See why combining two declarations can make a property impossible to supply.',
+                        'The example shows why combining two declarations can make a property impossible to supply.',
                     ],
                     language: 'typescript',
                     code: [
@@ -82,7 +86,8 @@ const note: LearningNote = {
                         '// interface Invalid extends Base { value: number; } // Extension error.',
                     ].join('\n'),
                     explanation: [
-                        'The intersection exists as a type expression, but its value property cannot be a string or a number.',
+                        'The intersection exists as a type expression.',
+                        'Its `value` property cannot be a `string` or a `number`.',
                         'The incompatible interface extension is rejected at its declaration.',
                         'The commented lines are separate rejected cases.',
                     ],

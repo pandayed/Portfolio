@@ -2,10 +2,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 
 const note: LearningNote = {
     slug: "async-concurrency",
-    title: "Limiting asynchronous concurrency",
-    summary: "Control how many operations start and define what workers do after failure.",
+    title: "Asynchronous concurrency limits",
+    summary: "A concurrency limit controls how many operations run at once.",
     scope: "javascript",
     updatedOn: "2026-10-14",
+    inlineCode: true,
     exampleLayout: "grouped",
     references: [
         {
@@ -20,17 +21,18 @@ const note: LearningNote = {
     sections: [
         {
             id: "eager-starts",
-            title: "A Promise group does not limit starts",
+            title: "Promise groups and operation starts",
             bullets: [
-                "Array.map calls its mapper immediately for every present item. Promise.all observes the returned Promises after those calls.",
+                "`Array.map` calls its mapper immediately for every present item.",
+                "`Promise.all` observes the returned Promises after those calls.",
                 "For a large list, starting every request can exceed service capacity or use too much memory.",
                 "A concurrency limit allows at most a chosen number of pending mapper calls at once."
             ],
             examples: [
                 {
-                    title: "Count starts before waiting",
+                    title: "Operation start counts",
                     description: [
-                        "Map starts all three operations before Promise.all is called."
+                        "Map starts all three operations before `Promise.all` is called."
                     ],
                     language: "javascript",
                     code: `let starts = 0;
@@ -42,8 +44,8 @@ console.log(starts); // 3: map already called every mapper
 Promise.all(promises).then((values) => console.log(values.join(','))); // 1,2,3`,
                     result: "3\n1,2,3",
                     explanation: [
-                        "The counter reaches 3 during map.",
-                        "Wrapping the result array in Promise.all does not postpone those mapper calls."
+                        "The counter reaches 3 during `map`.",
+                        "Wrapping the result array in `Promise.all` does not postpone those mapper calls."
                     ],
                     runnable: true
                 }
@@ -51,17 +53,22 @@ Promise.all(promises).then((values) => console.log(values.join(','))); // 1,2,3`
         },
         {
             id: "worker-limit",
-            title: "Give each async worker one item at a time",
+            title: "Async workers",
             bullets: [
-                "A worker here is an async function that takes one item, waits for its mapper result, then takes another. It is not a worker thread.",
-                "Each worker reserves its next index before await. Workers on the same JavaScript thread therefore do not reserve the same index.",
-                "Store each result under its input index to preserve input order. Completion order may differ.",
-                "Validate the limit as a positive integer. An empty input starts no workers and returns an empty array.",
-                "Decide the failure policy explicitly. This helper rejects when one worker fails, while other workers can finish and take more items."
+                "A worker here is an `async` function that takes one item, waits for its mapper result, then takes another.",
+                "It is not a worker thread.",
+                "Each worker reserves its next index before `await`.",
+                "Workers on the same JavaScript thread therefore do not reserve the same index.",
+                "Storing each result under its input index preserves input order.",
+                "Completion order may differ.",
+                "The helper requires the limit to be a positive integer.",
+                "An empty input starts no workers and returns an empty array.",
+                "The helper defines what happens when a worker fails.",
+                "This helper rejects when one worker fails, while other workers can finish and take more items."
             ],
             examples: [
                 {
-                    title: "Measure a two-operation limit and its failure behavior",
+                    title: "Concurrency limits and worker failures",
                     description: [
                         "The mapper waits on a timer so active operations can overlap.",
                         "The example also checks limit 0 and a mapper failure while another worker is pending."
@@ -120,10 +127,13 @@ inspectConcurrency();
 // A mapper failure does not stop other workers from taking more items.`,
                     result: "10,20,30,40\n2\nRangeError Invalid limit\nfailure demo starts 1\nfailure demo starts 2\nmapper failed\nfailure demo starts 3",
                     explanation: [
-                        "The results array retains input order. highest records at most two active mapper calls.",
+                        "The `results` array retains input order.",
+                        "`highest` records at most two active mapper calls.",
                         "A zero limit is rejected before any mapper call.",
-                        "Failure of item 1 rejects the helper. Resolving item 2 then lets its surviving worker start item 3.",
-                        "A shared stop flag could stop taking new items after failure. Cancelling work already started still needs operation-specific support."
+                        "Failure of item 1 rejects the helper.",
+                        "Resolving item 2 then lets its surviving worker start item 3.",
+                        "A shared stop flag could stop taking new items after failure.",
+                        "Cancelling work already started still needs operation-specific support."
                     ],
                     runnable: true
                 }

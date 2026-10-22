@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'generics',
     title: 'Generics',
-    summary: 'Connect input and result types without restricting reusable code to one fixed type.',
+    summary: 'Generics connect input and result types without restricting reusable code to one fixed type.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: Generics',
@@ -20,17 +21,17 @@ const note: LearningNote = {
     sections: [
         {
             id: 'preserve-type-information',
-            title: 'Connect an input type to its result',
+            title: 'Type parameters',
             bullets: [
-                'A type parameter names a type chosen for a particular use of a function or type.',
-                'Declare a function type parameter in angle brackets before its parameter list.',
+                'A type parameter represents a type supplied when a function is called or a generic type is used.',
+                'A function declares type parameters in angle brackets before its parameter list.',
                 'Using the same type parameter for input and result preserves their relationship.',
             ],
             examples: [
                 {
-                    title: 'Keep the caller’s type',
+                    title: 'Input and result types',
                     description: [
-                        'Return an input while preserving whether it was a string or a number.',
+                        'The example returns an input while preserving whether it was a `string` or a `number`.',
                     ],
                     language: 'typescript',
                     code: [
@@ -51,17 +52,18 @@ const note: LearningNote = {
         },
         {
             id: 'inferred-and-explicit-type-arguments',
-            title: 'Infer or supply a type argument',
+            title: 'Type arguments',
             bullets: [
                 'Inference usually chooses type arguments from supplied values.',
                 'A caller can write a type argument in angle brackets when it needs to state a requirement explicitly.',
-                'A type argument selects a checked type. It is not a runtime argument or a conversion.',
+                'A type argument selects a checked type.',
+                'It is not a runtime argument or a conversion.',
             ],
             examples: [
                 {
-                    title: 'Select a checked type explicitly',
+                    title: 'Explicit type arguments',
                     description: [
-                        'Require a numeric input on a generic call.',
+                        'The example requires a numeric input on a generic call.',
                     ],
                     language: 'typescript',
                     code: [
@@ -71,25 +73,26 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: '20',
                     explanation: [
-                        'number fills the Value parameter for this call.',
-                        'The string argument remains invalid even though it looks numeric.',
+                        '`number` fills the `Value` parameter for this call.',
+                        'The `string` argument remains invalid even though it looks numeric.',
                     ],
                 },
             ],
         },
         {
             id: 'generic-containers',
-            title: 'Use a parameter in an object type',
+            title: 'Generic containers',
             bullets: [
                 'A type alias or interface can also declare type parameters.',
                 'A generic container reuses the same structure with different contained types.',
-                'Array<Item> is the generic form of Item[]. Promise<Result> describes the fulfilled result type of a promise.',
+                '`Array<Item>` is the generic form of `Item[]`.',
+                '`Promise<Result>` describes the fulfilled result type of a promise.',
             ],
             examples: [
                 {
-                    title: 'Reuse a box shape',
+                    title: 'Generic object types',
                     description: [
-                        'Use one interface for a string value and a numeric value.',
+                        'The example uses one interface for a `string` value and a numeric value.',
                     ],
                     language: 'typescript',
                     code: [
@@ -100,7 +103,7 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'MIA 20.0',
                     explanation: [
-                        'Each type argument determines the value property type.',
+                        'Each type argument determines the `value` property type.',
                         'The interface does not create either object.',
                     ],
                 },
@@ -108,16 +111,16 @@ const note: LearningNote = {
         },
         {
             id: 'generic-arrays-and-functions',
-            title: 'Include a possible missing result',
+            title: 'Missing results',
             bullets: [
                 'A generic result must describe every result the function can produce.',
-                'An operation returning an item from a possibly empty array needs to account for undefined.',
+                'An operation returning an item from a possibly empty array needs to account for `undefined`.',
             ],
             examples: [
                 {
-                    title: 'Return an item or undefined',
+                    title: 'First array item',
                     description: [
-                        'Preserve the item type while handling an empty input list.',
+                        'The example preserves the item type while handling an empty input list.',
                     ],
                     language: 'typescript',
                     code: [
@@ -130,24 +133,25 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'MIA\nundefined',
                     explanation: [
-                        'The non-empty call preserves string as its item type.',
-                        'The result union still requires a check before using string methods.',
+                        'The non-empty call preserves `string` as its item type.',
+                        'The result union still requires a check before using `string` methods.',
                     ],
                 },
             ],
         },
         {
             id: 'generic-constraints',
-            title: 'Require members with a constraint',
+            title: 'Generic constraints',
             bullets: [
-                'extends in a type parameter declares a constraint. Supplied types must meet that requirement.',
+                '`extends` in a type parameter declares a constraint.',
+                'Supplied types must meet that requirement.',
                 'The constraint permits operations on its required members while preserving additional information about the input.',
             ],
             examples: [
                 {
-                    title: 'Require a name and preserve the full object',
+                    title: 'Required and additional properties',
                     description: [
-                        'Read a required property without dropping an additional id property from the result type.',
+                        'The example reads a required property without dropping an additional `id` property from the result type.',
                     ],
                     language: 'typescript',
                     code: [
@@ -161,24 +165,25 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Mia\n7',
                     explanation: [
-                        'The constraint makes value.name available inside the function.',
-                        'The inferred type also retains id for the caller.',
+                        'The constraint makes `value.name` available inside the function.',
+                        'The inferred type also retains `id` for the caller.',
                     ],
                 },
             ],
         },
         {
             id: 'runtime-constructors',
-            title: 'Pass a constructor when code must create a value',
+            title: 'Constructor parameters',
             bullets: [
                 'A type parameter does not provide a constructor that JavaScript can call.',
-                'A constructor signature uses new (...) => ResultType to describe a constructor value supplied as an argument.',
+                'A constructor signature uses `new (...) => ResultType` to describe a constructor value supplied as an argument.',
             ],
             examples: [
                 {
-                    title: 'Create an instance from a supplied constructor',
+                    title: 'Supplied constructor',
                     description: [
-                        'Require an actual constructor argument instead of attempting to instantiate a type parameter.',
+                        'The example receives a constructor as an argument.',
+                        'The function calls it to create an instance.',
                     ],
                     language: 'typescript',
                     code: [
@@ -193,24 +198,26 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Mia',
                     explanation: [
-                        'User is supplied as a runtime value.',
-                        'Value describes the resulting instance type. public name is a parameter property that creates and initializes the instance property.',
+                        '`User` is supplied as a runtime value.',
+                        '`Value` describes the resulting instance type.',
+                        '`public name` is a parameter property that creates and initializes the instance property.',
                     ],
                 },
             ],
         },
         {
             id: 'callback-result-types',
-            title: 'Infer the result type from a callback',
+            title: 'Callback result types',
             bullets: [
                 'A generic function can connect its result to the result of a supplied callback.',
-                'The callback can check an unknown value and return the type the caller needs.',
+                'The callback can check an `unknown` value and return the type the caller needs.',
             ],
             examples: [
                 {
-                    title: 'Keep a validator’s result type',
+                    title: 'Validation callback',
                     description: [
-                        'Parse external text and let a checking callback determine the returned type.',
+                        'The example parses external text.',
+                        'A checking callback determines the returned type.',
                     ],
                     language: 'typescript',
                     code: [
@@ -227,25 +234,28 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'MIA',
                     explanation: [
-                        'readName checks the parsed value and returns a string.',
-                        'The callback result lets TypeScript infer string for Value and the parse result.',
-                        'Invalid JSON throws while parsing. A valid non-string JSON value throws in readName.',
+                        '`readName` checks the parsed value and returns a `string`.',
+                        'The callback result lets TypeScript infer `string` for `Value` and the parse result.',
+                        'Invalid JSON throws while parsing.',
+                        'A valid non-`string` JSON value throws in `readName`.',
                     ],
                 },
             ],
         },
         {
             id: 'dom-type-arguments',
-            title: 'A DOM type argument states an expectation',
+            title: 'DOM type arguments',
             bullets: [
                 'Some DOM functions let the caller supply an expected element type as a type argument.',
-                'That type argument does not inspect the selected element. Check the actual element when its kind is uncertain.',
+                'That type argument does not inspect the selected element.',
+                'A runtime check can confirm its actual kind.',
             ],
             examples: [
                 {
-                    title: 'Check the selected element’s actual kind',
+                    title: 'DOM element checks',
                     description: [
-                        'Avoid relying on a button type argument when the selector matches a div.',
+                        'The selector matches a `div`.',
+                        'A runtime check confirms whether the selected element is a button.',
                     ],
                     language: 'typescript',
                     code: [
@@ -262,9 +272,10 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'undefined\nNot a button',
                     explanation: [
-                        'Run this in a browser DOM environment.',
-                        'The type argument permits a button property read, but the actual element is a div.',
-                        'The instanceof condition checks the runtime element before using button-specific properties.',
+                        'This example requires a browser DOM environment.',
+                        'The type argument permits a button property read.',
+                        'The actual element is a `div`.',
+                        'The `instanceof` condition checks the runtime element before using button-specific properties.',
                     ],
                 },
             ],

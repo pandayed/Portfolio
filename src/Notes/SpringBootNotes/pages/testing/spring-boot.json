@@ -4,52 +4,117 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed54807ba8f0c285d4dff46f",
   "blocks": [
     {
-      "id": "spring-test-context",
+      "id": "testing-spring-boot-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Load the application context"
+          "The application test context"
         ]
       ]
     },
     {
-      "id": "spring-test-context-b0",
+      "id": "testing-spring-boot-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "@SpringBootTest loads the application context using Spring Boot’s configuration."
+          "@SpringBootTest",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " loads the application configuration through Spring Boot."
         ]
       ]
     },
     {
-      "id": "spring-test-context-b1",
+      "id": "testing-spring-boot-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use it when the behavior depends on several real components or Spring configuration."
+          "The context contains the configured application beans rather than only the MVC slice from the preceding lesson."
         ]
       ]
     },
     {
-      "id": "spring-test-context-b2",
+      "id": "testing-spring-boot-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Supply isolated databases and other external dependencies so the test cannot change production data."
+          "Spring normally finds the "
+        ],
+        [
+          "@SpringBootApplication",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " class by searching the test\u2019s package and its parent packages."
         ]
       ]
     },
     {
-      "id": "spring-test-server",
+      "id": "testing-spring-boot-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A test can specify the startup configuration explicitly with "
+        ],
+        [
+          "classes",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A context-startup test checks that the beans can be created. Assertions are still needed for application behavior."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Choose the web environment"
+          "Web environments"
         ]
       ]
     },
     {
-      "id": "spring-test-server-table",
+      "id": "testing-spring-boot-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "webEnvironment",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " determines whether Spring Boot starts an HTTP server for the test."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-1-table-0",
       "type": "table",
       "columnOrder": [
         "0",
@@ -58,12 +123,12 @@
       "hasColumnHeader": true,
       "children": [
         {
-          "id": "spring-test-server-table-0",
+          "id": "testing-spring-boot-lesson-1-table-0-row-0",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "Setting"
+                "Value"
               ]
             ],
             "1": [
@@ -74,65 +139,85 @@
           }
         },
         {
-          "id": "spring-test-server-table-1",
+          "id": "testing-spring-boot-lesson-1-table-0-row-1",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "MOCK (default)"
+                "MOCK",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Loads a web context when applicable. Does not start a real HTTP server."
+                "Default. Loads a mock web environment when web support is available. No HTTP port."
               ]
             ]
           }
         },
         {
-          "id": "spring-test-server-table-2",
+          "id": "testing-spring-boot-lesson-1-table-0-row-2",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "RANDOM_PORT"
+                "RANDOM_PORT",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Starts a real server on an available port."
+                "Starts an embedded server on an available port."
               ]
             ]
           }
         },
         {
-          "id": "spring-test-server-table-3",
+          "id": "testing-spring-boot-lesson-1-table-0-row-3",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "DEFINED_PORT"
+                "DEFINED_PORT",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Starts a real server using the configured port."
+                "Starts an embedded server on the configured port."
               ]
             ]
           }
         },
         {
-          "id": "spring-test-server-table-4",
+          "id": "testing-spring-boot-lesson-1-table-0-row-4",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "NONE"
+                "NONE",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Loads a context without a web environment."
+                "Loads a non-web application context."
               ]
             ]
           }
@@ -140,92 +225,209 @@
       ]
     },
     {
-      "id": "spring-test-mockmvc-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use @AutoConfigureMockMvc with the default mock environment to send requests without a network port."
-        ]
-      ]
-    },
-    {
-      "id": "spring-test-mockmvc-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use RANDOM_PORT when the check needs a real HTTP request to the running application."
-        ]
-      ]
-    },
-    {
-      "id": "spring-test-data",
+      "id": "testing-spring-boot-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Keep test data isolated"
+          "Real HTTP requests"
         ]
       ]
     },
     {
-      "id": "spring-test-data-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use a dedicated test profile or explicit test properties for database settings."
+      "id": "testing-spring-boot-lesson-2-example-0",
+      "type": "example",
+      "example": {
+        "title": "Call a running application on a random port",
+        "language": "java",
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "It has no database or security dependencies. A larger application also loads those configured components."
+        ],
+        "code": "",
+        "explanation": [
+          "`RANDOM_PORT` starts the embedded server without reserving a fixed port in the test.",
+          "Boot provides `TestRestTemplate`, a test HTTP client configured for that server.",
+          "The client sends a real request. The assertions check both the response status and body.",
+          "Spring manages the server lifecycle for the test context."
+        ],
+        "commands": "mvn -Dtest=GreetingApplicationTest test",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/GreetingController.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\npublic class GreetingController {\n    @GetMapping(\"/hello\")\n    public String hello() {\n        return \"Hello, Spring Boot\";\n    }\n}\n"
+          },
+          {
+            "name": "src/test/java/com/example/demo/GreetingApplicationTest.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.junit.jupiter.api.Test;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.boot.test.context.SpringBootTest;\nimport org.springframework.boot.test.web.client.TestRestTemplate;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)\nclass GreetingApplicationTest {\n    @Autowired\n    private TestRestTemplate client;\n\n    @Test\n    void servesGreeting() {\n        var response = client.getForEntity(\"/hello\", String.class);\n\n        assertEquals(200, response.getStatusCode().value());\n        assertEquals(\"Hello, Spring Boot\", response.getBody());\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
-      ]
+      }
     },
     {
-      "id": "spring-test-data-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A transaction around a test does not automatically roll back changes made by a real server handling an HTTP request on another thread."
-        ]
-      ]
-    },
-    {
-      "id": "spring-test-data-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Create and clean up data according to the test’s actual request and transaction boundaries."
-        ]
-      ]
-    },
-    {
-      "id": "spring-test-outcomes",
+      "id": "testing-spring-boot-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Check behavior after startup"
+          "Mock requests with the full context"
         ]
       ]
     },
     {
-      "id": "spring-test-outcomes-b0",
+      "id": "testing-spring-boot-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A contextLoads method checks that Spring can start the context."
+          "@AutoConfigureMockMvc",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " adds the "
+        ],
+        [
+          "MockMvc",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " support explained in the MVC-test lesson to a full-context test."
         ]
       ]
     },
     {
-      "id": "spring-test-outcomes-b1",
+      "id": "testing-spring-boot-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Check actual results to verify the requirement, such as saved data or an access-denied response."
+          "With the default "
+        ],
+        [
+          "MOCK",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " environment, that combination exercises configured application beans without opening an HTTP port."
         ]
       ]
     },
     {
-      "id": "spring-test-outcomes-b2",
+      "id": "testing-spring-boot-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A local integration test does not prove that a deployed host has the same configuration or can reach an external service."
+          "@WebMvcTest",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " and "
+        ],
+        [
+          "@SpringBootTest",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " select different scopes. A single test class uses one of them."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-4",
+      "type": "header",
+      "richText": [
+        [
+          "Test configuration and data"
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-4-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "@ActiveProfiles(\"test\")",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " activates a test profile. Its properties can select isolated databases and service endpoints."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-4-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A profile name alone does not create an isolated database. Its actual configuration determines the target."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-4-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A transactional test can roll back changes performed in its own transaction."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-4-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An HTTP server handles requests on another thread. A transaction around the test method does not automatically roll back that server-side work."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-4-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Real-server tests need data setup and cleanup that follow those server-side transaction boundaries."
+        ]
+      ]
+    },
+    {
+      "id": "testing-spring-boot-lesson-4-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A local application test does not prove that a deployed host has the same settings or can reach its external services."
         ]
       ]
     }
@@ -234,8 +436,12 @@
     {
       "title": "Spring Boot 3.5: testing",
       "url": "https://docs.spring.io/spring-boot/3.5/reference/testing/spring-boot-applications.html"
+    },
+    {
+      "title": "Spring Boot 3.5: SpringBootTest API",
+      "url": "https://docs.spring.io/spring-boot/3.5/api/java/org/springframework/boot/test/context/SpringBootTest.html"
     }
   ],
-  "updatedOn": "2026-10-14",
-  "summary": "Load application wiring and choose whether to start a real HTTP server."
+  "updatedOn": "2026-10-20",
+  "summary": "Load configured application beans, choose mock or real HTTP, and keep integration-test data isolated."
 }

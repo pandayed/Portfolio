@@ -4,6 +4,114 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed5480449f34ec7dca26258e",
   "blocks": [
     {
+      "id": "relational-databases-lesson-0",
+      "type": "header",
+      "richText": [
+        [
+          "JPA, Hibernate and Spring Data"
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Jakarta Persistence, usually called JPA, defines how Java classes map to relational tables."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An entity is one of these mapped classes."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "One entity object represents one stored row."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Hibernate implements JPA."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It reads the mappings and runs the SQL needed to load or change rows."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Data JPA creates repository beans."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A repository gives application code methods for saving and finding entities."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Spring Boot configures these libraries from the dependencies and database settings."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The flow is service \u2192 repository \u2192 Hibernate \u2192 database."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-5-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Entity mapping comes next."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-0-note-5-part-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Repository methods follow after that."
+        ]
+      ]
+    },
+    {
       "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f",
       "type": "header",
       "richText": [
@@ -13,224 +121,347 @@
       ]
     },
     {
-      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b0",
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "A relational database stores data in tables. SQL reads and changes that data."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "JDBC is the Java API used to communicate with relational databases. Each database supplies a JDBC driver."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A DataSource supplies database connections to application code. Spring Boot can configure it from dependencies and connection properties."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A connection pool reuses connections instead of opening a new connection for every operation. Spring Boot starters normally use HikariCP when it is available."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-b4",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Connection setup does not define table mappings or repository methods. Those are separate topics."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a2-b870-d916849a832e",
-      "type": "header",
-      "richText": [
-        [
-          "Connect to PostgreSQL"
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a2-b870-d916849a832e-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Add the PostgreSQL JDBC driver and a database-access starter. Use spring-boot-starter-data-jpa for the JPA lessons."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a2-b870-d916849a832e-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Configure the database URL, username and password. Keep credentials outside committed source files."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80a2-b870-d916849a832e-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "The database must be running and the configured user must have access to it. Spring Boot does not create a PostgreSQL server."
-        ]
-      ]
-    },
-    {
-      "id": "postgres-connection",
-      "type": "example",
-      "example": {
-        "title": "Configure a PostgreSQL connection",
-        "description": [
-          "Use a Spring Boot 3 project with Java 17 or later.",
-          "Add org.springframework.boot:spring-boot-starter-data-jpa and org.postgresql:postgresql to pom.xml. Set the driver dependency scope to runtime.",
-          "Create a PostgreSQL database named notes. Set DB_USERNAME and DB_PASSWORD in the application environment.",
-          "Put these settings in src/main/resources/application.properties."
+          "A "
         ],
-        "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate",
-        "language": "text",
-        "explanation": [
-          "The JDBC URL selects the PostgreSQL server and notes database.",
-          "Environment variables provide the credentials.",
-          "validate checks mapped tables when JPA starts. It does not create them.",
-          "With no entities yet, this configuration teaches the connection settings. Once entities are added, create their tables before starting with validate."
-        ]
-      }
-    },
-    {
-      "id": "database-schema",
-      "type": "header",
-      "richText": [
         [
-          "Create and change the schema"
-        ]
-      ]
-    },
-    {
-      "id": "database-schema-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "A schema describes database objects such as tables and columns."
-        ]
-      ]
-    },
-    {
-      "id": "database-schema-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "For a disposable learning database, ddl-auto=create or create-drop can generate tables from entity mappings. These settings can destroy existing data."
-        ]
-      ]
-    },
-    {
-      "id": "database-schema-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "For a persistent database, use versioned migrations such as Flyway or Liquibase to change the schema. Use ddl-auto=validate to check mappings."
-        ]
-      ]
-    },
-    {
-      "id": "database-schema-b3",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "ddl-auto=update is not a substitute for reviewed, versioned migrations."
-        ]
-      ]
-    },
-    {
-      "id": "h2-database",
-      "type": "header",
-      "richText": [
-        [
-          "Use H2 for a separate local case"
-        ]
-      ]
-    },
-    {
-      "id": "h2-database-b0",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "H2 can run inside the application process. An in-memory H2 database keeps its data in memory."
-        ]
-      ]
-    },
-    {
-      "id": "h2-database-b1",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "An in-memory database loses its data when it closes. It is useful for short local experiments."
-        ]
-      ]
-    },
-    {
-      "id": "h2-database-b2",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "H2 and PostgreSQL can behave differently. Use PostgreSQL when checking PostgreSQL-specific SQL or behavior."
-        ]
-      ]
-    },
-    {
-      "id": "h2-connection",
-      "type": "example",
-      "example": {
-        "title": "Configure an in-memory H2 database",
-        "description": [
-          "For this local case, add com.h2database:h2 with runtime scope instead of the PostgreSQL driver.",
-          "Use a separate local profile or project. Put these properties in its application.properties."
-        ],
-        "code": "spring.datasource.url=jdbc:h2:mem:notes\nspring.datasource.username=sa\nspring.datasource.password=\nspring.jpa.hibernate.ddl-auto=create-drop",
-        "language": "text",
-        "explanation": [
-          "jdbc:h2:mem:notes creates an in-memory database named notes.",
-          "create-drop creates mapped tables and drops them when the JPA application shuts down normally.",
-          "The empty password is for this isolated local example."
-        ]
-      }
-    },
-    {
-      "id": "database-next",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Map a Java class to a table",
+          "DataSource",
           [
             [
-              "a",
-              "/notes/spring-boot/entity-mapping"
+              "c"
             ]
           ]
+        ],
+        [
+          " supplies the JDBC connections Hibernate uses."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot configures a "
+        ],
+        [
+          "DataSource",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " when the application has a database driver and connection settings."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The JPA starter includes HikariCP."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Its connection pool reuses connections across operations."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The JDBC URL selects the database."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot usually identifies the driver from that URL."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot connects to a PostgreSQL server."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not install or start that server."
+        ]
+      ]
+    },
+    {
+      "id": "20924eb1-ed54-8088-bf3b-e2a5e1e9166f-example-0",
+      "type": "example",
+      "example": {
+        "title": "Configure the employee database",
+        "language": "text",
+        "description": [
+          "The tabs contain all application files for this separate Maven project.",
+          "The example requires Java 17 or later, Maven and PostgreSQL with an existing `employee_notes` database.",
+          "The environment supplies `DB_USERNAME` and `DB_PASSWORD`.",
+          "`database/schema.sql` creates the tables in an empty database before `mvn spring-boot:run`.",
+          "Hibernate validates the supplied schema. It does not create the tables."
+        ],
+        "code": "",
+        "explanation": [
+          "Boot manages the dependency versions through its parent or dependency management.",
+          "`spring.datasource.*` supplies the connection settings.",
+          "`validate` checks that mapped tables and columns exist.",
+          "It does not create them.",
+          "`spring.jpa.open-in-view=false` keeps later entity loading out of web response rendering.",
+          "Relationship loading is explained after relationships."
+        ],
+        "files": [
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.datasource.url=jdbc:postgresql://localhost:5432/employee_notes\nspring.datasource.username=${DB_USERNAME}\nspring.datasource.password=${DB_PASSWORD}\nspring.jpa.hibernate.ddl-auto=validate\nspring.jpa.open-in-view=false\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/employee/Employee.java",
+            "language": "java",
+            "code": "package com.example.demo.employee;\n\nimport jakarta.persistence.Column;\nimport jakarta.persistence.Entity;\nimport jakarta.persistence.GeneratedValue;\nimport jakarta.persistence.GenerationType;\nimport jakarta.persistence.Id;\nimport jakarta.persistence.Table;\n\n@Entity\n@Table(name = \"employees\")\npublic class Employee {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    @Column(nullable = false, length = 100)\n    private String name;\n\n    @Column(nullable = false, length = 100)\n    private String department;\n\n    protected Employee() {}\n\n    public Employee(String name, String department) {\n        this.name = name;\n        this.department = department;\n    }\n\n    public Long getId() { return id; }\n    public String getName() { return name; }\n    public String getDepartment() { return department; }\n    public void rename(String name) { this.name = name; }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.postgresql</groupId>\n            <artifactId>postgresql</artifactId>\n            <scope>runtime</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "database/schema.sql",
+            "language": "sql",
+            "code": "CREATE TABLE employees (\n    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(100) NOT NULL\n);\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "relational-databases-lesson-2",
+      "type": "header",
+      "richText": [
+        [
+          "Schema changes"
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "spring.jpa.hibernate.ddl-auto",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " controls Hibernate schema handling."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "none",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " leaves the schema unchanged."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-1-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "validate",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " checks it against the entity mappings."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "create",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " recreates the mapped schema."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "create-drop",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " also drops it at normal shutdown."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-2-part-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Both can destroy existing data."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Flyway and Liquibase apply ordered migration files to a persistent database."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "update",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " changes a schema automatically."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-2-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "It does not provide the reviewable change history of migrations."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-3",
+      "type": "header",
+      "richText": [
+        [
+          "H2 as a separate local database"
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-3-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Boot can configure an embedded H2 database when the runtime dependency "
+        ],
+        [
+          "com.h2database:h2",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " is present."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-3-note-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "An in-memory H2 database loses its data when it closes."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-3-note-2",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "H2 replaces PostgreSQL for that local case."
+        ]
+      ]
+    },
+    {
+      "id": "relational-databases-lesson-3-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Its behavior does not establish that PostgreSQL-specific SQL works."
         ]
       ]
     }
   ],
-  "summary": "Connect Spring Boot to PostgreSQL before mapping or querying data.",
-  "updatedOn": "2026-10-14",
+  "summary": "Understand the data libraries, then configure the relational connection used by the employee examples.",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Spring Boot 3.5: SQL databases",

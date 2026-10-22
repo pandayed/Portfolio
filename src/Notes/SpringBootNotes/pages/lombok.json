@@ -4,61 +4,81 @@
   "sourceUrl": "https://xpandeyed.notion.site/20924eb1ed548036946ace7ff06748a9",
   "blocks": [
     {
-      "id": "20924eb1-ed54-8053-84d8-d23d31782cfa",
+      "id": "lombok-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Generate repetitive Java methods"
+          "Lombok and Spring"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8053-84d8-d23d31782cfa-b0",
+      "id": "lombok-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Lombok is an optional Java library that generates methods and constructors from annotations."
+          "Lombok generates Java methods and constructors from annotations during compilation."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8053-84d8-d23d31782cfa-b1",
+      "id": "lombok-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "The compiler processes these annotations while building the class. They do not generate methods when the application runs."
+          "Spring Boot does not require Lombok. Explicit Java constructors and methods work the same way."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8053-84d8-d23d31782cfa-b2",
+      "id": "lombok-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Spring Boot does not require Lombok. You can write the same methods yourself."
+          "Lombok annotations belong to "
+        ],
+        [
+          "lombok",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          ". They do not register Spring beans."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-8053-84d8-d23d31782cfa-b3",
+      "id": "lombok-lesson-0-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Configure Lombok for your build and IDE. Annotation processing must be enabled where your setup requires it."
+          "The build needs the Lombok dependency and annotation processing. The IDE also needs Lombok support to understand generated methods."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80af-bb03-d47212966157",
+      "id": "lombok-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Choose the annotation"
+          "Generated members"
         ]
       ]
     },
     {
-      "id": "lombok-annotations",
+      "id": "lombok-lesson-1-note-0",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Specific annotations make the generated members explicit."
+        ]
+      ]
+    },
+    {
+      "id": "lombok-lesson-1-table-0",
       "type": "table",
       "columnOrder": [
         "0",
@@ -67,7 +87,7 @@
       "hasColumnHeader": true,
       "children": [
         {
-          "id": "lombok-annotations-r0",
+          "id": "lombok-lesson-1-table-0-row-0",
           "type": "table_row",
           "cells": {
             "0": [
@@ -77,135 +97,216 @@
             ],
             "1": [
               [
-                "Generated code"
+                "Generated members"
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r1",
+          "id": "lombok-lesson-1-table-0-row-1",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@Getter"
+                "@Getter",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A getter for each applicable field."
+                "Getters for the selected fields."
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r2",
+          "id": "lombok-lesson-1-table-0-row-2",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@Setter"
+                "@Setter",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A setter for each non-final applicable field."
+                "Setters for selected non-final fields."
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r3",
+          "id": "lombok-lesson-1-table-0-row-3",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@NoArgsConstructor"
+                "@RequiredArgsConstructor",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A constructor with no arguments."
+                "Constructor for uninitialized final fields and required non-null fields."
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r4",
+          "id": "lombok-lesson-1-table-0-row-4",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@AllArgsConstructor"
+                "@NoArgsConstructor",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A constructor for non-static fields. Initialized final fields are excluded."
+                "Constructor with no arguments, when fields allow it."
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r5",
+          "id": "lombok-lesson-1-table-0-row-5",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@RequiredArgsConstructor"
+                "@AllArgsConstructor",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A constructor for uninitialized final fields and uninitialized @NonNull fields."
+                "Constructor for instance fields, except initialized final fields."
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r6",
+          "id": "lombok-lesson-1-table-0-row-6",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@ToString"
+                "@ToString",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "A toString method."
+                "A "
+              ],
+              [
+                "toString",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " implementation."
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r7",
+          "id": "lombok-lesson-1-table-0-row-7",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@EqualsAndHashCode"
+                "@EqualsAndHashCode",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "equals and hashCode methods."
+                "equals",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " and "
+              ],
+              [
+                "hashCode",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                " using the selected fields."
               ]
             ]
           }
         },
         {
-          "id": "lombok-annotations-r8",
+          "id": "lombok-lesson-1-table-0-row-8",
           "type": "table_row",
           "cells": {
             "0": [
               [
-                "@Data"
+                "@Data",
+                [
+                  [
+                    "c"
+                  ]
+                ]
               ]
             ],
             "1": [
               [
-                "Getters, setters for non-final fields, toString, equals, hashCode, and a required-arguments constructor."
+                "Getters, non-final field setters, equality, "
+              ],
+              [
+                "toString",
+                [
+                  [
+                    "c"
+                  ]
+                ]
+              ],
+              [
+                ", and a required-arguments constructor."
               ]
             ]
           }
@@ -213,111 +314,174 @@
       ]
     },
     {
-      "id": "lombok-data-choice",
-      "type": "bulleted_list",
-      "richText": [
-        [
-          "Use specific annotations when you need only some of these methods. @Data does not mean that every class gets a no-argument or all-arguments constructor."
-        ]
-      ]
-    },
-    {
-      "id": "20924eb1-ed54-80da-9b86-db2e0ef1d6ef",
+      "id": "lombok-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Write a data class"
+          "Constructor injection with Lombok"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-805d-a8bb-c6315f8a15b6",
+      "id": "lombok-lesson-2-example-0",
       "type": "example",
       "example": {
-        "title": "Generate User methods with Lombok",
-        "description": [
-          "Add Lombok to the build and configure annotation processing.",
-          "This class represents simple application data."
-        ],
-        "code": "import lombok.Data;\nimport lombok.NoArgsConstructor;\nimport lombok.AllArgsConstructor;\n\n@Data\n@NoArgsConstructor\n@AllArgsConstructor\npublic class User {\n    private String name;\n    private int age;\n}\n",
+        "title": "Generate a constructor for a service dependency",
         "language": "java",
+        "description": [
+          "Java `17` and Maven are required. The files form a separate project rooted at `pom.xml`.",
+          "Java `17` discovers the Lombok annotation processor from the dependency. The IDE also needs Lombok support to recognize generated members."
+        ],
+        "code": "",
         "explanation": [
-          "@Data generates accessors, toString, equals, and hashCode for this class.",
-          "@NoArgsConstructor provides new User().",
-          "@AllArgsConstructor provides new User(name, age).",
-          "Generated toString, equals, and hashCode use the fields unless you configure exclusions."
+          "Lombok generates `EntryService(TitlePolicy titlePolicy)` during compilation.",
+          "`@Service` registers the class with Spring. Spring calls its single constructor and supplies the `TitlePolicy` bean.",
+          "`@RequiredArgsConstructor` supplies the constructor. It does not create the dependency or perform injection.",
+          "`prepareTitle(\"  First entry  \")` returns `First entry`."
+        ],
+        "commands": "mvn clean package",
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/TitlePolicy.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.stereotype.Component;\n\n@Component\npublic class TitlePolicy {\n    public String normalize(String title) {\n        return title.strip();\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/EntryService.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.stereotype.Service;\n\n@Service\n@RequiredArgsConstructor\npublic class EntryService {\n    private final TitlePolicy titlePolicy;\n\n    public String prepareTitle(String title) {\n        return titlePolicy.normalize(title);\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.projectlombok</groupId>\n            <artifactId>lombok</artifactId>\n            <optional>true</optional>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
         ]
       }
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f",
+      "id": "lombok-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Control the generated behavior"
+          "Data classes and entities"
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f-b0",
+      "id": "lombok-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not generate setters for fields that callers should not change."
+          "@Data",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " does not promise both a no-argument constructor and an all-arguments constructor."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f-b1",
+      "id": "lombok-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Generated toString can include private or sensitive fields. Exclude fields that must not appear in logs."
+          "@NonNull",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " on an uninitialized field makes it a required constructor argument. Lombok also generates a null check for that argument."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f-b2",
+      "id": "lombok-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Avoid applying @Data automatically to JPA entities. Relations and mutable fields can make generated equality or toString inappropriate."
+          "Generated setters allow callers to change fields. Generated equality depends on the selected fields."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f-b3",
+      "id": "lombok-lesson-3-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Bidirectional relations can cause recursive toString calls. Select or exclude relation fields explicitly."
+          "Generated "
+        ],
+        [
+          "toString",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can print private fields. "
+        ],
+        [
+          "@ToString.Exclude",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " leaves a field out."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f-b4",
+      "id": "lombok-lesson-3-note-4",
       "type": "bulleted_list",
       "richText": [
         [
-          "A JPA entity needs a public or protected no-argument constructor. Choose that visibility when generating it."
+          "A JPA entity needs a public or protected no-argument constructor, as covered in the relational-data notes."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f-b5",
+      "id": "lombok-lesson-3-note-5",
       "type": "bulleted_list",
       "richText": [
         [
-          "Lombok constructors do not create Spring beans. Dependency injection still follows Spring’s constructor and bean rules."
+          "JPA relationships can cause recursive "
+        ],
+        [
+          "toString",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " calls or unexpected lazy loading. Their fields need deliberate inclusion or exclusion."
         ]
       ]
     },
     {
-      "id": "20924eb1-ed54-80f8-8e61-cf70f0b8485f-b6",
+      "id": "lombok-lesson-3-note-6",
       "type": "bulleted_list",
       "richText": [
         [
-          "Jackson mapping and Bean Validation still follow their own rules. Generating accessors does not replace their configuration."
+          "Lombok does not replace Jackson mapping or Bean Validation annotations."
         ]
       ]
     }
@@ -336,6 +500,6 @@
       "url": "https://projectlombok.org/setup/maven"
     }
   ],
-  "summary": "Choose annotations to generate Java methods and constructors, then control their behavior.",
-  "updatedOn": "2026-10-14"
+  "summary": "Lombok generates Java members at compile time; Spring still registers beans and injects dependencies.",
+  "updatedOn": "2026-10-20"
 }

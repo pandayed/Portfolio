@@ -59,7 +59,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'runtime-and-fundamentals',
         title: '1. JavaScript basics',
-        summary: 'Run code, declare variables, then use operators, conditions, and loops.',
+        summary: 'Programs, variables, operators, conditions, and loops.',
         notes: [
             runtimeAndTypesNote,
             variablesValuesAndOperatorsNote,
@@ -74,7 +74,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'functions-and-data',
         title: '2. Functions, scope, and arrays',
-        summary: 'Define functions, follow declaration scope, then pass functions and capture variables.',
+        summary: 'Functions, declaration scope, callbacks, arrays, and closures.',
         notes: [
             functionsAndScopeNote,
             declarationScopeNote,
@@ -86,7 +86,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'objects-and-collections',
         title: '3. Objects and collections',
-        summary: 'Group data in objects, copy and unpack it, then use collection methods and method calls.',
+        summary: 'Object properties, destructuring, collection methods, and function calls.',
         notes: [
             objectsNote,
             destructuringAndSpreadNote,
@@ -98,7 +98,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'objects-and-program-structure',
         title: '4. Program structure and errors',
-        summary: 'Use prototypes, classes, and modules. Read JSON, handle errors, and debug code.',
+        summary: 'Prototypes, classes, modules, JSON, errors, and debugging.',
         notes: [
             classesPrototypesAndModulesNote,
             classesNote,
@@ -112,7 +112,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'asynchronous-javascript',
         title: '5. Asynchronous JavaScript',
-        summary: 'Start with timer callbacks, then Promise results, await, combinators, and scheduling.',
+        summary: 'Timer callbacks, promises, asynchronous functions, and the event loop.',
         notes: [
             timersAndCallbacksNote,
             promisesNote,
@@ -124,7 +124,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'browser-and-async',
         title: '6. Browser pages and requests',
-        summary: 'Use the DOM, events, and storage before fetching data and coordinating asynchronous work.',
+        summary: 'The DOM, events, storage, network requests, and asynchronous coordination.',
         notes: [
             browserDomAndStorageNote,
             browserEventsNote,
@@ -141,7 +141,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'typescript-type-system',
         title: '7. TypeScript foundations',
-        summary: 'Add type checks, type functions and data, then narrow values and validate external data.',
+        summary: 'Type checks, function types, object types, narrowing, and runtime validation.',
         notes: [
             inferenceUnionsAndNarrowingNote,
             typescriptFunctionsAndCollectionsNote,
@@ -157,7 +157,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'typescript-type-transformations-and-configuration',
         title: '8. Reusable and derived types',
-        summary: 'Connect input and output types with generics, then derive types from existing ones.',
+        summary: 'Generics, type operators, utility types, and derived types.',
         notes: [
             genericsNote,
             typeOperatorsNote,
@@ -168,7 +168,7 @@ export const javascriptTypeScriptChapters: readonly LearningChapter[] = [
     {
         id: 'typescript-projects',
         title: '9. TypeScript projects',
-        summary: 'Configure checking, emitted files, and declaration files.',
+        summary: 'TypeScript modules, compiler settings, and declaration files.',
         notes: [
             typescriptModulesNote,
             tsconfigAndDeclarationFilesNote,

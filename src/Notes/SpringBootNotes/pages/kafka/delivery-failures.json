@@ -1,9 +1,9 @@
 {
   "id": "spring-boot-kafka-delivery-failures",
   "title": "Kafka Failures and Retries",
-  "summary": "Handle publish failures, consumer retries, durable pending events, and duplicate delivery.",
+  "summary": "Separate publication from processing, add bounded listener retries, and preserve failed records.",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue",
-  "updatedOn": "2026-10-14",
+  "updatedOn": "2026-10-20",
   "sources": [
     {
       "title": "Engineering Digest: Kafka Fallback: What if Kafka doesn't work ?",
@@ -32,240 +32,505 @@
     {
       "title": "Kafka producer idempotence configuration",
       "url": "https://kafka.apache.org/40/configuration/producer-configs/"
+    },
+    {
+      "title": "Spring Kafka 3.3 error handling",
+      "url": "https://docs.spring.io/spring-kafka/reference/3.3/kafka/annotation-error-handling.html"
+    },
+    {
+      "title": "Spring Boot 3.5 Kafka integration",
+      "url": "https://docs.spring.io/spring-boot/3.5/reference/messaging/kafka.html"
     }
   ],
   "blocks": [
     {
-      "id": "delivery-boundaries",
+      "id": "kafka-delivery-failures-lesson-0",
       "type": "header",
       "richText": [
         [
-          "Distinguish publication from processing"
+          "Publication failures"
         ]
       ]
     },
     {
-      "id": "delivery-boundaries-b0",
+      "id": "kafka-delivery-failures-lesson-0-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Publishing to Kafka and processing a received record are separate operations. Each can fail independently."
+          "KafkaTemplate.send",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " can fail immediately or complete its future exceptionally later."
         ]
       ]
     },
     {
-      "id": "delivery-boundaries-b1",
+      "id": "kafka-delivery-failures-lesson-0-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "KafkaTemplate.send can throw immediately or complete its future with an error later."
+          "A "
+        ],
+        [
+          "try/catch",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " around "
+        ],
+        [
+          "send",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " alone misses the later failure."
         ]
       ]
     },
     {
-      "id": "delivery-boundaries-b2",
+      "id": "kafka-delivery-failures-lesson-0-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A try/catch around send alone cannot catch a later asynchronous failure. Inspect the future or use a completion callback."
+          "Waiting for the future or attaching a completion callback exposes the publication result."
         ]
       ]
     },
     {
-      "id": "delivery-boundaries-b3",
+      "id": "kafka-delivery-failures-lesson-0-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A timeout means the caller stopped waiting. It does not prove that the broker rejected the record."
+          "A wait timeout means the caller stopped waiting."
         ]
       ]
     },
     {
-      "id": "delivery-boundaries-b4",
+      "id": "kafka-delivery-failures-lesson-0-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Sending an email directly after a publish timeout can duplicate an email later sent by the consumer."
+          "Sending email directly after a publish timeout is unsafe as a fallback."
         ]
       ]
     },
     {
-      "id": "delivery-scenario",
+      "id": "kafka-delivery-failures-lesson-0-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The record may still reach Kafka and trigger another email."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-1",
       "type": "header",
       "richText": [
         [
-          "Store work before retrying publication"
+          "Durable pending publication"
         ]
       ]
     },
     {
-      "id": "delivery-scenario-b0",
+      "id": "kafka-delivery-failures-lesson-1-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "An outbox is a database record for an event that still needs to be published."
+          "An outbox is a database record for an event awaiting publication."
         ]
       ]
     },
     {
-      "id": "delivery-scenario-b1",
+      "id": "kafka-delivery-failures-lesson-1-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "When possible, save the business change and outbox record in the same database transaction."
+          "It contains a stable event ID and the payload needed to publish later."
         ]
       ]
     },
     {
-      "id": "delivery-scenario-b2",
+      "id": "kafka-delivery-failures-lesson-1-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A background worker publishes pending outbox records. It marks them published after broker acknowledgment."
+          "Saving the business change and outbox row in the same database transaction keeps their commit together."
         ]
       ]
     },
     {
-      "id": "delivery-scenario-b3",
+      "id": "kafka-delivery-failures-lesson-1-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A crash between publication and marking the record can cause another publication. Consumers still need duplicate handling."
+          "This depends on the database\u2019s transaction support."
         ]
       ]
     },
     {
-      "id": "delivery-scenario-b4",
+      "id": "kafka-delivery-failures-lesson-1-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Report a queued state only after durable storage succeeds. If storage fails, report failure. Logging an event does not preserve it."
+          "A worker publishes pending rows and marks them published after broker acknowledgment."
         ]
       ]
     },
     {
-      "id": "delivery-retry",
+      "id": "kafka-delivery-failures-lesson-1-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The schedule can use the method-registration pattern already covered."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-1-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A crash after publication and before that update can publish the same event again."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-1-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "The consumer still needs duplicate handling."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-1-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "A queued response is justified only after durable storage succeeds."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-1-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Logging an event does not store pending work."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-2",
       "type": "header",
       "richText": [
         [
-          "Retry a failed consumer"
+          "Container retry and recovery"
         ]
       ]
     },
     {
-      "id": "delivery-retry-b0",
+      "id": "kafka-delivery-failures-lesson-2-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Let exceptions escape the listener so the container can detect failure."
+          "DefaultErrorHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " handles exceptions raised by a listener."
         ]
       ]
     },
     {
-      "id": "delivery-retry-b1",
+      "id": "kafka-delivery-failures-lesson-2-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "DefaultErrorHandler can retry temporary processing failures. Configure a limit."
+          "A backoff controls how long the container waits between retries."
         ]
       ]
     },
     {
-      "id": "delivery-retry-b2",
+      "id": "kafka-delivery-failures-lesson-2-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Backoff is the wait between attempts. One initial attempt plus two retries means three attempts in total."
+          "DeadLetterPublishingRecoverer",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " publishes a record that exhausted its allowed attempts to a dead-letter topic."
         ]
       ]
     },
     {
-      "id": "delivery-retry-b3",
+      "id": "kafka-delivery-failures-lesson-2-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Do not retry invalid event formats or permanent business errors without correcting them."
+          "This preserves failed input for investigation and a controlled replay."
         ]
       ]
     },
     {
-      "id": "delivery-retry-b4",
+      "id": "kafka-delivery-failures-lesson-2-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "A dead-letter topic stores records that could not be processed after the allowed attempts."
+          "Boot attaches a "
+        ],
+        [
+          "CommonErrorHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " bean to its auto-configured listener container factory."
         ]
       ]
     },
     {
-      "id": "delivery-retry-b5",
+      "id": "kafka-delivery-failures-lesson-2-note-2-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "DeadLetterPublishingRecoverer publishes those failed records. Ensure publication succeeds before treating recovery as complete."
+          "DefaultErrorHandler",
+          [
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          " implements that interface."
         ]
       ]
     },
     {
-      "id": "delivery-retry-b6",
+      "id": "kafka-delivery-failures-lesson-2-note-3",
       "type": "bulleted_list",
       "richText": [
         [
-          "Monitor failed records, retries, and consumer lag. Consumer lag is how far consumption is behind available records."
+          "A permanent format error needs correction."
         ]
       ]
     },
     {
-      "id": "delivery-guarantees",
+      "id": "kafka-delivery-failures-lesson-2-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Repeating the same invalid input does not fix it."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-2-example-0",
+      "type": "example",
+      "example": {
+        "title": "Retry twice, then publish a failed record",
+        "language": "java",
+        "description": [
+          "Each tab names a file relative to the project root. Java `17` and Maven are required. `mvn spring-boot:run` starts this example after its external requirements are configured.",
+          "The tabs include the producer runner, listener, topic declarations, error handler, broker settings, application class, and complete build file.",
+          "A local broker must be reachable through `KAFKA_BOOTSTRAP_SERVERS` and permit topic creation and publication. These settings use an unauthenticated local demonstration broker.",
+          "The original topic has one partition.",
+          "The dead-letter topic has one matching partition so recovery can use the original partition number.",
+          "The broker must permit creation and publication to `weekly-sentiments.DLT`.",
+          "This example handles failures after string deserialization, including JSON parsing inside the listener.",
+          "Deserializer failures before listener invocation need a separate `ErrorHandlingDeserializer` configuration.",
+          "The runner sends a valid event on startup. Changing its `version` to `2` demonstrates immediate dead-letter recovery. Invalid JSON demonstrates the retryable parsing failure."
+        ],
+        "code": "",
+        "explanation": [
+          "The explicit destination function chooses `weekly-sentiments.DLT`.",
+          "The destination name is supplied explicitly.",
+          "`FixedBackOff(1000L, 2L)` waits one second between two retries.",
+          "A retryable failure gets up to three processing attempts including the initial attempt.",
+          "`IllegalArgumentException` skips those retries and goes to recovery.",
+          "`DigestListener` in these tabs uses that exception for an invalid event contract.",
+          "`setFailIfSendResultIsError(true)` makes failed dead-letter publication fail recovery.",
+          "The failed record must not be treated as safely recovered when publication failed.",
+          "After successful recovery, the container can progress past the recovered record under its acknowledgment policy.",
+          "This is not successful business processing.",
+          "A dead-letter topic needs monitoring and an explicit replay process.",
+          "It is not an automatic repair."
+        ],
+        "files": [
+          {
+            "name": "src/main/java/com/example/demo/KafkaFailureConfiguration.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.apache.kafka.clients.admin.NewTopic;\nimport org.apache.kafka.common.TopicPartition;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.kafka.config.TopicBuilder;\nimport org.springframework.kafka.core.KafkaTemplate;\nimport org.springframework.kafka.listener.DeadLetterPublishingRecoverer;\nimport org.springframework.kafka.listener.DefaultErrorHandler;\nimport org.springframework.util.backoff.FixedBackOff;\n\n@Configuration\nclass KafkaFailureConfiguration {\n    @Bean\n    NewTopic failedDigests() {\n        return TopicBuilder.name(\"weekly-sentiments.DLT\")\n                .partitions(1).replicas(1).build();\n    }\n\n    @Bean\n    DefaultErrorHandler digestErrorHandler(KafkaTemplate<String, String> kafka) {\n        var recoverer = new DeadLetterPublishingRecoverer(kafka,\n                (record, failure) -> new TopicPartition(\n                        \"weekly-sentiments.DLT\", record.partition()));\n        recoverer.setFailIfSendResultIsError(true);\n        var handler = new DefaultErrorHandler(recoverer,\n                new FixedBackOff(1000L, 2L));\n        handler.addNotRetryableExceptions(IllegalArgumentException.class);\n        return handler;\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DigestKafkaConfiguration.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.util.concurrent.TimeUnit;\nimport org.apache.kafka.clients.admin.NewTopic;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.boot.ApplicationRunner;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.kafka.annotation.KafkaListener;\nimport org.springframework.kafka.config.TopicBuilder;\nimport org.springframework.kafka.core.KafkaTemplate;\nimport org.springframework.stereotype.Component;\nimport com.fasterxml.jackson.databind.ObjectMapper;\n\n@Configuration\nclass DigestKafkaConfiguration {\n    @Bean\n    NewTopic digestTopic() {\n        return TopicBuilder.name(\"weekly-sentiments\")\n                .partitions(1).replicas(1).build();\n    }\n\n    @Bean\n    ApplicationRunner publishDigest(KafkaTemplate<String, String> kafka) {\n        return args -> {\n            String json = \"\"\"\n                {\"version\":1,\"eventId\":\"digest-42-2026-W41\",\"userId\":\"user-42\",\"summary\":\"HAPPY=2, SAD=1\"}\n                \"\"\";\n            kafka.send(\"weekly-sentiments\", \"user-42\", json)\n                    .get(5, TimeUnit.SECONDS);\n        };\n    }\n}\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DigestListener.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport java.util.concurrent.TimeUnit;\nimport org.apache.kafka.clients.admin.NewTopic;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\nimport org.springframework.boot.ApplicationRunner;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.kafka.annotation.KafkaListener;\nimport org.springframework.kafka.config.TopicBuilder;\nimport org.springframework.kafka.core.KafkaTemplate;\nimport org.springframework.stereotype.Component;\nimport com.fasterxml.jackson.databind.ObjectMapper;\n\n@Component\nclass DigestListener {\n    private static final Logger log = LoggerFactory.getLogger(DigestListener.class);\n    private final ObjectMapper mapper;\n\n    DigestListener(ObjectMapper mapper) {\n        this.mapper = mapper;\n    }\n\n    @KafkaListener(topics = \"weekly-sentiments\", groupId = \"weekly-digest-mail\")\n    void receive(String json) throws Exception {\n        Digest event = mapper.readValue(json, Digest.class);\n        if (event.version() != 1 || event.eventId() == null\n                || event.eventId().isBlank() || event.userId() == null\n                || event.summary() == null) {\n            throw new IllegalArgumentException(\"Invalid digest event\");\n        }\n        log.info(\"Validated digest record\");\n    }\n\n    record Digest(int version, String eventId, String userId, String summary) {}\n}\n"
+          },
+          {
+            "name": "src/main/resources/application.properties",
+            "language": "text",
+            "code": "spring.kafka.bootstrap-servers=${KAFKA_BOOTSTRAP_SERVERS}\nspring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer\nspring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer\nspring.kafka.consumer.enable-auto-commit=false\nspring.kafka.consumer.auto-offset-reset=earliest\nspring.kafka.listener.ack-mode=record\n"
+          },
+          {
+            "name": "src/main/java/com/example/demo/DemoApplication.java",
+            "language": "java",
+            "code": "package com.example.demo;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class DemoApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(DemoApplication.class, args);\n    }\n}\n"
+          },
+          {
+            "name": "pom.xml",
+            "language": "text",
+            "code": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>3.5.16</version>\n        <relativePath/>\n    </parent>\n    <groupId>com.example</groupId>\n    <artifactId>demo</artifactId>\n    <version>1.0.0</version>\n    <properties><java.version>17</java.version></properties>\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.kafka</groupId>\n            <artifactId>spring-kafka</artifactId>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>demo</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3",
       "type": "header",
       "richText": [
         [
-          "Understand duplicate handling limits"
+          "Repeated delivery and external actions"
         ]
       ]
     },
     {
-      "id": "delivery-guarantees-b0",
+      "id": "kafka-delivery-failures-lesson-3-note-0",
       "type": "bulleted_list",
       "richText": [
         [
-          "Producer idempotence prevents certain duplicate Kafka writes caused by producer retries. It does not make an external action happen once."
+          "A stable event ID lets a processor recognize a repeated event."
         ]
       ]
     },
     {
-      "id": "delivery-guarantees-b1",
+      "id": "kafka-delivery-failures-lesson-3-note-0-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Kafka transactions can provide exactly-once results for supported Kafka read-process-write flows. Ordinary SMTP is outside that transaction."
+          "An in-memory set loses that information on restart."
         ]
       ]
     },
     {
-      "id": "delivery-guarantees-b2",
+      "id": "kafka-delivery-failures-lesson-3-note-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "A stable event ID lets a consumer identify repeated work."
+          "Producer idempotence prevents some duplicate writes caused by producer retries."
         ]
       ]
     },
     {
-      "id": "delivery-guarantees-b3",
+      "id": "kafka-delivery-failures-lesson-3-note-1-part-1",
       "type": "bulleted_list",
       "richText": [
         [
-          "Sending an email before recording completion risks a duplicate after a crash. Recording completion first risks losing the email."
+          "It does not make an email happen once."
         ]
       ]
     },
     {
-      "id": "delivery-guarantees-b4",
+      "id": "kafka-delivery-failures-lesson-3-note-2",
       "type": "bulleted_list",
       "richText": [
         [
-          "Use idempotent mail submission when the provider supports it. Otherwise choose and document the remaining retry and duplicate behavior."
+          "Kafka transactions support exactly-once behavior for supported Kafka read-process-write flows."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3-note-2-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Ordinary SMTP submission is outside that transaction."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3-note-3",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Sending email before recording completion risks a duplicate after a crash."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3-note-3-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Recording completion before sending risks a lost email."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3-note-4",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Provider-supported idempotent submission can close that gap."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3-note-4-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Otherwise the application must choose and document its remaining duplicate or loss behavior."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3-note-5",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Retry counts, failed-record counts, and consumer lag need monitoring."
+        ]
+      ]
+    },
+    {
+      "id": "kafka-delivery-failures-lesson-3-note-5-part-1",
+      "type": "bulleted_list",
+      "richText": [
+        [
+          "Lag measures how far group consumption is behind available records."
         ]
       ]
     }

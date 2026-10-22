@@ -3,10 +3,11 @@ import type { LearningNote } from '../../LearningNotes/types';
 const note: LearningNote = {
     slug: 'inference-unions-and-narrowing',
     title: 'Type annotations and inference',
-    summary: 'Describe primitive values, let TypeScript infer their types, and distinguish checking from JavaScript execution.',
+    summary: 'Annotations state type requirements. Inference determines types from existing code.',
     scope: 'typescript',
     updatedOn: '2026-10-14',
     exampleLayout: 'grouped',
+    inlineCode: true,
     references: [
         {
             title: 'TypeScript Handbook: The basics',
@@ -20,18 +21,21 @@ const note: LearningNote = {
     sections: [
         {
             id: 'annotations',
-            title: 'Write a type annotation',
+            title: 'Type annotations',
             bullets: [
                 'TypeScript checks whether operations match the types described in the code.',
-                'A type annotation follows a variable name after a colon. Use string for text, number for numbers, and boolean for true or false.',
-                'Use the lowercase names. String, Number, and Boolean describe different types.',
-                'An annotation restricts assignments. It does not convert a value.',
+                'A type annotation follows a variable name after a colon.',
+                '`string` describes text, `number` describes numbers, and `boolean` describes `true` or `false`.',
+                'The primitive types use lowercase names.',
+                '`String`, `Number`, and `Boolean` describe different types.',
+                'An annotation restricts assignments.',
+                'It does not convert a value.',
             ],
             examples: [
                 {
-                    title: 'Reject a string assigned to a number',
+                    title: 'Numeric assignments',
                     description: [
-                        'Keep a score numeric while allowing its value to change.',
+                        'The example keeps a score numeric while allowing its value to change.',
                     ],
                     language: 'typescript',
                     code: [
@@ -43,25 +47,27 @@ const note: LearningNote = {
                     result: '20',
                     explanation: [
                         'The annotation allows both numeric assignments.',
-                        'Uncommenting the string assignment produces a type error.',
+                        'Uncommenting the `string` assignment produces a type error.',
                     ],
                 },
             ],
         },
         {
             id: 'inference',
-            title: 'Let the initial value supply the type',
+            title: 'Type inference',
             bullets: [
                 'Inference means TypeScript determines a type without a written annotation.',
-                'An initialized let variable usually gets the wider primitive type. A const primitive can keep its exact literal type.',
+                'An initialized `let` variable usually gets a primitive type such as `string`, rather than one exact value.',
+                'A `const` primitive can keep its exact literal type.',
                 'A literal type allows one exact value.',
-                'Use annotations to state requirements. Use inference when the code already supplies enough information.',
+                'Annotations state requirements.',
+                'Inference uses type information already present in the code.',
             ],
             examples: [
                 {
-                    title: 'Compare a writable string with a constant',
+                    title: 'Variable and constant types',
                     description: [
-                        'See which checked types TypeScript infers from primitive string values.',
+                        'The example shows which checked types TypeScript infers from primitive `string` values.',
                     ],
                     language: 'typescript',
                     code: [
@@ -72,25 +78,28 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'writer reader',
                     explanation: [
-                        'The let variable can hold another string.',
-                        'The const variable has the exact type "reader".',
+                        'The `let` variable can hold another `string`.',
+                        'The `const` variable has the exact type `"reader"`.',
                     ],
                 },
             ],
         },
         {
             id: 'checking-and-emission',
-            title: 'Check TypeScript and run JavaScript',
+            title: 'Type checking and JavaScript output',
             bullets: [
-                'The TypeScript compiler checks .ts files and can produce .js files. Producing output files is called emission.',
-                'Annotations disappear from the emitted JavaScript. Ordinary JavaScript statements keep their behavior.',
-                'The examples in these TypeScript lessons assume strict checking. Compiler configuration is covered after the type lessons.',
+                'The TypeScript compiler checks `.ts` files and can produce `.js` files.',
+                'Producing output files is called emission.',
+                'Annotations disappear from the emitted JavaScript.',
+                'Ordinary JavaScript statements keep their behavior.',
+                'The examples in these TypeScript lessons assume `strict` checking.',
+                'Compiler configuration is covered after the type lessons.',
             ],
             examples: [
                 {
-                    title: 'Compile an annotated variable',
+                    title: 'Emitted JavaScript',
                     description: [
-                        'Compare TypeScript source with the JavaScript the compiler emits.',
+                        'The example compares TypeScript source with the JavaScript the compiler emits.',
                     ],
                     language: 'typescript',
                     code: [
@@ -99,8 +108,10 @@ const note: LearningNote = {
                     ].join('\n'),
                     result: 'Emitted score.js:\nconst score = 20;\nconsole.log(score);\n\nRunning score.js prints 20.',
                     explanation: [
-                        'Save the source as score.ts. The emitted code belongs in a separate score.js file.',
-                        'The compiler removes : number. The console call still runs in JavaScript.',
+                        'The source file is `score.ts`.',
+                        'The compiler writes the emitted code to a separate `score.js` file.',
+                        'The compiler removes `: number`.',
+                        'The console call still runs in JavaScript.',
                     ],
                 },
             ],
