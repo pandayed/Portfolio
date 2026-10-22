@@ -18,7 +18,6 @@ export type { SystemDesignEntryRoute };
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
-export const MCP_SERVERS_ROUTE = '/notes/mcp-servers';
 export const AWS_SERVICES_ROUTE = '/notes/aws-services';
 export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
 export const DBMS_NOTES_ROUTE = '/notes/dbms';
@@ -106,7 +105,6 @@ export const getJavaScriptTypeScriptNoteRoute = (slug: string):
 export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
-    | typeof MCP_SERVERS_ROUTE
     | typeof NOTES_ROUTE
     | typeof AWS_SERVICES_ROUTE
     | typeof PROGRAMMING_DICTIONARY_ROUTE
@@ -216,7 +214,6 @@ const nodeNoteRoutes: NodeNoteRoute[] = nodeLearningNotes.map(
 const routes: Route[] = [
     BLOGS_ROUTE,
     NOTES_ROUTE,
-    MCP_SERVERS_ROUTE,
     AWS_SERVICES_ROUTE,
     POSTGRESQL_NOTES_ROUTE,
     DBMS_NOTES_ROUTE,

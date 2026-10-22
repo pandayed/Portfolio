@@ -28,8 +28,8 @@ export interface Post {
 
 const entries: Post[] = [
     {
-        title: 'Understanding MCP servers',
-        summary: 'From fetching a Jira issue to adding resources and reusable prompts: how an AI application discovers and uses an MCP server’s capabilities.',
+        title: "Understanding MCP Servers — How AI Connects to the Real World",
+        summary: 'It provides a standard interface through which AI applications can access external capabilities and information.',
         startedOn: '2026-10-15',
         updatedOn: '2026-10-15',
         route: MCP_SERVER_BLOG_ROUTE,

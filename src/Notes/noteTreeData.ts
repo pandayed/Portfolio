@@ -1,5 +1,4 @@
 import {
-    MCP_SERVERS_ROUTE,
     API_COMMUNICATION_ROUTE,
     AWS_SERVICES_ROUTE,
     CICD_NOTES_ROUTE,
@@ -591,13 +590,6 @@ export const noteTree: NoteNode[] = [
         summary: 'Shared definitions of common programming terms, with language-specific terms clearly marked.',
         route: PROGRAMMING_DICTIONARY_ROUTE,
         updatedOn: '2026-10-02',
-    },
-    {
-        type: 'page',
-        title: 'MCP servers',
-        summary: 'Server components, LLM tool flow, information visibility, permissions, and credential management.',
-        route: MCP_SERVERS_ROUTE,
-        updatedOn: '2026-10-15',
     },
     frontendNotes,
     nodeNotes,

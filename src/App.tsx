@@ -1,4 +1,3 @@
-import McpServers from './Notes/McpServers';
 import './App.css';
 import './CommonClasses/CommonClasses.css';
 
@@ -86,7 +85,6 @@ import About from './About/About';
 import Footer from './Footer/Footer';
 
 import {
-    MCP_SERVERS_ROUTE,
     ABOUT_ROUTE,
     AWS_SERVICES_ROUTE,
     API_COMMUNICATION_ROUTE,
@@ -193,7 +191,6 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [JENKINS_ROUTE]: Jenkins,
     [GITLAB_CICD_ROUTE]: GitLabCICD,
     [ARGO_CD_ROUTE]: ArgoCD,
-    [MCP_SERVERS_ROUTE]: McpServers,
     [DOCKER_NOTES_ROUTE]: DockerNotesIndex,
     [DOCKER_CONTAINERS_ROUTE]: DockerContainers,
     [DOCKER_BUILD_RUN_ROUTE]: DockerBuildRun,
