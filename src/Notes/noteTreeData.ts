@@ -5,8 +5,6 @@ import {
     CICD_BASICS_ROUTE,
     GITHUB_ACTIONS_ROUTE,
     JENKINS_ROUTE,
-    GITLAB_CICD_ROUTE,
-    ARGO_CD_ROUTE,
     DBMS_NOTES_ROUTE,
     DOCKER_BUILD_RUN_ROUTE,
     DOCKER_COMPOSE_ROUTE,
@@ -527,7 +525,7 @@ export const kubernetesNotes: NoteGroup = {
 export const cicdNotes: NoteGroup = {
     type: 'group',
     title: 'CI/CD',
-    summary: 'Release fundamentals and one practical page each for GitHub Actions, Jenkins, GitLab CI/CD, and Argo CD.',
+    summary: 'Release fundamentals and practical pages for GitHub Actions and Jenkins.',
     route: CICD_NOTES_ROUTE,
     children: [
         {
@@ -549,20 +547,6 @@ export const cicdNotes: NoteGroup = {
             title: 'Jenkins',
             summary: 'Controllers, agents, Jenkinsfiles, stages, credentials, and build results.',
             route: JENKINS_ROUTE,
-            updatedOn: '2026-10-10',
-        },
-        {
-            type: 'page',
-            title: 'GitLab CI/CD',
-            summary: 'Runners, YAML jobs, rules, artifact handoff, manual releases, and variables.',
-            route: GITLAB_CICD_ROUTE,
-            updatedOn: '2026-10-10',
-        },
-        {
-            type: 'page',
-            title: 'Argo CD',
-            summary: 'GitOps delivery, Applications, sync policies, health, and recovery.',
-            route: ARGO_CD_ROUTE,
             updatedOn: '2026-10-10',
         },
         systemDesignPageNode(bareMetalsPage),

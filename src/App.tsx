@@ -28,8 +28,6 @@ import CICDNotesIndex from './Notes/CICDNotes/CICDNotesIndex';
 import CICDBasics from './Notes/CICDNotes/CICDBasics';
 import GitHubActions from './Notes/CICDNotes/GitHubActions';
 import Jenkins from './Notes/CICDNotes/Jenkins';
-import GitLabCICD from './Notes/CICDNotes/GitLabCICD';
-import ArgoCD from './Notes/CICDNotes/ArgoCD';
 import DockerNotesIndex from './Notes/DockerNotes/DockerNotesIndex';
 import DockerContainers from './Notes/DockerNotes/DockerContainers';
 import DockerBuildRun from './Notes/DockerNotes/DockerBuildRun';
@@ -96,8 +94,6 @@ import {
     CICD_BASICS_ROUTE,
     GITHUB_ACTIONS_ROUTE,
     JENKINS_ROUTE,
-    GITLAB_CICD_ROUTE,
-    ARGO_CD_ROUTE,
     BOOKSHELF_ROUTE,
     CHAIN_OF_THOUGHT_ROUTE,
     COMPLEXITY_CASES_ROUTE,
@@ -189,8 +185,6 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [CICD_BASICS_ROUTE]: CICDBasics,
     [GITHUB_ACTIONS_ROUTE]: GitHubActions,
     [JENKINS_ROUTE]: Jenkins,
-    [GITLAB_CICD_ROUTE]: GitLabCICD,
-    [ARGO_CD_ROUTE]: ArgoCD,
     [DOCKER_NOTES_ROUTE]: DockerNotesIndex,
     [DOCKER_CONTAINERS_ROUTE]: DockerContainers,
     [DOCKER_BUILD_RUN_ROUTE]: DockerBuildRun,

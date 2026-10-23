@@ -32,8 +32,6 @@ export const CICD_NOTES_ROUTE = '/notes/ci-cd';
 export const CICD_BASICS_ROUTE = '/notes/ci-cd/fundamentals';
 export const GITHUB_ACTIONS_ROUTE = '/notes/ci-cd/github-actions';
 export const JENKINS_ROUTE = '/notes/ci-cd/jenkins';
-export const GITLAB_CICD_ROUTE = '/notes/ci-cd/gitlab-ci-cd';
-export const ARGO_CD_ROUTE = '/notes/ci-cd/argo-cd';
 export const DOCKER_NOTES_ROUTE = '/notes/docker';
 export const DOCKER_CONTAINERS_ROUTE = '/notes/docker/containers-images-and-registries';
 export const DOCKER_BUILD_RUN_ROUTE = '/notes/docker/build-and-run';
@@ -129,8 +127,6 @@ export type Route =
     | typeof CICD_BASICS_ROUTE
     | typeof GITHUB_ACTIONS_ROUTE
     | typeof JENKINS_ROUTE
-    | typeof GITLAB_CICD_ROUTE
-    | typeof ARGO_CD_ROUTE
     | typeof DOCKER_NOTES_ROUTE
     | typeof DOCKER_CONTAINERS_ROUTE
     | typeof DOCKER_BUILD_RUN_ROUTE
@@ -237,8 +233,6 @@ const routes: Route[] = [
     CICD_BASICS_ROUTE,
     GITHUB_ACTIONS_ROUTE,
     JENKINS_ROUTE,
-    GITLAB_CICD_ROUTE,
-    ARGO_CD_ROUTE,
     DOCKER_NOTES_ROUTE,
     DOCKER_CONTAINERS_ROUTE,
     DOCKER_BUILD_RUN_ROUTE,
