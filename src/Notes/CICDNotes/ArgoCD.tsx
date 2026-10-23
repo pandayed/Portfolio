@@ -9,6 +9,7 @@ const sections: TocEntry[] = [
     { id: 'argo-sync', title: 'Sync, pruning, and self-healing' },
     { id: 'argo-health', title: 'Sync status and application health' },
     { id: 'argo-recovery', title: 'Access and recovery' },
+    { id: 'argo-references', title: 'References' },
 ];
 
 const application = `apiVersion: argoproj.io/v1alpha1
@@ -38,7 +39,6 @@ const ArgoCD = () => (
                 <li>Argo CD reads the configuration and deploys it. It does not compile application source or replace the CI test pipeline.</li>
                 <li>The desired state is the Git configuration. The live state is what currently exists in the cluster.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noreferrer">Argo CD overview</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="argo-application">
@@ -54,7 +54,6 @@ const ArgoCD = () => (
                 <li><strong>Expected result:</strong> after registering this resource, Argo CD compares the staging manifests with the cluster. An authorized manual sync applies them.</li>
                 <li><code>syncPolicy: {'{}'}</code> leaves automatic sync disabled. Tracking <code>main</code> allows later commits to become the desired state.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/" target="_blank" rel="noreferrer">Applications and AppProjects</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="argo-sync">
@@ -66,7 +65,6 @@ const ArgoCD = () => (
                 <li><strong>Self-healing:</strong> correct live changes that differ from Git when automatic sync and <code>selfHeal</code> are enabled.</li>
                 <li>Review deletion effects before enabling <code>prune</code>. Self-healing can undo manual cluster edits.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/" target="_blank" rel="noreferrer">automated sync policy</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="argo-health">
@@ -86,7 +84,6 @@ const ArgoCD = () => (
                 <li>A deployment can be Synced while its Pods fail to start. Check health, resource events, and application logs.</li>
                 <li>Healthy resources do not prove that a user request works. Check the application after rollout.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://argo-cd.readthedocs.io/en/stable/operator-manual/health/" target="_blank" rel="noreferrer">resource health assessment</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="argo-recovery">
@@ -97,6 +94,16 @@ const ArgoCD = () => (
                 <li>For recovery, revert the deployment configuration to a known working image digest, then sync and check health.</li>
                 <li>A direct live rollback can be overwritten by reconciliation. Record the desired recovery state in Git.</li>
                 <li>Application rollback does not restore database data. Plan compatible schema changes separately.</li>
+            </ul>
+        </section>
+
+        <section className="Article__section" aria-labelledby="argo-references">
+            <h2 id="argo-references" className="SectionTitle">References</h2>
+            <ul className="Article__notes">
+                <li><a className="Link" href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noreferrer">Argo CD overview</a>.</li>
+                <li><a className="Link" href="https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/" target="_blank" rel="noreferrer">Applications and AppProjects</a>.</li>
+                <li><a className="Link" href="https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/" target="_blank" rel="noreferrer">automated sync policy</a>.</li>
+                <li><a className="Link" href="https://argo-cd.readthedocs.io/en/stable/operator-manual/health/" target="_blank" rel="noreferrer">resource health assessment</a>.</li>
             </ul>
         </section>
     </ArticleLayout>

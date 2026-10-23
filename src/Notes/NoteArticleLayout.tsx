@@ -10,6 +10,7 @@ import { getNodeReadingMinutes, getPageReadingMinutes, getPageWordCount } from '
 import { pythonPrerequisites } from './PythonNotes/prerequisites';
 import { frontendPrerequisites } from './frontendPrerequisites';
 import { nodePrerequisites } from './NodeNotes/nodePrerequisites';
+import { cicdPrerequisites } from './CICDNotes/prerequisites';
 
 type NoteArticleLayoutProps = ComponentProps<typeof ArticleLayout>;
 
@@ -52,7 +53,7 @@ const NoteControl = ({
 const NoteArticleLayout = ({ route, children, sections, ...props }: NoteArticleLayoutProps) => {
     const index = notePages.findIndex((note) => note.route === route);
     const group = findGroupForRoute(noteTree, route);
-    const prerequisites = frontendPrerequisites.get(route) ?? nodePrerequisites.get(route) ?? pythonPrerequisites.get(route);
+    const prerequisites = frontendPrerequisites.get(route) ?? nodePrerequisites.get(route) ?? pythonPrerequisites.get(route) ?? cicdPrerequisites.get(route);
 
     return (
         <ArticleLayout

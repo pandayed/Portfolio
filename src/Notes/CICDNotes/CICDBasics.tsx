@@ -8,7 +8,7 @@ const sections: TocEntry[] = [
     { id: 'ci-cd-pipeline', title: 'From a commit to a release' },
     { id: 'ci-cd-terms', title: 'The main terms' },
     { id: 'ci-cd-release', title: 'Release controls and rollback' },
-    { id: 'ci-cd-tools', title: 'Where each tool fits' },
+    { id: 'ci-cd-references', title: 'References' },
 ];
 
 const CICDBasics = () => (
@@ -22,7 +22,6 @@ const CICDBasics = () => (
                 <li>CD can mean either delivery or deployment. State which meaning you use.</li>
                 <li>A passing build proves that its configured commands succeeded. It does not prove that every feature works in production.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://docs.gitlab.com/ci/" target="_blank" rel="noreferrer">GitLab CI/CD introduction</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="ci-cd-pipeline">
@@ -59,7 +58,6 @@ const CICDBasics = () => (
                     </tbody>
                 </table>
             </div>
-            <p>References: <a className="Link" href="https://docs.gitlab.com/ci/jobs/job_artifacts/" target="_blank" rel="noreferrer">job artifacts</a> and <a className="Link" href="https://docs.gitlab.com/ci/caching/" target="_blank" rel="noreferrer">caching</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="ci-cd-release">
@@ -71,21 +69,11 @@ const CICDBasics = () => (
             </ul>
         </section>
 
-        <section className="Article__section" aria-labelledby="ci-cd-tools">
-            <h2 id="ci-cd-tools" className="SectionTitle">Where each tool fits</h2>
-            <div className="Article__tableWrap">
-                <table className="Article__table">
-                    <thead><tr><th>Tool</th><th>Main role</th><th>Configuration</th></tr></thead>
-                    <tbody>
-                        <tr><td>GitHub Actions</td><td>Run workflows from GitHub events.</td><td><code>.github/workflows/*.yml</code></td></tr>
-                        <tr><td>Jenkins</td><td>Coordinate jobs on managed agents.</td><td><code>Jenkinsfile</code></td></tr>
-                        <tr><td>GitLab CI/CD</td><td>Run GitLab pipelines on runners.</td><td><code>.gitlab-ci.yml</code></td></tr>
-                        <tr><td>Argo CD</td><td>Reconcile Kubernetes applications with Git configuration.</td><td>An <code>Application</code> resource.</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <section className="Article__section" aria-labelledby="ci-cd-references">
+            <h2 id="ci-cd-references" className="SectionTitle">References</h2>
             <ul className="Article__notes">
-                <li>CI tools can build, check, package, and deploy. Argo CD usually handles Kubernetes delivery after CI publishes an image.</li>
+                <li><a className="Link" href="https://docs.gitlab.com/ci/" target="_blank" rel="noreferrer">GitLab CI/CD introduction</a>.</li>
+                <li><a className="Link" href="https://docs.gitlab.com/ci/jobs/job_artifacts/" target="_blank" rel="noreferrer">job artifacts</a> and <a className="Link" href="https://docs.gitlab.com/ci/caching/" target="_blank" rel="noreferrer">caching</a>.</li>
             </ul>
         </section>
     </ArticleLayout>

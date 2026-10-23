@@ -9,6 +9,7 @@ const sections: TocEntry[] = [
     { id: 'gitlab-order', title: 'Stages, dependencies, and saved files' },
     { id: 'gitlab-release', title: 'Deployment and credentials' },
     { id: 'gitlab-debug', title: 'Read a failed pipeline' },
+    { id: 'gitlab-references', title: 'References' },
 ];
 
 const pipeline = `workflow:
@@ -49,7 +50,6 @@ const GitLabCICD = () => (
                 <li>The <code>image</code> keyword needs an executor that supports container images. A shell executor does not use it.</li>
                 <li>Runner tags select eligible workers. A job stays pending if no matching runner is available.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://docs.gitlab.com/ci/runners/" target="_blank" rel="noreferrer">GitLab runners</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="gitlab-example">
@@ -65,7 +65,6 @@ const GitLabCICD = () => (
                 <li><strong>Expected result:</strong> the build saves <code>dist/</code>. The second job downloads it and succeeds if <code>dist/index.html</code> exists and is nonempty.</li>
                 <li>The file check verifies package structure. It does not test application behavior or deploy a site.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://docs.gitlab.com/ci/jobs/job_rules/" target="_blank" rel="noreferrer">pipeline and job rules</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="gitlab-order">
@@ -77,7 +76,6 @@ const GitLabCICD = () => (
                 <li>Artifacts preserve outputs. A cache speeds repeated work and may be missing.</li>
                 <li><code>expire_in</code> sets artifact retention. Instance settings can keep artifacts from the latest successful pipeline longer.</li>
             </ul>
-            <p>References: <a className="Link" href="https://docs.gitlab.com/ci/yaml/" target="_blank" rel="noreferrer">YAML reference</a> and <a className="Link" href="https://docs.gitlab.com/ci/jobs/job_artifacts/" target="_blank" rel="noreferrer">artifact retention</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="gitlab-release">
@@ -89,7 +87,6 @@ const GitLabCICD = () => (
                 <li>Masking limits accidental log exposure. Malicious job code can still read a secret it receives.</li>
                 <li>Review merge-request changes to pipeline files before running them with privileged runners or protected variables.</li>
             </ul>
-            <p>Reference: <a className="Link" href="https://docs.gitlab.com/ci/variables/" target="_blank" rel="noreferrer">CI/CD variable security</a>.</p>
         </section>
 
         <section className="Article__section" aria-labelledby="gitlab-debug">
@@ -99,6 +96,16 @@ const GitLabCICD = () => (
                 <li>Pending job: check runner availability and tags. Failed job: read the first failing command in its log.</li>
                 <li>Missing files: check the artifact path, download dependency, and expiration.</li>
                 <li>Check the commit and job list. Allowed failures and skipped jobs can appear in a pipeline that is considered successful.</li>
+            </ul>
+        </section>
+
+        <section className="Article__section" aria-labelledby="gitlab-references">
+            <h2 id="gitlab-references" className="SectionTitle">References</h2>
+            <ul className="Article__notes">
+                <li><a className="Link" href="https://docs.gitlab.com/ci/runners/" target="_blank" rel="noreferrer">GitLab runners</a>.</li>
+                <li><a className="Link" href="https://docs.gitlab.com/ci/jobs/job_rules/" target="_blank" rel="noreferrer">pipeline and job rules</a>.</li>
+                <li><a className="Link" href="https://docs.gitlab.com/ci/yaml/" target="_blank" rel="noreferrer">YAML reference</a> and <a className="Link" href="https://docs.gitlab.com/ci/jobs/job_artifacts/" target="_blank" rel="noreferrer">artifact retention</a>.</li>
+                <li><a className="Link" href="https://docs.gitlab.com/ci/variables/" target="_blank" rel="noreferrer">CI/CD variable security</a>.</li>
             </ul>
         </section>
     </ArticleLayout>

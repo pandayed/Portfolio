@@ -10,7 +10,7 @@ const sections: TocEntry[] = [
     { id: 'jenkinsfile', title: 'A small Jenkinsfile' },
     { id: 'jenkins-failures', title: 'Failures and reports' },
     { id: 'jenkins-credentials', title: 'Credentials and pull requests' },
-    { id: 'jenkins-references', title: 'Official references' },
+    { id: 'jenkins-references', title: 'References' },
 ];
 
 const jenkinsfile = [
@@ -105,7 +105,7 @@ const Jenkins = () => (
         </section>
 
         <section className="Article__section" aria-labelledby="jenkins-references">
-            <h2 id="jenkins-references" className="SectionTitle">Official references</h2>
+            <h2 id="jenkins-references" className="SectionTitle">References</h2>
             <ul className="Article__notes">
                 <li><a className="Link" href="https://www.jenkins.io/doc/book/glossary/">Jenkins terms</a> and <a className="Link" href="https://www.jenkins.io/doc/book/security/controller-isolation/">controller isolation</a>.</li>
                 <li><a className="Link" href="https://www.jenkins.io/doc/book/pipeline/jenkinsfile/">Using a Jenkinsfile</a> and <a className="Link" href="https://www.jenkins.io/doc/book/pipeline/syntax/">Declarative Pipeline syntax</a>.</li>
