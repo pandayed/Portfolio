@@ -67,7 +67,18 @@ const note = {
                         ],
                         "job": [
                             [
-                                "Carries the results from the workers to main."
+                                "Carries the results from the workers to "
+                            ],
+                            [
+                                "main",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "."
                             ]
                         ]
                     }
@@ -78,7 +89,12 @@ const note = {
                     "cells": {
                         "part": [
                             [
-                                "WaitGroup"
+                                "WaitGroup",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "job": [
@@ -120,33 +136,31 @@ const note = {
         },
         {
             "id": "together-program",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    numbers := []int{1, 2, 3}\n    results := make(chan int)\n    var wg sync.WaitGroup\n\n    for _, number := range numbers {\n        wg.Add(1)\n        go func(n int) {\n            defer wg.Done()\n            results <- n * n\n        }(number)\n    }\n\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n\n    total := 0\n    for result := range results {\n        fmt.Println(result)\n        total += result\n    }\n    fmt.Println(\"Total:\", total)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "together-output-order",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "square three numbers",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    numbers := []int{1, 2, 3}\n    results := make(chan int)\n    var wg sync.WaitGroup\n\n    for _, number := range numbers {\n        wg.Add(1)\n        go func(n int) {\n            defer wg.Done()\n            results <- n * n\n        }(number)\n    }\n\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n\n    total := 0\n    for result := range results {\n        fmt.Println(result)\n        total += result\n    }\n    fmt.Println(\"Total:\", total)\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "4\n1\n9\nTotal: 14",
+                "possibleOutput": true,
+                "explanation": [
                     "The first three lines can appear in any order. One possible output is:"
                 ]
-            ]
+            }
         },
-        {
-            "id": "together-output",
-            "type": "code",
-            "richText": [
-                [
-                    "4\n1\n9\nTotal: 14"
-                ]
-            ],
-            "language": "text"
-        },
+
+
         {
             "id": "together-total",
             "type": "bulleted_list",
@@ -498,7 +512,18 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Why close after Wait?"
+                    "Why close after "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "?"
                 ]
             ]
         },
@@ -507,7 +532,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A WaitGroup does not close a channel. The waiting goroutine calls "
+                    "A "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not close a channel. The waiting goroutine calls "
                 ],
                 [
                     "close(results)",
@@ -605,7 +641,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The WaitGroup can be reused after every previous "
+                    "The "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can be reused after every previous "
                 ],
                 [
                     "Wait",
@@ -645,7 +692,28 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "When to add tasks, reuse a WaitGroup or create a new one",
+                    "When to add tasks, reuse a ",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/workgroups"
+                        ]
+                    ]
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/workgroups"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or create a new one",
                     [
                         [
                             "a",
@@ -701,6 +769,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/workgroups"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -714,11 +785,23 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go documentation: WaitGroup",
+                    "Go documentation: ",
                     [
                         [
                             "a",
                             "https://pkg.go.dev/sync#WaitGroup"
+                        ]
+                    ]
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#WaitGroup"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ]
@@ -746,6 +829,9 @@ const note = {
                         [
                             "a",
                             "https://go.dev/ref/spec#Close"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ]

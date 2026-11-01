@@ -18,11 +18,7 @@ const note = {
         {
             "id": "24a24eb1-ed54-80e2-8bd7-c1f02ca1a857",
             "type": "code",
-            "richText": [
-                [
-                    "func functionName(param1 type1, param2 type2) returnType {\n    // body\n}"
-                ]
-            ],
+            "richText": [["func functionName(param1 type1, param2 type2) returnType {\n    // body\n}"]],
             "language": "Go"
         },
         {
@@ -84,11 +80,7 @@ const note = {
         {
             "id": "24a24eb1-ed54-804e-b7eb-c002e5fc5724",
             "type": "code",
-            "richText": [
-                [
-                    "func add(a int, b int) int {\n    return a + b\n}"
-                ]
-            ],
+            "richText": [["func add(a int, b int) int {\n    return a + b\n}"]],
             "language": "Go"
         },
         {
@@ -168,11 +160,7 @@ const note = {
         {
             "id": "4145098c-ad25-5d21-a8c4-816c0eae8909",
             "type": "code",
-            "richText": [
-                [
-                    "func divide(a, b int) (int, int) {\n    return a / b, a % b\n}\n\nfunc divisionExample() {\n    q, r := divide(10, 3)\n    fmt.Println(q, r) // 3 1\n}"
-                ]
-            ],
+            "richText": [["func divide(a, b int) (int, int) {\n    return a / b, a % b\n}\n\nfunc divisionExample() {\n    q, r := divide(10, 3)\n    fmt.Println(q, r) // 3 1\n}"]],
             "language": "Go"
         },
         {
@@ -205,11 +193,7 @@ const note = {
         {
             "id": "01b167d3-85cd-545c-b223-015914b83120",
             "type": "code",
-            "richText": [
-                [
-                    "func rectProps(length, width float64) (area, perimeter float64) {\n    area = length * width\n    perimeter = 2 * (length + width)\n    return // returns the current named result values\n}"
-                ]
-            ],
+            "richText": [["func rectProps(length, width float64) (area, perimeter float64) {\n    area = length * width\n    perimeter = 2 * (length + width)\n    return // returns the current named result values\n}"]],
             "language": "Go"
         },
         {
@@ -279,11 +263,7 @@ const note = {
         {
             "id": "24a24eb1-ed54-8053-93fa-eca279bccffb",
             "type": "code",
-            "richText": [
-                [
-                    "func add(a, b int) int { return a + b }"
-                ]
-            ],
+            "richText": [["func add(a, b int) int { return a + b }"]],
             "language": "Go"
         },
         {
@@ -307,11 +287,7 @@ const note = {
         {
             "id": "24a24eb1-ed54-8054-9350-fac1d4e305bd",
             "type": "code",
-            "richText": [
-                [
-                    "func update(val *int) { *val = 100 }"
-                ]
-            ],
+            "richText": [["func update(val *int) { *val = 100 }"]],
             "language": "Go"
         },
         {
@@ -364,11 +340,7 @@ const note = {
         {
             "id": "f6f57905-88e3-5405-b342-66bc7022fcfe",
             "type": "code",
-            "richText": [
-                [
-                    "_, remainder := divide(10, 3)\nfmt.Println(remainder) // 1"
-                ]
-            ],
+            "richText": [["_, remainder := divide(10, 3)\nfmt.Println(remainder) // 1"]],
             "language": "Go"
         },
         {

@@ -13,7 +13,26 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "go.sum records checksums for downloaded module files and go.mod files."
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " records checksums for downloaded module files and "
+                ],
+                [
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " files."
                 ]
             ]
         },
@@ -31,7 +50,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go commands manage go.sum alongside go.mod."
+                    "Go commands manage "
+                ],
+                [
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " alongside "
+                ],
+                [
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -55,13 +96,22 @@ const note = {
         },
         {
             "id": "go-sum-04",
-            "type": "code",
-            "richText": [
-                [
-                    "example.com/lib v1.2.3 h1:<base64-content-hash>\nexample.com/lib v1.2.3/go.mod h1:<base64-manifest-hash>"
+            "type": "example",
+            "example": {
+                "title": "Checksum entry format",
+                "language": "text",
+                "description": [
+                    "This illustrative `go.sum` shows the entry format. The hash placeholders are not valid checksums. Go commands generate the actual file."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "go.sum",
+                        "language": "text",
+                        "code": "example.com/lib v1.2.3 h1:<base64-content-hash>\nexample.com/lib v1.2.3/go.mod h1:<base64-manifest-hash>"
+                    }
                 ]
-            ],
-            "language": "Plain Text"
+            }
         },
         {
             "id": "go-sum-05",
@@ -94,7 +144,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "example.com/lib"
+                                "example.com/lib",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -110,7 +165,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "v1.2.3"
+                                "v1.2.3",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -126,12 +186,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "v1.2.3/go.mod"
+                                "v1.2.3/go.mod",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "This hash checks only the go.mod file for that version."
+                                "This hash checks only the "
+                            ],
+                            [
+                                "go.mod",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " file for that version."
                             ]
                         ]
                     }
@@ -142,12 +218,25 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "h1:..."
+                                "h1:...",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "h1 means SHA-256. The rest is the hash written as base64 text."
+                                "h1",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " means SHA-256. The rest is the hash written as base64 text."
                             ]
                         ]
                     }
@@ -195,7 +284,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "go.sum can contain several versions of one module."
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can contain several versions of one module."
                 ]
             ]
         },
@@ -204,7 +301,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "It can record a go.mod hash without a hash for the rest of that module."
+                    "It can record a "
+                ],
+                [
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " hash without a hash for the rest of that module."
                 ]
             ]
         },
@@ -222,7 +330,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "go mod tidy adds needed hashes and removes unused ones."
+                    "go mod tidy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " adds needed hashes and removes unused ones."
                 ]
             ]
         },
@@ -231,7 +347,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Keep go.sum in version control. Let Go tools update its hashes."
+                    "Keep "
+                ],
+                [
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " in version control. Let Go tools update its hashes."
                 ]
             ]
         },
@@ -240,7 +367,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A module with no downloaded dependencies may have no go.sum."
+                    "A module with no downloaded dependencies may have no "
+                ],
+                [
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -266,6 +404,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/go-mod"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -282,7 +423,19 @@ const note = {
                     "Source: "
                 ],
                 [
-                    "go.sum format and authentication",
+                    "go.sum",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/mod#go-sum-files"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " format and authentication",
                     [
                         [
                             "a",

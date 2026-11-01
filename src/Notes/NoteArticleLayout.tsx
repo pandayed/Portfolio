@@ -3,14 +3,16 @@ import './NoteArticleLayout.css';
 import type { ComponentProps } from 'react';
 
 import ArticleLayout from '../Blogs/ArticleLayout/ArticleLayout';
-import { PYTHON_NOTES_ROUTE, toHref } from '../routing/routes';
+import { PYTHON_NOTES_ROUTE, SYSTEM_DESIGN_ROUTE, noteCollectionRoutes, toHref } from '../routing/routes';
 import { notePages, noteTree, type NoteGroup, type NoteNode, type NotePage } from './noteTreeData';
 import NoteReadingTime from './NoteReadingTime';
 import { getNodeReadingMinutes, getPageReadingMinutes, getPageWordCount } from './readingTime';
 import { pythonPrerequisites } from './PythonNotes/prerequisites';
+import { goPrerequisites } from './GoNotes/prerequisites';
 import { frontendPrerequisites } from './frontendPrerequisites';
 import { nodePrerequisites } from './NodeNotes/nodePrerequisites';
 import { cicdPrerequisites } from './CICDNotes/prerequisites';
+import { getNoteParent } from './noteNavigation';
 
 type NoteArticleLayoutProps = ComponentProps<typeof ArticleLayout>;
 
@@ -51,13 +53,19 @@ const NoteControl = ({
 };
 
 const NoteArticleLayout = ({ route, children, sections, ...props }: NoteArticleLayoutProps) => {
+    const treeParent = getNoteParent(route);
+    const parent = route.startsWith(`${SYSTEM_DESIGN_ROUTE}/`) || (treeParent && noteCollectionRoutes.includes(treeParent.route))
+        ? treeParent
+        : undefined;
     const index = notePages.findIndex((note) => note.route === route);
     const group = findGroupForRoute(noteTree, route);
-    const prerequisites = frontendPrerequisites.get(route) ?? nodePrerequisites.get(route) ?? pythonPrerequisites.get(route) ?? cicdPrerequisites.get(route);
+    const prerequisites = frontendPrerequisites.get(route) ?? nodePrerequisites.get(route) ?? pythonPrerequisites.get(route) ?? goPrerequisites.get(route) ?? cicdPrerequisites.get(route);
 
     return (
         <ArticleLayout
             {...props}
+            backRoute={parent?.route ?? props.backRoute}
+            backLabel={parent ? `Back to ${parent.title}` : props.backLabel}
             route={route}
             sections={prerequisites ? [{ id: 'note-prerequisites', title: 'Prerequisites' }, ...sections] : sections}
             headerMeta={(

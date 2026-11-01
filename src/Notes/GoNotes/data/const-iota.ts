@@ -24,18 +24,14 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " for const declarations and typed versus untyped constants."
-                ]
+                [" for "], ["const",[["c"]]], [" declarations and typed versus untyped constants."]
             ]
         },
         {
             "id": "2ef24eb1-ed54-80be-acc8-f715d57ff506",
             "type": "sub_header",
             "richText": [
-                [
-                    "iota in Go"
-                ]
+                ["iota",[["c"]]], [" in Go"]
             ]
         },
         {
@@ -148,11 +144,7 @@ const note = {
             "id": "c3ad803f-c94a-5a21-8124-786e72ecab0c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "const (\n    A, B = iota, iota // both 0: specification 0\n    C, D             // both 1: specification 1\n)\nconst E = iota // 0: a separate const declaration"
-                ]
-            ]
+            "richText": [["const (\n    A, B = iota, iota // both 0: specification 0\n    C, D             // both 1: specification 1\n)\nconst E = iota // 0: a separate const declaration"]]
         },
         {
             "id": "fc7f4afe-aa17-5d3c-a24e-fa19e171ec7f",
@@ -213,11 +205,7 @@ const note = {
             "id": "438e06b5-ab08-54b1-802a-acb532cdace2",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "type Status int\n\nconst (\n    Pending Status = iota // 0\n    Approved              // 1\n    Rejected              // 2\n)"
-                ]
-            ]
+            "richText": [["type Status int\n\nconst (\n    Pending Status = iota // 0\n    Approved              // 1\n    Rejected              // 2\n)"]]
         },
         {
             "id": "e5361627-5442-5250-8049-4de51323cfd7",
@@ -307,11 +295,7 @@ const note = {
             "id": "0d62b38c-9555-581e-827d-64dc6e0ff5e3",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "const (\n    _ = iota // discard 0\n    Read     // 1\n    Write    // 2\n)"
-                ]
-            ]
+            "richText": [["const (\n    _ = iota // discard 0\n    Read     // 1\n    Write    // 2\n)"]]
         },
         {
             "id": "503e53d7-5b36-5f3c-908b-ac18f9a5bdb0",
@@ -348,20 +332,14 @@ const note = {
             "id": "220d975b-8545-569f-992b-f01ca81a04cb",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "Expressions with iota"
-                ]
+                ["Expressions with "], ["iota",[["c"]]]
             ]
         },
         {
             "id": "7803a29f-df45-58a5-b182-5b58e55d8fd3",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "const (\n    First = iota + 1 // 1\n    Second           // 2\n    Third            // 3\n)\n\nconst (\n    _ = iota\n    KB = 1 << (10 * iota) // 1024\n    MB                    // 1048576\n    GB                    // 1073741824\n)"
-                ]
-            ]
+            "richText": [["const (\n    First = iota + 1 // 1\n    Second           // 2\n    Third            // 3\n)\n\nconst (\n    _ = iota\n    KB = 1 << (10 * iota) // 1024\n    MB                    // 1048576\n    GB                    // 1073741824\n)"]]
         },
         {
             "id": "214803f2-33ab-5f6f-9277-61afd9b4bf40",
@@ -376,11 +354,7 @@ const note = {
             "id": "f15b2d44-9faf-55d8-8cf7-8edbbfcb558a",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "type Permission uint\n\nconst (\n    CanRead Permission = 1 << iota // 1 (001)\n    CanWrite                       // 2 (010)\n    CanExecute                     // 4 (100)\n)"
-                ]
-            ]
+            "richText": [["type Permission uint\n\nconst (\n    CanRead Permission = 1 << iota // 1 (001)\n    CanWrite                       // 2 (010)\n    CanExecute                     // 4 (100)\n)"]]
         },
         {
             "id": "0bec5d77-2de9-528d-a1bc-f511bafb0743",
@@ -435,11 +409,7 @@ const note = {
             "id": "22a5e0af-ff5d-5573-ba0e-634d4eef7320",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "permissions := CanRead | CanWrite\nfmt.Println(permissions)                  // 3\nfmt.Println(permissions&CanRead != 0)       // true\nfmt.Println(permissions&CanExecute != 0)    // false"
-                ]
-            ]
+            "richText": [["permissions := CanRead | CanWrite\nfmt.Println(permissions)                  // 3\nfmt.Println(permissions&CanRead != 0)       // true\nfmt.Println(permissions&CanExecute != 0)    // false"]]
         },
         {
             "id": "56619fa9-4e34-5396-b0bc-a342508e78b2",
@@ -448,15 +418,7 @@ const note = {
                 [
                     "Reference: "
                 ],
-                [
-                    "Go specification: iota",
-                    [
-                        [
-                            "a",
-                            "https://go.dev/ref/spec#Iota"
-                        ]
-                    ]
-                ],
+                ["Go specification: ",[["a","https://go.dev/ref/spec#Iota"]]], ["iota",[["a","https://go.dev/ref/spec#Iota"],["c"]]],
                 [
                     "."
                 ]

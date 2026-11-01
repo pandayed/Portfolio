@@ -13,7 +13,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Mutex means mutual exclusion. A lock controls access to shared data."
+                    "Mutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " means mutual exclusion. A lock controls access to shared data."
                 ]
             ]
         },
@@ -22,7 +30,40 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go’s sync package provides two public mutex types: Mutex and RWMutex."
+                    "Go’s "
+                ],
+                [
+                    "sync",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package provides two public mutex types: "
+                ],
+                [
+                    "Mutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "RWMutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -31,7 +72,23 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Mutex and RWMutex"
+                    "Mutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "RWMutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -73,7 +130,12 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "sync.Mutex"
+                                "sync.Mutex",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "column-1": [
@@ -83,7 +145,23 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "Lock / Unlock"
+                                "Lock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " / "
+                            ],
+                            [
+                                "Unlock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ]
                     }
@@ -94,7 +172,12 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "sync.RWMutex"
+                                "sync.RWMutex",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "column-1": [
@@ -104,7 +187,48 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "RLock / RUnlock for reads. Lock / Unlock for writes."
+                                "RLock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " / "
+                            ],
+                            [
+                                "RUnlock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " for reads. "
+                            ],
+                            [
+                                "Lock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " / "
+                            ],
+                            [
+                                "Unlock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " for writes."
                             ]
                         ]
                     }
@@ -116,7 +240,12 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Mutex"
+                    "Mutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -233,7 +362,15 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Lock Rules"
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " Rules"
                 ]
             ]
         },
@@ -242,7 +379,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Both Mutex and RWMutex work from their zero value. They start unlocked."
+                    "Both "
+                ],
+                [
+                    "Mutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "RWMutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " work from their zero value. They start unlocked."
                 ]
             ]
         },
@@ -331,23 +490,28 @@ const note = {
         },
         {
             "id": "431f2719-c8cd-5ae4-a284-10868df374b5",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nvar (\n    counter int\n    mu sync.Mutex\n)\n\nfunc increment(wg *sync.WaitGroup) {\n    defer wg.Done()\n    mu.Lock()\n    defer mu.Unlock()\n    counter++\n}\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go increment(&wg)\n    }\n    wg.Wait()\n    fmt.Println(\"Final counter:\", counter)\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "97bff678-2ebe-536b-893d-18d0c52d5541",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Protect a Counter",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nvar (\n    counter int\n    mu sync.Mutex\n)\n\nfunc increment(wg *sync.WaitGroup) {\n    defer wg.Done()\n    mu.Lock()\n    defer mu.Unlock()\n    counter++\n}\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go increment(&wg)\n    }\n    wg.Wait()\n    fmt.Println(\"Final counter:\", counter)\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Output: Final counter: 5."
                 ]
-            ]
+            }
         },
+
         {
             "id": "1e31953a-7972-5879-8105-1fc5c37ea684",
             "type": "bulleted_list",
@@ -362,7 +526,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The WaitGroup makes "
+                    "The "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " makes "
                 ],
                 [
                     "main",
@@ -391,7 +566,12 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "RWMutex"
+                    "RWMutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -534,7 +714,15 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "RWMutex Rules"
+                    "RWMutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " Rules"
                 ]
             ]
         },
@@ -749,23 +937,28 @@ const note = {
         },
         {
             "id": "1bc215d8-a73f-5d45-93a9-96ddecc5bd0b",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nvar (\n    data = make(map[string]string)\n    rw sync.RWMutex\n)\n\nfunc write(key, value string) {\n    rw.Lock()\n    defer rw.Unlock()\n    data[key] = value\n    fmt.Println(\"Wrote:\", key, \"=>\", value)\n}\n\nfunc read(key string, wg *sync.WaitGroup) {\n    defer wg.Done()\n    rw.RLock()\n    defer rw.RUnlock()\n    fmt.Println(\"Read:\", key, \"=>\", data[key])\n}\n\nfunc main() {\n    written := make(chan struct{})\n    go func() {\n        write(\"foo\", \"bar\")\n        close(written)\n    }()\n    <-written\n\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go read(\"foo\", &wg)\n    }\n    wg.Wait()\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "2b67da4b-5b65-5695-9571-253f43032ecd",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Read a Shared Map",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nvar (\n    data = make(map[string]string)\n    rw sync.RWMutex\n)\n\nfunc write(key, value string) {\n    rw.Lock()\n    defer rw.Unlock()\n    data[key] = value\n    fmt.Println(\"Wrote:\", key, \"=>\", value)\n}\n\nfunc read(key string, wg *sync.WaitGroup) {\n    defer wg.Done()\n    rw.RLock()\n    defer rw.RUnlock()\n    fmt.Println(\"Read:\", key, \"=>\", data[key])\n}\n\nfunc main() {\n    written := make(chan struct{})\n    go func() {\n        write(\"foo\", \"bar\")\n        close(written)\n    }()\n    <-written\n\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go read(\"foo\", &wg)\n    }\n    wg.Wait()\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Output: Wrote: foo => bar first, then three Read: foo => bar lines."
                 ]
-            ]
+            }
         },
+
         {
             "id": "854a0644-af53-5a21-8500-8ab1fe15b7b6",
             "type": "bulleted_list",
@@ -789,7 +982,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Consider an RWMutex when reads can run together without changing data."
+                    "Consider an "
+                ],
+                [
+                    "RWMutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when reads can run together without changing data."
                 ]
             ]
         },
@@ -798,7 +1002,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "It is not always faster than a Mutex."
+                    "It is not always faster than a "
+                ],
+                [
+                    "Mutex",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -816,7 +1031,23 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "TryLock and TryRLock"
+                    "TryLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "TryRLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -825,7 +1056,40 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go 1.18 added Mutex.TryLock, RWMutex.TryLock and RWMutex.TryRLock."
+                    "Go 1.18 added "
+                ],
+                [
+                    "Mutex.TryLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "RWMutex.TryLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "RWMutex.TryRLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -843,7 +1107,26 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "TryLock tries to take an exclusive lock without waiting. TryRLock tries to take a read lock without waiting."
+                    "TryLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " tries to take an exclusive lock without waiting. "
+                ],
+                [
+                    "TryRLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " tries to take a read lock without waiting."
                 ]
             ]
         },
@@ -852,7 +1135,40 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A true result means you acquired the lock. Release it with Unlock or RUnlock as appropriate."
+                    "A "
+                ],
+                [
+                    "true",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " result means you acquired the lock. Release it with "
+                ],
+                [
+                    "Unlock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or "
+                ],
+                [
+                    "RUnlock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " as appropriate."
                 ]
             ]
         },
@@ -861,7 +1177,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A false result means you did not acquire the lock. Do not access the protected data through that failed attempt."
+                    "A "
+                ],
+                [
+                    "false",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " result means you did not acquire the lock. Do not access the protected data through that failed attempt."
                 ]
             ]
         },
@@ -879,7 +1206,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not keep calling TryLock in a loop to replace Lock. That loop uses CPU time while waiting."
+                    "Do not keep calling "
+                ],
+                [
+                    "TryLock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " in a loop to replace "
+                ],
+                [
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". That loop uses CPU time while waiting."
                 ]
             ]
         },
@@ -888,7 +1237,18 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Other Lock Variants"
+                    "Other "
+                ],
+                [
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " Variants"
                 ]
             ]
         },
@@ -897,7 +1257,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Other languages and libraries provide these lock variants. Go’s sync package has no public type for them."
+                    "Other languages and libraries provide these lock variants. Go’s "
+                ],
+                [
+                    "sync",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package has no public type for them."
                 ]
             ]
         },
@@ -949,7 +1320,26 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "Mutex and RWMutex do not support recursive locking."
+                                "Mutex",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " and "
+                            ],
+                            [
+                                "RWMutex",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " do not support recursive locking."
                             ]
                         ]
                     }
@@ -970,7 +1360,37 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "Lock and RLock have no timeout or context parameter. TryLock returns immediately."
+                                "Lock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " and "
+                            ],
+                            [
+                                "RLock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " have no timeout or context parameter. "
+                            ],
+                            [
+                                "TryLock",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " returns immediately."
                             ]
                         ]
                     }
@@ -991,7 +1411,18 @@ const note = {
                         ],
                         "column-2": [
                             [
-                                "No public sync spinlock type. Mutex may spin briefly inside its implementation."
+                                "No public sync spinlock type. "
+                            ],
+                            [
+                                "Mutex",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " may spin briefly inside its implementation."
                             ]
                         ]
                     }
@@ -1003,7 +1434,37 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "sync.Locker is an interface with Lock and Unlock methods. It is not another mutex type."
+                    "sync.Locker",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is an interface with "
+                ],
+                [
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Unlock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " methods. It is not another mutex type."
                 ]
             ]
         },
@@ -1012,7 +1473,40 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Channels, WaitGroup, Cond and sync/atomic are other synchronization tools. They are not mutex types."
+                    "Channels, "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Cond",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "sync/atomic",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " are other synchronization tools. They are not mutex types."
                 ]
             ]
         },
@@ -1021,7 +1515,15 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Lock Scope and Alternatives"
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " Scope and Alternatives"
                 ]
             ]
         },
@@ -1066,7 +1568,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Lock contention means goroutines wait for a lock that others are using."
+                    "Lock",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " contention means goroutines wait for a lock that others are using."
                 ]
             ]
         },
@@ -1108,7 +1618,19 @@ const note = {
                     ", "
                 ],
                 [
-                    "WaitGroup for completion",
+                    "WaitGroup",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/workgroups"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " for completion",
                     [
                         [
                             "a",
@@ -1176,7 +1698,19 @@ const note = {
                     ", "
                 ],
                 [
-                    "Mutex contract",
+                    "Mutex",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#Mutex"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " contract",
                     [
                         [
                             "a",
@@ -1188,7 +1722,19 @@ const note = {
                     ", "
                 ],
                 [
-                    "RWMutex contract",
+                    "RWMutex",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#RWMutex"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " contract",
                     [
                         [
                             "a",
@@ -1200,7 +1746,19 @@ const note = {
                     ", "
                 ],
                 [
-                    "Mutex source",
+                    "Mutex",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/sync/mutex.go"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " source",
                     [
                         [
                             "a",
@@ -1212,7 +1770,19 @@ const note = {
                     ", "
                 ],
                 [
-                    "RWMutex source",
+                    "RWMutex",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/sync/rwmutex.go"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " source",
                     [
                         [
                             "a",
@@ -1236,7 +1806,19 @@ const note = {
                     ", "
                 ],
                 [
-                    "Mutex implementation",
+                    "Mutex",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/internal/sync/mutex.go"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " implementation",
                     [
                         [
                             "a",

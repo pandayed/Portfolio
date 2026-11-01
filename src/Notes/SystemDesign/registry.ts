@@ -15,7 +15,6 @@ export interface SystemDesignPageData {
     id: string;
     title: string;
     icon?: string;
-    status: string;
     parentId: string | null;
     route: SystemDesignEntryRoute;
     load: () => Promise<SystemDesignDocument>;
@@ -37,7 +36,6 @@ export const systemDesignPages: SystemDesignPageData[] = pageManifest.map((entry
         id: entry.id,
         title: entry.title,
         icon: 'icon' in entry ? entry.icon : undefined,
-        status: entry.status,
         parentId: entry.parentId,
         route: `${SYSTEM_DESIGN_ROUTE}/${slug(entry.title)}-${entry.id.slice(0, 8)}` as SystemDesignEntryRoute,
         load: async () => (await loadSource()).default,

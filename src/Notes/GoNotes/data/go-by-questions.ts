@@ -107,9 +107,7 @@ const note = {
             "id": "question-B02",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B02 — How do import forms work, including aliases and blank imports?"
-                ]
+                ["B02 — How do "], ["import",[["c"]]], [" forms work, including aliases and blank imports?"]
             ]
         },
         {
@@ -161,13 +159,23 @@ const note = {
         },
         {
             "id": "2ef24eb1-ed54-81f2-8d70-f874d0b8945e",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    f \"fmt\"\n    _ \"net/http/pprof\" // registers profiling handlers\n)\n\nfunc main() { f.Println(\"ok\") }"
-                ]
-            ],
-            "language": "go"
+            "type": "example",
+            "example": {
+                "title": "B02 — How do import forms work, including aliases and blank imports?",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    f \"fmt\"\n    _ \"net/http/pprof\" // registers profiling handlers\n)\n\nfunc main() { f.Println(\"ok\") }"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "question-B02-related",
@@ -194,9 +202,7 @@ const note = {
             "id": "question-B03",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B03 — What is the difference between var declarations and := short variable declarations?"
-                ]
+                ["B03 — What is the difference between "], ["var",[["c"]]], [" declarations and "], [":=",[["c"]]], [" short variable declarations?"]
             ]
         },
         {
@@ -321,9 +327,7 @@ const note = {
             "id": "question-B04",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B04 — How do const and iota work?"
-                ]
+                ["B04 — How do "], ["const",[["c"]]], [" and "], ["iota",[["c"]]], [" work?"]
             ]
         },
         {
@@ -758,9 +762,7 @@ const note = {
             "id": "question-B07",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B07 — How do if, for, and switch work in Go?"
-                ]
+                ["B07 — How do "], ["if",[["c"]]], [", "], ["for",[["c"]]], [", and "], ["switch",[["c"]]], [" work in Go?"]
             ]
         },
         {
@@ -849,15 +851,7 @@ const note = {
                 [
                     "Related: "
                 ],
-                [
-                    "If, else & switch",
-                    [
-                        [
-                            "a",
-                            "#/notes/go/if-else-switch"
-                        ]
-                    ]
-                ],
+                ["If, else & ",[["a","#/notes/go/if-else-switch"]]], ["switch",[["a","#/notes/go/if-else-switch"],["c"]]],
                 [
                     ", "
                 ],
@@ -879,9 +873,7 @@ const note = {
             "id": "question-B08",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B08 — How do multiple return values work, and what is the blank identifier _?"
-                ]
+                ["B08 — How do multiple return values work, and what is the blank identifier "], ["_",[["c"]]], ["?"]
             ]
         },
         {
@@ -931,11 +923,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8185-bfe7-e37cff162f59",
             "type": "code",
-            "richText": [
-                [
-                    "v, err := strconv.Atoi(\"42\")\nif err != nil { panic(err) }\nfmt.Println(v) // 42\n\n_, err = strconv.Atoi(\"bad\") // discard the result, retain the error\nfmt.Println(err != nil) // true"
-                ]
-            ],
+            "richText": [["v, err := strconv.Atoi(\"42\")\nif err != nil { panic(err) }\nfmt.Println(v) // 42\n\n_, err = strconv.Atoi(\"bad\") // discard the result, retain the error\nfmt.Println(err != nil) // true"]],
             "language": "go"
         },
         {
@@ -1018,11 +1006,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8198-aea9-f8e5dbefcfb6",
             "type": "code",
-            "richText": [
-                [
-                    "func div(a, b int) (q int, err error) {\n    if b == 0 { return 0, fmt.Errorf(\"divide by zero\") }\n    q = a / b\n    return // returns q, err\n}"
-                ]
-            ],
+            "richText": [["func div(a, b int) (q int, err error) {\n    if b == 0 { return 0, fmt.Errorf(\"divide by zero\") }\n    q = a / b\n    return // returns q, err\n}"]],
             "language": "go"
         },
         {
@@ -1050,9 +1034,7 @@ const note = {
             "id": "question-B10",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B10 — What does defer do, and in what order do deferred calls run?"
-                ]
+                ["B10 — What does "], ["defer",[["c"]]], [" do, and in what order do deferred calls run?"]
             ]
         },
         {
@@ -1076,9 +1058,7 @@ const note = {
             "id": "question-B10-answer-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "It also runs while a panic returns through that function."
-                ]
+                ["It also runs while a "], ["panic",[["c"]]], [" returns through that function."]
             ]
         },
         {
@@ -1201,9 +1181,7 @@ const note = {
             "id": "question-B12",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B12 — What is the difference between panic and returning an error? How does recover work?"
-                ]
+                ["B12 — What is the difference between "], ["panic",[["c"]]], [" and returning an error? How does "], ["recover",[["c"]]], [" work?"]
             ]
         },
         {
@@ -1253,9 +1231,7 @@ const note = {
             "id": "question-B12-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "If that deferred call recovers, the function containing the defer returns to its caller."
-                ]
+                ["If that deferred call recovers, the function containing the "], ["defer",[["c"]]], [" returns to its caller."]
             ]
         },
         {
@@ -1270,11 +1246,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8120-a301-c0bfdaab0556",
             "type": "code",
-            "richText": [
-                [
-                    "func safe() (err error) {\n    defer func() {\n        if r := recover(); r != nil {\n            err = fmt.Errorf(\"panic: %v\", r)\n        }\n    }()\n    panic(\"broken invariant\")\n}\n// safe() returns an error with text \"panic: broken invariant\"."
-                ]
-            ],
+            "richText": [["func safe() (err error) {\n    defer func() {\n        if r := recover(); r != nil {\n            err = fmt.Errorf(\"panic: %v\", r)\n        }\n    }()\n    panic(\"broken invariant\")\n}\n// safe() returns an error with text \"panic: broken invariant\"."]],
             "language": "go"
         },
         {
@@ -1346,11 +1318,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-813b-a9bd-f50fb0627150",
             "type": "code",
-            "richText": [
-                [
-                    "a := [3]int{1, 2, 3}\nb := a\nb[0] = 99\n// a[0] == 1, b[0] == 99 (array copy)\n\ns := []int{1, 2, 3}\nt := s\nt[0] = 99\n// s[0] == 99, t[0] == 99 (shared backing array)"
-                ]
-            ],
+            "richText": [["a := [3]int{1, 2, 3}\nb := a\nb[0] = 99\n// a[0] == 1, b[0] == 99 (array copy)\n\ns := []int{1, 2, 3}\nt := s\nt[0] = 99\n// s[0] == 99, t[0] == 99 (shared backing array)"]],
             "language": "go"
         },
         {
@@ -1378,9 +1346,7 @@ const note = {
             "id": "question-B14",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B14 — How do len, cap, make, and append work for slices?"
-                ]
+                ["B14 — How do "], ["len",[["c"]]], [", "], ["cap",[["c"]]], [", "], ["make",[["c"]]], [", and "], ["append",[["c"]]], [" work for slices?"]
             ]
         },
         {
@@ -1474,11 +1440,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-810c-a720-c521a1374419",
             "type": "code",
-            "richText": [
-                [
-                    "s := make([]int, 0, 2)\ns = append(s, 1, 2)\ns = append(s, 3) // capacity is exhausted, so append allocates a new backing array"
-                ]
-            ],
+            "richText": [["s := make([]int, 0, 2)\ns = append(s, 1, 2)\ns = append(s, 3) // capacity is exhausted, so append allocates a new backing array"]],
             "language": "go"
         },
         {
@@ -1566,28 +1528,20 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " is safe when the key is absent or the map is nil."
-                ]
+                [" is safe when the key is absent or the map is "], ["nil",[["c"]]], ["."]
             ]
         },
         {
             "id": "question-B15-answer-5",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "You can read a nil map. Writing an entry into it panics."
-                ]
+                ["You can read a "], ["nil",[["c"]]], [" map. Writing an entry into it panics."]
             ]
         },
         {
             "id": "2ef24eb1-ed54-818d-ab18-d267afe035b3",
             "type": "code",
-            "richText": [
-                [
-                    "var m map[string]int\nv, ok := m[\"x\"]\nfmt.Println(v, ok) // 0 false\n\nm = make(map[string]int)\nm[\"x\"] = 1\nv, ok = m[\"x\"]\nfmt.Println(v, ok) // 1 true\ndelete(m, \"x\")"
-                ]
-            ],
+            "richText": [["var m map[string]int\nv, ok := m[\"x\"]\nfmt.Println(v, ok) // 0 false\n\nm = make(map[string]int)\nm[\"x\"] = 1\nv, ok = m[\"x\"]\nfmt.Println(v, ok) // 1 true\ndelete(m, \"x\")"]],
             "language": "go"
         },
         {
@@ -1698,9 +1652,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " decodes UTF-8 and gives each rune’s byte index."
-                ]
+                [" decodes UTF-8 and gives each "], ["rune",[["c"]]], ["’s byte index."]
             ]
         },
         {
@@ -1718,19 +1670,13 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " gives the replacement rune and moves forward one byte."
-                ]
+                [" gives the replacement "], ["rune",[["c"]]], [" and moves forward one byte."]
             ]
         },
         {
             "id": "2ef24eb1-ed54-8150-9848-e290d54a4830",
             "type": "code",
-            "richText": [
-                [
-                    "s := \"€\"\nfmt.Println(len(s)) // 3 bytes in UTF-8\n\nfor i, r := range s {\n    fmt.Println(i, r) // i is byte index, r is rune\n}"
-                ]
-            ],
+            "richText": [["s := \"€\"\nfmt.Println(len(s)) // 3 bytes in UTF-8\n\nfor i, r := range s {\n    fmt.Println(i, r) // i is byte index, r is rune\n}"]],
             "language": "go"
         },
         {
@@ -1823,9 +1769,7 @@ const note = {
             "id": "question-B18",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B18 — How do pointers work in Go, and when are they nil?"
-                ]
+                ["B18 — How do pointers work in Go, and when are they "], ["nil",[["c"]]], ["?"]
             ]
         },
         {
@@ -1916,9 +1860,7 @@ const note = {
             "id": "question-B18-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "An uninitialized pointer is nil. Dereferencing nil panics."
-                ]
+                ["An uninitialized pointer is "], ["nil",[["c"]]], [". Dereferencing "], ["nil",[["c"]]], [" panics."]
             ]
         },
         {
@@ -2230,19 +2172,13 @@ const note = {
             "id": "question-B21-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A type switch chooses a branch using the actual type stored in the interface."
-                ]
+                ["A type "], ["switch",[["c"]]], [" chooses a branch using the actual type stored in the interface."]
             ]
         },
         {
             "id": "2ef24eb1-ed54-813d-adde-ce90278cd327",
             "type": "code",
-            "richText": [
-                [
-                    "var x any = 42\n\nif v, ok := x.(int); ok {\n    fmt.Println(v)\n}\n\nswitch v := x.(type) {\ncase int:\n    fmt.Println(\"int\", v)\ncase string:\n    fmt.Println(\"string\", v)\ndefault:\n    fmt.Println(\"other\")\n}"
-                ]
-            ],
+            "richText": [["var x any = 42\n\nif v, ok := x.(int); ok {\n    fmt.Println(v)\n}\n\nswitch v := x.(type) {\ncase int:\n    fmt.Println(\"int\", v)\ncase string:\n    fmt.Println(\"string\", v)\ndefault:\n    fmt.Println(\"other\")\n}"]],
             "language": "go"
         },
         {
@@ -2336,9 +2272,7 @@ const note = {
             "id": "question-B23",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "B23 — What’s the difference between new and make?"
-                ]
+                ["B23 — What’s the difference between "], ["new",[["c"]]], [" and "], ["make",[["c"]]], ["?"]
             ]
         },
         {
@@ -2398,9 +2332,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " points to a nil map."
-                ]
+                [" points to a "], ["nil",[["c"]]], [" map."]
             ]
         },
         {
@@ -2622,11 +2554,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-818e-a71b-c8d0d59f0503",
             "type": "code",
-            "richText": [
-                [
-                    "ch := make(chan int, 2)\nch <- 1\nch <- 2\nclose(ch)\n\nfor v := range ch { // drains 1,2 then stops\n    fmt.Println(v)\n}\n\nv, ok := <-ch // v==0, ok==false (already closed and drained)\n_ = v; _ = ok"
-                ]
-            ],
+            "richText": [["ch := make(chan int, 2)\nch <- 1\nch <- 2\nclose(ch)\n\nfor v := range ch { // drains 1,2 then stops\n    fmt.Println(v)\n}\n\nv, ok := <-ch // v==0, ok==false (already closed and drained)\n_ = v; _ = ok"]],
             "language": "go"
         },
         {
@@ -2736,11 +2664,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8163-a1a6-f5acb3cbfca1",
             "type": "code",
-            "richText": [
-                [
-                    "func fetch(ctx context.Context, url string) error {\n    ctx, cancel := context.WithTimeout(ctx, 200*time.Millisecond)\n    defer cancel()\n    req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)\n    if err != nil { return err }\n    resp, err := http.DefaultClient.Do(req)\n    if err != nil { return err }\n    defer resp.Body.Close()\n    _, err = io.Copy(io.Discard, resp.Body)\n    return err\n}"
-                ]
-            ],
+            "richText": [["func fetch(ctx context.Context, url string) error {\n    ctx, cancel := context.WithTimeout(ctx, 200*time.Millisecond)\n    defer cancel()\n    req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)\n    if err != nil { return err }\n    resp, err := http.DefaultClient.Do(req)\n    if err != nil { return err }\n    defer resp.Body.Close()\n    _, err = io.Copy(io.Discard, resp.Body)\n    return err\n}"]],
             "language": "go"
         },
         {
@@ -2768,9 +2692,7 @@ const note = {
             "id": "question-M02",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M02 — How do init() functions work and in what order do they run?"
-                ]
+                ["M02 — How do "], ["init()",[["c"]]], [" functions work and in what order do they run?"]
             ]
         },
         {
@@ -2860,11 +2782,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81a1-ba64-ee8158f25f0b",
             "type": "code",
-            "richText": [
-                [
-                    "var x = initial()\n\nfunc initial() int { return 7 }\nfunc init() { x++ }\n// x is 8 after this package finishes initialization."
-                ]
-            ],
+            "richText": [["var x = initial()\n\nfunc initial() int { return 7 }\nfunc init() { x++ }\n// x is 8 after this package finishes initialization."]],
             "language": "go"
         },
         {
@@ -2874,15 +2792,7 @@ const note = {
                 [
                     "Related: "
                 ],
-                [
-                    "init() Function",
-                    [
-                        [
-                            "a",
-                            "#/notes/go/init-function"
-                        ]
-                    ]
-                ],
+                ["init()",[["a","#/notes/go/init-function"],["c"]]], [" Function",[["a","#/notes/go/init-function"]]],
                 [
                     "."
                 ]
@@ -3001,13 +2911,22 @@ const note = {
         },
         {
             "id": "2ef24eb1-ed54-8108-9463-eca60a746ca8",
-            "type": "code",
-            "richText": [
-                [
-                    "module example.com/app\n\ngo 1.22\n\nrequire example.com/lib v1.4.0\n\nreplace example.com/lib => ../lib"
+            "type": "example",
+            "example": {
+                "title": "Module file contents",
+                "language": "text",
+                "description": [
+                    "This illustrative `go.mod` uses example module paths and versions. The dependencies and replacement directories must exist for a real build."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "go.mod",
+                        "language": "text",
+                        "code": "module example.com/app\n\ngo 1.22\n\nrequire example.com/lib v1.4.0\n\nreplace example.com/lib => ../lib"
+                    }
                 ]
-            ],
-            "language": "go.mod"
+            }
         },
         {
             "id": "question-M03-related",
@@ -3016,15 +2935,7 @@ const note = {
                 [
                     "Related: "
                 ],
-                [
-                    "go.mod",
-                    [
-                        [
-                            "a",
-                            "#/notes/go/go-mod"
-                        ]
-                    ]
-                ],
+                ["go.mod",[["a","#/notes/go/go-mod"],["c"]]],
                 [
                     "."
                 ]
@@ -3034,9 +2945,7 @@ const note = {
             "id": "question-M04",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M04 — What is variable shadowing, and why is := a common source of bugs?"
-                ]
+                ["M04 — What is variable shadowing, and why is "], [":=",[["c"]]], [" a common source of bugs?"]
             ]
         },
         {
@@ -3097,11 +3006,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8131-ba2d-ee7a9ce212c2",
             "type": "code",
-            "richText": [
-                [
-                    "func shadowed() error {\n    var err error\n    if true {\n        err := fmt.Errorf(\"inner failure\") // new variable\n        fmt.Println(err)\n    }\n    return err // BUG: returns nil and loses the failure\n}\n// Assign with err = ... to update the outer err, or return the inner err."
-                ]
-            ],
+            "richText": [["func shadowed() error {\n    var err error\n    if true {\n        err := fmt.Errorf(\"inner failure\") // new variable\n        fmt.Println(err)\n    }\n    return err // BUG: returns nil and loses the failure\n}\n// Assign with err = ... to update the outer err, or return the inner err."]],
             "language": "go"
         },
         {
@@ -3299,11 +3204,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81d7-9002-e77a8a18abc5",
             "type": "code",
-            "richText": [
-                [
-                    "type I interface{ M() }\ntype T struct{}\nfunc (t *T) M() {}\n\nvar _ I = &T{} // ok\n// var _ I = T{} // compile error"
-                ]
-            ],
+            "richText": [["type I interface{ M() }\ntype T struct{}\nfunc (t *T) M() {}\n\nvar _ I = &T{} // ok\n// var _ I = T{} // compile error"]],
             "language": "go"
         },
         {
@@ -3331,27 +3232,21 @@ const note = {
             "id": "question-M07",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M07 — What is the “typed nil in an interface” trap?"
-                ]
+                ["M07 — What is the “typed "], ["nil",[["c"]]], [" in an interface” trap?"]
             ]
         },
         {
             "id": "question-M07-answer",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "An interface is nil only when it has no actual type or value."
-                ]
+                ["An interface is "], ["nil",[["c"]]], [" only when it has no actual type or value."]
             ]
         },
         {
             "id": "question-M07-answer-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A nil "
-                ],
+                ["A "], ["nil",[["c"]]], [" "],
                 [
                     "*MyErr",
                     [
@@ -3369,28 +3264,20 @@ const note = {
             "id": "question-M07-answer-3",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "The interface is then non-nil, even though the stored pointer is nil."
-                ]
+                ["The interface is then non-"], ["nil",[["c"]]], [", even though the stored pointer is "], ["nil",[["c"]]], ["."]
             ]
         },
         {
             "id": "question-M07-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Return a plain nil error on success. Do not return a typed nil pointer as an error."
-                ]
+                ["Return a plain "], ["nil",[["c"]]], [" error on success. Do not return a typed "], ["nil",[["c"]]], [" pointer as an error."]
             ]
         },
         {
             "id": "2ef24eb1-ed54-8156-bc41-dfb6052d2654",
             "type": "code",
-            "richText": [
-                [
-                    "type MyErr struct{}\nfunc (*MyErr) Error() string { return \"x\" }\n\nvar p *MyErr = nil\nvar err error = p\nfmt.Println(err == nil) // false (typed nil)"
-                ]
-            ],
+            "richText": [["type MyErr struct{}\nfunc (*MyErr) Error() string { return \"x\" }\n\nvar p *MyErr = nil\nvar err error = p\nfmt.Println(err == nil) // false (typed nil)"]],
             "language": "go"
         },
         {
@@ -3418,18 +3305,14 @@ const note = {
             "id": "question-M08",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M08 — What is the difference between a nil slice and an empty slice? When does it matter?"
-                ]
+                ["M08 — What is the difference between a "], ["nil",[["c"]]], [" slice and an empty slice? When does it matter?"]
             ]
         },
         {
             "id": "question-M08-answer",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Nil and non-nil empty slices both have length zero."
-                ]
+                ["Nil and non-"], ["nil",[["c"]]], [" empty slices both have length zero."]
             ]
         },
         {
@@ -3467,18 +3350,14 @@ const note = {
             "id": "question-M08-answer-3",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Only a nil slice compares equal to nil."
-                ]
+                ["Only a "], ["nil",[["c"]]], [" slice compares equal to "], ["nil",[["c"]]], ["."]
             ]
         },
         {
             "id": "question-M08-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A non-nil empty slice can still have spare capacity."
-                ]
+                ["A non-"], ["nil",[["c"]]], [" empty slice can still have spare capacity."]
             ]
         },
         {
@@ -3507,9 +3386,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " and no omission tags, nil becomes "
-                ],
+                [" and no omission tags, "], ["nil",[["c"]]], [" becomes "],
                 [
                     "null",
                     [
@@ -3518,9 +3395,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " and a non-nil empty slice becomes "
-                ],
+                [" and a non-"], ["nil",[["c"]]], [" empty slice becomes "],
                 [
                     "[]",
                     [
@@ -3537,11 +3412,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81de-9608-fb0139bedfdb",
             "type": "code",
-            "richText": [
-                [
-                    "var a []int\nb := []int{}\nfmt.Println(a == nil, len(a)) // true 0\nfmt.Println(b == nil, len(b)) // false 0\naJSON, err := json.Marshal(a)\nif err != nil { panic(err) }\nbJSON, err := json.Marshal(b)\nif err != nil { panic(err) }\nfmt.Println(string(aJSON), string(bJSON)) // null []"
-                ]
-            ],
+            "richText": [["var a []int\nb := []int{}\nfmt.Println(a == nil, len(a)) // true 0\nfmt.Println(b == nil, len(b)) // false 0\naJSON, err := json.Marshal(a)\nif err != nil { panic(err) }\nbJSON, err := json.Marshal(b)\nif err != nil { panic(err) }\nfmt.Println(string(aJSON), string(bJSON)) // null []"]],
             "language": "go"
         },
         {
@@ -3569,9 +3440,7 @@ const note = {
             "id": "question-M09",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M09 — How can append accidentally overwrite data due to shared backing arrays?"
-                ]
+                ["M09 — How can "], ["append",[["c"]]], [" accidentally overwrite data due to shared backing arrays?"]
             ]
         },
         {
@@ -3615,9 +3484,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " limits the new slice’s capacity to 2. Its next append must use a new backing array."
-                ]
+                [" limits the new slice’s capacity to 2. Its next "], ["append",[["c"]]], [" must use a new backing array."]
             ]
         },
         {
@@ -3632,11 +3499,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81a7-8b23-f7fc1a56400c",
             "type": "code",
-            "richText": [
-                [
-                    "base := []int{1, 2, 3, 4}\na := base[:2]      // [1 2], cap 4\nb := base[2:3]     // [3], shares backing array\n\na = append(a, 99)  // writes into base[2]\nfmt.Println(b[0])  // 99 (was 3)"
-                ]
-            ],
+            "richText": [["base := []int{1, 2, 3, 4}\na := base[:2]      // [1 2], cap 4\nb := base[2:3]     // [3], shares backing array\n\na = append(a, 99)  // writes into base[2]\nfmt.Println(b[0])  // 99 (was 3)"]],
             "language": "go"
         },
         {
@@ -3664,9 +3527,7 @@ const note = {
             "id": "question-M10",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M10 — What does copy(dst, src) guarantee?"
-                ]
+                ["M10 — What does "], ["copy(dst, src)",[["c"]]], [" guarantee?"]
             ]
         },
         {
@@ -3744,11 +3605,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8173-b312-c7dbd6004af7",
             "type": "code",
-            "richText": [
-                [
-                    "s := []int{1, 2, 3, 4}\ncopy(s[1:], s[:3]) // overlapping copy\nfmt.Println(s)     // [1 1 2 3]"
-                ]
-            ],
+            "richText": [["s := []int{1, 2, 3, 4}\ncopy(s[1:], s[:3]) // overlapping copy\nfmt.Println(s)     // [1 1 2 3]"]],
             "language": "go"
         },
         {
@@ -3820,11 +3677,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8179-ac8e-f646404634a2",
             "type": "code",
-            "richText": [
-                [
-                    "jobs := make(chan int)\nvar senders sync.WaitGroup\nsenders.Add(2)\nfor i := 0; i < 2; i++ {\n    go func(v int) {\n        defer senders.Done()\n        jobs <- v\n    }(i)\n}\ngo func() {\n    senders.Wait()\n    close(jobs) // both senders are finished\n}()\nfor job := range jobs { fmt.Println(job) }\n// Prints 0 and 1; either order is possible."
-                ]
-            ],
+            "richText": [["jobs := make(chan int)\nvar senders sync.WaitGroup\nsenders.Add(2)\nfor i := 0; i < 2; i++ {\n    go func(v int) {\n        defer senders.Done()\n        jobs <- v\n    }(i)\n}\ngo func() {\n    senders.Wait()\n    close(jobs) // both senders are finished\n}()\nfor job := range jobs { fmt.Println(job) }\n// Prints 0 and 1; either order is possible."]],
             "language": "go"
         },
         {
@@ -3852,9 +3705,7 @@ const note = {
             "id": "question-M12",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M12 — How does select behave, including default?"
-                ]
+                ["M12 — How does "], ["select",[["c"]]], [" behave, including "], ["default",[["c"]]], ["?"]
             ]
         },
         {
@@ -3988,9 +3839,7 @@ const note = {
             "id": "question-M13",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M13 — How do sync.WaitGroup rules prevent races and panics?"
-                ]
+                ["M13 — How do "], ["sync.WaitGroup",[["c"]]], [" rules prevent races and panics?"]
             ]
         },
         {
@@ -4107,9 +3956,7 @@ const note = {
             "id": "question-M14",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M14 — When should you use sync.Mutex vs sync.RWMutex?"
-                ]
+                ["M14 — When should you use "], ["sync.Mutex",[["c"]]], [" vs "], ["sync.RWMutex",[["c"]]], ["?"]
             ]
         },
         {
@@ -4171,11 +4018,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8148-85fd-c784dee86a1f",
             "type": "code",
-            "richText": [
-                [
-                    "var mu sync.RWMutex\nm := map[string]int{\"count\": 1}\nmu.RLock()\nv := m[\"count\"]\nmu.RUnlock()\nmu.Lock()\nm[\"count\"] = v + 1\nmu.Unlock()\n// Individual accesses are protected. A read-modify-write invariant\n// would require holding one exclusive lock across both accesses."
-                ]
-            ],
+            "richText": [["var mu sync.RWMutex\nm := map[string]int{\"count\": 1}\nmu.RLock()\nv := m[\"count\"]\nmu.RUnlock()\nmu.Lock()\nm[\"count\"] = v + 1\nmu.Unlock()\n// Individual accesses are protected. A read-modify-write invariant\n// would require holding one exclusive lock across both accesses."]],
             "language": "go"
         },
         {
@@ -4215,9 +4058,7 @@ const note = {
             "id": "question-M15",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M15 — How does error wrapping work with %w, errors.Is, and errors.As?"
-                ]
+                ["M15 — How does error wrapping work with "], ["%w",[["c"]]], [", "], ["errors.Is",[["c"]]], [", and "], ["errors.As",[["c"]]], ["?"]
             ]
         },
         {
@@ -4314,11 +4155,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8136-9f08-f21a6255ef3b",
             "type": "code",
-            "richText": [
-                [
-                    "var ErrNotFound = errors.New(\"not found\")\n\nerr := fmt.Errorf(\"load user: %w\", ErrNotFound)\nfmt.Println(errors.Is(err, ErrNotFound)) // true"
-                ]
-            ],
+            "richText": [["var ErrNotFound = errors.New(\"not found\")\n\nerr := fmt.Errorf(\"load user: %w\", ErrNotFound)\nfmt.Println(errors.Is(err, ErrNotFound)) // true"]],
             "language": "go"
         },
         {
@@ -4440,9 +4277,7 @@ const note = {
             "id": "question-M16-caveat",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Pass a non-nil cause to this "
-                ],
+                ["Pass a non-"], ["nil",[["c"]]], [" cause to this "],
                 [
                     "OpError",
                     [
@@ -4481,11 +4316,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8138-8ae9-db0d0919f1df",
             "type": "code",
-            "richText": [
-                [
-                    "type OpError struct {\n    Op  string\n    Err error // must be non-nil in this example\n}\nfunc (e *OpError) Error() string { return e.Op + \": \" + e.Err.Error() }\nfunc (e *OpError) Unwrap() error { return e.Err }\n\nfunc loadFailure() error {\n    return &OpError{Op: \"load\", Err: os.ErrNotExist}\n}\n// errors.Is(loadFailure(), os.ErrNotExist) is true."
-                ]
-            ],
+            "richText": [["type OpError struct {\n    Op  string\n    Err error // must be non-nil in this example\n}\nfunc (e *OpError) Error() string { return e.Op + \": \" + e.Err.Error() }\nfunc (e *OpError) Unwrap() error { return e.Err }\n\nfunc loadFailure() error {\n    return &OpError{Op: \"load\", Err: os.ErrNotExist}\n}\n// errors.Is(loadFailure(), os.ErrNotExist) is true."]],
             "language": "go"
         },
         {
@@ -4513,18 +4344,14 @@ const note = {
             "id": "question-M17",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M17 — Why is defer inside hot loops sometimes a performance problem, and what’s a safe alternative?"
-                ]
+                ["M17 — Why is "], ["defer",[["c"]]], [" inside hot loops sometimes a performance problem, and what’s a safe alternative?"]
             ]
         },
         {
             "id": "question-M17-answer",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A defer inside a loop runs when the surrounding function returns."
-                ]
+                ["A "], ["defer",[["c"]]], [" inside a loop runs when the surrounding function returns."]
             ]
         },
         {
@@ -4549,28 +4376,20 @@ const note = {
             "id": "question-M17-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "The cost of defer depends on the compiler and code."
-                ]
+                ["The cost of "], ["defer",[["c"]]], [" depends on the compiler and code."]
             ]
         },
         {
             "id": "question-M17-answer-5",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Measure a frequently run path before removing defer for speed."
-                ]
+                ["Measure a frequently run path before removing "], ["defer",[["c"]]], [" for speed."]
             ]
         },
         {
             "id": "2ef24eb1-ed54-81cf-a021-e56bf9421eba",
             "type": "code",
-            "richText": [
-                [
-                    "func visitFiles(files []string, use func(*os.File) error) error {\n    for _, name := range files {\n        err := func() error {\n            f, err := os.Open(name)\n            if err != nil { return err }\n            defer f.Close() // closes at this helper’s return\n            return use(f)\n        }()\n        if err != nil { return err }\n    }\n    return nil\n}"
-                ]
-            ],
+            "richText": [["func visitFiles(files []string, use func(*os.File) error) error {\n    for _, name := range files {\n        err := func() error {\n            f, err := os.Open(name)\n            if err != nil { return err }\n            defer f.Close() // closes at this helper’s return\n            return use(f)\n        }()\n        if err != nil { return err }\n    }\n    return nil\n}"]],
             "language": "go"
         },
         {
@@ -4682,11 +4501,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8135-aedf-f9b29018c520",
             "type": "code",
-            "richText": [
-                [
-                    "vals := []int{1, 2, 3}\nvar wg sync.WaitGroup\nfor _, v := range vals {\n    wg.Add(1)\n    go func(x int) {\n        defer wg.Done()\n        fmt.Println(x)\n    }(v) // one explicit value copy, valid across language versions\n}\nwg.Wait()\n// Prints 1, 2 and 3 in an unspecified order."
-                ]
-            ],
+            "richText": [["vals := []int{1, 2, 3}\nvar wg sync.WaitGroup\nfor _, v := range vals {\n    wg.Add(1)\n    go func(x int) {\n        defer wg.Done()\n        fmt.Println(x)\n    }(v) // one explicit value copy, valid across language versions\n}\nwg.Wait()\n// Prints 1, 2 and 3 in an unspecified order."]],
             "language": "go"
         },
         {
@@ -4747,9 +4562,7 @@ const note = {
             "id": "question-M19",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M19 — What are the key differences between time.After and time.NewTimer in long-running systems?"
-                ]
+                ["M19 — What are the key differences between "], ["time.After",[["c"]]], [" and "], ["time.NewTimer",[["c"]]], [" in long-running systems?"]
             ]
         },
         {
@@ -4929,11 +4742,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8126-8564-c96019e05cef",
             "type": "code",
-            "richText": [
-                [
-                    "func waitForJobs(ctx context.Context, jobs <-chan int) error {\n    t := time.NewTimer(time.Second)\n    defer t.Stop()\n    for {\n        select {\n        case _, ok := <-jobs:\n            if !ok { return nil }\n            t.Reset(time.Second) // refresh inactivity deadline\n        case <-t.C:\n            return fmt.Errorf(\"no job within one second\")\n        case <-ctx.Done():\n            return ctx.Err()\n        }\n    }\n}\n// Go 1.23 timer semantics. The main module must opt into them.\n// One goroutine owns this timer and receives from its channel."
-                ]
-            ],
+            "richText": [["func waitForJobs(ctx context.Context, jobs <-chan int) error {\n    t := time.NewTimer(time.Second)\n    defer t.Stop()\n    for {\n        select {\n        case _, ok := <-jobs:\n            if !ok { return nil }\n            t.Reset(time.Second) // refresh inactivity deadline\n        case <-t.C:\n            return fmt.Errorf(\"no job within one second\")\n        case <-ctx.Done():\n            return ctx.Err()\n        }\n    }\n}\n// Go 1.23 timer semantics. The main module must opt into them.\n// One goroutine owns this timer and receives from its channel."]],
             "language": "go"
         },
         {
@@ -4964,15 +4773,7 @@ const note = {
                 [
                     "Reference: "
                 ],
-                [
-                    "Timer.Reset contract",
-                    [
-                        [
-                            "a",
-                            "https://pkg.go.dev/time#Timer.Reset"
-                        ]
-                    ]
-                ],
+                ["Timer.Reset",[["a","https://pkg.go.dev/time#Timer.Reset"],["c"]]], [" contract",[["a","https://pkg.go.dev/time#Timer.Reset"]]],
                 [
                     ", "
                 ],
@@ -5057,13 +4858,23 @@ const note = {
         },
         {
             "id": "2ef24eb1-ed54-8179-bac8-ed9513d2e372",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    jobs := make(chan int)\n    var wg sync.WaitGroup\n    for i := 0; i < 4; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            for j := range jobs { fmt.Println(j * j) }\n        }()\n    }\n    for _, j := range []int{1, 2, 3} { jobs <- j }\n    close(jobs)\n    wg.Wait()\n}\n// Prints 1, 4 and 9 in an unspecified order."
-                ]
-            ],
-            "language": "go"
+            "type": "example",
+            "example": {
+                "title": "M20 — How do you implement a worker pool with channels?",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    jobs := make(chan int)\n    var wg sync.WaitGroup\n    for i := 0; i < 4; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            for j := range jobs { fmt.Println(j * j) }\n        }()\n    }\n    for _, j := range []int{1, 2, 3} { jobs <- j }\n    close(jobs)\n    wg.Wait()\n}\n// Prints 1, 4 and 9 in an unspecified order."
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "question-M20-related",
@@ -5143,20 +4954,14 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81d9-9bf1-da1b0fba1ebc",
             "type": "code",
-            "richText": [
-                [
-                    "func Add(a, b int) int { return a + b }\n\nfunc TestAdd(t *testing.T) {\n    cases := []struct {\n        name string\n        a, b, want int\n    }{\n        {\"positive\", 1, 2, 3},\n        {\"zero\", 0, 0, 0},\n        {\"negative\", -1, 2, 1},\n    }\n    for _, tc := range cases {\n        t.Run(tc.name, func(t *testing.T) {\n            if got := Add(tc.a, tc.b); got != tc.want {\n                t.Fatalf(\"got %d, want %d\", got, tc.want)\n            }\n        })\n    }\n}"
-                ]
-            ],
+            "richText": [["func Add(a, b int) int { return a + b }\n\nfunc TestAdd(t *testing.T) {\n    cases := []struct {\n        name string\n        a, b, want int\n    }{\n        {\"positive\", 1, 2, 3},\n        {\"zero\", 0, 0, 0},\n        {\"negative\", -1, 2, 1},\n    }\n    for _, tc := range cases {\n        t.Run(tc.name, func(t *testing.T) {\n            if got := Add(tc.a, tc.b); got != tc.want {\n                t.Fatalf(\"got %d, want %d\", got, tc.want)\n            }\n        })\n    }\n}"]],
             "language": "go"
         },
         {
             "id": "question-M22",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M22 — How do you write a correct benchmark with testing.B?"
-                ]
+                ["M22 — How do you write a correct benchmark with "], ["testing.B",[["c"]]], ["?"]
             ]
         },
         {
@@ -5262,20 +5067,14 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8154-b5cc-e8079ba9bb8a",
             "type": "code",
-            "richText": [
-                [
-                    "var sink int\n\nfunc sum(data []int) int {\n    total := 0\n    for _, v := range data { total += v }\n    return total\n}\n\nfunc BenchmarkSum(b *testing.B) {\n    data := make([]int, 1_000)\n    for i := range data { data[i] = i }\n    b.ReportAllocs()\n    b.ResetTimer()\n    for i := 0; i < b.N; i++ { sink = sum(data) }\n}"
-                ]
-            ],
+            "richText": [["var sink int\n\nfunc sum(data []int) int {\n    total := 0\n    for _, v := range data { total += v }\n    return total\n}\n\nfunc BenchmarkSum(b *testing.B) {\n    data := make([]int, 1_000)\n    for i := range data { data[i] = i }\n    b.ReportAllocs()\n    b.ResetTimer()\n    for i := 0; i < b.N; i++ { sink = sum(data) }\n}"]],
             "language": "go"
         },
         {
             "id": "question-M23",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "M23 — What does go test -race detect, and what are its limits?"
-                ]
+                ["M23 — What does "], ["go test -race",[["c"]]], [" detect, and what are its limits?"]
             ]
         },
         {
@@ -5402,11 +5201,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81b1-8748-fa2ade8140ff",
             "type": "code",
-            "richText": [
-                [
-                    "go test ./mypkg -run=^$ -bench=. -cpuprofile=cpu.out -memprofile=mem.out\ngo tool pprof cpu.out\ngo tool pprof -inuse_space mem.out\ngo tool pprof -alloc_space mem.out"
-                ]
-            ],
+            "richText": [["go test ./mypkg -run=^$ -bench=. -cpuprofile=cpu.out -memprofile=mem.out\ngo tool pprof cpu.out\ngo tool pprof -inuse_space mem.out\ngo tool pprof -alloc_space mem.out"]],
             "language": "shell"
         },
         {
@@ -5430,11 +5225,7 @@ const note = {
         {
             "id": "question-M24-extra-1",
             "type": "code",
-            "richText": [
-                [
-                    "go func() {\n    log.Print(http.ListenAndServe(\"localhost:6060\", nil))\n}()"
-                ]
-            ],
+            "richText": [["go func() {\n    log.Print(http.ListenAndServe(\"localhost:6060\", nil))\n}()"]],
             "language": "go"
         },
         {
@@ -5569,9 +5360,7 @@ const note = {
             "id": "question-M25-answer-6",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Comparing interface values can still panic if they hold values such as slices that cannot be compared."
-                ]
+                ["Comparing interface values can still "], ["panic",[["c"]]], [" if they hold values such as slices that cannot be compared."]
             ]
         },
         {
@@ -5776,9 +5565,7 @@ const note = {
             "id": "question-H03",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H03 — When should you use sync/atomic instead of a mutex?"
-                ]
+                ["H03 — When should you use "], ["sync/atomic",[["c"]]], [" instead of a mutex?"]
             ]
         },
         {
@@ -5812,9 +5599,7 @@ const note = {
             "id": "question-H03-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Several atomic operations do not make one atomic transaction. Another goroutine can run between them."
-                ]
+                ["Several atomic operations do not "], ["make",[["c"]]], [" one atomic transaction. Another goroutine can run between them."]
             ]
         },
         {
@@ -5829,11 +5614,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8191-9c6d-f0825865bb1e",
             "type": "code",
-            "richText": [
-                [
-                    "var n atomic.Int64\nn.Add(1)\nv := n.Load()\n_ = v"
-                ]
-            ],
+            "richText": [["var n atomic.Int64\nn.Add(1)\nv := n.Load()\n_ = v"]],
             "language": "go"
         },
         {
@@ -5939,18 +5720,14 @@ const note = {
             "id": "question-H05",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H05 — How does using a nil channel in select help structure concurrent code?"
-                ]
+                ["H05 — How does using a "], ["nil",[["c"]]], [" channel in "], ["select",[["c"]]], [" help structure concurrent code?"]
             ]
         },
         {
             "id": "question-H05-answer",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A nil channel disables its send or receive case in "
-                ],
+                ["A "], ["nil",[["c"]]], [" channel disables its send or receive case in "],
                 [
                     "select",
                     [
@@ -5968,9 +5745,7 @@ const note = {
             "id": "question-H05-answer-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "After an input channel is closed and drained, set it to nil to disable its case."
-                ]
+                ["After an input channel is closed and drained, set it to "], ["nil",[["c"]]], [" to disable its case."]
             ]
         },
         {
@@ -5986,9 +5761,7 @@ const note = {
             "id": "question-H05-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "If all channels are nil and there is no "
-                ],
+                ["If all channels are "], ["nil",[["c"]]], [" and there is no "],
                 [
                     "default",
                     [
@@ -6016,11 +5789,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-810c-865b-de6275d38a46",
             "type": "code",
-            "richText": [
-                [
-                    "func merge(ctx context.Context, a, b <-chan int, out chan<- int) {\n    for a != nil || b != nil {\n        var v int\n        var ok bool\n        select {\n        case v, ok = <-a:\n            if !ok { a = nil; continue }\n        case v, ok = <-b:\n            if !ok { b = nil; continue }\n        case <-ctx.Done():\n            return\n        }\n        select {\n        case out <- v:\n        case <-ctx.Done():\n            return\n        }\n    }\n}\n// The caller owns out and decides when to close it."
-                ]
-            ],
+            "richText": [["func merge(ctx context.Context, a, b <-chan int, out chan<- int) {\n    for a != nil || b != nil {\n        var v int\n        var ok bool\n        select {\n        case v, ok = <-a:\n            if !ok { a = nil; continue }\n        case v, ok = <-b:\n            if !ok { b = nil; continue }\n        case <-ctx.Done():\n            return\n        }\n        select {\n        case out <- v:\n        case <-ctx.Done():\n            return\n        }\n    }\n}\n// The caller owns out and decides when to close it."]],
             "language": "go"
         },
         {
@@ -6066,9 +5835,7 @@ const note = {
             "id": "question-H06-answer-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "At a channel wait, also select on "
-                ],
+                ["At a channel wait, also "], ["select",[["c"]]], [" on "],
                 [
                     "ctx.Done()",
                     [
@@ -6132,11 +5899,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81bf-bdae-caf1d8e25635",
             "type": "code",
-            "richText": [
-                [
-                    "func consume(ctx context.Context, jobs <-chan int) error {\n    for {\n        select {\n        case job, ok := <-jobs:\n            if !ok { return nil }\n            fmt.Println(job) // bounded work in this example\n        case <-ctx.Done():\n            return ctx.Err()\n        }\n    }\n}\n// A ready job can win alongside cancellation. For longer work,\n// pass ctx into that work and check it during execution."
-                ]
-            ],
+            "richText": [["func consume(ctx context.Context, jobs <-chan int) error {\n    for {\n        select {\n        case job, ok := <-jobs:\n            if !ok { return nil }\n            fmt.Println(job) // bounded work in this example\n        case <-ctx.Done():\n            return ctx.Err()\n        }\n    }\n}\n// A ready job can win alongside cancellation. For longer work,\n// pass ctx into that work and check it during execution."]],
             "language": "go"
         },
         {
@@ -6237,11 +6000,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8127-ab17-e1e3b26588a4",
             "type": "code",
-            "richText": [
-                [
-                    "func New() *int {\n    x := 1\n    return &x // must stay valid; a non-inlined call may allocate on the heap\n}\n// Inspect a concrete package:\n// go build -gcflags=-m ./mypkg\n// go build -gcflags=-m=2 ./mypkg"
-                ]
-            ],
+            "richText": [["func New() *int {\n    x := 1\n    return &x // must stay valid; a non-inlined call may allocate on the heap\n}\n// Inspect a concrete package:\n// go build -gcflags=-m ./mypkg\n// go build -gcflags=-m=2 ./mypkg"]],
             "language": "go"
         },
         {
@@ -6323,9 +6082,7 @@ const note = {
             "id": "question-H09",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H09 — How does Go’s garbage collector work at a high level, and what is GOGC?"
-                ]
+                ["H09 — How does Go’s garbage collector work at a high level, and what is "], ["GOGC",[["c"]]], ["?"]
             ]
         },
         {
@@ -6453,9 +6210,7 @@ const note = {
             "id": "question-H10",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H10 — What are the exact semantics of sync.Pool?"
-                ]
+                ["H10 — What are the exact semantics of "], ["sync.Pool",[["c"]]], ["?"]
             ]
         },
         {
@@ -6498,9 +6253,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    ", or return nil if "
-                ],
+                [", or return "], ["nil",[["c"]]], [" if "],
                 [
                     "New",
                     [
@@ -6752,11 +6505,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-817c-a9da-d550ddd33afe",
             "type": "code",
-            "richText": [
-                [
-                    "func prefix() []byte {\n    big := make([]byte, 10<<20) // 10 MiB backing array\n    view := big[:10]\n    small := make([]byte, len(view))\n    copy(small, view)\n    return small // the large array can be collected when otherwise unreachable\n}"
-                ]
-            ],
+            "richText": [["func prefix() []byte {\n    big := make([]byte, 10<<20) // 10 MiB backing array\n    view := big[:10]\n    small := make([]byte, len(view))\n    copy(small, view)\n    return small // the large array can be collected when otherwise unreachable\n}"]],
             "language": "go"
         },
         {
@@ -6836,11 +6585,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-816d-998a-c84c7907f8ff",
             "type": "code",
-            "richText": [
-                [
-                    "func smallSubstring(s string, start, end int) string {\n    return strings.Clone(s[start:end]) // Go 1.18+\n}\n// The original string can be collected once no references to it remain."
-                ]
-            ],
+            "richText": [["func smallSubstring(s string, start, end int) string {\n    return strings.Clone(s[start:end]) // Go 1.18+\n}\n// The original string can be collected once no references to it remain."]],
             "language": "go"
         },
         {
@@ -7018,11 +6763,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8131-b67e-f74356d9a511",
             "type": "code",
-            "richText": [
-                [
-                    "type T struct{}\nfunc (T) M(int) {}\n\nvar t T\nf1 := t.M      // method value: func(int)\nf2 := T.M      // method expression: func(T, int)\n\nf1(1)\nf2(t, 1)"
-                ]
-            ],
+            "richText": [["type T struct{}\nfunc (T) M(int) {}\n\nvar t T\nf1 := t.M      // method value: func(int)\nf2 := T.M      // method expression: func(T, int)\n\nf1(1)\nf2(t, 1)"]],
             "language": "go"
         },
         {
@@ -7156,19 +6897,13 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    ", the new value’s type must be assignable to the target’s type. A wrong setter or type can panic."
-                ]
+                [", the new value’s type must be assignable to the target’s type. A wrong setter or type can "], ["panic",[["c"]]], ["."]
             ]
         },
         {
             "id": "2ef24eb1-ed54-8137-96fa-d92536ddf753",
             "type": "code",
-            "richText": [
-                [
-                    "x := 0\nv := reflect.ValueOf(&x).Elem()\nv.SetInt(42)"
-                ]
-            ],
+            "richText": [["x := 0\nv := reflect.ValueOf(&x).Elem()\nv.SetInt(42)"]],
             "language": "go"
         },
         {
@@ -7303,15 +7038,7 @@ const note = {
                 [
                     "Reference: "
                 ],
-                [
-                    "Valid unsafe.Pointer patterns",
-                    [
-                        [
-                            "a",
-                            "https://pkg.go.dev/unsafe#Pointer"
-                        ]
-                    ]
-                ],
+                ["Valid ",[["a","https://pkg.go.dev/unsafe#Pointer"]]], ["unsafe.Pointer",[["a","https://pkg.go.dev/unsafe#Pointer"],["c"]]], [" patterns",[["a","https://pkg.go.dev/unsafe#Pointer"]]],
                 [
                     "."
                 ]
@@ -7321,9 +7048,7 @@ const note = {
             "id": "question-H19",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H19 — Explain Go’s scheduler model (G-M-P) and what GOMAXPROCS controls."
-                ]
+                ["H19 — Explain Go’s scheduler model (G-M-P) and what "], ["GOMAXPROCS",[["c"]]], [" controls."]
             ]
         },
         {
@@ -7533,9 +7258,7 @@ const note = {
             "id": "question-H21-answer-5",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A nil-channel wait may have no way to exit."
-                ]
+                ["A "], ["nil",[["c"]]], ["-channel wait may have no way to exit."]
             ]
         },
         {
@@ -7581,9 +7304,7 @@ const note = {
             "id": "question-H22",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H22 — How does net/http server concurrency work by default?"
-                ]
+                ["H22 — How does "], ["net/http",[["c"]]], [" server concurrency work by default?"]
             ]
         },
         {
@@ -7653,11 +7374,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-815b-9221-ea68af31e144",
             "type": "code",
-            "richText": [
-                [
-                    "func handle(w http.ResponseWriter, r *http.Request) {\n    ctx := r.Context()\n    t := time.NewTimer(100 * time.Millisecond)\n    defer t.Stop()\n    select {\n    case <-ctx.Done():\n        return\n    case <-t.C:\n        _, _ = io.WriteString(w, \"done\")\n    }\n}\n// A real database or outbound HTTP call should receive ctx too."
-                ]
-            ],
+            "richText": [["func handle(w http.ResponseWriter, r *http.Request) {\n    ctx := r.Context()\n    t := time.NewTimer(100 * time.Millisecond)\n    defer t.Stop()\n    select {\n    case <-ctx.Done():\n        return\n    case <-t.C:\n        _, _ = io.WriteString(w, \"done\")\n    }\n}\n// A real database or outbound HTTP call should receive ctx too."]],
             "language": "go"
         },
         {
@@ -7667,15 +7384,7 @@ const note = {
                 [
                     "Reference: "
                 ],
-                [
-                    "Request.Context contract",
-                    [
-                        [
-                            "a",
-                            "https://pkg.go.dev/net/http#Request.Context"
-                        ]
-                    ]
-                ],
+                ["Request.Context",[["a","https://pkg.go.dev/net/http#Request.Context"],["c"]]], [" contract",[["a","https://pkg.go.dev/net/http#Request.Context"]]],
                 [
                     "."
                 ]
@@ -7685,9 +7394,7 @@ const note = {
             "id": "question-H23",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H23 — What are encoding/json performance pitfalls that matter in interviews?"
-                ]
+                ["H23 — What are "], ["encoding/json",[["c"]]], [" performance pitfalls that matter in interviews?"]
             ]
         },
         {
@@ -7782,9 +7489,7 @@ const note = {
             "id": "question-H24-answer-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "It checks a property: something that should remain true for every supported input."
-                ]
+                ["It checks a property: something that should remain "], ["true",[["c"]]], [" for every supported input."]
             ]
         },
         {
@@ -7817,20 +7522,14 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8105-a793-d308ce82eb31",
             "type": "code",
-            "richText": [
-                [
-                    "func FuzzJSONRoundTrip(f *testing.F) {\n    f.Add(\"seed\")\n    f.Add(\"€\")\n    f.Fuzz(func(t *testing.T, s string) {\n        if !utf8.ValidString(s) { t.Skip() }\n        data, err := json.Marshal(s)\n        if err != nil { t.Fatal(err) }\n        var got string\n        if err := json.Unmarshal(data, &got); err != nil { t.Fatal(err) }\n        if got != s { t.Fatalf(\"got %q, want %q\", got, s) }\n    })\n}"
-                ]
-            ],
+            "richText": [["func FuzzJSONRoundTrip(f *testing.F) {\n    f.Add(\"seed\")\n    f.Add(\"€\")\n    f.Fuzz(func(t *testing.T, s string) {\n        if !utf8.ValidString(s) { t.Skip() }\n        data, err := json.Marshal(s)\n        if err != nil { t.Fatal(err) }\n        var got string\n        if err := json.Unmarshal(data, &got); err != nil { t.Fatal(err) }\n        if got != s { t.Fatalf(\"got %q, want %q\", got, s) }\n    })\n}"]],
             "language": "go"
         },
         {
             "id": "question-H25",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "H25 — How do build tags, internal packages, and go:generate help maintain real-world Go codebases?"
-                ]
+                ["H25 — How do build tags, internal packages, and "], ["go:generate",[["c"]]], [" help maintain real-world Go codebases?"]
             ]
         },
         {
@@ -7919,11 +7618,7 @@ const note = {
         {
             "id": "question-H25-extra-0",
             "type": "code",
-            "richText": [
-                [
-                    "//go:build linux\n\npackage platform\n\n//go:generate go run ./cmd/gen\n// Directives are examples. The generator must exist and be versioned."
-                ]
-            ],
+            "richText": [["//go:build linux\n\npackage platform\n\n//go:generate go run ./cmd/gen\n// Directives are examples. The generator must exist and be versioned."]],
             "language": "go"
         },
         {
@@ -7939,9 +7634,7 @@ const note = {
             "id": "question-E01",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E01 — What is the difference between GOGC and GOMEMLIMIT, and how do they interact in production?"
-                ]
+                ["E01 — What is the difference between "], ["GOGC",[["c"]]], [" and "], ["GOMEMLIMIT",[["c"]]], [", and how do they interact in production?"]
             ]
         },
         {
@@ -8147,9 +7840,7 @@ const note = {
             "id": "question-E03",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E03 — Why are finalizers (runtime.SetFinalizer) considered a last resort?"
-                ]
+                ["E03 — Why are finalizers ("], ["runtime.SetFinalizer",[["c"]]], [") considered a last resort?"]
             ]
         },
         {
@@ -8221,9 +7912,7 @@ const note = {
             "id": "question-E04",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E04 — What do you need to know about sync.Mutex behavior under contention (including starvation)?"
-                ]
+                ["E04 — What do you need to know about "], ["sync.Mutex",[["c"]]], [" behavior under contention (including starvation)?"]
             ]
         },
         {
@@ -8442,9 +8131,7 @@ const note = {
             "id": "question-E06",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E06 — Why can make(map[K]V, hint) improve performance, and what are its limits?"
-                ]
+                ["E06 — Why can "], ["make(map[K]V, hint)",[["c"]]], [" improve performance, and what are its limits?"]
             ]
         },
         {
@@ -8506,11 +8193,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-814b-9207-cc21c49d0dbd",
             "type": "code",
-            "richText": [
-                [
-                    "m := make(map[string]int, 10_000) // initial size hint, not a maximum\nfor i := 0; i < 10_001; i++ {\n    m[strconv.Itoa(i)] = i // the map can grow beyond the hint\n}\nfmt.Println(len(m)) // 10001"
-                ]
-            ],
+            "richText": [["m := make(map[string]int, 10_000) // initial size hint, not a maximum\nfor i := 0; i < 10_001; i++ {\n    m[strconv.Itoa(i)] = i // the map can grow beyond the hint\n}\nfmt.Println(len(m)) // 10001"]],
             "language": "go"
         },
         {
@@ -8538,9 +8221,7 @@ const note = {
             "id": "question-E07",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E07 — When is sync.Map the right choice, and what are the tradeoffs?"
-                ]
+                ["E07 — When is "], ["sync.Map",[["c"]]], [" the right choice, and what are the tradeoffs?"]
             ]
         },
         {
@@ -8643,15 +8324,7 @@ const note = {
                 [
                     "Reference: "
                 ],
-                [
-                    "sync.Map workloads",
-                    [
-                        [
-                            "a",
-                            "https://pkg.go.dev/sync#Map"
-                        ]
-                    ]
-                ],
+                ["sync.Map",[["a","https://pkg.go.dev/sync#Map"],["c"]]], [" workloads",[["a","https://pkg.go.dev/sync#Map"]]],
                 [
                     "."
                 ]
@@ -8732,11 +8405,7 @@ const note = {
         {
             "id": "question-E08-extra-1",
             "type": "code",
-            "richText": [
-                [
-                    "type Snapshot struct { Value int }\nvar published atomic.Pointer[Snapshot]\n\nfunc publish() {\n    published.Store(&Snapshot{Value: 42})\n}\nfunc read() {\n    if s := published.Load(); s != nil {\n        fmt.Println(s.Value) // initialized before publication\n    }\n}\n// Do not mutate the published Snapshot without additional synchronization."
-                ]
-            ],
+            "richText": [["type Snapshot struct { Value int }\nvar published atomic.Pointer[Snapshot]\n\nfunc publish() {\n    published.Store(&Snapshot{Value: 42})\n}\nfunc read() {\n    if s := published.Load(); s != nil {\n        fmt.Println(s.Value) // initialized before publication\n    }\n}\n// Do not mutate the published Snapshot without additional synchronization."]],
             "language": "go"
         },
         {
@@ -8827,9 +8496,7 @@ const note = {
             "id": "question-E10",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E10 — What are Go type sets and the ~ operator in constraints?"
-                ]
+                ["E10 — What are Go type sets and the "], ["~",[["c"]]], [" operator in constraints?"]
             ]
         },
         {
@@ -8915,11 +8582,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81cf-831e-c122d0767035",
             "type": "code",
-            "richText": [
-                [
-                    "type IntLike interface {\n    ~int | ~int64\n}\n\nfunc Sum[T IntLike](s []T) T {\n    var total T\n    for _, v := range s { total += v }\n    return total\n}"
-                ]
-            ],
+            "richText": [["type IntLike interface {\n    ~int | ~int64\n}\n\nfunc Sum[T IntLike](s []T) T {\n    var total T\n    for _, v := range s { total += v }\n    return total\n}"]],
             "language": "go"
         },
         {
@@ -9031,9 +8694,7 @@ const note = {
             "id": "question-E12",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E12 — How does the module checksum database (sumdb) protect builds, and when do GOPRIVATE / GONOSUMDB matter?"
-                ]
+                ["E12 — How does the module checksum database (sumdb) protect builds, and when do "], ["GOPRIVATE",[["c"]]], [" / "], ["GONOSUMDB",[["c"]]], [" matter?"]
             ]
         },
         {
@@ -9124,15 +8785,7 @@ const note = {
                 [
                     "Related: "
                 ],
-                [
-                    "go.sum",
-                    [
-                        [
-                            "a",
-                            "#/notes/go/go-sum"
-                        ]
-                    ]
-                ],
+                ["go.sum",[["a","#/notes/go/go-sum"],["c"]]],
                 [
                     "."
                 ]
@@ -9203,9 +8856,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " gives C an integer handle through which Go can recover a Go value."
-                ]
+                [" gives C an integer handle through which Go can "], ["recover",[["c"]]], [" a Go value."]
             ]
         },
         {
@@ -9263,9 +8914,7 @@ const note = {
             "id": "question-E14",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E14 — What does runtime.LockOSThread() do, and when is it justified?"
-                ]
+                ["E14 — What does "], ["runtime.LockOSThread()",[["c"]]], [" do, and when is it justified?"]
             ]
         },
         {
@@ -9334,9 +8983,7 @@ const note = {
             "id": "question-E15",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E15 — How does io.Copy achieve high performance, and what interfaces does it leverage?"
-                ]
+                ["E15 — How does "], ["io.Copy",[["c"]]], [" achieve high performance, and what interfaces does it leverage?"]
             ]
         },
         {
@@ -9362,9 +9009,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " and can copy with "
-                ],
+                [" and can "], ["copy",[["c"]]], [" with "],
                 [
                     "WriteTo",
                     [
@@ -9393,9 +9038,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " and can copy with "
-                ],
+                [" and can "], ["copy",[["c"]]], [" with "],
                 [
                     "ReadFrom",
                     [
@@ -9439,11 +9082,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-818e-9ecf-c60e2d70a9c8",
             "type": "code",
-            "richText": [
-                [
-                    "func transfer(dst io.Writer, src io.Reader) error {\n    n, err := io.Copy(dst, src)\n    if err != nil { return fmt.Errorf(\"copy after %d bytes: %w\", n, err) }\n    return nil\n}"
-                ]
-            ],
+            "richText": [["func transfer(dst io.Writer, src io.Reader) error {\n    n, err := io.Copy(dst, src)\n    if err != nil { return fmt.Errorf(\"copy after %d bytes: %w\", n, err) }\n    return nil\n}"]],
             "language": "go"
         },
         {
@@ -9512,11 +9151,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-81ce-b2ec-cc097296f76d",
             "type": "code",
-            "richText": [
-                [
-                    "type config struct { timeout time.Duration }\ntype Option func(*config)\ntype Client struct { cfg config }\n\nfunc WithTimeout(d time.Duration) Option {\n    return func(c *config) { c.timeout = d }\n}\n\nfunc NewClient(opts ...Option) *Client {\n    cfg := config{timeout: time.Second}\n    for _, opt := range opts { opt(&cfg) }\n    return &Client{cfg: cfg}\n}\n// Later options win when they change the same setting."
-                ]
-            ],
+            "richText": [["type config struct { timeout time.Duration }\ntype Option func(*config)\ntype Client struct { cfg config }\n\nfunc WithTimeout(d time.Duration) Option {\n    return func(c *config) { c.timeout = d }\n}\n\nfunc NewClient(opts ...Option) *Client {\n    cfg := config{timeout: time.Second}\n    for _, opt := range opts { opt(&cfg) }\n    return &Client{cfg: cfg}\n}\n// Later options win when they change the same setting."]],
             "language": "go"
         },
         {
@@ -9716,9 +9351,7 @@ const note = {
             "id": "question-E19",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E19 — What is the most common misuse of errors.New sentinel errors in large systems?"
-                ]
+                ["E19 — What is the most common misuse of "], ["errors.New",[["c"]]], [" sentinel errors in large systems?"]
             ]
         },
         {
@@ -9814,9 +9447,7 @@ const note = {
             "id": "question-E20",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E20 — How does the default http.Client behave, and what are the production-grade timeout rules?"
-                ]
+                ["E20 — How does the default "], ["http.Client",[["c"]]], [" behave, and what are the production-grade timeout rules?"]
             ]
         },
         {
@@ -9938,9 +9569,7 @@ const note = {
             "id": "question-E21",
             "type": "sub_sub_header",
             "richText": [
-                [
-                    "E21 — What does runtime/trace show that CPU profiles don’t?"
-                ]
+                ["E21 — What does "], ["runtime/trace",[["c"]]], [" show that CPU profiles don’t?"]
             ]
         },
         {
@@ -10066,11 +9695,7 @@ const note = {
         {
             "id": "question-E22-extra-0",
             "type": "code",
-            "richText": [
-                [
-                    "go tool pprof -inuse_space mem.out\ngo tool pprof -alloc_space mem.out"
-                ]
-            ],
+            "richText": [["go tool pprof -inuse_space mem.out\ngo tool pprof -alloc_space mem.out"]],
             "language": "shell"
         },
         {
@@ -10155,18 +9780,14 @@ const note = {
             "id": "question-E23-answer-4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Swapping only a byte and an int64 often leaves the final size unchanged."
-                ]
+                ["Swapping only a byte and an "], ["int64",[["c"]]], [" often leaves the final size unchanged."]
             ]
         },
         {
             "id": "question-E23-answer-5",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "The example uses two byte fields and assumes the standard compiler aligns int64 to 8 bytes."
-                ]
+                ["The example uses two byte fields and assumes the standard compiler aligns "], ["int64",[["c"]]], [" to 8 bytes."]
             ]
         },
         {
@@ -10199,11 +9820,7 @@ const note = {
         {
             "id": "2ef24eb1-ed54-8196-9515-d607553ec9aa",
             "type": "code",
-            "richText": [
-                [
-                    "type A struct {\n    first byte\n    count int64\n    last  byte\n}\ntype B struct {\n    count int64\n    first byte\n    last  byte\n}\n\nfunc sizes() {\n    fmt.Println(unsafe.Sizeof(A{}), unsafe.Sizeof(B{}))\n}\n// Standard gc layout with 8-byte int64 alignment: 24 16.\n// Illustrative expected sizes; check on the target architecture."
-                ]
-            ],
+            "richText": [["type A struct {\n    first byte\n    count int64\n    last  byte\n}\ntype B struct {\n    count int64\n    first byte\n    last  byte\n}\n\nfunc sizes() {\n    fmt.Println(unsafe.Sizeof(A{}), unsafe.Sizeof(B{}))\n}\n// Standard gc layout with 8-byte int64 alignment: 24 16.\n// Illustrative expected sizes; check on the target architecture."]],
             "language": "go"
         },
         {

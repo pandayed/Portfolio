@@ -72,11 +72,7 @@ const note = {
         {
             "id": "db17e381-bdb8-56f5-88f6-05829985827d",
             "type": "code",
-            "richText": [
-                [
-                    "type A struct { FieldA int }\ntype B struct {\n    A\n    FieldB int\n}\n\nfunc fields() {\n    b := B{A: A{FieldA: 10}, FieldB: 20}\n    fmt.Println(b.FieldA)   // 10: promoted selector\n    fmt.Println(b.A.FieldA) // 10: explicit selector\n}"
-                ]
-            ],
+            "richText": [["type A struct { FieldA int }\ntype B struct {\n    A\n    FieldB int\n}\n\nfunc fields() {\n    b := B{A: A{FieldA: 10}, FieldB: 20}\n    fmt.Println(b.FieldA)   // 10: promoted selector\n    fmt.Println(b.A.FieldA) // 10: explicit selector\n}"]],
             "language": "Go"
         },
         {
@@ -145,11 +141,7 @@ const note = {
         {
             "id": "b3b4999d-4caa-5d10-a20b-92288ea8b4bf",
             "type": "code",
-            "richText": [
-                [
-                    "type Animal struct{}\nfunc (Animal) Speak() { fmt.Println(\"Animal speaks\") }\n\ntype Dog struct { Animal }\nfunc (Dog) Speak() { fmt.Println(\"Dog barks\") }\n\nfunc speak() {\n    d := Dog{}\n    d.Speak()        // Dog barks\n    d.Animal.Speak() // Animal speaks\n}"
-                ]
-            ],
+            "richText": [["type Animal struct{}\nfunc (Animal) Speak() { fmt.Println(\"Animal speaks\") }\n\ntype Dog struct { Animal }\nfunc (Dog) Speak() { fmt.Println(\"Dog barks\") }\n\nfunc speak() {\n    d := Dog{}\n    d.Speak()        // Dog barks\n    d.Animal.Speak() // Animal speaks\n}"]],
             "language": "Go"
         },
         {
@@ -358,11 +350,7 @@ const note = {
         {
             "id": "949838d7-47a1-578e-b3b9-c470d7b8b4fc",
             "type": "code",
-            "richText": [
-                [
-                    "type Inner struct { Count int }\nfunc (i *Inner) Add() { i.Count++ }\n\ntype ValueOuter struct { Inner }\ntype PointerOuter struct { *Inner }\ntype Adder interface { Add() }\n\nvar _ Adder = (*ValueOuter)(nil)\nvar _ Adder = PointerOuter{}\n// var _ Adder = ValueOuter{} // error: value method set lacks Add\n\nfunc promotedCalls() {\n    v := ValueOuter{}\n    v.Add() // valid: v is addressable, even though ValueOuter lacks Add\n    fmt.Println(v.Count) // 1\n\n    p := PointerOuter{Inner: &Inner{}}\n    p.Add()\n    fmt.Println(p.Count) // 1\n}"
-                ]
-            ],
+            "richText": [["type Inner struct { Count int }\nfunc (i *Inner) Add() { i.Count++ }\n\ntype ValueOuter struct { Inner }\ntype PointerOuter struct { *Inner }\ntype Adder interface { Add() }\n\nvar _ Adder = (*ValueOuter)(nil)\nvar _ Adder = PointerOuter{}\n// var _ Adder = ValueOuter{} // error: value method set lacks Add\n\nfunc promotedCalls() {\n    v := ValueOuter{}\n    v.Add() // valid: v is addressable, even though ValueOuter lacks Add\n    fmt.Println(v.Count) // 1\n\n    p := PointerOuter{Inner: &Inner{}}\n    p.Add()\n    fmt.Println(p.Count) // 1\n}"]],
             "language": "Go"
         },
         {
@@ -380,9 +368,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " contains a nil "
-                ],
+                [" contains a "], ["nil",[["c"]]], [" "],
                 [
                     "*Inner",
                     [
@@ -513,11 +499,7 @@ const note = {
         {
             "id": "02056562-243e-5a4b-b5ed-6b9ef71a6b38",
             "type": "code",
-            "richText": [
-                [
-                    "type NamedA struct { Name string }\ntype NamedB struct { Name string }\ntype C struct {\n    NamedA\n    NamedB\n}\ntype D struct {\n    NamedA\n    Name string\n}\n\nfunc names() {\n    c := C{}\n    c.NamedA.Name = \"One\"\n    c.NamedB.Name = \"Two\"\n    // fmt.Println(c.Name) // compile-time error: ambiguous selector\n\n    d := D{NamedA: NamedA{Name: \"Inner\"}, Name: \"Outer\"}\n    fmt.Println(d.Name)        // Outer\n    fmt.Println(d.NamedA.Name) // Inner\n}"
-                ]
-            ],
+            "richText": [["type NamedA struct { Name string }\ntype NamedB struct { Name string }\ntype C struct {\n    NamedA\n    NamedB\n}\ntype D struct {\n    NamedA\n    Name string\n}\n\nfunc names() {\n    c := C{}\n    c.NamedA.Name = \"One\"\n    c.NamedB.Name = \"Two\"\n    // fmt.Println(c.Name) // compile-time error: ambiguous selector\n\n    d := D{NamedA: NamedA{Name: \"Inner\"}, Name: \"Outer\"}\n    fmt.Println(d.Name)        // Outer\n    fmt.Println(d.NamedA.Name) // Inner\n}"]],
             "language": "Go"
         },
         {
@@ -532,11 +514,7 @@ const note = {
         {
             "id": "ac0ff688-22a3-5eb7-92eb-0c0b83091134",
             "type": "code",
-            "richText": [
-                [
-                    "type Engine struct { Power int }\ntype Wheels struct { Count int }\ntype Car struct {\n    Engine\n    Wheels\n}\n\nfunc car() {\n    c := Car{Engine: Engine{Power: 120}, Wheels: Wheels{Count: 4}}\n    fmt.Println(c.Power, c.Count) // 120 4\n    // var e Engine = c          // error: Car is not Engine\n}"
-                ]
-            ],
+            "richText": [["type Engine struct { Power int }\ntype Wheels struct { Count int }\ntype Car struct {\n    Engine\n    Wheels\n}\n\nfunc car() {\n    c := Car{Engine: Engine{Power: 120}, Wheels: Wheels{Count: 4}}\n    fmt.Println(c.Power, c.Count) // 120 4\n    // var e Engine = c          // error: Car is not Engine\n}"]],
             "language": "Go"
         },
         {

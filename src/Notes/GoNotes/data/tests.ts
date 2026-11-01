@@ -47,7 +47,22 @@ const note = {
         {
             id: 'tests-parameter',
             type: 'sub_header',
-            richText: [['The t *testing.T parameter']],
+            richText: [
+                [
+                    "The t "
+                ],
+                [
+                    "*testing.T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " parameter"
+                ]
+            ],
         },
         {
             id: 'tests-signature',
@@ -62,13 +77,53 @@ const note = {
             id: 'tests-import',
             type: 'bulleted_list',
             richText: [
-                ['Import '],
-                ['"testing"', [['c']]],
-                [' from Go’s standard library. '],
-                ['*testing.T', [['c']]],
-                [' means a pointer to the testing package’s '],
-                ['T', [['c']]],
-                [' type.'],
+                [
+                    "Import "
+                ],
+                [
+                    "\"testing\"",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " from Go’s standard library. "
+                ],
+                [
+                    "*testing.T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " means a pointer to the "
+                ],
+                [
+                    "testing",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package’s "
+                ],
+                [
+                    "T",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " type."
+                ]
             ],
         },
         {
@@ -80,31 +135,29 @@ const note = {
                 [' is the usual parameter name.'],
             ],
         },
+
         {
-            id: 'tests-example-file',
-            type: 'text',
-            richText: [['add_test.go', [['c']]]],
-        },
-        {
-            id: 'tests-example',
-            type: 'code',
-            language: 'Go',
-            richText: [[`package calculator
-
-import "testing"
-
-func add(a, b int) int {
-    return a + b
-}
-
-func TestAdd(t *testing.T) {
-    got := add(2, 3)
-    want := 5
-
-    if got != want {
-        t.Errorf("add(2, 3) = %d; want %d", got, want)
-    }
-}`]],
+            "id": "tests-example",
+            "type": "example",
+            "example": {
+                "title": "Check an addition result",
+                "language": "go",
+                "description": [
+                    "The file belongs to the calculator package in a Go module."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "add_test.go",
+                        "language": "go",
+                        "code": "package calculator\n\nimport \"testing\"\n\nfunc add(a, b int) int {\n    return a + b\n}\n\nfunc TestAdd(t *testing.T) {\n    got := add(2, 3)\n    want := 5\n\n    if got != want {\n        t.Errorf(\"add(2, 3) = %d; want %d\", got, want)\n    }\n}"
+                    }
+                ],
+                "commands": "go test",
+                "explanation": [
+                    "The test passes because `add(2, 3)` returns 5."
+                ]
+            }
         },
         {
             id: 'tests-errorf',
@@ -135,26 +188,47 @@ func TestAdd(t *testing.T) {
                 ['.'],
             ],
         },
-        {
-            id: 'tests-run',
-            type: 'bulleted_list',
-            richText: [
-                ['Run '],
-                ['go test', [['c']]],
-                [' from the package directory in your Go module. This example passes because '],
-                ['add(2, 3)', [['c']]],
-                [' returns '],
-                ['5', [['c']]],
-                ['.'],
-            ],
-        },
+
         {
             id: 'tests-source',
             type: 'text',
             richText: [
-                ['Source: '],
-                ['Go testing package', [['a', 'https://pkg.go.dev/testing#pkg-overview']]],
-                ['.'],
+                [
+                    "Source: "
+                ],
+                [
+                    "Go ",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/testing#pkg-overview"
+                        ]
+                    ]
+                ],
+                [
+                    "testing",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/testing#pkg-overview"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/testing#pkg-overview"
+                        ]
+                    ]
+                ],
+                [
+                    "."
+                ]
             ],
         },
     ],

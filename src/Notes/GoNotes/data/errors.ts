@@ -49,11 +49,7 @@ const note = {
         {
             "id": "24a24eb1-ed54-8006-972c-f25075814c96",
             "type": "code",
-            "richText": [
-                [
-                    "type error interface {\n    Error() string\n}"
-                ]
-            ],
+            "richText": [["type error interface {\n    Error() string\n}"]],
             "language": "Go"
         },
         {
@@ -126,11 +122,7 @@ const note = {
         {
             "id": "b35bcbfe-b5fd-5c18-bed7-40977f3071f9",
             "type": "code",
-            "richText": [
-                [
-                    "plain := errors.New(\"something went wrong\")\nformatted := fmt.Errorf(\"error code %d: %s\", 404, \"not found\")\nfmt.Println(plain)     // something went wrong\nfmt.Println(formatted) // error code 404: not found"
-                ]
-            ],
+            "richText": [["plain := errors.New(\"something went wrong\")\nformatted := fmt.Errorf(\"error code %d: %s\", 404, \"not found\")\nfmt.Println(plain)     // something went wrong\nfmt.Println(formatted) // error code 404: not found"]],
             "language": "Go"
         },
         {
@@ -145,11 +137,7 @@ const note = {
         {
             "id": "69afc17a-da40-51cc-8e38-b4d9ca66e832",
             "type": "code",
-            "richText": [
-                [
-                    "func divide(a, b int) (int, error) {\n    if b == 0 {\n        return 0, errors.New(\"division by zero\")\n    }\n    return a / b, nil\n}\n\nfunc divideExample() {\n    result, err := divide(10, 0)\n    if err != nil {\n        fmt.Println(\"Error:\", err) // Error: division by zero\n        return\n    }\n    fmt.Println(\"Result:\", result)\n}"
-                ]
-            ],
+            "richText": [["func divide(a, b int) (int, error) {\n    if b == 0 {\n        return 0, errors.New(\"division by zero\")\n    }\n    return a / b, nil\n}\n\nfunc divideExample() {\n    result, err := divide(10, 0)\n    if err != nil {\n        fmt.Println(\"Error:\", err) // Error: division by zero\n        return\n    }\n    fmt.Println(\"Result:\", result)\n}"]],
             "language": "Go"
         },
         {
@@ -232,11 +220,7 @@ const note = {
         {
             "id": "ea3e4016-5e3c-5a3e-a3dc-e73e8326c066",
             "type": "code",
-            "richText": [
-                [
-                    "type MyError struct {\n    Code int\n    Msg string\n}\n\nfunc (e *MyError) Error() string {\n    return fmt.Sprintf(\"Code %d: %s\", e.Code, e.Msg)\n}\n\nfunc customFailure() error {\n    return &MyError{Code: 404, Msg: \"not found\"}\n}"
-                ]
-            ],
+            "richText": [["type MyError struct {\n    Code int\n    Msg string\n}\n\nfunc (e *MyError) Error() string {\n    return fmt.Sprintf(\"Code %d: %s\", e.Code, e.Msg)\n}\n\nfunc customFailure() error {\n    return &MyError{Code: 404, Msg: \"not found\"}\n}"]],
             "language": "Go"
         },
         {
@@ -277,11 +261,7 @@ const note = {
         {
             "id": "67aa779a-0f67-5143-a546-c0af093746ad",
             "type": "code",
-            "richText": [
-                [
-                    "type Item struct { ID int }\n\nvar ErrNotFound = errors.New(\"item not found\")\n\nfunc getItem(id int) (Item, error) {\n    if id == 0 {\n        return Item{}, ErrNotFound\n    }\n    return Item{ID: id}, nil\n}"
-                ]
-            ],
+            "richText": [["type Item struct { ID int }\n\nvar ErrNotFound = errors.New(\"item not found\")\n\nfunc getItem(id int) (Item, error) {\n    if id == 0 {\n        return Item{}, ErrNotFound\n    }\n    return Item{ID: id}, nil\n}"]],
             "language": "Go"
         },
         {
@@ -342,11 +322,7 @@ const note = {
         {
             "id": "4e72ce85-b900-5e42-aef5-59c7f6b0e331",
             "type": "code",
-            "richText": [
-                [
-                    "func loadItem(id int) (Item, error) {\n    item, err := getItem(id)\n    if err != nil {\n        return Item{}, fmt.Errorf(\"load item %d: %w\", id, err)\n    }\n    return item, nil\n}\n\nfunc matchSentinel() {\n    _, err := loadItem(0)\n    fmt.Println(errors.Is(err, ErrNotFound)) // true\n    fmt.Println(errors.Unwrap(err) == ErrNotFound) // true\n}"
-                ]
-            ],
+            "richText": [["func loadItem(id int) (Item, error) {\n    item, err := getItem(id)\n    if err != nil {\n        return Item{}, fmt.Errorf(\"load item %d: %w\", id, err)\n    }\n    return item, nil\n}\n\nfunc matchSentinel() {\n    _, err := loadItem(0)\n    fmt.Println(errors.Is(err, ErrNotFound)) // true\n    fmt.Println(errors.Unwrap(err) == ErrNotFound) // true\n}"]],
             "language": "Go"
         },
         {
@@ -449,9 +425,7 @@ const note = {
             "id": "e9edf4a9-566b-5c5b-89db-0ff2ce6f202d",
             "type": "sub_header",
             "richText": [
-                [
-                    "Finding a custom error with errors.As"
-                ]
+                ["Finding a custom error with "], ["errors.As",[["c"]]]
             ]
         },
         {
@@ -492,11 +466,7 @@ const note = {
         {
             "id": "452c5d9b-7ab3-5b4c-8575-95e896a5061f",
             "type": "code",
-            "richText": [
-                [
-                    "func inspectCustomError() {\n    err := fmt.Errorf(\"operation failed: %w\", customFailure())\n    var myErr *MyError\n    if errors.As(err, &myErr) {\n        fmt.Println(myErr.Code) // 404\n    }\n}"
-                ]
-            ],
+            "richText": [["func inspectCustomError() {\n    err := fmt.Errorf(\"operation failed: %w\", customFailure())\n    var myErr *MyError\n    if errors.As(err, &myErr) {\n        fmt.Println(myErr.Code) // 404\n    }\n}"]],
             "language": "Go"
         },
         {

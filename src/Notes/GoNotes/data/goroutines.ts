@@ -84,23 +84,28 @@ const note = {
         },
         {
             "id": "bb25639d-f1b4-5f9a-9d35-7534e8dd0bde",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc main() {\n    done := make(chan struct{})\n    go func(message string) {\n        fmt.Println(message)\n        close(done)\n    }(\"worker finished\")\n\n    <-done\n    fmt.Println(\"main finished\")\n}"
+            "type": "example",
+            "example": {
+                "title": "Launching a Goroutine",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    done := make(chan struct{})\n    go func(message string) {\n        fmt.Println(message)\n        close(done)\n    }(\"worker finished\")\n\n    <-done\n    fmt.Println(\"main finished\")\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
+                    "Output: worker finished, then `main` finished."
                 ]
-            ],
-            "language": "Go"
+            }
         },
-        {
-            "id": "b5c9157a-18db-59b2-9f66-aef1c94b6598",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Output: worker finished, then main finished."
-                ]
-            ]
-        },
+
         {
             "id": "de4e63d1-ea21-5f10-a4ce-e865d4e39243",
             "type": "bulleted_list",
@@ -254,6 +259,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/workgroups"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -278,6 +286,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/mutex"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -376,23 +387,28 @@ const note = {
         },
         {
             "id": "111c33bd-9aa6-540e-b034-b478d83b7ecf",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 1; i <= 3; i++ {\n        wg.Add(1)\n        go func(value int) {\n            defer wg.Done()\n            fmt.Println(value)\n        }(i)\n    }\n    wg.Wait()\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "210f3c8a-c13a-5cf6-9b27-7e3f61fabfd5",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Loop Variables and Concurrent Calls",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 1; i <= 3; i++ {\n        wg.Add(1)\n        go func(value int) {\n            defer wg.Done()\n            fmt.Println(value)\n        }(i)\n    }\n    wg.Wait()\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Prints 1, 2 and 3 once each."
                 ]
-            ]
+            }
         },
+
         {
             "id": "c149cafc-07f6-58b9-a9c5-604016a643c0",
             "type": "bulleted_list",

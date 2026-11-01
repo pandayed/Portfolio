@@ -20,9 +20,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " checks a condition that is true or false."
-                ]
+                [" checks a condition that is "], ["true",[["c"]]], [" or "], ["false",[["c"]]], ["."]
             ]
         },
         {
@@ -46,104 +44,72 @@ const note = {
             "id": "0be2b604-ec3b-5396-843f-b8e3b0ca4ed5",
             "type": "sub_header",
             "richText": [
-                [
-                    "if: one condition"
-                ]
+                ["if",[["c"]]], [": one condition"]
             ]
         },
         {
             "id": "0e4b3d21-3d09-57b2-be37-1eae91bf1bc0",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "x := 2\nif x > 0 {\n    fmt.Println(\"Positive\")\n}\n// Output: Positive"
-                ]
-            ]
+            "richText": [["x := 2\nif x > 0 {\n    fmt.Println(\"Positive\")\n}\n// Output: Positive"]]
         },
         {
             "id": "b8f33322-12ee-55e8-8726-c130fd1c06e2",
             "type": "sub_header",
             "richText": [
-                [
-                    "if and else"
-                ]
+                ["if",[["c"]]], [" and "], ["else",[["c"]]]
             ]
         },
         {
             "id": "9e2b17a5-a7f5-5ebb-a7bd-c5d4ac0bd98c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "x := 0\nif x > 0 {\n    fmt.Println(\"Positive\")\n} else {\n    fmt.Println(\"Non-positive\")\n}\n// Output: Non-positive"
-                ]
-            ]
+            "richText": [["x := 0\nif x > 0 {\n    fmt.Println(\"Positive\")\n} else {\n    fmt.Println(\"Non-positive\")\n}\n// Output: Non-positive"]]
         },
         {
             "id": "c25e0429-2a00-5712-af49-302f785434d4",
             "type": "sub_header",
             "richText": [
-                [
-                    "else if: several conditions"
-                ]
+                ["else",[["c"]]], [" "], ["if",[["c"]]], [": several conditions"]
             ]
         },
         {
             "id": "e201a6c2-84ed-588e-a8ff-9d1c630dc214",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "x := -2\nif x > 0 {\n    fmt.Println(\"Positive\")\n} else if x < 0 {\n    fmt.Println(\"Negative\")\n} else {\n    fmt.Println(\"Zero\")\n}\n// Output: Negative"
-                ]
-            ]
+            "richText": [["x := -2\nif x > 0 {\n    fmt.Println(\"Positive\")\n} else if x < 0 {\n    fmt.Println(\"Negative\")\n} else {\n    fmt.Println(\"Zero\")\n}\n// Output: Negative"]]
         },
         {
             "id": "1168c848-b70e-5030-98f5-c92734a04941",
             "type": "sub_header",
             "richText": [
-                [
-                    "if with an initializer"
-                ]
+                ["if",[["c"]]], [" with an initializer"]
             ]
         },
         {
             "id": "5ef33c6c-ce85-5caf-9f9f-1a71f54a2f54",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "if length := len(\"Go\"); length > 1 {\n    fmt.Println(length) // 2\n}\n// length can be used only inside this if and its else branch."
-                ]
-            ]
+            "richText": [["if length := len(\"Go\"); length > 1 {\n    fmt.Println(length) // 2\n}\n// length can be used only inside this if and its else branch."]]
         },
         {
             "id": "5c970904-c7b3-567b-96bb-c528e4749ba5",
             "type": "sub_header",
             "richText": [
-                [
-                    "switch"
-                ]
+                ["switch",[["c"]]]
             ]
         },
         {
             "id": "63d90210-ef6d-5646-a5c0-3c826a20c81c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "day := \"Tue\"\nswitch day {\ncase \"Mon\":\n    fmt.Println(\"Monday\")\ncase \"Tue\":\n    fmt.Println(\"Tuesday\")\ndefault:\n    fmt.Println(\"Other day\")\n}\n// Output: Tuesday"
-                ]
-            ]
+            "richText": [["day := \"Tue\"\nswitch day {\ncase \"Mon\":\n    fmt.Println(\"Monday\")\ncase \"Tue\":\n    fmt.Println(\"Tuesday\")\ndefault:\n    fmt.Println(\"Other day\")\n}\n// Output: Tuesday"]]
         },
         {
             "id": "8e7cfc23-ea22-5429-8d15-40596fa7a2e4",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Go stops the switch after running the matched case."
-                ]
+                ["Go stops the "], ["switch",[["c"]]], [" after running the matched case."]
             ]
         },
         {
@@ -241,9 +207,7 @@ const note = {
             "id": "4b33a7ca-394b-5d4b-9f08-b2a3825ba8a3",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Each case can check a true-or-false condition."
-                ]
+                ["Each case can check a "], ["true",[["c"]]], ["-or-"], ["false",[["c"]]], [" condition."]
             ]
         },
         {
@@ -253,15 +217,7 @@ const note = {
                 [
                     "Reference: "
                 ],
-                [
-                    "Go specification: if and switch statements",
-                    [
-                        [
-                            "a",
-                            "https://go.dev/ref/spec#If_statements"
-                        ]
-                    ]
-                ],
+                ["Go specification: if and ",[["a","https://go.dev/ref/spec#If_statements"]]], ["switch",[["a","https://go.dev/ref/spec#If_statements"],["c"]]], [" statements",[["a","https://go.dev/ref/spec#If_statements"]]],
                 [
                     "."
                 ]

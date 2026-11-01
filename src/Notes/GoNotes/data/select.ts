@@ -187,7 +187,18 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "A case uses a nil channel"
+                                "A case uses a "
+                            ],
+                            [
+                                "nil",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " channel"
                             ]
                         ],
                         "column-1": [
@@ -203,7 +214,18 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "All channels are nil, without "
+                                "All channels are "
+                            ],
+                            [
+                                "nil",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                ", without "
                             ],
                             [
                                 "default",
@@ -260,23 +282,28 @@ const note = {
         },
         {
             "id": "e0245016-62de-53fa-ad98-618929192905",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc main() {\n    ch := make(chan int, 1)\n    select {\n    case value := <-ch:\n        fmt.Println(value)\n    default:\n        fmt.Println(\"no value ready\")\n    }\n\n    ch <- 7\n    select {\n    case value := <-ch:\n        fmt.Println(value)\n    default:\n        fmt.Println(\"no value ready\")\n    }\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "207e294a-46ca-54d9-ba5a-b1b3c8ab8776",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Ready Cases and Default",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    ch := make(chan int, 1)\n    select {\n    case value := <-ch:\n        fmt.Println(value)\n    default:\n        fmt.Println(\"no value ready\")\n    }\n\n    ch <- 7\n    select {\n    case value := <-ch:\n        fmt.Println(value)\n    default:\n        fmt.Println(\"no value ready\")\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Output: no value ready, then 7."
                 ]
-            ]
+            }
         },
+
         {
             "id": "21469aa7-96a0-58aa-a2a4-f48f897f0c91",
             "type": "bulleted_list",
@@ -320,7 +347,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "After a channel closes, set its local variable to nil."
+                    "After a channel closes, set its local variable to "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -343,29 +381,45 @@ const note = {
         },
         {
             "id": "2669dd92-9aee-54a0-b6a8-0604e46714d4",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc main() {\n    first := make(chan int, 1)\n    second := make(chan int, 1)\n    first <- 10\n    second <- 20\n    close(first)\n    close(second)\n\n    for first != nil || second != nil {\n        select {\n        case value, ok := <-first:\n            if !ok {\n                first = nil\n                continue\n            }\n            fmt.Println(value)\n        case value, ok := <-second:\n            if !ok {\n                second = nil\n                continue\n            }\n            fmt.Println(value)\n        }\n    }\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "374fa693-e10a-54ee-a6a2-497d1933640d",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Disable a Finished Channel",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    first := make(chan int, 1)\n    second := make(chan int, 1)\n    first <- 10\n    second <- 20\n    close(first)\n    close(second)\n\n    for first != nil || second != nil {\n        select {\n        case value, ok := <-first:\n            if !ok {\n                first = nil\n                continue\n            }\n            fmt.Println(value)\n        case value, ok := <-second:\n            if !ok {\n                second = nil\n                continue\n            }\n            fmt.Println(value)\n        }\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Prints 10 and 20 once each, in either order, then exits."
                 ]
-            ]
+            }
         },
+
         {
             "id": "f6ed5de6-0819-59d1-95c5-3093dbf3162c",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Setting one channel variable to nil does not change other variables that refer to that channel."
+                    "Setting one channel variable to "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not change other variables that refer to that channel."
                 ]
             ]
         },

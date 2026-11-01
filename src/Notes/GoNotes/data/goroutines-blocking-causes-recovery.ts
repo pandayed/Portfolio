@@ -132,9 +132,7 @@ const note = {
                     "type": "table_row",
                     "cells": {
                         "column-0": [
-                            [
-                                "WaitGroup.Wait"
-                            ]
+                            ["WaitGroup.Wait",[["c"]]]
                         ],
                         "column-1": [
                             [
@@ -330,11 +328,7 @@ const note = {
         {
             "id": "509b75ca-5feb-5ebe-981e-c68c7de14ad3",
             "type": "code",
-            "richText": [
-                [
-                    "// Deliberately deadlocking example.\nch := make(chan int)\nch <- 1 // this goroutine cannot reach the receive below\nvalue := <-ch\n_ = value"
-                ]
-            ],
+            "richText": [["// Deliberately deadlocking example.\nch := make(chan int)\nch <- 1 // this goroutine cannot reach the receive below\nvalue := <-ch\n_ = value"]],
             "language": "Go"
         },
         {
@@ -487,11 +481,7 @@ const note = {
         {
             "id": "7c534e55-1e3e-5fba-b8ce-7227ef95281e",
             "type": "code",
-            "richText": [
-                [
-                    "func count(ctx context.Context, limit uint64) (uint64, error) {\n    var completed uint64\n    for completed < limit {\n        if completed%1024 == 0 {\n            if err := ctx.Err(); err != nil {\n                return completed, err\n            }\n        }\n        completed++\n    }\n    return completed, nil\n}"
-                ]
-            ],
+            "richText": [["func count(ctx context.Context, limit uint64) (uint64, error) {\n    var completed uint64\n    for completed < limit {\n        if completed%1024 == 0 {\n            if err := ctx.Err(); err != nil {\n                return completed, err\n            }\n        }\n        completed++\n    }\n    return completed, nil\n}"]],
             "language": "Go"
         },
         {

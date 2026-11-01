@@ -5,28 +5,18 @@ import { useEffect, useState } from 'react';
 
 import ArticleLayout from '../NoteArticleLayout';
 import NoteTree from '../NoteTree';
-import NoteReadingTime from '../NoteReadingTime';
-import { getNodeReadingMinutes } from '../readingTime';
-import { cicdNotes, systemDesignNotes, type NoteGroup, type NoteNode } from '../noteTreeData';
-import Page from '../../Page/Page';
-import { CICD_NOTES_ROUTE, SYSTEM_DESIGN_ROUTE, toHref, type SystemDesignEntryRoute } from '../../routing/routes';
+import NoteCollectionPage from '../NoteCollectionPage';
+import { getNoteGroup } from '../noteNavigation';
+import { SYSTEM_DESIGN_ROUTE, toHref, type SystemDesignEntryRoute } from '../../routing/routes';
 import SystemDesignContent, { systemDesignSections } from './SystemDesignContent';
 import { systemDesignPagesById, systemDesignPagesByRoute, systemDesignViewsByRoute } from './registry';
+import { relatedSystemDesignNotes } from './relatedNotes';
+import { outlinePageGroupIds } from './outline';
 import type { SystemDesignDocument } from './types';
 
 interface Props {
     route: SystemDesignEntryRoute;
 }
-
-const findGroup = (nodes: NoteNode[], route: string): NoteGroup | undefined => {
-    for (const node of nodes) {
-        if (node.type !== 'group') continue;
-        if (node.route === route) return node;
-        const child = findGroup(node.children, route);
-        if (child) return child;
-    }
-    return undefined;
-};
 
 const SystemDesignEntry = ({ route }: Props) => {
     const page = systemDesignPagesByRoute.get(route);
@@ -45,38 +35,50 @@ const SystemDesignEntry = ({ route }: Props) => {
     }, [page]);
 
     if (page) {
-        const isCicdNote = cicdNotes.children.some((node) => node.route === route);
+        const group = outlinePageGroupIds.has(page.id) ? getNoteGroup(route) : undefined;
+        const relatedPages = (relatedSystemDesignNotes.get(page.id) ?? []).map((id) => {
+            const related = systemDesignPagesById.get(id);
+            if (!related) throw new Error(`Missing related System Design note: ${id}`);
+            return related;
+        });
+        const sections = [
+            ...(source ? systemDesignSections(source) : []),
+            ...(group ? [{ id: 'note-subpages', title: 'Subpages' }] : []),
+            ...(relatedPages.length ? [{ id: 'note-related-topics', title: 'Related topics' }] : []),
+        ];
         return (
             <ArticleLayout
                 title={page.title}
                 route={route}
-                sections={source ? systemDesignSections(source) : []}
-                backRoute={isCicdNote ? CICD_NOTES_ROUTE : SYSTEM_DESIGN_ROUTE}
-                backLabel={isCicdNote ? 'Back to CI/CD notes' : 'Back to System Design notes'}
+                sections={sections}
+                backRoute={SYSTEM_DESIGN_ROUTE}
+                backLabel="Back to Software Architecture & System Design"
             >
                 {source ? <SystemDesignContent document={source} />
                     : <p>{loadFailed ? 'Could not load this note.' : 'Loading note…'}</p>}
+                {group && (
+                    <section className="Article__section" aria-labelledby="note-subpages">
+                        <h2 id="note-subpages" className="SectionTitle">Subpages</h2>
+                        <NoteTree nodes={group.children} />
+                    </section>
+                )}
+                {relatedPages.length > 0 && (
+                    <section className="Article__section" aria-labelledby="note-related-topics">
+                        <h2 id="note-related-topics" className="SectionTitle">Related topics</h2>
+                        <ul className="Article__notes">
+                            {relatedPages.map((related) => (
+                                <li key={related.id}>
+                                    <a href={toHref(related.route)} className="Link Link--standalone">{related.title}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
             </ArticleLayout>
         );
     }
 
-    const view = systemDesignViewsByRoute.get(route);
-    const group = findGroup(systemDesignNotes.children, route);
-    if (!view || !group) return null;
-    const parent = systemDesignPagesById.get(view.parentId);
-
-    return (
-        <Page title={view.title}>
-            <NoteReadingTime minutes={getNodeReadingMinutes(group)} total />
-            <a
-                href={toHref(parent?.route ?? SYSTEM_DESIGN_ROUTE)}
-                className="Link Link--standalone Notes__back"
-            >
-                Back to {parent?.title ?? 'System Design'}
-            </a>
-            <NoteTree nodes={group.children} />
-        </Page>
-    );
+    return systemDesignViewsByRoute.has(route) ? <NoteCollectionPage route={route} /> : null;
 };
 
 export default SystemDesignEntry;

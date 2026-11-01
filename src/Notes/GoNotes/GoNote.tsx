@@ -5,6 +5,7 @@ import { Fragment, type ComponentProps, type ReactNode } from 'react';
 import ArticleLayout from '../NoteArticleLayout';
 import CodeBlock from '../../Blogs/ArticleLayout/CodeBlock';
 import LearningNoteExampleBlock from '../LearningNotes/LearningNoteExampleBlock';
+import { renderInlineCode } from '../LearningNotes/renderInlineCode';
 import type { TocEntry } from '../../Blogs/ArticleLayout/types';
 import {
     GO_NOTES_ROUTE,
@@ -30,13 +31,13 @@ const goNoteRoutesByNotionId = new Map<string, GoNoteRoute>(
 const plainText = (richText: RichText | undefined) =>
     richText?.map(([value]) => value).join('') ?? '';
 
-const withLineBreaks = (value: string, key: string): ReactNode => {
+const withLineBreaks = (value: string, key: string, inlineCode = true): ReactNode => {
     const lines = value.split('\n');
 
     return lines.map((line, index) => (
         <Fragment key={`${key}-${index}`}>
             {index > 0 && <br />}
-            {line}
+            {inlineCode ? renderInlineCode(line, `${key}-line-${index}`) : line}
         </Fragment>
     ));
 };
@@ -84,7 +85,7 @@ const renderRichText = (richText: RichText | undefined) =>
         const key = `rich-text-${index}`;
         return marks.reduce<ReactNode>(
             (content, mark, markIndex) => applyMark(content, mark, `${key}-${markIndex}`),
-            withLineBreaks(value, key),
+            withLineBreaks(value, key, !marks.some(([kind]) => kind === 'c')),
         );
     });
 
@@ -136,7 +137,7 @@ const renderTable = (block: GoNoteBlock) => {
 const renderBlock = (block: GoNoteBlock): ReactNode => {
     switch (block.type) {
         case 'example':
-            return block.example ? <LearningNoteExampleBlock key={block.id} example={block.example} /> : null;
+            return block.example ? <LearningNoteExampleBlock key={block.id} example={block.example} renderText={renderInlineCode} /> : null;
         case 'text':
             return plainText(block.richText) ? (
                 <p key={block.id}>{renderRichText(block.richText)}</p>
@@ -259,21 +260,74 @@ const renderSections = (blocks: readonly GoNoteBlock[]): ReactNode[] => {
     });
 };
 
+// Keep imported source lists after the lesson, including sources stored inline.
+const orderNoteBlocks = (blocks: readonly GoNoteBlock[]): GoNoteBlock[] => {
+    const content: GoNoteBlock[] = [];
+    const references: GoNoteBlock[] = [];
+    let referenceHeading: GoNoteBlock | undefined;
+    let inReferences = false;
+
+    for (const block of blocks) {
+        const text = plainText(block.richText).trim();
+        const isHeading = block.type === 'header' || block.type === 'sub_header' ||
+            block.type === 'sub_sub_header';
+        const isReferenceHeading = isHeading &&
+            /^(?:(?:Go )?(?:sources|references)|related notes and (?:sources|references))$/i.test(text);
+
+        if (isHeading) inReferences = isReferenceHeading;
+        if (isReferenceHeading) {
+            referenceHeading ??= { ...block, richText: [['References']] };
+            continue;
+        }
+
+        if (/^(?:sources|references):\s*/i.test(text) &&
+            (block.type === 'text' || block.type === 'bulleted_list')) {
+            const links = block.richText?.filter(([, marks]) =>
+                marks?.some(([kind]) => kind === 'a' || kind === 'p')) ?? [];
+            if (links.length > 0) {
+                references.push(...links.map((link, index): GoNoteBlock => ({
+                    id: `${block.id}-reference-${index}`,
+                    type: 'bulleted_list',
+                    richText: [link],
+                })));
+                continue;
+            }
+        }
+
+        if (inReferences) {
+            references.push(block.type === 'text' || block.type === 'numbered_list'
+                ? { ...block, type: 'bulleted_list' } : block);
+        } else {
+            content.push(block);
+        }
+    }
+
+    if (references.length === 0) return content;
+
+    return [
+        ...content,
+        referenceHeading ?? { id: 'references', type: 'sub_header', richText: [['References']] },
+        ...references,
+    ];
+};
+
 const GoNote = ({ route }: GoNoteProps) => {
     const slug = route.slice(`${GO_NOTES_ROUTE}/`.length);
     const note = goNotes.find((entry) => entry.slug === slug);
 
     if (!note) return null;
 
+    const blocks = orderNoteBlocks(note.blocks);
+
     return (
         <ArticleLayout
             title={note.title}
             route={route}
-            sections={collectSections(note.blocks)}
+            sections={collectSections(blocks)}
             backRoute={GO_NOTES_ROUTE}
             backLabel="Back to Go notes"
         >
-            {renderSections(note.blocks)}
+            {renderSections(blocks)}
         </ArticleLayout>
     );
 };

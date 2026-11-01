@@ -13,7 +13,26 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "init runs package setup before main starts."
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " runs package setup before "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " starts."
                 ]
             ]
         },
@@ -76,7 +95,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "All package variables initialize before init functions run."
+                    "All package variables initialize before "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " functions run."
                 ]
             ]
         },
@@ -85,7 +115,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "init functions run in the order they appear in the source."
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " functions run in the order they appear in the source."
                 ]
             ]
         },
@@ -94,7 +132,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A file or package can have several init functions."
+                    "A file or package can have several "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " functions."
                 ]
             ]
         },
@@ -130,7 +179,40 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "After all packages initialize, Go calls func main() in package main."
+                    "After all packages initialize, Go calls "
+                ],
+                [
+                    "func",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " "
+                ],
+                [
+                    "main()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " in package "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -148,7 +230,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You cannot call init yourself or use it as a function value."
+                    "You cannot call "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " yourself or use it as a function value."
                 ]
             ]
         },
@@ -157,7 +250,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Keep init small. Registering a package implementation is one use."
+                    "Keep "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " small. Registering a package implementation is one use."
                 ]
             ]
         },
@@ -202,7 +306,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "init can start other goroutines."
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can start other goroutines."
                 ]
             ]
         },
@@ -211,7 +323,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Returning from init does not wait for those goroutines to finish."
+                    "Returning from "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not wait for those goroutines to finish."
                 ]
             ]
         },
@@ -220,39 +343,52 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Variables, multiple init functions, and main"
+                    "Variables, multiple "
+                ],
+                [
+                    "init",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " functions, and "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
         {
             "id": "init-function-14",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nvar ready = prepare()\n\nfunc prepare() bool {\n    fmt.Println(\"variables\")\n    return true\n}\n\nfunc init() {\n    fmt.Println(\"first init\", ready)\n}\n\nfunc init() {\n    fmt.Println(\"second init\")\n}\n\nfunc main() {\n    fmt.Println(\"main\")\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Variables, multiple `init` functions, and `main`",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nvar ready = prepare()\n\nfunc prepare() bool {\n    fmt.Println(\"variables\")\n    return true\n}\n\nfunc init() {\n    fmt.Println(\"first init\", ready)\n}\n\nfunc init() {\n    fmt.Println(\"second init\")\n}\n\nfunc main() {\n    fmt.Println(\"main\")\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "variables\nfirst init true\nsecond init\nmain"
+            }
         },
-        {
-            "id": "init-function-15",
-            "type": "text",
-            "richText": [
-                [
-                    "Expected output:"
-                ]
-            ]
-        },
-        {
-            "id": "init-function-16",
-            "type": "code",
-            "richText": [
-                [
-                    "variables\nfirst init true\nsecond init\nmain"
-                ]
-            ],
-            "language": "Plain Text"
-        },
+
+
         {
             "id": "init-function-17",
             "type": "bulleted_list",

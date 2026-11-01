@@ -450,9 +450,7 @@ const note = {
             "id": "24224eb1-ed54-80be-a117-df84fe8f0090",
             "type": "sub_header",
             "richText": [
-                [
-                    "GOMAXPROCS"
-                ]
+                ["GOMAXPROCS",[["c"]]]
             ]
         },
         {
@@ -493,11 +491,7 @@ const note = {
         {
             "id": "afa58221-52f1-5b97-946f-23defa85d19d",
             "type": "code",
-            "richText": [
-                [
-                    "current := runtime.GOMAXPROCS(0) // read without changing the setting\nfmt.Println(current)"
-                ]
-            ],
+            "richText": [["current := runtime.GOMAXPROCS(0) // read without changing the setting\nfmt.Println(current)"]],
             "language": "Go"
         },
         {
@@ -818,15 +812,7 @@ const note = {
                 [
                     ", "
                 ],
-                [
-                    "GOMAXPROCS documentation",
-                    [
-                        [
-                            "a",
-                            "https://pkg.go.dev/runtime#GOMAXPROCS"
-                        ]
-                    ]
-                ],
+                ["GOMAXPROCS",[["a","https://pkg.go.dev/runtime#GOMAXPROCS"],["c"]]], [" documentation",[["a","https://pkg.go.dev/runtime#GOMAXPROCS"]]],
                 [
                     ", "
                 ],

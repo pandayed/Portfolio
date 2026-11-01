@@ -67,11 +67,7 @@ const note = {
         {
             "id": "0426c50f-0b95-5f3d-a23d-c7444f31bf09",
             "type": "code",
-            "richText": [
-                [
-                    "func sum(nums ...int) int {\n    total := 0\n    for _, n := range nums {\n        total += n\n    }\n    return total\n}\n\nfunc sumExample() {\n    fmt.Println(sum(1, 2, 3)) // 6\n    fmt.Println(sum())        // 0\n}"
-                ]
-            ],
+            "richText": [["func sum(nums ...int) int {\n    total := 0\n    for _, n := range nums {\n        total += n\n    }\n    return total\n}\n\nfunc sumExample() {\n    fmt.Println(sum(1, 2, 3)) // 6\n    fmt.Println(sum())        // 0\n}"]],
             "language": "Go"
         },
         {
@@ -135,11 +131,7 @@ const note = {
         {
             "id": "a7c6e939-1d8a-5294-a902-f2e12b8781e9",
             "type": "code",
-            "richText": [
-                [
-                    "nums := []int{1, 2, 3}\nfmt.Println(sum(nums...)) // 6"
-                ]
-            ],
+            "richText": [["nums := []int{1, 2, 3}\nfmt.Println(sum(nums...)) // 6"]],
             "language": "Go"
         },
         {
@@ -157,9 +149,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " does not copy the slice’s underlying array."
-                ]
+                [" does not "], ["copy",[["c"]]], [" the slice’s underlying array."]
             ]
         },
         {
@@ -183,11 +173,7 @@ const note = {
         {
             "id": "25b305c2-620a-5757-a6d8-31767ace24e8",
             "type": "code",
-            "richText": [
-                [
-                    "func greet(prefix string, names ...string) {\n    for _, n := range names {\n        fmt.Println(prefix, n)\n    }\n}\n\nfunc greetingExample() {\n    greet(\"Hello\", \"Alice\", \"Bob\")\n}"
-                ]
-            ],
+            "richText": [["func greet(prefix string, names ...string) {\n    for _, n := range names {\n        fmt.Println(prefix, n)\n    }\n}\n\nfunc greetingExample() {\n    greet(\"Hello\", \"Alice\", \"Bob\")\n}"]],
             "language": "Go"
         },
         {
@@ -202,11 +188,7 @@ const note = {
         {
             "id": "5fcabe06-ecf3-575a-96f7-2e67adde74b1",
             "type": "code",
-            "richText": [
-                [
-                    "Hello Alice\nHello Bob"
-                ]
-            ],
+            "richText": [["Hello Alice\nHello Bob"]],
             "language": "Plain Text"
         },
         {

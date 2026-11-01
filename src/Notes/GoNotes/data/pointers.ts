@@ -111,11 +111,7 @@ const note = {
         {
             "id": "dacc80eb-d402-57fb-a813-903929d20b99",
             "type": "code",
-            "richText": [
-                [
-                    "x := 10\nvar p *int = &x\nfmt.Println(*p) // 10\n*p = 20\nfmt.Println(x)  // 20\n\ny := 5\nq := &y\nfmt.Println(*q) // 5"
-                ]
-            ],
+            "richText": [["x := 10\nvar p *int = &x\nfmt.Println(*p) // 10\n*p = 20\nfmt.Println(x)  // 20\n\ny := 5\nq := &y\nfmt.Println(*q) // 5"]],
             "language": "Go"
         },
         {
@@ -130,11 +126,7 @@ const note = {
         {
             "id": "53206999-b37c-5273-8df1-13fb5638d8a2",
             "type": "code",
-            "richText": [
-                [
-                    "var p *int\nfmt.Println(p == nil) // true\n// fmt.Println(*p)    // panics: p is nil\n\nx := 10\np = &x\npp := &p\nfmt.Println(**pp) // 10"
-                ]
-            ],
+            "richText": [["var p *int\nfmt.Println(p == nil) // true\n// fmt.Println(*p)    // panics: p is nil\n\nx := 10\np = &x\npp := &p\nfmt.Println(**pp) // 10"]],
             "language": "Go"
         },
         {
@@ -176,11 +168,7 @@ const note = {
         {
             "id": "b540d455-c0dc-525e-9f0a-c2d316ef2af6",
             "type": "code",
-            "richText": [
-                [
-                    "func increment(n *int) {\n    (*n)++\n}\n\nfunc incrementExample() {\n    x := 5\n    increment(&x)\n    fmt.Println(x) // 6\n}"
-                ]
-            ],
+            "richText": [["func increment(n *int) {\n    (*n)++\n}\n\nfunc incrementExample() {\n    x := 5\n    increment(&x)\n    fmt.Println(x) // 6\n}"]],
             "language": "Go"
         },
         {
@@ -195,11 +183,7 @@ const note = {
         {
             "id": "f16d9fdf-11d2-5ceb-8f3c-50c0e544dc3a",
             "type": "code",
-            "richText": [
-                [
-                    "type User struct { Name string }\n\nfunc changeName(u *User) {\n    u.Name = \"Alice\" // same field access as (*u).Name\n}\n\nfunc changeNameExample() {\n    user := User{Name: \"Bob\"}\n    changeName(&user)\n    fmt.Println(user.Name) // Alice\n}"
-                ]
-            ],
+            "richText": [["type User struct { Name string }\n\nfunc changeName(u *User) {\n    u.Name = \"Alice\" // same field access as (*u).Name\n}\n\nfunc changeNameExample() {\n    user := User{Name: \"Bob\"}\n    changeName(&user)\n    fmt.Println(user.Name) // Alice\n}"]],
             "language": "Go"
         },
         {
@@ -224,9 +208,7 @@ const note = {
             "id": "08cdd5dd-96df-5ba8-a6e7-4fcedf77cc4e",
             "type": "sub_header",
             "richText": [
-                [
-                    "new(T) and addresses of literals"
-                ]
+                ["new(T)",[["c"]]], [" and addresses of literals"]
             ]
         },
         {
@@ -477,9 +459,7 @@ const note = {
                             ]
                         ],
                         "col-2": [
-                            [
-                                "A nil slice"
-                            ]
+                            ["A "], ["nil",[["c"]]], [" slice"]
                         ]
                     }
                 },
@@ -508,9 +488,7 @@ const note = {
                             ]
                         ],
                         "col-2": [
-                            [
-                                "A non-nil empty slice"
-                            ]
+                            ["A non-"], ["nil",[["c"]]], [" empty slice"]
                         ]
                     }
                 }
@@ -519,11 +497,7 @@ const note = {
         {
             "id": "38099d50-0061-5049-8b32-4c781ead99b4",
             "type": "code",
-            "richText": [
-                [
-                    "type Point struct { X, Y int }\n\nfunc pointerConstruction() {\n    x := new(int)\n    fmt.Println(*x) // 0\n    *x = 42\n    fmt.Println(*x) // 42\n\n    p := &Point{X: 1, Y: 2}\n    fmt.Println(p.X) // 1\n\n    s := &[]int{1, 2, 3}\n    fmt.Println((*s)[0]) // 1\n}"
-                ]
-            ],
+            "richText": [["type Point struct { X, Y int }\n\nfunc pointerConstruction() {\n    x := new(int)\n    fmt.Println(*x) // 0\n    *x = 42\n    fmt.Println(*x) // 42\n\n    p := &Point{X: 1, Y: 2}\n    fmt.Println(p.X) // 1\n\n    s := &[]int{1, 2, 3}\n    fmt.Println((*s)[0]) // 1\n}"]],
             "language": "Go"
         },
         {
@@ -716,11 +690,7 @@ const note = {
         {
             "id": "34f56cfc-72e6-5909-a8ec-a87fd319c36d",
             "type": "code",
-            "richText": [
-                [
-                    "func changeFirst(s []int) {\n    s[0] = 100       // modifies a shared element; requires a non-empty slice\n    s = s[:0]        // changes only this local slice value\n}\n\nfunc sliceArgument() {\n    values := []int{1, 2}\n    changeFirst(values)\n    fmt.Println(values, len(values)) // [100 2] 2\n}"
-                ]
-            ],
+            "richText": [["func changeFirst(s []int) {\n    s[0] = 100       // modifies a shared element; requires a non-empty slice\n    s = s[:0]        // changes only this local slice value\n}\n\nfunc sliceArgument() {\n    values := []int{1, 2}\n    changeFirst(values)\n    fmt.Println(values, len(values)) // [100 2] 2\n}"]],
             "language": "Go"
         },
         {
@@ -756,9 +726,7 @@ const note = {
             "id": "7e5d6164-c7f5-53dd-85e2-df5db060b64d",
             "type": "text",
             "richText": [
-                [
-                    "Backing storage, copying and append: "
-                ],
+                ["Backing storage, copying and "], ["append",[["c"]]], [": "],
                 [
                     "Slices & Arrays",
                     [
@@ -898,11 +866,7 @@ const note = {
         {
             "id": "a6a38abb-b213-5d06-a25b-312a53c3e6a3",
             "type": "code",
-            "richText": [
-                [
-                    "type Counter int\n\nfunc counterPointer(p *Counter) *int {\n    return (*int)(unsafe.Pointer(p))\n}"
-                ]
-            ],
+            "richText": [["type Counter int\n\nfunc counterPointer(p *Counter) *int {\n    return (*int)(unsafe.Pointer(p))\n}"]],
             "language": "Go"
         },
         {
@@ -912,15 +876,7 @@ const note = {
                 [
                     "Source: "
                 ],
-                [
-                    "unsafe.Pointer conversion restrictions",
-                    [
-                        [
-                            "a",
-                            "https://pkg.go.dev/unsafe#Pointer"
-                        ]
-                    ]
-                ]
+                ["unsafe.Pointer",[["a","https://pkg.go.dev/unsafe#Pointer"],["c"]]], [" conversion restrictions",[["a","https://pkg.go.dev/unsafe#Pointer"]]]
             ]
         },
         {
@@ -954,9 +910,7 @@ const note = {
             "id": "37f31fe4-3fc6-54be-852a-d3104adb259a",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A nil pointer can represent a missing optional value. This also applies to basic types such as "
-                ],
+                ["A "], ["nil",[["c"]]], [" pointer can represent a missing optional value. This also applies to basic types such as "],
                 [
                     "int",
                     [

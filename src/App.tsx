@@ -7,6 +7,8 @@ import Header from './Header/Header';
 import Home from './Home/Home';
 import Blogs from './Blogs/Blogs';
 import Notes from './Notes/Notes';
+import NoteCollectionPage from './Notes/NoteCollectionPage';
+import NoteBreadcrumbs from './Notes/NoteBreadcrumbs';
 import FrontendNotes from './Notes/FrontendNotes';
 import AwsServices from './Notes/AwsServices/AwsServices';
 import PostgreSQLNotes from './Notes/PostgreSQLNotes';
@@ -26,6 +28,7 @@ import NodeNotesIndex from './Notes/NodeNotes/NodeNotesIndex';
 import NodeNote from './Notes/NodeNotes/NodeNote';
 import CICDNotesIndex from './Notes/CICDNotes/CICDNotesIndex';
 import CICDBasics from './Notes/CICDNotes/CICDBasics';
+import GitCommands from './Notes/CICDNotes/GitCommands';
 import GitHubActions from './Notes/CICDNotes/GitHubActions';
 import Jenkins from './Notes/CICDNotes/Jenkins';
 import DockerNotesIndex from './Notes/DockerNotes/DockerNotesIndex';
@@ -92,6 +95,7 @@ import {
     BLOGS_ROUTE,
     CICD_NOTES_ROUTE,
     CICD_BASICS_ROUTE,
+    GIT_COMMANDS_ROUTE,
     GITHUB_ACTIONS_ROUTE,
     JENKINS_ROUTE,
     BOOKSHELF_ROUTE,
@@ -119,6 +123,7 @@ import {
     SPRING_BOOT_FIRST_APPLICATION_ROUTE,
     SPRING_BOOT_ANNOTATIONS_ROUTE,
     isSpringBootRoute,
+    noteCollectionRoutes,
     HOME_ROUTE,
     INSTEAD_PRIVACY_POLICY_ROUTE,
     JAVASCRIPT_ASYNC_ROUTE,
@@ -183,6 +188,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [NODE_NOTES_ROUTE]: NodeNotesIndex,
     [CICD_NOTES_ROUTE]: CICDNotesIndex,
     [CICD_BASICS_ROUTE]: CICDBasics,
+    [GIT_COMMANDS_ROUTE]: GitCommands,
     [GITHUB_ACTIONS_ROUTE]: GitHubActions,
     [JENKINS_ROUTE]: Jenkins,
     [DOCKER_NOTES_ROUTE]: DockerNotesIndex,
@@ -253,7 +259,10 @@ function App() {
             <Header route={route} />
 
             <main>
-                {isGoNote ? (
+                <NoteBreadcrumbs route={route} />
+                {noteCollectionRoutes.includes(route) ? (
+                    <NoteCollectionPage route={route} />
+                ) : isGoNote ? (
                     <GoNote route={route as GoNoteRoute} />
                 ) : isSystemDesignEntry ? (
                     <Suspense fallback={<p>Loading note…</p>}>

@@ -88,7 +88,18 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "Add n tasks to the counter. A negative resulting counter causes a panic."
+                                "Add "
+                            ],
+                            [
+                                "n",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " tasks to the counter. A negative resulting counter causes a panic."
                             ]
                         ]
                     }
@@ -159,13 +170,23 @@ const note = {
         },
         {
             "id": "1c8ed295-5750-5959-ac16-603af36035d9",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc worker(id int, wg *sync.WaitGroup) {\n    defer wg.Done()\n    fmt.Printf(\"Worker %d starting\\n\", id)\n    fmt.Printf(\"Worker %d done\\n\", id)\n}\n\nfunc main() {\n    var wg sync.WaitGroup\n    for id := 1; id <= 3; id++ {\n        wg.Add(1)\n        go worker(id, &wg)\n    }\n    wg.Wait()\n    fmt.Println(\"All workers completed\")\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Wait for Workers",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc worker(id int, wg *sync.WaitGroup) {\n    defer wg.Done()\n    fmt.Printf(\"Worker %d starting\\n\", id)\n    fmt.Printf(\"Worker %d done\\n\", id)\n}\n\nfunc main() {\n    var wg sync.WaitGroup\n    for id := 1; id <= 3; id++ {\n        wg.Add(1)\n        go worker(id, &wg)\n    }\n    wg.Wait()\n    fmt.Println(\"All workers completed\")\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "a3a9e582-6482-5478-9eb0-85fe74a7871d",
@@ -319,7 +340,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not copy a WaitGroup after first use."
+                    "Do not copy a "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after first use."
                 ]
             ]
         },
@@ -328,7 +360,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Pass a pointer when another function needs to use the same WaitGroup."
+                    "Pass a pointer when another function needs to use the same "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -363,7 +406,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Cancelling a context does not reduce the WaitGroup counter."
+                    "Cancelling a context does not reduce the "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " counter."
                 ]
             ]
         },
@@ -372,7 +426,18 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Adding tasks while Wait is waiting"
+                    "Adding tasks while "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is waiting"
                 ]
             ]
         },
@@ -492,7 +557,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Adding too early breaks the WaitGroup rules and may cause a panic."
+                    "Adding too early breaks the "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " rules and may cause a panic."
                 ]
             ]
         },
@@ -501,7 +577,18 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "After Wait returns"
+                    "After "
+                ],
+                [
+                    "Wait",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " returns"
                 ]
             ]
         },
@@ -538,7 +625,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The WaitGroup can still be used. "
+                    "The "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can still be used. "
                 ],
                 [
                     "Wait",
@@ -558,7 +656,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Before starting a new group on the same WaitGroup, every previous "
+                    "Before starting a new group on the same "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", every previous "
                 ],
                 [
                     "Wait",
@@ -629,7 +738,15 @@ const note = {
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Two groups, one WaitGroup"
+                    "Two groups, one "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -699,12 +816,34 @@ const note = {
                     "cells": {
                         "situation": [
                             [
-                                "The next group starts after all previous Wait calls return."
+                                "The next group starts after all previous "
+                            ],
+                            [
+                                "Wait",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " calls return."
                             ]
                         ],
                         "choice": [
                             [
-                                "Reuse the same WaitGroup."
+                                "Reuse the same "
+                            ],
+                            [
+                                "WaitGroup",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "."
                             ]
                         ],
                         "why": [
@@ -725,12 +864,34 @@ const note = {
                         ],
                         "choice": [
                             [
-                                "Use a separate WaitGroup for each."
+                                "Use a separate "
+                            ],
+                            [
+                                "WaitGroup",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " for each."
                             ]
                         ],
                         "why": [
                             [
-                                "Each Wait should wait for its own group."
+                                "Each "
+                            ],
+                            [
+                                "Wait",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " should wait for its own group."
                             ]
                         ]
                     }
@@ -746,12 +907,31 @@ const note = {
                         ],
                         "choice": [
                             [
-                                "Use the same WaitGroup."
+                                "Use the same "
+                            ],
+                            [
+                                "WaitGroup",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "."
                             ]
                         ],
                         "why": [
                             [
-                                "Wait should include those tasks too."
+                                "Wait",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " should include those tasks too."
                             ]
                         ]
                     }
@@ -781,7 +961,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use the WaitGroup to know when every sender has finished."
+                    "Use the "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to know when every sender has finished."
                 ]
             ]
         },
@@ -805,29 +996,45 @@ const note = {
         },
         {
             "id": "c6fe4e1c-d0c1-56e0-a1e1-3c2e94fc4436",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    results := make(chan int)\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go func(n int) {\n            defer wg.Done()\n            results <- n * n\n        }(i)\n    }\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n\n    for result := range results {\n        fmt.Println(result)\n    }\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "c18f22c6-a64b-560a-b89d-a369f77dc466",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Collect Results",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    results := make(chan int)\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go func(n int) {\n            defer wg.Done()\n            results <- n * n\n        }(i)\n    }\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n\n    for result := range results {\n        fmt.Println(result)\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Prints 0, 1 and 4. Their order can change."
                 ]
-            ]
+            }
         },
+
         {
             "id": "3106944e-dd03-539b-8883-580dbaba6af0",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The coordinator closes results only after every send has finished."
+                    "The coordinator closes "
+                ],
+                [
+                    "results",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " only after every send has finished."
                 ]
             ]
         },
@@ -983,6 +1190,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/mutex"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -1011,7 +1221,19 @@ const note = {
                     "Sources: "
                 ],
                 [
-                    "WaitGroup documentation",
+                    "WaitGroup",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#WaitGroup"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " documentation",
                     [
                         [
                             "a",
@@ -1023,7 +1245,19 @@ const note = {
                     ", "
                 ],
                 [
-                    "WaitGroup implementation and contracts",
+                    "WaitGroup",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/src/sync/waitgroup.go"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " implementation and contracts",
                     [
                         [
                             "a",

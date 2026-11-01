@@ -497,7 +497,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Closing a nil channel panics."
+                    "Closing a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " channel panics."
                 ]
             ]
         },
@@ -543,7 +554,18 @@ const note = {
                     ]
                 ],
                 [
-                    " is true while receiving values that were sent, including buffered values."
+                    " is "
+                ],
+                [
+                    "true",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " while receiving values that were sent, including buffered values."
                 ]
             ]
         },
@@ -560,7 +582,18 @@ const note = {
                     ]
                 ],
                 [
-                    " becomes false after the channel is closed and all buffered values have been received."
+                    " becomes "
+                ],
+                [
+                    "false",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after the channel is closed and all buffered values have been received."
                 ]
             ]
         },
@@ -592,23 +625,28 @@ const note = {
         },
         {
             "id": "a6b01cc5-14ee-5601-8aa7-0217c6589ac9",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc main() {\n    ch := make(chan int, 1)\n    ch <- 7\n    close(ch)\n    value, ok := <-ch\n    fmt.Println(value, ok)\n    value, ok = <-ch\n    fmt.Println(value, ok)\n}"
+            "type": "example",
+            "example": {
+                "title": "Closing Channels",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    ch := make(chan int, 1)\n    ch <- 7\n    close(ch)\n    value, ok := <-ch\n    fmt.Println(value, ok)\n    value, ok = <-ch\n    fmt.Println(value, ok)\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
+                    "Output: 7 `true`, then 0 `false`."
                 ]
-            ],
-            "language": "Go"
+            }
         },
-        {
-            "id": "ed0cf350-3816-5ed1-aab0-b609baca2930",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Output: 7 true, then 0 false."
-                ]
-            ]
-        },
+
         {
             "id": "f2abd55e-f308-5637-a2f7-4a4f6b4a9d05",
             "type": "bulleted_list",
@@ -697,7 +735,23 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "Mutex / RWMutex"
+                                "Mutex",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " / "
+                            ],
+                            [
+                                "RWMutex",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "column-1": [
@@ -718,7 +772,12 @@ const note = {
                     "cells": {
                         "column-0": [
                             [
-                                "WaitGroup"
+                                "WaitGroup",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "column-1": [
@@ -748,6 +807,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/mutex"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -760,6 +822,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/mutex"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -772,6 +837,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/workgroups"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -794,7 +862,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Multiplexing means handling several channels through one select statement."
+                    "Multiplexing means handling several channels through one "
+                ],
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " statement."
                 ]
             ]
         },
@@ -809,23 +888,28 @@ const note = {
         },
         {
             "id": "05df06c9-85fb-5b83-b5fc-cacc5e2269e0",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc main() {\n    jobs := make(chan int, 1)\n    jobs <- 1\n    select {\n    case jobs <- 2:\n        fmt.Println(\"queued\")\n    default:\n        fmt.Println(\"queue full\")\n    }\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "cb4f623c-ca4f-5e4e-880b-b27d272e4160",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Select Statement (Multiplexing)",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    jobs := make(chan int, 1)\n    jobs <- 1\n    select {\n    case jobs <- 2:\n        fmt.Println(\"queued\")\n    default:\n        fmt.Println(\"queue full\")\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Output: queue full."
                 ]
-            ]
+            }
         },
+
         {
             "id": "7e647512-f6b9-5112-8d44-943db53e2584",
             "type": "bulleted_list",
@@ -848,7 +932,18 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Ready-case choice, default and nil-channel disabling: "
+                    "Ready-case choice, default and "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "-channel disabling: "
                 ],
                 [
                     "Select",
@@ -878,7 +973,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Fan-out: several workers receive from the same jobs channel."
+                    "Fan-out: several workers receive from the same "
+                ],
+                [
+                    "jobs",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " channel."
                 ]
             ]
         },
@@ -887,7 +993,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Fan-in: the workers send their results to the same results channel."
+                    "Fan-in: the workers send their results to the same "
+                ],
+                [
+                    "results",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " channel."
                 ]
             ]
         },
@@ -896,7 +1013,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The producer closes jobs after sending all jobs."
+                    "The producer closes "
+                ],
+                [
+                    "jobs",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after sending all jobs."
                 ]
             ]
         },
@@ -905,29 +1033,45 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The coordinator closes results after every worker returns."
+                    "The coordinator closes "
+                ],
+                [
+                    "results",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " after every worker returns."
                 ]
             ]
         },
         {
             "id": "c53de6ff-af95-58b5-bc60-9136009847c4",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc worker(jobs <-chan int, results chan<- int, wg *sync.WaitGroup) {\n    defer wg.Done()\n    for job := range jobs {\n        results <- job * job\n    }\n}\n\nfunc main() {\n    jobs := make(chan int)\n    results := make(chan int)\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go worker(jobs, results, &wg)\n    }\n    go func() {\n        defer close(jobs)\n        for job := 1; job <= 5; job++ {\n            jobs <- job\n        }\n    }()\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n\n    for result := range results {\n        fmt.Println(result)\n    }\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "3f1dafd4-6c44-5f11-aa21-c328acccfb0b",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Worker Pool: Fan-Out and Fan-In",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc worker(jobs <-chan int, results chan<- int, wg *sync.WaitGroup) {\n    defer wg.Done()\n    for job := range jobs {\n        results <- job * job\n    }\n}\n\nfunc main() {\n    jobs := make(chan int)\n    results := make(chan int)\n    var wg sync.WaitGroup\n    for i := 0; i < 3; i++ {\n        wg.Add(1)\n        go worker(jobs, results, &wg)\n    }\n    go func() {\n        defer close(jobs)\n        for job := 1; job <= 5; job++ {\n            jobs <- job\n        }\n    }()\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n\n    for result := range results {\n        fmt.Println(result)\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Prints 1, 4, 9, 16 and 25. Their order can change."
                 ]
-            ]
+            }
         },
+
         {
             "id": "877b1cef-b5e9-5af3-9fde-12d1e578692b",
             "type": "bulleted_list",
@@ -941,7 +1085,18 @@ const note = {
                     ]
                 ],
                 [
-                    " receives results while the workers run, so their unbuffered sends can finish."
+                    " receives "
+                ],
+                [
+                    "results",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " while the workers run, so their unbuffered sends can finish."
                 ]
             ]
         },
@@ -974,23 +1129,28 @@ const note = {
         },
         {
             "id": "c14a8462-9211-54ab-92e0-f5ab6e245311",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc generate() <-chan int {\n    output := make(chan int)\n    go func() {\n        defer close(output)\n        for value := 0; value < 5; value++ {\n            output <- value\n        }\n    }()\n    return output\n}\n\nfunc square(input <-chan int) <-chan int {\n    output := make(chan int)\n    go func() {\n        defer close(output)\n        for value := range input {\n            output <- value * value\n        }\n    }()\n    return output\n}\n\nfunc main() {\n    for value := range square(generate()) {\n        fmt.Println(value)\n    }\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "f185770e-e264-567d-9a4f-a2c6ae323caf",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Pipeline",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc generate() <-chan int {\n    output := make(chan int)\n    go func() {\n        defer close(output)\n        for value := 0; value < 5; value++ {\n            output <- value\n        }\n    }()\n    return output\n}\n\nfunc square(input <-chan int) <-chan int {\n    output := make(chan int)\n    go func() {\n        defer close(output)\n        for value := range input {\n            output <- value * value\n        }\n    }()\n    return output\n}\n\nfunc main() {\n    for value := range square(generate()) {\n        fmt.Println(value)\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Prints 0, 1, 4, 9 and 16, in that order."
                 ]
-            ]
+            }
         },
+
         {
             "id": "edc1ad7b-a200-562d-9d15-9ddaa39d8ea0",
             "type": "bulleted_list",
@@ -1047,13 +1207,23 @@ const note = {
         },
         {
             "id": "8fb10ee5-a26f-55c5-8c09-c3d66153b145",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"io\"\n    \"net/http\"\n    \"sync\"\n    \"time\"\n)\n\ntype Result struct {\n    URL string\n    Body string\n    Err error\n}\n\nfunc fetch(client *http.Client, url string) Result {\n    result := Result{URL: url}\n    response, err := client.Get(url)\n    if err != nil {\n        result.Err = err\n        return result\n    }\n    defer response.Body.Close()\n    if response.StatusCode < 200 || response.StatusCode >= 300 {\n        result.Err = fmt.Errorf(\"HTTP status: %s\", response.Status)\n        return result\n    }\n    body, err := io.ReadAll(response.Body)\n    result.Body, result.Err = string(body), err\n    return result\n}\n\nfunc main() {\n    client := &http.Client{Timeout: 5 * time.Second}\n    urls := []string{\"https://example.com\", \"https://go.dev\"}\n    results := make(chan Result)\n    var wg sync.WaitGroup\n    for _, url := range urls {\n        wg.Add(1)\n        go func(url string) {\n            defer wg.Done()\n            results <- fetch(client, url)\n        }(url)\n    }\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n    for result := range results {\n        if result.Err != nil {\n            fmt.Println(result.URL, result.Err)\n            continue\n        }\n        fmt.Println(\"Fetched\", result.URL, len(result.Body), \"bytes\")\n    }\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Real-World Example – Web Crawler",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"io\"\n    \"net/http\"\n    \"sync\"\n    \"time\"\n)\n\ntype Result struct {\n    URL string\n    Body string\n    Err error\n}\n\nfunc fetch(client *http.Client, url string) Result {\n    result := Result{URL: url}\n    response, err := client.Get(url)\n    if err != nil {\n        result.Err = err\n        return result\n    }\n    defer response.Body.Close()\n    if response.StatusCode < 200 || response.StatusCode >= 300 {\n        result.Err = fmt.Errorf(\"HTTP status: %s\", response.Status)\n        return result\n    }\n    body, err := io.ReadAll(response.Body)\n    result.Body, result.Err = string(body), err\n    return result\n}\n\nfunc main() {\n    client := &http.Client{Timeout: 5 * time.Second}\n    urls := []string{\"https://example.com\", \"https://go.dev\"}\n    results := make(chan Result)\n    var wg sync.WaitGroup\n    for _, url := range urls {\n        wg.Add(1)\n        go func(url string) {\n            defer wg.Done()\n            results <- fetch(client, url)\n        }(url)\n    }\n    go func() {\n        wg.Wait()\n        close(results)\n    }()\n    for result := range results {\n        if result.Err != nil {\n            fmt.Println(result.URL, result.Err)\n            continue\n        }\n        fmt.Println(\"Fetched\", result.URL, len(result.Body), \"bytes\")\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "e786471f-a8bc-5c04-a796-a5b31a599cce",

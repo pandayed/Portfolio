@@ -31,7 +31,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "External test files can use a separate package name ending in _test."
+                    "External test files can use a separate package name ending in "
+                ],
+                [
+                    "_test",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -102,7 +113,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "main"
+                                "main",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -112,7 +128,12 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "func main() with no parameters or return values. Runs after package initialization."
+                                "func main() with no parameters or return values. Runs after package initialization.",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ]
                     }
@@ -133,7 +154,18 @@ const note = {
                         ],
                         "col-2": [
                             [
-                                "No main function required."
+                                "No "
+                            ],
+                            [
+                                "main",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " function required."
                             ]
                         ]
                     }
@@ -145,7 +177,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A library-only repository does not need package main."
+                    "A library-only repository does not need package "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -163,7 +206,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Each executable directory has its own package main and main function."
+                    "Each executable directory has its own package "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " function."
                 ]
             ]
         },
@@ -221,53 +286,44 @@ const note = {
                 ]
             ]
         },
-        {
-            "id": "packages-08",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "go.mod declares module example.com/shop."
-                ]
-            ]
-        },
+
         {
             "id": "packages-09",
-            "type": "code",
-            "richText": [
-                [
-                    "// pricing/pricing.go\npackage pricing\n\nconst defaultTax = 10 // available only within package pricing\n\nfunc Total(amount int) int {\n    return amount + defaultTax\n}"
+            "type": "example",
+            "example": {
+                "title": "Import an exported function from another package",
+                "language": "go",
+                "description": [
+                    "The files form one module named `example.com/shop`. Paths are relative to its root directory."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "go.mod",
+                        "language": "text",
+                        "code": "module example.com/shop\n\ngo 1.23.0\n"
+                    },
+                    {
+                        "name": "pricing/pricing.go",
+                        "language": "go",
+                        "code": "package pricing\n\nconst defaultTax = 10 // available only within package pricing\n\nfunc Total(amount int) int {\n    return amount + defaultTax\n}"
+                    },
+                    {
+                        "name": "cmd/shop/main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"example.com/shop/pricing\"\n)\n\nfunc main() {\n    fmt.Println(pricing.Total(100))\n}"
+                    }
+                ],
+                "commands": "go run ./cmd/shop",
+                "result": "110",
+                "explanation": [
+                    "Code outside `pricing` cannot access `pricing.defaultTax`."
                 ]
-            ],
-            "language": "Go"
+            }
         },
-        {
-            "id": "packages-10",
-            "type": "code",
-            "richText": [
-                [
-                    "// cmd/shop/main.go\npackage main\n\nimport (\n    \"fmt\"\n    \"example.com/shop/pricing\"\n)\n\nfunc main() {\n    fmt.Println(pricing.Total(100))\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "packages-11",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Expected output: 110."
-                ]
-            ]
-        },
-        {
-            "id": "packages-11-read-1",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Code outside pricing cannot access pricing.defaultTax."
-                ]
-            ]
-        },
+
+
+
         {
             "id": "packages-12",
             "type": "sub_header",
@@ -300,7 +356,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "To use example.com/shop/pricing/rules, the pricing package must import it."
+                    "To use "
+                ],
+                [
+                    "example.com/shop/pricing/rules",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", the "
+                ],
+                [
+                    "pricing",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package must import it."
                 ]
             ]
         },
@@ -344,7 +422,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "import \"example.com/shop/pricing\""
+                                "import \"example.com/shop/pricing\"",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -360,12 +443,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "import cost \"example.com/shop/pricing\""
+                                "import cost \"example.com/shop/pricing\"",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Use the local name cost, such as cost.Total(100)."
+                                "Use the local name cost, such as "
+                            ],
+                            [
+                                "cost.Total(100)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "."
                             ]
                         ]
                     }
@@ -376,7 +475,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "import _ \"example.com/shop/pricing\""
+                                "import _ \"example.com/shop/pricing\"",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -392,7 +496,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "import . \"example.com/shop/pricing\""
+                                "import . \"example.com/shop/pricing\"",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -439,7 +548,19 @@ const note = {
                     "Initialization details are on "
                 ],
                 [
-                    "init() Function",
+                    "init()",
+                    [
+                        [
+                            "a",
+                            "#/notes/go/init-function"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " Function",
                     [
                         [
                             "a",

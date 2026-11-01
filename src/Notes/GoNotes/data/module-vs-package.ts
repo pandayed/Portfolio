@@ -76,9 +76,7 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "The go.mod directory and its subdirectories, except separate nested modules."
-                            ]
+                            ["The "], ["go.mod",[["c"]]], [" directory and its subdirectories, except separate nested modules."]
                         ],
                         "col-2": [
                             [
@@ -144,9 +142,7 @@ const note = {
                             ]
                         ],
                         "col-2": [
-                            [
-                                "package main with func main() starts the program after initialization."
-                            ]
+                            ["package main",[["c"]]], [" with "], ["func main()",[["c"]]], [" starts the program after initialization."]
                         ]
                     }
                 }
@@ -201,9 +197,7 @@ const note = {
             "id": "module-vs-package-06-read-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Go then calls main.main."
-                ]
+                ["Go then calls "], ["main.main",[["c"]]], ["."]
             ]
         },
         {
@@ -219,18 +213,14 @@ const note = {
             "id": "module-vs-package-08",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "go.mod is a file used during the build. It is not executable code."
-                ]
+                ["go.mod",[["c"]]], [" is a file used during the build. It is not executable code."]
             ]
         },
         {
             "id": "module-vs-package-08-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A built program can start without reading its source go.mod."
-                ]
+                ["A built program can start without reading its source "], ["go.mod",[["c"]]], ["."]
             ]
         },
         {
@@ -254,21 +244,13 @@ const note = {
         {
             "id": "module-vs-package-10",
             "type": "code",
-            "richText": [
-                [
-                    "shop/\n  go.mod                  # module example.com/shop\n  pricing/pricing.go      # package pricing\n  cmd/shop/main.go        # package main imports example.com/shop/pricing"
-                ]
-            ],
+            "richText": [["shop/\n  go.mod                  # module example.com/shop\n  pricing/pricing.go      # package pricing\n  cmd/shop/main.go        # package main imports example.com/shop/pricing"]],
             "language": "Plain Text"
         },
         {
             "id": "module-vs-package-11",
             "type": "code",
-            "richText": [
-                [
-                    "go run ./cmd/shop\ngo build -o shop ./cmd/shop"
-                ]
-            ],
+            "richText": [["go run ./cmd/shop\ngo build -o shop ./cmd/shop"]],
             "language": "Shell"
         },
         {
@@ -293,9 +275,7 @@ const note = {
             "id": "module-vs-package-12-read-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A simple file using only the standard library can run with go run main.go without a local go.mod."
-                ]
+                ["A simple file using only the standard library can run with "], ["go run main.go",[["c"]]], [" without a local "], ["go.mod",[["c"]]], ["."]
             ]
         },
         {

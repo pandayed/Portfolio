@@ -102,7 +102,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Person"
+                                "Person",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-2": [
@@ -128,7 +133,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Person"
+                                "Person",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-2": [
@@ -154,7 +164,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Person"
+                                "Person",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-2": [
@@ -180,7 +195,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "*Person"
+                                "*Person",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-2": [
@@ -206,7 +226,12 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "*Person"
+                                "*Person",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-2": [
@@ -371,7 +396,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The pointer must not be nil."
+                    "The pointer must not be "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -446,7 +482,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The zero value of a function field is nil."
+                    "The zero value of a function field is "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -498,19 +545,40 @@ const note = {
                     ]
                 ],
                 [
-                    " uses a pointer receiver to change the Age field."
+                    " uses a pointer receiver to change the "
+                ],
+                [
+                    "Age",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " field."
                 ]
             ]
         },
         {
             "id": "ec035d97-3d59-5f17-92c6-1e381f42d874",
-            "type": "code",
-            "language": "Go",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\ntype Person struct {\n    Name string\n    Age int\n}\n\nfunc (p Person) Greet() string {\n    return \"Hi \" + p.Name\n}\n\nfunc (p *Person) HaveBirthday() {\n    p.Age++\n}\n\nfunc main() {\n    p := Person{Name: \"Bob\", Age: 20}\n    p.HaveBirthday() // p is addressable, so this can use &p\n    fmt.Println(p.Greet(), p.Age) // Hi Bob 21\n}"
-                ]
-            ]
+            "type": "example",
+            "example": {
+                "title": "Methods on Structs",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\ntype Person struct {\n    Name string\n    Age int\n}\n\nfunc (p Person) Greet() string {\n    return \"Hi \" + p.Name\n}\n\nfunc (p *Person) HaveBirthday() {\n    p.Age++\n}\n\nfunc main() {\n    p := Person{Name: \"Bob\", Age: 20}\n    p.HaveBirthday() // p is addressable, so this can use &p\n    fmt.Println(p.Greet(), p.Age) // Hi Bob 21\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "324809c0-cfa0-5a17-8f31-209ab56a5848",

@@ -194,13 +194,23 @@ const note = {
         },
         {
             "id": "5fa554e6-4f67-5db1-89f1-1324e9d34137",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc makeCounter() func() int {\n    count := 0\n    return func() int {\n        count++\n        return count\n    }\n}\n\nfunc main() {\n    counterA := makeCounter()\n    fmt.Println(counterA()) // 1\n    fmt.Println(counterA()) // 2\n    fmt.Println(counterA()) // 3\n\n    counterB := makeCounter()\n    fmt.Println(counterB()) // 1\n    fmt.Println(counterA()) // 4\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Independent captured state",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc makeCounter() func() int {\n    count := 0\n    return func() int {\n        count++\n        return count\n    }\n}\n\nfunc main() {\n    counterA := makeCounter()\n    fmt.Println(counterA()) // 1\n    fmt.Println(counterA()) // 2\n    fmt.Println(counterA()) // 3\n\n    counterB := makeCounter()\n    fmt.Println(counterB()) // 1\n    fmt.Println(counterA()) // 4\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "b024abe0-37eb-5b55-a116-f6babfb5a1a4",

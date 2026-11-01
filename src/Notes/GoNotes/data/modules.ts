@@ -21,18 +21,14 @@ const note = {
             "id": "modules-01-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Its root directory contains go.mod."
-                ]
+                ["Its root directory contains "], ["go.mod",[["c"]]], ["."]
             ]
         },
         {
             "id": "modules-01-read-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A directory with another go.mod starts a separate module. Packages inside it belong to that module."
-                ]
+                ["A directory with another "], ["go.mod",[["c"]]], [" starts a separate module. Packages inside it belong to that module."]
             ]
         },
         {
@@ -51,9 +47,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    ". Directive details are on the go.mod page."
-                ]
+                [". Directive details are on the "], ["go.mod",[["c"]]], [" page."]
             ]
         },
         {
@@ -68,11 +62,7 @@ const note = {
         {
             "id": "modules-04",
             "type": "code",
-            "richText": [
-                [
-                    "shop/\n  go.mod                  # module example.com/shop\n  cmd/shop/main.go        # executable package\n  pricing/pricing.go      # package example.com/shop/pricing"
-                ]
-            ],
+            "richText": [["shop/\n  go.mod                  # module example.com/shop\n  cmd/shop/main.go        # executable package\n  pricing/pricing.go      # package example.com/shop/pricing"]],
             "language": "Plain Text"
         },
         {
@@ -88,9 +78,7 @@ const note = {
             "id": "modules-05-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Here, import the pricing package as example.com/shop/pricing."
-                ]
+                ["Here, import the pricing package as "], ["example.com",[["c"]]], ["/shop/pricing."]
             ]
         },
         {
@@ -160,9 +148,7 @@ const note = {
             "id": "modules-09-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Each module has its own go.mod and can release its own versions."
-                ]
+                ["Each module has its own "], ["go.mod",[["c"]]], [" and can release its own versions."]
             ]
         },
         {
@@ -214,18 +200,14 @@ const note = {
             "id": "modules-12-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Go usually finds its go.mod in the current directory or a parent directory."
-                ]
+                ["Go usually finds its "], ["go.mod",[["c"]]], [" in the current directory or a parent directory."]
             ]
         },
         {
             "id": "modules-12-read-2",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A workspace can list several main modules in go.work."
-                ]
+                ["A workspace can list several main modules in "], ["go.work",[["c"]]], ["."]
             ]
         },
         {
@@ -235,15 +217,7 @@ const note = {
                 [
                     "Manifest commands and dependency requirements are covered in "
                 ],
-                [
-                    "go.mod",
-                    [
-                        [
-                            "a",
-                            "#/notes/go/go-mod"
-                        ]
-                    ]
-                ],
+                ["go.mod",[["a","#/notes/go/go-mod"],["c"]]],
                 [
                     "."
                 ]

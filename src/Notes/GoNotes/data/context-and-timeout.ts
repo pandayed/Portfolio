@@ -136,7 +136,18 @@ const note = {
                         ],
                         "column-1": [
                             [
-                                "A channel that closes on cancellation. It can be nil when the context cannot be cancelled."
+                                "A channel that closes on cancellation. It can be "
+                            ],
+                            [
+                                "nil",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " when the context cannot be cancelled."
                             ]
                         ]
                     }
@@ -396,23 +407,28 @@ const note = {
         },
         {
             "id": "d1e1c51c-52d5-5b6e-a434-0e2e8fc9272f",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n)\n\nfunc main() {\n    parent, cancelParent := context.WithCancel(context.Background())\n    defer cancelParent()\n    child, cancelChild := context.WithCancel(parent)\n    defer cancelChild()\n\n    cancelParent()\n    <-child.Done()\n    fmt.Println(child.Err())\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "6960ba08-0c44-5572-99f8-9c9d5a7c2849",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Creating Contexts",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n)\n\nfunc main() {\n    parent, cancelParent := context.WithCancel(context.Background())\n    defer cancelParent()\n    child, cancelChild := context.WithCancel(parent)\n    defer cancelChild()\n\n    cancelParent()\n    <-child.Done()\n    fmt.Println(child.Err())\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Output: context canceled."
                 ]
-            ]
+            }
         },
+
         {
             "id": "c4d03241-be9b-50eb-a755-547e55d50a44",
             "type": "bulleted_list",
@@ -488,13 +504,23 @@ const note = {
         },
         {
             "id": "0ad07e3d-7c65-52fc-8882-73d6cc03fabb",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"time\"\n)\n\nfunc delayedResult(ctx context.Context) (<-chan string, <-chan struct{}) {\n    results := make(chan string)\n    stopped := make(chan struct{})\n    go func() {\n        defer close(stopped)\n        defer close(results)\n        timer := time.NewTimer(2 * time.Second)\n        defer timer.Stop()\n\n        select {\n        case <-ctx.Done():\n            return\n        case <-timer.C:\n        }\n\n        select {\n        case <-ctx.Done():\n            return\n        case results <- \"done\":\n        }\n    }()\n    return results, stopped\n}\n\nfunc main() {\n    ctx, cancel := context.WithTimeout(context.Background(), time.Second)\n    defer cancel()\n    results, stopped := delayedResult(ctx)\n\n    select {\n    case <-ctx.Done():\n        fmt.Println(\"timed out:\", ctx.Err())\n    case result, ok := <-results:\n        if ok {\n            fmt.Println(result)\n        } else {\n            fmt.Println(\"stopped:\", ctx.Err())\n        }\n    }\n    cancel()\n    <-stopped\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Timeout-Aware Work and Send",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"time\"\n)\n\nfunc delayedResult(ctx context.Context) (<-chan string, <-chan struct{}) {\n    results := make(chan string)\n    stopped := make(chan struct{})\n    go func() {\n        defer close(stopped)\n        defer close(results)\n        timer := time.NewTimer(2 * time.Second)\n        defer timer.Stop()\n\n        select {\n        case <-ctx.Done():\n            return\n        case <-timer.C:\n        }\n\n        select {\n        case <-ctx.Done():\n            return\n        case results <- \"done\":\n        }\n    }()\n    return results, stopped\n}\n\nfunc main() {\n    ctx, cancel := context.WithTimeout(context.Background(), time.Second)\n    defer cancel()\n    results, stopped := delayedResult(ctx)\n\n    select {\n    case <-ctx.Done():\n        fmt.Println(\"timed out:\", ctx.Err())\n    case result, ok := <-results:\n        if ok {\n            fmt.Println(result)\n        } else {\n            fmt.Println(\"stopped:\", ctx.Err())\n        }\n    }\n    cancel()\n    <-stopped\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "907c07fb-ea1e-5a7f-9a59-4b7683a7c1f3",
@@ -693,23 +719,28 @@ const note = {
         },
         {
             "id": "60630bf8-9e85-5c40-8ab8-0f7a834cf93b",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n)\n\ntype userIDKey struct{}\n\nfunc withUserID(ctx context.Context, id int) context.Context {\n    return context.WithValue(ctx, userIDKey{}, id)\n}\n\nfunc userID(ctx context.Context) (int, bool) {\n    id, ok := ctx.Value(userIDKey{}).(int)\n    return id, ok\n}\n\nfunc main() {\n    ctx := withUserID(context.Background(), 42)\n    id, ok := userID(ctx)\n    fmt.Println(id, ok)\n}"
+            "type": "example",
+            "example": {
+                "title": "Request-Scoped Values",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n)\n\ntype userIDKey struct{}\n\nfunc withUserID(ctx context.Context, id int) context.Context {\n    return context.WithValue(ctx, userIDKey{}, id)\n}\n\nfunc userID(ctx context.Context) (int, bool) {\n    id, ok := ctx.Value(userIDKey{}).(int)\n    return id, ok\n}\n\nfunc main() {\n    ctx := withUserID(context.Background(), 42)\n    id, ok := userID(ctx)\n    fmt.Println(id, ok)\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
+                    "Output: 42 `true`."
                 ]
-            ],
-            "language": "Go"
+            }
         },
-        {
-            "id": "37c0b3cb-85e9-56ef-860e-c96cf544f291",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Output: 42 true."
-                ]
-            ]
-        },
+
         {
             "id": "c292141d-57e9-5903-b026-a574b37d093e",
             "type": "bulleted_list",
@@ -799,7 +830,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Do not pass a nil context."
+                    "Do not pass a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " context."
                 ]
             ]
         },
@@ -866,7 +908,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use a WaitGroup or a completion channel if the caller must wait for cleanup."
+                    "Use a "
+                ],
+                [
+                    "WaitGroup",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or a completion channel if the caller must wait for cleanup."
                 ]
             ]
         },
@@ -895,6 +948,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/workgroups"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],

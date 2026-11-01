@@ -1,8 +1,12 @@
 import {
+    CLOUD_DELIVERY_ROUTE,
+    SOFTWARE_DESIGN_ROUTE,
+    LANGUAGES_FRAMEWORKS_DATABASES_ROUTE,
     API_COMMUNICATION_ROUTE,
     AWS_SERVICES_ROUTE,
     CICD_NOTES_ROUTE,
     CICD_BASICS_ROUTE,
+    GIT_COMMANDS_ROUTE,
     GITHUB_ACTIONS_ROUTE,
     JENKINS_ROUTE,
     DBMS_NOTES_ROUTE,
@@ -69,11 +73,11 @@ import type { SpringBootOutlineNode } from './SpringBootNotes/types';
 import {
     systemDesignPagesById,
     systemDesignPagesByRoute,
-    systemDesignRootPages,
     systemDesignViewsByParentId,
     type SystemDesignPageData,
     type SystemDesignViewData,
 } from './SystemDesign/registry';
+import { architectureOutline, cloudOutline, softwareDesignOutline, type SystemDesignOutlineNode } from './SystemDesign/outline';
 
 interface NoteBase {
     title: string;
@@ -239,27 +243,39 @@ const systemDesignPageNode = (page: SystemDesignPageData): NoteNode => {
     const views = systemDesignViewsByParentId.get(page.id) ?? [];
     const children = views.flatMap(systemDesignViewNode);
     if (children.length) {
-        return { type: 'group', title: page.title, icon: page.icon, summary: page.status || undefined, route: page.route, children };
+        return { type: 'group', title: page.title, icon: page.icon, route: page.route, children };
     }
     return {
         type: 'page',
         title: page.title,
         icon: page.icon,
-        summary: page.status || undefined,
         route: page.route,
     };
 };
 
-const bareMetalsPage = systemDesignPagesById.get('33124eb1ed5480498f70e7010ffc7c92');
-if (!bareMetalsPage) throw new Error('Missing Bare Metals, Virtual Machines & Containers note');
+const systemDesignOutlineNode = (node: SystemDesignOutlineNode): NoteNode => {
+    if (node.pageId) {
+        const page = systemDesignPagesById.get(node.pageId);
+        if (!page) throw new Error(`Missing System Design outline page: ${node.pageId}`);
+        const note = systemDesignPageNode(page);
+        return node.children
+            ? { ...note, type: 'group', children: node.children.map(systemDesignOutlineNode) }
+            : note;
+    }
+    if (!node.title || !node.route || !node.children) throw new Error('Incomplete System Design outline group');
+    return {
+        type: 'group',
+        title: node.title,
+        route: node.route as Route,
+        children: node.children.map(systemDesignOutlineNode),
+    };
+};
 
 export const systemDesignNotes: NoteGroup = {
     type: 'group',
-    title: 'System Design',
+    title: 'Software Architecture & System Design',
     route: SYSTEM_DESIGN_ROUTE,
-    children: systemDesignRootPages
-        .filter((page) => page.id !== bareMetalsPage.id)
-        .map(systemDesignPageNode),
+    children: architectureOutline.map(systemDesignOutlineNode),
 };
 
 export const pythonNotes: NoteGroup = {
@@ -476,6 +492,10 @@ export const dockerNotes: NoteGroup = {
             route: DOCKER_INSTRUCTIONS_ROUTE,
             updatedOn: '2026-10-17',
         },
+        {
+            ...systemDesignOutlineNode({ pageId: '30624eb1ed5480358019debee2687837' }),
+            title: 'Docker (imported notes)',
+        },
     ],
 };
 
@@ -525,7 +545,7 @@ export const kubernetesNotes: NoteGroup = {
 export const cicdNotes: NoteGroup = {
     type: 'group',
     title: 'CI/CD',
-    summary: 'Release fundamentals and practical pages for GitHub Actions and Jenkins.',
+    summary: 'Git commands, release fundamentals, GitHub Actions, and Jenkins.',
     route: CICD_NOTES_ROUTE,
     children: [
         {
@@ -534,6 +554,13 @@ export const cicdNotes: NoteGroup = {
             summary: 'Integration, delivery, deployment, pipelines, artifacts, release controls, and rollback.',
             route: CICD_BASICS_ROUTE,
             updatedOn: '2026-10-10',
+        },
+        {
+            type: 'page',
+            title: 'Git commands',
+            summary: 'Commands, options, flags, and arguments for everyday Git work.',
+            route: GIT_COMMANDS_ROUTE,
+            updatedOn: '2026-10-30',
         },
         {
             type: 'page',
@@ -549,9 +576,6 @@ export const cicdNotes: NoteGroup = {
             route: JENKINS_ROUTE,
             updatedOn: '2026-10-10',
         },
-        systemDesignPageNode(bareMetalsPage),
-        dockerNotes,
-        kubernetesNotes,
     ],
 };
 
@@ -565,8 +589,44 @@ export const frontendNotes: NoteGroup = {
     ],
 };
 
-/* Groups can contain pages or more groups. Add another NoteGroup inside
-   children when a subject needs another level. */
+const awsNotes: NotePage = {
+    type: 'page',
+    title: 'AWS services',
+    summary: 'S3, EC2, IAM, Lambda, databases, queues, containers, analytics, and AI. Three introductory points per service.',
+    route: AWS_SERVICES_ROUTE,
+    updatedOn: '2026-10-05',
+};
+
+export const cloudDeliveryNotes: NoteGroup = {
+    type: 'group',
+    title: 'Cloud & Delivery',
+    route: CLOUD_DELIVERY_ROUTE,
+    children: [
+        ...cloudOutline.map((node): NoteNode =>
+            node.pageId === '30624eb1ed5480358019debee2687837'
+                ? dockerNotes
+                : systemDesignOutlineNode(node)),
+        kubernetesNotes,
+        cicdNotes,
+        awsNotes,
+    ],
+};
+
+export const softwareDesignNotes: NoteGroup = {
+    type: 'group',
+    title: 'Software Design',
+    route: SOFTWARE_DESIGN_ROUTE,
+    children: softwareDesignOutline.map(systemDesignOutlineNode),
+};
+
+export const languagesFrameworksDatabasesNotes: NoteGroup = {
+    type: 'group',
+    title: 'Languages, Frameworks & Databases',
+    route: LANGUAGES_FRAMEWORKS_DATABASES_ROUTE,
+    children: [frontendNotes, nodeNotes, dbmsNotes, postgresqlNotes, goNotes, pythonNotes, javaNotes, springBootNotes],
+};
+
+/* Groups can contain pages or more groups. */
 export const noteTree: NoteNode[] = [
     {
         type: 'page',
@@ -575,23 +635,10 @@ export const noteTree: NoteNode[] = [
         route: PROGRAMMING_DICTIONARY_ROUTE,
         updatedOn: '2026-10-02',
     },
-    frontendNotes,
-    nodeNotes,
-    cicdNotes,
-    {
-        type: 'page',
-        title: 'AWS services',
-        summary: 'S3, EC2, IAM, Lambda, databases, queues, containers, analytics, and AI. Three introductory points per service.',
-        route: AWS_SERVICES_ROUTE,
-        updatedOn: '2026-10-05',
-    },
-    dbmsNotes,
-    postgresqlNotes,
     systemDesignNotes,
-    goNotes,
-    pythonNotes,
-    javaNotes,
-    springBootNotes,
+    cloudDeliveryNotes,
+    softwareDesignNotes,
+    languagesFrameworksDatabasesNotes,
 ];
 
 const collectPages = (nodes: NoteNode[]): NotePage[] =>

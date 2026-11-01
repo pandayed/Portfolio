@@ -13,7 +13,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use the standard time package for dates, durations, time zones, and timers."
+                    "Use the standard "
+                ],
+                [
+                    "time",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package for dates, durations, time zones, and timers."
                 ]
             ]
         },
@@ -57,7 +68,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "time.Time"
+                                "time.Time",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -73,12 +89,61 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "time.Duration"
+                                "time.Duration",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "An int64 count of nanoseconds. Use time.Second, time.Minute, or time.Hour as units."
+                                "An "
+                            ],
+                            [
+                                "int64",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " count of nanoseconds. Use "
+                            ],
+                            [
+                                "time.Second",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                ", "
+                            ],
+                            [
+                                "time.Minute",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                ", or "
+                            ],
+                            [
+                                "time.Hour",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " as units."
                             ]
                         ]
                     }
@@ -89,7 +154,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "*time.Location"
+                                "*time.Location",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -116,7 +186,89 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Read time parts with Year, Month, Day, Hour, Minute, Second, and Nanosecond."
+                    "Read time parts with "
+                ],
+                [
+                    "Year",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Month",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Day",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Hour",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Minute",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "Second",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", and "
+                ],
+                [
+                    "Nanosecond",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ".",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -125,7 +277,37 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Weekday, YearDay, and Location give more date and zone details."
+                    "Weekday",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "YearDay",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", and "
+                ],
+                [
+                    "Location",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " give more date and zone details."
                 ]
             ]
         },
@@ -134,7 +316,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use these methods rather than depending on how time.Time stores data internally."
+                    "Use these methods rather than depending on how "
+                ],
+                [
+                    "time.Time",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " stores data internally."
                 ]
             ]
         },
@@ -149,39 +342,41 @@ const note = {
         },
         {
             "id": "date-time-08",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    zone := time.FixedZone(\"IST\", 5*3600+1800)\n    earlier := time.Date(2025, time.August, 13, 14, 30, 0, 0, zone)\n    later := time.Date(2025, time.August, 15, 15, 30, 0, 123456789, zone)\n    fmt.Println(later.Sub(earlier))\n    fmt.Println(earlier.Add(2*time.Hour).Format(\"15:04\"))\n    fmt.Println(earlier.Add(-2*time.Hour).Format(\"15:04\"))\n    fmt.Println(earlier.Before(later), earlier.After(later))\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Fixed times and duration arithmetic",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    zone := time.FixedZone(\"IST\", 5*3600+1800)\n    earlier := time.Date(2025, time.August, 13, 14, 30, 0, 0, zone)\n    later := time.Date(2025, time.August, 15, 15, 30, 0, 123456789, zone)\n    fmt.Println(later.Sub(earlier))\n    fmt.Println(earlier.Add(2*time.Hour).Format(\"15:04\"))\n    fmt.Println(earlier.Add(-2*time.Hour).Format(\"15:04\"))\n    fmt.Println(earlier.Before(later), earlier.After(later))\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "49h0m0.123456789s\n16:30\n12:30\ntrue false"
+            }
         },
-        {
-            "id": "date-time-09",
-            "type": "text",
-            "richText": [
-                [
-                    "Expected output:"
-                ]
-            ]
-        },
-        {
-            "id": "date-time-10",
-            "type": "code",
-            "richText": [
-                [
-                    "49h0m0.123456789s\n16:30\n12:30\ntrue false"
-                ]
-            ],
-            "language": "Plain Text"
-        },
+
+
         {
             "id": "date-time-11",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Sub gives the duration between two times you supply."
+                    "Sub",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives the duration between two times you supply."
                 ]
             ]
         },
@@ -190,7 +385,26 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Since(start) measures from start to the actual current time."
+                    "Since(start)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " measures from "
+                ],
+                [
+                    "start",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to the actual current time."
                 ]
             ]
         },
@@ -199,7 +413,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A variable named now does not change what Since reads from the clock."
+                    "A variable named "
+                ],
+                [
+                    "now",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " does not change what "
+                ],
+                [
+                    "Since",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " reads from the clock."
                 ]
             ]
         },
@@ -208,7 +444,37 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "d.Hours(), d.Minutes(), and d.Seconds() return decimal counts."
+                    "d.Hours()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "d.Minutes()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", and "
+                ],
+                [
+                    "d.Seconds()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " return decimal counts."
                 ]
             ]
         },
@@ -217,7 +483,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A Duration holds about 290 years. Larger calculations can overflow."
+                    "A "
+                ],
+                [
+                    "Duration",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " holds about 290 years. Larger calculations can overflow."
                 ]
             ]
         },
@@ -251,29 +528,42 @@ const note = {
         },
         {
             "id": "date-time-15",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    utc := time.Date(2025, time.August, 13, 9, 0, 0, 0, time.UTC)\n    india := utc.In(time.FixedZone(\"IST\", 19800))\n    fmt.Println(utc.Equal(india))\n    fmt.Println(utc == india)\n}"
+            "type": "example",
+            "example": {
+                "title": "Comparing instants",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    utc := time.Date(2025, time.August, 13, 9, 0, 0, 0, time.UTC)\n    india := utc.In(time.FixedZone(\"IST\", 19800))\n    fmt.Println(utc.Equal(india))\n    fmt.Println(utc == india)\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
+                    "Expected output: `true`, then `false`."
                 ]
-            ],
-            "language": "Go"
+            }
         },
-        {
-            "id": "date-time-16",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Expected output: true, then false."
-                ]
-            ]
-        },
+
         {
             "id": "date-time-16-read-1",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Equal checks whether two values represent the same point in time, even in different zones."
+                    "Equal",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " checks whether two values represent the same point in time, even in different zones."
                 ]
             ]
         },
@@ -282,7 +572,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "== also compares the location and any monotonic clock reading."
+                    "==",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " also compares the location and any monotonic clock reading."
                 ]
             ]
         },
@@ -300,7 +598,26 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Before and After check time order."
+                    "Before",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "After",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " check time order."
                 ]
             ]
         },
@@ -318,7 +635,23 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A layout shows how to write the reference date: Mon Jan 2 15:04:05 MST 2006."
+                    "A layout shows how to write the reference date: Mon Jan 2 15:04:05 "
+                ],
+                [
+                    "MST",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " 2006.",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -336,7 +669,26 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "YYYY and DD are not Go layout tokens."
+                    "YYYY",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "DD",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " are not Go layout tokens."
                 ]
             ]
         },
@@ -345,7 +697,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use time.RFC3339 for a timestamp with a numeric zone offset."
+                    "Use "
+                ],
+                [
+                    "time.RFC3339",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " for a timestamp with a numeric zone offset."
                 ]
             ]
         },
@@ -380,7 +743,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "2006 / 06"
+                                "2006 / 06",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -396,7 +764,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "01 / Jan / January"
+                                "01 / Jan / January",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -412,7 +785,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "02"
+                                "02",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -428,7 +806,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "Mon / Monday"
+                                "Mon / Monday",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -444,7 +827,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "15 / 03"
+                                "15 / 03",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -460,12 +848,25 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "04 / 05"
+                                "04 / 05",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Minute / second."
+                                "Minute",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " / second."
                             ]
                         ]
                     }
@@ -476,12 +877,36 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "PM"
+                                "PM",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "AM or PM marker."
+                                "AM",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " or "
+                            ],
+                            [
+                                "PM",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " marker."
                             ]
                         ]
                     }
@@ -492,7 +917,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "MST / -0700 / -07:00"
+                                "MST / -0700 / -07:00",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -528,7 +958,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "If the input has no time zone, Parse uses UTC."
+                    "If the input has no time zone, "
+                ],
+                [
+                    "Parse",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses UTC."
                 ]
             ]
         },
@@ -537,7 +978,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "ParseInLocation uses the location you supply when the input has no zone."
+                    "ParseInLocation",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses the location you supply when the input has no zone."
                 ]
             ]
         },
@@ -555,7 +1004,42 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Parse tries to match the zone against time.Local. ParseInLocation uses the supplied location instead."
+                    "Parse",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " tries to match the zone against "
+                ],
+                [
+                    "time.Local",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". ",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "ParseInLocation",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses the supplied location instead."
                 ]
             ]
         },
@@ -570,39 +1054,42 @@ const note = {
         },
         {
             "id": "date-time-24",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"log\"\n    \"time\"\n)\n\nfunc main() {\n    loc, err := time.LoadLocation(\"Asia/Kolkata\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    const layout = \"2006-01-02 15:04:05\"\n    utc, err := time.Parse(layout, \"2025-08-13 14:30:00\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    india, err := time.ParseInLocation(layout, \"2025-08-13 14:30:00\", loc)\n    if err != nil {\n        log.Fatal(err)\n    }\n    day, err := time.ParseInLocation(\"2006-01-02\", \"2025-08-13\", loc)\n    if err != nil {\n        log.Fatal(err)\n    }\n    fmt.Println(utc.Format(time.RFC3339))\n    fmt.Println(india.UTC().Format(time.RFC3339))\n    fmt.Println(day.Format(time.RFC3339))\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Parsing and time zones",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages.",
+                    "The shown output requires the `Asia/Kolkata` time zone data to be available."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"log\"\n    \"time\"\n)\n\nfunc main() {\n    loc, err := time.LoadLocation(\"Asia/Kolkata\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    const layout = \"2006-01-02 15:04:05\"\n    utc, err := time.Parse(layout, \"2025-08-13 14:30:00\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    india, err := time.ParseInLocation(layout, \"2025-08-13 14:30:00\", loc)\n    if err != nil {\n        log.Fatal(err)\n    }\n    day, err := time.ParseInLocation(\"2006-01-02\", \"2025-08-13\", loc)\n    if err != nil {\n        log.Fatal(err)\n    }\n    fmt.Println(utc.Format(time.RFC3339))\n    fmt.Println(india.UTC().Format(time.RFC3339))\n    fmt.Println(day.Format(time.RFC3339))\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "2025-08-13T14:30:00Z\n2025-08-13T09:00:00Z\n2025-08-13T00:00:00+05:30"
+            }
         },
-        {
-            "id": "date-time-25",
-            "type": "bulleted_list",
-            "richText": [
-                [
-                    "Expected output when the zone data is available:"
-                ]
-            ]
-        },
-        {
-            "id": "date-time-26",
-            "type": "code",
-            "richText": [
-                [
-                    "2025-08-13T14:30:00Z\n2025-08-13T09:00:00Z\n2025-08-13T00:00:00+05:30"
-                ]
-            ],
-            "language": "Plain Text"
-        },
+
+
         {
             "id": "date-time-27",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "LoadLocation can fail if it cannot find the zone data."
+                    "LoadLocation",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can fail if it cannot find the zone data."
                 ]
             ]
         },
@@ -611,7 +1098,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use a named zone such as America/New_York when daylight-saving rules matter."
+                    "Use a named zone such as "
+                ],
+                [
+                    "America/New_York",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when daylight-saving rules matter."
                 ]
             ]
         },
@@ -620,7 +1118,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "FixedZone uses the same offset all year."
+                    "FixedZone",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " uses the same offset all year."
                 ]
             ]
         },
@@ -629,7 +1135,37 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "In(loc), UTC(), and Local() change the display zone, not the point in time."
+                    "In(loc)",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", "
+                ],
+                [
+                    "UTC()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ", and "
+                ],
+                [
+                    "Local()",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " change the display zone, not the point in time."
                 ]
             ]
         },
@@ -665,7 +1201,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Add adds a fixed duration."
+                    "Add",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " adds a fixed duration."
                 ]
             ]
         },
@@ -674,7 +1218,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "AddDate adds calendar years, months, and days in the time's location."
+                    "AddDate",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " adds calendar years, months, and days in the time's location."
                 ]
             ]
         },
@@ -692,7 +1244,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "AddDate normalizes an invalid date. It does not always choose the last day of the month."
+                    "AddDate",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " normalizes an invalid date. It does not always choose the last day of the month."
                 ]
             ]
         },
@@ -711,7 +1271,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Truncate rounds down the duration since the zero time, not the displayed local clock."
+                    "Truncate",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " rounds down the duration since the zero time, not the displayed local clock."
                 ]
             ]
         },
@@ -738,7 +1306,15 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Unix timestamps"
+                    "Unix",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " timestamps"
                 ]
             ]
         },
@@ -747,7 +1323,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Unix gives seconds since 1970-01-01 UTC."
+                    "Unix",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives seconds since 1970-01-01 UTC."
                 ]
             ]
         },
@@ -756,7 +1340,26 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "UnixMilli gives milliseconds. UnixNano gives nanoseconds."
+                    "UnixMilli",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives milliseconds. "
+                ],
+                [
+                    "UnixNano",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " gives nanoseconds."
                 ]
             ]
         },
@@ -774,39 +1377,41 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "UnixNano can represent dates only from about 1678 to 2262."
+                    "UnixNano",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can represent dates only from about 1678 to 2262."
                 ]
             ]
         },
         {
             "id": "date-time-35",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    t := time.Date(2025, time.August, 13, 9, 0, 0, 0, time.UTC)\n    fmt.Println(t.Unix())\n    fmt.Println(t.UnixNano())\n    fmt.Println(time.Unix(t.Unix(), 0).UTC().Format(time.RFC3339))\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "`Unix` timestamps",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    t := time.Date(2025, time.August, 13, 9, 0, 0, 0, time.UTC)\n    fmt.Println(t.Unix())\n    fmt.Println(t.UnixNano())\n    fmt.Println(time.Unix(t.Unix(), 0).UTC().Format(time.RFC3339))\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "1755075600\n1755075600000000000\n2025-08-13T09:00:00Z"
+            }
         },
-        {
-            "id": "date-time-36",
-            "type": "text",
-            "richText": [
-                [
-                    "Expected output:"
-                ]
-            ]
-        },
-        {
-            "id": "date-time-37",
-            "type": "code",
-            "richText": [
-                [
-                    "1755075600\n1755075600000000000\n2025-08-13T09:00:00Z"
-                ]
-            ],
-            "language": "Plain Text"
-        },
+
+
         {
             "id": "date-time-38",
             "type": "sub_header",
@@ -847,12 +1452,33 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "time.Sleep(d)"
+                                "time.Sleep(d)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Pause the current goroutine for at least d."
+                                "Pause the current goroutine for at least "
+                            ],
+                            [
+                                "d",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                ".",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ]
                     }
@@ -863,7 +1489,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "time.After(d)"
+                                "time.After(d)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -879,12 +1510,55 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "time.NewTimer(d)"
+                                "time.NewTimer(d)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "A timer that fires once. Use Stop or Reset to control it. Wait by receiving from timer.C."
+                                "A timer that fires once. Use "
+                            ],
+                            [
+                                "Stop",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " or "
+                            ],
+                            [
+                                "Reset",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " to control it. Wait by receiving from "
+                            ],
+                            [
+                                "timer.C",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                ".",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ]
                     }
@@ -895,12 +1569,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "time.NewTicker(d)"
+                                "time.NewTicker(d)",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Sends ticks repeatedly. Slow receivers can miss ticks. Stop when work ends."
+                                "Sends ticks repeatedly. Slow receivers can miss ticks. "
+                            ],
+                            [
+                                "Stop",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " when work ends."
                             ]
                         ]
                     }
@@ -921,7 +1611,31 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Ticker.Stop stops ticks but does not close ticker.C."
+                    "Ticker.Stop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " stops ticks but does not close "
+                ],
+                [
+                    "ticker.C",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ".",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -936,23 +1650,28 @@ const note = {
         },
         {
             "id": "date-time-41",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    ticker := time.NewTicker(10 * time.Millisecond)\n    defer ticker.Stop()\n    for i := 0; i < 3; i++ {\n        <-ticker.C\n        fmt.Println(\"tick\", i+1)\n    }\n}"
-                ]
-            ],
-            "language": "Go"
-        },
-        {
-            "id": "date-time-42",
-            "type": "bulleted_list",
-            "richText": [
-                [
+            "type": "example",
+            "example": {
+                "title": "Sleep, timers, and tickers",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    ticker := time.NewTicker(10 * time.Millisecond)\n    defer ticker.Stop()\n    for i := 0; i < 3; i++ {\n        <-ticker.C\n        fmt.Println(\"tick\", i+1)\n    }\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "explanation": [
                     "Expected output: tick 1, tick 2, tick 3 on separate lines."
                 ]
-            ]
+            }
         },
+
         {
             "id": "date-time-42-read-1",
             "type": "bulleted_list",
@@ -994,7 +1713,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "With this behavior, Stop and Reset prevent later receives of old values from the previous timer setting."
+                    "With this behavior, "
+                ],
+                [
+                    "Stop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "Reset",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " prevent later receives of old values from the previous timer setting."
                 ]
             ]
         },
@@ -1003,7 +1744,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The new behavior is the default when the main module declares go 1.23 or later."
+                    "The new behavior is the default when the "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " module declares "
+                ],
+                [
+                    "go 1.23",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or later."
                 ]
             ]
         },
@@ -1012,7 +1775,40 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The asynctimerchan GODEBUG setting can select different behavior."
+                    "The "
+                ],
+                [
+                    "asynctimerchan",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " "
+                ],
+                [
+                    "GODEBUG",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " setting can "
+                ],
+                [
+                    "select",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " different behavior."
                 ]
             ]
         },
@@ -1039,7 +1835,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Before reusing a channel timer with older behavior, stop it and remove an unread expiry value when needed."
+                    "Before",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " reusing a channel timer with older behavior, stop it and remove an unread expiry value when needed."
                 ]
             ]
         },
@@ -1048,7 +1852,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Then call Reset. Coordinate this with any other receiver."
+                    "Then call "
+                ],
+                [
+                    "Reset",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". Coordinate this with any other receiver."
                 ]
             ]
         },
@@ -1066,7 +1881,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Stop is still useful when you want to prevent future timer or ticker work."
+                    "Stop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " is still useful when you want to prevent future timer or ticker work."
                 ]
             ]
         },
@@ -1156,7 +1979,19 @@ const note = {
                     "API reference: "
                 ],
                 [
-                    "time package",
+                    "time",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/time"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " package",
                     [
                         [
                             "a",

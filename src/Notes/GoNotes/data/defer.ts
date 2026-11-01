@@ -61,33 +61,27 @@ const note = {
         },
         {
             "id": "a22030b4-6651-5fe9-a915-9851fc87ab73",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc sayHello() { fmt.Println(\"Hello\") }\n\nfunc greetAndReturn() int {\n    defer fmt.Println(\"Deferred: Goodbye\")\n    fmt.Println(\"In Function: Greeting\")\n    return 42\n}\n\nfunc main() {\n    sayHello()\n    result := greetAndReturn()\n    fmt.Println(\"Returned:\", result)\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Return timing",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc sayHello() { fmt.Println(\"Hello\") }\n\nfunc greetAndReturn() int {\n    defer fmt.Println(\"Deferred: Goodbye\")\n    fmt.Println(\"In Function: Greeting\")\n    return 42\n}\n\nfunc main() {\n    sayHello()\n    result := greetAndReturn()\n    fmt.Println(\"Returned:\", result)\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "Hello\nIn Function: Greeting\nDeferred: Goodbye\nReturned: 42"
+            }
         },
-        {
-            "id": "f3329694-bee4-59aa-8e16-cd1a9e0cd4e0",
-            "type": "text",
-            "richText": [
-                [
-                    "Expected output:"
-                ]
-            ]
-        },
-        {
-            "id": "24224eb1-ed54-80e9-ad9b-f5f9abf22234",
-            "type": "code",
-            "richText": [
-                [
-                    "Hello\nIn Function: Greeting\nDeferred: Goodbye\nReturned: 42"
-                ]
-            ],
-            "language": "Plain Text"
-        },
+
+
         {
             "id": "a8d12f23-5804-500e-b648-bd801c26412d",
             "type": "bulleted_list",
@@ -139,7 +133,18 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Calling example prints:"
+                    "Calling "
+                ],
+                [
+                    "example",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " prints:"
                 ]
             ]
         },
@@ -215,7 +220,18 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Calling capture prints:"
+                    "Calling "
+                ],
+                [
+                    "capture",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " prints:"
                 ]
             ]
         },
@@ -468,7 +484,18 @@ const note = {
             "type": "text",
             "richText": [
                 [
-                    "Calling loop prints:"
+                    "Calling "
+                ],
+                [
+                    "loop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " prints:"
                 ]
             ]
         },
@@ -671,7 +698,28 @@ const note = {
                     "Source: "
                 ],
                 [
-                    "Go 1.14 defer improvements",
+                    "Go 1.14 ",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/doc/go1.14#runtime"
+                        ]
+                    ]
+                ],
+                [
+                    "defer",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/doc/go1.14#runtime"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " improvements",
                     [
                         [
                             "a",
@@ -689,11 +737,44 @@ const note = {
                     "Source: "
                 ],
                 [
-                    "Defer, panic and recover",
+                    "Defer, ",
                     [
                         [
                             "a",
                             "https://go.dev/blog/defer-panic-and-recover"
+                        ]
+                    ]
+                ],
+                [
+                    "panic",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/blog/defer-panic-and-recover"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and ",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/blog/defer-panic-and-recover"
+                        ]
+                    ]
+                ],
+                [
+                    "recover",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/blog/defer-panic-and-recover"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ]

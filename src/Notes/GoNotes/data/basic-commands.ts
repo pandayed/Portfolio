@@ -21,9 +21,7 @@ const note = {
             "id": "basic-commands-01-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "That package needs package main and func main()."
-                ]
+                ["That package needs "], ["package main",[["c"]]], [" and "], ["func main()",[["c"]]], ["."]
             ]
         },
         {
@@ -38,11 +36,7 @@ const note = {
         {
             "id": "basic-commands-03",
             "type": "code",
-            "richText": [
-                [
-                    "go run ."
-                ]
-            ],
+            "richText": [["go run ."]],
             "language": "Shell"
         },
         {
@@ -66,11 +60,7 @@ const note = {
         {
             "id": "basic-commands-05",
             "type": "code",
-            "richText": [
-                [
-                    "go run main.go"
-                ]
-            ],
+            "richText": [["go run main.go"]],
             "language": "Shell"
         },
         {
@@ -86,9 +76,7 @@ const note = {
             "id": "basic-commands-06-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Use go run . to include all source files in the current package."
-                ]
+                ["Use "], ["go run",[["c"]]], [" . to include all source files in the current package."]
             ]
         },
         {
@@ -103,11 +91,7 @@ const note = {
         {
             "id": "basic-commands-08",
             "type": "code",
-            "richText": [
-                [
-                    "go build -o app ."
-                ]
-            ],
+            "richText": [["go build -o app ."]],
             "language": "Shell"
         },
         {
@@ -123,9 +107,7 @@ const note = {
             "id": "basic-commands-09-read-1",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "For a library package, go build checks and caches compiled code. It does not make an executable."
-                ]
+                ["For a library package, "], ["go build",[["c"]]], [" checks and caches compiled code. It does not make an executable."]
             ]
         },
         {
@@ -178,9 +160,7 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "go build -o app ."
-                            ]
+                            ["go build -o",[["c"]]], [" app ."]
                         ],
                         "col-2": [
                             [
@@ -199,14 +179,10 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "go build -o app.exe ."
-                            ]
+                            ["go build -o",[["c"]]], [" "], ["app.exe",[["c"]]], [" ."]
                         ],
                         "col-2": [
-                            [
-                                ".\\app.exe"
-                            ]
+                            [".\\"], ["app.exe",[["c"]]]
                         ]
                     }
                 }

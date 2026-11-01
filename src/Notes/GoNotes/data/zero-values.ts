@@ -67,7 +67,26 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "Signed and unsigned integers, including byte and rune"
+                                "Signed and unsigned integers, including "
+                            ],
+                            [
+                                "byte",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " and "
+                            ],
+                            [
+                                "rune",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -382,13 +401,23 @@ const note = {
         },
         {
             "id": "65b7d3b6-0a18-539d-b89d-30601e322b93",
-            "type": "code",
-            "language": "Go",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\ntype Person struct {\n    Name string\n    Age int\n}\n\nfunc main() {\n    var person Person\n    var numbers [3]int\n    fmt.Printf(\"%q %d\\n\", person.Name, person.Age) // \"\" 0\n    fmt.Println(numbers)                       // [0 0 0]\n\n    p := new(Person) // *Person pointing to a zero-valued Person\n    fmt.Printf(\"%q %d\\n\", p.Name, p.Age)         // \"\" 0\n}"
-                ]
-            ]
+            "type": "example",
+            "example": {
+                "title": "Structs and arrays",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\ntype Person struct {\n    Name string\n    Age int\n}\n\nfunc main() {\n    var person Person\n    var numbers [3]int\n    fmt.Printf(\"%q %d\\n\", person.Name, person.Age) // \"\" 0\n    fmt.Println(numbers)                       // [0 0 0]\n\n    p := new(Person) // *Person pointing to a zero-valued Person\n    fmt.Printf(\"%q %d\\n\", p.Name, p.Age)         // \"\" 0\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "10fd0eaa-1933-5f9f-8709-87eee099e663",
@@ -413,7 +442,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A nil slice has length 0 and capacity 0."
+                    "A "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " slice has length 0 and capacity 0."
                 ]
             ]
         },
@@ -422,7 +462,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You can iterate over a nil slice or append to it."
+                    "You can iterate over a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " slice or append to it."
                 ]
             ]
         },
@@ -431,7 +482,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You cannot read an element from a nil slice because it has no elements."
+                    "You cannot read an element from a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " slice because it has no elements."
                 ]
             ]
         },
@@ -440,7 +502,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You can read from a nil map, check its length, iterate over it, or delete a key."
+                    "You can read from a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " map, check its length, iterate over it, or delete a key."
                 ]
             ]
         },
@@ -449,7 +522,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Adding or updating an entry in a nil map panics."
+                    "Adding or updating an entry in a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " map panics."
                 ]
             ]
         },
@@ -458,7 +542,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Sending to or receiving from a nil channel waits forever."
+                    "Sending to or receiving from a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " channel waits forever."
                 ]
             ]
         },
@@ -467,7 +562,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Closing a nil channel panics."
+                    "Closing a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " channel panics."
                 ]
             ]
         },
@@ -476,7 +582,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "You cannot dereference a nil pointer."
+                    "You cannot dereference a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " pointer."
                 ]
             ]
         },
@@ -485,7 +602,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Calling a nil function panics."
+                    "Calling a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " function panics."
                 ]
             ]
         },

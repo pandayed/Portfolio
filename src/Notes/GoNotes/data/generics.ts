@@ -65,11 +65,7 @@ const note = {
         {
             "id": "25024eb1-ed54-807e-a81e-ccdd7fe5b57b",
             "type": "code",
-            "richText": [
-                [
-                    "func PrintSlice[T any](s []T) {\n    for _, v := range s {\n        fmt.Println(v)\n    }\n}"
-                ]
-            ],
+            "richText": [["func PrintSlice[T any](s []T) {\n    for _, v := range s {\n        fmt.Println(v)\n    }\n}"]],
             "language": "Go"
         },
         {
@@ -213,11 +209,7 @@ const note = {
         {
             "id": "1e5611a8-771f-5c33-ab53-7ecbed7072a0",
             "type": "code",
-            "richText": [
-                [
-                    "PrintSlice([]int{1, 2, 3})\nPrintSlice[int]([]int{1, 2, 3})"
-                ]
-            ],
+            "richText": [["PrintSlice([]int{1, 2, 3})\nPrintSlice[int]([]int{1, 2, 3})"]],
             "language": "Go"
         },
         {
@@ -297,21 +289,13 @@ const note = {
         {
             "id": "726e721e-c8dc-5c52-98c9-f319abf8f95a",
             "type": "code",
-            "richText": [
-                [
-                    "type Stack[T any] struct {\n    items []T\n}\n\nfunc (s *Stack[T]) Push(item T) {\n    s.items = append(s.items, item)\n}\n\nfunc (s *Stack[T]) Pop() (T, bool) {\n    if len(s.items) == 0 {\n        var zero T\n        return zero, false\n    }\n    n := len(s.items) - 1\n    item := s.items[n]\n    s.items = s.items[:n]\n    return item, true\n}"
-                ]
-            ],
+            "richText": [["type Stack[T any] struct {\n    items []T\n}\n\nfunc (s *Stack[T]) Push(item T) {\n    s.items = append(s.items, item)\n}\n\nfunc (s *Stack[T]) Pop() (T, bool) {\n    if len(s.items) == 0 {\n        var zero T\n        return zero, false\n    }\n    n := len(s.items) - 1\n    item := s.items[n]\n    s.items = s.items[:n]\n    return item, true\n}"]],
             "language": "Go"
         },
         {
             "id": "f49ee776-b5a7-575b-8d42-414487e46221",
             "type": "code",
-            "richText": [
-                [
-                    "var s Stack[int]\ns.Push(7)\nv, ok := s.Pop()\nfmt.Println(v, ok) // 7 true\nv, ok = s.Pop()\nfmt.Println(v, ok) // 0 false"
-                ]
-            ],
+            "richText": [["var s Stack[int]\ns.Push(7)\nv, ok := s.Pop()\nfmt.Println(v, ok) // 7 true\nv, ok = s.Pop()\nfmt.Println(v, ok) // 0 false"]],
             "language": "Go"
         },
         {
@@ -396,11 +380,7 @@ const note = {
         {
             "id": "fb0da56f-5a0a-53b3-8e09-61d4cbad5b08",
             "type": "code",
-            "richText": [
-                [
-                    "type Number interface {\n    ~int | ~float64\n}\n\nfunc Sum[T Number](nums []T) T {\n    var total T\n    for _, v := range nums {\n        total += v\n    }\n    return total\n}"
-                ]
-            ],
+            "richText": [["type Number interface {\n    ~int | ~float64\n}\n\nfunc Sum[T Number](nums []T) T {\n    var total T\n    for _, v := range nums {\n        total += v\n    }\n    return total\n}"]],
             "language": "Go"
         },
         {
@@ -516,11 +496,7 @@ const note = {
         {
             "id": "b351a4df-7440-5b38-89a9-a274b5c3d214",
             "type": "code",
-            "richText": [
-                [
-                    "type Count int\n\nfunc sumCounts() {\n    fmt.Println(Sum([]Count{2, 3})) // 5\n}"
-                ]
-            ],
+            "richText": [["type Count int\n\nfunc sumCounts() {\n    fmt.Println(Sum([]Count{2, 3})) // 5\n}"]],
             "language": "Go"
         },
         {
@@ -605,11 +581,7 @@ const note = {
         {
             "id": "25024eb1-ed54-8075-9ba9-d88586992ed5",
             "type": "code",
-            "richText": [
-                [
-                    "func IndexOf[T comparable](slice []T, value T) int {\n    for i, v := range slice {\n        if v == value {\n            return i\n        }\n    }\n    return -1\n}"
-                ]
-            ],
+            "richText": [["func IndexOf[T comparable](slice []T, value T) int {\n    for i, v := range slice {\n        if v == value {\n            return i\n        }\n    }\n    return -1\n}"]],
             "language": "Go"
         },
         {
@@ -748,9 +720,7 @@ const note = {
             "id": "f05c90e7-a1e5-599f-9594-8e140e851f87",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Its stored value still matters. Comparing interface values that hold slices, maps or functions can panic."
-                ]
+                ["Its stored value still matters. Comparing interface values that hold slices, maps or functions can "], ["panic",[["c"]]], ["."]
             ]
         },
         {

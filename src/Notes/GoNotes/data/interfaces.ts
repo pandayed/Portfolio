@@ -203,33 +203,27 @@ const note = {
         },
         {
             "id": "5498ed48-eb04-577f-886c-220297a3efa7",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\ntype Speaker interface {\n    Speak() string\n}\n\ntype Dog struct{}\nfunc (Dog) Speak() string { return \"Woof\" }\n\ntype Cat struct{}\nfunc (Cat) Speak() string { return \"Meow\" }\n\nfunc makeItSpeak(s Speaker) {\n    fmt.Println(s.Speak())\n}\n\nfunc main() {\n    makeItSpeak(Dog{})\n    makeItSpeak(Cat{})\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Using interface values",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\ntype Speaker interface {\n    Speak() string\n}\n\ntype Dog struct{}\nfunc (Dog) Speak() string { return \"Woof\" }\n\ntype Cat struct{}\nfunc (Cat) Speak() string { return \"Meow\" }\n\nfunc makeItSpeak(s Speaker) {\n    fmt.Println(s.Speak())\n}\n\nfunc main() {\n    makeItSpeak(Dog{})\n    makeItSpeak(Cat{})\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "Woof\nMeow"
+            }
         },
-        {
-            "id": "d34cae42-f836-5db7-bbd6-1dff4165dcfc",
-            "type": "text",
-            "richText": [
-                [
-                    "Expected output:"
-                ]
-            ]
-        },
-        {
-            "id": "90642f75-411c-51a6-b598-09aeb115f412",
-            "type": "code",
-            "richText": [
-                [
-                    "Woof\nMeow"
-                ]
-            ],
-            "language": "Plain Text"
-        },
+
+
         {
             "id": "2f324eb1-ed54-8080-85a6-f11621db4227",
             "type": "text",
@@ -506,7 +500,15 @@ const note = {
             "type": "sub_header",
             "richText": [
                 [
-                    "Empty interface and any"
+                    "Empty interface and "
+                ],
+                [
+                    "any",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -886,7 +888,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Assigning a typed nil pointer gives the interface a dynamic type."
+                    "Assigning a typed "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " pointer gives the interface a dynamic type."
                 ]
             ]
         },
@@ -947,7 +960,18 @@ const note = {
                     ]
                 ],
                 [
-                    " for success. Do not return a typed nil pointer as an "
+                    " for success. Do not return a typed "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " pointer as an "
                 ],
                 [
                     "error",

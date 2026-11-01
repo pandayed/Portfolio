@@ -15,7 +15,7 @@ const CICDNotesIndex = () => (
             <h2 id="cicd-index-prerequisites" className="SectionTitle">Prerequisites</h2>
             <p>No prior notes required.</p>
         </section>
-        <p className="Notes__intro">Start with the release process. Then read the GitHub Actions and Jenkins pages.</p>
+        <p className="Notes__intro">Start with the release process. Use the Git command reference, then read the GitHub Actions and Jenkins pages.</p>
         <NoteTree nodes={cicdNotes.children} />
         <section className="Article__section" aria-labelledby="cicd-index-references">
             <h2 id="cicd-index-references" className="SectionTitle">References</h2>

@@ -171,13 +171,23 @@ const note = {
         },
         {
             "id": "b42b90c4-eb85-5c45-ad46-b351e6ba6ffa",
-            "type": "code",
-            "language": "Go",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc change(s []int) {\n    s[0] = 99\n    s = s[:1] // changes only this function’s slice length\n}\n\nfunc main() {\n    a := []int{1, 2, 3}\n    b := a\n    b[1] = 77\n    change(a)\n    fmt.Println(a)      // [99 77 3]\n    fmt.Println(len(a)) // 3\n}"
-                ]
-            ]
+            "type": "example",
+            "example": {
+                "title": "Slices",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc change(s []int) {\n    s[0] = 99\n    s = s[:1] // changes only this function’s slice length\n}\n\nfunc main() {\n    a := []int{1, 2, 3}\n    b := a\n    b[1] = 77\n    change(a)\n    fmt.Println(a)      // [99 77 3]\n    fmt.Println(len(a)) // 3\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "24124eb1-ed54-8056-ab2f-ed831bcbb392",
@@ -238,7 +248,15 @@ const note = {
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "Using make"
+                    "Using "
+                ],
+                [
+                    "make",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -608,7 +626,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "An empty slice can be nil or non-nil."
+                    "An empty slice can be "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or non-"
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -672,7 +712,18 @@ const note = {
                     ]
                 ],
                 [
-                    " with a nil slice."
+                    " with a "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " slice."
                 ]
             ]
         },
@@ -882,11 +933,44 @@ const note = {
                     "Reference: "
                 ],
                 [
-                    "Go specification: append and copy",
+                    "Go specification: ",
                     [
                         [
                             "a",
                             "https://go.dev/ref/spec#Appending_and_copying_slices"
+                        ]
+                    ]
+                ],
+                [
+                    "append",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/spec#Appending_and_copying_slices"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and ",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/spec#Appending_and_copying_slices"
+                        ]
+                    ]
+                ],
+                [
+                    "copy",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/ref/spec#Appending_and_copying_slices"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],

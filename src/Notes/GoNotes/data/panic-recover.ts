@@ -124,12 +124,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "panic"
+                                "panic",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "A broken invariant (a rule that must stay true), a programming bug or a must-style helper"
+                                "A broken invariant (a rule that must stay "
+                            ],
+                            [
+                                "true",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "), a programming bug or a must-style helper"
                             ]
                         ]
                     }
@@ -140,7 +156,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "recover"
+                                "recover",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -232,33 +253,27 @@ const note = {
         },
         {
             "id": "066511f1-94b5-5272-89b8-f03725513960",
-            "type": "code",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc safe() {\n    defer func() {\n        if r := recover(); r != nil {\n            fmt.Println(\"Recovered from:\", r)\n        }\n    }()\n\n    defer fmt.Println(\"Cleanup\")\n    panic(\"fail\")\n    // Ordinary statements and new defer statements here are not reached.\n}\n\nfunc main() {\n    fmt.Println(\"Start\")\n    safe()\n    fmt.Println(\"End\")\n}"
-                ]
-            ],
-            "language": "Go"
+            "type": "example",
+            "example": {
+                "title": "Recovery control flow",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc safe() {\n    defer func() {\n        if r := recover(); r != nil {\n            fmt.Println(\"Recovered from:\", r)\n        }\n    }()\n\n    defer fmt.Println(\"Cleanup\")\n    panic(\"fail\")\n    // Ordinary statements and new defer statements here are not reached.\n}\n\nfunc main() {\n    fmt.Println(\"Start\")\n    safe()\n    fmt.Println(\"End\")\n}"
+                    }
+                ],
+                "commands": "go run main.go",
+                "result": "Start\nCleanup\nRecovered from: fail\nEnd"
+            }
         },
-        {
-            "id": "1759e5d3-21bc-5ca1-a128-a840b6ba5f11",
-            "type": "text",
-            "richText": [
-                [
-                    "Expected output:"
-                ]
-            ]
-        },
-        {
-            "id": "1f5d8ccf-4abf-5326-ac16-c68263fcfdf3",
-            "type": "code",
-            "richText": [
-                [
-                    "Start\nCleanup\nRecovered from: fail\nEnd"
-                ]
-            ],
-            "language": "Plain Text"
-        },
+
+
         {
             "id": "24216aa4-a498-5c24-b735-dc53b14d30ee",
             "type": "bulleted_list",
@@ -503,7 +518,18 @@ const note = {
                     ]
                 ],
                 [
-                    " into a non-nil "
+                    " into a non-"
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " "
                 ],
                 [
                     "*runtime.PanicNilError",
@@ -562,7 +588,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The older behavior may be selected automatically when the main module declares Go 1.20 or earlier."
+                    "The older behavior may be selected automatically when the "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " module declares Go 1.20 or earlier."
                 ]
             ]
         },
@@ -725,11 +762,44 @@ const note = {
                     "Source: "
                 ],
                 [
-                    "Built-in panic and recover",
+                    "Built-in ",
                     [
                         [
                             "a",
                             "https://pkg.go.dev/builtin#recover"
+                        ]
+                    ]
+                ],
+                [
+                    "panic",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/builtin#recover"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and ",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/builtin#recover"
+                        ]
+                    ]
+                ],
+                [
+                    "recover",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/builtin#recover"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ]

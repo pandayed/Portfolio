@@ -1,10 +1,12 @@
+import { createElement } from 'react';
+
 import type { GoNote } from '../types';
 
 const note = {
     notionId: 'go-gin',
     slug: 'gin',
     title: 'Gin: getting started',
-    updatedOn: '2026-10-19',
+    updatedOn: '2026-10-26',
     blocks: [
         { id: 'gin-role', type: 'sub_header', richText: [['Gin']] },
         { id: 'gin-definition', type: 'bulleted_list', richText: [['Gin is a Go package for building HTTP applications. It provides methods for registering routes, reading requests, and writing responses.']] },
@@ -35,7 +37,7 @@ const note = {
 
         { id: 'gin-routes', type: 'sub_header', richText: [['Route registration']] },
         { id: 'gin-route-definition', type: 'bulleted_list', richText: [['A route registration associates an HTTP method and path with a handler on the engine.']] },
-        { id: 'gin-registration', type: 'bulleted_list', richText: [['The engine’s '], ['GET', [['c']]], [' method registers a GET route. Registration stores the handler function for later requests; it does not call the function immediately.']] },
+        { id: 'gin-registration', type: 'bulleted_list', richText: [['The engine’s '], ['GET', [['c']]], [" method registers a "], ["GET",[["c"]]], [" route. Registration stores the handler function for later requests; it does not call the function immediately."]] },
 
         { id: 'gin-server', type: 'sub_header', richText: [['HTTP server']] },
         { id: 'gin-run', type: 'bulleted_list', richText: [['The engine’s '], ['Run', [['c']]], [' method starts a Go HTTP server using that engine to handle requests. Its address argument selects the interface and port to listen on.']] },
@@ -43,8 +45,9 @@ const note = {
         {
             id: 'gin-first-server', type: 'example', example: {
                 title: 'Basic server', language: 'go',
-                description: ['The example requires Go compatible with the selected Gin release.', 'In an empty directory, the first two commands create a module and add Gin. The code is saved as main.go before go run . runs.', 'The curl command runs in a second terminal while the server is running.'],
-                code: `package main
+                description: ['The example requires Go compatible with the selected Gin release.', "The `main.go` and `go.mod` tabs are saved in an empty directory. The first command adds Gin before `go run .` starts the server.", "The `curl` command runs in a second terminal while the server is running."],
+                code: '',
+                files: [{ name: 'main.go', language: 'go', code: `package main
 
 import (
     "log"
@@ -61,9 +64,6 @@ func ping(c *gin.Context) {
 func main() {
     // Engine creation.
     router := gin.Default()
-    if err := router.SetTrustedProxies(nil); err != nil {
-        log.Fatal(err)
-    }
 
     // Route registration: ping is the handler function.
     router.GET("/ping", ping)
@@ -72,22 +72,29 @@ func main() {
     if err := router.Run("127.0.0.1:8080"); err != nil {
         log.Fatal(err)
     }
-}`,
-                commands: `go mod init example.com/gin-notes
-go get github.com/gin-gonic/gin
+}` },
+                    { name: 'go.mod', language: 'text', code: 'module example.com/gin-notes\n' },
+                ],
+                commands: `go get github.com/gin-gonic/gin
 go run .
 
 # In another terminal:
 curl -s http://127.0.0.1:8080/ping`,
                 result: '{"message":"pong"}',
                 explanation: [
-                    'Engine: router holds the *gin.Engine returned by gin.Default(). The variable is named router because this engine selects handlers for routes.',
-                    'Handler: ping is the function registered for GET /ping. Passing ping without parentheses gives Gin the function to call later.',
-                    'Server: router.Run listens on the local machine at port 8080. The curl command sends GET /ping to that address.',
-                    'Request handling: Gin finds the route, prepares its context, and calls ping with that context as c.',
-                    'Response: c.JSON sends status 200 from http.StatusOK and encodes the supplied value as JSON. gin.H is a short name for map[string]any.',
-                    'SetTrustedProxies(nil) configures this direct-traffic example to ignore forwarded client IP headers.',
-                    'A port conflict makes Run return an error. log.Fatal prints it and exits. Ctrl+C stops this local server.',
+                    "Engine: `router` holds the `*gin.Engine` returned by `gin.Default()`. The variable is named `router` because this engine selects handlers for routes.",
+                    "Handler: `ping` is the function registered for `GET` `/ping`. Passing `ping` without parentheses gives Gin the function to call later.",
+                    "Server: `router.Run` listens on the local machine at port 8080. The `curl` command sends `GET` `/ping` to that address.",
+                    "Request handling: Gin finds the route, prepares its context, and calls `ping` with that context as `c`.",
+                    "Response: `c.JSON` sends status 200 from `http.StatusOK` and encodes the supplied value as JSON. `gin.H` is a short name for `map[string]any`.",
+                    createElement('span', null,
+                        'Gin may print a warning that it trusts all proxies by default. This local example leaves that configuration for ',
+                        createElement('a', { className: 'Link', href: '#/notes/go/gin-server' }, 'Gin: server configuration'),
+                        ', under “Trusted proxies and client IP”. Proxy trust affects client IP logging, but does not change this ',
+                        createElement('code', null, '/ping'),
+                        ' response.',
+                    ),
+                    "A port conflict makes `Run` return an error. `log.Fatal` prints it and exits. Ctrl+C stops this local server.",
                 ],
             },
         },

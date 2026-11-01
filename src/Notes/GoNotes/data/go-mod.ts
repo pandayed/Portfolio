@@ -13,7 +13,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "go.mod records the module path, required Go version, and dependencies."
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " records the module path, required Go version, and dependencies."
                 ]
             ]
         },
@@ -66,7 +74,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "module"
+                                "module",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -82,7 +95,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "go"
+                                "go",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -98,12 +116,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "toolchain"
+                                "toolchain",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Suggested version of the Go tools for a main module (Go 1.21+)."
+                                "Suggested version of the Go tools for a "
+                            ],
+                            [
+                                "main",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " module (Go 1.21+)."
                             ]
                         ]
                     }
@@ -114,12 +148,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "require"
+                                "require",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Minimum version of another module. // indirect means this module does not directly import a package from it."
+                                "Minimum version of another module. "
+                            ],
+                            [
+                                "// indirect",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " means this module does not directly import a package from it."
                             ]
                         ]
                     }
@@ -130,7 +180,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "replace"
+                                "replace",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -146,12 +201,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "exclude"
+                                "exclude",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Prevent the main module from using a specific dependency version."
+                                "Prevent the "
+                            ],
+                            [
+                                "main",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " module from using a specific dependency version."
                             ]
                         ]
                     }
@@ -163,26 +234,54 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The module path here is example.com/shop."
+                    "The module path here is "
+                ],
+                [
+                    "example.com/shop",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
         {
             "id": "go-mod-05",
-            "type": "code",
-            "richText": [
-                [
-                    "module example.com/shop\n\ngo 1.23.0\n\nrequire example.com/lib v1.2.3"
+            "type": "example",
+            "example": {
+                "title": "Module file contents",
+                "language": "text",
+                "description": [
+                    "This illustrative `go.mod` uses example module paths and versions. The dependencies and replacement directories must exist for a real build."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "go.mod",
+                        "language": "text",
+                        "code": "module example.com/shop\n\ngo 1.23.0\n\nrequire example.com/lib v1.2.3"
+                    }
                 ]
-            ],
-            "language": "Plain Text"
+            }
         },
         {
             "id": "go-mod-06",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "require sets a minimum version. It does not lock the build to that version."
+                    "require",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " sets a minimum version. It does not lock the build to that version."
                 ]
             ]
         },
@@ -200,7 +299,40 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "For example, a requirement for v1.4.0 can raise the selected version from v1.2.3 to v1.4.0."
+                    "For example, a requirement for "
+                ],
+                [
+                    "v1.4.0",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " can raise the selected version from "
+                ],
+                [
+                    "v1.2.3",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to "
+                ],
+                [
+                    "v1.4.0",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -209,7 +341,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "go.sum checks downloaded content. It does not choose versions."
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " checks downloaded content. It does not choose versions."
                 ]
             ]
         },
@@ -226,6 +366,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/go-sum"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -274,12 +417,28 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "go mod init example.com/shop"
+                                "go mod init example.com/shop",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
                             [
-                                "Create go.mod for the new module."
+                                "Create "
+                            ],
+                            [
+                                "go.mod",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                " for the new module."
                             ]
                         ]
                     }
@@ -290,7 +449,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "go get module/path@version"
+                                "go get module/path@version",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -306,7 +470,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "go mod tidy"
+                                "go mod tidy",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -322,7 +491,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "go mod download"
+                                "go mod download",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -338,7 +512,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "go mod verify"
+                                "go mod verify",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -354,7 +533,12 @@ const note = {
                     "cells": {
                         "col-0": [
                             [
-                                "go list -m all"
+                                "go list -m all",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
                             ]
                         ],
                         "col-1": [
@@ -371,7 +555,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Since Go 1.16, build commands normally leave go.mod unchanged and report missing requirements."
+                    "Since Go 1.16, build commands normally leave "
+                ],
+                [
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " unchanged and report missing requirements."
                 ]
             ]
         },
@@ -380,7 +575,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Use go get or go mod tidy to update dependencies."
+                    "Use "
+                ],
+                [
+                    "go get",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " or "
+                ],
+                [
+                    "go mod tidy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to update dependencies."
                 ]
             ]
         },
@@ -389,7 +606,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A build can download a module already listed in go.mod. That does not add a new requirement."
+                    "A build can download a module already listed in "
+                ],
+                [
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    ". That does not add a new requirement."
                 ]
             ]
         },
@@ -404,20 +632,51 @@ const note = {
         },
         {
             "id": "go-mod-12",
-            "type": "code",
-            "richText": [
-                [
-                    "require example.com/lib v1.2.3\nreplace example.com/lib => ../lib\nexclude example.com/other v1.3.0"
+            "type": "example",
+            "example": {
+                "title": "Dependency directive fragment",
+                "language": "text",
+                "description": [
+                    "This illustrative `go.mod` uses example module paths and versions. The dependencies and replacement directories must exist for a real build."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "go.mod",
+                        "language": "text",
+                        "code": "require example.com/lib v1.2.3\nreplace example.com/lib => ../lib\nexclude example.com/other v1.3.0"
+                    }
                 ]
-            ],
-            "language": "Plain Text"
+            }
         },
         {
             "id": "go-mod-13",
             "type": "bulleted_list",
             "richText": [
                 [
-                    "The local replacement uses ../lib instead of downloading example.com/lib."
+                    "The local replacement uses "
+                ],
+                [
+                    "../lib",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " instead of downloading "
+                ],
+                [
+                    "example.com/lib",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -426,7 +685,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "That directory needs the correct go.mod."
+                    "That directory needs the correct "
+                ],
+                [
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -435,7 +705,15 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "replace alone does not add a dependency. The module must also be required."
+                    "replace",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " alone does not add a dependency. The module must also be required."
                 ]
             ]
         },
@@ -444,7 +722,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go ignores replacements and exclusions from dependency modules. The main module controls them."
+                    "Go ignores replacements and exclusions from dependency modules. The "
+                ],
+                [
+                    "main",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " module controls them."
                 ]
             ]
         },
@@ -453,7 +742,29 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Commit go.mod and go.sum when present."
+                    "Commit "
+                ],
+                [
+                    "go.mod",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and "
+                ],
+                [
+                    "go.sum",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " when present."
                 ]
             ]
         },
@@ -462,7 +773,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Review their changes after updating imports or running go mod tidy."
+                    "Review their changes after updating imports or running "
+                ],
+                [
+                    "go mod tidy",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -483,7 +805,19 @@ const note = {
                     "Source: "
                 ],
                 [
-                    "go.mod file reference",
+                    "go.mod",
+                    [
+                        [
+                            "a",
+                            "https://go.dev/doc/modules/gomod-ref"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " file reference",
                     [
                         [
                             "a",

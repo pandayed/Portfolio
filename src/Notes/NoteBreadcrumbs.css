@@ -1,0 +1,22 @@
+.NoteBreadcrumbs {
+    width: 100%;
+    max-width: var(--section-max-width);
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--color-text-subtle);
+    margin-bottom: 1rem;
+}
+
+.NoteBreadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.NoteBreadcrumbs li + li::before {
+    content: '/';
+    margin-right: 0.6rem;
+}

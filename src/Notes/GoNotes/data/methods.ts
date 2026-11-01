@@ -54,11 +54,7 @@ const note = {
         {
             "id": "622d4959-8e83-5854-b115-18cea4bd872d",
             "type": "code",
-            "richText": [
-                [
-                    "type User struct { Name string }\n\nfunc (u User) Read() string {\n    return u.Name\n}\n\nfunc (u *User) Write(name string) {\n    u.Name = name\n}\n\nfunc useUser() {\n    u := User{Name: \"Bob\"}\n    u.Write(\"Alice\")\n    fmt.Println(u.Read()) // Alice\n}"
-                ]
-            ],
+            "richText": [["type User struct { Name string }\n\nfunc (u User) Read() string {\n    return u.Name\n}\n\nfunc (u *User) Write(name string) {\n    u.Name = name\n}\n\nfunc useUser() {\n    u := User{Name: \"Bob\"}\n    u.Write(\"Alice\")\n    fmt.Println(u.Read()) // Alice\n}"]],
             "language": "Go"
         },
         {
@@ -324,11 +320,7 @@ const note = {
         {
             "id": "387fd577-84cc-525c-bcc8-68c9ac29d2b9",
             "type": "code",
-            "richText": [
-                [
-                    "func callExpressions() {\n    u := User{Name: \"Bob\"}\n    read := User.Read          // func(User) string\n    write := (*User).Write     // func(*User, string)\n    write(&u, \"Alice\")\n    fmt.Println(read(u))       // Alice\n}"
-                ]
-            ],
+            "richText": [["func callExpressions() {\n    u := User{Name: \"Bob\"}\n    read := User.Read          // func(User) string\n    write := (*User).Write     // func(*User, string)\n    write(&u, \"Alice\")\n    fmt.Println(read(u))       // Alice\n}"]],
             "language": "Go"
         },
         {
@@ -469,11 +461,7 @@ const note = {
         {
             "id": "77cebf54-106d-5641-9568-155bc71a4408",
             "type": "code",
-            "richText": [
-                [
-                    "type Writer interface {\n    Write(string)\n}\n\nvar _ Writer = (*User)(nil) // *User implements Writer\n// var _ Writer = User{}   // compile-time error: Write has a pointer receiver"
-                ]
-            ],
+            "richText": [["type Writer interface {\n    Write(string)\n}\n\nvar _ Writer = (*User)(nil) // *User implements Writer\n// var _ Writer = User{}   // compile-time error: Write has a pointer receiver"]],
             "language": "Go"
         },
         {
@@ -641,11 +629,7 @@ const note = {
         {
             "id": "65ae6bdb-0986-53a1-bec0-2e7e7e08ec12",
             "type": "code",
-            "richText": [
-                [
-                    "func makeUser() User { return User{} }\n\nfunc addressableCalls() {\n    u := User{}\n    u.Write(\"Alice\")\n\n    users := []User{{}}\n    users[0].Write(\"Bob\")\n\n    m := map[string]User{\"a\": {}}\n    copyOfUser := m[\"a\"]\n    copyOfUser.Write(\"Carol\")\n    m[\"a\"] = copyOfUser // write the changed copy back\n\n    // User{}.Write(\"Alice\")  // error: literal is not addressable for this call\n    // makeUser().Write(\"Bob\") // error: function result is not addressable\n    // m[\"a\"].Write(\"Carol\")   // error: map index is not addressable\n\n    (&User{}).Write(\"Alice\") // explicit address of a composite literal is allowed\n}"
-                ]
-            ],
+            "richText": [["func makeUser() User { return User{} }\n\nfunc addressableCalls() {\n    u := User{}\n    u.Write(\"Alice\")\n\n    users := []User{{}}\n    users[0].Write(\"Bob\")\n\n    m := map[string]User{\"a\": {}}\n    copyOfUser := m[\"a\"]\n    copyOfUser.Write(\"Carol\")\n    m[\"a\"] = copyOfUser // write the changed copy back\n\n    // User{}.Write(\"Alice\")  // error: literal is not addressable for this call\n    // makeUser().Write(\"Bob\") // error: function result is not addressable\n    // m[\"a\"].Write(\"Carol\")   // error: map index is not addressable\n\n    (&User{}).Write(\"Alice\") // explicit address of a composite literal is allowed\n}"]],
             "language": "Go"
         },
         {
@@ -757,19 +741,13 @@ const note = {
             "id": "636bfee0-fde8-5398-b400-13ce835df2da",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "A method can also panic for reasons unrelated to its receiver."
-                ]
+                ["A method can also "], ["panic",[["c"]]], [" for reasons unrelated to its receiver."]
             ]
         },
         {
             "id": "6b950c31-017e-5758-8a37-6452ee429266",
             "type": "code",
-            "richText": [
-                [
-                    "func (u *User) DisplayName() string {\n    if u == nil {\n        return \"unknown\"\n    }\n    return u.Name\n}\n\nfunc nilReceiver() {\n    var u *User\n    fmt.Println(u.DisplayName()) // unknown\n    // u.Write(\"Alice\")          // panics when Write accesses u.Name\n    // u.Read()                  // panics: a User value cannot be obtained from nil\n}"
-                ]
-            ],
+            "richText": [["func (u *User) DisplayName() string {\n    if u == nil {\n        return \"unknown\"\n    }\n    return u.Name\n}\n\nfunc nilReceiver() {\n    var u *User\n    fmt.Println(u.DisplayName()) // unknown\n    // u.Write(\"Alice\")          // panics when Write accesses u.Name\n    // u.Read()                  // panics: a User value cannot be obtained from nil\n}"]],
             "language": "Go"
         },
         {
@@ -851,11 +829,7 @@ const note = {
         {
             "id": "ed4b0c55-93e4-561c-8d13-c47a5ab72e91",
             "type": "code",
-            "richText": [
-                [
-                    "type UserID int\n\nfunc (id UserID) IsValid() bool {\n    return id > 0\n}"
-                ]
-            ],
+            "richText": [["type UserID int\n\nfunc (id UserID) IsValid() bool {\n    return id > 0\n}"]],
             "language": "Go"
         },
         {

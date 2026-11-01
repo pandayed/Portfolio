@@ -39,20 +39,14 @@ const note = {
             "id": "24124eb1-ed54-80e8-b3a2-ee4df8b423e5",
             "type": "sub_header",
             "richText": [
-                [
-                    "Constants (const)"
-                ]
+                ["Constants ("], ["const",[["c"]]], [")"]
             ]
         },
         {
             "id": "a01743cd-b607-5c74-886f-92d19a2df73c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "const version = \"1.0\"\nconst limit int = 100\nconst enabled = true"
-                ]
-            ]
+            "richText": [["const version = \"1.0\"\nconst limit int = 100\nconst enabled = true"]]
         },
         {
             "id": "d8c2542e-63fa-5cc8-93e9-7ba27b9b03b3",
@@ -123,11 +117,7 @@ const note = {
             "id": "1ae24bc8-b3e8-5c49-9464-89c9a09b598f",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "const untyped = 42\nvar small int32 = untyped\nvar large int64 = untyped\n\nconst typed int32 = 42\n// var wrong int64 = typed // invalid: int32 is not assignable to int64\nvar converted int64 = int64(typed)\n\n// var overflow uint8 = 256 // invalid: 256 does not fit in uint8"
-                ]
-            ]
+            "richText": [["const untyped = 42\nvar small int32 = untyped\nvar large int64 = untyped\n\nconst typed int32 = 42\n// var wrong int64 = typed // invalid: int32 is not assignable to int64\nvar converted int64 = int64(typed)\n\n// var overflow uint8 = 256 // invalid: 256 does not fit in uint8"]]
         },
         {
             "id": "355fe16c-c02e-5994-890a-2d1ea2cb4eab",
@@ -182,11 +172,7 @@ const note = {
             "id": "8e80b0c2-d4f3-5444-a4cd-c478b03f4eed",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "const sum = 5 + 3\nconst name = \"Go\" + \"Lang\"\nconst letters = len(\"Go\") // allowed: length of a constant string"
-                ]
-            ]
+            "richText": [["const sum = 5 + 3\nconst name = \"Go\" + \"Lang\"\nconst letters = len(\"Go\") // allowed: length of a constant string"]]
         },
         {
             "id": "d2f7f564-4554-5a52-947b-590c572b8d7d",
@@ -230,11 +216,7 @@ const note = {
             "id": "5c0bda93-9233-565d-b20f-759c9cf25e3c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "var current = 10\n// const fromVariable = current // invalid: current is a variable\n// const sine = math.Sin(1.0)   // invalid even with math imported"
-                ]
-            ]
+            "richText": [["var current = 10\n// const fromVariable = current // invalid: current is a variable\n// const sine = math.Sin(1.0)   // invalid even with math imported"]]
         },
         {
             "id": "24124eb1-ed54-80ac-aebe-d9eede70b838",
@@ -249,11 +231,7 @@ const note = {
             "id": "ea2398ae-7865-532f-b24c-cc8449ead137",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "const (\n    A = 1\n    B = 2\n    C = 3\n)"
-                ]
-            ]
+            "richText": [["const (\n    A = 1\n    B = 2\n    C = 3\n)"]]
         },
         {
             "id": "f00b0f7a-d583-52f9-a3cf-003c05e2efc4",
@@ -289,9 +267,7 @@ const note = {
             "id": "24124eb1-ed54-80a1-87da-e8b26adf4908",
             "type": "sub_header",
             "richText": [
-                [
-                    "Variables (var)"
-                ]
+                ["Variables ("], ["var",[["c"]]], [")"]
             ]
         },
         {
@@ -335,9 +311,7 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "Declare an int with no explicit initializer."
-                            ]
+                            ["Declare an "], ["int",[["c"]]], [" with no explicit initializer."]
                         ]
                     }
                 },
@@ -431,11 +405,7 @@ const note = {
             "id": "eaa1d482-94a1-58ac-b6a4-a986c360d72c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "var (\n    count int = 1\n    language = \"Go\"\n    active = true\n)"
-                ]
-            ]
+            "richText": [["var (\n    count int = 1\n    language = \"Go\"\n    active = true\n)"]]
         },
         {
             "id": "24124eb1-ed54-808c-8a4f-dec4d6351ce9",
@@ -450,11 +420,7 @@ const note = {
             "id": "01e36cc1-2ef0-5899-8a45-db8b572ed542",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "func example() {\n    count := 10\n    count = 11 // assignment changes the existing variable\n    count, ready := 12, true // ready is new in this scope\n    _ = count\n    _ = ready\n}"
-                ]
-            ]
+            "richText": [["func example() {\n    count := 10\n    count = 11 // assignment changes the existing variable\n    count, ready := 12, true // ready is new in this scope\n    _ = count\n    _ = ready\n}"]]
         },
         {
             "id": "7b568de3-1c1e-5a63-865c-17b106445c26",

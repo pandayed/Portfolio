@@ -61,11 +61,7 @@ const note = {
             "id": "52285243-10d9-53b7-b3be-12a67f5e806c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "for i := 0; i < 3; i++ {\n    fmt.Println(i)\n}\n// Output, one value per line: 0, 1, 2"
-                ]
-            ]
+            "richText": [["for i := 0; i < 3; i++ {\n    fmt.Println(i)\n}\n// Output, one value per line: 0, 1, 2"]]
         },
         {
             "id": "27a6b7e6-6246-53b4-b47d-3e126832da6a",
@@ -140,11 +136,7 @@ const note = {
             "id": "b54c6808-fd84-5e24-8b82-12977eb1c069",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "i := 0\nfor i < 3 {\n    fmt.Println(i)\n    i++\n}\n// Output, one value per line: 0, 1, 2"
-                ]
-            ]
+            "richText": [["i := 0\nfor i < 3 {\n    fmt.Println(i)\n    i++\n}\n// Output, one value per line: 0, 1, 2"]]
         },
         {
             "id": "24224eb1-ed54-80b6-ba64-d20d82f6c0f0",
@@ -159,19 +151,13 @@ const note = {
             "id": "d743409f-0d89-5fca-a2eb-9dfb9aae824f",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "i := 0\nfor {\n    if i == 3 {\n        break\n    }\n    fmt.Println(i)\n    i++\n}\n// Output, one value per line: 0, 1, 2"
-                ]
-            ]
+            "richText": [["i := 0\nfor {\n    if i == 3 {\n        break\n    }\n    fmt.Println(i)\n    i++\n}\n// Output, one value per line: 0, 1, 2"]]
         },
         {
             "id": "da266570-ffae-55b4-b1c3-a1db4dee3c61",
             "type": "sub_header",
             "richText": [
-                [
-                    "range: iteration values"
-                ]
+                ["range",[["c"]]], [": iteration values"]
             ]
         },
         {
@@ -216,9 +202,7 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "Element index (int)."
-                            ]
+                            ["Element index ("], ["int",[["c"]]], [")."]
                         ],
                         "col-2": [
                             [
@@ -237,14 +221,10 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "Index of the first byte of the rune (int)."
-                            ]
+                            ["Index of the first byte of the "], ["rune",[["c"]]], [" ("], ["int",[["c"]]], [")."]
                         ],
                         "col-2": [
-                            [
-                                "Unicode code point (rune)."
-                            ]
+                            ["Unicode code point ("], ["rune",[["c"]]], [")."]
                         ]
                     }
                 },
@@ -305,11 +285,7 @@ const note = {
             "id": "bdb0dadf-73b5-5009-be9b-0deb66adad9f",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "nums := []int{10, 20, 30}\nfor index, value := range nums {\n    fmt.Println(index, value)\n}\n// Output:\n// 0 10\n// 1 20\n// 2 30"
-                ]
-            ]
+            "richText": [["nums := []int{10, 20, 30}\nfor index, value := range nums {\n    fmt.Println(index, value)\n}\n// Output:\n// 0 10\n// 1 20\n// 2 30"]]
         },
         {
             "id": "839a873b-2e70-52fa-a6f9-f77d2b745ae1",
@@ -384,11 +360,7 @@ const note = {
             "id": "42887151-2436-5849-adb6-706b23b3b9e1",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "for index := range nums {\n    nums[index]++\n}\nfor _, value := range nums {\n    fmt.Println(value)\n}\n// Output, one value per line: 11, 21, 31"
-                ]
-            ]
+            "richText": [["for index := range nums {\n    nums[index]++\n}\nfor _, value := range nums {\n    fmt.Println(value)\n}\n// Output, one value per line: 11, 21, 31"]]
         },
         {
             "id": "24224eb1-ed54-8066-8642-dfebc21963c2",
@@ -403,28 +375,20 @@ const note = {
             "id": "7d8bdd40-942e-5999-91e4-59e1243790a1",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "s := \"Géo\"\nfor index, ch := range s {\n    fmt.Printf(\"%d %c\\n\", index, ch)\n}\nfmt.Println(len(s))\n// Output:\n// 0 G\n// 1 é\n// 3 o\n// 4"
-                ]
-            ]
+            "richText": [["s := \"Géo\"\nfor index, ch := range s {\n    fmt.Printf(\"%d %c\\n\", index, ch)\n}\nfmt.Println(len(s))\n// Output:\n// 0 G\n// 1 é\n// 3 o\n// 4"]]
         },
         {
             "id": "44150f0f-418e-5095-adf0-85518394b6d7",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "The string has 4 UTF-8 bytes and 3 runes. A rune is a Unicode code point."
-                ]
+                ["The string has 4 UTF-8 bytes and 3 runes. A "], ["rune",[["c"]]], [" is a Unicode code point."]
             ]
         },
         {
             "id": "3b8b6f7e-7599-5366-844c-2874f94dbc2c",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "The index tells you where the rune starts in the string’s bytes."
-                ]
+                ["The index tells you where the "], ["rune",[["c"]]], [" starts in the string’s bytes."]
             ]
         },
         {
@@ -439,9 +403,7 @@ const note = {
                         ]
                     ]
                 ],
-                [
-                    " reads one rune at a time, instead of one byte at a time."
-                ]
+                [" reads one "], ["rune",[["c"]]], [" at a time, instead of one byte at a time."]
             ]
         },
         {
@@ -466,11 +428,7 @@ const note = {
             "id": "d6de176b-7cac-5b8b-9f73-2b88900e6b31",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "m := map[string]int{\"a\": 1, \"b\": 2}\nfor key, value := range m {\n    fmt.Println(key, value)\n}\n// Prints a 1 and b 2, in an unspecified order.\n\nfor key := range m {\n    fmt.Println(key)\n}\n// Prints the keys, also in an unspecified order."
-                ]
-            ]
+            "richText": [["m := map[string]int{\"a\": 1, \"b\": 2}\nfor key, value := range m {\n    fmt.Println(key, value)\n}\n// Prints a 1 and b 2, in an unspecified order.\n\nfor key := range m {\n    fmt.Println(key)\n}\n// Prints the keys, also in an unspecified order."]]
         },
         {
             "id": "41773933-a988-5330-80ed-98d3d83ad8d3",
@@ -506,11 +464,7 @@ const note = {
             "id": "cad40785-b6af-545a-b1dd-5bb8c7373232",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "ch := make(chan int)\ngo func() {\n    ch <- 1\n    ch <- 2\n    close(ch)\n}()\n\nfor value := range ch {\n    fmt.Println(value)\n}\n// Output, one value per line: 1, 2"
-                ]
-            ]
+            "richText": [["ch := make(chan int)\ngo func() {\n    ch <- 1\n    ch <- 2\n    close(ch)\n}()\n\nfor value := range ch {\n    fmt.Println(value)\n}\n// Output, one value per line: 1, 2"]]
         },
         {
             "id": "052fd9d6-17a8-5209-b0cd-92bd7ab8dc45",
@@ -543,9 +497,7 @@ const note = {
             "id": "4fc05261-9763-5d43-91f8-a864a477e70b",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "Range over a nil channel waits forever."
-                ]
+                ["Range over a "], ["nil",[["c"]]], [" channel waits forever."]
             ]
         },
         {
@@ -652,9 +604,7 @@ const note = {
             "id": "24224eb1-ed54-803d-9620-d2aebf892c71",
             "type": "sub_header",
             "richText": [
-                [
-                    "break, continue, return"
-                ]
+                ["break",[["c"]]], [", "], ["continue",[["c"]]], [", "], ["return",[["c"]]]
             ]
         },
         {
@@ -698,9 +648,7 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "Leave the nearest enclosing loop, switch, or select."
-                            ]
+                            ["Leave the nearest enclosing loop, "], ["switch",[["c"]]], [", or select."]
                         ]
                     }
                 },
@@ -834,11 +782,7 @@ const note = {
             "id": "9a8f3ff3-be34-557a-bbb6-4a394aa40af6",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "outer:\nfor i := 0; i < 3; i++ {\n    for j := 0; j < 3; j++ {\n        if i == 1 && j == 1 {\n            break outer\n        }\n        fmt.Println(i, j)\n    }\n}\n// Output:\n// 0 0\n// 0 1\n// 0 2\n// 1 0"
-                ]
-            ]
+            "richText": [["outer:\nfor i := 0; i < 3; i++ {\n    for j := 0; j < 3; j++ {\n        if i == 1 && j == 1 {\n            break outer\n        }\n        fmt.Println(i, j)\n    }\n}\n// Output:\n// 0 0\n// 0 1\n// 0 2\n// 1 0"]]
         },
         {
             "id": "542ffc10-e206-5d2b-b4ae-d8d5e69d5a3b",

@@ -63,11 +63,7 @@ const note = {
         {
             "id": "24224eb1-ed54-8097-b4ee-c27e93874b1e",
             "type": "code",
-            "richText": [
-                [
-                    "func(paramList) returnType {\n    // body\n}"
-                ]
-            ],
+            "richText": [["func(paramList) returnType {\n    // body\n}"]],
             "language": "Go"
         },
         {
@@ -109,11 +105,7 @@ const note = {
         {
             "id": "1f012821-3638-50ce-b8ba-c3274c8d8023",
             "type": "code",
-            "richText": [
-                [
-                    "result := func(a, b int) int {\n    return a + b\n}(5, 3)\nfmt.Println(result) // 8"
-                ]
-            ],
+            "richText": [["result := func(a, b int) int {\n    return a + b\n}(5, 3)\nfmt.Println(result) // 8"]],
             "language": "Go"
         },
         {
@@ -128,11 +120,7 @@ const note = {
         {
             "id": "c45f33c1-af26-5ce6-9e2a-4359274c2fb6",
             "type": "code",
-            "richText": [
-                [
-                    "add := func(x, y int) int {\n    return x + y\n}\nfmt.Println(add(2, 3)) // 5"
-                ]
-            ],
+            "richText": [["add := func(x, y int) int {\n    return x + y\n}\nfmt.Println(add(2, 3)) // 5"]],
             "language": "Go"
         },
         {
@@ -147,11 +135,7 @@ const note = {
         {
             "id": "8306fb87-8519-5d41-9299-50c1abda4856",
             "type": "code",
-            "richText": [
-                [
-                    "func operate(x, y int, op func(int, int) int) int {\n    return op(x, y)\n}\n\nfunc callbackExample() {\n    result := operate(4, 2, func(a, b int) int {\n        return a * b\n    })\n    fmt.Println(result) // 8\n}"
-                ]
-            ],
+            "richText": [["func operate(x, y int, op func(int, int) int) int {\n    return op(x, y)\n}\n\nfunc callbackExample() {\n    result := operate(4, 2, func(a, b int) int {\n        return a * b\n    })\n    fmt.Println(result) // 8\n}"]],
             "language": "Go"
         },
         {
@@ -166,11 +150,7 @@ const note = {
         {
             "id": "6052927a-e59f-5fef-973e-fc48abd7e6f4",
             "type": "code",
-            "richText": [
-                [
-                    "func multiplier(factor int) func(int) int {\n    return func(x int) int {\n        return x * factor\n    }\n}\n\nfunc multiplierExample() {\n    double := multiplier(2)\n    fmt.Println(double(5)) // 10\n}"
-                ]
-            ],
+            "richText": [["func multiplier(factor int) func(int) int {\n    return func(x int) int {\n        return x * factor\n    }\n}\n\nfunc multiplierExample() {\n    double := multiplier(2)\n    fmt.Println(double(5)) // 10\n}"]],
             "language": "Go"
         },
         {

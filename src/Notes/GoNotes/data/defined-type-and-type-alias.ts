@@ -82,9 +82,7 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "MyInt is a new type. Its underlying type is int."
-                            ]
+                            ["MyInt",[["c"]]], [" is a new type. Its underlying type is "], ["int",[["c"]]], ["."]
                         ],
                         "col-2": [
                             [
@@ -108,9 +106,7 @@ const note = {
                             ]
                         ],
                         "col-1": [
-                            [
-                                "MyInt and int are the same type."
-                            ]
+                            ["MyInt",[["c"]]], [" and "], ["int",[["c"]]], [" are the same type."]
                         ],
                         "col-2": [
                             [
@@ -134,11 +130,7 @@ const note = {
             "id": "a2868776-e4c6-5e39-8a61-b714f7ca5b06",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "type MyInt int\n\nvar a MyInt = 5\n// var b int = a // invalid: distinct named types\nvar b int = int(a) // explicit conversion"
-                ]
-            ]
+            "richText": [["type MyInt int\n\nvar a MyInt = 5\n// var b int = a // invalid: distinct named types\nvar b int = int(a) // explicit conversion"]]
         },
         {
             "id": "3250c673-f8b4-5b91-b93a-5499c22fea99",
@@ -175,9 +167,7 @@ const note = {
             "id": "186854d9-4b6d-5288-b72a-e8df1b518126",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "MyInt is based on "
-                ],
+                ["MyInt",[["c"]]], [" is based on "],
                 [
                     "int",
                     [
@@ -268,11 +258,7 @@ const note = {
             "id": "0918f20a-7ab4-58ee-bb54-f647b3fec5a1",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "type Meter int\ntype Second int\n\nfunc travel(distance Meter, duration Second) {}\n\nfunc example() {\n    var distance Meter = 10\n    var duration Second = 2\n    travel(distance, duration)\n    // travel(duration, distance) // invalid: wrong argument types\n    // _ = distance + duration   // invalid: different named types\n}"
-                ]
-            ]
+            "richText": [["type Meter int\ntype Second int\n\nfunc travel(distance Meter, duration Second) {}\n\nfunc example() {\n    var distance Meter = 10\n    var duration Second = 2\n    travel(distance, duration)\n    // travel(duration, distance) // invalid: wrong argument types\n    // _ = distance + duration   // invalid: different named types\n}"]]
         },
         {
             "id": "38fee8c2-1227-5565-8617-2b68fd4a32ce",
@@ -366,11 +352,7 @@ const note = {
             "id": "b2c87fb2-26f9-57e6-9789-e0ec82fa558c",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "type Count = int\n\nvar count Count = 5\nvar number int = count // no conversion needed"
-                ]
-            ]
+            "richText": [["type Count = int\n\nvar count Count = 5\nvar number int = count // no conversion needed"]]
         },
         {
             "id": "cff542e7-a2fd-5c15-b3c5-ac1cfd25c2b5",
@@ -394,11 +376,7 @@ const note = {
             "id": "53742e6b-d3e6-50a1-b4ec-34ab988cc073",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "type User struct {\n    Name string\n}\n\ntype Customer = User // existing callers may keep using Customer"
-                ]
-            ]
+            "richText": [["type User struct {\n    Name string\n}\n\ntype Customer = User // existing callers may keep using Customer"]]
         },
         {
             "id": "53c16a92-3870-5f57-8270-9b62de69b6c0",
@@ -469,11 +447,7 @@ const note = {
             "id": "4b1cbc1b-6a6d-5b6f-a86f-98b0bb75c802",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "type Local int\ntype Alias = Local\n\nfunc (a Alias) Double() Local {\n    return a * 2\n}\n\n// Local and Alias share this method; Alias is not a separate type."
-                ]
-            ]
+            "richText": [["type Local int\ntype Alias = Local\n\nfunc (a Alias) Double() Local {\n    return a * 2\n}\n\n// Local and Alias share this method; Alias is not a separate type."]]
         },
         {
             "id": "138a2b2f-5ee3-56ce-914a-bace80d95671",
@@ -518,11 +492,7 @@ const note = {
             "id": "440379fe-8342-58be-b9f7-c0c09fa3a3bc",
             "type": "code",
             "language": "Go",
-            "richText": [
-                [
-                    "var small int32 = 10\n// var large int64 = small // invalid: conversion is required\nvar large int64 = int64(small)"
-                ]
-            ]
+            "richText": [["var small int32 = 10\n// var large int64 = small // invalid: conversion is required\nvar large int64 = int64(small)"]]
         },
         {
             "id": "61699374-ed8a-50a3-a0db-89c502021647",

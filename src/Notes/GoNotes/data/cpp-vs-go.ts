@@ -102,9 +102,7 @@ const note = {
                             ]
                         ],
                         "col-2": [
-                            [
-                                "No class inheritance or overriding. Use composition, embedding, and interfaces. Embedding does not make one type a subtype of another."
-                            ]
+                            ["No class inheritance or overriding. Use composition, embedding, and interfaces. Embedding does not "], ["make",[["c"]]], [" one type a subtype of another."]
                         ]
                     }
                 },
@@ -396,9 +394,7 @@ const note = {
                             ]
                         ],
                         "col-2": [
-                            [
-                                "No automatic destructor. Use Close and defer for cleanup when the function returns."
-                            ]
+                            ["No automatic destructor. Use Close and "], ["defer",[["c"]]], [" for cleanup when the function returns."]
                         ]
                     }
                 },
@@ -417,9 +413,7 @@ const note = {
                             ]
                         ],
                         "col-2": [
-                            [
-                                "Return errors as values. Use panic/recover for panics, not normal error handling."
-                            ]
+                            ["Return errors as values. Use "], ["panic",[["c"]]], ["/"], ["recover",[["c"]]], [" for panics, not normal error handling."]
                         ]
                     }
                 }
@@ -429,9 +423,7 @@ const note = {
             "id": "cpp-vs-go-06",
             "type": "bulleted_list",
             "richText": [
-                [
-                    "defer runs cleanup when the current function returns."
-                ]
+                ["defer",[["c"]]], [" runs cleanup when the current function returns."]
             ]
         },
         {

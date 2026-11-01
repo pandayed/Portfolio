@@ -149,7 +149,18 @@ const note = {
                     ]
                 ],
                 [
-                    " is nil."
+                    " is "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    "."
                 ]
             ]
         },
@@ -158,7 +169,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "A nil map and an empty map both have length 0."
+                    "A "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " map and an empty map both have length 0."
                 ]
             ]
         },
@@ -251,12 +273,34 @@ const note = {
                         ],
                         "col-1": [
                             [
-                                "Zero value and false."
+                                "Zero value and "
+                            ],
+                            [
+                                "false",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "."
                             ]
                         ],
                         "col-2": [
                             [
-                                "Zero value and false."
+                                "Zero value and "
+                            ],
+                            [
+                                "false",
+                                [
+                                    [
+                                        "c"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "."
                             ]
                         ]
                     }
@@ -411,7 +455,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "An API can use nil to mean that no map was provided."
+                    "An API can use "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " to mean that no map was provided."
                 ]
             ]
         },
@@ -420,7 +475,18 @@ const note = {
             "type": "bulleted_list",
             "richText": [
                 [
-                    "Go does not require this meaning. The API decides how to treat nil and empty maps."
+                    "Go does not require this meaning. The API decides how to treat "
+                ],
+                [
+                    "nil",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " and empty maps."
                 ]
             ]
         },
@@ -577,13 +643,23 @@ const note = {
         },
         {
             "id": "596980d5-58cc-5aa4-9e19-9f824769d73e",
-            "type": "code",
-            "language": "Go",
-            "richText": [
-                [
-                    "package main\n\nimport \"fmt\"\n\nfunc change(m map[string]int) {\n    m[\"a\"] = 100\n    m = map[string]int{\"b\": 2} // replaces only the parameter\n}\n\nfunc main() {\n    m1 := map[string]int{\"a\": 1}\n    m2 := m1\n    m2[\"a\"] = 10\n    change(m1)\n    fmt.Println(m1[\"a\"]) // 100\n    _, ok := m1[\"b\"]\n    fmt.Println(ok)      // false\n}"
-                ]
-            ]
+            "type": "example",
+            "example": {
+                "title": "Assignment and function arguments",
+                "language": "go",
+                "description": [
+                    "The example is saved as `main.go`. It uses only standard library packages."
+                ],
+                "code": "",
+                "files": [
+                    {
+                        "name": "main.go",
+                        "language": "go",
+                        "code": "package main\n\nimport \"fmt\"\n\nfunc change(m map[string]int) {\n    m[\"a\"] = 100\n    m = map[string]int{\"b\": 2} // replaces only the parameter\n}\n\nfunc main() {\n    m1 := map[string]int{\"a\": 1}\n    m2 := m1\n    m2[\"a\"] = 10\n    change(m1)\n    fmt.Println(m1[\"a\"]) // 100\n    _, ok := m1[\"b\"]\n    fmt.Println(ok)      // false\n}"
+                    }
+                ],
+                "commands": "go run main.go"
+            }
         },
         {
             "id": "12aacaf5-fef6-5bfd-807c-e251b26cafa3",
@@ -757,6 +833,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/mutex"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -769,6 +848,9 @@ const note = {
                         [
                             "a",
                             "#/notes/go/mutex"
+                        ],
+                        [
+                            "c"
                         ]
                     ]
                 ],
@@ -782,7 +864,15 @@ const note = {
             "type": "sub_sub_header",
             "richText": [
                 [
-                    "When to use sync.Map"
+                    "When to use "
+                ],
+                [
+                    "sync.Map",
+                    [
+                        [
+                            "c"
+                        ]
+                    ]
                 ]
             ]
         },
@@ -923,7 +1013,19 @@ const note = {
                     " and "
                 ],
                 [
-                    "sync.Map documentation",
+                    "sync.Map",
+                    [
+                        [
+                            "a",
+                            "https://pkg.go.dev/sync#Map"
+                        ],
+                        [
+                            "c"
+                        ]
+                    ]
+                ],
+                [
+                    " documentation",
                     [
                         [
                             "a",

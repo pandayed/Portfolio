@@ -9,6 +9,7 @@ import { pythonNotes } from '../Notes/PythonNotes/pythonNotes';
 import { reactNotes } from '../Notes/ReactNotes/reactNotes';
 import { nodeLearningNotes } from '../Notes/NodeNotes/nodeNotes';
 import { springBootRoutes } from '../Notes/SpringBootNotes/registry';
+import { outlineGroupRoutes } from '../Notes/SystemDesign/outline';
 import { systemDesignEntryRoutes } from '../Notes/SystemDesign/registry';
 import { SYSTEM_DESIGN_ROUTE, type SystemDesignEntryRoute } from '../Notes/SystemDesign/path';
 
@@ -18,6 +19,9 @@ export type { SystemDesignEntryRoute };
 export const HOME_ROUTE = '/';
 export const BLOGS_ROUTE = '/blogs';
 export const NOTES_ROUTE = '/notes';
+export const CLOUD_DELIVERY_ROUTE = '/notes/cloud-and-delivery';
+export const SOFTWARE_DESIGN_ROUTE = '/notes/software-design';
+export const LANGUAGES_FRAMEWORKS_DATABASES_ROUTE = '/notes/languages-frameworks-databases';
 export const AWS_SERVICES_ROUTE = '/notes/aws-services';
 export const POSTGRESQL_NOTES_ROUTE = '/notes/postgresql';
 export const DBMS_NOTES_ROUTE = '/notes/dbms';
@@ -30,6 +34,7 @@ export const REACT_NOTES_ROUTE = '/notes/react';
 export const NODE_NOTES_ROUTE = '/notes/nodejs';
 export const CICD_NOTES_ROUTE = '/notes/ci-cd';
 export const CICD_BASICS_ROUTE = '/notes/ci-cd/fundamentals';
+export const GIT_COMMANDS_ROUTE = '/notes/ci-cd/git';
 export const GITHUB_ACTIONS_ROUTE = '/notes/ci-cd/github-actions';
 export const JENKINS_ROUTE = '/notes/ci-cd/jenkins';
 export const DOCKER_NOTES_ROUTE = '/notes/docker';
@@ -104,6 +109,10 @@ export type Route =
     | typeof HOME_ROUTE
     | typeof BLOGS_ROUTE
     | typeof NOTES_ROUTE
+    | typeof CLOUD_DELIVERY_ROUTE
+    | typeof SOFTWARE_DESIGN_ROUTE
+    | `${typeof SOFTWARE_DESIGN_ROUTE}/${string}`
+    | typeof LANGUAGES_FRAMEWORKS_DATABASES_ROUTE
     | typeof AWS_SERVICES_ROUTE
     | typeof PROGRAMMING_DICTIONARY_ROUTE
     | typeof POSTGRESQL_NOTES_ROUTE
@@ -125,6 +134,7 @@ export type Route =
     | NodeNoteRoute
     | typeof CICD_NOTES_ROUTE
     | typeof CICD_BASICS_ROUTE
+    | typeof GIT_COMMANDS_ROUTE
     | typeof GITHUB_ACTIONS_ROUTE
     | typeof JENKINS_ROUTE
     | typeof DOCKER_NOTES_ROUTE
@@ -207,7 +217,15 @@ const nodeNoteRoutes: NodeNoteRoute[] = nodeLearningNotes.map(
     ({ slug }) => `${NODE_NOTES_ROUTE}/${slug}` as NodeNoteRoute,
 );
 
+export const noteCollectionRoutes: readonly Route[] = [
+    CLOUD_DELIVERY_ROUTE,
+    SOFTWARE_DESIGN_ROUTE,
+    LANGUAGES_FRAMEWORKS_DATABASES_ROUTE,
+    ...outlineGroupRoutes as Route[],
+];
+
 const routes: Route[] = [
+    ...noteCollectionRoutes,
     BLOGS_ROUTE,
     NOTES_ROUTE,
     AWS_SERVICES_ROUTE,
@@ -231,6 +249,7 @@ const routes: Route[] = [
     ...nodeNoteRoutes,
     CICD_NOTES_ROUTE,
     CICD_BASICS_ROUTE,
+    GIT_COMMANDS_ROUTE,
     GITHUB_ACTIONS_ROUTE,
     JENKINS_ROUTE,
     DOCKER_NOTES_ROUTE,
