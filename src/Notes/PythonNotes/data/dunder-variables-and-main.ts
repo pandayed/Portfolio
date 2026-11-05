@@ -42,7 +42,19 @@ const note: PythonNote = {
                         "Save these as two separate files in the same folder.",
                         "Run `python3 inspect_module.py`."
                     ],
-                    "code": "# greetings.py\n\"\"\"Greeting helpers.\"\"\"\n\ndef greet(name):\n    return f\"Hello, {name}\"\n\n# inspect_module.py\nimport greetings\n\nprint(greetings.__name__)\nprint(greetings.__doc__)\nprint(\"greet\" in greetings.__dict__)",
+                    "code": "",
+                    "files": [
+                        {
+                            "name": "greetings.py",
+                            "language": "python",
+                            "code": "\"\"\"Greeting helpers.\"\"\"\n\ndef greet(name):\n    return f\"Hello, {name}\""
+                        },
+                        {
+                            "name": "inspect_module.py",
+                            "language": "python",
+                            "code": "import greetings\n\nprint(greetings.__name__)\nprint(greetings.__doc__)\nprint(\"greet\" in greetings.__dict__)"
+                        }
+                    ],
                     "result": "greetings\nGreeting helpers.\nTrue",
                     "explanation": [
                         "Python sets the module metadata while loading `greetings`.",
@@ -69,7 +81,19 @@ const note: PythonNote = {
                         "Save the files below in the same folder.",
                         "Run each command in a separate process."
                     ],
-                    "code": "# greetings.py\nprint(f\"Module name: {__name__}\")\n\nif __name__ == \"__main__\":\n    print(\"Started as the program\")\n\n# use_greetings.py\nimport greetings\nprint(\"Import finished\")",
+                    "code": "",
+                    "files": [
+                        {
+                            "name": "greetings.py",
+                            "language": "python",
+                            "code": "print(f\"Module name: {__name__}\")\n\nif __name__ == \"__main__\":\n    print(\"Started as the program\")"
+                        },
+                        {
+                            "name": "use_greetings.py",
+                            "language": "python",
+                            "code": "import greetings\nprint(\"Import finished\")"
+                        }
+                    ],
                     "result": "$ python3 greetings.py\nModule name: __main__\nStarted as the program\n\n$ python3 use_greetings.py\nModule name: greetings\nImport finished",
                     "explanation": [
                         "The first print is outside the guard, so it runs in both cases.",
@@ -127,7 +151,19 @@ const note: PythonNote = {
                         "Create a `hello_app` folder with an empty `__init__.py` and the two files below.",
                         "Run python3 -m `hello_app` from the folder containing `hello_app`."
                     ],
-                    "code": "# hello_app/cli.py\ndef main():\n    print(\"Hello from a package\")\n\n# hello_app/__main__.py\nfrom .cli import main\n\nmain()",
+                    "code": "",
+                    "files": [
+                        {
+                            "name": "hello_app/cli.py",
+                            "language": "python",
+                            "code": "def main():\n    print(\"Hello from a package\")"
+                        },
+                        {
+                            "name": "hello_app/__main__.py",
+                            "language": "python",
+                            "code": "from .cli import main\n\nmain()"
+                        }
+                    ],
                     "result": "Hello from a package",
                     "explanation": [
                         "`__main__.py` stays short.",

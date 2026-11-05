@@ -41,7 +41,7 @@ const note: PythonNote = {
                 "`append` adds one item.",
                 "`extend` adds each value from an iterable.",
                 "`insert` adds one item at a position.",
-                "`pop` removes `and` returns an item, using the last position by default.",
+                "`pop` removes and returns an item, using the last position by default.",
                 "An invalid position raises `IndexError`.",
                 "`remove` deletes the first equal value and raises `ValueError` if absent.",
                 "del removes an item or slice.",

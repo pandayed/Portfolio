@@ -13,7 +13,7 @@ const note: PythonNote = {
             "bullets": [
                 "For ordinary function code, Python searches Local, Enclosing function, Global module, then Built-in names.",
                 "This order is called LEGB.",
-                "An if `or` loop block does not create a new function scope.",
+                "An `if` or loop block does not create a new function scope.",
                 "Assignment inside a function normally makes the name local throughout that function.",
                 "Reading it before assigning raises `UnboundLocalError`.",
                 "A name assigned only in a branch may be unbound if that branch does not run."
@@ -90,8 +90,8 @@ const note: PythonNote = {
                 "It is not a parameter or a local variable of the inner function.",
                 "A closure works while the outer call is active and after it returns.",
                 "Returning the inner function is a common way to keep it.",
-                "A nested function that uses no enclosing function names has no captured closure cells.",
-                "Nesting alone does not create a state-retaining closure in this sense.",
+                "If an inner function does not use any variables from an outer function, it does not keep access to that outer function's variables.",
+                "Defining a function inside another function is not enough. It must use an outer function's variable to capture it in a closure.",
                 "Use `nonlocal` when the closure needs to reassign an enclosing name."
             ],
             "examples": [

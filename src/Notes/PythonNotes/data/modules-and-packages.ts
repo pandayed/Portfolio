@@ -30,10 +30,22 @@ const note: PythonNote = {
                         "Save both files in the same folder.",
                         "Run `python3 main.py` from that folder."
                     ],
-                    "code": "# prices.py\ndef price_with_tax(price):\n    return price * 1.10\n\n# main.py\nimport prices\nprint(prices.price_with_tax(20))",
+                    "code": "",
+                    "files": [
+                        {
+                            "name": "prices.py",
+                            "language": "python",
+                            "code": "def price_with_tax(price):\n    return price * 1.10"
+                        },
+                        {
+                            "name": "main.py",
+                            "language": "python",
+                            "code": "import prices\nprint(prices.price_with_tax(20))"
+                        }
+                    ],
                     "result": "22.0",
                     "explanation": [
-                        "The comments mark separate files. import prices binds the module name; `prices.price_with_tax` accesses its function."
+                        "`import prices` binds the module name; `prices.price_with_tax` accesses its function."
                     ]
                 }
             ]
@@ -111,7 +123,19 @@ const note: PythonNote = {
                         "The project folder contains `main.py` and the shop package folder.",
                         "The shop folder contains `__init__.py` and the `pricing.py` module."
                     ],
-                    "code": "# shop/pricing.py\ndef total(price, shipping):\n    return price + shipping\n\n# main.py\nimport shop.pricing\nprint(shop.pricing.total(10, 2))\n\nfrom shop import pricing\nprint(pricing.total(10, 2))\n\nfrom shop.pricing import total\nprint(total(10, 2))",
+                    "code": "",
+                    "files": [
+                        {
+                            "name": "shop/pricing.py",
+                            "language": "python",
+                            "code": "def total(price, shipping):\n    return price + shipping"
+                        },
+                        {
+                            "name": "main.py",
+                            "language": "python",
+                            "code": "import shop.pricing\nprint(shop.pricing.total(10, 2))\n\nfrom shop import pricing\nprint(pricing.total(10, 2))\n\nfrom shop.pricing import total\nprint(total(10, 2))"
+                        }
+                    ],
                     "result": "12\n12\n12",
                     "explanation": [
                         "The containment order is shop package → pricing module → total function. `main.py` is a separate module beside the shop package.",
@@ -137,7 +161,19 @@ const note: PythonNote = {
                         "Create a shop/ folder with an empty `__init__.py` and the two files below.",
                         "From the folder containing shop/, run `python3 -m shop.main`."
                     ],
-                    "code": "# shop/pricing.py\ndef total(price, shipping):\n    return price + shipping\n\n# shop/main.py\nfrom .pricing import total\n\nif __name__ == \"__main__\":\n    print(total(10, 2))",
+                    "code": "",
+                    "files": [
+                        {
+                            "name": "shop/pricing.py",
+                            "language": "python",
+                            "code": "def total(price, shipping):\n    return price + shipping"
+                        },
+                        {
+                            "name": "shop/main.py",
+                            "language": "python",
+                            "code": "from .pricing import total\n\nif __name__ == \"__main__\":\n    print(total(10, 2))"
+                        }
+                    ],
                     "result": "12",
                     "explanation": [
                         "Running python3 shop/`main.py` directly does not supply the package context needed by this relative import."

@@ -38,7 +38,7 @@ const LearningNoteExampleBlock = ({ example, termContext, renderText }: Learning
         ? renderProgrammingTerms(text, key, termContext)
         : text;
     return (
-        <details className="LearningNoteExampleBlock">
+        <details className="LearningNoteExampleBlock" open>
             <summary className="LearningNoteExampleBlock__summary">
                 <span className="LearningNoteExampleBlock__indicator" aria-hidden="true">
                     <svg viewBox="0 0 16 16" fill="none" focusable="false">

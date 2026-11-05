@@ -100,7 +100,7 @@ const note: PythonNote = {
             "id": "loop-else",
             "title": "Loop else",
             "bullets": [
-                "A for or `while` loop can have an else block.",
+                "A `for` or `while` loop can have an else block.",
                 "It runs when the loop finishes normally, without `break`.",
                 "For a `for` loop, finishing normally means exhausting its values.",
                 "For a `while` loop, it means the condition became falsy.",

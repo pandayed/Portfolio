@@ -5,6 +5,7 @@ export interface PythonExample {
     possibleOutput?: boolean;
     language?: 'python' | 'text';
     code: string;
+    files?: readonly { name: string; language: 'python' | 'text'; code: string }[];
     result?: string;
 }
 

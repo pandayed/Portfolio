@@ -24,7 +24,7 @@ const note: PythonNote = {
             "bullets": [
                 "`==` asks whether two objects have equal values.",
                 "For lists, it compares their items.",
-                "is asks whether two names refer to the exact same object.",
+                "`is` asks whether two names refer to the exact same object.",
                 "Use `==` to compare values.",
                 "Use `is` for identity checks, most often `x is None` or `x is not None`.",
                 "Do not use `is` to compare strings or numbers: Python may reuse some objects, so identity is not a reliable value comparison.",
