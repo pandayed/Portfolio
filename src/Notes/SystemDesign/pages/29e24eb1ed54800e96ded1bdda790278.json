@@ -170,6 +170,178 @@
       "type": "divider"
     },
     {
+      "id": "microservices-guidelines-section",
+      "type": "header",
+      "html": "Design Guidelines &amp; Trade-offs",
+      "text": "Design Guidelines & Trade-offs"
+    },
+    {
+      "id": "microservices-guidelines-context",
+      "type": "bulleted_list",
+      "html": "These are architectural recommendations. Their value depends on the system, team, and business needs. They are not universal rules.",
+      "text": "These are architectural recommendations. Their value depends on the system, team, and business needs. They are not universal rules."
+    },
+    {
+      "id": "microservices-guidelines-data",
+      "type": "sub_header",
+      "html": "Database per service: independent data ownership",
+      "text": "Database per service: independent data ownership"
+    },
+    {
+      "id": "microservices-guidelines-data-0",
+      "type": "bulleted_list",
+      "html": "<strong>Recommendation:</strong> Each service owns its persistent data. Other services use its API or published events instead of reading or changing its tables directly.",
+      "text": "Recommendation: Each service owns its persistent data. Other services use its API or published events instead of reading or changing its tables directly."
+    },
+    {
+      "id": "microservices-guidelines-data-1",
+      "type": "bulleted_list",
+      "html": "<strong>Reason:</strong> Private data reduces coordination when a service changes its data model.",
+      "text": "Reason: Private data reduces coordination when a service changes its data model."
+    },
+    {
+      "id": "microservices-guidelines-data-2",
+      "type": "bulleted_list",
+      "html": "<strong>Deployment choice:</strong> Private tables or schemas can share a database server. Separate servers offer more isolation but add cost and operations work.",
+      "text": "Deployment choice: Private tables or schemas can share a database server. Separate servers offer more isolation but add cost and operations work."
+    },
+    {
+      "id": "microservices-guidelines-data-3",
+      "type": "bulleted_list",
+      "html": "<strong>Trade-offs:</strong> Queries across services need API calls or separate read models. Updates across services need an approach for partial failures and consistency.",
+      "text": "Trade-offs: Queries across services need API calls or separate read models. Updates across services need an approach for partial failures and consistency."
+    },
+    {
+      "id": "microservices-guidelines-data-4",
+      "type": "bulleted_list",
+      "html": "<strong>Exceptions:</strong> A shared database can help during a migration or when existing transactions need it. Shared tables couple schema changes and can create lock contention.",
+      "text": "Exceptions: A shared database can help during a migration or when existing transactions need it. Shared tables couple schema changes and can create lock contention."
+    },
+    {
+      "id": "microservices-guidelines-data-5",
+      "type": "bulleted_list",
+      "html": "<strong>Example:</strong> Orders owns order records. Payments owns payment records. They exchange order IDs and payment status through APIs or events.",
+      "text": "Example: Orders owns order records. Payments owns payment records. They exchange order IDs and payment status through APIs or events."
+    },
+    {
+      "id": "microservices-guidelines-boundaries",
+      "type": "sub_header",
+      "html": "Service boundaries",
+      "text": "Service boundaries"
+    },
+    {
+      "id": "microservices-guidelines-boundaries-0",
+      "type": "bulleted_list",
+      "html": "<strong>Recommendation:</strong> Group related business behavior and data in the same service.",
+      "text": "Recommendation: Group related business behavior and data in the same service."
+    },
+    {
+      "id": "microservices-guidelines-boundaries-1",
+      "type": "bulleted_list",
+      "html": "<strong>Reason:</strong> A service can complete more work without calling several other services.",
+      "text": "Reason: A service can complete more work without calling several other services."
+    },
+    {
+      "id": "microservices-guidelines-boundaries-2",
+      "type": "bulleted_list",
+      "html": "<strong>Trade-offs:</strong> Business boundaries can be unclear and may change as the system grows.",
+      "text": "Trade-offs: Business boundaries can be unclear and may change as the system grows."
+    },
+    {
+      "id": "microservices-guidelines-boundaries-3",
+      "type": "bulleted_list",
+      "html": "<strong>Exceptions:</strong> A modular monolith can suit a small team or an unclear domain. Its modules run together while keeping clear code boundaries.",
+      "text": "Exceptions: A modular monolith can suit a small team or an unclear domain. Its modules run together while keeping clear code boundaries."
+    },
+    {
+      "id": "microservices-guidelines-deployment",
+      "type": "sub_header",
+      "html": "Independent deployment",
+      "text": "Independent deployment"
+    },
+    {
+      "id": "microservices-guidelines-deployment-0",
+      "type": "bulleted_list",
+      "html": "<strong>Recommendation:</strong> Design service changes so they can be deployed without releasing other services at the same time.",
+      "text": "Recommendation: Design service changes so they can be deployed without releasing other services at the same time."
+    },
+    {
+      "id": "microservices-guidelines-deployment-1",
+      "type": "bulleted_list",
+      "html": "<strong>Reason:</strong> Teams can release changes on separate schedules.",
+      "text": "Reason: Teams can release changes on separate schedules."
+    },
+    {
+      "id": "microservices-guidelines-deployment-2",
+      "type": "bulleted_list",
+      "html": "<strong>Trade-offs:</strong> API and event changes need compatibility with consumers that still use the previous version.",
+      "text": "Trade-offs: API and event changes need compatibility with consumers that still use the previous version."
+    },
+    {
+      "id": "microservices-guidelines-deployment-3",
+      "type": "bulleted_list",
+      "html": "<strong>Exceptions:</strong> A migration may need a coordinated release. Frequent coordination suggests that the service boundaries or contracts need review.",
+      "text": "Exceptions: A migration may need a coordinated release. Frequent coordination suggests that the service boundaries or contracts need review."
+    },
+    {
+      "id": "microservices-guidelines-communication",
+      "type": "sub_header",
+      "html": "Communication choices",
+      "text": "Communication choices"
+    },
+    {
+      "id": "microservices-guidelines-communication-0",
+      "type": "bulleted_list",
+      "html": "<strong>Recommendation:</strong> Use request-response calls when the caller needs an immediate result. Consider events for work that can finish later.",
+      "text": "Recommendation: Use request-response calls when the caller needs an immediate result. Consider events for work that can finish later."
+    },
+    {
+      "id": "microservices-guidelines-communication-1",
+      "type": "bulleted_list",
+      "html": "<strong>Reason:</strong> The choice follows the response time and consistency needs of the operation.",
+      "text": "Reason: The choice follows the response time and consistency needs of the operation."
+    },
+    {
+      "id": "microservices-guidelines-communication-2",
+      "type": "bulleted_list",
+      "html": "<strong>Trade-offs:</strong> Request-response calls depend on downstream availability. Events add delayed updates and require handling retries, duplicate messages, and possible reordering.",
+      "text": "Trade-offs: Request-response calls depend on downstream availability. Events add delayed updates and require handling retries, duplicate messages, and possible reordering."
+    },
+    {
+      "id": "microservices-guidelines-communication-3",
+      "type": "bulleted_list",
+      "html": "<strong>Exceptions:</strong> A simple request-response flow can be easier to operate than a message broker for a small workflow.",
+      "text": "Exceptions: A simple request-response flow can be easier to operate than a message broker for a small workflow."
+    },
+    {
+      "id": "microservices-guidelines-sources",
+      "type": "sub_header",
+      "html": "Sources",
+      "text": "Sources"
+    },
+    {
+      "id": "microservices-guidelines-database-source",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://microservices.io/patterns/data/database-per-service.html\">Database per service pattern</a>",
+      "text": "Database per service pattern"
+    },
+    {
+      "id": "microservices-guidelines-shared-source",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://microservices.io/patterns/data/shared-database.html\">Shared database pattern</a>",
+      "text": "Shared database pattern"
+    },
+    {
+      "id": "microservices-guidelines-patterns-source",
+      "type": "bulleted_list",
+      "html": "<a href=\"https://microservices.io/patterns/\">Microservices pattern language</a>",
+      "text": "Microservices pattern language"
+    },
+    {
+      "id": "microservices-guidelines-end",
+      "type": "divider"
+    },
+    {
       "id": "29e24eb1ed5480f0b3a1fc8478537b67",
       "type": "text",
       "html": "Remember that the problem with monolithic arises when codebase grows, and active users increase.",

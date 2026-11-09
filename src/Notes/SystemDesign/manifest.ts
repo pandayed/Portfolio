@@ -349,12 +349,6 @@ export const pageManifest = [
     "sourcePath": "./pages/30624eb1ed5480a9af1ce93d818aff43.json"
   },
   {
-    "id": "30624eb1ed5480358019debee2687837",
-    "title": "Docker",
-    "parentId": null,
-    "sourcePath": "./pages/30624eb1ed5480358019debee2687837.json"
-  },
-  {
     "id": "30b24eb1ed548030bc66c7825de64981",
     "title": "GraphQL",
     "parentId": null,
@@ -594,42 +588,6 @@ export const pageManifest = [
     "icon": "⭐"
   },
   {
-    "id": "30624eb1ed54806bace5c15a96a1c206",
-    "title": "What are we trying to solve?",
-    "parentId": "30624eb1ed5480358019debee2687837",
-    "sourcePath": "./pages/30624eb1ed54806bace5c15a96a1c206.json"
-  },
-  {
-    "id": "30624eb1ed54804683a2f672e702899f",
-    "title": "Virtualization",
-    "parentId": "30624eb1ed5480358019debee2687837",
-    "sourcePath": "./pages/30624eb1ed54804683a2f672e702899f.json"
-  },
-  {
-    "id": "30624eb1ed5480d0b8d1d78fb618258d",
-    "title": "Why not virtualization?",
-    "parentId": "30624eb1ed5480358019debee2687837",
-    "sourcePath": "./pages/30624eb1ed5480d0b8d1d78fb618258d.json"
-  },
-  {
-    "id": "30624eb1ed548018b8b7f006744557ae",
-    "title": "Containerization",
-    "parentId": "30624eb1ed5480358019debee2687837",
-    "sourcePath": "./pages/30624eb1ed548018b8b7f006744557ae.json"
-  },
-  {
-    "id": "30624eb1ed54804585f3fc5635922efb",
-    "title": "Docker Compose",
-    "parentId": "30624eb1ed5480358019debee2687837",
-    "sourcePath": "./pages/30624eb1ed54804585f3fc5635922efb.json"
-  },
-  {
-    "id": "30624eb1ed548052ad85eef012d5fea0",
-    "title": "Docker Volumes",
-    "parentId": "30624eb1ed5480358019debee2687837",
-    "sourcePath": "./pages/30624eb1ed548052ad85eef012d5fea0.json"
-  },
-  {
     "id": "31524eb1ed54805eb4eeef3ff146ca56",
     "title": "Builder",
     "parentId": "31524eb1ed5480f79523d2b2c9902d1d",
@@ -703,12 +661,6 @@ export const pageManifest = [
     "parentId": "26324eb1ed5480d0b07ff7cdd25a9645",
     "sourcePath": "./pages/24b24eb1ed5480eba76bd1443607177a.json",
     "icon": "❇️"
-  },
-  {
-    "id": "30624eb1ed5480efae55efbe8528ab92",
-    "title": "Docker Commands",
-    "parentId": "30624eb1ed5480358019debee2687837",
-    "sourcePath": "./pages/30624eb1ed5480efae55efbe8528ab92.json"
   },
   {
     "id": "26c24eb1ed54802abd25ff7b66fefaa8",
@@ -795,7 +747,6 @@ export const rootPageIds = [
   "31524eb1ed5480f79523d2b2c9902d1d",
   "30124eb1ed5480e999dff56c7a3fc5f4",
   "30624eb1ed5480a9af1ce93d818aff43",
-  "30624eb1ed5480358019debee2687837",
   "30b24eb1ed548030bc66c7825de64981",
   "30d24eb1ed54801b99e6fb8fd36bfcd9",
   "31024eb1ed5480f0979dc84675671367",
@@ -898,21 +849,6 @@ export const pageViews = {
         "26c24eb1ed548091844bc2f5f3cd12b9",
         "26c24eb1ed5480eb951bf3ca6de5eae5",
         "26c24eb1ed5480f7bdf4f069ffbc73bd"
-      ]
-    }
-  ],
-  "30624eb1ed5480358019debee2687837": [
-    {
-      "id": "30624eb1ed5480e59250f90f9bc27582",
-      "title": "",
-      "pageIds": [
-        "30624eb1ed54806bace5c15a96a1c206",
-        "30624eb1ed54804683a2f672e702899f",
-        "30624eb1ed5480d0b8d1d78fb618258d",
-        "30624eb1ed548018b8b7f006744557ae",
-        "30624eb1ed5480efae55efbe8528ab92",
-        "30624eb1ed54804585f3fc5635922efb",
-        "30624eb1ed548052ad85eef012d5fea0"
       ]
     }
   ],

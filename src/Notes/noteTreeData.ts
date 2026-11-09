@@ -492,10 +492,6 @@ export const dockerNotes: NoteGroup = {
             route: DOCKER_INSTRUCTIONS_ROUTE,
             updatedOn: '2026-10-17',
         },
-        {
-            ...systemDesignOutlineNode({ pageId: '30624eb1ed5480358019debee2687837' }),
-            title: 'Docker (imported notes)',
-        },
     ],
 };
 
@@ -603,7 +599,7 @@ export const cloudDeliveryNotes: NoteGroup = {
     route: CLOUD_DELIVERY_ROUTE,
     children: [
         ...cloudOutline.map((node): NoteNode =>
-            node.pageId === '30624eb1ed5480358019debee2687837'
+            node.route === DOCKER_NOTES_ROUTE
                 ? dockerNotes
                 : systemDesignOutlineNode(node)),
         kubernetesNotes,

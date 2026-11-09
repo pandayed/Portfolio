@@ -62,8 +62,8 @@
     {
       "id": "33324eb1ed548088b630c89cd26ac69f",
       "type": "bulleted_list",
-      "html": "For an application to be cloud native, there are at least 4 pillars which must be considered.",
-      "text": "For an application to be cloud native, there are at least 4 pillars which must be considered."
+      "html": "The following four areas describe a common approach to cloud-native design. The choices depend on the application and its operational needs.",
+      "text": "The following four areas describe a common approach to cloud-native design. The choices depend on the application and its operational needs."
     },
     {
       "id": "33324eb1ed5480f6b0b1e1a66ceaa4e0",
@@ -72,20 +72,20 @@
     {
       "id": "33324eb1ed54805491d8cefe03db102b",
       "type": "header",
-      "html": "Pillar 1: Microservices based Architecture",
-      "text": "Pillar 1: Microservices based Architecture"
+      "html": "Pillar 1: Microservices Architecture",
+      "text": "Pillar 1: Microservices Architecture"
     },
     {
       "id": "33324eb1ed548037888beeb3de7c4c92",
       "type": "bulleted_list",
-      "html": "Microservices based architecture must be used.",
-      "text": "Microservices based architecture must be used."
+      "html": "Microservices are a common choice when parts of an application need independent deployment and scaling. Cloud-native applications can also use a modular monolith.",
+      "text": "Microservices are a common choice when parts of an application need independent deployment and scaling. Cloud-native applications can also use a modular monolith."
     },
     {
       "id": "33324eb1ed54805ca2a3f795d68a7049",
       "type": "bulleted_list",
-      "html": "Microservices must be loosely coupled.",
-      "text": "Microservices must be loosely coupled."
+      "html": "Loose coupling helps services change without requiring changes in other services.",
+      "text": "Loose coupling helps services change without requiring changes in other services."
     },
     {
       "id": "33324eb1ed5480999e56fff63e083430",
@@ -98,6 +98,12 @@
       "type": "bulleted_list",
       "html": "Independent deployment and scaling.",
       "text": "Independent deployment and scaling."
+    },
+    {
+      "id": "cloud-native-microservices-guidelines",
+      "type": "bulleted_list",
+      "text": "See Microservices for design guidelines and trade-offs, including database per service.",
+      "html": "See <a href=\"https://xpandeyed.notion.site/Microservices-29e24eb1ed54800e96ded1bdda790278\">Microservices</a> for design guidelines and trade-offs, including database per service."
     },
     {
       "id": "33324eb1ed5480b79388e3cfc68a22ae",
