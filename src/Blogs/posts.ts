@@ -1,5 +1,6 @@
 import {
     AI_OBEDIENCE_ROUTE,
+    IS_AI_REALLY_TO_BLAME_ROUTE,
     MCP_SERVER_BLOG_ROUTE,
     CHAIN_OF_THOUGHT_ROUTE,
     COMPLEXITY_CASES_ROUTE,
@@ -27,6 +28,14 @@ export interface Post {
 }
 
 const entries: Post[] = [
+    {
+        title: 'Is AI Really to Blame?',
+        summary: 'We are delegating the thinking to AI.',
+        startedOn: '2026-11-10',
+        updatedOn: '2026-11-10',
+        route: IS_AI_REALLY_TO_BLAME_ROUTE,
+        status: 'published',
+    },
     {
         title: "Understanding MCP Servers — How AI Connects to the Real World",
         summary: 'It provides a standard interface through which AI applications can access external capabilities and information.',

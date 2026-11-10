@@ -59,6 +59,7 @@ import ComplexityCases from './Blogs/ComplexityCases/ComplexityCases';
 import SqlVsMySql from './Blogs/SqlVsMySql/SqlVsMySql';
 import SslTls from './Blogs/SslTls/SslTls';
 import AiObedience from './Blogs/AiObedience/AiObedience';
+import IsAiReallyToBlame from './Blogs/IsAiReallyToBlame/IsAiReallyToBlame';
 import McpServer from './Blogs/McpServer/McpServer';
 import SieveOfEratosthenes from './Blogs/SieveOfEratosthenes/SieveOfEratosthenes';
 import ConsistentHashing from './Notes/SystemDesign/ConsistentHashing/ConsistentHashing';
@@ -90,6 +91,7 @@ import {
     AWS_SERVICES_ROUTE,
     API_COMMUNICATION_ROUTE,
     AI_OBEDIENCE_ROUTE,
+    IS_AI_REALLY_TO_BLAME_ROUTE,
     MCP_SERVER_BLOG_ROUTE,
     ARCHIVE_ROUTE,
     BLOGS_ROUTE,
@@ -217,6 +219,7 @@ const pages: Partial<Record<Route, () => JSX.Element>> = {
     [SQL_VS_MYSQL_ROUTE]: SqlVsMySql,
     [SSL_TLS_ROUTE]: SslTls,
     [AI_OBEDIENCE_ROUTE]: AiObedience,
+    [IS_AI_REALLY_TO_BLAME_ROUTE]: IsAiReallyToBlame,
     [MCP_SERVER_BLOG_ROUTE]: McpServer,
     [SIEVE_OF_ERATOSTHENES_ROUTE]: SieveOfEratosthenes,
     [WHY_REACT_ROUTE]: WhyReact,

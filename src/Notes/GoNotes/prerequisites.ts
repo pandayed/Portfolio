@@ -58,6 +58,13 @@ const dependencies: Record<string, readonly string[]> = {
     'encoding-json': ['struct', 'interfaces', 'errors', 'slices-arrays', 'maps'],
     bufio: ['functions', 'errors', 'defer'],
     gorm: ['struct', 'methods', 'go-mod', 'errors'],
+    'gorm-connection': ['gorm', 'defer', 'context-and-timeout'],
+    'gorm-pool': ['gorm-connection'],
+    'gorm-models': ['gorm'],
+    'gorm-queries': ['gorm-connection', 'gorm-models'],
+    'gorm-writes': ['gorm-queries'],
+    'gorm-transactions': ['gorm-writes', 'gorm-pool'],
+    'gorm-associations': ['gorm-models', 'gorm-queries'],
 };
 
 const prerequisite = (slug: string) => {

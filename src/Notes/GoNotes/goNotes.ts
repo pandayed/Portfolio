@@ -57,6 +57,13 @@ import ginServer from './data/gin-server';
 import encodingJson from './data/encoding-json';
 import bufio from './data/bufio';
 import gorm from './data/gorm';
+import gormConnection from './data/gorm-connection';
+import gormPool from './data/gorm-pool';
+import gormModels from './data/gorm-models';
+import gormQueries from './data/gorm-queries';
+import gormWrites from './data/gorm-writes';
+import gormTransactions from './data/gorm-transactions';
+import gormAssociations from './data/gorm-associations';
 
 export const goChapters: readonly GoChapter[] = [
     {
@@ -101,8 +108,8 @@ export const goChapters: readonly GoChapter[] = [
     },
     {
         title: '9. Databases',
-        summary: 'Models, queries, updates, and transactions with GORM.',
-        notes: [gorm],
+        summary: 'GORM with PostgreSQL: connections, pooling, models, queries, writes, transactions, and associations.',
+        notes: [gorm, gormConnection, gormPool, gormModels, gormQueries, gormWrites, gormTransactions, gormAssociations],
     },
 ];
 

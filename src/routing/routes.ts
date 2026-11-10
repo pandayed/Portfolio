@@ -63,6 +63,7 @@ export const COMPLEXITY_CASES_ROUTE = '/blogs/complexity-cases';
 export const SQL_VS_MYSQL_ROUTE = '/blogs/sql-vs-mysql';
 export const SSL_TLS_ROUTE = '/blogs/ssl-tls';
 export const AI_OBEDIENCE_ROUTE = '/blogs/ai-obedience';
+export const IS_AI_REALLY_TO_BLAME_ROUTE = '/blogs/is-ai-really-to-blame';
 export const MCP_SERVER_BLOG_ROUTE = '/blogs/understanding-mcp-servers';
 export const SIEVE_OF_ERATOSTHENES_ROUTE = '/blogs/sieve-of-eratosthenes';
 export const CONSISTENT_HASHING_ROUTE = '/blogs/consistent-hashing';
@@ -164,6 +165,7 @@ export type Route =
     | typeof SQL_VS_MYSQL_ROUTE
     | typeof SSL_TLS_ROUTE
     | typeof AI_OBEDIENCE_ROUTE
+    | typeof IS_AI_REALLY_TO_BLAME_ROUTE
     | typeof MCP_SERVER_BLOG_ROUTE
     | typeof SIEVE_OF_ERATOSTHENES_ROUTE
     | typeof CONSISTENT_HASHING_ROUTE
@@ -279,6 +281,7 @@ const routes: Route[] = [
     SQL_VS_MYSQL_ROUTE,
     SSL_TLS_ROUTE,
     AI_OBEDIENCE_ROUTE,
+    IS_AI_REALLY_TO_BLAME_ROUTE,
     MCP_SERVER_BLOG_ROUTE,
     SIEVE_OF_ERATOSTHENES_ROUTE,
     CONSISTENT_HASHING_ROUTE,
