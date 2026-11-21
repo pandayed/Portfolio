@@ -191,6 +191,10 @@ export const architectureOutline: SystemDesignOutlineNode[] = [
             {
                 pageId: '32e24eb1ed5480f0b150f3d74858a9b5',
             },
+            // Circuit Breakers
+            { pageId: 'circuit-breakers' },
+            // Bulkheads
+            { pageId: 'bulkheads' },
             // Rate Limiting
             {
                 pageId: '24f24eb1ed54805fbe53e3fb6c76b7f1',

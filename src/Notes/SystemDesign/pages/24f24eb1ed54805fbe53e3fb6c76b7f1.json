@@ -2,5 +2,71 @@
   "id": "24f24eb1ed54805fbe53e3fb6c76b7f1",
   "title": "Rate Limiting",
   "sourceUrl": "https://xpandeyed.notion.site/Rate-Limiting-24f24eb1ed54805fbe53e3fb6c76b7f1?pvs=23",
-  "blocks": []
+  "blocks": [
+    {
+      "id": "rate-limiting-section-0",
+      "type": "header",
+      "text": "Overview"
+    },
+    {
+      "id": "rate-limiting-0-0",
+      "type": "bulleted_list",
+      "text": "Rate limiting controls how many requests or operations are allowed within a period of time."
+    },
+    {
+      "id": "rate-limiting-0-1",
+      "type": "bulleted_list",
+      "text": "Limits can apply per user, API key, IP address, or service. They help control load, abuse, and usage costs."
+    },
+    {
+      "id": "rate-limiting-section-1",
+      "type": "header",
+      "text": "Example"
+    },
+    {
+      "id": "rate-limiting-1-0",
+      "type": "bulleted_list",
+      "text": "An API allows each API key to make 100 requests per minute. Requests above that limit are rejected."
+    },
+    {
+      "id": "rate-limiting-1-1",
+      "type": "bulleted_list",
+      "text": "HTTP APIs commonly return status 429 (Too Many Requests). A Retry-After header can tell the client how long to wait."
+    },
+    {
+      "id": "rate-limiting-section-2",
+      "type": "header",
+      "text": "Common approaches"
+    },
+    {
+      "id": "rate-limiting-2-0",
+      "type": "bulleted_list",
+      "text": "A fixed window counts requests in each time interval. Requests near a window boundary can create a burst."
+    },
+    {
+      "id": "rate-limiting-2-1",
+      "type": "bulleted_list",
+      "text": "A sliding window considers recent traffic as time moves forward."
+    },
+    {
+      "id": "rate-limiting-2-2",
+      "type": "bulleted_list",
+      "text": "A token bucket adds tokens at a steady rate. Each request consumes a token, allowing short bursts up to the bucket capacity."
+    },
+    {
+      "id": "rate-limiting-section-3",
+      "type": "header",
+      "text": "Limits and related patterns"
+    },
+    {
+      "id": "rate-limiting-3-0",
+      "type": "bulleted_list",
+      "text": "A limit enforced separately on each server can allow more total traffic as servers are added. A shared limit needs coordination."
+    },
+    {
+      "id": "rate-limiting-3-1",
+      "type": "bulleted_list",
+      "text": "Rate limiting caps arrivals over time. Bulkheads cap resource use or concurrent work, while circuit breakers react to dependency failures."
+    }
+  ]
 }

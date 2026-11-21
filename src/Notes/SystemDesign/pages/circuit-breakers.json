@@ -1,0 +1,57 @@
+{
+  "id": "circuit-breakers",
+  "title": "Circuit Breakers",
+  "sourceUrl": "",
+  "blocks": [
+    {
+      "id": "circuit-breakers-section-0",
+      "type": "header",
+      "text": "Overview"
+    },
+    {
+      "id": "circuit-breakers-0-0",
+      "type": "bulleted_list",
+      "text": "A circuit breaker temporarily stops calls to a dependency that is failing or responding too slowly."
+    },
+    {
+      "id": "circuit-breakers-0-1",
+      "type": "bulleted_list",
+      "text": "It helps prevent repeated failed calls from consuming resources and spreading failures to other services."
+    },
+    {
+      "id": "circuit-breakers-section-1",
+      "type": "header",
+      "text": "States"
+    },
+    {
+      "id": "circuit-breakers-1-0",
+      "type": "bulleted_list",
+      "text": "Closed: calls pass through, and the breaker tracks failures or slow calls."
+    },
+    {
+      "id": "circuit-breakers-1-1",
+      "type": "bulleted_list",
+      "text": "Open: after a configured threshold is reached, calls fail immediately without reaching the dependency."
+    },
+    {
+      "id": "circuit-breakers-1-2",
+      "type": "bulleted_list",
+      "text": "Half-open: after a waiting period, a limited number of trial calls check recovery. Success closes the breaker; further failures reopen it."
+    },
+    {
+      "id": "circuit-breakers-section-2",
+      "type": "header",
+      "text": "Example and limits"
+    },
+    {
+      "id": "circuit-breakers-2-0",
+      "type": "bulleted_list",
+      "text": "If a payment service repeatedly times out, the checkout service opens its circuit breaker and reports that payment is temporarily unavailable."
+    },
+    {
+      "id": "circuit-breakers-2-1",
+      "type": "bulleted_list",
+      "text": "Timeouts still bound individual calls. A circuit breaker does not repair the dependency or guarantee that a fallback is safe."
+    }
+  ]
+}

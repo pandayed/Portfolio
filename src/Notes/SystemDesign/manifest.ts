@@ -1,6 +1,18 @@
 // Imported Notion pages and locally authored notes, with titles, order, and nested views.
 export const pageManifest = [
   {
+    "id": "circuit-breakers",
+    "title": "Circuit Breakers",
+    "parentId": null,
+    "sourcePath": "./pages/circuit-breakers.json"
+  },
+  {
+    "id": "bulkheads",
+    "title": "Bulkheads",
+    "parentId": null,
+    "sourcePath": "./pages/bulkheads.json"
+  },
+  {
     "id": "34f24eb1ed54801990cfe7aa757be3b7",
     "title": "Conditional Variables",
     "parentId": null,

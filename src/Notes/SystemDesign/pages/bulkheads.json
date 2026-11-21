@@ -1,0 +1,57 @@
+{
+  "id": "bulkheads",
+  "title": "Bulkheads",
+  "sourceUrl": "",
+  "blocks": [
+    {
+      "id": "bulkheads-section-0",
+      "type": "header",
+      "text": "Overview"
+    },
+    {
+      "id": "bulkheads-0-0",
+      "type": "bulleted_list",
+      "text": "Bulkheads isolate resources so that one overloaded or failing part of a system does not consume all available capacity."
+    },
+    {
+      "id": "bulkheads-0-1",
+      "type": "bulleted_list",
+      "text": "Services, dependencies, or tenants can have separate thread pools, connection pools, or concurrency limits. A concurrency limit caps work running at the same time."
+    },
+    {
+      "id": "bulkheads-section-1",
+      "type": "header",
+      "text": "Example"
+    },
+    {
+      "id": "bulkheads-1-0",
+      "type": "bulleted_list",
+      "text": "An application gives its reporting service and payment service separate connection pools."
+    },
+    {
+      "id": "bulkheads-1-1",
+      "type": "bulleted_list",
+      "text": "Slow reports can exhaust the reporting pool while payments still have connections available."
+    },
+    {
+      "id": "bulkheads-section-2",
+      "type": "header",
+      "text": "Trade-offs"
+    },
+    {
+      "id": "bulkheads-2-0",
+      "type": "bulleted_list",
+      "text": "When an isolated pool is full, new work may be rejected or wait in a bounded queue."
+    },
+    {
+      "id": "bulkheads-2-1",
+      "type": "bulleted_list",
+      "text": "Separate pools can leave capacity unused in one area while another area is busy."
+    },
+    {
+      "id": "bulkheads-2-2",
+      "type": "bulleted_list",
+      "text": "Bulkheads limit the spread of failures. Circuit breakers stop calls to a failing dependency; rate limiting controls how much work is admitted over time."
+    }
+  ]
+}
